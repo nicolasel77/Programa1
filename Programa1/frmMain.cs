@@ -14,6 +14,18 @@ namespace Programa1
             InitializeComponent();
         }
 
+        private void Mostrar(object sender, EventArgs e)
+        {
+            foreach (Form f in forms)
+            {
+                if (f.Name.StartsWith("frm"+ sender.ToString()) == true)
+                {
+                    f.BringToFront();
+                    break;
+                }
+            }
+        }
+
         private void ResumenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -28,16 +40,15 @@ namespace Programa1
             }
             if (found == false)
             {
-                ToolStripMenuItem t = new ToolStripMenuItem("ResumenSuc");
+                ToolStripMenuItem t = new ToolStripMenuItem("frmResumenSuc");
                 t.Text = "Resumen Sucs";
-                t.Click += new EventHandler(ResumenToolStripMenuItem_Click);
+                t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
                 
                 Form frmResumenSuc = new Programa1.Carga.frmResumenSuc();
                 frmResumenSuc.MdiParent = this;
                 forms.Add(frmResumenSuc);
                 frmResumenSuc.Show();
-                frmResumenSuc.BringToFront();
                 frmResumenSuc.WindowState = FormWindowState.Minimized;
                 frmResumenSuc.WindowState = FormWindowState.Maximized;
             }
@@ -76,15 +87,16 @@ namespace Programa1
                 if (f.Name == "frmProductos")
                 {
                     f.BringToFront();
+                    f.Show();
                     found = true;
                     break;
                 }
             }
             if (found == false)
             {
-                ToolStripMenuItem t = new ToolStripMenuItem("Productos");
+                ToolStripMenuItem t = new ToolStripMenuItem("frmProductos");
                 t.Text = "Productos";
-                t.Click += new EventHandler(PruebaToolStripMenuItem_Click);
+                t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
                 Form frmProds = new Programa1.Datos.frmProductos();
@@ -92,7 +104,6 @@ namespace Programa1
                 frmProds.Disposed += FrmProds_Disposed;
                 forms.Add(frmProds);
                 frmProds.Show();
-                frmProds.BringToFront();
                 frmProds.WindowState = FormWindowState.Minimized;
                 frmProds.WindowState = FormWindowState.Maximized;
             }
@@ -105,6 +116,7 @@ namespace Programa1
             {
                 if (f.Name == "frmSucursales")
                 {
+                    f.Show();
                     f.BringToFront();
                     found = true;
                     break;
@@ -112,9 +124,9 @@ namespace Programa1
             }
             if (found == false)
             {
-                ToolStripMenuItem t = new ToolStripMenuItem("Sucursales");
+                ToolStripMenuItem t = new ToolStripMenuItem("frmSucursales");
                 t.Text = "Sucursales";
-                t.Click += new EventHandler(PruebaToolStripMenuItem_Click);
+                t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
                 Form frmSucursales = new Programa1.Datos.frmSucursales();
@@ -122,7 +134,6 @@ namespace Programa1
                 frmSucursales.Disposed += FrmSucursales_Disposed;
                 forms.Add(frmSucursales);
                 frmSucursales.Show();
-                frmSucursales.BringToFront();
                 frmSucursales.WindowState = FormWindowState.Minimized;
                 frmSucursales.WindowState = FormWindowState.Maximized;
             }
@@ -155,6 +166,7 @@ namespace Programa1
             {
                 if (f.Name == "frmProveedores")
                 {
+                    f.Show();
                     f.BringToFront();
                     found = true;
                     break;
@@ -162,9 +174,9 @@ namespace Programa1
             }
             if (found == false)
             {
-                ToolStripMenuItem t = new ToolStripMenuItem("Proveedores");
+                ToolStripMenuItem t = new ToolStripMenuItem("frmProveedores");
                 t.Text = "Proveedores";
-                t.Click += new EventHandler(PruebaToolStripMenuItem_Click);
+                t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
                 Form frmProveedores = new Programa1.Datos.frmProveedores();
@@ -172,7 +184,6 @@ namespace Programa1
                 frmProveedores.Disposed += FrmProveedores_Disposed;
                 forms.Add(frmProveedores);
                 frmProveedores.Show();
-                frmProveedores.BringToFront();
                 frmProveedores.WindowState = FormWindowState.Minimized;
                 frmProveedores.WindowState = FormWindowState.Maximized;
             }
@@ -212,9 +223,9 @@ namespace Programa1
             }
             if (found == false)
             {
-                ToolStripMenuItem t = new ToolStripMenuItem("Stock");
+                ToolStripMenuItem t = new ToolStripMenuItem("frmStock");
                 t.Text = "Stock";
-                t.Click += new EventHandler(PruebaToolStripMenuItem_Click);
+                t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
                 Form frmStock = new Programa1.Carga.frmStock();
@@ -222,7 +233,6 @@ namespace Programa1
                 frmStock.Disposed += FrmStock_Disposed;
                 forms.Add(frmStock);
                 frmStock.Show();
-                frmStock.BringToFront();
                 frmStock.WindowState = FormWindowState.Minimized;
                 frmStock.WindowState = FormWindowState.Maximized;
             }
