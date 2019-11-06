@@ -48,6 +48,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -117,9 +120,11 @@
     </Compile>
     <Compile Include="DB\Localidades.cs" />
     <Compile Include="DB\Partidos.cs" />
+    <Compile Include="DB\Precios_Sucursales.cs" />
     <Compile Include="DB\Productos.cs" />
     <Compile Include="DB\Proveedores.cs" />
     <Compile Include="DB\Semanas.cs" />
+    <Compile Include="DB\Stock.cs" />
     <Compile Include="DB\Sucursales.cs" />
     <Compile Include="DB\TipoProductos.cs" />
     <Compile Include="DB\TipoProveedores.cs" />

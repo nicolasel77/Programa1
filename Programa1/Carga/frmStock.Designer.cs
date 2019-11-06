@@ -32,15 +32,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStock));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblKilos = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdStock = new Grilla2.SpeedGrilla();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.cmdLimpiar = new System.Windows.Forms.Button();
+            this.cmdMostrar = new System.Windows.Forms.Button();
+            this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.cProds = new Programa1.Controles.cProductos();
             this.cSucs = new Programa1.Controles.cSucursales();
             this.cFecha = new Programa1.Controles.cFechas();
-            this.cmdMostrar = new System.Windows.Forms.Button();
-            this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -59,7 +63,10 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblMensaje});
+            this.lblMensaje,
+            this.lblCant,
+            this.lblKilos,
+            this.lblTotal});
             this.statusStrip1.Location = new System.Drawing.Point(0, 693);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1362, 22);
@@ -71,6 +78,26 @@
             this.lblMensaje.ForeColor = System.Drawing.Color.Red;
             this.lblMensaje.Name = "lblMensaje";
             this.lblMensaje.Size = new System.Drawing.Size(0, 17);
+            // 
+            // lblCant
+            // 
+            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCant.Name = "lblCant";
+            this.lblCant.Size = new System.Drawing.Size(60, 17);
+            this.lblCant.Text = "Cantidad";
+            // 
+            // lblKilos
+            // 
+            this.lblKilos.Name = "lblKilos";
+            this.lblKilos.Size = new System.Drawing.Size(32, 17);
+            this.lblKilos.Text = "Kilos";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(49, 17);
+            this.lblTotal.Text = "Totales";
             // 
             // splitContainer1
             // 
@@ -127,6 +154,8 @@
             this.grdStock.Rows = 50;
             this.grdStock.Size = new System.Drawing.Size(852, 678);
             this.grdStock.TabIndex = 0;
+            this.grdStock.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdStock_Editado);
+            this.grdStock.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdStock_CambioFila);
             // 
             // splitContainer2
             // 
@@ -142,6 +171,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.cFecha);
+            this.splitContainer2.Panel2.Controls.Add(this.cmdLimpiar);
             this.splitContainer2.Panel2.Controls.Add(this.cmdMostrar);
             this.splitContainer2.Size = new System.Drawing.Size(487, 693);
             this.splitContainer2.SplitterDistance = 477;
@@ -164,6 +194,32 @@
             this.splitContainer3.SplitterDistance = 239;
             this.splitContainer3.TabIndex = 0;
             // 
+            // cmdLimpiar
+            // 
+            this.cmdLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdLimpiar.Location = new System.Drawing.Point(382, 157);
+            this.cmdLimpiar.Name = "cmdLimpiar";
+            this.cmdLimpiar.Size = new System.Drawing.Size(102, 23);
+            this.cmdLimpiar.TabIndex = 4;
+            this.cmdLimpiar.Text = "Limpiar Grilla";
+            this.cmdLimpiar.UseVisualStyleBackColor = true;
+            this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
+            // 
+            // cmdMostrar
+            // 
+            this.cmdMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdMostrar.Location = new System.Drawing.Point(382, 186);
+            this.cmdMostrar.Name = "cmdMostrar";
+            this.cmdMostrar.Size = new System.Drawing.Size(102, 23);
+            this.cmdMostrar.TabIndex = 4;
+            this.cmdMostrar.Text = "Mostrar";
+            this.cmdMostrar.UseVisualStyleBackColor = true;
+            this.cmdMostrar.Click += new System.EventHandler(this.CmdMostrar_Click);
+            // 
+            // tiMensaje
+            // 
+            this.tiMensaje.Interval = 5000;
+            // 
             // cProds
             // 
             this.cProds.BackColor = System.Drawing.Color.Gainsboro;
@@ -183,6 +239,7 @@
             this.cSucs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(0, 0);
+            this.cSucs.Mostrar_Tipo = true;
             this.cSucs.Name = "cSucs";
             this.cSucs.Size = new System.Drawing.Size(244, 477);
             this.cSucs.TabIndex = 2;
@@ -198,21 +255,7 @@
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(221, 206);
             this.cFecha.TabIndex = 3;
-            // 
-            // cmdMostrar
-            // 
-            this.cmdMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdMostrar.Location = new System.Drawing.Point(382, 186);
-            this.cmdMostrar.Name = "cmdMostrar";
-            this.cmdMostrar.Size = new System.Drawing.Size(102, 23);
-            this.cmdMostrar.TabIndex = 4;
-            this.cmdMostrar.Text = "Mostrar";
-            this.cmdMostrar.UseVisualStyleBackColor = true;
-            this.cmdMostrar.Click += new System.EventHandler(this.CmdMostrar_Click);
-            // 
-            // tiMensaje
-            // 
-            this.tiMensaje.Interval = 5000;
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
             // 
             // frmStock
             // 
@@ -255,5 +298,9 @@
         private Controles.cFechas cFecha;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.Button cmdLimpiar;
+        private System.Windows.Forms.ToolStripStatusLabel lblTotal;
+        private System.Windows.Forms.ToolStripStatusLabel lblCant;
+        private System.Windows.Forms.ToolStripStatusLabel lblKilos;
     }
 }

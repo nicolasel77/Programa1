@@ -14,6 +14,9 @@ namespace Programa1.Controles
     public partial class cFechas : UserControl
     {
         private Semanas semanas;
+        private bool cCambio = false;
+
+        public event EventHandler Cambio_Seleccion;
 
         public cFechas()
         {
@@ -24,6 +27,7 @@ namespace Programa1.Controles
 
         private void Cargar()
         {
+            cCambio = true;
             semanas = new Semanas();
 
             DataTable dt = semanas.Datos();
@@ -43,6 +47,7 @@ namespace Programa1.Controles
                 lstMesAño.Items.Add(dr["Años"]);
                 lstAños.Items.Add(dr["Años"]);
             }
+            cCambio = false;
         }
 
         public string Cadena(string campo = "Fecha")
@@ -54,7 +59,7 @@ namespace Programa1.Controles
                     if (lstSemanas.SelectedIndex > -1)
                     {
                         s = Convert.ToDateTime(lstSemanas.Text).ToString("MM/dd/yyy");
-                        s = $"{campo} BETWEEN ('{s}' AND DATEADD(DAY, 6, '{s}'))";
+                        s = $"({campo} BETWEEN '{s}' AND DATEADD(DAY, 6, '{s}'))";
                     }
                     break;
                 case 1:
@@ -70,7 +75,7 @@ namespace Programa1.Controles
                             a = lstMesAño.Text;
                         }
                         s = Convert.ToDateTime($"1/{(lstMes.SelectedIndex + 1).ToString()}/{a}").ToString("MM/dd/yyy");
-                        s = $"{campo} BETWEEN ('{s}' AND DATEADD(DAY, -1, DATEADD(MONTH, 1, '{s}')))";
+                        s = $"({campo} BETWEEN '{s}' AND DATEADD(DAY, -1, DATEADD(MONTH, 1, '{s}')))";
                     }
                     break;
                 case 3:
@@ -82,11 +87,20 @@ namespace Programa1.Controles
                 case 4:
                     if (dtHasta.Value>dtDesde.Value)
                     {
-                        s = $"{campo} BETWEEN '{dtDesde.Value.ToString("MM/dd/yyy")}' AND '{dtHasta.Value.ToString("MM/dd/yyy")}'";
+                        s = $"({campo} BETWEEN '{dtDesde.Value.ToString("MM/dd/yyy")}' AND '{dtHasta.Value.ToString("MM/dd/yyy")}')";
                     }                    
                     break;
             }
             return s;
+        }
+
+        private void LstSemanas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cCambio == false)
+            {
+                Cambio_Seleccion(null, null);
+            }
+            
         }
     }
 }

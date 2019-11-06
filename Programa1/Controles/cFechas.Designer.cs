@@ -32,9 +32,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lstSemanas = new System.Windows.Forms.ListBox();
+            this.tabDia = new System.Windows.Forms.TabPage();
+            this.mntDias = new System.Windows.Forms.MonthCalendar();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lstMesAño = new System.Windows.Forms.ListBox();
             this.lstMes = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.lstAños = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -43,15 +46,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtDesde = new System.Windows.Forms.DateTimePicker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.tabDia = new System.Windows.Forms.TabPage();
-            this.mntDias = new System.Windows.Forms.MonthCalendar();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabDia.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.tabDia.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -95,6 +95,24 @@
             this.lstSemanas.Name = "lstSemanas";
             this.lstSemanas.Size = new System.Drawing.Size(336, 251);
             this.lstSemanas.TabIndex = 0;
+            this.lstSemanas.SelectedIndexChanged += new System.EventHandler(this.LstSemanas_SelectedIndexChanged);
+            // 
+            // tabDia
+            // 
+            this.tabDia.Controls.Add(this.mntDias);
+            this.tabDia.Location = new System.Drawing.Point(4, 4);
+            this.tabDia.Name = "tabDia";
+            this.tabDia.Size = new System.Drawing.Size(342, 257);
+            this.tabDia.TabIndex = 4;
+            this.tabDia.Text = "Día";
+            this.tabDia.UseVisualStyleBackColor = true;
+            // 
+            // mntDias
+            // 
+            this.mntDias.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mntDias.Location = new System.Drawing.Point(0, 0);
+            this.mntDias.Name = "mntDias";
+            this.mntDias.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -154,6 +172,16 @@
             this.lstMes.Name = "lstMes";
             this.lstMes.Size = new System.Drawing.Size(38, 256);
             this.lstMes.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.label3.Location = new System.Drawing.Point(30, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 251);
+            this.label3.TabIndex = 3;
             // 
             // tabPage3
             // 
@@ -238,33 +266,6 @@
             this.dtDesde.Size = new System.Drawing.Size(86, 22);
             this.dtDesde.TabIndex = 0;
             // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.label3.Location = new System.Drawing.Point(30, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 251);
-            this.label3.TabIndex = 3;
-            // 
-            // tabDia
-            // 
-            this.tabDia.Controls.Add(this.mntDias);
-            this.tabDia.Location = new System.Drawing.Point(4, 4);
-            this.tabDia.Name = "tabDia";
-            this.tabDia.Size = new System.Drawing.Size(342, 257);
-            this.tabDia.TabIndex = 4;
-            this.tabDia.Text = "Día";
-            this.tabDia.UseVisualStyleBackColor = true;
-            // 
-            // mntDias
-            // 
-            this.mntDias.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mntDias.Location = new System.Drawing.Point(0, 0);
-            this.mntDias.Name = "mntDias";
-            this.mntDias.TabIndex = 0;
-            // 
             // cFechas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,11 +276,11 @@
             this.Size = new System.Drawing.Size(369, 265);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabDia.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            this.tabDia.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

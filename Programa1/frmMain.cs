@@ -37,6 +37,7 @@ namespace Programa1
                 frmResumenSuc.MdiParent = this;
                 forms.Add(frmResumenSuc);
                 frmResumenSuc.Show();
+                frmResumenSuc.BringToFront();
                 frmResumenSuc.WindowState = FormWindowState.Minimized;
                 frmResumenSuc.WindowState = FormWindowState.Maximized;
             }
@@ -91,6 +92,7 @@ namespace Programa1
                 frmProds.Disposed += FrmProds_Disposed;
                 forms.Add(frmProds);
                 frmProds.Show();
+                frmProds.BringToFront();
                 frmProds.WindowState = FormWindowState.Minimized;
                 frmProds.WindowState = FormWindowState.Maximized;
             }
@@ -120,6 +122,7 @@ namespace Programa1
                 frmSucursales.Disposed += FrmSucursales_Disposed;
                 forms.Add(frmSucursales);
                 frmSucursales.Show();
+                frmSucursales.BringToFront();
                 frmSucursales.WindowState = FormWindowState.Minimized;
                 frmSucursales.WindowState = FormWindowState.Maximized;
             }
@@ -169,6 +172,7 @@ namespace Programa1
                 frmProveedores.Disposed += FrmProveedores_Disposed;
                 forms.Add(frmProveedores);
                 frmProveedores.Show();
+                frmProveedores.BringToFront();
                 frmProveedores.WindowState = FormWindowState.Minimized;
                 frmProveedores.WindowState = FormWindowState.Maximized;
             }
@@ -218,6 +222,7 @@ namespace Programa1
                 frmStock.Disposed += FrmStock_Disposed;
                 forms.Add(frmStock);
                 frmStock.Show();
+                frmStock.BringToFront();
                 frmStock.WindowState = FormWindowState.Minimized;
                 frmStock.WindowState = FormWindowState.Maximized;
             }
