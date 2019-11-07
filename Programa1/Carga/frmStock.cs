@@ -371,6 +371,7 @@ namespace Programa1.Carga
                 }
                 cm.Ids = n;
                 cm.ShowDialog();
+                cmdMostrar.PerformClick();
             }
         }
     }

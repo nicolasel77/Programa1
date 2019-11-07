@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Programa1.DB;
-
-namespace Programa1.Controles
+﻿namespace Programa1.Controles
 {
+    using Programa1.DB;
+    using System;
+    using System.Data;
+    using System.Windows.Forms;
+    using MaterialSkin.Controls;
+    using MaterialSkin;
+
     public partial class cFechas : UserControl
     {
         private Semanas semanas;
@@ -33,9 +29,9 @@ namespace Programa1.Controles
             DataTable dt = semanas.Datos();
 
             lstSemanas.Items.Clear();
-            foreach(DataRow dr in dt.Rows)
+            foreach (DataRow dr in dt.Rows)
             {
-                DateTime d = Convert.ToDateTime( dr["Semana"]);
+                DateTime d = Convert.ToDateTime(dr["Semana"]);
                 lstSemanas.Items.Add(d.ToString("dd/MM/yyy"));
             }
 
@@ -64,7 +60,7 @@ namespace Programa1.Controles
                     break;
                 case 1:
                     s = mntDias.SelectionRange.Start.ToString("MM/dd/yyy");
-                    s = $"{campo}='{s}'";                    
+                    s = $"{campo}='{s}'";
                     break;
                 case 2:
                     if (lstMes.SelectedIndex > -1)
@@ -85,10 +81,10 @@ namespace Programa1.Controles
                     }
                     break;
                 case 4:
-                    if (dtHasta.Value>dtDesde.Value)
+                    if (dtHasta.Value > dtDesde.Value)
                     {
                         s = $"({campo} BETWEEN '{dtDesde.Value.ToString("MM/dd/yyy")}' AND '{dtHasta.Value.ToString("MM/dd/yyy")}')";
-                    }                    
+                    }
                     break;
             }
             return s;
@@ -100,7 +96,7 @@ namespace Programa1.Controles
             {
                 Cambio_Seleccion(null, null);
             }
-            
+
         }
     }
 }
