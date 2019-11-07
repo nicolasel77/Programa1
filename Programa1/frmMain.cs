@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-
-
-namespace Programa1
+﻿namespace Programa1
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Forms;
+    
     public partial class frmMain : Form
     {
         List<Form> forms = new List<Form>();

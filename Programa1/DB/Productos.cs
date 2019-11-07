@@ -46,7 +46,6 @@
 
         public DataTable Datos(string filtro = "")
         {
-            //Cadena de conexion y DataTable (tabla)
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -70,6 +69,59 @@
             }
 
             return dt;
+        }
+
+        public void Siguiente()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+          
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 * FROM vw_Productos WHERE Id>{Id} ORDER BY Id", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0];                   
+
+                    Id = Convert.ToInt32(dr["Id"]);
+                    Nombre = dr["Nombre"].ToString();
+                    Tipo.Id = Convert.ToInt32(dr["Id_Tipo"]);
+                    Ver = Convert.ToBoolean(dr["Ver"]);
+                    Imprimir = Convert.ToBoolean(dr["Imprimir"]);
+                    Pesable = Convert.ToBoolean(dr["Pesable"]);
+                    Multiplicador = Convert.ToInt32(dr["Multiplicador"]);
+                }
+                else
+                {
+                    comandoSql.CommandText = ($"SELECT TOP 1 * FROM vw_Productos ORDER BY Id");
+                    comandoSql.CommandType = CommandType.Text;
+                    
+                    SqlDat.Fill(dt);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        DataRow dr = dt.Rows[0];
+
+                        Id = Convert.ToInt32(dr["Id"]);
+                        Nombre = dr["Nombre"].ToString();
+                        Tipo.Id = Convert.ToInt32(dr["Id_Tipo"]);
+                        Ver = Convert.ToBoolean(dr["Ver"]);
+                        Imprimir = Convert.ToBoolean(dr["Imprimir"]);
+                        Pesable = Convert.ToBoolean(dr["Pesable"]);
+                        Multiplicador = Convert.ToInt32(dr["Multiplicador"]);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Id = 0;
+            }
         }
 
         public void Actualizar()
@@ -187,5 +239,7 @@
                 return false;
             }
         }
+
+        
     }
 }

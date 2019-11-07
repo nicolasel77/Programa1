@@ -1,5 +1,6 @@
 ﻿using Programa1.DB;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Programa1.Carga
@@ -21,10 +22,50 @@ namespace Programa1.Carga
             stock = new Stock();
             grdStock.MostrarDatos(stock.Datos("Id=0"), true);
             formato_Grilla();
+
+            //El intercambio de columnas para estas teclas
+            grdStock.AgregarTeclas(Convert.ToInt32(Keys.Subtract), grdStock.get_ColIndex("Id_Productos"), grdStock.get_ColIndex("Kilos"));
+            grdStock.AgregarTeclas(Convert.ToInt32(Keys.Add), grdStock.get_ColIndex("Id_Sucursales"), grdStock.get_ColIndex("Kilos"));
+
             Totales();
         }
 
-        
+        private void FrmStock_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Add:
+                    if (e.Control)
+                    {
+                        e.Handled = true;
+                        cSucs.Siguiente();
+                    }
+                    else
+                    {
+                        if (e.Shift)
+                        {
+                            e.Handled = true;
+                            cProds.Siguiente();
+                        }
+                    }
+                    break;
+                case Keys.Subtract:
+                    if (e.Control)
+                    {
+                        e.Handled = true;
+                        cSucs.Anterior();
+                    }
+                    else
+                    {
+                        if (e.Shift)
+                        {
+                            e.Handled = true;
+                            cProds.Anterior();
+                        }
+                    }
+                    break;
+            }
+        }
 
         #region "Mensaje"
         private void Mensaje(string Mensaje)
@@ -74,6 +115,12 @@ namespace Programa1.Carga
             grdStock.set_ColW(grdStock.get_ColIndex("Kilos"), 60);
             grdStock.set_ColW(grdStock.get_ColIndex("Total"), 80);
 
+            grdStock.Columnas[grdStock.get_ColIndex("Costo")].Format = "C2";
+            grdStock.Columnas[grdStock.get_ColIndex("Kilos")].Format = "N2";
+            grdStock.Columnas[grdStock.get_ColIndex("Total")].Format = "C2";
+
+            grdStock.Columnas[grdStock.get_ColIndex("Kilos")].Style.Font= new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
+
             grdStock.set_Texto(0, grdStock.get_ColIndex("Id_Sucursales"), "Suc");
             grdStock.set_Texto(0, grdStock.get_ColIndex("Id_Productos"), "Prod");
         }
@@ -88,6 +135,15 @@ namespace Programa1.Carga
             lblTotal.Text = $"Total: {t:C2}";
         }
 
+
+        private void CmdLimpiar_Click(object sender, EventArgs e)
+        {
+            grdStock.Rows = 1;
+            grdStock.Rows = 2;
+            Totales();
+        }
+
+
         private void CProds_Cambio_Seleccion(object sender, EventArgs e)
         {
             cmdMostrar.PerformClick();
@@ -97,6 +153,12 @@ namespace Programa1.Carga
         {
             cmdMostrar.PerformClick();
         }
+
+        private void CFecha_Cambio_Seleccion(object sender, EventArgs e)
+        {
+            cmdMostrar.PerformClick();
+        }
+
 
         private void GrdStock_Editado(short f, short c, object a)
         {
@@ -109,6 +171,8 @@ namespace Programa1.Carga
                     stock.Fecha = Convert.ToDateTime(a);
                     precios.Fecha = stock.Fecha;
 
+                    if (id != 0) { stock.Actualizar(); }
+
                     grdStock.set_Texto(f, c, a);
                     grdStock.ActivarCelda(f, c + 1);
                     break;
@@ -118,6 +182,8 @@ namespace Programa1.Carga
                     if (stock.suc.Existe() == true)
                     {
                         precios.suc = stock.suc;
+
+                        if (id != 0) { stock.Actualizar(); }
 
                         grdStock.set_Texto(f, c, a);
                         grdStock.set_Texto(f, c + 1, stock.suc.Nombre);
@@ -145,6 +211,8 @@ namespace Programa1.Carga
                         grdStock.set_Texto(f, grdStock.get_ColIndex("Costo"), stock.Costo);
                         grdStock.set_Texto(f, grdStock.get_ColIndex("Total"), stock.Costo*stock.Kilos);
 
+                        if (id != 0) { stock.Actualizar(); }
+
                         grdStock.ActivarCelda(f, grdStock.get_ColIndex("Kilos"));
                         Totales();
                     }
@@ -159,6 +227,8 @@ namespace Programa1.Carga
                     stock.Descripcion = a.ToString();
                     grdStock.set_Texto(f, c, a);
 
+                    if (id != 0) { stock.Actualizar(); }
+
                     grdStock.ActivarCelda(f + 1, c);
                     break;
                 case 6:
@@ -166,6 +236,8 @@ namespace Programa1.Carga
                     stock.Costo = Convert.ToSingle(a);
                     grdStock.set_Texto(f, c, a);
                     grdStock.set_Texto(f, grdStock.get_ColIndex("Total"), stock.Costo * stock.Kilos);
+
+                    if (id != 0) { stock.Actualizar(); }
 
                     grdStock.ActivarCelda(f + 1, c);
                     Totales();
@@ -195,22 +267,111 @@ namespace Programa1.Carga
             }
 
         }
-
-        private void CmdLimpiar_Click(object sender, EventArgs e)
-        {
-            grdStock.Rows = 1;
-            grdStock.Rows = 2;
-        }
-
+               
         private void GrdStock_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdStock.get_Texto(Fila, grdStock.get_ColIndex("Id")).ToString());
-            stock.Cargar_Fila(i);            
+            stock.Cargar_Fila(i);
+            precios.Fecha = stock.Fecha;
+            precios.suc = stock.suc;
+            precios.producto = stock.producto;
         }
 
-        private void CFecha_Cambio_Seleccion(object sender, EventArgs e)
+        private void GrdStock_KeyPress(object sender, short e)
         {
-            cmdMostrar.PerformClick();
+            if (e == 13)
+            {
+                if (grdStock.Col == grdStock.get_ColIndex("Kilos"))
+                {
+                    stock.producto.Siguiente();
+                    precios.producto = stock.producto;
+
+                    stock.Descripcion = stock.producto.Nombre;
+
+                    grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Id_Productos"), stock.producto.Id);
+                    grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Descripcion"), stock.Descripcion);
+
+                    stock.Costo = precios.Buscar();
+                    grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Costo"), stock.Costo);
+                    grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Total"), stock.Costo*stock.Kilos);
+
+                    if (stock.Id != 0)
+                    {
+                        stock.Actualizar();
+                        Totales();
+                    }                    
+                }
+            }
+        }
+
+        private void GrdStock_KeyUp(object sender, short e)
+        {
+            switch (Convert.ToInt32(e))
+            {
+                case 46: //Delete
+                        if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                        {
+                            if (Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0)) != 0)
+                            {
+                                stock.Id = Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0));
+                                stock.Borrar();
+                                grdStock.BorrarFila(grdStock.Row);
+                                Totales();
+                            }
+                        }                    
+                        break;
+            }
+        }
+
+
+        private void LblCant_Click(object sender, EventArgs e)
+        {
+            string s = lblCant.Text.Substring(10);
+
+            Clipboard.SetText(s);
+
+            Mensaje($"Copiado: {s}");
+        }
+
+        private void LblKilos_Click(object sender, EventArgs e)
+        {
+            string s = lblKilos.Text.Substring(6);
+
+            Clipboard.SetText(s);
+
+            Mensaje($"Copiado: {s}");
+        }
+
+        private void LblTotal_Click(object sender, EventArgs e)
+        {
+            string s = lblTotal.Text.Substring(6);
+
+            Clipboard.SetText(s);
+
+            Mensaje($"Copiado: {s}");
+        }
+
+        private void CmdCambioMasivo_Click(object sender, EventArgs e)
+        {
+            if (grdStock.Rows > 2)
+            {
+                frmCMStock cm = new frmCMStock();
+                List<int> n = new List<int>();
+
+                int d = grdStock.Selection.r1;
+                int h = grdStock.Selection.r2;
+                if (d == -1)
+                {
+                    d = 1;
+                    h = grdStock.Rows - 2;
+                }
+                for (int i = d; i <= h; i++)
+                {
+                    n.Add(Convert.ToInt32(grdStock.get_Texto(i, grdStock.get_ColIndex("Id"))));
+                }
+                cm.Ids = n;
+                cm.ShowDialog();
+            }
         }
     }
 }

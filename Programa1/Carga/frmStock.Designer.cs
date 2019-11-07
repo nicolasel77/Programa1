@@ -45,6 +45,7 @@
             this.cProds = new Programa1.Controles.cProductos();
             this.cSucs = new Programa1.Controles.cSucursales();
             this.cFecha = new Programa1.Controles.cFechas();
+            this.cmdCambioMasivo = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -85,12 +86,14 @@
             this.lblCant.Name = "lblCant";
             this.lblCant.Size = new System.Drawing.Size(60, 17);
             this.lblCant.Text = "Cantidad";
+            this.lblCant.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblKilos
             // 
             this.lblKilos.Name = "lblKilos";
             this.lblKilos.Size = new System.Drawing.Size(32, 17);
             this.lblKilos.Text = "Kilos";
+            this.lblKilos.Click += new System.EventHandler(this.LblKilos_Click);
             // 
             // lblTotal
             // 
@@ -98,6 +101,7 @@
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(49, 17);
             this.lblTotal.Text = "Totales";
+            this.lblTotal.Click += new System.EventHandler(this.LblTotal_Click);
             // 
             // splitContainer1
             // 
@@ -156,6 +160,8 @@
             this.grdStock.TabIndex = 0;
             this.grdStock.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdStock_Editado);
             this.grdStock.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdStock_CambioFila);
+            this.grdStock.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdStock_KeyUp);
+            this.grdStock.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.GrdStock_KeyPress);
             // 
             // splitContainer2
             // 
@@ -171,6 +177,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.cFecha);
+            this.splitContainer2.Panel2.Controls.Add(this.cmdCambioMasivo);
             this.splitContainer2.Panel2.Controls.Add(this.cmdLimpiar);
             this.splitContainer2.Panel2.Controls.Add(this.cmdMostrar);
             this.splitContainer2.Size = new System.Drawing.Size(487, 693);
@@ -218,7 +225,9 @@
             // 
             // tiMensaje
             // 
-            this.tiMensaje.Interval = 5000;
+            this.tiMensaje.Enabled = true;
+            this.tiMensaje.Interval = 8000;
+            this.tiMensaje.Tick += new System.EventHandler(this.TiMensaje_Tick);
             // 
             // cProds
             // 
@@ -257,6 +266,17 @@
             this.cFecha.TabIndex = 3;
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
             // 
+            // cmdCambioMasivo
+            // 
+            this.cmdCambioMasivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdCambioMasivo.Location = new System.Drawing.Point(382, 128);
+            this.cmdCambioMasivo.Name = "cmdCambioMasivo";
+            this.cmdCambioMasivo.Size = new System.Drawing.Size(102, 23);
+            this.cmdCambioMasivo.TabIndex = 4;
+            this.cmdCambioMasivo.Text = "Cambio Masivo";
+            this.cmdCambioMasivo.UseVisualStyleBackColor = true;
+            this.cmdCambioMasivo.Click += new System.EventHandler(this.CmdCambioMasivo_Click);
+            // 
             // frmStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -264,8 +284,10 @@
             this.ClientSize = new System.Drawing.Size(1362, 715);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
+            this.KeyPreview = true;
             this.Name = "frmStock";
             this.Text = "Stock";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmStock_KeyUp);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -302,5 +324,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblTotal;
         private System.Windows.Forms.ToolStripStatusLabel lblCant;
         private System.Windows.Forms.ToolStripStatusLabel lblKilos;
+        private System.Windows.Forms.Button cmdCambioMasivo;
     }
 }

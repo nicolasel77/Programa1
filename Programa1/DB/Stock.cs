@@ -81,7 +81,7 @@
                 command.Connection = sql;
                 sql.Open();
 
-                var d = command.ExecuteNonQueryAsync();
+                var d = command.ExecuteNonQuery();
 
                 sql.Close();
             }
@@ -156,7 +156,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Stcok WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM Stock WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -171,7 +171,7 @@
             }
         }
 
-        public async Task Cargar_Fila(int id)
+        public void Cargar_Fila(int id)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
