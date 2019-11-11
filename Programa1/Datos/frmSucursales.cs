@@ -30,7 +30,8 @@ namespace Programa1.Datos
             grdSucursales.TeclasManejadas = n;
 
 
-            
+            Sucs.Mostrar_Ocultos = true;
+            Sucs.Filtro_SucCliente = Sucursales.Filtrar_SucsClientes.Todas;
             //Datos
             grdTipo.MostrarDatos(tipoSucursales.Datos(), true);
                         
@@ -562,7 +563,7 @@ namespace Programa1.Datos
             // F12
             if (e == 123 | e == 46)
             {
-                if (MessageBox.Show($"¿Esta segura/o de borrar el Sucursal '{grdSucursales.get_Texto(grdSucursales.Row, 1).ToString()}' ?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                if (MessageBox.Show($"¿Esta segura/o de borrar la Sucursal '{grdSucursales.get_Texto(grdSucursales.Row, 1).ToString()}' ?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     if (Convert.ToInt32(grdSucursales.get_Texto(grdSucursales.Row, 0)) != 0)
                     {

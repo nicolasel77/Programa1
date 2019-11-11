@@ -45,7 +45,7 @@
             InitializeComponent();
 
             prods = new Productos();
-
+            
             DataTable dt = prods.Tipo.Datos();
             foreach (DataRow dr in dt.Rows)
             {
@@ -162,12 +162,12 @@
                 }
                 
             }
-
+           
             dt = prods.Datos(s);
             foreach (DataRow dr in dt.Rows)
             {
                 lst.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
-            }
+            }            
         }
 
         public void Siguiente()
@@ -291,6 +291,22 @@
         private void CmdTodosTipos_Click(object sender, EventArgs e)
         {
             lstTipos.SelectedIndex = -1;
+        }
+
+        private void ChVer_CheckedChanged(object sender, EventArgs e)
+        {
+            prods.Mostrar_Ocultos = chVer.Checked;
+            Cargar();
+        }
+        private void RdId_CheckedChanged(object sender, EventArgs e)
+        {
+            prods.Ordern_XId = rdId.Checked;
+            Cargar();
+        }
+
+        private void CmdNinguno_Click(object sender, EventArgs e)
+        {
+            lst.SelectedIndex = -1;
         }
     }
 

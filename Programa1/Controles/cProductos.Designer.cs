@@ -29,34 +29,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
             this.lst = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.lstTipos = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.chVer = new System.Windows.Forms.CheckBox();
             this.cmdInvertir = new System.Windows.Forms.Button();
             this.cmdNinguno = new System.Windows.Forms.Button();
             this.cmdTodos = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.rdOrden = new System.Windows.Forms.RadioButton();
+            this.rdId = new System.Windows.Forms.RadioButton();
             this.cmdTodosTipos = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Productos";
             // 
             // lst
             // 
@@ -65,24 +58,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lst.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lst.FormattingEnabled = true;
-            this.lst.Location = new System.Drawing.Point(6, 21);
+            this.lst.Location = new System.Drawing.Point(3, 21);
             this.lst.Name = "lst";
             this.lst.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lst.Size = new System.Drawing.Size(225, 455);
+            this.lst.Size = new System.Drawing.Size(228, 455);
             this.lst.TabIndex = 0;
             this.lst.SelectedIndexChanged += new System.EventHandler(this.Lst_SelectedIndexChanged);
             this.lst.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Lst_MouseUp);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 18);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Tipo";
             // 
             // lstTipos
             // 
@@ -109,6 +91,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.chVer);
             this.splitContainer1.Panel1.Controls.Add(this.cmdInvertir);
             this.splitContainer1.Panel1.Controls.Add(this.cmdNinguno);
             this.splitContainer1.Panel1.Controls.Add(this.cmdTodos);
@@ -118,6 +101,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.label4);
+            this.splitContainer1.Panel2.Controls.Add(this.rdOrden);
+            this.splitContainer1.Panel2.Controls.Add(this.rdId);
             this.splitContainer1.Panel2.Controls.Add(this.cmdTodosTipos);
             this.splitContainer1.Panel2.Controls.Add(this.txtBuscar);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
@@ -126,6 +112,20 @@
             this.splitContainer1.Size = new System.Drawing.Size(337, 512);
             this.splitContainer1.SplitterDistance = 234;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // chVer
+            // 
+            this.chVer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chVer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chVer.ForeColor = System.Drawing.Color.DimGray;
+            this.chVer.Location = new System.Drawing.Point(3, 484);
+            this.chVer.Name = "chVer";
+            this.chVer.Size = new System.Drawing.Size(71, 23);
+            this.chVer.TabIndex = 7;
+            this.chVer.Text = "Ocultos";
+            this.toolTip1.SetToolTip(this.chVer, "Oculta/muestra según filtro Ver");
+            this.chVer.UseVisualStyleBackColor = true;
+            this.chVer.CheckedChanged += new System.EventHandler(this.ChVer_CheckedChanged);
             // 
             // cmdInvertir
             // 
@@ -151,6 +151,7 @@
             this.cmdNinguno.Text = "N";
             this.toolTip1.SetToolTip(this.cmdNinguno, "Borra la selección.");
             this.cmdNinguno.UseVisualStyleBackColor = true;
+            this.cmdNinguno.Click += new System.EventHandler(this.CmdNinguno_Click);
             // 
             // cmdTodos
             // 
@@ -164,6 +165,55 @@
             this.toolTip1.SetToolTip(this.cmdTodos, "Selecciona Todos\r\n(Click con rueda del mouse)");
             this.cmdTodos.UseVisualStyleBackColor = true;
             this.cmdTodos.Click += new System.EventHandler(this.CmdTodos_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Productos";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.DimGray;
+            this.label4.Location = new System.Drawing.Point(1, 412);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Orden:";
+            // 
+            // rdOrden
+            // 
+            this.rdOrden.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rdOrden.AutoSize = true;
+            this.rdOrden.ForeColor = System.Drawing.Color.DimGray;
+            this.rdOrden.Location = new System.Drawing.Point(4, 451);
+            this.rdOrden.Name = "rdOrden";
+            this.rdOrden.Size = new System.Drawing.Size(62, 17);
+            this.rdOrden.TabIndex = 9;
+            this.rdOrden.Text = "Nombre";
+            this.rdOrden.UseVisualStyleBackColor = true;
+            // 
+            // rdId
+            // 
+            this.rdId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rdId.AutoSize = true;
+            this.rdId.Checked = true;
+            this.rdId.ForeColor = System.Drawing.Color.DimGray;
+            this.rdId.Location = new System.Drawing.Point(4, 428);
+            this.rdId.Name = "rdId";
+            this.rdId.Size = new System.Drawing.Size(34, 17);
+            this.rdId.TabIndex = 10;
+            this.rdId.TabStop = true;
+            this.rdId.Text = "Id";
+            this.rdId.UseVisualStyleBackColor = true;
+            this.rdId.CheckedChanged += new System.EventHandler(this.RdId_CheckedChanged);
             // 
             // cmdTodosTipos
             // 
@@ -199,6 +249,17 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Buscar:";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 18);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Tipo";
+            // 
             // cProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -231,5 +292,9 @@
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button cmdTodosTipos;
+        private System.Windows.Forms.CheckBox chVer;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RadioButton rdOrden;
+        private System.Windows.Forms.RadioButton rdId;
     }
 }

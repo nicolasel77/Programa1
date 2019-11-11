@@ -45,7 +45,7 @@
             InitializeComponent();
 
             Sucs = new Sucursales();
-
+            Sucs.Filtro_SucCliente = Sucursales.Filtrar_SucsClientes.Sucursales;
             DataTable dt = Sucs.Tipo.Datos();
             foreach (DataRow dr in dt.Rows)
             {
@@ -161,8 +161,9 @@
                     s = $"Id IN ({vFiltroIn})";
                 }
 
-            }
+            }           
 
+            
             dt = Sucs.Datos(s);
             foreach (DataRow dr in dt.Rows)
             {
@@ -292,6 +293,41 @@
         {
             lstTipos.SelectedIndex = -1;
         }
-    }
 
+        private void ChVer_CheckedChanged(object sender, EventArgs e)
+        {
+            Sucs.Mostrar_Ocultos = chVer.Checked;
+            Cargar();
+        }
+        private void RdId_CheckedChanged(object sender, EventArgs e)
+        {
+            Sucs.Ordern_XId = rdId.Checked;
+            Cargar();
+        }
+
+        private void CmdNinguno_Click(object sender, EventArgs e)
+        {
+            lst.SelectedIndex = -1;
+        }
+
+        private void RdSucs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdTodas.Checked)
+            {
+                Sucs.Filtro_SucCliente = Sucursales.Filtrar_SucsClientes.Todas;
+            }
+            else
+            {
+                if (rdClientes.Checked)
+                {
+                    Sucs.Filtro_SucCliente = Sucursales.Filtrar_SucsClientes.Clientes;
+                }
+                else
+                {
+                    Sucs.Filtro_SucCliente = Sucursales.Filtrar_SucsClientes.Sucursales;
+                }
+            }
+            Cargar();
+        }
+    }
 }

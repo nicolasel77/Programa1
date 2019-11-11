@@ -29,34 +29,35 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
             this.lst = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.lstTipos = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.chVer = new System.Windows.Forms.CheckBox();
             this.cmdInvertir = new System.Windows.Forms.Button();
             this.cmdNinguno = new System.Windows.Forms.Button();
             this.cmdTodos = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.rdOrden = new System.Windows.Forms.RadioButton();
+            this.rdId = new System.Windows.Forms.RadioButton();
             this.cmdTodosTipos = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.rdTodas = new System.Windows.Forms.RadioButton();
+            this.rdSucs = new System.Windows.Forms.RadioButton();
+            this.rdClientes = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Sucursales";
             // 
             // lst
             // 
@@ -72,17 +73,6 @@
             this.lst.TabIndex = 0;
             this.lst.SelectedIndexChanged += new System.EventHandler(this.Lst_SelectedIndexChanged);
             this.lst.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Lst_MouseUp);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 18);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Tipo";
             // 
             // lstTipos
             // 
@@ -109,6 +99,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.chVer);
             this.splitContainer1.Panel1.Controls.Add(this.cmdInvertir);
             this.splitContainer1.Panel1.Controls.Add(this.cmdNinguno);
             this.splitContainer1.Panel1.Controls.Add(this.cmdTodos);
@@ -118,6 +109,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.panel2);
+            this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Panel2.Controls.Add(this.cmdTodosTipos);
             this.splitContainer1.Panel2.Controls.Add(this.txtBuscar);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
@@ -126,6 +119,20 @@
             this.splitContainer1.Size = new System.Drawing.Size(337, 512);
             this.splitContainer1.SplitterDistance = 234;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // chVer
+            // 
+            this.chVer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chVer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chVer.ForeColor = System.Drawing.Color.DimGray;
+            this.chVer.Location = new System.Drawing.Point(6, 486);
+            this.chVer.Name = "chVer";
+            this.chVer.Size = new System.Drawing.Size(71, 23);
+            this.chVer.TabIndex = 8;
+            this.chVer.Text = "Ocultos";
+            this.toolTip1.SetToolTip(this.chVer, "Oculta/muestra según filtro Ver");
+            this.chVer.UseVisualStyleBackColor = true;
+            this.chVer.CheckedChanged += new System.EventHandler(this.ChVer_CheckedChanged);
             // 
             // cmdInvertir
             // 
@@ -151,6 +158,7 @@
             this.cmdNinguno.Text = "N";
             this.toolTip1.SetToolTip(this.cmdNinguno, "Borra la selección.");
             this.cmdNinguno.UseVisualStyleBackColor = true;
+            this.cmdNinguno.Click += new System.EventHandler(this.CmdNinguno_Click);
             // 
             // cmdTodos
             // 
@@ -164,6 +172,41 @@
             this.toolTip1.SetToolTip(this.cmdTodos, "Selecciona Todos\r\n(Click con rueda del mouse)");
             this.cmdTodos.UseVisualStyleBackColor = true;
             this.cmdTodos.Click += new System.EventHandler(this.CmdTodos_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.DimGray;
+            this.label4.Location = new System.Drawing.Point(1, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Orden:";
+            // 
+            // rdOrden
+            // 
+            this.rdOrden.AutoSize = true;
+            this.rdOrden.ForeColor = System.Drawing.Color.DimGray;
+            this.rdOrden.Location = new System.Drawing.Point(4, 39);
+            this.rdOrden.Name = "rdOrden";
+            this.rdOrden.Size = new System.Drawing.Size(62, 17);
+            this.rdOrden.TabIndex = 7;
+            this.rdOrden.Text = "Nombre";
+            this.rdOrden.UseVisualStyleBackColor = true;
+            // 
+            // rdId
+            // 
+            this.rdId.AutoSize = true;
+            this.rdId.Checked = true;
+            this.rdId.ForeColor = System.Drawing.Color.DimGray;
+            this.rdId.Location = new System.Drawing.Point(4, 16);
+            this.rdId.Name = "rdId";
+            this.rdId.Size = new System.Drawing.Size(34, 17);
+            this.rdId.TabIndex = 7;
+            this.rdId.TabStop = true;
+            this.rdId.Text = "Id";
+            this.rdId.UseVisualStyleBackColor = true;
+            this.rdId.CheckedChanged += new System.EventHandler(this.RdId_CheckedChanged);
             // 
             // cmdTodosTipos
             // 
@@ -199,6 +242,99 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Buscar:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Sucursales";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 18);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Tipo";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.rdId);
+            this.panel1.Controls.Add(this.rdOrden);
+            this.panel1.Location = new System.Drawing.Point(3, 400);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(80, 68);
+            this.panel1.TabIndex = 9;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.rdTodas);
+            this.panel2.Controls.Add(this.rdClientes);
+            this.panel2.Controls.Add(this.rdSucs);
+            this.panel2.Location = new System.Drawing.Point(3, 291);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(85, 92);
+            this.panel2.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.DimGray;
+            this.label5.Location = new System.Drawing.Point(1, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(26, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Ver:";
+            // 
+            // rdTodas
+            // 
+            this.rdTodas.AutoSize = true;
+            this.rdTodas.ForeColor = System.Drawing.Color.DimGray;
+            this.rdTodas.Location = new System.Drawing.Point(4, 16);
+            this.rdTodas.Name = "rdTodas";
+            this.rdTodas.Size = new System.Drawing.Size(55, 17);
+            this.rdTodas.TabIndex = 7;
+            this.rdTodas.Text = "Todas";
+            this.rdTodas.UseVisualStyleBackColor = true;
+            this.rdTodas.CheckedChanged += new System.EventHandler(this.RdSucs_CheckedChanged);
+            // 
+            // rdSucs
+            // 
+            this.rdSucs.AutoSize = true;
+            this.rdSucs.Checked = true;
+            this.rdSucs.ForeColor = System.Drawing.Color.DimGray;
+            this.rdSucs.Location = new System.Drawing.Point(4, 39);
+            this.rdSucs.Name = "rdSucs";
+            this.rdSucs.Size = new System.Drawing.Size(77, 17);
+            this.rdSucs.TabIndex = 7;
+            this.rdSucs.TabStop = true;
+            this.rdSucs.Text = "Sucursales";
+            this.rdSucs.UseVisualStyleBackColor = true;
+            this.rdSucs.CheckedChanged += new System.EventHandler(this.RdSucs_CheckedChanged);
+            // 
+            // rdClientes
+            // 
+            this.rdClientes.AutoSize = true;
+            this.rdClientes.ForeColor = System.Drawing.Color.DimGray;
+            this.rdClientes.Location = new System.Drawing.Point(4, 62);
+            this.rdClientes.Name = "rdClientes";
+            this.rdClientes.Size = new System.Drawing.Size(62, 17);
+            this.rdClientes.TabIndex = 7;
+            this.rdClientes.Text = "Clientes";
+            this.rdClientes.UseVisualStyleBackColor = true;
+            this.rdClientes.CheckedChanged += new System.EventHandler(this.RdSucs_CheckedChanged);
+            // 
             // cSucursales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,6 +349,10 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -231,5 +371,15 @@
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button cmdTodosTipos;
+        private System.Windows.Forms.CheckBox chVer;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RadioButton rdOrden;
+        private System.Windows.Forms.RadioButton rdId;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RadioButton rdTodas;
+        private System.Windows.Forms.RadioButton rdClientes;
+        private System.Windows.Forms.RadioButton rdSucs;
+        private System.Windows.Forms.Panel panel1;
     }
 }

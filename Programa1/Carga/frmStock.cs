@@ -84,10 +84,18 @@ namespace Programa1.Carga
 
         private void CmdMostrar_Click(object sender, EventArgs e)
         {
+            this.Enabled = false;
+            this.Cursor = Cursors.WaitCursor;
+
             string s = Armar_Cadena();
             grdStock.MostrarDatos(stock.Datos(s), true);
             formato_Grilla();
             Totales();
+
+            grdStock.ActivarCelda(grdStock.Rows - 1, grdStock.get_ColIndex("Fecha"));
+            grdStock.Focus();
+            this.Enabled = true;
+            this.Cursor = Cursors.Default;
         }
 
         private string Armar_Cadena()
@@ -95,11 +103,12 @@ namespace Programa1.Carga
             string p = cProds.Cadena("Id_Productos");
             string s = cSucs.Cadena("Id_Sucursales");
             string f = cFecha.Cadena();
+            
             Herramientas.Herramientas h = new Herramientas.Herramientas();
 
             s = h.Unir(f, s);
             s = h.Unir(s, p);
-
+            
             return s;
         }
 

@@ -15,6 +15,8 @@ namespace Programa1.DB
             Localidad = new Localidades();
         }
 
+        public enum Filtrar_SucsClientes { Todas=0, Sucursales, Clientes };
+
         public Sucursales(int id, string nombre, int tipo, bool ver, bool propio, string titular, string cuit, string direccion, string alias, int localidad, string balanza)
         {
             Id = id;
@@ -57,16 +59,42 @@ namespace Programa1.DB
         public string Balanza { get; set; }
 
 
+        public Filtrar_SucsClientes Filtro_SucCliente { get; set; }
+
+        public bool Mostrar_Ocultos { get; set; } = false;
+        public bool Ordern_XId { get; set; } = true;
 
         public DataTable Datos(string filtro = "")
         {
             //Cadena de conexion y DataTable (tabla)
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
 
+            if (Mostrar_Ocultos == false)
+            {
+                filtro = h.Unir(filtro, " (Ver=1) ");
+            }
+            switch (Filtro_SucCliente)
+            {
+                case Filtrar_SucsClientes.Clientes:
+                    filtro = h.Unir(filtro, " (Propio=0) ");
+                    break;
+                case Filtrar_SucsClientes.Sucursales:
+                    filtro = h.Unir(filtro, " (Propio=1) ");
+                    break;
+            }
             if (filtro.Length > 0)
             {
                 filtro = " WHERE " + filtro;
+            }
+            if (Ordern_XId == false)
+            {
+                filtro += " ORDER BY Nombre ";
+            }
+            else
+            {
+                filtro +=  " ORDER BY Id";
             }
 
             try

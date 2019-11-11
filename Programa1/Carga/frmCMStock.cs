@@ -215,6 +215,7 @@
             Totales();
         }
 
+
         private void CmdGuardar_Click(object sender, EventArgs e)
         {
             for (int f = 1; f <= grdResultado.Rows - 1; f++)
@@ -231,6 +232,7 @@
             }
             this.Close();
         }
+
 
 
         private void ChFecha_CheckedChanged(object sender, System.EventArgs e)
