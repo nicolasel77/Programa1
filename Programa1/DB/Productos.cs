@@ -95,7 +95,7 @@
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-          
+
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 * FROM vw_Productos WHERE Id>{Id} ORDER BY Id", conexionSql);
@@ -103,37 +103,24 @@
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
                 SqlDat.Fill(dt);
+                DataRow dr;
 
                 if (dt.Rows.Count > 0)
                 {
-                    DataRow dr = dt.Rows[0];                   
-
-                    Id = Convert.ToInt32(dr["Id"]);
-                    Nombre = dr["Nombre"].ToString();
-                    Tipo.Id = Convert.ToInt32(dr["Id_Tipo"]);
-                    Ver = Convert.ToBoolean(dr["Ver"]);
-                    Imprimir = Convert.ToBoolean(dr["Imprimir"]);
-                    Pesable = Convert.ToBoolean(dr["Pesable"]);
-                    Multiplicador = Convert.ToInt32(dr["Multiplicador"]);
+                    dr = dt.Rows[0];
+                    Asignar(dr);
                 }
                 else
                 {
                     comandoSql.CommandText = ($"SELECT TOP 1 * FROM vw_Productos ORDER BY Id");
                     comandoSql.CommandType = CommandType.Text;
-                    
+
                     SqlDat.Fill(dt);
 
                     if (dt.Rows.Count > 0)
                     {
-                        DataRow dr = dt.Rows[0];
-
-                        Id = Convert.ToInt32(dr["Id"]);
-                        Nombre = dr["Nombre"].ToString();
-                        Tipo.Id = Convert.ToInt32(dr["Id_Tipo"]);
-                        Ver = Convert.ToBoolean(dr["Ver"]);
-                        Imprimir = Convert.ToBoolean(dr["Imprimir"]);
-                        Pesable = Convert.ToBoolean(dr["Pesable"]);
-                        Multiplicador = Convert.ToInt32(dr["Multiplicador"]);
+                        dr = dt.Rows[0];
+                        Asignar(dr);
                     }
                 }
             }
@@ -141,6 +128,17 @@
             {
                 Id = 0;
             }
+        }
+
+        private void Asignar(DataRow dr)
+        {
+            Id = Convert.ToInt32(dr["Id"]);
+            Nombre = dr["Nombre"].ToString();
+            Tipo.Id = Convert.ToInt32(dr["Id_Tipo"]);
+            Ver = Convert.ToBoolean(dr["Ver"]);
+            Imprimir = Convert.ToBoolean(dr["Imprimir"]);
+            Pesable = Convert.ToBoolean(dr["Pesable"]);
+            Multiplicador = Convert.ToInt32(dr["Multiplicador"]);
         }
 
         public void Actualizar()
@@ -153,7 +151,7 @@
                 string vimp = Imprimir ? "1" : "0";
                 string vpesa = Pesable ? "1" : "0";
 
-                SqlCommand command = 
+                SqlCommand command =
                     new SqlCommand($"UPDATE Productos SET Nombre='{Nombre}', Id_Tipo={Tipo.Id}, Ver={vver}, Imprimir={vimp}, Pesable={vpesa}, Multiplicador={Multiplicador} WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -179,7 +177,7 @@
                 string vimp = Imprimir ? "1" : "0";
                 string vpesa = Pesable ? "1" : "0";
 
-                SqlCommand command = 
+                SqlCommand command =
                     new SqlCommand($"INSERT INTO Productos (Id, Nombre, Id_Tipo, Ver, Imprimir, Pesable, Multiplicador) VALUES({Id}, '{Nombre}', {Tipo.Id}, {vver}, " +
                     $"{vimp}, {vpesa}, {Multiplicador})", sql);
                 command.CommandType = CommandType.Text;
@@ -259,6 +257,6 @@
             }
         }
 
-        
+
     }
 }

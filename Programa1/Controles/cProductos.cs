@@ -45,7 +45,7 @@
             InitializeComponent();
 
             prods = new Productos();
-            
+
             DataTable dt = prods.Tipo.Datos();
             foreach (DataRow dr in dt.Rows)
             {
@@ -72,7 +72,7 @@
                 {
                     if (herramientas.Codigo_Seleccionado(lst.Items[i].ToString()) == value)
                     {
-                        lst.SelectedIndices.Add(i);                        
+                        lst.SelectedIndices.Add(i);
                     }
                 }
             }
@@ -97,77 +97,64 @@
                 }
             }
             return s;
-        }            
-        
-        
+        }
+
+
         private void Cargar()
         {
             DataTable dt = new DataTable();
             string s = "";
-            string z = "";
 
-            if (lstTipos.SelectedItems.Count == 1)
-            {
-                s = $"(Id_Tipo={herramientas.Codigo_Seleccionado(lstTipos.Text)})";
-            }
-            else
-            {
-                if (lstTipos.SelectedItems.Count > 1)
-                {
-                    foreach (string sn in lstTipos.SelectedItems)
-                    {
-                        s = $"{s}, {herramientas.Codigo_Seleccionado(sn)}";
-                    }
-                    s = $"(Id_Tipo IN ({s.Substring(2)}))";
-                }
-            }
             if (txtBuscar.TextLength > 0)
             {
                 int i;
                 bool n = int.TryParse(txtBuscar.Text, out i);
                 if (n)
                 {
-                    z = $"Nombre like '%{i}%' OR Id={i}";
+                    s = $"Nombre like '%{i}%' OR Id={i}";
                 }
                 else
                 {
-                    z = $"Nombre like '%{txtBuscar.Text}%'";
-                }
-            }
-            if (s.Length > 0)
-            {
-                if (z.Length > 0)
-                {
-                    s = $"{s} AND {z}";
+                    s = $"Nombre like '%{txtBuscar.Text}%'";
                 }
             }
             else
             {
-                if (z.Length > 0)
+                if (lstTipos.SelectedItems.Count == 1)
                 {
-                    s = z;
-                }
-            }
-            lst.Items.Clear();
-
-            if (vFiltroIn.Length>0)
-            {
-                if (s.Length > 0)
-                {
-                    s = $"{s} AND Id IN ({vFiltroIn})";
+                    s = $"(Id_Tipo={herramientas.Codigo_Seleccionado(lstTipos.Text)})";
                 }
                 else
                 {
-                    s = $"Id IN ({vFiltroIn})";
+                    if (lstTipos.SelectedItems.Count > 1)
+                    {
+                        foreach (string sn in lstTipos.SelectedItems)
+                        {
+                            s = $"{s}, {herramientas.Codigo_Seleccionado(sn)}";
+                        }
+                        s = $"(Id_Tipo IN ({s.Substring(2)}))";
+                    }
                 }
-                
+
+                if (vFiltroIn.Length > 0)
+                {
+                    if (s.Length > 0)
+                    {
+                        s = $"{s} AND Id IN ({vFiltroIn})";
+                    }
+                    else
+                    {
+                        s = $"Id IN ({vFiltroIn})";
+                    }
+                }
             }
-           
+
+            lst.Items.Clear();
             dt = prods.Datos(s);
             foreach (DataRow dr in dt.Rows)
             {
                 lst.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
-            }            
+            }
         }
 
         public void Siguiente()
@@ -185,7 +172,7 @@
                     lst.SetSelected(i, false);
                     if (i == lst.Items.Count - 1)
                     {
-                        lst.SetSelected(0 , true);
+                        lst.SetSelected(0, true);
                     }
                     else
                     {
@@ -202,7 +189,7 @@
 
                 if (i == -1)
                 {
-                    lst.SetSelected( lst.Items.Count-1, true);
+                    lst.SetSelected(lst.Items.Count - 1, true);
                 }
                 else
                 {
@@ -213,7 +200,7 @@
                     }
                     else
                     {
-                        lst.SetSelected(i- 1, true);
+                        lst.SetSelected(i - 1, true);
                     }
                 }
             }
@@ -221,7 +208,7 @@
 
         private void Lst_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cCancel  == false)
+            if (cCancel == false)
             {
                 Cambio_Seleccion(this, e);
             }
@@ -244,8 +231,8 @@
                     break;
             }
         }
-        
-        
+
+
         private void CmdTodos_Click(object sender, EventArgs e)
         {
             cCancel = true;

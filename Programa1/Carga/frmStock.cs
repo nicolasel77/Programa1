@@ -84,17 +84,15 @@ namespace Programa1.Carga
 
         private void CmdMostrar_Click(object sender, EventArgs e)
         {
-            this.Enabled = false;
             this.Cursor = Cursors.WaitCursor;
 
             string s = Armar_Cadena();
             grdStock.MostrarDatos(stock.Datos(s), true);
             formato_Grilla();
             Totales();
-
             grdStock.ActivarCelda(grdStock.Rows - 1, grdStock.get_ColIndex("Fecha"));
             grdStock.Focus();
-            this.Enabled = true;
+
             this.Cursor = Cursors.Default;
         }
 
@@ -103,12 +101,12 @@ namespace Programa1.Carga
             string p = cProds.Cadena("Id_Productos");
             string s = cSucs.Cadena("Id_Sucursales");
             string f = cFecha.Cadena();
-            
+
             Herramientas.Herramientas h = new Herramientas.Herramientas();
 
             s = h.Unir(f, s);
             s = h.Unir(s, p);
-            
+
             return s;
         }
 
@@ -128,7 +126,7 @@ namespace Programa1.Carga
             grdStock.Columnas[grdStock.get_ColIndex("Kilos")].Format = "N2";
             grdStock.Columnas[grdStock.get_ColIndex("Total")].Format = "C2";
 
-            grdStock.Columnas[grdStock.get_ColIndex("Kilos")].Style.Font= new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
+            grdStock.Columnas[grdStock.get_ColIndex("Kilos")].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
             grdStock.set_Texto(0, grdStock.get_ColIndex("Id_Sucursales"), "Suc");
             grdStock.set_Texto(0, grdStock.get_ColIndex("Id_Productos"), "Prod");
@@ -165,13 +163,15 @@ namespace Programa1.Carga
 
         private void CFecha_Cambio_Seleccion(object sender, EventArgs e)
         {
+            cProds.Filtro_In = $" (SELECT DISTINCT Id_Productos FROM Stock WHERE {cFecha.Cadena()})";
+            cSucs.Filtro_In = $" (SELECT DISTINCT Id_Sucursales FROM Stock WHERE {cFecha.Cadena()})";
             cmdMostrar.PerformClick();
         }
 
 
         private void GrdStock_Editado(short f, short c, object a)
         {
-            int id = Convert.ToInt32( grdStock.get_Texto(f, grdStock.get_ColIndex("Id")));
+            int id = Convert.ToInt32(grdStock.get_Texto(f, grdStock.get_ColIndex("Id")));
             switch (c)
             {
                 case 1:
@@ -198,7 +198,8 @@ namespace Programa1.Carga
                         grdStock.set_Texto(f, c + 1, stock.suc.Nombre);
 
                         grdStock.ActivarCelda(f, c + 2);
-                    }else
+                    }
+                    else
                     {
                         Mensaje("No se encontró la sucursal " + a.ToString());
                         grdStock.ErrorEnTxt();
@@ -218,7 +219,7 @@ namespace Programa1.Carga
 
                         stock.Costo = precios.Buscar();
                         grdStock.set_Texto(f, grdStock.get_ColIndex("Costo"), stock.Costo);
-                        grdStock.set_Texto(f, grdStock.get_ColIndex("Total"), stock.Costo*stock.Kilos);
+                        grdStock.set_Texto(f, grdStock.get_ColIndex("Total"), stock.Costo * stock.Kilos);
 
                         if (id != 0) { stock.Actualizar(); }
 
@@ -257,26 +258,43 @@ namespace Programa1.Carga
                     grdStock.set_Texto(f, c, a);
                     grdStock.set_Texto(f, grdStock.get_ColIndex("Total"), stock.Costo * stock.Kilos);
 
-                    //TODO:
-                    //Guardar
                     if (grdStock.Row == grdStock.Rows - 1)
                     {
                         stock.Agregar();
                         grdStock.set_Texto(f, grdStock.get_ColIndex("Id"), stock.Id);
                         grdStock.AgregarFila();
+                        //Rellenar nueva fila
+
+                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Fecha"), stock.Fecha);
+                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Id_Sucursales"), stock.suc.Id);
+                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Nombre"), stock.suc.Nombre);
+
+                        stock.producto.Siguiente();
+                        precios.producto = stock.producto;
+
+                        stock.Descripcion = stock.producto.Nombre;
+
+                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Id_Productos"), stock.producto.Id);
+                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Descripcion"), stock.Descripcion);
+
+                        stock.Costo = precios.Buscar();
+                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Costo"), stock.Costo);
+                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Total"), 0);
+
+                        stock.Kilos = 0;
                     }
                     else
                     {
                         stock.Actualizar();
                     }
                     grdStock.ActivarCelda(f + 1, c);
-                    //Rellenar nueva fila
+
                     Totales();
                     break;
             }
 
         }
-               
+
         private void GrdStock_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdStock.get_Texto(Fila, grdStock.get_ColIndex("Id")).ToString());
@@ -290,25 +308,23 @@ namespace Programa1.Carga
         {
             if (e == 13)
             {
-                if (grdStock.Col == grdStock.get_ColIndex("Kilos"))
+                if (stock.Id == 0)
                 {
-                    stock.producto.Siguiente();
-                    precios.producto = stock.producto;
 
-                    stock.Descripcion = stock.producto.Nombre;
-
-                    grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Id_Productos"), stock.producto.Id);
-                    grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Descripcion"), stock.Descripcion);
-
-                    stock.Costo = precios.Buscar();
-                    grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Costo"), stock.Costo);
-                    grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Total"), stock.Costo*stock.Kilos);
-
-                    if (stock.Id != 0)
+                    if (grdStock.Col == grdStock.get_ColIndex("Kilos"))
                     {
-                        stock.Actualizar();
-                        Totales();
-                    }                    
+                        stock.producto.Siguiente();
+                        precios.producto = stock.producto;
+
+                        stock.Descripcion = stock.producto.Nombre;
+
+                        grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Id_Productos"), stock.producto.Id);
+                        grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Descripcion"), stock.Descripcion);
+
+                        stock.Costo = precios.Buscar();
+                        grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Costo"), stock.Costo);
+                        grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Total"), 0);
+                    }
                 }
             }
         }
@@ -318,17 +334,17 @@ namespace Programa1.Carga
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                        if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+                        if (Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0)) != 0)
                         {
-                            if (Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0)) != 0)
-                            {
-                                stock.Id = Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0));
-                                stock.Borrar();
-                                grdStock.BorrarFila(grdStock.Row);
-                                Totales();
-                            }
-                        }                    
-                        break;
+                            stock.Id = Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0));
+                            stock.Borrar();
+                            grdStock.BorrarFila(grdStock.Row);
+                            Totales();
+                        }
+                    }
+                    break;
             }
         }
 

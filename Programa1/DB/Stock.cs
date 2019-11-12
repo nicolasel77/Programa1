@@ -37,8 +37,7 @@
         public Sucursales suc { get; set; }
         public Single Costo { get; set; }
         public Single Kilos { get; set; }
-                       
-
+                
         public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
@@ -51,12 +50,11 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Stock" + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Stock {filtro} ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
+                SqlDat.Fill(dt);                
             }
             catch (Exception)
             {

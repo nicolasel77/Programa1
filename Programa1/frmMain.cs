@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
+    using Programa1.Carga.Precios;
     
     public partial class frmMain : Form
     {
@@ -55,7 +56,7 @@
 
         private void PruebaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            stockToolStripMenuItem.PerformClick();
+            menudenciasToolStripMenuItem.PerformClick();
         }
 
         private void FrmProds_Disposed(object sender, EventArgs e)
@@ -254,6 +255,56 @@
                     forms.Remove(f);
                     break;
                 }
+            }
+        }
+
+       
+        private void FrmPrecios_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Precios Men")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPreciosMen")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void MenudenciasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPreciosMen")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmPreciosMen");
+                t.Text = "Precios Men";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmPrecios = new frmPreciosMen();
+                frmPrecios.MdiParent = this;
+                frmPrecios.Disposed += FrmPrecios_Disposed;
+                forms.Add(frmPrecios);
+                frmPrecios.Show();
+                frmPrecios.WindowState = FormWindowState.Minimized;
+                frmPrecios.WindowState = FormWindowState.Maximized;
             }
         }
     }

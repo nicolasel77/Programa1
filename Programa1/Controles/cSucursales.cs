@@ -104,66 +104,53 @@
         {
             DataTable dt = new DataTable();
             string s = "";
-            string z = "";
 
-            if (lstTipos.SelectedItems.Count == 1)
-            {
-                s = $"(Tipo={herramientas.Codigo_Seleccionado(lstTipos.Text)})";
-            }
-            else
-            {
-                if (lstTipos.SelectedItems.Count > 1)
-                {
-                    foreach (string sn in lstTipos.SelectedItems)
-                    {
-                        s = $"{s}, {herramientas.Codigo_Seleccionado(sn)}";
-                    }
-                    s = $"(Tipo IN ({s.Substring(2)}))";
-                }
-            }
             if (txtBuscar.TextLength > 0)
             {
                 int i;
                 bool n = int.TryParse(txtBuscar.Text, out i);
                 if (n)
                 {
-                    z = $"Nombre like '%{i}%' OR Id={i}";
+                    s = $"Nombre like '%{i}%' OR Id={i}";
                 }
                 else
                 {
-                    z = $"Nombre like '%{txtBuscar.Text}%'";
-                }
-            }
-            if (s.Length > 0)
-            {
-                if (z.Length > 0)
-                {
-                    s = $"{s} AND {z}";
+                    s = $"Nombre like '%{txtBuscar.Text}%'";
                 }
             }
             else
             {
-                if (z.Length > 0)
+                if (lstTipos.SelectedItems.Count == 1)
                 {
-                    s = z;
-                }
-            }
-            lst.Items.Clear();
-
-            if (vFiltroIn.Length > 0)
-            {
-                if (s.Length > 0)
-                {
-                    s = $"{s} AND Id IN ({vFiltroIn})";
+                    s = $"(Tipo={herramientas.Codigo_Seleccionado(lstTipos.Text)})";
                 }
                 else
                 {
-                    s = $"Id IN ({vFiltroIn})";
+                    if (lstTipos.SelectedItems.Count > 1)
+                    {
+                        foreach (string sn in lstTipos.SelectedItems)
+                        {
+                            s = $"{s}, {herramientas.Codigo_Seleccionado(sn)}";
+                        }
+                        s = $"(Tipo IN ({s.Substring(2)}))";
+                    }
+               }               
+
+                if (vFiltroIn.Length > 0)
+                {
+                    if (s.Length > 0)
+                    {
+                        s = $"{s} AND Id IN ({vFiltroIn})";
+                    }
+                    else
+                    {
+                        s = $"Id IN ({vFiltroIn})";
+                    }
+
                 }
+            }
 
-            }           
-
-            
+            lst.Items.Clear();
             dt = Sucs.Datos(s);
             foreach (DataRow dr in dt.Rows)
             {

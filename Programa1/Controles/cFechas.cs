@@ -4,14 +4,12 @@
     using System;
     using System.Data;
     using System.Windows.Forms;
-    using MaterialSkin.Controls;
-    using MaterialSkin;
 
     public partial class cFechas : UserControl
     {
         private Semanas semanas;
         private bool cCambio = false;
-
+        
         public event EventHandler Cambio_Seleccion;
 
         public cFechas()
@@ -29,10 +27,17 @@
             DataTable dt = semanas.Datos();
 
             lstSemanas.Items.Clear();
+            int salir = 1;
             foreach (DataRow dr in dt.Rows)
             {
+                if (salir == 100)
+                {
+                    lstSemanas.Items.Add("Mas...");
+                    break;
+                }
                 DateTime d = Convert.ToDateTime(dr["Semana"]);
                 lstSemanas.Items.Add(d.ToString("dd/MM/yyy"));
+                salir++;
             }
 
             dt = semanas.Años();
@@ -92,11 +97,28 @@
 
         private void LstSemanas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cCambio == false)
+            if (lstSemanas.Text == "Mas...")
             {
-                Cambio_Seleccion(null, null);
-            }
+                string s = lstSemanas.Items[lstSemanas.SelectedIndex - 1].ToString();
 
+                DataTable dt = semanas.Datos($"Semana<'{Convert.ToDateTime(s).ToString("MM/dd/yy")}'");
+
+                int i = lstSemanas.SelectedIndex;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    DateTime d = Convert.ToDateTime(dr["Semana"]);
+                    lstSemanas.Items.Insert(i, d.ToString("dd/MM/yyy"));
+                    i++;
+                }
+                
+            }
+            else
+            {
+                if (cCambio == false)
+                {
+                    Cambio_Seleccion(null, null);
+                }
+            }
         }
     }
 }

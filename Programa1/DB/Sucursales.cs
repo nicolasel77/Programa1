@@ -15,7 +15,7 @@ namespace Programa1.DB
             Localidad = new Localidades();
         }
 
-        public enum Filtrar_SucsClientes { Todas=0, Sucursales, Clientes };
+        public enum Filtrar_SucsClientes { Todas = 0, Sucursales, Clientes };
 
         public Sucursales(int id, string nombre, int tipo, bool ver, bool propio, string titular, string cuit, string direccion, string alias, int localidad, string balanza)
         {
@@ -66,7 +66,6 @@ namespace Programa1.DB
 
         public DataTable Datos(string filtro = "")
         {
-            //Cadena de conexion y DataTable (tabla)
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             Herramientas.Herramientas h = new Herramientas.Herramientas();
@@ -94,12 +93,12 @@ namespace Programa1.DB
             }
             else
             {
-                filtro +=  " ORDER BY Id";
+                filtro += " ORDER BY Id";
             }
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Sucursales" + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM Sucursales" + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -114,6 +113,64 @@ namespace Programa1.DB
             return dt;
         }
 
+        public void Siguiente()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 * FROM Sucursales WHERE Id>{Id} ORDER BY Id", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+                DataRow dr;
+
+                if (dt.Rows.Count > 0)
+                {
+                    dr = dt.Rows[0];
+                    Asignar(dr);
+                }
+                else
+                {
+                    comandoSql.CommandText = ($"SELECT TOP 1 * FROM Sucursales ORDER BY Id");
+                    comandoSql.CommandType = CommandType.Text;
+
+                    SqlDat.Fill(dt);
+
+                    if (dt.Rows.Count == 0)
+                    {
+                        Id = 0;
+                    }
+                    else
+                    {
+                        dr = dt.Rows[0];
+                        Asignar(dr);
+                    }
+                }                
+            }
+            catch (Exception)
+            {
+                Id = 0;
+            }
+        }
+
+        private void Asignar(DataRow dr)
+        {
+            Id = Convert.ToInt32(dr["Id"]);
+            Nombre = dr["Nombre"].ToString();
+            Tipo.Id = Convert.ToInt32(dr["Id_Tipo"]);
+            Ver = Convert.ToBoolean(dr["Ver"]);
+            Titular = dr["Titular"].ToString();
+            Direccion = dr["Direccion"].ToString();
+            Alias = dr["Alias"].ToString();
+            CUIT = dr["CUIT"].ToString();
+            Balanza = dr["Balanza"].ToString();
+            Localidad.Id = Convert.ToInt32(dr["Id_Localidad"]);
+        }
+
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -122,7 +179,7 @@ namespace Programa1.DB
             {
                 string vver = Ver ? "1" : "0";
                 string vpropio = Propio ? "1" : "0";
-                
+
                 SqlCommand command =
                     new SqlCommand($"UPDATE Sucursales SET Nombre='{Nombre}', Tipo={Tipo.Id}, Ver={vver}, Propio={vpropio}, Titular='{Titular}', CUIT='{CUIT}', Direccion='{Direccion}'" +
                     $",Alias='{Alias}',Id_Localidad={Localidad.Id}, Balanza='{Balanza}' WHERE Id={Id}", sql);
@@ -147,7 +204,7 @@ namespace Programa1.DB
             try
             {
                 string vver = Ver ? "1" : "0";
-                string vpropio = Propio ? "1" : "0";                
+                string vpropio = Propio ? "1" : "0";
 
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Sucursales (Id, Nombre, Tipo, Ver, Propio, Titular, CUIT, Direccion, Id_Localidad, Alias, Balanza) VALUES({Id}, '{Nombre}', {Tipo.Id}, {vver}, " +
