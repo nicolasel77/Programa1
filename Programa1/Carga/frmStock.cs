@@ -137,7 +137,7 @@ namespace Programa1.Carga
             double t = grdStock.SumarCol(grdStock.get_ColIndex("Total"), false);
             double k = grdStock.SumarCol(grdStock.get_ColIndex("Kilos"), false);
             int c = grdStock.Rows - 2;
-            lblCant.Text = $"Registros: {c}";
+            lblCant.Text = $"Registros: {c:N0}";
             lblKilos.Text = $"Kilos: {k:N2}";
             lblTotal.Text = $"Total: {t:C2}";
         }

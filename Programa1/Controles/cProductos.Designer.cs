@@ -237,6 +237,7 @@
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(82, 13);
             this.txtBuscar.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.txtBuscar, "Busca por Id y Nombre");
             this.txtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
             // 
             // label3

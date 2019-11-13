@@ -126,8 +126,6 @@
             // 
             // grdStock
             // 
-            this.grdStock.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdStock.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
             this.grdStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -147,7 +145,6 @@
             this.grdStock.FixRows = 0;
             this.grdStock.FuenteEncabezado = null;
             this.grdStock.FuentePieDePagina = null;
-            this.grdStock.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdStock.Location = new System.Drawing.Point(12, 12);
             this.grdStock.MenuActivado = false;
             this.grdStock.Name = "grdStock";

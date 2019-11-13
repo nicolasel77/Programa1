@@ -88,8 +88,6 @@
             // 
             // grdTipo
             // 
-            this.grdTipo.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdTipo.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
             this.grdTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.grdTipo.AutoResize = false;
@@ -108,7 +106,6 @@
             this.grdTipo.FixRows = 0;
             this.grdTipo.FuenteEncabezado = null;
             this.grdTipo.FuentePieDePagina = null;
-            this.grdTipo.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdTipo.Location = new System.Drawing.Point(12, 30);
             this.grdTipo.MenuActivado = false;
             this.grdTipo.Name = "grdTipo";
@@ -126,8 +123,6 @@
             // 
             // grdProductos
             // 
-            this.grdProductos.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdProductos.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
             this.grdProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -147,7 +142,6 @@
             this.grdProductos.FixRows = 0;
             this.grdProductos.FuenteEncabezado = null;
             this.grdProductos.FuentePieDePagina = null;
-            this.grdProductos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdProductos.Location = new System.Drawing.Point(404, 30);
             this.grdProductos.MenuActivado = false;
             this.grdProductos.Name = "grdProductos";

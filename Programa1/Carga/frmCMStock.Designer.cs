@@ -389,8 +389,6 @@
             // 
             // grdOriginal
             // 
-            this.grdOriginal.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdOriginal.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
             this.grdOriginal.AutoResize = false;
             this.grdOriginal.bColor = System.Drawing.SystemColors.Window;
             this.grdOriginal.bColorSel = System.Drawing.SystemColors.Highlight;
@@ -408,7 +406,6 @@
             this.grdOriginal.FixRows = 0;
             this.grdOriginal.FuenteEncabezado = null;
             this.grdOriginal.FuentePieDePagina = null;
-            this.grdOriginal.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdOriginal.Location = new System.Drawing.Point(0, 0);
             this.grdOriginal.MenuActivado = false;
             this.grdOriginal.Name = "grdOriginal";
@@ -437,8 +434,6 @@
             // 
             // grdResultado
             // 
-            this.grdResultado.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdResultado.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
             this.grdResultado.AutoResize = false;
             this.grdResultado.bColor = System.Drawing.SystemColors.Window;
             this.grdResultado.bColorSel = System.Drawing.SystemColors.Highlight;
@@ -456,7 +451,6 @@
             this.grdResultado.FixRows = 0;
             this.grdResultado.FuenteEncabezado = null;
             this.grdResultado.FuentePieDePagina = null;
-            this.grdResultado.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdResultado.Location = new System.Drawing.Point(0, 0);
             this.grdResultado.MenuActivado = false;
             this.grdResultado.Name = "grdResultado";

@@ -36,27 +36,27 @@
             this.cmdInvertir = new System.Windows.Forms.Button();
             this.cmdNinguno = new System.Windows.Forms.Button();
             this.cmdTodos = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.rdOrden = new System.Windows.Forms.RadioButton();
-            this.rdId = new System.Windows.Forms.RadioButton();
-            this.cmdTodosTipos = new System.Windows.Forms.Button();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.rdTodas = new System.Windows.Forms.RadioButton();
-            this.rdSucs = new System.Windows.Forms.RadioButton();
             this.rdClientes = new System.Windows.Forms.RadioButton();
+            this.rdSucs = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.rdId = new System.Windows.Forms.RadioButton();
+            this.rdOrden = new System.Windows.Forms.RadioButton();
+            this.cmdTodosTipos = new System.Windows.Forms.Button();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lst
@@ -173,75 +173,6 @@
             this.cmdTodos.UseVisualStyleBackColor = true;
             this.cmdTodos.Click += new System.EventHandler(this.CmdTodos_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.DimGray;
-            this.label4.Location = new System.Drawing.Point(1, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Orden:";
-            // 
-            // rdOrden
-            // 
-            this.rdOrden.AutoSize = true;
-            this.rdOrden.ForeColor = System.Drawing.Color.DimGray;
-            this.rdOrden.Location = new System.Drawing.Point(4, 39);
-            this.rdOrden.Name = "rdOrden";
-            this.rdOrden.Size = new System.Drawing.Size(62, 17);
-            this.rdOrden.TabIndex = 7;
-            this.rdOrden.Text = "Nombre";
-            this.rdOrden.UseVisualStyleBackColor = true;
-            // 
-            // rdId
-            // 
-            this.rdId.AutoSize = true;
-            this.rdId.Checked = true;
-            this.rdId.ForeColor = System.Drawing.Color.DimGray;
-            this.rdId.Location = new System.Drawing.Point(4, 16);
-            this.rdId.Name = "rdId";
-            this.rdId.Size = new System.Drawing.Size(34, 17);
-            this.rdId.TabIndex = 7;
-            this.rdId.TabStop = true;
-            this.rdId.Text = "Id";
-            this.rdId.UseVisualStyleBackColor = true;
-            this.rdId.CheckedChanged += new System.EventHandler(this.RdId_CheckedChanged);
-            // 
-            // cmdTodosTipos
-            // 
-            this.cmdTodosTipos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdTodosTipos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdTodosTipos.Location = new System.Drawing.Point(57, 183);
-            this.cmdTodosTipos.Name = "cmdTodosTipos";
-            this.cmdTodosTipos.Size = new System.Drawing.Size(31, 19);
-            this.cmdTodosTipos.TabIndex = 5;
-            this.cmdTodosTipos.Text = "N";
-            this.toolTip1.SetToolTip(this.cmdTodosTipos, "Borra selección");
-            this.cmdTodosTipos.UseVisualStyleBackColor = true;
-            this.cmdTodosTipos.Click += new System.EventHandler(this.CmdTodosTipos_Click);
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBuscar.Location = new System.Drawing.Point(6, 489);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(82, 13);
-            this.txtBuscar.TabIndex = 6;
-            this.txtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 471);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Buscar:";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -252,28 +183,6 @@
             this.label1.Size = new System.Drawing.Size(82, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Sucursales";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 18);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Tipo";
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.rdId);
-            this.panel1.Controls.Add(this.rdOrden);
-            this.panel1.Location = new System.Drawing.Point(3, 400);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(80, 68);
-            this.panel1.TabIndex = 9;
             // 
             // panel2
             // 
@@ -309,6 +218,18 @@
             this.rdTodas.UseVisualStyleBackColor = true;
             this.rdTodas.CheckedChanged += new System.EventHandler(this.RdSucs_CheckedChanged);
             // 
+            // rdClientes
+            // 
+            this.rdClientes.AutoSize = true;
+            this.rdClientes.ForeColor = System.Drawing.Color.DimGray;
+            this.rdClientes.Location = new System.Drawing.Point(4, 62);
+            this.rdClientes.Name = "rdClientes";
+            this.rdClientes.Size = new System.Drawing.Size(62, 17);
+            this.rdClientes.TabIndex = 7;
+            this.rdClientes.Text = "Clientes";
+            this.rdClientes.UseVisualStyleBackColor = true;
+            this.rdClientes.CheckedChanged += new System.EventHandler(this.RdSucs_CheckedChanged);
+            // 
             // rdSucs
             // 
             this.rdSucs.AutoSize = true;
@@ -323,17 +244,97 @@
             this.rdSucs.UseVisualStyleBackColor = true;
             this.rdSucs.CheckedChanged += new System.EventHandler(this.RdSucs_CheckedChanged);
             // 
-            // rdClientes
+            // panel1
             // 
-            this.rdClientes.AutoSize = true;
-            this.rdClientes.ForeColor = System.Drawing.Color.DimGray;
-            this.rdClientes.Location = new System.Drawing.Point(4, 62);
-            this.rdClientes.Name = "rdClientes";
-            this.rdClientes.Size = new System.Drawing.Size(62, 17);
-            this.rdClientes.TabIndex = 7;
-            this.rdClientes.Text = "Clientes";
-            this.rdClientes.UseVisualStyleBackColor = true;
-            this.rdClientes.CheckedChanged += new System.EventHandler(this.RdSucs_CheckedChanged);
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.rdId);
+            this.panel1.Controls.Add(this.rdOrden);
+            this.panel1.Location = new System.Drawing.Point(3, 400);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(80, 68);
+            this.panel1.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.DimGray;
+            this.label4.Location = new System.Drawing.Point(1, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Orden:";
+            // 
+            // rdId
+            // 
+            this.rdId.AutoSize = true;
+            this.rdId.Checked = true;
+            this.rdId.ForeColor = System.Drawing.Color.DimGray;
+            this.rdId.Location = new System.Drawing.Point(4, 16);
+            this.rdId.Name = "rdId";
+            this.rdId.Size = new System.Drawing.Size(34, 17);
+            this.rdId.TabIndex = 7;
+            this.rdId.TabStop = true;
+            this.rdId.Text = "Id";
+            this.rdId.UseVisualStyleBackColor = true;
+            this.rdId.CheckedChanged += new System.EventHandler(this.RdId_CheckedChanged);
+            // 
+            // rdOrden
+            // 
+            this.rdOrden.AutoSize = true;
+            this.rdOrden.ForeColor = System.Drawing.Color.DimGray;
+            this.rdOrden.Location = new System.Drawing.Point(4, 39);
+            this.rdOrden.Name = "rdOrden";
+            this.rdOrden.Size = new System.Drawing.Size(62, 17);
+            this.rdOrden.TabIndex = 7;
+            this.rdOrden.Text = "Nombre";
+            this.rdOrden.UseVisualStyleBackColor = true;
+            // 
+            // cmdTodosTipos
+            // 
+            this.cmdTodosTipos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdTodosTipos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdTodosTipos.Location = new System.Drawing.Point(57, 183);
+            this.cmdTodosTipos.Name = "cmdTodosTipos";
+            this.cmdTodosTipos.Size = new System.Drawing.Size(31, 19);
+            this.cmdTodosTipos.TabIndex = 5;
+            this.cmdTodosTipos.Text = "N";
+            this.toolTip1.SetToolTip(this.cmdTodosTipos, "Borra selección");
+            this.cmdTodosTipos.UseVisualStyleBackColor = true;
+            this.cmdTodosTipos.Click += new System.EventHandler(this.CmdTodosTipos_Click);
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBuscar.Location = new System.Drawing.Point(6, 489);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(82, 13);
+            this.txtBuscar.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.txtBuscar, "Busca por Id y Nombre");
+            this.txtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 471);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Buscar:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 18);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Tipo";
             // 
             // cSucursales
             // 
@@ -349,10 +350,10 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

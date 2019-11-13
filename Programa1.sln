@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programa1", "Programa1\Programa1.csproj", "{87D003FC-6B79-4965-A4DD-334E03EF4AC7}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SpeedGrilla", "D:\Nico\Proyectos\SpeedGrilla\SpeedGrilla.vbproj", "{64F92811-4680-4543-A345-0F68983286E2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programa1.Xamarin.Android", "Programa1.Xamarin\Programa1.Xamarin.Android\Programa1.Xamarin.Android.csproj", "{421C2845-A6F3-46AB-810D-9C25933A8D13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programa1.Xamarin.MobileAppService", "Programa1.Xamarin\Programa1.Xamarin.MobileAppService\Programa1.Xamarin.MobileAppService.csproj", "{D5E9A79F-E032-4B3D-A5AB-3F53876DF0D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Programa1.Xamarin.MobileAppService", "Programa1.Xamarin\Programa1.Xamarin.MobileAppService\Programa1.Xamarin.MobileAppService.csproj", "{D5E9A79F-E032-4B3D-A5AB-3F53876DF0D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programa1.Xamarin", "Programa1.Xamarin\Programa1.Xamarin\Programa1.Xamarin.csproj", "{ECE41B1B-5A02-476C-BF0D-32C180346266}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Programa1.Xamarin", "Programa1.Xamarin\Programa1.Xamarin\Programa1.Xamarin.csproj", "{ECE41B1B-5A02-476C-BF0D-32C180346266}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SpeedGrilla", "SpeedGrilla\SpeedGrilla.vbproj", "{64F92811-4680-4543-A345-0F68983286E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,14 +29,6 @@ Global
 		{87D003FC-6B79-4965-A4DD-334E03EF4AC7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87D003FC-6B79-4965-A4DD-334E03EF4AC7}.Release|x86.ActiveCfg = Release|Any CPU
 		{87D003FC-6B79-4965-A4DD-334E03EF4AC7}.Release|x86.Build.0 = Release|Any CPU
-		{64F92811-4680-4543-A345-0F68983286E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64F92811-4680-4543-A345-0F68983286E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64F92811-4680-4543-A345-0F68983286E2}.Debug|x86.ActiveCfg = Debug|x86
-		{64F92811-4680-4543-A345-0F68983286E2}.Debug|x86.Build.0 = Debug|x86
-		{64F92811-4680-4543-A345-0F68983286E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64F92811-4680-4543-A345-0F68983286E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64F92811-4680-4543-A345-0F68983286E2}.Release|x86.ActiveCfg = Release|x86
-		{64F92811-4680-4543-A345-0F68983286E2}.Release|x86.Build.0 = Release|x86
 		{421C2845-A6F3-46AB-810D-9C25933A8D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{421C2845-A6F3-46AB-810D-9C25933A8D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{421C2845-A6F3-46AB-810D-9C25933A8D13}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -65,6 +57,14 @@ Global
 		{ECE41B1B-5A02-476C-BF0D-32C180346266}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ECE41B1B-5A02-476C-BF0D-32C180346266}.Release|x86.ActiveCfg = Release|Any CPU
 		{ECE41B1B-5A02-476C-BF0D-32C180346266}.Release|x86.Build.0 = Release|Any CPU
+		{64F92811-4680-4543-A345-0F68983286E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64F92811-4680-4543-A345-0F68983286E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64F92811-4680-4543-A345-0F68983286E2}.Debug|x86.ActiveCfg = Debug|x86
+		{64F92811-4680-4543-A345-0F68983286E2}.Debug|x86.Build.0 = Debug|x86
+		{64F92811-4680-4543-A345-0F68983286E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64F92811-4680-4543-A345-0F68983286E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64F92811-4680-4543-A345-0F68983286E2}.Release|x86.ActiveCfg = Release|x86
+		{64F92811-4680-4543-A345-0F68983286E2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

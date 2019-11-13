@@ -23,8 +23,11 @@
             }
             set
             {
-                vFiltroIn = value;
-                Cargar();
+                if (value != vFiltroIn)
+                {
+                    vFiltroIn = value;
+                    Cargar();
+                }
             }
         }
         public bool Mostrar_Tipo
@@ -101,7 +104,7 @@
 
 
         private void Cargar()
-        {
+        {            
             DataTable dt = new DataTable();
             string s = "";
 

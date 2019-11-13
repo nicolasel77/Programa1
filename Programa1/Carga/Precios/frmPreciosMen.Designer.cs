@@ -59,8 +59,6 @@
             // 
             // grd
             // 
-            this.grd.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grd.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
             this.grd.AutoResize = false;
             this.grd.bColor = System.Drawing.SystemColors.Window;
             this.grd.bColorSel = System.Drawing.SystemColors.Highlight;
@@ -78,7 +76,6 @@
             this.grd.FixRows = 0;
             this.grd.FuenteEncabezado = null;
             this.grd.FuentePieDePagina = null;
-            this.grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grd.Location = new System.Drawing.Point(0, 0);
             this.grd.MenuActivado = false;
             this.grd.Name = "grd";
