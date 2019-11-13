@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
+    using Programa1.Carga;
     using Programa1.Carga.Precios;
     
     public partial class frmMain : Form
@@ -109,6 +110,7 @@
             }
         }
 
+
         private void SucursalesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -159,6 +161,7 @@
             }
         }
 
+
         private void ProveedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -179,7 +182,7 @@
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
-                Form frmProveedores = new Programa1.Datos.frmProveedores();
+                Form frmProveedores = new Datos.frmProveedores();
                 frmProveedores.MdiParent = this;
                 frmProveedores.Disposed += FrmProveedores_Disposed;
                 forms.Add(frmProveedores);
@@ -208,6 +211,7 @@
                 }
             }
         }
+
 
         private void StockToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -259,25 +263,7 @@
         }
 
        
-        private void FrmPrecios_Disposed(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem t in tstMenu.Items)
-            {
-                if (t.Text == "Precios Men")
-                {
-                    tstMenu.Items.Remove(t);
-                    break;
-                }
-            }
-            foreach (Form f in forms)
-            {
-                if (f.Name == "frmPreciosMen")
-                {
-                    forms.Remove(f);
-                    break;
-                }
-            }
-        }
+        
 
         private void MenudenciasToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -307,5 +293,74 @@
                 frmPrecios.WindowState = FormWindowState.Maximized;
             }
         }
+        private void FrmPrecios_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Precios Men")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPreciosMen")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+
+        private void TrasladosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmTraslados")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmTraslados");
+                t.Text = "Traslados";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmTraslados = new frmTraslados();
+                frmTraslados.MdiParent = this;
+                frmTraslados.Disposed += FrmTraslados_Disposed;
+                forms.Add(frmTraslados);
+                frmTraslados.Show();
+                frmTraslados.WindowState = FormWindowState.Minimized;
+                frmTraslados.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmTraslados_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Traslados")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmTraslados")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
     }
 }

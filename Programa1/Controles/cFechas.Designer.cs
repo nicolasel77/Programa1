@@ -142,9 +142,9 @@
             "2017",
             "2016",
             "2015"});
-            this.lstMesAño.Location = new System.Drawing.Point(47, 3);
+            this.lstMesAño.Location = new System.Drawing.Point(63, 1);
             this.lstMesAño.Name = "lstMesAño";
-            this.lstMesAño.Size = new System.Drawing.Size(37, 256);
+            this.lstMesAño.Size = new System.Drawing.Size(47, 256);
             this.lstMesAño.TabIndex = 2;
             // 
             // lstMes
@@ -170,7 +170,7 @@
             "Dic"});
             this.lstMes.Location = new System.Drawing.Point(3, 3);
             this.lstMes.Name = "lstMes";
-            this.lstMes.Size = new System.Drawing.Size(38, 256);
+            this.lstMes.Size = new System.Drawing.Size(54, 256);
             this.lstMes.TabIndex = 1;
             // 
             // label3
@@ -209,7 +209,7 @@
             "2015"});
             this.lstAños.Location = new System.Drawing.Point(0, 0);
             this.lstAños.Name = "lstAños";
-            this.lstAños.Size = new System.Drawing.Size(37, 257);
+            this.lstAños.Size = new System.Drawing.Size(50, 257);
             this.lstAños.TabIndex = 3;
             // 
             // tabPage4

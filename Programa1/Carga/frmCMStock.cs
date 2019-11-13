@@ -37,7 +37,7 @@
             formato_Grilla();
             Totales();
 
-            dt = stock.suc.Datos("Propio=1 AND Ver=1");
+            dt = stock.suc.Datos();
             foreach(DataRow dr in dt.Rows)
             {
                 cmbSucs.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");

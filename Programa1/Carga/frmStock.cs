@@ -1,10 +1,10 @@
-﻿using Programa1.DB;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-
-namespace Programa1.Carga
+﻿namespace Programa1.Carga
 {
+    using Programa1.DB;
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Forms;
+
     public partial class frmStock : Form
     {
         private Stock stock;
@@ -129,7 +129,7 @@ namespace Programa1.Carga
             grdStock.Columnas[grdStock.get_ColIndex("Kilos")].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
             grdStock.set_Texto(0, grdStock.get_ColIndex("Id_Sucursales"), "Suc");
-            grdStock.set_Texto(0, grdStock.get_ColIndex("Id_Productos"), "Prod");
+            grdStock.set_Texto(0, grdStock.get_ColIndex("Id_Productos"), "Prod");            
         }
 
         private void Totales()

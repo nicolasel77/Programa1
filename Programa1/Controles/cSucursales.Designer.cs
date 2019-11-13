@@ -32,11 +32,11 @@
             this.lst = new System.Windows.Forms.ListBox();
             this.lstTipos = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.chVer = new System.Windows.Forms.CheckBox();
             this.cmdInvertir = new System.Windows.Forms.Button();
             this.cmdNinguno = new System.Windows.Forms.Button();
             this.cmdTodos = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.chVer = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.rdTodas = new System.Windows.Forms.RadioButton();
@@ -99,12 +99,12 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer1.Panel1.Controls.Add(this.chVer);
             this.splitContainer1.Panel1.Controls.Add(this.cmdInvertir);
             this.splitContainer1.Panel1.Controls.Add(this.cmdNinguno);
             this.splitContainer1.Panel1.Controls.Add(this.cmdTodos);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.lblTitulo);
             this.splitContainer1.Panel1.Controls.Add(this.lst);
+            this.splitContainer1.Panel1.Controls.Add(this.chVer);
             // 
             // splitContainer1.Panel2
             // 
@@ -119,20 +119,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(337, 512);
             this.splitContainer1.SplitterDistance = 234;
             this.splitContainer1.TabIndex = 2;
-            // 
-            // chVer
-            // 
-            this.chVer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chVer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.chVer.ForeColor = System.Drawing.Color.DimGray;
-            this.chVer.Location = new System.Drawing.Point(6, 486);
-            this.chVer.Name = "chVer";
-            this.chVer.Size = new System.Drawing.Size(71, 23);
-            this.chVer.TabIndex = 8;
-            this.chVer.Text = "Ocultos";
-            this.toolTip1.SetToolTip(this.chVer, "Oculta/muestra según filtro Ver");
-            this.chVer.UseVisualStyleBackColor = true;
-            this.chVer.CheckedChanged += new System.EventHandler(this.ChVer_CheckedChanged);
             // 
             // cmdInvertir
             // 
@@ -173,16 +159,30 @@
             this.cmdTodos.UseVisualStyleBackColor = true;
             this.cmdTodos.Click += new System.EventHandler(this.CmdTodos_Click);
             // 
-            // label1
+            // lblTitulo
             // 
-            this.label1.AutoSize = true;
-            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Sucursales";
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblTitulo.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblTitulo.Location = new System.Drawing.Point(3, 0);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(82, 18);
+            this.lblTitulo.TabIndex = 0;
+            this.lblTitulo.Text = "Sucursales";
+            // 
+            // chVer
+            // 
+            this.chVer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chVer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chVer.ForeColor = System.Drawing.Color.DimGray;
+            this.chVer.Location = new System.Drawing.Point(6, 486);
+            this.chVer.Name = "chVer";
+            this.chVer.Size = new System.Drawing.Size(71, 23);
+            this.chVer.TabIndex = 8;
+            this.chVer.Text = "Ocultos";
+            this.toolTip1.SetToolTip(this.chVer, "Oculta/muestra según filtro Ver");
+            this.chVer.UseVisualStyleBackColor = true;
+            this.chVer.CheckedChanged += new System.EventHandler(this.ChVer_CheckedChanged);
             // 
             // panel2
             // 
@@ -360,7 +360,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.ListBox lst;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lstTipos;

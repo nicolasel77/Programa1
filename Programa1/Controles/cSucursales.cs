@@ -41,6 +41,8 @@
         }
 
 
+        public string Titulo { get => lblTitulo.Text; set { lblTitulo.Text = value; } }
+
         public event EventHandler Cambio_Seleccion;
 
         public cSucursales()

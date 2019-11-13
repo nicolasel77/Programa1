@@ -91,12 +91,12 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer1.Panel1.Controls.Add(this.chVer);
             this.splitContainer1.Panel1.Controls.Add(this.cmdInvertir);
             this.splitContainer1.Panel1.Controls.Add(this.cmdNinguno);
             this.splitContainer1.Panel1.Controls.Add(this.cmdTodos);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.lst);
+            this.splitContainer1.Panel1.Controls.Add(this.chVer);
             // 
             // splitContainer1.Panel2
             // 
