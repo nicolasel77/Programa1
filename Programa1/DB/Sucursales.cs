@@ -98,7 +98,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM Sucursales" + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Sucursales" + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

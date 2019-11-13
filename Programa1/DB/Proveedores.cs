@@ -33,16 +33,35 @@
 
         public bool Ver { get; set; }
 
-        
+
+        public bool Mostrar_Ocultos { get; set; } = false;
+        public bool Ordern_XId { get; set; } = true;
+
 
         public DataTable Datos(string filtro = "")
         {
            var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+            if (Mostrar_Ocultos == false)
+            {
+                filtro = h.Unir(filtro, " (Ver=1) ");
+            }
+
             if (filtro.Length > 0)
             {
                 filtro = " WHERE " + filtro;
+            }
+
+            if (Ordern_XId == false)
+            {
+                filtro += " ORDER BY Nombre ";
+            }
+            else
+            {
+                filtro += " ORDER BY Id";
             }
 
             try

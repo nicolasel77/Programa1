@@ -100,6 +100,12 @@
     <Compile Include="Carga\frmTraslados.Designer.cs">
       <DependentUpon>frmTraslados.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\frmVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmVenta.Designer.cs">
+      <DependentUpon>frmVenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Precios\frmPreciosMen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,12 @@
     </Compile>
     <Compile Include="Controles\cProductos.Designer.cs">
       <DependentUpon>cProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\cProveedores.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\cProveedores.Designer.cs">
+      <DependentUpon>cProveedores.cs</DependentUpon>
     </Compile>
     <Compile Include="Controles\cSucursales.cs">
       <SubType>UserControl</SubType>
@@ -154,6 +166,7 @@
     <Compile Include="DB\TipoProveedores.cs" />
     <Compile Include="DB\TipoSucursales.cs" />
     <Compile Include="DB\Traslados.cs" />
+    <Compile Include="DB\Ventas.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +191,9 @@
     <EmbeddedResource Include="Carga\frmTraslados.resx">
       <DependentUpon>frmTraslados.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\frmVenta.resx">
+      <DependentUpon>frmVenta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Precios\frmPreciosMen.resx">
       <DependentUpon>frmPreciosMen.cs</DependentUpon>
     </EmbeddedResource>
@@ -186,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cProductos.resx">
       <DependentUpon>cProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\cProveedores.resx">
+      <DependentUpon>cProveedores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cSucursales.resx">
       <DependentUpon>cSucursales.cs</DependentUpon>

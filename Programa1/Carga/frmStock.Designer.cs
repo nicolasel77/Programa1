@@ -180,13 +180,15 @@
             // 
             // cProds
             // 
+            this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cProds.BackColor = System.Drawing.Color.Gainsboro;
-            this.cProds.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cProds.Filtro_In = "";
-            this.cProds.Location = new System.Drawing.Point(0, 0);
+            this.cProds.Location = new System.Drawing.Point(3, 3);
             this.cProds.Mostrar_Tipo = true;
             this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(256, 687);
+            this.cProds.Size = new System.Drawing.Size(253, 681);
             this.cProds.TabIndex = 1;
             this.cProds.Valor_Actual = -1;
             this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
