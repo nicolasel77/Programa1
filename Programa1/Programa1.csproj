@@ -100,11 +100,11 @@
     <Compile Include="Carga\frmTraslados.Designer.cs">
       <DependentUpon>frmTraslados.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmVenta.cs">
+    <Compile Include="Carga\frmVentas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmVenta.Designer.cs">
-      <DependentUpon>frmVenta.cs</DependentUpon>
+    <Compile Include="Carga\frmVentas.Designer.cs">
+      <DependentUpon>frmVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Precios\frmPreciosMen.cs">
       <SubType>Form</SubType>
@@ -156,6 +156,7 @@
     </Compile>
     <Compile Include="DB\Localidades.cs" />
     <Compile Include="DB\Partidos.cs" />
+    <Compile Include="DB\Precios_Proveedores.cs" />
     <Compile Include="DB\Precios_Sucursales.cs" />
     <Compile Include="DB\Productos.cs" />
     <Compile Include="DB\Proveedores.cs" />
@@ -191,8 +192,8 @@
     <EmbeddedResource Include="Carga\frmTraslados.resx">
       <DependentUpon>frmTraslados.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmVenta.resx">
-      <DependentUpon>frmVenta.cs</DependentUpon>
+    <EmbeddedResource Include="Carga\frmVentas.resx">
+      <DependentUpon>frmVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Precios\frmPreciosMen.resx">
       <DependentUpon>frmPreciosMen.cs</DependentUpon>

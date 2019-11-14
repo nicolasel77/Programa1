@@ -364,7 +364,50 @@
 
         private void VentaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmVentas")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmVentas");
+                t.Text = "Ventas";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
 
+                Form frmVentas = new frmVentas();
+                frmVentas.MdiParent = this;
+                frmVentas.Disposed += FrmVentas_Disposed;
+                forms.Add(frmVentas);
+                frmVentas.Show();
+                frmVentas.WindowState = FormWindowState.Minimized;
+                frmVentas.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmVentas_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Ventas")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmVentas")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
         }
     }
 }

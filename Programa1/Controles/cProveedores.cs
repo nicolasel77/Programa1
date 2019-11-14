@@ -3,6 +3,7 @@
     using Programa1.DB;
     using Programa1.Herramientas;
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.Windows.Forms;
 
@@ -106,6 +107,13 @@
 
         private void Cargar()
         {
+            List<String> items = new List<String>();
+
+            foreach (String item in lst.SelectedItems)
+            {
+                items.Add(item);
+            }
+
             DataTable dt = new DataTable();
             string s = "";
 
@@ -159,6 +167,20 @@
             foreach (DataRow dr in dt.Rows)
             {
                 lst.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
+            }
+            if (items.Count > 0)
+            {
+                for (int n = 0; n < items.Count; n++)
+                {
+                    for (int i = 0; i < lst.Items.Count; i++)
+                    {
+                        if (items[n].ToString() == lst.Items[i].ToString())
+                        {
+                            lst.SetSelected(i, true);
+                            break;
+                        }
+                    }
+                }
             }
         }
 

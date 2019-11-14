@@ -5,16 +5,18 @@
     using System.Collections.Generic;
     using System.Windows.Forms;
 
-    public partial class frmVenta : Form
+    public partial class frmVentas : Form
     {
         private Ventas Venta;
         private Precios_Sucursales precios;
+        private Precios_Proveedores precios_Proveedores;
 
-        public frmVenta()
+        public frmVentas()
         {
             InitializeComponent();
 
             precios = new Precios_Sucursales();
+            precios_Proveedores = new Precios_Proveedores();
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdVenta.TeclasManejadas = n;
@@ -26,6 +28,7 @@
             //El intercambio de columnas para estas teclas
             grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Subtract), grdVenta.get_ColIndex("Id_Productos"), grdVenta.get_ColIndex("Kilos"));
             grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Add), grdVenta.get_ColIndex("Id_Sucursales"), grdVenta.get_ColIndex("Kilos"));
+            grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Multiply), grdVenta.get_ColIndex("Id_Proveedores"), grdVenta.get_ColIndex("Kilos"));
 
             Totales();
         }
@@ -38,7 +41,7 @@
                     if (e.Control)
                     {
                         e.Handled = true;
-                        cProveedores.Siguiente();
+                        cSucursal.Siguiente();
                     }
                     else
                     {
@@ -53,7 +56,7 @@
                     if (e.Control)
                     {
                         e.Handled = true;
-                        cProveedores.Anterior();
+                        cSucursal.Anterior();
                     }
                     else
                     {
@@ -117,9 +120,9 @@
             grdVenta.set_ColW(grdVenta.get_ColIndex("Id"), 0);
             grdVenta.set_ColW(grdVenta.get_ColIndex("Fecha"), 60);
             grdVenta.set_ColW(grdVenta.get_ColIndex("Id_Sucursales"), 35);
-            grdVenta.set_ColW(grdVenta.get_ColIndex("Nombre"), 100);
+            grdVenta.set_ColW(grdVenta.get_ColIndex("Nombre"), 80);
             grdVenta.set_ColW(grdVenta.get_ColIndex("Id_Proveedores"), 35);
-            grdVenta.set_ColW(grdVenta.get_ColIndex("Nombre_Proveedor"), 100);
+            grdVenta.set_ColW(grdVenta.get_ColIndex("Nombre_Proveedor"), 60);
             grdVenta.set_ColW(grdVenta.get_ColIndex("Id_Productos"), 30);
             grdVenta.set_ColW(grdVenta.get_ColIndex("Descripcion"), 100);
             grdVenta.set_ColW(grdVenta.get_ColIndex("Costo_Venta"), 60);
@@ -151,7 +154,7 @@
             lblKilos.Text = $"Kilos: {k:N2}";
             lblTotalS.Text = $"Total Venta: {tSalida:C2}";
             lblTotalE.Text = $"Total Compra: {tEntrada:C2}";
-            lblDiferencia.Text = $"Diferencia: {(tEntrada - tSalida):C2}";
+            lblDiferencia.Text = $"Diferencia: {(tSalida- tEntrada):C2}";
 
         }
 
@@ -193,6 +196,7 @@
                     //TODO: Validar que la fecha este en el rango del calendario
                     Venta.Fecha = Convert.ToDateTime(a);
                     precios.Fecha = Venta.Fecha;
+                    precios_Proveedores.Fecha = Venta.Fecha;
 
                     if (id != 0) { Venta.Actualizar(); }
 
@@ -204,7 +208,7 @@
                     Venta.Prov.Id = Convert.ToInt32(a);
                     if (Venta.Prov.Existe() == true)
                     {
-                        //precios.pr = Venta.Prov;
+                        precios_Proveedores.prov = Venta.Prov;
 
                         if (id != 0) { Venta.Actualizar(); }
 
@@ -215,7 +219,7 @@
                     }
                     else
                     {
-                        Mensaje("No se encontró la sucursal " + a.ToString());
+                        Mensaje("No se encontró el proveedor " + a.ToString());
                         grdVenta.ErrorEnTxt();
                     }
                     break;
@@ -246,6 +250,7 @@
                     if (Venta.producto.Existe() == true)
                     {
                         precios.producto = Venta.producto;
+                        precios_Proveedores.producto = Venta.producto;
 
                         Venta.Descripcion = Venta.producto.Nombre;
 
@@ -257,10 +262,10 @@
                         grdVenta.set_Texto(f, grdVenta.get_ColIndex("Costo_Venta"), Venta.CostoVenta);
                         grdVenta.set_Texto(f, grdVenta.get_ColIndex("Total_Venta"), Venta.Kilos * Venta.CostoVenta);
 
-                        //precios.suc = Venta.Prov;
-                        //Venta.CostoE = precios.Buscar();
-                        //grdVenta.set_Texto(f, grdVenta.get_ColIndex("Costo_Compra"), Venta.CostoE);
-                        //grdVenta.set_Texto(f, grdVenta.get_ColIndex("Total_Compra"), Venta.Kilos * Venta.CostoE);
+                        precios_Proveedores.prov = Venta.Prov;
+                        Venta.CostoCompra = precios_Proveedores.Buscar();
+                        grdVenta.set_Texto(f, grdVenta.get_ColIndex("Costo_Compra"), Venta.CostoCompra);
+                        grdVenta.set_Texto(f, grdVenta.get_ColIndex("Total_Compra"), Venta.Kilos * Venta.CostoCompra);
 
                         if (id != 0) { Venta.Actualizar(); }
 
@@ -316,12 +321,35 @@
                         Venta.Agregar();
                         grdVenta.set_Texto(f, grdVenta.get_ColIndex("Id"), Venta.Id);
                         grdVenta.AgregarFila();
+                        
                         //Rellenar nueva fila
 
                         grdVenta.set_Texto(f + 1, grdVenta.get_ColIndex("Fecha"), Venta.Fecha);
+                        grdVenta.set_Texto(f + 1, grdVenta.get_ColIndex("Id_Proveedores"), Venta.Prov.Id);
+                        grdVenta.set_Texto(f + 1, grdVenta.get_ColIndex("Nombre_Proveedor"), Venta.suc.Nombre);
+                        grdVenta.set_Texto(f + 1, grdVenta.get_ColIndex("Id_Sucursales"), Venta.suc.Id);
+                        grdVenta.set_Texto(f + 1, grdVenta.get_ColIndex("Nombre"), Venta.suc.Nombre);
+
+                        Venta.producto.Siguiente();
+                        precios.producto = Venta.producto;
+                        precios_Proveedores.producto = Venta.producto;
+
+                        Venta.Descripcion = Venta.producto.Nombre;
+
+                        grdVenta.set_Texto(f + 1, grdVenta.get_ColIndex("Id_Productos"), Venta.producto.Id);
+                        grdVenta.set_Texto(f + 1, grdVenta.get_ColIndex("Descripcion"), Venta.Descripcion);
+
+
+                        Venta.CostoVenta= precios.Buscar();
+                        grdVenta.set_Texto(f + 1, grdVenta.get_ColIndex("Costo_Venta"), Venta.CostoVenta);
+                        grdVenta.set_Texto(f + 1, grdVenta.get_ColIndex("Total_Venta"), 0);
+
+                        Venta.CostoCompra = precios_Proveedores.Buscar();
+                        grdVenta.set_Texto(f + 1, grdVenta.get_ColIndex("Costo_Compra"), Venta.CostoCompra);
+                        grdVenta.set_Texto(f + 1, grdVenta.get_ColIndex("Total_Compra"), 0);
 
                         Venta.Kilos = 0;
-                        grdVenta.ActivarCelda(f + 1, grdVenta.get_ColIndex("Id_Proveedores"));
+                        grdVenta.ActivarCelda(f + 1, grdVenta.get_ColIndex("Kilos"));
                     }
                     else
                     {
@@ -342,6 +370,11 @@
             precios.Fecha = Venta.Fecha;
             precios.suc = Venta.suc;
             precios.producto = Venta.producto;
+
+            precios_Proveedores.Fecha = Venta.Fecha;
+            precios_Proveedores.prov = Venta.Prov;
+            precios_Proveedores.producto = Venta.producto;
+
         }
 
         private void GrdVenta_KeyPress(object sender, short e)
@@ -355,6 +388,7 @@
                     {
                         Venta.producto.Siguiente();
                         precios.producto = Venta.producto;
+                        precios_Proveedores.producto = Venta.producto;
 
                         Venta.Descripcion = Venta.producto.Nombre;
 
@@ -366,10 +400,10 @@
                         grdVenta.set_Texto(grdVenta.Row, grdVenta.get_ColIndex("Costo_Venta"), Venta.CostoVenta);
                         grdVenta.set_Texto(grdVenta.Row, grdVenta.get_ColIndex("Total_Venta"), 0);
 
-                        //precios.suc = Venta.Prov;
-                        //Venta.CostoE = precios.Buscar();
-                        //grdVenta.set_Texto(grdVenta.Row, grdVenta.get_ColIndex("Costo_Compra"), Venta.CostoE);
-                        //grdVenta.set_Texto(grdVenta.Row, grdVenta.get_ColIndex("Total_Compra"), 0);
+                        precios_Proveedores.prov = Venta.Prov;
+                        Venta.CostoCompra = precios_Proveedores.Buscar();
+                        grdVenta.set_Texto(grdVenta.Row, grdVenta.get_ColIndex("Costo_Compra"), Venta.CostoCompra);
+                        grdVenta.set_Texto(grdVenta.Row, grdVenta.get_ColIndex("Total_Compra"), 0);
                     }
                 }
             }

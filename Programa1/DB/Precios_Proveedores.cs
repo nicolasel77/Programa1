@@ -1,31 +1,32 @@
-﻿namespace Programa1.DB
+﻿
+namespace Programa1.DB
 {
     using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Precios_Sucursales
+    class Precios_Proveedores
     {
-        public Precios_Sucursales()
+        public Precios_Proveedores()
         {
             producto = new Productos();
-            suc = new Sucursales();
+            prov = new Proveedores();
         }
 
-        public Precios_Sucursales(int id, DateTime fecha, Productos prod, Sucursales sucursal, float pr)
+        public Precios_Proveedores(int id, DateTime fecha, Productos prod, Proveedores proveedor, float pr)
         {
             Id = id;
             Fecha = fecha;
             producto = prod;
-            suc = sucursal;
+            prov = proveedor;
             Precio = pr;
         }
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public Productos producto { get; set; }
-        public Sucursales suc { get; set; }
+        public Proveedores prov { get; set; }
         public Single Precio { get; set; }
 
         public Single Buscar()
@@ -36,8 +37,8 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Sucursales  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={producto.Id} AND ID_Sucursales={suc.Id} ORDER BY Fecha DESC", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Proveedores  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
+                    $" AND Id_Productos={producto.Id} AND ID_Proveedores={prov.Id} ORDER BY Fecha DESC", conexionSql);
 
                 conexionSql.Open();
 
@@ -66,7 +67,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_PreciosSucursales" + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_PreciosProveedores" + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -85,10 +86,10 @@
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-                      
+
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT Id, Nombre, 0.0 Precio FROM Productos WHERE Id_Tipo=2 AND Ver=1 ORDER BY Id" , conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT Id, Nombre, 0.0 Precio FROM Productos WHERE Id_Tipo=2 AND Ver=1 ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -110,7 +111,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT Fecha FROM vw_PreciosSucursales WHERE Id_Tipo=2 GROUP BY Fecha ORDER BY Fecha DESC", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT Fecha FROM vw_PreciosProveedores WHERE Id_Tipo=2 GROUP BY Fecha ORDER BY Fecha DESC", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -181,7 +182,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Precios_Sucursales WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM Precios_Proveedores WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
