@@ -144,8 +144,8 @@
                 int i = Convert.ToInt32(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id")).ToString());
                 Traslados.Cargar_Fila(i);
 
-                precios.suc = Traslados.sucS;
-                precios.producto = Traslados.producto;
+                precios.Sucursal = Traslados.sucS;
+                precios.Producto = Traslados.producto;
 
                 if (chFecha.Checked)
                 {
@@ -181,7 +181,7 @@
                         grdResultado.set_Texto(f, grdResultado.get_ColIndex("Nombre_Entrada"), s);
                     }
                 }
-                precios.suc.Id = Traslados.sucS.Id;
+                precios.Sucursal.Id = Traslados.sucS.Id;
 
                 if (chProd.Checked)
                 {
@@ -196,7 +196,7 @@
                         grdResultado.set_Texto(f, grdResultado.get_ColIndex("Descripcion"), s);
                     }
                 }
-                precios.producto.Id = Traslados.producto.Id;
+                precios.Producto.Id = Traslados.producto.Id;
 
                 if (chDescripcion.Checked)
                 {
@@ -233,7 +233,7 @@
                 {
                     if (rdAutoEntrada.Checked)
                     {
-                        precios.suc.Id = Traslados.sucE.Id;
+                        precios.Sucursal.Id = Traslados.sucE.Id;
                         precios.Buscar();
                         Traslados.CostoE = precios.Precio;
 

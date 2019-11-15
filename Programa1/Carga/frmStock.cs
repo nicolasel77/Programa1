@@ -187,15 +187,15 @@
                     break;
                 case 2:
                     //ID_Sucursales
-                    stock.suc.Id = Convert.ToInt32(a);
-                    if (stock.suc.Existe() == true)
+                    stock.Sucursal.Id = Convert.ToInt32(a);
+                    if (stock.Sucursal.Existe() == true)
                     {
-                        precios.suc = stock.suc;
+                        precios.Sucursal = stock.Sucursal;
 
                         if (id != 0) { stock.Actualizar(); }
 
                         grdStock.set_Texto(f, c, a);
-                        grdStock.set_Texto(f, c + 1, stock.suc.Nombre);
+                        grdStock.set_Texto(f, c + 1, stock.Sucursal.Nombre);
 
                         grdStock.ActivarCelda(f, c + 2);
                     }
@@ -207,15 +207,15 @@
                     break;
                 case 4:
                     //ID_Productos
-                    stock.producto.Id = Convert.ToInt32(a);
-                    if (stock.producto.Existe() == true)
+                    stock.Producto.Id = Convert.ToInt32(a);
+                    if (stock.Producto.Existe() == true)
                     {
-                        precios.producto = stock.producto;
+                        precios.Producto = stock.Producto;
 
-                        stock.Descripcion = stock.producto.Nombre;
+                        stock.Descripcion = stock.Producto.Nombre;
 
                         grdStock.set_Texto(f, c, a);
-                        grdStock.set_Texto(f, c + 1, stock.producto.Nombre);
+                        grdStock.set_Texto(f, c + 1, stock.Producto.Nombre);
 
                         stock.Costo = precios.Buscar();
                         grdStock.set_Texto(f, grdStock.get_ColIndex("Costo"), stock.Costo);
@@ -266,15 +266,15 @@
                         //Rellenar nueva fila
 
                         grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Fecha"), stock.Fecha);
-                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Id_Sucursales"), stock.suc.Id);
-                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Nombre"), stock.suc.Nombre);
+                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Id_Sucursales"), stock.Sucursal.Id);
+                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Nombre"), stock.Sucursal.Nombre);
 
-                        stock.producto.Siguiente();
-                        precios.producto = stock.producto;
+                        stock.Producto.Siguiente();
+                        precios.Producto = stock.Producto;
 
-                        stock.Descripcion = stock.producto.Nombre;
+                        stock.Descripcion = stock.Producto.Nombre;
 
-                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Id_Productos"), stock.producto.Id);
+                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Id_Productos"), stock.Producto.Id);
                         grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Descripcion"), stock.Descripcion);
 
                         stock.Costo = precios.Buscar();
@@ -300,8 +300,8 @@
             int i = Convert.ToInt32(grdStock.get_Texto(Fila, grdStock.get_ColIndex("Id")).ToString());
             stock.Cargar_Fila(i);
             precios.Fecha = stock.Fecha;
-            precios.suc = stock.suc;
-            precios.producto = stock.producto;
+            precios.Sucursal = stock.Sucursal;
+            precios.Producto = stock.Producto;
         }
 
         private void GrdStock_KeyPress(object sender, short e)
@@ -313,12 +313,12 @@
 
                     if (grdStock.Col == grdStock.get_ColIndex("Kilos"))
                     {
-                        stock.producto.Siguiente();
-                        precios.producto = stock.producto;
+                        stock.Producto.Siguiente();
+                        precios.Producto = stock.Producto;
 
-                        stock.Descripcion = stock.producto.Nombre;
+                        stock.Descripcion = stock.Producto.Nombre;
 
-                        grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Id_Productos"), stock.producto.Id);
+                        grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Id_Productos"), stock.Producto.Id);
                         grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Descripcion"), stock.Descripcion);
 
                         stock.Costo = precios.Buscar();

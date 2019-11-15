@@ -9,23 +9,23 @@
     {
         public Precios_Sucursales()
         {
-            producto = new Productos();
-            suc = new Sucursales();
+            Producto = new Productos();
+            Sucursal = new Sucursales();
         }
 
         public Precios_Sucursales(int id, DateTime fecha, Productos prod, Sucursales sucursal, float pr)
         {
             Id = id;
             Fecha = fecha;
-            producto = prod;
-            suc = sucursal;
+            Producto = prod;
+            Sucursal = sucursal;
             Precio = pr;
         }
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Productos producto { get; set; }
-        public Sucursales suc { get; set; }
+        public Productos Producto { get; set; }
+        public Sucursales Sucursal { get; set; }
         public Single Precio { get; set; }
 
         public Single Buscar()
@@ -37,7 +37,7 @@
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Sucursales  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={producto.Id} AND ID_Sucursales={suc.Id} ORDER BY Fecha DESC", conexionSql);
+                    $" AND Id_Productos={Producto.Id} AND ID_Sucursales={Sucursal.Id} ORDER BY Fecha DESC", conexionSql);
 
                 conexionSql.Open();
 

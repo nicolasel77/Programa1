@@ -10,23 +10,23 @@ namespace Programa1.DB
     {
         public Precios_Proveedores()
         {
-            producto = new Productos();
-            prov = new Proveedores();
+            Producto = new Productos();
+            Proveedor = new Proveedores();
         }
 
         public Precios_Proveedores(int id, DateTime fecha, Productos prod, Proveedores proveedor, float pr)
         {
             Id = id;
             Fecha = fecha;
-            producto = prod;
-            prov = proveedor;
+            Producto = prod;
+            Proveedor = proveedor;
             Precio = pr;
         }
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Productos producto { get; set; }
-        public Proveedores prov { get; set; }
+        public Productos Producto { get; set; }
+        public Proveedores Proveedor { get; set; }
         public Single Precio { get; set; }
 
         public Single Buscar()
@@ -38,7 +38,7 @@ namespace Programa1.DB
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Proveedores  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={producto.Id} AND ID_Proveedores={prov.Id} ORDER BY Fecha DESC", conexionSql);
+                    $" AND Id_Productos={Producto.Id} AND ID_Proveedores={Proveedor.Id} ORDER BY Fecha DESC", conexionSql);
 
                 conexionSql.Open();
 

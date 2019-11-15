@@ -82,6 +82,18 @@
     <Compile Include="Carga\frmCMTraslados.Designer.cs">
       <DependentUpon>frmCMTraslados.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\frmCMVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmCMVentas.Designer.cs">
+      <DependentUpon>frmCMVentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\frmCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmCompras.Designer.cs">
+      <DependentUpon>frmCompras.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\frmResumenSuc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,17 +166,20 @@
     <Compile Include="Datos\frmSucursales.Designer.cs">
       <DependentUpon>frmSucursales.cs</DependentUpon>
     </Compile>
+    <Compile Include="DB\Compras.cs" />
     <Compile Include="DB\Localidades.cs" />
     <Compile Include="DB\Partidos.cs" />
     <Compile Include="DB\Precios_Proveedores.cs" />
     <Compile Include="DB\Precios_Sucursales.cs" />
     <Compile Include="DB\Productos.cs" />
     <Compile Include="DB\Proveedores.cs" />
+    <Compile Include="DB\Reintegros.cs" />
     <Compile Include="DB\Semanas.cs" />
     <Compile Include="DB\Stock.cs" />
     <Compile Include="DB\Sucursales.cs" />
     <Compile Include="DB\TipoProductos.cs" />
     <Compile Include="DB\TipoProveedores.cs" />
+    <Compile Include="DB\TipoReintegros.cs" />
     <Compile Include="DB\TipoSucursales.cs" />
     <Compile Include="DB\Traslados.cs" />
     <Compile Include="DB\Ventas.cs" />
@@ -182,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmCMTraslados.resx">
       <DependentUpon>frmCMTraslados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\frmCMVentas.resx">
+      <DependentUpon>frmCMVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmResumenSuc.resx">
       <DependentUpon>frmResumenSuc.cs</DependentUpon>

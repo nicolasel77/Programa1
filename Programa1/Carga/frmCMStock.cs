@@ -37,12 +37,12 @@
             formato_Grilla();
             Totales();
 
-            dt = stock.suc.Datos();
+            dt = stock.Sucursal.Datos();
             foreach(DataRow dr in dt.Rows)
             {
                 cmbSucs.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
             }
-            dt = stock.producto.Datos("Ver=1");
+            dt = stock.Producto.Datos("Ver=1");
             foreach (DataRow dr in dt.Rows)
             {
                 cmbProds.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
@@ -122,8 +122,8 @@
                 int i = Convert.ToInt32(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id")).ToString());
                 stock.Cargar_Fila(i);
                 
-                precios.suc = stock.suc;
-                precios.producto = stock.producto;
+                precios.Sucursal = stock.Sucursal;
+                precios.Producto = stock.Producto;
 
                 if (chFecha.Checked)
                 {                    
@@ -138,30 +138,30 @@
                     if (cmbSucs.SelectedIndex > -1)
                     {
                         Herramientas.Herramientas h = new Herramientas.Herramientas();
-                        stock.suc.Id = h.Codigo_Seleccionado(cmbSucs.Text);
+                        stock.Sucursal.Id = h.Codigo_Seleccionado(cmbSucs.Text);
 
-                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Sucursales"), stock.suc.Id);
+                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Sucursales"), stock.Sucursal.Id);
                         string s = cmbSucs.Text;
                         s = s.Substring(s.IndexOf(".") + 1);
                         grdResultado.set_Texto(f, grdResultado.get_ColIndex("Nombre"), s);
                     }                    
                 }
-                precios.suc.Id = stock.suc.Id;
+                precios.Sucursal.Id = stock.Sucursal.Id;
 
                 if (chProd.Checked)
                 {
                     if (cmbProds.SelectedIndex > -1)
                     {
                         Herramientas.Herramientas h = new Herramientas.Herramientas();
-                        stock.producto.Id = h.Codigo_Seleccionado(cmbProds.Text);
+                        stock.Producto.Id = h.Codigo_Seleccionado(cmbProds.Text);
 
-                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Productos"), stock.producto.Id);
+                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Productos"), stock.Producto.Id);
                         string s = cmbProds.Text;
                         s = s.Substring(s.IndexOf(".") + 1);
                         grdResultado.set_Texto(f, grdResultado.get_ColIndex("Descripcion"), s);
                     }
                 }
-                precios.producto.Id = stock.producto.Id;
+                precios.Producto.Id = stock.Producto.Id;
 
                 if (chDescripcion.Checked)
                 {
@@ -223,8 +223,8 @@
                 int i = Convert.ToInt32(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id")).ToString());
                 stock.Id = i;
                 stock.Fecha  = Convert.ToDateTime(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Fecha")));
-                stock.suc.Id  = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Sucursales")));
-                stock.producto.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Productos")));
+                stock.Sucursal.Id  = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Sucursales")));
+                stock.Producto.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Productos")));
                 stock.Descripcion = Convert.ToString(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Descripcion")));
                 stock.Costo = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo")));
                 stock.Kilos = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Kilos")));

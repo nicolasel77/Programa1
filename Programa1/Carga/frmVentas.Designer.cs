@@ -335,7 +335,7 @@
             this.cmdATraslados.TabIndex = 4;
             this.cmdATraslados.Text = "A Traslados";
             this.cmdATraslados.UseVisualStyleBackColor = true;
-            this.cmdATraslados.Click += new System.EventHandler(this.CmdCambioMasivo_Click);
+            this.cmdATraslados.Click += new System.EventHandler(this.CmdATraslados_Click);
             // 
             // cmdACompras
             // 
@@ -346,7 +346,7 @@
             this.cmdACompras.TabIndex = 4;
             this.cmdACompras.Text = "A Compras";
             this.cmdACompras.UseVisualStyleBackColor = true;
-            this.cmdACompras.Click += new System.EventHandler(this.CmdCambioMasivo_Click);
+            this.cmdACompras.Click += new System.EventHandler(this.CmdACompras_Click);
             // 
             // frmVentas
             // 

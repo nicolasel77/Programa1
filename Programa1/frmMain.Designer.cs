@@ -183,6 +183,7 @@
             this.reintegrosToolStripMenuItem.Name = "reintegrosToolStripMenuItem";
             this.reintegrosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reintegrosToolStripMenuItem.Text = "Reinte&gros";
+            this.reintegrosToolStripMenuItem.Click += new System.EventHandler(this.ReintegrosToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -254,8 +255,9 @@
             // compraToolStripMenuItem
             // 
             this.compraToolStripMenuItem.Name = "compraToolStripMenuItem";
-            this.compraToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.compraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.compraToolStripMenuItem.Text = "&Compra";
+            this.compraToolStripMenuItem.Click += new System.EventHandler(this.CompraToolStripMenuItem_Click);
             // 
             // devolucionesToolStripMenuItem
             // 

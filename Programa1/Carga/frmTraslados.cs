@@ -205,7 +205,7 @@ namespace Programa1.Carga
                     Traslados.sucS.Id = Convert.ToInt32(a);
                     if (Traslados.sucS.Existe() == true)
                     {
-                        precios.suc = Traslados.sucS;
+                        precios.Sucursal = Traslados.sucS;
 
                         if (id != 0) { Traslados.Actualizar(); }
 
@@ -225,7 +225,7 @@ namespace Programa1.Carga
                     Traslados.sucE.Id = Convert.ToInt32(a);
                     if (Traslados.sucE.Existe() == true)
                     {
-                        precios.suc = Traslados.sucE;
+                        precios.Sucursal = Traslados.sucE;
 
                         if (id != 0) { Traslados.Actualizar(); }
 
@@ -245,19 +245,19 @@ namespace Programa1.Carga
                     Traslados.producto.Id = Convert.ToInt32(a);
                     if (Traslados.producto.Existe() == true)
                     {
-                        precios.producto = Traslados.producto;
+                        precios.Producto = Traslados.producto;
 
                         Traslados.Descripcion = Traslados.producto.Nombre;
 
                         grdTraslados.set_Texto(f, c, a);
                         grdTraslados.set_Texto(f, c + 1, Traslados.producto.Nombre);
 
-                        precios.suc = Traslados.sucS;
+                        precios.Sucursal = Traslados.sucS;
                         Traslados.CostoS = precios.Buscar();
                         grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Costo_Salida"), Traslados.CostoS);
                         grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Total_Salida"), Traslados.Kilos*Traslados.CostoS);
 
-                        precios.suc = Traslados.sucE;
+                        precios.Sucursal = Traslados.sucE;
                         Traslados.CostoE = precios.Buscar();
                         grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Costo_Entrada"), Traslados.CostoE);
                         grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Total_Entrada"), Traslados.Kilos * Traslados.CostoE);
@@ -340,8 +340,8 @@ namespace Programa1.Carga
             int i = Convert.ToInt32(grdTraslados.get_Texto(Fila, grdTraslados.get_ColIndex("Id")).ToString());
             Traslados.Cargar_Fila(i);
             precios.Fecha = Traslados.Fecha;
-            precios.suc = Traslados.sucS;
-            precios.producto = Traslados.producto;
+            precios.Sucursal = Traslados.sucS;
+            precios.Producto = Traslados.producto;
         }
 
         private void GrdTraslados_KeyPress(object sender, short e)
@@ -354,19 +354,19 @@ namespace Programa1.Carga
                     if (grdTraslados.Col == grdTraslados.get_ColIndex("Kilos"))
                     {
                         Traslados.producto.Siguiente();
-                        precios.producto = Traslados.producto;
+                        precios.Producto = Traslados.producto;
 
                         Traslados.Descripcion = Traslados.producto.Nombre;
 
                         grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Id_Productos"), Traslados.producto.Id);
                         grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Descripcion"), Traslados.Descripcion);
 
-                        precios.suc = Traslados.sucS;
+                        precios.Sucursal = Traslados.sucS;
                         Traslados.CostoS = precios.Buscar();
                         grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Costo_Salida"), Traslados.CostoS);
                         grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Total_Salida"), 0);
 
-                        precios.suc = Traslados.sucE;
+                        precios.Sucursal = Traslados.sucE;
                         Traslados.CostoE = precios.Buscar();
                         grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Costo_Entrada"), Traslados.CostoE);
                         grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Total_Entrada"), 0);

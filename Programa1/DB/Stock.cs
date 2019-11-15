@@ -13,17 +13,17 @@
 
         public Stock()
         {
-            producto = new Productos();
-            suc = new Sucursales();            
+            Producto = new Productos();
+            Sucursal = new Sucursales();            
         }
 
         public Stock(int id, DateTime fecha, Productos prod, string desc, Sucursales sucursal, float costo, float kilos)
         {
             Id = id;
             Fecha = fecha;
-            producto = prod;
+            Producto = prod;
             Descripcion = desc;
-            suc = sucursal;
+            Sucursal = sucursal;
             Costo = costo;
             Kilos = kilos;
             
@@ -31,10 +31,10 @@
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Productos producto { get; set; }
+        public Productos Producto { get; set; }
         [MaxLength(50, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Sucursales suc { get; set; }
+        public Sucursales Sucursal { get; set; }
         public Single Costo { get; set; }
         public Single Kilos { get; set; }
                 
@@ -72,7 +72,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Stock SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={suc.Id}, Id_Productos={producto.Id}, Descripcion='{Descripcion}', " +
+                        $"Id_Sucursales={Sucursal.Id}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', " +
                         $"Costo={Costo.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -97,7 +97,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Stock (Fecha, Id_Sucursales, Id_Productos, Descripcion, Costo, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {suc.Id}, {producto.Id}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.Id}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -187,9 +187,9 @@
 
                 Id = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
-                producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
-                suc.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+                Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
                 Costo = Convert.ToSingle(dr["Costo"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
 
