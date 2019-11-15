@@ -412,9 +412,51 @@
 
         private void ReintegrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmReintegros")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmReintegros");
+                t.Text = "Reintegros";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
 
+                Form frmReintegros = new frmReintegros();
+                frmReintegros.MdiParent = this;
+                frmReintegros.Disposed += FrmReintegros_Disposed;
+                forms.Add(frmReintegros);
+                frmReintegros.Show();
+                frmReintegros.WindowState = FormWindowState.Minimized;
+                frmReintegros.WindowState = FormWindowState.Maximized;
+            }
         }
-
+        private void FrmReintegros_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Reintegros")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmReintegros")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
         private void CompraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;

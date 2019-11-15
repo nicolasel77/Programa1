@@ -13,7 +13,7 @@ namespace Programa1.DB
 
         public Traslados()
         {
-            producto = new Productos();
+            Producto = new Productos();
             sucS = new Sucursales();
             sucE = new Sucursales();
         }
@@ -22,7 +22,7 @@ namespace Programa1.DB
         {
             Id = id;
             Fecha = fecha;
-            producto = prod;
+            Producto = prod;
             Descripcion = desc;
             sucS = suc_Salida;
             CostoS = costo_Salida;
@@ -34,7 +34,7 @@ namespace Programa1.DB
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Productos producto { get; set; }
+        public Productos Producto { get; set; }
         [MaxLength(100, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
         public Sucursales sucS { get; set; }
@@ -77,7 +77,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Traslados SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Suc_Salida={sucS.Id}, Suc_Entrada={sucE.Id}, Id_Productos={producto.Id}, Descripcion='{Descripcion}', " +
+                        $"Suc_Salida={sucS.Id}, Suc_Entrada={sucE.Id}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', " +
                         $"Costo_Salida={CostoS.ToString().Replace(",", ".")}, Costo_Entrada={CostoE.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -102,7 +102,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Traslados (Fecha, Suc_Salida, Suc_Entrada, Id_Productos, Descripcion, Costo_Salida, Costo_Entrada, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {sucS.Id}, {sucE.Id}, {producto.Id}, '{Descripcion}', {CostoS.ToString().Replace(",", ".")}, {CostoE.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {sucS.Id}, {sucE.Id}, {Producto.Id}, '{Descripcion}', {CostoS.ToString().Replace(",", ".")}, {CostoE.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -192,7 +192,7 @@ namespace Programa1.DB
 
                 Id = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
-                producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
                 sucS.Id = Convert.ToInt32(dr["Suc_Salida"]);
                 sucE.Id = Convert.ToInt32(dr["Suc_Entrada"]);

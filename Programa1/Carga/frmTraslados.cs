@@ -242,15 +242,15 @@ namespace Programa1.Carga
                     break;
                 case 6:
                     //ID_Productos
-                    Traslados.producto.Id = Convert.ToInt32(a);
-                    if (Traslados.producto.Existe() == true)
+                    Traslados.Producto.Id = Convert.ToInt32(a);
+                    if (Traslados.Producto.Existe() == true)
                     {
-                        precios.Producto = Traslados.producto;
+                        precios.Producto = Traslados.Producto;
 
-                        Traslados.Descripcion = Traslados.producto.Nombre;
+                        Traslados.Descripcion = Traslados.Producto.Nombre;
 
                         grdTraslados.set_Texto(f, c, a);
-                        grdTraslados.set_Texto(f, c + 1, Traslados.producto.Nombre);
+                        grdTraslados.set_Texto(f, c + 1, Traslados.Producto.Nombre);
 
                         precios.Sucursal = Traslados.sucS;
                         Traslados.CostoS = precios.Buscar();
@@ -341,7 +341,7 @@ namespace Programa1.Carga
             Traslados.Cargar_Fila(i);
             precios.Fecha = Traslados.Fecha;
             precios.Sucursal = Traslados.sucS;
-            precios.Producto = Traslados.producto;
+            precios.Producto = Traslados.Producto;
         }
 
         private void GrdTraslados_KeyPress(object sender, short e)
@@ -353,12 +353,12 @@ namespace Programa1.Carga
 
                     if (grdTraslados.Col == grdTraslados.get_ColIndex("Kilos"))
                     {
-                        Traslados.producto.Siguiente();
-                        precios.Producto = Traslados.producto;
+                        Traslados.Producto.Siguiente();
+                        precios.Producto = Traslados.Producto;
 
-                        Traslados.Descripcion = Traslados.producto.Nombre;
+                        Traslados.Descripcion = Traslados.Producto.Nombre;
 
-                        grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Id_Productos"), Traslados.producto.Id);
+                        grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Id_Productos"), Traslados.Producto.Id);
                         grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Descripcion"), Traslados.Descripcion);
 
                         precios.Sucursal = Traslados.sucS;

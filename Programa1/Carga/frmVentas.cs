@@ -3,6 +3,7 @@
     using Programa1.DB;
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Windows.Forms;
 
     public partial class frmVentas : Form
@@ -498,12 +499,67 @@
 
         private void CmdACompras_Click(object sender, EventArgs e)
         {
+            frmCopiarVentaACompra cp = new frmCopiarVentaACompra();
+            string f = Armar_Cadena();
 
+            DataTable dt = Venta.Resumen_Compra(f);
+
+            cp.Cargar(dt);
+            cp.grd.Columnas[cp.grd.get_ColIndex("Costo")].Format = "C2";
+            cp.grd.Columnas[cp.grd.get_ColIndex("Kilos")].Format = "N2";
+            cp.grd.Columnas[cp.grd.get_ColIndex("Total")].Format = "C2";
+            cp.ShowDialog();
+
+            if (cp.Aceptado == true)
+            {
+                Compras compras = new Compras();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    compras.Fecha = Convert.ToDateTime(dr["Fecha"]);
+                    compras.Proveedor.Id = Convert.ToInt16(dr["Id_Proveedores"]);
+                    compras.Producto.Id = Convert.ToInt16(dr["Id_Productos"]);
+                    compras.Descripcion = dr["Descripcion"].ToString();
+                    compras.Costo = Convert.ToSingle(dr["Costo"]);
+                    compras.Kilos = Convert.ToSingle(dr["Kilos"]);
+                    compras.Agregar();
+                }
+            }
         }
 
         private void CmdATraslados_Click(object sender, EventArgs e)
         {
+            frmCopiarVentaACompra cp = new frmCopiarVentaACompra();
+            string f = Armar_Cadena();
 
+            DataTable dt = Venta.Resumen_ATraslados(f);
+
+            cp.Text = "Copiar a Traslados";
+
+            cp.Cargar(dt);
+            cp.grd.Columnas[cp.grd.get_ColIndex("Costo_Entrada")].Format = "C2";
+            cp.grd.Columnas[cp.grd.get_ColIndex("Costo_Salida")].Format = "C2";
+            cp.grd.Columnas[cp.grd.get_ColIndex("Kilos")].Format = "N2";
+            cp.grd.Columnas[cp.grd.get_ColIndex("Total_Entrada")].Format = "C2";
+            cp.grd.Columnas[cp.grd.get_ColIndex("Total_Salida")].Format = "C2";
+
+            cp.ShowDialog();
+
+            if (cp.Aceptado == true)
+            {
+                Traslados traslados = new Traslados();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    traslados.Fecha = Convert.ToDateTime(dr["Fecha"]);
+                    traslados.sucS.Id = 50;
+                    traslados.sucE.Id = Convert.ToInt16(dr["Suc_Entrada"]); ;
+                    traslados.Producto.Id = Convert.ToInt16(dr["Id_Productos"]);
+                    traslados.Descripcion = dr["Descripcion"].ToString();
+                    traslados.CostoS = Convert.ToSingle(dr["Costo_Salida"]);
+                    traslados.CostoE = Convert.ToSingle(dr["Costo_Entrada"]);
+                    traslados.Kilos = Convert.ToSingle(dr["Kilos"]);
+                    traslados.Agregar();
+                }
+            }
         }
     }
 }

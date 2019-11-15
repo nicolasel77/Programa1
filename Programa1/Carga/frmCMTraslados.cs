@@ -47,7 +47,7 @@
             {
                 cmbSucEntrada.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
             }
-            dt = Traslados.producto.Datos();
+            dt = Traslados.Producto.Datos();
             foreach (DataRow dr in dt.Rows)
             {
                 cmbProds.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
@@ -145,7 +145,7 @@
                 Traslados.Cargar_Fila(i);
 
                 precios.Sucursal = Traslados.sucS;
-                precios.Producto = Traslados.producto;
+                precios.Producto = Traslados.Producto;
 
                 if (chFecha.Checked)
                 {
@@ -188,15 +188,15 @@
                     if (cmbProds.SelectedIndex > -1)
                     {
                         Herramientas.Herramientas h = new Herramientas.Herramientas();
-                        Traslados.producto.Id = h.Codigo_Seleccionado(cmbProds.Text);
+                        Traslados.Producto.Id = h.Codigo_Seleccionado(cmbProds.Text);
 
-                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Productos"), Traslados.producto.Id);
+                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Productos"), Traslados.Producto.Id);
                         string s = cmbProds.Text;
                         s = s.Substring(s.IndexOf(".") + 1);
                         grdResultado.set_Texto(f, grdResultado.get_ColIndex("Descripcion"), s);
                     }
                 }
-                precios.Producto.Id = Traslados.producto.Id;
+                precios.Producto.Id = Traslados.Producto.Id;
 
                 if (chDescripcion.Checked)
                 {
@@ -286,7 +286,7 @@
                 Traslados.Fecha = Convert.ToDateTime(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Fecha")));
                 Traslados.sucS.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Suc_Salida")));
                 Traslados.sucE.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Suc_Entrada")));
-                Traslados.producto.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Productos")));
+                Traslados.Producto.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Productos")));
                 Traslados.Descripcion = Convert.ToString(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Descripcion")));
                 Traslados.CostoS = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Salida")));
                 Traslados.CostoE = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Entrada")));

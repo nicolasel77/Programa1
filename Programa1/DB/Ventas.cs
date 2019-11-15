@@ -72,7 +72,7 @@ namespace Programa1.DB
         /// </summary>
         /// <param name="filtro"></param>
         /// <returns></returns>
-        public DataTable Datos_Proveedor(string filtro = "")
+        public DataTable Resumen_Compra(string filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -84,7 +84,44 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Ventas {filtro} ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra Costo, SUM(Kilos) Kilos, SUM(Total_Compra) Total  " +
+                    $"FROM vw_Ventas {filtro} " +
+                    $"GROUP BY Fecha, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra " +
+                    $"ORDER BY  Fecha, Id_Productos", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        /// <summary>
+        /// Resumen de datos para copiar a Traslados (Sucucrsal 50).
+        /// </summary>
+        /// <param name="filtro"></param>
+        /// <returns></returns>
+        public DataTable Resumen_ATraslados(string filtro = "")
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            if (filtro.Length > 0)
+            {
+                filtro = " WHERE " + filtro;
+            }
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, 50 Suc_Salida, 'CAMARA' Nombre_Salida, Id_Sucursales Suc_Entrada, Nombre Nombre_Entrada, Id_Productos, Descripcion, Costo_Compra Costo_Salida, Costo_Venta Costo_Entrada, SUM(Kilos) Kilos" +
+                    $", SUM(Total_Compra) Total_Salida, SUM(Total_Venta) Total_Entrada   " +
+                    $"FROM vw_Ventas {filtro} " +
+                    $"GROUP BY Fecha, Id_Sucursales, Nombre, Id_Productos, Descripcion, Costo_Compra, Costo_Venta " +
+                    $"ORDER BY  Fecha, Id_Productos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

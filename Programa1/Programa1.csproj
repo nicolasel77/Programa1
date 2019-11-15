@@ -94,6 +94,18 @@
     <Compile Include="Carga\frmCompras.Designer.cs">
       <DependentUpon>frmCompras.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\frmCopiarVentaACompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmCopiarVentaACompra.Designer.cs">
+      <DependentUpon>frmCopiarVentaACompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\frmReintegros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmReintegros.Designer.cs">
+      <DependentUpon>frmReintegros.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\frmResumenSuc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +212,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmCMVentas.resx">
       <DependentUpon>frmCMVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\frmCopiarVentaACompra.resx">
+      <DependentUpon>frmCopiarVentaACompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\frmReintegros.resx">
+      <DependentUpon>frmReintegros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmResumenSuc.resx">
       <DependentUpon>frmResumenSuc.cs</DependentUpon>
