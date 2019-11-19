@@ -106,6 +106,12 @@
     <Compile Include="Carga\frmOfertas.Designer.cs">
       <DependentUpon>frmOfertas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\frmPreciosOfertas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmPreciosOfertas.Designer.cs">
+      <DependentUpon>frmPreciosOfertas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\frmReintegros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +194,7 @@
     <Compile Include="DB\Localidades.cs" />
     <Compile Include="DB\Ofertas.cs" />
     <Compile Include="DB\Partidos.cs" />
+    <Compile Include="DB\Precios_Ofertas.cs" />
     <Compile Include="DB\Precios_Proveedores.cs" />
     <Compile Include="DB\Precios_Sucursales.cs" />
     <Compile Include="DB\Productos.cs" />
@@ -222,6 +229,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmCopiarVentaACompra.resx">
       <DependentUpon>frmCopiarVentaACompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\frmOfertas.resx">
+      <DependentUpon>frmOfertas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\frmPreciosOfertas.resx">
+      <DependentUpon>frmPreciosOfertas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmReintegros.resx">
       <DependentUpon>frmReintegros.cs</DependentUpon>

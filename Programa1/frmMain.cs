@@ -507,7 +507,50 @@
 
         private void OfertasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmOfertas")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmOfertas");
+                t.Text = "Ofertas";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
 
+                Form frmOfertas = new frmOfertas();
+                frmOfertas.MdiParent = this;
+                frmOfertas.Disposed += FrmOfertas_Disposed;
+                forms.Add(frmOfertas);
+                frmOfertas.Show();
+                frmOfertas.WindowState = FormWindowState.Minimized;
+                frmOfertas.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmOfertas_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Ofertas")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmOfertas")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
         }
     }
 }

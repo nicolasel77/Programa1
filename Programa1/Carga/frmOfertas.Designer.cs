@@ -45,6 +45,7 @@
             this.cmdLimpiar = new System.Windows.Forms.Button();
             this.cmdMostrar = new System.Windows.Forms.Button();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
+            this.cmdPrecios = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -125,8 +126,8 @@
             // 
             this.grdOfertas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
             this.grdOfertas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdOfertas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.grdOfertas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdOfertas.AutoResize = false;
             this.grdOfertas.bColor = System.Drawing.SystemColors.Window;
@@ -180,8 +181,8 @@
             // 
             // cProds
             // 
-            this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cProds.BackColor = System.Drawing.Color.Gainsboro;
             this.cProds.Filtro_In = "";
@@ -195,7 +196,7 @@
             // 
             // cFecha
             // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cFecha.Location = new System.Drawing.Point(3, 500);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
@@ -206,13 +207,13 @@
             // 
             // cSucs
             // 
-            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(2, 3);
-            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Mostrar_Tipo = false;
             this.cSucs.Name = "cSucs";
             this.cSucs.Size = new System.Drawing.Size(258, 491);
             this.cSucs.TabIndex = 2;
@@ -259,12 +260,24 @@
             this.tiMensaje.Interval = 8000;
             this.tiMensaje.Tick += new System.EventHandler(this.TiMensaje_Tick);
             // 
+            // cmdPrecios
+            // 
+            this.cmdPrecios.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdPrecios.Location = new System.Drawing.Point(933, 689);
+            this.cmdPrecios.Name = "cmdPrecios";
+            this.cmdPrecios.Size = new System.Drawing.Size(102, 23);
+            this.cmdPrecios.TabIndex = 4;
+            this.cmdPrecios.Text = "Cargar Precios";
+            this.cmdPrecios.UseVisualStyleBackColor = true;
+            this.cmdPrecios.Click += new System.EventHandler(this.CmdPrecios_Click);
+            // 
             // frmOfertas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 715);
             this.Controls.Add(this.cmdMostrar);
+            this.Controls.Add(this.cmdPrecios);
             this.Controls.Add(this.cmdCambioMasivo);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.cmdLimpiar);
@@ -304,5 +317,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblCant;
         private System.Windows.Forms.ToolStripStatusLabel lblKilos;
         private System.Windows.Forms.Button cmdCambioMasivo;
+        private System.Windows.Forms.Button cmdPrecios;
     }
 }
