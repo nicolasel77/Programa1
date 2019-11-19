@@ -113,6 +113,7 @@
             this.mntDias.Location = new System.Drawing.Point(0, 0);
             this.mntDias.Name = "mntDias";
             this.mntDias.TabIndex = 0;
+            this.mntDias.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MntDias_DateChanged);
             // 
             // tabPage2
             // 

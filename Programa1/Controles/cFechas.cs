@@ -9,7 +9,7 @@
     {
         private Semanas semanas;
         private bool cCambio = false;
-        
+        private DateTime fecha_Actual;
         public event EventHandler Cambio_Seleccion;
 
         public cFechas()
@@ -118,6 +118,18 @@
                 {
                     Cambio_Seleccion(null, null);
                 }
+            }
+        }
+
+        private void MntDias_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            if (cCambio == false)
+            {
+                if (mntDias.SelectionStart.Date != fecha_Actual)
+                {
+                    fecha_Actual = mntDias.SelectionStart.Date;
+                    Cambio_Seleccion(null, null);
+                }                
             }
         }
     }

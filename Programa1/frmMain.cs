@@ -505,5 +505,9 @@
             }
         }
 
+        private void OfertasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

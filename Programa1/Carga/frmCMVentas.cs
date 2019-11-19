@@ -218,7 +218,7 @@
                     }
                     else
                     {
-                        float c = 0;
+                        Single c = 0;
 
                         if (float.TryParse(txtCostoCompra.Text.Replace(".", ","), out c))
                         {

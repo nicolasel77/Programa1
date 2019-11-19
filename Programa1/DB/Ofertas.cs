@@ -1,33 +1,31 @@
-﻿
-namespace Programa1.DB
+﻿namespace Programa1.DB
 {
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
 
-    class Traslados
+    class Ofertas
     {
 
 
-        public Traslados()
+        public Ofertas()
         {
             Producto = new Productos();
-            sucS = new Sucursales();
-            sucE = new Sucursales();
+            Sucursal = new Sucursales();
         }
 
-        public Traslados(int id, DateTime fecha, Productos prod, string desc, Sucursales suc_Salida, float costo_Salida, Sucursales suc_Entrada, float costo_Entrada, float kilos)
+        public Ofertas(int id, DateTime fecha, Productos prod, string desc, Sucursales sucursal, Single costo_or, Single costo_of, float kilos)
         {
             Id = id;
             Fecha = fecha;
             Producto = prod;
             Descripcion = desc;
-            sucS = suc_Salida;
-            CostoS = costo_Salida;
-            sucE = suc_Entrada;
-            CostoE = costo_Entrada;
+            Sucursal = sucursal;
+            Costo_Original = costo_or;
+            Costo_Oferta = costo_of;
             Kilos = kilos;
 
         }
@@ -35,12 +33,11 @@ namespace Programa1.DB
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public Productos Producto { get; set; }
-        [MaxLength(100, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
+        [MaxLength(50, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Sucursales sucS { get; set; }
-        public float CostoS { get; set; }
-        public Sucursales sucE { get; set; }
-        public float CostoE { get; set; }
+        public Sucursales Sucursal { get; set; }
+        public Single Costo_Original { get; set; }
+        public Single Costo_Oferta { get; set; }
         public Single Kilos { get; set; }
 
         public DataTable Datos(string filtro = "")
@@ -55,7 +52,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Traslados {filtro} ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Ofertas {filtro} ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -76,9 +73,9 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Traslados SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Suc_Salida={sucS.Id}, Suc_Entrada={sucE.Id}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', " +
-                        $"Costo_Salida={CostoS.ToString().Replace(",", ".")}, Costo_Entrada={CostoE.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
+                    new SqlCommand($"UPDATE Ofertas SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
+                        $"Id_Sucursales={Sucursal.Id}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', " +
+                        $"Costo_Original={Costo_Original.ToString().Replace(",", ".")}, Costo_Oferta={Costo_Oferta.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -101,8 +98,8 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Traslados (Fecha, Suc_Salida, Suc_Entrada, Id_Productos, Descripcion, Costo_Salida, Costo_Entrada, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {sucS.Id}, {sucE.Id}, {Producto.Id}, '{Descripcion}', {CostoS.ToString().Replace(",", ".")}, {CostoE.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Ofertas (Fecha, Id_Sucursales, Id_Productos, Descripcion, Costo_Original, Costo_Oferta, Kilos) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.Id}, '{Descripcion}', {Costo_Original.ToString().Replace(",", ".")}, {Costo_Oferta.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -136,7 +133,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Traslados", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Ofertas", conexionSql);
 
                 conexionSql.Open();
 
@@ -159,7 +156,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Traslados WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM Ofertas WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -182,7 +179,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Traslados WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Ofertas WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -194,10 +191,9 @@ namespace Programa1.DB
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
                 Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
-                sucS.Id = Convert.ToInt32(dr["Suc_Salida"]);
-                sucE.Id = Convert.ToInt32(dr["Suc_Entrada"]);
-                CostoS = Convert.ToSingle(dr["Costo_Salida"]);
-                CostoS = Convert.ToSingle(dr["Costo_Entrada"]);
+                Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+                Costo_Original = Convert.ToSingle(dr["Costo_Original"]);
+                Costo_Oferta = Convert.ToSingle(dr["Costo_Oferta"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
 
             }

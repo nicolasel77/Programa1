@@ -11,6 +11,15 @@ namespace Programa1.Carga
     {
         private Reintegros Reintegros = new Reintegros();
 
+        #region " Columnas "
+        private Byte c_Id;
+        private Byte c_Fecha;
+        private Byte c_IdSuc;
+        private Byte c_IdTipo;
+        private Byte c_Descripcion;
+        private Byte c_Importe;
+
+        #endregion
         public frmReintegros()
         {
             InitializeComponent();
@@ -27,11 +36,19 @@ namespace Programa1.Carga
 
             Reintegros = new Reintegros();
             grdReintegros.MostrarDatos(Reintegros.Datos("Id=0"), true);
+
+            c_Id = Convert.ToByte(grdReintegros.get_ColIndex("Id"));
+            c_Fecha = Convert.ToByte(grdReintegros.get_ColIndex("Fecha"));
+            c_IdSuc = Convert.ToByte(grdReintegros.get_ColIndex("Id_Sucursales"));
+            c_IdTipo = Convert.ToByte(grdReintegros.get_ColIndex("Id_Tipo"));
+            c_Descripcion = Convert.ToByte(grdReintegros.get_ColIndex("Descripcion"));
+            c_Importe = Convert.ToByte(grdReintegros.get_ColIndex("Importe"));
+
             formato_Grilla();
 
             //El intercambio de columnas para estas teclas
-            grdReintegros.AgregarTeclas(Convert.ToInt32(Keys.Subtract), grdReintegros.get_ColIndex("Id_Tipo"), grdReintegros.get_ColIndex("Importe"));
-            grdReintegros.AgregarTeclas(Convert.ToInt32(Keys.Add), grdReintegros.get_ColIndex("Id_Sucursales"), grdReintegros.get_ColIndex("Importe"));
+            grdReintegros.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdTipo, c_Importe);
+            grdReintegros.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSuc, c_Importe);
 
             Totales();
         }
@@ -94,7 +111,7 @@ namespace Programa1.Carga
             grdReintegros.MostrarDatos(Reintegros.Datos(s), true);
             formato_Grilla();
             Totales();
-            grdReintegros.ActivarCelda(grdReintegros.Rows - 1, grdReintegros.get_ColIndex("Fecha"));
+            grdReintegros.ActivarCelda(grdReintegros.Rows - 1, c_Fecha);
             grdReintegros.Focus();
 
             this.Cursor = Cursors.Default;
@@ -125,25 +142,25 @@ namespace Programa1.Carga
 
         private void formato_Grilla()
         {
-            grdReintegros.set_ColW(grdReintegros.get_ColIndex("Id"), 0);
-            grdReintegros.set_ColW(grdReintegros.get_ColIndex("Fecha"), 60);
-            grdReintegros.set_ColW(grdReintegros.get_ColIndex("Id_Sucursales"), 30);
-            grdReintegros.set_ColW(grdReintegros.get_ColIndex("Nombre"), 100);
-            grdReintegros.set_ColW(grdReintegros.get_ColIndex("Id_Tipo"), 30);
-            grdReintegros.set_ColW(grdReintegros.get_ColIndex("Descripcion"), 100);
-            grdReintegros.set_ColW(grdReintegros.get_ColIndex("Importe"), 60);
+            grdReintegros.set_ColW(c_Id, 0);
+            grdReintegros.set_ColW(c_Fecha, 60);
+            grdReintegros.set_ColW(c_IdSuc, 30);
+            grdReintegros.set_ColW(c_IdSuc + 1, 100);
+            grdReintegros.set_ColW(c_IdTipo, 30);
+            grdReintegros.set_ColW(c_Descripcion, 150);
+            grdReintegros.set_ColW(c_Importe, 60);
 
-            grdReintegros.Columnas[grdReintegros.get_ColIndex("Importe")].Format = "N2";
+            grdReintegros.Columnas[c_Importe].Format = "N2";
 
-            grdReintegros.Columnas[grdReintegros.get_ColIndex("Importe")].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
+            grdReintegros.Columnas[c_Importe].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
-            grdReintegros.set_Texto(0, grdReintegros.get_ColIndex("Id_Sucursales"), "Suc");
-            grdReintegros.set_Texto(0, grdReintegros.get_ColIndex("Id_Tipo"), "Prod");
+            grdReintegros.set_Texto(0, c_IdSuc, "Suc");
+            grdReintegros.set_Texto(0, c_IdTipo, "Tipo");
         }
 
         private void Totales()
         {
-            double k = grdReintegros.SumarCol(grdReintegros.get_ColIndex("Importe"), false);
+            double k = grdReintegros.SumarCol(c_Importe, false);
             int c = grdReintegros.Rows - 2;
             lblCant.Text = $"Registros: {c:N0}";
             lblTotal.Text = $"Total: {k:C2}";
@@ -177,7 +194,7 @@ namespace Programa1.Carga
 
         private void GrdReintegros_Editado(short f, short c, object a)
         {
-            int id = Convert.ToInt32(grdReintegros.get_Texto(f, grdReintegros.get_ColIndex("Id")));
+            int id = Convert.ToInt32(grdReintegros.get_Texto(f, c_Id));
             switch (c)
             {
                 case 1:
@@ -220,7 +237,7 @@ namespace Programa1.Carga
 
                         if (id != 0) { Reintegros.Actualizar(); }
 
-                        grdReintegros.ActivarCelda(f, grdReintegros.get_ColIndex("Importe"));
+                        grdReintegros.ActivarCelda(f, c_Importe);
                         Totales();
                     }
                     else
@@ -246,27 +263,20 @@ namespace Programa1.Carga
                     if (grdReintegros.Row == grdReintegros.Rows - 1)
                     {
                         Reintegros.Agregar();
-                        grdReintegros.set_Texto(f, grdReintegros.get_ColIndex("Id"), Reintegros.Id);
+                        grdReintegros.set_Texto(f, c_Id, Reintegros.Id);
                         grdReintegros.AgregarFila();
                         //Rellenar nueva fila
 
-                        grdReintegros.set_Texto(f + 1, grdReintegros.get_ColIndex("Fecha"), Reintegros.Fecha);
-                        grdReintegros.set_Texto(f + 1, grdReintegros.get_ColIndex("Id_Sucursales"), Reintegros.Sucursal.Id);
-                        grdReintegros.set_Texto(f + 1, grdReintegros.get_ColIndex("Nombre"), Reintegros.Sucursal.Nombre);
-
-                        Reintegros.Descripcion = Reintegros.Tipo.Nombre;
-
-                        grdReintegros.set_Texto(f + 1, grdReintegros.get_ColIndex("Id_Tipo"), Reintegros.Tipo.Id);
-                        grdReintegros.set_Texto(f + 1, grdReintegros.get_ColIndex("Descripcion"), Reintegros.Descripcion);
-
-
+                        grdReintegros.set_Texto(f + 1, c_Fecha, Reintegros.Fecha);
+                        
                         Reintegros.Importe = 0;
+                        grdReintegros.ActivarCelda(f + 1, c_IdSuc);
                     }
                     else
                     {
                         Reintegros.Actualizar();
-                    }
-                    grdReintegros.ActivarCelda(f + 1, c);
+                        grdReintegros.ActivarCelda(f + 1, c);
+                    }                    
 
                     Totales();
                     break;
@@ -276,7 +286,7 @@ namespace Programa1.Carga
 
         private void GrdReintegros_CambioFila(short Fila)
         {
-            int i = Convert.ToInt32(grdReintegros.get_Texto(Fila, grdReintegros.get_ColIndex("Id")).ToString());
+            int i = Convert.ToInt32(grdReintegros.get_Texto(Fila, c_Id).ToString());
             Reintegros.Cargar_Fila(i);
         }
 
@@ -318,30 +328,6 @@ namespace Programa1.Carga
             Clipboard.SetText(s);
 
             Mensaje($"Copiado: {s}");
-        }
-
-        private void CmdCambioMasivo_Click(object sender, EventArgs e)
-        {
-            if (grdReintegros.Rows > 2)
-            {
-                //frmCMReintegros cm = new frmCMReintegros();
-                //List<int> n = new List<int>();
-
-                //int d = grdReintegros.Selection.r1;
-                //int h = grdReintegros.Selection.r2;
-                //if (d == -1)
-                //{
-                //    d = 1;
-                //    h = grdReintegros.Rows - 2;
-                //}
-                //for (int i = d; i <= h; i++)
-                //{
-                //    n.Add(Convert.ToInt32(grdReintegros.get_Texto(i, grdReintegros.get_ColIndex("Id"))));
-                //}
-                //cm.Ids = n;
-                //cm.ShowDialog();
-                //cmdMostrar.PerformClick();
-            }
-        }
+        }               
     }
 }

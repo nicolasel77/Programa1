@@ -14,7 +14,7 @@ namespace Programa1.DB
             Proveedor = new Proveedores();
         }
 
-        public Precios_Proveedores(int id, DateTime fecha, Productos prod, Proveedores proveedor, float pr)
+        public Precios_Proveedores(int id, DateTime fecha, Productos prod, Proveedores proveedor, Single pr)
         {
             Id = id;
             Fecha = fecha;

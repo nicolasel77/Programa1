@@ -195,6 +195,7 @@
             this.ofertasToolStripMenuItem.Name = "ofertasToolStripMenuItem";
             this.ofertasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ofertasToolStripMenuItem.Text = "&Ofertas";
+            this.ofertasToolStripMenuItem.Click += new System.EventHandler(this.OfertasToolStripMenuItem_Click);
             // 
             // aPicadaToolStripMenuItem
             // 
@@ -255,7 +256,7 @@
             // compraToolStripMenuItem
             // 
             this.compraToolStripMenuItem.Name = "compraToolStripMenuItem";
-            this.compraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.compraToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.compraToolStripMenuItem.Text = "&Compra";
             this.compraToolStripMenuItem.Click += new System.EventHandler(this.CompraToolStripMenuItem_Click);
             // 

@@ -11,6 +11,20 @@ namespace Programa1.Carga
         private Traslados Traslados;
         private Precios_Sucursales precios;
 
+        #region " Columnas "
+        private Byte c_Id;
+        private Byte c_Fecha;
+        private Byte c_IdSucS;
+        private Byte c_IdSucE;
+        private Byte c_IdProd;
+        private Byte c_Descripcion;
+        private Byte c_CostoS;
+        private Byte c_CostoE;
+        private Byte c_Kilos;
+        private Byte c_TotalS;
+        private Byte c_TotalE;
+        #endregion
+
         public frmTraslados()
         {
             InitializeComponent();
@@ -22,11 +36,24 @@ namespace Programa1.Carga
 
             Traslados = new Traslados();
             grdTraslados.MostrarDatos(Traslados.Datos("Id=0"), true);
+
+            c_Id = Convert.ToByte(grdTraslados.get_ColIndex("Id"));
+            c_Fecha = Convert.ToByte(grdTraslados.get_ColIndex("Fecha"));
+            c_IdSucS = Convert.ToByte(grdTraslados.get_ColIndex("Suc_Salida"));
+            c_IdSucE = Convert.ToByte(grdTraslados.get_ColIndex("Suc_Entrada"));
+            c_IdProd = Convert.ToByte(grdTraslados.get_ColIndex("Id_Productos"));
+            c_Descripcion = Convert.ToByte(grdTraslados.get_ColIndex("Descripcion"));
+            c_CostoS = Convert.ToByte(grdTraslados.get_ColIndex("Costo_Salida"));
+            c_CostoE = Convert.ToByte(grdTraslados.get_ColIndex("Costo_Entrada"));
+            c_Kilos = Convert.ToByte(grdTraslados.get_ColIndex("Kilos"));
+            c_TotalS = Convert.ToByte(grdTraslados.get_ColIndex("Total_Salida"));
+            c_TotalE = Convert.ToByte(grdTraslados.get_ColIndex("Total_Entrada"));
+
             formato_Grilla();
 
             //El intercambio de columnas para estas teclas
-            grdTraslados.AgregarTeclas(Convert.ToInt32(Keys.Subtract), grdTraslados.get_ColIndex("Id_Productos"), grdTraslados.get_ColIndex("Kilos"));
-            grdTraslados.AgregarTeclas(Convert.ToInt32(Keys.Add), grdTraslados.get_ColIndex("Suc_Salida"), grdTraslados.get_ColIndex("Kilos"));
+            grdTraslados.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdProd, c_Kilos);
+            grdTraslados.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSucS, c_Kilos);
 
             Totales();
         }
@@ -91,7 +118,7 @@ namespace Programa1.Carga
             grdTraslados.MostrarDatos(Traslados.Datos(s), true);
             formato_Grilla();
             Totales();
-            grdTraslados.ActivarCelda(grdTraslados.Rows - 1, grdTraslados.get_ColIndex("Fecha"));
+            grdTraslados.ActivarCelda(grdTraslados.Rows - 1, c_Fecha);
             grdTraslados.Focus();
 
             this.Cursor = Cursors.Default;
@@ -115,38 +142,38 @@ namespace Programa1.Carga
 
         private void formato_Grilla()
         {
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Id"), 0);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Fecha"), 60);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Suc_Salida"), 35);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Nombre_Salida"), 100);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Suc_Entrada"), 35);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Nombre_Entrada"), 100);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Id_Productos"), 30);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Descripcion"), 100);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Costo_Salida"), 60);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Costo_Entrada"), 60);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Kilos"), 60);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Total_Salida"), 80);
-            grdTraslados.set_ColW(grdTraslados.get_ColIndex("Total_Entrada"), 80);
+            grdTraslados.set_ColW(c_Id, 0);
+            grdTraslados.set_ColW(c_Fecha, 60);
+            grdTraslados.set_ColW(c_IdSucS, 35);
+            grdTraslados.set_ColW(c_IdSucS + 1, 100);
+            grdTraslados.set_ColW(c_IdSucE, 35);
+            grdTraslados.set_ColW(c_IdSucE + 1, 100);
+            grdTraslados.set_ColW(c_IdProd, 30);
+            grdTraslados.set_ColW(c_Descripcion, 100);
+            grdTraslados.set_ColW(c_CostoS, 60);
+            grdTraslados.set_ColW(c_CostoE, 60);
+            grdTraslados.set_ColW(c_Kilos, 60);
+            grdTraslados.set_ColW(c_TotalS, 80);
+            grdTraslados.set_ColW(c_TotalE, 80);
 
-            grdTraslados.Columnas[grdTraslados.get_ColIndex("Costo_Salida")].Format = "C2";
-            grdTraslados.Columnas[grdTraslados.get_ColIndex("Costo_Entrada")].Format = "C2";
-            grdTraslados.Columnas[grdTraslados.get_ColIndex("Kilos")].Format = "N2";
-            grdTraslados.Columnas[grdTraslados.get_ColIndex("Total_Salida")].Format = "C2";
-            grdTraslados.Columnas[grdTraslados.get_ColIndex("Total_Entrada")].Format = "C2";
+            grdTraslados.Columnas[c_CostoS].Format = "C2";
+            grdTraslados.Columnas[c_CostoE].Format = "C2";
+            grdTraslados.Columnas[c_Kilos].Format = "N2";
+            grdTraslados.Columnas[c_TotalS].Format = "C2";
+            grdTraslados.Columnas[c_TotalE].Format = "C2";
 
-            grdTraslados.Columnas[grdTraslados.get_ColIndex("Kilos")].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
+            grdTraslados.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
-            grdTraslados.set_Texto(0, grdTraslados.get_ColIndex("Suc_Salida"), "Suc S");
-            grdTraslados.set_Texto(0, grdTraslados.get_ColIndex("Suc_Entrada"), "Suc E");
-            grdTraslados.set_Texto(0, grdTraslados.get_ColIndex("Id_Productos"), "Prod");
+            grdTraslados.set_Texto(0, c_IdSucS, "Suc S");
+            grdTraslados.set_Texto(0, c_IdSucE, "Suc E");
+            grdTraslados.set_Texto(0, c_IdProd, "Prod");
         }
 
         private void Totales()
         {
-            double tSalida = grdTraslados.SumarCol(grdTraslados.get_ColIndex("Total_Salida"), false);
-            double tEntrada = grdTraslados.SumarCol(grdTraslados.get_ColIndex("Total_Entrada"), false);
-            double k = grdTraslados.SumarCol(grdTraslados.get_ColIndex("Kilos"), false);
+            double tSalida = grdTraslados.SumarCol(c_TotalS, false);
+            double tEntrada = grdTraslados.SumarCol(c_TotalE, false);
+            double k = grdTraslados.SumarCol(c_Kilos, false);
             int c = grdTraslados.Rows - 2;
             lblCant.Text = $"Registros: {c:N0}";
             lblKilos.Text = $"Kilos: {k:N2}";
@@ -177,16 +204,17 @@ namespace Programa1.Carga
 
         private void CFecha_Cambio_Seleccion(object sender, EventArgs e)
         {
-            cProds.Filtro_In = $" (SELECT DISTINCT Id_Productos FROM Traslados WHERE {cFecha.Cadena()})";
-            cSucSalida.Filtro_In = $" (SELECT DISTINCT Suc_Salida FROM Traslados WHERE {cFecha.Cadena()})";
-            cSucEntrada.Filtro_In = $" (SELECT DISTINCT Suc_Entrada FROM Traslados WHERE {cFecha.Cadena()})";
+            string vFecha = cFecha.Cadena();
+            cProds.Filtro_In = $" (SELECT DISTINCT Id_Productos FROM Traslados WHERE {vFecha})";
+            cSucSalida.Filtro_In = $" (SELECT DISTINCT Suc_Salida FROM Traslados WHERE {vFecha})";
+            cSucEntrada.Filtro_In = $" (SELECT DISTINCT Suc_Entrada FROM Traslados WHERE {vFecha})";
             cmdMostrar.PerformClick();
         }
 
 
         private void GrdTraslados_Editado(short f, short c, object a)
         {
-            int id = Convert.ToInt32(grdTraslados.get_Texto(f, grdTraslados.get_ColIndex("Id")));
+            int id = Convert.ToInt32(grdTraslados.get_Texto(f, c_Id));
             switch (c)
             {
                 case 1:
@@ -254,17 +282,17 @@ namespace Programa1.Carga
 
                         precios.Sucursal = Traslados.sucS;
                         Traslados.CostoS = precios.Buscar();
-                        grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Costo_Salida"), Traslados.CostoS);
-                        grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Total_Salida"), Traslados.Kilos*Traslados.CostoS);
+                        grdTraslados.set_Texto(f, c_CostoS, Traslados.CostoS);
+                        grdTraslados.set_Texto(f, c_TotalS, Traslados.Kilos*Traslados.CostoS);
 
                         precios.Sucursal = Traslados.sucE;
                         Traslados.CostoE = precios.Buscar();
-                        grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Costo_Entrada"), Traslados.CostoE);
-                        grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Total_Entrada"), Traslados.Kilos * Traslados.CostoE);
+                        grdTraslados.set_Texto(f, c_CostoE, Traslados.CostoE);
+                        grdTraslados.set_Texto(f, c_TotalE, Traslados.Kilos * Traslados.CostoE);
 
                         if (id != 0) { Traslados.Actualizar(); }
 
-                        grdTraslados.ActivarCelda(f, grdTraslados.get_ColIndex("Kilos"));
+                        grdTraslados.ActivarCelda(f, c_Kilos);
                         Totales();
                     }
                     else
@@ -286,7 +314,7 @@ namespace Programa1.Carga
                     //Costo_Salida
                     Traslados.CostoS = Convert.ToSingle(a);
                     grdTraslados.set_Texto(f, c, a);
-                    grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Total_Salida"), Traslados.CostoS * Traslados.Kilos);
+                    grdTraslados.set_Texto(f, c_TotalS, Traslados.CostoS * Traslados.Kilos);
 
                     if (id != 0) { Traslados.Actualizar(); }
 
@@ -297,7 +325,7 @@ namespace Programa1.Carga
                     //Costo_Entrada
                     Traslados.CostoE = Convert.ToSingle(a);
                     grdTraslados.set_Texto(f, c, a);
-                    grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Total_Entrada"), Traslados.CostoE * Traslados.Kilos);
+                    grdTraslados.set_Texto(f, c_TotalE, Traslados.CostoE * Traslados.Kilos);
 
                     if (id != 0) { Traslados.Actualizar(); }
 
@@ -308,20 +336,20 @@ namespace Programa1.Carga
                     //Kilos
                     Traslados.Kilos = Convert.ToSingle(a);
                     grdTraslados.set_Texto(f, c, a);
-                    grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Total_Salida"), Traslados.CostoS * Traslados.Kilos);
-                    grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Total_Entrada"), Traslados.CostoE * Traslados.Kilos);
+                    grdTraslados.set_Texto(f, c_TotalS, Traslados.CostoS * Traslados.Kilos);
+                    grdTraslados.set_Texto(f, c_TotalE, Traslados.CostoE * Traslados.Kilos);
 
                     if (grdTraslados.Row == grdTraslados.Rows - 1)
                     {
                         Traslados.Agregar();
-                        grdTraslados.set_Texto(f, grdTraslados.get_ColIndex("Id"), Traslados.Id);
+                        grdTraslados.set_Texto(f, c_Id, Traslados.Id);
                         grdTraslados.AgregarFila();
                         //Rellenar nueva fila
 
-                        grdTraslados.set_Texto(f + 1, grdTraslados.get_ColIndex("Fecha"), Traslados.Fecha);
+                        grdTraslados.set_Texto(f + 1, c_Fecha, Traslados.Fecha);
                         
                         Traslados.Kilos = 0;
-                        grdTraslados.ActivarCelda(f + 1, grdTraslados.get_ColIndex("Suc_Entrada"));
+                        grdTraslados.ActivarCelda(f + 1, c_IdSucE);
                     }
                     else
                     {
@@ -337,7 +365,7 @@ namespace Programa1.Carga
 
         private void GrdTraslados_CambioFila(short Fila)
         {
-            int i = Convert.ToInt32(grdTraslados.get_Texto(Fila, grdTraslados.get_ColIndex("Id")).ToString());
+            int i = Convert.ToInt32(grdTraslados.get_Texto(Fila, c_Id).ToString());
             Traslados.Cargar_Fila(i);
             precios.Fecha = Traslados.Fecha;
             precios.Sucursal = Traslados.sucS;
@@ -351,25 +379,25 @@ namespace Programa1.Carga
                 if (Traslados.Id == 0)
                 {
 
-                    if (grdTraslados.Col == grdTraslados.get_ColIndex("Kilos"))
+                    if (grdTraslados.Col == c_Kilos)
                     {
                         Traslados.Producto.Siguiente();
                         precios.Producto = Traslados.Producto;
 
                         Traslados.Descripcion = Traslados.Producto.Nombre;
 
-                        grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Id_Productos"), Traslados.Producto.Id);
-                        grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Descripcion"), Traslados.Descripcion);
+                        grdTraslados.set_Texto(grdTraslados.Row, c_IdProd, Traslados.Producto.Id);
+                        grdTraslados.set_Texto(grdTraslados.Row, c_Descripcion, Traslados.Descripcion);
 
                         precios.Sucursal = Traslados.sucS;
                         Traslados.CostoS = precios.Buscar();
-                        grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Costo_Salida"), Traslados.CostoS);
-                        grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Total_Salida"), 0);
+                        grdTraslados.set_Texto(grdTraslados.Row, c_CostoS, Traslados.CostoS);
+                        grdTraslados.set_Texto(grdTraslados.Row, c_TotalS, 0);
 
                         precios.Sucursal = Traslados.sucE;
                         Traslados.CostoE = precios.Buscar();
-                        grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Costo_Entrada"), Traslados.CostoE);
-                        grdTraslados.set_Texto(grdTraslados.Row, grdTraslados.get_ColIndex("Total_Entrada"), 0);
+                        grdTraslados.set_Texto(grdTraslados.Row, c_CostoE, Traslados.CostoE);
+                        grdTraslados.set_Texto(grdTraslados.Row, c_TotalE, 0);
                     }
                 }
             }
@@ -452,7 +480,7 @@ namespace Programa1.Carga
                 }
                 for (int i = d; i <= h; i++)
                 {
-                    n.Add(Convert.ToInt32(grdTraslados.get_Texto(i, grdTraslados.get_ColIndex("Id"))));
+                    n.Add(Convert.ToInt32(grdTraslados.get_Texto(i, c_Id)));
                 }
                 cm.Ids = n;
                 cm.ShowDialog();

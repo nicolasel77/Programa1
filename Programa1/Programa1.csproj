@@ -100,6 +100,12 @@
     <Compile Include="Carga\frmCopiarVentaACompra.Designer.cs">
       <DependentUpon>frmCopiarVentaACompra.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\frmOfertas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmOfertas.Designer.cs">
+      <DependentUpon>frmOfertas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\frmReintegros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,7 @@
     </Compile>
     <Compile Include="DB\Compras.cs" />
     <Compile Include="DB\Localidades.cs" />
+    <Compile Include="DB\Ofertas.cs" />
     <Compile Include="DB\Partidos.cs" />
     <Compile Include="DB\Precios_Proveedores.cs" />
     <Compile Include="DB\Precios_Sucursales.cs" />

@@ -10,6 +10,16 @@
         private Stock stock;
         private Precios_Sucursales precios;
 
+        #region " Columnas "
+        private Byte c_Id;
+        private Byte c_Fecha;
+        private Byte c_IdSuc;
+        private Byte c_IdProd;
+        private Byte c_Descripcion;
+        private Byte c_Costo;
+        private Byte c_Kilos;
+        private Byte c_Total;
+        #endregion
         public frmStock()
         {
             InitializeComponent();
@@ -21,11 +31,21 @@
 
             stock = new Stock();
             grdStock.MostrarDatos(stock.Datos("Id=0"), true);
+
+            c_Id = Convert.ToByte(grdStock.get_ColIndex("Id"));
+            c_Fecha = Convert.ToByte(grdStock.get_ColIndex("Fecha"));
+            c_IdSuc = Convert.ToByte(grdStock.get_ColIndex("Id_Sucursales"));
+            c_IdProd = Convert.ToByte(grdStock.get_ColIndex("Id_Productos"));
+            c_Descripcion = Convert.ToByte(grdStock.get_ColIndex("Descripcion"));
+            c_Costo = Convert.ToByte(grdStock.get_ColIndex("Costo"));
+            c_Kilos = Convert.ToByte(grdStock.get_ColIndex("Kilos"));
+            c_Total = Convert.ToByte(grdStock.get_ColIndex("Total"));
+
             formato_Grilla();
 
             //El intercambio de columnas para estas teclas
-            grdStock.AgregarTeclas(Convert.ToInt32(Keys.Subtract), grdStock.get_ColIndex("Id_Productos"), grdStock.get_ColIndex("Kilos"));
-            grdStock.AgregarTeclas(Convert.ToInt32(Keys.Add), grdStock.get_ColIndex("Id_Sucursales"), grdStock.get_ColIndex("Kilos"));
+            grdStock.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdProd, c_Kilos);
+            grdStock.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSuc, c_Kilos);
 
             Totales();
         }
@@ -90,7 +110,7 @@
             grdStock.MostrarDatos(stock.Datos(s), true);
             formato_Grilla();
             Totales();
-            grdStock.ActivarCelda(grdStock.Rows - 1, grdStock.get_ColIndex("Fecha"));
+            grdStock.ActivarCelda(grdStock.Rows - 1, c_Fecha);
             grdStock.Focus();
 
             this.Cursor = Cursors.Default;
@@ -112,30 +132,30 @@
 
         private void formato_Grilla()
         {
-            grdStock.set_ColW(grdStock.get_ColIndex("Id"), 0);
-            grdStock.set_ColW(grdStock.get_ColIndex("Fecha"), 60);
-            grdStock.set_ColW(grdStock.get_ColIndex("Id_Sucursales"), 30);
-            grdStock.set_ColW(grdStock.get_ColIndex("Nombre"), 100);
-            grdStock.set_ColW(grdStock.get_ColIndex("Id_Productos"), 30);
-            grdStock.set_ColW(grdStock.get_ColIndex("Descripcion"), 100);
-            grdStock.set_ColW(grdStock.get_ColIndex("Costo"), 60);
-            grdStock.set_ColW(grdStock.get_ColIndex("Kilos"), 60);
-            grdStock.set_ColW(grdStock.get_ColIndex("Total"), 80);
+            grdStock.set_ColW(c_Id, 0);
+            grdStock.set_ColW(c_Fecha, 60);
+            grdStock.set_ColW(c_IdSuc, 30);
+            grdStock.set_ColW(c_IdSuc + 1, 100);
+            grdStock.set_ColW(c_IdProd, 30);
+            grdStock.set_ColW(c_Descripcion, 150);
+            grdStock.set_ColW(c_Costo, 60);
+            grdStock.set_ColW(c_Kilos, 60);
+            grdStock.set_ColW(c_Total, 80);
 
-            grdStock.Columnas[grdStock.get_ColIndex("Costo")].Format = "C2";
-            grdStock.Columnas[grdStock.get_ColIndex("Kilos")].Format = "N2";
-            grdStock.Columnas[grdStock.get_ColIndex("Total")].Format = "C2";
+            grdStock.Columnas[c_Costo].Format = "C2";
+            grdStock.Columnas[c_Kilos].Format = "N2";
+            grdStock.Columnas[c_Total].Format = "C2";
 
-            grdStock.Columnas[grdStock.get_ColIndex("Kilos")].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
+            grdStock.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
-            grdStock.set_Texto(0, grdStock.get_ColIndex("Id_Sucursales"), "Suc");
-            grdStock.set_Texto(0, grdStock.get_ColIndex("Id_Productos"), "Prod");            
+            grdStock.set_Texto(0, c_IdSuc, "Suc");
+            grdStock.set_Texto(0, c_IdProd, "Prod");            
         }
 
         private void Totales()
         {
-            double t = grdStock.SumarCol(grdStock.get_ColIndex("Total"), false);
-            double k = grdStock.SumarCol(grdStock.get_ColIndex("Kilos"), false);
+            double t = grdStock.SumarCol(c_Total, false);
+            double k = grdStock.SumarCol(c_Kilos, false);
             int c = grdStock.Rows - 2;
             lblCant.Text = $"Registros: {c:N0}";
             lblKilos.Text = $"Kilos: {k:N2}";
@@ -163,15 +183,16 @@
 
         private void CFecha_Cambio_Seleccion(object sender, EventArgs e)
         {
-            cProds.Filtro_In = $" (SELECT DISTINCT Id_Productos FROM Stock WHERE {cFecha.Cadena()})";
-            cSucs.Filtro_In = $" (SELECT DISTINCT Id_Sucursales FROM Stock WHERE {cFecha.Cadena()})";
+            string vFecha = cFecha.Cadena();
+            cProds.Filtro_In = $" (SELECT DISTINCT Id_Productos FROM Stock WHERE {vFecha})";
+            cSucs.Filtro_In = $" (SELECT DISTINCT Id_Sucursales FROM Stock WHERE {vFecha})";
             cmdMostrar.PerformClick();
         }
 
 
         private void GrdStock_Editado(short f, short c, object a)
         {
-            int id = Convert.ToInt32(grdStock.get_Texto(f, grdStock.get_ColIndex("Id")));
+            int id = Convert.ToInt32(grdStock.get_Texto(f, c_Id));
             switch (c)
             {
                 case 1:
@@ -218,12 +239,12 @@
                         grdStock.set_Texto(f, c + 1, stock.Producto.Nombre);
 
                         stock.Costo = precios.Buscar();
-                        grdStock.set_Texto(f, grdStock.get_ColIndex("Costo"), stock.Costo);
-                        grdStock.set_Texto(f, grdStock.get_ColIndex("Total"), stock.Costo * stock.Kilos);
+                        grdStock.set_Texto(f, c_Costo, stock.Costo);
+                        grdStock.set_Texto(f, c_Total, stock.Costo * stock.Kilos);
 
                         if (id != 0) { stock.Actualizar(); }
 
-                        grdStock.ActivarCelda(f, grdStock.get_ColIndex("Kilos"));
+                        grdStock.ActivarCelda(f, c_Kilos);
                         Totales();
                     }
                     else
@@ -245,7 +266,7 @@
                     //Costo
                     stock.Costo = Convert.ToSingle(a);
                     grdStock.set_Texto(f, c, a);
-                    grdStock.set_Texto(f, grdStock.get_ColIndex("Total"), stock.Costo * stock.Kilos);
+                    grdStock.set_Texto(f, c_Total, stock.Costo * stock.Kilos);
 
                     if (id != 0) { stock.Actualizar(); }
 
@@ -256,30 +277,30 @@
                     //Kilos
                     stock.Kilos = Convert.ToSingle(a);
                     grdStock.set_Texto(f, c, a);
-                    grdStock.set_Texto(f, grdStock.get_ColIndex("Total"), stock.Costo * stock.Kilos);
+                    grdStock.set_Texto(f, c_Total, stock.Costo * stock.Kilos);
 
                     if (grdStock.Row == grdStock.Rows - 1)
                     {
                         stock.Agregar();
-                        grdStock.set_Texto(f, grdStock.get_ColIndex("Id"), stock.Id);
+                        grdStock.set_Texto(f, c_Id, stock.Id);
                         grdStock.AgregarFila();
                         //Rellenar nueva fila
 
-                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Fecha"), stock.Fecha);
-                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Id_Sucursales"), stock.Sucursal.Id);
-                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Nombre"), stock.Sucursal.Nombre);
+                        grdStock.set_Texto(f + 1, c_Fecha, stock.Fecha);
+                        grdStock.set_Texto(f + 1, c_IdSuc, stock.Sucursal.Id);
+                        grdStock.set_Texto(f + 1, c_IdSuc + 1, stock.Sucursal.Nombre);
 
                         stock.Producto.Siguiente();
                         precios.Producto = stock.Producto;
 
                         stock.Descripcion = stock.Producto.Nombre;
 
-                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Id_Productos"), stock.Producto.Id);
-                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Descripcion"), stock.Descripcion);
+                        grdStock.set_Texto(f + 1, c_IdProd, stock.Producto.Id);
+                        grdStock.set_Texto(f + 1, c_Descripcion, stock.Descripcion);
 
                         stock.Costo = precios.Buscar();
-                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Costo"), stock.Costo);
-                        grdStock.set_Texto(f + 1, grdStock.get_ColIndex("Total"), 0);
+                        grdStock.set_Texto(f + 1, c_Costo, stock.Costo);
+                        grdStock.set_Texto(f + 1, c_Total, 0);
 
                         stock.Kilos = 0;
                     }
@@ -297,7 +318,7 @@
 
         private void GrdStock_CambioFila(short Fila)
         {
-            int i = Convert.ToInt32(grdStock.get_Texto(Fila, grdStock.get_ColIndex("Id")).ToString());
+            int i = Convert.ToInt32(grdStock.get_Texto(Fila, c_Id).ToString());
             stock.Cargar_Fila(i);
             precios.Fecha = stock.Fecha;
             precios.Sucursal = stock.Sucursal;
@@ -311,19 +332,19 @@
                 if (stock.Id == 0)
                 {
 
-                    if (grdStock.Col == grdStock.get_ColIndex("Kilos"))
+                    if (grdStock.Col == c_Kilos)
                     {
                         stock.Producto.Siguiente();
                         precios.Producto = stock.Producto;
 
                         stock.Descripcion = stock.Producto.Nombre;
 
-                        grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Id_Productos"), stock.Producto.Id);
-                        grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Descripcion"), stock.Descripcion);
+                        grdStock.set_Texto(grdStock.Row, c_IdProd, stock.Producto.Id);
+                        grdStock.set_Texto(grdStock.Row, c_Descripcion, stock.Descripcion);
 
                         stock.Costo = precios.Buscar();
-                        grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Costo"), stock.Costo);
-                        grdStock.set_Texto(grdStock.Row, grdStock.get_ColIndex("Total"), 0);
+                        grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
+                        grdStock.set_Texto(grdStock.Row, c_Total, 0);
                     }
                 }
             }
@@ -392,7 +413,7 @@
                 }
                 for (int i = d; i <= h; i++)
                 {
-                    n.Add(Convert.ToInt32(grdStock.get_Texto(i, grdStock.get_ColIndex("Id"))));
+                    n.Add(Convert.ToInt32(grdStock.get_Texto(i, c_Id)));
                 }
                 cm.Ids = n;
                 cm.ShowDialog();
