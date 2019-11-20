@@ -38,12 +38,12 @@
             this.grdReintegros = new Grilla2.SpeedGrilla();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.cSucs = new Programa1.Controles.cSucursales();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lstTipo = new System.Windows.Forms.ListBox();
             this.cFecha = new Programa1.Controles.cFechas();
             this.cmdLimpiar = new System.Windows.Forms.Button();
             this.cmdMostrar = new System.Windows.Forms.Button();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
-            this.lstTipo = new System.Windows.Forms.ListBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -136,7 +136,7 @@
             this.grdReintegros.FuenteEncabezado = null;
             this.grdReintegros.FuentePieDePagina = null;
             this.grdReintegros.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdReintegros.Location = new System.Drawing.Point(12, 12);
+            this.grdReintegros.Location = new System.Drawing.Point(3, 6);
             this.grdReintegros.MenuActivado = false;
             this.grdReintegros.Name = "grdReintegros";
             this.grdReintegros.PieDePagina = "\t\tPage {0} of {1}";
@@ -144,7 +144,7 @@
             this.grdReintegros.Redraw = true;
             this.grdReintegros.Row = 0;
             this.grdReintegros.Rows = 50;
-            this.grdReintegros.Size = new System.Drawing.Size(816, 672);
+            this.grdReintegros.Size = new System.Drawing.Size(825, 678);
             this.grdReintegros.TabIndex = 0;
             this.grdReintegros.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdReintegros_Editado);
             this.grdReintegros.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdReintegros_CambioFila);
@@ -176,13 +176,41 @@
             this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(3, 3);
-            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Mostrar_Tipo = false;
             this.cSucs.Name = "cSucs";
             this.cSucs.Size = new System.Drawing.Size(250, 680);
             this.cSucs.TabIndex = 2;
             this.cSucs.Titulo = "Sucursales";
             this.cSucs.Valor_Actual = -1;
             this.cSucs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.lstTipo);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(249, 491);
+            this.panel1.TabIndex = 5;
+            // 
+            // lstTipo
+            // 
+            this.lstTipo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstTipo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstTipo.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lstTipo.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lstTipo.FormattingEnabled = true;
+            this.lstTipo.ItemHeight = 18;
+            this.lstTipo.Location = new System.Drawing.Point(3, 3);
+            this.lstTipo.Name = "lstTipo";
+            this.lstTipo.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstTipo.Size = new System.Drawing.Size(243, 486);
+            this.lstTipo.TabIndex = 4;
             // 
             // cFecha
             // 
@@ -222,34 +250,6 @@
             this.tiMensaje.Enabled = true;
             this.tiMensaje.Interval = 8000;
             this.tiMensaje.Tick += new System.EventHandler(this.TiMensaje_Tick);
-            // 
-            // lstTipo
-            // 
-            this.lstTipo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstTipo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstTipo.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lstTipo.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lstTipo.FormattingEnabled = true;
-            this.lstTipo.ItemHeight = 18;
-            this.lstTipo.Location = new System.Drawing.Point(3, 3);
-            this.lstTipo.Name = "lstTipo";
-            this.lstTipo.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstTipo.Size = new System.Drawing.Size(243, 486);
-            this.lstTipo.TabIndex = 4;
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Controls.Add(this.lstTipo);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(249, 491);
-            this.panel1.TabIndex = 5;
             // 
             // frmReintegros
             // 

@@ -8,7 +8,7 @@
     public partial class frmCompras : Form
     {
         private Compras Compras;
-        private Precios_Proveedores precios;
+        
 
         #region " Columnas "
         private Byte c_Id;
@@ -24,9 +24,7 @@
         public frmCompras()
         {
             InitializeComponent();
-
-            precios = new Precios_Proveedores();
-
+            
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdCompras.TeclasManejadas = n;
 
@@ -200,7 +198,7 @@
                     //Fecha
                     //TODO: Validar que la fecha este en el rango del calendario
                     Compras.Fecha = Convert.ToDateTime(a);
-                    precios.Fecha = Compras.Fecha;
+                    Compras.precios.Fecha = Compras.Fecha;
 
                     if (id != 0) { Compras.Actualizar(); }
 
@@ -212,7 +210,7 @@
                     Compras.Proveedor.Id = Convert.ToInt32(a);
                     if (Compras.Proveedor.Existe() == true)
                     {
-                        precios.Proveedor = Compras.Proveedor;
+                        Compras.precios.Proveedor = Compras.Proveedor;
 
                         if (id != 0) { Compras.Actualizar(); }
 
@@ -232,14 +230,14 @@
                     Compras.Producto.Id = Convert.ToInt32(a);
                     if (Compras.Producto.Existe() == true)
                     {
-                        precios.Producto = Compras.Producto;
+                        Compras.precios.Producto = Compras.Producto;
 
                         Compras.Descripcion = Compras.Producto.Nombre;
 
                         grdCompras.set_Texto(f, c, a);
                         grdCompras.set_Texto(f, c + 1, Compras.Producto.Nombre);
 
-                        Compras.Costo = precios.Buscar();
+                        Compras.Costo = Compras.precios.Buscar();
                         grdCompras.set_Texto(f, c_Costo, Compras.Costo);
                         grdCompras.set_Texto(f, c_Total, Compras.Costo * Compras.Kilos);
 
@@ -292,14 +290,14 @@
                         grdCompras.set_Texto(f + 1, grdCompras.get_ColIndex("Nombre"), Compras.Proveedor.Nombre);
 
                         Compras.Producto.Siguiente();
-                        precios.Producto = Compras.Producto;
+                        Compras.precios.Producto = Compras.Producto;
 
                         Compras.Descripcion = Compras.Producto.Nombre;
 
                         grdCompras.set_Texto(f + 1, c_IdProd, Compras.Producto.Id);
                         grdCompras.set_Texto(f + 1, c_Descripcion, Compras.Descripcion);
 
-                        Compras.Costo = precios.Buscar();
+                        Compras.Costo = Compras.precios.Buscar();
                         grdCompras.set_Texto(f + 1, c_Costo, Compras.Costo);
                         grdCompras.set_Texto(f + 1, c_Total, 0);
 
@@ -321,9 +319,9 @@
         {
             int i = Convert.ToInt32(grdCompras.get_Texto(Fila, c_Id).ToString());
             Compras.Cargar_Fila(i);
-            precios.Fecha = Compras.Fecha;
-            precios.Proveedor = Compras.Proveedor;
-            precios.Producto = Compras.Producto;
+            Compras.precios.Fecha = Compras.Fecha;
+            Compras.precios.Proveedor = Compras.Proveedor;
+            Compras.precios.Producto = Compras.Producto;
         }
 
         private void GrdCompras_KeyPress(object sender, short e)
@@ -336,14 +334,14 @@
                     if (grdCompras.Col == c_Kilos)
                     {
                         Compras.Producto.Siguiente();
-                        precios.Producto = Compras.Producto;
+                        Compras.precios.Producto = Compras.Producto;
 
                         Compras.Descripcion = Compras.Producto.Nombre;
 
                         grdCompras.set_Texto(grdCompras.Row, c_IdProd, Compras.Producto.Id);
                         grdCompras.set_Texto(grdCompras.Row, c_Descripcion, Compras.Descripcion);
 
-                        Compras.Costo = precios.Buscar();
+                        Compras.Costo = Compras.precios.Buscar();
                         grdCompras.set_Texto(grdCompras.Row, c_Costo, Compras.Costo);
                         grdCompras.set_Texto(grdCompras.Row, c_Total, 0);
                     }

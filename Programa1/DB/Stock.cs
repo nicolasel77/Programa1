@@ -8,13 +8,10 @@
     using System.Windows.Forms;
 
     class Stock
-    {
-        
-
+    {       
         public Stock()
         {
-            Producto = new Productos();
-            Sucursal = new Sucursales();            
+                       
         }
 
         public Stock(int id, DateTime fecha, Productos prod, string desc, Sucursales sucursal, float costo, float kilos)
@@ -31,13 +28,15 @@
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Productos Producto { get; set; }
+        public Productos Producto { get; set; } = new Productos();
         [MaxLength(50, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Sucursales Sucursal { get; set; }
+        public Sucursales Sucursal { get; set; } = new Sucursales();
         public Single Costo { get; set; }
         public Single Kilos { get; set; }
-                
+
+        public Precios_Sucursales precios = new Precios_Sucursales();
+
         public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");

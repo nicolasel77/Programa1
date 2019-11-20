@@ -125,8 +125,8 @@
             // 
             this.grdCompras.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
             this.grdCompras.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.grdCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdCompras.AutoResize = false;
             this.grdCompras.bColor = System.Drawing.SystemColors.Window;
@@ -145,7 +145,7 @@
             this.grdCompras.FuenteEncabezado = null;
             this.grdCompras.FuentePieDePagina = null;
             this.grdCompras.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdCompras.Location = new System.Drawing.Point(12, 12);
+            this.grdCompras.Location = new System.Drawing.Point(3, 3);
             this.grdCompras.MenuActivado = false;
             this.grdCompras.Name = "grdCompras";
             this.grdCompras.PieDePagina = "\t\tPage {0} of {1}";
@@ -153,7 +153,7 @@
             this.grdCompras.Redraw = true;
             this.grdCompras.Row = 0;
             this.grdCompras.Rows = 50;
-            this.grdCompras.Size = new System.Drawing.Size(816, 672);
+            this.grdCompras.Size = new System.Drawing.Size(825, 681);
             this.grdCompras.TabIndex = 0;
             this.grdCompras.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdCompras_Editado);
             this.grdCompras.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdCompras_CambioFila);
@@ -180,8 +180,8 @@
             // 
             // cProds
             // 
-            this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cProds.BackColor = System.Drawing.Color.Gainsboro;
             this.cProds.Filtro_In = "";
@@ -195,7 +195,7 @@
             // 
             // cFecha
             // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cFecha.Location = new System.Drawing.Point(3, 500);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
@@ -206,13 +206,13 @@
             // 
             // cSucs
             // 
-            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(2, 3);
-            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Mostrar_Tipo = false;
             this.cSucs.Name = "cSucs";
             this.cSucs.Size = new System.Drawing.Size(258, 491);
             this.cSucs.TabIndex = 2;

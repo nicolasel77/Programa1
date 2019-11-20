@@ -11,9 +11,7 @@ namespace Programa1.DB
     {        
         public Ventas()
         {
-            Producto = new Productos();
-            Sucursal = new Sucursales();
-            Proveedor = new Proveedores();
+            
         }
 
         public Ventas(int id, DateTime fecha, Productos prod, string desc, Sucursales sucu, Single Costo_Venta, Proveedores proveedor, Single Costo_Compra, Single kilos)
@@ -32,14 +30,18 @@ namespace Programa1.DB
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Productos Producto { get; set; }
+        public Productos Producto { get; set; } = new Productos();
         [MaxLength(100, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Sucursales Sucursal { get; set; }
+        public Sucursales Sucursal { get; set; } = new Sucursales();
         public Single CostoVenta { get; set; }
-        public Proveedores Proveedor { get; set; }
+        public Proveedores Proveedor { get; set; } = new Proveedores();
         public Single CostoCompra { get; set; }
         public Single Kilos { get; set; }
+
+
+        public Precios_Sucursales precios = new Precios_Sucursales();
+        public Precios_Proveedores precios_Proveedores = new Precios_Proveedores();
 
         public DataTable Datos(string filtro = "")
         {

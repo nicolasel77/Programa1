@@ -146,7 +146,7 @@
             this.grdOfertas.FuenteEncabezado = null;
             this.grdOfertas.FuentePieDePagina = null;
             this.grdOfertas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdOfertas.Location = new System.Drawing.Point(12, 12);
+            this.grdOfertas.Location = new System.Drawing.Point(3, 3);
             this.grdOfertas.MenuActivado = false;
             this.grdOfertas.Name = "grdOfertas";
             this.grdOfertas.PieDePagina = "\t\tPage {0} of {1}";
@@ -154,7 +154,7 @@
             this.grdOfertas.Redraw = true;
             this.grdOfertas.Row = 0;
             this.grdOfertas.Rows = 50;
-            this.grdOfertas.Size = new System.Drawing.Size(816, 672);
+            this.grdOfertas.Size = new System.Drawing.Size(825, 681);
             this.grdOfertas.TabIndex = 0;
             this.grdOfertas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdOfertas_Editado);
             this.grdOfertas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdOfertas_CambioFila);
@@ -213,7 +213,7 @@
             this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(2, 3);
-            this.cSucs.Mostrar_Tipo = false;
+            this.cSucs.Mostrar_Tipo = true;
             this.cSucs.Name = "cSucs";
             this.cSucs.Size = new System.Drawing.Size(258, 491);
             this.cSucs.TabIndex = 2;

@@ -8,12 +8,8 @@
 
     class Compras
     {
-
-
         public Compras()
         {
-            Producto = new Productos();
-            Proveedor = new Proveedores();
         }
 
         public Compras(int id, DateTime fecha, Productos prod, string desc, Proveedores proveedor, float costo, float kilos)
@@ -30,12 +26,15 @@
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Productos Producto { get; set; }
+        public Productos Producto { get; set; } = new Productos();
+
         [MaxLength(50, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Proveedores Proveedor { get; set; }
+        public Proveedores Proveedor { get; set; } = new Proveedores();
         public Single Costo { get; set; }
         public Single Kilos { get; set; }
+
+        public Precios_Proveedores precios = new Precios_Proveedores();
 
         public DataTable Datos(string filtro = "")
         {

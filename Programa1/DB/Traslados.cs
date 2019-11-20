@@ -13,9 +13,6 @@ namespace Programa1.DB
 
         public Traslados()
         {
-            Producto = new Productos();
-            sucS = new Sucursales();
-            sucE = new Sucursales();
         }
 
         public Traslados(int id, DateTime fecha, Productos prod, string desc, Sucursales suc_Salida, float costo_Salida, Sucursales suc_Entrada, float costo_Entrada, float kilos)
@@ -34,14 +31,17 @@ namespace Programa1.DB
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Productos Producto { get; set; }
+        public Productos Producto { get; set; } = new Productos();
+
         [MaxLength(100, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Sucursales sucS { get; set; }
+        public Sucursales sucS { get; set; } = new Sucursales();
         public float CostoS { get; set; }
-        public Sucursales sucE { get; set; }
+        public Sucursales sucE { get; set; } = new Sucursales();
         public float CostoE { get; set; }
         public Single Kilos { get; set; }
+
+        public Precios_Sucursales precios = new Precios_Sucursales();
 
         public DataTable Datos(string filtro = "")
         {

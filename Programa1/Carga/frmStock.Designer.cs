@@ -145,7 +145,7 @@
             this.grdStock.FuenteEncabezado = null;
             this.grdStock.FuentePieDePagina = null;
             this.grdStock.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdStock.Location = new System.Drawing.Point(12, 12);
+            this.grdStock.Location = new System.Drawing.Point(3, 3);
             this.grdStock.MenuActivado = false;
             this.grdStock.Name = "grdStock";
             this.grdStock.PieDePagina = "\t\tPage {0} of {1}";
@@ -153,7 +153,7 @@
             this.grdStock.Redraw = true;
             this.grdStock.Row = 0;
             this.grdStock.Rows = 50;
-            this.grdStock.Size = new System.Drawing.Size(816, 672);
+            this.grdStock.Size = new System.Drawing.Size(825, 681);
             this.grdStock.TabIndex = 0;
             this.grdStock.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdStock_Editado);
             this.grdStock.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdStock_CambioFila);
@@ -212,7 +212,7 @@
             this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(2, 3);
-            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Mostrar_Tipo = false;
             this.cSucs.Name = "cSucs";
             this.cSucs.Size = new System.Drawing.Size(258, 491);
             this.cSucs.TabIndex = 2;

@@ -10,49 +10,83 @@
         public Precios_Ofertas()
         {
             Producto = new Productos();
-            Sucursal = new Sucursales();
         }
 
-        public Precios_Ofertas(int id, DateTime fecha, Productos prod, Sucursales sucursal, float pr)
+        public Precios_Ofertas(int orden, Productos prod, string desc, Single pr)
         {
-            Id = id;
-            Fecha = fecha;
+            Orden = orden;
             Producto = prod;
-            Sucursal = sucursal;
-            Costo_Original = pr;
+            Descripcion = desc;
+            Costo = pr;
         }
 
-        public int Id { get; set; }
-        public DateTime Fecha { get; set; }
+        public int Orden { get; set; }
         public Productos Producto { get; set; }
-        public Sucursales Sucursal { get; set; }
-        public Single Costo_Original { get; set; }
-        public Single Costo_Oferta { get; set; }
+        public string Descripcion { get; set; }
 
-        public Single Buscar()
+        public Single Costo { get; set; }
+
+        public Single Buscar_Costo()
         {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Costo_Oferta FROM Precios_Ofertas  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={Producto.Id} AND ID_Sucursal={Sucursal.Id} ORDER BY Fecha DESC", conexionSql);
+                var dt = new DataTable("Datos");
+                var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-                conexionSql.Open();
-
+                string sel = $"SELECT TOP 1 * FROM vw_PreciosOfertas WHERE Id_Productos={Producto.Id} ORDER BY Orden";
+                
+                SqlCommand comandoSql = new SqlCommand(sel, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
 
-                conexionSql.Close();
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+                DataRow dr = dt.Rows[0];
+
+                Orden = Convert.ToInt32(dr["Orden"]);
+                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Descripcion = dr["Descripcion"].ToString();
+                Costo = Convert.ToSingle(dr["Costo"]);
+
+
             }
             catch (Exception)
             {
-                d = null;
+                Orden = 0;
+                Costo = 0;
             }
-            Costo_Oferta = Convert.ToSingle(d);
-            return Costo_Oferta;
+            return Costo;
+        }
+        public Single Buscar_SiguienteCosto()
+        {
+            try
+            {
+                var dt = new DataTable("Datos");
+                var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+                string sel = $"SELECT TOP 1 * FROM vw_PreciosOfertas WHERE Orden>{Orden} ORDER BY Orden";
+
+                SqlCommand comandoSql = new SqlCommand(sel, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+                DataRow dr = dt.Rows[0];
+
+                Orden = Convert.ToInt32(dr["Orden"]);
+                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Descripcion = dr["Descripcion"].ToString();
+                Costo = Convert.ToSingle(dr["Costo"]);
+
+
+            }
+            catch (Exception)
+            {
+                Orden = 0;
+                Costo = 0;
+            }
+            return Costo;
         }
 
         public DataTable Datos(string filtro = "")
@@ -81,7 +115,7 @@
 
             return dt;
         }
-                       
+
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -90,9 +124,8 @@
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Precios_Ofertas " +
-                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Sucursales={Sucursal.Id}, Id_Productos={Producto.Id}, " +
-                    $"Costo_Original={Costo_Original.ToString().Replace(",", ".")}, Costo_Oferta={Costo_Oferta.ToString().Replace(",", ".")} " +
-                    $"WHERE Id={Id}", sql);
+                    $"SET Orden={Orden}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', Costo={Costo.ToString().Replace(",", ".")} " +
+                    $"WHERE Id={Orden}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -114,8 +147,8 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Precios_Ofertas (Fecha, Id_Sucursales, Id_Productos, Costo_Original, Costo_Oferta) " +
-                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.Id}, {Costo_Original.ToString().Replace(",", ".")} )", sql);
+                    new SqlCommand($"INSERT INTO Precios_Ofertas (Orden, Id_Productos, Descripcion, Costo) " +
+                    $"VALUES({Orden}, {Producto.Id}, '{Descripcion}', {Costo.ToString().Replace(",", ".")} )", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -136,7 +169,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Precios_Ofertas WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM Precios_Ofertas WHERE Orden=" + Orden, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
