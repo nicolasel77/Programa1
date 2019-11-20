@@ -38,7 +38,7 @@
         public Single Kilos { get; set; }
 
         public Precios_Sucursales precios = new Precios_Sucursales();
-        public Precios_Ofertas precios_ofertas = new Precios_Ofertas();
+        public Lista_Ofertas precios_ofertas = new Lista_Ofertas();
 
         public DataTable Datos(string filtro = "")
         {

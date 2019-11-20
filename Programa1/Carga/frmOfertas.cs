@@ -456,7 +456,6 @@
         private void CmdPrecios_Click(object sender, EventArgs e)
         {
             frmPreciosOfertas frmPrecios = new frmPreciosOfertas();
-
             frmPrecios.ShowDialog();
 
         }

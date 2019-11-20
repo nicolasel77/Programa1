@@ -5,14 +5,14 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Precios_Ofertas
+    class Lista_Ofertas
     {
-        public Precios_Ofertas()
+        public Lista_Ofertas()
         {
             Producto = new Productos();
         }
 
-        public Precios_Ofertas(int orden, Productos prod, string desc, Single pr)
+        public Lista_Ofertas(int orden, Productos prod, string desc, Single pr)
         {
             Orden = orden;
             Producto = prod;
@@ -125,7 +125,7 @@
                 SqlCommand command =
                     new SqlCommand($"UPDATE Precios_Ofertas " +
                     $"SET Orden={Orden}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', Costo={Costo.ToString().Replace(",", ".")} " +
-                    $"WHERE Id={Orden}", sql);
+                    $"WHERE Orden={Orden}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
