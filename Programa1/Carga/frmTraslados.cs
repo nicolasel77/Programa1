@@ -431,44 +431,14 @@ namespace Programa1.Carga
 
         private void LblCant_Click(object sender, EventArgs e)
         {
-            string s = lblCant.Text.Substring(lblCant.Text.IndexOf(":") + 1);
+            ToolStripLabel lbl = sender as ToolStripLabel;
+            string s = lbl.Text.Substring(lbl.Text.IndexOf(":") + 1);
 
             Clipboard.SetText(s);
 
             Mensaje($"Copiado: {s}");
         }
-        private void LblKilos_Click(object sender, EventArgs e)
-        {
-            string s = lblKilos.Text.Substring(lblKilos.Text.IndexOf(":") + 1);
 
-            Clipboard.SetText(s);
-
-            Mensaje($"Copiado: {s}");
-        }
-        private void LblTotalS_Click(object sender, EventArgs e)
-        {
-            string s = lblTotalS.Text.Substring(lblTotalS.Text.IndexOf(":") + 1);
-
-            Clipboard.SetText(s);
-
-            Mensaje($"Copiado: {s}");
-        }
-        private void LblTotalE_Click(object sender, EventArgs e)
-        {
-            string s = lblTotalE.Text.Substring(lblTotalE.Text.IndexOf(":") + 1);
-
-            Clipboard.SetText(s);
-
-            Mensaje($"Copiado: {s}");
-        }
-        private void LblDiferencia_Click(object sender, EventArgs e)
-        {
-            string s = lblDiferencia.Text.Substring(lblDiferencia.Text.IndexOf(":") + 1);
-
-            Clipboard.SetText(s);
-
-            Mensaje($"Copiado: {s}");
-        }
 
         private void CmdCambioMasivo_Click(object sender, EventArgs e)
         {

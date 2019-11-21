@@ -92,7 +92,7 @@
             this.lblKilos.Name = "lblKilos";
             this.lblKilos.Size = new System.Drawing.Size(36, 23);
             this.lblKilos.Text = "Kilos";
-            this.lblKilos.Click += new System.EventHandler(this.LblKilos_Click);
+            this.lblKilos.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblTotalS
             // 
@@ -100,7 +100,7 @@
             this.lblTotalS.Name = "lblTotalS";
             this.lblTotalS.Size = new System.Drawing.Size(85, 23);
             this.lblTotalS.Text = "Totales Venta";
-            this.lblTotalS.Click += new System.EventHandler(this.LblTotalS_Click);
+            this.lblTotalS.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblTotalE
             // 
@@ -108,7 +108,7 @@
             this.lblTotalE.Name = "lblTotalE";
             this.lblTotalE.Size = new System.Drawing.Size(100, 23);
             this.lblTotalE.Text = "Totales Compra";
-            this.lblTotalE.Click += new System.EventHandler(this.LblTotalE_Click);
+            this.lblTotalE.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblDiferencia
             // 
@@ -116,7 +116,7 @@
             this.lblDiferencia.Name = "lblDiferencia";
             this.lblDiferencia.Size = new System.Drawing.Size(66, 23);
             this.lblDiferencia.Text = "Diferencia";
-            this.lblDiferencia.Click += new System.EventHandler(this.LblDiferencia_Click);
+            this.lblDiferencia.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // splitContainer1
             // 

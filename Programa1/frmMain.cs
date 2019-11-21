@@ -552,5 +552,53 @@
                 }
             }
         }
+
+        private void APicadaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmAPicada")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmAPicada");
+                t.Text = "APicada";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmAPicada = new frmAPicada();
+                frmAPicada.MdiParent = this;
+                frmAPicada.Disposed += FrmAPicada_Disposed;
+                forms.Add(frmAPicada);
+                frmAPicada.Show();
+                frmAPicada.WindowState = FormWindowState.Minimized;
+                frmAPicada.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmAPicada_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "APicada")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmAPicada")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

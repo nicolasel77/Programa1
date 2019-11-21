@@ -89,7 +89,7 @@
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(49, 23);
             this.lblTotal.Text = "Totales";
-            this.lblTotal.Click += new System.EventHandler(this.LblTotal_Click);
+            this.lblTotal.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // splitContainer1
             // 

@@ -413,30 +413,14 @@
 
         private void LblCant_Click(object sender, EventArgs e)
         {
-            string s = lblCant.Text.Substring(10);
+            ToolStripLabel lbl = sender as ToolStripLabel;
+            string s = lbl.Text.Substring(lbl.Text.IndexOf(":") + 1);
 
             Clipboard.SetText(s);
 
             Mensaje($"Copiado: {s}");
         }
 
-        private void LblKilos_Click(object sender, EventArgs e)
-        {
-            string s = lblKilos.Text.Substring(6);
-
-            Clipboard.SetText(s);
-
-            Mensaje($"Copiado: {s}");
-        }
-
-        private void LblTotal_Click(object sender, EventArgs e)
-        {
-            string s = lblTotal.Text.Substring(6);
-
-            Clipboard.SetText(s);
-
-            Mensaje($"Copiado: {s}");
-        }
 
         private void CmdCambioMasivo_Click(object sender, EventArgs e)
         {

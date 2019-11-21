@@ -16,6 +16,8 @@
         private bool MostrarTipo = true;
         private string vFiltroIn = "";
 
+        public string Titulo { get => lblTitulo.Text; set { lblTitulo.Text = value; } }
+
         public string Filtro_In
         {
             get
