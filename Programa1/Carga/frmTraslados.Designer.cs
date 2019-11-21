@@ -234,7 +234,7 @@
             this.cSucSalida.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucSalida.Filtro_In = "";
             this.cSucSalida.Location = new System.Drawing.Point(3, 3);
-            this.cSucSalida.Mostrar_Tipo = false;
+            this.cSucSalida.Mostrar_Tipo = true;
             this.cSucSalida.Name = "cSucSalida";
             this.cSucSalida.Size = new System.Drawing.Size(253, 392);
             this.cSucSalida.TabIndex = 3;
@@ -250,7 +250,7 @@
             this.cSucEntrada.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucEntrada.Filtro_In = "";
             this.cSucEntrada.Location = new System.Drawing.Point(0, 3);
-            this.cSucEntrada.Mostrar_Tipo = false;
+            this.cSucEntrada.Mostrar_Tipo = true;
             this.cSucEntrada.Name = "cSucEntrada";
             this.cSucEntrada.Size = new System.Drawing.Size(260, 392);
             this.cSucEntrada.TabIndex = 2;

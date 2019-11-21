@@ -93,7 +93,7 @@
             this.cSucursales1.Dock = System.Windows.Forms.DockStyle.Left;
             this.cSucursales1.Filtro_In = "";
             this.cSucursales1.Location = new System.Drawing.Point(0, 0);
-            this.cSucursales1.Mostrar_Tipo = false;
+            this.cSucursales1.Mostrar_Tipo = true;
             this.cSucursales1.Name = "cSucursales1";
             this.cSucursales1.Size = new System.Drawing.Size(343, 677);
             this.cSucursales1.TabIndex = 1;
