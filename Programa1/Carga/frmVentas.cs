@@ -9,7 +9,7 @@
     public partial class frmVentas : Form
     {
         private Ventas Venta;
-        
+
         #region " Columnas "
         private Byte c_Id;
         private Byte c_Fecha;
@@ -27,13 +27,13 @@
         public frmVentas()
         {
             InitializeComponent();
-                        
+
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdVenta.TeclasManejadas = n;
 
             Venta = new Ventas();
             grdVenta.MostrarDatos(Venta.Datos("Id=0"), true);
-            
+
             c_Id = Convert.ToByte(grdVenta.get_ColIndex("Id"));
             c_Fecha = Convert.ToByte(grdVenta.get_ColIndex("Fecha"));
             c_IdProv = Convert.ToByte(grdVenta.get_ColIndex("Id_Proveedores"));
@@ -145,7 +145,7 @@
             grdVenta.set_ColW(c_IdProv, 35);
             grdVenta.set_ColW(c_IdProv + 1, 40);
             grdVenta.set_ColW(c_IdSuc, 35);
-            grdVenta.set_ColW(c_IdSuc + 1, 40);            
+            grdVenta.set_ColW(c_IdSuc + 1, 40);
             grdVenta.set_ColW(c_IdProd, 30);
             grdVenta.set_ColW(c_Descripcion, 120);
             grdVenta.set_ColW(c_CostoVenta, 60);
@@ -217,15 +217,23 @@
             {
                 case 1:
                     //Fecha
-                    //TODO: Validar que la fecha este en el rango del calendario
-                    Venta.Fecha = Convert.ToDateTime(a);
-                    Venta.precios.Fecha = Venta.Fecha;
-                    Venta.precios_Proveedores.Fecha = Venta.Fecha;
+                    DateTime df = Convert.ToDateTime(a);
+                    if (df >= cFecha.fecha_Actual)
+                    {
+                        Venta.Fecha = df;
+                        Venta.precios.Fecha = Venta.Fecha;
+                        Venta.precios_Proveedores.Fecha = Venta.Fecha;
 
-                    if (id != 0) { Venta.Actualizar(); }
+                        if (id != 0) { Venta.Actualizar(); }
 
-                    grdVenta.set_Texto(f, c, a);
-                    grdVenta.ActivarCelda(f, c + 1);
+                        grdVenta.set_Texto(f, c, a);
+                        grdVenta.ActivarCelda(f, c + 1);
+                    }
+                    else
+                    {
+                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                        grdVenta.ErrorEnTxt();
+                    }
                     break;
                 case 2:
                     //Id_Proveedores

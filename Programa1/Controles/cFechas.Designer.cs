@@ -71,6 +71,7 @@
             this.tabControl1.ShowToolTips = true;
             this.tabControl1.Size = new System.Drawing.Size(369, 265);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -147,6 +148,7 @@
             this.lstMesAño.Name = "lstMesAño";
             this.lstMesAño.Size = new System.Drawing.Size(47, 256);
             this.lstMesAño.TabIndex = 2;
+            this.lstMesAño.SelectedIndexChanged += new System.EventHandler(this.LstMesAño_SelectedIndexChanged);
             // 
             // lstMes
             // 
@@ -173,6 +175,7 @@
             this.lstMes.Name = "lstMes";
             this.lstMes.Size = new System.Drawing.Size(54, 256);
             this.lstMes.TabIndex = 1;
+            this.lstMes.SelectedIndexChanged += new System.EventHandler(this.LstMes_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -212,6 +215,7 @@
             this.lstAños.Name = "lstAños";
             this.lstAños.Size = new System.Drawing.Size(50, 257);
             this.lstAños.TabIndex = 3;
+            this.lstAños.SelectedIndexChanged += new System.EventHandler(this.LstAños_SelectedIndexChanged);
             // 
             // tabPage4
             // 
@@ -266,6 +270,7 @@
             this.dtDesde.Name = "dtDesde";
             this.dtDesde.Size = new System.Drawing.Size(86, 22);
             this.dtDesde.TabIndex = 0;
+            this.dtDesde.ValueChanged += new System.EventHandler(this.DtDesde_ValueChanged);
             // 
             // cFechas
             // 

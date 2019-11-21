@@ -70,6 +70,7 @@
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.Grd_Editado);
             this.grd.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.Grd_CambioFila);
+            this.grd.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.Grd_KeyUp);
             // 
             // cmdCancelar
             // 

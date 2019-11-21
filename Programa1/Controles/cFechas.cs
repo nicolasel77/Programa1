@@ -9,7 +9,8 @@
     {
         private Semanas semanas;
         private bool cCambio = false;
-        private DateTime fecha_Actual;
+        public DateTime fecha_Actual;
+
         public event EventHandler Cambio_Seleccion;
 
         public cFechas()
@@ -110,10 +111,11 @@
                     lstSemanas.Items.Insert(i, d.ToString("dd/MM/yyy"));
                     i++;
                 }
-                
+
             }
             else
             {
+                fecha_Actual = DateTime.Parse(lstSemanas.Text);
                 if (cCambio == false)
                 {
                     Cambio_Seleccion(null, null);
@@ -123,13 +125,81 @@
 
         private void MntDias_DateChanged(object sender, DateRangeEventArgs e)
         {
+            fechaDia();
+        }
+
+        private void fechaDia()
+        {
             if (cCambio == false)
             {
                 if (mntDias.SelectionStart.Date != fecha_Actual)
                 {
                     fecha_Actual = mntDias.SelectionStart.Date;
                     Cambio_Seleccion(null, null);
-                }                
+                }
+            }
+        }
+
+        private void DtDesde_ValueChanged(object sender, EventArgs e)
+        {
+            fecha_Actual = dtDesde.Value;
+        }
+
+        private void LstMes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fechaMes();
+        }
+
+        private void LstMesAño_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fechaMes();
+        }
+
+        private void fechaMes()
+        {
+            if (lstMes.SelectedIndex > -1)
+            {
+                string a = DateTime.Today.Year.ToString();
+                if (lstMesAño.SelectedIndex > -1)
+                {
+                    a = lstMesAño.Text;
+                }
+                fecha_Actual = Convert.ToDateTime($"1/{(lstMes.SelectedIndex + 1).ToString()}/{a}");
+            }
+        }
+
+        private void LstAños_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fechaAño();
+        }
+        private void fechaAño()
+        {
+            if (lstAños.SelectedIndex > -1)
+            {
+                string a = lstMesAño.Text;
+                fecha_Actual = Convert.ToDateTime($"1/{(lstMes.SelectedIndex + 1).ToString()}/{a}");
+            }
+        }
+
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0:
+                    //Semana
+                    break;
+                case 1:
+                    //Mes
+                    fechaMes();
+                    break;
+                case 2:
+                    //Año
+                    fechaAño();
+                    break;
+                case 3:
+                    //Desde-Hasta
+                    fecha_Actual = dtDesde.Value;
+                    break;
             }
         }
     }

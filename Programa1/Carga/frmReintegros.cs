@@ -199,13 +199,21 @@ namespace Programa1.Carga
             {
                 case 1:
                     //Fecha
-                    //TODO: Validar que la fecha este en el rango del calendario
-                    Reintegros.Fecha = Convert.ToDateTime(a);
+                    DateTime df = Convert.ToDateTime(a);
+                    if (df >= cFecha.fecha_Actual)
+                    {
+                        Reintegros.Fecha = df;
 
-                    if (id != 0) { Reintegros.Actualizar(); }
+                        if (id != 0) { Reintegros.Actualizar(); }
 
-                    grdReintegros.set_Texto(f, c, a);
-                    grdReintegros.ActivarCelda(f, c + 1);
+                        grdReintegros.set_Texto(f, c, a);
+                        grdReintegros.ActivarCelda(f, c + 1);
+                    }
+                    else
+                    {
+                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                        grdReintegros.ErrorEnTxt();
+                    }
                     break;
                 case 2:
                     //ID_Sucursales
@@ -268,7 +276,7 @@ namespace Programa1.Carga
                         //Rellenar nueva fila
 
                         grdReintegros.set_Texto(f + 1, c_Fecha, Reintegros.Fecha);
-                        
+
                         Reintegros.Importe = 0;
                         grdReintegros.ActivarCelda(f + 1, c_IdSuc);
                     }
@@ -276,7 +284,7 @@ namespace Programa1.Carga
                     {
                         Reintegros.Actualizar();
                         grdReintegros.ActivarCelda(f + 1, c);
-                    }                    
+                    }
 
                     Totales();
                     break;
@@ -328,6 +336,6 @@ namespace Programa1.Carga
             Clipboard.SetText(s);
 
             Mensaje($"Copiado: {s}");
-        }               
+        }
     }
 }

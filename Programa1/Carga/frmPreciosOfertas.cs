@@ -8,6 +8,7 @@
     public partial class frmPreciosOfertas : Form
     {
         private Lista_Ofertas lista = new Lista_Ofertas();
+
         #region " Columnas "
         private Byte c_Orden;
         private Byte c_IdProd;
@@ -32,15 +33,18 @@
             c_Descripcion = Convert.ToByte(grd.get_ColIndex("Descripcion"));
             c_Costo = Convert.ToByte(grd.get_ColIndex("Costo"));
 
+            int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
+            grd.TeclasManejadas = n;
+
             grd.AutosizeAll();
         }
         private void CmdAceptar_Click(object sender, EventArgs e)
-        {            
+        {
         }
 
         private void Grd_CambioFila(short Fila)
         {
-            lista.Orden = Convert.ToInt32( grd.get_Texto(Fila, c_Orden));
+            lista.Orden = Convert.ToInt32(grd.get_Texto(Fila, c_Orden));
             lista.Producto.Id = Convert.ToInt32(grd.get_Texto(Fila, c_IdProd));
             lista.Descripcion = Convert.ToString(grd.get_Texto(Fila, c_Descripcion));
             lista.Costo = Convert.ToSingle(grd.get_Texto(Fila, c_Costo));
@@ -63,7 +67,7 @@
                     else
                     {
                         grd.ActivarCelda(f, c_IdProd);
-                    }                    
+                    }
                     break;
                 case 1:
                     //Id_Productos
@@ -85,7 +89,7 @@
                     else
                     {
                         MessageBox.Show("Error", "No se encontró el producto " + a);
-                    }                    
+                    }
                     break;
                 case 3:
                     //Descripcion
@@ -117,6 +121,24 @@
                         lista.Agregar();
                         grd.AgregarFila();
                         grd.ActivarCelda(f + 1, c_Orden);
+                    }
+                    break;
+            }
+        }
+
+        private void Grd_KeyUp(object sender, short e)
+        {
+            switch (Convert.ToInt32(e))
+            {
+                case 46: //Delete
+                    if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+                        if (Convert.ToInt32(grd.get_Texto(grd.Row, c_Orden)) != 0)
+                        {
+                            lista.Orden = Convert.ToInt32(grd.get_Texto(grd.Row, c_Orden));
+                            lista.Borrar();
+                            grd.BorrarFila(grd.Row);                            
+                        }
                     }
                     break;
             }

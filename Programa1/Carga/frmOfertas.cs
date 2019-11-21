@@ -19,6 +19,7 @@
         private Byte c_Kilos;
         private Byte c_Reintegro;
         #endregion
+
         public frmOfertas()
         {
             InitializeComponent();
@@ -197,14 +198,22 @@
             {
                 case 1:
                     //Fecha
-                    //TODO: Validar que la fecha este en el rango del calendario
-                    Ofertas.Fecha = Convert.ToDateTime(a);
-                    Ofertas.precios.Fecha = Ofertas.Fecha;
+                    DateTime df = Convert.ToDateTime(a);
+                    if (df >= cFecha.fecha_Actual)
+                    {
+                        Ofertas.Fecha = df;
+                        Ofertas.precios.Fecha = Ofertas.Fecha;
 
-                    if (id != 0) { Ofertas.Actualizar(); }
+                        if (id != 0) { Ofertas.Actualizar(); }
 
-                    grdOfertas.set_Texto(f, c, a);
-                    grdOfertas.ActivarCelda(f, c + 1);
+                        grdOfertas.set_Texto(f, c, a);
+                        grdOfertas.ActivarCelda(f, c + 1);
+                    }
+                    else
+                    {
+                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                        grdOfertas.ErrorEnTxt();
+                    }
                     break;
                 case 2:
                     //ID_Sucursales
@@ -389,9 +398,9 @@
                 case 46: //Delete
                     if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                     {
-                        if (Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, 0)) != 0)
+                        if (Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id)) != 0)
                         {
-                            Ofertas.Id = Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, 0));
+                            Ofertas.Id = Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id));
                             Ofertas.Borrar();
                             grdOfertas.BorrarFila(grdOfertas.Row);
                             Totales();

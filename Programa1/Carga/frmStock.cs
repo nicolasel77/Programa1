@@ -8,7 +8,7 @@
     public partial class frmStock : Form
     {
         private Stock stock;
-        
+
 
         #region " Columnas "
         private Byte c_Id;
@@ -22,7 +22,7 @@
         #endregion
         public frmStock()
         {
-            InitializeComponent();            
+            InitializeComponent();
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdStock.TeclasManejadas = n;
@@ -147,7 +147,7 @@
             grdStock.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
             grdStock.set_Texto(0, c_IdSuc, "Suc");
-            grdStock.set_Texto(0, c_IdProd, "Prod");            
+            grdStock.set_Texto(0, c_IdProd, "Prod");
         }
 
         private void Totales()
@@ -195,14 +195,22 @@
             {
                 case 1:
                     //Fecha
-                    //TODO: Validar que la fecha este en el rango del calendario
-                    stock.Fecha = Convert.ToDateTime(a);
-                    stock.precios.Fecha = stock.Fecha;
+                    DateTime df = Convert.ToDateTime(a);
+                    if (df >= cFecha.fecha_Actual)
+                    {
+                        stock.Fecha = df;
+                        stock.precios.Fecha = stock.Fecha;
 
-                    if (id != 0) { stock.Actualizar(); }
+                        if (id != 0) { stock.Actualizar(); }
 
-                    grdStock.set_Texto(f, c, a);
-                    grdStock.ActivarCelda(f, c + 1);
+                        grdStock.set_Texto(f, c, a);
+                        grdStock.ActivarCelda(f, c + 1);
+                    }
+                    else
+                    {
+                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                        grdStock.ErrorEnTxt();
+                    }
                     break;
                 case 2:
                     //ID_Sucursales

@@ -9,7 +9,7 @@ namespace Programa1.Carga
     public partial class frmTraslados : Form
     {
         private Traslados Traslados;
-        
+
 
         #region " Columnas "
         private Byte c_Id;
@@ -27,7 +27,7 @@ namespace Programa1.Carga
 
         public frmTraslados()
         {
-            InitializeComponent();            
+            InitializeComponent();
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdTraslados.TeclasManejadas = n;
@@ -217,14 +217,22 @@ namespace Programa1.Carga
             {
                 case 1:
                     //Fecha
-                    //TODO: Validar que la fecha este en el rango del calendario
-                    Traslados.Fecha = Convert.ToDateTime(a);
-                    Traslados.precios.Fecha = Traslados.Fecha;
+                    DateTime df = Convert.ToDateTime(a);
+                    if (df >= cFecha.fecha_Actual)
+                    {
+                        Traslados.Fecha = df;
+                        Traslados.precios.Fecha = Traslados.Fecha;
 
-                    if (id != 0) { Traslados.Actualizar(); }
+                        if (id != 0) { Traslados.Actualizar(); }
 
-                    grdTraslados.set_Texto(f, c, a);
-                    grdTraslados.ActivarCelda(f, c + 1);
+                        grdTraslados.set_Texto(f, c, a);
+                        grdTraslados.ActivarCelda(f, c + 1);
+                    }
+                    else
+                    {
+                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                        grdTraslados.ErrorEnTxt();
+                    }
                     break;
                 case 2:
                     //Suc_Salida
@@ -281,7 +289,7 @@ namespace Programa1.Carga
                         Traslados.precios.Sucursal = Traslados.sucS;
                         Traslados.CostoS = Traslados.precios.Buscar();
                         grdTraslados.set_Texto(f, c_CostoS, Traslados.CostoS);
-                        grdTraslados.set_Texto(f, c_TotalS, Traslados.Kilos*Traslados.CostoS);
+                        grdTraslados.set_Texto(f, c_TotalS, Traslados.Kilos * Traslados.CostoS);
 
                         Traslados.precios.Sucursal = Traslados.sucE;
                         Traslados.CostoE = Traslados.precios.Buscar();
@@ -345,7 +353,7 @@ namespace Programa1.Carga
                         //Rellenar nueva fila
 
                         grdTraslados.set_Texto(f + 1, c_Fecha, Traslados.Fecha);
-                        
+
                         Traslados.Kilos = 0;
                         grdTraslados.ActivarCelda(f + 1, c_IdSucE);
                     }
@@ -353,7 +361,7 @@ namespace Programa1.Carga
                     {
                         Traslados.Actualizar();
                         grdTraslados.ActivarCelda(f + 1, c);
-                    }                    
+                    }
 
                     Totales();
                     break;

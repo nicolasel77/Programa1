@@ -2,13 +2,12 @@
 {
     using Programa1.DB;
     using System;
-    using System.Collections.Generic;
     using System.Windows.Forms;
 
     public partial class frmCompras : Form
     {
         private Compras Compras;
-        
+
 
         #region " Columnas "
         private Byte c_Id;
@@ -24,7 +23,7 @@
         public frmCompras()
         {
             InitializeComponent();
-            
+
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdCompras.TeclasManejadas = n;
 
@@ -196,14 +195,22 @@
             {
                 case 1:
                     //Fecha
-                    //TODO: Validar que la fecha este en el rango del calendario
-                    Compras.Fecha = Convert.ToDateTime(a);
-                    Compras.precios.Fecha = Compras.Fecha;
+                    DateTime df = Convert.ToDateTime(a);
+                    if (df >= cFecha.fecha_Actual)
+                    {
+                        Compras.Fecha = df;
+                        Compras.precios.Fecha = Compras.Fecha;
 
-                    if (id != 0) { Compras.Actualizar(); }
+                        if (id != 0) { Compras.Actualizar(); }
 
-                    grdCompras.set_Texto(f, c, a);
-                    grdCompras.ActivarCelda(f, c + 1);
+                        grdCompras.set_Texto(f, c, a);
+                        grdCompras.ActivarCelda(f, c + 1);
+                    }
+                    else
+                    {
+                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                        grdCompras.ErrorEnTxt();
+                    }
                     break;
                 case 2:
                     //ID_Proveedores
