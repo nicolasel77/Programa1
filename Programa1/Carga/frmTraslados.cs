@@ -9,7 +9,7 @@ namespace Programa1.Carga
     public partial class frmTraslados : Form
     {
         private Traslados Traslados;
-        private Precios_Sucursales precios;
+        
 
         #region " Columnas "
         private Byte c_Id;
@@ -27,9 +27,7 @@ namespace Programa1.Carga
 
         public frmTraslados()
         {
-            InitializeComponent();
-
-            precios = new Precios_Sucursales();
+            InitializeComponent();            
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdTraslados.TeclasManejadas = n;
@@ -221,7 +219,7 @@ namespace Programa1.Carga
                     //Fecha
                     //TODO: Validar que la fecha este en el rango del calendario
                     Traslados.Fecha = Convert.ToDateTime(a);
-                    precios.Fecha = Traslados.Fecha;
+                    Traslados.precios.Fecha = Traslados.Fecha;
 
                     if (id != 0) { Traslados.Actualizar(); }
 
@@ -233,7 +231,7 @@ namespace Programa1.Carga
                     Traslados.sucS.Id = Convert.ToInt32(a);
                     if (Traslados.sucS.Existe() == true)
                     {
-                        precios.Sucursal = Traslados.sucS;
+                        Traslados.precios.Sucursal = Traslados.sucS;
 
                         if (id != 0) { Traslados.Actualizar(); }
 
@@ -253,7 +251,7 @@ namespace Programa1.Carga
                     Traslados.sucE.Id = Convert.ToInt32(a);
                     if (Traslados.sucE.Existe() == true)
                     {
-                        precios.Sucursal = Traslados.sucE;
+                        Traslados.precios.Sucursal = Traslados.sucE;
 
                         if (id != 0) { Traslados.Actualizar(); }
 
@@ -273,20 +271,20 @@ namespace Programa1.Carga
                     Traslados.Producto.Id = Convert.ToInt32(a);
                     if (Traslados.Producto.Existe() == true)
                     {
-                        precios.Producto = Traslados.Producto;
+                        Traslados.precios.Producto = Traslados.Producto;
 
                         Traslados.Descripcion = Traslados.Producto.Nombre;
 
                         grdTraslados.set_Texto(f, c, a);
                         grdTraslados.set_Texto(f, c + 1, Traslados.Producto.Nombre);
 
-                        precios.Sucursal = Traslados.sucS;
-                        Traslados.CostoS = precios.Buscar();
+                        Traslados.precios.Sucursal = Traslados.sucS;
+                        Traslados.CostoS = Traslados.precios.Buscar();
                         grdTraslados.set_Texto(f, c_CostoS, Traslados.CostoS);
                         grdTraslados.set_Texto(f, c_TotalS, Traslados.Kilos*Traslados.CostoS);
 
-                        precios.Sucursal = Traslados.sucE;
-                        Traslados.CostoE = precios.Buscar();
+                        Traslados.precios.Sucursal = Traslados.sucE;
+                        Traslados.CostoE = Traslados.precios.Buscar();
                         grdTraslados.set_Texto(f, c_CostoE, Traslados.CostoE);
                         grdTraslados.set_Texto(f, c_TotalE, Traslados.Kilos * Traslados.CostoE);
 
@@ -367,9 +365,9 @@ namespace Programa1.Carga
         {
             int i = Convert.ToInt32(grdTraslados.get_Texto(Fila, c_Id).ToString());
             Traslados.Cargar_Fila(i);
-            precios.Fecha = Traslados.Fecha;
-            precios.Sucursal = Traslados.sucS;
-            precios.Producto = Traslados.Producto;
+            Traslados.precios.Fecha = Traslados.Fecha;
+            Traslados.precios.Sucursal = Traslados.sucS;
+            Traslados.precios.Producto = Traslados.Producto;
         }
 
         private void GrdTraslados_KeyPress(object sender, short e)
@@ -382,20 +380,20 @@ namespace Programa1.Carga
                     if (grdTraslados.Col == c_Kilos)
                     {
                         Traslados.Producto.Siguiente();
-                        precios.Producto = Traslados.Producto;
+                        Traslados.precios.Producto = Traslados.Producto;
 
                         Traslados.Descripcion = Traslados.Producto.Nombre;
 
                         grdTraslados.set_Texto(grdTraslados.Row, c_IdProd, Traslados.Producto.Id);
                         grdTraslados.set_Texto(grdTraslados.Row, c_Descripcion, Traslados.Descripcion);
 
-                        precios.Sucursal = Traslados.sucS;
-                        Traslados.CostoS = precios.Buscar();
+                        Traslados.precios.Sucursal = Traslados.sucS;
+                        Traslados.CostoS = Traslados.precios.Buscar();
                         grdTraslados.set_Texto(grdTraslados.Row, c_CostoS, Traslados.CostoS);
                         grdTraslados.set_Texto(grdTraslados.Row, c_TotalS, 0);
 
-                        precios.Sucursal = Traslados.sucE;
-                        Traslados.CostoE = precios.Buscar();
+                        Traslados.precios.Sucursal = Traslados.sucE;
+                        Traslados.CostoE = Traslados.precios.Buscar();
                         grdTraslados.set_Texto(grdTraslados.Row, c_CostoE, Traslados.CostoE);
                         grdTraslados.set_Texto(grdTraslados.Row, c_TotalE, 0);
                     }

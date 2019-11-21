@@ -66,14 +66,16 @@
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(716, 635);
+            this.grd.Size = new System.Drawing.Size(525, 677);
             this.grd.TabIndex = 0;
+            this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.Grd_Editado);
+            this.grd.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.Grd_CambioFila);
             // 
             // cmdCancelar
             // 
             this.cmdCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cmdCancelar.Location = new System.Drawing.Point(626, 659);
+            this.cmdCancelar.Location = new System.Drawing.Point(435, 701);
             this.cmdCancelar.Name = "cmdCancelar";
             this.cmdCancelar.Size = new System.Drawing.Size(102, 23);
             this.cmdCancelar.TabIndex = 5;
@@ -85,7 +87,7 @@
             this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdAceptar.BackColor = System.Drawing.SystemColors.Control;
             this.cmdAceptar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cmdAceptar.Location = new System.Drawing.Point(491, 659);
+            this.cmdAceptar.Location = new System.Drawing.Point(300, 701);
             this.cmdAceptar.Name = "cmdAceptar";
             this.cmdAceptar.Size = new System.Drawing.Size(129, 23);
             this.cmdAceptar.TabIndex = 5;
@@ -99,7 +101,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancelar;
-            this.ClientSize = new System.Drawing.Size(740, 694);
+            this.ClientSize = new System.Drawing.Size(549, 736);
             this.Controls.Add(this.cmdAceptar);
             this.Controls.Add(this.cmdCancelar);
             this.Controls.Add(this.grd);

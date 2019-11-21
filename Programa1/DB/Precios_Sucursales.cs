@@ -131,18 +131,17 @@
 
             try
             {
-                //TODO:
-                //string vver = Ver ? "1" : "0";
+                SqlCommand command =
+                    new SqlCommand($"UPDATE Precios_Sucursales " +
+                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Sucursales={Sucursal.Id}, Id_Productos={Producto.Id}, Precio={Precio.ToString().Replace(",", ".")} " +
+                    $"WHERE Id={Id}", sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
 
-                //SqlCommand command =
-                //    new SqlCommand($"UPDATE Proveedores SET Nombre='{Nombre}', Tipo={Tipo.Id}, Ver={vver} WHERE Id={Id}", sql);
-                //command.CommandType = CommandType.Text;
-                //command.Connection = sql;
-                //sql.Open();
+                var d = command.ExecuteNonQuery();
 
-                //var d = command.ExecuteNonQuery();
-
-                //sql.Close();
+                sql.Close();
             }
             catch (Exception e)
             {
@@ -156,18 +155,16 @@
 
             try
             {
-                //TODO:
-                //string vver = Ver ? "1" : "0";
+                SqlCommand command =
+                    new SqlCommand($"INSERT INTO Precio_Sucursales (Fecha, Id_Sucursales, Id_Productos, Precio) " +
+                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.Id}, {Precio.ToString().Replace(",", ".")} )", sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
 
-                //SqlCommand command =
-                //    new SqlCommand($"INSERT INTO Proveedores (Id, Nombre, Tipo, Ver) VALUES({Id}, '{Nombre}', {Tipo.Id}, {vver})", sql);
-                //command.CommandType = CommandType.Text;
-                //command.Connection = sql;
-                //sql.Open();
+                var d = command.ExecuteNonQuery();
 
-                //var d = command.ExecuteNonQuery();
-
-                //sql.Close();
+                sql.Close();
             }
             catch (Exception e)
             {

@@ -131,13 +131,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="C1.Common, Version=1.0.20031.116, Culture=neutral, PublicKeyToken=e272bb32d11b1948">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\ComponentOne Studio.NET\bin\C1.Common.dll</HintPath>
+    <Reference Include="C1.Common">
+      <HintPath>.\C1.Common.dll</HintPath>
     </Reference>
-    <Reference Include="C1.Win.C1FlexGrid.4, Version=4.6.20113.647, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\ComponentOne\Studio for WinForms\bin\v4\C1.Win.C1FlexGrid.4.dll</HintPath>
+    <Reference Include="C1.Win.C1FlexGrid.4">
+      <HintPath>.\C1.Win.C1FlexGrid.4.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>

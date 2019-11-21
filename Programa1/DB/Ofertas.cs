@@ -9,12 +9,8 @@
 
     class Ofertas
     {
-
-
         public Ofertas()
-        {
-            Producto = new Productos();
-            Sucursal = new Sucursales();
+        {            
         }
 
         public Ofertas(int id, DateTime fecha, Productos prod, string desc, Sucursales sucursal, Single costo_or, Single costo_of, float kilos)
@@ -32,13 +28,17 @@
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Productos Producto { get; set; }
+        public Productos Producto { get; set; } = new Productos();
+
         [MaxLength(50, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Sucursales Sucursal { get; set; }
+        public Sucursales Sucursal { get; set; } = new Sucursales();
         public Single Costo_Original { get; set; }
         public Single Costo_Oferta { get; set; }
         public Single Kilos { get; set; }
+
+        public Precios_Sucursales precios = new Precios_Sucursales();
+        public Lista_Ofertas precios_ofertas = new Lista_Ofertas();
 
         public DataTable Datos(string filtro = "")
         {

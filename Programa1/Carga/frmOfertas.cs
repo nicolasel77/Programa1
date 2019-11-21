@@ -2,13 +2,11 @@
 {
     using Programa1.DB;
     using System;
-    using System.Collections.Generic;
     using System.Windows.Forms;
 
     public partial class frmOfertas : Form
     {
         private Ofertas Ofertas;
-        private Precios_Sucursales precios;
 
         #region " Columnas "
         private Byte c_Id;
@@ -24,8 +22,6 @@
         public frmOfertas()
         {
             InitializeComponent();
-
-            precios = new Precios_Sucursales();
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdOfertas.TeclasManejadas = n;
@@ -137,9 +133,9 @@
             grdOfertas.set_ColW(c_Id, 0);
             grdOfertas.set_ColW(c_Fecha, 60);
             grdOfertas.set_ColW(c_IdSuc, 30);
-            grdOfertas.set_ColW(c_IdSuc + 1, 100);
+            grdOfertas.set_ColW(c_IdSuc + 1, 60);
             grdOfertas.set_ColW(c_IdProd, 30);
-            grdOfertas.set_ColW(c_Descripcion, 150);
+            grdOfertas.set_ColW(c_Descripcion, 200);
             grdOfertas.set_ColW(c_CostoOriginal, 60);
             grdOfertas.set_ColW(c_CostoOferta, 60);
             grdOfertas.set_ColW(c_Kilos, 60);
@@ -203,7 +199,7 @@
                     //Fecha
                     //TODO: Validar que la fecha este en el rango del calendario
                     Ofertas.Fecha = Convert.ToDateTime(a);
-                    precios.Fecha = Ofertas.Fecha;
+                    Ofertas.precios.Fecha = Ofertas.Fecha;
 
                     if (id != 0) { Ofertas.Actualizar(); }
 
@@ -215,7 +211,7 @@
                     Ofertas.Sucursal.Id = Convert.ToInt32(a);
                     if (Ofertas.Sucursal.Existe() == true)
                     {
-                        precios.Sucursal = Ofertas.Sucursal;
+                        Ofertas.precios.Sucursal = Ofertas.Sucursal;
 
                         if (id != 0) { Ofertas.Actualizar(); }
 
@@ -231,21 +227,25 @@
                     }
                     break;
                 case 4:
-                    //TODO: Costo_Oferta
                     //ID_Productos
                     Ofertas.Producto.Id = Convert.ToInt32(a);
                     if (Ofertas.Producto.Existe() == true)
                     {
-                        precios.Producto = Ofertas.Producto;
-
-                        Ofertas.Descripcion = Ofertas.Producto.Nombre;
+                        Ofertas.precios.Producto = Ofertas.Producto;
+                        Ofertas.precios_ofertas.Producto = Ofertas.Producto;
 
                         grdOfertas.set_Texto(f, c, a);
-                        grdOfertas.set_Texto(f, c + 1, Ofertas.Producto.Nombre);
+                        
+                        Ofertas.Costo_Original = Ofertas.precios.Buscar();
+                        Ofertas.Costo_Oferta = Ofertas.precios_ofertas.Buscar_Costo();
 
-                        Ofertas.Costo_Original = precios.Buscar();
+                        Ofertas.Descripcion = $"{Ofertas.Producto.Nombre} :: {Ofertas.precios_ofertas.Descripcion}";
+                        grdOfertas.set_Texto(f, c + 1, Ofertas.Descripcion);
+
                         grdOfertas.set_Texto(f, c_CostoOriginal, Ofertas.Costo_Original);
-                        grdOfertas.set_Texto(f, c_Reintegro, Ofertas.Costo_Original * Ofertas.Kilos);
+                        grdOfertas.set_Texto(f, c_CostoOferta, Ofertas.Costo_Oferta);
+
+                        grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original - Ofertas.Costo_Oferta) * Ofertas.Kilos);
 
                         if (id != 0) { Ofertas.Actualizar(); }
 
@@ -271,7 +271,7 @@
                     //Costo_Original
                     Ofertas.Costo_Original = Convert.ToSingle(a);
                     grdOfertas.set_Texto(f, c, a);
-                    grdOfertas.set_Texto(f, c_Reintegro, Ofertas.Costo_Original * Ofertas.Kilos);
+                    grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original - Ofertas.Costo_Oferta) * Ofertas.Kilos);
 
                     if (id != 0) { Ofertas.Actualizar(); }
 
@@ -282,7 +282,7 @@
                     //Costo_Oferta
                     Ofertas.Costo_Original = Convert.ToSingle(a);
                     grdOfertas.set_Texto(f, c, a);
-                    grdOfertas.set_Texto(f, c_Reintegro, Ofertas.Costo_Original * Ofertas.Kilos);
+                    grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original - Ofertas.Costo_Oferta) * Ofertas.Kilos);
 
                     if (id != 0) { Ofertas.Actualizar(); }
 
@@ -293,7 +293,7 @@
                     //Kilos
                     Ofertas.Kilos = Convert.ToSingle(a);
                     grdOfertas.set_Texto(f, c, a);
-                    grdOfertas.set_Texto(f, c_Reintegro, Ofertas.Costo_Original * Ofertas.Kilos);
+                    grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original -Ofertas.Costo_Oferta) * Ofertas.Kilos);
 
                     if (grdOfertas.Row == grdOfertas.Rows - 1)
                     {
@@ -306,18 +306,26 @@
                         grdOfertas.set_Texto(f + 1, c_IdSuc, Ofertas.Sucursal.Id);
                         grdOfertas.set_Texto(f + 1, c_IdSuc + 1, Ofertas.Sucursal.Nombre);
 
-                        Ofertas.Producto.Siguiente();
-                        precios.Producto = Ofertas.Producto;
+                        //El buscar de precios_ofertas automaticamente busca el siguiente en el orden:
+                        Ofertas.Costo_Oferta = Ofertas.precios_ofertas.Buscar_SiguienteCosto();
+                        Ofertas.Producto = Ofertas.precios_ofertas.Producto;
 
-                        Ofertas.Descripcion = Ofertas.Producto.Nombre;
+                        //Para que cargue el nombre del producto:
+                        if (Ofertas.Producto.Existe() == true) { }
+
+                        Ofertas.precios.Producto = Ofertas.precios_ofertas.Producto;
+                        Ofertas.Costo_Original = Ofertas.precios.Buscar();
+
+
+                        Ofertas.Descripcion = $"{Ofertas.precios.Producto.Nombre} :: {Ofertas.precios_ofertas.Descripcion}";
 
                         grdOfertas.set_Texto(f + 1, c_IdProd, Ofertas.Producto.Id);
                         grdOfertas.set_Texto(f + 1, c_Descripcion, Ofertas.Descripcion);
 
-                        Ofertas.Costo_Original = precios.Buscar();
-                        grdOfertas.set_Texto(f + 1, c_CostoOriginal, Ofertas.Costo_Original);
-                        grdOfertas.set_Texto(f + 1, c_Reintegro, 0);
 
+                        grdOfertas.set_Texto(f + 1, c_CostoOriginal, Ofertas.Costo_Original);
+                        grdOfertas.set_Texto(f + 1, c_CostoOferta, Ofertas.Costo_Oferta);
+                        grdOfertas.set_Texto(f + 1, c_Reintegro, 0);
                         Ofertas.Kilos = 0;
                     }
                     else
@@ -336,30 +344,38 @@
         {
             int i = Convert.ToInt32(grdOfertas.get_Texto(Fila, c_Id).ToString());
             Ofertas.Cargar_Fila(i);
-            precios.Fecha = Ofertas.Fecha;
-            precios.Sucursal = Ofertas.Sucursal;
-            precios.Producto = Ofertas.Producto;
+            Ofertas.precios.Fecha = Ofertas.Fecha;
+            Ofertas.precios.Sucursal = Ofertas.Sucursal;
+            Ofertas.precios.Producto = Ofertas.Producto;
         }
 
         private void GrdOfertas_KeyPress(object sender, short e)
         {
             if (e == 13)
             {
-                if (Ofertas.Id == 0)
+                if (grdOfertas.Col == c_Kilos)
                 {
-
-                    if (grdOfertas.Col == c_Kilos)
+                    if (Convert.ToInt32(grdOfertas.get_Texto()) == 0)
                     {
-                        Ofertas.Producto.Siguiente();
-                        precios.Producto = Ofertas.Producto;
 
-                        Ofertas.Descripcion = Ofertas.Producto.Nombre;
+                        Ofertas.Costo_Oferta = Ofertas.precios_ofertas.Buscar_SiguienteCosto();
+                        Ofertas.Producto = Ofertas.precios_ofertas.Producto;
+
+                        //Para que cargue el nombre del producto:
+                        if (Ofertas.Producto.Existe() == true) { }
+
+                        Ofertas.precios.Producto = Ofertas.precios_ofertas.Producto;
+                        Ofertas.Costo_Original = Ofertas.precios.Buscar();
+
+
+                        Ofertas.Descripcion = $"{Ofertas.precios.Producto.Nombre} :: {Ofertas.precios_ofertas.Descripcion}";
 
                         grdOfertas.set_Texto(grdOfertas.Row, c_IdProd, Ofertas.Producto.Id);
                         grdOfertas.set_Texto(grdOfertas.Row, c_Descripcion, Ofertas.Descripcion);
 
-                        Ofertas.Costo_Original = precios.Buscar();
+
                         grdOfertas.set_Texto(grdOfertas.Row, c_CostoOriginal, Ofertas.Costo_Original);
+                        grdOfertas.set_Texto(grdOfertas.Row, c_CostoOferta, Ofertas.Costo_Oferta);
                         grdOfertas.set_Texto(grdOfertas.Row, c_Reintegro, 0);
                     }
                 }
@@ -440,7 +456,6 @@
         private void CmdPrecios_Click(object sender, EventArgs e)
         {
             frmPreciosOfertas frmPrecios = new frmPreciosOfertas();
-
             frmPrecios.ShowDialog();
 
         }

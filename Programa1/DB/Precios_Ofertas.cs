@@ -5,53 +5,88 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Precios_Ofertas
+    class Lista_Ofertas
     {
-        public Precios_Ofertas()
+        public Lista_Ofertas()
         {
             Producto = new Productos();
-            Sucursal = new Sucursales();
         }
 
-        public Precios_Ofertas(int id, DateTime fecha, Productos prod, Sucursales sucursal, float pr)
+        public Lista_Ofertas(int orden, Productos prod, string desc, Single pr)
         {
-            Id = id;
-            Fecha = fecha;
+            Orden = orden;
             Producto = prod;
-            Sucursal = sucursal;
-            Precio = pr;
+            Descripcion = desc;
+            Costo = pr;
         }
 
-        public int Id { get; set; }
-        public DateTime Fecha { get; set; }
+        public int Orden { get; set; }
         public Productos Producto { get; set; }
-        public Sucursales Sucursal { get; set; }
-        public Single Precio { get; set; }
+        public string Descripcion { get; set; }
 
-        public Single Buscar()
+        public Single Costo { get; set; }
+
+        public Single Buscar_Costo()
         {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Ofertas  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={Producto.Id} AND ID_Sucursal={Sucursal.Id} ORDER BY Fecha DESC", conexionSql);
+                var dt = new DataTable("Datos");
+                var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-                conexionSql.Open();
-
+                string sel = $"SELECT TOP 1 * FROM vw_PreciosOfertas WHERE Id_Productos={Producto.Id} ORDER BY Orden";
+                
+                SqlCommand comandoSql = new SqlCommand(sel, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
 
-                conexionSql.Close();
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+                DataRow dr = dt.Rows[0];
+
+                Orden = Convert.ToInt32(dr["Orden"]);
+                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Descripcion = dr["Descripcion"].ToString();
+                Costo = Convert.ToSingle(dr["Costo"]);
+
+
             }
             catch (Exception)
             {
-                d = null;
+                Orden = 0;
+                Costo = 0;
             }
-            Precio = Convert.ToSingle(d);
-            return Precio;
+            return Costo;
+        }
+        public Single Buscar_SiguienteCosto()
+        {
+            try
+            {
+                var dt = new DataTable("Datos");
+                var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+                string sel = $"SELECT TOP 1 * FROM vw_PreciosOfertas WHERE Orden>{Orden} ORDER BY Orden";
+
+                SqlCommand comandoSql = new SqlCommand(sel, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+                DataRow dr = dt.Rows[0];
+
+                Orden = Convert.ToInt32(dr["Orden"]);
+                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Descripcion = dr["Descripcion"].ToString();
+                Costo = Convert.ToSingle(dr["Costo"]);
+
+
+            }
+            catch (Exception)
+            {
+                Orden = 0;
+                Costo = 0;
+            }
+            return Costo;
         }
 
         public DataTable Datos(string filtro = "")
@@ -81,68 +116,23 @@
             return dt;
         }
 
-        public DataTable Tabla_Men()
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT Id, Nombre, 0.0 Precio FROM Productos WHERE Id_Tipo=2 AND Ver=1 ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
-
-        public DataTable Fechas_Men()
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT Fecha FROM vw_PreciosOfertas WHERE Id_Tipo=2 GROUP BY Fecha ORDER BY Fecha DESC", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
-
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                //TODO:
-                //string vver = Ver ? "1" : "0";
+                SqlCommand command =
+                    new SqlCommand($"UPDATE Precios_Ofertas " +
+                    $"SET Orden={Orden}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', Costo={Costo.ToString().Replace(",", ".")} " +
+                    $"WHERE Orden={Orden}", sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
 
-                //SqlCommand command =
-                //    new SqlCommand($"UPDATE Proveedores SET Nombre='{Nombre}', Tipo={Tipo.Id}, Ver={vver} WHERE Id={Id}", sql);
-                //command.CommandType = CommandType.Text;
-                //command.Connection = sql;
-                //sql.Open();
+                var d = command.ExecuteNonQuery();
 
-                //var d = command.ExecuteNonQuery();
-
-                //sql.Close();
+                sql.Close();
             }
             catch (Exception e)
             {
@@ -156,18 +146,16 @@
 
             try
             {
-                //TODO:
-                //string vver = Ver ? "1" : "0";
+                SqlCommand command =
+                    new SqlCommand($"INSERT INTO Precios_Ofertas (Orden, Id_Productos, Descripcion, Costo) " +
+                    $"VALUES({Orden}, {Producto.Id}, '{Descripcion}', {Costo.ToString().Replace(",", ".")} )", sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
 
-                //SqlCommand command =
-                //    new SqlCommand($"INSERT INTO Proveedores (Id, Nombre, Tipo, Ver) VALUES({Id}, '{Nombre}', {Tipo.Id}, {vver})", sql);
-                //command.CommandType = CommandType.Text;
-                //command.Connection = sql;
-                //sql.Open();
+                var d = command.ExecuteNonQuery();
 
-                //var d = command.ExecuteNonQuery();
-
-                //sql.Close();
+                sql.Close();
             }
             catch (Exception e)
             {
@@ -181,7 +169,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Precios_Ofertas WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM Precios_Ofertas WHERE Orden=" + Orden, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

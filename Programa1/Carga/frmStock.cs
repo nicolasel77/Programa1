@@ -8,7 +8,7 @@
     public partial class frmStock : Form
     {
         private Stock stock;
-        private Precios_Sucursales precios;
+        
 
         #region " Columnas "
         private Byte c_Id;
@@ -22,9 +22,7 @@
         #endregion
         public frmStock()
         {
-            InitializeComponent();
-
-            precios = new Precios_Sucursales();
+            InitializeComponent();            
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdStock.TeclasManejadas = n;
@@ -199,7 +197,7 @@
                     //Fecha
                     //TODO: Validar que la fecha este en el rango del calendario
                     stock.Fecha = Convert.ToDateTime(a);
-                    precios.Fecha = stock.Fecha;
+                    stock.precios.Fecha = stock.Fecha;
 
                     if (id != 0) { stock.Actualizar(); }
 
@@ -211,7 +209,7 @@
                     stock.Sucursal.Id = Convert.ToInt32(a);
                     if (stock.Sucursal.Existe() == true)
                     {
-                        precios.Sucursal = stock.Sucursal;
+                        stock.precios.Sucursal = stock.Sucursal;
 
                         if (id != 0) { stock.Actualizar(); }
 
@@ -231,14 +229,14 @@
                     stock.Producto.Id = Convert.ToInt32(a);
                     if (stock.Producto.Existe() == true)
                     {
-                        precios.Producto = stock.Producto;
+                        stock.precios.Producto = stock.Producto;
 
                         stock.Descripcion = stock.Producto.Nombre;
 
                         grdStock.set_Texto(f, c, a);
                         grdStock.set_Texto(f, c + 1, stock.Producto.Nombre);
 
-                        stock.Costo = precios.Buscar();
+                        stock.Costo = stock.precios.Buscar();
                         grdStock.set_Texto(f, c_Costo, stock.Costo);
                         grdStock.set_Texto(f, c_Total, stock.Costo * stock.Kilos);
 
@@ -291,14 +289,14 @@
                         grdStock.set_Texto(f + 1, c_IdSuc + 1, stock.Sucursal.Nombre);
 
                         stock.Producto.Siguiente();
-                        precios.Producto = stock.Producto;
+                        stock.precios.Producto = stock.Producto;
 
                         stock.Descripcion = stock.Producto.Nombre;
 
                         grdStock.set_Texto(f + 1, c_IdProd, stock.Producto.Id);
                         grdStock.set_Texto(f + 1, c_Descripcion, stock.Descripcion);
 
-                        stock.Costo = precios.Buscar();
+                        stock.Costo = stock.precios.Buscar();
                         grdStock.set_Texto(f + 1, c_Costo, stock.Costo);
                         grdStock.set_Texto(f + 1, c_Total, 0);
 
@@ -320,9 +318,9 @@
         {
             int i = Convert.ToInt32(grdStock.get_Texto(Fila, c_Id).ToString());
             stock.Cargar_Fila(i);
-            precios.Fecha = stock.Fecha;
-            precios.Sucursal = stock.Sucursal;
-            precios.Producto = stock.Producto;
+            stock.precios.Fecha = stock.Fecha;
+            stock.precios.Sucursal = stock.Sucursal;
+            stock.precios.Producto = stock.Producto;
         }
 
         private void GrdStock_KeyPress(object sender, short e)
@@ -335,14 +333,14 @@
                     if (grdStock.Col == c_Kilos)
                     {
                         stock.Producto.Siguiente();
-                        precios.Producto = stock.Producto;
+                        stock.precios.Producto = stock.Producto;
 
                         stock.Descripcion = stock.Producto.Nombre;
 
                         grdStock.set_Texto(grdStock.Row, c_IdProd, stock.Producto.Id);
                         grdStock.set_Texto(grdStock.Row, c_Descripcion, stock.Descripcion);
 
-                        stock.Costo = precios.Buscar();
+                        stock.Costo = stock.precios.Buscar();
                         grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
                         grdStock.set_Texto(grdStock.Row, c_Total, 0);
                     }
