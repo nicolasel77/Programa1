@@ -648,5 +648,53 @@
                 }
             }
         }
+
+        private void CantClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCantidad_Clientes")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmCantidad_Clientes");
+                t.Text = "Cantidad_Clientes";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmCantidad_Clientes = new frmCantidad_Clientes();
+                frmCantidad_Clientes.MdiParent = this;
+                frmCantidad_Clientes.Disposed += FrmCantidad_Clientes_Disposed;
+                forms.Add(frmCantidad_Clientes);
+                frmCantidad_Clientes.Show();
+                frmCantidad_Clientes.WindowState = FormWindowState.Minimized;
+                frmCantidad_Clientes.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmCantidad_Clientes_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Cantidad_Clientes")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCantidad_Clientes")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

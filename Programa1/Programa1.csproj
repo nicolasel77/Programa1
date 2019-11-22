@@ -79,6 +79,12 @@
     <Compile Include="Carga\frmAPicada.Designer.cs">
       <DependentUpon>frmAPicada.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\frmCantidadClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmCantidadClientes.Designer.cs">
+      <DependentUpon>frmCantidadClientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\frmCMStock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +218,7 @@
       <DependentUpon>frmSucursales.cs</DependentUpon>
     </Compile>
     <Compile Include="DB\APicada.cs" />
+    <Compile Include="DB\Cantidad_Clientes.cs" />
     <Compile Include="DB\Compras.cs" />
     <Compile Include="DB\GastosSucursales_Grupos.cs" />
     <Compile Include="DB\GastosSucursales_Rubros.cs" />
@@ -246,6 +253,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Carga\frmAPicada.resx">
       <DependentUpon>frmAPicada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\frmCantidadClientes.resx">
+      <DependentUpon>frmCantidadClientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmCMStock.resx">
       <DependentUpon>frmCMStock.cs</DependentUpon>

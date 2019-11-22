@@ -222,6 +222,7 @@
             this.cantClientesToolStripMenuItem.Name = "cantClientesToolStripMenuItem";
             this.cantClientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cantClientesToolStripMenuItem.Text = "&Cant Clientes";
+            this.cantClientesToolStripMenuItem.Click += new System.EventHandler(this.CantClientesToolStripMenuItem_Click);
             // 
             // empleadosToolStripMenuItem
             // 
