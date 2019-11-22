@@ -109,6 +109,12 @@
     <Compile Include="Carga\frmCopiarVentaACompra.Designer.cs">
       <DependentUpon>frmCopiarVentaACompra.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\frmGastos_Sucursales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmGastos_Sucursales.Designer.cs">
+      <DependentUpon>frmGastos_Sucursales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\frmOfertas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +207,10 @@
     </Compile>
     <Compile Include="DB\APicada.cs" />
     <Compile Include="DB\Compras.cs" />
+    <Compile Include="DB\GastosSucursales_Grupos.cs" />
+    <Compile Include="DB\GastosSucursales_Rubros.cs" />
+    <Compile Include="DB\GastosSucursales_Tipos.cs" />
+    <Compile Include="DB\Gastos_Sucursales.cs" />
     <Compile Include="DB\Localidades.cs" />
     <Compile Include="DB\Ofertas.cs" />
     <Compile Include="DB\Partidos.cs" />
@@ -245,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmCopiarVentaACompra.resx">
       <DependentUpon>frmCopiarVentaACompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\frmGastos_Sucursales.resx">
+      <DependentUpon>frmGastos_Sucursales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmOfertas.resx">
       <DependentUpon>frmOfertas.cs</DependentUpon>

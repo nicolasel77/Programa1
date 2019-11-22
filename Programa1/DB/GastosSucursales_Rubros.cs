@@ -6,16 +6,17 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Localidades
+    class GastosSucursales_Rubros
     {
-        public Localidades()
+        public GastosSucursales_Rubros()
         {
+            Grupo = new GastosSucursales_Grupos();
         }
 
-        public Localidades(int id,int partido, string nombre)
+        public GastosSucursales_Rubros(int id, GastosSucursales_Grupos grupo, string nombre)
         {
             Id = id;
-            Partido.Id = partido;
+            Grupo = grupo;
             Nombre = nombre;
         }
 
@@ -23,23 +24,24 @@
         [Key]
         public int Id { get; set; }
 
-        public Partidos Partido { get; set; } = new Partidos();
+        public GastosSucursales_Grupos Grupo { get; set; }
 
-        [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
+        [MaxLength(50, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
         public string Nombre { get; set; }
 
 
-        public DataTable Datos()
+        public DataTable Datos(string filtro = "")
         {
             //Cadena de conexion y DataTable (tabla)
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
+            if (filtro.Length > 0) filtro = " WHERE " + filtro;
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Localidades ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM GastosSucursales_Rubros  {filtro}  ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -60,7 +62,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"UPDATE Localidades SET Nombre='{Nombre}', Id_Partido={Partido.Id} WHERE Id={Id}", sql);
+                SqlCommand command = new SqlCommand($"UPDATE GastosSucursales_Rubros SET Nombre='{Nombre}', Id_Grupo={Grupo.Id} WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -81,7 +83,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Localidades (Id, Id_Partido, Nombre) VALUES({Id}, {Partido.Id}, '{Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO GastosSucursales_Rubros (Id, Id_Grupo, Nombre) VALUES({Id}, {Grupo.Id}, '{Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -102,7 +104,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Localidades WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM GastosSucursales_Rubros WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -124,7 +126,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"SELECT Nombre FROM Localidades WHERE Id={Id}", sql);
+                SqlCommand command = new SqlCommand($"SELECT Nombre FROM GastosSucursales_Rubros WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;

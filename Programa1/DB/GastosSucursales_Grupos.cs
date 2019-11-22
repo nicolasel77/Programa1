@@ -6,16 +6,15 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Localidades
+    class GastosSucursales_Grupos
     {
-        public Localidades()
+        public GastosSucursales_Grupos()
         {
         }
 
-        public Localidades(int id,int partido, string nombre)
+        public GastosSucursales_Grupos(int id, string nombre)
         {
             Id = id;
-            Partido.Id = partido;
             Nombre = nombre;
         }
 
@@ -23,9 +22,7 @@
         [Key]
         public int Id { get; set; }
 
-        public Partidos Partido { get; set; } = new Partidos();
-
-        [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
+        [MaxLength(50, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
         public string Nombre { get; set; }
 
@@ -39,7 +36,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Localidades ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM GastosSucursales_Grupos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -60,7 +57,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"UPDATE Localidades SET Nombre='{Nombre}', Id_Partido={Partido.Id} WHERE Id={Id}", sql);
+                SqlCommand command = new SqlCommand($"UPDATE GastosSucursales_Grupos SET Nombre='{Nombre}' WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -81,7 +78,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Localidades (Id, Id_Partido, Nombre) VALUES({Id}, {Partido.Id}, '{Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO GastosSucursales_Grupos (Id, Nombre) VALUES({Id}, '{Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -102,7 +99,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Localidades WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand(string.Format("DELETE FROM GastosSucursales_Grupos WHERE Id={0}", Id), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -118,13 +115,19 @@
         }
 
 
-        public bool Existe()
+        public bool Existe(int id = 0)
         {
             SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand command = new SqlCommand($"SELECT Nombre FROM Localidades WHERE Id={Id}", sql);
+                string s = "SELECT Nombre FROM GastosSucursales_Grupos WHERE Id=" + Id;
+                if (id != 0)
+                {
+                    s = "SELECT Nombre FROM GastosSucursales_Grupos WHERE Id=" + id;
+                }
+
+                SqlCommand command = new SqlCommand(s, sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;

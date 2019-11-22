@@ -5,9 +5,9 @@
     using System.Data;
     using System.Windows.Forms;
 
-    public partial class frmReintegros : Form
+    public partial class frmGastos_Sucursales : Form
     {
-        private Reintegros Reintegros = new Reintegros();
+        private Gastos_Sucursales Gastos_Sucursales = new Gastos_Sucursales();
 
         #region " Columnas "
         private Byte c_Id;
@@ -18,40 +18,33 @@
         private Byte c_Importe;
 
         #endregion
-        public frmReintegros()
+        public frmGastos_Sucursales()
         {
             InitializeComponent();
-
-            DataTable dt = Reintegros.Tipo.Datos();
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                lstTipo.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
-            }
-
+            
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
-            grdReintegros.TeclasManejadas = n;
+            grdGastos.TeclasManejadas = n;
 
-            Reintegros = new Reintegros();
-            grdReintegros.MostrarDatos(Reintegros.Datos("Id=0"), true);
+            Gastos_Sucursales = new Gastos_Sucursales();
+            grdGastos.MostrarDatos(Gastos_Sucursales.Datos("Id=0"), true);
 
-            c_Id = Convert.ToByte(grdReintegros.get_ColIndex("Id"));
-            c_Fecha = Convert.ToByte(grdReintegros.get_ColIndex("Fecha"));
-            c_IdSuc = Convert.ToByte(grdReintegros.get_ColIndex("Id_Sucursales"));
-            c_IdTipo = Convert.ToByte(grdReintegros.get_ColIndex("Id_Tipo"));
-            c_Descripcion = Convert.ToByte(grdReintegros.get_ColIndex("Descripcion"));
-            c_Importe = Convert.ToByte(grdReintegros.get_ColIndex("Importe"));
+            c_Id = Convert.ToByte(grdGastos.get_ColIndex("Id"));
+            c_Fecha = Convert.ToByte(grdGastos.get_ColIndex("Fecha"));
+            c_IdSuc = Convert.ToByte(grdGastos.get_ColIndex("Id_Sucursales"));
+            c_IdTipo = Convert.ToByte(grdGastos.get_ColIndex("Id_Tipo"));
+            c_Descripcion = Convert.ToByte(grdGastos.get_ColIndex("Descripcion"));
+            c_Importe = Convert.ToByte(grdGastos.get_ColIndex("Importe"));
 
             formato_Grilla();
 
             //El intercambio de columnas para estas teclas
-            grdReintegros.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdTipo, c_Importe);
-            grdReintegros.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSuc, c_Importe);
+            grdGastos.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdTipo, c_Importe);
+            grdGastos.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSuc, c_Importe);
 
             Totales();
         }
 
-        private void FrmReintegros_KeyUp(object sender, KeyEventArgs e)
+        private void frmGastos_Sucursales_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -106,11 +99,11 @@
             this.Cursor = Cursors.WaitCursor;
 
             string s = Armar_Cadena();
-            grdReintegros.MostrarDatos(Reintegros.Datos(s), true);
+            grdGastos.MostrarDatos(Gastos_Sucursales.Datos(s), true);
             formato_Grilla();
             Totales();
-            grdReintegros.ActivarCelda(grdReintegros.Rows - 1, c_Fecha);
-            grdReintegros.Focus();
+            grdGastos.ActivarCelda(grdGastos.Rows - 1, c_Fecha);
+            grdGastos.Focus();
 
             this.Cursor = Cursors.Default;
         }
@@ -121,14 +114,7 @@
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
 
-            foreach (string li in lstTipo.SelectedItems)
-            {
-                p = h.Unir(p, h.Codigo_Seleccionado(li).ToString(), ", ");
-            }
-            if (p.Length > 0)
-            {
-                p = $" Id_Tipo IN ({p})";
-            }
+            //string t = c.Cadena("Id_Sucursales");
             string s = cSucs.Cadena("Id_Sucursales");
             string f = cFecha.Cadena();
 
@@ -140,26 +126,26 @@
 
         private void formato_Grilla()
         {
-            grdReintegros.set_ColW(c_Id, 0);
-            grdReintegros.set_ColW(c_Fecha, 60);
-            grdReintegros.set_ColW(c_IdSuc, 30);
-            grdReintegros.set_ColW(c_IdSuc + 1, 100);
-            grdReintegros.set_ColW(c_IdTipo, 30);
-            grdReintegros.set_ColW(c_Descripcion, 150);
-            grdReintegros.set_ColW(c_Importe, 60);
+            grdGastos.set_ColW(c_Id, 0);
+            grdGastos.set_ColW(c_Fecha, 60);
+            grdGastos.set_ColW(c_IdSuc, 30);
+            grdGastos.set_ColW(c_IdSuc + 1, 100);
+            grdGastos.set_ColW(c_IdTipo, 30);
+            grdGastos.set_ColW(c_Descripcion, 150);
+            grdGastos.set_ColW(c_Importe, 60);
 
-            grdReintegros.Columnas[c_Importe].Format = "N2";
+            grdGastos.Columnas[c_Importe].Format = "N2";
 
-            grdReintegros.Columnas[c_Importe].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
+            grdGastos.Columnas[c_Importe].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
-            grdReintegros.set_Texto(0, c_IdSuc, "Suc");
-            grdReintegros.set_Texto(0, c_IdTipo, "Tipo");
+            grdGastos.set_Texto(0, c_IdSuc, "Suc");
+            grdGastos.set_Texto(0, c_IdTipo, "Tipo");
         }
 
         private void Totales()
         {
-            double k = grdReintegros.SumarCol(c_Importe, false);
-            int c = grdReintegros.Rows - 2;
+            double k = grdGastos.SumarCol(c_Importe, false);
+            int c = grdGastos.Rows - 2;
             lblCant.Text = $"Registros: {c:N0}";
             lblTotal.Text = $"Total: {k:C2}";
         }
@@ -167,8 +153,8 @@
 
         private void CmdLimpiar_Click(object sender, EventArgs e)
         {
-            grdReintegros.Rows = 1;
-            grdReintegros.Rows = 2;
+            grdGastos.Rows = 1;
+            grdGastos.Rows = 2;
             Totales();
         }
 
@@ -185,14 +171,14 @@
 
         private void CFecha_Cambio_Seleccion(object sender, EventArgs e)
         {
-            cSucs.Filtro_In = $" (SELECT DISTINCT Id_Sucursales FROM Reintegros WHERE {cFecha.Cadena()})";
+            cSucs.Filtro_In = $" (SELECT DISTINCT Id_Sucursales FROM Gastos_Sucursales WHERE {cFecha.Cadena()})";
             cmdMostrar.PerformClick();
         }
 
 
-        private void GrdReintegros_Editado(short f, short c, object a)
+        private void grdGastos_Editado(short f, short c, object a)
         {
-            int id = Convert.ToInt32(grdReintegros.get_Texto(f, c_Id));
+            int id = Convert.ToInt32(grdGastos.get_Texto(f, c_Id));
             switch (c)
             {
                 case 1:
@@ -200,88 +186,88 @@
                     DateTime df = Convert.ToDateTime(a);
                     if (df >= cFecha.fecha_Actual)
                     {
-                        Reintegros.Fecha = df;
+                        Gastos_Sucursales.Fecha = df;
 
-                        if (id != 0) { Reintegros.Actualizar(); }
+                        if (id != 0) { Gastos_Sucursales.Actualizar(); }
 
-                        grdReintegros.set_Texto(f, c, a);
-                        grdReintegros.ActivarCelda(f, c + 1);
+                        grdGastos.set_Texto(f, c, a);
+                        grdGastos.ActivarCelda(f, c + 1);
                     }
                     else
                     {
                         Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
-                        grdReintegros.ErrorEnTxt();
+                        grdGastos.ErrorEnTxt();
                     }
                     break;
                 case 2:
                     //ID_Sucursales
-                    Reintegros.Sucursal.Id = Convert.ToInt32(a);
-                    if (Reintegros.Sucursal.Existe() == true)
+                    Gastos_Sucursales.Sucursal.Id = Convert.ToInt32(a);
+                    if (Gastos_Sucursales.Sucursal.Existe() == true)
                     {
-                        if (id != 0) { Reintegros.Actualizar(); }
+                        if (id != 0) { Gastos_Sucursales.Actualizar(); }
 
-                        grdReintegros.set_Texto(f, c, a);
-                        grdReintegros.set_Texto(f, c + 1, Reintegros.Sucursal.Nombre);
+                        grdGastos.set_Texto(f, c, a);
+                        grdGastos.set_Texto(f, c + 1, Gastos_Sucursales.Sucursal.Nombre);
 
-                        grdReintegros.ActivarCelda(f, c + 2);
+                        grdGastos.ActivarCelda(f, c + 2);
                     }
                     else
                     {
                         Mensaje("No se encontró la sucursal " + a.ToString());
-                        grdReintegros.ErrorEnTxt();
+                        grdGastos.ErrorEnTxt();
                     }
                     break;
                 case 4:
                     //Id_Tipo
-                    Reintegros.Tipo.Id = Convert.ToInt32(a);
-                    if (Reintegros.Tipo.Existe() == true)
+                    Gastos_Sucursales.Tipo.Id = Convert.ToInt32(a);
+                    if (Gastos_Sucursales.Tipo.Existe() == true)
                     {
-                        Reintegros.Descripcion = Reintegros.Tipo.Nombre;
+                        Gastos_Sucursales.Descripcion = Gastos_Sucursales.Tipo.Nombre;
 
-                        grdReintegros.set_Texto(f, c, a);
-                        grdReintegros.set_Texto(f, c + 1, Reintegros.Tipo.Nombre);
+                        grdGastos.set_Texto(f, c, a);
+                        grdGastos.set_Texto(f, c + 1, Gastos_Sucursales.Tipo.Nombre);
 
-                        if (id != 0) { Reintegros.Actualizar(); }
+                        if (id != 0) { Gastos_Sucursales.Actualizar(); }
 
-                        grdReintegros.ActivarCelda(f, c_Importe);
+                        grdGastos.ActivarCelda(f, c_Importe);
                         Totales();
                     }
                     else
                     {
                         Mensaje("No se encontró el Tipo " + a.ToString());
-                        grdReintegros.ErrorEnTxt();
+                        grdGastos.ErrorEnTxt();
                     }
                     break;
                 case 5:
                     //Descripcion
-                    Reintegros.Descripcion = a.ToString();
-                    grdReintegros.set_Texto(f, c, a);
+                    Gastos_Sucursales.Descripcion = a.ToString();
+                    grdGastos.set_Texto(f, c, a);
 
-                    if (id != 0) { Reintegros.Actualizar(); }
+                    if (id != 0) { Gastos_Sucursales.Actualizar(); }
 
-                    grdReintegros.ActivarCelda(f + 1, c);
+                    grdGastos.ActivarCelda(f + 1, c);
                     break;
                 case 6:
                     //Importe
-                    Reintegros.Importe = Convert.ToSingle(a);
-                    grdReintegros.set_Texto(f, c, a);
+                    Gastos_Sucursales.Importe = Convert.ToSingle(a);
+                    grdGastos.set_Texto(f, c, a);
 
-                    if (grdReintegros.Row == grdReintegros.Rows - 1)
+                    if (grdGastos.Row == grdGastos.Rows - 1)
                     {
-                        Reintegros.Agregar();
-                        grdReintegros.set_Texto(f, c_Id, Reintegros.Id);
-                        grdReintegros.AgregarFila();
+                        Gastos_Sucursales.Agregar();
+                        grdGastos.set_Texto(f, c_Id, Gastos_Sucursales.Id);
+                        grdGastos.AgregarFila();
                         //Rellenar nueva fila
 
-                        grdReintegros.set_Texto(f + 1, c_Fecha, Reintegros.Fecha);
+                        grdGastos.set_Texto(f + 1, c_Fecha, Gastos_Sucursales.Fecha);
 
-                        Reintegros.Importe = 0;
-                        grdReintegros.ActivarCelda(f + 1, c_IdSuc);
+                        Gastos_Sucursales.Importe = 0;
+                        grdGastos.ActivarCelda(f + 1, c_IdSuc);
                     }
                     else
                     {
-                        Reintegros.Actualizar();
-                        grdReintegros.ActivarCelda(f + 1, c);
+                        Gastos_Sucursales.Actualizar();
+                        grdGastos.ActivarCelda(f + 1, c);
                     }
 
                     Totales();
@@ -290,25 +276,25 @@
 
         }
 
-        private void GrdReintegros_CambioFila(short Fila)
+        private void grdGastos_CambioFila(short Fila)
         {
-            int i = Convert.ToInt32(grdReintegros.get_Texto(Fila, c_Id).ToString());
-            Reintegros.Cargar_Fila(i);
+            int i = Convert.ToInt32(grdGastos.get_Texto(Fila, c_Id).ToString());
+            Gastos_Sucursales.Cargar_Fila(i);
         }
 
 
-        private void GrdReintegros_KeyUp(object sender, short e)
+        private void grdGastos_KeyUp(object sender, short e)
         {
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
                     if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                     {
-                        if (Convert.ToInt32(grdReintegros.get_Texto(grdReintegros.Row, 0)) != 0)
+                        if (Convert.ToInt32(grdGastos.get_Texto(grdGastos.Row, 0)) != 0)
                         {
-                            Reintegros.Id = Convert.ToInt32(grdReintegros.get_Texto(grdReintegros.Row, 0));
-                            Reintegros.Borrar();
-                            grdReintegros.BorrarFila(grdReintegros.Row);
+                            Gastos_Sucursales.Id = Convert.ToInt32(grdGastos.get_Texto(grdGastos.Row, 0));
+                            Gastos_Sucursales.Borrar();
+                            grdGastos.BorrarFila(grdGastos.Row);
                             Totales();
                         }
                     }

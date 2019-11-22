@@ -6,19 +6,17 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Reintegros
+    class Gastos_Sucursales
     {
-
-
-        public Reintegros()
-        {   
+        public Gastos_Sucursales()
+        {            
         }
 
-        public Reintegros(int id, DateTime fecha, TipoReintegros prod, string desc, Sucursales sucursal, float importe)
+        public Gastos_Sucursales(int id, DateTime fecha, GastosSucursales_Tipos tipo, string desc, Sucursales sucursal, float importe)
         {
             Id = id;
             Fecha = fecha;
-            Tipo = prod;
+            Tipo = tipo;
             Descripcion = desc;
             Sucursal = sucursal;
             Importe = importe;
@@ -27,7 +25,7 @@
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public TipoReintegros Tipo { get; set; } = new TipoReintegros();
+        public GastosSucursales_Tipos Tipo { get; set; } = new GastosSucursales_Tipos();
         [MaxLength(80, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
         public Sucursales Sucursal { get; set; } = new Sucursales();
@@ -38,14 +36,11 @@
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
+            if (filtro.Length > 0) filtro = " WHERE " + filtro;            
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Reintegros {filtro} ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Fecha, Id_Sucursales, Nombre, Id_Tipo, Descripcion, Importe FROM vw_GastosSucursales {filtro} ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -59,6 +54,7 @@
             return dt;
         }
 
+
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -66,7 +62,7 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Reintegros SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
+                    new SqlCommand($"UPDATE Gastos_Sucursales SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
                         $"Id_Sucursales={Sucursal.Id}, Id_Tipo={Tipo.Id}, Descripcion='{Descripcion}', " +
                         $"Importe={Importe.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
@@ -91,7 +87,7 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Reintegros (Fecha, Id_Sucursales, Id_Tipo, Descripcion, Importe) " +
+                    new SqlCommand($"INSERT INTO Gastos_Sucursales (Fecha, Id_Sucursales, Id_Tipo, Descripcion, Importe) " +
                         $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Tipo.Id}, '{Descripcion}', {Importe.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -126,7 +122,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Reintegros", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Gastos_Sucursales", conexionSql);
 
                 conexionSql.Open();
 
@@ -149,7 +145,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Reintegros WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM Gastos_Sucursales WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -172,7 +168,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Reintegros WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_GastosSucursales WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

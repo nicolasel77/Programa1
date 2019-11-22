@@ -600,5 +600,53 @@
                 }
             }
         }
+
+        private void GastosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmGastos_Sucursales")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmGastos_Sucursales");
+                t.Text = "Gastos_Sucursales";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmGastos_Sucursales = new frmGastos_Sucursales();
+                frmGastos_Sucursales.MdiParent = this;
+                frmGastos_Sucursales.Disposed += FrmGastos_Sucursales_Disposed;
+                forms.Add(frmGastos_Sucursales);
+                frmGastos_Sucursales.Show();
+                frmGastos_Sucursales.WindowState = FormWindowState.Minimized;
+                frmGastos_Sucursales.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmGastos_Sucursales_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Gastos_Sucursales")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmGastos_Sucursales")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }
