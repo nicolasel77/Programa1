@@ -38,12 +38,12 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdCantidad_Clientes = new Grilla2.SpeedGrilla();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.cFecha = new Programa1.Controles.cFechas();
-            this.cSucs = new Programa1.Controles.cSucursales();
             this.cmdCambioMasivo = new System.Windows.Forms.Button();
             this.cmdLimpiar = new System.Windows.Forms.Button();
             this.cmdMostrar = new System.Windows.Forms.Button();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
+            this.cSucs = new Programa1.Controles.cSucursales();
+            this.cFecha = new Programa1.Controles.cFechas();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -176,33 +176,6 @@
             this.splitContainer3.SplitterDistance = 256;
             this.splitContainer3.TabIndex = 0;
             // 
-            // cFecha
-            // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cFecha.Location = new System.Drawing.Point(3, 500);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(249, 184);
-            this.cFecha.TabIndex = 3;
-            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
-            // 
-            // cSucs
-            // 
-            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
-            this.cSucs.Filtro_In = "";
-            this.cSucs.Location = new System.Drawing.Point(3, 3);
-            this.cSucs.Mostrar_Tipo = false;
-            this.cSucs.Name = "cSucs";
-            this.cSucs.Size = new System.Drawing.Size(250, 681);
-            this.cSucs.TabIndex = 2;
-            this.cSucs.Titulo = "Sucursales";
-            this.cSucs.Valor_Actual = -1;
-            this.cSucs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
-            // 
             // cmdCambioMasivo
             // 
             this.cmdCambioMasivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -241,6 +214,33 @@
             this.tiMensaje.Enabled = true;
             this.tiMensaje.Interval = 8000;
             this.tiMensaje.Tick += new System.EventHandler(this.TiMensaje_Tick);
+            // 
+            // cSucs
+            // 
+            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
+            this.cSucs.Filtro_In = "";
+            this.cSucs.Location = new System.Drawing.Point(3, 3);
+            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Name = "cSucs";
+            this.cSucs.Size = new System.Drawing.Size(250, 681);
+            this.cSucs.TabIndex = 2;
+            this.cSucs.Titulo = "Sucursales";
+            this.cSucs.Valor_Actual = -1;
+            this.cSucs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
+            // 
+            // cFecha
+            // 
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cFecha.Location = new System.Drawing.Point(3, 441);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(249, 243);
+            this.cFecha.TabIndex = 3;
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
             // 
             // frmCantidad_Clientes
             // 
