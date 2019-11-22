@@ -199,7 +199,9 @@
                 }
                 else
                 {
+                    cCancel = true;
                     lst.SetSelected(i, false);
+                    cCancel = false;
                     if (i == lst.Items.Count - 1)
                     {
                         lst.SetSelected(0, true);
@@ -223,7 +225,9 @@
                 }
                 else
                 {
+                    cCancel = true;
                     lst.SetSelected(i, false);
+                    cCancel = false;
                     if (i == 0)
                     {
                         lst.SetSelected(lst.Items.Count - 1, true);

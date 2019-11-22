@@ -37,13 +37,12 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdGastos = new Grilla2.SpeedGrilla();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.cSucs = new Programa1.Controles.cSucursales();
+            this.cTipos = new Programa1.Controles.cTiposGastosSucursal();
+            this.cFecha = new Programa1.Controles.cFechas();
             this.cmdLimpiar = new System.Windows.Forms.Button();
             this.cmdMostrar = new System.Windows.Forms.Button();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
-            this.cSucs = new Programa1.Controles.cSucursales();
-            this.cFecha = new Programa1.Controles.cFechas();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lstTipo = new System.Windows.Forms.ListBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -53,7 +52,6 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -162,11 +160,54 @@
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.panel1);
+            this.splitContainer3.Panel2.Controls.Add(this.cTipos);
             this.splitContainer3.Panel2.Controls.Add(this.cFecha);
             this.splitContainer3.Size = new System.Drawing.Size(523, 687);
             this.splitContainer3.SplitterDistance = 256;
             this.splitContainer3.TabIndex = 0;
+            // 
+            // cSucs
+            // 
+            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
+            this.cSucs.Filtro_In = "";
+            this.cSucs.Location = new System.Drawing.Point(3, 3);
+            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Name = "cSucs";
+            this.cSucs.Size = new System.Drawing.Size(250, 680);
+            this.cSucs.TabIndex = 2;
+            this.cSucs.Titulo = "Sucursales";
+            this.cSucs.Valor_Actual = -1;
+            this.cSucs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
+            // 
+            // cTipos
+            // 
+            this.cTipos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cTipos.BackColor = System.Drawing.Color.Gainsboro;
+            this.cTipos.Filtro_In = "";
+            this.cTipos.Location = new System.Drawing.Point(3, 3);
+            this.cTipos.Mostrar_Tipo = true;
+            this.cTipos.Name = "cTipos";
+            this.cTipos.Size = new System.Drawing.Size(257, 491);
+            this.cTipos.TabIndex = 5;
+            this.cTipos.Titulo = "Tipo";
+            this.cTipos.Valor_Actual = -1;
+            this.cTipos.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
+            // 
+            // cFecha
+            // 
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cFecha.Location = new System.Drawing.Point(3, 500);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(249, 184);
+            this.cFecha.TabIndex = 3;
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
             // 
             // cmdLimpiar
             // 
@@ -196,61 +237,6 @@
             this.tiMensaje.Interval = 8000;
             this.tiMensaje.Tick += new System.EventHandler(this.TiMensaje_Tick);
             // 
-            // cSucs
-            // 
-            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
-            this.cSucs.Filtro_In = "";
-            this.cSucs.Location = new System.Drawing.Point(3, 3);
-            this.cSucs.Mostrar_Tipo = true;
-            this.cSucs.Name = "cSucs";
-            this.cSucs.Size = new System.Drawing.Size(250, 680);
-            this.cSucs.TabIndex = 2;
-            this.cSucs.Titulo = "Sucursales";
-            this.cSucs.Valor_Actual = -1;
-            this.cSucs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
-            // 
-            // cFecha
-            // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cFecha.Location = new System.Drawing.Point(3, 500);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(249, 184);
-            this.cFecha.TabIndex = 3;
-            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Controls.Add(this.lstTipo);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(249, 491);
-            this.panel1.TabIndex = 5;
-            // 
-            // lstTipo
-            // 
-            this.lstTipo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstTipo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstTipo.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lstTipo.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lstTipo.FormattingEnabled = true;
-            this.lstTipo.ItemHeight = 18;
-            this.lstTipo.Location = new System.Drawing.Point(3, 3);
-            this.lstTipo.Name = "lstTipo";
-            this.lstTipo.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstTipo.Size = new System.Drawing.Size(243, 486);
-            this.lstTipo.TabIndex = 4;
-            // 
             // frmGastos_Sucursales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -274,7 +260,6 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -293,7 +278,6 @@
         private System.Windows.Forms.Button cmdLimpiar;
         private System.Windows.Forms.ToolStripStatusLabel lblTotal;
         private System.Windows.Forms.ToolStripStatusLabel lblCant;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ListBox lstTipo;
+        private Controles.cTiposGastosSucursal cTipos;
     }
 }

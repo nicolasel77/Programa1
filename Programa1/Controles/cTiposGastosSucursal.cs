@@ -7,9 +7,9 @@
     using System.Data;
     using System.Windows.Forms;
 
-    public partial class cTipoGastosSucursal : UserControl
+    public partial class cTiposGastosSucursal : UserControl
     {
-        private GastosSucursales_Tipos Tipos = new GastosSucursales_Tipos();
+        private GastosSucursales_Tipos Tipo = new GastosSucursales_Tipos();
         private Herramientas herramientas = new Herramientas();
 
         private bool cCancel = false;
@@ -46,21 +46,20 @@
 
         public event EventHandler Cambio_Seleccion;
 
-        public cTipoGastosSucursal()
+        public cTiposGastosSucursal()
         {
             InitializeComponent();
-                        
-            DataTable dt = Tipos.Rubro.Datos();
+
+            DataTable dt = Tipo.Rubro.Datos();
             foreach (DataRow dr in dt.Rows)
             {
                 lstRubros.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
             }
-            dt = Tipos.Rubro.Grupo.Datos();
+            dt = Tipo.Rubro.Grupo.Datos();
             foreach (DataRow dr in dt.Rows)
             {
                 lstGrupos.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
             }
-
             Cargar();
         }
 
@@ -69,19 +68,19 @@
             get
             {
                 int n = -1;
-                if (lstTipo.SelectedIndex > -1)
+                if (lst.SelectedIndex > -1)
                 {
-                    n = herramientas.Codigo_Seleccionado(lstTipo.Text);
+                    n = herramientas.Codigo_Seleccionado(lst.Text);
                 }
                 return n;
             }
             set
             {
-                for (int i = 0; i < lstTipo.Items.Count; i++)
+                for (int i = 0; i < lst.Items.Count; i++)
                 {
-                    if (herramientas.Codigo_Seleccionado(lstTipo.Items[i].ToString()) == value)
+                    if (herramientas.Codigo_Seleccionado(lst.Items[i].ToString()) == value)
                     {
-                        lstTipo.SelectedIndices.Add(i);
+                        lst.SelectedIndices.Add(i);
                     }
                 }
             }
@@ -90,15 +89,15 @@
         public string Cadena(string campo)
         {
             string s = "";
-            if (lstTipo.SelectedItems.Count > 0)
+            if (lst.SelectedItems.Count > 0)
             {
-                if (lstTipo.SelectedItems.Count == 1)
+                if (lst.SelectedItems.Count == 1)
                 {
                     s = $"{campo}={Valor_Actual.ToString()}";
                 }
                 else
                 {
-                    foreach (string sn in lstTipo.SelectedItems)
+                    foreach (string sn in lst.SelectedItems)
                     {
                         s = $"{s}, {herramientas.Codigo_Seleccionado(sn)}";
                     }
@@ -113,7 +112,7 @@
         {
             List<String> items = new List<String>();
 
-            foreach (String item in lstTipo.SelectedItems)
+            foreach (String item in lst.SelectedItems)
             {
                 items.Add(item);
             }
@@ -136,19 +135,25 @@
             }
             else
             {
-                if (lstRubros.SelectedItems.Count == 1)
+                if (lstRubros.SelectedItems.Count > 0)
                 {
-                    s = $"(Tipo={herramientas.Codigo_Seleccionado(lstRubros.Text)})";
+                    foreach (string sn in lstRubros.SelectedItems)
+                    {
+                        s = $"{s}, {herramientas.Codigo_Seleccionado(sn)}";
+                    }
+                    s = $"(Id_Rubro IN ({s.Substring(2)}))";
+
                 }
                 else
                 {
-                    if (lstRubros.SelectedItems.Count > 1)
+                    if (lstGrupos.SelectedItems.Count > 0)
                     {
-                        foreach (string sn in lstRubros.SelectedItems)
+                        foreach (string sn in lstGrupos.SelectedItems)
                         {
                             s = $"{s}, {herramientas.Codigo_Seleccionado(sn)}";
                         }
-                        s = $"(Tipo IN ({s.Substring(2)}))";
+                        s = $"(Id_Grupo IN ({s.Substring(2)}))";
+
                     }
                 }
 
@@ -166,22 +171,22 @@
                 }
             }
 
-            lstTipo.Items.Clear();
-            dt = Tipos.Datos(s);
+            lst.Items.Clear();
+            dt = Tipo.Datos(s);
             foreach (DataRow dr in dt.Rows)
             {
-                lstTipo.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
+                lst.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
             }
 
             if (items.Count > 0)
             {
                 for (int n = 0; n < items.Count; n++)
                 {
-                    for (int i = 0; i < lstTipo.Items.Count; i++)
+                    for (int i = 0; i < lst.Items.Count; i++)
                     {
-                        if (items[n].ToString() == lstTipo.Items[i].ToString())
+                        if (items[n].ToString() == lst.Items[i].ToString())
                         {
-                            lstTipo.SetSelected(i, true);
+                            lst.SetSelected(i, true);
                             break;
                         }
                     }
@@ -192,48 +197,52 @@
 
         public void Siguiente()
         {
-            if (lstTipo.Items.Count > 0)
+            if (lst.Items.Count > 0)
             {
-                int i = lstTipo.SelectedIndex;
+                int i = lst.SelectedIndex;
 
                 if (i == -1)
                 {
-                    lstTipo.SetSelected(0, true);
+                    lst.SetSelected(0, true);
                 }
                 else
                 {
-                    lstTipo.SetSelected(i, false);
-                    if (i == lstTipo.Items.Count - 1)
+                    cCancel = true;
+                    lst.SetSelected(i, false);
+                    cCancel = false;
+                    if (i == lst.Items.Count - 1)
                     {
-                        lstTipo.SetSelected(0, true);
+                        lst.SetSelected(0, true);
                     }
                     else
                     {
-                        lstTipo.SetSelected(i + 1, true);
+                        lst.SetSelected(i + 1, true);
                     }
                 }
             }
         }
         public void Anterior()
         {
-            if (lstTipo.Items.Count > 0)
+            if (lst.Items.Count > 0)
             {
-                int i = lstTipo.SelectedIndex;
+                int i = lst.SelectedIndex;
 
                 if (i == -1)
                 {
-                    lstTipo.SetSelected(lstTipo.Items.Count - 1, true);
+                    lst.SetSelected(lst.Items.Count - 1, true);
                 }
                 else
                 {
-                    lstTipo.SetSelected(i, false);
+                    cCancel = true;
+                    lst.SetSelected(i, false);
+                    cCancel = false;
                     if (i == 0)
                     {
-                        lstTipo.SetSelected(lstTipo.Items.Count - 1, true);
+                        lst.SetSelected(lst.Items.Count - 1, true);
                     }
                     else
                     {
-                        lstTipo.SetSelected(i - 1, true);
+                        lst.SetSelected(i - 1, true);
                     }
                 }
             }
@@ -265,39 +274,40 @@
             }
         }
 
+
         private void CmdTodos_Click(object sender, EventArgs e)
         {
             cCancel = true;
-            SelectionMode previousMode = lstTipo.SelectionMode;
-            lstTipo.SelectionMode = SelectionMode.MultiSimple;
+            SelectionMode previousMode = lst.SelectionMode;
+            lst.SelectionMode = SelectionMode.MultiSimple;
 
-            lstTipo.BeginUpdate();
+            lst.BeginUpdate();
 
-            for (int i = 0; i < lstTipo.Items.Count; i++)
+            for (int i = 0; i < lst.Items.Count; i++)
             {
-                lstTipo.SelectedIndices.Add(i);
+                lst.SelectedIndices.Add(i);
             }
 
-            lstTipo.EndUpdate();
-            lstTipo.SelectionMode = previousMode;
+            lst.EndUpdate();
+            lst.SelectionMode = previousMode;
             cCancel = false;
             Cambio_Seleccion(this, e);
         }
         private void CmdInvertir_Click(object sender, EventArgs e)
         {
             cCancel = true;
-            SelectionMode previousMode = lstTipo.SelectionMode;
-            lstTipo.SelectionMode = SelectionMode.MultiSimple;
+            SelectionMode previousMode = lst.SelectionMode;
+            lst.SelectionMode = SelectionMode.MultiSimple;
 
-            lstTipo.BeginUpdate();
+            lst.BeginUpdate();
 
-            for (int i = 0; i < lstTipo.Items.Count; i++)
+            for (int i = 0; i < lst.Items.Count; i++)
             {
-                lstTipo.SetSelected(i, !lstTipo.GetSelected(i));
+                lst.SetSelected(i, !lst.GetSelected(i));
             }
 
-            lstTipo.EndUpdate();
-            lstTipo.SelectionMode = previousMode;
+            lst.EndUpdate();
+            lst.SelectionMode = previousMode;
             cCancel = false;
             Cambio_Seleccion(this, e);
         }
@@ -312,18 +322,16 @@
             lstRubros.SelectedIndex = -1;
         }
 
-     
         private void RdId_CheckedChanged(object sender, EventArgs e)
         {
-            Tipos.Ordern_XId = rdId.Checked;
+            Tipo.Ordern_XId = rdId.Checked;
             Cargar();
         }
 
         private void CmdNinguno_Click(object sender, EventArgs e)
         {
-            lstTipo.SelectedIndex = -1;
+            lst.SelectedIndex = -1;
         }
 
-        
     }
 }

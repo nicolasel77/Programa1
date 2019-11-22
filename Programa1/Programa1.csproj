@@ -187,6 +187,12 @@
     <Compile Include="Controles\cSucursales.Designer.cs">
       <DependentUpon>cSucursales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controles\cTiposGastosSucursal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\cTiposGastosSucursal.Designer.cs">
+      <DependentUpon>cTiposGastosSucursal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Datos\frmProductos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -294,6 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cSucursales.resx">
       <DependentUpon>cSucursales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\cTiposGastosSucursal.resx">
+      <DependentUpon>cTiposGastosSucursal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Datos\frmProductos.resx">
       <DependentUpon>frmProductos.cs</DependentUpon>

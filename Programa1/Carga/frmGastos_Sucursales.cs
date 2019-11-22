@@ -59,6 +59,7 @@
                         if (e.Shift)
                         {
                             e.Handled = true;
+                            cTipos.Siguiente();
                         }
                     }
                     break;
@@ -73,6 +74,7 @@
                         if (e.Shift)
                         {
                             e.Handled = true;
+                            cTipos.Anterior();
                         }
                     }
                     break;
@@ -114,11 +116,12 @@
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
 
-            //string t = c.Cadena("Id_Sucursales");
+            string t = cTipos.Cadena("Id_Tipo");
             string s = cSucs.Cadena("Id_Sucursales");
             string f = cFecha.Cadena();
 
             s = h.Unir(f, s);
+            s = h.Unir(s, t);
             s = h.Unir(s, p);
 
             return s;
@@ -131,7 +134,7 @@
             grdGastos.set_ColW(c_IdSuc, 30);
             grdGastos.set_ColW(c_IdSuc + 1, 100);
             grdGastos.set_ColW(c_IdTipo, 30);
-            grdGastos.set_ColW(c_Descripcion, 150);
+            grdGastos.set_ColW(c_Descripcion, 350);
             grdGastos.set_ColW(c_Importe, 60);
 
             grdGastos.Columnas[c_Importe].Format = "N2";
@@ -159,11 +162,6 @@
         }
 
 
-        private void CProds_Cambio_Seleccion(object sender, EventArgs e)
-        {
-            cmdMostrar.PerformClick();
-        }
-
         private void CSucs_Cambio_Seleccion(object sender, EventArgs e)
         {
             cmdMostrar.PerformClick();
@@ -172,6 +170,7 @@
         private void CFecha_Cambio_Seleccion(object sender, EventArgs e)
         {
             cSucs.Filtro_In = $" (SELECT DISTINCT Id_Sucursales FROM Gastos_Sucursales WHERE {cFecha.Cadena()})";
+            cTipos.Filtro_In = $" (SELECT DISTINCT Id_Tipo FROM Gastos_Sucursales WHERE {cFecha.Cadena()})";
             cmdMostrar.PerformClick();
         }
 
@@ -301,7 +300,6 @@
                     break;
             }
         }
-
 
         private void LblCant_Click(object sender, EventArgs e)
         {

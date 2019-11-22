@@ -1,6 +1,6 @@
 ﻿namespace Programa1.Controles
 {
-    partial class cTipoGastosSucursal
+    partial class cTiposGastosSucursal
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lstTipo = new System.Windows.Forms.ListBox();
+            this.lst = new System.Windows.Forms.ListBox();
             this.lstRubros = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.cmdInvertir = new System.Windows.Forms.Button();
@@ -40,14 +40,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.rdId = new System.Windows.Forms.RadioButton();
             this.rdOrden = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.cmdTodosTipos = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lstGrupos = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.lstGrupos = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,31 +55,32 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lstTipo
+            // lst
             // 
-            this.lstTipo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstTipo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstTipo.FormattingEnabled = true;
-            this.lstTipo.Location = new System.Drawing.Point(6, 21);
-            this.lstTipo.Name = "lstTipo";
-            this.lstTipo.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstTipo.Size = new System.Drawing.Size(275, 572);
-            this.lstTipo.TabIndex = 0;
-            this.lstTipo.SelectedIndexChanged += new System.EventHandler(this.Lst_SelectedIndexChanged);
-            this.lstTipo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Lst_MouseUp);
+            this.lst.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lst.FormattingEnabled = true;
+            this.lst.Location = new System.Drawing.Point(6, 21);
+            this.lst.Name = "lst";
+            this.lst.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lst.Size = new System.Drawing.Size(225, 455);
+            this.lst.TabIndex = 0;
+            this.lst.SelectedIndexChanged += new System.EventHandler(this.Lst_SelectedIndexChanged);
+            this.lst.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Lst_MouseUp);
             // 
             // lstRubros
             // 
-            this.lstRubros.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lstRubros.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lstRubros.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lstRubros.FormattingEnabled = true;
             this.lstRubros.Location = new System.Drawing.Point(3, 21);
             this.lstRubros.Name = "lstRubros";
             this.lstRubros.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstRubros.Size = new System.Drawing.Size(116, 247);
+            this.lstRubros.Size = new System.Drawing.Size(93, 221);
             this.lstRubros.TabIndex = 4;
             this.lstRubros.SelectedIndexChanged += new System.EventHandler(this.LstTipos_SelectedIndexChanged);
             // 
@@ -99,7 +100,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.cmdNinguno);
             this.splitContainer1.Panel1.Controls.Add(this.cmdTodos);
             this.splitContainer1.Panel1.Controls.Add(this.lblTitulo);
-            this.splitContainer1.Panel1.Controls.Add(this.lstTipo);
+            this.splitContainer1.Panel1.Controls.Add(this.lst);
             // 
             // splitContainer1.Panel2
             // 
@@ -113,15 +114,15 @@
             this.splitContainer1.Panel2.Controls.Add(this.lstGrupos);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.lstRubros);
-            this.splitContainer1.Size = new System.Drawing.Size(410, 635);
-            this.splitContainer1.SplitterDistance = 284;
+            this.splitContainer1.Size = new System.Drawing.Size(337, 512);
+            this.splitContainer1.SplitterDistance = 234;
             this.splitContainer1.TabIndex = 2;
             // 
             // cmdInvertir
             // 
             this.cmdInvertir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdInvertir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdInvertir.Location = new System.Drawing.Point(244, 607);
+            this.cmdInvertir.Location = new System.Drawing.Point(194, 484);
             this.cmdInvertir.Name = "cmdInvertir";
             this.cmdInvertir.Size = new System.Drawing.Size(37, 23);
             this.cmdInvertir.TabIndex = 3;
@@ -134,7 +135,7 @@
             // 
             this.cmdNinguno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdNinguno.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdNinguno.Location = new System.Drawing.Point(199, 607);
+            this.cmdNinguno.Location = new System.Drawing.Point(149, 484);
             this.cmdNinguno.Name = "cmdNinguno";
             this.cmdNinguno.Size = new System.Drawing.Size(37, 23);
             this.cmdNinguno.TabIndex = 2;
@@ -147,7 +148,7 @@
             // 
             this.cmdTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdTodos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdTodos.Location = new System.Drawing.Point(154, 607);
+            this.cmdTodos.Location = new System.Drawing.Point(104, 484);
             this.cmdTodos.Name = "cmdTodos";
             this.cmdTodos.Size = new System.Drawing.Size(37, 23);
             this.cmdTodos.TabIndex = 1;
@@ -169,14 +170,13 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.rdId);
             this.panel1.Controls.Add(this.rdOrden);
-            this.panel1.Location = new System.Drawing.Point(3, 523);
+            this.panel1.Location = new System.Drawing.Point(3, 400);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(116, 68);
+            this.panel1.Size = new System.Drawing.Size(93, 68);
             this.panel1.TabIndex = 9;
             // 
             // label4
@@ -214,11 +214,23 @@
             this.rdOrden.Text = "Nombre";
             this.rdOrden.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Location = new System.Drawing.Point(64, 376);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(31, 19);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "N";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.CmdTodosTipos_Click);
+            // 
             // cmdTodosTipos
             // 
-            this.cmdTodosTipos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdTodosTipos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdTodosTipos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdTodosTipos.Location = new System.Drawing.Point(88, 274);
+            this.cmdTodosTipos.Location = new System.Drawing.Point(64, 252);
             this.cmdTodosTipos.Name = "cmdTodosTipos";
             this.cmdTodosTipos.Size = new System.Drawing.Size(31, 19);
             this.cmdTodosTipos.TabIndex = 5;
@@ -232,9 +244,9 @@
             this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBuscar.Location = new System.Drawing.Point(6, 612);
+            this.txtBuscar.Location = new System.Drawing.Point(6, 489);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(105, 13);
+            this.txtBuscar.Size = new System.Drawing.Size(82, 13);
             this.txtBuscar.TabIndex = 6;
             this.toolTip1.SetToolTip(this.txtBuscar, "Busca por Id y Nombre");
             this.txtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
@@ -243,11 +255,35 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 594);
+            this.label3.Location = new System.Drawing.Point(3, 471);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Buscar:";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label1.Location = new System.Drawing.Point(0, 284);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Grupo";
+            // 
+            // lstGrupos
+            // 
+            this.lstGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstGrupos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstGrupos.FormattingEnabled = true;
+            this.lstGrupos.Location = new System.Drawing.Point(2, 305);
+            this.lstGrupos.Name = "lstGrupos";
+            this.lstGrupos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstGrupos.Size = new System.Drawing.Size(93, 65);
+            this.lstGrupos.TabIndex = 4;
             // 
             // label2
             // 
@@ -256,53 +292,18 @@
             this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 18);
+            this.label2.Size = new System.Drawing.Size(49, 18);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Rubros";
+            this.label2.Text = "Rubro";
             // 
-            // lstGrupos
-            // 
-            this.lstGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstGrupos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstGrupos.FormattingEnabled = true;
-            this.lstGrupos.Location = new System.Drawing.Point(3, 324);
-            this.lstGrupos.Name = "lstGrupos";
-            this.lstGrupos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstGrupos.Size = new System.Drawing.Size(116, 78);
-            this.lstGrupos.TabIndex = 4;
-            this.lstGrupos.SelectedIndexChanged += new System.EventHandler(this.LstTipos_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label1.Location = new System.Drawing.Point(0, 303);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Grupos";
-            // 
-            // button1
-            // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(65, 408);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(31, 19);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "N";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.CmdTodosTipos_Click);
-            // 
-            // cTipoGastosSucursal
+            // cTiposGastosSucursal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.Controls.Add(this.splitContainer1);
-            this.Name = "cTipoGastosSucursal";
-            this.Size = new System.Drawing.Size(416, 641);
+            this.Name = "cTiposGastosSucursal";
+            this.Size = new System.Drawing.Size(343, 518);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -318,7 +319,7 @@
         #endregion
 
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.ListBox lstTipo;
+        private System.Windows.Forms.ListBox lst;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lstRubros;
         private System.Windows.Forms.SplitContainer splitContainer1;

@@ -143,6 +143,7 @@
         private void DtDesde_ValueChanged(object sender, EventArgs e)
         {
             fecha_Actual = dtDesde.Value;
+            Cambio_Seleccion(null, null);
         }
 
         private void LstMes_SelectedIndexChanged(object sender, EventArgs e)
@@ -165,6 +166,7 @@
                     a = lstMesAño.Text;
                 }
                 fecha_Actual = Convert.ToDateTime($"1/{(lstMes.SelectedIndex + 1).ToString()}/{a}");
+                Cambio_Seleccion(null, null);
             }
         }
 
@@ -176,8 +178,8 @@
         {
             if (lstAños.SelectedIndex > -1)
             {
-                string a = lstMesAño.Text;
-                fecha_Actual = Convert.ToDateTime($"1/{(lstMes.SelectedIndex + 1).ToString()}/{a}");
+                fecha_Actual = Convert.ToDateTime($"1/1/{lstAños.Text}");
+                Cambio_Seleccion(null, null);
             }
         }
 
