@@ -11,8 +11,6 @@ namespace Programa1.DB
     {
         public Sucursales()
         {
-            Tipo = new TipoSucursales();
-            Localidad = new Localidades();
         }
 
         public enum Filtrar_SucsClientes { Todas = 0, Sucursales, Clientes };
@@ -36,11 +34,11 @@ namespace Programa1.DB
         [Key]
         public int Id { get; set; }
 
-        [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
+        [MaxLength(50, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
         public string Nombre { get; set; }
 
-        public TipoSucursales Tipo { get; set; }
+        public TipoSucursales Tipo { get; set; } = new TipoSucursales();
 
         public bool Ver { get; set; }
 
@@ -54,7 +52,7 @@ namespace Programa1.DB
 
         public string Alias { get; set; }
 
-        public Localidades Localidad { get; set; }
+        public Localidades Localidad { get; set; } = new Localidades();
 
         public string Balanza { get; set; }
 

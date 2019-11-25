@@ -5,6 +5,7 @@
     using System.Windows.Forms;
     using Programa1.Carga;
     using Programa1.Carga.Precios;
+    using Programa1.Carga.Empleados;
     
     public partial class frmMain : Form
     {
@@ -681,7 +682,7 @@
         {
             foreach (ToolStripMenuItem t in tstMenu.Items)
             {
-                if (t.Text == "Cantidad_Clientes")
+                if (t.Text == "Empleados")
                 {
                     tstMenu.Items.Remove(t);
                     break;
@@ -689,7 +690,55 @@
             }
             foreach (Form f in forms)
             {
-                if (f.Name == "frmCantidad_Clientes")
+                if (f.Name == "frmEmpleados")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void EmpleadosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmEmpleados")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmEmpleados");
+                t.Text = "Empleados";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmEmpleados = new frmEmpleados();
+                frmEmpleados.MdiParent = this;
+                frmEmpleados.Disposed += FrmEmpleados_Disposed;
+                forms.Add(frmEmpleados);
+                frmEmpleados.Show();
+                frmEmpleados.WindowState = FormWindowState.Minimized;
+                frmEmpleados.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmEmpleados_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Empleados")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmEmpleados")
                 {
                     forms.Remove(f);
                     break;

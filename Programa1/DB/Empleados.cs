@@ -1,4 +1,5 @@
-﻿namespace Programa1.DB
+﻿
+namespace Programa1.DB
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -6,75 +7,107 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Productos
+    class Empleados
     {
-        public Productos()
-        {            
+        public Empleados()
+        {
         }
 
-        public Productos(int id, string nombre, int tipo, bool ver, bool imp, bool pesable, int multi)
+        public enum Orden_X {Nombre = 0, Suc, Id, Fecha_Nac, Alta, Baja, DNI, Tipo};
+
+        public Empleados(int id,
+                         string nombre,
+                         TipoEmpleados tipo,
+                         string domicilio,
+                         Localidades localidad,
+                         int dni,
+                         DateTime fecha,
+                         string telefono,
+                         DateTime alta,
+                         DateTime baja,
+                         Sucursales sucursal)
         {
             Id = id;
             Nombre = nombre;
-            Tipo.Id = tipo;
-            Ver = ver;
-            Imprimir = imp;
-            Pesable = pesable;
-            Multiplicador = multi;
+            DNI = dni;
+            Fecha_Nacimiento = fecha;
+            Domicilio = domicilio;
+            Telefono = telefono;
+            Alta = alta;
+            Baja = baja;
+            Sucursal = sucursal;
+            Tipo = tipo;
+            Localidad = localidad;
+
         }
 
         [Required]
         [Key]
         public int Id { get; set; }
-
-        [MaxLength(80, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
+        [MaxLength(100, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
         public string Nombre { get; set; }
+        public int DNI { get; set; }
+        public DateTime Fecha_Nacimiento { get; set; }
+        [MaxLength(100, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
+        public string Domicilio { get; set; }
+        public string Telefono { get; set; }
+        public DateTime Alta { get; set; }
+        public DateTime Baja { get; set; }
 
-        public TipoProductos Tipo { get; set; } = new TipoProductos();
+        public TipoEmpleados Tipo { get; set; } = new TipoEmpleados();
+        public Localidades Localidad { get; set; }
+        public Sucursales Sucursal { get; set; }
 
-        public bool Ver { get; set; }
-
-        public bool Imprimir { get; set; }
-
-        public bool Pesable { get; set; }
-
-        public int Multiplicador { get; set; }
-
-
-        public bool Mostrar_Ocultos { get; set; } = false;
-        public bool Ordern_XId { get; set; } = true;
+        public Orden_X Ordernar_por { get; set; }
+        public bool Mostrar_Bajas { get; set; } = false;
 
         public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
             Herramientas.Herramientas h = new Herramientas.Herramientas();
 
-            if (Mostrar_Ocultos == false)
-            {
-                filtro = h.Unir(filtro, " (Ver=1) ");
-            }
 
+            if (Mostrar_Bajas == false)
+            {
+                filtro = h.Unir(filtro, " (BAJA IS NULL) ");
+            }
             if (filtro.Length > 0)
             {
                 filtro = " WHERE " + filtro;
             }
-
-            if (Ordern_XId == false)
+            switch (Ordernar_por)
             {
-                filtro += " ORDER BY Nombre ";
+                case Orden_X.Nombre:
+                    filtro += " ORDER BY Nombre ";
+                    break;
+                case Orden_X.Id:
+                    filtro += " ORDER BY Id ";
+                    break;
+                case Orden_X.Suc:
+                    filtro += " ORDER BY Id_Sucursales ";
+                    break;
+                case Orden_X.Tipo:
+                    filtro += " ORDER BY Id_Tipo ";
+                    break;
+                case Orden_X.Fecha_Nac:
+                    filtro += " ORDER BY Fecha_Nacimiento ";
+                    break;
+                case Orden_X.DNI:
+                    filtro += " ORDER BY DNI ";
+                    break;
+                case Orden_X.Alta:
+                    filtro += " ORDER BY Alta ";
+                    break;
+                case Orden_X.Baja:
+                    filtro += " ORDER BY Baja ";
+                    break;
             }
-            else
-            {
-                filtro += " ORDER BY Id";
-            }
-
-
+            
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Productos" + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Empleados" + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -89,55 +122,20 @@
             return dt;
         }
 
-        public void Siguiente()
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 * FROM vw_Productos WHERE Id>{Id} ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-                DataRow dr;
-
-                if (dt.Rows.Count > 0)
-                {
-                    dr = dt.Rows[0];
-                    Asignar(dr);
-                }
-                else
-                {
-                    comandoSql.CommandText = ($"SELECT TOP 1 * FROM vw_Productos ORDER BY Id");
-                    comandoSql.CommandType = CommandType.Text;
-
-                    SqlDat.Fill(dt);
-
-                    if (dt.Rows.Count > 0)
-                    {
-                        dr = dt.Rows[0];
-                        Asignar(dr);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                Id = 0;
-            }
-        }
-
         private void Asignar(DataRow dr)
         {
             Id = Convert.ToInt32(dr["Id"]);
             Nombre = dr["Nombre"].ToString();
+            DNI = Convert.ToInt32(dr["DNI"]);
+            Fecha_Nacimiento = Convert.ToDateTime(dr["Fecha_Nacimiento"]);
+            Domicilio = dr["Domicilio"].ToString();
+            Telefono = dr["Telefono"].ToString();
+            Alta = Convert.ToDateTime(dr["Alta"]);
+            Baja = Convert.ToDateTime(dr["Baja"]);
+
+            Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+            Localidad.Id = Convert.ToInt32(dr["Id_Localidades"]);
             Tipo.Id = Convert.ToInt32(dr["Id_Tipo"]);
-            Ver = Convert.ToBoolean(dr["Ver"]);
-            Imprimir = Convert.ToBoolean(dr["Imprimir"]);
-            Pesable = Convert.ToBoolean(dr["Pesable"]);
-            Multiplicador = Convert.ToInt32(dr["Multiplicador"]);
         }
 
         public void Actualizar()
@@ -146,12 +144,9 @@
 
             try
             {
-                string vver = Ver ? "1" : "0";
-                string vimp = Imprimir ? "1" : "0";
-                string vpesa = Pesable ? "1" : "0";
-
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Productos SET Nombre='{Nombre}', Id_Tipo={Tipo.Id}, Ver={vver}, Imprimir={vimp}, Pesable={vpesa}, Multiplicador={Multiplicador} WHERE Id={Id}", sql);
+                    new SqlCommand($"UPDATE Empleados SET Nombre='{Nombre}', Id_Tipo={Tipo.Id}, Domicilio='{Domicilio}'" +
+                    $",Id_Localidades={Localidad.Id} WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -172,13 +167,9 @@
 
             try
             {
-                string vver = Ver ? "1" : "0";
-                string vimp = Imprimir ? "1" : "0";
-                string vpesa = Pesable ? "1" : "0";
-
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Productos (Id, Nombre, Id_Tipo, Ver, Imprimir, Pesable, Multiplicador) VALUES({Id}, '{Nombre}', {Tipo.Id}, {vver}, " +
-                    $"{vimp}, {vpesa}, {Multiplicador})", sql);
+                    new SqlCommand($"INSERT INTO Empleados (Id, Nombre, Id_Tipo, Domicilio, Id_Localidades,) VALUES({Id}, '{Nombre}', {Tipo.Id}, " +
+                    $"'{Domicilio}', {Localidad.Id})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -199,7 +190,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Productos WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM Empleados WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -221,7 +212,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("SELECT Nombre FROM Productos WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("SELECT Nombre FROM Empleados WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;
@@ -255,7 +246,5 @@
                 return false;
             }
         }
-
-
     }
 }

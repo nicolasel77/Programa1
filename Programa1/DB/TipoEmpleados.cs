@@ -6,66 +6,37 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Proveedores
+    class TipoEmpleados
     {
-        public Proveedores()
-        {   
+        public TipoEmpleados()
+        {
         }
 
-        public Proveedores(int id, string nombre, int tipo, bool ver)
+        public TipoEmpleados(int id, string nombre)
         {
             Id = id;
             Nombre = nombre;
-            Tipo.Id = tipo;
-            Ver = ver;            
         }
 
         [Required]
         [Key]
         public int Id { get; set; }
 
-        [MaxLength(50, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
+        [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
         public string Nombre { get; set; }
 
-        public TipoProveedores Tipo { get; set; } = new TipoProveedores();
 
-        public bool Ver { get; set; }
-
-
-        public bool Mostrar_Ocultos { get; set; } = false;
-        public bool Ordern_XId { get; set; } = true;
-
-
-        public DataTable Datos(string filtro = "")
+        public DataTable Datos()
         {
-           var dt = new DataTable("Datos");
+            //Cadena de conexion y DataTable (tabla)
+            var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            Herramientas.Herramientas h = new Herramientas.Herramientas();
-
-            if (Mostrar_Ocultos == false)
-            {
-                filtro = h.Unir(filtro, " (Ver=1) ");
-            }
-
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-
-            if (Ordern_XId == false)
-            {
-                filtro += " ORDER BY Nombre ";
-            }
-            else
-            {
-                filtro += " ORDER BY Id";
-            }
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT Id, Tipo, Nombre, Ver FROM Proveedores" + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM TipoEmpleados", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -86,10 +57,7 @@
 
             try
             {
-                string vver = Ver ? "1" : "0";
-                
-                SqlCommand command =
-                    new SqlCommand($"UPDATE Proveedores SET Nombre='{Nombre}', Tipo={Tipo.Id}, Ver={vver} WHERE Id={Id}", sql);
+                SqlCommand command = new SqlCommand(string.Format("UPDATE TipoEmpleados SET Nombre='{0}' WHERE Id={1}", Nombre, Id), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -110,10 +78,7 @@
 
             try
             {
-                string vver = Ver ? "1" : "0";
-                
-                SqlCommand command =
-                    new SqlCommand($"INSERT INTO Proveedores (Id, Nombre, Tipo, Ver) VALUES({Id}, '{Nombre}', {Tipo.Id}, {vver})", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO TipoEmpleados (Id, Nombre) VALUES({Id}, '{Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -134,7 +99,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Proveedores WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand(string.Format("DELETE FROM TipoEmpleados WHERE Id={0}", Id), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -156,7 +121,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("SELECT Nombre FROM Proveedores WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("SELECT Nombre FROM TipoEmpleados WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;
