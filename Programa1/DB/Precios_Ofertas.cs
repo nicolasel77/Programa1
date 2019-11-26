@@ -9,7 +9,6 @@
     {
         public Lista_Ofertas()
         {
-            Producto = new Productos();
         }
 
         public Lista_Ofertas(int orden, Productos prod, string desc, Single pr)
@@ -21,7 +20,7 @@
         }
 
         public int Orden { get; set; }
-        public Productos Producto { get; set; }
+        public Productos Producto { get; set; } = new Productos();
         public string Descripcion { get; set; }
 
         public Single Costo { get; set; }

@@ -3,17 +3,15 @@ namespace Programa1.Datos
 {
     using Programa1.DB;
     using System;
-    using System.Data;
     using System.Windows.Forms;
 
     public partial class frmSucursales : Form
     {
-        private TipoSucursales tipoSucursales = new TipoSucursales();
         private Sucursales Sucs = new Sucursales();
         private Partidos Partidos = new Partidos();
         private Localidades Localidades = new Localidades();
 
-        
+
         public frmSucursales()
         {
             InitializeComponent();
@@ -33,8 +31,8 @@ namespace Programa1.Datos
             Sucs.Mostrar_Ocultos = true;
             Sucs.Filtro_SucCliente = Sucursales.Filtrar_SucsClientes.Todas;
             //Datos
-            grdTipo.MostrarDatos(tipoSucursales.Datos(), true);
-                        
+            grdTipo.MostrarDatos(Sucs.Tipo.Datos(), true);
+
             grdPartidos.MostrarDatos(Partidos.Datos(), true);
 
             grdLocalidades.MostrarDatos(Localidades.Datos(), true);
@@ -49,7 +47,7 @@ namespace Programa1.Datos
             grdLocalidades.set_ColW(0, 40);
 
             grdSucursales.set_ColW(0, 40);
-            
+
         }
 
 
@@ -68,8 +66,8 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        tipoSucursales.Id = Convert.ToInt32(a);
-                        if (tipoSucursales.Existe() == true)
+                        Sucs.Tipo.Id = Convert.ToInt32(a);
+                        if (Sucs.Tipo.Existe() == true)
                         {
                             Mensaje($"El Tipo '{a.ToString()}' ya existe.");
                             grdTipo.ErrorEnTxt();
@@ -77,7 +75,7 @@ namespace Programa1.Datos
                         else
                         {
                             grdTipo.set_Texto(f, c, a);
-                            tipoSucursales.Agregar();
+                            Sucs.Tipo.Agregar();
                             grdTipo.ActivarCelda(f, 1);
                         }
                     }
@@ -91,10 +89,10 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        tipoSucursales.Id = i;
-                        tipoSucursales.Nombre = a.ToString();
+                        Sucs.Tipo.Id = i;
+                        Sucs.Tipo.Nombre = a.ToString();
                         grdTipo.set_Texto(f, c, a);
-                        tipoSucursales.Actualizar();
+                        Sucs.Tipo.Actualizar();
                         grdTipo.AgregarFila();
                         grdTipo.ActivarCelda(f + 1, 0);
                     }
@@ -104,8 +102,8 @@ namespace Programa1.Datos
 
         private void GrdTipo_CambioFila(short Fila)
         {
-            tipoSucursales.Id = Convert.ToInt32(grdTipo.get_Texto(Fila, 0));
-            tipoSucursales.Nombre = grdTipo.get_Texto(Fila, 1).ToString();
+            Sucs.Tipo.Id = Convert.ToInt32(grdTipo.get_Texto(Fila, 0));
+            Sucs.Tipo.Nombre = grdTipo.get_Texto(Fila, 1).ToString();
         }
 
         private void GrdTipo_KeyPress(object sender, short e)
@@ -133,8 +131,8 @@ namespace Programa1.Datos
                 {
                     if (Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0)) != 0)
                     {
-                        tipoSucursales.Id = Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0));
-                        tipoSucursales.Borrar();
+                        Sucs.Tipo.Id = Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0));
+                        Sucs.Tipo.Borrar();
                         grdTipo.BorrarFila(grdTipo.Row);
                     }
 
@@ -277,7 +275,7 @@ namespace Programa1.Datos
                         Localidades.Actualizar();
                         grdLocalidades.ActivarCelda(f, 2);
                     }
-                    
+
                     break;
                 case 2: // Nombre
                     if (i == 0)
@@ -419,7 +417,7 @@ namespace Programa1.Datos
                         }
                     }
                     break;
-                
+
                 case 3: // Ver
                     if (i == 0)
                     {
@@ -477,7 +475,7 @@ namespace Programa1.Datos
                         grdSucursales.set_Texto(f, c, a);
                         Sucs.Direccion = a.ToString();
                         Sucs.Actualizar();
-                        grdSucursales.ActivarCelda(f , 7);
+                        grdSucursales.ActivarCelda(f, 7);
                     }
                     break;
                 case 7: // Alias

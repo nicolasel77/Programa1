@@ -9,8 +9,6 @@
     {
         public Precios_Sucursales()
         {
-            Producto = new Productos();
-            Sucursal = new Sucursales();
         }
 
         public Precios_Sucursales(int id, DateTime fecha, Productos prod, Sucursales sucursal, float pr)
@@ -24,8 +22,8 @@
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Productos Producto { get; set; }
-        public Sucursales Sucursal { get; set; }
+        public Productos Producto { get; set; } = new Productos();
+        public Sucursales Sucursal { get; set; } = new Sucursales();
         public Single Precio { get; set; }
 
         public Single Buscar()

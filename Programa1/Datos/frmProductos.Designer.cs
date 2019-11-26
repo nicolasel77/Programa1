@@ -155,7 +155,6 @@
             this.grdProductos.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdProductos_Editado);
             this.grdProductos.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdProductos_CambioFila);
             this.grdProductos.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdProductos_KeyUp);
-            this.grdProductos.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.GrdProductos_KeyPress);
             // 
             // label3
             // 

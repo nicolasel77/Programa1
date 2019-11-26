@@ -7,7 +7,6 @@
 
     public partial class frmProductos : Form
     {
-        private TipoProductos tipoProductos = new TipoProductos();
         private Productos prods = new Productos();
 
         private DataTable dt;
@@ -15,14 +14,13 @@
         public frmProductos()
         {
             InitializeComponent();
-
         }
 
         private void FrmProductos_Load(object sender, EventArgs e)
         {
             //Tipo Producto
             //Datos
-            dt = tipoProductos.Datos();
+            dt = prods.Tipo.Datos();
             grdTipo.MostrarDatos(dt, true);
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdTipo.TeclasManejadas = n;
@@ -55,8 +53,8 @@
                     }
                     else
                     {
-                        tipoProductos.Id = Convert.ToInt32(a);
-                        if (tipoProductos.Existe() == true)
+                        prods.Tipo.Id = Convert.ToInt32(a);
+                        if (prods.Tipo.Existe() == true)
                         {
                             Mensaje($"El Tipo '{a.ToString()}' ya existe.");
                             grdTipo.ErrorEnTxt();
@@ -64,7 +62,7 @@
                         else
                         {
                             grdTipo.set_Texto(f, c, a);
-                            tipoProductos.Agregar();
+                            prods.Tipo.Agregar();
                             grdTipo.ActivarCelda(f, 1);
                         }
                     }
@@ -78,10 +76,10 @@
                     }
                     else
                     {
-                        tipoProductos.Id = i;
-                        tipoProductos.Nombre = a.ToString();
+                        prods.Tipo.Id = i;
+                        prods.Tipo.Nombre = a.ToString();
                         grdTipo.set_Texto(f, c, a);
-                        tipoProductos.Actualizar();
+                        prods.Tipo.Actualizar();
                         grdTipo.AgregarFila();
                         grdTipo.ActivarCelda(f + 1, 0);
                     }
@@ -91,8 +89,8 @@
 
         private void GrdTipo_CambioFila(short Fila)
         {
-            tipoProductos.Id = Convert.ToInt32(grdTipo.get_Texto(Fila, 0));
-            tipoProductos.Nombre = grdTipo.get_Texto(Fila, 1).ToString();
+            prods.Tipo.Id = Convert.ToInt32(grdTipo.get_Texto(Fila, 0));
+            prods.Tipo.Nombre = grdTipo.get_Texto(Fila, 1).ToString();
         }
 
         private void GrdTipo_KeyPress(object sender, short e)
@@ -120,8 +118,8 @@
                 {
                     if (Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0)) != 0)
                     {
-                        tipoProductos.Id = Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0));
-                        tipoProductos.Borrar();
+                        prods.Tipo.Id = Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0));
+                        prods.Tipo.Borrar();
                         grdTipo.BorrarFila(grdTipo.Row);
                     }
 
@@ -175,7 +173,7 @@
                         if (prods.Tipo.Existe() == true)
                         {
                             grdProductos.set_Texto(f, c, a);
-                            grdProductos.set_Texto(f, c+1, prods.Tipo.Nombre);
+                            grdProductos.set_Texto(f, c + 1, prods.Tipo.Nombre);
                             prods.Actualizar();
                             grdProductos.ActivarCelda(f, 3);
                         }
@@ -264,11 +262,6 @@
             }
         }
 
-        private void GrdProductos_KeyPress(object sender, short e)
-        {
-
-        }
-
         private void GrdProductos_KeyUp(object sender, short e)
         {
             // F12
@@ -325,7 +318,7 @@
             {
                 grdProductos.MostrarDatos(prods.Datos());
             }
-
+            
         }
 
         #endregion 

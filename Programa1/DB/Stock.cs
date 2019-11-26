@@ -4,14 +4,13 @@
     using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
 
     class Stock
-    {       
+    {
         public Stock()
         {
-                       
+
         }
 
         public Stock(int id, DateTime fecha, Productos prod, string desc, Sucursales sucursal, float costo, float kilos)
@@ -23,7 +22,7 @@
             Sucursal = sucursal;
             Costo = costo;
             Kilos = kilos;
-            
+
         }
 
         public int Id { get; set; }
@@ -53,7 +52,7 @@
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);                
+                SqlDat.Fill(dt);
             }
             catch (Exception)
             {
@@ -143,7 +142,7 @@
             {
                 d = 0;
             }
-            
+
             return Convert.ToInt32(d);
         }
 
@@ -198,7 +197,7 @@
                 Id = 0;
             }
 
-            
+
         }
     }
 }

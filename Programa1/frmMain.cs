@@ -745,5 +745,53 @@
                 }
             }
         }
+
+        private void RetirosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmRetiros")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmRetiros");
+                t.Text = "Retiros";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmRetiros = new frmRetiros();
+                frmRetiros.MdiParent = this;
+                frmRetiros.Disposed += FrmRetiros_Disposed;
+                forms.Add(frmRetiros);
+                frmRetiros.Show();
+                frmRetiros.WindowState = FormWindowState.Minimized;
+                frmRetiros.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmRetiros_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Retiros")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmRetiros")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

@@ -1,31 +1,31 @@
-﻿
-namespace Programa1.DB
+﻿namespace Programa1.DB
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Precios_Proveedores
+    class Sueldos
     {
-        public Precios_Proveedores()
-        {            
+        public Sueldos()
+        {
         }
 
-        public Precios_Proveedores(int id, DateTime fecha, Productos prod, Proveedores proveedor, Single pr)
+        public Sueldos(int id, DateTime fecha, Empleados prod, TipoSueldo tipo, Single sueldo)
         {
             Id = id;
             Fecha = fecha;
-            Producto = prod;
-            Proveedor = proveedor;
-            Precio = pr;
+            Empleado = prod;
+            Tipo = tipo;
+            Sueldo = sueldo;
         }
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Productos Producto { get; set; } = new Productos();
-        public Proveedores Proveedor { get; set; } = new Proveedores();
-        public Single Precio { get; set; }
+        public Empleados Empleado { get; set; } = new Empleados();
+        public TipoSueldo Tipo { get; set; } = new TipoSueldo();
+        public Single Sueldo { get; set; }
 
         public Single Buscar()
         {
@@ -35,8 +35,8 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Proveedores  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={Producto.Id} AND ID_Proveedores={Proveedor.Id} ORDER BY Fecha DESC", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Sueldo FROM Sueldos  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
+                    $" AND Id_Empleados={Empleado.Id} AND ID_Tipo={Tipo.Id} ORDER BY Fecha DESC", conexionSql);
 
                 conexionSql.Open();
 
@@ -49,8 +49,8 @@ namespace Programa1.DB
             {
                 d = null;
             }
-            Precio = Convert.ToSingle(d);
-            return Precio;
+            Sueldo = Convert.ToSingle(d);
+            return Sueldo;
         }
 
         public DataTable Datos(string filtro = "")
@@ -65,51 +65,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_PreciosProveedores" + filtro, conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
-
-        public DataTable Tabla_Men()
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT Id, Nombre, 0.0 Precio FROM Productos WHERE Id_Tipo=2 AND Ver=1 ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
-
-        public DataTable Fechas_Men()
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT Fecha FROM vw_PreciosProveedores WHERE Id_Tipo=2 GROUP BY Fecha ORDER BY Fecha DESC", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Sueldos" + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -131,8 +87,8 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Precios_Proveedores " +
-                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Proveedores={Proveedor.Id}, Id_Productos={Producto.Id}, Precio={Precio.ToString().Replace(",", ".")} " +
+                    new SqlCommand($"UPDATE Sueldos " +
+                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Tipo={Tipo.Id}, Id_Empleados={Empleado.Id}, Sueldo={Sueldo.ToString().Replace(",", ".")} " +
                     $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -155,8 +111,8 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Precio_Proveedores (Fecha, Id_Proveedores, Id_Productos, Precio) " +
-                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Proveedor.Id}, {Producto.Id}, {Precio.ToString().Replace(",", ".")} )", sql);
+                    new SqlCommand($"INSERT INTO Sueldos (Fecha, Id_Tipo, Id_Empleados, Sueldo) " +
+                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Tipo.Id}, {Empleado.Id}, {Sueldo.ToString().Replace(",", ".")} )", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -177,7 +133,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Precios_Proveedores WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM Sueldos WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -192,4 +148,6 @@ namespace Programa1.DB
             }
         }
     }
+}
+
 }

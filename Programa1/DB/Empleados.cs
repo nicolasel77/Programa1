@@ -48,16 +48,17 @@ namespace Programa1.DB
         [Required]
         public string Nombre { get; set; }
         public int DNI { get; set; }
-        public DateTime Fecha_Nacimiento { get; set; }
+        public DateTime Fecha_Nacimiento { get; set; } = DateTime.Parse("1-1-1900");
+
         [MaxLength(100, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         public string Domicilio { get; set; }
         public string Telefono { get; set; }
-        public DateTime Alta { get; set; }
-        public DateTime Baja { get; set; }
+        public DateTime Alta { get; set; } = DateTime.Parse("1-1-1900");
+        public DateTime Baja { get; set; } = DateTime.Parse("1-1-1900");
 
         public TipoEmpleados Tipo { get; set; } = new TipoEmpleados();
-        public Localidades Localidad { get; set; }
-        public Sucursales Sucursal { get; set; }
+        public Localidades Localidad { get; set; } = new Localidades();
+        public Sucursales Sucursal { get; set; } = new Sucursales();
 
         public Orden_X Ordernar_por { get; set; }
         public bool Mostrar_Bajas { get; set; } = false;
@@ -71,7 +72,7 @@ namespace Programa1.DB
 
             if (Mostrar_Bajas == false)
             {
-                filtro = h.Unir(filtro, " (BAJA IS NULL) ");
+                filtro = h.Unir(filtro, " (Baja IS NULL OR Baja<'01-01-2000') ");
             }
             if (filtro.Length > 0)
             {
@@ -145,8 +146,9 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Empleados SET Nombre='{Nombre}', Id_Tipo={Tipo.Id}, Domicilio='{Domicilio}'" +
-                    $",Id_Localidades={Localidad.Id} WHERE Id={Id}", sql);
+                    new SqlCommand($"UPDATE Empleados SET Nombre='{Nombre}', Id_Tipo={Tipo.Id}, Telefono='{Telefono}', Domicilio='{Domicilio}'" +
+                    $", Fecha_Nacimiento='{Fecha_Nacimiento.ToString("MM/dd/yyy")}', Alta='{Alta.ToString("MM/dd/yyy")}', Baja='{Baja.ToString("MM/dd/yyy")}'" +
+                    $", DNI={DNI}, Id_Localidades={Localidad.Id}, Id_Sucursales={Sucursal.Id} WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -168,8 +170,10 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Empleados (Id, Nombre, Id_Tipo, Domicilio, Id_Localidades,) VALUES({Id}, '{Nombre}', {Tipo.Id}, " +
-                    $"'{Domicilio}', {Localidad.Id})", sql);
+                    new SqlCommand($"INSERT INTO Empleados (Id, Nombre, DNI, Fecha_Nacimiento, Domicilio, Telefono, Alta, Baja, Id_Tipo, Id_Localidades, Id_Sucursales)" +
+                    $" VALUES({Id}, '{Nombre}', {DNI}, '{Fecha_Nacimiento.ToString("MM/dd/yyy")}'" +
+                    $", '{Domicilio}', '{Telefono}', '{Alta.ToString("MM/dd/yyy")}', '{Baja.ToString("MM/dd/yyy")}'" +
+                    $", {Tipo.Id}, {Localidad.Id}, {Sucursal.Id})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -245,6 +249,31 @@ namespace Programa1.DB
                 MessageBox.Show(e.Message, "Error");
                 return false;
             }
+        }
+
+        public int MaxId()
+        {
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object d = null;
+
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Empleados", conexionSql);
+
+                conexionSql.Open();
+
+                comandoSql.CommandType = CommandType.Text;
+                d = comandoSql.ExecuteScalar();
+
+                conexionSql.Close();
+            }
+            catch (Exception)
+            {
+                d = 0;
+            }
+
+            return Convert.ToInt32(d);
         }
     }
 }
