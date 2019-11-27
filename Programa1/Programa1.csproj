@@ -157,6 +157,12 @@
     <Compile Include="Carga\frmReintegros.Designer.cs">
       <DependentUpon>frmReintegros.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\frmRendimiento_Compras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmRendimiento_Compras.Designer.cs">
+      <DependentUpon>frmRendimiento_Compras.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\frmResumenSuc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +257,7 @@
     <Compile Include="DB\Productos.cs" />
     <Compile Include="DB\Proveedores.cs" />
     <Compile Include="DB\Reintegros.cs" />
+    <Compile Include="DB\Rendimiento_Compras.cs" />
     <Compile Include="DB\Retiros.cs" />
     <Compile Include="DB\Semanas.cs" />
     <Compile Include="DB\Stock.cs" />
@@ -316,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmReintegros.resx">
       <DependentUpon>frmReintegros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\frmRendimiento_Compras.resx">
+      <DependentUpon>frmRendimiento_Compras.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmResumenSuc.resx">
       <DependentUpon>frmResumenSuc.cs</DependentUpon>

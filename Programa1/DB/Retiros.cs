@@ -9,22 +9,31 @@
         {
             Cargar_Mes();
         }
-        public Retiros(int id, DateTime fecha, Empleados empl, Sucursales suc, TipoRetiros tipo, Single importe)
+        public Retiros(DateTime fecha, Empleados empl, Sucursales suc, TipoRetiros tipo, Single saldoant)
         {
-            Id = id;
-            Fecha = fecha;
+            Mes = fecha;
             Empleado = empl;
             Sucursal = suc;
             Tipo = tipo;
-            Importe = importe;
+            Saldo_Anterior = saldoant;
         }
-
-        public int Id { get; set; }
-        public DateTime Fecha { get; set; }
+                
+        public DateTime Mes { get; set; }
         public Empleados Empleado { get; set; } = new Empleados();
         public Sucursales Sucursal { get; set; } = new Sucursales();
         public TipoRetiros Tipo { get; set; } = new TipoRetiros();
-        public Single Importe { get; set; }
+        public Single Saldo_Anterior { get; set; }
+        public Single Sueldo_Mes { get; set; }
+        public Single Adelanto { get; set; }
+        public Single D7 { get; set; }
+        public Single D14 { get; set; }
+        public Single D21 { get; set; }
+        public Single Resto { get; set; }
+        public Single Descuento { get; set; }
+        public Single Franco { get; set; }
+        public Single Bono { get; set; }
+        public Single Ajustes { get; set; }
+        public Single Vacas { get; set; }
 
         public DataTable Datos(string filtro = "")
         {

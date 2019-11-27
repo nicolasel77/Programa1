@@ -74,7 +74,7 @@
         private void GrdRetiros_CambioFila(short Fila)
         {
             retiros.Empleado.Id = Convert.ToInt32(grdRetiros.get_Texto(Fila, c_IdEmp));
-            retiros.Fecha = v_Mes;
+            retiros.Mes = v_Mes;
             sueldos.Empleado = retiros.Empleado;
             sueldos.Fecha = v_Mes;
 
@@ -122,6 +122,42 @@
 
                 grdRetiros.ActivarCelda(f + 1, c);
             }
+            if (c == c_D7)
+            {
+                retiros.Mes = v_Mes.AddDays(6);
+                //retiros.guardar();
+                grdRetiros.set_Texto(f, c, a);
+                Saldo(f);
+
+                grdRetiros.ActivarCelda(f + 1, c);
+            }
+            if (c == c_D14)
+            {
+                retiros.Mes = v_Mes.AddDays(13);
+                //retiros.guardar();
+                grdRetiros.set_Texto(f, c, a);
+                Saldo(f);
+
+                grdRetiros.ActivarCelda(f + 1, c);
+            }
+            if (c == c_D21)
+            {
+                retiros.Mes = v_Mes.AddDays(6);
+                //retiros.guardar();
+                grdRetiros.set_Texto(f, c, a);
+                Saldo(f);
+
+                grdRetiros.ActivarCelda(f + 1, c);
+            }
+            if (c == c_Resto)
+            {
+                retiros.Mes = v_Mes.AddDays(6);
+                //retiros.guardar();
+                grdRetiros.set_Texto(f, c, a);
+                Saldo(f);
+
+                grdRetiros.ActivarCelda(f + 1, c);
+            }
         }
 
         
@@ -155,12 +191,16 @@
             saldo -= Convert.ToSingle(grdRetiros.get_Texto(fila, c_Ajustes));
             saldo -= Convert.ToSingle(grdRetiros.get_Texto(fila, c_Vacas));
 
-            grdRetiros.set_Texto(fila, c_Saldo, saldo);            
+            grdRetiros.set_Texto(fila, c_Saldo, saldo);
 
 
             //Guardar
 
             //Pintar
+            grdRetiros.set_ColorLetraCelda(fila, c_D7, Color.Black);
+            grdRetiros.set_ColorLetraCelda(fila, c_D14, Color.Black);
+            grdRetiros.set_ColorLetraCelda(fila, c_D21, Color.Black);
+
             Single va = Convert.ToSingle(grdRetiros.get_Texto(fila, c_Adelanto));
             Single dn = Convert.ToSingle(grdRetiros.get_Texto(fila, c_D7));
             if (dn < va)
