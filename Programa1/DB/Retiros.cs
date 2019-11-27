@@ -52,6 +52,32 @@
             return dt;
         }
 
+        public DataTable Datos_Mes(DateTime mes, string suc = "")
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            if (suc.Length > 0)
+            {
+                suc = $" AND ({suc})";
+            }
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_MesTemp WHERE Mes='{mes.ToString("MM/dd/yyy")}' {suc} ORDER BY Id_Sucursales, Id_Empleados", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+
         private void Cargar_Mes()
         {
             DateTime f = DateTime.Today.AddDays((DateTime.Today.Day - 1) * - 1);

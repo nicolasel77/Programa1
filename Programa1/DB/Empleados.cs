@@ -65,10 +65,8 @@ namespace Programa1.DB
 
         public DataTable Datos(string filtro = "")
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             Herramientas.Herramientas h = new Herramientas.Herramientas();
-
+            var dt = new DataTable("Datos");
 
             if (Mostrar_Bajas == false)
             {
@@ -108,6 +106,9 @@ namespace Programa1.DB
             
             try
             {
+                
+                var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
                 SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Empleados" + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
@@ -131,8 +132,8 @@ namespace Programa1.DB
             Fecha_Nacimiento = Convert.ToDateTime(dr["Fecha_Nacimiento"]);
             Domicilio = dr["Domicilio"].ToString();
             Telefono = dr["Telefono"].ToString();
-            Alta = Convert.ToDateTime(dr["Alta"]);
-            Baja = Convert.ToDateTime(dr["Baja"]);
+            if (dr["Alta"] != DBNull.Value) Alta = Convert.ToDateTime(dr["Alta"]);
+            if (dr["Baja"] != DBNull.Value) Baja = Convert.ToDateTime(dr["Baja"]);
 
             Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
             Localidad.Id = Convert.ToInt32(dr["Id_Localidades"]);
@@ -213,34 +214,28 @@ namespace Programa1.DB
         public bool Existe()
         {
             SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var dt = new DataTable("Datos");
 
             try
-            {
-                SqlCommand command = new SqlCommand("SELECT Nombre FROM Empleados WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                sql.Open();
-                command.Connection = sql;
+            {               
 
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Empleados WHERE Id=" + Id, sql);
+                comandoSql.CommandType = CommandType.Text;
 
-                var d = command.ExecuteScalar();
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
 
-                if (string.IsNullOrEmpty(Convert.ToString(d)))
+               
+
+                if (dt.Rows.Count == 0)
                 {
+                    Nombre = "";
                     return false;
                 }
                 else
                 {
-                    if (d.ToString().Length == 0)
-                    {
-                        Nombre = "";
-                        return false;
-                    }
-                    else
-                    {
-                        Nombre = d.ToString();
-                        return true;
-                    }
-
+                    Asignar(dt.Rows[0]);
+                    return true;
                 }
 
             }

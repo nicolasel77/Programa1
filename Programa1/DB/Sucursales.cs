@@ -246,34 +246,27 @@ namespace Programa1.DB
         public bool Existe()
         {
             SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var dt = new DataTable("Datos");
 
             try
             {
-                SqlCommand command = new SqlCommand("SELECT Nombre FROM Sucursales WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                sql.Open();
-                command.Connection = sql;
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Sucursales WHERE Id=" + Id, sql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
 
 
-                var d = command.ExecuteScalar();
 
-                if (string.IsNullOrEmpty(Convert.ToString(d)))
+                if (dt.Rows.Count == 0)
                 {
+                    Nombre = "";
                     return false;
                 }
                 else
                 {
-                    if (d.ToString().Length == 0)
-                    {
-                        Nombre = "";
-                        return false;
-                    }
-                    else
-                    {
-                        Nombre = d.ToString();
-                        return true;
-                    }
-
+                    Asignar(dt.Rows[0]);
+                    return true;
                 }
 
             }

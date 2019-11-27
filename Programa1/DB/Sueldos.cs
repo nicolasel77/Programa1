@@ -86,14 +86,21 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Sueldos " +
-                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Tipo={Tipo.Id}, Id_Empleados={Empleado.Id}, Sueldo={Sueldo.ToString().Replace(",", ".")} " +
-                    $"WHERE Id={Id}", sql);
+                    new SqlCommand($"DELETE FROM  Sueldos WHERE Fecha='{Fecha.ToString("MM/dd/yyy")}' AND Id_Tipo={Tipo.Id} AND Id_Empleados={Empleado.Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
+
+                command.CommandText = $"UPDATE Sueldos " +
+                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Tipo={Tipo.Id}, Id_Empleados={Empleado.Id}, Sueldo={Sueldo.ToString().Replace(",", ".")} " +
+                    $"WHERE Id={Id}";
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                
+
+                d = command.ExecuteNonQuery();
 
                 sql.Close();
             }

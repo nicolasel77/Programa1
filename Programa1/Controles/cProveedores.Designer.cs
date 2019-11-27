@@ -135,7 +135,7 @@
             this.cmdNinguno.Size = new System.Drawing.Size(37, 23);
             this.cmdNinguno.TabIndex = 2;
             this.cmdNinguno.Text = "N";
-            this.toolTip1.SetToolTip(this.cmdNinguno, "Borra la selección.");
+            this.toolTip1.SetToolTip(this.cmdNinguno, "Borra la selección.\r\n(Click con rueda del mouse)");
             this.cmdNinguno.UseVisualStyleBackColor = true;
             this.cmdNinguno.Click += new System.EventHandler(this.CmdNinguno_Click);
             // 
@@ -148,7 +148,7 @@
             this.cmdTodos.Size = new System.Drawing.Size(37, 23);
             this.cmdTodos.TabIndex = 1;
             this.cmdTodos.Text = "T";
-            this.toolTip1.SetToolTip(this.cmdTodos, "Selecciona Todos\r\n(Click con rueda del mouse)");
+            this.toolTip1.SetToolTip(this.cmdTodos, "Selecciona Todos");
             this.cmdTodos.UseVisualStyleBackColor = true;
             this.cmdTodos.Click += new System.EventHandler(this.CmdTodos_Click);
             // 
