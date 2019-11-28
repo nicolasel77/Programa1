@@ -40,7 +40,7 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.cProds = new Programa1.Controles.cProductos();
             this.cFecha = new Programa1.Controles.cFechas();
-            this.cSucs = new Programa1.Controles.cProveedores();
+            this.cProvs = new Programa1.Controles.cProveedores();
             this.cmdCambioMasivo = new System.Windows.Forms.Button();
             this.cmdLimpiar = new System.Windows.Forms.Button();
             this.cmdMostrar = new System.Windows.Forms.Button();
@@ -173,7 +173,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.cFecha);
-            this.splitContainer3.Panel2.Controls.Add(this.cSucs);
+            this.splitContainer3.Panel2.Controls.Add(this.cProvs);
             this.splitContainer3.Size = new System.Drawing.Size(523, 687);
             this.splitContainer3.SplitterDistance = 256;
             this.splitContainer3.TabIndex = 0;
@@ -190,6 +190,7 @@
             this.cProds.Name = "cProds";
             this.cProds.Size = new System.Drawing.Size(253, 681);
             this.cProds.TabIndex = 1;
+            this.cProds.Titulo = "Productos";
             this.cProds.Valor_Actual = -1;
             this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
             // 
@@ -204,21 +205,21 @@
             this.cFecha.TabIndex = 3;
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
             // 
-            // cSucs
+            // cProvs
             // 
-            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.cProvs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
-            this.cSucs.Filtro_In = "";
-            this.cSucs.Location = new System.Drawing.Point(2, 3);
-            this.cSucs.Mostrar_Tipo = true;
-            this.cSucs.Name = "cSucs";
-            this.cSucs.Size = new System.Drawing.Size(258, 491);
-            this.cSucs.TabIndex = 2;
-            this.cSucs.Titulo = "Proveedores";
-            this.cSucs.Valor_Actual = -1;
-            this.cSucs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
+            this.cProvs.BackColor = System.Drawing.Color.Gainsboro;
+            this.cProvs.Filtro_In = "";
+            this.cProvs.Location = new System.Drawing.Point(2, 3);
+            this.cProvs.Mostrar_Tipo = true;
+            this.cProvs.Name = "cProvs";
+            this.cProvs.Size = new System.Drawing.Size(258, 491);
+            this.cProvs.TabIndex = 2;
+            this.cProvs.Titulo = "Proveedores";
+            this.cProvs.Valor_Actual = -1;
+            this.cProvs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
             // 
             // cmdCambioMasivo
             // 
@@ -296,7 +297,7 @@
         private System.Windows.Forms.Timer tiMensaje;
         private System.Windows.Forms.ToolStripStatusLabel lblMensaje;
         private System.Windows.Forms.Button cmdMostrar;
-        private Controles.cProveedores cSucs;
+        private Controles.cProveedores cProvs;
         private Controles.cFechas cFecha;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Button cmdLimpiar;

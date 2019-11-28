@@ -793,5 +793,106 @@
                 }
             }
         }
+
+        private void RendimientoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmRendimiento_Compras")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmRendimiento_Compras");
+                t.Text = "Rendimiento_Compras";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmRendimiento_Compras = new frmRendimiento_Compras();
+                frmRendimiento_Compras.MdiParent = this;
+                frmRendimiento_Compras.Disposed += FrmRendimiento_Compras_Disposed;
+                forms.Add(frmRendimiento_Compras);
+                frmRendimiento_Compras.Show();
+                frmRendimiento_Compras.WindowState = FormWindowState.Minimized;
+                frmRendimiento_Compras.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmRendimiento_Compras_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Rendimiento_Compras")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmRendimiento_Compras")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void AjustesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DevolucionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmDevoluciones")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmDevoluciones");
+                t.Text = "Devoluciones";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmDevoluciones = new frmDevoluciones();
+                frmDevoluciones.MdiParent = this;
+                frmDevoluciones.Disposed += FrmDevoluciones_Disposed;
+                forms.Add(frmDevoluciones);
+                frmDevoluciones.Show();
+                frmDevoluciones.WindowState = FormWindowState.Minimized;
+                frmDevoluciones.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmDevoluciones_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Devoluciones")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmDevoluciones")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

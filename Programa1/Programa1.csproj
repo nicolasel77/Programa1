@@ -91,6 +91,12 @@
     <Compile Include="Carga\Empleados\frmSueldos.Designer.cs">
       <DependentUpon>frmSueldos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\frmAjustes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmAjustes.Designer.cs">
+      <DependentUpon>frmAjustes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\frmAPicada.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,12 @@
     </Compile>
     <Compile Include="Carga\frmCopiarVentaACompra.Designer.cs">
       <DependentUpon>frmCopiarVentaACompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\frmDevoluciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\frmDevoluciones.Designer.cs">
+      <DependentUpon>frmDevoluciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\frmGastos_Sucursales.cs">
       <SubType>Form</SubType>
@@ -272,6 +284,7 @@
     <Compile Include="DB\TipoReintegros.cs" />
     <Compile Include="DB\TipoSucursales.cs" />
     <Compile Include="DB\Traslados.cs" />
+    <Compile Include="DB\Devoluciones.cs" />
     <Compile Include="DB\Ventas.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
@@ -290,6 +303,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Empleados\frmSueldos.resx">
       <DependentUpon>frmSueldos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\frmAjustes.resx">
+      <DependentUpon>frmAjustes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmAPicada.resx">
       <DependentUpon>frmAPicada.cs</DependentUpon>
@@ -311,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmCopiarVentaACompra.resx">
       <DependentUpon>frmCopiarVentaACompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\frmDevoluciones.resx">
+      <DependentUpon>frmDevoluciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmGastos_Sucursales.resx">
       <DependentUpon>frmGastos_Sucursales.cs</DependentUpon>

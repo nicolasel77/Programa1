@@ -56,7 +56,7 @@
                     if (e.Control)
                     {
                         e.Handled = true;
-                        cSucs.Siguiente();
+                        cProvs.Siguiente();
                     }
                     else
                     {
@@ -71,7 +71,7 @@
                     if (e.Control)
                     {
                         e.Handled = true;
-                        cSucs.Anterior();
+                        cProvs.Anterior();
                     }
                     else
                     {
@@ -117,7 +117,7 @@
         private string Armar_Cadena()
         {
             string p = cProds.Cadena("Id_Productos");
-            string s = cSucs.Cadena("Id_Proveedores");
+            string s = cProvs.Cadena("Id_Proveedores");
             string f = cFecha.Cadena();
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
@@ -183,7 +183,7 @@
         {
             string vFecha = cFecha.Cadena();
             cProds.Filtro_In = $" (SELECT DISTINCT Id_Productos FROM Compras WHERE {vFecha})";
-            cSucs.Filtro_In = $" (SELECT DISTINCT Id_Proveedores FROM Compras WHERE {vFecha})";
+            cProvs.Filtro_In = $" (SELECT DISTINCT Id_Proveedores FROM Compras WHERE {vFecha})";
             cmdMostrar.PerformClick();
         }
 

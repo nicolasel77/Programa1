@@ -209,11 +209,13 @@
             // rdTodas
             // 
             this.rdTodas.AutoSize = true;
+            this.rdTodas.Checked = true;
             this.rdTodas.ForeColor = System.Drawing.Color.DimGray;
             this.rdTodas.Location = new System.Drawing.Point(4, 16);
             this.rdTodas.Name = "rdTodas";
             this.rdTodas.Size = new System.Drawing.Size(55, 17);
             this.rdTodas.TabIndex = 7;
+            this.rdTodas.TabStop = true;
             this.rdTodas.Text = "Todas";
             this.rdTodas.UseVisualStyleBackColor = true;
             this.rdTodas.CheckedChanged += new System.EventHandler(this.RdSucs_CheckedChanged);
@@ -233,13 +235,11 @@
             // rdSucs
             // 
             this.rdSucs.AutoSize = true;
-            this.rdSucs.Checked = true;
             this.rdSucs.ForeColor = System.Drawing.Color.DimGray;
             this.rdSucs.Location = new System.Drawing.Point(4, 39);
             this.rdSucs.Name = "rdSucs";
             this.rdSucs.Size = new System.Drawing.Size(77, 17);
             this.rdSucs.TabIndex = 7;
-            this.rdSucs.TabStop = true;
             this.rdSucs.Text = "Sucursales";
             this.rdSucs.UseVisualStyleBackColor = true;
             this.rdSucs.CheckedChanged += new System.EventHandler(this.RdSucs_CheckedChanged);
