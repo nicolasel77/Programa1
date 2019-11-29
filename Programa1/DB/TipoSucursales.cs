@@ -29,7 +29,6 @@
 
         public DataTable Datos()
         {
-            //Cadena de conexion y DataTable (tabla)
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 

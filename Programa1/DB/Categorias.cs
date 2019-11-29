@@ -6,41 +6,38 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class GastosSucursales_Rubros
+    class Categorias
     {
-        public GastosSucursales_Rubros()
+        public Categorias()
         {
-            Grupo = new GastosSucursales_Grupos();
         }
 
-        public GastosSucursales_Rubros(int id, GastosSucursales_Grupos grupo, string nombre)
+        public Categorias(int id, string nombre, TipoStock tipo)
         {
             Id = id;
-            Grupo = grupo;
             Nombre = nombre;
+            tipoStock = tipo;
         }
 
         [Required]
         [Key]
         public int Id { get; set; }
 
-        public GastosSucursales_Grupos Grupo { get; set; }
-
-        [MaxLength(50, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
+        [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
         public string Nombre { get; set; }
+        public TipoStock tipoStock { get; set; }
 
 
-        public DataTable Datos(string filtro = "")
+        public DataTable Datos()
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            if (filtro.Length > 0) filtro = " WHERE " + filtro;
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM GastosSucursales_Rubros  {filtro}  ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Categorias", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -61,7 +58,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"UPDATE GastosSucursales_Rubros SET Nombre='{Nombre}', Id_Grupo={Grupo.Id} WHERE Id={Id}", sql);
+                SqlCommand command = new SqlCommand($"UPDATE Categorias SET Nombre='{Nombre}', Id_TipoStock={tipoStock.Id} WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -82,7 +79,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO GastosSucursales_Rubros (Id, Id_Grupo, Nombre) VALUES({Id}, {Grupo.Id}, '{Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Categorias (Id, Nombre, Id_TipoStock) VALUES({Id}, '{Nombre}', {tipoStock.Id})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -103,7 +100,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM GastosSucursales_Rubros WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand(string.Format("DELETE FROM Categorias WHERE Id={0}", Id), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -119,13 +116,19 @@
         }
 
 
-        public bool Existe()
+        public bool Existe(int id = 0)
         {
             SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand command = new SqlCommand($"SELECT Nombre FROM GastosSucursales_Rubros WHERE Id={Id}", sql);
+                string s = "SELECT Nombre FROM Categorias WHERE Id=" + Id;
+                if (id!=0)
+                {
+                    s = "SELECT Nombre FROM Categorias WHERE Id=" + id;
+                }
+
+                SqlCommand command = new SqlCommand(s, sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;

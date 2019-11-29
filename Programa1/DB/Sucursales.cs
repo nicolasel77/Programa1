@@ -175,11 +175,8 @@ namespace Programa1.DB
 
             try
             {
-                string vver = Ver ? "1" : "0";
-                string vpropio = Propio ? "1" : "0";
-
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Sucursales SET Nombre='{Nombre}', Tipo={Tipo.Id}, Ver={vver}, Propio={vpropio}, Titular='{Titular}', CUIT='{CUIT}', Direccion='{Direccion}'" +
+                    new SqlCommand($"UPDATE Sucursales SET Nombre='{Nombre}', Tipo={Tipo.Id}, Ver={(Ver ? "1" : "0")}, Propio={(Propio ? "1" : "0")}, Titular='{Titular}', CUIT='{CUIT}', Direccion='{Direccion}'" +
                     $",Alias='{Alias}',Id_Localidad={Localidad.Id}, Balanza='{Balanza}' WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;

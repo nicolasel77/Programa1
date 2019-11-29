@@ -256,12 +256,16 @@
     <Compile Include="DB\APicada.cs" />
     <Compile Include="DB\Cantidad_Clientes.cs" />
     <Compile Include="DB\Compras.cs" />
+    <Compile Include="DB\Compra_Hacienda.cs" />
     <Compile Include="DB\GastosSucursales_Grupos.cs" />
     <Compile Include="DB\GastosSucursales_Rubros.cs" />
     <Compile Include="DB\GastosSucursales_Tipos.cs" />
     <Compile Include="DB\Gastos_Sucursales.cs" />
     <Compile Include="DB\Localidades.cs" />
     <Compile Include="DB\Ofertas.cs" />
+    <Compile Include="DB\Categorias.cs" />
+    <Compile Include="DB\Frigorificos.cs" />
+    <Compile Include="DB\TipoStock.cs" />
     <Compile Include="DB\Partidos.cs" />
     <Compile Include="DB\Precios_Ofertas.cs" />
     <Compile Include="DB\Precios_Proveedores.cs" />
@@ -272,10 +276,13 @@
     <Compile Include="DB\Rendimiento_Compras.cs" />
     <Compile Include="DB\Retiros.cs" />
     <Compile Include="DB\Semanas.cs" />
+    <Compile Include="DB\NBoletas.cs" />
     <Compile Include="DB\Stock.cs" />
     <Compile Include="DB\Empleados.cs" />
     <Compile Include="DB\Sucursales.cs" />
     <Compile Include="DB\Sueldos.cs" />
+    <Compile Include="DB\TipoAgregados.cs" />
+    <Compile Include="DB\Consignatarios.cs" />
     <Compile Include="DB\TipoRetiros.cs" />
     <Compile Include="DB\TipoSueldo.cs" />
     <Compile Include="DB\TipoProductos.cs" />
@@ -423,7 +430,9 @@
   <ItemGroup>
     <Content Include="Icono.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Carga\Hacienda\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

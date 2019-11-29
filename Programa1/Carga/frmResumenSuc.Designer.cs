@@ -30,25 +30,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmResumenSuc));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.lblEntradas = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.speedGrilla1 = new Grilla2.SpeedGrilla();
+            this.lblEntradas = new System.Windows.Forms.Label();
             this.speedGrilla2 = new Grilla2.SpeedGrilla();
-            this.lblSuc = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.speedGrilla3 = new Grilla2.SpeedGrilla();
+            this.lblSuc = new System.Windows.Forms.Label();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.speedGrilla4 = new Grilla2.SpeedGrilla();
             this.lstSemanas = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
@@ -57,6 +53,10 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -75,24 +75,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(1318, 678);
             this.splitContainer1.SplitterDistance = 928;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.speedGrilla4);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.lstSemanas);
-            this.splitContainer2.Size = new System.Drawing.Size(386, 678);
-            this.splitContainer2.SplitterDistance = 461;
-            this.splitContainer2.TabIndex = 0;
             // 
             // splitContainer3
             // 
@@ -132,28 +114,6 @@
             this.splitContainer4.SplitterDistance = 408;
             this.splitContainer4.TabIndex = 0;
             // 
-            // lblEntradas
-            // 
-            this.lblEntradas.AutoSize = true;
-            this.lblEntradas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblEntradas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblEntradas.Location = new System.Drawing.Point(0, 0);
-            this.lblEntradas.Name = "lblEntradas";
-            this.lblEntradas.Size = new System.Drawing.Size(67, 18);
-            this.lblEntradas.TabIndex = 0;
-            this.lblEntradas.Text = "Entradas";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Salidas";
-            // 
             // speedGrilla1
             // 
             this.speedGrilla1.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
@@ -188,6 +148,17 @@
             this.speedGrilla1.Rows = 1;
             this.speedGrilla1.Size = new System.Drawing.Size(402, 447);
             this.speedGrilla1.TabIndex = 1;
+            // 
+            // lblEntradas
+            // 
+            this.lblEntradas.AutoSize = true;
+            this.lblEntradas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblEntradas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblEntradas.Location = new System.Drawing.Point(0, 0);
+            this.lblEntradas.Name = "lblEntradas";
+            this.lblEntradas.Size = new System.Drawing.Size(67, 18);
+            this.lblEntradas.TabIndex = 0;
+            this.lblEntradas.Text = "Entradas";
             // 
             // speedGrilla2
             // 
@@ -224,17 +195,16 @@
             this.speedGrilla2.Size = new System.Drawing.Size(510, 447);
             this.speedGrilla2.TabIndex = 1;
             // 
-            // lblSuc
+            // label1
             // 
-            this.lblSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblSuc.AutoSize = true;
-            this.lblSuc.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblSuc.Location = new System.Drawing.Point(12, 179);
-            this.lblSuc.Name = "lblSuc";
-            this.lblSuc.Size = new System.Drawing.Size(66, 18);
-            this.lblSuc.TabIndex = 0;
-            this.lblSuc.Text = "Sucursal";
+            this.label1.AutoSize = true;
+            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Salidas";
             // 
             // speedGrilla3
             // 
@@ -270,6 +240,36 @@
             this.speedGrilla3.Rows = 1;
             this.speedGrilla3.Size = new System.Drawing.Size(658, 191);
             this.speedGrilla3.TabIndex = 1;
+            // 
+            // lblSuc
+            // 
+            this.lblSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSuc.AutoSize = true;
+            this.lblSuc.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblSuc.Location = new System.Drawing.Point(12, 179);
+            this.lblSuc.Name = "lblSuc";
+            this.lblSuc.Size = new System.Drawing.Size(66, 18);
+            this.lblSuc.TabIndex = 0;
+            this.lblSuc.Text = "Sucursal";
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.speedGrilla4);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.lstSemanas);
+            this.splitContainer2.Size = new System.Drawing.Size(386, 678);
+            this.splitContainer2.SplitterDistance = 461;
+            this.splitContainer2.TabIndex = 0;
             // 
             // speedGrilla4
             // 
@@ -316,8 +316,9 @@
             this.lstSemanas.ItemHeight = 18;
             this.lstSemanas.Location = new System.Drawing.Point(0, 0);
             this.lstSemanas.Name = "lstSemanas";
-            this.lstSemanas.Size = new System.Drawing.Size(67, 213);
+            this.lstSemanas.Size = new System.Drawing.Size(123, 213);
             this.lstSemanas.TabIndex = 0;
+            this.lstSemanas.SelectedIndexChanged += new System.EventHandler(this.LstSemanas_SelectedIndexChanged);
             // 
             // frmResumenSuc
             // 
@@ -326,16 +327,12 @@
             this.ClientSize = new System.Drawing.Size(1318, 678);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmResumenSuc";
-            this.Text = "ResumenSuc";
+            this.Text = "Resumen";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             this.splitContainer3.Panel2.PerformLayout();
@@ -347,6 +344,10 @@
             this.splitContainer4.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
