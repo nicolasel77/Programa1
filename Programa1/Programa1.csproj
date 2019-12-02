@@ -205,6 +205,12 @@
     <Compile Include="Carga\Precios\frmPreciosMen.Designer.cs">
       <DependentUpon>frmPreciosMen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Sebero\frmCargaSebo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sebero\frmCargaSebo.Designer.cs">
+      <DependentUpon>frmCargaSebo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controles\cFechas.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -216,6 +222,12 @@
     </Compile>
     <Compile Include="Controles\cProductos.Designer.cs">
       <DependentUpon>cProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\cSeberos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\cSeberos.Designer.cs">
+      <DependentUpon>cSeberos.cs</DependentUpon>
     </Compile>
     <Compile Include="Controles\cProveedores.cs">
       <SubType>UserControl</SubType>
@@ -265,6 +277,7 @@
     <Compile Include="DB\Ofertas.cs" />
     <Compile Include="DB\Categorias.cs" />
     <Compile Include="DB\Frigorificos.cs" />
+    <Compile Include="DB\Seberos.cs" />
     <Compile Include="DB\TipoStock.cs" />
     <Compile Include="DB\Partidos.cs" />
     <Compile Include="DB\Precios_Ofertas.cs" />
@@ -292,6 +305,7 @@
     <Compile Include="DB\TipoSucursales.cs" />
     <Compile Include="DB\Traslados.cs" />
     <Compile Include="DB\Devoluciones.cs" />
+    <Compile Include="DB\CargaSebo.cs" />
     <Compile Include="DB\Ventas.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
@@ -368,11 +382,17 @@
     <EmbeddedResource Include="Carga\Precios\frmPreciosMen.resx">
       <DependentUpon>frmPreciosMen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sebero\frmCargaSebo.resx">
+      <DependentUpon>frmCargaSebo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controles\cFechas.resx">
       <DependentUpon>cFechas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cProductos.resx">
       <DependentUpon>cProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\cSeberos.resx">
+      <DependentUpon>cSeberos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cProveedores.resx">
       <DependentUpon>cProveedores.cs</DependentUpon>

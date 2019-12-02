@@ -1,39 +1,41 @@
-﻿namespace Programa1.DB
+﻿
+namespace Programa1.DB
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Compra_Hacienda
-    {
-
-        public Compra_Hacienda()
+    class CargaSebo
+    {        
+        public CargaSebo()
         {
+            
         }
 
-        public Compra_Hacienda(int id, NBoletas nBoleta, Consignatarios consignatario, Productos producto, int cabezas, float kilos, float costo, float iVA, byte plazo)
+        public CargaSebo(int id, DateTime fecha, Productos prod, Sucursales sucu, Seberos sebero, Single costo, Single kilos)
         {
             Id = id;
-            NBoleta = nBoleta;
-            Consignatario = consignatario;
-            Producto = producto;
-            Cabezas = cabezas;
-            Kilos = kilos;
+            Fecha = fecha;
+            Producto = prod;
+            Sucursal = sucu;
+            Sebero = sebero;
             Costo = costo;
-            IVA = iVA;
-            Plazo = plazo;
+            Kilos = kilos;
+
         }
 
         public int Id { get; set; }
-        public NBoletas NBoleta { get; set; }
-        public Consignatarios Consignatario { get; set; }
-        public Productos Producto { get; set; }
-        public int Cabezas { get; set; }
-        public Single Kilos { get; set; }
+        public DateTime Fecha { get; set; }
+        public Productos Producto { get; set; } = new Productos();
+        public Sucursales Sucursal { get; set; } = new Sucursales();
+        public Seberos Sebero { get; set; } = new Seberos();
         public Single Costo { get; set; }
-        public Single IVA { get; set; }
-        public Byte Plazo { get; set; }
+        public Single Kilos { get; set; }
+
+
+        public Precios_Proveedores precios_Seberos = new Precios_Proveedores();
 
         public DataTable Datos(string filtro = "")
         {
@@ -47,7 +49,43 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_CompraHacienda {filtro} ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_CargaSebo {filtro} ORDER BY Id", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        /// <summary>
+        /// Resumen de datos de Sebero. Sirve para análisis y para copiar a compras.
+        /// </summary>
+        /// <param name="filtro"></param>
+        /// <returns></returns>
+        public DataTable Resumen_Compra(string filtro = "")
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            if (filtro.Length > 0)
+            {
+                filtro = " WHERE " + filtro;
+            }
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, Id_Seberos, Nombre_Sebero, Id_Productos, Descripcion, Costo_Compra Costo, SUM(Kilos) Kilos, SUM(Total_Compra) Total  " +
+                    $"FROM vw_CargaSebo {filtro} " +
+                    $"GROUP BY Fecha, Id_Seberos, Nombre_Sebero, Id_Productos, Descripcion, Costo_Compra " +
+                    $"ORDER BY  Fecha, Id_Productos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -60,6 +98,7 @@
 
             return dt;
         }
+        
 
         public void Actualizar()
         {
@@ -68,8 +107,9 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Hacienda_Compras SET NBoleta={NBoleta.NBoleta}, Id_Consignatarios={Consignatario.Id}, Id_Productos={Producto.Id}, " +
-                        $"Cabezas={Cabezas}, Kilos={Kilos.ToString().Replace(",", ".")}, Costo={Costo.ToString().Replace(",", ".")}, IVA={IVA.ToString().Replace(",", ".")}, Plazo={Plazo} " +    
+                    new SqlCommand($"UPDATE CargaSebo SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
+                        $"Id_Sucursales={Sucursal.Id}, Id_Seberos={Sebero.Id}, Id_Productos={Producto.Id}, " +
+                        $"Cost={Costo.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -92,8 +132,8 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Hacienda_Compras (NBoleta, Id_Consignatarios, Id_Productos, Cabezas, Kilos, Costo, IVA, Plazo) " +
-                        $"VALUES({NBoleta.NBoleta},{Consignatario.Id},{Producto.Id},{Cabezas},{Kilos.ToString().Replace(",", ".")},{Costo.ToString().Replace(",", ".")},{IVA.ToString().Replace(",", ".")},{Plazo})", sql);
+                    new SqlCommand($"INSERT INTO CargaSebo (Fecha, Id_Sucursales, Id_Seberos, Id_Productos, Costo, Kilos) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Sebero.Id}, {Producto.Id}, {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -127,7 +167,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Hacienda_Compras", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM CargaSebo", conexionSql);
 
                 conexionSql.Open();
 
@@ -150,7 +190,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Hacienda_Compras WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM CargaSebo WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -173,7 +213,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_CompraHacienda WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_CargaSebo WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -182,19 +222,20 @@
                 DataRow dr = dt.Rows[0];
 
                 Id = id;
-                NBoleta.NBoleta = Convert.ToInt32(dr["NBoleta"]);
-                Consignatario.Id = Convert.ToInt32(dr["Id_Consignatarios"]);
+                Fecha = Convert.ToDateTime(dr["Fecha"]);
                 Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
-                Cabezas = Convert.ToInt32(dr["Cabezas"]);
-                Costo = Convert.ToSingle(dr["Costo"]);
+                Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+                Sebero.Id = Convert.ToInt32(dr["Id_Seberos"]);
+                Costo = Convert.ToSingle(dr["Costo_Compra"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
-                IVA = Convert.ToSingle(dr["IVA"]);
-                Plazo = Convert.ToByte(dr["Plazo"]);
+
             }
             catch (Exception)
             {
                 Id = 0;
             }
+
+
         }
     }
 }

@@ -894,5 +894,53 @@
                 }
             }
         }
-    }
+
+        private void cargaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCargaSebo")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmCargaSebo");
+                t.Text = "CargaSebo";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmCargaSebo = new frmCargaSebo();
+                frmCargaSebo.MdiParent = this;
+                frmCargaSebo.Disposed += FrmCargaSebo_Disposed;
+                forms.Add(frmCargaSebo);
+                frmCargaSebo.Show();
+                frmCargaSebo.WindowState = FormWindowState.Minimized;
+                frmCargaSebo.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmCargaSebo_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "CargaSebo")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCargaSebo")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+    }    
 }
