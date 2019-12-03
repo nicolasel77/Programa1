@@ -19,7 +19,6 @@
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblKilos = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblTotalS = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotalE = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdVenta = new Grilla2.SpeedGrilla();
@@ -60,7 +59,6 @@
             this.lblMensaje,
             this.lblCant,
             this.lblKilos,
-            this.lblTotalS,
             this.lblTotalE});
             this.statusStrip1.Location = new System.Drawing.Point(0, 687);
             this.statusStrip1.Name = "statusStrip1";
@@ -90,20 +88,12 @@
             this.lblKilos.Text = "Kilos";
             this.lblKilos.Click += new System.EventHandler(this.LblCant_Click);
             // 
-            // lblTotalS
-            // 
-            this.lblTotalS.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalS.Name = "lblTotalS";
-            this.lblTotalS.Size = new System.Drawing.Size(85, 23);
-            this.lblTotalS.Text = "Totales Venta";
-            this.lblTotalS.Click += new System.EventHandler(this.LblCant_Click);
-            // 
             // lblTotalE
             // 
             this.lblTotalE.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalE.Name = "lblTotalE";
-            this.lblTotalE.Size = new System.Drawing.Size(100, 23);
-            this.lblTotalE.Text = "Totales Compra";
+            this.lblTotalE.Size = new System.Drawing.Size(36, 23);
+            this.lblTotalE.Text = "Total";
             this.lblTotalE.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // splitContainer1
@@ -364,7 +354,6 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Button cmdLimpiar;
-        private System.Windows.Forms.ToolStripStatusLabel lblTotalS;
         private System.Windows.Forms.ToolStripStatusLabel lblCant;
         private System.Windows.Forms.ToolStripStatusLabel lblKilos;
         private Controles.cSucursales cSucursal;
