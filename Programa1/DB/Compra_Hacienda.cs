@@ -165,6 +165,40 @@
             }
         }
 
+        public void Cargar_Boleta(int nb)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_CompraHacienda WHERE NBoleta=" + nb, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+                DataRow dr = dt.Rows[0];
+
+                Id = Convert.ToInt32(dr["Id"]);
+                NBoleta.NBoleta = Convert.ToInt32(dr["NBoleta"]);
+                Consignatario.Id = Convert.ToInt32(dr["Id_Consignatarios"]);
+                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Cabezas = Convert.ToInt32(dr["Cabezas"]);
+                Costo = Convert.ToSingle(dr["Costo"]);
+                Kilos = Convert.ToSingle(dr["Kilos"]);
+                IVA = Convert.ToSingle(dr["IVA"]);
+                Plazo = Convert.ToByte(dr["Plazo"]);
+            }
+            catch (Exception)
+            {
+                Id = 0;
+            }
+
+
+        }
+
         public void Cargar_Fila(int id)
         {
             var dt = new DataTable("Datos");
@@ -189,7 +223,7 @@
                 Costo = Convert.ToSingle(dr["Costo"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
                 IVA = Convert.ToSingle(dr["IVA"]);
-                Plazo = Convert.ToInt32(dr["Plazo"]);
+                Plazo = Convert.ToByte(dr["Plazo"]);
             }
             catch (Exception)
             {

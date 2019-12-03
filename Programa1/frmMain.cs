@@ -5,6 +5,7 @@
     using System.Windows.Forms;
     using Programa1.Carga;
     using Programa1.Carga.Precios;
+    using Programa1.Carga.Hacienda;
     using Programa1.Carga.Empleados;
     
     public partial class frmMain : Form
@@ -888,6 +889,54 @@
             foreach (Form f in forms)
             {
                 if (f.Name == "frmDevoluciones")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void ComprasFaenaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmComprasFaena")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmComprasFaena");
+                t.Text = "ComprasFaena";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmComprasFaena = new frmComprasFaena();
+                frmComprasFaena.MdiParent = this;
+                frmComprasFaena.Disposed += FrmComprasFaena_Disposed;
+                forms.Add(frmComprasFaena);
+                frmComprasFaena.Show();
+                frmComprasFaena.WindowState = FormWindowState.Minimized;
+                frmComprasFaena.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmComprasFaena_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "ComprasFaena")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmComprasFaena")
                 {
                     forms.Remove(f);
                     break;

@@ -30,7 +30,7 @@
         public Single Costo_Faena { get; set; }
         public bool Directo { get; set; }
 
-        public DataTable Datos(string filtro = "")
+        public DataTable Datos(string filtro = "", string top = " TOP 100", string orden = "DESC")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -42,7 +42,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM NBoletas {filtro} ORDER BY NBoleta", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT {top} * FROM NBoletas {filtro} ORDER BY NBoleta {orden}", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

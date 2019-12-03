@@ -199,6 +199,12 @@
     <Compile Include="Carga\frmVentas.Designer.cs">
       <DependentUpon>frmVentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Hacienda\frmComprasFaena.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmComprasFaena.Designer.cs">
+      <DependentUpon>frmComprasFaena.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Precios\frmPreciosMen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,14 +259,17 @@
     <Compile Include="Datos\frmSucursales.Designer.cs">
       <DependentUpon>frmSucursales.cs</DependentUpon>
     </Compile>
+    <Compile Include="DB\Agregados_Hacienda.cs" />
     <Compile Include="DB\APicada.cs" />
     <Compile Include="DB\Cantidad_Clientes.cs" />
     <Compile Include="DB\Compras.cs" />
     <Compile Include="DB\Compra_Hacienda.cs" />
+    <Compile Include="DB\Faena.cs" />
     <Compile Include="DB\GastosSucursales_Grupos.cs" />
     <Compile Include="DB\GastosSucursales_Rubros.cs" />
     <Compile Include="DB\GastosSucursales_Tipos.cs" />
     <Compile Include="DB\Gastos_Sucursales.cs" />
+    <Compile Include="DB\Hacienda.cs" />
     <Compile Include="DB\Localidades.cs" />
     <Compile Include="DB\Ofertas.cs" />
     <Compile Include="DB\Categorias.cs" />
@@ -365,6 +374,9 @@
     <EmbeddedResource Include="Carga\frmVentas.resx">
       <DependentUpon>frmVentas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmComprasFaena.resx">
+      <DependentUpon>frmComprasFaena.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Precios\frmPreciosMen.resx">
       <DependentUpon>frmPreciosMen.cs</DependentUpon>
     </EmbeddedResource>
@@ -430,9 +442,7 @@
   <ItemGroup>
     <Content Include="Icono.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Carga\Hacienda\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
