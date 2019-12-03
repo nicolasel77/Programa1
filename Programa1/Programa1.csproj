@@ -217,6 +217,18 @@
     <Compile Include="Carga\Sebero\frmCargaSebo.Designer.cs">
       <DependentUpon>frmCargaSebo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Sebero\frmSeberos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sebero\frmSeberos.Designer.cs">
+      <DependentUpon>frmSeberos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Sebero\frmResumenSebero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sebero\frmResumenSebero.Designer.cs">
+      <DependentUpon>frmResumenSebero.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controles\cFechas.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -396,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sebero\frmCargaSebo.resx">
       <DependentUpon>frmCargaSebo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sebero\frmSeberos.resx">
+      <DependentUpon>frmSeberos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cFechas.resx">
       <DependentUpon>cFechas.cs</DependentUpon>

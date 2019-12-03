@@ -1,13 +1,13 @@
 ﻿namespace Programa1
 {
+    using Programa1.Carga;
+    using Programa1.Carga.Empleados;
+    using Programa1.Carga.Hacienda;
+    using Programa1.Carga.Precios;
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
-    using Programa1.Carga;
-    using Programa1.Carga.Precios;
-    using Programa1.Carga.Hacienda;
-    using Programa1.Carga.Empleados;
-    
+
     public partial class frmMain : Form
     {
         List<Form> forms = new List<Form>();
@@ -21,7 +21,7 @@
         {
             foreach (Form f in forms)
             {
-                if (f.Name.StartsWith("frm"+ sender.ToString()) == true)
+                if (f.Name.StartsWith("frm" + sender.ToString()) == true)
                 {
                     f.BringToFront();
                     break;
@@ -47,7 +47,7 @@
                 t.Text = "Resumen Sucs";
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
-                
+
                 Form frmResumenSuc = new Programa1.Carga.frmResumenSuc();
                 frmResumenSuc.MdiParent = this;
                 forms.Add(frmResumenSuc);
@@ -74,7 +74,7 @@
             }
             foreach (Form f in forms)
             {
-                if(f.Name=="frmProductos")
+                if (f.Name == "frmProductos")
                 {
                     forms.Remove(f);
                     break;
@@ -264,8 +264,8 @@
             }
         }
 
-       
-        
+
+
 
         private void MenudenciasToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -993,9 +993,54 @@
             }
         }
 
-        private void CargaToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
 
+        private void seberosToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmSeberos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmSeberos");
+                t.Text = "Seberos";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmSeberos = new frmSeberos();
+                frmSeberos.MdiParent = this;
+                frmSeberos.Disposed += FrmSeberos_Disposed;
+                forms.Add(frmSeberos);
+                frmSeberos.Show();
+                frmSeberos.WindowState = FormWindowState.Minimized;
+                frmSeberos.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void FrmSeberos_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Seberos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmSeberos")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
         }
     }
 }

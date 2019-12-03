@@ -427,6 +427,7 @@
             this.seberosToolStripMenuItem.Name = "seberosToolStripMenuItem";
             this.seberosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.seberosToolStripMenuItem.Text = "&Seberos";
+            this.seberosToolStripMenuItem.Click += new System.EventHandler(this.seberosToolStripMenuItem_Click_1);
             // 
             // haciendaToolStripMenuItem
             // 
