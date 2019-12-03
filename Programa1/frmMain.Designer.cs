@@ -401,31 +401,31 @@
             // resumenToolStripMenuItem2
             // 
             this.resumenToolStripMenuItem2.Name = "resumenToolStripMenuItem2";
-            this.resumenToolStripMenuItem2.Size = new System.Drawing.Size(123, 22);
+            this.resumenToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.resumenToolStripMenuItem2.Text = "&Resumen";
             // 
             // cargaToolStripMenuItem1
             // 
             this.cargaToolStripMenuItem1.Name = "cargaToolStripMenuItem1";
-            this.cargaToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
+            this.cargaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.cargaToolStripMenuItem1.Text = "&Carga";
-            this.cargaToolStripMenuItem1.Click += new System.EventHandler(this.cargaToolStripMenuItem1_Click);
+            this.cargaToolStripMenuItem1.Click += new System.EventHandler(this.CargaSeboToolStripMenuItem_Click);
             // 
             // preciosToolStripMenuItem2
             // 
             this.preciosToolStripMenuItem2.Name = "preciosToolStripMenuItem2";
-            this.preciosToolStripMenuItem2.Size = new System.Drawing.Size(123, 22);
+            this.preciosToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.preciosToolStripMenuItem2.Text = "&Precios";
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(120, 6);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(177, 6);
             // 
             // seberosToolStripMenuItem
             // 
             this.seberosToolStripMenuItem.Name = "seberosToolStripMenuItem";
-            this.seberosToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.seberosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.seberosToolStripMenuItem.Text = "&Seberos";
             // 
             // haciendaToolStripMenuItem

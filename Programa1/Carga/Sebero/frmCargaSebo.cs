@@ -39,8 +39,6 @@
             c_Kilos = Convert.ToByte(grdVenta.get_ColIndex("Kilos"));
             c_Total = Convert.ToByte(grdVenta.get_ColIndex("Total"));
             
-            MessageBox.Show("Hasta aca todo bien");
-
             formato_Grilla();
 
             //El intercambio de columnas para estas teclas
@@ -121,7 +119,7 @@
         {
             string p = cProds.Cadena("Id_Productos");
             string s = cSucursal.Cadena("Id_Sucursales");
-            string e = cProveedores.Cadena("Id_Seberos");
+            string e = cSeberos.Cadena("Id_Seberos");
             string f = cFecha.Cadena();
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
@@ -138,9 +136,9 @@
             grdVenta.set_ColW(c_Id, 0);
             grdVenta.set_ColW(c_Fecha, 60);
             grdVenta.set_ColW(c_IdSebero, 35);
-            grdVenta.set_ColW(c_IdSebero + 1, 40);
+            grdVenta.set_ColW(c_IdSebero + 1, 100);
             grdVenta.set_ColW(c_IdSuc, 35);
-            grdVenta.set_ColW(c_IdSuc + 1, 40);
+            grdVenta.set_ColW(c_IdSuc + 1, 100);
             grdVenta.set_ColW(c_IdProd, 30);
             grdVenta.set_ColW(c_Descripcion, 120);
             grdVenta.set_ColW(c_Costo, 60);
@@ -191,8 +189,8 @@
         private void CFecha_Cambio_Seleccion(object sender, EventArgs e)
         {
             string vFecha = cFecha.Cadena();
-            cProds.Filtro_In = $" (SELECT DISTINCT Id_Productos FROM Ventas WHERE {vFecha})";
-            cSucursal.Filtro_In = $" (SELECT DISTINCT Id_Sucursales FROM Ventas WHERE {vFecha})";
+            cProds.Filtro_In = $" (SELECT DISTINCT Id_Productos FROM CargaSebo WHERE {vFecha})";
+            cSucursal.Filtro_In = $" (SELECT DISTINCT Id_Sucursales FROM CargaSebo WHERE {vFecha})";
             //cSeberos.Filtro_In = $" (SELECT DISTINCT Id_Seberos FROM Ventas WHERE {vFecha})";
             cmdMostrar.PerformClick();
         }

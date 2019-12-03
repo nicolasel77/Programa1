@@ -3,17 +3,15 @@
     using Programa1.DB;
     using Programa1.Herramientas;
     using System;
-    using System.Collections.Generic;
     using System.Data;
     using System.Windows.Forms;
 
     public partial class cSeberos : UserControl
     {
-        private Seberos Sebero = new Seberos();
+        private Seberos Sebero;
         private Herramientas herramientas = new Herramientas();
 
         private bool cCancel = false;
-        private bool MostrarTipo = true;
         private string vFiltroIn = "";
 
         public string Filtro_In
@@ -30,7 +28,7 @@
                     Cargar();
                 }
             }
-        }      
+        }
 
         public string Titulo { get => lblTitulo.Text; set { lblTitulo.Text = value; } }
 
@@ -39,6 +37,7 @@
         public cSeberos()
         {
             InitializeComponent();
+            Sebero = new Seberos();
             
             Cargar();
         }
@@ -92,11 +91,17 @@
         {
             
             lst.Items.Clear();
-            DataTable dt = Sebero.Datos();
-            foreach (DataRow dr in dt.Rows)
+            DataTable dt = new DataTable();
+
+            dt = Sebero.Datos();
+
+            if (dt != null)
             {
-                lst.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
-            }            
+                foreach (DataRow dr in dt.Rows)
+                {
+                    lst.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
+                }
+            }
         }
 
         public void Siguiente()
@@ -216,16 +221,16 @@
             Cambio_Seleccion(this, e);
         }
 
-                
+
         private void TxtBuscar_TextChanged(object sender, EventArgs e)
         {
             Cargar();
         }
-        
-       
+
+
         private void CmdNinguno_Click(object sender, EventArgs e)
         {
             lst.SelectedIndex = -1;
-        }        
+        }
     }
 }
