@@ -1,4 +1,4 @@
-﻿namespace Programa1.Carga
+﻿namespace Programa1.Carga.Sebero
 {
     using Programa1.DB;
     using System;

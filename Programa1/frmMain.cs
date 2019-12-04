@@ -4,6 +4,7 @@
     using Programa1.Carga.Empleados;
     using Programa1.Carga.Hacienda;
     using Programa1.Carga.Precios;
+    using Programa1.Carga.Sebero;
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;

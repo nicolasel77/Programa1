@@ -67,5 +67,28 @@ namespace Programa1.DB
 
             return dt;
         }
+        public DataTable Romaneos()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT NRomaneo, COUNT(Kilos) AS Cant, SUM(Kilos) AS Kilos FROM vw_Faena WHERE NBoleta={nBoleta.NBoleta}" +
+                    $" GROUP BY NRomaneo", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
     }
 }

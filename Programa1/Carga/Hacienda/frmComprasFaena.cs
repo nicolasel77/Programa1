@@ -2,6 +2,7 @@
 {
     using Programa1.DB;
     using System;
+    using System.Drawing;
     using System.Windows.Forms;
     public partial class frmComprasFaena : Form
     {
@@ -158,6 +159,16 @@
             hc.Faena.nBoleta = hc.nBoletas;
             grdFaena.MostrarDatos(hc.Faena.Datos(), false);
 
+            grdRomaneos.MostrarDatos(hc.Faena.Romaneos(), true, true);
+            grdRomaneos.SumarCol(2, true);
+
+            grdRomaneos.Columnas[0].Format = "N0";
+            grdRomaneos.Columnas[2].Format = "N1";
+
+            grdRomaneos.set_ColW(0, 80);
+            grdRomaneos.set_ColW(1, 40);
+            grdRomaneos.set_ColW(2, 70);
+
             Totales();
         }
         private void Totales()
@@ -182,17 +193,37 @@
             }
 
             t = 0;
-            k = 0;
-            c = 0;
+            double kf = 0;
+            double cf = 0;
+
             for (int i = 1; i < grdFaena.Rows - 1; i++)
             {
-                t += Convert.ToSingle(grdFaena.get_Texto(i, F_Recu))* Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
-                k += Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
-                c++;
+                t += Convert.ToSingle(grdFaena.get_Texto(i, F_Recu)) * Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
+                kf += Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
+                cf++;
             }
-            lblCant.Text = $"Cantidad: {c:N0}";
-            lblKilos.Text = $"Kilos: {k:N2}";
+            lblCant.Text = $"Cantidad: {cf:N0}";
+            lblKilos.Text = $"Kilos: {kf:N2}";
             lblTotal.Text = $"Recupero: {t:C2}";
+
+            if (k != 0)
+            {
+                lblRendimiento.Text = $"Rendimiento: {(kf / k * 100):N2}";
+            }
+            else
+            {
+                lblRendimiento.Text = "";
+            }
+            if (c != 0 & cf != (c*2))
+            {
+                lblCant.BackColor = Color.Red;
+                toolTip1.SetToolTip(lblCant, "La cantidad faenada no coincide con la compra.");
+            }
+            else
+            {
+                lblCant.BackColor = System.Drawing.SystemColors.Control;
+                lblCant.ToolTipText = "";
+            }
         }
     }
 }

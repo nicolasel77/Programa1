@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmComprasFaena));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -52,6 +53,10 @@
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblKilos = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotal = new System.Windows.Forms.ToolStripStatusLabel();
+            this.grdRomaneos = new Grilla2.SpeedGrilla();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblRendimiento = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -68,6 +73,7 @@
             this.statusStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -337,6 +343,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer3.Panel2.Controls.Add(this.label2);
+            this.splitContainer3.Panel2.Controls.Add(this.grdRomaneos);
             this.splitContainer3.Size = new System.Drawing.Size(1101, 387);
             this.splitContainer3.SplitterDistance = 747;
             this.splitContainer3.TabIndex = 2;
@@ -382,7 +390,8 @@
             this.lblMensaje,
             this.lblCant,
             this.lblKilos,
-            this.lblTotal});
+            this.lblTotal,
+            this.lblRendimiento});
             this.statusStrip1.Location = new System.Drawing.Point(0, 387);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1101, 28);
@@ -416,6 +425,60 @@
             this.lblTotal.Size = new System.Drawing.Size(49, 23);
             this.lblTotal.Text = "Totales";
             // 
+            // grdRomaneos
+            // 
+            this.grdRomaneos.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdRomaneos.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdRomaneos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdRomaneos.AutoResize = false;
+            this.grdRomaneos.bColor = System.Drawing.SystemColors.Window;
+            this.grdRomaneos.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdRomaneos.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdRomaneos.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdRomaneos.Col = -2;
+            this.grdRomaneos.Cols = 0;
+            this.grdRomaneos.DataMember = "";
+            this.grdRomaneos.DataSource = null;
+            this.grdRomaneos.EnableEdicion = true;
+            this.grdRomaneos.Encabezado = "";
+            this.grdRomaneos.fColor = System.Drawing.SystemColors.Control;
+            this.grdRomaneos.FixCols = 0;
+            this.grdRomaneos.FixRows = 0;
+            this.grdRomaneos.FuenteEncabezado = null;
+            this.grdRomaneos.FuentePieDePagina = null;
+            this.grdRomaneos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdRomaneos.Location = new System.Drawing.Point(3, 23);
+            this.grdRomaneos.MenuActivado = false;
+            this.grdRomaneos.Name = "grdRomaneos";
+            this.grdRomaneos.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdRomaneos.PintarFilaSel = true;
+            this.grdRomaneos.Redraw = true;
+            this.grdRomaneos.Row = 0;
+            this.grdRomaneos.Rows = 50;
+            this.grdRomaneos.Size = new System.Drawing.Size(344, 186);
+            this.grdRomaneos.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 18);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Romaneos";
+            // 
+            // lblRendimiento
+            // 
+            this.lblRendimiento.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRendimiento.Name = "lblRendimiento";
+            this.lblRendimiento.Size = new System.Drawing.Size(81, 23);
+            this.lblRendimiento.Text = "Rendimiento";
+            // 
             // frmComprasFaena
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,6 +506,8 @@
             this.statusStrip3.ResumeLayout(false);
             this.statusStrip3.PerformLayout();
             this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
@@ -476,5 +541,9 @@
         private System.Windows.Forms.ToolStripStatusLabel lblCInt;
         private Grilla2.SpeedGrilla grdAgregados;
         private Grilla2.SpeedGrilla grdFaena;
+        private System.Windows.Forms.Label label2;
+        private Grilla2.SpeedGrilla grdRomaneos;
+        private System.Windows.Forms.ToolStripStatusLabel lblRendimiento;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

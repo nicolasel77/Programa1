@@ -1,4 +1,4 @@
-﻿namespace Programa1.Carga
+﻿namespace Programa1.Carga.Sebero
 {
     partial class frmCargaSebo
     {
