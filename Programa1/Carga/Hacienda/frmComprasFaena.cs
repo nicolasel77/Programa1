@@ -48,6 +48,10 @@
 
             grdBoletas.MostrarDatos(hc.nBoletas.Datos(), true, false);
             grdBoletas.AutosizeAll();
+            grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo")].Format = "C3";
+            grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo_Faena")].Format = "C3";
+            grdBoletas.Columnas[grdBoletas.get_ColIndex("Kilos_Compra")].Format = "N0";
+            grdBoletas.Columnas[grdBoletas.get_ColIndex("Kilos_Faena")].Format = "N0";
 
             grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=0"), true);
 
@@ -108,6 +112,7 @@
             grdAgregados.set_ColW(A_Tipo, 40);
             grdAgregados.set_ColW(A_Tipo + 1, 100);
             grdAgregados.set_ColW(A_Impporte, 100);
+            grdAgregados.set_ColW(A_Plazo, 40);
 
             grdAgregados.Columnas[A_Impporte].Format = "C2";
 
@@ -147,6 +152,16 @@
             grdFaena.Columnas[F_Recu].Format = "C2";
         }
 
+        private void LblCant_Click(object sender, EventArgs e)
+        {
+            ToolStripLabel lbl = sender as ToolStripLabel;
+            string s = lbl.Text.Substring(lbl.Text.IndexOf(":") + 1);
+
+            Clipboard.SetText(s);
+
+            System.Media.SystemSounds.Beep.Play();
+        }
+
         private void GrdBoletas_CambioFila(short Fila)
         {
             hc.nBoletas.NBoleta = Convert.ToInt32(grdBoletas.get_Texto(Fila, 0));
@@ -173,56 +188,56 @@
         }
         private void Totales()
         {
-            double t = grdCompras.SumarCol(c_Total, false);
-            double k = grdCompras.SumarCol(c_Kilos, false);
-            double c = grdCompras.SumarCol(c_Cab, false);
-            lblCCant.Text = $"Registros: {c:N0}";
-            lblCKilos.Text = $"Kilos: {k:N2}";
-            lblCTotal.Text = $"Total: {t:C2}";
+            double tCompra = grdCompras.SumarCol(c_Total, false);
+            double kCompra = grdCompras.SumarCol(c_Kilos, false);
+            double cabezas = grdCompras.SumarCol(c_Cab, false);
+            lblCCant.Text = $"Registros: {cabezas:N0}";
+            lblCKilos.Text = $"Kilos: {kCompra:N2}";
+            lblCTotal.Text = $"Total: {tCompra:C2}";
 
-            double ta = grdAgregados.SumarCol(A_Impporte, false);
-            lblATotal.Text = $"Total: {ta:C2}";
+            double tAgregados = grdAgregados.SumarCol(A_Impporte, false);
+            lblATotal.Text = $"Total: {tAgregados:C2}";
 
-            if (k != 0)
+            tCompra = (tCompra + tAgregados);
+            if (kCompra != 0)
             {
-                lblCInt.Text = $"Integración: {(t + ta) / k:C3}";
+                lblCInt.Text = $"Integración: {tCompra / kCompra:C3}";
             }
             else
             {
                 lblCInt.Text = "";
             }
 
-            t = 0;
-            double kf = 0;
-            double cf = 0;
+            double tRecupero = 0;
+            double kFaena = 0;
+            double cFaena = 0;
 
             for (int i = 1; i < grdFaena.Rows - 1; i++)
             {
-                t += Convert.ToSingle(grdFaena.get_Texto(i, F_Recu)) * Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
-                kf += Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
-                cf++;
+                tRecupero += Convert.ToSingle(grdFaena.get_Texto(i, F_Recu)) * Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
+                kFaena += Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
+                cFaena++;
             }
-            lblCant.Text = $"Cantidad: {cf:N0}";
-            lblKilos.Text = $"Kilos: {kf:N2}";
-            lblTotal.Text = $"Recupero: {t:C2}";
+            lblCant.Text = $"Cantidad: {cFaena:N0}";
+            lblKilos.Text = $"Kilos: {kFaena:N2}";
+            lblTotal.Text = $"Recupero: {tRecupero:C2}";
+            lblCostoCarne.Text = $"Costo Carne: {(tCompra / kFaena) - (tRecupero/kFaena):C3}";
 
-            if (k != 0)
+            if (kCompra != 0)
             {
-                lblRendimiento.Text = $"Rendimiento: {(kf / k * 100):N2}";
+                lblRendimiento.Text = $"Rendimiento: {(kFaena / kCompra * 100):N2}";
             }
             else
             {
                 lblRendimiento.Text = "";
             }
-            if (c != 0 & cf != (c*2))
+            if (cabezas != 0 & cFaena != (cabezas*2))
             {
-                lblCant.BackColor = Color.Red;
-                toolTip1.SetToolTip(lblCant, "La cantidad faenada no coincide con la compra.");
+                lblCant.BackColor = Color.Red;                
             }
             else
             {
-                lblCant.BackColor = System.Drawing.SystemColors.Control;
-                lblCant.ToolTipText = "";
+                lblCant.BackColor = System.Drawing.SystemColors.Control;                
             }
         }
     }

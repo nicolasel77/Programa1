@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmComprasFaena));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -48,15 +47,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.grdFaena = new Grilla2.SpeedGrilla();
+            this.label2 = new System.Windows.Forms.Label();
+            this.grdRomaneos = new Grilla2.SpeedGrilla();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblKilos = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotal = new System.Windows.Forms.ToolStripStatusLabel();
-            this.grdRomaneos = new Grilla2.SpeedGrilla();
-            this.label2 = new System.Windows.Forms.Label();
             this.lblRendimiento = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblCostoCarne = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -93,7 +92,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer1.Panel2.Controls.Add(this.statusStrip1);
-            this.splitContainer1.Size = new System.Drawing.Size(1101, 679);
+            this.splitContainer1.Size = new System.Drawing.Size(1229, 679);
             this.splitContainer1.SplitterDistance = 260;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -113,8 +112,8 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer2.Size = new System.Drawing.Size(1101, 260);
-            this.splitContainer2.SplitterDistance = 490;
+            this.splitContainer2.Size = new System.Drawing.Size(1229, 260);
+            this.splitContainer2.SplitterDistance = 452;
             this.splitContainer2.TabIndex = 2;
             // 
             // grdCompras
@@ -149,7 +148,7 @@
             this.grdCompras.Redraw = true;
             this.grdCompras.Row = 0;
             this.grdCompras.Rows = 50;
-            this.grdCompras.Size = new System.Drawing.Size(484, 226);
+            this.grdCompras.Size = new System.Drawing.Size(446, 226);
             this.grdCompras.TabIndex = 2;
             // 
             // statusStrip2
@@ -163,7 +162,7 @@
             this.lblCInt});
             this.statusStrip2.Location = new System.Drawing.Point(0, 232);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(490, 28);
+            this.statusStrip2.Size = new System.Drawing.Size(452, 28);
             this.statusStrip2.TabIndex = 1;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -179,6 +178,7 @@
             this.lblCCant.Name = "lblCCant";
             this.lblCCant.Size = new System.Drawing.Size(57, 23);
             this.lblCCant.Text = "Cabezas";
+            this.lblCCant.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblCKilos
             // 
@@ -186,6 +186,7 @@
             this.lblCKilos.Name = "lblCKilos";
             this.lblCKilos.Size = new System.Drawing.Size(36, 23);
             this.lblCKilos.Text = "Kilos";
+            this.lblCKilos.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblCTotal
             // 
@@ -193,6 +194,7 @@
             this.lblCTotal.Name = "lblCTotal";
             this.lblCTotal.Size = new System.Drawing.Size(36, 23);
             this.lblCTotal.Text = "Total";
+            this.lblCTotal.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblCInt
             // 
@@ -200,6 +202,7 @@
             this.lblCInt.Name = "lblCInt";
             this.lblCInt.Size = new System.Drawing.Size(76, 23);
             this.lblCInt.Text = "Integración:";
+            this.lblCInt.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // splitContainer4
             // 
@@ -219,8 +222,8 @@
             this.splitContainer4.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer4.Panel2.Controls.Add(this.grdBoletas);
             this.splitContainer4.Panel2.Controls.Add(this.label1);
-            this.splitContainer4.Size = new System.Drawing.Size(607, 260);
-            this.splitContainer4.SplitterDistance = 379;
+            this.splitContainer4.Size = new System.Drawing.Size(773, 260);
+            this.splitContainer4.SplitterDistance = 357;
             this.splitContainer4.TabIndex = 2;
             // 
             // grdAgregados
@@ -253,7 +256,7 @@
             this.grdAgregados.Redraw = true;
             this.grdAgregados.Row = 0;
             this.grdAgregados.Rows = 50;
-            this.grdAgregados.Size = new System.Drawing.Size(379, 232);
+            this.grdAgregados.Size = new System.Drawing.Size(357, 232);
             this.grdAgregados.TabIndex = 3;
             // 
             // statusStrip3
@@ -264,7 +267,7 @@
             this.lblATotal});
             this.statusStrip3.Location = new System.Drawing.Point(0, 232);
             this.statusStrip3.Name = "statusStrip3";
-            this.statusStrip3.Size = new System.Drawing.Size(379, 28);
+            this.statusStrip3.Size = new System.Drawing.Size(357, 28);
             this.statusStrip3.TabIndex = 2;
             this.statusStrip3.Text = "statusStrip3";
             // 
@@ -280,6 +283,7 @@
             this.lblATotal.Name = "lblATotal";
             this.lblATotal.Size = new System.Drawing.Size(49, 23);
             this.lblATotal.Text = "Totales";
+            this.lblATotal.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // grdBoletas
             // 
@@ -313,7 +317,7 @@
             this.grdBoletas.Redraw = true;
             this.grdBoletas.Row = 0;
             this.grdBoletas.Rows = 50;
-            this.grdBoletas.Size = new System.Drawing.Size(218, 236);
+            this.grdBoletas.Size = new System.Drawing.Size(406, 236);
             this.grdBoletas.TabIndex = 1;
             this.grdBoletas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdBoletas_CambioFila);
             // 
@@ -345,8 +349,8 @@
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer3.Panel2.Controls.Add(this.label2);
             this.splitContainer3.Panel2.Controls.Add(this.grdRomaneos);
-            this.splitContainer3.Size = new System.Drawing.Size(1101, 387);
-            this.splitContainer3.SplitterDistance = 747;
+            this.splitContainer3.Size = new System.Drawing.Size(1229, 387);
+            this.splitContainer3.SplitterDistance = 833;
             this.splitContainer3.TabIndex = 2;
             // 
             // grdFaena
@@ -379,51 +383,20 @@
             this.grdFaena.Redraw = true;
             this.grdFaena.Row = 0;
             this.grdFaena.Rows = 50;
-            this.grdFaena.Size = new System.Drawing.Size(747, 387);
+            this.grdFaena.Size = new System.Drawing.Size(833, 387);
             this.grdFaena.TabIndex = 0;
             // 
-            // statusStrip1
+            // label2
             // 
-            this.statusStrip1.AutoSize = false;
-            this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblMensaje,
-            this.lblCant,
-            this.lblKilos,
-            this.lblTotal,
-            this.lblRendimiento});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 387);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1101, 28);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblMensaje
-            // 
-            this.lblMensaje.ForeColor = System.Drawing.Color.Red;
-            this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(0, 23);
-            // 
-            // lblCant
-            // 
-            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCant.Name = "lblCant";
-            this.lblCant.Size = new System.Drawing.Size(60, 23);
-            this.lblCant.Text = "Cantidad";
-            // 
-            // lblKilos
-            // 
-            this.lblKilos.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblKilos.Name = "lblKilos";
-            this.lblKilos.Size = new System.Drawing.Size(36, 23);
-            this.lblKilos.Text = "Kilos";
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(49, 23);
-            this.lblTotal.Text = "Totales";
+            this.label2.AutoSize = true;
+            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 18);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Romaneos";
             // 
             // grdRomaneos
             // 
@@ -457,20 +430,55 @@
             this.grdRomaneos.Redraw = true;
             this.grdRomaneos.Row = 0;
             this.grdRomaneos.Rows = 50;
-            this.grdRomaneos.Size = new System.Drawing.Size(344, 186);
+            this.grdRomaneos.Size = new System.Drawing.Size(386, 186);
             this.grdRomaneos.TabIndex = 0;
             // 
-            // label2
+            // statusStrip1
             // 
-            this.label2.AutoSize = true;
-            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 18);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Romaneos";
+            this.statusStrip1.AutoSize = false;
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblMensaje,
+            this.lblCant,
+            this.lblKilos,
+            this.lblTotal,
+            this.lblRendimiento,
+            this.lblCostoCarne});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 387);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1229, 28);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblMensaje
+            // 
+            this.lblMensaje.ForeColor = System.Drawing.Color.Red;
+            this.lblMensaje.Name = "lblMensaje";
+            this.lblMensaje.Size = new System.Drawing.Size(0, 23);
+            // 
+            // lblCant
+            // 
+            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCant.Name = "lblCant";
+            this.lblCant.Size = new System.Drawing.Size(60, 23);
+            this.lblCant.Text = "Cantidad";
+            this.lblCant.Click += new System.EventHandler(this.LblCant_Click);
+            // 
+            // lblKilos
+            // 
+            this.lblKilos.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblKilos.Name = "lblKilos";
+            this.lblKilos.Size = new System.Drawing.Size(36, 23);
+            this.lblKilos.Text = "Kilos";
+            this.lblKilos.Click += new System.EventHandler(this.LblCant_Click);
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(49, 23);
+            this.lblTotal.Text = "Totales";
+            this.lblTotal.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblRendimiento
             // 
@@ -478,13 +486,21 @@
             this.lblRendimiento.Name = "lblRendimiento";
             this.lblRendimiento.Size = new System.Drawing.Size(81, 23);
             this.lblRendimiento.Text = "Rendimiento";
+            this.lblRendimiento.Click += new System.EventHandler(this.LblCant_Click);
+            // 
+            // lblCostoCarne
+            // 
+            this.lblCostoCarne.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCostoCarne.Name = "lblCostoCarne";
+            this.lblCostoCarne.Size = new System.Drawing.Size(42, 23);
+            this.lblCostoCarne.Text = "Carne";
             // 
             // frmComprasFaena
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(1101, 679);
+            this.ClientSize = new System.Drawing.Size(1229, 679);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmComprasFaena";
             this.Text = "Compras/Faena";
@@ -544,6 +560,6 @@
         private System.Windows.Forms.Label label2;
         private Grilla2.SpeedGrilla grdRomaneos;
         private System.Windows.Forms.ToolStripStatusLabel lblRendimiento;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblCostoCarne;
     }
 }
