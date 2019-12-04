@@ -29,11 +29,22 @@
         private Byte A_Tipo;
         private Byte A_Impporte;
         private Byte A_Plazo;
+
+        private Byte F_Id;
+        private Byte F_NBoleta;
+        private Byte F_Fecha;
+        private Byte F_Cat;
+        private Byte F_NRomaneo;
+        private Byte F_Tropa;
+        private Byte F_Prod;
+        private Byte F_Frigo;
+        private Byte F_Recu;
+        private Byte F_Kilos;
         #endregion
         public frmComprasFaena()
         {
             InitializeComponent();
-            
+
             grdBoletas.MostrarDatos(hc.nBoletas.Datos(), true, false);
             grdBoletas.AutosizeAll();
 
@@ -81,6 +92,7 @@
             grdCompras.Columnas[c_Total].Format = "C2";
 
             grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=0"), true);
+
             A_Id = Convert.ToByte(grdAgregados.get_ColIndex("Id"));
             A_NB = Convert.ToByte(grdAgregados.get_ColIndex("NBoleta"));
             A_Consig = Convert.ToByte(grdAgregados.get_ColIndex("Id_Consignatarios"));
@@ -97,16 +109,54 @@
             grdAgregados.set_ColW(A_Impporte, 100);
 
             grdAgregados.Columnas[A_Impporte].Format = "C2";
+
+
+            grdFaena.MostrarDatos(hc.Faena.Datos(), true, true);
+
+            F_Id = Convert.ToByte(grdFaena.get_ColIndex("Id"));
+            F_NBoleta = Convert.ToByte(grdFaena.get_ColIndex("NBoleta"));
+            F_Fecha = Convert.ToByte(grdFaena.get_ColIndex("Fecha"));
+            F_Cat = Convert.ToByte(grdFaena.get_ColIndex("Id_Categorias"));
+            F_NRomaneo = Convert.ToByte(grdFaena.get_ColIndex("NRomaneo"));
+            F_Tropa = Convert.ToByte(grdFaena.get_ColIndex("Tropa"));
+            F_Prod = Convert.ToByte(grdFaena.get_ColIndex("Id_Productos"));
+            F_Frigo = Convert.ToByte(grdFaena.get_ColIndex("Id_Frigorificos"));
+            F_Recu = Convert.ToByte(grdFaena.get_ColIndex("Recupero"));
+            F_Kilos = Convert.ToByte(grdFaena.get_ColIndex("Kilos"));
+
+            grdFaena.set_Texto(0, F_Prod, "Prod");
+            grdFaena.set_Texto(0, F_Prod + 1, "Desc");
+
+            grdFaena.set_ColW(F_Id, 0);
+            grdFaena.set_ColW(F_NBoleta, 0);
+            grdFaena.set_ColW(F_Fecha, 60);
+            grdFaena.set_ColW(F_Cat, 40);
+            grdFaena.set_ColW(F_Cat + 1, 50);
+            grdFaena.set_ColW(F_NRomaneo, 70);
+            grdFaena.set_ColW(F_Tropa, 60);
+            grdFaena.set_ColW(F_Prod, 40);
+            grdFaena.set_ColW(F_Prod + 1, 50);
+            grdFaena.set_ColW(F_Frigo, 40);
+            grdFaena.set_ColW(F_Frigo + 1, 50);
+            grdFaena.set_ColW(F_Recu, 50);
+            grdFaena.set_ColW(F_Kilos, 80);
+
+            grdFaena.Columnas[F_Kilos].Format = "N2";
+            grdFaena.Columnas[F_NRomaneo].Format = "N0";
+            grdFaena.Columnas[F_Recu].Format = "C2";
         }
 
         private void GrdBoletas_CambioFila(short Fila)
         {
-            hc.nBoletas.NBoleta = Convert.ToInt32( grdBoletas.get_Texto(Fila, 0));
+            hc.nBoletas.NBoleta = Convert.ToInt32(grdBoletas.get_Texto(Fila, 0));
             grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=" + hc.nBoletas.NBoleta), false);
             grdCompras.set_Texto(0, c_IdProd, "Prod");
             grdCompras.set_Texto(0, c_IdProd + 1, "Desc");
 
-            grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=" + hc.nBoletas.NBoleta), false);            
+            grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=" + hc.nBoletas.NBoleta), false);
+
+            hc.Faena.nBoleta = hc.nBoletas;
+            grdFaena.MostrarDatos(hc.Faena.Datos(), false);
 
             Totales();
         }
@@ -118,7 +168,7 @@
             lblCCant.Text = $"Registros: {c:N0}";
             lblCKilos.Text = $"Kilos: {k:N2}";
             lblCTotal.Text = $"Total: {t:C2}";
-            
+
             double ta = grdAgregados.SumarCol(A_Impporte, false);
             lblATotal.Text = $"Total: {ta:C2}";
 
@@ -130,6 +180,19 @@
             {
                 lblCInt.Text = "";
             }
+
+            t = 0;
+            k = 0;
+            c = 0;
+            for (int i = 1; i < grdFaena.Rows - 1; i++)
+            {
+                t += Convert.ToSingle(grdFaena.get_Texto(i, F_Recu))* Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
+                k += Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
+                c++;
+            }
+            lblCant.Text = $"Cantidad: {c:N0}";
+            lblKilos.Text = $"Kilos: {k:N2}";
+            lblTotal.Text = $"Recupero: {t:C2}";
         }
     }
 }

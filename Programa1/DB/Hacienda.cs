@@ -13,6 +13,7 @@ namespace Programa1.DB
         public NBoletas nBoletas = new NBoletas();
         public Compra_Hacienda compra = new Compra_Hacienda();
         public Agregados_Hacienda Agregados = new Agregados_Hacienda();
+        public Faena Faena = new Faena();
 
         public void Cargar(int nb = 0)
         {

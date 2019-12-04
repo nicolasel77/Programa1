@@ -35,13 +35,13 @@ namespace Programa1.DB
         }
 
         public int Id { get; set; }
-        public NBoletas nBoleta { get; set; }
+        public NBoletas nBoleta { get; set; } = new NBoletas();
         public DateTime Fecha { get; set; }
-        public Categorias Categoria { get; set; }
+        public Categorias Categoria { get; set; } = new Categorias();
         public int NRomaneo { get; set; }
         public int Tropa { get; set; }
-        public Frigorificos Frigorifico { get; set; }
-        public Productos Producto { get; set; }
+        public Frigorificos Frigorifico { get; set; } = new Frigorificos();
+        public Productos Producto { get; set; } = new Productos();
         public Single Recupero { get; set; }
         public Single Kilos { get; set; }
 
@@ -53,7 +53,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Faena", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Faena WHERE NBoleta=" + nBoleta.NBoleta, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
