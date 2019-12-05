@@ -319,13 +319,16 @@
         private void CmdTodosTipos_Click(object sender, EventArgs e)
         {
             lstTipos.SelectedIndex = -1;
-        }
-
-       
+        }      
 
         private void CmdNinguno_Click(object sender, EventArgs e)
         {
             lst.SelectedIndex = -1;
-        }        
+        }
+
+        private void SplitContainer1_Panel1_DoubleClick(object sender, EventArgs e)
+        {
+            Mostrar_Tipo = !MostrarTipo;
+        }
     }
 }

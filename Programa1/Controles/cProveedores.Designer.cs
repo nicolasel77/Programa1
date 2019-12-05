@@ -99,6 +99,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.lblTitulo);
             this.splitContainer1.Panel1.Controls.Add(this.lst);
             this.splitContainer1.Panel1.Controls.Add(this.chVer);
+            this.splitContainer1.Panel1.DoubleClick += new System.EventHandler(this.SplitContainer1_Panel1_DoubleClick);
             // 
             // splitContainer1.Panel2
             // 
@@ -109,6 +110,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.label3);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.lstTipos);
+            this.splitContainer1.Panel2.DoubleClick += new System.EventHandler(this.SplitContainer1_Panel1_DoubleClick);
             this.splitContainer1.Size = new System.Drawing.Size(337, 512);
             this.splitContainer1.SplitterDistance = 234;
             this.splitContainer1.TabIndex = 2;

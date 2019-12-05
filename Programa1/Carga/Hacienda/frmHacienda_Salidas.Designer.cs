@@ -228,7 +228,7 @@
             this.cSucursal.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucursal.Filtro_In = "";
             this.cSucursal.Location = new System.Drawing.Point(3, 3);
-            this.cSucursal.Mostrar_Tipo = false;
+            this.cSucursal.Mostrar_Tipo = true;
             this.cSucursal.Name = "cSucursal";
             this.cSucursal.Size = new System.Drawing.Size(222, 447);
             this.cSucursal.TabIndex = 3;

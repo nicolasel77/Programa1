@@ -329,6 +329,11 @@
         {
             lst.SelectedIndex = -1;
         }
+
+        private void SplitContainer1_Panel1_DoubleClick(object sender, EventArgs e)
+        {
+            Mostrar_Tipo = !MostrarTipo;
+        }
     }
 
 }
