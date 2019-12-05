@@ -1043,5 +1043,54 @@
                 }
             }
         }
+
+        private void RepartoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmHacienda_Salidas")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmHacienda_Salidas");
+                t.Text = "Hacienda_Salidas";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmHacienda_Salidas = new frmHacienda_Salidas();
+                frmHacienda_Salidas.MdiParent = this;
+                frmHacienda_Salidas.Disposed += FrmHacienda_Salidas_Disposed;
+                forms.Add(frmHacienda_Salidas);
+                frmHacienda_Salidas.Show();
+                frmHacienda_Salidas.WindowState = FormWindowState.Minimized;
+                frmHacienda_Salidas.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void FrmHacienda_Salidas_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Hacienda_Salidas")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmHacienda_Salidas")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }
