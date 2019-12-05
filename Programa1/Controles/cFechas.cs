@@ -19,6 +19,8 @@
 
             Cargar();
         }
+        public DateTime Fecha_Maxima { get => mntDias.MaxDate; set { mntDias.MaxDate = value; } }
+        public int Mostrar { get => tabControl1.SelectedIndex; set { tabControl1.SelectedIndex = value; } }
 
         private void Cargar()
         {
@@ -65,8 +67,11 @@
                     }
                     break;
                 case 1:
-                    s = mntDias.SelectionRange.Start.ToString("MM/dd/yyy");
-                    s = $"{campo}='{s}'";
+                    if (fecha_Actual.Year > 2000)
+                    {
+                        s = mntDias.SelectionRange.Start.ToString("MM/dd/yyy");
+                        s = $"{campo}='{s}'";
+                    }
                     break;
                 case 2:
                     if (lstMes.SelectedIndex > -1)

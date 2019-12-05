@@ -43,6 +43,9 @@
 
 
         public bool Mostrar_Ocultos { get; set; } = false;
+
+        public bool Filtrar_Ver { get; set; } = true;
+
         public bool Ordern_XId { get; set; } = true;
 
         public DataTable Datos(string filtro = "")
@@ -52,11 +55,13 @@
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
 
-            if (Mostrar_Ocultos == false)
+            if (Filtrar_Ver)
             {
-                filtro = h.Unir(filtro, " (Ver=1) ");
+                if (Mostrar_Ocultos == false)
+                {
+                    filtro = h.Unir(filtro, " (Ver=1) ");
+                }
             }
-
             if (filtro.Length > 0)
             {
                 filtro = " WHERE " + filtro;

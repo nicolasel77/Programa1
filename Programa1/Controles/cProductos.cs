@@ -9,14 +9,17 @@
 
     public partial class cProductos : UserControl
     {
-        private Productos prods;
+        private Productos prods = new Productos();
         private Herramientas herramientas = new Herramientas();
 
+        
         private bool cCancel = false;
         private bool MostrarTipo = true;
         private string vFiltroIn = "";
 
         public string Titulo { get => lblTitulo.Text; set { lblTitulo.Text = value; } }
+
+        public bool Filtrar_Ver { get => prods.Filtrar_Ver; set { prods.Filtrar_Ver = value; } }
 
         public string Filtro_In
         {

@@ -35,11 +35,8 @@
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-
+            if (filtro.Length > 0) filtro = " WHERE " + filtro;
+            
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT {top} * FROM vw_NBoletas {filtro} ORDER BY NBoleta {orden}", conexionSql);
