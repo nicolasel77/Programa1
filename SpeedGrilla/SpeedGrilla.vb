@@ -1360,6 +1360,8 @@ Public Class SpeedGrilla
                 End If
             Catch ex As OverflowException
                 Beep()
+            Catch er As Exception
+                Beep()
             End Try
             If .Col <> c And .Col <> -1 And .Redraw = True Then
                 c = .Col

@@ -42,7 +42,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT {top} *, (Kilos_Faena/Kilos_Compra*100) Rend FROM vw_NBoletas {filtro} ORDER BY NBoleta {orden}", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT {top} * FROM vw_NBoletas {filtro} ORDER BY NBoleta {orden}", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

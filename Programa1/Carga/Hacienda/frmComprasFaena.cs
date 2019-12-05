@@ -48,8 +48,10 @@
 
             grdBoletas.MostrarDatos(hc.nBoletas.Datos(), true, false);
             grdBoletas.AutosizeAll();
-            grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo")].Format = "C3";
-            grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo_Faena")].Format = "C3";
+            
+            grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo")].Format = "N3";
+            grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo_Faena")].Format = "N3";
+            grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo_Carne")].Format = "N3";
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Kilos_Compra")].Format = "N0";
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Kilos_Faena")].Format = "N0";
 
@@ -185,6 +187,11 @@
             grdRomaneos.set_ColW(2, 70);
 
             Totales();
+
+            if (grdBoletas.EsUltimaF() == true)
+            {
+                grdBoletas.MostrarDatos(hc.nBoletas.Datos("", ""), false, false);
+            }
         }
         private void Totales()
         {
