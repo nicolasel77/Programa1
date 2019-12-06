@@ -205,6 +205,12 @@
     <Compile Include="Carga\Hacienda\frmComprasFaena.Designer.cs">
       <DependentUpon>frmComprasFaena.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Hacienda\frmHaciendaStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmHaciendaStock.Designer.cs">
+      <DependentUpon>frmHaciendaStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Hacienda\frmHacienda_Salidas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -409,6 +415,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmComprasFaena.resx">
       <DependentUpon>frmComprasFaena.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmHaciendaStock.resx">
+      <DependentUpon>frmHaciendaStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmHacienda_Salidas.resx">
       <DependentUpon>frmHacienda_Salidas.cs</DependentUpon>

@@ -52,9 +52,12 @@
 
             Provs = new Proveedores();
             DataTable dt = Provs.Tipo.Datos();
-            foreach (DataRow dr in dt.Rows)
+            if (dt != null)
             {
-                lstTipos.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    lstTipos.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
+                }
             }
 
             Cargar();
@@ -319,7 +322,7 @@
         private void CmdTodosTipos_Click(object sender, EventArgs e)
         {
             lstTipos.SelectedIndex = -1;
-        }      
+        }
 
         private void CmdNinguno_Click(object sender, EventArgs e)
         {

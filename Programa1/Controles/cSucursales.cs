@@ -53,9 +53,12 @@
             Sucs = new Sucursales();
             Sucs.Filtro_SucCliente = Sucursales.Filtrar_SucsClientes.Sucursales;
             DataTable dt = Sucs.Tipo.Datos();
-            foreach (DataRow dr in dt.Rows)
+            if (dt != null)
             {
-                lstTipos.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    lstTipos.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
+                }
             }
 
             Cargar();

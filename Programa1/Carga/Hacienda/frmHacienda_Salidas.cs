@@ -59,6 +59,7 @@
             c_CostoCarne = Convert.ToByte(grdSalida.get_ColIndex("Costo_Carne"));
             c_CostoSalida = Convert.ToByte(grdSalida.get_ColIndex("Costo_Salida"));
             c_Media = Convert.ToByte(grdSalida.get_ColIndex("Media"));
+            c_Original = Convert.ToByte(grdSalida.get_ColIndex("Original"));
             c_TotalCompra = Convert.ToByte(grdSalida.get_ColIndex("Total_Compra"));
             c_TotalSalida = Convert.ToByte(grdSalida.get_ColIndex("Total_Salida"));
 
@@ -148,17 +149,22 @@
             grdSalida.set_ColW(c_Id, 0);
             grdSalida.set_ColW(c_Fecha, 60);
             grdSalida.set_ColW(c_IdSuc, 35);
-            grdSalida.set_ColW(c_IdSuc + 1, 40);
-            grdSalida.set_ColW(c_Prod, 30);
+            grdSalida.set_ColW(c_IdSuc + 1, 50);
+            grdSalida.set_ColW(c_Categoria, 40);
+            grdSalida.set_ColW(c_Prod, 40);
+            grdSalida.set_ColW(c_Tropa, 50);
+            grdSalida.set_ColW(c_Boleta, 40);
             grdSalida.set_ColW(c_CostoSalida, 60);
             grdSalida.set_ColW(c_CostoCarne, 60);
-            grdSalida.set_ColW(c_Media, 60);
+            grdSalida.set_ColW(c_Media, 50);
+            grdSalida.set_ColW(c_Original, 50);
             grdSalida.set_ColW(c_TotalCompra, 80);
             grdSalida.set_ColW(c_TotalSalida, 80);
 
-            grdSalida.Columnas[c_CostoSalida].Format = "C2";
-            grdSalida.Columnas[c_CostoCarne].Format = "C2";
-            grdSalida.Columnas[c_Media].Format = "N2";
+            grdSalida.Columnas[c_CostoSalida].Format = "N3";
+            grdSalida.Columnas[c_CostoCarne].Format = "N3";
+            grdSalida.Columnas[c_Media].Format = "N1";
+            grdSalida.Columnas[c_Original].Format = "N1";
             grdSalida.Columnas[c_TotalCompra].Format = "C2";
             grdSalida.Columnas[c_TotalSalida].Format = "C2";
 

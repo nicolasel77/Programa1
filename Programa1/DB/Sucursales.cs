@@ -103,8 +103,9 @@ namespace Programa1.DB
                 SqlDat.Fill(dt);
 
             }
-            catch (Exception)
+            catch (Exception er)
             {
+                MessageBox.Show(er.Message);
                 dt = null;
             }
 
