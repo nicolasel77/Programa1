@@ -1349,11 +1349,11 @@ Public Class SpeedGrilla
                             'despintar EX Fila Seleccionada
                             If Grd.Rows.Count > FilaSeleccionada Then
                                 Dim rg As C1.Win.C1FlexGrid.Row = Grd.Rows(FilaSeleccionada)
-                                rg.StyleNew.BackColor = Color.White
+                                If Not rg.IsNode Then rg.StyleNew.BackColor = Color.White
                             End If
                             'pintar la Fila Seleccionada
                             Dim rg2 As C1.Win.C1FlexGrid.Row = Grd.Rows(r)
-                            rg2.StyleNew.BackColor = Color.LightBlue
+                            If Not rg2.IsNode Then rg2.StyleNew.BackColor = Color.LightBlue
                             FilaSeleccionada = r
                         End If
                     End If

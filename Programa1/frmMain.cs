@@ -1092,5 +1092,54 @@
                 }
             }
         }
+
+        private void StockToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmHaciendaStock")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmHaciendaStock");
+                t.Text = "HaciendaStock";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmHaciendaStock = new frmHaciendaStock();
+                frmHaciendaStock.MdiParent = this;
+                frmHaciendaStock.Disposed += FrmHaciendaStock_Disposed;
+                forms.Add(frmHaciendaStock);
+                frmHaciendaStock.Show();
+                frmHaciendaStock.WindowState = FormWindowState.Minimized;
+                frmHaciendaStock.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void FrmHaciendaStock_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "HaciendaStock")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmHaciendaStock")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

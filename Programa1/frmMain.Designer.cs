@@ -468,6 +468,7 @@
             this.stockToolStripMenuItem1.Name = "stockToolStripMenuItem1";
             this.stockToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.stockToolStripMenuItem1.Text = "&Stock";
+            this.stockToolStripMenuItem1.Click += new System.EventHandler(this.StockToolStripMenuItem1_Click);
             // 
             // vencimientosToolStripMenuItem
             // 

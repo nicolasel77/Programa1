@@ -29,23 +29,127 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHaciendaStock));
-            this.grdStock = new Grilla2.SpeedGrilla();
-            this.grdDetalle = new Grilla2.SpeedGrilla();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.cmdMostrar = new System.Windows.Forms.Button();
+            this.calFecha = new System.Windows.Forms.MonthCalendar();
+            this.grdTipo = new Grilla2.SpeedGrilla();
+            this.grdStock = new Grilla2.SpeedGrilla();
+            this.grdDetalle = new Grilla2.SpeedGrilla();
+            this.grdCategorias = new Grilla2.SpeedGrilla();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.grdCategorias);
+            this.splitContainer1.Panel1.Controls.Add(this.grdTipo);
+            this.splitContainer1.Panel1.Controls.Add(this.grdStock);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.grdDetalle);
+            this.splitContainer1.Size = new System.Drawing.Size(922, 651);
+            this.splitContainer1.SplitterDistance = 212;
+            this.splitContainer1.TabIndex = 2;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer2.BackColor = System.Drawing.Color.Gainsboro;
+            this.splitContainer2.Location = new System.Drawing.Point(12, 12);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.splitContainer1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer2.Panel2.Controls.Add(this.calFecha);
+            this.splitContainer2.Panel2.Controls.Add(this.cmdMostrar);
+            this.splitContainer2.Size = new System.Drawing.Size(1180, 651);
+            this.splitContainer2.SplitterDistance = 922;
+            this.splitContainer2.TabIndex = 3;
+            // 
+            // cmdMostrar
+            // 
+            this.cmdMostrar.BackColor = System.Drawing.Color.LightBlue;
+            this.cmdMostrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdMostrar.Location = new System.Drawing.Point(6, 177);
+            this.cmdMostrar.Name = "cmdMostrar";
+            this.cmdMostrar.Size = new System.Drawing.Size(245, 35);
+            this.cmdMostrar.TabIndex = 1;
+            this.cmdMostrar.Text = "&Mostrar Actual";
+            this.cmdMostrar.UseVisualStyleBackColor = false;
+            this.cmdMostrar.Click += new System.EventHandler(this.CmdMostrar_Click);
+            // 
+            // calFecha
+            // 
+            this.calFecha.Location = new System.Drawing.Point(3, 0);
+            this.calFecha.Name = "calFecha";
+            this.calFecha.TabIndex = 2;
+            this.calFecha.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.CalFecha_DateSelected);
+            // 
+            // grdTipo
+            // 
+            this.grdTipo.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdTipo.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdTipo.AutoResize = false;
+            this.grdTipo.bColor = System.Drawing.SystemColors.Window;
+            this.grdTipo.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdTipo.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdTipo.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdTipo.Col = 0;
+            this.grdTipo.Cols = 10;
+            this.grdTipo.DataMember = "";
+            this.grdTipo.DataSource = null;
+            this.grdTipo.EnableEdicion = true;
+            this.grdTipo.Encabezado = "";
+            this.grdTipo.fColor = System.Drawing.SystemColors.Control;
+            this.grdTipo.FixCols = 0;
+            this.grdTipo.FixRows = 0;
+            this.grdTipo.FuenteEncabezado = null;
+            this.grdTipo.FuentePieDePagina = null;
+            this.grdTipo.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdTipo.Location = new System.Drawing.Point(481, 0);
+            this.grdTipo.MenuActivado = false;
+            this.grdTipo.Name = "grdTipo";
+            this.grdTipo.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdTipo.PintarFilaSel = true;
+            this.grdTipo.Redraw = true;
+            this.grdTipo.Row = 0;
+            this.grdTipo.Rows = 50;
+            this.grdTipo.Size = new System.Drawing.Size(206, 212);
+            this.grdTipo.TabIndex = 1;
             // 
             // grdStock
             // 
             this.grdStock.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
             this.grdStock.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grdStock.AutoResize = false;
             this.grdStock.bColor = System.Drawing.SystemColors.Window;
             this.grdStock.bColorSel = System.Drawing.SystemColors.Highlight;
@@ -55,7 +159,6 @@
             this.grdStock.Cols = 10;
             this.grdStock.DataMember = "";
             this.grdStock.DataSource = null;
-            this.grdStock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdStock.EnableEdicion = true;
             this.grdStock.Encabezado = "";
             this.grdStock.fColor = System.Drawing.SystemColors.Control;
@@ -64,7 +167,7 @@
             this.grdStock.FuenteEncabezado = null;
             this.grdStock.FuentePieDePagina = null;
             this.grdStock.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdStock.Location = new System.Drawing.Point(0, 0);
+            this.grdStock.Location = new System.Drawing.Point(3, 0);
             this.grdStock.MenuActivado = false;
             this.grdStock.Name = "grdStock";
             this.grdStock.PieDePagina = "\t\tPage {0} of {1}";
@@ -72,8 +175,9 @@
             this.grdStock.Redraw = true;
             this.grdStock.Row = 0;
             this.grdStock.Rows = 50;
-            this.grdStock.Size = new System.Drawing.Size(763, 212);
+            this.grdStock.Size = new System.Drawing.Size(475, 212);
             this.grdStock.TabIndex = 0;
+            this.grdStock.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdStock_CambioFila);
             // 
             // grdDetalle
             // 
@@ -93,7 +197,7 @@
             this.grdDetalle.Encabezado = "";
             this.grdDetalle.fColor = System.Drawing.SystemColors.Control;
             this.grdDetalle.FixCols = 0;
-            this.grdDetalle.FixRows = 0;
+            this.grdDetalle.FixRows = 1;
             this.grdDetalle.FuenteEncabezado = null;
             this.grdDetalle.FuentePieDePagina = null;
             this.grdDetalle.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -103,40 +207,44 @@
             this.grdDetalle.PieDePagina = "\t\tPage {0} of {1}";
             this.grdDetalle.PintarFilaSel = true;
             this.grdDetalle.Redraw = true;
-            this.grdDetalle.Row = 0;
-            this.grdDetalle.Rows = 50;
-            this.grdDetalle.Size = new System.Drawing.Size(763, 435);
+            this.grdDetalle.Row = 1;
+            this.grdDetalle.Rows = 2;
+            this.grdDetalle.Size = new System.Drawing.Size(922, 435);
             this.grdDetalle.TabIndex = 1;
             // 
-            // splitContainer1
+            // grdCategorias
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.grdStock);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.grdDetalle);
-            this.splitContainer1.Size = new System.Drawing.Size(763, 651);
-            this.splitContainer1.SplitterDistance = 212;
-            this.splitContainer1.TabIndex = 2;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Location = new System.Drawing.Point(12, 12);
-            this.splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.splitContainer1);
-            this.splitContainer2.Size = new System.Drawing.Size(1180, 651);
-            this.splitContainer2.SplitterDistance = 763;
-            this.splitContainer2.TabIndex = 3;
+            this.grdCategorias.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdCategorias.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdCategorias.AutoResize = false;
+            this.grdCategorias.bColor = System.Drawing.SystemColors.Window;
+            this.grdCategorias.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdCategorias.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdCategorias.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdCategorias.Col = 0;
+            this.grdCategorias.Cols = 10;
+            this.grdCategorias.DataMember = "";
+            this.grdCategorias.DataSource = null;
+            this.grdCategorias.EnableEdicion = true;
+            this.grdCategorias.Encabezado = "";
+            this.grdCategorias.fColor = System.Drawing.SystemColors.Control;
+            this.grdCategorias.FixCols = 0;
+            this.grdCategorias.FixRows = 0;
+            this.grdCategorias.FuenteEncabezado = null;
+            this.grdCategorias.FuentePieDePagina = null;
+            this.grdCategorias.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdCategorias.Location = new System.Drawing.Point(693, 0);
+            this.grdCategorias.MenuActivado = false;
+            this.grdCategorias.Name = "grdCategorias";
+            this.grdCategorias.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdCategorias.PintarFilaSel = true;
+            this.grdCategorias.Redraw = true;
+            this.grdCategorias.Row = 0;
+            this.grdCategorias.Rows = 50;
+            this.grdCategorias.Size = new System.Drawing.Size(224, 212);
+            this.grdCategorias.TabIndex = 1;
             // 
             // frmHaciendaStock
             // 
@@ -146,11 +254,13 @@
             this.Controls.Add(this.splitContainer2);
             this.Name = "frmHaciendaStock";
             this.Text = "Stock";
+            this.Load += new System.EventHandler(this.FrmHaciendaStock_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -163,5 +273,9 @@
         private Grilla2.SpeedGrilla grdDetalle;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.Button cmdMostrar;
+        private System.Windows.Forms.MonthCalendar calFecha;
+        private Grilla2.SpeedGrilla grdTipo;
+        private Grilla2.SpeedGrilla grdCategorias;
     }
 }
