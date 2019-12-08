@@ -26,8 +26,7 @@ namespace Programa1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=dbDatos;Integrated Security=Tr" +
-            "ue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-5IUSNJ2;Initial Catalog=dbDatos;User Id=Nikorasu;Password=Oficina02;Persist Security Info=True")]
         public string dbDatosConnectionString {
             get {
                 return ((string)(this["dbDatosConnectionString"]));

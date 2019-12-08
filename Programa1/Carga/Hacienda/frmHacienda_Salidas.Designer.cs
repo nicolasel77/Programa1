@@ -180,6 +180,7 @@
             // 
             // splitContainer2
             // 
+            this.splitContainer2.BackColor = System.Drawing.Color.Gainsboro;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
@@ -204,10 +205,12 @@
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer3.Panel1.Controls.Add(this.cSucursal);
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer3.Panel2.Controls.Add(this.grdResumen);
             this.splitContainer3.Panel2.Controls.Add(this.chMediasUsadas);
             this.splitContainer3.Panel2.Controls.Add(this.txtNRomaneo);
@@ -228,9 +231,9 @@
             this.cSucursal.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucursal.Filtro_In = "";
             this.cSucursal.Location = new System.Drawing.Point(3, 3);
-            this.cSucursal.Mostrar_Tipo = true;
+            this.cSucursal.Mostrar_Tipo = false;
             this.cSucursal.Name = "cSucursal";
-            this.cSucursal.Size = new System.Drawing.Size(222, 447);
+            this.cSucursal.Size = new System.Drawing.Size(219, 447);
             this.cSucursal.TabIndex = 3;
             this.cSucursal.Titulo = "Sucursales";
             this.cSucursal.Valor_Actual = -1;
@@ -268,7 +271,7 @@
             this.grdResumen.Redraw = true;
             this.grdResumen.Row = 0;
             this.grdResumen.Rows = 50;
-            this.grdResumen.Size = new System.Drawing.Size(214, 194);
+            this.grdResumen.Size = new System.Drawing.Size(209, 194);
             this.grdResumen.TabIndex = 6;
             // 
             // chMediasUsadas
@@ -372,10 +375,12 @@
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer4.Panel1.Controls.Add(this.cFecha);
             // 
             // splitContainer4.Panel2
             // 
+            this.splitContainer4.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer4.Panel2.Controls.Add(this.cProds);
             this.splitContainer4.Size = new System.Drawing.Size(446, 230);
             this.splitContainer4.SplitterDistance = 248;

@@ -7,7 +7,7 @@
     {
         public Retiros()
         {
-            Cargar_Mes();
+            //Cargar_Mes();
         }
         public Retiros(DateTime fecha, Empleados empl, Sucursales suc, TipoRetiros tipo, Single saldoant)
         {
@@ -17,7 +17,7 @@
             Tipo = tipo;
             Saldo_Anterior = saldoant;
         }
-                
+
         public DateTime Mes { get; set; }
         public Empleados Empleado { get; set; } = new Empleados();
         public Sucursales Sucursal { get; set; } = new Sucursales();
@@ -72,7 +72,12 @@
             }
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_MesTemp WHERE Mes='{mes.ToString("MM/dd/yyy")}' {suc} ORDER BY Id_Sucursales, Id_Empleados", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"EXEC sp_SueldosMes '{mes.ToString("MM/dd/yyy")}'", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+                conexionSql.Open();
+                comandoSql.ExecuteNonQuery();
+
+                comandoSql.CommandText = $"SELECT * FROM vw_MesTemp WHERE Mes='{mes.ToString("MM/dd/yyy")}' {suc} ORDER BY Id_Sucursales, Id_Empleados";
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -87,35 +92,35 @@
         }
 
 
-        private void Cargar_Mes()
-        {
-            DateTime f = DateTime.Today.AddDays((DateTime.Today.Day - 1) * - 1);
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            SqlCommand comandoSql = new SqlCommand($"SELECT COUNT(Mes) FROM Mes_Temp WHERE Mes='{f.ToString("MM/dd/yyy")}'", conexionSql);
-            object d = null;
+        //private void Cargar_Mes()
+        //{
+        //    DateTime f = DateTime.Today.AddDays((DateTime.Today.Day - 1) * - 1);
+        //    var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+        //    SqlCommand comandoSql = new SqlCommand($"SELECT COUNT(Mes) FROM Mes_Temp WHERE Mes='{f.ToString("MM/dd/yyy")}'", conexionSql);
+        //    object d = null;
 
 
-            try
-            {
-                conexionSql.Open();
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
+        //    try
+        //    {
+        //        conexionSql.Open();
+        //        comandoSql.CommandType = CommandType.Text;
+        //        d = comandoSql.ExecuteScalar();
 
-                conexionSql.Close();
-            }
-            catch (Exception)
-            {
-                d = 0;
-            }
-            if (Convert.ToInt32(d) == 0)
-            {
-                comandoSql.CommandText = $"EXEC sp_SueldosMes '{f.ToString("MM/dd/yyy")}'";
-                comandoSql.CommandType = CommandType.Text;
+        //        conexionSql.Close();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        d = 0;
+        //    }
+        //    if (Convert.ToInt32(d) == 0)
+        //    {
+        //        comandoSql.CommandText = $"EXEC sp_SueldosMes '{f.ToString("MM/dd/yyy")}'";
+        //        comandoSql.CommandType = CommandType.Text;
 
-                conexionSql.Open();
-                comandoSql.ExecuteNonQuery();
+        //        conexionSql.Open();
+        //        comandoSql.ExecuteNonQuery();
 
-            }
-        }
+        //    }
+        //}
     }
 }

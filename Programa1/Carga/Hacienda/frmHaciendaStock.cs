@@ -78,7 +78,7 @@
                     faena.nBoleta.NBoleta = Convert.ToInt32(grdStock.get_Texto(Fila, grdStock.get_ColIndex("NBoleta")));
                     string f = $"Nombre_Categoria='{grdStock.get_Texto(Fila, grdStock.get_ColIndex("Cat"))}'" +
                                $" AND Tropa={grdStock.get_Texto(Fila, grdStock.get_ColIndex("Tropa"))}";
-                    grdDetalle.MostrarDatos(faena.Stock_DetalleFaena(calFecha.SelectionEnd.Date, f), true, true);
+                    grdDetalle.MostrarDatos(faena.Stock_DetalleFaena(calFecha.SelectionEnd.Date, f), true, false);
                     grdDetalle.AutosizeAll();
                     this.Cursor = Cursors.Default;
                 }

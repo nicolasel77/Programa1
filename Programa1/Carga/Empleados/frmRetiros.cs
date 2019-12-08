@@ -164,6 +164,8 @@
 
         private void Cargar()
         {
+            this.Cursor = Cursors.WaitCursor;
+
             v_Mes = DateTime.Parse($"1/{DateTime.Today.Month}/{DateTime.Today.Year}");
             v_Mes = v_Mes.AddMonths(lstMes.SelectedIndex * -1);            
 
@@ -175,6 +177,7 @@
             {
                 Saldo(i);
             }
+            this.Cursor = Cursors.Default;
         }
 
         private void Saldo(int fila)

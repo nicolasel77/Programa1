@@ -218,11 +218,23 @@
     <Compile Include="Carga\Hacienda\frmHacienda_Salidas.Designer.cs">
       <DependentUpon>frmHacienda_Salidas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Hacienda\frmVencimientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmVencimientos.Designer.cs">
+      <DependentUpon>frmVencimientos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Precios\frmPreciosMen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Carga\Precios\frmPreciosMen.Designer.cs">
       <DependentUpon>frmPreciosMen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Precios\frmPrecios_Carne.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Precios\frmPrecios_Carne.Designer.cs">
+      <DependentUpon>frmPrecios_Carne.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Sebero\frmCargaSebo.cs">
       <SubType>Form</SubType>
@@ -423,8 +435,14 @@
     <EmbeddedResource Include="Carga\Hacienda\frmHacienda_Salidas.resx">
       <DependentUpon>frmHacienda_Salidas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmVencimientos.resx">
+      <DependentUpon>frmVencimientos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Precios\frmPreciosMen.resx">
       <DependentUpon>frmPreciosMen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Precios\frmPrecios_Carne.resx">
+      <DependentUpon>frmPrecios_Carne.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sebero\frmCargaSebo.resx">
       <DependentUpon>frmCargaSebo.cs</DependentUpon>
