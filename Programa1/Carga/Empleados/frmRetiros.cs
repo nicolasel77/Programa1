@@ -19,7 +19,7 @@
             InitializeComponent();
 
             DateTime d = new DateTime(2000, 1, 1);
-            grdRetiros.MostrarDatos(retiros.Datos_Mes(d), true, false);
+            grdRetiros.MostrarDatos(retiros.Datos_Mes(d, 0), true, false);
             c_Mes = Convert.ToByte(grdRetiros.get_ColIndex("Mes"));
             c_IdEmp = Convert.ToByte(grdRetiros.get_ColIndex("Id_Empleados"));
             c_IdSuc = Convert.ToByte(grdRetiros.get_ColIndex("Id_Sucursales"));
@@ -74,7 +74,8 @@
         private void GrdRetiros_CambioFila(short Fila)
         {
             retiros.Empleado.Id = Convert.ToInt32(grdRetiros.get_Texto(Fila, c_IdEmp));
-            retiros.Mes = v_Mes;
+            retiros.Sucursal.Id = Convert.ToInt32(grdRetiros.get_Texto(Fila, c_IdSuc));
+            retiros.Fecha = v_Mes;
             sueldos.Empleado = retiros.Empleado;
             sueldos.Fecha = v_Mes;
 
@@ -124,8 +125,9 @@
             }
             if (c == c_D7)
             {
-                retiros.Mes = v_Mes.AddDays(6);
-                //retiros.guardar();
+                retiros.Fecha = v_Mes.AddDays(6);
+                retiros.Importe = Convert.ToSingle(a);
+                retiros.Actualizar_Adelantos();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
@@ -133,8 +135,9 @@
             }
             if (c == c_D14)
             {
-                retiros.Mes = v_Mes.AddDays(13);
-                //retiros.guardar();
+                retiros.Fecha = v_Mes.AddDays(13);
+                retiros.Importe = Convert.ToSingle(a);
+                retiros.Actualizar_Adelantos();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
@@ -142,8 +145,9 @@
             }
             if (c == c_D21)
             {
-                retiros.Mes = v_Mes.AddDays(6);
-                //retiros.guardar();
+                retiros.Fecha = v_Mes.AddDays(6);
+                retiros.Importe = Convert.ToSingle(a);
+                retiros.Actualizar_Adelantos();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
@@ -151,8 +155,9 @@
             }
             if (c == c_Resto)
             {
-                retiros.Mes = v_Mes.AddDays(6);
-                //retiros.guardar();
+                retiros.Fecha  = v_Mes.AddDays(6);
+                retiros.Importe = Convert.ToSingle(a);
+                retiros.Actualizar_Resto();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
@@ -171,7 +176,7 @@
 
             this.Text = v_Mes.ToString("MMMM yyy");
             this.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(this.Text);
-            grdRetiros.MostrarDatos(retiros.Datos_Mes(v_Mes, cSuc.Cadena("Id_Sucursales")));
+            grdRetiros.MostrarDatos(retiros.Datos_Mes(v_Mes, cSuc.Valor_Actual));
 
             for (int i = 1; i < grdRetiros.Rows; i++)
             {
@@ -198,6 +203,7 @@
 
 
             //Guardar
+            retiros.Actualizar_Saldo(saldo);
 
             //Pintar
             grdRetiros.set_ColorLetraCelda(fila, c_D7, Color.Black);
