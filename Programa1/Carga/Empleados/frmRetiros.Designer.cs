@@ -32,23 +32,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRetiros));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdRetiros = new Grilla2.SpeedGrilla();
+            this.cntMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darDeBajaEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.cSuc = new Programa1.Controles.cSucursales();
             this.cmdImprimir = new System.Windows.Forms.Button();
             this.cmdExcel = new System.Windows.Forms.Button();
             this.lstMes = new System.Windows.Forms.ListBox();
-            this.cntMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.darDeBajaEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.cntMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.cntMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -65,7 +65,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(1272, 690);
-            this.splitContainer1.SplitterDistance = 927;
+            this.splitContainer1.SplitterDistance = 1063;
             this.splitContainer1.TabIndex = 0;
             // 
             // grdRetiros
@@ -101,11 +101,32 @@
             this.grdRetiros.Redraw = true;
             this.grdRetiros.Row = 0;
             this.grdRetiros.Rows = 50;
-            this.grdRetiros.Size = new System.Drawing.Size(912, 666);
+            this.grdRetiros.Size = new System.Drawing.Size(1048, 666);
             this.grdRetiros.TabIndex = 0;
             this.grdRetiros.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdRetiros_Editado);
             this.grdRetiros.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdRetiros_CambioFila);
             this.grdRetiros.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdRetiros_KeyUp);
+            // 
+            // cntMenu
+            // 
+            this.cntMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editarToolStripMenuItem,
+            this.darDeBajaEmpleadoToolStripMenuItem});
+            this.cntMenu.Name = "cntMenu";
+            this.cntMenu.Size = new System.Drawing.Size(190, 48);
+            // 
+            // editarToolStripMenuItem
+            // 
+            this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.editarToolStripMenuItem.Text = "Editar fechas";
+            this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
+            // 
+            // darDeBajaEmpleadoToolStripMenuItem
+            // 
+            this.darDeBajaEmpleadoToolStripMenuItem.Name = "darDeBajaEmpleadoToolStripMenuItem";
+            this.darDeBajaEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.darDeBajaEmpleadoToolStripMenuItem.Text = "Dar de baja empleado";
             // 
             // splitContainer2
             // 
@@ -123,7 +144,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.cmdImprimir);
             this.splitContainer2.Panel2.Controls.Add(this.cmdExcel);
             this.splitContainer2.Panel2.Controls.Add(this.lstMes);
-            this.splitContainer2.Size = new System.Drawing.Size(341, 690);
+            this.splitContainer2.Size = new System.Drawing.Size(205, 690);
             this.splitContainer2.SplitterDistance = 552;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -137,7 +158,7 @@
             this.cSuc.Location = new System.Drawing.Point(-1, 12);
             this.cSuc.Mostrar_Tipo = true;
             this.cSuc.Name = "cSuc";
-            this.cSuc.Size = new System.Drawing.Size(339, 537);
+            this.cSuc.Size = new System.Drawing.Size(203, 537);
             this.cSuc.TabIndex = 0;
             this.cSuc.Titulo = "Sucursales";
             this.cSuc.Valor_Actual = -1;
@@ -147,7 +168,7 @@
             // 
             this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdImprimir.Location = new System.Drawing.Point(222, 93);
+            this.cmdImprimir.Location = new System.Drawing.Point(86, 93);
             this.cmdImprimir.Name = "cmdImprimir";
             this.cmdImprimir.Size = new System.Drawing.Size(116, 24);
             this.cmdImprimir.TabIndex = 1;
@@ -158,7 +179,7 @@
             // 
             this.cmdExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdExcel.Location = new System.Drawing.Point(222, 63);
+            this.cmdExcel.Location = new System.Drawing.Point(86, 63);
             this.cmdExcel.Name = "cmdExcel";
             this.cmdExcel.Size = new System.Drawing.Size(116, 24);
             this.cmdExcel.TabIndex = 1;
@@ -180,27 +201,6 @@
             this.lstMes.TabIndex = 0;
             this.lstMes.SelectedIndexChanged += new System.EventHandler(this.LstMes_SelectedIndexChanged);
             // 
-            // cntMenu
-            // 
-            this.cntMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editarToolStripMenuItem,
-            this.darDeBajaEmpleadoToolStripMenuItem});
-            this.cntMenu.Name = "cntMenu";
-            this.cntMenu.Size = new System.Drawing.Size(190, 70);
-            // 
-            // editarToolStripMenuItem
-            // 
-            this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
-            this.editarToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.editarToolStripMenuItem.Text = "Editar fechas";
-            this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
-            // 
-            // darDeBajaEmpleadoToolStripMenuItem
-            // 
-            this.darDeBajaEmpleadoToolStripMenuItem.Name = "darDeBajaEmpleadoToolStripMenuItem";
-            this.darDeBajaEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.darDeBajaEmpleadoToolStripMenuItem.Text = "Dar de baja empleado";
-            // 
             // frmRetiros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,11 +213,11 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.cntMenu.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.cntMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

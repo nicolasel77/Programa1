@@ -1,6 +1,6 @@
 ﻿namespace Programa1.Carga.Empleados
 {
-    partial class frmRetiros_Detalle
+    partial class frmDetalle_Varios
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRetiros_Detalle));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDetalle_Varios));
             this.grdDetalle = new Grilla2.SpeedGrilla();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
@@ -39,8 +39,8 @@
             // 
             this.grdDetalle.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
             this.grdDetalle.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.grdDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdDetalle.AutoResize = false;
             this.grdDetalle.bColor = System.Drawing.SystemColors.Window;
@@ -126,7 +126,7 @@
             this.grdRetiros.TabIndex = 3;
             this.grdRetiros.Visible = false;
             // 
-            // frmRetiros_Detalle
+            // frmDetalle_Varios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -138,10 +138,10 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmRetiros_Detalle";
+            this.Name = "frmDetalle_Varios";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detalle";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmRetiros_Detalle_KeyUp);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmDetalle_Varios_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

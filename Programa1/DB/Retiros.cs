@@ -93,7 +93,7 @@
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-                        
+
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
@@ -137,7 +137,31 @@
 
             return dt;
         }
-        public void Actualizar_Adelantos()
+        public DataTable Detalle_Varios()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
+                    $" AND '{Fecha.AddMonths(1).AddDays(-1).ToString("MM/dd/yyy")}' " +
+                    $" AND Id_Empleados={Empleado.Id}" +
+                    $" AND Id_Tipo={Tipo.Id}" +
+                    $" ORDER BY Fecha", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -146,13 +170,14 @@
                 SqlCommand command = new SqlCommand();
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
+                sql.Open();
 
                 if (Id != 0)
                 {
                     command.CommandText =
                     $"UPDATE Retiros SET " +
                     $"  Fecha='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $", Id_Tipo=100" +
+                    $", Id_Tipo={Tipo.Id}" +
                     $", Id_Sucursales={Sucursal.Id}" +
                     $", Id_Empleados={Empleado.Id}" +
                     $", Importe={Importe.ToString().Replace(",", ".")} " +
@@ -162,41 +187,15 @@
                 }
                 else
                 {
-                    string s = $"DELETE FROM Retiros WHERE ";
-
-                    switch (Fecha.Day)
-                    {
-                        case 7:
-                            s = $"{s}  Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}' AND '{Fecha.AddDays(6).ToString("MM/dd/yyy")}'";
-                            break;
-                        case 14:
-                            s = $"{s}  Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}' AND '{Fecha.AddDays(6).ToString("MM/dd/yyy")}'";
-                            break;
-                        case 21:
-                            //Hasta fin de mes
-                            s = $"{s}  Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}' AND " +
-                                $"'{Fecha.AddMonths(1).AddDays(-1).ToString("MM/dd/yyy")}'";
-                            break;
-                    }
-
-                    s = $"{s} AND Id_Tipo=100" +
-                    $" AND Id_Sucursales={Sucursal.Id}" +
-                    $" AND Id_Empleados={Empleado.Id}";
-
-                    sql.Open();
-
-                    command.CommandText = s;
-                    var d = command.ExecuteNonQuery();
-
                     command.CommandText =
                     $"INSERT INTO Retiros (Fecha, Id_Empleados, Id_Sucursales, Id_Tipo, Importe) VALUES (" +
                     $"'{Fecha.ToString("MM/dd/yyy")}'" +
                     $", {Empleado.Id}" +
                     $", {Sucursal.Id}" +
-                    $", 100" +
+                    $", {Tipo.Id}" +
                     $", {Importe.ToString().Replace(",", ".")})";
 
-                    d = command.ExecuteNonQuery();
+                    var d = command.ExecuteNonQuery();
                 }
 
 
@@ -207,7 +206,8 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
-        public void Actualizar_Resto()
+       
+        public void Borrar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -216,42 +216,44 @@
                 SqlCommand command = new SqlCommand();
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
+                sql.Open();
 
                 if (Id != 0)
                 {
-                    command.CommandText =
-                    $"UPDATE Retiros SET " +
-                    $"  Fecha='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $", Id_Tipo=1" +
-                    $", Id_Sucursales={Sucursal.Id}" +
-                    $", Id_Empleados={Empleado.Id}" +
-                    $", Importe={Importe.ToString().Replace(",", ".")} " +
-                    $"  WHERE Id={Id}";
+                    command.CommandText = $"DELETE FROM Retiros WHERE Id={Id}";
 
                     var d = command.ExecuteNonQuery();
                 }
                 else
                 {
-                    string s = $"DELETE FROM Retiros WHERE " +
-                    $"  Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}' AND '{Fecha.AddDays(5).ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Tipo=1" +
-                    $" AND Id_Sucursales={Sucursal.Id}" +
-                    $" AND Id_Empleados={Empleado.Id}";
+                    string f = Fecha.ToString("MM/dd/yyy");
 
-                    sql.Open();
-
-                    command.CommandText = s;
-                    var d = command.ExecuteNonQuery();
+                    if (Fecha.Day >=1 & Fecha.Day < 14)
+                    {
+                        f = $" BETWEEN '{f}' AND '{Fecha.AddDays(13 - Fecha.Day).ToString("MM/dd/yyy")}'";
+                    }
+                    else
+                    {
+                        if (Fecha.Day >= 14 & Fecha.Day < 20)
+                        {
+                            f = $" BETWEEN '{f}' AND '{Fecha.AddDays(20 - Fecha.Day).ToString("MM/dd/yyy")}'";
+                        }
+                        else
+                        {
+                            if (Fecha.Day >= 21 & Fecha.Day < 31)
+                            {
+                                f = $" BETWEEN '{f}' AND '{Fecha.AddDays(30 - Fecha.Day).ToString("MM/dd/yyy")}'";
+                            }
+                        }
+                    }
 
                     command.CommandText =
-                    $"INSERT INTO Retiros (Fecha, Id_Empleados, Id_Sucursales, Id_Tipo, Importe) VALUES (" +
-                    $"'{Fecha.ToString("MM/dd/yyy")}'" +
-                    $", {Empleado.Id}" +
-                    $", {Sucursal.Id}" +
-                    $", 1" +
-                    $", {Importe.ToString().Replace(",", ".")})";
-
-                    d = command.ExecuteNonQuery();
+                    $"DELETE FROM Retiros WHERE " +
+                    $"  Fecha {f} " +
+                    $" AND Id_Tipo={Tipo.Id}" +
+                    $" AND Id_Empleados={Empleado.Id}";
+                                        
+                    var d = command.ExecuteNonQuery();
                 }
 
 
@@ -292,5 +294,29 @@
             }
         }
 
+        public int MaxId()
+        {
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object d;
+
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Retiros", conexionSql);
+
+                conexionSql.Open();
+
+                comandoSql.CommandType = CommandType.Text;
+                d = comandoSql.ExecuteScalar();
+
+                conexionSql.Close();
+            }
+            catch (Exception)
+            {
+                d = 0;
+            }
+
+            return Convert.ToInt32(d);
+        }
     }
 }

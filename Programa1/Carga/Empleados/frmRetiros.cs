@@ -10,8 +10,9 @@
         private Retiros retiros = new Retiros();
         private Sueldos sueldos = new Sueldos();
 
-        private Byte c_Mes, c_IdEmp, c_IdSuc, c_SaldoAnt, c_Sueldo, c_Adelanto, c_D7, c_D14, c_D21, c_Resto, c_Franco, c_Bono, c_Vacas, c_Desc, c_Ajustes, c_Saldo
-            , c_SemVacas, c_Dia;
+        private Byte c_Mes, c_IdEmp, c_IdSuc, c_SaldoAnt, c_Sueldo, c_Adelanto, c_D7, c_D14, c_D21, c_Resto, c_Franco, c_Bono, c_Vacas, c_Desc, c_Ajustes, c_Aguinaldo
+            , c_Saldo, c_SemVacas, c_Dia;
+
 
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -44,6 +45,7 @@
             c_Vacas = Convert.ToByte(grdRetiros.get_ColIndex("Vacas"));
             c_Desc = Convert.ToByte(grdRetiros.get_ColIndex("Descuento"));
             c_Ajustes = Convert.ToByte(grdRetiros.get_ColIndex("Ajustes"));
+            c_Aguinaldo = Convert.ToByte(grdRetiros.get_ColIndex("Aguinaldo"));
             c_Saldo = Convert.ToByte(grdRetiros.get_ColIndex("Saldo"));
             c_SemVacas = Convert.ToByte(grdRetiros.get_ColIndex("Sem_Vacas"));
             c_Dia = Convert.ToByte(grdRetiros.get_ColIndex("Dia"));
@@ -54,12 +56,14 @@
             grdRetiros.set_ColW(c_IdEmp + 1, 120);
             grdRetiros.set_ColW(c_IdSuc, 40);
             grdRetiros.set_ColW(c_SaldoAnt, 50);
+            grdRetiros.set_ColW(c_Aguinaldo, 50);
 
             for (int i = c_SaldoAnt; i < c_SemVacas; i++)
             {
                 grdRetiros.Columnas[i].Format = "#,###.#";
                 grdRetiros.set_ColW(i, 60);
             }
+            grdRetiros.Columnas[c_Aguinaldo].Format = "N1";
             grdRetiros.Columnas[c_Dia].Format = "N0";
             grdRetiros.set_ColW(c_SemVacas, 50);
             grdRetiros.set_ColW(c_Dia, 50);
@@ -76,7 +80,6 @@
                     d = d.AddMonths(-1);
                 }
             }
-
         }
 
 
@@ -89,7 +92,6 @@
             sueldos.Fecha = v_Mes;
 
         }
-
         private void GrdRetiros_Editado(short f, short c, object a)
         {
             if (Convert.ToInt32(grdRetiros.get_Texto(f, c_IdEmp)) != retiros.Empleado.Id) { retiros.Empleado.Id = Convert.ToInt32(grdRetiros.get_Texto(f, c_IdEmp)); }
@@ -136,7 +138,9 @@
             {
                 retiros.Fecha = v_Mes.AddDays(6);
                 retiros.Importe = Convert.ToSingle(a);
-                retiros.Actualizar_Adelantos();
+                retiros.Tipo.Id = 100;
+                retiros.Borrar();
+                retiros.Actualizar();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
@@ -146,7 +150,9 @@
             {
                 retiros.Fecha = v_Mes.AddDays(13);
                 retiros.Importe = Convert.ToSingle(a);
-                retiros.Actualizar_Adelantos();
+                retiros.Tipo.Id = 100;
+                retiros.Borrar();
+                retiros.Actualizar();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
@@ -154,9 +160,11 @@
             }
             if (c == c_D21)
             {
-                retiros.Fecha = v_Mes.AddDays(6);
+                retiros.Fecha = v_Mes.AddDays(20);
                 retiros.Importe = Convert.ToSingle(a);
-                retiros.Actualizar_Adelantos();
+                retiros.Tipo.Id = 100;
+                retiros.Borrar();
+                retiros.Actualizar();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
@@ -164,9 +172,11 @@
             }
             if (c == c_Resto)
             {
-                retiros.Fecha = v_Mes.AddDays(6);
+                retiros.Fecha = v_Mes.AddDays(27);
                 retiros.Importe = Convert.ToSingle(a);
-                retiros.Actualizar_Resto();
+                retiros.Tipo.Id = 1;
+                retiros.Borrar();
+                retiros.Actualizar();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
@@ -181,40 +191,170 @@
                 if (grdRetiros.Col == c_D7)
                 {
                     frmRetiros_Detalle fr = new frmRetiros_Detalle();
+                    fr.Owner = this;
+                    fr.grdRetiros = grdRetiros;
                     fr.retiros = this.retiros;
                     fr.retiros.Fecha = v_Mes.AddDays(6);
+                    fr.retiros.Tipo.Id = 100;
                     fr.Cargar();
                     fr.ShowDialog();
+                    this.Focus();
                 }
                 else
                 {
                     if (grdRetiros.Col == c_D14)
                     {
                         frmRetiros_Detalle fr = new frmRetiros_Detalle();
+                        fr.Owner = this;
+                        fr.grdRetiros = grdRetiros;
                         fr.retiros = this.retiros;
                         fr.retiros.Fecha = v_Mes.AddDays(13);
+                        fr.retiros.Tipo.Id = 100;
                         fr.Cargar();
                         fr.ShowDialog();
+                        this.Focus();
                     }
                     else
                     {
                         if (grdRetiros.Col == c_D21)
                         {
                             frmRetiros_Detalle fr = new frmRetiros_Detalle();
+                            fr.Owner = this;
+                            fr.grdRetiros = grdRetiros;
                             fr.retiros = this.retiros;
                             fr.retiros.Fecha = v_Mes.AddDays(20);
+                            fr.retiros.Tipo.Id = 100;
                             fr.Cargar();
                             fr.ShowDialog();
+                            this.Focus();
                         }
                         else
                         {
                             if (grdRetiros.Col == c_Resto)
                             {
                                 frmRetiros_Detalle fr = new frmRetiros_Detalle();
+                                fr.Owner = this;
+                                fr.grdRetiros = grdRetiros;
                                 fr.retiros = this.retiros;
                                 fr.retiros.Fecha = v_Mes.AddDays(26);
+                                fr.retiros.Tipo.Id = 1;
                                 fr.Cargar();
                                 fr.ShowDialog();
+                                this.Focus();
+                            }
+                            else
+                            {
+                                if (grdRetiros.Col == c_Franco)
+                                {
+                                    frmDetalle_Varios fr = new frmDetalle_Varios();
+                                    fr.Owner = this;
+                                    fr.grdRetiros = grdRetiros;
+                                    fr.retiros = this.retiros;
+                                    fr.retiros.Fecha = v_Mes;
+                                    fr.retiros.Tipo.Id = 2;
+                                    fr.Cargar();
+                                    fr.ShowDialog();
+                                    this.Focus();
+                                }
+                                else
+                                {
+                                    if (grdRetiros.Col == c_Desc)
+                                    {
+                                        frmDetalle_Varios fr = new frmDetalle_Varios();
+                                        fr.Owner = this;
+                                        fr.grdRetiros = grdRetiros;
+                                        fr.retiros = this.retiros;
+                                        fr.retiros.Fecha = v_Mes;
+                                        fr.retiros.Tipo.Id = 6;
+                                        fr.Cargar();
+                                        fr.ShowDialog();
+                                        this.Focus();
+                                    }
+                                    else
+                                    {
+                                        if (grdRetiros.Col == c_Bono)
+                                        {
+                                            frmDetalle_Varios fr = new frmDetalle_Varios();
+                                            fr.Owner = this;
+                                            fr.grdRetiros = grdRetiros;
+                                            fr.retiros = this.retiros;
+                                            fr.retiros.Fecha = v_Mes;
+                                            fr.retiros.Tipo.Id = 11;
+                                            fr.Cargar();
+                                            fr.ShowDialog();
+                                            this.Focus();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (e == Convert.ToInt16(Keys.Delete))
+                {
+                    if (grdRetiros.Col == c_Sueldo)
+                    {
+                        sueldos.Fecha = v_Mes;
+                        sueldos.Tipo.Id = 1;
+                        sueldos.Borrar();
+                        grdRetiros.set_Texto(-1, -1, 0);
+                        Saldo(grdRetiros.Row);
+                    }
+                    else
+                    {
+                        if (grdRetiros.Col == c_Adelanto)
+                        {
+                            sueldos.Fecha = v_Mes;
+                            sueldos.Tipo.Id = 2;
+                            sueldos.Borrar();
+                            grdRetiros.set_Texto(-1, -1, 0);
+                            Saldo(grdRetiros.Row);
+                        }
+                        else
+                        {
+                            if (grdRetiros.Col == c_D7)
+                            {
+                                retiros.Fecha = v_Mes.AddDays(6);
+                                retiros.Tipo.Id = 100;
+                                retiros.Borrar();
+                                grdRetiros.set_Texto(-1, -1, 0);
+                                Saldo(grdRetiros.Row);
+                            }
+                            else
+                            {
+                                if (grdRetiros.Col == c_D14)
+                                {
+                                    retiros.Fecha = v_Mes.AddDays(13);
+                                    retiros.Tipo.Id = 100;
+                                    retiros.Borrar();
+                                    grdRetiros.set_Texto(-1, -1, 0);
+                                    Saldo(grdRetiros.Row);
+                                }
+                                else
+                                {
+                                    if (grdRetiros.Col == c_D21)
+                                    {
+                                        retiros.Fecha = v_Mes.AddDays(20);
+                                        retiros.Tipo.Id = 100;
+                                        retiros.Borrar();
+                                        grdRetiros.set_Texto(-1, -1, 0);
+                                        Saldo(grdRetiros.Row);
+                                    }
+                                    else
+                                    {
+                                        if (grdRetiros.Col == c_Resto)
+                                        {
+                                            retiros.Fecha = v_Mes.AddDays(28);
+                                            retiros.Tipo.Id = 1;
+                                            retiros.Borrar();
+                                            grdRetiros.set_Texto(-1, -1, 0);
+                                            Saldo(grdRetiros.Row);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

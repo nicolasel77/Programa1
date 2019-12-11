@@ -4,17 +4,17 @@
     using System;
     using System.Windows.Forms;
 
-    public partial class frmRetiros_Detalle : Form
+    public partial class frmDetalle_Varios : Form
     {
         public Retiros retiros;
-        
-        public frmRetiros_Detalle()
+
+        public frmDetalle_Varios()
         {
             InitializeComponent();
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdDetalle.TeclasManejadas = n;
-                        
+
         }
 
         public void Cargar()
@@ -24,14 +24,7 @@
             retiros.Empleado.Existe();
             lblNombre.Text = retiros.Empleado.Nombre;
             lblFecha.Text = retiros.Fecha.ToString("dd/MM/yyy");
-            if (retiros.Tipo.Id == 100)
-            {
-                grdDetalle.MostrarDatos(retiros.Detalle_Adelantos(), true, true);
-            }
-            else
-            {
-                grdDetalle.MostrarDatos(retiros.Detalle_Resto(), true, true);
-            }
+            grdDetalle.MostrarDatos(retiros.Detalle_Varios(), true, true);
             
             grdDetalle.set_ColW(0, 0);
             grdDetalle.set_ColW(1, 60);
@@ -46,7 +39,7 @@
             grdDetalle.ActivarCelda(grdDetalle.Rows - 1, 1);
         }
 
-        private void FrmRetiros_Detalle_KeyUp(object sender, KeyEventArgs e)
+        private void FrmDetalle_Varios_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
@@ -81,14 +74,15 @@
                     retiros.Importe = Convert.ToSingle(a);
                     grdDetalle.set_Texto(f, c, a);
                     retiros.Actualizar();
+                    
                     grdDetalle.set_Texto(f, 0, retiros.Id);
                     if (grdDetalle.EsUltimaF()) grdDetalle.AgregarFila();
                     grdDetalle.ActivarCelda(f + 1, 1);
 
-                    grdRetiros.set_Texto(-1, -1, grdDetalle.SumarCol(c, false));                    
+                    grdRetiros.set_Texto(-1, -1, grdDetalle.SumarCol(c, false));
                     break;
             }
-            
+
         }
 
         private void Actualizar()
@@ -101,7 +95,7 @@
 
         private void GrdDetalle_CambioFila(short Fila)
         {
-            retiros.Id =Convert.ToInt32(grdDetalle.get_Texto(Fila, 0));
+            retiros.Id = Convert.ToInt32(grdDetalle.get_Texto(Fila, 0));
         }
 
         private void GrdDetalle_KeyUp(object sender, short e)

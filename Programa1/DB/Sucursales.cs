@@ -160,7 +160,7 @@ namespace Programa1.DB
         {
             Id = Convert.ToInt32(dr["Id"]);
             Nombre = dr["Nombre"].ToString();
-            Tipo.Id = Convert.ToInt32(dr["Id_Tipo"]);
+            Tipo.Id = Convert.ToInt32(dr["Tipo"]);
             Ver = Convert.ToBoolean(dr["Ver"]);
             Titular = dr["Titular"].ToString();
             Direccion = dr["Direccion"].ToString();
@@ -248,7 +248,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Sucursales WHERE Id=" + Id, sql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Sucursales WHERE Id=" + Id, sql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

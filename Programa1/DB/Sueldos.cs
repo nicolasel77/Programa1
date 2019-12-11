@@ -93,9 +93,8 @@
 
                 var d = command.ExecuteNonQuery();
 
-                command.CommandText = $"UPDATE Sueldos " +
-                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Tipo={Tipo.Id}, Id_Empleados={Empleado.Id}, Sueldo={Sueldo.ToString().Replace(",", ".")} " +
-                    $"WHERE Id={Id}";
+                command.CommandText = $"INSERT INTO Sueldos (Fecha, Id_Empleados, Id_Tipo, Sueldo) VALUES(" +
+                    $"'{Fecha.ToString("MM/dd/yyy")}', {Empleado.Id}, {Tipo.Id}, {Sueldo.ToString().Replace(",", ".")})";
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 
@@ -143,6 +142,14 @@
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
+
+                if (Id == 0)
+                {
+                    command.CommandText = $"DELETE FROM Sueldos WHERE " +
+                        $"Fecha='{Fecha.ToString("MM/dd/yyy")}'" +
+                        $" AND Id_Tipo={Tipo.Id}" +
+                        $" AND Id_Empleados={Empleado.Id}";
+                }
 
                 var d = command.ExecuteNonQuery();
 
