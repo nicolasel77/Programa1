@@ -66,7 +66,7 @@
             this.grdDetalle.Redraw = true;
             this.grdDetalle.Row = 0;
             this.grdDetalle.Rows = 50;
-            this.grdDetalle.Size = new System.Drawing.Size(246, 195);
+            this.grdDetalle.Size = new System.Drawing.Size(239, 129);
             this.grdDetalle.TabIndex = 0;
             // 
             // lblNombre
@@ -93,10 +93,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 250);
+            this.ClientSize = new System.Drawing.Size(263, 184);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.grdDetalle);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmRetiros_Detalle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detalle";

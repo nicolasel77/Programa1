@@ -6,7 +6,7 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class TipoRetiros
+    public class TipoRetiros
     {
         public TipoRetiros()
         {

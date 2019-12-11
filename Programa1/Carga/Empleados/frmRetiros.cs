@@ -12,11 +12,20 @@
 
         private Byte c_Mes, c_IdEmp, c_IdSuc, c_SaldoAnt, c_Sueldo, c_Adelanto, c_D7, c_D14, c_D21, c_Resto, c_Franco, c_Bono, c_Vacas, c_Desc, c_Ajustes, c_Saldo
             , c_SemVacas, c_Dia;
+
+        private void editarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SendKeys.Send("{F2}");
+        }
+
         private DateTime v_Mes;
 
         public frmRetiros()
         {
             InitializeComponent();
+
+            int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 113, 123 };
+            grdRetiros.TeclasManejadas = n;
 
             DateTime d = new DateTime(2000, 1, 1);
             grdRetiros.MostrarDatos(retiros.Datos_Mes(d, 0), true, false);
@@ -99,7 +108,7 @@
                     grdRetiros.set_Texto(f, c, a);
                     grdRetiros.ActivarCelda(f, c + 1);
                 }
-                
+
             }
             if (c == c_Sueldo)
             {
@@ -155,7 +164,7 @@
             }
             if (c == c_Resto)
             {
-                retiros.Fecha  = v_Mes.AddDays(6);
+                retiros.Fecha = v_Mes.AddDays(6);
                 retiros.Importe = Convert.ToSingle(a);
                 retiros.Actualizar_Resto();
                 grdRetiros.set_Texto(f, c, a);
@@ -165,14 +174,60 @@
             }
         }
 
-        
+        private void grdRetiros_KeyUp(object sender, short e)
+        {
+            if (e == Convert.ToInt16(Keys.F2))
+            {
+                if (grdRetiros.Col == c_D7)
+                {
+                    frmRetiros_Detalle fr = new frmRetiros_Detalle();
+                    fr.retiros = this.retiros;
+                    fr.retiros.Fecha = v_Mes.AddDays(6);
+                    fr.Cargar();
+                    fr.ShowDialog();
+                }
+                else
+                {
+                    if (grdRetiros.Col == c_D14)
+                    {
+                        frmRetiros_Detalle fr = new frmRetiros_Detalle();
+                        fr.retiros = this.retiros;
+                        fr.retiros.Fecha = v_Mes.AddDays(13);
+                        fr.Cargar();
+                        fr.ShowDialog();
+                    }
+                    else
+                    {
+                        if (grdRetiros.Col == c_D21)
+                        {
+                            frmRetiros_Detalle fr = new frmRetiros_Detalle();
+                            fr.retiros = this.retiros;
+                            fr.retiros.Fecha = v_Mes.AddDays(20);
+                            fr.Cargar();
+                            fr.ShowDialog();
+                        }
+                        else
+                        {
+                            if (grdRetiros.Col == c_Resto)
+                            {
+                                frmRetiros_Detalle fr = new frmRetiros_Detalle();
+                                fr.retiros = this.retiros;
+                                fr.retiros.Fecha = v_Mes.AddDays(26);
+                                fr.Cargar();
+                                fr.ShowDialog();
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         private void Cargar()
         {
             this.Cursor = Cursors.WaitCursor;
 
             v_Mes = DateTime.Parse($"1/{DateTime.Today.Month}/{DateTime.Today.Year}");
-            v_Mes = v_Mes.AddMonths(lstMes.SelectedIndex * -1);            
+            v_Mes = v_Mes.AddMonths(lstMes.SelectedIndex * -1);
 
             this.Text = v_Mes.ToString("MMMM yyy");
             this.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(this.Text);

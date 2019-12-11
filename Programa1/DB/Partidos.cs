@@ -6,7 +6,7 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Partidos
+    public class Partidos
     {
         public Partidos()
         {

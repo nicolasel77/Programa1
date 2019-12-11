@@ -28,14 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRetiros));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdRetiros = new Grilla2.SpeedGrilla();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.lstMes = new System.Windows.Forms.ListBox();
             this.cSuc = new Programa1.Controles.cSucursales();
-            this.cmdExcel = new System.Windows.Forms.Button();
             this.cmdImprimir = new System.Windows.Forms.Button();
+            this.cmdExcel = new System.Windows.Forms.Button();
+            this.lstMes = new System.Windows.Forms.ListBox();
+            this.cntMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darDeBajaEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -44,6 +48,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.cntMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -77,6 +82,7 @@
             this.grdRetiros.bFColorSel = System.Drawing.SystemColors.HighlightText;
             this.grdRetiros.Col = 0;
             this.grdRetiros.Cols = 10;
+            this.grdRetiros.ContextMenuStrip = this.cntMenu;
             this.grdRetiros.DataMember = "";
             this.grdRetiros.DataSource = null;
             this.grdRetiros.EnableEdicion = true;
@@ -99,6 +105,7 @@
             this.grdRetiros.TabIndex = 0;
             this.grdRetiros.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdRetiros_Editado);
             this.grdRetiros.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdRetiros_CambioFila);
+            this.grdRetiros.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdRetiros_KeyUp);
             // 
             // splitContainer2
             // 
@@ -117,8 +124,46 @@
             this.splitContainer2.Panel2.Controls.Add(this.cmdExcel);
             this.splitContainer2.Panel2.Controls.Add(this.lstMes);
             this.splitContainer2.Size = new System.Drawing.Size(341, 690);
-            this.splitContainer2.SplitterDistance = 432;
+            this.splitContainer2.SplitterDistance = 552;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // cSuc
+            // 
+            this.cSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cSuc.BackColor = System.Drawing.Color.Gainsboro;
+            this.cSuc.Filtro_In = "";
+            this.cSuc.Location = new System.Drawing.Point(-1, 12);
+            this.cSuc.Mostrar_Tipo = true;
+            this.cSuc.Name = "cSuc";
+            this.cSuc.Size = new System.Drawing.Size(339, 537);
+            this.cSuc.TabIndex = 0;
+            this.cSuc.Titulo = "Sucursales";
+            this.cSuc.Valor_Actual = -1;
+            this.cSuc.Cambio_Seleccion += new System.EventHandler(this.CSuc_Cambio_Seleccion);
+            // 
+            // cmdImprimir
+            // 
+            this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdImprimir.Location = new System.Drawing.Point(222, 93);
+            this.cmdImprimir.Name = "cmdImprimir";
+            this.cmdImprimir.Size = new System.Drawing.Size(116, 24);
+            this.cmdImprimir.TabIndex = 1;
+            this.cmdImprimir.Text = "Imprimir";
+            this.cmdImprimir.UseVisualStyleBackColor = true;
+            // 
+            // cmdExcel
+            // 
+            this.cmdExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdExcel.Location = new System.Drawing.Point(222, 63);
+            this.cmdExcel.Name = "cmdExcel";
+            this.cmdExcel.Size = new System.Drawing.Size(116, 24);
+            this.cmdExcel.TabIndex = 1;
+            this.cmdExcel.Text = "Excel";
+            this.cmdExcel.UseVisualStyleBackColor = true;
             // 
             // lstMes
             // 
@@ -131,47 +176,30 @@
             this.lstMes.ItemHeight = 18;
             this.lstMes.Location = new System.Drawing.Point(3, 3);
             this.lstMes.Name = "lstMes";
-            this.lstMes.Size = new System.Drawing.Size(78, 234);
+            this.lstMes.Size = new System.Drawing.Size(78, 126);
             this.lstMes.TabIndex = 0;
             this.lstMes.SelectedIndexChanged += new System.EventHandler(this.LstMes_SelectedIndexChanged);
             // 
-            // cSuc
+            // cntMenu
             // 
-            this.cSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cSuc.BackColor = System.Drawing.Color.Gainsboro;
-            this.cSuc.Filtro_In = "";
-            this.cSuc.Location = new System.Drawing.Point(-1, 12);
-            this.cSuc.Mostrar_Tipo = true;
-            this.cSuc.Name = "cSuc";
-            this.cSuc.Size = new System.Drawing.Size(339, 417);
-            this.cSuc.TabIndex = 0;
-            this.cSuc.Titulo = "Sucursales";
-            this.cSuc.Valor_Actual = -1;
-            this.cSuc.Cambio_Seleccion += new System.EventHandler(this.CSuc_Cambio_Seleccion);
+            this.cntMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editarToolStripMenuItem,
+            this.darDeBajaEmpleadoToolStripMenuItem});
+            this.cntMenu.Name = "cntMenu";
+            this.cntMenu.Size = new System.Drawing.Size(190, 70);
             // 
-            // cmdExcel
+            // editarToolStripMenuItem
             // 
-            this.cmdExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdExcel.Location = new System.Drawing.Point(222, 183);
-            this.cmdExcel.Name = "cmdExcel";
-            this.cmdExcel.Size = new System.Drawing.Size(116, 24);
-            this.cmdExcel.TabIndex = 1;
-            this.cmdExcel.Text = "Excel";
-            this.cmdExcel.UseVisualStyleBackColor = true;
+            this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.editarToolStripMenuItem.Text = "Editar fechas";
+            this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
-            // cmdImprimir
+            // darDeBajaEmpleadoToolStripMenuItem
             // 
-            this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdImprimir.Location = new System.Drawing.Point(222, 213);
-            this.cmdImprimir.Name = "cmdImprimir";
-            this.cmdImprimir.Size = new System.Drawing.Size(116, 24);
-            this.cmdImprimir.TabIndex = 1;
-            this.cmdImprimir.Text = "Imprimir";
-            this.cmdImprimir.UseVisualStyleBackColor = true;
+            this.darDeBajaEmpleadoToolStripMenuItem.Name = "darDeBajaEmpleadoToolStripMenuItem";
+            this.darDeBajaEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.darDeBajaEmpleadoToolStripMenuItem.Text = "Dar de baja empleado";
             // 
             // frmRetiros
             // 
@@ -189,6 +217,7 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.cntMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -202,5 +231,8 @@
         private System.Windows.Forms.ListBox lstMes;
         private System.Windows.Forms.Button cmdImprimir;
         private System.Windows.Forms.Button cmdExcel;
+        private System.Windows.Forms.ContextMenuStrip cntMenu;
+        private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem darDeBajaEmpleadoToolStripMenuItem;
     }
 }

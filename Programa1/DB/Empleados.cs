@@ -7,7 +7,7 @@ namespace Programa1.DB
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Empleados
+    public class Empleados
     {
         public Empleados()
         {
@@ -129,7 +129,7 @@ namespace Programa1.DB
             Id = Convert.ToInt32(dr["Id"]);
             Nombre = dr["Nombre"].ToString();
             DNI = Convert.ToInt32(dr["DNI"]);
-            Fecha_Nacimiento = Convert.ToDateTime(dr["Fecha_Nacimiento"]);
+            if (dr["Fecha_Nacimiento"] != DBNull.Value) Fecha_Nacimiento = Convert.ToDateTime(dr["Fecha_Nacimiento"]);
             Domicilio = dr["Domicilio"].ToString();
             Telefono = dr["Telefono"].ToString();
             if (dr["Alta"] != DBNull.Value) Alta = Convert.ToDateTime(dr["Alta"]);

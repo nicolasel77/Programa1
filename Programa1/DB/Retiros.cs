@@ -5,7 +5,7 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Retiros
+    public class Retiros
     {
         public Retiros()
         {
@@ -89,8 +89,54 @@
 
             return dt;
         }
+        public DataTable Detalle_Adelantos()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+                        
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
+                    $" AND '{Fecha.AddDays(6).ToString("MM/dd/yyy")}' " +
+                    $" AND Id_Empleados={Empleado.Id}" +
+                    $" AND Id_Tipo=100" +
+                    $" ORDER BY Fecha", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
 
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
 
+            return dt;
+        }
+        public DataTable Detalle_Resto()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
+                    $" AND '{Fecha.AddMonths(1).AddDays(-1).ToString("MM/dd/yyy")}' " +
+                    $" AND Id_Empleados={Empleado.Id}" +
+                    $" AND Id_Tipo=1" +
+                    $" ORDER BY Fecha", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
         public void Actualizar_Adelantos()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
