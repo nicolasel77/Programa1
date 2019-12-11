@@ -10,8 +10,8 @@
         private Retiros retiros = new Retiros();
         private Sueldos sueldos = new Sueldos();
 
-        private Byte c_Mes, c_IdEmp, c_IdSuc, c_SaldoAnt, c_Sueldo, c_Adelanto, c_D7, c_D14, c_D21, c_Resto, c_Franco, c_Bono, c_Vacas, c_Desc, c_Ajustes, c_Aguinaldo
-            , c_Saldo, c_SemVacas, c_Dia;
+        private Byte c_Mes, c_IdEmp, c_IdSuc, c_SaldoAnt, c_Sueldo, c_Adelanto, c_D7, c_D14, c_D21, c_Resto, c_Franco, c_Bono, c_Vacas, c_Desc, c_Ajustes
+            , c_Saldo, c_SemVacas, c_Dia, c_Aguinaldo, c_SaldoAg;
 
 
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -45,11 +45,11 @@
             c_Vacas = Convert.ToByte(grdRetiros.get_ColIndex("Vacas"));
             c_Desc = Convert.ToByte(grdRetiros.get_ColIndex("Descuento"));
             c_Ajustes = Convert.ToByte(grdRetiros.get_ColIndex("Ajustes"));
-            c_Aguinaldo = Convert.ToByte(grdRetiros.get_ColIndex("Aguinaldo"));
             c_Saldo = Convert.ToByte(grdRetiros.get_ColIndex("Saldo"));
             c_SemVacas = Convert.ToByte(grdRetiros.get_ColIndex("Sem_Vacas"));
             c_Dia = Convert.ToByte(grdRetiros.get_ColIndex("Dia"));
-
+            c_Aguinaldo = Convert.ToByte(grdRetiros.get_ColIndex("Aguinaldo"));
+            //c_SaldoAg = Convert.ToByte(grdRetiros.get_ColIndex("Saldo_Ag"));
 
             grdRetiros.set_ColW(c_Mes, 0);
             grdRetiros.set_ColW(c_IdEmp, 0);
@@ -57,6 +57,7 @@
             grdRetiros.set_ColW(c_IdSuc, 40);
             grdRetiros.set_ColW(c_SaldoAnt, 50);
             grdRetiros.set_ColW(c_Aguinaldo, 50);
+            //grdRetiros.set_ColW(c_SaldoAg, 50);
 
             for (int i = c_SaldoAnt; i < c_SemVacas; i++)
             {
@@ -64,6 +65,7 @@
                 grdRetiros.set_ColW(i, 60);
             }
             grdRetiros.Columnas[c_Aguinaldo].Format = "N1";
+            //grdRetiros.Columnas[c_SaldoAg].Format = "N1";
             grdRetiros.Columnas[c_Dia].Format = "N0";
             grdRetiros.set_ColW(c_SemVacas, 50);
             grdRetiros.set_ColW(c_Dia, 50);
@@ -188,27 +190,22 @@
         {
             if (e == Convert.ToInt16(Keys.F2))
             {
-                if (grdRetiros.Col == c_D7)
+                if (grdRetiros.Col == c_IdEmp + 1)
                 {
-                    frmRetiros_Detalle fr = new frmRetiros_Detalle();
-                    fr.Owner = this;
-                    fr.grdRetiros = grdRetiros;
-                    fr.retiros = this.retiros;
-                    fr.retiros.Fecha = v_Mes.AddDays(6);
-                    fr.retiros.Tipo.Id = 100;
-                    fr.Cargar();
+                    frmEmpleado fr = new frmEmpleado();
+                    fr.Cargar(retiros.Empleado);
                     fr.ShowDialog();
                     this.Focus();
                 }
                 else
                 {
-                    if (grdRetiros.Col == c_D14)
+                    if (grdRetiros.Col == c_D7)
                     {
                         frmRetiros_Detalle fr = new frmRetiros_Detalle();
                         fr.Owner = this;
                         fr.grdRetiros = grdRetiros;
                         fr.retiros = this.retiros;
-                        fr.retiros.Fecha = v_Mes.AddDays(13);
+                        fr.retiros.Fecha = v_Mes.AddDays(6);
                         fr.retiros.Tipo.Id = 100;
                         fr.Cargar();
                         fr.ShowDialog();
@@ -216,13 +213,13 @@
                     }
                     else
                     {
-                        if (grdRetiros.Col == c_D21)
+                        if (grdRetiros.Col == c_D14)
                         {
                             frmRetiros_Detalle fr = new frmRetiros_Detalle();
                             fr.Owner = this;
                             fr.grdRetiros = grdRetiros;
                             fr.retiros = this.retiros;
-                            fr.retiros.Fecha = v_Mes.AddDays(20);
+                            fr.retiros.Fecha = v_Mes.AddDays(13);
                             fr.retiros.Tipo.Id = 100;
                             fr.Cargar();
                             fr.ShowDialog();
@@ -230,59 +227,74 @@
                         }
                         else
                         {
-                            if (grdRetiros.Col == c_Resto)
+                            if (grdRetiros.Col == c_D21)
                             {
                                 frmRetiros_Detalle fr = new frmRetiros_Detalle();
                                 fr.Owner = this;
                                 fr.grdRetiros = grdRetiros;
                                 fr.retiros = this.retiros;
-                                fr.retiros.Fecha = v_Mes.AddDays(26);
-                                fr.retiros.Tipo.Id = 1;
+                                fr.retiros.Fecha = v_Mes.AddDays(20);
+                                fr.retiros.Tipo.Id = 100;
                                 fr.Cargar();
                                 fr.ShowDialog();
                                 this.Focus();
                             }
                             else
                             {
-                                if (grdRetiros.Col == c_Franco)
+                                if (grdRetiros.Col == c_Resto)
                                 {
-                                    frmDetalle_Varios fr = new frmDetalle_Varios();
+                                    frmRetiros_Detalle fr = new frmRetiros_Detalle();
                                     fr.Owner = this;
                                     fr.grdRetiros = grdRetiros;
                                     fr.retiros = this.retiros;
-                                    fr.retiros.Fecha = v_Mes;
-                                    fr.retiros.Tipo.Id = 2;
+                                    fr.retiros.Fecha = v_Mes.AddDays(26);
+                                    fr.retiros.Tipo.Id = 1;
                                     fr.Cargar();
                                     fr.ShowDialog();
                                     this.Focus();
                                 }
                                 else
                                 {
-                                    if (grdRetiros.Col == c_Desc)
+                                    if (grdRetiros.Col == c_Franco)
                                     {
                                         frmDetalle_Varios fr = new frmDetalle_Varios();
                                         fr.Owner = this;
                                         fr.grdRetiros = grdRetiros;
                                         fr.retiros = this.retiros;
                                         fr.retiros.Fecha = v_Mes;
-                                        fr.retiros.Tipo.Id = 6;
+                                        fr.retiros.Tipo.Id = 2;
                                         fr.Cargar();
                                         fr.ShowDialog();
                                         this.Focus();
                                     }
                                     else
                                     {
-                                        if (grdRetiros.Col == c_Bono)
+                                        if (grdRetiros.Col == c_Desc)
                                         {
                                             frmDetalle_Varios fr = new frmDetalle_Varios();
                                             fr.Owner = this;
                                             fr.grdRetiros = grdRetiros;
                                             fr.retiros = this.retiros;
                                             fr.retiros.Fecha = v_Mes;
-                                            fr.retiros.Tipo.Id = 11;
+                                            fr.retiros.Tipo.Id = 6;
                                             fr.Cargar();
                                             fr.ShowDialog();
                                             this.Focus();
+                                        }
+                                        else
+                                        {
+                                            if (grdRetiros.Col == c_Bono)
+                                            {
+                                                frmDetalle_Varios fr = new frmDetalle_Varios();
+                                                fr.Owner = this;
+                                                fr.grdRetiros = grdRetiros;
+                                                fr.retiros = this.retiros;
+                                                fr.retiros.Fecha = v_Mes;
+                                                fr.retiros.Tipo.Id = 11;
+                                                fr.Cargar();
+                                                fr.ShowDialog();
+                                                this.Focus();
+                                            }
                                         }
                                     }
                                 }

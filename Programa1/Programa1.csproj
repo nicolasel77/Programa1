@@ -80,6 +80,12 @@
     <Compile Include="Carga\Empleados\frmDetalle_Varios.Designer.cs">
       <DependentUpon>frmDetalle_Varios.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Empleados\frmEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Empleados\frmEmpleado.Designer.cs">
+      <DependentUpon>frmEmpleado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Empleados\frmEmpleados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -375,6 +381,9 @@
     <Compile Include="Herramientas\Herramientas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Carga\Empleados\frmEmpleado.resx">
+      <DependentUpon>frmEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Empleados\frmEmpleados.resx">
       <DependentUpon>frmEmpleados.cs</DependentUpon>
     </EmbeddedResource>
