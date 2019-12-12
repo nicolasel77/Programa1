@@ -13,6 +13,10 @@
         private Byte c_Mes, c_IdEmp, c_IdSuc, c_SaldoAnt, c_Sueldo, c_Adelanto, c_D7, c_D14, c_D21, c_Resto, c_Franco, c_Bono, c_Vacas, c_Desc, c_Ajustes
             , c_Saldo, c_SemVacas, c_Dia, c_Aguinaldo, c_SaldoAg;
 
+        private void CmdExcel_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -49,15 +53,15 @@
             c_SemVacas = Convert.ToByte(grdRetiros.get_ColIndex("Sem_Vacas"));
             c_Dia = Convert.ToByte(grdRetiros.get_ColIndex("Dia"));
             c_Aguinaldo = Convert.ToByte(grdRetiros.get_ColIndex("Aguinaldo"));
-            //c_SaldoAg = Convert.ToByte(grdRetiros.get_ColIndex("Saldo_Ag"));
+            c_SaldoAg = Convert.ToByte(grdRetiros.get_ColIndex("Saldo_Ag"));
 
             grdRetiros.set_ColW(c_Mes, 0);
             grdRetiros.set_ColW(c_IdEmp, 0);
             grdRetiros.set_ColW(c_IdEmp + 1, 120);
             grdRetiros.set_ColW(c_IdSuc, 40);
             grdRetiros.set_ColW(c_SaldoAnt, 50);
-            grdRetiros.set_ColW(c_Aguinaldo, 50);
-            //grdRetiros.set_ColW(c_SaldoAg, 50);
+            grdRetiros.set_ColW(c_Aguinaldo, 60);
+            grdRetiros.set_ColW(c_SaldoAg, 60);
 
             for (int i = c_SaldoAnt; i < c_SemVacas; i++)
             {
@@ -65,7 +69,7 @@
                 grdRetiros.set_ColW(i, 60);
             }
             grdRetiros.Columnas[c_Aguinaldo].Format = "N1";
-            //grdRetiros.Columnas[c_SaldoAg].Format = "N1";
+            grdRetiros.Columnas[c_SaldoAg].Format = "N1";
             grdRetiros.Columnas[c_Dia].Format = "N0";
             grdRetiros.set_ColW(c_SemVacas, 50);
             grdRetiros.set_ColW(c_Dia, 50);
@@ -174,7 +178,7 @@
             }
             if (c == c_Resto)
             {
-                retiros.Fecha = v_Mes.AddDays(27);
+                retiros.Fecha = dtResto.Value;
                 retiros.Importe = Convert.ToSingle(a);
                 retiros.Tipo.Id = 1;
                 retiros.Borrar();
@@ -295,6 +299,20 @@
                                                 fr.ShowDialog();
                                                 this.Focus();
                                             }
+                                            else
+                                            {
+                                                if (grdRetiros.Col == c_Aguinaldo)
+                                                {
+                                                    frmRetiros_Aguinaldo fr = new frmRetiros_Aguinaldo();
+                                                    fr.Owner = this;
+                                                    fr.grdRetiros = grdRetiros;
+                                                    fr.retiros = this.retiros;
+                                                    fr.retiros.Fecha = v_Mes;
+                                                    fr.Cargar();
+                                                    fr.ShowDialog();
+                                                    this.Focus();
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -380,6 +398,7 @@
 
             v_Mes = DateTime.Parse($"1/{DateTime.Today.Month}/{DateTime.Today.Year}");
             v_Mes = v_Mes.AddMonths(lstMes.SelectedIndex * -1);
+            dtResto.Value = v_Mes.AddMonths(1).AddDays(3);
 
             this.Text = v_Mes.ToString("MMMM yyy");
             this.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(this.Text);

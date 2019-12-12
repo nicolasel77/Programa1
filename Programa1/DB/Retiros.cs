@@ -161,6 +161,30 @@
 
             return dt;
         }
+        public DataTable Retiro_Aguinaldo()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
+                    $" AND '{Fecha.AddMonths(1).AddDays(-1).ToString("MM/dd/yyy")}' " +
+                    $" AND Id_Empleados={Empleado.Id}" +
+                    $" AND Id_Tipo IN(4, 40)" +
+                    $" ORDER BY Fecha", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -270,23 +294,26 @@
 
             try
             {
-                SqlCommand command = new SqlCommand();
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
+                if (Fecha.Year > 2000)
+                {
+                    SqlCommand command = new SqlCommand();
+                    command.CommandType = CommandType.Text;
+                    command.Connection = sql;
 
 
-                string s = $"UPDATE Mes_Temp SET Saldo={importe.ToString().Replace(",", ".")} " +
-                $" WHERE Mes='{Fecha.ToString("MM/dd/yyy")}'" +
-                $" AND Id_Sucursales={Sucursal.Id}" +
-                $" AND Id_Empleados={Empleado.Id}";
+                    string s = $"UPDATE Mes_Temp SET Saldo={importe.ToString().Replace(",", ".")} " +
+                    $" WHERE Mes='{Fecha.ToString("MM/dd/yyy")}'" +
+                    $" AND Id_Sucursales={Sucursal.Id}" +
+                    $" AND Id_Empleados={Empleado.Id}";
 
-                sql.Open();
+                    sql.Open();
 
-                command.CommandText = s;
-                var d = command.ExecuteNonQuery();
+                    command.CommandText = s;
+                    var d = command.ExecuteNonQuery();
 
 
-                sql.Close();
+                    sql.Close();
+                }
             }
             catch (Exception e)
             {
