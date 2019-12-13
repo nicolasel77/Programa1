@@ -98,6 +98,12 @@
     <Compile Include="Carga\Empleados\frmRetiros.Designer.cs">
       <DependentUpon>frmRetiros.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Empleados\frmRetiros_Vacaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Empleados\frmRetiros_Vacaciones.Designer.cs">
+      <DependentUpon>frmRetiros_Vacaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Empleados\frmRetiros_Aguinaldo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -395,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Empleados\frmRetiros.resx">
       <DependentUpon>frmRetiros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Empleados\frmRetiros_Vacaciones.resx">
+      <DependentUpon>frmRetiros_Vacaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Empleados\frmRetiros_Aguinaldo.resx">
       <DependentUpon>frmRetiros_Aguinaldo.cs</DependentUpon>

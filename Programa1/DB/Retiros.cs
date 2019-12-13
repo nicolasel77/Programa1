@@ -168,8 +168,20 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND '{Fecha.AddMonths(1).AddDays(-1).ToString("MM/dd/yyy")}' " +
+                DateTime fIni, fFin;
+                if (Fecha.Month == 12) 
+                {
+                    fIni = Fecha;
+                }
+                else
+                {
+                    fIni = Fecha.AddMonths(Fecha.Month * -1);
+                }
+                fIni = fIni.AddDays((fIni.Day - 1) * -1);
+                fFin = fIni.AddDays(-1).AddMonths(12);
+
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{fIni.ToString("MM/dd/yyy")}'" +
+                    $" AND '{fFin.ToString("MM/dd/yyy")}' " +
                     $" AND Id_Empleados={Empleado.Id}" +
                     $" AND Id_Tipo IN(4, 40)" +
                     $" ORDER BY Fecha", conexionSql);
@@ -185,6 +197,107 @@
 
             return dt;
         }
+
+        public Single Aguinaldo_Empleado()
+        {
+            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand($"SELECT dbo.f_Aguinaldo('{Fecha.ToString("MM/dd/yy")}', {Empleado.Id})", sql);
+                command.CommandType = CommandType.Text;
+                sql.Open();
+                command.Connection = sql;
+
+
+                var d = command.ExecuteScalar();
+                return Convert.ToSingle(d);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+            
+        }
+        public Single Aguinaldo_Saldo()
+        {
+            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand($"SELECT dbo.f_SaldoAguinaldo('{Fecha.ToString("MM/dd/yy")}', {Empleado.Id})", sql);
+                command.CommandType = CommandType.Text;
+                sql.Open();
+                command.Connection = sql;
+
+
+                var d = command.ExecuteScalar();
+                return Convert.ToSingle(d);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public DataTable Retiro_Vacaciones()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                DateTime fIni, fFin;
+                if (Fecha.Month == 12)
+                {
+                    fIni = Fecha;
+                }
+                else
+                {
+                    fIni = Fecha.AddMonths(Fecha.Month * -1);
+                }
+                fIni = fIni.AddDays((fIni.Day - 1) * -1);
+                fFin = fIni.AddDays(-1).AddMonths(12);
+
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Vacaciones WHERE Fecha BETWEEN '{fIni.ToString("MM/dd/yyy")}'" +
+                    $" AND '{fFin.ToString("MM/dd/yyy")}' " +
+                    $" AND Id_Empleados={Empleado.Id}" +
+                    $" ORDER BY Fecha", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        public int Vacaciones_Dias()
+        {
+            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand($"SELECT dbo.f_VacacionesDias('{Fecha.ToString("MM/dd/yy")}', {Empleado.Id})", sql);
+                command.CommandType = CommandType.Text;
+                sql.Open();
+                command.Connection = sql;
+
+
+                var d = command.ExecuteScalar();
+                return Convert.ToInt32(d);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);

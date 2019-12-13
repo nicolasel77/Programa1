@@ -4,11 +4,11 @@
     using System;
     using System.Windows.Forms;
 
-    public partial class frmRetiros_Aguinaldo : Form
+    public partial class frmRetiros_Vacaciones : Form
     {
         public Retiros retiros;
 
-        public frmRetiros_Aguinaldo()
+        public frmRetiros_Vacaciones()
         {
             InitializeComponent();
 
@@ -24,24 +24,23 @@
             lblNombre.Text = retiros.Empleado.Nombre;
             lblFecha.Text = retiros.Fecha.ToString("dd/MM/yyy");
             lblAlta.Text = retiros.Empleado.Alta.ToString("dd/MM/yyy");
-            lblAguinaldo.Text = retiros.Aguinaldo_Empleado().ToString("C1");
+            lblDias.Text = retiros.Vacaciones_Dias().ToString();
 
-            grdDetalle.MostrarDatos(retiros.Retiro_Aguinaldo(), true, true);
+            grdDetalle.MostrarDatos(retiros.Retiro_Vacaciones(), true, true);
 
-            grdDetalle.set_ColW(0, 0);
-            grdDetalle.set_ColW(1, 60);
+            grdDetalle.set_ColW(0, 60);
+            grdDetalle.set_ColW(1, 0);
             grdDetalle.set_ColW(2, 0);
-            grdDetalle.set_ColW(3, 0);
-            grdDetalle.set_ColW(4, 40);
+            grdDetalle.set_ColW(3, 40);
+            grdDetalle.set_ColW(4, 80);
             grdDetalle.set_ColW(5, 40);
             grdDetalle.set_ColW(6, 80);
-            grdDetalle.set_ColW(7, 70);
-            grdDetalle.set_Texto(0, 4, "Suc");
-            grdDetalle.Columnas[7].Format = "N1";
+            grdDetalle.set_Texto(0, 3, "Suc");
+            grdDetalle.Columnas["Importe"].Format = "N1";
             grdDetalle.ActivarCelda(grdDetalle.Rows - 1, 1);
         }
 
-        private void FrmRetiros_Aguinaldo_KeyUp(object sender, KeyEventArgs e)
+        private void FrmRetiros_Vacaciones_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
@@ -56,7 +55,7 @@
                 case "Fecha":
                     retiros.Fecha = Convert.ToDateTime(a);
                     grdDetalle.set_Texto(f, c, a);
-                    grdDetalle.ActivarCelda(f, 4);
+                    grdDetalle.ActivarCelda(f, 3);
                     Actualizar();
                     break;
                 case "Suc":
@@ -72,29 +71,22 @@
                         System.Media.SystemSounds.Beep.Play();
                     }
                     break;
-                case "Id_Tipo":
-                    retiros.Tipo.Id = Convert.ToInt32(a);
-                    if (retiros.Tipo.Existe() == true)
-                    {
-                        grdDetalle.set_Texto(f, c, a);
-                        grdDetalle.set_Texto(f, c + 1, retiros.Tipo.Nombre);
-                        grdDetalle.ActivarCelda(f, 7);
-                        Actualizar();
-                    }
-                    else
-                    {
-                        System.Media.SystemSounds.Beep.Play();
-                    }
+                case "Dias":
+                    grdDetalle.set_Texto(f, c, a);
+                    grdDetalle.ActivarCelda(f, 6);
+                    Actualizar();
+                    
                     break;
                 case "Importe":
-                    retiros.Importe = Convert.ToSingle(a);
+                    //Cambiar x Vacaciones
+                    //retiros.Importe = Convert.ToSingle(a);
                     grdDetalle.set_Texto(f, c, a);
-                    retiros.Actualizar();
+                    //retiros.Actualizar();
 
                     grdDetalle.set_Texto(f, 0, retiros.Id);
                     
-                    grdRetiros.set_Texto(-1, -1, grdDetalle.SumarCol(c, false));
-                    grdRetiros.set_Texto(-1, grdRetiros.Col + 1, retiros.Aguinaldo_Saldo());
+                    //grdRetiros.set_Texto(-1, -1, grdDetalle.SumarCol(c, false));
+                    //grdRetiros.set_Texto(-1, grdRetiros.Col + 1, retiros.Aguinaldo_Saldo());
                     
                     if (grdDetalle.EsUltimaF()) grdDetalle.AgregarFila();
                     grdDetalle.ActivarCelda(f + 1, 1);
@@ -107,7 +99,7 @@
         {
             if (retiros.Id != 0)
             {
-                retiros.Actualizar();
+                //retiros.Actualizar();
             }
         }
 
@@ -124,8 +116,8 @@
                 {
                     retiros.Borrar();
                     grdDetalle.BorrarFila();
-                    grdRetiros.set_Texto(-1, -1, grdDetalle.SumarCol(grdDetalle.get_ColIndex("Importe"), false));
-                    grdRetiros.set_Texto(-1, grdRetiros.Col + 1, retiros.Aguinaldo_Saldo());
+                    //grdRetiros.set_Texto(-1, -1, grdDetalle.SumarCol(grdDetalle.get_ColIndex("Importe"), false));
+                    //grdRetiros.set_Texto(-1, grdRetiros.Col + 1, retiros.Aguinaldo_Saldo());
                 }
             }
         }

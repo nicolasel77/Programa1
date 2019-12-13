@@ -11,7 +11,7 @@
         private Sueldos sueldos = new Sueldos();
 
         private Byte c_Mes, c_IdEmp, c_IdSuc, c_SaldoAnt, c_Sueldo, c_Adelanto, c_D7, c_D14, c_D21, c_Resto, c_Franco, c_Bono, c_Vacas, c_Desc, c_Ajustes
-            , c_Saldo, c_SemVacas, c_Dia, c_Aguinaldo, c_SaldoAg;
+            , c_Saldo, c_SaldoVacas, c_Dia, c_Aguinaldo, c_SaldoAg;
 
         private void CmdExcel_Click(object sender, EventArgs e)
         {
@@ -50,7 +50,7 @@
             c_Desc = Convert.ToByte(grdRetiros.get_ColIndex("Descuento"));
             c_Ajustes = Convert.ToByte(grdRetiros.get_ColIndex("Ajustes"));
             c_Saldo = Convert.ToByte(grdRetiros.get_ColIndex("Saldo"));
-            c_SemVacas = Convert.ToByte(grdRetiros.get_ColIndex("Sem_Vacas"));
+            c_SaldoVacas = Convert.ToByte(grdRetiros.get_ColIndex("Saldo_Vc"));
             c_Dia = Convert.ToByte(grdRetiros.get_ColIndex("Dia"));
             c_Aguinaldo = Convert.ToByte(grdRetiros.get_ColIndex("Aguinaldo"));
             c_SaldoAg = Convert.ToByte(grdRetiros.get_ColIndex("Saldo_Ag"));
@@ -63,7 +63,7 @@
             grdRetiros.set_ColW(c_Aguinaldo, 60);
             grdRetiros.set_ColW(c_SaldoAg, 60);
 
-            for (int i = c_SaldoAnt; i < c_SemVacas; i++)
+            for (int i = c_SaldoAnt; i < c_SaldoAg; i++)
             {
                 grdRetiros.Columnas[i].Format = "#,###.#";
                 grdRetiros.set_ColW(i, 60);
@@ -71,7 +71,7 @@
             grdRetiros.Columnas[c_Aguinaldo].Format = "N1";
             grdRetiros.Columnas[c_SaldoAg].Format = "N1";
             grdRetiros.Columnas[c_Dia].Format = "N0";
-            grdRetiros.set_ColW(c_SemVacas, 50);
+            grdRetiros.set_ColW(c_SaldoVacas, 50);
             grdRetiros.set_ColW(c_Dia, 50);
 
             grdRetiros.Columnas[c_Adelanto].Style.ForeColor = Color.DarkBlue;
@@ -206,7 +206,6 @@
                     if (grdRetiros.Col == c_D7)
                     {
                         frmRetiros_Detalle fr = new frmRetiros_Detalle();
-                        fr.Owner = this;
                         fr.grdRetiros = grdRetiros;
                         fr.retiros = this.retiros;
                         fr.retiros.Fecha = v_Mes.AddDays(6);
@@ -220,7 +219,6 @@
                         if (grdRetiros.Col == c_D14)
                         {
                             frmRetiros_Detalle fr = new frmRetiros_Detalle();
-                            fr.Owner = this;
                             fr.grdRetiros = grdRetiros;
                             fr.retiros = this.retiros;
                             fr.retiros.Fecha = v_Mes.AddDays(13);
@@ -234,7 +232,6 @@
                             if (grdRetiros.Col == c_D21)
                             {
                                 frmRetiros_Detalle fr = new frmRetiros_Detalle();
-                                fr.Owner = this;
                                 fr.grdRetiros = grdRetiros;
                                 fr.retiros = this.retiros;
                                 fr.retiros.Fecha = v_Mes.AddDays(20);
@@ -248,7 +245,6 @@
                                 if (grdRetiros.Col == c_Resto)
                                 {
                                     frmRetiros_Detalle fr = new frmRetiros_Detalle();
-                                    fr.Owner = this;
                                     fr.grdRetiros = grdRetiros;
                                     fr.retiros = this.retiros;
                                     fr.retiros.Fecha = v_Mes.AddDays(26);
@@ -262,7 +258,6 @@
                                     if (grdRetiros.Col == c_Franco)
                                     {
                                         frmDetalle_Varios fr = new frmDetalle_Varios();
-                                        fr.Owner = this;
                                         fr.grdRetiros = grdRetiros;
                                         fr.retiros = this.retiros;
                                         fr.retiros.Fecha = v_Mes;
@@ -276,7 +271,6 @@
                                         if (grdRetiros.Col == c_Desc)
                                         {
                                             frmDetalle_Varios fr = new frmDetalle_Varios();
-                                            fr.Owner = this;
                                             fr.grdRetiros = grdRetiros;
                                             fr.retiros = this.retiros;
                                             fr.retiros.Fecha = v_Mes;
@@ -290,7 +284,6 @@
                                             if (grdRetiros.Col == c_Bono)
                                             {
                                                 frmDetalle_Varios fr = new frmDetalle_Varios();
-                                                fr.Owner = this;
                                                 fr.grdRetiros = grdRetiros;
                                                 fr.retiros = this.retiros;
                                                 fr.retiros.Fecha = v_Mes;
@@ -304,13 +297,25 @@
                                                 if (grdRetiros.Col == c_Aguinaldo)
                                                 {
                                                     frmRetiros_Aguinaldo fr = new frmRetiros_Aguinaldo();
-                                                    fr.Owner = this;
                                                     fr.grdRetiros = grdRetiros;
                                                     fr.retiros = this.retiros;
                                                     fr.retiros.Fecha = v_Mes;
                                                     fr.Cargar();
                                                     fr.ShowDialog();
                                                     this.Focus();
+                                                }
+                                                else
+                                                {
+                                                    if (grdRetiros.Col == c_Vacas)
+                                                    {
+                                                        frmRetiros_Vacaciones fr = new frmRetiros_Vacaciones();
+                                                        fr.grdRetiros = grdRetiros;
+                                                        fr.retiros = this.retiros;
+                                                        fr.retiros.Fecha = v_Mes;
+                                                        fr.Cargar();
+                                                        fr.ShowDialog();
+                                                        this.Focus();
+                                                    }
                                                 }
                                             }
                                         }

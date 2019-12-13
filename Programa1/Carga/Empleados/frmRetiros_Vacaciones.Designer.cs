@@ -1,6 +1,6 @@
 ﻿namespace Programa1.Carga.Empleados
 {
-    partial class frmRetiros_Aguinaldo
+    partial class frmRetiros_Vacaciones
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRetiros_Aguinaldo));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRetiros_Vacaciones));
             this.grdDetalle = new Grilla2.SpeedGrilla();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
@@ -36,7 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblAlta = new System.Windows.Forms.Label();
-            this.lblAguinaldo = new System.Windows.Forms.Label();
+            this.lblDias = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // grdDetalle
@@ -71,7 +71,7 @@
             this.grdDetalle.Redraw = true;
             this.grdDetalle.Row = 0;
             this.grdDetalle.Rows = 50;
-            this.grdDetalle.Size = new System.Drawing.Size(353, 313);
+            this.grdDetalle.Size = new System.Drawing.Size(366, 313);
             this.grdDetalle.TabIndex = 0;
             this.grdDetalle.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdDetalle_Editado);
             this.grdDetalle.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdDetalle_CambioFila);
@@ -134,7 +134,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(260, 10);
+            this.label1.Location = new System.Drawing.Point(252, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(28, 13);
             this.label1.TabIndex = 2;
@@ -144,40 +144,40 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(231, 27);
+            this.label2.Location = new System.Drawing.Point(246, 27);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Aguinaldo:";
+            this.label2.Text = "Dias:";
             // 
             // lblAlta
             // 
             this.lblAlta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAlta.AutoSize = true;
-            this.lblAlta.Location = new System.Drawing.Point(291, 10);
+            this.lblAlta.Location = new System.Drawing.Point(283, 10);
             this.lblAlta.Name = "lblAlta";
             this.lblAlta.Size = new System.Drawing.Size(25, 13);
             this.lblAlta.TabIndex = 2;
             this.lblAlta.Text = "Alta";
             // 
-            // lblAguinaldo
+            // lblDias
             // 
-            this.lblAguinaldo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAguinaldo.AutoSize = true;
-            this.lblAguinaldo.Location = new System.Drawing.Point(291, 27);
-            this.lblAguinaldo.Name = "lblAguinaldo";
-            this.lblAguinaldo.Size = new System.Drawing.Size(25, 13);
-            this.lblAguinaldo.TabIndex = 2;
-            this.lblAguinaldo.Text = "Alta";
+            this.lblDias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDias.AutoSize = true;
+            this.lblDias.Location = new System.Drawing.Point(283, 27);
+            this.lblDias.Name = "lblDias";
+            this.lblDias.Size = new System.Drawing.Size(25, 13);
+            this.lblDias.TabIndex = 2;
+            this.lblDias.Text = "Alta";
             // 
-            // frmRetiros_Aguinaldo
+            // frmRetiros_Vacaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 368);
+            this.ClientSize = new System.Drawing.Size(390, 368);
             this.Controls.Add(this.grdRetiros);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.lblAguinaldo);
+            this.Controls.Add(this.lblDias);
             this.Controls.Add(this.lblAlta);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblFecha);
@@ -186,10 +186,10 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmRetiros_Aguinaldo";
+            this.Name = "frmRetiros_Vacaciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Aguinaldo";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmRetiros_Aguinaldo_KeyUp);
+            this.Text = "Vacaciones";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmRetiros_Vacaciones_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,6 +204,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblAlta;
-        private System.Windows.Forms.Label lblAguinaldo;
+        private System.Windows.Forms.Label lblDias;
     }
 }
