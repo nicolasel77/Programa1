@@ -37,7 +37,7 @@
             grdDetalle.set_ColW(6, 80);
             grdDetalle.set_Texto(0, 3, "Suc");
             grdDetalle.Columnas["Importe"].Format = "N1";
-            grdDetalle.ActivarCelda(grdDetalle.Rows - 1, 1);
+            grdDetalle.ActivarCelda(grdDetalle.Rows - 1, 0);
         }
 
         private void FrmRetiros_Vacaciones_KeyUp(object sender, KeyEventArgs e)
@@ -105,7 +105,7 @@
 
         private void GrdDetalle_CambioFila(short Fila)
         {
-            retiros.Id = Convert.ToInt32(grdDetalle.get_Texto(Fila, 0));
+            //retiros.Id = Convert.ToInt32(grdDetalle.get_Texto(Fila, 0));
         }
 
         private void GrdDetalle_KeyUp(object sender, short e)
