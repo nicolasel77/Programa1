@@ -12,7 +12,7 @@
 
         }
 
-        public Retiros(int id, DateTime fecha, Empleados empleado, Sucursales sucursal, TipoRetiros tipo, float importe)
+        public Retiros(int id, DateTime fecha, Empleados empleado, Sucursales sucursal, TipoRetiros tipo, float importe, int dias_Vacas, int dias_Pagados)
         {
             Id = id;
             Fecha = fecha;
@@ -20,6 +20,8 @@
             Sucursal = sucursal;
             Tipo = tipo;
             Importe = importe;
+            Dias_Vacas = dias_Vacas;
+            Dias_Pagados = dias_Pagados;
         }
 
         public int Id { get; set; }
@@ -28,6 +30,8 @@
         public Sucursales Sucursal { get; set; } = new Sucursales();
         public TipoRetiros Tipo { get; set; } = new TipoRetiros();
         public Single Importe { get; set; }
+        public int Dias_Vacas { get; set; }
+        public int Dias_Pagados { get; set; }
 
 
         public DataTable Datos(string filtro = "")
@@ -169,7 +173,7 @@
             try
             {
                 DateTime fIni, fFin;
-                if (Fecha.Month == 12) 
+                if (Fecha.Month == 12)
                 {
                     fIni = Fecha;
                 }
@@ -217,7 +221,7 @@
             {
                 return 0;
             }
-            
+
         }
         public Single Aguinaldo_Saldo()
         {
@@ -297,7 +301,103 @@
             }
 
         }
+        public int Sueldo_Dia()
+        {
+            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
+            try
+            {
+                SqlCommand command = new SqlCommand($"SELECT dbo.f_SueldoDia('{Fecha.ToString("MM/dd/yy")}', {Empleado.Id})", sql);
+                command.CommandType = CommandType.Text;
+                sql.Open();
+                command.Connection = sql;
+
+
+                var d = command.ExecuteScalar();
+                return Convert.ToInt32(d);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        public int Saldo_DiaVacas()
+        {
+            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand($"SELECT dbo.f_SaldoDiaVacas('{Fecha.ToString("MM/dd/yy")}', {Empleado.Id})", sql);
+                command.CommandType = CommandType.Text;
+                sql.Open();
+                command.Connection = sql;
+
+
+                var d = command.ExecuteScalar();
+                return Convert.ToInt32(d);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        public int Saldo_ImporteVacas()
+        {
+            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand($"SELECT dbo.f_SaldoImporteVacas('{Fecha.ToString("MM/dd/yy")}', {Empleado.Id})", sql);
+                command.CommandType = CommandType.Text;
+                sql.Open();
+                command.Connection = sql;
+
+
+                var d = command.ExecuteScalar();
+                return Convert.ToInt32(d);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+
+        public void Actualizar_Vacas()
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
+
+                command.CommandText =
+                $"DELETE FROM Detalle_Vacaciones WHERE " +
+                $"Fecha='{Fecha.ToString("MM/dd/yyy")}' AND Id_Empleados={Empleado.Id}";
+
+                var d = command.ExecuteNonQuery();
+
+                command.CommandText =
+                $"INSERT INTO Detalle_Vacaciones (Fecha, Id_Empleados, Dias, Importe, Id_Sucursales, Dias_Pagados) VALUES (" +
+                $"'{Fecha.ToString("MM/dd/yyy")}'" +
+                $", {Empleado.Id}" +
+                $", {Dias_Vacas}" +
+                $", {Importe.ToString().Replace(",", ".")}" +
+                $", {Sucursal.Id}" +
+                $", {Dias_Pagados})";
+
+                d = command.ExecuteNonQuery();
+
+                sql.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -343,7 +443,7 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
-       
+
         public void Borrar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -365,7 +465,7 @@
                 {
                     string f = Fecha.ToString("MM/dd/yyy");
 
-                    if (Fecha.Day >=1 & Fecha.Day < 14)
+                    if (Fecha.Day >= 1 & Fecha.Day < 14)
                     {
                         f = $" BETWEEN '{f}' AND '{Fecha.AddDays(13 - Fecha.Day).ToString("MM/dd/yyy")}'";
                     }
@@ -389,7 +489,7 @@
                     $"  Fecha {f} " +
                     $" AND Id_Tipo={Tipo.Id}" +
                     $" AND Id_Empleados={Empleado.Id}";
-                                        
+
                     var d = command.ExecuteNonQuery();
                 }
 
@@ -401,6 +501,31 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
+        public void Borrar_Vacaciones()
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
+
+                command.CommandText =
+                $"DELETE FROM Detalle_Vacaciones WHERE " +
+                $"Fecha='{Fecha.ToString("MM/dd/yyy")}' AND Id_Empleados={Empleado.Id}";
+
+                var d = command.ExecuteNonQuery();
+                
+                sql.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
+
         public void Actualizar_Saldo(Single importe)
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);

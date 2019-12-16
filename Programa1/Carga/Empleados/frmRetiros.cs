@@ -426,6 +426,7 @@
             saldo -= Convert.ToSingle(grdRetiros.get_Texto(fila, c_D21));
             saldo -= Convert.ToSingle(grdRetiros.get_Texto(fila, c_Resto));
             saldo -= Convert.ToSingle(grdRetiros.get_Texto(fila, c_Desc));
+            saldo += Convert.ToSingle(grdRetiros.get_Texto(fila, c_Bono));
             saldo += Convert.ToSingle(grdRetiros.get_Texto(fila, c_Franco));
             saldo -= Convert.ToSingle(grdRetiros.get_Texto(fila, c_Ajustes));
             saldo -= Convert.ToSingle(grdRetiros.get_Texto(fila, c_Vacas));
