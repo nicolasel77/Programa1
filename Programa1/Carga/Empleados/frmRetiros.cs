@@ -315,6 +315,7 @@
                                                         fr.Cargar();
                                                         fr.ShowDialog();
                                                         this.Focus();
+                                                        SendKeys.Send("%{TAB}");
                                                     }
                                                 }
                                             }
