@@ -12,7 +12,7 @@ namespace Programa1.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -20,17 +20,6 @@ namespace Programa1.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        //[global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.5.1;Initial Catalog=dbDatos;User Id=Nikorasu;Password=Oficina02;Persist Security Info=True")]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-5IUSNJ2;Initial Catalog=dbDatos;User Id=Nikorasu;Password=Oficina02;Persist Security Info=True")]
-        public string dbDatosConnectionString {
-            get {
-                return ((string)(this["dbDatosConnectionString"]));
             }
         }
         
@@ -43,6 +32,17 @@ namespace Programa1.Properties {
             }
             set {
                 this["lblTitulos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.11;Initial Catalog=dbDatos;User Id=Nikorasu;Password=Oficin" +
+            "a02")]
+        public string dbDatosConnectionString {
+            get {
+                return ((string)(this["dbDatosConnectionString"]));
             }
         }
     }

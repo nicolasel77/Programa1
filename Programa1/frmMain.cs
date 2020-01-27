@@ -60,7 +60,57 @@
 
         private void PruebaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            menudenciasToolStripMenuItem.PerformClick();
+            FrmMailMenuItem_Click(null, null);
+        }
+
+        private void FrmMail_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Mail")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmMail")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void FrmMailMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmMail")
+                {
+                    f.BringToFront();
+                    f.Show();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmMail");
+                t.Text = "Mail";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmMail = new Programa1.Mail.frmMail();
+                frmMail.MdiParent = this;
+                frmMail.Disposed += FrmMail_Disposed;
+                forms.Add(frmMail);
+                frmMail.Show();
+                frmMail.WindowState = FormWindowState.Minimized;
+                frmMail.WindowState = FormWindowState.Maximized;
+            }
         }
 
         private void FrmProds_Disposed(object sender, EventArgs e)

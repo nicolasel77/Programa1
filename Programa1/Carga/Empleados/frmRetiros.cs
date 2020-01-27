@@ -87,8 +87,7 @@
                 }
             }
         }
-
-
+        
         private void GrdRetiros_CambioFila(short Fila)
         {
             retiros.Empleado.Id = Convert.ToInt32(grdRetiros.get_Texto(Fila, c_IdEmp));
