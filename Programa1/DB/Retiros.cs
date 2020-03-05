@@ -245,6 +245,61 @@
 
         }
 
+        public Single Total_Adelantos()
+        {
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object d;
+
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(Importe) FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
+                    $" AND '{Fecha.AddDays(6).ToString("MM/dd/yyy")}' " +
+                    $" AND Id_Empleados={Empleado.Id}" +
+                    $" AND Id_Tipo=100", conexionSql);
+
+                conexionSql.Open();
+
+                comandoSql.CommandType = CommandType.Text;
+                d = comandoSql.ExecuteScalar();
+
+                conexionSql.Close();
+            }
+            catch (Exception)
+            {
+                d = 0;
+            }
+
+            return Convert.ToSingle(d);
+        }
+        public Single Total_Resto()
+        {
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object d;
+
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(Importe) FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
+                    $" AND '{Fecha.AddMonths(1).AddDays(-1).ToString("MM/dd/yyy")}' " +
+                    $" AND Id_Empleados={Empleado.Id}" +
+                    $" AND Id_Tipo=1", conexionSql);
+
+                conexionSql.Open();
+
+                comandoSql.CommandType = CommandType.Text;
+                d = comandoSql.ExecuteScalar();
+
+                conexionSql.Close();
+            }
+            catch (Exception)
+            {
+                d = 0;
+            }
+
+            return Convert.ToInt32(d);
+        }
+
         public DataTable Retiro_Vacaciones()
         {
             var dt = new DataTable("Datos");
@@ -433,6 +488,8 @@
                     $", {Importe.ToString().Replace(",", ".")})";
 
                     var d = command.ExecuteNonQuery();
+
+                    //Id = MaxId();
                 }
 
 
@@ -465,25 +522,31 @@
                 {
                     string f = Fecha.ToString("MM/dd/yyy");
 
-                    if (Fecha.Day >= 1 & Fecha.Day < 14)
+                    if (Fecha.Day >= 1 & Fecha.Day < 5)
                     {
-                        f = $" BETWEEN '{f}' AND '{Fecha.AddDays(13 - Fecha.Day).ToString("MM/dd/yyy")}'";
+                        f = $" BETWEEN '{f}' AND '{Fecha.AddDays(4 - Fecha.Day).ToString("MM/dd/yyy")}'";
                     }
                     else
                     {
-                        if (Fecha.Day >= 14 & Fecha.Day < 20)
+                        if (Fecha.Day >= 7 & Fecha.Day < 14)
                         {
-                            f = $" BETWEEN '{f}' AND '{Fecha.AddDays(20 - Fecha.Day).ToString("MM/dd/yyy")}'";
+                            f = $" BETWEEN '{f}' AND '{Fecha.AddDays(13 - Fecha.Day).ToString("MM/dd/yyy")}'";
                         }
                         else
                         {
-                            if (Fecha.Day >= 21 & Fecha.Day < 31)
+                            if (Fecha.Day >= 14 & Fecha.Day < 20)
                             {
-                                f = $" BETWEEN '{f}' AND '{Fecha.AddDays(30 - Fecha.Day).ToString("MM/dd/yyy")}'";
+                                f = $" BETWEEN '{f}' AND '{Fecha.AddDays(20 - Fecha.Day).ToString("MM/dd/yyy")}'";
+                            }
+                            else
+                            {
+                                if (Fecha.Day >= 21 & Fecha.Day < 31)
+                                {
+                                    f = $" BETWEEN '{f}' AND '{Fecha.AddDays(30 - Fecha.Day).ToString("MM/dd/yyy")}'";
+                                }
                             }
                         }
                     }
-
                     command.CommandText =
                     $"DELETE FROM Retiros WHERE " +
                     $"  Fecha {f} " +
@@ -492,6 +555,39 @@
 
                     var d = command.ExecuteNonQuery();
                 }
+
+
+                sql.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
+
+        /// <summary>
+        /// Borra los datos dentro del rango del mes (del 5 al 4 del siguiente)
+        /// </summary>
+        public void Borrar_Mes()
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
+
+                string f = $"'{Fecha.Month.ToString()}/5/{Fecha.Year.ToString()}'";
+                f = $"BETWEEN {f} AND '{Fecha.AddMonths(1).Month.ToString()}/4/{Fecha.AddMonths(1).Year.ToString()}'";
+                command.CommandText =
+                $"DELETE FROM Retiros WHERE " +
+                $"  Fecha {f} " +
+                $" AND Id_Tipo={Tipo.Id}" +
+                $" AND Id_Empleados={Empleado.Id}";
+
+                var d = command.ExecuteNonQuery();
 
 
                 sql.Close();
@@ -517,7 +613,7 @@
                 $"Fecha='{Fecha.ToString("MM/dd/yyy")}' AND Id_Empleados={Empleado.Id}";
 
                 var d = command.ExecuteNonQuery();
-                
+
                 sql.Close();
             }
             catch (Exception e)

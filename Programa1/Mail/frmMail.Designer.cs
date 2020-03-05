@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.cmdActualizar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.tiMail = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // cmdActualizar
@@ -54,6 +56,12 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
+            // tiMail
+            // 
+            this.tiMail.Enabled = true;
+            this.tiMail.Interval = 60000;
+            this.tiMail.Tick += new System.EventHandler(this.tiMail_Tick);
+            // 
             // frmMail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -71,5 +79,6 @@
 
         private System.Windows.Forms.Button cmdActualizar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer tiMail;
     }
 }

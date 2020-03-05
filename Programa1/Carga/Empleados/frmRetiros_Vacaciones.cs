@@ -65,6 +65,10 @@
                     grdDetalle.set_Texto(f, c, a);
                     grdDetalle.ActivarCelda(f, 3);
 
+                    if (retiros.Importe != 0)
+                    {
+                        retiros.Actualizar_Vacas();
+                    }
                     break;
                 case "Suc":
                     retiros.Sucursal.Id = Convert.ToInt32(a);

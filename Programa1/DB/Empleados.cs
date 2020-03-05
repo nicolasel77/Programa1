@@ -13,7 +13,7 @@ namespace Programa1.DB
         {
         }
 
-        public enum Orden_X {Nombre = 0, Suc, Id, Fecha_Nac, Alta, Baja, DNI, Tipo};
+        public enum Orden_X { Nombre = 0, Suc, Id, Fecha_Nac, Alta, Baja, DNI, Tipo };
 
         public Empleados(int id,
                          string nombre,
@@ -103,10 +103,10 @@ namespace Programa1.DB
                     filtro += " ORDER BY Baja ";
                     break;
             }
-            
+
             try
             {
-                
+
                 var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
                 SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Empleados" + filtro, conexionSql);
@@ -146,9 +146,15 @@ namespace Programa1.DB
 
             try
             {
+                string vBaja = "NULL";
+                if (Baja > Convert.ToDateTime("1/1/2000"))
+                {
+                    vBaja = Baja.ToString("'MM/dd/yyy'");
+                }
+
                 SqlCommand command =
                     new SqlCommand($"UPDATE Empleados SET Nombre='{Nombre}', Id_Tipo={Tipo.Id}, Telefono='{Telefono}', Domicilio='{Domicilio}'" +
-                    $", Fecha_Nacimiento='{Fecha_Nacimiento.ToString("MM/dd/yyy")}', Alta='{Alta.ToString("MM/dd/yyy")}', Baja='{Baja.ToString("MM/dd/yyy")}'" +
+                    $", Fecha_Nacimiento='{Fecha_Nacimiento.ToString("MM/dd/yyy")}', Alta='{Alta.ToString("MM/dd/yyy")}', Baja={vBaja}" +
                     $", DNI={DNI}, Id_Localidades={Localidad.Id}, Id_Sucursales={Sucursal.Id} WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -217,7 +223,7 @@ namespace Programa1.DB
             var dt = new DataTable("Datos");
 
             try
-            {               
+            {
 
                 SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Empleados WHERE Id=" + Id, sql);
                 comandoSql.CommandType = CommandType.Text;
@@ -225,7 +231,7 @@ namespace Programa1.DB
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
                 SqlDat.Fill(dt);
 
-               
+
 
                 if (dt.Rows.Count == 0)
                 {

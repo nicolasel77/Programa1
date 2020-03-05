@@ -9,9 +9,45 @@
     {
         private Retiros retiros = new Retiros();
         private Sueldos sueldos = new Sueldos();
+        private DateTime v_Mes;
 
         private Byte c_Mes, c_IdEmp, c_IdSuc, c_SaldoAnt, c_Sueldo, c_Adelanto, c_D7, c_D14, c_D21, c_Resto, c_Franco, c_Bono, c_Vacas, c_Desc, c_Ajustes
             , c_Saldo, c_SaldoVacas, c_Dia, c_Aguinaldo, c_SaldoAg;
+
+        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(13))
+            {
+                e.Handled = true;
+
+                bool encontrado = false;
+                int rowinicio = grdRetiros.Row;
+                int rowfin = grdRetiros.Rows - 1;
+
+                for (int i = rowinicio + 1; i <= rowfin; i++)
+                {
+                    string nombre = grdRetiros.get_Texto(i, c_IdEmp + 1).ToString().ToLower();
+                    if (nombre.IndexOf(txtBuscar.Text.ToLower()) > -1)
+                    {
+                        grdRetiros.ActivarCelda(i, c_IdEmp + 1);
+                        encontrado = true;
+                        break;
+                    }
+                }
+                if (rowinicio != 1 & encontrado == false)
+                {
+                    for (int i = 1; i <= rowinicio; i++)
+                    {
+                        string nombre = grdRetiros.get_Texto(i, c_IdEmp + 1).ToString().ToLower();
+                        if (nombre.IndexOf(txtBuscar.Text.ToLower()) > -1)
+                        {
+                            grdRetiros.ActivarCelda(i, c_IdEmp + 1);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         private void CmdExcel_Click(object sender, EventArgs e)
         {
@@ -22,8 +58,7 @@
         {
             SendKeys.Send("{F2}");
         }
-
-        private DateTime v_Mes;
+                
 
         public frmRetiros()
         {
@@ -87,7 +122,7 @@
                 }
             }
         }
-        
+
         private void GrdRetiros_CambioFila(short Fila)
         {
             retiros.Empleado.Id = Convert.ToInt32(grdRetiros.get_Texto(Fila, c_IdEmp));
@@ -100,6 +135,7 @@
         private void GrdRetiros_Editado(short f, short c, object a)
         {
             if (Convert.ToInt32(grdRetiros.get_Texto(f, c_IdEmp)) != retiros.Empleado.Id) { retiros.Empleado.Id = Convert.ToInt32(grdRetiros.get_Texto(f, c_IdEmp)); }
+
             if (c == c_IdSuc)
             {
                 retiros.Empleado.Existe();
@@ -146,6 +182,7 @@
                 retiros.Tipo.Id = 100;
                 retiros.Borrar();
                 retiros.Actualizar();
+                a = retiros.Total_Adelantos();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
@@ -158,6 +195,7 @@
                 retiros.Tipo.Id = 100;
                 retiros.Borrar();
                 retiros.Actualizar();
+                a = retiros.Total_Adelantos();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
@@ -170,6 +208,7 @@
                 retiros.Tipo.Id = 100;
                 retiros.Borrar();
                 retiros.Actualizar();
+                a = retiros.Total_Adelantos();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
@@ -182,13 +221,37 @@
                 retiros.Tipo.Id = 1;
                 retiros.Borrar();
                 retiros.Actualizar();
+                a = retiros.Total_Resto();
+                grdRetiros.set_Texto(f, c, a);
+                Saldo(f);
+
+                grdRetiros.ActivarCelda(f + 1, c);
+            }
+            if (c == c_Desc)
+            {
+                retiros.Fecha = dtResto.Value;
+                retiros.Importe = Convert.ToSingle(a);
+                retiros.Tipo.Id = 6;
+                retiros.Borrar();
+                retiros.Actualizar();
+                grdRetiros.set_Texto(f, c, a);
+                Saldo(f);
+
+                grdRetiros.ActivarCelda(f + 1, c);
+            }
+            if (c == c_Ajustes)
+            {
+                retiros.Fecha = dtResto.Value;
+                retiros.Importe = Convert.ToSingle(a);
+                retiros.Tipo.Id = 10;
+                retiros.Borrar();
+                retiros.Actualizar();
                 grdRetiros.set_Texto(f, c, a);
                 Saldo(f);
 
                 grdRetiros.ActivarCelda(f + 1, c);
             }
         }
-
         private void grdRetiros_KeyUp(object sender, short e)
         {
             if (e == Convert.ToInt16(Keys.F2))
@@ -387,6 +450,17 @@
                                             retiros.Borrar();
                                             grdRetiros.set_Texto(-1, -1, 0);
                                             Saldo(grdRetiros.Row);
+                                        }
+                                        else
+                                        {
+                                            if (grdRetiros.Col == c_Ajustes)
+                                            {
+                                                retiros.Fecha = v_Mes;
+                                                retiros.Tipo.Id = 10;
+                                                retiros.Borrar_Mes();
+                                                grdRetiros.set_Texto(-1, -1, 0);
+                                                Saldo(grdRetiros.Row);
+                                            }
                                         }
                                     }
                                 }
