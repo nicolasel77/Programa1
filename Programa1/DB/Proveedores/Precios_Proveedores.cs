@@ -12,7 +12,7 @@ namespace Programa1.DB
         {            
         }
 
-        public Precios_Proveedores(int id, DateTime fecha, Productos prod, Proveedores proveedor, Single pr)
+        public Precios_Proveedores(int id, DateTime fecha, Productos prod, Proveedores.Proveedores proveedor, Single pr)
         {
             Id = id;
             Fecha = fecha;
@@ -24,7 +24,7 @@ namespace Programa1.DB
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public Productos Producto { get; set; } = new Productos();
-        public Proveedores Proveedor { get; set; } = new Proveedores();
+        public Proveedores.Proveedores Proveedor { get; set; } = new Proveedores.Proveedores();
         public Single Precio { get; set; }
 
         public Single Buscar()

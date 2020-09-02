@@ -6,6 +6,7 @@ namespace Programa1.DB
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
+    using Programa1.DB.Proveedores;
 
     class Devoluciones
     {        
@@ -14,7 +15,7 @@ namespace Programa1.DB
             
         }
 
-        public Devoluciones(int id, DateTime fecha, Productos prod, string desc, Sucursales sucu, Single Costo_Venta, Proveedores proveedor, Single Costo_Compra, Single kilos)
+        public Devoluciones(int id, DateTime fecha, Productos prod, string desc, Sucursales sucu, Single Costo_Venta, Proveedores.Proveedores proveedor, Single Costo_Compra, Single kilos)
         {
             Id = id;
             Fecha = fecha;
@@ -35,7 +36,7 @@ namespace Programa1.DB
         public string Descripcion { get; set; }
         public Sucursales Sucursal { get; set; } = new Sucursales();
         public Single CostoVenta { get; set; }
-        public Proveedores Proveedor { get; set; } = new Proveedores();
+        public Proveedores.Proveedores Proveedor { get; set; } = new Proveedores.Proveedores();
         public Single CostoCompra { get; set; }
         public Single Kilos { get; set; }
 

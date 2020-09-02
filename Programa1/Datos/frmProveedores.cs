@@ -1,6 +1,7 @@
 ﻿namespace Programa1.Datos
 {
     using Programa1.DB;
+    using Programa1.DB.Proveedores;
     using System;
     using System.Data;
     using System.Windows.Forms;

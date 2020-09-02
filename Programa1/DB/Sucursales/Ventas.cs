@@ -14,7 +14,7 @@ namespace Programa1.DB
             
         }
 
-        public Ventas(int id, DateTime fecha, Productos prod, string desc, Sucursales sucu, Single Costo_Venta, Proveedores proveedor, Single Costo_Compra, Single kilos)
+        public Ventas(int id, DateTime fecha, Productos prod, string desc, Sucursales sucu, Single Costo_Venta, Proveedores.Proveedores proveedor, Single Costo_Compra, Single kilos)
         {
             Id = id;
             Fecha = fecha;
