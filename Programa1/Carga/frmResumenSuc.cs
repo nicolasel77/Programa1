@@ -2,13 +2,7 @@
 {
     using Programa1.DB;
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Data;
-    using System.Drawing;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
     public partial class frmResumenSuc : Form
     {
@@ -18,7 +12,7 @@
 
             Semanas sem = new Semanas();
             DataTable dt = sem.Datos();
-                        
+
             int salir = 1;
             foreach (DataRow dr in dt.Rows)
             {
@@ -35,7 +29,7 @@
 
         private void LstSemanas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(lstSemanas.Text == "Mas...")
+            if (lstSemanas.Text == "Mas...")
             {
 
             }
@@ -47,7 +41,7 @@
 
         private void Cargar()
         {
-            
+
         }
     }
 }

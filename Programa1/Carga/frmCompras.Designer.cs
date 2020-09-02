@@ -184,6 +184,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cProds.BackColor = System.Drawing.Color.Gainsboro;
+            this.cProds.Filtrar_Ver = true;
             this.cProds.Filtro_In = "";
             this.cProds.Location = new System.Drawing.Point(3, 3);
             this.cProds.Mostrar_Tipo = true;
@@ -198,10 +199,12 @@
             // 
             this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cFecha.Location = new System.Drawing.Point(3, 500);
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(3, 381);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
             this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(249, 184);
+            this.cFecha.Size = new System.Drawing.Size(249, 303);
             this.cFecha.TabIndex = 3;
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
             // 
@@ -213,9 +216,9 @@
             this.cProvs.BackColor = System.Drawing.Color.Gainsboro;
             this.cProvs.Filtro_In = "";
             this.cProvs.Location = new System.Drawing.Point(2, 3);
-            this.cProvs.Mostrar_Tipo = true;
+            this.cProvs.Mostrar_Tipo = false;
             this.cProvs.Name = "cProvs";
-            this.cProvs.Size = new System.Drawing.Size(258, 491);
+            this.cProvs.Size = new System.Drawing.Size(258, 372);
             this.cProvs.TabIndex = 2;
             this.cProvs.Titulo = "Proveedores";
             this.cProvs.Valor_Actual = -1;

@@ -10,6 +10,7 @@
         private Semanas semanas;
         private bool cCambio = false;
         public DateTime fecha_Actual;
+        public DateTime fecha_Fin;
 
         public event EventHandler Cambio_Seleccion;
 
@@ -121,9 +122,17 @@
             else
             {
                 fecha_Actual = DateTime.Parse(lstSemanas.Text);
+                fecha_Fin = fecha_Actual.AddDays(6);
                 if (cCambio == false)
                 {
-                    Cambio_Seleccion(null, null);
+                    try
+                    {
+                        Cambio_Seleccion(null, null);
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
                 }
             }
         }
@@ -140,6 +149,7 @@
                 if (mntDias.SelectionStart.Date != fecha_Actual)
                 {
                     fecha_Actual = mntDias.SelectionStart.Date;
+                    fecha_Fin = fecha_Actual;
                     Cambio_Seleccion(null, null);
                 }
             }
@@ -148,6 +158,7 @@
         private void DtDesde_ValueChanged(object sender, EventArgs e)
         {
             fecha_Actual = dtDesde.Value;
+            fecha_Fin = dtHasta.Value;
             Cambio_Seleccion(null, null);
         }
 
@@ -171,6 +182,7 @@
                     a = lstMesAño.Text;
                 }
                 fecha_Actual = Convert.ToDateTime($"1/{(lstMes.SelectedIndex + 1).ToString()}/{a}");
+                fecha_Fin = fecha_Actual.AddMonths(1).AddDays(-1);
                 Cambio_Seleccion(null, null);
             }
         }
@@ -184,6 +196,7 @@
             if (lstAños.SelectedIndex > -1)
             {
                 fecha_Actual = Convert.ToDateTime($"1/1/{lstAños.Text}");
+                fecha_Fin = fecha_Actual.AddYears(1).AddDays(-1);
                 Cambio_Seleccion(null, null);
             }
         }

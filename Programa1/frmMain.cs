@@ -717,7 +717,7 @@
             if (found == false)
             {
                 ToolStripMenuItem t = new ToolStripMenuItem("frmCantidad_Clientes");
-                t.Text = "Cantidad_Clientes";
+                t.Text = "Cantidad Clientes";
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
@@ -734,7 +734,7 @@
         {
             foreach (ToolStripMenuItem t in tstMenu.Items)
             {
-                if (t.Text == "Empleados")
+                if (t.Text == "Cantidad Clientes")
                 {
                     tstMenu.Items.Remove(t);
                     break;
@@ -742,7 +742,7 @@
             }
             foreach (Form f in forms)
             {
-                if (f.Name == "frmEmpleados")
+                if (f.Name == "frmCantidad_Clientes")
                 {
                     forms.Remove(f);
                     break;
@@ -1185,6 +1185,54 @@
             foreach (Form f in forms)
             {
                 if (f.Name == "frmHaciendaStock")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void ttResumenProveedores_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmResumen_Proveedores")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmResumen_Proveedores");
+                t.Text = "Resumen Prov";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmResumen_Proveedores = new Programa1.Carga.frmResumen_Proveedores();
+                frmResumen_Proveedores.MdiParent = this;
+                frmResumen_Proveedores.Disposed += FrmResumen_Proveedores_Disposed;
+                forms.Add(frmResumen_Proveedores);
+                frmResumen_Proveedores.Show();
+                frmResumen_Proveedores.WindowState = FormWindowState.Minimized;
+                frmResumen_Proveedores.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmResumen_Proveedores_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Resumen Prov")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmResumen_Proveedores")
                 {
                     forms.Remove(f);
                     break;
