@@ -31,6 +31,7 @@ namespace Programa1.Carga
             this.Cursor = Cursors.WaitCursor;
             grdProv.MostrarDatos(Compras.Saldos_Proveedores(fecha), true, false);
             grdProv.Columnas[grdProv.get_ColIndex("Saldo")].Style.Format = "#,###.#";
+            grdProv.set_Texto(0, 1, "Proveedor");
             grdProv.AutosizeAll();
             for (int i = 1; i <= grdProv.Rows - 1; i++)
             {
