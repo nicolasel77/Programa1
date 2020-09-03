@@ -9,6 +9,7 @@
     {
         private Semanas semanas;
         private bool cCambio = false;
+        private DateTime uFecha = Convert.ToDateTime("1/1/2000");
         public DateTime fecha_Actual;
         public DateTime fecha_Fin;
 
@@ -23,12 +24,28 @@
         public DateTime Fecha_Maxima { get => mntDias.MaxDate; set { mntDias.MaxDate = value; } }
         public int Mostrar { get => tabControl1.SelectedIndex; set { tabControl1.SelectedIndex = value; } }
 
+        public DateTime Ultima_Fecha
+        {
+            get { return uFecha; }
+            set 
+            {
+                uFecha = value;
+                Cargar();
+            }
+        }
+
         private void Cargar()
         {
             cCambio = true;
             semanas = new Semanas();
 
-            DataTable dt = semanas.Datos();
+            string s = "";
+            if (uFecha.Year > 2000)
+            {
+                s = $"Semana<='{uFecha:MM/dd/yy}'";
+            }
+
+            DataTable dt = semanas.Datos(s);
 
             lstSemanas.Items.Clear();
             int salir = 1;

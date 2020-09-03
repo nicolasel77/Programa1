@@ -35,7 +35,7 @@ namespace Programa1.DB
         public string Descripcion { get; set; }
         public Sucursales Sucursal { get; set; } = new Sucursales();
         public Single CostoVenta { get; set; }
-        public Proveedores Proveedor { get; set; } = new Proveedores();
+        public Proveedores.Proveedores Proveedor { get; set; } = new Proveedores.Proveedores();
         public Single CostoCompra { get; set; }
         public Single Kilos { get; set; }
 

@@ -188,7 +188,7 @@
         {
             Id = Convert.ToInt32(dr["Id"]);
             Nombre = dr["Nombre"].ToString();
-            Tipo.Id = Convert.ToInt32(dr["Id_Tipo"]);
+            Tipo.Id = Convert.ToInt32(dr["Tipo"]);
             Ver = Convert.ToBoolean(dr["Ver"]);            
         }
     }

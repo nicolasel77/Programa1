@@ -34,6 +34,7 @@
         public Single Costo { get; set; }
         public Single Kilos { get; set; }
 
+
         public Precios_Proveedores precios = new Precios_Proveedores();
 
         public DataTable Datos(string filtro = "")
@@ -61,26 +62,30 @@
 
             return dt;
         }
-
-        public DataTable Saldos_Proveedores(DateTime fecha)
+        
+        public DateTime Ultima_Fecha()
         {
-            var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-                        
+            object d = null;
+
+
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, dbo.f_SaldoProveedor(Id, '{fecha.ToString("MM/dd/yy")}') AS Saldo FROM Proveedores ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
+                SqlCommand comandoSql = new SqlCommand($"SELECT ISNULL(MAX(Fecha), '1/1/2000') FROM Compras", conexionSql);
 
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
+                conexionSql.Open();
+
+                comandoSql.CommandType = CommandType.Text;
+                d = comandoSql.ExecuteScalar();
+
+                conexionSql.Close();
             }
             catch (Exception)
             {
-                dt = null;
+                d = null;
             }
-
-            return dt;
+            DateTime f = Convert.ToDateTime(d);
+            return f;
         }
         public void Actualizar()
         {

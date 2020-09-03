@@ -804,18 +804,20 @@ Public Class SpeedGrilla
             'MsgBox(Grd.GetDataDisplay(f, c))
             Try
                 If IsDBNull(Grd.Item(f, c)) Or Grd.Item(f, c) Is Nothing Then
-                    Select Case Grd.Cols(c).DataType.ToString
-                        Case "System.String"
-                            Return ""
-                        Case "System.Byte", "System.Int16", "System.Int32", "System.Int64", "System.Single", "System.Double", "System.Decimal"
-                            Return 0
-                        Case "System.DateTime"
-                            Return Date.MinValue
-                        Case "System.Boolean"
-                            Return False
-                    End Select
+                    If Not IsNothing(Grd.Cols(c).datatype) Then
+                        Select Case Grd.Cols(c).DataType.ToString
+                            Case "System.String"
+                                Return ""
+                            Case "System.Byte", "System.Int16", "System.Int32", "System.Int64", "System.Single", "System.Double", "System.Decimal"
+                                Return 0
+                            Case "System.DateTime"
+                                Return Date.MinValue
+                            Case "System.Boolean"
+                                Return False
+                        End Select
+                    End If
                 Else
-                    Return Grd.Item(f, c)
+                        Return Grd.Item(f, c)
                 End If
             Catch er As Exception
                 RaiseEvent grdError(er.Message)
