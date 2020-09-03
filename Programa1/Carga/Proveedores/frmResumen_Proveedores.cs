@@ -31,24 +31,39 @@ namespace Programa1.Carga
         {
             this.Cursor = Cursors.WaitCursor;
             Prov = Convert.ToInt32(grdProv.get_Texto(grdProv.Row, 0));
-
+            
             grdProv.MostrarDatos(cCtes.Saldos_Proveedores(fecha), true, false);
             grdProv.Columnas[grdProv.get_ColIndex("Saldo")].Style.Format = "#,###.#";
             grdProv.set_Texto(0, 1, "Proveedor");
             grdProv.AutosizeAll();
-            for (int i = 1; i <= grdProv.Rows - 1; i++)
+            for (int i = grdProv.Rows - 1; i >= 1; i--)
             {
-                if (Convert.ToSingle(grdProv.get_Texto(i, grdProv.get_ColIndex("Saldo"))) > 0)
+                double v = Convert.ToDouble(grdProv.get_Texto(i, grdProv.get_ColIndex("Saldo")));
+                //Para redondear a 0
+                if (v > -1 & v < 1) v = 0;
+
+                if (v != 0 | chSoloSaldos.Checked == false)
                 {
-                    grdProv.set_ColorLetraCelda(i, grdProv.get_ColIndex("Saldo"), Color.Blue);
+                    if (Convert.ToSingle(grdProv.get_Texto(i, grdProv.get_ColIndex("Saldo"))) > 0)
+                    {
+                        grdProv.set_ColorLetraCelda(i, grdProv.get_ColIndex("Saldo"), Color.Blue);
+                    }
+                    else
+                    {
+                        grdProv.set_ColorLetraCelda(i, grdProv.get_ColIndex("Saldo"), Color.DarkRed);
+                    }
                 }
                 else
                 {
-                    grdProv.set_ColorLetraCelda(i, grdProv.get_ColIndex("Saldo"), Color.DarkRed);
+                    grdProv.Filas[i].Visible = false;
                 }
+                
                 if (Convert.ToInt32(grdProv.get_Texto(i, 0)) == Prov) { grdProv.ActivarCelda(i, 0); }
             }
             if (Prov != 0) { Cargar_Datos(Prov); }
+
+            Double sp = Convert.ToDouble(grdProv.SumarCol(grdProv.get_ColIndex("Saldo"), false));
+            lblSaldoProveedores.Text = sp.ToString("$ #,###.0");
             this.Cursor = Cursors.Default;
         }
 
@@ -65,10 +80,24 @@ namespace Programa1.Carga
         {
             Compras();
             Pagos();
-            double t = cCtes.Saldo_Proveedor(prov, cFechas1.fecha_Actual.AddDays(-1));
+            DateTime f1 = cFechas1.fecha_Actual;
+            DateTime f2 = cFechas1.fecha_Fin;
+
+            double t = cCtes.Saldo_Proveedor(prov, f1.AddDays(-1));
+
             lblSaldoAnt.Text = t.ToString("$ #,###.0");
             t = Convert.ToDouble(grdProv.get_Texto(grdProv.Row, 2));
             lblSaldo.Text = t.ToString("$ #,###.0");
+
+            
+            t = cCtes.Total_Ajustes(prov, f1, f2);
+            lblAjustes.Text = t.ToString("$ #,###.0");
+
+            t = cCtes.Total_Devoluciones(prov, f1, f2);
+            lblDevoluciones.Text = t.ToString("$ #,###.0");
+
+            t = cCtes.Ganancia_Proveedor(prov, f1, f2);
+            lblGanancia.Text = t.ToString("$ #,###.0");
         }
 
         private void Compras()
@@ -96,16 +125,42 @@ namespace Programa1.Carga
         private void Pagos()
         {
             //PAGOS
-            DataTable dt = cCtes.Pagos(Prov, cFechas1.fecha_Actual, cFechas1.fecha_Fin);
+            DataTable dt = cCtes.Salidas(Prov, cFechas1.fecha_Actual, cFechas1.fecha_Fin);
             grdSalidas.MostrarDatos(dt, true, false);
 
-            grdSalidas.set_ColW(grdSalidas.get_ColIndex("Id"), 0);
-
             grdSalidas.Columnas[grdSalidas.get_ColIndex("Importe")].Style.Format = "#,###.#";
-
             grdSalidas.AutosizeAll();
+            grdSalidas.set_ColW(grdSalidas.get_ColIndex("ID"), 0);
+            C1.Win.C1FlexGrid.CellStyle Devolucion;
+            C1.Win.C1FlexGrid.CellStyle Ajuste;
 
-            double t = Convert.ToDouble(grdSalidas.SumarCol(grdSalidas.get_ColIndex("Total"), false));
+            Devolucion = grdSalidas.Styles.Add("Devolucion");
+            Ajuste = grdSalidas.Styles.Add("Ajuste");
+
+            Devolucion.BackColor = Color.MistyRose;
+            Ajuste.BackColor = Color.LightSkyBlue;
+
+            for (int i = 1; i <= grdSalidas.Rows - 1; i++)
+            {
+                string s = Convert.ToString(grdSalidas.get_Texto(i, grdSalidas.get_ColIndex("Descripcion")));
+                s = s.Substring(0, 2);
+
+                switch (s)
+                {
+                    case "Dv":
+                        grdSalidas.Filas[i].Style = Devolucion;
+                        break;
+                    case "Aj":
+                        grdSalidas.Filas[i].Style = Ajuste;
+                        break;
+                    default:
+                        grdSalidas.Filas[i].Style = null;
+                        break;
+                }
+                    
+            }
+
+            double t = Convert.ToDouble(grdSalidas.SumarCol(grdSalidas.get_ColIndex("Importe"), false));
             lblTotalSalidas.Text = t.ToString("Total: $ #,###.0");
             lblPagos.Text = t.ToString("$ #,###.0");
         }
@@ -113,6 +168,11 @@ namespace Programa1.Carga
         private void frmResumen_Proveedores_Resize(object sender, EventArgs e)
         {
             splitContainer2.SplitterDistance = splitContainer2.Height - 137;
+        }
+
+        private void chSoloSaldos_CheckedChanged(object sender, EventArgs e)
+        {
+            Cargar_Proveedores(cFechas1.fecha_Fin);
         }
     }
 }

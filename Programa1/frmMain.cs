@@ -27,6 +27,7 @@
                     f.BringToFront();
                     break;
                 }
+
             }
         }
 
@@ -163,7 +164,6 @@
             }
         }
 
-
         private void SucursalesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -213,7 +213,6 @@
                 }
             }
         }
-
 
         private void ProveedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -265,7 +264,6 @@
             }
         }
 
-
         private void StockToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -315,9 +313,6 @@
             }
         }
 
-
-
-
         private void MenudenciasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -365,7 +360,6 @@
                 }
             }
         }
-
 
         private void TrasladosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -510,6 +504,7 @@
                 }
             }
         }
+
         private void CompraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -1044,7 +1039,6 @@
             }
         }
 
-
         private void seberosToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             bool found = false;
@@ -1207,7 +1201,7 @@
             if (found == false)
             {
                 ToolStripMenuItem t = new ToolStripMenuItem("frmResumen_Proveedores");
-                t.Text = "Resumen Prov";
+                t.Text = "Resumen_Prov";
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
