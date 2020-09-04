@@ -8,7 +8,6 @@
     {
         private Compras Compras;
 
-
         #region " Columnas "
         private Byte c_Id;
         private Byte c_Fecha;

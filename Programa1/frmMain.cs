@@ -891,7 +891,50 @@
 
         private void AjustesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmAjustes")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmAjustes");
+                t.Text = "Ajustes";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
 
+                Form frmAjustes = new frmAjustes();
+                frmAjustes.MdiParent = this;
+                frmAjustes.Disposed += FrmAjustes_Disposed;
+                forms.Add(frmAjustes);
+                frmAjustes.Show();
+                frmAjustes.WindowState = FormWindowState.Minimized;
+                frmAjustes.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmAjustes_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Ajustes")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmAjustes")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
         }
 
         private void DevolucionesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1218,7 +1261,7 @@
         {
             foreach (ToolStripMenuItem t in tstMenu.Items)
             {
-                if (t.Text == "Resumen Prov")
+                if (t.Text == "Resumen_Prov")
                 {
                     tstMenu.Items.Remove(t);
                     break;

@@ -7,15 +7,26 @@ namespace Proveedores
 {
     class CCtes_Proveedores
     {
-        private Programa1.DB.Proveedores.Proveedores prov;
-        public Compras Compras = new Compras();
+        private Compras Compras = new Compras();
 
         public CCtes_Proveedores()
         {
         }
-        public CCtes_Proveedores(int prov)
+        
+        public DateTime Ultima_Fecha() { return Compras.Ultima_Fecha(); }
+
+        public DataTable Detalle_Compras(string filtro = "", bool Agrupado = false)
         {
-            this.prov.Id = prov;
+            DataTable dt;
+            if (Agrupado == true)
+            {
+                dt = Compras.ResumenFecha_Datos(filtro);
+            }
+            else
+            {
+                dt = Compras.Datos(filtro);
+            }
+            return dt;
         }
 
         public DataTable Saldos_Proveedores(DateTime fecha)
@@ -106,7 +117,7 @@ namespace Proveedores
 
                 comandoSql.CommandType = CommandType.Text;
                 d = comandoSql.ExecuteScalar();
-                t = Convert.ToDouble(d);                
+                t = Convert.ToDouble(d);
             }
             catch (Exception)
             {
@@ -116,7 +127,7 @@ namespace Proveedores
             {
                 conexionSql.Close();
             }
-            
+
             return t;
         }
 

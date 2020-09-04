@@ -32,13 +32,13 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblTotalEntradas = new System.Windows.Forms.ToolStripStatusLabel();
             this.grdEntradas = new Grilla2.SpeedGrilla();
-            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
-            this.lblTotalSalidas = new System.Windows.Forms.ToolStripStatusLabel();
             this.grdSalidas = new Grilla2.SpeedGrilla();
+            this.lblGanancia = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblSaldoProveedores = new System.Windows.Forms.Label();
             this.lblSaldo = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblAjustes = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,13 +51,15 @@
             this.lblSaldoAnt = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.grdProv = new Grilla2.SpeedGrilla();
             this.chSoloSaldos = new MaterialSkin.Controls.MaterialCheckBox();
-            this.lblGanancia = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.grdProv = new Grilla2.SpeedGrilla();
             this.cFechas1 = new Programa1.Controles.cFechas();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblSaldoProveedores = new System.Windows.Forms.Label();
+            this.rdAgrupado = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdDetalle = new MaterialSkin.Controls.MaterialRadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblTotalEntradas = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblTotalSalidas = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,12 +72,12 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.statusStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -140,34 +142,17 @@
             // splitContainer4.Panel1
             // 
             this.splitContainer4.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer4.Panel1.Controls.Add(this.statusStrip1);
+            this.splitContainer4.Panel1.Controls.Add(this.panel1);
             this.splitContainer4.Panel1.Controls.Add(this.grdEntradas);
             // 
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer4.Panel2.Controls.Add(this.statusStrip2);
+            this.splitContainer4.Panel2.Controls.Add(this.panel2);
             this.splitContainer4.Panel2.Controls.Add(this.grdSalidas);
             this.splitContainer4.Size = new System.Drawing.Size(825, 470);
             this.splitContainer4.SplitterDistance = 443;
             this.splitContainer4.TabIndex = 0;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblTotalEntradas});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 444);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(443, 26);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblTotalEntradas
-            // 
-            this.lblTotalEntradas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalEntradas.Name = "lblTotalEntradas";
-            this.lblTotalEntradas.Size = new System.Drawing.Size(42, 21);
-            this.lblTotalEntradas.Text = "Total";
             // 
             // grdEntradas
             // 
@@ -201,25 +186,8 @@
             this.grdEntradas.Redraw = true;
             this.grdEntradas.Row = 0;
             this.grdEntradas.Rows = 50;
-            this.grdEntradas.Size = new System.Drawing.Size(443, 441);
+            this.grdEntradas.Size = new System.Drawing.Size(443, 444);
             this.grdEntradas.TabIndex = 0;
-            // 
-            // statusStrip2
-            // 
-            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblTotalSalidas});
-            this.statusStrip2.Location = new System.Drawing.Point(0, 444);
-            this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(378, 26);
-            this.statusStrip2.TabIndex = 2;
-            this.statusStrip2.Text = "statusStrip2";
-            // 
-            // lblTotalSalidas
-            // 
-            this.lblTotalSalidas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalSalidas.Name = "lblTotalSalidas";
-            this.lblTotalSalidas.Size = new System.Drawing.Size(42, 21);
-            this.lblTotalSalidas.Text = "Total";
             // 
             // grdSalidas
             // 
@@ -253,8 +221,35 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 50;
-            this.grdSalidas.Size = new System.Drawing.Size(378, 441);
+            this.grdSalidas.Size = new System.Drawing.Size(378, 444);
             this.grdSalidas.TabIndex = 0;
+            // 
+            // lblGanancia
+            // 
+            this.lblGanancia.Location = new System.Drawing.Point(303, 9);
+            this.lblGanancia.Name = "lblGanancia";
+            this.lblGanancia.Size = new System.Drawing.Size(94, 13);
+            this.lblGanancia.TabIndex = 1;
+            this.lblGanancia.Text = "0";
+            this.lblGanancia.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(241, 9);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 13);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Ganancia:";
+            // 
+            // lblSaldoProveedores
+            // 
+            this.lblSaldoProveedores.Location = new System.Drawing.Point(526, 9);
+            this.lblSaldoProveedores.Name = "lblSaldoProveedores";
+            this.lblSaldoProveedores.Size = new System.Drawing.Size(106, 13);
+            this.lblSaldoProveedores.TabIndex = 0;
+            this.lblSaldoProveedores.Text = "0";
+            this.lblSaldoProveedores.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblSaldo
             // 
@@ -264,6 +259,15 @@
             this.lblSaldo.TabIndex = 0;
             this.lblSaldo.Text = "0";
             this.lblSaldo.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(420, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Saldo Proveedores:";
             // 
             // label6
             // 
@@ -385,6 +389,26 @@
             this.splitContainer3.SplitterDistance = 413;
             this.splitContainer3.TabIndex = 0;
             // 
+            // chSoloSaldos
+            // 
+            this.chSoloSaldos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chSoloSaldos.AutoSize = true;
+            this.chSoloSaldos.Checked = true;
+            this.chSoloSaldos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chSoloSaldos.Depth = 0;
+            this.chSoloSaldos.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chSoloSaldos.Location = new System.Drawing.Point(0, 378);
+            this.chSoloSaldos.Margin = new System.Windows.Forms.Padding(0);
+            this.chSoloSaldos.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chSoloSaldos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chSoloSaldos.Name = "chSoloSaldos";
+            this.chSoloSaldos.Ripple = true;
+            this.chSoloSaldos.Size = new System.Drawing.Size(151, 30);
+            this.chSoloSaldos.TabIndex = 1;
+            this.chSoloSaldos.Text = "Ver solo con saldos";
+            this.chSoloSaldos.UseVisualStyleBackColor = true;
+            this.chSoloSaldos.CheckedChanged += new System.EventHandler(this.chSoloSaldos_CheckedChanged);
+            // 
             // grdProv
             // 
             this.grdProv.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
@@ -421,44 +445,6 @@
             this.grdProv.TabIndex = 0;
             this.grdProv.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdProv_CambioFila);
             // 
-            // chSoloSaldos
-            // 
-            this.chSoloSaldos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chSoloSaldos.AutoSize = true;
-            this.chSoloSaldos.Checked = true;
-            this.chSoloSaldos.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chSoloSaldos.Depth = 0;
-            this.chSoloSaldos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.chSoloSaldos.Location = new System.Drawing.Point(0, 378);
-            this.chSoloSaldos.Margin = new System.Windows.Forms.Padding(0);
-            this.chSoloSaldos.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chSoloSaldos.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chSoloSaldos.Name = "chSoloSaldos";
-            this.chSoloSaldos.Ripple = true;
-            this.chSoloSaldos.Size = new System.Drawing.Size(151, 30);
-            this.chSoloSaldos.TabIndex = 1;
-            this.chSoloSaldos.Text = "Ver solo con saldos";
-            this.chSoloSaldos.UseVisualStyleBackColor = true;
-            this.chSoloSaldos.CheckedChanged += new System.EventHandler(this.chSoloSaldos_CheckedChanged);
-            // 
-            // lblGanancia
-            // 
-            this.lblGanancia.Location = new System.Drawing.Point(303, 9);
-            this.lblGanancia.Name = "lblGanancia";
-            this.lblGanancia.Size = new System.Drawing.Size(94, 13);
-            this.lblGanancia.TabIndex = 1;
-            this.lblGanancia.Text = "0";
-            this.lblGanancia.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(241, 9);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 13);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "Ganancia:";
-            // 
             // cFechas1
             // 
             this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -472,23 +458,82 @@
             this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
             // 
-            // label7
+            // rdAgrupado
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(420, 9);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Saldo Proveedores:";
+            this.rdAgrupado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdAgrupado.AutoSize = true;
+            this.rdAgrupado.Checked = true;
+            this.rdAgrupado.Depth = 0;
+            this.rdAgrupado.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdAgrupado.Location = new System.Drawing.Point(278, 0);
+            this.rdAgrupado.Margin = new System.Windows.Forms.Padding(0);
+            this.rdAgrupado.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdAgrupado.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdAgrupado.Name = "rdAgrupado";
+            this.rdAgrupado.Ripple = true;
+            this.rdAgrupado.Size = new System.Drawing.Size(89, 30);
+            this.rdAgrupado.TabIndex = 2;
+            this.rdAgrupado.TabStop = true;
+            this.rdAgrupado.Text = "Agrupado";
+            this.rdAgrupado.UseVisualStyleBackColor = true;
+            this.rdAgrupado.CheckedChanged += new System.EventHandler(this.rdAgrupado_CheckedChanged);
             // 
-            // lblSaldoProveedores
+            // rdDetalle
             // 
-            this.lblSaldoProveedores.Location = new System.Drawing.Point(526, 9);
-            this.lblSaldoProveedores.Name = "lblSaldoProveedores";
-            this.lblSaldoProveedores.Size = new System.Drawing.Size(106, 13);
-            this.lblSaldoProveedores.TabIndex = 0;
-            this.lblSaldoProveedores.Text = "0";
-            this.lblSaldoProveedores.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.rdDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdDetalle.AutoSize = true;
+            this.rdDetalle.Depth = 0;
+            this.rdDetalle.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdDetalle.Location = new System.Drawing.Point(367, 0);
+            this.rdDetalle.Margin = new System.Windows.Forms.Padding(0);
+            this.rdDetalle.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdDetalle.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdDetalle.Name = "rdDetalle";
+            this.rdDetalle.Ripple = true;
+            this.rdDetalle.Size = new System.Drawing.Size(72, 30);
+            this.rdDetalle.TabIndex = 2;
+            this.rdDetalle.Text = "Detalle";
+            this.rdDetalle.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblTotalEntradas);
+            this.panel1.Controls.Add(this.rdAgrupado);
+            this.panel1.Controls.Add(this.rdDetalle);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 444);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(443, 26);
+            this.panel1.TabIndex = 3;
+            // 
+            // lblTotalEntradas
+            // 
+            this.lblTotalEntradas.AutoSize = true;
+            this.lblTotalEntradas.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblTotalEntradas.Location = new System.Drawing.Point(3, 3);
+            this.lblTotalEntradas.Name = "lblTotalEntradas";
+            this.lblTotalEntradas.Size = new System.Drawing.Size(42, 21);
+            this.lblTotalEntradas.TabIndex = 3;
+            this.lblTotalEntradas.Text = "Total";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblTotalSalidas);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 444);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(378, 26);
+            this.panel2.TabIndex = 4;
+            // 
+            // lblTotalSalidas
+            // 
+            this.lblTotalSalidas.AutoSize = true;
+            this.lblTotalSalidas.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblTotalSalidas.Location = new System.Drawing.Point(3, 3);
+            this.lblTotalSalidas.Name = "lblTotalSalidas";
+            this.lblTotalSalidas.Size = new System.Drawing.Size(42, 21);
+            this.lblTotalSalidas.TabIndex = 3;
+            this.lblTotalSalidas.Text = "Total";
             // 
             // frmResumen_Proveedores
             // 
@@ -511,20 +556,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
-            this.splitContainer4.Panel1.PerformLayout();
             this.splitContainer4.Panel2.ResumeLayout(false);
-            this.splitContainer4.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.statusStrip2.ResumeLayout(false);
-            this.statusStrip2.PerformLayout();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel1.PerformLayout();
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -539,10 +582,6 @@
         private Grilla2.SpeedGrilla grdSalidas;
         private Controles.cFechas cFechas1;
         private Grilla2.SpeedGrilla grdProv;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lblTotalEntradas;
-        private System.Windows.Forms.StatusStrip statusStrip2;
-        private System.Windows.Forms.ToolStripStatusLabel lblTotalSalidas;
         private System.Windows.Forms.Label lblSaldo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblAjustes;
@@ -560,5 +599,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblSaldoProveedores;
         private System.Windows.Forms.Label label7;
+        private MaterialSkin.Controls.MaterialRadioButton rdDetalle;
+        private MaterialSkin.Controls.MaterialRadioButton rdAgrupado;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblTotalEntradas;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblTotalSalidas;
     }
 }

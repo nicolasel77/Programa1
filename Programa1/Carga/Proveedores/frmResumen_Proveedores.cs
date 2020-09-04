@@ -18,7 +18,7 @@ namespace Programa1.Carga
         private void frmResumen_Proveedores_Load(object sender, EventArgs e)
         {
             Cargar_Proveedores(DateTime.Today);
-            cFechas1.Ultima_Fecha = cCtes.Compras.Ultima_Fecha();            
+            cFechas1.Ultima_Fecha = cCtes.Ultima_Fecha();            
         }
 
 
@@ -63,7 +63,7 @@ namespace Programa1.Carga
             if (Prov != 0) { Cargar_Datos(Prov); }
 
             Double sp = Convert.ToDouble(grdProv.SumarCol(grdProv.get_ColIndex("Saldo"), false));
-            lblSaldoProveedores.Text = sp.ToString("$ #,###.0");
+            lblSaldoProveedores.Text = sp.ToString("$ #,##0.0");
             this.Cursor = Cursors.Default;
         }
 
@@ -85,41 +85,54 @@ namespace Programa1.Carga
 
             double t = cCtes.Saldo_Proveedor(prov, f1.AddDays(-1));
 
-            lblSaldoAnt.Text = t.ToString("$ #,###.0");
+            lblSaldoAnt.Text = t.ToString("$ #,##0.0");
             t = Convert.ToDouble(grdProv.get_Texto(grdProv.Row, 2));
-            lblSaldo.Text = t.ToString("$ #,###.0");
+            lblSaldo.Text = t.ToString("$ #,##0.0");
 
             
             t = cCtes.Total_Ajustes(prov, f1, f2);
-            lblAjustes.Text = t.ToString("$ #,###.0");
+            lblAjustes.Text = t.ToString("$ #,##0.0");
 
             t = cCtes.Total_Devoluciones(prov, f1, f2);
-            lblDevoluciones.Text = t.ToString("$ #,###.0");
+            lblDevoluciones.Text = t.ToString("$ #,##0.0");
 
             t = cCtes.Ganancia_Proveedor(prov, f1, f2);
-            lblGanancia.Text = t.ToString("$ #,###.0");
+            lblGanancia.Text = t.ToString("$ #,##0.0");
         }
 
         private void Compras()
         {
             //COMPRAS
             String s = $"{cFechas1.Cadena()} AND Id_Proveedores={Prov}";
-            DataTable dt = cCtes.Compras.Datos(s);
+            DataTable dt = cCtes.Detalle_Compras(s, rdAgrupado.Checked);
             grdEntradas.MostrarDatos(dt, true, false);
 
             grdEntradas.set_Texto(0, grdEntradas.get_ColIndex("Id_Productos"), "Prod");
             grdEntradas.Columnas[grdEntradas.get_ColIndex("Costo")].Style.Format = "#,###.#";
-            grdEntradas.Columnas[grdEntradas.get_ColIndex("Kilos")].Style.Format = "#,###.#";
-            grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "#,###.#";
 
             grdEntradas.AutosizeAll();
             grdEntradas.set_ColW(grdEntradas.get_ColIndex("Id"), 0);
             grdEntradas.set_ColW(grdEntradas.get_ColIndex("Id_Proveedores"), 0);
-            grdEntradas.set_ColW(grdEntradas.get_ColIndex("Id_Proveedores") + 1, 0);
+            grdEntradas.set_ColW(grdEntradas.get_ColIndex("Nombre"), 0);
 
             double t = Convert.ToDouble(grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), false));
-            lblTotalEntradas.Text = t.ToString("Total: $ #,###.0");
-            lblCompras.Text = t.ToString("$ #,###.0");
+            lblTotalEntradas.Text = t.ToString("Total: $ #,##0.0");
+            lblCompras.Text = t.ToString("$ #,##0.0");
+
+            C1.Win.C1FlexGrid.CellStyle cKilos;
+            cKilos = grdEntradas.Styles.Add("Kilos");
+            cKilos.Font = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
+            cKilos.Format = "#,###.#";
+
+            grdEntradas.Columnas[grdEntradas.get_ColIndex("Kilos")].Style = cKilos;
+
+            C1.Win.C1FlexGrid.CellStyle cTotal;
+            cTotal = grdEntradas.Styles.Add("Total");
+            //cTotal.Font = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
+            cTotal.ForeColor = Color.DarkBlue;
+            cTotal.Format = "#,###.#";
+
+            grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style = cTotal;
         }
 
         private void Pagos()
@@ -161,8 +174,8 @@ namespace Programa1.Carga
             }
 
             double t = Convert.ToDouble(grdSalidas.SumarCol(grdSalidas.get_ColIndex("Importe"), false));
-            lblTotalSalidas.Text = t.ToString("Total: $ #,###.0");
-            lblPagos.Text = t.ToString("$ #,###.0");
+            lblTotalSalidas.Text = t.ToString("Total: $ #,##0.0");
+            lblPagos.Text = t.ToString("$ #,##0.0");
         }
 
         private void frmResumen_Proveedores_Resize(object sender, EventArgs e)
@@ -173,6 +186,11 @@ namespace Programa1.Carga
         private void chSoloSaldos_CheckedChanged(object sender, EventArgs e)
         {
             Cargar_Proveedores(cFechas1.fecha_Fin);
+        }
+
+        private void rdAgrupado_CheckedChanged(object sender, EventArgs e)
+        {
+            Cargar_Datos(Prov);
         }
     }
 }
