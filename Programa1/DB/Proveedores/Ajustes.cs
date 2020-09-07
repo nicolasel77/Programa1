@@ -28,7 +28,7 @@
         [MaxLength(100, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
         public Proveedores.Proveedores Proveedor { get; set; } = new Proveedores.Proveedores();
-        public Single Importe { get; set; }
+        public Double Importe { get; set; }
 
 
 
@@ -68,7 +68,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT ISNULL(MAX(Fecha), '1/1/2000') FROM Ajustes", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT ISNULL(MAX(Fecha), '1/1/2000') FROM Ajustes_Proveedor", conexionSql);
 
                 conexionSql.Open();
 
@@ -91,7 +91,7 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Ajustes SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
+                    new SqlCommand($"UPDATE Ajustes_Proveedor SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
                         $"Id_Proveedor={Proveedor.Id}, Descripcion='{Descripcion}', " +
                         $"Importe={Importe.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
@@ -116,7 +116,7 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Ajustes (Fecha, Id_Proveedor, Descripcion, Importe) " +
+                    new SqlCommand($"INSERT INTO Ajustes_Proveedor (Fecha, Id_Proveedor, Descripcion, Importe) " +
                         $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Proveedor.Id}, '{Descripcion}', {Importe.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -151,7 +151,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Ajustes", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Ajustes_Proveedor", conexionSql);
 
                 conexionSql.Open();
 
@@ -174,7 +174,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Ajustes WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM Ajustes_Proveedor WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

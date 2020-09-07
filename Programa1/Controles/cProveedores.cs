@@ -167,20 +167,23 @@
 
             lst.Items.Clear();
             dt = Provs.Datos(s);
-            foreach (DataRow dr in dt.Rows)
+            if (dt != null)
             {
-                lst.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
-            }
-            if (items.Count > 0)
-            {
-                for (int n = 0; n < items.Count; n++)
+                foreach (DataRow dr in dt.Rows)
                 {
-                    for (int i = 0; i < lst.Items.Count; i++)
+                    lst.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
+                }
+                if (items.Count > 0)
+                {
+                    for (int n = 0; n < items.Count; n++)
                     {
-                        if (items[n].ToString() == lst.Items[i].ToString())
+                        for (int i = 0; i < lst.Items.Count; i++)
                         {
-                            lst.SetSelected(i, true);
-                            break;
+                            if (items[n].ToString() == lst.Items[i].ToString())
+                            {
+                                lst.SetSelected(i, true);
+                                break;
+                            }
                         }
                     }
                 }

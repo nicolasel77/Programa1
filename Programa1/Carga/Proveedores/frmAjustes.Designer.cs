@@ -37,8 +37,10 @@
             this.grdAjustes = new Grilla2.SpeedGrilla();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
-            this.cFecha = new Programa1.Controles.cFechas();
             this.cProvs = new Programa1.Controles.cProveedores();
+            this.cFecha = new Programa1.Controles.cFechas();
+            this.cmdMostrar = new System.Windows.Forms.Button();
+            this.cmdLimpiar = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -58,7 +60,7 @@
             this.lblTotal});
             this.statusStrip1.Location = new System.Drawing.Point(0, 637);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(962, 28);
+            this.statusStrip1.Size = new System.Drawing.Size(1229, 28);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -91,8 +93,8 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new System.Drawing.Size(962, 637);
-            this.splitContainer1.SplitterDistance = 586;
+            this.splitContainer1.Size = new System.Drawing.Size(1229, 637);
+            this.splitContainer1.SplitterDistance = 715;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -128,8 +130,10 @@
             this.grdAjustes.Redraw = true;
             this.grdAjustes.Row = 0;
             this.grdAjustes.Rows = 50;
-            this.grdAjustes.Size = new System.Drawing.Size(580, 631);
+            this.grdAjustes.Size = new System.Drawing.Size(709, 631);
             this.grdAjustes.TabIndex = 0;
+            this.grdAjustes.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdAjustes_Editado_1);
+            this.grdAjustes.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdAjustes_KeyUp);
             // 
             // splitContainer3
             // 
@@ -144,26 +148,14 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.cFecha);
-            this.splitContainer3.Size = new System.Drawing.Size(368, 637);
-            this.splitContainer3.SplitterDistance = 180;
+            this.splitContainer3.Size = new System.Drawing.Size(506, 637);
+            this.splitContainer3.SplitterDistance = 247;
             this.splitContainer3.TabIndex = 0;
             // 
             // tiMensaje
             // 
             this.tiMensaje.Enabled = true;
             this.tiMensaje.Interval = 8000;
-            // 
-            // cFecha
-            // 
-            this.cFecha.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(0, 0);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Mostrar = 0;
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(184, 637);
-            this.cFecha.TabIndex = 3;
-            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // cProvs
             // 
@@ -173,16 +165,52 @@
             this.cProvs.Location = new System.Drawing.Point(0, 0);
             this.cProvs.Mostrar_Tipo = true;
             this.cProvs.Name = "cProvs";
-            this.cProvs.Size = new System.Drawing.Size(180, 637);
+            this.cProvs.Size = new System.Drawing.Size(247, 637);
             this.cProvs.TabIndex = 2;
             this.cProvs.Titulo = "Proveedores";
             this.cProvs.Valor_Actual = -1;
+            // 
+            // cFecha
+            // 
+            this.cFecha.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(0, 0);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(255, 637);
+            this.cFecha.TabIndex = 3;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion_1);
+            // 
+            // cmdMostrar
+            // 
+            this.cmdMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdMostrar.Location = new System.Drawing.Point(1122, 640);
+            this.cmdMostrar.Name = "cmdMostrar";
+            this.cmdMostrar.Size = new System.Drawing.Size(102, 23);
+            this.cmdMostrar.TabIndex = 5;
+            this.cmdMostrar.Text = "Mostrar";
+            this.cmdMostrar.UseVisualStyleBackColor = true;
+            this.cmdMostrar.Click += new System.EventHandler(this.cmdMostrar_Click_1);
+            // 
+            // cmdLimpiar
+            // 
+            this.cmdLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdLimpiar.Location = new System.Drawing.Point(1014, 640);
+            this.cmdLimpiar.Name = "cmdLimpiar";
+            this.cmdLimpiar.Size = new System.Drawing.Size(102, 23);
+            this.cmdLimpiar.TabIndex = 6;
+            this.cmdLimpiar.Text = "Limpiar Grilla";
+            this.cmdLimpiar.UseVisualStyleBackColor = true;
             // 
             // frmAjustes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(962, 665);
+            this.ClientSize = new System.Drawing.Size(1229, 665);
+            this.Controls.Add(this.cmdMostrar);
+            this.Controls.Add(this.cmdLimpiar);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Name = "frmAjustes";
@@ -212,5 +240,7 @@
         private Controles.cFechas cFecha;
         private Controles.cProveedores cProvs;
         private System.Windows.Forms.Timer tiMensaje;
+        private System.Windows.Forms.Button cmdMostrar;
+        private System.Windows.Forms.Button cmdLimpiar;
     }
 }

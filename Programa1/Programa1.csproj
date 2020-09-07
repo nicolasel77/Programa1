@@ -129,34 +129,34 @@
     <Compile Include="Carga\Proveedores\frmAjustes.Designer.cs">
       <DependentUpon>frmAjustes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmAPicada.cs">
+    <Compile Include="Carga\Sucursales\frmAPicada.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmAPicada.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmAPicada.Designer.cs">
       <DependentUpon>frmAPicada.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmCantidadClientes.cs">
+    <Compile Include="Carga\Sucursales\frmCantidadClientes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmCantidadClientes.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmCantidadClientes.Designer.cs">
       <DependentUpon>frmCantidadClientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmCMStock.cs">
+    <Compile Include="Carga\Sucursales\frmCMStock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmCMStock.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmCMStock.Designer.cs">
       <DependentUpon>frmCMStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmCMTraslados.cs">
+    <Compile Include="Carga\Sucursales\frmCMTraslados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmCMTraslados.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmCMTraslados.Designer.cs">
       <DependentUpon>frmCMTraslados.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmCMVentas.cs">
+    <Compile Include="Carga\Sucursales\frmCMVentas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmCMVentas.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmCMVentas.Designer.cs">
       <DependentUpon>frmCMVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Proveedores\frmCompras.cs">
@@ -165,10 +165,10 @@
     <Compile Include="Carga\Proveedores\frmCompras.Designer.cs">
       <DependentUpon>frmCompras.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmCopiarVentaACompra.cs">
+    <Compile Include="Carga\Sucursales\frmCopiarVentaACompra.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmCopiarVentaACompra.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmCopiarVentaACompra.Designer.cs">
       <DependentUpon>frmCopiarVentaACompra.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Proveedores\frmDevoluciones.cs">
@@ -177,10 +177,10 @@
     <Compile Include="Carga\Proveedores\frmDevoluciones.Designer.cs">
       <DependentUpon>frmDevoluciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmGastos_Sucursales.cs">
+    <Compile Include="Carga\Sucursales\frmGastos_Sucursales.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmGastos_Sucursales.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmGastos_Sucursales.Designer.cs">
       <DependentUpon>frmGastos_Sucursales.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\frmOfertas.cs">
@@ -195,10 +195,10 @@
     <Compile Include="Carga\frmPreciosOfertas.Designer.cs">
       <DependentUpon>frmPreciosOfertas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmReintegros.cs">
+    <Compile Include="Carga\Sucursales\frmReintegros.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmReintegros.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmReintegros.Designer.cs">
       <DependentUpon>frmReintegros.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Proveedores\frmRendimiento_Compras.cs">
@@ -207,10 +207,10 @@
     <Compile Include="Carga\Proveedores\frmRendimiento_Compras.Designer.cs">
       <DependentUpon>frmRendimiento_Compras.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmResumenSuc.cs">
+    <Compile Include="Carga\Sucursales\frmResumenSuc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmResumenSuc.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmResumenSuc.Designer.cs">
       <DependentUpon>frmResumenSuc.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Proveedores\frmResumen_Proveedores.cs">
@@ -219,22 +219,22 @@
     <Compile Include="Carga\Proveedores\frmResumen_Proveedores.Designer.cs">
       <DependentUpon>frmResumen_Proveedores.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmStock.cs">
+    <Compile Include="Carga\Sucursales\frmStock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmStock.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmStock.Designer.cs">
       <DependentUpon>frmStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmTraslados.cs">
+    <Compile Include="Carga\Sucursales\frmTraslados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmTraslados.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmTraslados.Designer.cs">
       <DependentUpon>frmTraslados.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\frmVentas.cs">
+    <Compile Include="Carga\Sucursales\frmVentas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\frmVentas.Designer.cs">
+    <Compile Include="Carga\Sucursales\frmVentas.Designer.cs">
       <DependentUpon>frmVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Hacienda\frmComprasFaena.cs">
@@ -432,31 +432,31 @@
     <EmbeddedResource Include="Carga\Proveedores\frmAjustes.resx">
       <DependentUpon>frmAjustes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmAPicada.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmAPicada.resx">
       <DependentUpon>frmAPicada.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmCantidadClientes.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmCantidadClientes.resx">
       <DependentUpon>frmCantidadClientes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmCMStock.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmCMStock.resx">
       <DependentUpon>frmCMStock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmCMTraslados.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmCMTraslados.resx">
       <DependentUpon>frmCMTraslados.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmCMVentas.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmCMVentas.resx">
       <DependentUpon>frmCMVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmCompras.resx">
       <DependentUpon>frmCompras.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmCopiarVentaACompra.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmCopiarVentaACompra.resx">
       <DependentUpon>frmCopiarVentaACompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmDevoluciones.resx">
       <DependentUpon>frmDevoluciones.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmGastos_Sucursales.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmGastos_Sucursales.resx">
       <DependentUpon>frmGastos_Sucursales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\frmOfertas.resx">
@@ -465,25 +465,25 @@
     <EmbeddedResource Include="Carga\frmPreciosOfertas.resx">
       <DependentUpon>frmPreciosOfertas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmReintegros.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmReintegros.resx">
       <DependentUpon>frmReintegros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmRendimiento_Compras.resx">
       <DependentUpon>frmRendimiento_Compras.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmResumenSuc.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmResumenSuc.resx">
       <DependentUpon>frmResumenSuc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmResumen_Proveedores.resx">
       <DependentUpon>frmResumen_Proveedores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmStock.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmStock.resx">
       <DependentUpon>frmStock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmTraslados.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmTraslados.resx">
       <DependentUpon>frmTraslados.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\frmVentas.resx">
+    <EmbeddedResource Include="Carga\Sucursales\frmVentas.resx">
       <DependentUpon>frmVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmComprasFaena.resx">
@@ -615,6 +615,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -32,15 +32,15 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.speedGrilla1 = new Grilla2.SpeedGrilla();
+            this.grdEntradas = new Grilla2.SpeedGrilla();
             this.lblEntradas = new System.Windows.Forms.Label();
-            this.speedGrilla2 = new Grilla2.SpeedGrilla();
+            this.grdSalidas = new Grilla2.SpeedGrilla();
             this.label1 = new System.Windows.Forms.Label();
             this.speedGrilla3 = new Grilla2.SpeedGrilla();
             this.lblSuc = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.speedGrilla4 = new Grilla2.SpeedGrilla();
-            this.lstSemanas = new System.Windows.Forms.ListBox();
+            this.cFechas1 = new Programa1.Controles.cFechas();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -103,104 +103,104 @@
             // 
             // splitContainer4.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.speedGrilla1);
+            this.splitContainer4.Panel1.Controls.Add(this.grdEntradas);
             this.splitContainer4.Panel1.Controls.Add(this.lblEntradas);
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.speedGrilla2);
+            this.splitContainer4.Panel2.Controls.Add(this.grdSalidas);
             this.splitContainer4.Panel2.Controls.Add(this.label1);
             this.splitContainer4.Size = new System.Drawing.Size(928, 468);
             this.splitContainer4.SplitterDistance = 408;
             this.splitContainer4.TabIndex = 0;
             // 
-            // speedGrilla1
+            // grdEntradas
             // 
-            this.speedGrilla1.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.speedGrilla1.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.speedGrilla1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.grdEntradas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdEntradas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdEntradas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.speedGrilla1.AutoResize = false;
-            this.speedGrilla1.bColor = System.Drawing.SystemColors.Window;
-            this.speedGrilla1.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.speedGrilla1.bFColor = System.Drawing.SystemColors.WindowText;
-            this.speedGrilla1.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.speedGrilla1.Col = 0;
-            this.speedGrilla1.Cols = 1;
-            this.speedGrilla1.DataMember = "";
-            this.speedGrilla1.DataSource = null;
-            this.speedGrilla1.EnableEdicion = true;
-            this.speedGrilla1.Encabezado = "";
-            this.speedGrilla1.fColor = System.Drawing.SystemColors.Control;
-            this.speedGrilla1.FixCols = 0;
-            this.speedGrilla1.FixRows = 0;
-            this.speedGrilla1.FuenteEncabezado = null;
-            this.speedGrilla1.FuentePieDePagina = null;
-            this.speedGrilla1.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.speedGrilla1.Location = new System.Drawing.Point(3, 21);
-            this.speedGrilla1.MenuActivado = false;
-            this.speedGrilla1.Name = "speedGrilla1";
-            this.speedGrilla1.PieDePagina = "\t\tPage {0} of {1}";
-            this.speedGrilla1.PintarFilaSel = true;
-            this.speedGrilla1.Redraw = true;
-            this.speedGrilla1.Row = 0;
-            this.speedGrilla1.Rows = 1;
-            this.speedGrilla1.Size = new System.Drawing.Size(402, 447);
-            this.speedGrilla1.TabIndex = 1;
+            this.grdEntradas.AutoResize = false;
+            this.grdEntradas.bColor = System.Drawing.SystemColors.Window;
+            this.grdEntradas.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdEntradas.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdEntradas.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdEntradas.Col = 0;
+            this.grdEntradas.Cols = 1;
+            this.grdEntradas.DataMember = "";
+            this.grdEntradas.DataSource = null;
+            this.grdEntradas.EnableEdicion = true;
+            this.grdEntradas.Encabezado = "";
+            this.grdEntradas.fColor = System.Drawing.SystemColors.Control;
+            this.grdEntradas.FixCols = 0;
+            this.grdEntradas.FixRows = 0;
+            this.grdEntradas.FuenteEncabezado = null;
+            this.grdEntradas.FuentePieDePagina = null;
+            this.grdEntradas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdEntradas.Location = new System.Drawing.Point(3, 24);
+            this.grdEntradas.MenuActivado = false;
+            this.grdEntradas.Name = "grdEntradas";
+            this.grdEntradas.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdEntradas.PintarFilaSel = true;
+            this.grdEntradas.Redraw = true;
+            this.grdEntradas.Row = 0;
+            this.grdEntradas.Rows = 1;
+            this.grdEntradas.Size = new System.Drawing.Size(402, 411);
+            this.grdEntradas.TabIndex = 1;
             // 
             // lblEntradas
             // 
             this.lblEntradas.AutoSize = true;
             this.lblEntradas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lblEntradas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblEntradas.Location = new System.Drawing.Point(0, 0);
+            this.lblEntradas.Location = new System.Drawing.Point(3, 3);
             this.lblEntradas.Name = "lblEntradas";
             this.lblEntradas.Size = new System.Drawing.Size(67, 18);
             this.lblEntradas.TabIndex = 0;
             this.lblEntradas.Text = "Entradas";
             // 
-            // speedGrilla2
+            // grdSalidas
             // 
-            this.speedGrilla2.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.speedGrilla2.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.speedGrilla2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.grdSalidas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdSalidas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdSalidas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.speedGrilla2.AutoResize = false;
-            this.speedGrilla2.bColor = System.Drawing.SystemColors.Window;
-            this.speedGrilla2.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.speedGrilla2.bFColor = System.Drawing.SystemColors.WindowText;
-            this.speedGrilla2.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.speedGrilla2.Col = 0;
-            this.speedGrilla2.Cols = 1;
-            this.speedGrilla2.DataMember = "";
-            this.speedGrilla2.DataSource = null;
-            this.speedGrilla2.EnableEdicion = true;
-            this.speedGrilla2.Encabezado = "";
-            this.speedGrilla2.fColor = System.Drawing.SystemColors.Control;
-            this.speedGrilla2.FixCols = 0;
-            this.speedGrilla2.FixRows = 0;
-            this.speedGrilla2.FuenteEncabezado = null;
-            this.speedGrilla2.FuentePieDePagina = null;
-            this.speedGrilla2.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.speedGrilla2.Location = new System.Drawing.Point(3, 21);
-            this.speedGrilla2.MenuActivado = false;
-            this.speedGrilla2.Name = "speedGrilla2";
-            this.speedGrilla2.PieDePagina = "\t\tPage {0} of {1}";
-            this.speedGrilla2.PintarFilaSel = true;
-            this.speedGrilla2.Redraw = true;
-            this.speedGrilla2.Row = 0;
-            this.speedGrilla2.Rows = 1;
-            this.speedGrilla2.Size = new System.Drawing.Size(510, 447);
-            this.speedGrilla2.TabIndex = 1;
+            this.grdSalidas.AutoResize = false;
+            this.grdSalidas.bColor = System.Drawing.SystemColors.Window;
+            this.grdSalidas.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdSalidas.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdSalidas.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdSalidas.Col = 0;
+            this.grdSalidas.Cols = 1;
+            this.grdSalidas.DataMember = "";
+            this.grdSalidas.DataSource = null;
+            this.grdSalidas.EnableEdicion = true;
+            this.grdSalidas.Encabezado = "";
+            this.grdSalidas.fColor = System.Drawing.SystemColors.Control;
+            this.grdSalidas.FixCols = 0;
+            this.grdSalidas.FixRows = 0;
+            this.grdSalidas.FuenteEncabezado = null;
+            this.grdSalidas.FuentePieDePagina = null;
+            this.grdSalidas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdSalidas.Location = new System.Drawing.Point(3, 24);
+            this.grdSalidas.MenuActivado = false;
+            this.grdSalidas.Name = "grdSalidas";
+            this.grdSalidas.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdSalidas.PintarFilaSel = true;
+            this.grdSalidas.Redraw = true;
+            this.grdSalidas.Row = 0;
+            this.grdSalidas.Rows = 1;
+            this.grdSalidas.Size = new System.Drawing.Size(510, 411);
+            this.grdSalidas.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 18);
             this.label1.TabIndex = 0;
@@ -266,7 +266,7 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.lstSemanas);
+            this.splitContainer2.Panel2.Controls.Add(this.cFechas1);
             this.splitContainer2.Size = new System.Drawing.Size(386, 678);
             this.splitContainer2.SplitterDistance = 461;
             this.splitContainer2.TabIndex = 0;
@@ -306,19 +306,17 @@
             this.speedGrilla4.Size = new System.Drawing.Size(381, 455);
             this.speedGrilla4.TabIndex = 1;
             // 
-            // lstSemanas
+            // cFechas1
             // 
-            this.lstSemanas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstSemanas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lstSemanas.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lstSemanas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lstSemanas.FormattingEnabled = true;
-            this.lstSemanas.ItemHeight = 18;
-            this.lstSemanas.Location = new System.Drawing.Point(0, 0);
-            this.lstSemanas.Name = "lstSemanas";
-            this.lstSemanas.Size = new System.Drawing.Size(123, 213);
-            this.lstSemanas.TabIndex = 0;
-            this.lstSemanas.SelectedIndexChanged += new System.EventHandler(this.LstSemanas_SelectedIndexChanged);
+            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFechas1.Location = new System.Drawing.Point(0, 0);
+            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFechas1.Mostrar = 0;
+            this.cFechas1.Name = "cFechas1";
+            this.cFechas1.Size = new System.Drawing.Size(386, 213);
+            this.cFechas1.TabIndex = 0;
+            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // frmResumenSuc
             // 
@@ -357,14 +355,14 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private Grilla2.SpeedGrilla speedGrilla1;
+        private Grilla2.SpeedGrilla grdEntradas;
         private System.Windows.Forms.Label lblEntradas;
-        private Grilla2.SpeedGrilla speedGrilla2;
+        private Grilla2.SpeedGrilla grdSalidas;
         private System.Windows.Forms.Label label1;
         private Grilla2.SpeedGrilla speedGrilla3;
         private System.Windows.Forms.Label lblSuc;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private Grilla2.SpeedGrilla speedGrilla4;
-        private System.Windows.Forms.ListBox lstSemanas;
+        private Controles.cFechas cFechas1;
     }
 }
