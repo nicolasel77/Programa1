@@ -11,7 +11,7 @@
         {
         }
 
-        public Cantidad_Clientes(int id, DateTime fecha, Sucursales sucursal, int cant)
+        public Cantidad_Clientes(int id, DateTime fecha, Sucursales.Sucursales sucursal, int cant)
         {
             Id = id;
             Fecha = fecha;
@@ -22,7 +22,7 @@
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Sucursales Sucursal { get; set; } = new Sucursales();
+        public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public int Cantidad { get; set; }
 
         public DataTable Datos(string filtro = "")

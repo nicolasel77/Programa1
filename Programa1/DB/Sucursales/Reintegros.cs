@@ -14,7 +14,7 @@
         {   
         }
 
-        public Reintegros(int id, DateTime fecha, TipoReintegros prod, string desc, Sucursales sucursal, float importe)
+        public Reintegros(int id, DateTime fecha, TipoReintegros prod, string desc, Sucursales.Sucursales sucursal, float importe)
         {
             Id = id;
             Fecha = fecha;
@@ -30,7 +30,7 @@
         public TipoReintegros Tipo { get; set; } = new TipoReintegros();
         [MaxLength(80, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Sucursales Sucursal { get; set; } = new Sucursales();
+        public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Single Importe { get; set; }
 
         public DataTable Datos(string filtro = "")

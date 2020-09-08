@@ -15,7 +15,7 @@ namespace Programa1.DB
         {
         }
 
-        public Traslados(int id, DateTime fecha, Productos prod, string desc, Sucursales suc_Salida, float costo_Salida, Sucursales suc_Entrada, float costo_Entrada, float kilos)
+        public Traslados(int id, DateTime fecha, Productos prod, string desc, Sucursales.Sucursales suc_Salida, float costo_Salida, Sucursales.Sucursales suc_Entrada, float costo_Entrada, float kilos)
         {
             Id = id;
             Fecha = fecha;
@@ -35,9 +35,9 @@ namespace Programa1.DB
 
         [MaxLength(100, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Sucursales sucS { get; set; } = new Sucursales();
+        public Sucursales.Sucursales sucS { get; set; } = new Sucursales.Sucursales();
         public float CostoS { get; set; }
-        public Sucursales sucE { get; set; } = new Sucursales();
+        public Sucursales.Sucursales sucE { get; set; } = new Sucursales.Sucursales();
         public float CostoE { get; set; }
         public Single Kilos { get; set; }
 

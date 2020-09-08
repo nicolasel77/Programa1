@@ -1,6 +1,6 @@
 ﻿namespace Programa1.Controles
 {
-    using Programa1.DB;
+    using Programa1.DB.Sucursales;
     using Programa1.Herramientas;
     using System;
     using System.Collections.Generic;

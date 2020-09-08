@@ -13,7 +13,7 @@
         {            
         }
 
-        public Ofertas(int id, DateTime fecha, Productos prod, string desc, Sucursales sucursal, Single costo_or, Single costo_of, float kilos)
+        public Ofertas(int id, DateTime fecha, Productos prod, string desc, Sucursales.Sucursales sucursal, Single costo_or, Single costo_of, float kilos)
         {
             Id = id;
             Fecha = fecha;
@@ -32,7 +32,7 @@
 
         [MaxLength(50, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Sucursales Sucursal { get; set; } = new Sucursales();
+        public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Single Costo_Original { get; set; }
         public Single Costo_Oferta { get; set; }
         public Single Kilos { get; set; }

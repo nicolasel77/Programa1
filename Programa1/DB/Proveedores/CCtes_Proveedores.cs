@@ -1,10 +1,10 @@
-﻿using Programa1.DB;
-using System;
-using System.Data;
-using System.Data.SqlClient;
-
-namespace Proveedores
+﻿namespace Proveedores
 {
+    using Programa1.DB;
+    using System;
+    using System.Data;
+    using System.Data.SqlClient;
+
     class CCtes_Proveedores
     {
         private Compras Compras = new Compras();

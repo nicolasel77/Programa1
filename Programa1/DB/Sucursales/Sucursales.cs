@@ -1,5 +1,5 @@
 ﻿
-namespace Programa1.DB
+namespace Programa1.DB.Sucursales
 {
     using System;
     using System.ComponentModel.DataAnnotations;

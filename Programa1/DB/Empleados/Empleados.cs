@@ -1,6 +1,7 @@
 ﻿
 namespace Programa1.DB
 {
+    using Programa1.DB.Sucursales;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
@@ -25,7 +26,7 @@ namespace Programa1.DB
                          string telefono,
                          DateTime alta,
                          DateTime baja,
-                         Sucursales sucursal)
+                         Sucursales.Sucursales sucursal)
         {
             Id = id;
             Nombre = nombre;
@@ -58,7 +59,7 @@ namespace Programa1.DB
 
         public TipoEmpleados Tipo { get; set; } = new TipoEmpleados();
         public Localidades Localidad { get; set; } = new Localidades();
-        public Sucursales Sucursal { get; set; } = new Sucursales();
+        public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
 
         public Orden_X Ordernar_por { get; set; }
         public bool Mostrar_Bajas { get; set; } = false;

@@ -12,7 +12,7 @@
 
         }
 
-        public Retiros(int id, DateTime fecha, Empleados empleado, Sucursales sucursal, TipoRetiros tipo, float importe, int dias_Vacas, int dias_Pagados)
+        public Retiros(int id, DateTime fecha, Empleados empleado, Sucursales.Sucursales sucursal, TipoRetiros tipo, float importe, int dias_Vacas, int dias_Pagados)
         {
             Id = id;
             Fecha = fecha;
@@ -27,7 +27,7 @@
         public int Id { get; set; }
         public DateTime Fecha { get; set; } = new DateTime(2000, 1, 1);
         public Empleados Empleado { get; set; } = new Empleados();
-        public Sucursales Sucursal { get; set; } = new Sucursales();
+        public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public TipoRetiros Tipo { get; set; } = new TipoRetiros();
         public Single Importe { get; set; }
         public int Dias_Vacas { get; set; }

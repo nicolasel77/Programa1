@@ -12,7 +12,7 @@
         {            
         }
 
-        public Gastos_Sucursales(int id, DateTime fecha, GastosSucursales_Tipos tipo, string desc, Sucursales sucursal, float importe)
+        public Gastos_Sucursales(int id, DateTime fecha, GastosSucursales_Tipos tipo, string desc, Sucursales.Sucursales sucursal, float importe)
         {
             Id = id;
             Fecha = fecha;
@@ -28,7 +28,7 @@
         public GastosSucursales_Tipos Tipo { get; set; } = new GastosSucursales_Tipos();
         [MaxLength(80, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Sucursales Sucursal { get; set; } = new Sucursales();
+        public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Single Importe { get; set; }
 
         public DataTable Datos(string filtro = "")

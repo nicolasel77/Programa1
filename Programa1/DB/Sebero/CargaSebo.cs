@@ -14,7 +14,7 @@ namespace Programa1.DB
             
         }
 
-        public CargaSebo(int id, DateTime fecha, Productos prod, Sucursales sucu, Seberos sebero, Single costo, Single kilos)
+        public CargaSebo(int id, DateTime fecha, Productos prod, Sucursales.Sucursales sucu, Seberos sebero, Single costo, Single kilos)
         {
             Id = id;
             Fecha = fecha;
@@ -29,7 +29,7 @@ namespace Programa1.DB
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public Productos Producto { get; set; } = new Productos();
-        public Sucursales Sucursal { get; set; } = new Sucursales();
+        public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Seberos Sebero { get; set; } = new Seberos();
         public Single Costo { get; set; }
         public Single Kilos { get; set; }

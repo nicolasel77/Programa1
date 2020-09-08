@@ -15,7 +15,7 @@ namespace Programa1.DB
             
         }
 
-        public Devoluciones(int id, DateTime fecha, Productos prod, string desc, Sucursales sucu, Single Costo_Venta, Proveedores.Proveedores proveedor, Single Costo_Compra, Single kilos)
+        public Devoluciones(int id, DateTime fecha, Productos prod, string desc, Sucursales.Sucursales sucu, Single Costo_Venta, Proveedores.Proveedores proveedor, Single Costo_Compra, Single kilos)
         {
             Id = id;
             Fecha = fecha;
@@ -34,7 +34,7 @@ namespace Programa1.DB
         public Productos Producto { get; set; } = new Productos();
         [MaxLength(100, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
-        public Sucursales Sucursal { get; set; } = new Sucursales();
+        public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Single CostoVenta { get; set; }
         public Proveedores.Proveedores Proveedor { get; set; } = new Proveedores.Proveedores();
         public Single CostoCompra { get; set; }

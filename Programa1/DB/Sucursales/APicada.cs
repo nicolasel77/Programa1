@@ -11,7 +11,7 @@
         {
         }
 
-        public APicada(int id, DateTime fecha, Sucursales sucursal, Productos proda, Productos prods, float costoa, float costos, float kilosa, float kiloss)
+        public APicada(int id, DateTime fecha, Sucursales.Sucursales sucursal, Productos proda, Productos prods, float costoa, float costos, float kilosa, float kiloss)
         {
             Id = id;
             Fecha = fecha;
@@ -26,7 +26,7 @@
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Sucursales Sucursal { get; set; } = new Sucursales();
+        public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
 
         public Productos Producto_A { get; set; } = new Productos();
         public Productos Producto_S { get; set; } = new Productos();

@@ -1,6 +1,7 @@
 ﻿
 namespace Programa1.Datos
 {
+    using Programa1.DB.Sucursales;
     using Programa1.DB;
     using System;
     using System.Windows.Forms;

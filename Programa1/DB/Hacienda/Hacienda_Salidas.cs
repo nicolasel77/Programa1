@@ -14,7 +14,7 @@ namespace Programa1.DB
             
         }
 
-        public Hacienda_Salidas(int id, DateTime fecha, Faena faena, Sucursales sucursal, float costo_Salida, float media)
+        public Hacienda_Salidas(int id, DateTime fecha, Faena faena, Sucursales.Sucursales sucursal, float costo_Salida, float media)
         {
             Id = id;
             Fecha = fecha;
@@ -27,7 +27,7 @@ namespace Programa1.DB
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public Faena Faena { get; set; } = new Faena();
-        public Sucursales Sucursal { get; set; } = new Sucursales();
+        public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Single Costo_Salida { get; set; }
         public Single Media { get; set; }
 
