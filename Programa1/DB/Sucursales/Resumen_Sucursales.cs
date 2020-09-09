@@ -33,9 +33,52 @@
 
         public DataTable Entradas(int Suc, DateTime f1, DateTime f2)
         {
-            DataTable dt = new DataTable("Entradas");
-            DataSet ds = new DataSet("Datos");
+            var dt = new DataTable("Entradas");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("sp_ResumenEntradasSuc", conexionSql);
+                comandoSql.CommandType = CommandType.StoredProcedure;
+                comandoSql.Parameters.AddWithValue("Suc", Suc);
+                comandoSql.Parameters.AddWithValue("F1", f1);
+                comandoSql.Parameters.AddWithValue("F2", f2);
+                
+                conexionSql.Open();
+                
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        public DataTable Salidas(int Suc, DateTime f1, DateTime f2)
+        {
+            var dt = new DataTable("Salidas");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("sp_ResumenSalidasSuc", conexionSql);
+                comandoSql.CommandType = CommandType.StoredProcedure;
+                comandoSql.Parameters.AddWithValue("Suc", Suc);
+                comandoSql.Parameters.AddWithValue("F1", f1);
+                comandoSql.Parameters.AddWithValue("F2", f2);
+
+                conexionSql.Open();
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
 
             return dt;
         }

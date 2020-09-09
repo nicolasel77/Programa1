@@ -36,7 +36,7 @@
             bool found = false;
             foreach (Form f in forms)
             {
-                if (f.Name == "frmResumenSuc")
+                if (f.Name == "frmResumen_Suc")
                 {
                     f.BringToFront();
                     found = true;
@@ -45,17 +45,17 @@
             }
             if (found == false)
             {
-                ToolStripMenuItem t = new ToolStripMenuItem("frmResumenSuc");
-                t.Text = "Resumen Sucs";
+                ToolStripMenuItem t = new ToolStripMenuItem("frmResumen_Suc");
+                t.Text = "Resumen_Suc";
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
-                Form frmResumenSuc = new Programa1.Carga.frmResumenSuc();
-                frmResumenSuc.MdiParent = this;
-                forms.Add(frmResumenSuc);
-                frmResumenSuc.Show();
-                frmResumenSuc.WindowState = FormWindowState.Minimized;
-                frmResumenSuc.WindowState = FormWindowState.Maximized;
+                Form frmResumen_Suc = new Programa1.Carga.frmResumen_Suc();
+                frmResumen_Suc.MdiParent = this;
+                forms.Add(frmResumen_Suc);
+                frmResumen_Suc.Show();
+                frmResumen_Suc.WindowState = FormWindowState.Minimized;
+                frmResumen_Suc.WindowState = FormWindowState.Maximized;
             }
         }
 
