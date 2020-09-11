@@ -9,6 +9,7 @@
     {
 
         private Resumen_Sucursales RS = new Resumen_Sucursales();
+        private Estadisticas_Sucursales Est = new Estadisticas_Sucursales();
         private int Suc = 0;
 
         public frmResumen_Suc()
@@ -41,6 +42,7 @@
         private void cFechas1_Cambio_Seleccion(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            Est.Sem.Semana = cFechas1.fecha_Actual;
             Cargar_Listado(cFechas1.fecha_Actual);
             Cargar_Datos();
             this.Cursor = Cursors.Default;
@@ -51,6 +53,7 @@
             if (Convert.ToInt32(grdSucursales.get_Texto(Fila, 0)) != 0)
             {
                 Suc = Convert.ToInt32(grdSucursales.get_Texto(Fila, 0));
+                Est.Suc.Id = Suc;
 
                 lblSuc.Text = $"{grdSucursales.get_Texto(Fila, 1)}";
                 this.Text = $"{lblSuc.Text}  -  Semana: {cFechas1.fecha_Actual:dd/MM/yy}";
@@ -63,9 +66,13 @@
             this.Cursor = Cursors.WaitCursor;
             Entradas();
             Salidas();
-
+            Cuentas();
+            if (paEst.Visible == true) { Estadisticas(); }
             this.Cursor = Cursors.Default;
         }
+
+        
+
         private void Entradas()
         {
             DataTable dt = new DataTable();
@@ -100,9 +107,25 @@
             double T = grdSalidas.SumarCol(grdSalidas.get_ColIndex("Total"), false);
             lblTotalSalidas.Text = "Total: " + T.ToString("C1");
         }
+        private void Cuentas()
+        {
+            Double k = Est.Carne_Kilos();
+            lblCarneK.Text = "Venta Carne: " + k.ToString("N1");
+        }
+
+        private void Estadisticas()
+        {
+            grdEstadistica.MostrarDatos(Est.Completa(), true, false);
+            grdEstadistica.AutosizeAll();
+            
+        }
 
         private void paEstadistica_Click(object sender, EventArgs e)
         {
+            if( paEst.Visible == false)
+            {
+                Estadisticas();
+            }
             paEst.Visible = !paEst.Visible;
         }
     }
