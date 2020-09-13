@@ -43,6 +43,7 @@
             this.grdSalidas = new Grilla2.SpeedGrilla();
             this.label1 = new System.Windows.Forms.Label();
             this.speedGrilla3 = new Grilla2.SpeedGrilla();
+            this.lblCarneK = new System.Windows.Forms.Label();
             this.lblSuc = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.grdSucursales = new Grilla2.SpeedGrilla();
@@ -51,7 +52,6 @@
             this.paEst = new System.Windows.Forms.Panel();
             this.grdEstadistica = new Grilla2.SpeedGrilla();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblCarneK = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -345,6 +345,17 @@
             this.speedGrilla3.Size = new System.Drawing.Size(520, 71);
             this.speedGrilla3.TabIndex = 1;
             // 
+            // lblCarneK
+            // 
+            this.lblCarneK.AutoSize = true;
+            this.lblCarneK.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblCarneK.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblCarneK.Location = new System.Drawing.Point(12, 3);
+            this.lblCarneK.Name = "lblCarneK";
+            this.lblCarneK.Size = new System.Drawing.Size(85, 18);
+            this.lblCarneK.TabIndex = 0;
+            this.lblCarneK.Text = "Kilos Carne";
+            // 
             // lblSuc
             // 
             this.lblSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -497,17 +508,6 @@
             this.label2.Size = new System.Drawing.Size(88, 18);
             this.label2.TabIndex = 1;
             this.label2.Text = "Estadísticas";
-            // 
-            // lblCarneK
-            // 
-            this.lblCarneK.AutoSize = true;
-            this.lblCarneK.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblCarneK.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblCarneK.Location = new System.Drawing.Point(12, 3);
-            this.lblCarneK.Name = "lblCarneK";
-            this.lblCarneK.Size = new System.Drawing.Size(85, 18);
-            this.lblCarneK.TabIndex = 0;
-            this.lblCarneK.Text = "Kilos Carne";
             // 
             // frmResumen_Suc
             // 

@@ -110,7 +110,7 @@
         private void Cuentas()
         {
             Double k = Est.Carne_Kilos();
-            lblCarneK.Text = "Venta Carne: " + k.ToString("N1");
+            lblCarneK.Text = $"Venta Carne: {k.ToString("N0")} kg";
         }
 
         private void Estadisticas()

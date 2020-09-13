@@ -1276,5 +1276,101 @@
                 }
             }
         }
+
+        private void editarTiposToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmTipos_Entradas")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmTipos_Entradas");
+                t.Text = "Tipos_Entradas";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmTipos_Entradas = new Programa1.Carga.Tesoreria.frmTipos_Entradas();
+                frmTipos_Entradas.MdiParent = this;
+                frmTipos_Entradas.Disposed += FrmTipos_Entradas_Disposed;
+                forms.Add(frmTipos_Entradas);
+                frmTipos_Entradas.Show();
+                frmTipos_Entradas.WindowState = FormWindowState.Minimized;
+                frmTipos_Entradas.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmTipos_Entradas_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Tipos_Entradas")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmTipos_Entradas")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void cajaDiariaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCaja_Diaria")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmCaja_Diaria");
+                t.Text = "Caja_Diaria";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmCaja_Diaria = new Programa1.Carga.Tesoreria.frmCaja_Diaria();
+                frmCaja_Diaria.MdiParent = this;
+                frmCaja_Diaria.Disposed += FrmCaja_Diaria_Disposed;
+                forms.Add(frmCaja_Diaria);
+                frmCaja_Diaria.Show();
+                frmCaja_Diaria.WindowState = FormWindowState.Minimized;
+                frmCaja_Diaria.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmCaja_Diaria_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Caja_Diaria")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCaja_Diaria")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

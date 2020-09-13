@@ -291,6 +291,18 @@
     <Compile Include="Carga\Sebero\frmResumenSebero.Designer.cs">
       <DependentUpon>frmResumenSebero.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmCaja_Diaria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmCaja_Diaria.Designer.cs">
+      <DependentUpon>frmCaja_Diaria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmTipos_Entradas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmTipos_Entradas.Designer.cs">
+      <DependentUpon>frmTipos_Entradas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controles\cFechas.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -359,6 +371,9 @@
     <Compile Include="DB\Proveedores\CCtes_Proveedores.cs" />
     <Compile Include="DB\Sucursales\Estadisticas_Sucursales.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />
+    <Compile Include="DB\Tesoreria\Entradas.cs" />
+    <Compile Include="DB\Tesoreria\Grupo_Entradas.cs" />
+    <Compile Include="DB\Tesoreria\Tipo_Entradas.cs" />
     <Compile Include="DB\Varios\Localidades.cs" />
     <Compile Include="DB\Proveedores\Compras.cs" />
     <Compile Include="DB\Proveedores\Devoluciones.cs" />
@@ -511,6 +526,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sebero\frmSeberos.resx">
       <DependentUpon>frmSeberos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmCaja_Diaria.resx">
+      <DependentUpon>frmCaja_Diaria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmTipos_Entradas.resx">
+      <DependentUpon>frmTipos_Entradas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cFechas.resx">
       <DependentUpon>cFechas.cs</DependentUpon>
