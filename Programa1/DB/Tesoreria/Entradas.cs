@@ -8,6 +8,8 @@
 
     class Entradas
     {
+        private int id_SubTipoEntrada;
+
         public Entradas()
         {
         }
@@ -27,7 +29,14 @@
         public int ID { get; set; }
         public DateTime Fecha { get; set; }
         public Tipos_Entradas TE { get; set; } = new Tipos_Entradas();
-        public int Id_SubTipoEntrada { get; set; }
+        public int Id_SubTipoEntrada {
+            get { return id_SubTipoEntrada; }
+            set {
+                id_SubTipoEntrada = value; 
+
+            }
+
+        }
 
         [MaxLength(500, ErrorMessage = "El campo Descripción solo puede tener 500 caracteres.")]
         public string Descripcion { get; set; }
@@ -75,7 +84,7 @@
                 var d = command.ExecuteNonQuery();
                 sql.Close();
 
-                int n2 = MaxId();                
+                int n2 = MaxId();
                 if (n == n2)
                 {
                     ID = 0;
@@ -85,7 +94,7 @@
                 {
                     ID = n2;
                 }
-                
+
             }
             catch (Exception e)
             {
@@ -147,7 +156,7 @@
         /// </summary>
         /// <param name="f"></param>
         /// <returns></returns>
-        public Double Total_AFecha(DateTime f )
+        public Double Total_AFecha(DateTime f)
         {
             Double t = 0;
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -172,6 +181,34 @@
             }
             return t;
         }
+
+        public string Nombre_SubTipo()
+        {
+            string s = "";
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object d = null;
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM {}", conexionSql);
+
+                conexionSql.Open();
+
+                comandoSql.CommandType = CommandType.Text;
+                d = comandoSql.ExecuteScalar();
+
+                conexionSql.Close();
+
+                s = Convert.ToString(d);
+            }
+            catch (Exception)
+            {
+                s = "";
+            }
+
+            return s;
+        }
+
         public int MaxId()
         {
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);

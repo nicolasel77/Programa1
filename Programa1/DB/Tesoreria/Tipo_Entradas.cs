@@ -11,11 +11,11 @@
         {
         }
 
-        public Tipos_Entradas(int id, string nombre, Grupos_Entradas grupo, bool es_entrega)
+        public Tipos_Entradas(int id, string nombre, int subtipo, bool es_entrega)
         {
             Id_Tipo = id;
             Nombre = nombre;
-            Grupo = grupo;
+            SubTipo = subtipo;
             Es_Entrega = es_entrega;
         }
 
@@ -27,8 +27,7 @@
         [Required]
         public string Nombre { get; set; }
 
-        [Required]
-        public Grupos_Entradas Grupo { get; set; } = new Grupos_Entradas();
+        public int SubTipo { get; set; }
 
         public bool Es_Entrega { get; set; }
 
@@ -67,7 +66,7 @@
             try
             {
 
-                SqlCommand command = new SqlCommand($"UPDATE Tipos_Entradas SET Nombre='{Nombre}', Grupo={Grupo.Id}, Es_Entrega={(Es_Entrega ? "1" : "0")} WHERE Id_Tipo={Id_Tipo}", sql);
+                SqlCommand command = new SqlCommand($"UPDATE Tipos_Entradas SET Nombre='{Nombre}', Grupo={SubTipo.Id}, Es_Entrega={(Es_Entrega ? "1" : "0")} WHERE Id_Tipo={Id_Tipo}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -88,7 +87,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Tipos_Entradas (Id_Tipo, Nombre, Grupo, Es_Entrega) VALUES({Id_Tipo}, '{Nombre}', {Grupo.Id}, {(Es_Entrega ? "1" : "0")})", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Tipos_Entradas (Id_Tipo, Nombre, Grupo, Es_Entrega) VALUES({Id_Tipo}, '{Nombre}', {SubTipo.Id}, {(Es_Entrega ? "1" : "0")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

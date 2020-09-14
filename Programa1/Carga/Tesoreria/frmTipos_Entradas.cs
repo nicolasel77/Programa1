@@ -20,7 +20,7 @@
         {
             //Grupo
             //Datos
-            dt = tipos_e.Grupo.Datos();
+            dt = tipos_e.SubTipo.Datos();
             grdGrupo.MostrarDatos(dt, true);
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdGrupo.TeclasManejadas = n;
@@ -54,8 +54,8 @@
                     }
                     else
                     {
-                        tipos_e.Grupo.Id = Convert.ToInt32(a);
-                        if (tipos_e.Grupo.Existe() == true)
+                        tipos_e.SubTipo.Id = Convert.ToInt32(a);
+                        if (tipos_e.SubTipo.Existe() == true)
                         {
                             Mensaje($"El Tipo '{a.ToString()}' ya existe.");
                             grdGrupo.ErrorEnTxt();
@@ -63,7 +63,7 @@
                         else
                         {
                             grdGrupo.set_Texto(f, c, a);
-                            tipos_e.Grupo.Agregar();
+                            tipos_e.SubTipo.Agregar();
                             grdGrupo.ActivarCelda(f, 1);
                         }
                     }
@@ -77,10 +77,10 @@
                     }
                     else
                     {
-                        tipos_e.Grupo.Id = i;
-                        tipos_e.Grupo.Nombre = a.ToString();
+                        tipos_e.SubTipo.Id = i;
+                        tipos_e.SubTipo.Nombre = a.ToString();
                         grdGrupo.set_Texto(f, c, a);
-                        tipos_e.Grupo.Actualizar();
+                        tipos_e.SubTipo.Actualizar();
                         grdGrupo.ActivarCelda(f, 2);
                     }
                     break;
@@ -92,9 +92,9 @@
                     }
                     else
                     {
-                        tipos_e.Grupo.Tabla = a.ToString();
+                        tipos_e.SubTipo.Tabla = a.ToString();
                         grdGrupo.set_Texto(f, c, a);
-                        tipos_e.Grupo.Actualizar();
+                        tipos_e.SubTipo.Actualizar();
                         if (grdGrupo.EsUltimaF() == true) { grdGrupo.AgregarFila(); }
                         grdGrupo.ActivarCelda(f + 1, 0);
                     }
@@ -104,8 +104,8 @@
 
         private void GrdGrupo_CambioFila(short Fila)
         {
-            tipos_e.Grupo.Id = Convert.ToInt32(grdGrupo.get_Texto(Fila, 0));
-            tipos_e.Grupo.Nombre = grdGrupo.get_Texto(Fila, 1).ToString();
+            tipos_e.SubTipo.Id = Convert.ToInt32(grdGrupo.get_Texto(Fila, 0));
+            tipos_e.SubTipo.Nombre = grdGrupo.get_Texto(Fila, 1).ToString();
         }
 
         private void GrdGrupo_KeyPress(object sender, short e)
@@ -133,8 +133,8 @@
                 {
                     if (Convert.ToInt32(grdGrupo.get_Texto(grdGrupo.Row, 0)) != 0)
                     {
-                        tipos_e.Grupo.Id = Convert.ToInt32(grdGrupo.get_Texto(grdGrupo.Row, 0));
-                        tipos_e.Grupo.Borrar();
+                        tipos_e.SubTipo.Id = Convert.ToInt32(grdGrupo.get_Texto(grdGrupo.Row, 0));
+                        tipos_e.SubTipo.Borrar();
                         grdGrupo.BorrarFila(grdGrupo.Row);
                     }
 
@@ -204,11 +204,11 @@
                     else
                     {
                         tipos_e.Id_Tipo = i;
-                        tipos_e.Grupo.Id = Convert.ToInt32(a);
-                        if (tipos_e.Grupo.Existe() == true)
+                        tipos_e.SubTipo.Id = Convert.ToInt32(a);
+                        if (tipos_e.SubTipo.Existe() == true)
                         {
                             grdTipos_Entradas.set_Texto(f, c, a);
-                            grdTipos_Entradas.set_Texto(f, c + 1, tipos_e.Grupo.Nombre);
+                            grdTipos_Entradas.set_Texto(f, c + 1, tipos_e.SubTipo.Nombre);
                             tipos_e.Actualizar();
                             grdTipos_Entradas.ActivarCelda(f, 3);
                         }
@@ -266,7 +266,7 @@
 
             tipos_e.Id_Tipo = Convert.ToInt32(grdTipos_Entradas.get_Texto(Fila, 0));
             tipos_e.Nombre = grdTipos_Entradas.get_Texto(Fila, 1).ToString();
-            tipos_e.Grupo.Id = Convert.ToInt32(grdTipos_Entradas.get_Texto(Fila, 2));
+            tipos_e.SubTipo.Id = Convert.ToInt32(grdTipos_Entradas.get_Texto(Fila, 2));
             tipos_e.Es_Entrega = Convert.ToBoolean(grdTipos_Entradas.get_Texto(Fila, 3));
 
         }
