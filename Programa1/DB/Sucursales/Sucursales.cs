@@ -232,6 +232,8 @@ namespace Programa1.DB.Sucursales
 
                 var d = command.ExecuteNonQuery();
 
+                Id = 0;
+
                 sql.Close();
             }
             catch (Exception e)

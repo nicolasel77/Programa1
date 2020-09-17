@@ -230,7 +230,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Hacienda_Salidas", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Hacienda_Salidas", conexionSql);
 
                 conexionSql.Open();
 
@@ -283,6 +283,8 @@ namespace Programa1.DB
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
+
+                Id = 0;
 
                 sql.Close();
             }

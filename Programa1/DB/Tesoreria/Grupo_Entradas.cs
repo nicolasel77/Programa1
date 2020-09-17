@@ -11,17 +11,16 @@
         public Grupos_Entradas()
         {
         }
-
-        public Grupos_Entradas(int id, string nombre, string tabla)
-        {
-            Id = id;
-            Nombre = nombre;
-            Tabla = tabla;
-        }
+        private int vId;
 
         [Required]
         [Key]
-        public int Id { get; set; }
+        public int Id { 
+            get { return vId; } 
+            set { 
+                vId = value; 
+                Cargar(); } 
+        }
 
         [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
@@ -30,17 +29,33 @@
         [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
         public string Tabla { get; set; }
+        /// <summary>
+        /// Campo a buscar.
+        /// </summary>
+        public string Campo_Id { get; set; }
+        public string Campo_Nombre { get; set; }
 
 
-        public DataTable Datos()
+        public void Cargar()
+        {
+            DataTable dt = Datos("Id=" + Id);
+            Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+            Tabla = Convert.ToString(dt.Rows[0]["Tabla"]);
+            Campo_Id = Convert.ToString(dt.Rows[0]["Campo_Id"]);
+            Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]);
+
+        }
+
+        public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Grupos_Entradas", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Grupos_Entradas" + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -61,7 +76,8 @@
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("UPDATE Grupos_Entradas SET Nombre='{0}', Tabla='{1}' WHERE Id={2}", Nombre, Tabla, Id), sql);
+                SqlCommand command = new SqlCommand($"UPDATE Grupos_Entradas SET Nombre='{Nombre}', " +
+                    $"Tabla='{Tabla}', Campo_ID='{Campo_Id}', Campo_Nombre='{Campo_Nombre}' WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -82,7 +98,8 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Grupos_Entradas (Id, Nombre, Tabla) VALUES({Id}, '{Nombre}', '{Tabla}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Grupos_Entradas (Id, Nombre, Tabla, Campo_ID, Campo_Nombre)" +
+                    $" VALUES({Id}, '{Nombre}', '{Tabla}', '{Campo_Id}', '{Campo_Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -109,6 +126,8 @@
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
+
+                Id = 0;
 
                 sql.Close();
             }

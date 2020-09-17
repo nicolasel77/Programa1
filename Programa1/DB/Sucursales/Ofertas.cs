@@ -133,7 +133,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Ofertas", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Ofertas", conexionSql);
 
                 conexionSql.Open();
 
@@ -162,6 +162,8 @@
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
+
+                Id = 0;
 
                 sql.Close();
             }

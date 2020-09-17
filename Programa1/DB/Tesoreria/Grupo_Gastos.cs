@@ -1,42 +1,67 @@
-﻿
-namespace Programa1.DB
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Programa1.DB.Tesoreria
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.Data;
-    using System.Data.SqlClient;
-    using System.Windows.Forms;
-
-    class TipoSueldo
+    class Grupo_Gastos
     {
-        public TipoSueldo()
-        {
-        }
+        public Grupo_Gastos() { }
 
-        public TipoSueldo(int id, string nombre)
-        {
-            Id = id;
-            Nombre = nombre;
-        }
+        private int vId;
 
         [Required]
         [Key]
-        public int Id { get; set; }
+        public int Id
+        {
+            get { return vId; }
+            set
+            {
+                vId = value;
+                Cargar();
+            }
+        }
 
         [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
         public string Nombre { get; set; }
 
+        [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
+        [Required]
+        public string Tabla { get; set; }
+        /// <summary>
+        /// Campo a buscar.
+        /// </summary>
+        public string Campo_Id { get; set; }
+        public string Campo_Nombre { get; set; }
 
-        public DataTable Datos()
+
+        public void Cargar()
+        {
+            DataTable dt = Datos("Id=" + Id);
+            Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+            Tabla = Convert.ToString(dt.Rows[0]["Tabla"]);
+            Campo_Id = Convert.ToString(dt.Rows[0]["Campo_Id"]);
+            Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]);
+
+        }
+
+        public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM TipoSueldos", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Grupos_Salidas" + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -57,7 +82,8 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("UPDATE TipoSueldos SET Nombre='{0}' WHERE Id={1}", Nombre, Id), sql);
+                SqlCommand command = new SqlCommand($"UPDATE Grupos_Salidas SET Nombre='{Nombre}', " +
+                    $"Tabla='{Tabla}', Campo_ID='{Campo_Id}', Campo_Nombre='{Campo_Nombre}' WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -78,13 +104,14 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO TipoSueldos (Id, Nombre) VALUES({Id}, '{Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Grupos_Salidas (Id, Nombre, Tabla, Campo_ID, Campo_Nombre)" +
+                    $" VALUES({Id}, '{Nombre}', '{Tabla}', '{Campo_Id}', '{Campo_Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
-                
+
                 sql.Close();
             }
             catch (Exception e)
@@ -99,7 +126,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("DELETE FROM TipoSueldos WHERE Id={0}", Id), sql);
+                SqlCommand command = new SqlCommand(string.Format("DELETE FROM Grupos_Salidas WHERE Id={0}", Id), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -123,7 +150,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand("SELECT Nombre FROM TipoSueldos WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("SELECT Nombre FROM Grupos_Salidas WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;

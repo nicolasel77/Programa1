@@ -108,7 +108,7 @@
                     grdRetiros.set_Texto(-1, grdRetiros.Col + 1, retiros.Saldo_DiaVacas());
                     grdRetiros.set_Texto(-1, grdRetiros.Col + 2, retiros.Saldo_ImporteVacas());
                     Saldos();
-                    if (grdDetalle.EsUltimaF()) grdDetalle.AgregarFila();
+                    if (grdDetalle.EsUltimaFila()) grdDetalle.AgregarFila();
                     grdDetalle.ActivarCelda(f + 1, 0);
                     break;
             }

@@ -8,7 +8,6 @@
 
     class Entradas
     {
-        private int id_SubTipoEntrada;
 
         public Entradas()
         {
@@ -28,15 +27,12 @@
         /// </summary>
         public int ID { get; set; }
         public DateTime Fecha { get; set; }
+
+        /// <summary>
+        /// Tipo Entradas
+        /// </summary>
         public Tipos_Entradas TE { get; set; } = new Tipos_Entradas();
-        public int Id_SubTipoEntrada {
-            get { return id_SubTipoEntrada; }
-            set {
-                id_SubTipoEntrada = value; 
-
-            }
-
-        }
+        public int Id_SubTipoEntrada { get; set; }        
 
         [MaxLength(500, ErrorMessage = "El campo Descripción solo puede tener 500 caracteres.")]
         public string Descripcion { get; set; }
@@ -115,6 +111,14 @@
 
                 var d = command.ExecuteNonQuery();
 
+                command = new SqlCommand($"DELETE FROM Fecha_Entregas WHERE ID_Entradas={ID}", sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;                
+
+                d = command.ExecuteNonQuery();
+
+                ID = 0;
+
                 sql.Close();
             }
             catch (Exception e)
@@ -185,27 +189,32 @@
         public string Nombre_SubTipo()
         {
             string s = "";
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-            try
+            if (TE.Id_Tipo != 0)
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM {}", conexionSql);
+                var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+                object d = null;
 
-                conexionSql.Open();
+                TE.grupoE.Id = TE.Grupo;
 
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
+                s = $"SELECT TOP 1 {TE.grupoE.Campo_Nombre} FROM {TE.grupoE.Tabla} WHERE {TE.grupoE.Campo_Id}={Id_SubTipoEntrada}";
+                try
+                {
+                    SqlCommand comandoSql = new SqlCommand(s, conexionSql);
 
-                conexionSql.Close();
+                    conexionSql.Open();
 
-                s = Convert.ToString(d);
+                    comandoSql.CommandType = CommandType.Text;
+                    d = comandoSql.ExecuteScalar();
+
+                    conexionSql.Close();
+
+                    s = Convert.ToString(d);
+                }
+                catch (Exception)
+                {
+                    s = "";
+                }
             }
-            catch (Exception)
-            {
-                s = "";
-            }
-
             return s;
         }
 
@@ -216,7 +225,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM CD_Entradas", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM CD_Entradas", conexionSql);
 
                 conexionSql.Open();
 

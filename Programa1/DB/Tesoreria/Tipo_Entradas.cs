@@ -5,32 +5,55 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
+
     class Tipos_Entradas
     {
+        private int vId;
+        /// <summary>
+        /// Grupos_Entradas
+        /// </summary>
+        public Grupos_Entradas grupoE = new Grupos_Entradas();
         public Tipos_Entradas()
         {
         }
 
-        public Tipos_Entradas(int id, string nombre, int subtipo, bool es_entrega)
+        public Tipos_Entradas(int id, string nombre, int grupo, bool es_entrega)
         {
             Id_Tipo = id;
             Nombre = nombre;
-            SubTipo = subtipo;
+            Grupo = grupo;
             Es_Entrega = es_entrega;
         }
 
         [Required]
         [Key]
-        public int Id_Tipo { get; set; }
+        public int Id_Tipo
+        {
+            get { return vId; }
+            set
+            {
+                vId = value;
+                Cargar();
+            }
+        }
 
         [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
         public string Nombre { get; set; }
 
-        public int SubTipo { get; set; }
+        public int Grupo { get; set; }
 
         public bool Es_Entrega { get; set; }
 
+
+        public void Cargar()
+        {
+            DataTable dt = Datos("Id_Tipo=" + Id_Tipo);
+            Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+            Grupo = Convert.ToInt32(dt.Rows[0]["Grupo"]);
+            Es_Entrega = Convert.ToBoolean(dt.Rows[0]["Es_Entrega"]);
+
+        }
 
 
         public DataTable Datos(string filtro = "")
@@ -66,7 +89,8 @@
             try
             {
 
-                SqlCommand command = new SqlCommand($"UPDATE Tipos_Entradas SET Nombre='{Nombre}', Grupo={SubTipo.Id}, Es_Entrega={(Es_Entrega ? "1" : "0")} WHERE Id_Tipo={Id_Tipo}", sql);
+                SqlCommand command = new SqlCommand($"UPDATE Tipos_Entradas SET Nombre='{Nombre}', " +
+                    $"Grupo={Grupo}, Es_Entrega={(Es_Entrega ? "1" : "0")} WHERE Id_Tipo={Id_Tipo}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -87,7 +111,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Tipos_Entradas (Id_Tipo, Nombre, Grupo, Es_Entrega) VALUES({Id_Tipo}, '{Nombre}', {SubTipo.Id}, {(Es_Entrega ? "1" : "0")})", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Tipos_Entradas (Id_Tipo, Nombre, Grupo, Es_Entrega) VALUES({Id_Tipo}, '{Nombre}', {Grupo}, {(Es_Entrega ? "1" : "0")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -114,6 +138,8 @@
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
+
+                Id_Tipo = 0;
 
                 sql.Close();
             }

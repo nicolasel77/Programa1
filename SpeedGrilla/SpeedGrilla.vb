@@ -1017,7 +1017,7 @@ Public Class SpeedGrilla
     Public Sub Ordenar(ByVal o As Int16)
         Grd.Sort(C1.Win.C1FlexGrid.SortFlags.Ascending, o)
     End Sub
-    Public Function EsUltimaF() As Boolean
+    Public Function EsUltimaFila() As Boolean
 
         With Grd
             If .Row = .Rows.Count - 1 Then
@@ -1363,7 +1363,7 @@ Public Class SpeedGrilla
             Catch ex As OverflowException
                 Beep()
             Catch er As Exception
-                Beep()
+
             End Try
             If .Col <> c And .Col <> -1 And .Redraw = True Then
                 c = .Col
@@ -1518,7 +1518,11 @@ Public Class SpeedGrilla
         End Function
         Function C1EditorGetValue() As Object Implements C1.Win.C1FlexGrid.IC1EmbeddedEditor.C1EditorGetValue
             Try
-                Return valor.Date
+                If (IsDate(valor.date)) Then
+                    Return valor.date
+                Else
+                    Return #1/1/1900#
+                End If
             Catch er As Exception
                 'MsgBox(er.Message)
             End Try

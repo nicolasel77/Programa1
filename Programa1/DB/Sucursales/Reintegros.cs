@@ -126,7 +126,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Reintegros", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Reintegros", conexionSql);
 
                 conexionSql.Open();
 
@@ -155,6 +155,8 @@
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
+
+                Id = 0;
 
                 sql.Close();
             }

@@ -183,6 +183,8 @@
 
                 var d = command.ExecuteNonQuery();
 
+                Id = 0;
+
                 sql.Close();
             }
             catch (Exception e)

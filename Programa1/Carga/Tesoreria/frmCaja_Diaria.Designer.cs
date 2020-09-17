@@ -93,6 +93,7 @@
             this.splPrincipal.Panel2.Controls.Add(this.panel1);
             this.splPrincipal.Panel2.Controls.Add(this.materialLabel4);
             this.splPrincipal.Panel2.Controls.Add(this.mntFecha);
+            this.splPrincipal.Panel2.Resize += new System.EventHandler(this.splPrincipal_Panel2_Resize);
             this.splPrincipal.Size = new System.Drawing.Size(1118, 719);
             this.splPrincipal.SplitterDistance = 909;
             this.splPrincipal.TabIndex = 1;
@@ -131,7 +132,7 @@
             this.materialLabel1.Location = new System.Drawing.Point(3, 3);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(514, 20);
+            this.materialLabel1.Size = new System.Drawing.Size(482, 20);
             this.materialLabel1.TabIndex = 1;
             this.materialLabel1.Text = "Entradas";
             this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -147,7 +148,7 @@
             this.lblTEntrada.Location = new System.Drawing.Point(3, 693);
             this.lblTEntrada.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTEntrada.Name = "lblTEntrada";
-            this.lblTEntrada.Size = new System.Drawing.Size(514, 26);
+            this.lblTEntrada.Size = new System.Drawing.Size(482, 22);
             this.lblTEntrada.TabIndex = 1;
             this.lblTEntrada.Text = "Total Entrada";
             this.lblTEntrada.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -188,6 +189,8 @@
             this.grdEntradas.Size = new System.Drawing.Size(482, 664);
             this.grdEntradas.TabIndex = 0;
             this.grdEntradas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdEntradas_Editado);
+            this.grdEntradas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdEntradas_CambioFila);
+            this.grdEntradas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdEntradas_KeyUp);
             // 
             // mnuEntradas
             // 
@@ -230,7 +233,7 @@
             this.materialLabel3.Location = new System.Drawing.Point(3, 3);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(442, 20);
+            this.materialLabel3.Size = new System.Drawing.Size(414, 20);
             this.materialLabel3.TabIndex = 1;
             this.materialLabel3.Text = "Gastos";
             this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -246,7 +249,7 @@
             this.lblTSalida.Location = new System.Drawing.Point(3, 693);
             this.lblTSalida.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTSalida.Name = "lblTSalida";
-            this.lblTSalida.Size = new System.Drawing.Size(442, 26);
+            this.lblTSalida.Size = new System.Drawing.Size(414, 22);
             this.lblTSalida.TabIndex = 2;
             this.lblTSalida.Text = "Total Salida";
             this.lblTSalida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -312,7 +315,7 @@
             this.panel1.Controls.Add(this.cmdCerrar_Fecha);
             this.panel1.Location = new System.Drawing.Point(8, 204);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(185, 507);
+            this.panel1.Size = new System.Drawing.Size(192, 507);
             this.panel1.TabIndex = 4;
             // 
             // label9
@@ -321,7 +324,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.Location = new System.Drawing.Point(109, 138);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(73, 16);
+            this.label9.Size = new System.Drawing.Size(80, 16);
             this.label9.TabIndex = 6;
             this.label9.Text = "$ 0,0";
             this.label9.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -332,7 +335,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSTotalEntradas.Location = new System.Drawing.Point(109, 57);
             this.lblSTotalEntradas.Name = "lblSTotalEntradas";
-            this.lblSTotalEntradas.Size = new System.Drawing.Size(73, 16);
+            this.lblSTotalEntradas.Size = new System.Drawing.Size(80, 16);
             this.lblSTotalEntradas.TabIndex = 6;
             this.lblSTotalEntradas.Text = "$ 0,0";
             this.lblSTotalEntradas.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -361,7 +364,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.Location = new System.Drawing.Point(109, 122);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 16);
+            this.label7.Size = new System.Drawing.Size(80, 16);
             this.label7.TabIndex = 6;
             this.label7.Text = "$ 0,0";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -372,7 +375,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSEntradas.Location = new System.Drawing.Point(109, 41);
             this.lblSEntradas.Name = "lblSEntradas";
-            this.lblSEntradas.Size = new System.Drawing.Size(73, 16);
+            this.lblSEntradas.Size = new System.Drawing.Size(80, 16);
             this.lblSEntradas.TabIndex = 6;
             this.lblSEntradas.Text = "$ 0,0";
             this.lblSEntradas.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -401,7 +404,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.Location = new System.Drawing.Point(109, 106);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 16);
+            this.label5.Size = new System.Drawing.Size(80, 16);
             this.label5.TabIndex = 6;
             this.label5.Text = "$ 0,0";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -412,7 +415,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSSantEntradas.Location = new System.Drawing.Point(109, 25);
             this.lblSSantEntradas.Name = "lblSSantEntradas";
-            this.lblSSantEntradas.Size = new System.Drawing.Size(73, 16);
+            this.lblSSantEntradas.Size = new System.Drawing.Size(80, 16);
             this.lblSSantEntradas.TabIndex = 6;
             this.lblSSantEntradas.Text = "$ 0,0";
             this.lblSSantEntradas.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -442,7 +445,7 @@
             this.panel5.BackColor = System.Drawing.Color.Gainsboro;
             this.panel5.Location = new System.Drawing.Point(-17, 101);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(231, 2);
+            this.panel5.Size = new System.Drawing.Size(238, 2);
             this.panel5.TabIndex = 5;
             // 
             // panel2
@@ -452,7 +455,7 @@
             this.panel2.BackColor = System.Drawing.Color.Gainsboro;
             this.panel2.Location = new System.Drawing.Point(-17, 20);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(231, 2);
+            this.panel2.Size = new System.Drawing.Size(238, 2);
             this.panel2.TabIndex = 5;
             // 
             // panel4
@@ -462,7 +465,7 @@
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
             this.panel4.Location = new System.Drawing.Point(0, 157);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(245, 2);
+            this.panel4.Size = new System.Drawing.Size(252, 2);
             this.panel4.TabIndex = 5;
             // 
             // panel3
@@ -472,7 +475,7 @@
             this.panel3.BackColor = System.Drawing.Color.Gainsboro;
             this.panel3.Location = new System.Drawing.Point(0, 76);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(245, 2);
+            this.panel3.Size = new System.Drawing.Size(252, 2);
             this.panel3.TabIndex = 5;
             // 
             // materialLabel5
@@ -512,7 +515,7 @@
             this.cmdCerrar_Fecha.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdCerrar_Fecha.Name = "cmdCerrar_Fecha";
             this.cmdCerrar_Fecha.Primary = false;
-            this.cmdCerrar_Fecha.Size = new System.Drawing.Size(185, 36);
+            this.cmdCerrar_Fecha.Size = new System.Drawing.Size(192, 36);
             this.cmdCerrar_Fecha.TabIndex = 0;
             this.cmdCerrar_Fecha.Text = "Cerrar Fecha";
             this.cmdCerrar_Fecha.UseVisualStyleBackColor = true;
@@ -535,6 +538,7 @@
             // 
             // mntFecha
             // 
+            this.mntFecha.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.mntFecha.BackColor = System.Drawing.Color.Gainsboro;
             this.mntFecha.Location = new System.Drawing.Point(8, 26);
             this.mntFecha.Name = "mntFecha";

@@ -109,6 +109,7 @@
             this.seberosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pruebaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
+            this.editarTiposGastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -317,7 +318,8 @@
             this.toolStripMenuItem10,
             this.bancosCuentasToolStripMenuItem,
             this.toolStripMenuItem13,
-            this.editarTiposToolStripMenuItem});
+            this.editarTiposToolStripMenuItem,
+            this.editarTiposGastosToolStripMenuItem});
             this.tesoreríaToolStripMenuItem.Name = "tesoreríaToolStripMenuItem";
             this.tesoreríaToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.tesoreríaToolStripMenuItem.Text = "&Tesorería";
@@ -325,43 +327,43 @@
             // cajaDiariaToolStripMenuItem
             // 
             this.cajaDiariaToolStripMenuItem.Name = "cajaDiariaToolStripMenuItem";
-            this.cajaDiariaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cajaDiariaToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.cajaDiariaToolStripMenuItem.Text = "&Caja diaria";
             this.cajaDiariaToolStripMenuItem.Click += new System.EventHandler(this.cajaDiariaToolStripMenuItem_Click);
             // 
             // resumenGastosToolStripMenuItem
             // 
             this.resumenGastosToolStripMenuItem.Name = "resumenGastosToolStripMenuItem";
-            this.resumenGastosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resumenGastosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.resumenGastosToolStripMenuItem.Text = "Resumen &Gastos";
             // 
             // resumenEntradasToolStripMenuItem
             // 
             this.resumenEntradasToolStripMenuItem.Name = "resumenEntradasToolStripMenuItem";
-            this.resumenEntradasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resumenEntradasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.resumenEntradasToolStripMenuItem.Text = "Resumen &Entradas";
             // 
             // toolStripMenuItem10
             // 
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(180, 6);
             // 
             // bancosCuentasToolStripMenuItem
             // 
             this.bancosCuentasToolStripMenuItem.Name = "bancosCuentasToolStripMenuItem";
-            this.bancosCuentasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bancosCuentasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.bancosCuentasToolStripMenuItem.Text = "&Bancos/Cuentas";
             // 
             // toolStripMenuItem13
             // 
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(180, 6);
             // 
             // editarTiposToolStripMenuItem
             // 
             this.editarTiposToolStripMenuItem.Name = "editarTiposToolStripMenuItem";
-            this.editarTiposToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.editarTiposToolStripMenuItem.Text = "&Editar Tipos";
+            this.editarTiposToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.editarTiposToolStripMenuItem.Text = "&Editar Tipos Entradas";
             this.editarTiposToolStripMenuItem.Click += new System.EventHandler(this.editarTiposToolStripMenuItem_Click);
             // 
             // empleadosToolStripMenuItem
@@ -704,6 +706,13 @@
             this.tstMenu.TabIndex = 3;
             this.tstMenu.Text = "toolStrip1";
             // 
+            // editarTiposGastosToolStripMenuItem
+            // 
+            this.editarTiposGastosToolStripMenuItem.Name = "editarTiposGastosToolStripMenuItem";
+            this.editarTiposGastosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.editarTiposGastosToolStripMenuItem.Text = "Editar Tipos Gastos";
+            this.editarTiposGastosToolStripMenuItem.Click += new System.EventHandler(this.editarTiposGastosToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -806,6 +815,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem14;
         private System.Windows.Forms.ToolStripMenuItem empleadosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem rendimientoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editarTiposGastosToolStripMenuItem;
     }
 }
 

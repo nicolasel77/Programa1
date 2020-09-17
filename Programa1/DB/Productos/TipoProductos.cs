@@ -106,6 +106,8 @@ namespace Programa1.DB
 
                 var d = command.ExecuteNonQuery();
 
+                Id = 0;
+
                 sql.Close();
             }
             catch (Exception e)

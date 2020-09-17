@@ -175,6 +175,8 @@
 
                 var d = command.ExecuteNonQuery();
 
+                Orden = 0;
+
                 sql.Close();
             }
             catch (Exception e)

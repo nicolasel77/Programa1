@@ -1325,6 +1325,54 @@
             }
         }
 
+        private void editarTiposGastosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmTipos_Gastos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmTipos_Gastos");
+                t.Text = "Tipos_Gastos";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmTipos_Gastos = new Programa1.Carga.Tesoreria.frmTipos_Gastos();
+                frmTipos_Gastos.MdiParent = this;
+                frmTipos_Gastos.Disposed += FrmTipos_Gastos_Disposed;
+                forms.Add(frmTipos_Gastos);
+                frmTipos_Gastos.Show();
+                frmTipos_Gastos.WindowState = FormWindowState.Minimized;
+                frmTipos_Gastos.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmTipos_Gastos_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Tipos_Gastos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmTipos_Gastos")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
         private void cajaDiariaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -1372,5 +1420,7 @@
                 }
             }
         }
+
+        
     }
 }

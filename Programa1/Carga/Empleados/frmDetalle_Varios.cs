@@ -76,7 +76,7 @@
                     retiros.Actualizar();
                     
                     grdDetalle.set_Texto(f, 0, retiros.Id);
-                    if (grdDetalle.EsUltimaF()) grdDetalle.AgregarFila();
+                    if (grdDetalle.EsUltimaFila()) grdDetalle.AgregarFila();
                     grdDetalle.ActivarCelda(f + 1, 1);
 
                     grdRetiros.set_Texto(-1, -1, grdDetalle.SumarCol(c, false));

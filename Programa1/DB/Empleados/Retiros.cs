@@ -554,6 +554,7 @@
                     $" AND Id_Empleados={Empleado.Id}";
 
                     var d = command.ExecuteNonQuery();
+                    Id = 0;
                 }
 
 
@@ -663,7 +664,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Retiros", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Retiros", conexionSql);
 
                 conexionSql.Open();
 

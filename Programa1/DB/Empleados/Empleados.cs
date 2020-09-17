@@ -209,6 +209,8 @@ namespace Programa1.DB
 
                 var d = command.ExecuteNonQuery();
 
+                Id = 0;
+
                 sql.Close();
             }
             catch (Exception e)
@@ -261,7 +263,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT MAX(Id) FROM Empleados", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Empleados", conexionSql);
 
                 conexionSql.Open();
 

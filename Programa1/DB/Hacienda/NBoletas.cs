@@ -150,6 +150,8 @@
 
                 var d = command.ExecuteNonQuery();
 
+                NBoleta = 0;
+
                 sql.Close();
             }
             catch (Exception e)

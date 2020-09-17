@@ -297,11 +297,23 @@
     <Compile Include="Carga\Tesoreria\frmCaja_Diaria.Designer.cs">
       <DependentUpon>frmCaja_Diaria.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmCargarEntregas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmCargarEntregas.Designer.cs">
+      <DependentUpon>frmCargarEntregas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmTipos_Entradas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Carga\Tesoreria\frmTipos_Entradas.Designer.cs">
       <DependentUpon>frmTipos_Entradas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmTipos_Gastos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmTipos_Gastos.Designer.cs">
+      <DependentUpon>frmTipos_Gastos.cs</DependentUpon>
     </Compile>
     <Compile Include="Controles\cFechas.cs">
       <SubType>UserControl</SubType>
@@ -371,9 +383,15 @@
     <Compile Include="DB\Proveedores\CCtes_Proveedores.cs" />
     <Compile Include="DB\Sucursales\Estadisticas_Sucursales.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />
+    <Compile Include="DB\Tesoreria\Detalle_Entregas.cs" />
+    <Compile Include="DB\Tesoreria\Detalle_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Entradas.cs" />
+    <Compile Include="DB\Tesoreria\Gastos.cs" />
     <Compile Include="DB\Tesoreria\Grupo_Entradas.cs" />
+    <Compile Include="DB\Tesoreria\Grupo_Gastos.cs" />
+    <Compile Include="DB\Tesoreria\SubTipo_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Tipo_Entradas.cs" />
+    <Compile Include="DB\Tesoreria\Tipo_Gastos.cs" />
     <Compile Include="DB\Varios\Localidades.cs" />
     <Compile Include="DB\Proveedores\Compras.cs" />
     <Compile Include="DB\Proveedores\Devoluciones.cs" />
@@ -529,6 +547,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmCaja_Diaria.resx">
       <DependentUpon>frmCaja_Diaria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmCargarEntregas.resx">
+      <DependentUpon>frmCargarEntregas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmTipos_Entradas.resx">
       <DependentUpon>frmTipos_Entradas.cs</DependentUpon>

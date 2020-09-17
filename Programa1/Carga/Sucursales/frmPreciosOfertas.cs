@@ -59,7 +59,7 @@
                     lista.Orden = Convert.ToInt32(a);
                     grd.set_Texto(f, c, a);
 
-                    if (grd.EsUltimaF() != true)
+                    if (grd.EsUltimaFila() != true)
                     {
                         lista.Actualizar();
                         grd.ActivarCelda(f + 1, c);
@@ -76,7 +76,7 @@
                     {
                         grd.set_Texto(f, c, a);
                         grd.set_Texto(f, c_IdProd + 1, lista.Producto.Nombre);
-                        if (grd.EsUltimaF() != true)
+                        if (grd.EsUltimaFila() != true)
                         {
                             lista.Actualizar();
                             grd.ActivarCelda(f + 1, c);
@@ -96,7 +96,7 @@
                     lista.Descripcion = Convert.ToString(a);
                     grd.set_Texto(f, c, a);
 
-                    if (grd.EsUltimaF() != true)
+                    if (grd.EsUltimaFila() != true)
                     {
                         lista.Actualizar();
                         grd.ActivarCelda(f + 1, c);
@@ -111,7 +111,7 @@
                     lista.Costo = Convert.ToSingle(a);
                     grd.set_Texto(f, c, a);
 
-                    if (grd.EsUltimaF() != true)
+                    if (grd.EsUltimaFila() != true)
                     {
                         lista.Actualizar();
                         grd.ActivarCelda(f + 1, c);

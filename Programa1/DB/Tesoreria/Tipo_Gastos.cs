@@ -1,5 +1,4 @@
-﻿
-namespace Programa1.DB
+﻿namespace Programa1.DB.Tesoreria
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -7,36 +6,58 @@ namespace Programa1.DB
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class TipoSueldo
+    class Tipo_Gastos
     {
-        public TipoSueldo()
-        {
-        }
+        private int vId;
+        /// <summary>
+        /// Grupo_Gastos
+        /// </summary>
+        public Grupo_Gastos grupoS = new Grupo_Gastos();
 
-        public TipoSueldo(int id, string nombre)
+        public Tipo_Gastos()
         {
-            Id = id;
-            Nombre = nombre;
-        }
+        }        
 
         [Required]
         [Key]
-        public int Id { get; set; }
+        public int Id_Tipo
+        {
+            get { return vId; }
+            set
+            {
+                vId = value;
+                Cargar();
+            }
+        }
 
         [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
         public string Nombre { get; set; }
 
+        public int Grupo { get; set; }
 
-        public DataTable Datos()
+
+        public void Cargar()
+        {
+            DataTable dt = Datos("Id_Tipo=" + Id_Tipo);
+            Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+            Grupo = Convert.ToInt32(dt.Rows[0]["Grupo"]);            
+
+        }
+
+
+        public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM TipoSueldos", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Tipos_Salidas " + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -57,7 +78,9 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("UPDATE TipoSueldos SET Nombre='{0}' WHERE Id={1}", Nombre, Id), sql);
+
+                SqlCommand command = new SqlCommand($"UPDATE Tipos_Salidas SET Nombre='{Nombre}', " +
+                    $"Grupo={Grupo} WHERE Id_Tipo={Id_Tipo}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -78,13 +101,13 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO TipoSueldos (Id, Nombre) VALUES({Id}, '{Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Tipos_Salidas (Id_Tipo, Nombre, Grupo) VALUES({Id_Tipo}, '{Nombre}', {Grupo})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
-                
+
                 sql.Close();
             }
             catch (Exception e)
@@ -99,14 +122,14 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("DELETE FROM TipoSueldos WHERE Id={0}", Id), sql);
+                SqlCommand command = new SqlCommand(string.Format("DELETE FROM Tipos_Salidas WHERE Id_Tipo={0}", Id_Tipo), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
 
-                Id = 0;
+                Id_Tipo = 0;
 
                 sql.Close();
             }
@@ -123,7 +146,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand("SELECT Nombre FROM TipoSueldos WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("SELECT Nombre FROM Tipos_Salidas WHERE Id_Tipo=" + Id_Tipo, sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;

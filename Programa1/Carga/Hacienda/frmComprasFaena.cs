@@ -188,7 +188,7 @@
 
             Totales();
 
-            if (grdBoletas.EsUltimaF() == true)
+            if (grdBoletas.EsUltimaFila() == true)
             {
                 grdBoletas.MostrarDatos(hc.nBoletas.Datos("", ""), false, false);
             }
