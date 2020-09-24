@@ -30,36 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTipos_Entradas));
-            this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.grdTipos_Entradas = new Grilla2.SpeedGrilla();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.grdGrupo = new Grilla2.SpeedGrilla();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
+            this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.txtBuscar = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtBuscar.Location = new System.Drawing.Point(345, 615);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(296, 20);
-            this.txtBuscar.TabIndex = 11;
-            this.txtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(296, 622);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Buscar:";
             // 
             // grdTipos_Entradas
             // 
@@ -93,27 +73,11 @@
             this.grdTipos_Entradas.Redraw = true;
             this.grdTipos_Entradas.Row = 0;
             this.grdTipos_Entradas.Rows = 50;
-            this.grdTipos_Entradas.Size = new System.Drawing.Size(747, 583);
+            this.grdTipos_Entradas.Size = new System.Drawing.Size(761, 591);
             this.grdTipos_Entradas.TabIndex = 10;
             this.grdTipos_Entradas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdTipos_Entradas_Editado);
             this.grdTipos_Entradas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdTipos_Entradas_CambioFila);
             this.grdTipos_Entradas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdTipos_Entradas_KeyUp);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblMensaje});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 638);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1058, 22);
-            this.statusStrip1.TabIndex = 9;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblMensaje
-            // 
-            this.lblMensaje.ForeColor = System.Drawing.Color.Red;
-            this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(0, 17);
             // 
             // label2
             // 
@@ -168,7 +132,7 @@
             this.grdGrupo.Redraw = true;
             this.grdGrupo.Row = 0;
             this.grdGrupo.Rows = 50;
-            this.grdGrupo.Size = new System.Drawing.Size(281, 310);
+            this.grdGrupo.Size = new System.Drawing.Size(281, 318);
             this.grdGrupo.TabIndex = 0;
             this.grdGrupo.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdGrupo_Editado);
             this.grdGrupo.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdGrupo_CambioFila);
@@ -180,15 +144,48 @@
             this.tiMensaje.Interval = 5000;
             this.tiMensaje.Tick += new System.EventHandler(this.TiMensaje_Tick);
             // 
+            // lblMensaje
+            // 
+            this.lblMensaje.ForeColor = System.Drawing.Color.Red;
+            this.lblMensaje.Name = "lblMensaje";
+            this.lblMensaje.Size = new System.Drawing.Size(0, 17);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblMensaje});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 646);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1072, 22);
+            this.statusStrip1.TabIndex = 9;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBuscar.Depth = 0;
+            this.txtBuscar.Hint = "Buscar";
+            this.txtBuscar.Location = new System.Drawing.Point(299, 620);
+            this.txtBuscar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PasswordChar = '\0';
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.SelectionLength = 0;
+            this.txtBuscar.SelectionStart = 0;
+            this.txtBuscar.Size = new System.Drawing.Size(356, 23);
+            this.txtBuscar.TabIndex = 19;
+            this.txtBuscar.UseSystemPasswordChar = false;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
+            // 
             // frmTipos_Entradas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1058, 660);
+            this.ClientSize = new System.Drawing.Size(1072, 668);
+            this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.grdGrupo);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtBuscar);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.grdTipos_Entradas);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label2);
@@ -203,15 +200,13 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtBuscar;
-        private System.Windows.Forms.Label label3;
         private Grilla2.SpeedGrilla grdTipos_Entradas;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lblMensaje;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Grilla2.SpeedGrilla grdGrupo;
         private System.Windows.Forms.Timer tiMensaje;
+        private System.Windows.Forms.ToolStripStatusLabel lblMensaje;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtBuscar;
     }
 }

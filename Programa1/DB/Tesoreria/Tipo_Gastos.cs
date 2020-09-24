@@ -34,15 +34,20 @@
         [Required]
         public string Nombre { get; set; }
 
-        public int Grupo { get; set; }
-
 
         public void Cargar()
         {
             DataTable dt = Datos("Id_Tipo=" + Id_Tipo);
-            Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
-            Grupo = Convert.ToInt32(dt.Rows[0]["Grupo"]);            
-
+            if (dt.Rows.Count != 0)
+            {
+                Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+                grupoS.Id = Convert.ToInt32(dt.Rows[0]["Grupo"]);
+            }
+            else
+            {
+                Nombre = "";
+                grupoS.Id = 0;
+            }
         }
 
 
@@ -57,7 +62,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Tipos_Salidas " + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Tipos_Salidas " + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -80,7 +85,7 @@
             {
 
                 SqlCommand command = new SqlCommand($"UPDATE Tipos_Salidas SET Nombre='{Nombre}', " +
-                    $"Grupo={Grupo} WHERE Id_Tipo={Id_Tipo}", sql);
+                    $"Grupo={grupoS.Id} WHERE Id_Tipo={Id_Tipo}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -101,7 +106,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Tipos_Salidas (Id_Tipo, Nombre, Grupo) VALUES({Id_Tipo}, '{Nombre}', {Grupo})", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Tipos_Salidas (Id_Tipo, Nombre, Grupo) VALUES({Id_Tipo}, '{Nombre}', {grupoS.Id})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

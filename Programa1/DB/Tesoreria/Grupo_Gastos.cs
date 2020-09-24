@@ -45,11 +45,20 @@ namespace Programa1.DB.Tesoreria
         public void Cargar()
         {
             DataTable dt = Datos("Id=" + Id);
-            Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
-            Tabla = Convert.ToString(dt.Rows[0]["Tabla"]);
-            Campo_Id = Convert.ToString(dt.Rows[0]["Campo_Id"]);
-            Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]);
-
+            if (dt.Rows.Count != 0)
+            {
+                Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+                Tabla = Convert.ToString(dt.Rows[0]["Tabla"]);
+                Campo_Id = Convert.ToString(dt.Rows[0]["Campo_Id"]);
+                Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]);
+            }
+            else
+            {
+                Nombre = "";
+                Tabla = "";
+                Campo_Id = "";
+                Campo_Nombre = "";
+            }
         }
 
         public DataTable Datos(string filtro = "")
@@ -74,6 +83,55 @@ namespace Programa1.DB.Tesoreria
             }
 
             return dt;
+        }
+
+        public DataTable Tablas(string filtro = "")
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Tablas" + filtro, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        public int MaxId()
+        {
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object d = null;
+
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Grupos_Salidas", conexionSql);
+
+                conexionSql.Open();
+
+                comandoSql.CommandType = CommandType.Text;
+                d = comandoSql.ExecuteScalar();
+
+                conexionSql.Close();
+            }
+            catch (Exception)
+            {
+                d = 0;
+            }
+
+            return Convert.ToInt32(d);
         }
 
         public void Actualizar()
@@ -104,13 +162,15 @@ namespace Programa1.DB.Tesoreria
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Grupos_Salidas (Id, Nombre, Tabla, Campo_ID, Campo_Nombre)" +
-                    $" VALUES({Id}, '{Nombre}', '{Tabla}', '{Campo_Id}', '{Campo_Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Grupos_Salidas (Nombre, Tabla, Campo_ID, Campo_Nombre)" +
+                    $" VALUES('{Nombre}', '{Tabla}', '{Campo_Id}', '{Campo_Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
+
+                Id = MaxId();
 
                 sql.Close();
             }
@@ -143,6 +203,34 @@ namespace Programa1.DB.Tesoreria
             }
         }
 
+        public void Buscar_Tabla()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            Campo_Id = "";
+            Campo_Nombre = "";
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM Tablas WHERE Tabla LIKE '{Tabla}'", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    Campo_Id = Convert.ToString(dt.Rows[0]["Campo_Id"]);
+                    Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]);
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+        }
 
         public bool Existe()
         {

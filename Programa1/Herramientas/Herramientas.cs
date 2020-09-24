@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using System.Windows.Forms;
 
 namespace Programa1.Herramientas
 {
@@ -43,5 +45,16 @@ namespace Programa1.Herramientas
             return a;
         }
        
+        public void Llenar_List(ListBox ls, DataTable dt)
+        {
+            ls.Items.Clear();
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ls.Items.Add($"{dr[0]}. {dr[1]}");
+                }
+            }
+        }
     }
 }

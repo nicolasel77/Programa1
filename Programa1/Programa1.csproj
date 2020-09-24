@@ -554,6 +554,9 @@
     <EmbeddedResource Include="Carga\Tesoreria\frmTipos_Entradas.resx">
       <DependentUpon>frmTipos_Entradas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmTipos_Gastos.resx">
+      <DependentUpon>frmTipos_Gastos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controles\cFechas.resx">
       <DependentUpon>cFechas.cs</DependentUpon>
     </EmbeddedResource>
