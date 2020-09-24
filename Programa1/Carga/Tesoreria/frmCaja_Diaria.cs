@@ -90,11 +90,12 @@ namespace Programa1.Carga.Tesoreria
             s_Fecha_Autorizado = Convert.ToByte(grdSalidas.get_ColIndex("Fecha_Autorizado"));
 
 
-            //13: Enter
-            //43: +
-            //45: -
-            //46: Delete
-            grdSalidas.TeclasManejadas = new int[] { 13, 43, 45, 46 };
+            // 13: Enter
+            // 43: +
+            // 45: -
+            // 46: Delete
+            //112: F1
+            grdSalidas.TeclasManejadas = new int[] { 13, 43, 45, 46, 112 };
 
             grdSalidas.AgregarTeclas(Convert.ToInt32(Keys.Add), e_Tipo, e_Importe);
             grdSalidas.AgregarTeclas(Convert.ToInt32(Keys.Subtract), e_Subtipo, e_Importe);
@@ -477,6 +478,11 @@ namespace Programa1.Carga.Tesoreria
                     }
                     Totales();
                 }
+            }
+            if (e == Convert.ToInt32(Keys.F1))
+            {
+                frmAyuda ayuda = new frmAyuda();
+                ayuda.ShowDialog();
             }
         }
 
