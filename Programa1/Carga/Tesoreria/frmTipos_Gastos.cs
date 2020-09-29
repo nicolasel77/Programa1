@@ -77,6 +77,7 @@
 
                 grdGrupo.set_Texto(f, grdGrupo.get_ColIndex("Campo_Id"), gg.Campo_Id);
                 grdGrupo.set_Texto(f, grdGrupo.get_ColIndex("Campo_Nombre"), gg.Campo_Nombre);
+                grdGrupo.set_Texto(f, grdGrupo.get_ColIndex("Campo_Filtro"), gg.Campo_Filtro);
 
                 if (gg.Id != 0)
                 {
@@ -249,6 +250,17 @@
         private void grdTipo_CambioFila(short Fila)
         {
             tg.Id_Tipo = Convert.ToInt32(grdTipo.get_Texto(Fila, grdTipo.get_ColIndex("Id_Tipo")));
+            
+            string sf = "";
+            if (tg.Id_Tipo != 0) { sf = $"ID_Tipo={tg.Id_Tipo}"; }
+
+            grdSubTipo.MostrarDatos(stg.Datos(sf), true);
+            grdSubTipo.AutosizeAll();
+            grdSubTipo.set_ColW(grdSubTipo.get_ColIndex("Nombre"), 150);
+
+            grdDetalles.MostrarDatos(dtg.Datos(sf), true);
+            grdDetalles.AutosizeAll();
+            grdDetalles.set_ColW(grdDetalles.get_ColIndex("Nombre"), 150);
         }
 
         private void grdSubTipo_CambioFila(short Fila)

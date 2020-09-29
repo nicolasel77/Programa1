@@ -28,29 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtBuscar = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.lst = new System.Windows.Forms.ListBox();
-            this.cmdCerrar = new MaterialSkin.Controls.MaterialFlatButton();
+            this.cmdAceptar = new MaterialSkin.Controls.MaterialFlatButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cmdCancelar = new MaterialSkin.Controls.MaterialFlatButton();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBuscar.Depth = 0;
-            this.txtBuscar.Hint = "Buscar";
-            this.txtBuscar.Location = new System.Drawing.Point(12, 12);
-            this.txtBuscar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.PasswordChar = '\0';
-            this.txtBuscar.SelectedText = "";
-            this.txtBuscar.SelectionLength = 0;
-            this.txtBuscar.SelectionStart = 0;
-            this.txtBuscar.Size = new System.Drawing.Size(427, 23);
-            this.txtBuscar.TabIndex = 0;
-            this.txtBuscar.UseSystemPasswordChar = false;
             // 
             // lst
             // 
@@ -67,54 +53,104 @@
             this.lst.Size = new System.Drawing.Size(427, 256);
             this.lst.TabIndex = 1;
             // 
-            // cmdCerrar
+            // cmdAceptar
             // 
-            this.cmdCerrar.Depth = 0;
-            this.cmdCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cmdCerrar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmdCerrar.Location = new System.Drawing.Point(0, 0);
-            this.cmdCerrar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cmdCerrar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cmdCerrar.Name = "cmdCerrar";
-            this.cmdCerrar.Primary = false;
-            this.cmdCerrar.Size = new System.Drawing.Size(141, 36);
-            this.cmdCerrar.TabIndex = 0;
-            this.cmdCerrar.Text = "Cerrar";
-            this.cmdCerrar.UseVisualStyleBackColor = true;
-            this.cmdCerrar.Click += new System.EventHandler(this.cmdCerrar_Click);
+            this.cmdAceptar.AutoSize = true;
+            this.cmdAceptar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdAceptar.Depth = 0;
+            this.cmdAceptar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cmdAceptar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdAceptar.Location = new System.Drawing.Point(0, 0);
+            this.cmdAceptar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdAceptar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdAceptar.Name = "cmdAceptar";
+            this.cmdAceptar.Primary = false;
+            this.cmdAceptar.Size = new System.Drawing.Size(141, 36);
+            this.cmdAceptar.TabIndex = 0;
+            this.cmdAceptar.Text = "Aceptar";
+            this.cmdAceptar.UseVisualStyleBackColor = true;
+            this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
             // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.cmdCerrar);
-            this.panel1.Location = new System.Drawing.Point(298, 303);
+            this.panel1.Controls.Add(this.cmdAceptar);
+            this.panel1.Location = new System.Drawing.Point(298, 307);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(141, 36);
             this.panel1.TabIndex = 3;
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscar.Location = new System.Drawing.Point(12, 12);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(427, 15);
+            this.txtBuscar.TabIndex = 0;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
+            this.txtBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyUp);
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.cmdCancelar);
+            this.panel2.Location = new System.Drawing.Point(151, 307);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(141, 36);
+            this.panel2.TabIndex = 3;
+            // 
+            // cmdCancelar
+            // 
+            this.cmdCancelar.AutoSize = true;
+            this.cmdCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdCancelar.Depth = 0;
+            this.cmdCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cmdCancelar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdCancelar.Location = new System.Drawing.Point(0, 0);
+            this.cmdCancelar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdCancelar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdCancelar.Name = "cmdCancelar";
+            this.cmdCancelar.Primary = false;
+            this.cmdCancelar.Size = new System.Drawing.Size(141, 36);
+            this.cmdCancelar.TabIndex = 0;
+            this.cmdCancelar.Text = "Cancelar";
+            this.cmdCancelar.UseVisualStyleBackColor = true;
+            this.cmdCancelar.Click += new System.EventHandler(this.cmdCerrar_Click);
             // 
             // frmAyuda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.cmdCerrar;
+            this.CancelButton = this.cmdCancelar;
             this.ClientSize = new System.Drawing.Size(451, 351);
+            this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lst);
-            this.Controls.Add(this.txtBuscar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmAyuda";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Buscar";
+            this.Load += new System.EventHandler(this.frmAyuda_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private MaterialSkin.Controls.MaterialSingleLineTextField txtBuscar;
         private System.Windows.Forms.ListBox lst;
-        private MaterialSkin.Controls.MaterialFlatButton cmdCerrar;
+        private MaterialSkin.Controls.MaterialFlatButton cmdAceptar;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.Panel panel2;
+        private MaterialSkin.Controls.MaterialFlatButton cmdCancelar;
     }
 }

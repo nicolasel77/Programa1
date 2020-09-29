@@ -1421,6 +1421,52 @@
             }
         }
 
-        
+        private void Resumen_GastosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmResumen_Gastos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmResumen_Gastos");
+                t.Text = "Resumen_Gastos";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmResumen_Gastos = new Programa1.Carga.Tesoreria.frmResumen_Gastos();
+                frmResumen_Gastos.MdiParent = this;
+                frmResumen_Gastos.Disposed += FrmResumen_Gastos_Disposed;
+                forms.Add(frmResumen_Gastos);
+                frmResumen_Gastos.Show();
+                frmResumen_Gastos.WindowState = FormWindowState.Minimized;
+                frmResumen_Gastos.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmResumen_Gastos_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Resumen_Gastos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmResumen_Gastos")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

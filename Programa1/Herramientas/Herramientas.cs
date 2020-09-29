@@ -8,18 +8,36 @@ namespace Programa1.Herramientas
     {
         public int Codigo_Seleccionado(string s)
         {
-            int r = 0;
-            string n = s.Substring(0, s.IndexOf("."));
 
-            if (int.TryParse(n, out r) == true)
+            if (s.IndexOf(".") > - 1)
             {
-                return r;
+                int r = 0;
+                string n = s.Substring(0, s.IndexOf("."));
+
+                if (int.TryParse(n, out r) == true)
+                {
+                    return r;
+                }
+                else
+                {
+                    return 0;
+                } 
             }
             else
             {
                 return 0;
             }
 
+        }
+        public string Nombre_Seleccionado(string s)
+        {
+            string n = "";
+
+            if (s.IndexOf(".") > -1)
+            {
+                n = s.Substring(s.IndexOf(".") + 2);
+            }
+            return n;
         }
 
         public string Unir(string a, string b, string c = " AND ")
@@ -57,4 +75,19 @@ namespace Programa1.Herramientas
             }
         }
     }
+
+    //Public Sub Siguiente(ByVal s As ListBox)
+    //    If s.Items.Count<> 0 Then
+    //        Dim i As Integer = s.SelectedIndex
+    //        If i = -1 Then
+    //            s.SelectedIndex = 0
+    //        Else
+    //            If i = s.Items.Count - 1 Then
+    //                s.SelectedIndex = 0
+    //            Else
+    //                s.SelectedIndex = i + 1
+    //            End If
+    //        End If
+    //    End If
+    //End Sub
 }

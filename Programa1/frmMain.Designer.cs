@@ -62,6 +62,7 @@
             this.bancosCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripSeparator();
             this.editarTiposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarTiposGastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.empleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.retirosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sueldosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,7 +110,6 @@
             this.seberosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pruebaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
-            this.editarTiposGastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -336,6 +336,7 @@
             this.resumenGastosToolStripMenuItem.Name = "resumenGastosToolStripMenuItem";
             this.resumenGastosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.resumenGastosToolStripMenuItem.Text = "Resumen &Gastos";
+            this.resumenGastosToolStripMenuItem.Click += new System.EventHandler(this.Resumen_GastosToolStripMenuItem_Click);
             // 
             // resumenEntradasToolStripMenuItem
             // 
@@ -365,6 +366,13 @@
             this.editarTiposToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.editarTiposToolStripMenuItem.Text = "&Editar Tipos Entradas";
             this.editarTiposToolStripMenuItem.Click += new System.EventHandler(this.editarTiposToolStripMenuItem_Click);
+            // 
+            // editarTiposGastosToolStripMenuItem
+            // 
+            this.editarTiposGastosToolStripMenuItem.Name = "editarTiposGastosToolStripMenuItem";
+            this.editarTiposGastosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.editarTiposGastosToolStripMenuItem.Text = "Editar Tipos Gastos";
+            this.editarTiposGastosToolStripMenuItem.Click += new System.EventHandler(this.editarTiposGastosToolStripMenuItem_Click);
             // 
             // empleadosToolStripMenuItem
             // 
@@ -705,13 +713,6 @@
             this.tstMenu.Size = new System.Drawing.Size(1339, 25);
             this.tstMenu.TabIndex = 3;
             this.tstMenu.Text = "toolStrip1";
-            // 
-            // editarTiposGastosToolStripMenuItem
-            // 
-            this.editarTiposGastosToolStripMenuItem.Name = "editarTiposGastosToolStripMenuItem";
-            this.editarTiposGastosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.editarTiposGastosToolStripMenuItem.Text = "Editar Tipos Gastos";
-            this.editarTiposGastosToolStripMenuItem.Click += new System.EventHandler(this.editarTiposGastosToolStripMenuItem_Click);
             // 
             // frmMain
             // 

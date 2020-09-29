@@ -205,9 +205,9 @@
             // 
             this.lstAños.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lstAños.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lstAños.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstAños.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstAños.FormattingEnabled = true;
-            this.lstAños.ItemHeight = 16;
+            this.lstAños.ItemHeight = 20;
             this.lstAños.Items.AddRange(new object[] {
             "2019",
             "2018",
@@ -216,7 +216,7 @@
             "2015"});
             this.lstAños.Location = new System.Drawing.Point(0, 0);
             this.lstAños.Name = "lstAños";
-            this.lstAños.Size = new System.Drawing.Size(50, 239);
+            this.lstAños.Size = new System.Drawing.Size(91, 239);
             this.lstAños.TabIndex = 3;
             this.lstAños.SelectedIndexChanged += new System.EventHandler(this.LstAños_SelectedIndexChanged);
             // 

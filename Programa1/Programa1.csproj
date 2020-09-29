@@ -309,6 +309,12 @@
     <Compile Include="Carga\Tesoreria\frmCargarEntregas.Designer.cs">
       <DependentUpon>frmCargarEntregas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmResumen_Gastos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmResumen_Gastos.Designer.cs">
+      <DependentUpon>frmResumen_Gastos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmTipos_Entradas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -559,6 +565,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmCargarEntregas.resx">
       <DependentUpon>frmCargarEntregas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmResumen_Gastos.resx">
+      <DependentUpon>frmResumen_Gastos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmTipos_Entradas.resx">
       <DependentUpon>frmTipos_Entradas.cs</DependentUpon>

@@ -77,6 +77,42 @@
             return dt;
         }
 
+        /// <summary>
+        /// Devuelve los SubTipos o datos segun corresponda:
+        /// SubTipos, Sucursales, Frigorificos, etc
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SubTipos(string filtro = "")
+        {
+            DataTable dt = new DataTable();
+            if (Id_Tipo != 0)
+            {
+                var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+                if (grupoS.Campo_Filtro.Length != 0) { filtro = h.Unir(filtro, $"{grupoS.Campo_Filtro}={Id_Tipo}"); }
+                if (filtro.Length != 0) { filtro = "WHERE " + filtro; }
+
+                string s = $"SELECT  {grupoS.Campo_Id}, {grupoS.Campo_Nombre} FROM {grupoS.Tabla} {filtro}";
+                try
+                {
+                    SqlCommand comandoSql = new SqlCommand(s, conexionSql);
+
+                    conexionSql.Open();
+
+                    SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                    SqlDat.Fill(dt);
+
+                }
+                catch (Exception)
+                {
+                    dt = null;
+                }
+            }
+            return dt;
+        }
+
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);

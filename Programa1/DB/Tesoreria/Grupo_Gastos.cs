@@ -40,7 +40,7 @@ namespace Programa1.DB.Tesoreria
         /// </summary>
         public string Campo_Id { get; set; }
         public string Campo_Nombre { get; set; }
-
+        public string Campo_Filtro { get; set; }
 
         public void Cargar()
         {
@@ -51,6 +51,7 @@ namespace Programa1.DB.Tesoreria
                 Tabla = Convert.ToString(dt.Rows[0]["Tabla"]);
                 Campo_Id = Convert.ToString(dt.Rows[0]["Campo_Id"]);
                 Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]);
+                Campo_Filtro = Convert.ToString(dt.Rows[0]["Campo_Filtro"]);
             }
             else
             {
@@ -58,6 +59,7 @@ namespace Programa1.DB.Tesoreria
                 Tabla = "";
                 Campo_Id = "";
                 Campo_Nombre = "";
+                Campo_Filtro = "";
             }
         }
 
@@ -141,7 +143,8 @@ namespace Programa1.DB.Tesoreria
             try
             {
                 SqlCommand command = new SqlCommand($"UPDATE Grupos_Salidas SET Nombre='{Nombre}', " +
-                    $"Tabla='{Tabla}', Campo_ID='{Campo_Id}', Campo_Nombre='{Campo_Nombre}' WHERE Id={Id}", sql);
+                    $"Tabla='{Tabla}', Campo_ID='{Campo_Id}', Campo_Nombre='{Campo_Nombre}', Campo_Filtro='{Campo_Filtro}'" +
+                    $" WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -162,8 +165,8 @@ namespace Programa1.DB.Tesoreria
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Grupos_Salidas (Nombre, Tabla, Campo_ID, Campo_Nombre)" +
-                    $" VALUES('{Nombre}', '{Tabla}', '{Campo_Id}', '{Campo_Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Grupos_Salidas (Nombre, Tabla, Campo_ID, Campo_Nombre, Campo_Filtro)" +
+                    $" VALUES('{Nombre}', '{Tabla}', '{Campo_Id}', '{Campo_Nombre}', '{Campo_Filtro}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -223,6 +226,7 @@ namespace Programa1.DB.Tesoreria
                 {
                     Campo_Id = Convert.ToString(dt.Rows[0]["Campo_Id"]);
                     Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]);
+                    Campo_Filtro = Convert.ToString(dt.Rows[0]["Campo_Filtro"]);
                 }
             }
             catch (Exception)
