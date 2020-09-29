@@ -413,7 +413,7 @@
             this.grdSucursales.Cols = 1;
             this.grdSucursales.DataMember = "";
             this.grdSucursales.DataSource = null;
-            this.grdSucursales.EnableEdicion = true;
+            this.grdSucursales.EnableEdicion = false;
             this.grdSucursales.Encabezado = "";
             this.grdSucursales.fColor = System.Drawing.SystemColors.Control;
             this.grdSucursales.FixCols = 0;
@@ -552,10 +552,12 @@
             this.Controls.Add(this.paEst);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.paEstadistica);
+            this.KeyPreview = true;
             this.Name = "frmResumen_Suc";
             this.Text = "Resumen";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmResumen_Suc_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmResumen_Suc_KeyUp);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

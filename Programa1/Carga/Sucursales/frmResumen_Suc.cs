@@ -82,7 +82,7 @@
             this.Cursor = Cursors.Default;
         }
 
-        
+
 
         private void Entradas()
         {
@@ -134,12 +134,12 @@
         {
             grdEstadistica.MostrarDatos(Est.Completa(), true, false);
             grdEstadistica.AutosizeAll();
-            
+
         }
 
         private void paEstadistica_Click(object sender, EventArgs e)
         {
-            if( paEst.Visible == false)
+            if (paEst.Visible == false)
             {
                 Estadisticas();
             }
@@ -149,11 +149,11 @@
 
         private void grdEntradas_KeyUp(object sender, short e)
         {
-            if (e == Convert.ToInt32( Keys.Enter))
+            if (e == Convert.ToInt32(Keys.Enter))
             {
                 Cargar_DetalleEntrada();
             }
-            else 
+            else
             {
                 if (e == Convert.ToInt32(Keys.Delete))
                 {
@@ -164,7 +164,7 @@
                 }
             }
         }
-               
+
         private void grdEntradas_DobleClick(object sender, EventArgs e)
         {
             Cargar_DetalleEntrada();
@@ -207,7 +207,7 @@
         {
             Cargar_DetalleSalida();
         }
-        
+
         private void Cargar_DetalleSalida()
         {
             string s = grdSalidas.get_Texto(grdSalidas.Row, grdSalidas.get_ColIndex("SQL")).ToString();
@@ -234,6 +234,33 @@
             fr.grd.SumarCol(fr.grd.get_ColIndex("Kilos"), true);
             fr.grd.AutosizeAll();
             fr.ShowDialog();
+        }
+
+        private void frmResumen_Suc_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Add:
+                    if (grdSucursales.EsUltimaFila() == true)
+                    {
+                        grdSucursales.ActivarCelda(1, 0);
+                    }
+                    else
+                    {
+                        grdSucursales.ActivarCelda(grdSucursales.Row + 1, 0);
+                    }
+                    break;
+                case Keys.Subtract:
+                    if (grdSucursales.Row == 1)
+                    {
+                        grdSucursales.ActivarCelda(grdSucursales.Rows - 1, 0);
+                    }
+                    else
+                    {
+                        grdSucursales.ActivarCelda(grdSucursales.Row - 1, 0);
+                    }
+                    break;
+            }
         }
     }
 }
