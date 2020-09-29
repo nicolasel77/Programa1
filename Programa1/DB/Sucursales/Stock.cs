@@ -62,6 +62,28 @@
             return dt;
         }
 
+        public Double Stock_Carne(string filtro )
+        {
+            object d = 0;
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);            
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(Kilos) FROM vw_Stock WHERE {filtro}  AND ID_Tipo=1", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                conexionSql.Open();
+
+                d = comandoSql.ExecuteScalar();
+            }
+            catch (Exception)
+            {
+                d = 0;
+            }
+
+            return Convert.ToDouble(d);
+        }
+
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);

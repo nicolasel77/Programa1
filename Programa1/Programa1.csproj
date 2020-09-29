@@ -177,6 +177,12 @@
     <Compile Include="Carga\Proveedores\frmDevoluciones.Designer.cs">
       <DependentUpon>frmDevoluciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Sucursales\frmDetalle_Resumen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmDetalle_Resumen.Designer.cs">
+      <DependentUpon>frmDetalle_Resumen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Sucursales\frmGastos_Sucursales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +230,12 @@
     </Compile>
     <Compile Include="Carga\Sucursales\frmStock.Designer.cs">
       <DependentUpon>frmStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmStock_Carne.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmStock_Carne.Designer.cs">
+      <DependentUpon>frmStock_Carne.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Sucursales\frmTraslados.cs">
       <SubType>Form</SubType>
@@ -404,6 +416,7 @@
     <Compile Include="DB\Tesoreria\SubTipo_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Tipo_Entradas.cs" />
     <Compile Include="DB\Tesoreria\Tipo_Gastos.cs" />
+    <Compile Include="DB\Varios\Datos_Genericos.cs" />
     <Compile Include="DB\Varios\Localidades.cs" />
     <Compile Include="DB\Proveedores\Compras.cs" />
     <Compile Include="DB\Proveedores\Devoluciones.cs" />
@@ -503,6 +516,9 @@
     <EmbeddedResource Include="Carga\Proveedores\frmDevoluciones.resx">
       <DependentUpon>frmDevoluciones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sucursales\frmDetalle_Resumen.resx">
+      <DependentUpon>frmDetalle_Resumen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmGastos_Sucursales.resx">
       <DependentUpon>frmGastos_Sucursales.cs</DependentUpon>
     </EmbeddedResource>
@@ -526,6 +542,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmStock.resx">
       <DependentUpon>frmStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sucursales\frmStock_Carne.resx">
+      <DependentUpon>frmStock_Carne.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmTraslados.resx">
       <DependentUpon>frmTraslados.cs</DependentUpon>

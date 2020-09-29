@@ -1,6 +1,9 @@
 ﻿namespace Programa1.Carga
 {
+    using Programa1.Carga.Sucursales;
+    using Programa1.DB;
     using Programa1.DB.Sucursales;
+    using Programa1.DB.Varios;
     using System;
     using System.Data;
     using System.Drawing;
@@ -15,6 +18,14 @@
         public frmResumen_Suc()
         {
             InitializeComponent();
+        }
+
+        private void frmResumen_Suc_Load(object sender, EventArgs e)
+        {
+            // 13: Enter
+            // 46: Delete            
+            grdEntradas.TeclasManejadas = new int[] { 13, 46 };
+            grdSalidas.TeclasManejadas = new int[] { 13, 46 };
         }
 
 
@@ -111,7 +122,13 @@
         {
             Double k = Est.Carne_Kilos();
             lblCarneK.Text = $"Venta Carne: {k.ToString("N0")} kg";
+            Stock st = new Stock();
+            string cadena = $"Id_Sucursales={Suc} AND {cFechas1.Cadena()}";
+            k = st.Stock_Carne(cadena);
+            cmdStock_Carne.Text = $"STOCK CARNE:  {k:N1} kg";
+
         }
+
 
         private void Estadisticas()
         {
@@ -127,6 +144,96 @@
                 Estadisticas();
             }
             paEst.Visible = !paEst.Visible;
+        }
+
+
+        private void grdEntradas_KeyUp(object sender, short e)
+        {
+            if (e == Convert.ToInt32( Keys.Enter))
+            {
+                Cargar_DetalleEntrada();
+            }
+            else 
+            {
+                if (e == Convert.ToInt32(Keys.Delete))
+                {
+                    if (grdEntradas.Row > 0)
+                    {
+                        grdEntradas.BorrarFila();
+                    }
+                }
+            }
+        }
+               
+        private void grdEntradas_DobleClick(object sender, EventArgs e)
+        {
+            Cargar_DetalleEntrada();
+        }
+
+        private void Cargar_DetalleEntrada()
+        {
+            string s = grdEntradas.get_Texto(grdEntradas.Row, grdEntradas.get_ColIndex("SQL")).ToString();
+            if (s.Length > 0)
+            {
+                frmDetalle_Resumen fr = new frmDetalle_Resumen();
+                Datos_Genericos dg = new Datos_Genericos();
+                fr.grd.MostrarDatos(dg.Datos(s), true, false);
+                fr.grd.AutosizeAll();
+                fr.ShowDialog();
+                this.Focus();
+                grdEntradas.Focus();
+            }
+        }
+
+
+        private void grdSalidas_KeyUp(object sender, short e)
+        {
+            if (e == Convert.ToInt32(Keys.Enter))
+            {
+                Cargar_DetalleSalida();
+            }
+            else
+            {
+                if (e == Convert.ToInt32(Keys.Delete))
+                {
+                    if (grdSalidas.Row > 0)
+                    {
+                        grdSalidas.BorrarFila();
+                    }
+                }
+            }
+        }
+        private void grdSalidas_DobleClick(object sender, EventArgs e)
+        {
+            Cargar_DetalleSalida();
+        }
+        
+        private void Cargar_DetalleSalida()
+        {
+            string s = grdSalidas.get_Texto(grdSalidas.Row, grdSalidas.get_ColIndex("SQL")).ToString();
+            if (s.Length > 0)
+            {
+                frmDetalle_Resumen fr = new frmDetalle_Resumen();
+                Datos_Genericos dg = new Datos_Genericos();
+                fr.grd.MostrarDatos(dg.Datos(s), true, false);
+                fr.grd.AutosizeAll();
+                fr.ShowDialog();
+                this.Focus();
+                grdSalidas.Focus();
+            }
+        }
+
+        private void cmdStock_Carne_Click(object sender, EventArgs e)
+        {
+            frmStock_Carne fr = new frmStock_Carne();
+            Stock st = new Stock();
+
+            string cadena = $"Id_Sucursales={Suc} AND {cFechas1.Cadena()} AND ID_Tipo=1";
+
+            fr.grd.MostrarDatos(st.Datos(cadena), true, true);
+            fr.grd.SumarCol(fr.grd.get_ColIndex("Kilos"), true);
+            fr.grd.AutosizeAll();
+            fr.ShowDialog();
         }
     }
 }
