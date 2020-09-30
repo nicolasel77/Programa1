@@ -221,7 +221,7 @@ namespace Programa1.Carga.Tesoreria
                     }
                     break;
 
-                case 4: //SubTipo - Buscar Tabla
+                case 4: //SubTipo - Suc - Cliente
                     cEntradas.TE.Id_Tipo = Convert.ToInt32(grdEntradas.get_Texto(f, e_Tipo));
 
                     if (cEntradas.TE.Existe() == true)
@@ -332,6 +332,27 @@ namespace Programa1.Carga.Tesoreria
                     }
                     Totales();
                 }
+            }
+        }
+
+        private void grdEntradas_DobleClick(object sender, EventArgs e)
+        {
+            if (cEntradas.ID > 0)
+            {
+                SendKeys.Send("{ESC}");
+                Application.DoEvents();
+                cEntradas.Cargar();
+                frmCargarEntregas fr = new frmCargarEntregas();
+                fr.Detalle_Entregas.ID_Entradas = cEntradas.ID;
+                fr.lblSuc.Text = cEntradas.Descripcion;
+                fr.Cargar();
+                fr.ShowDialog();
+                cEntradas.Importe = fr.Detalle_Entregas.Total_IDEntradas(cEntradas.ID);
+                cEntradas.Actualizar();
+
+                grdEntradas.set_Texto(grdEntradas.Row, e_Importe, cEntradas.Importe);
+                this.Focus();
+                grdEntradas.Focus();
             }
         }
 
@@ -537,5 +558,7 @@ namespace Programa1.Carga.Tesoreria
         }
 
         #endregion
+
+        
     }
 }

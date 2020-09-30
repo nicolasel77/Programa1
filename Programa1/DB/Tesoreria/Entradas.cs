@@ -38,6 +38,19 @@
         public string Descripcion { get; set; }
         public Double Importe { get; set; }
 
+        public void Cargar()
+        {
+            DataTable dt = Datos("ID=" + ID);
+
+            if (dt != null)
+            {
+                Fecha = Convert.ToDateTime(dt.Rows[0]["Fecha"]);
+                TE.Id_Tipo = Convert.ToInt32(dt.Rows[0]["ID_TipoEntrada"]);
+                Id_SubTipoEntrada = Convert.ToInt32(dt.Rows[0]["ID_SubTipoEntrada"]);
+                Descripcion = Convert.ToString(dt.Rows[0]["Descripcion"]);
+                Importe = Convert.ToDouble(dt.Rows[0]["Importe"]); 
+            }
+        }
 
         #region " Editrar Datos "
         public void Actualizar()
