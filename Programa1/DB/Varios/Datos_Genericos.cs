@@ -33,5 +33,22 @@ namespace Programa1.DB.Varios
             return dt;
         }
 
+        public void Ejecutalee(string cadena)
+        {
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand(cadena, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                conexionSql.Open();
+                comandoSql.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                
+            }
+        }
     }
 }

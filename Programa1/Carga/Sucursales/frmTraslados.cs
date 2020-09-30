@@ -113,6 +113,7 @@ namespace Programa1.Carga
             this.Cursor = Cursors.WaitCursor;
 
             string s = Armar_Cadena();
+            if (s.Length == 0) { s = "Id=-1";  }
             grdTraslados.MostrarDatos(Traslados.Datos(s), true);
             formato_Grilla();
             Totales();
@@ -153,6 +154,8 @@ namespace Programa1.Carga
             grdTraslados.set_ColW(c_Kilos, 60);
             grdTraslados.set_ColW(c_TotalS, 80);
             grdTraslados.set_ColW(c_TotalE, 80);
+            grdTraslados.set_ColW(c_TotalE + 1, 0);
+            grdTraslados.set_ColW(c_TotalE + 2, 0);
 
             grdTraslados.Columnas[c_CostoS].Format = "C2";
             grdTraslados.Columnas[c_CostoE].Format = "C2";

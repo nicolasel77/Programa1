@@ -105,6 +105,7 @@
             this.Cursor = Cursors.WaitCursor;
 
             string s = Armar_Cadena();
+            if (s.Length == 0) { s = "Id=-1"; }
             grdStock.MostrarDatos(stock.Datos(s), true);
             formato_Grilla();
             Totales();
@@ -139,6 +140,7 @@
             grdStock.set_ColW(c_Costo, 60);
             grdStock.set_ColW(c_Kilos, 60);
             grdStock.set_ColW(c_Total, 80);
+            grdStock.set_ColW(c_Total + 1, 0);
 
             grdStock.Columnas[c_Costo].Format = "C2";
             grdStock.Columnas[c_Kilos].Format = "N2";

@@ -39,12 +39,15 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.cSucs = new Programa1.Controles.cSucursales();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.lstTipo = new System.Windows.Forms.ListBox();
             this.cFecha = new Programa1.Controles.cFechas();
-            this.cmdLimpiar = new System.Windows.Forms.Button();
-            this.cmdMostrar = new System.Windows.Forms.Button();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.paMostrar = new System.Windows.Forms.Panel();
+            this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
+            this.paLimpiar = new System.Windows.Forms.Panel();
+            this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -56,6 +59,9 @@
             this.splitContainer3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.paMostrar.SuspendLayout();
+            this.paLimpiar.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -178,7 +184,7 @@
             this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(3, 3);
-            this.cSucs.Mostrar_Tipo = false;
+            this.cSucs.Mostrar_Tipo = true;
             this.cSucs.Name = "cSucs";
             this.cSucs.Size = new System.Drawing.Size(290, 680);
             this.cSucs.TabIndex = 2;
@@ -196,6 +202,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(217, 298);
             this.panel1.TabIndex = 5;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.lstTipo);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(211, 292);
+            this.panel2.TabIndex = 5;
             // 
             // lstTipo
             // 
@@ -223,29 +240,8 @@
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(217, 376);
             this.cFecha.TabIndex = 3;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
-            // 
-            // cmdLimpiar
-            // 
-            this.cmdLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdLimpiar.Location = new System.Drawing.Point(1149, 689);
-            this.cmdLimpiar.Name = "cmdLimpiar";
-            this.cmdLimpiar.Size = new System.Drawing.Size(102, 23);
-            this.cmdLimpiar.TabIndex = 4;
-            this.cmdLimpiar.Text = "Limpiar Grilla";
-            this.cmdLimpiar.UseVisualStyleBackColor = true;
-            this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
-            // 
-            // cmdMostrar
-            // 
-            this.cmdMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdMostrar.Location = new System.Drawing.Point(1257, 689);
-            this.cmdMostrar.Name = "cmdMostrar";
-            this.cmdMostrar.Size = new System.Drawing.Size(102, 23);
-            this.cmdMostrar.TabIndex = 4;
-            this.cmdMostrar.Text = "Mostrar";
-            this.cmdMostrar.UseVisualStyleBackColor = true;
-            this.cmdMostrar.Click += new System.EventHandler(this.CmdMostrar_Click);
             // 
             // tiMensaje
             // 
@@ -253,25 +249,75 @@
             this.tiMensaje.Interval = 8000;
             this.tiMensaje.Tick += new System.EventHandler(this.TiMensaje_Tick);
             // 
-            // panel2
+            // panel3
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.lstTipo);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(211, 292);
-            this.panel2.TabIndex = 5;
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.paMostrar);
+            this.panel3.Controls.Add(this.paLimpiar);
+            this.panel3.Location = new System.Drawing.Point(770, 688);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(592, 27);
+            this.panel3.TabIndex = 8;
+            // 
+            // paMostrar
+            // 
+            this.paMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.paMostrar.Controls.Add(this.cmdMostrar);
+            this.paMostrar.Location = new System.Drawing.Point(412, 2);
+            this.paMostrar.Name = "paMostrar";
+            this.paMostrar.Size = new System.Drawing.Size(177, 25);
+            this.paMostrar.TabIndex = 5;
+            // 
+            // cmdMostrar
+            // 
+            this.cmdMostrar.AutoSize = true;
+            this.cmdMostrar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdMostrar.Depth = 0;
+            this.cmdMostrar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdMostrar.Location = new System.Drawing.Point(0, 0);
+            this.cmdMostrar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdMostrar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdMostrar.Name = "cmdMostrar";
+            this.cmdMostrar.Primary = false;
+            this.cmdMostrar.Size = new System.Drawing.Size(177, 25);
+            this.cmdMostrar.TabIndex = 0;
+            this.cmdMostrar.Text = "Mostrar";
+            this.cmdMostrar.UseVisualStyleBackColor = true;
+            this.cmdMostrar.Click += new System.EventHandler(this.CmdMostrar_Click);
+            // 
+            // paLimpiar
+            // 
+            this.paLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.paLimpiar.Controls.Add(this.cmdLimpiar);
+            this.paLimpiar.Location = new System.Drawing.Point(228, 2);
+            this.paLimpiar.Name = "paLimpiar";
+            this.paLimpiar.Size = new System.Drawing.Size(177, 25);
+            this.paLimpiar.TabIndex = 5;
+            // 
+            // cmdLimpiar
+            // 
+            this.cmdLimpiar.AutoSize = true;
+            this.cmdLimpiar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdLimpiar.Depth = 0;
+            this.cmdLimpiar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdLimpiar.Location = new System.Drawing.Point(0, 0);
+            this.cmdLimpiar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdLimpiar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdLimpiar.Name = "cmdLimpiar";
+            this.cmdLimpiar.Primary = false;
+            this.cmdLimpiar.Size = new System.Drawing.Size(177, 25);
+            this.cmdLimpiar.TabIndex = 0;
+            this.cmdLimpiar.Text = "Limpiar";
+            this.cmdLimpiar.UseVisualStyleBackColor = true;
+            this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
             // 
             // frmReintegros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 715);
-            this.Controls.Add(this.cmdMostrar);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.cmdLimpiar);
             this.Controls.Add(this.statusStrip1);
             this.KeyPreview = true;
             this.Name = "frmReintegros";
@@ -289,6 +335,11 @@
             this.splitContainer3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.paMostrar.ResumeLayout(false);
+            this.paMostrar.PerformLayout();
+            this.paLimpiar.ResumeLayout(false);
+            this.paLimpiar.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -300,15 +351,18 @@
         private Grilla2.SpeedGrilla grdReintegros;
         private System.Windows.Forms.Timer tiMensaje;
         private System.Windows.Forms.ToolStripStatusLabel lblMensaje;
-        private System.Windows.Forms.Button cmdMostrar;
         private Controles.cSucursales cSucs;
         private Controles.cFechas cFecha;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.Button cmdLimpiar;
         private System.Windows.Forms.ToolStripStatusLabel lblTotal;
         private System.Windows.Forms.ToolStripStatusLabel lblCant;
         private System.Windows.Forms.ListBox lstTipo;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel paMostrar;
+        private MaterialSkin.Controls.MaterialFlatButton cmdMostrar;
+        private System.Windows.Forms.Panel paLimpiar;
+        private MaterialSkin.Controls.MaterialFlatButton cmdLimpiar;
     }
 }

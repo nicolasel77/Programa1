@@ -152,7 +152,7 @@
             grdVenta.set_ColW(c_CostoCompra, 60);
             grdVenta.set_ColW(c_Kilos, 60);
             grdVenta.set_ColW(c_TotalCompra, 80);
-            grdVenta.set_ColW(c_TotalVenta, 80);
+            grdVenta.set_ColW(c_TotalVenta, 80);            
 
             grdVenta.Columnas[c_CostoVenta].Format = "C2";
             grdVenta.Columnas[c_CostoCompra].Format = "C2";

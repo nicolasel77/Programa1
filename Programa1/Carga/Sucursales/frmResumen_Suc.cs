@@ -74,12 +74,15 @@
 
         private void Cargar_Datos()
         {
-            this.Cursor = Cursors.WaitCursor;
-            Entradas();
-            Salidas();
-            Cuentas();
-            if (paEst.Visible == true) { Estadisticas(); }
-            this.Cursor = Cursors.Default;
+            if (grdSucursales.Row > 0)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                Entradas();
+                Salidas();
+                Cuentas();
+                if (paEst.Visible == true) { Estadisticas(); }
+                this.Cursor = Cursors.Default; 
+            }
         }
 
 

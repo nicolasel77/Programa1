@@ -5,9 +5,11 @@
     using Programa1.Carga.Hacienda;
     using Programa1.Carga.Precios;
     using Programa1.Carga.Sebero;
+    using Programa1.DB.Tesoreria;
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
+    using Excel = Microsoft.Office.Interop.Excel;
 
     public partial class frmMain : Form
     {
@@ -52,6 +54,7 @@
 
                 Form frmResumen_Suc = new Programa1.Carga.frmResumen_Suc();
                 frmResumen_Suc.MdiParent = this;
+                frmResumen_Suc.Disposed += FrmResumen_Suc_Dispose;
                 forms.Add(frmResumen_Suc);
                 frmResumen_Suc.Show();
                 frmResumen_Suc.WindowState = FormWindowState.Minimized;
@@ -59,9 +62,76 @@
             }
         }
 
+        private void FrmResumen_Suc_Dispose(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Resumen_Suc")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmResumen_Suc")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+
+        }
         private void PruebaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmMailMenuItem_Click(null, null);
+            OpenFileDialog ecsel = new OpenFileDialog();
+            ecsel.InitialDirectory = "D:\\Proyectos\\Excels A Importar";
+            ecsel.ShowDialog();
+
+            if (ecsel.FileName.Length > 0 )
+            {
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(ecsel.FileName);
+                Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+
+
+                Entradas en = new Entradas();
+                Detalle_Entregas de = new Detalle_Entregas();
+
+                int fila_actual = 2;
+                int idviejo = 0;
+                for (int i = 2; i <= 5336; i++)
+                {
+                    en.Fecha = Convert.ToDateTime(xlRange.Cells[i, 1].value);
+                    en.TE.Id_Tipo = Convert.ToInt32(xlRange.Cells[i, 2].value);
+                    en.Id_SubTipoEntrada = Convert.ToInt32(xlRange.Cells[i, 4].value);
+                    en.Descripcion = Convert.ToString(xlRange.Cells[i, 5].value);
+                    en.Importe = Convert.ToDouble(xlRange.Cells[i, 6].value);
+                    idviejo = Convert.ToInt32(xlRange.Cells[i, 7].value);
+
+                    en.Agregar();
+
+                    for (int n = fila_actual; n <= 11947; n++)
+                    {
+
+                        if (idviejo == Convert.ToInt32(xlRange.Cells[n, 13].value))
+                        {
+                            de.ID_Entradas = en.ID;
+                            de.Fecha = Convert.ToDateTime(xlRange.Cells[n, 11].value);
+                            de.Importe = Convert.ToDouble(xlRange.Cells[n, 12].value);
+
+                            de.Agregar();
+
+                            fila_actual++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                } 
+            }
         }
 
         private void FrmMail_Disposed(object sender, EventArgs e)

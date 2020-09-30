@@ -29,10 +29,14 @@
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.cFecha = new Programa1.Controles.cFechas();
             this.cSeberos = new Programa1.Controles.cSeberos();
-            this.cmdLimpiar = new System.Windows.Forms.Button();
-            this.cmdMostrar = new System.Windows.Forms.Button();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
-            this.cmdExcel = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.paCambio = new System.Windows.Forms.Panel();
+            this.cmdExcel = new MaterialSkin.Controls.MaterialFlatButton();
+            this.paMostrar = new System.Windows.Forms.Panel();
+            this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
+            this.paLimpiar = new System.Windows.Forms.Panel();
+            this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -50,6 +54,10 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.paCambio.SuspendLayout();
+            this.paMostrar.SuspendLayout();
+            this.paLimpiar.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -186,7 +194,7 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.cProds);
             this.splitContainer3.Size = new System.Drawing.Size(476, 453);
-            this.splitContainer3.SplitterDistance = 232;
+            this.splitContainer3.SplitterDistance = 231;
             this.splitContainer3.TabIndex = 0;
             // 
             // cSucursal
@@ -197,9 +205,9 @@
             this.cSucursal.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucursal.Filtro_In = "";
             this.cSucursal.Location = new System.Drawing.Point(3, 3);
-            this.cSucursal.Mostrar_Tipo = false;
+            this.cSucursal.Mostrar_Tipo = true;
             this.cSucursal.Name = "cSucursal";
-            this.cSucursal.Size = new System.Drawing.Size(229, 447);
+            this.cSucursal.Size = new System.Drawing.Size(228, 447);
             this.cSucursal.TabIndex = 3;
             this.cSucursal.Titulo = "Sucursales";
             this.cSucursal.Valor_Actual = -1;
@@ -211,11 +219,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cProds.BackColor = System.Drawing.Color.Gainsboro;
+            this.cProds.Filtrar_Ver = true;
             this.cProds.Filtro_In = "";
             this.cProds.Location = new System.Drawing.Point(2, 3);
             this.cProds.Mostrar_Tipo = true;
             this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(235, 447);
+            this.cProds.Size = new System.Drawing.Size(236, 447);
             this.cProds.TabIndex = 1;
             this.cProds.Titulo = "Productos";
             this.cProds.Valor_Actual = -1;
@@ -243,11 +252,14 @@
             this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.cFecha.Location = new System.Drawing.Point(3, 0);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(202, 230);
             this.cFecha.TabIndex = 3;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
             // 
             // cSeberos
@@ -265,54 +277,107 @@
             this.cSeberos.Valor_Actual = -1;
             this.cSeberos.Cambio_Seleccion += new System.EventHandler(this.Csuc_Cambio_Seleccion);
             // 
-            // cmdLimpiar
-            // 
-            this.cmdLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdLimpiar.Location = new System.Drawing.Point(1030, 690);
-            this.cmdLimpiar.Name = "cmdLimpiar";
-            this.cmdLimpiar.Size = new System.Drawing.Size(100, 23);
-            this.cmdLimpiar.TabIndex = 4;
-            this.cmdLimpiar.Text = "Limpiar Grilla";
-            this.cmdLimpiar.UseVisualStyleBackColor = true;
-            this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
-            // 
-            // cmdMostrar
-            // 
-            this.cmdMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdMostrar.Location = new System.Drawing.Point(1136, 690);
-            this.cmdMostrar.Name = "cmdMostrar";
-            this.cmdMostrar.Size = new System.Drawing.Size(100, 23);
-            this.cmdMostrar.TabIndex = 4;
-            this.cmdMostrar.Text = "Mostrar";
-            this.cmdMostrar.UseVisualStyleBackColor = true;
-            this.cmdMostrar.Click += new System.EventHandler(this.CmdMostrar_Click);
-            // 
             // tiMensaje
             // 
             this.tiMensaje.Enabled = true;
             this.tiMensaje.Interval = 8000;
             this.tiMensaje.Tick += new System.EventHandler(this.TiMensaje_Tick);
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.paCambio);
+            this.panel1.Controls.Add(this.paMostrar);
+            this.panel1.Controls.Add(this.paLimpiar);
+            this.panel1.Location = new System.Drawing.Point(644, 688);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(592, 27);
+            this.panel1.TabIndex = 9;
+            // 
+            // paCambio
+            // 
+            this.paCambio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.paCambio.Controls.Add(this.cmdExcel);
+            this.paCambio.Location = new System.Drawing.Point(44, 2);
+            this.paCambio.Name = "paCambio";
+            this.paCambio.Size = new System.Drawing.Size(177, 25);
+            this.paCambio.TabIndex = 5;
+            // 
             // cmdExcel
             // 
-            this.cmdExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdExcel.Location = new System.Drawing.Point(924, 690);
+            this.cmdExcel.AutoSize = true;
+            this.cmdExcel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdExcel.Depth = 0;
+            this.cmdExcel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdExcel.Location = new System.Drawing.Point(0, 0);
+            this.cmdExcel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdExcel.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdExcel.Name = "cmdExcel";
-            this.cmdExcel.Size = new System.Drawing.Size(100, 23);
-            this.cmdExcel.TabIndex = 4;
+            this.cmdExcel.Primary = false;
+            this.cmdExcel.Size = new System.Drawing.Size(177, 25);
+            this.cmdExcel.TabIndex = 0;
             this.cmdExcel.Text = "Excel";
             this.cmdExcel.UseVisualStyleBackColor = true;
-            this.cmdExcel.Click += new System.EventHandler(this.CmdLimpiar_Click);
+            // 
+            // paMostrar
+            // 
+            this.paMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.paMostrar.Controls.Add(this.cmdMostrar);
+            this.paMostrar.Location = new System.Drawing.Point(412, 2);
+            this.paMostrar.Name = "paMostrar";
+            this.paMostrar.Size = new System.Drawing.Size(177, 25);
+            this.paMostrar.TabIndex = 5;
+            // 
+            // cmdMostrar
+            // 
+            this.cmdMostrar.AutoSize = true;
+            this.cmdMostrar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdMostrar.Depth = 0;
+            this.cmdMostrar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdMostrar.Location = new System.Drawing.Point(0, 0);
+            this.cmdMostrar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdMostrar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdMostrar.Name = "cmdMostrar";
+            this.cmdMostrar.Primary = false;
+            this.cmdMostrar.Size = new System.Drawing.Size(177, 25);
+            this.cmdMostrar.TabIndex = 0;
+            this.cmdMostrar.Text = "Mostrar";
+            this.cmdMostrar.UseVisualStyleBackColor = true;
+            this.cmdMostrar.Click += new System.EventHandler(this.CmdMostrar_Click);
+            // 
+            // paLimpiar
+            // 
+            this.paLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.paLimpiar.Controls.Add(this.cmdLimpiar);
+            this.paLimpiar.Location = new System.Drawing.Point(228, 2);
+            this.paLimpiar.Name = "paLimpiar";
+            this.paLimpiar.Size = new System.Drawing.Size(177, 25);
+            this.paLimpiar.TabIndex = 5;
+            // 
+            // cmdLimpiar
+            // 
+            this.cmdLimpiar.AutoSize = true;
+            this.cmdLimpiar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdLimpiar.Depth = 0;
+            this.cmdLimpiar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdLimpiar.Location = new System.Drawing.Point(0, 0);
+            this.cmdLimpiar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdLimpiar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdLimpiar.Name = "cmdLimpiar";
+            this.cmdLimpiar.Primary = false;
+            this.cmdLimpiar.Size = new System.Drawing.Size(177, 25);
+            this.cmdLimpiar.TabIndex = 0;
+            this.cmdLimpiar.Text = "Limpiar";
+            this.cmdLimpiar.UseVisualStyleBackColor = true;
+            this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
             // 
             // frmCargaSebo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1239, 715);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.cmdMostrar);
-            this.Controls.Add(this.cmdExcel);
-            this.Controls.Add(this.cmdLimpiar);
             this.Controls.Add(this.statusStrip1);
             this.KeyPreview = true;
             this.Name = "frmCargaSebo";
@@ -336,6 +401,13 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.paCambio.ResumeLayout(false);
+            this.paCambio.PerformLayout();
+            this.paMostrar.ResumeLayout(false);
+            this.paMostrar.PerformLayout();
+            this.paLimpiar.ResumeLayout(false);
+            this.paLimpiar.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -348,17 +420,21 @@
         private Controles.cProductos cProds;
         private System.Windows.Forms.Timer tiMensaje;
         private System.Windows.Forms.ToolStripStatusLabel lblMensaje;
-        private System.Windows.Forms.Button cmdMostrar;
         private Controles.cSeberos cSeberos;
         private Controles.cFechas cFecha;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.Button cmdLimpiar;
         private System.Windows.Forms.ToolStripStatusLabel lblCant;
         private System.Windows.Forms.ToolStripStatusLabel lblKilos;
         private Controles.cSucursales cSucursal;
         private System.Windows.Forms.ToolStripStatusLabel lblTotalE;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.Button cmdExcel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel paCambio;
+        private MaterialSkin.Controls.MaterialFlatButton cmdExcel;
+        private System.Windows.Forms.Panel paMostrar;
+        private MaterialSkin.Controls.MaterialFlatButton cmdMostrar;
+        private System.Windows.Forms.Panel paLimpiar;
+        private MaterialSkin.Controls.MaterialFlatButton cmdLimpiar;
     }
 }

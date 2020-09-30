@@ -51,7 +51,7 @@
             this.grd.Cols = 10;
             this.grd.DataMember = "";
             this.grd.DataSource = null;
-            this.grd.EnableEdicion = true;
+            this.grd.EnableEdicion = false;
             this.grd.Encabezado = "";
             this.grd.fColor = System.Drawing.SystemColors.Control;
             this.grd.FixCols = 0;
