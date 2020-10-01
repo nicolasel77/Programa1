@@ -26,6 +26,8 @@
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Single Precio { get; set; }
 
+
+        #region " Devolver Datos "
         public Single Buscar()
         {
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -83,10 +85,10 @@
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-                      
+
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT Id, Nombre, 0.0 Precio FROM Productos WHERE Id_Tipo=2 AND Ver=1 ORDER BY Id" , conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT Id, Nombre, 0.0 Precio FROM Productos WHERE Id_Tipo=2 AND Ver=1 ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -101,14 +103,14 @@
             return dt;
         }
 
-        public DataTable Fechas_Men()
+        public DataTable Fechas(int tipo, int top = 50)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT Fecha FROM vw_PreciosSucursales WHERE Id_Tipo=2 GROUP BY Fecha ORDER BY Fecha DESC", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP {top} Fecha FROM vw_PreciosSucursales WHERE Id_Tipo={tipo} GROUP BY Fecha ORDER BY Fecha DESC", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -123,6 +125,52 @@
             return dt;
         }
 
+        public DataTable Precios_CarneListaKilos()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Precios_CarneListaKilos ORDER BY ID_Productos", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        public DataTable Precios_Formulas()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Precios_Formulas ORDER BY ID_Productos", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        #endregion
+
+        #region " Editar Datos "
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -191,6 +239,7 @@
             {
                 MessageBox.Show(e.Message, "Error");
             }
-        }
+        } 
+        #endregion
     }
 }

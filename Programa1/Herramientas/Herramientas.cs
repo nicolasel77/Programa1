@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -63,14 +64,38 @@ namespace Programa1.Herramientas
             return a;
         }
        
-        public void Llenar_List(ListBox ls, DataTable dt)
+        public void Llenar_List(ListBox ls, DataTable dt, string formato = "")
         {
             ls.Items.Clear();
             if (dt != null)
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    ls.Items.Add($"{dr[0]}. {dr[1]}");
+                    if (dt.Columns.Count > 1)
+                    {
+                        ls.Items.Add($"{dr[0]}. {dr[1]}");
+                    }
+                    else
+                    {
+                        if (formato.Length> 0)
+                        {
+                            if (dt.Columns[0].DataType == typeof(DateTime))
+                            {
+                                DateTime d = Convert.ToDateTime(dr[0]);
+                                ls.Items.Add(d.ToString(formato));
+                            }
+                            else
+                            {
+                                ls.Items.Add($"{dr[0]}");
+                            }
+                            
+                        }
+                        else
+                        {
+                            ls.Items.Add($"{dr[0]}");
+                        }
+                    }
+                    
                 }
             }
         }

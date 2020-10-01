@@ -24,7 +24,7 @@ namespace Programa1.Carga.Precios
             grd.set_ColW(0, 60);
             grd.set_ColW(1, 300);
 
-            lstFechas.DataSource = precios.Fechas_Men();
+            lstFechas.DataSource = precios.Fechas(2);
             lstFechas.DisplayMember = "Fecha";
             lstFechas.ValueMember = "Fecha";
         }

@@ -1538,5 +1538,53 @@
                 }
             }
         }
+
+        private void carneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPrecios_Carne")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmPrecios_Carne");
+                t.Text = "Precios_Carne";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmPrecios_Carne = new Programa1.Carga.Precios.frmPrecios_Carne();
+                frmPrecios_Carne.MdiParent = this;
+                frmPrecios_Carne.Disposed += FrmPrecios_Carne_Disposed;
+                forms.Add(frmPrecios_Carne);
+                frmPrecios_Carne.Show();
+                frmPrecios_Carne.WindowState = FormWindowState.Minimized;
+                frmPrecios_Carne.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmPrecios_Carne_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Precios_Carne")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPrecios_Carne")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }
