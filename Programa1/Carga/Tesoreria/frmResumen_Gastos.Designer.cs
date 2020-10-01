@@ -33,9 +33,11 @@
             this.lblTipo = new MaterialSkin.Controls.MaterialLabel();
             this.lblSubTipo = new MaterialSkin.Controls.MaterialLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.lst = new System.Windows.Forms.ComboBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.lst = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lstGrupos = new System.Windows.Forms.ListBox();
+            this.cmdGrupos = new Programa1.Controles.cBoton();
             this.cFechas1 = new Programa1.Controles.cFechas();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -127,21 +129,6 @@
             this.splitContainer1.SplitterDistance = 782;
             this.splitContainer1.TabIndex = 4;
             // 
-            // lst
-            // 
-            this.lst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.lst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lst.FormattingEnabled = true;
-            this.lst.Location = new System.Drawing.Point(0, -24);
-            this.lst.Name = "lst";
-            this.lst.Size = new System.Drawing.Size(276, 426);
-            this.lst.TabIndex = 0;
-            this.lst.SelectedIndexChanged += new System.EventHandler(this.lst_SelectedIndexChanged);
-            this.lst.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lst_KeyUp);
-            // 
             // splitContainer2
             // 
             this.splitContainer2.BackColor = System.Drawing.Color.Gainsboro;
@@ -158,12 +145,29 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer2.Panel2.Controls.Add(this.lstGrupos);
+            this.splitContainer2.Panel2.Controls.Add(this.cmdGrupos);
             this.splitContainer2.Panel2.Controls.Add(this.lblSubTipo);
             this.splitContainer2.Panel2.Controls.Add(this.cFechas1);
             this.splitContainer2.Panel2.Controls.Add(this.lblTipo);
             this.splitContainer2.Size = new System.Drawing.Size(276, 664);
-            this.splitContainer2.SplitterDistance = 410;
+            this.splitContainer2.SplitterDistance = 413;
             this.splitContainer2.TabIndex = 4;
+            // 
+            // lst
+            // 
+            this.lst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.lst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lst.FormattingEnabled = true;
+            this.lst.Location = new System.Drawing.Point(0, -24);
+            this.lst.Name = "lst";
+            this.lst.Size = new System.Drawing.Size(276, 429);
+            this.lst.TabIndex = 0;
+            this.lst.SelectedIndexChanged += new System.EventHandler(this.lst_SelectedIndexChanged);
+            this.lst.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lst_KeyUp);
             // 
             // panel1
             // 
@@ -176,6 +180,30 @@
             this.panel1.Size = new System.Drawing.Size(1075, 679);
             this.panel1.TabIndex = 5;
             // 
+            // lstGrupos
+            // 
+            this.lstGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstGrupos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstGrupos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstGrupos.FormattingEnabled = true;
+            this.lstGrupos.ItemHeight = 16;
+            this.lstGrupos.Location = new System.Drawing.Point(112, 39);
+            this.lstGrupos.Name = "lstGrupos";
+            this.lstGrupos.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstGrupos.Size = new System.Drawing.Size(161, 192);
+            this.lstGrupos.TabIndex = 5;
+            this.lstGrupos.Visible = false;
+            // 
+            // cmdGrupos
+            // 
+            this.cmdGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGrupos.Location = new System.Drawing.Point(142, 3);
+            this.cmdGrupos.Name = "cmdGrupos";
+            this.cmdGrupos.Size = new System.Drawing.Size(131, 30);
+            this.cmdGrupos.TabIndex = 4;
+            this.cmdGrupos.Texto = "Grupos";
+            this.cmdGrupos.Click += new System.EventHandler(this.cmdGrupos_Click);
+            // 
             // cFechas1
             // 
             this.cFechas1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -186,7 +214,7 @@
             this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFechas1.Mostrar = 0;
             this.cFechas1.Name = "cFechas1";
-            this.cFechas1.Size = new System.Drawing.Size(276, 210);
+            this.cFechas1.Size = new System.Drawing.Size(276, 207);
             this.cFechas1.TabIndex = 1;
             this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
@@ -201,6 +229,7 @@
             this.KeyPreview = true;
             this.Name = "frmResumen_Gastos";
             this.Text = "Resumen";
+            this.Load += new System.EventHandler(this.frmResumen_Gastos_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -224,5 +253,7 @@
         private System.Windows.Forms.ComboBox lst;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Panel panel1;
+        private Controles.cBoton cmdGrupos;
+        private System.Windows.Forms.ListBox lstGrupos;
     }
 }

@@ -53,7 +53,9 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Faena WHERE NBoleta=" + nBoleta.NBoleta, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT ID, Fecha, ID_Categorias, Nombre_Categoria, ID_Frigorificos, Nombre_Frigorifico" +
+                    ", NRomaneo, Tropa, ID_Productos, Nombre_Producto, Recupero, Kilos" +
+                    " FROM vw_Faena WHERE NBoleta=" + nBoleta.NBoleta, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

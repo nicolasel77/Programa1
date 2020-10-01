@@ -339,6 +339,12 @@
     <Compile Include="Carga\Tesoreria\frmTipos_Gastos.Designer.cs">
       <DependentUpon>frmTipos_Gastos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controles\cBoton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\cBoton.Designer.cs">
+      <DependentUpon>cBoton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controles\cFechas.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -593,6 +599,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmTipos_Gastos.resx">
       <DependentUpon>frmTipos_Gastos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\cBoton.resx">
+      <DependentUpon>cBoton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cFechas.resx">
       <DependentUpon>cFechas.cs</DependentUpon>

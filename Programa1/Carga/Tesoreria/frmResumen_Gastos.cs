@@ -81,7 +81,7 @@ namespace Programa1.Carga.Tesoreria
                         else
                         {
                             dt = Gastos.Detalles_Rango($"Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}");
-                        }                        
+                        }
                     }
                     else
                     {
@@ -148,7 +148,7 @@ namespace Programa1.Carga.Tesoreria
                             {
                                 cadena = $"Id_TipoGastos={Tipo} AND ID_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}";
                             }
-                            
+
                         }
                         else
                         {
@@ -253,10 +253,10 @@ namespace Programa1.Carga.Tesoreria
                         Detalle = h.Codigo_Seleccionado(lst.Text);
 
                         string cadena = $"Id_TipoGastos={ Tipo} AND ID_DetalleGastos={ Detalle } AND {cFechas1.Cadena()} ";
-                        
+
                         if (SubTipo > 0) { cadena = $"Id_TipoGastos={ Tipo} AND ID_SubTipoGastos={ SubTipo } AND ID_DetalleGastos={ Detalle } AND {cFechas1.Cadena()} "; }
 
-                        
+
                         grdGastos.MostrarDatos(Gastos.TotalPorDetalle(cadena, true), true, true);
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
@@ -270,8 +270,8 @@ namespace Programa1.Carga.Tesoreria
                         string cadena = $"Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}";
 
                         if (SubTipo > 0) { cadena = $"Id_TipoGastos={ Tipo} AND ID_SubTipoGastos={ SubTipo } AND {cFechas1.Cadena()} "; }
-                                                
-                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(cadena,true), true, true);
+
+                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(cadena, true), true, true);
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
                         grdGastos.AutosizeAll();
@@ -341,5 +341,20 @@ namespace Programa1.Carga.Tesoreria
             }
         }
 
+        private void cmdGrupos_Click(object sender, EventArgs e)
+        {
+            lstGrupos.Visible = !lstGrupos.Visible;
+        }
+
+        private void cmdGrupos_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmResumen_Gastos_Load(object sender, EventArgs e)
+        {
+            DataTable dt = Gastos.TG.grupoS.Datos();
+            h.Llenar_List(lstGrupos, dt);            
+        }
     }
 }

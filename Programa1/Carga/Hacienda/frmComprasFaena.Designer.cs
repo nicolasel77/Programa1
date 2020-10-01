@@ -38,10 +38,13 @@
             this.lblCKilos = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCInt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip3 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblATotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.grdAgregados = new Grilla2.SpeedGrilla();
-            this.grdBoletas = new Grilla2.SpeedGrilla();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.grdFaena = new Grilla2.SpeedGrilla();
+            this.cmdColumnas = new Programa1.Controles.cBoton();
             this.label2 = new System.Windows.Forms.Label();
             this.grdRomaneos = new Grilla2.SpeedGrilla();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -51,11 +54,9 @@
             this.lblTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRendimiento = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCostoCarne = new System.Windows.Forms.ToolStripStatusLabel();
+            this.grdBoletas = new Grilla2.SpeedGrilla();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
-            this.statusStrip3 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblATotal = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -65,6 +66,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.statusStrip2.SuspendLayout();
+            this.statusStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
@@ -74,7 +76,6 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
-            this.statusStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -114,7 +115,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.statusStrip3);
             this.splitContainer2.Panel2.Controls.Add(this.grdAgregados);
             this.splitContainer2.Size = new System.Drawing.Size(795, 255);
-            this.splitContainer2.SplitterDistance = 558;
+            this.splitContainer2.SplitterDistance = 458;
             this.splitContainer2.TabIndex = 2;
             // 
             // grdCompras
@@ -149,7 +150,7 @@
             this.grdCompras.Redraw = true;
             this.grdCompras.Row = 0;
             this.grdCompras.Rows = 50;
-            this.grdCompras.Size = new System.Drawing.Size(552, 221);
+            this.grdCompras.Size = new System.Drawing.Size(452, 221);
             this.grdCompras.TabIndex = 2;
             // 
             // statusStrip2
@@ -163,7 +164,7 @@
             this.lblCInt});
             this.statusStrip2.Location = new System.Drawing.Point(0, 227);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(558, 28);
+            this.statusStrip2.Size = new System.Drawing.Size(458, 28);
             this.statusStrip2.TabIndex = 1;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -205,6 +206,31 @@
             this.lblCInt.Text = "Integración:";
             this.lblCInt.Click += new System.EventHandler(this.LblCant_Click);
             // 
+            // statusStrip3
+            // 
+            this.statusStrip3.AutoSize = false;
+            this.statusStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel5,
+            this.lblATotal});
+            this.statusStrip3.Location = new System.Drawing.Point(0, 227);
+            this.statusStrip3.Name = "statusStrip3";
+            this.statusStrip3.Size = new System.Drawing.Size(333, 28);
+            this.statusStrip3.TabIndex = 4;
+            this.statusStrip3.Text = "statusStrip3";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.ForeColor = System.Drawing.Color.Red;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(0, 23);
+            // 
+            // lblATotal
+            // 
+            this.lblATotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblATotal.Name = "lblATotal";
+            this.lblATotal.Size = new System.Drawing.Size(49, 23);
+            this.lblATotal.Text = "Totales";
+            // 
             // grdAgregados
             // 
             this.grdAgregados.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
@@ -235,44 +261,8 @@
             this.grdAgregados.Redraw = true;
             this.grdAgregados.Row = 0;
             this.grdAgregados.Rows = 50;
-            this.grdAgregados.Size = new System.Drawing.Size(233, 255);
+            this.grdAgregados.Size = new System.Drawing.Size(333, 255);
             this.grdAgregados.TabIndex = 3;
-            // 
-            // grdBoletas
-            // 
-            this.grdBoletas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdBoletas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdBoletas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdBoletas.AutoResize = false;
-            this.grdBoletas.bColor = System.Drawing.SystemColors.Window;
-            this.grdBoletas.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.grdBoletas.bFColor = System.Drawing.SystemColors.WindowText;
-            this.grdBoletas.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdBoletas.Col = 0;
-            this.grdBoletas.Cols = 10;
-            this.grdBoletas.DataMember = "";
-            this.grdBoletas.DataSource = null;
-            this.grdBoletas.EnableEdicion = true;
-            this.grdBoletas.Encabezado = "";
-            this.grdBoletas.fColor = System.Drawing.SystemColors.Control;
-            this.grdBoletas.FixCols = 0;
-            this.grdBoletas.FixRows = 0;
-            this.grdBoletas.FuenteEncabezado = null;
-            this.grdBoletas.FuentePieDePagina = null;
-            this.grdBoletas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdBoletas.Location = new System.Drawing.Point(3, 21);
-            this.grdBoletas.MenuActivado = false;
-            this.grdBoletas.Name = "grdBoletas";
-            this.grdBoletas.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdBoletas.PintarFilaSel = true;
-            this.grdBoletas.Redraw = true;
-            this.grdBoletas.Row = 0;
-            this.grdBoletas.Rows = 50;
-            this.grdBoletas.Size = new System.Drawing.Size(243, 642);
-            this.grdBoletas.TabIndex = 1;
-            this.grdBoletas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdBoletas_CambioFila);
             // 
             // splitContainer3
             // 
@@ -288,10 +278,11 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer3.Panel2.Controls.Add(this.cmdColumnas);
             this.splitContainer3.Panel2.Controls.Add(this.label2);
             this.splitContainer3.Panel2.Controls.Add(this.grdRomaneos);
             this.splitContainer3.Size = new System.Drawing.Size(795, 379);
-            this.splitContainer3.SplitterDistance = 538;
+            this.splitContainer3.SplitterDistance = 598;
             this.splitContainer3.TabIndex = 2;
             // 
             // grdFaena
@@ -324,8 +315,19 @@
             this.grdFaena.Redraw = true;
             this.grdFaena.Row = 0;
             this.grdFaena.Rows = 50;
-            this.grdFaena.Size = new System.Drawing.Size(538, 379);
+            this.grdFaena.Size = new System.Drawing.Size(598, 379);
             this.grdFaena.TabIndex = 0;
+            // 
+            // cmdColumnas
+            // 
+            this.cmdColumnas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdColumnas.Location = new System.Drawing.Point(3, 347);
+            this.cmdColumnas.Name = "cmdColumnas";
+            this.cmdColumnas.Size = new System.Drawing.Size(187, 29);
+            this.cmdColumnas.TabIndex = 2;
+            this.cmdColumnas.Texto = "Columnas";
+            this.cmdColumnas.Click += new System.EventHandler(this.cBoton1_Click);
             // 
             // label2
             // 
@@ -371,7 +373,7 @@
             this.grdRomaneos.Redraw = true;
             this.grdRomaneos.Row = 0;
             this.grdRomaneos.Rows = 50;
-            this.grdRomaneos.Size = new System.Drawing.Size(247, 178);
+            this.grdRomaneos.Size = new System.Drawing.Size(187, 178);
             this.grdRomaneos.TabIndex = 0;
             // 
             // statusStrip1
@@ -436,6 +438,42 @@
             this.lblCostoCarne.Size = new System.Drawing.Size(42, 23);
             this.lblCostoCarne.Text = "Carne";
             // 
+            // grdBoletas
+            // 
+            this.grdBoletas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdBoletas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdBoletas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdBoletas.AutoResize = false;
+            this.grdBoletas.bColor = System.Drawing.SystemColors.Window;
+            this.grdBoletas.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdBoletas.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdBoletas.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdBoletas.Col = 0;
+            this.grdBoletas.Cols = 10;
+            this.grdBoletas.DataMember = "";
+            this.grdBoletas.DataSource = null;
+            this.grdBoletas.EnableEdicion = true;
+            this.grdBoletas.Encabezado = "";
+            this.grdBoletas.fColor = System.Drawing.SystemColors.Control;
+            this.grdBoletas.FixCols = 0;
+            this.grdBoletas.FixRows = 0;
+            this.grdBoletas.FuenteEncabezado = null;
+            this.grdBoletas.FuentePieDePagina = null;
+            this.grdBoletas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdBoletas.Location = new System.Drawing.Point(3, 21);
+            this.grdBoletas.MenuActivado = false;
+            this.grdBoletas.Name = "grdBoletas";
+            this.grdBoletas.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdBoletas.PintarFilaSel = true;
+            this.grdBoletas.Redraw = true;
+            this.grdBoletas.Row = 0;
+            this.grdBoletas.Rows = 50;
+            this.grdBoletas.Size = new System.Drawing.Size(243, 642);
+            this.grdBoletas.TabIndex = 1;
+            this.grdBoletas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdBoletas_CambioFila);
+            // 
             // splitContainer5
             // 
             this.splitContainer5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -468,31 +506,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Boletas";
             // 
-            // statusStrip3
-            // 
-            this.statusStrip3.AutoSize = false;
-            this.statusStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel5,
-            this.lblATotal});
-            this.statusStrip3.Location = new System.Drawing.Point(0, 227);
-            this.statusStrip3.Name = "statusStrip3";
-            this.statusStrip3.Size = new System.Drawing.Size(233, 28);
-            this.statusStrip3.TabIndex = 4;
-            this.statusStrip3.Text = "statusStrip3";
-            // 
-            // toolStripStatusLabel5
-            // 
-            this.toolStripStatusLabel5.ForeColor = System.Drawing.Color.Red;
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(0, 23);
-            // 
-            // lblATotal
-            // 
-            this.lblATotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblATotal.Name = "lblATotal";
-            this.lblATotal.Size = new System.Drawing.Size(49, 23);
-            this.lblATotal.Text = "Totales";
-            // 
             // frmComprasFaena
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -512,6 +525,8 @@
             this.splitContainer2.ResumeLayout(false);
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
+            this.statusStrip3.ResumeLayout(false);
+            this.statusStrip3.PerformLayout();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             this.splitContainer3.Panel2.PerformLayout();
@@ -524,8 +539,6 @@
             this.splitContainer5.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
-            this.statusStrip3.ResumeLayout(false);
-            this.statusStrip3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -559,5 +572,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblATotal;
         private System.Windows.Forms.SplitContainer splitContainer5;
         private System.Windows.Forms.Label label1;
+        private Controles.cBoton cmdColumnas;
     }
 }

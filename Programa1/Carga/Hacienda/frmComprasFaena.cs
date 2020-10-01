@@ -32,7 +32,6 @@
         private Byte A_Plazo;
 
         private Byte F_Id;
-        private Byte F_NBoleta;
         private Byte F_Fecha;
         private Byte F_Cat;
         private Byte F_NRomaneo;
@@ -122,7 +121,6 @@
             grdFaena.MostrarDatos(hc.Faena.Datos(), true, true);
 
             F_Id = Convert.ToByte(grdFaena.get_ColIndex("Id"));
-            F_NBoleta = Convert.ToByte(grdFaena.get_ColIndex("NBoleta"));
             F_Fecha = Convert.ToByte(grdFaena.get_ColIndex("Fecha"));
             F_Cat = Convert.ToByte(grdFaena.get_ColIndex("Id_Categorias"));
             F_NRomaneo = Convert.ToByte(grdFaena.get_ColIndex("NRomaneo"));
@@ -136,7 +134,6 @@
             grdFaena.set_Texto(0, F_Prod + 1, "Desc");
 
             grdFaena.set_ColW(F_Id, 0);
-            grdFaena.set_ColW(F_NBoleta, 0);
             grdFaena.set_ColW(F_Fecha, 60);
             grdFaena.set_ColW(F_Cat, 40);
             grdFaena.set_ColW(F_Cat + 1, 50);
@@ -246,6 +243,11 @@
             {
                 lblCant.BackColor = System.Drawing.SystemColors.Control;                
             }
+        }
+
+        private void cBoton1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("hola");
         }
     }
 }
