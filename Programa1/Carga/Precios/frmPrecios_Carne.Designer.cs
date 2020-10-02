@@ -235,6 +235,7 @@
             this.lstFechas.Name = "lstFechas";
             this.lstFechas.Size = new System.Drawing.Size(100, 540);
             this.lstFechas.TabIndex = 1;
+            this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
             // 
             // panel3
             // 
@@ -264,7 +265,7 @@
             this.grdSucursales.Cols = 10;
             this.grdSucursales.DataMember = "";
             this.grdSucursales.DataSource = null;
-            this.grdSucursales.EnableEdicion = true;
+            this.grdSucursales.EnableEdicion = false;
             this.grdSucursales.Encabezado = "";
             this.grdSucursales.fColor = System.Drawing.SystemColors.Control;
             this.grdSucursales.FixCols = 0;
@@ -276,7 +277,7 @@
             this.grdSucursales.MenuActivado = false;
             this.grdSucursales.Name = "grdSucursales";
             this.grdSucursales.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdSucursales.PintarFilaSel = true;
+            this.grdSucursales.PintarFilaSel = false;
             this.grdSucursales.Redraw = true;
             this.grdSucursales.Row = 0;
             this.grdSucursales.Rows = 50;
