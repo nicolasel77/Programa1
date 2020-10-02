@@ -44,6 +44,8 @@
             this.grdSucursales = new Grilla2.SpeedGrilla();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grdFormulas = new Grilla2.SpeedGrilla();
+            this.lblSuc = new MaterialSkin.Controls.MaterialLabel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.cmdGuardar = new Programa1.Controles.cBoton();
             this.cmdImprimir = new Programa1.Controles.cBoton();
             this.cmdFormulas = new Programa1.Controles.cBoton();
@@ -64,6 +66,7 @@
             this.splitContainer3.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -89,34 +92,34 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblPromedio,
             this.lblIntegracion,
             this.lblBifes});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 670);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 666);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(445, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(445, 26);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblPromedio
             // 
             this.lblPromedio.Name = "lblPromedio";
-            this.lblPromedio.Size = new System.Drawing.Size(103, 17);
+            this.lblPromedio.Size = new System.Drawing.Size(124, 21);
             this.lblPromedio.Text = "Promedio: 0,000";
             // 
             // lblIntegracion
             // 
             this.lblIntegracion.Name = "lblIntegracion";
-            this.lblIntegracion.Size = new System.Drawing.Size(98, 17);
+            this.lblIntegracion.Size = new System.Drawing.Size(118, 21);
             this.lblIntegracion.Text = "Costo Int: 0,000";
             // 
             // lblBifes
             // 
             this.lblBifes.Name = "lblBifes";
-            this.lblBifes.Size = new System.Drawing.Size(38, 17);
-            this.lblBifes.Text = "Bifes:";
+            this.lblBifes.Size = new System.Drawing.Size(85, 21);
+            this.lblBifes.Text = "Bifes Desh:";
             // 
             // panel1
             // 
@@ -162,8 +165,10 @@
             this.grdProductos.Redraw = true;
             this.grdProductos.Row = 0;
             this.grdProductos.Rows = 50;
-            this.grdProductos.Size = new System.Drawing.Size(433, 658);
+            this.grdProductos.Size = new System.Drawing.Size(433, 657);
             this.grdProductos.TabIndex = 0;
+            this.grdProductos.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdProductos_Editado);
+            this.grdProductos.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdProductos_KeyUp);
             // 
             // splFormulas
             // 
@@ -198,6 +203,7 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer3.Panel1.Controls.Add(this.panel4);
             this.splitContainer3.Panel1.Controls.Add(this.label1);
             this.splitContainer3.Panel1.Controls.Add(this.lstFechas);
             this.splitContainer3.Panel1.Controls.Add(this.cmdGuardar);
@@ -231,9 +237,9 @@
             this.lstFechas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstFechas.FormattingEnabled = true;
             this.lstFechas.ItemHeight = 20;
-            this.lstFechas.Location = new System.Drawing.Point(6, 19);
+            this.lstFechas.Location = new System.Drawing.Point(5, 19);
             this.lstFechas.Name = "lstFechas";
-            this.lstFechas.Size = new System.Drawing.Size(100, 540);
+            this.lstFechas.Size = new System.Drawing.Size(100, 500);
             this.lstFechas.TabIndex = 1;
             this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
             // 
@@ -283,6 +289,7 @@
             this.grdSucursales.Rows = 50;
             this.grdSucursales.Size = new System.Drawing.Size(467, 680);
             this.grdSucursales.TabIndex = 0;
+            this.grdSucursales.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSucursales_CambioFila);
             // 
             // panel2
             // 
@@ -330,6 +337,31 @@
             this.grdFormulas.Rows = 50;
             this.grdFormulas.Size = new System.Drawing.Size(580, 126);
             this.grdFormulas.TabIndex = 0;
+            // 
+            // lblSuc
+            // 
+            this.lblSuc.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblSuc.Depth = 0;
+            this.lblSuc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblSuc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblSuc.Location = new System.Drawing.Point(0, 0);
+            this.lblSuc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSuc.Name = "lblSuc";
+            this.lblSuc.Size = new System.Drawing.Size(106, 56);
+            this.lblSuc.TabIndex = 1;
+            this.lblSuc.Text = "Sucursal";
+            this.lblSuc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.lblSuc);
+            this.panel4.Location = new System.Drawing.Point(1, 522);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(106, 56);
+            this.panel4.TabIndex = 2;
             // 
             // cmdGuardar
             // 
@@ -399,6 +431,7 @@
             this.splitContainer3.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -424,5 +457,7 @@
         private Controles.cBoton cmdGuardar;
         private Controles.cBoton cmdImprimir;
         private Controles.cBoton cmdFormulas;
+        private System.Windows.Forms.Panel panel4;
+        private MaterialSkin.Controls.MaterialLabel lblSuc;
     }
 }
