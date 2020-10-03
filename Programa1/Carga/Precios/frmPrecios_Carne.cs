@@ -193,19 +193,56 @@ namespace Programa1.Carga.Precios
 
         private void Calcular_Formulas()
         {
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+
             for (int i = 1; i <= grdProductos.Rows - 1; i++)
             {
                 int vProd = Convert.ToInt32(grdFormulas.get_Texto(i, grdFormulas.get_ColIndex("ID_Productos")));
                 string cadena = Convert.ToString(grdFormulas.get_Texto(i, grdFormulas.get_ColIndex("Formula")));
                 Single precio = 0;
-                
+
                 if (vProd != 0 & cadena.Length > 0)
                 {
-                    // Buscar expersiones regulares para cambiar los [n] x precio
+                    int n = cadena.IndexOf("[");
+
+                    while (n > -1)
+                    {
+                        int f = cadena.IndexOf("]");
+
+                        string testoAReemp = cadena.Substring(n + 1, (f - n) - 1);
+                        Single nPrecio = Buscar_PrecioEnGrilla(Convert.ToInt32(testoAReemp));
+
+                        cadena = cadena.Replace(cadena.Substring(n, f - n + 1), nPrecio.ToString("N3"));
+
+                        n = cadena.IndexOf("[", n + 1);
+                    }
+                    try
+                    {
+                        precio = Convert.ToSingle(h.Calcular_Texto(cadena));
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine(ex.Message);
+                    }
+                    //Console.WriteLine();
                 }
 
                 grdFormulas.set_Texto(i, grdFormulas.get_ColIndex("Precio"), precio);
             }
+        }
+        private Single Buscar_PrecioEnGrilla(int prod)
+        {
+            Single precio = 0;
+            for (int i = 1; i <= grdProductos.Rows - 1; i++)
+            {
+                if (Convert.ToInt32(grdProductos.get_Texto(i, grdProductos.get_ColIndex("Id_Productos"))) == prod)
+                {
+                    precio = Convert.ToSingle(grdProductos.get_Texto(i, grdProductos.get_ColIndex("Precio")));
+                    break;
+                }
+            }
+            return precio;
         }
         private void grdProductos_Editado(short f, short c, object a)
         {
