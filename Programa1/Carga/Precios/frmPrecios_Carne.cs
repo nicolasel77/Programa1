@@ -51,6 +51,7 @@ namespace Programa1.Carga.Precios
             grdFormulas.MostrarDatos(dt, true, true);
             grdFormulas.set_Texto(0, 0, "ID");
             grdFormulas.AutosizeAll();
+            grdFormulas.set_ColW(grdFormulas.get_ColIndex("Precio"), 80);
 
             dt = pr.Fechas(1);
             Herramientas.Herramientas h = new Herramientas.Herramientas();
@@ -128,12 +129,11 @@ namespace Programa1.Carga.Precios
 
         private void Cargar_Precios()
         {
+            this.Cursor = Cursors.WaitCursor;
             if (pr.Sucursal.Id != 0)
             {
                 if (lstFechas.SelectedIndex != -1)
                 {
-                    this.Cursor = Cursors.WaitCursor;
-
                     for (int i = 1; i <= grdProductos.Rows - 1; i++)
                     {
                         int vProd = Convert.ToInt32(grdProductos.get_Texto(i, grdProductos.get_ColIndex("ID_Productos")));
@@ -151,10 +151,10 @@ namespace Programa1.Carga.Precios
                         }
                     }
 
-                    Calcular_Precios();
-                    this.Cursor = Cursors.Default;
+                    Calcular_Precios();                    
                 }
             }
+            this.Cursor = Cursors.Default;
         }
 
         private void Calcular_Precios()
@@ -203,6 +203,9 @@ namespace Programa1.Carga.Precios
 
                 if (vProd != 0 & cadena.Length > 0)
                 {
+                    //Reemplazo la integracion por la calculada.
+                    cadena = cadena.Replace("[1]", lblIntegracion.Text.Substring(5));
+
                     int n = cadena.IndexOf("[");
 
                     while (n > -1)
@@ -231,6 +234,7 @@ namespace Programa1.Carga.Precios
                 grdFormulas.set_Texto(i, grdFormulas.get_ColIndex("Precio"), precio);
             }
         }
+
         private Single Buscar_PrecioEnGrilla(int prod)
         {
             Single precio = 0;
@@ -244,6 +248,7 @@ namespace Programa1.Carga.Precios
             }
             return precio;
         }
+
         private void grdProductos_Editado(short f, short c, object a)
         {
             int cPr = grdProductos.get_ColIndex("Precio");
