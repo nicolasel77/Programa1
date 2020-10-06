@@ -38,14 +38,14 @@
             this.grdProductos = new Grilla2.SpeedGrilla();
             this.splFormulas = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblSuc = new MaterialSkin.Controls.MaterialLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.lstFechas = new System.Windows.Forms.ListBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.grdSucursales = new Grilla2.SpeedGrilla();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grdFormulas = new Grilla2.SpeedGrilla();
-            this.lblSuc = new MaterialSkin.Controls.MaterialLabel();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.cmdGuardar = new Programa1.Controles.cBoton();
             this.cmdImprimir = new Programa1.Controles.cBoton();
             this.cmdFormulas = new Programa1.Controles.cBoton();
@@ -64,9 +64,9 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -218,6 +218,31 @@
             this.splitContainer3.SplitterDistance = 109;
             this.splitContainer3.TabIndex = 1;
             // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.lblSuc);
+            this.panel4.Location = new System.Drawing.Point(1, 522);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(106, 56);
+            this.panel4.TabIndex = 2;
+            // 
+            // lblSuc
+            // 
+            this.lblSuc.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblSuc.Depth = 0;
+            this.lblSuc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblSuc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblSuc.Location = new System.Drawing.Point(0, 0);
+            this.lblSuc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSuc.Name = "lblSuc";
+            this.lblSuc.Size = new System.Drawing.Size(106, 56);
+            this.lblSuc.TabIndex = 1;
+            this.lblSuc.Text = "Sucursal";
+            this.lblSuc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -338,40 +363,17 @@
             this.grdFormulas.Size = new System.Drawing.Size(580, 126);
             this.grdFormulas.TabIndex = 0;
             // 
-            // lblSuc
-            // 
-            this.lblSuc.BackColor = System.Drawing.Color.Gainsboro;
-            this.lblSuc.Depth = 0;
-            this.lblSuc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblSuc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblSuc.Location = new System.Drawing.Point(0, 0);
-            this.lblSuc.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblSuc.Name = "lblSuc";
-            this.lblSuc.Size = new System.Drawing.Size(106, 56);
-            this.lblSuc.TabIndex = 1;
-            this.lblSuc.Text = "Sucursal";
-            this.lblSuc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.Controls.Add(this.lblSuc);
-            this.panel4.Location = new System.Drawing.Point(1, 522);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(106, 56);
-            this.panel4.TabIndex = 2;
-            // 
             // cmdGuardar
             // 
             this.cmdGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGuardar.Enabled = false;
             this.cmdGuardar.Location = new System.Drawing.Point(3, 584);
             this.cmdGuardar.Name = "cmdGuardar";
             this.cmdGuardar.Size = new System.Drawing.Size(103, 30);
             this.cmdGuardar.TabIndex = 0;
             this.cmdGuardar.Texto = "Guardar";
+            this.cmdGuardar.Click += new System.EventHandler(this.cmdGuardar_Click);
             // 
             // cmdImprimir
             // 
@@ -429,9 +431,9 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

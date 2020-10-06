@@ -14,7 +14,14 @@ namespace Programa1.Controles
 
         private void cmd_Click(object sender, EventArgs e)
         {
-            this.Click(sender, e);
+            try
+            {
+                if (this.Click != null) { this.Click(sender, e); }
+            }
+            catch (Exception er)
+            {
+
+            }
         }
 
         public string Texto

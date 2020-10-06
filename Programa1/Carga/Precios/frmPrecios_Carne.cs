@@ -151,7 +151,8 @@ namespace Programa1.Carga.Precios
                         }
                     }
 
-                    Calcular_Precios();                    
+                    Calcular_Precios();
+                    cmdGuardar.Enabled = true;
                 }
             }
             this.Cursor = Cursors.Default;
@@ -187,7 +188,7 @@ namespace Programa1.Carga.Precios
             lblPromedio.Text = "Promedio: " + ((tTotal / iKilos) - iInt).ToString("N3");
             lblIntegracion.Text = "Int: " + (tTotal / iKilos).ToString("N3");
 
-            Calcular_Formulas();            
+            Calcular_Formulas();
         }
 
         private void Calcular_Formulas()
@@ -195,7 +196,7 @@ namespace Programa1.Carga.Precios
             Herramientas.Herramientas h = new Herramientas.Herramientas();
 
             //lblProm.Text = FormatNumber(PrecioBifes * 0.70215, 2) '[(b/ancho+b/angosto)/2]*40.43/100+[(b/ancho+b/angosto)/2]
-            lblBifes.Text = "Bifes Desh: " + h.Calcular_Texto(Reemplazar_Precio( "(([28]+[29])*0,70215)")).ToString("N3");
+            lblBifes.Text = "Bifes Desh: " + h.Calcular_Texto(Reemplazar_Precio("(([28]+[29])*0,70215)")).ToString("N3");
 
             for (int i = 1; i <= grdProductos.Rows - 1; i++)
             {
@@ -283,6 +284,68 @@ namespace Programa1.Carga.Precios
                 {
                     grdProductos.ActivarCelda(grdProductos.Row + 1);
                 }
+            }
+        }
+
+        private void cmdGuardar_Click(object sender, EventArgs e)
+        {
+            frmGuardarPreciosCarne fr = new frmGuardarPreciosCarne();
+            fr.Cargar();
+
+            float integracion = Convert.ToSingle(grdSucursales.get_Texto(grdSucursales.Row, grdSucursales.get_ColIndex("Integracion")));
+            DateTime fecha = Convert.ToDateTime(lstFechas.Text);
+
+            fr.Seleccionar(integracion, fecha);
+            fr.ShowDialog();
+
+            if (fr.Guardar == true)
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                pr.Fecha = fr.mntFecha.SelectionStart.Date;
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+                foreach (string suc in fr.lstSucursales.SelectedItems)
+                {
+                    //Guardar todo por cada Sucursal
+                    pr.Sucursal.Id = h.Codigo_Seleccionado(suc);
+
+                    //Guardar primero la integracion
+                    pr.Producto.Id = 1;
+                    pr.Precio = integracion;
+                    pr.Agregar();
+
+                    //Guardar la Lista
+                    //Arranca en el 2 porque el costo de integracion es el calculado
+                    for (int i = 2; i <= grdProductos.Rows - 1; i++)
+                    {
+                        int prod = Convert.ToInt32((grdProductos.get_Texto(i, grdProductos.get_ColIndex("Id_Productos"))));
+
+                        if (prod != 0)
+                        {
+                            pr.Producto.Id = prod;
+                            pr.Precio = Convert.ToSingle((grdProductos.get_Texto(i, grdProductos.get_ColIndex("Precio"))));
+                            pr.Agregar();
+                        }
+                    }
+                    //Guardar Formulas
+                    for (int i = 1; i <= grdFormulas.Rows - 1; i++)
+                    {
+                        int prod = Convert.ToInt32((grdFormulas.get_Texto(i, grdFormulas.get_ColIndex("Id_Productos"))));
+
+                        if (prod != 0)
+                        {
+                            pr.Producto.Id = prod;
+                            pr.Precio = Convert.ToSingle((grdFormulas.get_Texto(i, grdFormulas.get_ColIndex("Precio"))));
+                            pr.Agregar();
+                        }
+                    }
+                }
+                lstFechas.Items.Clear();
+                DataTable dt = pr.Fechas(1);
+                h.Llenar_List(lstFechas, dt, "dd/MM/yyy");
+
+                this.Cursor = Cursors.Default;
             }
         }
     }

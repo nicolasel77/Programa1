@@ -126,6 +126,12 @@
     <Compile Include="Carga\Empleados\frmSueldos.Designer.cs">
       <DependentUpon>frmSueldos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Precios\frmGuardarPreciosCarne.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Precios\frmGuardarPreciosCarne.Designer.cs">
+      <DependentUpon>frmGuardarPreciosCarne.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Proveedores\frmAjustes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -497,6 +503,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Empleados\frmSueldos.resx">
       <DependentUpon>frmSueldos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Precios\frmGuardarPreciosCarne.resx">
+      <DependentUpon>frmGuardarPreciosCarne.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmAjustes.resx">
       <DependentUpon>frmAjustes.cs</DependentUpon>

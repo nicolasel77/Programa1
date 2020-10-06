@@ -190,6 +190,28 @@
 
             return dt;
         }
+
+        public DataTable Integraciones_Sucursales(bool Agrupado)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 50 Fecha, Precio AS Integracion FROM Precios_Sucursales WHERE Id_Productos=1 GROUP BY Fecha, Precio ORDER BY Fecha DESC, Precio ", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
         #endregion
 
         #region " Editar Datos "
@@ -224,13 +246,17 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Precio_Sucursales (Fecha, Id_Sucursales, Id_Productos, Precio) " +
-                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.Id}, {Precio.ToString().Replace(",", ".")} )", sql);
+                    new SqlCommand($"DELETE FROM Precios_Sucursales WHERE Fecha='{Fecha:MM/dd/yyy}' AND Id_Sucursales={Sucursal.Id} AND Id_Productos={Producto.Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
+
+                command.CommandText = $"INSERT INTO Precios_Sucursales (Fecha, Id_Sucursales, Id_Productos, Precio) " +
+                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.Id}, {Precio.ToString().Replace(",", ".")} )";                
+
+                d = command.ExecuteNonQuery();
 
                 sql.Close();
             }
