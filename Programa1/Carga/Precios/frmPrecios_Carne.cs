@@ -187,13 +187,15 @@ namespace Programa1.Carga.Precios
             lblPromedio.Text = "Promedio: " + ((tTotal / iKilos) - iInt).ToString("N3");
             lblIntegracion.Text = "Int: " + (tTotal / iKilos).ToString("N3");
 
-            Calcular_Formulas();
-            //lblProm.Text = FormatNumber(PrecioBifes * 0.70215, 2) '[(b/ancho+b/angosto)/2]*40.43/100+[(b/ancho+b/angosto)/2]
+            Calcular_Formulas();            
         }
 
         private void Calcular_Formulas()
         {
             Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+            //lblProm.Text = FormatNumber(PrecioBifes * 0.70215, 2) '[(b/ancho+b/angosto)/2]*40.43/100+[(b/ancho+b/angosto)/2]
+            lblBifes.Text = "Bifes Desh: " + h.Calcular_Texto(Reemplazar_Precio( "(([28]+[29])*0,70215)")).ToString("N3");
 
             for (int i = 1; i <= grdProductos.Rows - 1; i++)
             {
@@ -204,21 +206,7 @@ namespace Programa1.Carga.Precios
                 if (vProd != 0 & cadena.Length > 0)
                 {
                     //Reemplazo la integracion por la calculada.
-                    cadena = cadena.Replace("[1]", lblIntegracion.Text.Substring(5));
-
-                    int n = cadena.IndexOf("[");
-
-                    while (n > -1)
-                    {
-                        int f = cadena.IndexOf("]");
-
-                        string testoAReemp = cadena.Substring(n + 1, (f - n) - 1);
-                        Single nPrecio = Buscar_PrecioEnGrilla(Convert.ToInt32(testoAReemp));
-
-                        cadena = cadena.Replace(cadena.Substring(n, f - n + 1), nPrecio.ToString("N3"));
-
-                        n = cadena.IndexOf("[", n + 1);
-                    }
+                    cadena = Reemplazar_Precio(cadena);
                     try
                     {
                         precio = Convert.ToSingle(h.Calcular_Texto(cadena));
@@ -233,6 +221,27 @@ namespace Programa1.Carga.Precios
 
                 grdFormulas.set_Texto(i, grdFormulas.get_ColIndex("Precio"), precio);
             }
+        }
+
+        private string Reemplazar_Precio(string cadena)
+        {
+            cadena = cadena.Replace("[1]", lblIntegracion.Text.Substring(5));
+
+            int n = cadena.IndexOf("[");
+
+            while (n > -1)
+            {
+                int f = cadena.IndexOf("]");
+
+                string testoAReemp = cadena.Substring(n + 1, (f - n) - 1);
+                Single nPrecio = Buscar_PrecioEnGrilla(Convert.ToInt32(testoAReemp));
+
+                cadena = cadena.Replace(cadena.Substring(n, f - n + 1), nPrecio.ToString("N3"));
+
+                n = cadena.IndexOf("[", n + 1);
+            }
+
+            return cadena;
         }
 
         private Single Buscar_PrecioEnGrilla(int prod)
