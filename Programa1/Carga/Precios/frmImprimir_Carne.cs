@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Programa1.Carga.Precios
 {
@@ -27,7 +28,6 @@ namespace Programa1.Carga.Precios
 
             if (dt != null)
             {
-                lstListas.Items.Add("...Todas...");
                 foreach (DataRow dr in dt.Rows)
                 {
                     lstListas.Items.Add($"{dr[0]:dd/MM/yy}   {dr[1]:N3}");
@@ -39,11 +39,7 @@ namespace Programa1.Carga.Precios
         public void Seleccionar(Single integracion, DateTime fecha)
         {
             this.Cursor = Cursors.WaitCursor;
-            if (lstListas.SelectedIndex == 0)
-            {
-                lstSucursales.SelectedIndex = -1;
-            }
-            else
+            if (lstListas.SelectedIndex != -1)
             {
                 pr.Fecha = fecha;
                 pr.Producto.Id = 1;
@@ -56,10 +52,6 @@ namespace Programa1.Carga.Precios
                     {
                         lstSucursales.SetSelected(i, true);
                     }
-                    else
-                    {
-                        lstSucursales.SetSelected(i, false);
-                    }
                 }
             }
             this.Cursor = Cursors.Default;
@@ -67,28 +59,66 @@ namespace Programa1.Carga.Precios
 
         private void lstListas_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lstSucursales.SelectedIndex = -1;
+
             Single integ = 0; DateTime fecha = DateTime.Today;
-            if (lstListas.SelectedIndex != 0)
+            if (lstListas.SelectedIndex != -1)
             {
-                fecha = Convert.ToDateTime(lstListas.Text.Substring(0, 8));
-                integ = Convert.ToSingle(lstListas.Text.Substring(10));
+                foreach (string s in lstListas.SelectedItems)
+                {
+                    fecha = Convert.ToDateTime(s.Substring(0, 8));
+                    integ = Convert.ToSingle(s.Substring(10));
+                    Seleccionar(integ, fecha);
+                }
             }
-            Seleccionar(integ, fecha);
+
         }
 
         private void cmdImprimir_Click(object sender, EventArgs e)
         {
-            if (lstListas.SelectedIndex > -1)
+
+            this.Cursor = Cursors.WaitCursor;
+            Excel.Application xlApp = new Excel.Application();
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(AppContext.BaseDirectory + "\\Imprimir_Precios.xlsm");
+            // Ejecutar la macro
+            // Imprimir_Carne(ByVal Suc As Integer, ByVal Fecha As Date, ByVal Imp_Integracion As Boolean)
+
+            if (!chUltima.Checked)
             {
-                this.Cursor = Cursors.WaitCursor;
-                pr.Fecha = Convert.ToDateTime(lstListas.Text.Substring(0, 8));
+                if (lstListas.SelectedIndex > -1)
+                {
+                    foreach (string s in lstListas.SelectedItems)
+                    {
+                        pr.Fecha = Convert.ToDateTime(s.Substring(0, 8));
+                        if (lstSucursales.SelectedIndex != -1)
+                        {
+                            foreach (string suc in lstSucursales.SelectedItems)
+                            {
+                                pr.Sucursal.Id = Convert.ToInt32(h.Codigo_Seleccionado(suc));
+                                xlApp.Run("Imprimir_Carne", pr.Sucursal.Id, pr.Fecha, chIntegracion.Checked, false);
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i <= lstSucursales.Items.Count - 1; i++)
+                            {
+                                pr.Sucursal.Id = Convert.ToInt32(h.Codigo_Seleccionado(lstSucursales.Items[i].ToString()));
+                                xlApp.Run("Imprimir_Carne", pr.Sucursal.Id, pr.Fecha, chIntegracion.Checked, false);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                pr.Fecha =mntFecha.SelectionStart.Date;
 
                 if (lstSucursales.SelectedIndex != -1)
                 {
                     foreach (string suc in lstSucursales.SelectedItems)
                     {
                         pr.Sucursal.Id = Convert.ToInt32(h.Codigo_Seleccionado(suc));
-                        //pr.Borrar_Lista(1);
+                        xlApp.Run("Imprimir_Carne", pr.Sucursal.Id, pr.Fecha, chIntegracion.Checked, true);
                     }
                 }
                 else
@@ -96,11 +126,20 @@ namespace Programa1.Carga.Precios
                     for (int i = 0; i <= lstSucursales.Items.Count - 1; i++)
                     {
                         pr.Sucursal.Id = Convert.ToInt32(h.Codigo_Seleccionado(lstSucursales.Items[i].ToString()));
-                        //pr.Borrar_Lista(1);
+                        xlApp.Run("Imprimir_Carne", pr.Sucursal.Id, pr.Fecha, chIntegracion.Checked, true);
                     }
                 }
-                this.Close();
             }
+            xlApp.Run("Fin");
+            xlWorkbook.Close(false);
+            xlApp = null;
+            this.Close();
+
+        }
+
+        private void chUltima_CheckedChanged(object sender, EventArgs e)
+        {
+            mntFecha.Enabled = chUltima.Checked;
         }
     }
 }

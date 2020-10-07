@@ -30,10 +30,10 @@
         {
             this.lstSucursales = new System.Windows.Forms.ListBox();
             this.lstListas = new System.Windows.Forms.ListBox();
-            this.mntFecha = new System.Windows.Forms.MonthCalendar();
             this.chUltima = new MaterialSkin.Controls.MaterialCheckBox();
             this.chIntegracion = new MaterialSkin.Controls.MaterialCheckBox();
             this.cmdImprimir = new Programa1.Controles.cBoton();
+            this.mntFecha = new System.Windows.Forms.MonthCalendar();
             this.SuspendLayout();
             // 
             // lstSucursales
@@ -59,27 +59,20 @@
             this.lstListas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstListas.FormattingEnabled = true;
             this.lstListas.ItemHeight = 20;
-            this.lstListas.Location = new System.Drawing.Point(334, 181);
+            this.lstListas.Location = new System.Drawing.Point(334, 12);
             this.lstListas.Name = "lstListas";
             this.lstListas.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstListas.Size = new System.Drawing.Size(192, 340);
+            this.lstListas.Size = new System.Drawing.Size(192, 320);
             this.lstListas.TabIndex = 0;
             this.lstListas.SelectedIndexChanged += new System.EventHandler(this.lstListas_SelectedIndexChanged);
-            // 
-            // mntFecha
-            // 
-            this.mntFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.mntFecha.Location = new System.Drawing.Point(334, 12);
-            this.mntFecha.Name = "mntFecha";
-            this.mntFecha.TabIndex = 2;
             // 
             // chUltima
             // 
             this.chUltima.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chUltima.AutoSize = true;
             this.chUltima.Depth = 0;
-            this.chUltima.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.chUltima.Location = new System.Drawing.Point(334, 538);
+            this.chUltima.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chUltima.Location = new System.Drawing.Point(334, 358);
             this.chUltima.Margin = new System.Windows.Forms.Padding(0);
             this.chUltima.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chUltima.MouseState = MaterialSkin.MouseState.HOVER;
@@ -89,13 +82,14 @@
             this.chUltima.TabIndex = 3;
             this.chUltima.Text = "Última lista";
             this.chUltima.UseVisualStyleBackColor = true;
+            this.chUltima.CheckedChanged += new System.EventHandler(this.chUltima_CheckedChanged);
             // 
             // chIntegracion
             // 
             this.chIntegracion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chIntegracion.AutoSize = true;
             this.chIntegracion.Depth = 0;
-            this.chIntegracion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chIntegracion.Font = new System.Drawing.Font("Roboto", 10F);
             this.chIntegracion.Location = new System.Drawing.Point(333, 568);
             this.chIntegracion.Margin = new System.Windows.Forms.Padding(0);
             this.chIntegracion.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -117,14 +111,22 @@
             this.cmdImprimir.Texto = "Imprimir";
             this.cmdImprimir.Click += new System.EventHandler(this.cmdImprimir_Click);
             // 
+            // mntFecha
+            // 
+            this.mntFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.mntFecha.Enabled = false;
+            this.mntFecha.Location = new System.Drawing.Point(334, 397);
+            this.mntFecha.Name = "mntFecha";
+            this.mntFecha.TabIndex = 4;
+            // 
             // frmImprimir_Carne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 653);
+            this.Controls.Add(this.mntFecha);
             this.Controls.Add(this.chIntegracion);
             this.Controls.Add(this.chUltima);
-            this.Controls.Add(this.mntFecha);
             this.Controls.Add(this.cmdImprimir);
             this.Controls.Add(this.lstListas);
             this.Controls.Add(this.lstSucursales);
@@ -141,8 +143,8 @@
         private System.Windows.Forms.ListBox lstListas;
         private Controles.cBoton cmdImprimir;
         public System.Windows.Forms.ListBox lstSucursales;
-        public System.Windows.Forms.MonthCalendar mntFecha;
         private MaterialSkin.Controls.MaterialCheckBox chUltima;
         private MaterialSkin.Controls.MaterialCheckBox chIntegracion;
+        private System.Windows.Forms.MonthCalendar mntFecha;
     }
 }
