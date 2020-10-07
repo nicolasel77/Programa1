@@ -53,9 +53,7 @@ namespace Programa1.Carga.Precios
             grdFormulas.AutosizeAll();
             grdFormulas.set_ColW(grdFormulas.get_ColIndex("Precio"), 80);
 
-            dt = pr.Fechas(1);
-            Herramientas.Herramientas h = new Herramientas.Herramientas();
-            h.Llenar_List(lstFechas, dt, "dd/MM/yyy");
+            Cargar_Fechas();
 
             Colores.Add(grdSucursales.Styles.Add("0"));
             Colores.Add(grdSucursales.Styles.Add("1"));
@@ -88,6 +86,14 @@ namespace Programa1.Carga.Precios
         private void lstFechas_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            
+            Cargar_Sucursales();
+
+            this.Cursor = Cursors.Default;
+        }
+
+        private void Cargar_Sucursales()
+        {
             grdSucursales.MostrarDatos(pr.Integraciones_Sucursales(Convert.ToDateTime(lstFechas.Text)), true, false);
             grdSucursales.AutosizeAll();
 
@@ -111,8 +117,16 @@ namespace Programa1.Carga.Precios
             pr.Fecha = Convert.ToDateTime(lstFechas.Text);
 
             grdSucursales.Ordenar(Convert.ToInt16(grdSucursales.get_ColIndex("ID")));
-            this.Cursor = Cursors.Default;
+
             if (pr.Sucursal.Id != 0) { Cargar_Precios(); }
+        }
+        private void Cargar_Fechas()
+        {
+            lstFechas.Items.Clear();
+            DataTable dt = pr.Fechas(1);
+
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            h.Llenar_List(lstFechas, dt, "dd/MM/yyy");
         }
 
         private void grdSucursales_CambioFila(short Fila)
@@ -153,6 +167,7 @@ namespace Programa1.Carga.Precios
 
                     Calcular_Precios();
                     cmdGuardar.Enabled = true;
+                    cmdBorrar.Enabled = true;
                 }
             }
             this.Cursor = Cursors.Default;
@@ -302,12 +317,15 @@ namespace Programa1.Carga.Precios
             {
                 this.Cursor = Cursors.WaitCursor;
 
-                pr.Fecha = fr.mntFecha.SelectionStart.Date;
-                Herramientas.Herramientas h = new Herramientas.Herramientas();
+                pr.Fecha = fr.mntFecha.SelectionStart.Date;                
+
+                integracion = Convert.ToSingle(lblIntegracion.Text.Substring(5));
 
                 foreach (string suc in fr.lstSucursales.SelectedItems)
                 {
                     //Guardar todo por cada Sucursal
+                    Herramientas.Herramientas h = new Herramientas.Herramientas();
+
                     pr.Sucursal.Id = h.Codigo_Seleccionado(suc);
 
                     //Guardar primero la integracion
@@ -341,12 +359,25 @@ namespace Programa1.Carga.Precios
                         }
                     }
                 }
-                lstFechas.Items.Clear();
-                DataTable dt = pr.Fechas(1);
-                h.Llenar_List(lstFechas, dt, "dd/MM/yyy");
+
+                Cargar_Fechas();
+                Cargar_Sucursales();
 
                 this.Cursor = Cursors.Default;
             }
+        }        
+
+        private void cmdImprimir_Click(object sender, EventArgs e)
+        {
+            frmImprimir_Carne fr = new frmImprimir_Carne();
+            fr.ShowDialog();
+        }
+
+        private void cmdBorrar_Click(object sender, EventArgs e)
+        {
+            frmBorrar_Carne fr = new frmBorrar_Carne();
+            fr.ShowDialog();
+            Cargar_Fechas();
         }
     }
 }

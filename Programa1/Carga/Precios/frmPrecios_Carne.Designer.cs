@@ -42,14 +42,15 @@
             this.lblSuc = new MaterialSkin.Controls.MaterialLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.lstFechas = new System.Windows.Forms.ListBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.grdSucursales = new Grilla2.SpeedGrilla();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.grdFormulas = new Grilla2.SpeedGrilla();
             this.cmdGuardar = new Programa1.Controles.cBoton();
             this.cmdImprimir = new Programa1.Controles.cBoton();
             this.cmdFormulas = new Programa1.Controles.cBoton();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.grdSucursales = new Grilla2.SpeedGrilla();
             this.cmdCalcular = new Programa1.Controles.cBoton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.grdFormulas = new Grilla2.SpeedGrilla();
+            this.cmdBorrar = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -206,6 +207,7 @@
             this.splitContainer3.Panel1.Controls.Add(this.panel4);
             this.splitContainer3.Panel1.Controls.Add(this.label1);
             this.splitContainer3.Panel1.Controls.Add(this.lstFechas);
+            this.splitContainer3.Panel1.Controls.Add(this.cmdBorrar);
             this.splitContainer3.Panel1.Controls.Add(this.cmdGuardar);
             this.splitContainer3.Panel1.Controls.Add(this.cmdImprimir);
             this.splitContainer3.Panel1.Controls.Add(this.cmdFormulas);
@@ -223,9 +225,9 @@
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.Controls.Add(this.lblSuc);
-            this.panel4.Location = new System.Drawing.Point(1, 522);
+            this.panel4.Location = new System.Drawing.Point(0, 486);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(106, 56);
+            this.panel4.Size = new System.Drawing.Size(105, 56);
             this.panel4.TabIndex = 2;
             // 
             // lblSuc
@@ -233,12 +235,12 @@
             this.lblSuc.BackColor = System.Drawing.Color.Gainsboro;
             this.lblSuc.Depth = 0;
             this.lblSuc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblSuc.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblSuc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblSuc.Location = new System.Drawing.Point(0, 0);
             this.lblSuc.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblSuc.Name = "lblSuc";
-            this.lblSuc.Size = new System.Drawing.Size(106, 56);
+            this.lblSuc.Size = new System.Drawing.Size(105, 56);
             this.lblSuc.TabIndex = 1;
             this.lblSuc.Text = "Sucursal";
             this.lblSuc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -264,9 +266,43 @@
             this.lstFechas.ItemHeight = 20;
             this.lstFechas.Location = new System.Drawing.Point(5, 19);
             this.lstFechas.Name = "lstFechas";
-            this.lstFechas.Size = new System.Drawing.Size(100, 500);
+            this.lstFechas.Size = new System.Drawing.Size(100, 460);
             this.lstFechas.TabIndex = 1;
             this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
+            // 
+            // cmdGuardar
+            // 
+            this.cmdGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGuardar.Enabled = false;
+            this.cmdGuardar.Location = new System.Drawing.Point(3, 548);
+            this.cmdGuardar.Name = "cmdGuardar";
+            this.cmdGuardar.Size = new System.Drawing.Size(103, 30);
+            this.cmdGuardar.TabIndex = 0;
+            this.cmdGuardar.Texto = "Guardar";
+            this.cmdGuardar.Click += new System.EventHandler(this.cmdGuardar_Click);
+            // 
+            // cmdImprimir
+            // 
+            this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdImprimir.Location = new System.Drawing.Point(3, 620);
+            this.cmdImprimir.Name = "cmdImprimir";
+            this.cmdImprimir.Size = new System.Drawing.Size(103, 30);
+            this.cmdImprimir.TabIndex = 0;
+            this.cmdImprimir.Texto = "Imprimir";
+            this.cmdImprimir.Click += new System.EventHandler(this.cmdImprimir_Click);
+            // 
+            // cmdFormulas
+            // 
+            this.cmdFormulas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdFormulas.Location = new System.Drawing.Point(3, 656);
+            this.cmdFormulas.Name = "cmdFormulas";
+            this.cmdFormulas.Size = new System.Drawing.Size(103, 30);
+            this.cmdFormulas.TabIndex = 0;
+            this.cmdFormulas.Texto = "Fórmulas";
+            this.cmdFormulas.Click += new System.EventHandler(this.cmdFormulas_Click);
             // 
             // panel3
             // 
@@ -316,6 +352,15 @@
             this.grdSucursales.TabIndex = 0;
             this.grdSucursales.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSucursales_CambioFila);
             // 
+            // cmdCalcular
+            // 
+            this.cmdCalcular.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdCalcular.Location = new System.Drawing.Point(424, 140);
+            this.cmdCalcular.Name = "cmdCalcular";
+            this.cmdCalcular.Size = new System.Drawing.Size(165, 19);
+            this.cmdCalcular.TabIndex = 1;
+            this.cmdCalcular.Texto = "Calcular";
+            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -363,47 +408,17 @@
             this.grdFormulas.Size = new System.Drawing.Size(580, 126);
             this.grdFormulas.TabIndex = 0;
             // 
-            // cmdGuardar
+            // cmdBorrar
             // 
-            this.cmdGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.cmdBorrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdGuardar.Enabled = false;
-            this.cmdGuardar.Location = new System.Drawing.Point(3, 584);
-            this.cmdGuardar.Name = "cmdGuardar";
-            this.cmdGuardar.Size = new System.Drawing.Size(103, 30);
-            this.cmdGuardar.TabIndex = 0;
-            this.cmdGuardar.Texto = "Guardar";
-            this.cmdGuardar.Click += new System.EventHandler(this.cmdGuardar_Click);
-            // 
-            // cmdImprimir
-            // 
-            this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdImprimir.Location = new System.Drawing.Point(3, 620);
-            this.cmdImprimir.Name = "cmdImprimir";
-            this.cmdImprimir.Size = new System.Drawing.Size(103, 30);
-            this.cmdImprimir.TabIndex = 0;
-            this.cmdImprimir.Texto = "Imprimir";
-            // 
-            // cmdFormulas
-            // 
-            this.cmdFormulas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdFormulas.Location = new System.Drawing.Point(3, 656);
-            this.cmdFormulas.Name = "cmdFormulas";
-            this.cmdFormulas.Size = new System.Drawing.Size(103, 30);
-            this.cmdFormulas.TabIndex = 0;
-            this.cmdFormulas.Texto = "Fórmulas";
-            this.cmdFormulas.Click += new System.EventHandler(this.cmdFormulas_Click);
-            // 
-            // cmdCalcular
-            // 
-            this.cmdCalcular.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdCalcular.Location = new System.Drawing.Point(424, 140);
-            this.cmdCalcular.Name = "cmdCalcular";
-            this.cmdCalcular.Size = new System.Drawing.Size(165, 19);
-            this.cmdCalcular.TabIndex = 1;
-            this.cmdCalcular.Texto = "Calcular";
+            this.cmdBorrar.Enabled = false;
+            this.cmdBorrar.Location = new System.Drawing.Point(3, 584);
+            this.cmdBorrar.Name = "cmdBorrar";
+            this.cmdBorrar.Size = new System.Drawing.Size(103, 30);
+            this.cmdBorrar.TabIndex = 0;
+            this.cmdBorrar.Texto = "Borrar";
+            this.cmdBorrar.Click += new System.EventHandler(this.cmdBorrar_Click);
             // 
             // frmPrecios_Carne
             // 
@@ -461,5 +476,6 @@
         private Controles.cBoton cmdFormulas;
         private System.Windows.Forms.Panel panel4;
         private MaterialSkin.Controls.MaterialLabel lblSuc;
+        private Controles.cBoton cmdBorrar;
     }
 }

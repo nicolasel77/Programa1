@@ -126,11 +126,29 @@
     <Compile Include="Carga\Empleados\frmSueldos.Designer.cs">
       <DependentUpon>frmSueldos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Precios\frmBorrar_Carne.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Precios\frmBorrar_Carne.Designer.cs">
+      <DependentUpon>frmBorrar_Carne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Precios\frmDiseñoImpresion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Precios\frmDiseñoImpresion.Designer.cs">
+      <DependentUpon>frmDiseñoImpresion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Precios\frmGuardarPreciosCarne.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Carga\Precios\frmGuardarPreciosCarne.Designer.cs">
       <DependentUpon>frmGuardarPreciosCarne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Precios\frmImprimir_Carne.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Precios\frmImprimir_Carne.Designer.cs">
+      <DependentUpon>frmImprimir_Carne.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Proveedores\frmAjustes.cs">
       <SubType>Form</SubType>
@@ -504,8 +522,17 @@
     <EmbeddedResource Include="Carga\Empleados\frmSueldos.resx">
       <DependentUpon>frmSueldos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Precios\frmBorrar_Carne.resx">
+      <DependentUpon>frmBorrar_Carne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Precios\frmDiseñoImpresion.resx">
+      <DependentUpon>frmDiseñoImpresion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Precios\frmGuardarPreciosCarne.resx">
       <DependentUpon>frmGuardarPreciosCarne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Precios\frmImprimir_Carne.resx">
+      <DependentUpon>frmImprimir_Carne.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmAjustes.resx">
       <DependentUpon>frmAjustes.cs</DependentUpon>

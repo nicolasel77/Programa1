@@ -287,7 +287,59 @@
             {
                 MessageBox.Show(e.Message, "Error");
             }
-        } 
+        }
+
+        public void Borrar_Lista(int Tipo)
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                //Se pide el tipo para no borrar listas de distinto tipo. Ej: carne/men/emb
+                SqlCommand command = new SqlCommand($"DELETE FROM Precios_Sucursales " +
+                    $"WHERE ID IN(SELECT ID FROM vw_PreciosSucursales " +
+                    $"WHERE ID_Sucursales={Sucursal.Id} AND Fecha='{Fecha:MM/dd/yyyy}' AND Id_Tipo={Tipo})", sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
+
+                var d = command.ExecuteNonQuery();
+
+                Id = 0;
+
+                sql.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
         #endregion
+
+        public void Imprimir_Lista(int Tipo)
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                //Se pide el tipo para no borrar listas de distinto tipo. Ej: carne/men/emb
+                SqlCommand command = new SqlCommand($"DELETE FROM Precios_Sucursales " +
+                    $"WHERE ID IN(SELECT ID FROM vw_PreciosSucursales " +
+                    $"WHERE ID_Sucursales={Sucursal.Id} AND Fecha='{Fecha:MM/dd/yyyy}' AND Id_Tipo={Tipo})", sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
+
+                var d = command.ExecuteNonQuery();
+
+                Id = 0;
+
+                sql.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
     }
 }
