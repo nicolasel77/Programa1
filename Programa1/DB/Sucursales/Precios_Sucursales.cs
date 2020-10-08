@@ -102,6 +102,34 @@
 
             return dt;
         }
+        public DataTable Precios_Men()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                string fecha = "(SELECT MAX(Fecha) FROM vw_PreciosSucursales WHERE Id_Tipo=2)";
+                string suc = "";
+
+                if (Fecha != null) { fecha = $"'{Fecha:MM/dd/yy}'"; }
+                if (Sucursal.Id != 0) { suc = " AND Id_Sucursales=" + Sucursal.Id; }
+
+                SqlCommand comandoSql = new SqlCommand($"SELECT Id_Productos Id, Descripcion Nombre, Precio FROM vw_PreciosSucursales " +
+                    $"WHERE Fecha={fecha} {suc} AND Id_Tipo=2 AND Ver=1 ORDER BY Id", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
 
         public DataTable Fechas(int tipo, int top = 50)
         {
@@ -316,30 +344,6 @@
         }
         #endregion
 
-        public void Imprimir_Lista(int Tipo)
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                //Se pide el tipo para no borrar listas de distinto tipo. Ej: carne/men/emb
-                SqlCommand command = new SqlCommand($"DELETE FROM Precios_Sucursales " +
-                    $"WHERE ID IN(SELECT ID FROM vw_PreciosSucursales " +
-                    $"WHERE ID_Sucursales={Sucursal.Id} AND Fecha='{Fecha:MM/dd/yyyy}' AND Id_Tipo={Tipo})", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
+        
     }
 }
