@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Programa1.Carga.Tesoreria
 {
-    public partial class frmAyuda : Form
+    public partial class frmAyuda_Gastos : Form
     {
         private Tipo_Gastos TGastos;
         private Detalle_Gastos DTgastos;
@@ -20,7 +20,7 @@ namespace Programa1.Carga.Tesoreria
         public string Valor = "";
         private string Filtro_Tipo = "";
 
-        public frmAyuda()
+        public frmAyuda_Gastos()
         {
             InitializeComponent();
         }

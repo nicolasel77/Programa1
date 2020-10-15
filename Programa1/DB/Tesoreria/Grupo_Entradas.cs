@@ -33,8 +33,7 @@
         /// Campo a buscar.
         /// </summary>
         public string Campo_Id { get; set; }
-        public string Campo_Nombre { get; set; }
-
+        public string Campo_Nombre { get; set; }        
 
         public void Cargar()
         {

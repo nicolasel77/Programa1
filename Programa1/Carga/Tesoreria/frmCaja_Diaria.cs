@@ -1,7 +1,6 @@
 ﻿
 namespace Programa1.Carga.Tesoreria
 {
-    using Microsoft.Office.Core;
     using Programa1.DB.Tesoreria;
     using System;
     using System.Windows.Forms;
@@ -70,12 +69,17 @@ namespace Programa1.Carga.Tesoreria
             //43: +
             //45: -
             //46: Delete
-            grdEntradas.TeclasManejadas = new int[] { 13, 43, 45, 46 };
+            //112: F1
+            grdEntradas.TeclasManejadas = new int[] { 13, 43, 45, 46, 112 };
 
             grdEntradas.AgregarTeclas(Convert.ToInt32(Keys.Add), e_Tipo, e_Importe);
             grdEntradas.AgregarTeclas(Convert.ToInt32(Keys.Subtract), e_Subtipo, e_Importe);
 
             Formato_Entradas();
+            C1.Win.C1FlexGrid.CellStyle style;
+            style = grdEntradas.Styles.Fixed;
+            style.TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.CenterBottom;
+            grdEntradas.set_AlineamientoCelda(0, e_Importe, style);
 
             //*****************************
             //*********Gastos**************
@@ -103,6 +107,9 @@ namespace Programa1.Carga.Tesoreria
 
             Formato_Salidas();
 
+            style = grdSalidas.Styles.Fixed;
+            style.TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.CenterBottom;
+            grdSalidas.set_AlineamientoCelda(0, s_Importe, style);
             Totales();
         }
 
@@ -169,8 +176,11 @@ namespace Programa1.Carga.Tesoreria
             grdSalidas.set_Texto(0, s_Tipo, "Tipo");
             grdSalidas.set_Texto(0, s_SubTipo, "SubTipo");
             grdSalidas.set_Texto(0, s_Detalle, "Detalle");
+            grdSalidas.set_Texto(0, s_Autorizado, "Aut");
+            grdSalidas.set_Texto(0, s_Fecha_Autorizado, "Aut_Fe");
 
             grdSalidas.Columnas[s_Importe].Style.Format = "N2";
+
         }
 
         /// <summary>
@@ -331,6 +341,37 @@ namespace Programa1.Carga.Tesoreria
                         grdEntradas.BorrarFila();
                     }
                     Totales();
+                }
+            }
+            else
+            {
+                if (e == Convert.ToInt32(Keys.F1))
+                {
+                    frmAyuda_Entradas fayuda = new frmAyuda_Entradas();
+                    Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+                    if (grdEntradas.Col == e_Tipo) { fayuda.Cargar_TiposEntradas(cEntradas.TE.Id_Tipo); }
+                    if (grdEntradas.Col == e_Subtipo) { fayuda.Cargar_SubTiposEntradas(cEntradas.TE.Id_Tipo); }
+
+                    fayuda.ShowDialog();
+
+                    if (fayuda.Valor != "")
+                    {
+                        if (grdEntradas.Col == e_Tipo)
+                        {
+                            cEntradas.TE.Id_Tipo = h.Codigo_Seleccionado(fayuda.Valor);
+                            grdEntradas.set_Texto(Convert.ToInt16(grdEntradas.Row), e_Tipo, cEntradas.TE.Id_Tipo);
+                            grdEntradas.set_Texto(Convert.ToInt16(grdEntradas.Row), e_Tipo + 1, cEntradas.TE.Nombre);
+                            grdEntradas.ActivarCelda(grdEntradas.Row, e_Subtipo);
+                        }
+                        else
+                        {
+                            cEntradas.Id_SubTipoEntrada = h.Codigo_Seleccionado(fayuda.Valor);
+                            grdEntradas.set_Texto(Convert.ToInt16(grdEntradas.Row), e_Subtipo, cEntradas.Id_SubTipoEntrada);
+                            grdEntradas.set_Texto(Convert.ToInt16(grdEntradas.Row), e_Subtipo + 1, h.Nombre_Seleccionado(fayuda.Valor));
+                            grdEntradas.ActivarCelda(grdEntradas.Row, s_Detalle);
+                        }
+                    }
                 }
             }
         }
@@ -515,7 +556,7 @@ namespace Programa1.Carga.Tesoreria
             }
             if (e == Convert.ToInt32(Keys.F1))
             {
-                frmAyuda fayuda = new frmAyuda();
+                frmAyuda_Gastos fayuda = new frmAyuda_Gastos();
                 Herramientas.Herramientas h = new Herramientas.Herramientas();
 
                 if (grdSalidas.Col == s_Tipo) { fayuda.Cargar_TiposGastos(cGastos.TG.Id_Tipo); }
@@ -559,6 +600,6 @@ namespace Programa1.Carga.Tesoreria
 
         #endregion
 
-        
+
     }
 }

@@ -330,11 +330,17 @@
     <Compile Include="Carga\Sebero\frmResumenSebero.Designer.cs">
       <DependentUpon>frmResumenSebero.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\Tesoreria\frmAyuda.cs">
+    <Compile Include="Carga\Tesoreria\frmAyuda_Entradas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\Tesoreria\frmAyuda.Designer.cs">
-      <DependentUpon>frmAyuda.cs</DependentUpon>
+    <Compile Include="Carga\Tesoreria\frmAyuda_Entradas.Designer.cs">
+      <DependentUpon>frmAyuda_Entradas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmAyuda_Gastos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmAyuda_Gastos.Designer.cs">
+      <DependentUpon>frmAyuda_Gastos.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Tesoreria\frmCaja_Diaria.cs">
       <SubType>Form</SubType>
@@ -621,8 +627,8 @@
     <EmbeddedResource Include="Carga\Sebero\frmSeberos.resx">
       <DependentUpon>frmSeberos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\Tesoreria\frmAyuda.resx">
-      <DependentUpon>frmAyuda.cs</DependentUpon>
+    <EmbeddedResource Include="Carga\Tesoreria\frmAyuda_Gastos.resx">
+      <DependentUpon>frmAyuda_Gastos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmCaja_Diaria.resx">
       <DependentUpon>frmCaja_Diaria.cs</DependentUpon>

@@ -49,9 +49,14 @@
         public void Cargar()
         {
             DataTable dt = Datos("Id_Tipo=" + Id_Tipo);
-            Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
-            Grupo = Convert.ToInt32(dt.Rows[0]["Grupo"]);
-            Es_Entrega = Convert.ToBoolean(dt.Rows[0]["Es_Entrega"]);
+            if (dt.Rows.Count != 0)
+            {
+                Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+                Grupo = Convert.ToInt32(dt.Rows[0]["Grupo"]);
+                grupoE.Id = Grupo;
+
+                Es_Entrega = Convert.ToBoolean(dt.Rows[0]["Es_Entrega"]); 
+            }
 
         }
 
@@ -81,6 +86,37 @@
 
             return dt;
         }
+
+        public DataTable SubTipos(string filtro = "")
+        {
+            DataTable dt = new DataTable();
+            if (Id_Tipo != 0)
+            {
+                var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+                if (filtro.Length != 0) { filtro = "WHERE " + filtro; }
+
+                string s = $"SELECT  {grupoE.Campo_Id}, {grupoE.Campo_Nombre} FROM {grupoE.Tabla} {filtro}";
+                try
+                {
+                    SqlCommand comandoSql = new SqlCommand(s, conexionSql);
+
+                    conexionSql.Open();
+
+                    SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                    SqlDat.Fill(dt);
+
+                }
+                catch (Exception)
+                {
+                    dt = null;
+                }
+            }
+            return dt;
+        }
+
 
         public void Actualizar()
         {

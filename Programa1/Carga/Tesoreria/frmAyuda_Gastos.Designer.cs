@@ -1,6 +1,6 @@
 ﻿namespace Programa1.Carga.Tesoreria
 {
-    partial class frmAyuda
+    partial class frmAyuda_Gastos
     {
         /// <summary>
         /// Required designer variable.
@@ -44,13 +44,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lst.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lst.ForeColor = System.Drawing.Color.DimGray;
+            this.lst.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lst.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
             this.lst.FormattingEnabled = true;
-            this.lst.ItemHeight = 16;
+            this.lst.ItemHeight = 20;
             this.lst.Location = new System.Drawing.Point(12, 41);
             this.lst.Name = "lst";
-            this.lst.Size = new System.Drawing.Size(427, 256);
+            this.lst.Size = new System.Drawing.Size(427, 380);
             this.lst.TabIndex = 1;
             // 
             // cmdAceptar
@@ -65,7 +65,7 @@
             this.cmdAceptar.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdAceptar.Name = "cmdAceptar";
             this.cmdAceptar.Primary = false;
-            this.cmdAceptar.Size = new System.Drawing.Size(141, 36);
+            this.cmdAceptar.Size = new System.Drawing.Size(85, 27);
             this.cmdAceptar.TabIndex = 0;
             this.cmdAceptar.Text = "Aceptar";
             this.cmdAceptar.UseVisualStyleBackColor = true;
@@ -75,9 +75,9 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.cmdAceptar);
-            this.panel1.Location = new System.Drawing.Point(298, 307);
+            this.panel1.Location = new System.Drawing.Point(354, 436);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(141, 36);
+            this.panel1.Size = new System.Drawing.Size(85, 27);
             this.panel1.TabIndex = 3;
             // 
             // txtBuscar
@@ -98,9 +98,9 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.cmdCancelar);
-            this.panel2.Location = new System.Drawing.Point(151, 307);
+            this.panel2.Location = new System.Drawing.Point(263, 436);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(141, 36);
+            this.panel2.Size = new System.Drawing.Size(85, 27);
             this.panel2.TabIndex = 3;
             // 
             // cmdCancelar
@@ -115,24 +115,24 @@
             this.cmdCancelar.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdCancelar.Name = "cmdCancelar";
             this.cmdCancelar.Primary = false;
-            this.cmdCancelar.Size = new System.Drawing.Size(141, 36);
+            this.cmdCancelar.Size = new System.Drawing.Size(85, 27);
             this.cmdCancelar.TabIndex = 0;
             this.cmdCancelar.Text = "Cancelar";
             this.cmdCancelar.UseVisualStyleBackColor = true;
             this.cmdCancelar.Click += new System.EventHandler(this.cmdCerrar_Click);
             // 
-            // frmAyuda
+            // frmAyuda_Gastos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancelar;
-            this.ClientSize = new System.Drawing.Size(451, 351);
+            this.ClientSize = new System.Drawing.Size(451, 471);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lst);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmAyuda";
+            this.Name = "frmAyuda_Gastos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Buscar";
             this.Load += new System.EventHandler(this.frmAyuda_Load);
