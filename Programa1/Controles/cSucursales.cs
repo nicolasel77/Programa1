@@ -247,7 +247,10 @@
         {
             if (cCancel == false)
             {
-                Cambio_Seleccion(this, e);
+                if (Cambio_Seleccion != null)
+                {
+                    Cambio_Seleccion(this, e); 
+                }
             }
         }
 

@@ -38,10 +38,13 @@
         public void Cargar()
         {
             DataTable dt = Datos("Id=" + Id);
-            Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
-            Tabla = Convert.ToString(dt.Rows[0]["Tabla"]);
-            Campo_Id = Convert.ToString(dt.Rows[0]["Campo_Id"]);
-            Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]);
+            if (dt != null & dt.Rows.Count != 0)
+            {
+                Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+                Tabla = Convert.ToString(dt.Rows[0]["Tabla"]);
+                Campo_Id = Convert.ToString(dt.Rows[0]["Campo_Id"]);
+                Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]); 
+            }
 
         }
 

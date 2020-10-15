@@ -93,9 +93,12 @@ namespace Programa1.Carga.Tesoreria
                     }
 
                     dt = TGastos.SubTipos(sf);
-                    foreach (DataRow dr in dt.Rows)
+                    if (dt != null)
                     {
-                        lst.Items.Add($"{dr[0]}. {dr[1]}");
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            lst.Items.Add($"{dr[0]}. {dr[1]}");
+                        } 
                     }
                     break;
                 case TOpcion.gDetalle:
