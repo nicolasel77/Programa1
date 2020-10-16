@@ -27,14 +27,19 @@ namespace Programa1.Carga.Precios
 
         private void FrmPreciosMen_Load(object sender, EventArgs e)
         {
-            DataTable dt = precios.Tabla_Men();
+            Cargar_Lista();
 
-            
+            h.Llenar_List(lstFechas, precios.Fechas(Convert.ToByte(Opcion)), "dd/MM/yyyy");
+        }
+
+        private void Cargar_Lista()
+        {
+            DataTable dt = precios.Tabla_Precios(Convert.ToInt32(Opcion));
+
+
             grd.MostrarDatos(dt, true, false);
             grd.set_ColW(0, 60);
             grd.set_ColW(1, 300);
-
-            h.Llenar_List(lstFechas, precios.Fechas(Convert.ToByte(Opcion)), "dd/MM/yyyy");            
         }
 
         private void lstFechas_SelectedIndexChanged(object sender, EventArgs e)
@@ -100,7 +105,9 @@ namespace Programa1.Carga.Precios
 
         private void cmdImprimir_Click(object sender, EventArgs e)
         {
-
+            frmImprimir_MenEmb fr = new frmImprimir_MenEmb();
+            fr.Tipo = Convert.ToInt32(Opcion);
+            fr.ShowDialog();
         }
 
         private void cmdGuardar_Click(object sender, EventArgs e)
@@ -152,18 +159,24 @@ namespace Programa1.Carga.Precios
 
         private void rdMenudencias_CheckedChanged(object sender, EventArgs e)
         {
-            Opcion = TOpcion.Menudencias;
-            Cargar_Precios();
+            if (rdMenudencias.Checked == true)
+            {
+                Opcion = TOpcion.Menudencias;
+            }
+            else
+            {
+                Opcion = TOpcion.Embutidos; 
+            }
+            if (Suc.Valor_Actual > 0)
+            {
+                Cargar_Precios();
+            }
+            else
+            {
+                Cargar_Lista();
+            }
             h.Llenar_List(lstFechas, precios.Fechas(Convert.ToByte(Opcion)), "dd/MM/yyyy");
-        }
-
-        private void rdEmbutidos_CheckedChanged(object sender, EventArgs e)
-        {
-            Opcion = TOpcion.Embutidos;
-            Cargar_Precios();
-            h.Llenar_List(lstFechas, precios.Fechas(Convert.ToByte(Opcion)), "dd/MM/yyyy");
-        }
-
+        }       
        
     }
 }

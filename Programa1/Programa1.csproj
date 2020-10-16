@@ -156,6 +156,12 @@
     <Compile Include="Carga\Precios\frmImprimir_Carne.Designer.cs">
       <DependentUpon>frmImprimir_Carne.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Precios\frmImprimir_MenEmb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Precios\frmImprimir_MenEmb.Designer.cs">
+      <DependentUpon>frmImprimir_MenEmb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Proveedores\frmAjustes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -549,6 +555,9 @@
     <EmbeddedResource Include="Carga\Precios\frmImprimir_Carne.resx">
       <DependentUpon>frmImprimir_Carne.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Precios\frmImprimir_MenEmb.resx">
+      <DependentUpon>frmImprimir_MenEmb.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmAjustes.resx">
       <DependentUpon>frmAjustes.cs</DependentUpon>
     </EmbeddedResource>
@@ -699,7 +708,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Herramientas\Imprimir_Precios.xlsm" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

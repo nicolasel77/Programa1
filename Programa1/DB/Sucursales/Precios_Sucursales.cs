@@ -81,14 +81,14 @@
             return dt;
         }
 
-        public DataTable Tabla_Men()
+        public DataTable Tabla_Precios(int tipo)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT Id, Nombre, 0.0 Precio FROM Productos WHERE Id_Tipo=2 AND Ver=1 ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, 0.0 Precio FROM Productos WHERE Id_Tipo={tipo} AND Ver=1 ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

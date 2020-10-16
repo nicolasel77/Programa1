@@ -71,7 +71,6 @@
             this.preciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.carneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menudenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.embutidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.granjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -416,7 +415,6 @@
             this.preciosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.carneToolStripMenuItem,
             this.menudenciasToolStripMenuItem,
-            this.embutidosToolStripMenuItem,
             this.granjaToolStripMenuItem,
             this.otrosToolStripMenuItem});
             this.preciosToolStripMenuItem.Name = "preciosToolStripMenuItem";
@@ -434,14 +432,8 @@
             // 
             this.menudenciasToolStripMenuItem.Name = "menudenciasToolStripMenuItem";
             this.menudenciasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.menudenciasToolStripMenuItem.Text = "&Menudencias";
+            this.menudenciasToolStripMenuItem.Text = "&Men/Emb";
             this.menudenciasToolStripMenuItem.Click += new System.EventHandler(this.MenudenciasToolStripMenuItem_Click);
-            // 
-            // embutidosToolStripMenuItem
-            // 
-            this.embutidosToolStripMenuItem.Name = "embutidosToolStripMenuItem";
-            this.embutidosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.embutidosToolStripMenuItem.Text = "&Embutidos";
             // 
             // granjaToolStripMenuItem
             // 
@@ -776,7 +768,6 @@
         private System.Windows.Forms.ToolStripMenuItem proveedoresToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem carneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menudenciasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem embutidosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem granjaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem otrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resumenToolStripMenuItem2;

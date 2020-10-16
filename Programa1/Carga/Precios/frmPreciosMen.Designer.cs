@@ -134,7 +134,7 @@
             this.rdEmbutidos.TabIndex = 4;
             this.rdEmbutidos.Text = "Embutidos";
             this.rdEmbutidos.UseVisualStyleBackColor = true;
-            this.rdEmbutidos.CheckedChanged += new System.EventHandler(this.rdEmbutidos_CheckedChanged);
+            this.rdEmbutidos.CheckedChanged += new System.EventHandler(this.rdMenudencias_CheckedChanged);
             // 
             // rdMenudencias
             // 
