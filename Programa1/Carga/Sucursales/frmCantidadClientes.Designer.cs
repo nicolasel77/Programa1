@@ -33,7 +33,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblKilos = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdCantidad_Clientes = new Grilla2.SpeedGrilla();
@@ -42,8 +41,6 @@
             this.cFecha = new Programa1.Controles.cFechas();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.paCambio = new System.Windows.Forms.Panel();
-            this.cmdCambio = new MaterialSkin.Controls.MaterialFlatButton();
             this.paMostrar = new System.Windows.Forms.Panel();
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
@@ -58,7 +55,6 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.paCambio.SuspendLayout();
             this.paMostrar.SuspendLayout();
             this.paLimpiar.SuspendLayout();
             this.SuspendLayout();
@@ -69,7 +65,6 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblMensaje,
             this.lblCant,
-            this.lblKilos,
             this.lblTotal});
             this.statusStrip1.Location = new System.Drawing.Point(0, 687);
             this.statusStrip1.Name = "statusStrip1";
@@ -90,14 +85,6 @@
             this.lblCant.Size = new System.Drawing.Size(60, 23);
             this.lblCant.Text = "Cantidad";
             this.lblCant.Click += new System.EventHandler(this.LblCant_Click);
-            // 
-            // lblKilos
-            // 
-            this.lblKilos.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblKilos.Name = "lblKilos";
-            this.lblKilos.Size = new System.Drawing.Size(36, 23);
-            this.lblKilos.Text = "Kilos";
-            this.lblKilos.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblTotal
             // 
@@ -192,7 +179,7 @@
             this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(3, 3);
-            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Mostrar_Tipo = false;
             this.cSucs.Name = "cSucs";
             this.cSucs.Size = new System.Drawing.Size(250, 681);
             this.cSucs.TabIndex = 2;
@@ -224,39 +211,12 @@
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.paCambio);
             this.panel1.Controls.Add(this.paMostrar);
             this.panel1.Controls.Add(this.paLimpiar);
             this.panel1.Location = new System.Drawing.Point(770, 688);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(592, 27);
             this.panel1.TabIndex = 7;
-            // 
-            // paCambio
-            // 
-            this.paCambio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.paCambio.Controls.Add(this.cmdCambio);
-            this.paCambio.Location = new System.Drawing.Point(44, 2);
-            this.paCambio.Name = "paCambio";
-            this.paCambio.Size = new System.Drawing.Size(177, 25);
-            this.paCambio.TabIndex = 5;
-            // 
-            // cmdCambio
-            // 
-            this.cmdCambio.AutoSize = true;
-            this.cmdCambio.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cmdCambio.Depth = 0;
-            this.cmdCambio.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmdCambio.Location = new System.Drawing.Point(0, 0);
-            this.cmdCambio.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cmdCambio.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cmdCambio.Name = "cmdCambio";
-            this.cmdCambio.Primary = false;
-            this.cmdCambio.Size = new System.Drawing.Size(177, 25);
-            this.cmdCambio.TabIndex = 0;
-            this.cmdCambio.Text = "Cambio Masivo";
-            this.cmdCambio.UseVisualStyleBackColor = true;
-            this.cmdCambio.Click += new System.EventHandler(this.CmdCambioMasivo_Click);
             // 
             // paMostrar
             // 
@@ -333,8 +293,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.paCambio.ResumeLayout(false);
-            this.paCambio.PerformLayout();
             this.paMostrar.ResumeLayout(false);
             this.paMostrar.PerformLayout();
             this.paLimpiar.ResumeLayout(false);
@@ -355,10 +313,7 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.ToolStripStatusLabel lblTotal;
         private System.Windows.Forms.ToolStripStatusLabel lblCant;
-        private System.Windows.Forms.ToolStripStatusLabel lblKilos;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel paCambio;
-        private MaterialSkin.Controls.MaterialFlatButton cmdCambio;
         private System.Windows.Forms.Panel paMostrar;
         private MaterialSkin.Controls.MaterialFlatButton cmdMostrar;
         private System.Windows.Forms.Panel paLimpiar;
