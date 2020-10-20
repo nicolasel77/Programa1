@@ -469,6 +469,7 @@
     <Compile Include="DB\Proveedores\Ajustes.cs" />
     <Compile Include="DB\Proveedores\CCtes_Proveedores.cs" />
     <Compile Include="DB\Sucursales\Estadisticas_Sucursales.cs" />
+    <Compile Include="DB\Sucursales\Promedios.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />
     <Compile Include="DB\Tesoreria\Detalle_Entregas.cs" />
     <Compile Include="DB\Tesoreria\Detalle_Gastos.cs" />
