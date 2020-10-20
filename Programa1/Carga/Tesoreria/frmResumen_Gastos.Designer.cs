@@ -35,10 +35,10 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.lst = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.lstGrupos = new System.Windows.Forms.ListBox();
             this.cmdGrupos = new Programa1.Controles.cBoton();
             this.cFechas1 = new Programa1.Controles.cFechas();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -87,12 +87,12 @@
             // 
             this.lblTipo.AutoSize = true;
             this.lblTipo.Depth = 0;
-            this.lblTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblTipo.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblTipo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTipo.Location = new System.Drawing.Point(3, 1);
             this.lblTipo.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTipo.Name = "lblTipo";
-            this.lblTipo.Size = new System.Drawing.Size(37, 18);
+            this.lblTipo.Size = new System.Drawing.Size(39, 19);
             this.lblTipo.TabIndex = 3;
             this.lblTipo.Text = "Tipo";
             // 
@@ -100,12 +100,12 @@
             // 
             this.lblSubTipo.AutoSize = true;
             this.lblSubTipo.Depth = 0;
-            this.lblSubTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblSubTipo.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblSubTipo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblSubTipo.Location = new System.Drawing.Point(3, 19);
             this.lblSubTipo.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblSubTipo.Name = "lblSubTipo";
-            this.lblSubTipo.Size = new System.Drawing.Size(63, 18);
+            this.lblSubTipo.Size = new System.Drawing.Size(64, 19);
             this.lblSubTipo.TabIndex = 3;
             this.lblSubTipo.Text = "SubTipo";
             // 
@@ -169,17 +169,6 @@
             this.lst.SelectedIndexChanged += new System.EventHandler(this.lst_SelectedIndexChanged);
             this.lst.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lst_KeyUp);
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Location = new System.Drawing.Point(6, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1075, 679);
-            this.panel1.TabIndex = 5;
-            // 
             // lstGrupos
             // 
             this.lstGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -193,6 +182,7 @@
             this.lstGrupos.Size = new System.Drawing.Size(161, 192);
             this.lstGrupos.TabIndex = 5;
             this.lstGrupos.Visible = false;
+            this.lstGrupos.SelectedIndexChanged += new System.EventHandler(this.lstGrupos_SelectedIndexChanged);
             // 
             // cmdGrupos
             // 
@@ -218,6 +208,17 @@
             this.cFechas1.TabIndex = 1;
             this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Location = new System.Drawing.Point(6, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1075, 679);
+            this.panel1.TabIndex = 5;
             // 
             // frmResumen_Gastos
             // 

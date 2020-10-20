@@ -7,6 +7,7 @@ namespace Programa1.Herramientas
     class Herramientas
     {
 
+        #region " Funciones "
         public int Codigo_Seleccionado(string s)
         {
 
@@ -30,6 +31,7 @@ namespace Programa1.Herramientas
             }
 
         }
+
         public string Nombre_Seleccionado(string s)
         {
             string n = "";
@@ -40,6 +42,29 @@ namespace Programa1.Herramientas
             }
             return n;
         }
+
+        /// <summary>
+        /// Devuelve una cadena con los valores seleccionados.
+        /// Deben tener el formato "numero. nombre"
+        /// </summary>
+        /// <param name="ls">ListBox a analizar</param>
+        /// <param name="formato">Formato a devolver, por defecto: ({0})</param>
+        /// <returns></returns>
+        public string Codigos_Seleccionados(ListBox ls, string formato = "({0})")
+        {
+            string s = "";
+
+            foreach(string item in ls.SelectedItems)
+            {
+                s = Unir(s, Codigo_Seleccionado(item).ToString(), ", ");
+            }
+            if (s.Length > 0)
+            {
+                s = string.Format(formato, s);
+            }
+            return s;
+        }
+
 
         public string Unir(string a, string b, string c = " AND ")
         {
@@ -63,6 +88,10 @@ namespace Programa1.Herramientas
             }
             return a;
         }
+        #endregion
+
+
+        #region " Procedimientos "
 
         public void Llenar_List(ListBox ls, DataTable dt, string formato = "")
         {
@@ -99,6 +128,12 @@ namespace Programa1.Herramientas
                 }
             }
         }
+
+        #endregion
+
+
+
+        #region " Calcular Texto "
 
         /// <summary>
         /// Vos pasale una formula con parentesis y todo y el capo te la saca de una.
@@ -287,10 +322,10 @@ namespace Programa1.Herramientas
                         //            'Armar el valor
                         s += c;
                     }
-                    else { break; }                    
+                    else { break; }
                 }
                 Double b = 0;
-                if (double.TryParse(s, out b)) 
+                if (double.TryParse(s, out b))
                 {
                     if (b > 0) { a = a / b; }
                 }
@@ -300,7 +335,8 @@ namespace Programa1.Herramientas
                 i = t.IndexOf("/");
             }
             return t;
-        }
+        } 
+        #endregion
     }
 
 

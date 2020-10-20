@@ -54,6 +54,7 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -71,6 +72,10 @@
             this.paCambio.SuspendLayout();
             this.paMostrar.SuspendLayout();
             this.paLimpiar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -86,7 +91,7 @@
             this.lblReintegro});
             this.statusStrip1.Location = new System.Drawing.Point(0, 687);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1213, 28);
+            this.statusStrip1.Size = new System.Drawing.Size(1080, 28);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -160,8 +165,8 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new System.Drawing.Size(1213, 687);
-            this.splitContainer1.SplitterDistance = 740;
+            this.splitContainer1.Size = new System.Drawing.Size(1080, 687);
+            this.splitContainer1.SplitterDistance = 658;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -197,7 +202,7 @@
             this.grdAPicada.Redraw = true;
             this.grdAPicada.Row = 0;
             this.grdAPicada.Rows = 50;
-            this.grdAPicada.Size = new System.Drawing.Size(734, 681);
+            this.grdAPicada.Size = new System.Drawing.Size(652, 681);
             this.grdAPicada.TabIndex = 0;
             this.grdAPicada.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdAPicada_Editado);
             this.grdAPicada.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdAPicada_CambioFila);
@@ -216,10 +221,9 @@
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.cFecha);
-            this.splitContainer3.Panel2.Controls.Add(this.cSucs);
-            this.splitContainer3.Size = new System.Drawing.Size(465, 687);
-            this.splitContainer3.SplitterDistance = 227;
+            this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
+            this.splitContainer3.Size = new System.Drawing.Size(414, 687);
+            this.splitContainer3.SplitterDistance = 202;
             this.splitContainer3.TabIndex = 0;
             // 
             // splitContainer2
@@ -236,7 +240,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.cProdS);
-            this.splitContainer2.Size = new System.Drawing.Size(227, 687);
+            this.splitContainer2.Size = new System.Drawing.Size(202, 687);
             this.splitContainer2.SplitterDistance = 327;
             this.splitContainer2.TabIndex = 2;
             // 
@@ -251,7 +255,7 @@
             this.cProdA.Location = new System.Drawing.Point(3, 3);
             this.cProdA.Mostrar_Tipo = true;
             this.cProdA.Name = "cProdA";
-            this.cProdA.Size = new System.Drawing.Size(221, 321);
+            this.cProdA.Size = new System.Drawing.Size(196, 321);
             this.cProdA.TabIndex = 1;
             this.cProdA.Titulo = "Productos A Picada";
             this.cProdA.Valor_Actual = -1;
@@ -268,7 +272,7 @@
             this.cProdS.Location = new System.Drawing.Point(3, -1);
             this.cProdS.Mostrar_Tipo = true;
             this.cProdS.Name = "cProdS";
-            this.cProdS.Size = new System.Drawing.Size(221, 354);
+            this.cProdS.Size = new System.Drawing.Size(196, 354);
             this.cProdS.TabIndex = 1;
             this.cProdS.Titulo = "Productos Salida";
             this.cProdS.Valor_Actual = -1;
@@ -276,29 +280,26 @@
             // 
             // cFecha
             // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cFecha.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(3, 500);
+            this.cFecha.Location = new System.Drawing.Point(0, 0);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFecha.Mostrar = 0;
             this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(220, 184);
+            this.cFecha.Size = new System.Drawing.Size(202, 184);
             this.cFecha.TabIndex = 3;
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
             // 
             // cSucs
             // 
-            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
+            this.cSucs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cSucs.Filtro_In = "";
-            this.cSucs.Location = new System.Drawing.Point(2, 3);
-            this.cSucs.Mostrar_Tipo = false;
+            this.cSucs.Location = new System.Drawing.Point(0, 0);
+            this.cSucs.Mostrar_Tipo = true;
             this.cSucs.Name = "cSucs";
-            this.cSucs.Size = new System.Drawing.Size(229, 491);
+            this.cSucs.Size = new System.Drawing.Size(202, 528);
             this.cSucs.TabIndex = 2;
             this.cSucs.Titulo = "Sucursales";
             this.cSucs.Valor_Actual = -1;
@@ -316,7 +317,7 @@
             this.panel1.Controls.Add(this.paCambio);
             this.panel1.Controls.Add(this.paMostrar);
             this.panel1.Controls.Add(this.paLimpiar);
-            this.panel1.Location = new System.Drawing.Point(618, 687);
+            this.panel1.Location = new System.Drawing.Point(485, 687);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(592, 27);
             this.panel1.TabIndex = 7;
@@ -399,11 +400,32 @@
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
             // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer4.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.cSucs);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.cFecha);
+            this.splitContainer4.Size = new System.Drawing.Size(202, 684);
+            this.splitContainer4.SplitterDistance = 528;
+            this.splitContainer4.SplitterWidth = 8;
+            this.splitContainer4.TabIndex = 4;
+            // 
             // frmAPicada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1213, 715);
+            this.ClientSize = new System.Drawing.Size(1080, 715);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
@@ -432,6 +454,10 @@
             this.paMostrar.PerformLayout();
             this.paLimpiar.ResumeLayout(false);
             this.paLimpiar.PerformLayout();
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -462,5 +488,6 @@
         private MaterialSkin.Controls.MaterialFlatButton cmdMostrar;
         private System.Windows.Forms.Panel paLimpiar;
         private MaterialSkin.Controls.MaterialFlatButton cmdLimpiar;
+        private System.Windows.Forms.SplitContainer splitContainer4;
     }
 }

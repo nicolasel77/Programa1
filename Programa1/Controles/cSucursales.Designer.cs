@@ -51,12 +51,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.paBotones = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.paBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // lst
@@ -99,12 +101,9 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer1.Panel1.Controls.Add(this.cmdInvertir);
-            this.splitContainer1.Panel1.Controls.Add(this.cmdNinguno);
-            this.splitContainer1.Panel1.Controls.Add(this.cmdTodos);
+            this.splitContainer1.Panel1.Controls.Add(this.paBotones);
             this.splitContainer1.Panel1.Controls.Add(this.lblTitulo);
             this.splitContainer1.Panel1.Controls.Add(this.lst);
-            this.splitContainer1.Panel1.Controls.Add(this.chVer);
             this.splitContainer1.Panel1.DoubleClick += new System.EventHandler(this.SplitContainer1_Panel1_DoubleClick);
             // 
             // splitContainer1.Panel2
@@ -126,7 +125,7 @@
             // 
             this.cmdInvertir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdInvertir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdInvertir.Location = new System.Drawing.Point(194, 484);
+            this.cmdInvertir.Location = new System.Drawing.Point(195, 4);
             this.cmdInvertir.Name = "cmdInvertir";
             this.cmdInvertir.Size = new System.Drawing.Size(37, 23);
             this.cmdInvertir.TabIndex = 3;
@@ -139,7 +138,7 @@
             // 
             this.cmdNinguno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdNinguno.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdNinguno.Location = new System.Drawing.Point(149, 484);
+            this.cmdNinguno.Location = new System.Drawing.Point(150, 4);
             this.cmdNinguno.Name = "cmdNinguno";
             this.cmdNinguno.Size = new System.Drawing.Size(37, 23);
             this.cmdNinguno.TabIndex = 2;
@@ -152,7 +151,7 @@
             // 
             this.cmdTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdTodos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdTodos.Location = new System.Drawing.Point(104, 484);
+            this.cmdTodos.Location = new System.Drawing.Point(105, 4);
             this.cmdTodos.Name = "cmdTodos";
             this.cmdTodos.Size = new System.Drawing.Size(37, 23);
             this.cmdTodos.TabIndex = 1;
@@ -177,7 +176,7 @@
             this.chVer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chVer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chVer.ForeColor = System.Drawing.Color.DimGray;
-            this.chVer.Location = new System.Drawing.Point(6, 486);
+            this.chVer.Location = new System.Drawing.Point(3, 6);
             this.chVer.Name = "chVer";
             this.chVer.Size = new System.Drawing.Size(71, 23);
             this.chVer.TabIndex = 8;
@@ -338,6 +337,18 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Tipo";
             // 
+            // paBotones
+            // 
+            this.paBotones.Controls.Add(this.chVer);
+            this.paBotones.Controls.Add(this.cmdInvertir);
+            this.paBotones.Controls.Add(this.cmdTodos);
+            this.paBotones.Controls.Add(this.cmdNinguno);
+            this.paBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.paBotones.Location = new System.Drawing.Point(0, 480);
+            this.paBotones.Name = "paBotones";
+            this.paBotones.Size = new System.Drawing.Size(234, 32);
+            this.paBotones.TabIndex = 9;
+            // 
             // cSucursales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -356,6 +367,7 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.paBotones.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -384,5 +396,6 @@
         private System.Windows.Forms.RadioButton rdClientes;
         private System.Windows.Forms.RadioButton rdSucs;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel paBotones;
     }
 }

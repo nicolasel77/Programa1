@@ -3,6 +3,7 @@
     using Programa1.DB;
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Windows.Forms;
 
     public partial class frmStock : Form
@@ -146,6 +147,7 @@
             grdStock.Columnas[c_Kilos].Format = "N2";
             grdStock.Columnas[c_Total].Format = "C2";
 
+            grdStock.Columnas[c_IdSuc + 1].Style.ForeColor = Color.DimGray;
             grdStock.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
             grdStock.set_Texto(0, c_IdSuc, "Suc");

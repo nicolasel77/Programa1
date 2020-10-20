@@ -28,6 +28,11 @@ namespace Programa1.Carga.Tesoreria
         {
             InitializeComponent();
         }
+        private void frmResumen_Gastos_Load(object sender, EventArgs e)
+        {
+            DataTable dt = Gastos.TG.grupoS.Datos();
+            h.Llenar_List(lstGrupos, dt);
+        }
 
         private void cFechas1_Cambio_Seleccion(object sender, EventArgs e)
         {
@@ -39,12 +44,17 @@ namespace Programa1.Carga.Tesoreria
         private void Cargar_List()
         {
             this.Cursor = Cursors.WaitCursor;
+            
             lst.Items.Clear();
             DataTable dt = new DataTable();
+
+            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0}) AND");
+            if (grupo.Length == 0) { grupo = " AND"; }
+
             switch (Orden)
             {
                 case e_Orden.Tipo:
-                    dt = Gastos.Tipos_Rango(cFechas1.Cadena());
+                    dt = Gastos.Tipos_Rango(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND"))));
                     if (dt != null)
                     {
                         foreach (DataRow dr in dt.Rows)
@@ -57,11 +67,11 @@ namespace Programa1.Carga.Tesoreria
                 case e_Orden.SubTipo:
                     if (Tipo > 0)
                     {
-                        dt = Gastos.SubTipos_Rango($"Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}");
+                        dt = Gastos.SubTipos_Rango($"{grupo} Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}");
                     }
                     else
                     {
-                        dt = Gastos.SubTipos_Rango(cFechas1.Cadena());
+                        dt = Gastos.SubTipos_Rango(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND"))));
                     }
                     if (dt != null)
                     {
@@ -76,22 +86,22 @@ namespace Programa1.Carga.Tesoreria
                     {
                         if (SubTipo > 0)
                         {
-                            dt = Gastos.Detalles_Rango($"Id_TipoGastos={Tipo} AND Id_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}");
+                            dt = Gastos.Detalles_Rango($"{grupo} Id_TipoGastos={Tipo} AND Id_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}");
                         }
                         else
                         {
-                            dt = Gastos.Detalles_Rango($"Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}");
+                            dt = Gastos.Detalles_Rango($"{grupo} Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}");
                         }
                     }
                     else
                     {
                         if (SubTipo > 0)
                         {
-                            dt = Gastos.Detalles_Rango($"Id_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}");
+                            dt = Gastos.Detalles_Rango($"{grupo} Id_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}");
                         }
                         else
                         {
-                            dt = Gastos.Detalles_Rango(cFechas1.Cadena());
+                            dt = Gastos.Detalles_Rango(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND"))));
                         }
                     }
                     if (dt != null)
@@ -110,10 +120,14 @@ namespace Programa1.Carga.Tesoreria
         private void Cargar_Grilla()
         {
             this.Cursor = Cursors.WaitCursor;
+            
+            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0}) AND");
+            if (grupo.Length == 0) { grupo = " AND"; }
+
             switch (Orden)
             {
                 case e_Orden.Tipo:
-                    grdGastos.MostrarDatos(Gastos.TotalPorTipo(cFechas1.Cadena()), true, true);
+                    grdGastos.MostrarDatos(Gastos.TotalPorTipo(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND")))), true, true);
                     grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                     grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
                     grdGastos.AutosizeAll();
@@ -122,11 +136,11 @@ namespace Programa1.Carga.Tesoreria
                 case e_Orden.SubTipo:
                     if (Tipo > 0)
                     {
-                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo($"Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}"), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo($"{grupo} Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}"), true, true);
                     }
                     else
                     {
-                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(cFechas1.Cadena()), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND")))), true, true);
                     }
                     grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                     grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
@@ -142,11 +156,11 @@ namespace Programa1.Carga.Tesoreria
                         {
                             if (Detalle > 0)
                             {
-                                cadena = $"Id_TipoGastos={Tipo} AND ID_SubTipoGastos={SubTipo} AND ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
+                                cadena = $"{grupo} Id_TipoGastos={Tipo} AND ID_SubTipoGastos={SubTipo} AND ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
                             }
                             else
                             {
-                                cadena = $"Id_TipoGastos={Tipo} AND ID_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}";
+                                cadena = $"{grupo} Id_TipoGastos={Tipo} AND ID_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}";
                             }
 
                         }
@@ -154,11 +168,11 @@ namespace Programa1.Carga.Tesoreria
                         {
                             if (Detalle > 0)
                             {
-                                cadena = $"Id_TipoGastos={Tipo} AND ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
+                                cadena = $"{grupo} Id_TipoGastos={Tipo} AND ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
                             }
                             else
                             {
-                                cadena = $"Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}";
+                                cadena = $"{grupo} Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}";
                             }
                         }
                     }
@@ -168,11 +182,11 @@ namespace Programa1.Carga.Tesoreria
                         {
                             if (Detalle > 0)
                             {
-                                cadena = $"ID_SubTipoGastos={SubTipo} AND ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
+                                cadena = $"{grupo} ID_SubTipoGastos={SubTipo} AND ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
                             }
                             else
                             {
-                                cadena = $"ID_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}";
+                                cadena = $"{grupo} ID_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}";
                             }
 
                         }
@@ -180,11 +194,11 @@ namespace Programa1.Carga.Tesoreria
                         {
                             if (Detalle > 0)
                             {
-                                cadena = $"ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
+                                cadena = $"{grupo} ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
                             }
                             else
                             {
-                                cadena = cFechas1.Cadena();
+                                cadena = h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND")));
                             }
                         }
                     }
@@ -346,15 +360,9 @@ namespace Programa1.Carga.Tesoreria
             lstGrupos.Visible = !lstGrupos.Visible;
         }
 
-        private void cmdGrupos_Load(object sender, EventArgs e)
+        private void lstGrupos_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void frmResumen_Gastos_Load(object sender, EventArgs e)
-        {
-            DataTable dt = Gastos.TG.grupoS.Datos();
-            h.Llenar_List(lstGrupos, dt);            
+            cFechas1_Cambio_Seleccion(null, null);
         }
     }
 }

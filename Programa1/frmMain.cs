@@ -1586,5 +1586,101 @@
                 }
             }
         }
+
+        private void granjaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPrecios_Granja")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmPrecios_Granja");
+                t.Text = "Precios_Granja";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmPrecios_Granja = new Programa1.Carga.Precios.frmPrecios_Granja();
+                frmPrecios_Granja.MdiParent = this;
+                frmPrecios_Granja.Disposed += FrmPrecios_Granja_Disposed;
+                forms.Add(frmPrecios_Granja);
+                frmPrecios_Granja.Show();
+                frmPrecios_Granja.WindowState = FormWindowState.Minimized;
+                frmPrecios_Granja.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmPrecios_Granja_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Precios_Granja")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPrecios_Granja")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void promediosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPromedios")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmPromedios");
+                t.Text = "Promedios";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmPromedios = new Programa1.Carga.Precios.frmPromedios();
+                frmPromedios.MdiParent = this;
+                frmPromedios.Disposed += FrmPromedios_Disposed;
+                forms.Add(frmPromedios);
+                frmPromedios.Show();
+                frmPromedios.WindowState = FormWindowState.Minimized;
+                frmPromedios.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmPromedios_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Promedios")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPromedios")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Programa1.DB;
 using System;
 using System.Data;
+using System.Threading;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -22,7 +23,7 @@ namespace Programa1.Carga.Precios
         }
 
         public void Cargar()
-        {
+        {            
             h.Llenar_List(lstSucursales, pr.Sucursal.Datos("Propio=1 AND Ver=1"));
             DataTable dt = pr.Fechas(Tipo);
 
@@ -31,7 +32,6 @@ namespace Programa1.Carga.Precios
                 foreach (DataRow dr in dt.Rows)
                 {
                     lstListas.Items.Add($"{dr[0]:dd/MM/yy}");
-
                 }
             }
         }

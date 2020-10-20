@@ -152,6 +152,29 @@
 
             return dt;
         }
+        public DataTable Fechas_Granja(int top = 50)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP {top} Fecha, Precio FROM Precios_Sucursales " +
+                    $"WHERE ID_Productos=300 " +
+                    $"GROUP BY Fecha, Precio ORDER BY Fecha DESC", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
 
         public DataTable Precios_CarneListaKilos()
         {

@@ -1,40 +1,35 @@
-﻿
+﻿using Programa1.DB;
+using System;
+using System.Data;
+using System.Windows.Forms;
+
 namespace Programa1.Carga.Precios
 {
-    using Programa1.DB;
-    using Programa1.Herramientas;
-    using System;
-    using System.Data;
-    using System.Windows.Forms;
-
-    public partial class frmPreciosMen : Form
+    public partial class frmPrecios_Granja : Form
     {
+
         Precios_Sucursales precios;
-        Herramientas h = new Herramientas();
+        Herramientas.Herramientas h = new Herramientas.Herramientas();
 
-        private enum TOpcion : byte
-        {
-            Menudencias = 2,
-            Embutidos = 3
-        }
-        TOpcion Opcion = TOpcion.Menudencias;
-
-        public frmPreciosMen()
+        public frmPrecios_Granja()
         {
             InitializeComponent();
             precios = new Precios_Sucursales();
         }
 
-        private void FrmPreciosMen_Load(object sender, EventArgs e)
+        private void FrmPrecios_Granja_Load(object sender, EventArgs e)
         {
             Cargar_Lista();
 
-            h.Llenar_List(lstFechas, precios.Fechas(Convert.ToByte(Opcion)), "dd/MM/yyyy");
+            foreach (DataRow dr in precios.Fechas_Granja().Rows)
+            {
+                lstFechas.Items.Add($"{dr[0]:dd/MM/yy}  {dr[1]:N0}");
+            }
         }
 
         private void Cargar_Lista()
         {
-            DataTable dt = precios.Tabla_Precios(Convert.ToInt32(Opcion));
+            DataTable dt = precios.Tabla_Precios(4);
 
 
             grd.MostrarDatos(dt, true, false);
@@ -52,7 +47,7 @@ namespace Programa1.Carga.Precios
             this.Cursor = Cursors.WaitCursor;
             if (lstFechas.SelectedIndex > -1)
             {
-                precios.Fecha = Convert.ToDateTime(lstFechas.Text);
+                precios.Fecha = Convert.ToDateTime(lstFechas.Text.Substring(0, 8));
             }
             else
             {
@@ -62,7 +57,7 @@ namespace Programa1.Carga.Precios
             precios.Sucursal.Id = Suc.Valor_Actual;
 
 
-            DataTable dt = precios.Precios(Convert.ToByte(Opcion));
+            DataTable dt = precios.Precios(4);
 
 
             grd.MostrarDatos(dt, true, false);
@@ -79,7 +74,7 @@ namespace Programa1.Carga.Precios
         private void cmdBorrar_Click(object sender, EventArgs e)
         {
             int suc = Suc.Valor_Actual;
-            string fecha = lstFechas.Text;
+            string fecha = lstFechas.Text.Substring(0, 8);
             DateTime f;
 
             if (suc != 0 & DateTime.TryParse(fecha, out f) == true)
@@ -94,8 +89,11 @@ namespace Programa1.Carga.Precios
                     this.Cursor = Cursors.WaitCursor;
                     precios.Fecha = f;
                     precios.Sucursal.Id = suc;
-                    precios.Borrar_Lista(2);
-                    h.Llenar_List(lstFechas, precios.Fechas(2), "dd/MM/yyyy");
+                    precios.Borrar_Lista(4);
+                    foreach (DataRow dr in precios.Fechas_Granja().Rows)
+                    {
+                        lstFechas.Items.Add($"{dr[0]:dd/MM/yy}  {dr[1]:N0}");
+                    }
                     Cargar_Precios();
                     this.Cursor = Cursors.Default;
                 }
@@ -106,7 +104,7 @@ namespace Programa1.Carga.Precios
         private void cmdImprimir_Click(object sender, EventArgs e)
         {
             frmImprimir_MenEmb fr = new frmImprimir_MenEmb();
-            fr.Tipo = Convert.ToInt32(Opcion);
+            fr.Tipo = 4;
             fr.ShowDialog();
         }
 
@@ -126,7 +124,10 @@ namespace Programa1.Carga.Precios
                     //Guardar todo por cada Sucursal                    
                     Guardar(suc);
                 }
-                h.Llenar_List(lstFechas, precios.Fechas(Convert.ToByte(Opcion)), "dd/MM/yyyy");
+                foreach (DataRow dr in precios.Fechas_Granja().Rows)
+                {
+                    lstFechas.Items.Add($"{dr[0]:dd/MM/yy}  {dr[1]:N0}");
+                }
 
                 this.Cursor = Cursors.Default;
             }
@@ -158,27 +159,6 @@ namespace Programa1.Carga.Precios
                 grd.set_Texto(f, c, Convert.ToSingle(a));
                 grd.ActivarCelda(f + 1, c);
             }
-        }
-
-        private void rdMenudencias_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdMenudencias.Checked == true)
-            {
-                Opcion = TOpcion.Menudencias;
-            }
-            else
-            {
-                Opcion = TOpcion.Embutidos;
-            }
-            if (Suc.Valor_Actual > 0)
-            {
-                Cargar_Precios();
-            }
-            else
-            {
-                Cargar_Lista();
-            }
-            h.Llenar_List(lstFechas, precios.Fechas(Convert.ToByte(Opcion)), "dd/MM/yyyy");
         }
 
     }

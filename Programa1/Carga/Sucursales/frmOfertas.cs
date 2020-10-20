@@ -2,6 +2,7 @@
 {
     using Programa1.DB;
     using System;
+    using System.Drawing;
     using System.Windows.Forms;
 
     public partial class frmOfertas : Form
@@ -147,6 +148,7 @@
             grdOfertas.Columnas[c_Kilos].Format = "N2";
             grdOfertas.Columnas[c_Reintegro].Format = "C2";
 
+            grdOfertas.Columnas[c_IdSuc + 1].Style.ForeColor = Color.DimGray;
             grdOfertas.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
             grdOfertas.set_Texto(0, c_IdSuc, "Suc");

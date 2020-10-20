@@ -3,6 +3,7 @@
     using Programa1.DB;
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Windows.Forms;
 
     public partial class frmAPicada : Form
@@ -164,6 +165,7 @@
             grdAPicada.Columnas[c_Total_S].Format = "C2";
             grdAPicada.Columnas[c_Reintegro].Format = "C2";
 
+            grdAPicada.Columnas[c_IdSuc + 1].Style.ForeColor = Color.DimGray;
             grdAPicada.Columnas[c_Kilos_A].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
             grdAPicada.Columnas[c_Kilos_S].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
             grdAPicada.Columnas[c_Reintegro].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);

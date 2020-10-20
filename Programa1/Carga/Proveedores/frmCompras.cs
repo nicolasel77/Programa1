@@ -2,6 +2,7 @@
 {
     using Programa1.DB;
     using System;
+    using System.Drawing;
     using System.Windows.Forms;
 
     public partial class frmCompras : Form
@@ -143,9 +144,10 @@
             grdCompras.Columnas[c_Kilos].Format = "N2";
             grdCompras.Columnas[c_Total].Format = "C2";
 
+            grdCompras.Columnas[c_IdProv + 1].Style.ForeColor = Color.DimGray;
             grdCompras.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
-            grdCompras.set_Texto(0, c_IdProv, "Suc");
+            grdCompras.set_Texto(0, c_IdProv, "Prov");
             grdCompras.set_Texto(0, c_IdProd, "Prod");
         }
 

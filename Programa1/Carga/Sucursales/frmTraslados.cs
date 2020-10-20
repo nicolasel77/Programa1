@@ -4,6 +4,7 @@ namespace Programa1.Carga
     using Programa1.DB;
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Windows.Forms;
 
     public partial class frmTraslados : Form
@@ -163,6 +164,8 @@ namespace Programa1.Carga
             grdTraslados.Columnas[c_TotalS].Format = "C2";
             grdTraslados.Columnas[c_TotalE].Format = "C2";
 
+            grdTraslados.Columnas[c_IdSucS + 1].Style.ForeColor = Color.DimGray;
+            grdTraslados.Columnas[c_IdSucE + 1].Style.ForeColor = Color.DimGray;
             grdTraslados.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
             grdTraslados.set_Texto(0, c_IdSucS, "Suc S");

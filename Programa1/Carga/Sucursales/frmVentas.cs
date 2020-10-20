@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Drawing;
     using System.Windows.Forms;
 
     public partial class frmVentas : Form
@@ -160,6 +161,8 @@
             grdVenta.Columnas[c_TotalCompra].Format = "C2";
             grdVenta.Columnas[c_TotalVenta].Format = "C2";
 
+            grdVenta.Columnas[c_IdProv + 1].Style.ForeColor = Color.DimGray;
+            grdVenta.Columnas[c_IdSuc + 1].Style.ForeColor = Color.DimGray;
             grdVenta.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
             grdVenta.set_Texto(0, c_IdSuc, "Suc");

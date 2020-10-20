@@ -41,6 +41,28 @@
             }
         }
 
+        public bool Mostrar_Botones
+        {
+            get { return paBotones.Visible; }
+            set
+            {
+                paBotones.Visible = value;
+                if (value == true)
+                {
+                    lst.Height = splitContainer1.Height - 57;
+                }
+                else
+                {
+                    lst.Height = splitContainer1.Height - 25;
+                }
+            }
+        }
+
+        public SelectionMode selectionMode
+        {
+            get { return lst.SelectionMode; }
+            set { lst.SelectionMode = value; }
+        }
 
         public string Titulo { get => lblTitulo.Text; set { lblTitulo.Text = value; } }
 
@@ -113,7 +135,7 @@
         {
             List<String> items = new List<String>();
 
-            foreach(String item in lst.SelectedItems)
+            foreach (String item in lst.SelectedItems)
             {
                 items.Add(item);
             }
@@ -150,7 +172,7 @@
                         }
                         s = $"(Tipo IN ({s.Substring(2)}))";
                     }
-               }               
+                }
 
                 if (vFiltroIn.Length > 0)
                 {
@@ -187,7 +209,7 @@
                     }
                 }
             }
-            
+
         }
 
         public void Siguiente()
@@ -249,7 +271,7 @@
             {
                 if (Cambio_Seleccion != null)
                 {
-                    Cambio_Seleccion(this, e); 
+                    Cambio_Seleccion(this, e);
                 }
             }
         }

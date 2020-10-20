@@ -42,17 +42,18 @@
             this.lblTotalSalidas = new System.Windows.Forms.Label();
             this.grdSalidas = new Grilla2.SpeedGrilla();
             this.label1 = new System.Windows.Forms.Label();
-            this.speedGrilla3 = new Grilla2.SpeedGrilla();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.lblCarneK = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cmdStock_Carne = new MaterialSkin.Controls.MaterialFlatButton();
             this.lblSuc = new System.Windows.Forms.Label();
+            this.grdVentas = new Grilla2.SpeedGrilla();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.grdSucursales = new Grilla2.SpeedGrilla();
             this.paEstadistica = new System.Windows.Forms.Panel();
             this.paEst = new System.Windows.Forms.Panel();
             this.grdEstadistica = new Grilla2.SpeedGrilla();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.cmdStock_Carne = new MaterialSkin.Controls.MaterialFlatButton();
             this.cFechas1 = new Programa1.Controles.cFechas();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -68,12 +69,13 @@
             this.splitContainer4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.paEst.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -92,8 +94,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1123, 678);
-            this.splitContainer1.SplitterDistance = 790;
+            this.splitContainer1.Size = new System.Drawing.Size(1123, 701);
+            this.splitContainer1.SplitterDistance = 971;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer3
@@ -112,12 +114,10 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer3.Panel2.Controls.Add(this.panel3);
-            this.splitContainer3.Panel2.Controls.Add(this.speedGrilla3);
-            this.splitContainer3.Panel2.Controls.Add(this.lblCarneK);
-            this.splitContainer3.Panel2.Controls.Add(this.lblSuc);
-            this.splitContainer3.Size = new System.Drawing.Size(790, 678);
-            this.splitContainer3.SplitterDistance = 578;
+            this.splitContainer3.Panel2.Controls.Add(this.panel4);
+            this.splitContainer3.Panel2.Controls.Add(this.grdVentas);
+            this.splitContainer3.Size = new System.Drawing.Size(971, 701);
+            this.splitContainer3.SplitterDistance = 597;
             this.splitContainer3.TabIndex = 0;
             // 
             // splitContainer4
@@ -140,8 +140,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.panel2);
             this.splitContainer4.Panel2.Controls.Add(this.grdSalidas);
             this.splitContainer4.Panel2.Controls.Add(this.label1);
-            this.splitContainer4.Size = new System.Drawing.Size(790, 578);
-            this.splitContainer4.SplitterDistance = 347;
+            this.splitContainer4.Size = new System.Drawing.Size(971, 597);
+            this.splitContainer4.SplitterDistance = 523;
             this.splitContainer4.TabIndex = 0;
             // 
             // panel1
@@ -150,9 +150,9 @@
             this.panel1.Controls.Add(this.rdAgrupado);
             this.panel1.Controls.Add(this.rdDetalle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 552);
+            this.panel1.Location = new System.Drawing.Point(0, 571);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(347, 26);
+            this.panel1.Size = new System.Drawing.Size(523, 26);
             this.panel1.TabIndex = 4;
             // 
             // lblTotalEntradas
@@ -235,7 +235,7 @@
             this.grdEntradas.Redraw = true;
             this.grdEntradas.Row = 0;
             this.grdEntradas.Rows = 1;
-            this.grdEntradas.Size = new System.Drawing.Size(341, 525);
+            this.grdEntradas.Size = new System.Drawing.Size(517, 544);
             this.grdEntradas.TabIndex = 1;
             this.grdEntradas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdEntradas_KeyUp);
             this.grdEntradas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdEntradas_DobleClick);
@@ -255,9 +255,9 @@
             // 
             this.panel2.Controls.Add(this.lblTotalSalidas);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 552);
+            this.panel2.Location = new System.Drawing.Point(0, 571);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(439, 26);
+            this.panel2.Size = new System.Drawing.Size(444, 26);
             this.panel2.TabIndex = 5;
             // 
             // lblTotalSalidas
@@ -302,7 +302,7 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 1;
-            this.grdSalidas.Size = new System.Drawing.Size(433, 525);
+            this.grdSalidas.Size = new System.Drawing.Size(438, 544);
             this.grdSalidas.TabIndex = 1;
             this.grdSalidas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdSalidas_KeyUp);
             this.grdSalidas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdSalidas_DobleClick);
@@ -318,63 +318,105 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Salidas";
             // 
-            // speedGrilla3
+            // panel4
             // 
-            this.speedGrilla3.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.speedGrilla3.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.speedGrilla3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.speedGrilla3.AutoResize = false;
-            this.speedGrilla3.bColor = System.Drawing.SystemColors.Window;
-            this.speedGrilla3.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.speedGrilla3.bFColor = System.Drawing.SystemColors.WindowText;
-            this.speedGrilla3.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.speedGrilla3.Col = 0;
-            this.speedGrilla3.Cols = 1;
-            this.speedGrilla3.DataMember = "";
-            this.speedGrilla3.DataSource = null;
-            this.speedGrilla3.EnableEdicion = true;
-            this.speedGrilla3.Encabezado = "";
-            this.speedGrilla3.fColor = System.Drawing.SystemColors.Control;
-            this.speedGrilla3.FixCols = 0;
-            this.speedGrilla3.FixRows = 0;
-            this.speedGrilla3.FuenteEncabezado = null;
-            this.speedGrilla3.FuentePieDePagina = null;
-            this.speedGrilla3.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.speedGrilla3.Location = new System.Drawing.Point(267, 3);
-            this.speedGrilla3.MenuActivado = false;
-            this.speedGrilla3.Name = "speedGrilla3";
-            this.speedGrilla3.PieDePagina = "\t\tPage {0} of {1}";
-            this.speedGrilla3.PintarFilaSel = true;
-            this.speedGrilla3.Redraw = true;
-            this.speedGrilla3.Row = 0;
-            this.speedGrilla3.Rows = 1;
-            this.speedGrilla3.Size = new System.Drawing.Size(520, 81);
-            this.speedGrilla3.TabIndex = 1;
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel4.Controls.Add(this.lblCarneK);
+            this.panel4.Controls.Add(this.panel3);
+            this.panel4.Controls.Add(this.lblSuc);
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(242, 94);
+            this.panel4.TabIndex = 5;
             // 
             // lblCarneK
             // 
-            this.lblCarneK.AutoSize = true;
             this.lblCarneK.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblCarneK.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblCarneK.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblCarneK.Location = new System.Drawing.Point(12, 3);
+            this.lblCarneK.Location = new System.Drawing.Point(0, 0);
             this.lblCarneK.Name = "lblCarneK";
-            this.lblCarneK.Size = new System.Drawing.Size(85, 18);
-            this.lblCarneK.TabIndex = 0;
+            this.lblCarneK.Size = new System.Drawing.Size(242, 18);
+            this.lblCarneK.TabIndex = 3;
             this.lblCarneK.Text = "Kilos Carne";
+            this.lblCarneK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.cmdStock_Carne);
+            this.panel3.Location = new System.Drawing.Point(3, 21);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(236, 52);
+            this.panel3.TabIndex = 2;
+            // 
+            // cmdStock_Carne
+            // 
+            this.cmdStock_Carne.AutoSize = true;
+            this.cmdStock_Carne.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdStock_Carne.Depth = 0;
+            this.cmdStock_Carne.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdStock_Carne.Location = new System.Drawing.Point(0, 0);
+            this.cmdStock_Carne.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdStock_Carne.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdStock_Carne.Name = "cmdStock_Carne";
+            this.cmdStock_Carne.Primary = false;
+            this.cmdStock_Carne.Size = new System.Drawing.Size(236, 52);
+            this.cmdStock_Carne.TabIndex = 0;
+            this.cmdStock_Carne.Text = "Stock Carne";
+            this.cmdStock_Carne.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cmdStock_Carne.UseVisualStyleBackColor = true;
+            this.cmdStock_Carne.Click += new System.EventHandler(this.cmdStock_Carne_Click);
             // 
             // lblSuc
             // 
-            this.lblSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblSuc.AutoSize = true;
             this.lblSuc.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblSuc.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblSuc.Location = new System.Drawing.Point(12, 69);
+            this.lblSuc.Location = new System.Drawing.Point(0, 76);
             this.lblSuc.Name = "lblSuc";
-            this.lblSuc.Size = new System.Drawing.Size(66, 18);
-            this.lblSuc.TabIndex = 0;
+            this.lblSuc.Size = new System.Drawing.Size(242, 18);
+            this.lblSuc.TabIndex = 4;
             this.lblSuc.Text = "Sucursal";
+            this.lblSuc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // grdVentas
+            // 
+            this.grdVentas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdVentas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdVentas.AutoResize = false;
+            this.grdVentas.bColor = System.Drawing.SystemColors.Window;
+            this.grdVentas.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdVentas.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdVentas.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdVentas.Col = 0;
+            this.grdVentas.Cols = 1;
+            this.grdVentas.DataMember = "";
+            this.grdVentas.DataSource = null;
+            this.grdVentas.EnableEdicion = true;
+            this.grdVentas.Encabezado = "";
+            this.grdVentas.fColor = System.Drawing.SystemColors.Control;
+            this.grdVentas.FixCols = 0;
+            this.grdVentas.FixRows = 0;
+            this.grdVentas.FuenteEncabezado = null;
+            this.grdVentas.FuentePieDePagina = null;
+            this.grdVentas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdVentas.Location = new System.Drawing.Point(251, 3);
+            this.grdVentas.MenuActivado = false;
+            this.grdVentas.Name = "grdVentas";
+            this.grdVentas.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdVentas.PintarFilaSel = true;
+            this.grdVentas.Redraw = true;
+            this.grdVentas.Row = -2;
+            this.grdVentas.Rows = 0;
+            this.grdVentas.Size = new System.Drawing.Size(720, 94);
+            this.grdVentas.TabIndex = 1;
             // 
             // splitContainer2
             // 
@@ -393,8 +435,8 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.cFechas1);
-            this.splitContainer2.Size = new System.Drawing.Size(329, 678);
-            this.splitContainer2.SplitterDistance = 468;
+            this.splitContainer2.Size = new System.Drawing.Size(148, 701);
+            this.splitContainer2.SplitterDistance = 483;
             this.splitContainer2.TabIndex = 0;
             // 
             // grdSucursales
@@ -429,18 +471,18 @@
             this.grdSucursales.Redraw = true;
             this.grdSucursales.Row = 0;
             this.grdSucursales.Rows = 1;
-            this.grdSucursales.Size = new System.Drawing.Size(324, 462);
+            this.grdSucursales.Size = new System.Drawing.Size(203, 477);
             this.grdSucursales.TabIndex = 1;
             this.grdSucursales.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSucursales_CambioFila);
             // 
             // paEstadistica
             // 
-            this.paEstadistica.BackColor = System.Drawing.Color.DarkGray;
+            this.paEstadistica.BackColor = System.Drawing.Color.Gray;
             this.paEstadistica.Cursor = System.Windows.Forms.Cursors.Hand;
             this.paEstadistica.Dock = System.Windows.Forms.DockStyle.Right;
             this.paEstadistica.Location = new System.Drawing.Point(1116, 0);
             this.paEstadistica.Name = "paEstadistica";
-            this.paEstadistica.Size = new System.Drawing.Size(35, 678);
+            this.paEstadistica.Size = new System.Drawing.Size(35, 701);
             this.paEstadistica.TabIndex = 1;
             this.paEstadistica.Click += new System.EventHandler(this.paEstadistica_Click);
             // 
@@ -452,9 +494,9 @@
             this.paEst.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.paEst.Controls.Add(this.grdEstadistica);
             this.paEst.Controls.Add(this.label2);
-            this.paEst.Location = new System.Drawing.Point(486, 0);
+            this.paEst.Location = new System.Drawing.Point(476, 0);
             this.paEst.Name = "paEst";
-            this.paEst.Size = new System.Drawing.Size(637, 678);
+            this.paEst.Size = new System.Drawing.Size(647, 701);
             this.paEst.TabIndex = 2;
             this.paEst.Visible = false;
             // 
@@ -490,7 +532,7 @@
             this.grdEstadistica.Redraw = true;
             this.grdEstadistica.Row = 0;
             this.grdEstadistica.Rows = 50;
-            this.grdEstadistica.Size = new System.Drawing.Size(624, 640);
+            this.grdEstadistica.Size = new System.Drawing.Size(634, 663);
             this.grdEstadistica.TabIndex = 2;
             // 
             // label2
@@ -504,33 +546,6 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Estadísticas";
             // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel3.Controls.Add(this.cmdStock_Carne);
-            this.panel3.Location = new System.Drawing.Point(15, 24);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(246, 42);
-            this.panel3.TabIndex = 2;
-            // 
-            // cmdStock_Carne
-            // 
-            this.cmdStock_Carne.AutoSize = true;
-            this.cmdStock_Carne.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cmdStock_Carne.Depth = 0;
-            this.cmdStock_Carne.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmdStock_Carne.Location = new System.Drawing.Point(0, 0);
-            this.cmdStock_Carne.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cmdStock_Carne.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cmdStock_Carne.Name = "cmdStock_Carne";
-            this.cmdStock_Carne.Primary = false;
-            this.cmdStock_Carne.Size = new System.Drawing.Size(246, 42);
-            this.cmdStock_Carne.TabIndex = 0;
-            this.cmdStock_Carne.Text = "Stock Carne";
-            this.cmdStock_Carne.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cmdStock_Carne.UseVisualStyleBackColor = true;
-            this.cmdStock_Carne.Click += new System.EventHandler(this.cmdStock_Carne_Click);
-            // 
             // cFechas1
             // 
             this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -539,7 +554,7 @@
             this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFechas1.Mostrar = 0;
             this.cFechas1.Name = "cFechas1";
-            this.cFechas1.Size = new System.Drawing.Size(329, 206);
+            this.cFechas1.Size = new System.Drawing.Size(148, 214);
             this.cFechas1.TabIndex = 0;
             this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
@@ -548,7 +563,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1151, 678);
+            this.ClientSize = new System.Drawing.Size(1151, 701);
             this.Controls.Add(this.paEst);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.paEstadistica);
@@ -564,7 +579,6 @@
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
-            this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
@@ -577,14 +591,15 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.paEst.ResumeLayout(false);
             this.paEst.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -598,8 +613,7 @@
         private System.Windows.Forms.Label lblEntradas;
         private Grilla2.SpeedGrilla grdSalidas;
         private System.Windows.Forms.Label label1;
-        private Grilla2.SpeedGrilla speedGrilla3;
-        private System.Windows.Forms.Label lblSuc;
+        private Grilla2.SpeedGrilla grdVentas;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private Grilla2.SpeedGrilla grdSucursales;
         private Controles.cFechas cFechas1;
@@ -613,8 +627,10 @@
         private System.Windows.Forms.Panel paEst;
         private Grilla2.SpeedGrilla grdEstadistica;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblCarneK;
         private System.Windows.Forms.Panel panel3;
         private MaterialSkin.Controls.MaterialFlatButton cmdStock_Carne;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblCarneK;
+        private System.Windows.Forms.Label lblSuc;
     }
 }

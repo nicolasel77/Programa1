@@ -162,6 +162,18 @@
     <Compile Include="Carga\Precios\frmImprimir_MenEmb.Designer.cs">
       <DependentUpon>frmImprimir_MenEmb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Precios\frmPrecios_Granja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Precios\frmPrecios_Granja.Designer.cs">
+      <DependentUpon>frmPrecios_Granja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Precios\frmPromedios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Precios\frmPromedios.Designer.cs">
+      <DependentUpon>frmPromedios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Proveedores\frmAjustes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -557,6 +569,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Precios\frmImprimir_MenEmb.resx">
       <DependentUpon>frmImprimir_MenEmb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Precios\frmPrecios_Granja.resx">
+      <DependentUpon>frmPrecios_Granja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Precios\frmPromedios.resx">
+      <DependentUpon>frmPromedios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmAjustes.resx">
       <DependentUpon>frmAjustes.cs</DependentUpon>

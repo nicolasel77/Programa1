@@ -63,10 +63,7 @@
             Cargar(calFecha.SelectionEnd.Date);
         }
 
-        private void CmdMostrar_Click(object sender, EventArgs e)
-        {
-            Cargar(DateTime.Today);
-        }
+        
 
         private void GrdStock_CambioFila(short Fila)
         {
@@ -83,6 +80,11 @@
                     this.Cursor = Cursors.Default;
                 }
             }
+        }
+
+        private void cmdMostrar_Click(object sender, EventArgs e)
+        {
+            Cargar(DateTime.Today.AddMonths(1));
         }
     }
 }
