@@ -36,7 +36,7 @@
             //Si no hay una sucursal seleccionada se devuelve el primer precio encontrado
             string suc = $"(SELECT TOP 1 Id_Sucursales FROM Precios_Sucursales WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
                     $" AND Id_Productos={Producto.Id} ORDER BY Fecha DESC)";
-            if ( Sucursal.Id > 0) { suc = ""; }
+            if (Sucursal.Id > 0) { suc = Sucursal.Id.ToString(); }
             try
             {
 
@@ -135,16 +135,22 @@
             return dt;
         }
 
-        public DataTable Fechas(int tipo, int prod = 0, int top = 50)
+        public DataTable Fechas(int tipo, int prod = 0, string filtroSuc = "", int top = 50)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             string filtroProd = "";
             if (prod != 0) { filtroProd = " AND ID_Productos=" + prod; }
+
+            if (filtroSuc != "") { filtroSuc = $" ID_Sucursales IN({filtroSuc}) AND ";  }
+
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP {top} Fecha FROM vw_PreciosSucursales WHERE Id_Tipo={tipo} {filtroProd} GROUP BY Fecha ORDER BY Fecha DESC", conexionSql);
+                string mostrarPrecio = "";
+                if (prod == 1 | prod == 300) { mostrarPrecio = ", Precio"; }
+
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP {top} Fecha{mostrarPrecio} FROM vw_PreciosSucursales WHERE {filtroSuc}Id_Tipo={tipo} {filtroProd} GROUP BY Fecha{mostrarPrecio} ORDER BY Fecha DESC", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
