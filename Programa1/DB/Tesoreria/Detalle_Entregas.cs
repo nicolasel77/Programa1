@@ -66,7 +66,7 @@
             
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(SUM(Importe), 0) FROM Fecha_Entregas WHERE ID_Entradas=" + ID_E, conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT ISNULL(SUM(Importe), 0) FROM Fecha_Entregas WHERE ID_Entradas={ID_E.ToString()}", conexionSql);
 
                 conexionSql.Open();
 
@@ -77,8 +77,9 @@
 
                 conexionSql.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 d = 0;
             }
 

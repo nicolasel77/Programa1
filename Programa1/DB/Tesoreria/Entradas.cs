@@ -12,10 +12,11 @@
         public Entradas()
         {
         }
-        public Entradas(int iD, DateTime fecha, Tipos_Entradas tE, int id_SubTipoEntrada, string descripcion, double importe)
+        public Entradas(int iD, DateTime fecha, Cajas Caja, Tipos_Entradas tE, int id_SubTipoEntrada, string descripcion, double importe)
         {
             ID = iD;
             Fecha = fecha;
+            caja = Caja;
             TE = tE;
             Id_SubTipoEntrada = id_SubTipoEntrada;
             Descripcion = descripcion;
@@ -27,6 +28,7 @@
         /// </summary>
         public int ID { get; set; }
         public DateTime Fecha { get; set; }
+        public Cajas caja { get; set; } = new Cajas();
 
         /// <summary>
         /// Tipo Entradas
@@ -45,6 +47,7 @@
             if (dt != null)
             {
                 Fecha = Convert.ToDateTime(dt.Rows[0]["Fecha"]);
+                caja.Id = Convert.ToInt32(dt.Rows[0]["IDC"]);
                 TE.Id_Tipo = Convert.ToInt32(dt.Rows[0]["ID_TipoEntrada"]);
                 Id_SubTipoEntrada = Convert.ToInt32(dt.Rows[0]["ID_SubTipoEntrada"]);
                 Descripcion = Convert.ToString(dt.Rows[0]["Descripcion"]);
@@ -60,7 +63,7 @@
             try
             {
                 SqlCommand command = new SqlCommand($"UPDATE CD_Entradas SET " +
-                    $" Fecha='{Fecha:MM/dd/yy}', ID_TipoEntrada={TE.Id_Tipo}, ID_SubTipoEntrada={Id_SubTipoEntrada}" +
+                    $" Fecha='{Fecha:MM/dd/yy}', ID_Caja={caja.Id}, ID_TipoEntrada={TE.Id_Tipo}, ID_SubTipoEntrada={Id_SubTipoEntrada}" +
                     $", Descripcion='{Descripcion}', Importe={Importe.ToString().Replace(",", ".")}" +
                     $" WHERE ID={ID}", sql);
                 command.CommandType = CommandType.Text;
@@ -84,8 +87,8 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO CD_Entradas (Fecha, ID_TipoEntrada, ID_SubTipoEntrada, Descripcion, Importe) " +
-                    $"VALUES('{Fecha:MM/dd/yy}', {TE.Id_Tipo}, {Id_SubTipoEntrada}, '{Descripcion}', {Importe.ToString().Replace(",", ".")})", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO CD_Entradas (Fecha, ID_Caja, ID_TipoEntrada, ID_SubTipoEntrada, Descripcion, Importe) " +
+                    $"VALUES('{Fecha:MM/dd/yy}', {caja.Id}, {TE.Id_Tipo}, {Id_SubTipoEntrada}, '{Descripcion}', {Importe.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

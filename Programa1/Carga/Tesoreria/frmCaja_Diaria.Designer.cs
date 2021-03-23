@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCaja_Diaria));
             this.splPrincipal = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblEntradas = new MaterialSkin.Controls.MaterialLabel();
             this.lblTotalGrillaEntrada = new MaterialSkin.Controls.MaterialLabel();
             this.grdEntradas = new Grilla2.SpeedGrilla();
             this.mnuEntradas = new MaterialSkin.Controls.MaterialContextMenuStrip();
@@ -107,7 +107,7 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.splitContainer2.Panel1.Controls.Add(this.materialLabel1);
+            this.splitContainer2.Panel1.Controls.Add(this.lblEntradas);
             this.splitContainer2.Panel1.Controls.Add(this.lblTotalGrillaEntrada);
             this.splitContainer2.Panel1.Controls.Add(this.grdEntradas);
             // 
@@ -121,21 +121,21 @@
             this.splitContainer2.SplitterDistance = 488;
             this.splitContainer2.TabIndex = 0;
             // 
-            // materialLabel1
+            // lblEntradas
             // 
-            this.materialLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblEntradas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialLabel1.BackColor = System.Drawing.SystemColors.Control;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(3, 3);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(482, 20);
-            this.materialLabel1.TabIndex = 1;
-            this.materialLabel1.Text = "Entradas";
-            this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblEntradas.BackColor = System.Drawing.SystemColors.Control;
+            this.lblEntradas.Depth = 0;
+            this.lblEntradas.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblEntradas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblEntradas.Location = new System.Drawing.Point(3, 3);
+            this.lblEntradas.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblEntradas.Name = "lblEntradas";
+            this.lblEntradas.Size = new System.Drawing.Size(482, 20);
+            this.lblEntradas.TabIndex = 1;
+            this.lblEntradas.Text = "Entradas";
+            this.lblEntradas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblTotalGrillaEntrada
             // 
@@ -580,7 +580,7 @@
         private MaterialSkin.Controls.MaterialLabel lblTotalGrillaEntrada;
         private Grilla2.SpeedGrilla grdEntradas;
         private Grilla2.SpeedGrilla grdSalidas;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialLabel lblEntradas;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialLabel lblTotalGrillaGastos;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;

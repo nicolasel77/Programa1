@@ -9,6 +9,7 @@
     {
         private Tipos_Entradas tipos_e = new Tipos_Entradas();
         private Grupos_Entradas grupo_e = new Grupos_Entradas();
+        private Cajas cajas = new Cajas();
 
         private DataTable dt;
 
@@ -19,26 +20,130 @@
 
         private void FrmTipos_Entradas_Load(object sender, EventArgs e)
         {
+            int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
+
+            //Cajas
+            //Datos
+            grdCajas.MostrarDatos(cajas.Datos(), true);
+
+            //Formato
+            grdCajas.set_ColW(0, 40);
+            grdCajas.set_ColW(1, 120);
+            grdCajas.TeclasManejadas = n;
+            //**********************************
+
             //Grupo
             //Datos
-            dt = grupo_e.Datos();
-            grdGrupo.MostrarDatos(dt, true);
-            int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
-            grdGrupo.TeclasManejadas = n;
+            grdGrupo.MostrarDatos(grupo_e.Datos(), true);
 
             //Formato
             grdGrupo.set_ColW(0, 40);
+            grdGrupo.set_ColW(1, 120);
+            grdGrupo.TeclasManejadas = n;
+            //**********************************
 
             //Tipos_Entradas
             //Datos
-            dt = tipos_e.Datos();
-            grdTipos_Entradas.MostrarDatos(dt, true);
+            grdTipos_Entradas.MostrarDatos(tipos_e.Datos(), true);
             //Formato
             grdTipos_Entradas.set_ColW(0, 50);
             grdTipos_Entradas.set_ColW(1, 150);
             grdTipos_Entradas.TeclasManejadas = n;
         }
 
+
+        #region " Grupos_Entradas "
+
+        private void Grdcajasditado(short f, short c, object a)
+        {
+            int i = Convert.ToInt32(grdCajas.get_Texto(f, 0));
+
+            switch (c)
+            {
+                case 0: // Id
+                    if (i != 0)
+                    {
+                        Mensaje("Error: no se puede cambiar el Id de un Tipo.");
+                    }
+                    else
+                    {
+                        cajas.Id = Convert.ToInt32(a);
+                        if (cajas.Existe() == true)
+                        {
+                            Mensaje($"El id '{a.ToString()}' ya existe.");
+                            grdCajas.ErrorEnTxt();
+                        }
+                        else
+                        {
+                            grdCajas.set_Texto(f, c, a);
+                            cajas.Agregar();
+                            grdCajas.ActivarCelda(f, 1);
+                            if (grdCajas.EsUltimaFila() == true) { grdCajas.AgregarFila(); }
+                        }
+                    }
+                    break;
+
+                case 1: // Nombre
+                    if (i == 0)
+                    {
+                        Mensaje("Debe ingresar el Id primero");
+                        grdCajas.ActivarCelda(f, 0);
+                    }
+                    else
+                    {
+                        cajas.Id = i;
+                        cajas.Nombre = a.ToString();
+                        grdCajas.set_Texto(f, c, a);
+                        cajas.Actualizar();
+                        if (grdCajas.EsUltimaFila() == true) { grdCajas.AgregarFila(); }
+                        grdCajas.ActivarCelda(f + 1, 0);
+                    }
+                    break;
+            }
+        }
+
+        private void GrdCajas_CambioFila(short Fila)
+        {
+            cajas.Id = Convert.ToInt32(grdCajas.get_Texto(Fila, 0));
+            cajas.Nombre = grdCajas.get_Texto(Fila, 1).ToString();
+
+        }
+
+        private void GrdCajas_KeyPress(object sender, short e)
+        {
+            if (e == 13)
+            {
+                int f = grdCajas.Row;
+                if (f == grdCajas.Rows - 1)
+                {
+                    grdCajas.ActivarCelda(1, grdCajas.Col);
+                }
+                else
+                {
+                    grdCajas.ActivarCelda(f + 1, grdCajas.Col);
+                }
+            }
+        }
+
+        private void GrdCajas_KeyUp(object sender, short e)
+        {
+            // F12
+            if (e == 123 | e == 46)
+            {
+                if (MessageBox.Show($"¿Esta segura/o de borrar el item '{grdCajas.get_Texto(grdCajas.Row, 1).ToString()}' ?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    if (Convert.ToInt32(grdCajas.get_Texto(grdCajas.Row, 0)) != 0)
+                    {
+                        cajas.Id = Convert.ToInt32(grdCajas.get_Texto(grdCajas.Row, 0));
+                        cajas.Borrar();
+                        grdCajas.BorrarFila(grdCajas.Row);
+                    }
+
+                }
+            }
+        }
+
+        #endregion
 
         #region " Grupos_Entradas "
 
@@ -98,6 +203,36 @@
                         grdGrupo.set_Texto(f, c, a);
                         grupo_e.Actualizar();
                         if (grdGrupo.EsUltimaFila() == true) { grdGrupo.AgregarFila(); }
+                        grdGrupo.ActivarCelda(f, 3);
+                    }
+                    break;
+                case 3: // Campo Id
+                    if (i == 0)
+                    {
+                        Mensaje("Debe ingresar el Id primero");
+                        grdGrupo.ActivarCelda(f, 0);
+                    }
+                    else
+                    {
+                        grupo_e.Id = i;
+                        grupo_e.Campo_Id = a.ToString();
+                        grdGrupo.set_Texto(f, c, a);
+                        grupo_e.Actualizar();
+                        grdGrupo.ActivarCelda(f, 4);
+                    }
+                    break;
+                case 4: // Campo Nombre
+                    if (i == 0)
+                    {
+                        Mensaje("Debe ingresar el Id primero");
+                        grdGrupo.ActivarCelda(f, 0);
+                    }
+                    else
+                    {
+                        grupo_e.Id = i;
+                        grupo_e.Campo_Nombre = a.ToString();
+                        grdGrupo.set_Texto(f, c, a);
+                        grupo_e.Actualizar();
                         grdGrupo.ActivarCelda(f + 1, 0);
                     }
                     break;
@@ -108,7 +243,7 @@
         {
             grupo_e.Id = Convert.ToInt32(grdGrupo.get_Texto(Fila, 0));
             grupo_e.Nombre = grdGrupo.get_Texto(Fila, 1).ToString();
-            grupo_e.Tabla= grdGrupo.get_Texto(Fila, 2).ToString();
+            grupo_e.Tabla = grdGrupo.get_Texto(Fila, 2).ToString();
 
         }
 

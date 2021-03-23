@@ -38,8 +38,7 @@ namespace Programa1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.11;Initial Catalog=dbDatos;User Id=Nikorasu;Password=Oficin" +
-            "a02")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.11;Initial Catalog=dbDatos;User Id=Nikorasu;Password=Oficina02")]
         public string dbDatosConnectionString {
             get {
                 return ((string)(this["dbDatosConnectionString"]));

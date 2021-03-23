@@ -14,6 +14,7 @@
         private Byte d_Fecha;
         private Byte d_Importe;
 
+
         #endregion
         public frmCargarEntregas()
         {
@@ -105,7 +106,11 @@
         {
             if (e == Convert.ToInt32(Keys.Enter))
             {
-                if (Convert.ToDouble(grdEntregas.get_Texto(grdEntregas.Row, d_Importe)) == 0)
+                object importe = grdEntregas.get_Texto(grdEntregas.Row, d_Importe);
+
+                if (importe == "") { importe = "0"; }
+
+                if (Convert.ToDouble(importe) == 0)
                 {
                     this.Close();
                 }

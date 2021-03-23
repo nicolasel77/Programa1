@@ -471,6 +471,7 @@
     <Compile Include="DB\Sucursales\Estadisticas_Sucursales.cs" />
     <Compile Include="DB\Sucursales\Promedios.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />
+    <Compile Include="DB\Tesoreria\Cajas.cs" />
     <Compile Include="DB\Tesoreria\Detalle_Entregas.cs" />
     <Compile Include="DB\Tesoreria\Detalle_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Entradas.cs" />

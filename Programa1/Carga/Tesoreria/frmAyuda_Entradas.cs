@@ -48,7 +48,7 @@ namespace Programa1.Carga.Tesoreria
             Opcion = TOpcion.eSubTipo;
 
             Cargar();
-        }       
+        }
 
         private void Cargar()
         {
@@ -75,6 +75,10 @@ namespace Programa1.Carga.Tesoreria
                         {
                             sf = $"{Filtro_Tipo} AND {TEntradas.grupoE.Campo_Nombre} LIKE '%{txtBuscar.Text}%'";
                         }
+                        else
+                        {
+                            sf = $"{TEntradas.grupoE.Campo_Nombre} LIKE '%{txtBuscar.Text}%'";
+                        }
                     }
                     else
                     {
@@ -87,9 +91,9 @@ namespace Programa1.Carga.Tesoreria
                         foreach (DataRow dr in dt.Rows)
                         {
                             lst.Items.Add($"{dr[0]}. {dr[1]}");
-                        } 
+                        }
                     }
-                    break;                
+                    break;
             }
 
             txtBuscar.Focus();
