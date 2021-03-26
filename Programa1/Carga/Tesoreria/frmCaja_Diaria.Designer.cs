@@ -63,6 +63,9 @@
             this.cmdCerrar_Fecha = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.mntFecha = new System.Windows.Forms.MonthCalendar();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.grdCajas = new Grilla2.SpeedGrilla();
             ((System.ComponentModel.ISupportInitialize)(this.splPrincipal)).BeginInit();
             this.splPrincipal.Panel1.SuspendLayout();
             this.splPrincipal.Panel2.SuspendLayout();
@@ -94,8 +97,8 @@
             this.splPrincipal.Panel2.Controls.Add(this.materialLabel4);
             this.splPrincipal.Panel2.Controls.Add(this.mntFecha);
             this.splPrincipal.Panel2.Resize += new System.EventHandler(this.splPrincipal_Panel2_Resize);
-            this.splPrincipal.Size = new System.Drawing.Size(1118, 719);
-            this.splPrincipal.SplitterDistance = 909;
+            this.splPrincipal.Size = new System.Drawing.Size(1517, 719);
+            this.splPrincipal.SplitterDistance = 1233;
             this.splPrincipal.TabIndex = 1;
             // 
             // splitContainer2
@@ -117,8 +120,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.materialLabel3);
             this.splitContainer2.Panel2.Controls.Add(this.lblTotalGrillaGastos);
             this.splitContainer2.Panel2.Controls.Add(this.grdSalidas);
-            this.splitContainer2.Size = new System.Drawing.Size(909, 719);
-            this.splitContainer2.SplitterDistance = 488;
+            this.splitContainer2.Size = new System.Drawing.Size(1233, 719);
+            this.splitContainer2.SplitterDistance = 470;
             this.splitContainer2.TabIndex = 0;
             // 
             // lblEntradas
@@ -132,7 +135,7 @@
             this.lblEntradas.Location = new System.Drawing.Point(3, 3);
             this.lblEntradas.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblEntradas.Name = "lblEntradas";
-            this.lblEntradas.Size = new System.Drawing.Size(482, 20);
+            this.lblEntradas.Size = new System.Drawing.Size(464, 20);
             this.lblEntradas.TabIndex = 1;
             this.lblEntradas.Text = "Entradas";
             this.lblEntradas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -148,7 +151,7 @@
             this.lblTotalGrillaEntrada.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaEntrada.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalGrillaEntrada.Name = "lblTotalGrillaEntrada";
-            this.lblTotalGrillaEntrada.Size = new System.Drawing.Size(482, 22);
+            this.lblTotalGrillaEntrada.Size = new System.Drawing.Size(464, 22);
             this.lblTotalGrillaEntrada.TabIndex = 1;
             this.lblTotalGrillaEntrada.Text = "Total Entrada";
             this.lblTotalGrillaEntrada.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -186,7 +189,7 @@
             this.grdEntradas.Redraw = true;
             this.grdEntradas.Row = 0;
             this.grdEntradas.Rows = 50;
-            this.grdEntradas.Size = new System.Drawing.Size(482, 664);
+            this.grdEntradas.Size = new System.Drawing.Size(464, 664);
             this.grdEntradas.TabIndex = 0;
             this.grdEntradas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdEntradas_Editado);
             this.grdEntradas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdEntradas_CambioFila);
@@ -210,12 +213,14 @@
             this.borrarToolStripMenuItem.Name = "borrarToolStripMenuItem";
             this.borrarToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.borrarToolStripMenuItem.Text = "Borrar";
+            this.borrarToolStripMenuItem.Click += new System.EventHandler(this.borrarToolStripMenuItem_Click);
             // 
             // cambiarFechaToolStripMenuItem
             // 
             this.cambiarFechaToolStripMenuItem.Name = "cambiarFechaToolStripMenuItem";
             this.cambiarFechaToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.cambiarFechaToolStripMenuItem.Text = "Cambiar Fecha";
+            this.cambiarFechaToolStripMenuItem.Click += new System.EventHandler(this.cambiarFechaToolStripMenuItem_Click);
             // 
             // imprimirToolStripMenuItem
             // 
@@ -234,7 +239,7 @@
             this.materialLabel3.Location = new System.Drawing.Point(3, 3);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(414, 20);
+            this.materialLabel3.Size = new System.Drawing.Size(756, 20);
             this.materialLabel3.TabIndex = 1;
             this.materialLabel3.Text = "Gastos";
             this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -250,7 +255,7 @@
             this.lblTotalGrillaGastos.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaGastos.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalGrillaGastos.Name = "lblTotalGrillaGastos";
-            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(414, 22);
+            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(756, 22);
             this.lblTotalGrillaGastos.TabIndex = 2;
             this.lblTotalGrillaGastos.Text = "Total Salida";
             this.lblTotalGrillaGastos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -287,7 +292,7 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 50;
-            this.grdSalidas.Size = new System.Drawing.Size(414, 664);
+            this.grdSalidas.Size = new System.Drawing.Size(756, 664);
             this.grdSalidas.TabIndex = 0;
             this.grdSalidas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSalidas_Editado);
             this.grdSalidas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSalidas_CambioFila);
@@ -298,6 +303,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.grdCajas);
             this.panel1.Controls.Add(this.lblTotal);
             this.panel1.Controls.Add(this.lblSTotalEntradas);
             this.panel1.Controls.Add(this.label8);
@@ -310,16 +316,18 @@
             this.panel1.Controls.Add(this.lblSaldoAnterior);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.materialLabel1);
             this.panel1.Controls.Add(this.materialLabel5);
             this.panel1.Controls.Add(this.materialLabel2);
             this.panel1.Controls.Add(this.cmdCerrar_Fecha);
             this.panel1.Location = new System.Drawing.Point(8, 204);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(192, 507);
+            this.panel1.Size = new System.Drawing.Size(267, 507);
             this.panel1.TabIndex = 4;
             // 
             // lblTotal
@@ -328,7 +336,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotal.Location = new System.Drawing.Point(86, 138);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(103, 16);
+            this.lblTotal.Size = new System.Drawing.Size(178, 16);
             this.lblTotal.TabIndex = 6;
             this.lblTotal.Text = "$ 0,0";
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -339,7 +347,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSTotalEntradas.Location = new System.Drawing.Point(86, 57);
             this.lblSTotalEntradas.Name = "lblSTotalEntradas";
-            this.lblSTotalEntradas.Size = new System.Drawing.Size(103, 16);
+            this.lblSTotalEntradas.Size = new System.Drawing.Size(178, 16);
             this.lblSTotalEntradas.TabIndex = 6;
             this.lblSTotalEntradas.Text = "$ 0,0";
             this.lblSTotalEntradas.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -368,7 +376,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblGastos.Location = new System.Drawing.Point(86, 122);
             this.lblGastos.Name = "lblGastos";
-            this.lblGastos.Size = new System.Drawing.Size(103, 16);
+            this.lblGastos.Size = new System.Drawing.Size(178, 16);
             this.lblGastos.TabIndex = 6;
             this.lblGastos.Text = "$ 0,0";
             this.lblGastos.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -379,7 +387,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalEntradas.Location = new System.Drawing.Point(86, 41);
             this.lblTotalEntradas.Name = "lblTotalEntradas";
-            this.lblTotalEntradas.Size = new System.Drawing.Size(103, 16);
+            this.lblTotalEntradas.Size = new System.Drawing.Size(178, 16);
             this.lblTotalEntradas.TabIndex = 6;
             this.lblTotalEntradas.Text = "$ 0,0";
             this.lblTotalEntradas.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -408,7 +416,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCajaExterna.Location = new System.Drawing.Point(86, 106);
             this.lblCajaExterna.Name = "lblCajaExterna";
-            this.lblCajaExterna.Size = new System.Drawing.Size(103, 16);
+            this.lblCajaExterna.Size = new System.Drawing.Size(178, 16);
             this.lblCajaExterna.TabIndex = 6;
             this.lblCajaExterna.Text = "$ 0,0";
             this.lblCajaExterna.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -419,7 +427,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSaldoAnterior.Location = new System.Drawing.Point(86, 25);
             this.lblSaldoAnterior.Name = "lblSaldoAnterior";
-            this.lblSaldoAnterior.Size = new System.Drawing.Size(103, 16);
+            this.lblSaldoAnterior.Size = new System.Drawing.Size(178, 16);
             this.lblSaldoAnterior.TabIndex = 6;
             this.lblSaldoAnterior.Text = "$ 0,0";
             this.lblSaldoAnterior.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -449,7 +457,7 @@
             this.panel5.BackColor = System.Drawing.Color.Gainsboro;
             this.panel5.Location = new System.Drawing.Point(-17, 101);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(238, 2);
+            this.panel5.Size = new System.Drawing.Size(313, 2);
             this.panel5.TabIndex = 5;
             // 
             // panel2
@@ -459,7 +467,7 @@
             this.panel2.BackColor = System.Drawing.Color.Gainsboro;
             this.panel2.Location = new System.Drawing.Point(-17, 20);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(238, 2);
+            this.panel2.Size = new System.Drawing.Size(313, 2);
             this.panel2.TabIndex = 5;
             // 
             // panel4
@@ -469,7 +477,7 @@
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
             this.panel4.Location = new System.Drawing.Point(0, 157);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(252, 2);
+            this.panel4.Size = new System.Drawing.Size(327, 2);
             this.panel4.TabIndex = 5;
             // 
             // panel3
@@ -479,7 +487,7 @@
             this.panel3.BackColor = System.Drawing.Color.Gainsboro;
             this.panel3.Location = new System.Drawing.Point(0, 76);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(252, 2);
+            this.panel3.Size = new System.Drawing.Size(327, 2);
             this.panel3.TabIndex = 5;
             // 
             // materialLabel5
@@ -519,10 +527,11 @@
             this.cmdCerrar_Fecha.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdCerrar_Fecha.Name = "cmdCerrar_Fecha";
             this.cmdCerrar_Fecha.Primary = false;
-            this.cmdCerrar_Fecha.Size = new System.Drawing.Size(192, 36);
+            this.cmdCerrar_Fecha.Size = new System.Drawing.Size(267, 36);
             this.cmdCerrar_Fecha.TabIndex = 0;
             this.cmdCerrar_Fecha.Text = "Cerrar Fecha";
             this.cmdCerrar_Fecha.UseVisualStyleBackColor = true;
+            this.cmdCerrar_Fecha.Click += new System.EventHandler(this.cmdCerrar_Fecha_Click);
             // 
             // materialLabel4
             // 
@@ -535,7 +544,7 @@
             this.materialLabel4.Location = new System.Drawing.Point(8, 3);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(204, 20);
+            this.materialLabel4.Size = new System.Drawing.Size(279, 20);
             this.materialLabel4.TabIndex = 2;
             this.materialLabel4.Text = "Fecha";
             this.materialLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -544,16 +553,74 @@
             // 
             this.mntFecha.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.mntFecha.BackColor = System.Drawing.Color.Gainsboro;
-            this.mntFecha.Location = new System.Drawing.Point(8, 26);
+            this.mntFecha.Location = new System.Drawing.Point(46, 26);
+            this.mntFecha.MaxSelectionCount = 1;
             this.mntFecha.Name = "mntFecha";
             this.mntFecha.TabIndex = 0;
             this.mntFecha.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.mntFecha_DateSelected);
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(0, 162);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(47, 19);
+            this.materialLabel1.TabIndex = 4;
+            this.materialLabel1.Text = "Cajas";
+            // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel6.Location = new System.Drawing.Point(0, 184);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(313, 2);
+            this.panel6.TabIndex = 5;
+            // 
+            // grdCajas
+            // 
+            this.grdCajas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdCajas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdCajas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdCajas.AutoResize = false;
+            this.grdCajas.bColor = System.Drawing.SystemColors.Window;
+            this.grdCajas.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdCajas.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdCajas.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdCajas.Col = 0;
+            this.grdCajas.Cols = 10;
+            this.grdCajas.DataMember = "";
+            this.grdCajas.DataSource = null;
+            this.grdCajas.EnableEdicion = true;
+            this.grdCajas.Encabezado = "";
+            this.grdCajas.fColor = System.Drawing.SystemColors.Control;
+            this.grdCajas.FixCols = 0;
+            this.grdCajas.FixRows = 0;
+            this.grdCajas.FuenteEncabezado = null;
+            this.grdCajas.FuentePieDePagina = null;
+            this.grdCajas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdCajas.Location = new System.Drawing.Point(6, 192);
+            this.grdCajas.MenuActivado = false;
+            this.grdCajas.Name = "grdCajas";
+            this.grdCajas.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdCajas.PintarFilaSel = true;
+            this.grdCajas.Redraw = true;
+            this.grdCajas.Row = 0;
+            this.grdCajas.Rows = 50;
+            this.grdCajas.Size = new System.Drawing.Size(254, 219);
+            this.grdCajas.TabIndex = 7;
             // 
             // frmCaja_Diaria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1118, 719);
+            this.ClientSize = new System.Drawing.Size(1517, 719);
             this.Controls.Add(this.splPrincipal);
             this.Name = "frmCaja_Diaria";
             this.Text = "Caja Diaria";
@@ -609,5 +676,8 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private Grilla2.SpeedGrilla grdCajas;
+        private System.Windows.Forms.Panel panel6;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
 }

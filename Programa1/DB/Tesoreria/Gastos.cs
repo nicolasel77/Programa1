@@ -18,6 +18,7 @@
         /// </summary>
         public int ID { get; set; }
         public DateTime Fecha { get; set; }
+        public Cajas caja { get; set; } = new Cajas();
 
         /// <summary>
         /// Tipo Gastos
@@ -43,7 +44,7 @@
             try
             {
                 SqlCommand command = new SqlCommand($"UPDATE CD_Gastos SET " +
-                    $" Fecha='{Fecha:MM/dd/yy}', ID_TipoGastos={TG.Id_Tipo}, Id_SubTipoGastos={Id_SubTipoGastos}" +
+                    $" Fecha='{Fecha:MM/dd/yy}', ID_Caja={caja.Id}, ID_TipoGastos={TG.Id_Tipo}, Id_SubTipoGastos={Id_SubTipoGastos}" +
                     $", Id_DetalleGastos={Id_DetalleGastos}, Desc_SubTipo='{Desc_SubTipo}', Descripcion='{Descripcion}', Importe={Importe.ToString().Replace(",", ".")}" +
                     $", Autorizado={(Autorizado ? "1" : "0")}, Fecha_Autorizado='{Fecha_Autorizado:MM/dd/yy HH:mm}'" +
                     $" WHERE ID={ID}", sql);
@@ -69,8 +70,8 @@
             try
             {
                 SqlCommand command = new SqlCommand($"INSERT INTO CD_Gastos " +
-                    $"(Fecha, ID_TipoGastos, ID_SubTipoGastos, Desc_SubTipo, ID_DetalleGastos, Descripcion, Importe, Autorizado, Fecha_Autorizado) " +
-                    $"VALUES('{Fecha:MM/dd/yy}', {TG.Id_Tipo}, {Id_SubTipoGastos}, '{Desc_SubTipo}', {Id_DetalleGastos}, '{Descripcion}', " +
+                    $"(Fecha, ID_Caja, ID_TipoGastos, ID_SubTipoGastos, Desc_SubTipo, ID_DetalleGastos, Descripcion, Importe, Autorizado, Fecha_Autorizado) " +
+                    $"VALUES('{Fecha:MM/dd/yy}', {caja.Id}, {TG.Id_Tipo}, {Id_SubTipoGastos}, '{Desc_SubTipo}', {Id_DetalleGastos}, '{Descripcion}', " +
                     $"{Importe.ToString().Replace(",", ".")}, {(Autorizado ? "1" : "0")}, '{Fecha_Autorizado:MM/dd/yy HH:mm}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Programa1.DB.Tesoreria
+﻿namespace Programa1.DB.Tesoreria
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Windows.Forms;
+
     class Grupo_Gastos
     {
         public Grupo_Gastos() { }

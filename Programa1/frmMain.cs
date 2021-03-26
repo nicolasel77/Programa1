@@ -8,6 +8,7 @@
     using Programa1.DB.Tesoreria;
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Windows.Forms;
     using Excel = Microsoft.Office.Interop.Excel;
 
@@ -50,6 +51,7 @@
                 ToolStripMenuItem t = new ToolStripMenuItem("frmResumen_Suc");
                 t.Text = "Resumen_Suc";
                 t.Click += new EventHandler(Mostrar);
+
                 this.tstMenu.Items.Add(t);
 
                 Form frmResumen_Suc = new Programa1.Carga.frmResumen_Suc();
@@ -1681,6 +1683,25 @@
                     break;
                 }
             }
+        }
+
+        private void tstMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            foreach (ToolStripItem t in tstMenu.Items)
+            {
+                t.BackColor = DefaultBackColor;
+            }
+            e.ClickedItem.BackColor = Color.LightSkyBlue;
+        }
+
+        
+        private void tstMenu_ItemAdded(object sender, ToolStripItemEventArgs e)
+        {
+            foreach (ToolStripItem t in tstMenu.Items)
+            {
+                t.BackColor = DefaultBackColor;
+            }
+            e.Item.BackColor = Color.LightSkyBlue;
         }
     }
 }

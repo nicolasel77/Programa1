@@ -31,8 +31,11 @@ namespace Programa1.Carga.Tesoreria
         private Byte s_Importe;
         private Byte s_Autorizado;
         private Byte s_Fecha_Autorizado;
+        private Byte s_Grupo;
 
         #endregion
+
+        private Caja_Diaria CD = new Caja_Diaria();
 
         /// <summary>
         /// Caja Diaria Entradas
@@ -52,6 +55,8 @@ namespace Programa1.Carga.Tesoreria
 
         private void frmCaja_Diaria_Load(object sender, EventArgs e)
         {
+            mntFecha.SetDate(CD.Fecha);
+
             Cargar_Datos();
 
             //*****************************
@@ -89,6 +94,7 @@ namespace Programa1.Carga.Tesoreria
             //*****************************
             s_Id = Convert.ToByte(grdSalidas.get_ColIndex("Id"));
             s_Fecha = Convert.ToByte(grdSalidas.get_ColIndex("Fecha"));
+            s_Caja = Convert.ToByte(grdSalidas.get_ColIndex("IDC"));
             s_Tipo = Convert.ToByte(grdSalidas.get_ColIndex("ID_TipoGastos"));
             s_SubTipo = Convert.ToByte(grdSalidas.get_ColIndex("ID_SubTipoGastos"));
             s_Detalle = Convert.ToByte(grdSalidas.get_ColIndex("ID_DetalleGastos"));
@@ -96,6 +102,7 @@ namespace Programa1.Carga.Tesoreria
             s_Importe = Convert.ToByte(grdSalidas.get_ColIndex("Importe"));
             s_Autorizado = Convert.ToByte(grdSalidas.get_ColIndex("Autorizado"));
             s_Fecha_Autorizado = Convert.ToByte(grdSalidas.get_ColIndex("Fecha_Autorizado"));
+            s_Grupo = Convert.ToByte(grdSalidas.get_ColIndex("Grupo"));
 
 
             // 13: Enter
@@ -127,6 +134,18 @@ namespace Programa1.Carga.Tesoreria
             mnuEntradas.Top = 26;
         }
 
+        private void cmdCerrar_Fecha_Click(object sender, EventArgs e)
+        {
+            frmNuevaFecha fr = new frmNuevaFecha();
+            fr.ShowDialog();
+            if (fr.Aceptado == true)
+            {
+                CD.Fecha = fr.mntFecha.SelectionStart.Date;
+                CD.Actualizar();
+                mntFecha.SetDate(fr.mntFecha.SelectionStart.Date);
+                Cargar_Datos();
+            }
+        }
 
         private void Cargar_Datos()
         {
@@ -141,6 +160,10 @@ namespace Programa1.Carga.Tesoreria
 
 
             Totales();
+
+            grdCajas.MostrarDatos(CD.Saldos(mntFecha.SelectionStart.Date), true, 2);
+            grdCajas.Columnas[2].Style.Format = "N1";
+            grdCajas.AutosizeAll();
 
             this.Cursor = Cursors.Default;
         }
@@ -169,6 +192,8 @@ namespace Programa1.Carga.Tesoreria
         {
             grdSalidas.set_ColW(s_Id, 0);
             grdSalidas.set_ColW(s_Fecha, 0);
+            grdSalidas.set_ColW(s_Caja, 40);
+            grdSalidas.set_ColW(s_Caja + 1, 80);
             grdSalidas.set_ColW(s_Tipo, 50);
             grdSalidas.set_ColW(s_Tipo + 1, 90);
             grdSalidas.set_ColW(s_SubTipo, 50);
@@ -178,6 +203,7 @@ namespace Programa1.Carga.Tesoreria
             grdSalidas.set_ColW(s_Importe, 90);
             grdSalidas.set_ColW(s_Autorizado, 50);
             grdSalidas.set_ColW(s_Fecha_Autorizado, 70);
+            grdSalidas.set_ColW(s_Grupo, 0);
 
             grdSalidas.set_Texto(0, s_Tipo, "Tipo");
             grdSalidas.set_Texto(0, s_SubTipo, "SubTipo");
@@ -222,150 +248,171 @@ namespace Programa1.Carga.Tesoreria
         #region " Grilla Entradas "
         private void grdEntradas_Editado(short f, short c, object a)
         {
-            cEntradas.ID = Convert.ToInt32(grdEntradas.get_Texto(f, e_Id));
-            cEntradas.Fecha = mntFecha.SelectionStart.Date;
-
-            switch (c)
+            if (mntFecha.SelectionStart.Date >= CD.Fecha)
             {
-                case 2: // Caja
-                    cEntradas.caja.Id = Convert.ToInt32(a);
-                    if (cEntradas.caja.Existe() == true)
-                    {
-                        grdEntradas.set_Texto(f, c, a);
-                        grdEntradas.set_Texto(f, c + 1, cEntradas.caja.Nombre);
-                        grdEntradas.ActivarCelda(f, e_Tipo);
+                cEntradas.ID = Convert.ToInt32(grdEntradas.get_Texto(f, e_Id));
+                cEntradas.Fecha = mntFecha.SelectionStart.Date;
 
-                    }
-                    break;
-                case 4: //T ipo
-                    cEntradas.TE.Id_Tipo = Convert.ToInt32(a);
-                    if (cEntradas.TE.Existe() == true)
-                    {
-                        grdEntradas.set_Texto(f, c, a);
-                        grdEntradas.set_Texto(f, c + 1, cEntradas.TE.Nombre);
-                        grdEntradas.ActivarCelda(f, e_Subtipo);
-
-                    }
-                    break;
-
-                case 6: // SubTipo - Suc - Cliente
-                    cEntradas.TE.Id_Tipo = Convert.ToInt32(grdEntradas.get_Texto(f, e_Tipo));
-
-                    if (cEntradas.TE.Existe() == true)
-                    {
-                        cEntradas.Id_SubTipoEntrada = Convert.ToInt32(a);
-                        string s = cEntradas.Nombre_SubTipo();
-                        if (s.Length > 0)
+                switch (c)
+                {
+                    case 2: // Caja
+                        cEntradas.caja.Id = Convert.ToInt32(a);
+                        if (cEntradas.caja.Existe() == true)
                         {
-                            cEntradas.Descripcion = s;
-                            grdEntradas.set_Texto(f, e_Subtipo, a);
-                            grdEntradas.set_Texto(f, e_Descripcion, s);
+                            grdEntradas.set_Texto(f, c, a);
+                            grdEntradas.set_Texto(f, c + 1, cEntradas.caja.Nombre);
+                            grdEntradas.ActivarCelda(f, e_Tipo);
 
-                            // Es Entrega? Mostrar el form
-                            if (cEntradas.TE.Es_Entrega == true)
+                        }
+                        break;
+                    case 4: //T ipo
+                        cEntradas.TE.Id_Tipo = Convert.ToInt32(a);
+                        if (cEntradas.TE.Existe() == true)
+                        {
+                            grdEntradas.set_Texto(f, c, a);
+                            grdEntradas.set_Texto(f, c + 1, cEntradas.TE.Nombre);
+                            grdEntradas.ActivarCelda(f, e_Subtipo);
+
+                        }
+                        break;
+
+                    case 6: // SubTipo - Suc - Cliente
+                        cEntradas.TE.Id_Tipo = Convert.ToInt32(grdEntradas.get_Texto(f, e_Tipo));
+
+                        if (cEntradas.TE.Existe() == true)
+                        {
+                            cEntradas.Id_SubTipoEntrada = Convert.ToInt32(a);
+                            string s = cEntradas.Nombre_SubTipo();
+                            if (s.Length > 0)
                             {
-                                // Si es nuevo habrá que agregar el registro
-                                if (cEntradas.ID == 0) { cEntradas.Agregar(); }
+                                cEntradas.Descripcion = s;
+                                grdEntradas.set_Texto(f, e_Subtipo, a);
+                                grdEntradas.set_Texto(f, e_Descripcion, s);
 
-                                frmCargarEntregas fr = new frmCargarEntregas();
-                                fr.lblSuc.Text = s;
-                                fr.Detalle_Entregas.ID_Entradas = cEntradas.ID;
-                                fr.Cargar();
-                                fr.ShowDialog();
-                                grdEntradas.Focus();
-                                cEntradas.Importe = fr.Detalle_Entregas.Total_IDEntradas(cEntradas.ID);
-                                cEntradas.Actualizar();
+                                // Es Entrega? Mostrar el form
+                                if (cEntradas.TE.Es_Entrega == true)
+                                {
+                                    // Si es nuevo habrá que agregar el registro
+                                    if (cEntradas.ID == 0) { cEntradas.Agregar(); }
 
-                                grdEntradas.set_Texto(f, e_Importe, cEntradas.Importe);
+                                    frmCargarEntregas fr = new frmCargarEntregas();
+                                    fr.lblSuc.Text = s;
+                                    fr.Detalle_Entregas.ID_Entradas = cEntradas.ID;
+                                    fr.Cargar();
+                                    fr.ShowDialog();
+                                    grdEntradas.Focus();
+                                    cEntradas.Importe = fr.Detalle_Entregas.Total_IDEntradas(cEntradas.ID);
+                                    cEntradas.Actualizar();
 
-                                if (grdEntradas.EsUltimaFila() == true) { grdEntradas.AgregarFila(); }
+                                    grdEntradas.set_Texto(f, e_Importe, cEntradas.Importe);
 
-                                grdEntradas.set_Texto(f + 1, e_Id, cEntradas.ID);
+                                    if (grdEntradas.EsUltimaFila() == true) { grdEntradas.AgregarFila(); }
+
+                                    grdEntradas.set_Texto(f + 1, e_Id, cEntradas.ID);
+                                    grdEntradas.set_Texto(f + 1, e_Caja, cEntradas.caja.Id);
+                                    grdEntradas.set_Texto(f + 1, e_Caja + 1, cEntradas.caja.Nombre);
+                                    grdEntradas.set_Texto(f + 1, e_Fecha, cEntradas.Fecha);
+                                    grdEntradas.set_Texto(f + 1, e_Tipo, cEntradas.TE.Id_Tipo);
+                                    grdEntradas.set_Texto(f + 1, e_Tipo + 1, grdEntradas.get_Texto(f, e_Tipo + 1));
+
+                                    grdEntradas.ActivarCelda(f + 1, e_Subtipo);
+                                }
+                                else
+                                {
+                                    grdEntradas.ActivarCelda(f, e_Importe);
+                                    if (cEntradas.ID != 0) { cEntradas.Actualizar(); }
+                                }
+                            }
+                        }
+                        break;
+                    case 7: // Descripcion
+                        if (cEntradas.TE.Id_Tipo != 0 & cEntradas.Id_SubTipoEntrada != 0)
+                        {
+                            cEntradas.Descripcion = a.ToString();
+                            grdEntradas.set_Texto(f, e_Descripcion, a);
+                            grdEntradas.ActivarCelda(f, e_Importe);
+
+                            if (cEntradas.ID != 0) { cEntradas.Actualizar(); }
+                        }
+                        break;
+                    case 8: // Importe
+                        if (cEntradas.TE.Id_Tipo != 0 & cEntradas.Id_SubTipoEntrada != 0)
+                        {
+                            cEntradas.Fecha = mntFecha.SelectionStart.Date;
+
+                            cEntradas.Importe = Convert.ToDouble(a);
+                            grdEntradas.set_Texto(f, e_Importe, a);
+                            if (grdEntradas.EsUltimaFila() == true)
+                            {
+
+                                cEntradas.Agregar();
+                                grdEntradas.set_Texto(f, e_Id, Convert.ToInt32(cEntradas.ID));
+                                grdEntradas.set_Texto(f, e_Fecha, Convert.ToDateTime(cEntradas.Fecha));
+
+                                grdEntradas.AgregarFila();
+
                                 grdEntradas.set_Texto(f + 1, e_Caja, cEntradas.caja.Id);
                                 grdEntradas.set_Texto(f + 1, e_Caja + 1, cEntradas.caja.Nombre);
-                                grdEntradas.set_Texto(f + 1, e_Fecha, cEntradas.Fecha);
                                 grdEntradas.set_Texto(f + 1, e_Tipo, cEntradas.TE.Id_Tipo);
-                                grdEntradas.set_Texto(f + 1, e_Tipo + 1, grdEntradas.get_Texto(f, e_Tipo + 1));
-
-                                grdEntradas.ActivarCelda(f + 1, e_Subtipo);
+                                grdEntradas.set_Texto(f + 1, e_Tipo + 1, cEntradas.TE.Nombre);
                             }
                             else
                             {
-                                grdEntradas.ActivarCelda(f, e_Importe);
-                                if (cEntradas.ID != 0) { cEntradas.Actualizar(); }
+                                cEntradas.Actualizar();
                             }
+
+                            Totales();
+
+                            grdEntradas.ActivarCelda(f + 1, e_Caja);
                         }
-                    }
-                    break;
-                case 7: // Descripcion
-                    if (cEntradas.TE.Id_Tipo != 0 & cEntradas.Id_SubTipoEntrada != 0)
-                    {
-                        cEntradas.Descripcion = a.ToString();
-                        grdEntradas.set_Texto(f, e_Descripcion, a);
-                        grdEntradas.ActivarCelda(f, e_Importe);
-
-                        if (cEntradas.ID != 0) { cEntradas.Actualizar(); }
-                    }
-                    break;
-                case 8: // Importe
-                    if (cEntradas.TE.Id_Tipo != 0 & cEntradas.Id_SubTipoEntrada != 0)
-                    {
-                        cEntradas.Fecha = mntFecha.SelectionStart.Date;
-
-                        cEntradas.Importe = Convert.ToDouble(a);
-                        grdEntradas.set_Texto(f, e_Importe, a);
-                        if (grdEntradas.EsUltimaFila() == true)
-                        {
-
-                            cEntradas.Agregar();
-                            grdEntradas.set_Texto(f, e_Id, Convert.ToInt32(cEntradas.ID));
-                            grdEntradas.set_Texto(f, e_Fecha, Convert.ToDateTime(cEntradas.Fecha));
-
-                            grdEntradas.AgregarFila();
-
-                            grdEntradas.set_Texto(f + 1, e_Caja, cEntradas.caja.Id);
-                            grdEntradas.set_Texto(f + 1, e_Caja + 1, cEntradas.caja.Nombre);
-                            grdEntradas.set_Texto(f + 1, e_Tipo, cEntradas.TE.Id_Tipo);
-                            grdEntradas.set_Texto(f + 1, e_Tipo + 1, cEntradas.TE.Nombre);
-                        }
-                        else
-                        {
-                            cEntradas.Actualizar();
-                        }
-
-                        Totales();
-
-                        grdEntradas.ActivarCelda(f + 1, e_Caja);
-                    }
-                    break;
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("La fecha se encuentra cerrada.", "Error");
             }
         }
 
         private void grdEntradas_CambioFila(short Fila)
         {
+            Cargar_Fila(Fila);
+        }
+
+        private void Cargar_Fila(short Fila)
+        {
             cEntradas.ID = Convert.ToInt32(grdEntradas.get_Texto(Fila, e_Id));
             cEntradas.Fecha = Convert.ToDateTime(grdEntradas.get_Texto(Fila, e_Fecha));
             cEntradas.caja.Id = Convert.ToInt32(grdEntradas.get_Texto(Fila, e_Caja));
             cEntradas.TE.Id_Tipo = Convert.ToInt32(grdEntradas.get_Texto(Fila, e_Tipo));
+            cEntradas.Descripcion = grdEntradas.get_Texto(Fila, e_Descripcion).ToString();
         }
 
         private void grdEntradas_KeyUp(object sender, short e)
         {
+
             if (e == Convert.ToInt32(Keys.Delete))
             {
-                if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                if (mntFecha.SelectionStart.Date >= CD.Fecha)
                 {
-                    cEntradas.Borrar();
-                    if (grdEntradas.EsUltimaFila() == true)
+                    if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                     {
-                        grdEntradas.Rows = 1;
-                        grdEntradas.Rows = 2;
+                        cEntradas.Borrar();
+                        if (grdEntradas.EsUltimaFila() == true)
+                        {
+                            grdEntradas.Rows = 1;
+                            grdEntradas.Rows = 2;
+                        }
+                        else
+                        {
+                            grdEntradas.BorrarFila();
+                        }
+                        Totales();
                     }
-                    else
-                    {
-                        grdEntradas.BorrarFila();
-                    }
-                    Totales();
+                }
+                else
+                {
+                    MessageBox.Show("La fecha se encuentra cerrada.", "Error");
                 }
             }
             else
@@ -390,6 +437,7 @@ namespace Programa1.Carga.Tesoreria
                     }
                 }
             }
+
         }
 
         private void grdEntradas_DobleClick(object sender, EventArgs e)
@@ -418,112 +466,129 @@ namespace Programa1.Carga.Tesoreria
         #region " Grilla Salidas "
         private void grdSalidas_Editado(short f, short c, object a)
         {
-            cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(f, s_Id));
-            cGastos.Fecha = mntFecha.SelectionStart.Date;
-
-            switch (c)
+            if (mntFecha.SelectionStart.Date >= CD.Fecha)
             {
-                case 2: //Tipo
-                    cGastos.TG.Id_Tipo = Convert.ToInt32(a);
-                    if (cGastos.TG.Existe() == true)
-                    {
-                        grdSalidas.set_Texto(f, c, a);
-                        grdSalidas.set_Texto(f, c + 1, cGastos.TG.Nombre);
-                        grdSalidas.ActivarCelda(f, s_SubTipo);
+                cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(f, s_Id));
+                cGastos.Fecha = mntFecha.SelectionStart.Date;
 
-                    }
-                    break;
-
-                case 4: //SubTipo - Buscar Tabla
-                    cGastos.TG.Id_Tipo = Convert.ToInt32(grdSalidas.get_Texto(f, s_Tipo));
-
-                    if (cGastos.TG.Existe() == true)
-                    {
-                        cGastos.Id_SubTipoGastos = Convert.ToInt32(a);
-                        string s = cGastos.Nombre_SubTipo();
-
-                        if (s.Length > 0)
+                switch (c)
+                {
+                    case 2: // Caja
+                        cGastos.caja.Id = Convert.ToInt32(a);
+                        if (cGastos.caja.Existe() == true)
                         {
-                            cGastos.Desc_SubTipo = s;
-                            grdSalidas.set_Texto(f, s_SubTipo, a);
-                            grdSalidas.set_Texto(f, s_SubTipo + 1, s);
-
-                            grdSalidas.ActivarCelda(f, s_Detalle);
-                            if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                            grdSalidas.set_Texto(f, c, a);
+                            grdSalidas.set_Texto(f, c + 1, cGastos.caja.Nombre);
+                            grdSalidas.ActivarCelda(f, e_Tipo);
 
                         }
-                    }
-                    break;
-                case 5: // Desc_SubTipo
-                    if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
-                    {
-                        cGastos.Desc_SubTipo = a.ToString();
-                        grdSalidas.set_Texto(f, s_SubTipo + 1, a);
-                        grdSalidas.ActivarCelda(f, s_Importe);
-
-                        if (cGastos.ID != 0) { cGastos.Actualizar(); }
-                    }
-                    break;
-                case 6: //ID_Detalle
-                    dg.Id_Tipo = cGastos.TG.Id_Tipo;
-                    dg.ID_Detalle = Convert.ToInt32(a);
-
-                    if (dg.Existe() == true)
-                    {
-                        cGastos.Id_DetalleGastos = Convert.ToInt32(a);
-
-                        if (dg.Nombre.Length > 0)
+                        break;
+                    case 4: //Tipo
+                        cGastos.TG.Id_Tipo = Convert.ToInt32(a);
+                        if (cGastos.TG.Existe() == true)
                         {
-                            cGastos.Descripcion = dg.Nombre;
-                            grdSalidas.set_Texto(f, s_Detalle, a);
-                            grdSalidas.set_Texto(f, s_Descripcion, dg.Nombre);
+                            grdSalidas.set_Texto(f, c, a);
+                            grdSalidas.set_Texto(f, c + 1, cGastos.TG.Nombre);
+                            grdSalidas.ActivarCelda(f, s_SubTipo);
 
+                        }
+                        break;
+
+                    case 6: //SubTipo - Buscar Tabla
+                        cGastos.TG.Id_Tipo = Convert.ToInt32(grdSalidas.get_Texto(f, s_Tipo));
+
+                        if (cGastos.TG.Existe() == true)
+                        {
+                            cGastos.Id_SubTipoGastos = Convert.ToInt32(a);
+                            string s = cGastos.Nombre_SubTipo();
+
+                            if (s.Length > 0)
+                            {
+                                cGastos.Desc_SubTipo = s;
+                                grdSalidas.set_Texto(f, s_SubTipo, a);
+                                grdSalidas.set_Texto(f, s_SubTipo + 1, s);
+
+                                grdSalidas.ActivarCelda(f, s_Detalle);
+                                if (cGastos.ID != 0) { cGastos.Actualizar(); }
+
+                            }
+                        }
+                        break;
+                    case 7: // Desc_SubTipo
+                        if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
+                        {
+                            cGastos.Desc_SubTipo = a.ToString();
+                            grdSalidas.set_Texto(f, s_SubTipo + 1, a);
                             grdSalidas.ActivarCelda(f, s_Importe);
+
                             if (cGastos.ID != 0) { cGastos.Actualizar(); }
-
                         }
-                    }
-                    break;
-                case 7: // Descripcion
-                    if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
-                    {
-                        cGastos.Descripcion = a.ToString();
-                        grdSalidas.set_Texto(f, s_Descripcion, a);
-                        grdSalidas.ActivarCelda(f, s_Importe);
+                        break;
+                    case 8: //ID_Detalle
+                        dg.Id_Tipo = cGastos.TG.Id_Tipo;
+                        dg.ID_Detalle = Convert.ToInt32(a);
 
-                        if (cGastos.ID != 0) { cGastos.Actualizar(); }
-                    }
-                    break;
-                case 8: // Importe
-                    if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
-                    {
-                        cGastos.Fecha = mntFecha.SelectionStart.Date;
-
-                        cGastos.Importe = Convert.ToDouble(a);
-                        grdSalidas.set_Texto(f, s_Importe, a);
-
-                        if (grdSalidas.EsUltimaFila() == true)
+                        if (dg.Existe() == true)
                         {
+                            cGastos.Id_DetalleGastos = Convert.ToInt32(a);
 
-                            cGastos.Agregar();
-                            grdSalidas.set_Texto(f, s_Id, Convert.ToInt32(cGastos.ID));
-                            grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
+                            if (dg.Nombre.Length > 0)
+                            {
+                                cGastos.Descripcion = dg.Nombre;
+                                grdSalidas.set_Texto(f, s_Detalle, a);
+                                grdSalidas.set_Texto(f, s_Descripcion, dg.Nombre);
 
-                            grdSalidas.AgregarFila();
+                                grdSalidas.ActivarCelda(f, s_Importe);
+                                if (cGastos.ID != 0) { cGastos.Actualizar(); }
 
-                            grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
-                            grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
+                            }
                         }
-                        else
+                        break;
+                    case 9: // Descripcion
+                        if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
                         {
-                            cGastos.Actualizar();
+                            cGastos.Descripcion = a.ToString();
+                            grdSalidas.set_Texto(f, s_Descripcion, a);
+                            grdSalidas.ActivarCelda(f, s_Importe);
+
+                            if (cGastos.ID != 0) { cGastos.Actualizar(); }
                         }
+                        break;
+                    case 10: // Importe
+                        if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
+                        {
+                            cGastos.Fecha = mntFecha.SelectionStart.Date;
 
-                        Totales();
+                            cGastos.Importe = Convert.ToDouble(a);
+                            grdSalidas.set_Texto(f, s_Importe, a);
 
-                        grdSalidas.ActivarCelda(f + 1, s_Tipo);
-                    }
-                    break;
+                            if (grdSalidas.EsUltimaFila() == true)
+                            {
+
+                                cGastos.Agregar();
+                                grdSalidas.set_Texto(f, s_Id, Convert.ToInt32(cGastos.ID));
+                                grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
+
+                                grdSalidas.AgregarFila();
+
+                                grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
+                                grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
+                            }
+                            else
+                            {
+                                cGastos.Actualizar();
+                            }
+
+                            Totales();
+
+                            grdSalidas.ActivarCelda(f + 1, s_Tipo);
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("La fecha se encuentra cerrada.", "Error");
             }
         }
 
@@ -531,6 +596,7 @@ namespace Programa1.Carga.Tesoreria
         {
             cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Id));
             cGastos.Fecha = Convert.ToDateTime(grdSalidas.get_Texto(Fila, s_Fecha));
+            cGastos.caja.Id = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Caja));
             cGastos.TG.Id_Tipo = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Tipo));
             cGastos.Id_SubTipoGastos = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_SubTipo));
             cGastos.Desc_SubTipo = Convert.ToString(grdSalidas.get_Texto(Fila, s_SubTipo + 1));
@@ -555,19 +621,26 @@ namespace Programa1.Carga.Tesoreria
             }
             if (e == Convert.ToInt32(Keys.Delete))
             {
-                if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                if (mntFecha.SelectionStart.Date >= CD.Fecha)
                 {
-                    cGastos.Borrar();
-                    if (grdSalidas.EsUltimaFila() == true)
+                    if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                     {
-                        grdSalidas.Rows = 1;
-                        grdSalidas.Rows = 2;
+                        cGastos.Borrar();
+                        if (grdSalidas.EsUltimaFila() == true)
+                        {
+                            grdSalidas.Rows = 1;
+                            grdSalidas.Rows = 2;
+                        }
+                        else
+                        {
+                            grdSalidas.BorrarFila();
+                        }
+                        Totales();
                     }
-                    else
-                    {
-                        grdSalidas.BorrarFila();
-                    }
-                    Totales();
+                }
+                else
+                {
+                    MessageBox.Show("La fecha se encuentra cerrada.", "Error");
                 }
             }
             if (e == Convert.ToInt32(Keys.F1))
@@ -614,8 +687,34 @@ namespace Programa1.Carga.Tesoreria
             }
         }
 
+
         #endregion
 
+        #region " Menu contextual Entradas "
+        private void borrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            grdEntradas_KeyUp(null, Convert.ToInt16(Keys.Delete));
+        }
+
+        private void cambiarFechaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmNuevaFecha fr = new frmNuevaFecha();
+            fr.ShowDialog();
+            if (fr.Aceptado == true)
+            {
+                int fIni = grdEntradas.Selection.r1;
+                int fFin = grdEntradas.Selection.r2;
+                for (int i = fIni; i <= fFin; i++)
+                {
+                    Cargar_Fila(Convert.ToInt16(i));
+                    cEntradas.Fecha = fr.mntFecha.SelectionStart.Date;
+                    cEntradas.Actualizar();
+                }
+                Cargar_Datos();
+            }
+        }
+
+        #endregion
 
     }
 }

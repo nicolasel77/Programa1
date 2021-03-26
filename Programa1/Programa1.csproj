@@ -378,6 +378,12 @@
     <Compile Include="Carga\Tesoreria\frmCargarEntregas.Designer.cs">
       <DependentUpon>frmCargarEntregas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmNuevaFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmNuevaFecha.Designer.cs">
+      <DependentUpon>frmNuevaFecha.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmResumen_Gastos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -472,6 +478,7 @@
     <Compile Include="DB\Sucursales\Promedios.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />
     <Compile Include="DB\Tesoreria\Cajas.cs" />
+    <Compile Include="DB\Tesoreria\Caja_Diaria.cs" />
     <Compile Include="DB\Tesoreria\Detalle_Entregas.cs" />
     <Compile Include="DB\Tesoreria\Detalle_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Entradas.cs" />
@@ -673,6 +680,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmCargarEntregas.resx">
       <DependentUpon>frmCargarEntregas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmNuevaFecha.resx">
+      <DependentUpon>frmNuevaFecha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmResumen_Gastos.resx">
       <DependentUpon>frmResumen_Gastos.cs</DependentUpon>

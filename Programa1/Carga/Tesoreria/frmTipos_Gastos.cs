@@ -249,18 +249,23 @@
 
         private void grdTipo_CambioFila(short Fila)
         {
+            this.Cursor = Cursors.WaitCursor;
+
             tg.Id_Tipo = Convert.ToInt32(grdTipo.get_Texto(Fila, grdTipo.get_ColIndex("Id_Tipo")));
             
             string sf = "";
             if (tg.Id_Tipo != 0) { sf = $"ID_Tipo={tg.Id_Tipo}"; }
 
-            grdSubTipo.MostrarDatos(stg.Datos(sf), true);
+            stg.Id_Tipo = tg.Id_Tipo;
+            grdSubTipo.MostrarDatos(stg.Datos(), true);
             grdSubTipo.AutosizeAll();
             grdSubTipo.set_ColW(grdSubTipo.get_ColIndex("Nombre"), 150);
 
             grdDetalles.MostrarDatos(dtg.Datos(sf), true);
             grdDetalles.AutosizeAll();
             grdDetalles.set_ColW(grdDetalles.get_ColIndex("Nombre"), 150);
+
+            this.Cursor = Cursors.Default;
         }
 
         private void grdSubTipo_CambioFila(short Fila)

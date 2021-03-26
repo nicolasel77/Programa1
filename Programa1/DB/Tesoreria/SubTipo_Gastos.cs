@@ -1,17 +1,18 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Data.SqlClient;
-using System.Windows.Forms;
-
-namespace Programa1.DB.Tesoreria
+﻿namespace Programa1.DB.Tesoreria
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Windows.Forms;
     class SubTipo_Gastos
     {
+
         public SubTipo_Gastos()
         {
         }
-
+        
+        private Tipo_Gastos tg = new Tipo_Gastos();
         private int vId;
 
         [Required]
@@ -22,6 +23,7 @@ namespace Programa1.DB.Tesoreria
             set
             {
                 vId = value;
+                tg.Id_Tipo = vId;
                 Cargar();
             }
         }
@@ -29,17 +31,17 @@ namespace Programa1.DB.Tesoreria
         [MaxLength(100, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
         public string Nombre { get; set; }
-               
+
         public int ID_SubTipo { get; set; }
 
 
         public void Cargar()
         {
-            DataTable dt = Datos("Id_Tipo=" + Id_Tipo);
+            DataTable dt = Datos();
             if (dt.Rows.Count != 0)
             {
-                Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
-                ID_SubTipo = Convert.ToInt32(dt.Rows[0]["ID_SubTipo"]);
+                ID_SubTipo = Convert.ToInt32(dt.Rows[0][tg.grupoS.Campo_Id]);
+                Nombre = Convert.ToString(dt.Rows[0][tg.grupoS.Campo_Nombre]);                
             }
             else
             {
@@ -49,7 +51,42 @@ namespace Programa1.DB.Tesoreria
 
         }
 
-        public DataTable Datos(string filtro = "")
+        public DataTable Datos()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            string ci, cn, w, t;
+
+            //Busco los nombre de los campos
+            
+            tg.Id_Tipo = Id_Tipo;
+            ci = tg.grupoS.Campo_Id;
+            cn = tg.grupoS.Campo_Nombre;
+            t = tg.grupoS.Tabla;
+            if (tg.grupoS.Campo_Filtro != "") { w = $" WHERE {tg.grupoS.Campo_Filtro}={Id_Tipo}"; } else { w = ""; }
+
+            string s = $"SELECT {ci}, {cn} FROM {t} {w} ORDER BY {ci}";
+
+            try
+            {
+
+                SqlCommand comandoSql = new SqlCommand(s, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        public DataTable SubTipos(string filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -58,7 +95,7 @@ namespace Programa1.DB.Tesoreria
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM SubTipos_Gastos" + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT ID_Tipo, ID_SubTipo, Nombre FROM SubTipos_Gastos" + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

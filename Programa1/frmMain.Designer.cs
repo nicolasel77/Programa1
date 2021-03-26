@@ -390,25 +390,25 @@
             // retirosToolStripMenuItem
             // 
             this.retirosToolStripMenuItem.Name = "retirosToolStripMenuItem";
-            this.retirosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.retirosToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.retirosToolStripMenuItem.Text = "Retiros";
             this.retirosToolStripMenuItem.Click += new System.EventHandler(this.RetirosToolStripMenuItem_Click);
             // 
             // sueldosToolStripMenuItem
             // 
             this.sueldosToolStripMenuItem.Name = "sueldosToolStripMenuItem";
-            this.sueldosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sueldosToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.sueldosToolStripMenuItem.Text = "Sueldos";
             // 
             // toolStripMenuItem14
             // 
             this.toolStripMenuItem14.Name = "toolStripMenuItem14";
-            this.toolStripMenuItem14.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(129, 6);
             // 
             // empleadosToolStripMenuItem1
             // 
             this.empleadosToolStripMenuItem1.Name = "empleadosToolStripMenuItem1";
-            this.empleadosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.empleadosToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
             this.empleadosToolStripMenuItem1.Text = "Empleados";
             this.empleadosToolStripMenuItem1.Click += new System.EventHandler(this.EmpleadosToolStripMenuItem1_Click);
             // 
@@ -720,6 +720,8 @@
             this.tstMenu.Size = new System.Drawing.Size(1339, 25);
             this.tstMenu.TabIndex = 3;
             this.tstMenu.Text = "toolStrip1";
+            this.tstMenu.ItemAdded += new System.Windows.Forms.ToolStripItemEventHandler(this.tstMenu_ItemAdded);
+            this.tstMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tstMenu_ItemClicked);
             // 
             // frmMain
             // 
