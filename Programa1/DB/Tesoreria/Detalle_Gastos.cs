@@ -10,11 +10,21 @@
         public Detalle_Gastos() { }
         private int vId;
         private int vDetalle;
+        private Tipo_Gastos tg = new Tipo_Gastos();
 
         [Required]
         [Key]
-        public int Id_Tipo { get; set; }
-        
+        public int Id_Tipo
+        {
+            get { return vId; }
+            set
+            {
+                vId = value;
+                tg.Id_Tipo = vId;
+                Cargar();
+            }
+        }
+
 
         [MaxLength(100, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]

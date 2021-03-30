@@ -76,5 +76,10 @@
         {
             return Cajas.Saldos(fecha);
         }
+
+        public DataTable Datos()
+        {
+            return Cajas.Datos();
+        }
     }
 }

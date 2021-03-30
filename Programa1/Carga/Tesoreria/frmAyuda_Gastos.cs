@@ -7,14 +7,16 @@ namespace Programa1.Carga.Tesoreria
 {
     public partial class frmAyuda_Gastos : Form
     {
+        private Cajas gCajas;
         private Tipo_Gastos TGastos;
         private Detalle_Gastos DTgastos;
 
         private enum TOpcion : byte
         {
-            gTipo = 0,
-            gSubTipo = 1,
-            gDetalle = 2
+            gCaja = 0,
+            gTipo = 1,
+            gSubTipo = 2,
+            gDetalle = 3
         }
         private TOpcion Opcion;
         public string Valor = "";
@@ -35,6 +37,11 @@ namespace Programa1.Carga.Tesoreria
             this.Close();
         }
 
+        public void Cargar_Cajas()
+        {
+            gCajas = new Cajas();
+            Cargar();
+        }
         public void Cargar_TiposGastos(int Tipo)
         {
             TGastos = new Tipo_Gastos();
@@ -46,9 +53,9 @@ namespace Programa1.Carga.Tesoreria
         {
             TGastos = new Tipo_Gastos();
             TGastos.Id_Tipo = Tipo;
-            if (TGastos.grupoS.Campo_Filtro.Length > 0 ) { Filtro_Tipo = $"{TGastos.grupoS.Campo_Filtro}={Tipo}"; }
+            //if (TGastos.grupoS.Campo_Filtro.Length > 0) { Filtro_Tipo = $"{TGastos.grupoS.Campo_Filtro}={Tipo}"; }
             Opcion = TOpcion.gSubTipo;
-            
+
             Cargar();
         }
         public void Cargar_Detalles(int Tipo)
@@ -70,6 +77,16 @@ namespace Programa1.Carga.Tesoreria
 
             switch (Opcion)
             {
+                case TOpcion.gCaja:
+                    if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text}%'"; }
+
+                    dt = gCajas.Datos(sf);
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        lst.Items.Add($"{dr[0]}. {dr[1]}");
+                    }
+                    break;
                 case TOpcion.gTipo:
                     if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text}%'"; }
 
@@ -80,11 +97,16 @@ namespace Programa1.Carga.Tesoreria
                     }
                     break;
                 case TOpcion.gSubTipo:
-                    if (txtBuscar.Text.Length != 0) 
-                    { 
+                    if (txtBuscar.Text.Length != 0)
+                    {
+                        //if (TGastos.grupoS.Campo_Filtro.Length > 0) { Filtro_Tipo = $"{TGastos.grupoS.Campo_Filtro}={TGastos.Id_Tipo}"; }
                         if (Filtro_Tipo.Length > 0)
                         {
                             sf = $"{Filtro_Tipo} AND {TGastos.grupoS.Campo_Nombre} LIKE '%{txtBuscar.Text}%'";
+                        }
+                        else
+                        {
+                            sf = $"{TGastos.grupoS.Campo_Nombre} LIKE '%{txtBuscar.Text}%'";
                         }
                     }
                     else
@@ -98,7 +120,7 @@ namespace Programa1.Carga.Tesoreria
                         foreach (DataRow dr in dt.Rows)
                         {
                             lst.Items.Add($"{dr[0]}. {dr[1]}");
-                        } 
+                        }
                     }
                     break;
                 case TOpcion.gDetalle:
@@ -122,7 +144,7 @@ namespace Programa1.Carga.Tesoreria
                     break;
             }
 
-            txtBuscar.Focus();            
+            txtBuscar.Focus();
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
@@ -154,7 +176,7 @@ namespace Programa1.Carga.Tesoreria
                 }
                 else
                 {
-                    if(i == ls.Items.Count - 1)
+                    if (i == ls.Items.Count - 1)
                     {
                         ls.SelectedIndex = 0;
                     }
@@ -188,10 +210,17 @@ namespace Programa1.Carga.Tesoreria
 
         private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar== Convert.ToChar(13))
+            if (e.KeyChar == Convert.ToChar(13))
             {
                 e.Handled = true;
-                Valor = lst.Text;
+                if (lst.Items.Count == 1) 
+                {
+                    Valor = lst.Items[0].ToString();
+                }
+                else
+                {
+                    Valor = lst.Text; 
+                }
                 this.Hide();
             }
         }

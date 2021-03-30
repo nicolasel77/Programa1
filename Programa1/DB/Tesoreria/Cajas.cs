@@ -26,7 +26,7 @@
         public string Nombre { get; set; }
 
 
-        public DataTable Datos()
+        public DataTable Datos(string Filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -34,7 +34,9 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Cajas", conexionSql);
+                if (Filtro.Length > 0) { Filtro = " WHERE " + Filtro; }
+
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Cajas" + Filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

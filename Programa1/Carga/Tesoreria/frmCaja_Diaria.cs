@@ -53,9 +53,11 @@ namespace Programa1.Carga.Tesoreria
             InitializeComponent();
         }
 
+        #region " FORM "
         private void frmCaja_Diaria_Load(object sender, EventArgs e)
         {
             mntFecha.SetDate(CD.Fecha);
+            mntFecha.MaxDate = CD.Fecha;
 
             Cargar_Datos();
 
@@ -123,6 +125,14 @@ namespace Programa1.Carga.Tesoreria
             Totales();
         }
 
+        #endregion
+
+        #region " VARIOS "
+        private void mntFecha_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            Cargar_Datos();
+        }
+
         private void frmCaja_Diaria_Resize(object sender, EventArgs e)
         {
             if (splPrincipal.Width != 0 & splPrincipal.Width > 212) { splPrincipal.SplitterDistance = (splPrincipal.Width - 212); }
@@ -147,6 +157,9 @@ namespace Programa1.Carga.Tesoreria
             }
         }
 
+        #endregion
+
+        #region " SUBS "
         private void Cargar_Datos()
         {
             this.Cursor = Cursors.WaitCursor;
@@ -239,12 +252,8 @@ namespace Programa1.Carga.Tesoreria
             lblTotal.Text = (eSaldo - g).ToString("C1");
         }
 
-        private void mntFecha_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            Cargar_Datos();
-        }
-
-
+        #endregion
+        
         #region " Grilla Entradas "
         private void grdEntradas_Editado(short f, short c, object a)
         {
@@ -617,6 +626,7 @@ namespace Programa1.Carga.Tesoreria
                     if (grdSalidas.Col == s_Detalle) { grdSalidas.ActivarCelda(fila, s_Importe); }
                     if (grdSalidas.Col == s_SubTipo) { grdSalidas.ActivarCelda(fila, s_Detalle); }
                     if (grdSalidas.Col == s_Tipo) { grdSalidas.ActivarCelda(fila, s_SubTipo); }
+                    if (grdSalidas.Col == s_Caja) { grdSalidas.ActivarCelda(fila, s_Tipo); }
                 }
             }
             if (e == Convert.ToInt32(Keys.Delete))
@@ -648,6 +658,7 @@ namespace Programa1.Carga.Tesoreria
                 frmAyuda_Gastos fayuda = new frmAyuda_Gastos();
                 Herramientas.Herramientas h = new Herramientas.Herramientas();
 
+                if (grdSalidas.Col == s_Caja) { fayuda.Cargar_Cajas(); }
                 if (grdSalidas.Col == s_Tipo) { fayuda.Cargar_TiposGastos(cGastos.TG.Id_Tipo); }
                 if (grdSalidas.Col == s_SubTipo) { fayuda.Cargar_SubTiposGastos(cGastos.TG.Id_Tipo); }
                 if (grdSalidas.Col == s_Detalle) { fayuda.Cargar_Detalles(cGastos.TG.Id_Tipo); }
@@ -656,30 +667,43 @@ namespace Programa1.Carga.Tesoreria
 
                 if (fayuda.Valor != "")
                 {
-                    if (grdSalidas.Col == s_Tipo)
+                    if (grdSalidas.Col == s_Caja)
                     {
-                        cGastos.TG.Id_Tipo = h.Codigo_Seleccionado(fayuda.Valor);
-                        grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Tipo, cGastos.TG.Id_Tipo);
-                        grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Tipo + 1, cGastos.TG.Nombre);
-                        grdSalidas.ActivarCelda(grdSalidas.Row, s_SubTipo);
+                        cGastos.caja.Id = h.Codigo_Seleccionado(fayuda.Valor);
+                        if (cGastos.caja.Existe() == true)
+                        {
+                            grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Caja, cGastos.caja.Id);
+                            grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Caja + 1, cGastos.caja.Nombre);
+                            grdSalidas.ActivarCelda(grdSalidas.Row, s_Tipo);
+                        }                        
                     }
                     else
                     {
-                        if (grdSalidas.Col == s_SubTipo)
+                        if (grdSalidas.Col == s_Tipo)
                         {
-                            cGastos.Id_SubTipoGastos = h.Codigo_Seleccionado(fayuda.Valor);
-                            grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo, cGastos.Id_SubTipoGastos);
-                            grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo + 1, h.Nombre_Seleccionado(fayuda.Valor));
-                            grdSalidas.ActivarCelda(grdSalidas.Row, s_Detalle);
+                            cGastos.TG.Id_Tipo = h.Codigo_Seleccionado(fayuda.Valor);
+                            grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Tipo, cGastos.TG.Id_Tipo);
+                            grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Tipo + 1, cGastos.TG.Nombre);
+                            grdSalidas.ActivarCelda(grdSalidas.Row, s_SubTipo);
                         }
                         else
                         {
-                            if (grdSalidas.Col == s_Detalle)
+                            if (grdSalidas.Col == s_SubTipo)
                             {
-                                cGastos.Id_DetalleGastos = h.Codigo_Seleccionado(fayuda.Valor);
-                                grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Detalle, cGastos.Id_DetalleGastos);
-                                grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Descripcion, h.Nombre_Seleccionado(fayuda.Valor));
-                                grdSalidas.ActivarCelda(grdSalidas.Row, s_Importe);
+                                cGastos.Id_SubTipoGastos = h.Codigo_Seleccionado(fayuda.Valor);
+                                grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo, cGastos.Id_SubTipoGastos);
+                                grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo + 1, h.Nombre_Seleccionado(fayuda.Valor));
+                                grdSalidas.ActivarCelda(grdSalidas.Row, s_Detalle);
+                            }
+                            else
+                            {
+                                if (grdSalidas.Col == s_Detalle)
+                                {
+                                    cGastos.Id_DetalleGastos = h.Codigo_Seleccionado(fayuda.Valor);
+                                    grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Detalle, cGastos.Id_DetalleGastos);
+                                    grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Descripcion, h.Nombre_Seleccionado(fayuda.Valor));
+                                    grdSalidas.ActivarCelda(grdSalidas.Row, s_Importe);
+                                }
                             }
                         }
                     }

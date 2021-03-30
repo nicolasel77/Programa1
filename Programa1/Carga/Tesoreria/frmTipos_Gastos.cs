@@ -17,6 +17,7 @@
         SubTipo_Gastos stg = new SubTipo_Gastos();
         Detalle_Gastos dtg = new Detalle_Gastos();
 
+        #region " FORM "
         private void frmTipos_Gastos_Load(object sender, EventArgs e)
         {
             DataTable dt = gg.Tablas();
@@ -45,17 +46,22 @@
 
             //46: Delete
             grdSubTipo.TeclasManejadas = new int[] { 46 };
-            grdSubTipo.MostrarDatos(stg.Datos(), true);
-            grdSubTipo.AutosizeAll();
-            grdSubTipo.set_ColW(grdSubTipo.get_ColIndex("Nombre"), 150);
+            //grdSubTipo.MostrarDatos(stg.Datos(), true);
+            //grdSubTipo.AutosizeAll();
+            //grdSubTipo.set_ColW(grdSubTipo.get_ColIndex("Nombre"), 150);
+            grdSubTipo.Rows = 0;
 
             //46: Delete
             grdDetalles.TeclasManejadas = new int[] { 46 };
-            grdDetalles.MostrarDatos(dtg.Datos(), true);
-            grdDetalles.AutosizeAll();
-            grdDetalles.set_ColW(grdDetalles.get_ColIndex("Nombre"), 150);
+            //grdDetalles.MostrarDatos(dtg.Datos(), true);
+            //grdDetalles.AutosizeAll();
+            //grdDetalles.set_ColW(grdDetalles.get_ColIndex("Nombre"), 150);
+            grdDetalles.Rows = 0;
         }
 
+        #endregion
+
+        #region " GRUPO "
         private void grdGrupo_Editado(short f, short c, object a)
         {
             gg.Id = Convert.ToInt32(grdGrupo.get_Texto(f, 0));
@@ -95,6 +101,14 @@
             }
         }
 
+        private void grdGrupo_CambioFila(short Fila)
+        {
+            gg.Id = Convert.ToInt32(grdGrupo.get_Texto(Fila, grdGrupo.get_ColIndex("Id")));
+        }
+
+        #endregion
+
+        #region " TIPO "
         private void grdTipo_Editado(short f, short c, object a)
         {
             int vId = Convert.ToInt32(grdTipo.get_Texto(f, grdTipo.get_ColIndex("Id_Tipo")));
@@ -125,11 +139,11 @@
                 tg.grupoS.Id = Convert.ToInt32(a);
 
                 if (tg.grupoS.Nombre.Length != 0)
-                {                    
+                {
                     grdTipo.set_Texto(f, grdTipo.get_ColIndex("Grupo"), tg.grupoS.Id);
                     grdTipo.set_Texto(f, grdTipo.get_ColIndex("Descripcion"), tg.grupoS.Nombre);
 
-                    if (grdTipo.EsUltimaFila() ==  false)
+                    if (grdTipo.EsUltimaFila() == false)
                     {
                         tg.Actualizar();
                     }
@@ -141,18 +155,47 @@
 
                     grdTipo.ActivarCelda(f + 1, grdTipo.get_ColIndex("Id_Tipo"));
                 }
-                else 
-                { 
+                else
+                {
                     MessageBox.Show($"No se pudo encontrar el grupo {a}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     grdTipo.ErrorEnTxt();
                 }
             }
         }
 
+        private void grdTipo_CambioFila(short Fila)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            grdSubTipo.Rows = 1;
+            grdDetalles.Rows = 1;
+
+            if (Convert.ToInt32(grdTipo.get_Texto(Fila, grdTipo.get_ColIndex("Id_Tipo"))) != 0)
+            {
+                tg.Id_Tipo = Convert.ToInt32(grdTipo.get_Texto(Fila, grdTipo.get_ColIndex("Id_Tipo")));
+
+                string sf = "";
+                if (tg.Id_Tipo != 0) { sf = $"ID_Tipo={tg.Id_Tipo}"; }
+
+                stg.Id_Tipo = tg.Id_Tipo;
+                grdSubTipo.MostrarDatos(stg.Datos(), true);
+                grdSubTipo.AutosizeAll();
+                grdSubTipo.set_ColW(grdSubTipo.get_ColIndex("Nombre"), 150);
+
+                dtg.Id_Tipo = tg.Id_Tipo;
+                grdDetalles.MostrarDatos(dtg.Datos(sf), true);
+                grdDetalles.AutosizeAll();
+                grdDetalles.set_ColW(grdDetalles.get_ColIndex("ID_Tipo"), 0);
+                grdDetalles.set_ColW(grdDetalles.get_ColIndex("Nombre"), 150);
+            }
+            this.Cursor = Cursors.Default;
+        }
+        #endregion
+
+        #region " SUBTIPO "
         private void grdSubTipo_Editado(short f, short c, object a)
         {
-            int vId = Convert.ToInt32(grdSubTipo.get_Texto(f, grdSubTipo.get_ColIndex("Id_Tipo")));
-            int vSId = Convert.ToInt32(grdSubTipo.get_Texto(f, grdSubTipo.get_ColIndex("Id_SubTipo")));
+            int vId = tg.Id_Tipo;
+            int vSId = Convert.ToInt32(grdSubTipo.get_Texto(f, grdSubTipo.get_ColIndex(tg.grupoS.Campo_Id)));
 
             if (c == Convert.ToInt32(grdSubTipo.get_ColIndex("Id_Tipo")))
             {
@@ -174,11 +217,13 @@
 
                     grdSubTipo.ActivarCelda(f, c + 1);
                 }
-                else { grdSubTipo.ActivarCelda(f, grdSubTipo.get_ColIndex("Id_Tipo"));  }
+                else { grdSubTipo.ActivarCelda(f, grdSubTipo.get_ColIndex("Id_Tipo")); }
             }
             if (c == Convert.ToInt32(grdSubTipo.get_ColIndex("Nombre")))
             {
                 grdSubTipo.set_Texto(f, c, a);
+                stg.Id_Tipo = vId;
+                stg.ID_SubTipo = vSId;
                 stg.Nombre = Convert.ToString(a);
 
                 if (grdSubTipo.EsUltimaFila() == false)
@@ -192,80 +237,7 @@
                 }
 
                 grdSubTipo.ActivarCelda(f + 1, grdSubTipo.get_ColIndex("ID_Tipo"));
-            }            
-        }
-
-        private void grdDetalles_Editado(short f, short c, object a)
-        {
-            int vId = Convert.ToInt32(grdDetalles.get_Texto(f, grdDetalles.get_ColIndex("Id_Tipo")));
-            int vSId = Convert.ToInt32(grdDetalles.get_Texto(f, grdDetalles.get_ColIndex("Id_Detalle")));
-
-            if (c == Convert.ToInt32(grdDetalles.get_ColIndex("Id_Tipo")))
-            {
-                if (vId == 0 & vSId == 0)
-                {
-                    dtg.Id_Tipo = Convert.ToInt32(a);
-                    grdDetalles.set_Texto(f, c, a);
-
-                    grdDetalles.ActivarCelda(f, c + 1);
-                }
-                else { MessageBox.Show("No se puede modificar el Tipo y Detalle.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
-            if (c == Convert.ToInt32(grdDetalles.get_ColIndex("Id_Detalle")))
-            {
-                if (vId != 0)
-                {
-                    dtg.ID_Detalle = Convert.ToInt32(a);
-                    grdDetalles.set_Texto(f, c, a);
-
-                    grdDetalles.ActivarCelda(f, c + 1);
-                }
-                else { grdDetalles.ActivarCelda(f, grdDetalles.get_ColIndex("Id_Tipo")); }
-            }
-            if (c == Convert.ToInt32(grdDetalles.get_ColIndex("Nombre")))
-            {
-                grdDetalles.set_Texto(f, c, a);
-                dtg.Nombre = Convert.ToString(a);
-
-                if (grdDetalles.EsUltimaFila() == false)
-                {
-                    dtg.Actualizar();
-                }
-                else
-                {
-                    dtg.Agregar();
-                    grdDetalles.AgregarFila();
-                }
-
-                grdDetalles.ActivarCelda(f + 1, grdDetalles.get_ColIndex("ID_Tipo"));
-            }
-        }
-    
-
-        private void grdGrupo_CambioFila(short Fila)
-        {
-            gg.Id = Convert.ToInt32(grdGrupo.get_Texto(Fila, grdGrupo.get_ColIndex("Id")));            
-        }
-
-        private void grdTipo_CambioFila(short Fila)
-        {
-            this.Cursor = Cursors.WaitCursor;
-
-            tg.Id_Tipo = Convert.ToInt32(grdTipo.get_Texto(Fila, grdTipo.get_ColIndex("Id_Tipo")));
-            
-            string sf = "";
-            if (tg.Id_Tipo != 0) { sf = $"ID_Tipo={tg.Id_Tipo}"; }
-
-            stg.Id_Tipo = tg.Id_Tipo;
-            grdSubTipo.MostrarDatos(stg.Datos(), true);
-            grdSubTipo.AutosizeAll();
-            grdSubTipo.set_ColW(grdSubTipo.get_ColIndex("Nombre"), 150);
-
-            grdDetalles.MostrarDatos(dtg.Datos(sf), true);
-            grdDetalles.AutosizeAll();
-            grdDetalles.set_ColW(grdDetalles.get_ColIndex("Nombre"), 150);
-
-            this.Cursor = Cursors.Default;
         }
 
         private void grdSubTipo_CambioFila(short Fila)
@@ -274,12 +246,62 @@
             stg.ID_SubTipo = Convert.ToInt32(grdSubTipo.get_Texto(Fila, grdSubTipo.get_ColIndex("ID_SubTipo")));
         }
 
+        #endregion
+
+        #region " DETALLES "
+        private void grdDetalles_Editado(short f, short c, object a)
+        {
+            int vId = Convert.ToInt32(grdDetalles.get_Texto(f, grdDetalles.get_ColIndex("Id_Tipo")));
+            int vSId = Convert.ToInt32(grdDetalles.get_Texto(f, grdDetalles.get_ColIndex("Id_Detalle")));
+                        
+            if (tg.Id_Tipo != 0)
+            {
+                if (c == Convert.ToInt32(grdDetalles.get_ColIndex("Id_Detalle")))
+                {
+                    dtg.ID_Detalle = Convert.ToInt32(a);
+                    grdDetalles.set_Texto(f, c, a);
+                    if (vId != 0 & vSId != 0)
+                    { dtg.Actualizar(); }
+                    else
+                    { grdDetalles.ActivarCelda(f, grdDetalles.get_ColIndex("Id_Detalle")); }
+                    grdDetalles.ActivarCelda(f, c + 1);
+                }
+                if (c == Convert.ToInt32(grdDetalles.get_ColIndex("Nombre")))
+                {
+                    grdDetalles.set_Texto(f, c, a);
+                    
+                    dtg.Id_Tipo = tg.Id_Tipo;
+                    dtg.ID_Detalle = vSId;
+                    dtg.Nombre = Convert.ToString(a);
+
+                    if (grdDetalles.EsUltimaFila() == false)
+                    {
+                        dtg.Actualizar();
+                    }
+                    else
+                    {
+                        dtg.Agregar();
+                        grdDetalles.AgregarFila();
+                        grdDetalles.set_Texto(f + 1, grdDetalles.get_ColIndex("Id_Tipo"), vId);
+                    }
+
+                    grdDetalles.ActivarCelda(f + 1, grdDetalles.get_ColIndex("Id_Detalle"));
+                } 
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Tipo.", "Error");
+            }
+        }
+
         private void grdDetalles_CambioFila(short Fila)
         {
             dtg.Id_Tipo = Convert.ToInt32(grdDetalles.get_Texto(Fila, grdDetalles.get_ColIndex("ID_Tipo")));
             dtg.ID_Detalle = Convert.ToInt32(grdDetalles.get_Texto(Fila, grdDetalles.get_ColIndex("ID_Detalle")));
         }
+        #endregion
 
-        
+
+
     }
 }
