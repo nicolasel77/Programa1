@@ -135,5 +135,14 @@
                 }
             }
         }
+
+        private void frmCargarEntregas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(43))
+            {
+                SendKeys.Send("000");
+                SendKeys.Send("{ENTER}");
+            }
+        }
     }
 }

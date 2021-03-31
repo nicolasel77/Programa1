@@ -39,7 +39,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblST = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.lstTablas = new System.Windows.Forms.ListBox();
@@ -235,7 +235,7 @@
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.materialLabel2);
+            this.splitContainer2.Panel1.Controls.Add(this.lblST);
             this.splitContainer2.Panel1.Controls.Add(this.grdSubTipo);
             // 
             // splitContainer2.Panel2
@@ -246,21 +246,21 @@
             this.splitContainer2.SplitterDistance = 334;
             this.splitContainer2.TabIndex = 0;
             // 
-            // materialLabel2
+            // lblST
             // 
-            this.materialLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblST.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialLabel2.BackColor = System.Drawing.SystemColors.Control;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(3, 6);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(325, 21);
-            this.materialLabel2.TabIndex = 15;
-            this.materialLabel2.Text = "SubTipos";
-            this.materialLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblST.BackColor = System.Drawing.SystemColors.Control;
+            this.lblST.Depth = 0;
+            this.lblST.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblST.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblST.Location = new System.Drawing.Point(3, 6);
+            this.lblST.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblST.Name = "lblST";
+            this.lblST.Size = new System.Drawing.Size(325, 21);
+            this.lblST.TabIndex = 15;
+            this.lblST.Text = "SubTipos";
+            this.lblST.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // materialLabel3
             // 
@@ -424,7 +424,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel lblST;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;

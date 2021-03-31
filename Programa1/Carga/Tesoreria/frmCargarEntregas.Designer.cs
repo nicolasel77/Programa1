@@ -41,12 +41,12 @@
             // 
             this.lblSuc.AutoSize = true;
             this.lblSuc.Depth = 0;
-            this.lblSuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblSuc.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblSuc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblSuc.Location = new System.Drawing.Point(12, 9);
             this.lblSuc.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblSuc.Name = "lblSuc";
-            this.lblSuc.Size = new System.Drawing.Size(48, 18);
+            this.lblSuc.Size = new System.Drawing.Size(50, 19);
             this.lblSuc.TabIndex = 0;
             this.lblSuc.Text = "lblSuc";
             // 
@@ -55,12 +55,12 @@
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotal.AutoSize = true;
             this.lblTotal.Depth = 0;
-            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblTotal.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotal.Location = new System.Drawing.Point(12, 239);
             this.lblTotal.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(41, 18);
+            this.lblTotal.Size = new System.Drawing.Size(44, 19);
             this.lblTotal.TabIndex = 2;
             this.lblTotal.Text = "Total";
             // 
@@ -139,11 +139,13 @@
             this.Controls.Add(this.grdEntregas);
             this.Controls.Add(this.lblSuc);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "frmCargarEntregas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Entregas";
             this.Load += new System.EventHandler(this.frmCargarEntregas_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmCargarEntregas_KeyPress);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

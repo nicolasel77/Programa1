@@ -172,6 +172,7 @@
             if (Convert.ToInt32(grdTipo.get_Texto(Fila, grdTipo.get_ColIndex("Id_Tipo"))) != 0)
             {
                 tg.Id_Tipo = Convert.ToInt32(grdTipo.get_Texto(Fila, grdTipo.get_ColIndex("Id_Tipo")));
+                lblST.Text = tg.grupoS.Tabla;
 
                 string sf = "";
                 if (tg.Id_Tipo != 0) { sf = $"ID_Tipo={tg.Id_Tipo}"; }
@@ -196,28 +197,13 @@
         {
             int vId = tg.Id_Tipo;
             int vSId = Convert.ToInt32(grdSubTipo.get_Texto(f, grdSubTipo.get_ColIndex(tg.grupoS.Campo_Id)));
-
-            if (c == Convert.ToInt32(grdSubTipo.get_ColIndex("Id_Tipo")))
+                        
+            if (c != Convert.ToInt32(grdSubTipo.get_ColIndex("Nombre")))
             {
-                if (vId == 0 & vSId == 0)
-                {
-                    stg.Id_Tipo = Convert.ToInt32(a);
-                    grdSubTipo.set_Texto(f, c, a);
+                stg.ID_SubTipo = Convert.ToInt32(a);
+                grdSubTipo.set_Texto(f, c, a);
 
-                    grdSubTipo.ActivarCelda(f, c + 1);
-                }
-                else { MessageBox.Show("No se puede modificar el Tipo y SubTipo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-            }
-            if (c == Convert.ToInt32(grdSubTipo.get_ColIndex("Id_SubTipo")))
-            {
-                if (vId != 0)
-                {
-                    stg.ID_SubTipo = Convert.ToInt32(a);
-                    grdSubTipo.set_Texto(f, c, a);
-
-                    grdSubTipo.ActivarCelda(f, c + 1);
-                }
-                else { grdSubTipo.ActivarCelda(f, grdSubTipo.get_ColIndex("Id_Tipo")); }
+                grdSubTipo.ActivarCelda(f, c + 1);
             }
             if (c == Convert.ToInt32(grdSubTipo.get_ColIndex("Nombre")))
             {
@@ -236,7 +222,7 @@
                     grdSubTipo.AgregarFila();
                 }
 
-                grdSubTipo.ActivarCelda(f + 1, grdSubTipo.get_ColIndex("ID_Tipo"));
+                grdSubTipo.ActivarCelda(f + 1, c - 1);
             }
         }
 
@@ -253,7 +239,7 @@
         {
             int vId = Convert.ToInt32(grdDetalles.get_Texto(f, grdDetalles.get_ColIndex("Id_Tipo")));
             int vSId = Convert.ToInt32(grdDetalles.get_Texto(f, grdDetalles.get_ColIndex("Id_Detalle")));
-                        
+
             if (tg.Id_Tipo != 0)
             {
                 if (c == Convert.ToInt32(grdDetalles.get_ColIndex("Id_Detalle")))
@@ -269,7 +255,7 @@
                 if (c == Convert.ToInt32(grdDetalles.get_ColIndex("Nombre")))
                 {
                     grdDetalles.set_Texto(f, c, a);
-                    
+
                     dtg.Id_Tipo = tg.Id_Tipo;
                     dtg.ID_Detalle = vSId;
                     dtg.Nombre = Convert.ToString(a);
@@ -286,7 +272,7 @@
                     }
 
                     grdDetalles.ActivarCelda(f + 1, grdDetalles.get_ColIndex("Id_Detalle"));
-                } 
+                }
             }
             else
             {

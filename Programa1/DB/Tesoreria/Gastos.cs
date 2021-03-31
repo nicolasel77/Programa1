@@ -437,6 +437,37 @@
 
             return Convert.ToInt32(d);
         }
+
+        /// <summary>
+        /// Devuelve el último valor que se cargo con los datos actuales.
+        /// </summary>
+        /// <returns></returns>
+        public DataTable Ultimo_Valor()
+        {
+            var dt = new DataTable("Datos");
+
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Fecha, Importe FROM CD_Gastos WHERE Fecha<'{Fecha:MM/dd/yy}' AND ID_TipoGastos={TG.Id_Tipo} AND ID_SubTipoGastos={Id_SubTipoGastos} AND ID_DetalleGastos={Id_DetalleGastos} ORDER BY ID DESC", conexionSql);
+
+                conexionSql.Open();
+
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+                conexionSql.Close();
+            }
+            catch (Exception)
+            {
+            }
+
+            return dt;
+        }
+
         #endregion
 
     }

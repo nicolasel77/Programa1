@@ -8,11 +8,13 @@ namespace Programa1.Carga.Tesoreria
     public partial class frmAyuda_Entradas : Form
     {
         private Tipos_Entradas TEntradas;
+        private Cajas eCajas;
 
         private enum TOpcion : byte
         {
-            eTipo = 0,
-            eSubTipo = 1,
+            eCaja = 0,
+            eTipo = 1,
+            eSubTipo = 2
         }
         private TOpcion Opcion;
         public string Valor = "";
@@ -26,6 +28,12 @@ namespace Programa1.Carga.Tesoreria
         private void frmAyuda_Load(object sender, EventArgs e)
         {
             txtBuscar.Focus();
+        }
+
+        public void Cargar_Cajas()
+        {
+            eCajas = new Cajas();
+            Cargar();
         }
 
         private void cmdCerrar_Click(object sender, EventArgs e)
@@ -59,6 +67,16 @@ namespace Programa1.Carga.Tesoreria
 
             switch (Opcion)
             {
+                case TOpcion.eCaja:
+                    if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text}%'"; }
+
+                    dt = eCajas.Datos(sf);
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        lst.Items.Add($"{dr[0]}. {dr[1]}");
+                    }
+                    break;
                 case TOpcion.eTipo:
                     if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text}%'"; }
 

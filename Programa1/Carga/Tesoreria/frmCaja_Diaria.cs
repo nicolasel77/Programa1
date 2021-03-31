@@ -3,6 +3,7 @@ namespace Programa1.Carga.Tesoreria
 {
     using Programa1.DB.Tesoreria;
     using System;
+    using System.Data;
     using System.Windows.Forms;
 
     public partial class frmCaja_Diaria : Form
@@ -112,7 +113,7 @@ namespace Programa1.Carga.Tesoreria
             // 45: -
             // 46: Delete
             //112: F1
-            grdSalidas.TeclasManejadas = new int[] { 13, 43, 45, 46, 112 };
+            grdSalidas.TeclasManejadas = new int[] { 13, 43, 45, 46, 112, 120 };
 
             grdSalidas.AgregarTeclas(Convert.ToInt32(Keys.Add), e_Tipo, e_Importe);
             grdSalidas.AgregarTeclas(Convert.ToInt32(Keys.Subtract), e_Subtipo, e_Importe);
@@ -152,6 +153,7 @@ namespace Programa1.Carga.Tesoreria
             {
                 CD.Fecha = fr.mntFecha.SelectionStart.Date;
                 CD.Actualizar();
+                mntFecha.MaxDate = CD.Fecha;
                 mntFecha.SetDate(fr.mntFecha.SelectionStart.Date);
                 Cargar_Datos();
             }
@@ -253,7 +255,7 @@ namespace Programa1.Carga.Tesoreria
         }
 
         #endregion
-        
+
         #region " Grilla Entradas "
         private void grdEntradas_Editado(short f, short c, object a)
         {
@@ -274,7 +276,7 @@ namespace Programa1.Carga.Tesoreria
 
                         }
                         break;
-                    case 4: //T ipo
+                    case 4: //Tipo
                         cEntradas.TE.Id_Tipo = Convert.ToInt32(a);
                         if (cEntradas.TE.Existe() == true)
                         {
@@ -433,6 +435,7 @@ namespace Programa1.Carga.Tesoreria
                         frmAyuda_Entradas fayuda = new frmAyuda_Entradas();
                         Herramientas.Herramientas h = new Herramientas.Herramientas();
 
+                        if (grdEntradas.Col == e_Caja) { fayuda.Cargar_Cajas(); }
                         if (grdEntradas.Col == e_Tipo) { fayuda.Cargar_TiposEntradas(cEntradas.TE.Id_Tipo); }
                         if (grdEntradas.Col == e_Subtipo) { fayuda.Cargar_SubTiposEntradas(cEntradas.TE.Id_Tipo); }
 
@@ -547,7 +550,7 @@ namespace Programa1.Carga.Tesoreria
                                 grdSalidas.set_Texto(f, s_Detalle, a);
                                 grdSalidas.set_Texto(f, s_Descripcion, dg.Nombre);
 
-                                grdSalidas.ActivarCelda(f, s_Importe);
+                                grdSalidas.ActivarCelda(f, c + 1);
                                 if (cGastos.ID != 0) { cGastos.Actualizar(); }
 
                             }
@@ -567,7 +570,8 @@ namespace Programa1.Carga.Tesoreria
                         if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
                         {
                             cGastos.Fecha = mntFecha.SelectionStart.Date;
-
+                            cGastos.Desc_SubTipo = grdSalidas.get_Texto(f, s_SubTipo + 1).ToString();
+                            cGastos.Descripcion = grdSalidas.get_Texto(f, s_Descripcion).ToString();
                             cGastos.Importe = Convert.ToDouble(a);
                             grdSalidas.set_Texto(f, s_Importe, a);
 
@@ -580,8 +584,8 @@ namespace Programa1.Carga.Tesoreria
 
                                 grdSalidas.AgregarFila();
 
-                                grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
-                                grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
+                                grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
+                                grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
                             }
                             else
                             {
@@ -599,6 +603,7 @@ namespace Programa1.Carga.Tesoreria
             {
                 MessageBox.Show("La fecha se encuentra cerrada.", "Error");
             }
+            lblUltimo.Text = "";
         }
 
         private void grdSalidas_CambioFila(short Fila)
@@ -618,11 +623,25 @@ namespace Programa1.Carga.Tesoreria
         {
             int fila = grdSalidas.Row;
 
+            if (e == Convert.ToInt32(Keys.F9))
+            {
+                DataTable dt = cGastos.Ultimo_Valor();
+                if (dt != null & dt.Rows.Count > 0 )
+                {
+                    lblUltimo.Text = $"F: {dt.Rows[0][0]:dd/MM/yyy} Imp: {dt.Rows[0][1]:N1}";
+                }
+                else
+                {
+                    lblUltimo.Text = "No encontrado.";
+                }
+            }
             if (e == Convert.ToInt32(Keys.Enter))
             {
                 if (grdSalidas.Col == s_Importe) { grdSalidas.ActivarCelda(fila + 1, s_Tipo); }
                 else
                 {
+                    if (grdSalidas.Col == s_Detalle) { grdSalidas.ActivarCelda(fila, s_Detalle + 1); }
+                    if (grdSalidas.Col == s_Detalle + 1) { grdSalidas.ActivarCelda(fila, s_Importe); }
                     if (grdSalidas.Col == s_Detalle) { grdSalidas.ActivarCelda(fila, s_Importe); }
                     if (grdSalidas.Col == s_SubTipo) { grdSalidas.ActivarCelda(fila, s_Detalle); }
                     if (grdSalidas.Col == s_Tipo) { grdSalidas.ActivarCelda(fila, s_SubTipo); }
@@ -675,7 +694,7 @@ namespace Programa1.Carga.Tesoreria
                             grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Caja, cGastos.caja.Id);
                             grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Caja + 1, cGastos.caja.Nombre);
                             grdSalidas.ActivarCelda(grdSalidas.Row, s_Tipo);
-                        }                        
+                        }
                     }
                     else
                     {

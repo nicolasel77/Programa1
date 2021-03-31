@@ -156,7 +156,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Entradas " + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Entradas " + filtro + " ORDER BY ID", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

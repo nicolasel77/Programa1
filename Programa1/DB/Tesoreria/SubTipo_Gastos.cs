@@ -38,15 +38,18 @@
         public void Cargar()
         {
             DataTable dt = Datos();
-            if (dt.Rows.Count != 0)
+            if (dt != null)
             {
-                ID_SubTipo = Convert.ToInt32(dt.Rows[0][tg.grupoS.Campo_Id]);
-                Nombre = Convert.ToString(dt.Rows[0][tg.grupoS.Campo_Nombre]);                
-            }
-            else
-            {
-                Nombre = "";
-                ID_SubTipo = 0;
+                if (dt.Rows.Count != 0)
+                {
+                    ID_SubTipo = Convert.ToInt32(dt.Rows[0][tg.grupoS.Campo_Id]);
+                    Nombre = Convert.ToString(dt.Rows[0][tg.grupoS.Campo_Nombre]);
+                }
+                else
+                {
+                    Nombre = "";
+                    ID_SubTipo = 0;
+                } 
             }
 
         }
@@ -116,8 +119,13 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"UPDATE SubTipos_Gastos SET Nombre='{Nombre}', " +
-                    $"ID_SubTipo={ID_SubTipo} WHERE Id_Tipo={Id_Tipo} AND ID_SubTipo={ID_SubTipo}", sql);
+                string padre = "";
+                if (tg.grupoS.Campo_Filtro != "") { padre = $"{tg.grupoS.Campo_Filtro}={Id_Tipo} AND"; }
+
+                string cu = $"UPDATE {tg.grupoS.Tabla} SET {tg.grupoS.Campo_Nombre}='{Nombre}', " +
+                    $"{tg.grupoS.Campo_Id}={ID_SubTipo} WHERE {padre} {tg.grupoS.Campo_Id}={ID_SubTipo}";
+
+                SqlCommand command = new SqlCommand(cu, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -138,8 +146,12 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO SubTipos_Gastos (Id_Tipo, Nombre, ID_SubTipo)" +
-                    $" VALUES({Id_Tipo}, '{Nombre}', {ID_SubTipo})", sql);
+                string padre = ""; string tipoPadre = "";
+                if (tg.grupoS.Campo_Filtro != "") { padre = $"{tg.grupoS.Campo_Filtro}, "; tipoPadre = $"{Id_Tipo}, "; }
+
+                string ci = $"INSERT INTO {tg.grupoS.Tabla} ({padre}{tg.grupoS.Campo_Id}, {tg.grupoS.Campo_Nombre}) VALUES({tipoPadre}{ID_SubTipo}, '{Nombre}')";
+
+                SqlCommand command = new SqlCommand(ci, sql);                
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

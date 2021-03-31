@@ -64,7 +64,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Detalles_Gastos" + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Detalles_Gastos" + filtro + " ORDER BY ID_Detalle", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

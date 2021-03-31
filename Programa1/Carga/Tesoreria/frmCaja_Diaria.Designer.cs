@@ -42,6 +42,7 @@
             this.lblTotalGrillaGastos = new MaterialSkin.Controls.MaterialLabel();
             this.grdSalidas = new Grilla2.SpeedGrilla();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.grdCajas = new Grilla2.SpeedGrilla();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblSTotalEntradas = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -54,18 +55,18 @@
             this.lblSaldoAnterior = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.cmdCerrar_Fecha = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.mntFecha = new System.Windows.Forms.MonthCalendar();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.grdCajas = new Grilla2.SpeedGrilla();
+            this.lblUltimo = new MaterialSkin.Controls.MaterialLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splPrincipal)).BeginInit();
             this.splPrincipal.Panel1.SuspendLayout();
             this.splPrincipal.Panel2.SuspendLayout();
@@ -303,6 +304,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.lblUltimo);
             this.panel1.Controls.Add(this.grdCajas);
             this.panel1.Controls.Add(this.lblTotal);
             this.panel1.Controls.Add(this.lblSTotalEntradas);
@@ -329,6 +331,40 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(267, 507);
             this.panel1.TabIndex = 4;
+            // 
+            // grdCajas
+            // 
+            this.grdCajas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdCajas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdCajas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdCajas.AutoResize = false;
+            this.grdCajas.bColor = System.Drawing.SystemColors.Window;
+            this.grdCajas.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdCajas.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdCajas.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdCajas.Col = 0;
+            this.grdCajas.Cols = 10;
+            this.grdCajas.DataMember = "";
+            this.grdCajas.DataSource = null;
+            this.grdCajas.EnableEdicion = true;
+            this.grdCajas.Encabezado = "";
+            this.grdCajas.fColor = System.Drawing.SystemColors.Control;
+            this.grdCajas.FixCols = 0;
+            this.grdCajas.FixRows = 0;
+            this.grdCajas.FuenteEncabezado = null;
+            this.grdCajas.FuentePieDePagina = null;
+            this.grdCajas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdCajas.Location = new System.Drawing.Point(6, 192);
+            this.grdCajas.MenuActivado = false;
+            this.grdCajas.Name = "grdCajas";
+            this.grdCajas.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdCajas.PintarFilaSel = true;
+            this.grdCajas.Redraw = true;
+            this.grdCajas.Row = 0;
+            this.grdCajas.Rows = 50;
+            this.grdCajas.Size = new System.Drawing.Size(254, 219);
+            this.grdCajas.TabIndex = 7;
             // 
             // lblTotal
             // 
@@ -450,6 +486,16 @@
             this.label1.Text = "Saldo Anterior:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel6.Location = new System.Drawing.Point(0, 184);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(313, 2);
+            this.panel6.TabIndex = 5;
+            // 
             // panel5
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -489,6 +535,19 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(327, 2);
             this.panel3.TabIndex = 5;
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(0, 162);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(47, 19);
+            this.materialLabel1.TabIndex = 4;
+            this.materialLabel1.Text = "Cajas";
             // 
             // materialLabel5
             // 
@@ -559,62 +618,19 @@
             this.mntFecha.TabIndex = 0;
             this.mntFecha.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.mntFecha_DateSelected);
             // 
-            // materialLabel1
+            // lblUltimo
             // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(0, 162);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(47, 19);
-            this.materialLabel1.TabIndex = 4;
-            this.materialLabel1.Text = "Cajas";
-            // 
-            // panel6
-            // 
-            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblUltimo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel6.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel6.Location = new System.Drawing.Point(0, 184);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(313, 2);
-            this.panel6.TabIndex = 5;
-            // 
-            // grdCajas
-            // 
-            this.grdCajas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdCajas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdCajas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdCajas.AutoResize = false;
-            this.grdCajas.bColor = System.Drawing.SystemColors.Window;
-            this.grdCajas.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.grdCajas.bFColor = System.Drawing.SystemColors.WindowText;
-            this.grdCajas.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdCajas.Col = 0;
-            this.grdCajas.Cols = 10;
-            this.grdCajas.DataMember = "";
-            this.grdCajas.DataSource = null;
-            this.grdCajas.EnableEdicion = true;
-            this.grdCajas.Encabezado = "";
-            this.grdCajas.fColor = System.Drawing.SystemColors.Control;
-            this.grdCajas.FixCols = 0;
-            this.grdCajas.FixRows = 0;
-            this.grdCajas.FuenteEncabezado = null;
-            this.grdCajas.FuentePieDePagina = null;
-            this.grdCajas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdCajas.Location = new System.Drawing.Point(6, 192);
-            this.grdCajas.MenuActivado = false;
-            this.grdCajas.Name = "grdCajas";
-            this.grdCajas.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdCajas.PintarFilaSel = true;
-            this.grdCajas.Redraw = true;
-            this.grdCajas.Row = 0;
-            this.grdCajas.Rows = 50;
-            this.grdCajas.Size = new System.Drawing.Size(254, 219);
-            this.grdCajas.TabIndex = 7;
+            this.lblUltimo.Depth = 0;
+            this.lblUltimo.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblUltimo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblUltimo.Location = new System.Drawing.Point(3, 446);
+            this.lblUltimo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblUltimo.Name = "lblUltimo";
+            this.lblUltimo.Size = new System.Drawing.Size(264, 19);
+            this.lblUltimo.TabIndex = 8;
+            this.lblUltimo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmCaja_Diaria
             // 
@@ -679,5 +695,6 @@
         private Grilla2.SpeedGrilla grdCajas;
         private System.Windows.Forms.Panel panel6;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialLabel lblUltimo;
     }
 }
