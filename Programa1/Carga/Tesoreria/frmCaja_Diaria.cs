@@ -8,6 +8,17 @@ namespace Programa1.Carga.Tesoreria
 
     public partial class frmCaja_Diaria : Form
     {
+        private enum t_Repetir : int
+            {
+              Ninguno = 0,
+              Caja = 1,
+              Tipo = 2,
+              SubTipo = 3,
+              Detalle = 4
+            }
+        private t_Repetir o_Repetir;
+
+
         #region " Columnas Entradas "
         private Byte e_Id;
         private Byte e_Fecha;
@@ -115,8 +126,8 @@ namespace Programa1.Carga.Tesoreria
             //112: F1
             grdSalidas.TeclasManejadas = new int[] { 13, 43, 45, 46, 112, 120 };
 
-            grdSalidas.AgregarTeclas(Convert.ToInt32(Keys.Add), e_Tipo, e_Importe);
-            grdSalidas.AgregarTeclas(Convert.ToInt32(Keys.Subtract), e_Subtipo, e_Importe);
+            grdSalidas.AgregarTeclas(Convert.ToInt32(Keys.Add), s_Caja, s_Tipo, s_SubTipo, s_Detalle, s_Importe);
+            grdSalidas.AgregarTeclas(Convert.ToInt32(Keys.Subtract), s_Caja, s_Tipo, s_SubTipo, s_Detalle, s_Importe);
 
             Formato_Salidas();
 
@@ -159,6 +170,14 @@ namespace Programa1.Carga.Tesoreria
             }
         }
 
+        private void rdNinguno_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdCaja.Checked) { o_Repetir = t_Repetir.Caja; }
+            if (rdTipo.Checked) { o_Repetir = t_Repetir.Tipo; }
+            if (rdSubtipo.Checked) { o_Repetir = t_Repetir.SubTipo; }
+            if (rdDetalle.Checked) { o_Repetir = t_Repetir.Detalle; }
+            if (rdNinguno.Checked) { o_Repetir = t_Repetir.Ninguno; }
+        }
         #endregion
 
         #region " SUBS "
@@ -217,7 +236,7 @@ namespace Programa1.Carga.Tesoreria
             grdSalidas.set_ColW(s_Descripcion, 200);
             grdSalidas.set_ColW(s_Importe, 90);
             grdSalidas.set_ColW(s_Autorizado, 50);
-            grdSalidas.set_ColW(s_Fecha_Autorizado, 70);
+            grdSalidas.set_ColW(s_Fecha_Autorizado, 90);
             grdSalidas.set_ColW(s_Grupo, 0);
 
             grdSalidas.set_Texto(0, s_Tipo, "Tipo");
@@ -227,7 +246,7 @@ namespace Programa1.Carga.Tesoreria
             grdSalidas.set_Texto(0, s_Fecha_Autorizado, "Aut_Fe");
 
             grdSalidas.Columnas[s_Importe].Style.Format = "N2";
-
+            grdSalidas.Columnas[s_Fecha_Autorizado].Style.Format = "dd/MM/yy HH:mm";
         }
 
         /// <summary>
@@ -247,7 +266,14 @@ namespace Programa1.Carga.Tesoreria
             Double eSaldo = t + (Se - Sg);
             lblSTotalEntradas.Text = eSaldo.ToString("C1");
 
-            Double g = grdSalidas.SumarCol(s_Importe, false);
+            Double g = 0;
+            for (int i = 1; i <= grdSalidas.Rows - 1; i++)
+            {
+                if (Convert.ToBoolean(grdSalidas.get_Texto(i, s_Autorizado)) == true)
+                {
+                    g += Convert.ToDouble(grdSalidas.get_Texto(i, s_Importe));
+                }
+            }
             lblTotalGrillaGastos.Text = "Total Gastos: " + g.ToString("C1");
             lblGastos.Text = g.ToString("C1");
 
@@ -577,15 +603,53 @@ namespace Programa1.Carga.Tesoreria
 
                             if (grdSalidas.EsUltimaFila() == true)
                             {
-
                                 cGastos.Agregar();
                                 grdSalidas.set_Texto(f, s_Id, Convert.ToInt32(cGastos.ID));
                                 grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
 
                                 grdSalidas.AgregarFila();
+                                                                
+                                switch (o_Repetir)
+                                {
+                                    case t_Repetir.Caja:
+                                        grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
+                                        grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
+                                        grdSalidas.ActivarCelda(f + 1, s_Tipo);
+                                        break;
+                                    case t_Repetir.Tipo:
+                                        grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
+                                        grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
+                                        grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
+                                        grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
+                                        grdSalidas.ActivarCelda(f + 1, s_SubTipo);
+                                        break;
+                                    case t_Repetir.SubTipo:
+                                        grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
+                                        grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
+                                        grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
+                                        grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
+                                        grdSalidas.set_Texto(f + 1, s_SubTipo, cGastos.Id_SubTipoGastos);
+                                        grdSalidas.set_Texto(f + 1, s_SubTipo + 1, cGastos.Desc_SubTipo);
+                                        grdSalidas.ActivarCelda(f + 1, s_Detalle);
+                                        break;
+                                    case t_Repetir.Detalle:
+                                        grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
+                                        grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
+                                        grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
+                                        grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
+                                        grdSalidas.set_Texto(f + 1, s_SubTipo, cGastos.Id_SubTipoGastos);
+                                        grdSalidas.set_Texto(f + 1, s_SubTipo + 1, cGastos.Desc_SubTipo);
+                                        grdSalidas.set_Texto(f + 1, s_Detalle, cGastos.Id_DetalleGastos);
+                                        grdSalidas.set_Texto(f + 1, s_Detalle + 1, cGastos.Desc_Detalle);
+                                        grdSalidas.ActivarCelda(f + 1, s_Descripcion);
+                                        break;
+                                    default:
+                                        grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
+                                        grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
+                                        grdSalidas.ActivarCelda(f + 1, s_Tipo);
+                                        break;
 
-                                grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
-                                grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
+                                }
                             }
                             else
                             {
@@ -594,7 +658,21 @@ namespace Programa1.Carga.Tesoreria
 
                             Totales();
 
-                            grdSalidas.ActivarCelda(f + 1, s_Tipo);
+                        }
+                        break;
+                    case 11: // Autorizacion
+                        if (cGastos.ID != 0)
+                        {
+                            cGastos.Autorizado = Convert.ToBoolean(a);
+                            cGastos.Fecha_Autorizado = DateTime.Now;
+                            cGastos.Actualizar();
+
+                            grdSalidas.set_Texto(f, s_Autorizado, a);
+                            grdSalidas.set_Texto(f, s_Autorizado + 1, DateTime.Now);
+
+                            Totales();
+
+                            grdSalidas.ActivarCelda(f + 1, c);
                         }
                         break;
                 }
@@ -626,7 +704,7 @@ namespace Programa1.Carga.Tesoreria
             if (e == Convert.ToInt32(Keys.F9))
             {
                 DataTable dt = cGastos.Ultimo_Valor();
-                if (dt != null & dt.Rows.Count > 0 )
+                if (dt != null & dt.Rows.Count > 0)
                 {
                     lblUltimo.Text = $"F: {dt.Rows[0][0]:dd/MM/yyy} Imp: {dt.Rows[0][1]:N1}";
                 }
@@ -721,7 +799,7 @@ namespace Programa1.Carga.Tesoreria
                                     cGastos.Id_DetalleGastos = h.Codigo_Seleccionado(fayuda.Valor);
                                     grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Detalle, cGastos.Id_DetalleGastos);
                                     grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Descripcion, h.Nombre_Seleccionado(fayuda.Valor));
-                                    grdSalidas.ActivarCelda(grdSalidas.Row, s_Importe);
+                                    grdSalidas.ActivarCelda(grdSalidas.Row, s_Descripcion);
                                 }
                             }
                         }
@@ -759,5 +837,6 @@ namespace Programa1.Carga.Tesoreria
 
         #endregion
 
+        
     }
 }

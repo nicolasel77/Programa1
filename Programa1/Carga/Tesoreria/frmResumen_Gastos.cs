@@ -9,10 +9,9 @@ namespace Programa1.Carga.Tesoreria
     {
         enum e_Orden
         {
-            Caja = 0,
-            Tipo = 1,
-            SubTipo = 2,
-            Detalle = 3
+            Tipo = 0,
+            SubTipo = 1,
+            Detalle = 2
         }
         private e_Orden Orden;
 
@@ -45,28 +44,17 @@ namespace Programa1.Carga.Tesoreria
         private void Cargar_List()
         {
             this.Cursor = Cursors.WaitCursor;
-            
+
             lst.Items.Clear();
             DataTable dt = new DataTable();
 
             string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0}) AND");
-            if (grupo.Length == 0) { grupo = " AND"; }
+            if (grupo.Length != 0) { grupo += " AND"; }
 
             switch (Orden)
             {
-                case e_Orden.Caja:
-                    //dt = Gastos.Tipos_Rango(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND"))));
-                    //if (dt != null)
-                    //{
-                    //    foreach (DataRow dr in dt.Rows)
-                    //    {
-                    //        lst.Items.Add($"{dr[0]}. {dr[1]}");
-                    //    }
-                    //}
-                    //lblSubTipo.Text = "";
-                    //break;
                 case e_Orden.Tipo:
-                    dt = Gastos.Tipos_Rango(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND"))));
+                    dt = Gastos.Tipos_Rango(h.Unir(cFechas1.Cadena(), grupo));
                     if (dt != null)
                     {
                         foreach (DataRow dr in dt.Rows)
@@ -83,7 +71,7 @@ namespace Programa1.Carga.Tesoreria
                     }
                     else
                     {
-                        dt = Gastos.SubTipos_Rango(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND"))));
+                        dt = Gastos.SubTipos_Rango(h.Unir(cFechas1.Cadena(), grupo));
                     }
                     if (dt != null)
                     {
@@ -113,7 +101,7 @@ namespace Programa1.Carga.Tesoreria
                         }
                         else
                         {
-                            dt = Gastos.Detalles_Rango(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND"))));
+                            dt = Gastos.Detalles_Rango(h.Unir(cFechas1.Cadena(), grupo));
                         }
                     }
                     if (dt != null)
@@ -132,20 +120,21 @@ namespace Programa1.Carga.Tesoreria
         private void Cargar_Grilla()
         {
             this.Cursor = Cursors.WaitCursor;
-            
+
             string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0}) AND");
-            if (grupo.Length == 0) { grupo = " AND"; }
+            if (grupo.Length != 0) { grupo += " AND"; }
 
             switch (Orden)
             {
                 case e_Orden.Tipo:
-                    grdGastos.MostrarDatos(Gastos.TotalPorTipo(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND")))), true, true);
+                    string s = h.Unir(cFechas1.Cadena(), grupo);
+                    grdGastos.MostrarDatos(Gastos.TotalPorTipo(s), true, true);
                     grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
-                    grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
+                    grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N1";
                     grdGastos.AutosizeAll();
                     grdGastos.set_ColW(grdGastos.get_ColIndex("Descripcion"), 400);
                     break;
-                case e_Orden.SubTipo:
+                case e_Orden.SubTipo:                    
                     if (Tipo > 0)
                     {
                         grdGastos.MostrarDatos(Gastos.TotalPorSubTipo($"{grupo} Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}"), true, true);
@@ -155,7 +144,7 @@ namespace Programa1.Carga.Tesoreria
                         grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND")))), true, true);
                     }
                     grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
-                    grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
+                    grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N1";
                     grdGastos.AutosizeAll();
                     grdGastos.set_ColW(grdGastos.get_ColIndex("Descripcion"), 400);
                     break;
@@ -216,7 +205,7 @@ namespace Programa1.Carga.Tesoreria
                     }
                     grdGastos.MostrarDatos(Gastos.TotalPorDetalle(cadena), true, true);
                     grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
-                    grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
+                    grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N1";
                     grdGastos.AutosizeAll();
                     grdGastos.set_ColW(grdGastos.get_ColIndex("Descripcion"), 400);
                     break;
@@ -307,12 +296,23 @@ namespace Programa1.Carga.Tesoreria
             }
             this.Cursor = Cursors.Default;
         }
+                
+        private void cmdGrupos_Click(object sender, EventArgs e)
+        {
+            lstGrupos.Visible = !lstGrupos.Visible;
+        }
 
-        private void lst_KeyUp(object sender, KeyEventArgs e)
+        private void lstGrupos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cFechas1_Cambio_Seleccion(null, null);
+        }
+
+        private void frmResumen_Gastos_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.Right:
+                    e.Handled = true;
                     switch (Orden)
                     {
                         case e_Orden.Tipo:
@@ -329,6 +329,7 @@ namespace Programa1.Carga.Tesoreria
                     }
                     break;
                 case Keys.Left:
+                    e.Handled = true;
                     switch (Orden)
                     {
                         case e_Orden.Detalle:
@@ -365,16 +366,6 @@ namespace Programa1.Carga.Tesoreria
                     }
                     break;
             }
-        }
-
-        private void cmdGrupos_Click(object sender, EventArgs e)
-        {
-            lstGrupos.Visible = !lstGrupos.Visible;
-        }
-
-        private void lstGrupos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cFechas1_Cambio_Seleccion(null, null);
         }
     }
 }

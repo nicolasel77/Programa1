@@ -16,6 +16,7 @@
         {
             Id = id;
             Fecha = fecha;
+
             Producto = prod;
             Descripcion = desc;
             Proveedor = proveedor;

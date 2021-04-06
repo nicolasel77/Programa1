@@ -32,11 +32,13 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.lblEntradas = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTotalEntradas = new System.Windows.Forms.Label();
             this.rdAgrupado = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdDetalle = new MaterialSkin.Controls.MaterialRadioButton();
             this.grdEntradas = new Grilla2.SpeedGrilla();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblTotalSalidas = new System.Windows.Forms.Label();
             this.grdSalidas = new Grilla2.SpeedGrilla();
@@ -60,8 +62,6 @@
             this.chSoloSaldos = new MaterialSkin.Controls.MaterialCheckBox();
             this.grdProv = new Grilla2.SpeedGrilla();
             this.cFechas1 = new Programa1.Controles.cFechas();
-            this.lblEntradas = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -144,19 +144,30 @@
             // splitContainer4.Panel1
             // 
             this.splitContainer4.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer4.Panel1.Controls.Add(this.grdEntradas);
             this.splitContainer4.Panel1.Controls.Add(this.lblEntradas);
             this.splitContainer4.Panel1.Controls.Add(this.panel1);
-            this.splitContainer4.Panel1.Controls.Add(this.grdEntradas);
             // 
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer4.Panel2.Controls.Add(this.grdSalidas);
             this.splitContainer4.Panel2.Controls.Add(this.label9);
             this.splitContainer4.Panel2.Controls.Add(this.panel2);
-            this.splitContainer4.Panel2.Controls.Add(this.grdSalidas);
             this.splitContainer4.Size = new System.Drawing.Size(825, 470);
             this.splitContainer4.SplitterDistance = 443;
             this.splitContainer4.TabIndex = 0;
+            // 
+            // lblEntradas
+            // 
+            this.lblEntradas.AutoSize = true;
+            this.lblEntradas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblEntradas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblEntradas.Location = new System.Drawing.Point(3, 3);
+            this.lblEntradas.Name = "lblEntradas";
+            this.lblEntradas.Size = new System.Drawing.Size(67, 18);
+            this.lblEntradas.TabIndex = 4;
+            this.lblEntradas.Text = "Entradas";
             // 
             // panel1
             // 
@@ -250,6 +261,17 @@
             this.grdEntradas.Rows = 50;
             this.grdEntradas.Size = new System.Drawing.Size(443, 420);
             this.grdEntradas.TabIndex = 0;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label9.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label9.Location = new System.Drawing.Point(3, 3);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(56, 18);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Salidas";
             // 
             // panel2
             // 
@@ -538,28 +560,6 @@
             this.cFechas1.TabIndex = 0;
             this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
-            // 
-            // lblEntradas
-            // 
-            this.lblEntradas.AutoSize = true;
-            this.lblEntradas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblEntradas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblEntradas.Location = new System.Drawing.Point(3, 3);
-            this.lblEntradas.Name = "lblEntradas";
-            this.lblEntradas.Size = new System.Drawing.Size(67, 18);
-            this.lblEntradas.TabIndex = 4;
-            this.lblEntradas.Text = "Entradas";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label9.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label9.Location = new System.Drawing.Point(3, 3);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(56, 18);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "Salidas";
             // 
             // frmResumen_Proveedores
             // 

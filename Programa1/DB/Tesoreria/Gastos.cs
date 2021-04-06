@@ -27,6 +27,8 @@
         public int Id_SubTipoGastos { get; set; }
         public int Id_DetalleGastos { get; set; }
         public string Desc_SubTipo { get; set; }
+        
+        public string Desc_Detalle { get; set; }
 
         [MaxLength(500, ErrorMessage = "El campo Descripción solo puede tener 500 caracteres.")]
         public string Descripcion { get; set; }
@@ -351,7 +353,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(ISNULL(Importe, 0)) FROM CD_Gastos WHERE Fecha<='{f:MM/dd/yy}'", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(ISNULL(Importe, 0)) FROM CD_Gastos WHERE Autorizado=0 AND Fecha<='{f:MM/dd/yy}'", conexionSql);
 
                 conexionSql.Open();
 
@@ -410,6 +412,7 @@
                 dg.Id_Tipo = TG.Id_Tipo;
                 dg.ID_Detalle = Id_DetalleGastos;
                 s = dg.Nombre;
+                Desc_Detalle = s;
             }
             return s;
         }

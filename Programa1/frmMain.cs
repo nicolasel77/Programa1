@@ -6,6 +6,7 @@
     using Programa1.Carga.Precios;
     using Programa1.Carga.Sebero;
     using Programa1.DB.Tesoreria;
+    using Programa1.DB.Varios;
     using System;
     using System.Collections.Generic;
     using System.Drawing;
@@ -14,11 +15,18 @@
 
     public partial class frmMain : Form
     {
+        public Usuarios usuario;
+        
         List<Form> forms = new List<Form>();
 
         public frmMain()
         {
             InitializeComponent();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            this.Text = usuario.Nombre;
         }
 
         private void Mostrar(object sender, EventArgs e)
@@ -1703,5 +1711,7 @@
             }
             e.Item.BackColor = Color.LightSkyBlue;
         }
+
+        
     }
 }

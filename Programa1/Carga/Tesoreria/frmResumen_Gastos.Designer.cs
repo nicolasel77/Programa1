@@ -34,7 +34,7 @@
             this.lblSubTipo = new MaterialSkin.Controls.MaterialLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.lst = new System.Windows.Forms.ComboBox();
+            this.lst = new System.Windows.Forms.ListBox();
             this.lstGrupos = new System.Windows.Forms.ListBox();
             this.cmdGrupos = new Programa1.Controles.cBoton();
             this.cFechas1 = new Programa1.Controles.cFechas();
@@ -156,30 +156,28 @@
             // 
             // lst
             // 
-            this.lst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.lst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lst.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lst.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lst.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.lst.FormattingEnabled = true;
-            this.lst.Location = new System.Drawing.Point(0, -24);
+            this.lst.ItemHeight = 20;
+            this.lst.Location = new System.Drawing.Point(0, 0);
             this.lst.Name = "lst";
-            this.lst.Size = new System.Drawing.Size(276, 429);
+            this.lst.Size = new System.Drawing.Size(276, 413);
             this.lst.TabIndex = 0;
             this.lst.SelectedIndexChanged += new System.EventHandler(this.lst_SelectedIndexChanged);
-            this.lst.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lst_KeyUp);
             // 
             // lstGrupos
             // 
             this.lstGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lstGrupos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstGrupos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstGrupos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lstGrupos.FormattingEnabled = true;
-            this.lstGrupos.ItemHeight = 16;
+            this.lstGrupos.ItemHeight = 18;
             this.lstGrupos.Location = new System.Drawing.Point(112, 39);
             this.lstGrupos.Name = "lstGrupos";
             this.lstGrupos.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstGrupos.Size = new System.Drawing.Size(161, 192);
+            this.lstGrupos.Size = new System.Drawing.Size(161, 198);
             this.lstGrupos.TabIndex = 5;
             this.lstGrupos.Visible = false;
             this.lstGrupos.SelectedIndexChanged += new System.EventHandler(this.lstGrupos_SelectedIndexChanged);
@@ -231,6 +229,7 @@
             this.Name = "frmResumen_Gastos";
             this.Text = "Resumen";
             this.Load += new System.EventHandler(this.frmResumen_Gastos_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmResumen_Gastos_KeyDown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -251,10 +250,10 @@
         private MaterialSkin.Controls.MaterialLabel lblTipo;
         private MaterialSkin.Controls.MaterialLabel lblSubTipo;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ComboBox lst;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Panel panel1;
         private Controles.cBoton cmdGrupos;
         private System.Windows.Forms.ListBox lstGrupos;
+        private System.Windows.Forms.ListBox lst;
     }
 }

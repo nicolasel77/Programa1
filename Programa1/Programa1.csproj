@@ -39,6 +39,9 @@
   <PropertyGroup>
     <ApplicationIcon>Icono.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Programa1.clsMain</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="C1.Common">
       <HintPath>..\SpeedGrilla\C1.Common.dll</HintPath>
@@ -488,7 +491,9 @@
     <Compile Include="DB\Tesoreria\SubTipo_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Tipo_Entradas.cs" />
     <Compile Include="DB\Tesoreria\Tipo_Gastos.cs" />
+    <Compile Include="DB\Varios\Camiones.cs" />
     <Compile Include="DB\Varios\Datos_Genericos.cs" />
+    <Compile Include="DB\Varios\Empresas.cs" />
     <Compile Include="DB\Varios\Localidades.cs" />
     <Compile Include="DB\Proveedores\Compras.cs" />
     <Compile Include="DB\Proveedores\Devoluciones.cs" />
@@ -525,6 +530,7 @@
     <Compile Include="DB\Productos\TipoProductos.cs" />
     <Compile Include="DB\Empleados\TipoEmpleados.cs" />
     <Compile Include="DB\Sebero\CargaSebo.cs" />
+    <Compile Include="DB\Varios\Usuarios.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -538,6 +544,7 @@
     <Compile Include="Mail\frmMail.Designer.cs">
       <DependentUpon>frmMail.cs</DependentUpon>
     </Compile>
+    <Compile Include="clsMain.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Carga\Empleados\frmEmpleado.resx">
@@ -751,6 +758,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Roboto\Roboto-Black.ttf" />
+    <None Include="Roboto\Roboto-BlackItalic.ttf" />
+    <None Include="Roboto\Roboto-Bold.ttf" />
+    <None Include="Roboto\Roboto-BoldItalic.ttf" />
+    <None Include="Roboto\Roboto-Italic.ttf" />
+    <None Include="Roboto\Roboto-Light.ttf" />
+    <None Include="Roboto\Roboto-LightItalic.ttf" />
+    <None Include="Roboto\Roboto-Medium.ttf" />
+    <None Include="Roboto\Roboto-MediumItalic.ttf" />
+    <None Include="Roboto\Roboto-Regular.ttf" />
+    <None Include="Roboto\Roboto-Thin.ttf" />
+    <None Include="Roboto\Roboto-ThinItalic.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -766,6 +785,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icono.ico" />
+    <Content Include="Roboto\LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
