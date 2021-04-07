@@ -1,6 +1,7 @@
 ﻿
 namespace Programa1.DB
 {
+    using Programa1.DB.Varios;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
@@ -14,10 +15,11 @@ namespace Programa1.DB
             
         }
 
-        public Ventas(int id, DateTime fecha, Productos prod, string desc, Sucursales.Sucursales sucu, Single Costo_Venta, Proveedores.Proveedores proveedor, Single Costo_Compra, Single kilos)
+        public Ventas(int id, DateTime fecha, Camiones camion, Productos prod, string desc, Sucursales.Sucursales sucu, Single Costo_Venta, Proveedores.Proveedores proveedor, Single Costo_Compra, Single kilos)
         {
             Id = id;
             Fecha = fecha;
+            Camion = camion;
             Producto = prod;
             Descripcion = desc;
             Sucursal = sucu;
@@ -38,7 +40,7 @@ namespace Programa1.DB
         public Proveedores.Proveedores Proveedor { get; set; } = new Proveedores.Proveedores();
         public Single CostoCompra { get; set; }
         public Single Kilos { get; set; }
-
+        public Camiones Camion { get; set; } = new Camiones();
 
         public Precios_Sucursales precios = new Precios_Sucursales();
         public Precios_Proveedores precios_Proveedores = new Precios_Proveedores();
@@ -86,7 +88,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra Costo, SUM(Kilos) Kilos, SUM(Total_Compra) Total  " +
+                SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, ID_Camion, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra Costo, SUM(Kilos) Kilos, SUM(Total_Compra) Total  " +
                     $"FROM vw_Ventas {filtro} " +
                     $"GROUP BY Fecha, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra " +
                     $"ORDER BY  Fecha, Id_Productos", conexionSql);
@@ -145,7 +147,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Ventas SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={Sucursal.Id}, Id_Proveedores={Proveedor.Id}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', " +
+                        $"Id_Sucursales={Sucursal.Id}, ID_Camion={Camion.ID}, Id_Proveedores={Proveedor.Id}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', " +
                         $"Costo_Venta={CostoVenta.ToString().Replace(",", ".")}, Costo_Compra={CostoCompra.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -169,8 +171,8 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Ventas (Fecha, Id_Sucursales, Id_Proveedores, Id_Productos, Descripcion, Costo_Venta, Costo_Compra, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Proveedor.Id}, {Producto.Id}, '{Descripcion}', {CostoVenta.ToString().Replace(",", ".")}, {CostoCompra.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Ventas (Fecha, Id_Sucursales, ID_Camion, Id_Proveedores, Id_Productos, Descripcion, Costo_Venta, Costo_Compra, Kilos) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Camion.ID}, {Proveedor.Id}, {Producto.Id}, '{Descripcion}', {CostoVenta.ToString().Replace(",", ".")}, {CostoCompra.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

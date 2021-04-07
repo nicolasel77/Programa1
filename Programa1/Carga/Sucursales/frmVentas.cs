@@ -14,6 +14,7 @@
         #region " Columnas "
         private Byte c_Id;
         private Byte c_Fecha;
+        private Byte c_IdCamion;
         private Byte c_IdProv;
         private Byte c_IdSuc;
         private Byte c_IdProd;
@@ -37,6 +38,7 @@
 
             c_Id = Convert.ToByte(grdVenta.get_ColIndex("Id"));
             c_Fecha = Convert.ToByte(grdVenta.get_ColIndex("Fecha"));
+            c_IdCamion = Convert.ToByte(grdVenta.get_ColIndex("Id_Camion"));
             c_IdProv = Convert.ToByte(grdVenta.get_ColIndex("Id_Proveedores"));
             c_IdSuc = Convert.ToByte(grdVenta.get_ColIndex("Id_Sucursales"));
             c_IdProd = Convert.ToByte(grdVenta.get_ColIndex("Id_Productos"));
@@ -55,6 +57,8 @@
             grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Multiply), c_IdProv, c_Kilos);
 
             Totales();
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            h.Llenar_List(lstCamiones, Venta.Camion.Datos());
         }
 
         private void FrmVenta_KeyUp(object sender, KeyEventArgs e)
@@ -131,10 +135,13 @@
             string f = cFecha.Cadena();
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
+            string c = h.Codigos_Seleccionados(lstCamiones);
+            if (c != "") { c = $"ID_Camion IN {c}"; }
 
             s = h.Unir(s, e);
             s = h.Unir(s, f);
             s = h.Unir(s, p);
+            s = h.Unir(s, c);
 
             return s;
         }
@@ -143,6 +150,7 @@
         {
             grdVenta.set_ColW(c_Id, 0);
             grdVenta.set_ColW(c_Fecha, 60);
+            grdVenta.set_ColW(c_IdCamion, 30);
             grdVenta.set_ColW(c_IdProv, 35);
             grdVenta.set_ColW(c_IdProv + 1, 40);
             grdVenta.set_ColW(c_IdSuc, 35);
@@ -239,6 +247,15 @@
                     }
                     break;
                 case 2:
+                    //Camion
+                    Venta.Camion.ID = Convert.ToInt32(a);
+                    grdVenta.set_Texto(f, c, a);
+
+                    if (id != 0) { Venta.Actualizar(); }
+
+                    grdVenta.ActivarCelda(f, c + 1);
+                    break;
+                case 3:
                     //Id_Proveedores
                     Venta.Proveedor.Id = Convert.ToInt32(a);
                     if (Venta.Proveedor.Existe() == true)
@@ -258,7 +275,7 @@
                         grdVenta.ErrorEnTxt();
                     }
                     break;
-                case 4:
+                case 5:
                     //Id_Sucursales
                     Venta.Sucursal.Id = Convert.ToInt32(a);
                     if (Venta.Sucursal.Existe() == true)
@@ -279,7 +296,7 @@
                     }
                     break;
 
-                case 6:
+                case 7:
                     //ID_Productos
                     Venta.Producto.Id = Convert.ToInt32(a);
                     if (Venta.Producto.Existe() == true)
@@ -313,7 +330,7 @@
                         grdVenta.ErrorEnTxt();
                     }
                     break;
-                case 7:
+                case 8:
                     //Descripcion
                     Venta.Descripcion = a.ToString();
                     grdVenta.set_Texto(f, c, a);
@@ -322,7 +339,7 @@
 
                     grdVenta.ActivarCelda(f + 1, c);
                     break;
-                case 8:
+                case 9:
                     //Costo_Compra
                     Venta.CostoCompra = Convert.ToSingle(a);
                     grdVenta.set_Texto(f, c, a);
@@ -333,7 +350,7 @@
                     grdVenta.ActivarCelda(f + 1, c);
                     Totales();
                     break;
-                case 9:
+                case 10:
                     //Costo_Venta
                     Venta.CostoVenta = Convert.ToSingle(a);
                     grdVenta.set_Texto(f, c, a);
@@ -345,7 +362,7 @@
                     Totales();
                     break;
 
-                case 10:
+                case 11:
                     //Kilos
                     Venta.Kilos = Convert.ToSingle(a);
                     grdVenta.set_Texto(f, c, a);
