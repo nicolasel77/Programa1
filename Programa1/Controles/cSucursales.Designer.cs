@@ -32,11 +32,12 @@
             this.lst = new System.Windows.Forms.ListBox();
             this.lstTipos = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.cmdInvertir = new System.Windows.Forms.Button();
-            this.cmdNinguno = new System.Windows.Forms.Button();
-            this.cmdTodos = new System.Windows.Forms.Button();
-            this.lblTitulo = new System.Windows.Forms.Label();
+            this.paBotones = new System.Windows.Forms.Panel();
             this.chVer = new System.Windows.Forms.CheckBox();
+            this.cmdInvertir = new System.Windows.Forms.Button();
+            this.cmdTodos = new System.Windows.Forms.Button();
+            this.cmdNinguno = new System.Windows.Forms.Button();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.rdTodas = new System.Windows.Forms.RadioButton();
@@ -51,14 +52,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.paBotones = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.paBotones.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.paBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // lst
@@ -67,11 +67,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lst.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lst.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.lst.FormattingEnabled = true;
-            this.lst.Location = new System.Drawing.Point(6, 21);
+            this.lst.ItemHeight = 16;
+            this.lst.Location = new System.Drawing.Point(3, 21);
             this.lst.Name = "lst";
             this.lst.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lst.Size = new System.Drawing.Size(225, 455);
+            this.lst.Size = new System.Drawing.Size(228, 464);
             this.lst.TabIndex = 0;
             this.lst.SelectedIndexChanged += new System.EventHandler(this.Lst_SelectedIndexChanged);
             this.lst.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Lst_MouseUp);
@@ -121,55 +123,17 @@
             this.splitContainer1.SplitterDistance = 234;
             this.splitContainer1.TabIndex = 2;
             // 
-            // cmdInvertir
+            // paBotones
             // 
-            this.cmdInvertir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdInvertir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdInvertir.Location = new System.Drawing.Point(195, 4);
-            this.cmdInvertir.Name = "cmdInvertir";
-            this.cmdInvertir.Size = new System.Drawing.Size(37, 23);
-            this.cmdInvertir.TabIndex = 3;
-            this.cmdInvertir.Text = "I";
-            this.toolTip1.SetToolTip(this.cmdInvertir, "Invierte la selección actual\r\n(Click derecho)");
-            this.cmdInvertir.UseVisualStyleBackColor = true;
-            this.cmdInvertir.Click += new System.EventHandler(this.CmdInvertir_Click);
-            // 
-            // cmdNinguno
-            // 
-            this.cmdNinguno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdNinguno.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdNinguno.Location = new System.Drawing.Point(150, 4);
-            this.cmdNinguno.Name = "cmdNinguno";
-            this.cmdNinguno.Size = new System.Drawing.Size(37, 23);
-            this.cmdNinguno.TabIndex = 2;
-            this.cmdNinguno.Text = "N";
-            this.toolTip1.SetToolTip(this.cmdNinguno, "Borra la selección.\r\n(Click con rueda del mouse)");
-            this.cmdNinguno.UseVisualStyleBackColor = true;
-            this.cmdNinguno.Click += new System.EventHandler(this.CmdNinguno_Click);
-            // 
-            // cmdTodos
-            // 
-            this.cmdTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdTodos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdTodos.Location = new System.Drawing.Point(105, 4);
-            this.cmdTodos.Name = "cmdTodos";
-            this.cmdTodos.Size = new System.Drawing.Size(37, 23);
-            this.cmdTodos.TabIndex = 1;
-            this.cmdTodos.Text = "T";
-            this.toolTip1.SetToolTip(this.cmdTodos, "Selecciona Todos");
-            this.cmdTodos.UseVisualStyleBackColor = true;
-            this.cmdTodos.Click += new System.EventHandler(this.CmdTodos_Click);
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblTitulo.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblTitulo.Location = new System.Drawing.Point(3, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(82, 18);
-            this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "Sucursales";
+            this.paBotones.Controls.Add(this.chVer);
+            this.paBotones.Controls.Add(this.cmdInvertir);
+            this.paBotones.Controls.Add(this.cmdTodos);
+            this.paBotones.Controls.Add(this.cmdNinguno);
+            this.paBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.paBotones.Location = new System.Drawing.Point(0, 480);
+            this.paBotones.Name = "paBotones";
+            this.paBotones.Size = new System.Drawing.Size(234, 32);
+            this.paBotones.TabIndex = 9;
             // 
             // chVer
             // 
@@ -184,6 +148,56 @@
             this.toolTip1.SetToolTip(this.chVer, "Oculta/muestra según filtro Ver");
             this.chVer.UseVisualStyleBackColor = true;
             this.chVer.CheckedChanged += new System.EventHandler(this.ChVer_CheckedChanged);
+            // 
+            // cmdInvertir
+            // 
+            this.cmdInvertir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdInvertir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdInvertir.Location = new System.Drawing.Point(195, 4);
+            this.cmdInvertir.Name = "cmdInvertir";
+            this.cmdInvertir.Size = new System.Drawing.Size(37, 23);
+            this.cmdInvertir.TabIndex = 3;
+            this.cmdInvertir.Text = "I";
+            this.toolTip1.SetToolTip(this.cmdInvertir, "Invierte la selección actual\r\n(Click derecho)");
+            this.cmdInvertir.UseVisualStyleBackColor = true;
+            this.cmdInvertir.Click += new System.EventHandler(this.CmdInvertir_Click);
+            // 
+            // cmdTodos
+            // 
+            this.cmdTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdTodos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdTodos.Location = new System.Drawing.Point(105, 4);
+            this.cmdTodos.Name = "cmdTodos";
+            this.cmdTodos.Size = new System.Drawing.Size(37, 23);
+            this.cmdTodos.TabIndex = 1;
+            this.cmdTodos.Text = "T";
+            this.toolTip1.SetToolTip(this.cmdTodos, "Selecciona Todos");
+            this.cmdTodos.UseVisualStyleBackColor = true;
+            this.cmdTodos.Click += new System.EventHandler(this.CmdTodos_Click);
+            // 
+            // cmdNinguno
+            // 
+            this.cmdNinguno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdNinguno.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdNinguno.Location = new System.Drawing.Point(150, 4);
+            this.cmdNinguno.Name = "cmdNinguno";
+            this.cmdNinguno.Size = new System.Drawing.Size(37, 23);
+            this.cmdNinguno.TabIndex = 2;
+            this.cmdNinguno.Text = "N";
+            this.toolTip1.SetToolTip(this.cmdNinguno, "Borra la selección.\r\n(Click con rueda del mouse)");
+            this.cmdNinguno.UseVisualStyleBackColor = true;
+            this.cmdNinguno.Click += new System.EventHandler(this.CmdNinguno_Click);
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblTitulo.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblTitulo.Location = new System.Drawing.Point(3, 0);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(82, 18);
+            this.lblTitulo.TabIndex = 0;
+            this.lblTitulo.Text = "Sucursales";
             // 
             // panel2
             // 
@@ -337,18 +351,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Tipo";
             // 
-            // paBotones
-            // 
-            this.paBotones.Controls.Add(this.chVer);
-            this.paBotones.Controls.Add(this.cmdInvertir);
-            this.paBotones.Controls.Add(this.cmdTodos);
-            this.paBotones.Controls.Add(this.cmdNinguno);
-            this.paBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.paBotones.Location = new System.Drawing.Point(0, 480);
-            this.paBotones.Name = "paBotones";
-            this.paBotones.Size = new System.Drawing.Size(234, 32);
-            this.paBotones.TabIndex = 9;
-            // 
             // cSucursales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -363,11 +365,11 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.paBotones.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.paBotones.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

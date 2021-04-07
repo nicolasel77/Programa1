@@ -38,7 +38,10 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdCompras = new Grilla2.SpeedGrilla();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.cProds = new Programa1.Controles.cProductos();
+            this.lstCamiones = new System.Windows.Forms.ListBox();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.cFecha = new Programa1.Controles.cFechas();
             this.cProvs = new Programa1.Controles.cProveedores();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
@@ -58,6 +61,10 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.paCambio.SuspendLayout();
             this.paMostrar.SuspendLayout();
@@ -176,7 +183,7 @@
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.cProds);
+            this.splitContainer3.Panel1.Controls.Add(this.splitContainer2);
             // 
             // splitContainer3.Panel2
             // 
@@ -185,6 +192,25 @@
             this.splitContainer3.Size = new System.Drawing.Size(523, 687);
             this.splitContainer3.SplitterDistance = 256;
             this.splitContainer3.TabIndex = 0;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.cProds);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.lstCamiones);
+            this.splitContainer2.Panel2.Controls.Add(this.materialLabel1);
+            this.splitContainer2.Size = new System.Drawing.Size(256, 687);
+            this.splitContainer2.SplitterDistance = 587;
+            this.splitContainer2.TabIndex = 2;
             // 
             // cProds
             // 
@@ -197,11 +223,41 @@
             this.cProds.Location = new System.Drawing.Point(3, 3);
             this.cProds.Mostrar_Tipo = true;
             this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(253, 681);
+            this.cProds.Size = new System.Drawing.Size(250, 581);
             this.cProds.TabIndex = 1;
             this.cProds.Titulo = "Productos";
             this.cProds.Valor_Actual = -1;
             this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
+            // 
+            // lstCamiones
+            // 
+            this.lstCamiones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstCamiones.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstCamiones.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lstCamiones.FormattingEnabled = true;
+            this.lstCamiones.ItemHeight = 18;
+            this.lstCamiones.Location = new System.Drawing.Point(3, 22);
+            this.lstCamiones.Name = "lstCamiones";
+            this.lstCamiones.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstCamiones.Size = new System.Drawing.Size(250, 72);
+            this.lstCamiones.TabIndex = 1;
+            this.lstCamiones.SelectedIndexChanged += new System.EventHandler(this.lstCamiones_SelectedIndexChanged);
+            this.lstCamiones.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstCamiones_MouseUp);
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(3, 0);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(77, 19);
+            this.materialLabel1.TabIndex = 0;
+            this.materialLabel1.Text = "Camiones";
             // 
             // cFecha
             // 
@@ -225,7 +281,7 @@
             this.cProvs.BackColor = System.Drawing.Color.Gainsboro;
             this.cProvs.Filtro_In = "";
             this.cProvs.Location = new System.Drawing.Point(2, 3);
-            this.cProvs.Mostrar_Tipo = true;
+            this.cProvs.Mostrar_Tipo = false;
             this.cProvs.Name = "cProvs";
             this.cProvs.Size = new System.Drawing.Size(258, 372);
             this.cProvs.TabIndex = 2;
@@ -350,6 +406,11 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.paCambio.ResumeLayout(false);
             this.paCambio.PerformLayout();
@@ -382,5 +443,8 @@
         private MaterialSkin.Controls.MaterialFlatButton cmdMostrar;
         private System.Windows.Forms.Panel paLimpiar;
         private MaterialSkin.Controls.MaterialFlatButton cmdLimpiar;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.ListBox lstCamiones;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
 }

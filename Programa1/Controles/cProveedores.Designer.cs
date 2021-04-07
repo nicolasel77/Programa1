@@ -59,11 +59,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lst.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lst.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.lst.FormattingEnabled = true;
+            this.lst.ItemHeight = 16;
             this.lst.Location = new System.Drawing.Point(6, 21);
             this.lst.Name = "lst";
             this.lst.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lst.Size = new System.Drawing.Size(225, 455);
+            this.lst.Size = new System.Drawing.Size(225, 448);
             this.lst.TabIndex = 0;
             this.lst.SelectedIndexChanged += new System.EventHandler(this.Lst_SelectedIndexChanged);
             this.lst.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Lst_MouseUp);

@@ -1,5 +1,6 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.DB.Varios;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
@@ -12,11 +13,11 @@
         {
         }
 
-        public Compras(int id, DateTime fecha, Productos prod, string desc, Proveedores.Proveedores proveedor, float costo, float kilos)
+        public Compras(int id, DateTime fecha, Camiones camion, Productos prod, string desc, Proveedores.Proveedores proveedor, float costo, float kilos)
         {
             Id = id;
             Fecha = fecha;
-
+            Camion = camion;
             Producto = prod;
             Descripcion = desc;
             Proveedor = proveedor;
@@ -35,6 +36,7 @@
         public Single Costo { get; set; }
         public Single Kilos { get; set; }
 
+        public Camiones Camion { get; set; } = new Camiones();
 
         public Precios_Proveedores precios = new Precios_Proveedores();
 
@@ -131,7 +133,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Compras SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Proveedores={Proveedor.Id}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', " +
+                        $"Id_Camion={Camion.ID}, Id_Proveedores={Proveedor.Id}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', " +
                         $"Costo={Costo.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -155,8 +157,8 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Compras (Fecha, Id_Proveedores, Id_Productos, Descripcion, Costo, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Proveedor.Id}, {Producto.Id}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Compras (Fecha, Id_Camion, Id_Proveedores, Id_Productos, Descripcion, Costo, Kilos) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Camion.ID}, {Proveedor.Id}, {Producto.Id}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

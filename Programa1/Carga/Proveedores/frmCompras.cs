@@ -12,6 +12,7 @@
         #region " Columnas "
         private Byte c_Id;
         private Byte c_Fecha;
+        private Byte c_IdCamion;
         private Byte c_IdProv;
         private Byte c_IdProd;
         private Byte c_Descripcion;
@@ -32,6 +33,7 @@
 
             c_Id = Convert.ToByte(grdCompras.get_ColIndex("Id"));
             c_Fecha = Convert.ToByte(grdCompras.get_ColIndex("Fecha"));
+            c_IdCamion = Convert.ToByte(grdCompras.get_ColIndex("Id_Camion"));
             c_IdProv = Convert.ToByte(grdCompras.get_ColIndex("Id_Proveedores"));
             c_IdProd = Convert.ToByte(grdCompras.get_ColIndex("Id_Productos"));
             c_Descripcion = Convert.ToByte(grdCompras.get_ColIndex("Descripcion"));
@@ -46,6 +48,9 @@
             grdCompras.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdProv, c_Kilos);
 
             Totales();
+
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            h.Llenar_List(lstCamiones, Compras.Camion.Datos());
         }
 
         private void FrmCompras_KeyUp(object sender, KeyEventArgs e)
@@ -116,14 +121,18 @@
 
         private string Armar_Cadena()
         {
+
             string p = cProds.Cadena("Id_Productos");
             string s = cProvs.Cadena("Id_Proveedores");
             string f = cFecha.Cadena();
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
+            string c = h.Codigos_Seleccionados(lstCamiones);
+            if (c != "" ) { c = $"ID_Camion IN {c}";  }
 
             s = h.Unir(f, s);
             s = h.Unir(s, p);
+            s = h.Unir(s, c);
 
             return s;
         }
@@ -132,6 +141,7 @@
         {
             grdCompras.set_ColW(c_Id, 0);
             grdCompras.set_ColW(c_Fecha, 60);
+            grdCompras.set_ColW(c_IdCamion, 30);
             grdCompras.set_ColW(c_IdProv, 30);
             grdCompras.set_ColW(c_IdProv + 1, 100);
             grdCompras.set_ColW(c_IdProd, 30);
@@ -214,6 +224,15 @@
                     }
                     break;
                 case 2:
+                    //Camion
+                    Compras.Camion.ID = Convert.ToInt32(a);
+                    grdCompras.set_Texto(f, c, a);
+
+                    if (id != 0) { Compras.Actualizar(); }
+
+                    grdCompras.ActivarCelda(f, c + 1);
+                    break;
+                case 3:
                     //ID_Proveedores
                     Compras.Proveedor.Id = Convert.ToInt32(a);
                     if (Compras.Proveedor.Existe() == true)
@@ -233,7 +252,7 @@
                         grdCompras.ErrorEnTxt();
                     }
                     break;
-                case 4:
+                case 5:
                     //ID_Productos
                     Compras.Producto.Id = Convert.ToInt32(a);
                     if (Compras.Producto.Existe() == true)
@@ -260,7 +279,7 @@
                         grdCompras.ErrorEnTxt();
                     }
                     break;
-                case 5:
+                case 6:
                     //Descripcion
                     Compras.Descripcion = a.ToString();
                     grdCompras.set_Texto(f, c, a);
@@ -269,7 +288,7 @@
 
                     grdCompras.ActivarCelda(f + 1, c);
                     break;
-                case 6:
+                case 7:
                     //Costo
                     Compras.Costo = Convert.ToSingle(a);
                     grdCompras.set_Texto(f, c, a);
@@ -280,7 +299,7 @@
                     grdCompras.ActivarCelda(f + 1, c);
                     Totales();
                     break;
-                case 7:
+                case 8:
                     //Kilos
                     Compras.Kilos = Convert.ToSingle(a);
                     grdCompras.set_Texto(f, c, a);
@@ -294,6 +313,7 @@
                         //Rellenar nueva fila
 
                         grdCompras.set_Texto(f + 1, c_Fecha, Compras.Fecha);
+                        grdCompras.set_Texto(f + 1, c_IdCamion, Compras.Camion.ID);
                         grdCompras.set_Texto(f + 1, c_IdProv, Compras.Proveedor.Id);
                         grdCompras.set_Texto(f + 1, grdCompras.get_ColIndex("Nombre"), Compras.Proveedor.Nombre);
 
@@ -410,6 +430,16 @@
                 //cm.ShowDialog();
                 //cmdMostrar.PerformClick();
             }
+        }
+
+        private void lstCamiones_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle) { lstCamiones.SelectedIndex = -1; }
+        }
+
+        private void lstCamiones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmdMostrar.PerformClick();
         }
     }
 }
