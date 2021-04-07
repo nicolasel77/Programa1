@@ -50,7 +50,7 @@
 
             try
             {
-                string Cadena = $"SELECT Id, Fecha, Id_Proveedores, Nombre, Id_Productos, Descripcion, Costo, Kilos, Total  FROM vw_Compras {filtro} ORDER BY Id";
+                string Cadena = $"SELECT Id, Fecha, ID_Camion, Id_Proveedores, Nombre, Id_Productos, Descripcion, Costo, Kilos, Total  FROM vw_Compras {filtro} ORDER BY Id";
 
                 SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
