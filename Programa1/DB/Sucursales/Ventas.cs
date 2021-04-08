@@ -277,8 +277,7 @@ namespace Programa1.DB
             {
                 Id = 0;
             }
-
-
         }
+                
     }
 }

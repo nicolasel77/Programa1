@@ -30,6 +30,8 @@
             this.cSucursal = new Programa1.Controles.cSucursales();
             this.cProds = new Programa1.Controles.cProductos();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.lstCamiones = new System.Windows.Forms.ListBox();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.cFecha = new Programa1.Controles.cFechas();
             this.cProveedores = new Programa1.Controles.cProveedores();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
@@ -44,8 +46,6 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
-            this.lstCamiones = new System.Windows.Forms.ListBox();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -248,7 +248,7 @@
             this.cSucursal.Filtro_In = "";
             this.cSucursal.Location = new System.Drawing.Point(3, 3);
             this.cSucursal.Mostrar_Botones = true;
-            this.cSucursal.Mostrar_Tipo = true;
+            this.cSucursal.Mostrar_Tipo = false;
             this.cSucursal.Name = "cSucursal";
             this.cSucursal.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucursal.Size = new System.Drawing.Size(253, 406);
@@ -293,6 +293,36 @@
             this.splitContainer4.SplitterDistance = 226;
             this.splitContainer4.TabIndex = 4;
             // 
+            // lstCamiones
+            // 
+            this.lstCamiones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstCamiones.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstCamiones.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lstCamiones.FormattingEnabled = true;
+            this.lstCamiones.ItemHeight = 18;
+            this.lstCamiones.Location = new System.Drawing.Point(3, 215);
+            this.lstCamiones.Name = "lstCamiones";
+            this.lstCamiones.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstCamiones.Size = new System.Drawing.Size(223, 54);
+            this.lstCamiones.TabIndex = 5;
+            this.lstCamiones.SelectedIndexChanged += new System.EventHandler(this.lstCamiones_SelectedIndexChanged);
+            this.lstCamiones.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstCamiones_MouseUp);
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(3, 193);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(77, 19);
+            this.materialLabel1.TabIndex = 4;
+            this.materialLabel1.Text = "Camiones";
+            // 
             // cFecha
             // 
             this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -316,7 +346,7 @@
             this.cProveedores.BackColor = System.Drawing.Color.Gainsboro;
             this.cProveedores.Filtro_In = "";
             this.cProveedores.Location = new System.Drawing.Point(0, 0);
-            this.cProveedores.Mostrar_Tipo = true;
+            this.cProveedores.Mostrar_Tipo = false;
             this.cProveedores.Name = "cProveedores";
             this.cProveedores.Size = new System.Drawing.Size(290, 271);
             this.cProveedores.TabIndex = 2;
@@ -472,34 +502,6 @@
             this.cmdLimpiar.Text = "Limpiar";
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
-            // 
-            // lstCamiones
-            // 
-            this.lstCamiones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstCamiones.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstCamiones.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lstCamiones.FormattingEnabled = true;
-            this.lstCamiones.ItemHeight = 18;
-            this.lstCamiones.Location = new System.Drawing.Point(3, 215);
-            this.lstCamiones.Name = "lstCamiones";
-            this.lstCamiones.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstCamiones.Size = new System.Drawing.Size(223, 54);
-            this.lstCamiones.TabIndex = 5;
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(3, 193);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(77, 19);
-            this.materialLabel1.TabIndex = 4;
-            this.materialLabel1.Text = "Camiones";
             // 
             // frmVentas
             // 

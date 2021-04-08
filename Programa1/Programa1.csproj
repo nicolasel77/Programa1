@@ -523,6 +523,7 @@
     <Compile Include="DB\Productos\Productos.cs" />
     <Compile Include="DB\Sucursales\Reintegros.cs" />
     <Compile Include="DB\Empleados\Retiros.cs" />
+    <Compile Include="DB\Varios\Repartos.cs" />
     <Compile Include="DB\Varios\Semanas.cs" />
     <Compile Include="DB\Sucursales\Stock.cs" />
     <Compile Include="DB\Empleados\Empleados.cs" />

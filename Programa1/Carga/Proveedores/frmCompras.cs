@@ -226,11 +226,18 @@
                 case 2:
                     //Camion
                     Compras.Camion.ID = Convert.ToInt32(a);
-                    grdCompras.set_Texto(f, c, a);
+                    if (Compras.Camion.Existe() == true)
+                    {
+                        grdCompras.set_Texto(f, c, a);
 
-                    if (id != 0) { Compras.Actualizar(); }
+                        if (id != 0) { Compras.Actualizar(); }
 
-                    grdCompras.ActivarCelda(f, c + 1);
+                        grdCompras.ActivarCelda(f, c + 1);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No se encontro el camión {a}.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                     break;
                 case 3:
                     //ID_Proveedores

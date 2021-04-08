@@ -5,9 +5,9 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Camiones
+    class Repartos
     {
-        public Camiones()
+        public Repartos()
         {
         }
 
@@ -26,7 +26,7 @@
 
             try
             {
-                string Cadena = $"SELECT Id, Nombre FROM Camiones {filtro} ORDER BY Id";
+                string Cadena = $"SELECT Id, Nombre FROM Repartos {filtro} ORDER BY Id";
 
                 SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -49,7 +49,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Camiones WHERE Id=" + ID, sql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Repartos WHERE Id=" + ID, sql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -75,8 +75,7 @@
                 return false;
             }
 
-
         }
-        
+
     }
 }

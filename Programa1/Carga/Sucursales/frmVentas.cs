@@ -161,7 +161,7 @@
             grdVenta.set_ColW(c_CostoCompra, 60);
             grdVenta.set_ColW(c_Kilos, 60);
             grdVenta.set_ColW(c_TotalCompra, 80);
-            grdVenta.set_ColW(c_TotalVenta, 80);            
+            grdVenta.set_ColW(c_TotalVenta, 80);
 
             grdVenta.Columnas[c_CostoVenta].Format = "C2";
             grdVenta.Columnas[c_CostoCompra].Format = "C2";
@@ -249,11 +249,19 @@
                 case 2:
                     //Camion
                     Venta.Camion.ID = Convert.ToInt32(a);
-                    grdVenta.set_Texto(f, c, a);
 
-                    if (id != 0) { Venta.Actualizar(); }
+                    if (Venta.Camion.Existe() == true)
+                    {
+                        grdVenta.set_Texto(f, c, a);
 
-                    grdVenta.ActivarCelda(f, c + 1);
+                        if (id != 0) { Venta.Actualizar(); }
+
+                        grdVenta.ActivarCelda(f, c + 1);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No se encontro el camión {a}.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                        
+                    }
                     break;
                 case 3:
                     //Id_Proveedores
@@ -490,7 +498,7 @@
             Clipboard.SetText(s);
 
             Mensaje($"Copiado: {s}");
-        }        
+        }
 
         private void CmdCambioMasivo_Click(object sender, EventArgs e)
         {
@@ -580,6 +588,16 @@
                     traslados.Agregar();
                 }
             }
+        }
+
+        private void lstCamiones_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle) { lstCamiones.SelectedIndex = -1; }
+        }
+
+        private void lstCamiones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmdMostrar.PerformClick();
         }
     }
 }
