@@ -1,47 +1,48 @@
-﻿
-namespace Programa1.DB
+﻿namespace Programa1.DB.Tesoreria
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
-
-    class TipoProductos
+    class Cuentas_Bancos
     {
-        public TipoProductos()
+        public Cuentas_Bancos()
         {
         }
 
-        public TipoProductos(int id, string nombre)
-        {
-            Id = id;
-            Nombre = nombre;
-        }
+        public int ID { get; set; }
+        
+        public Tipo_CuentasBancos Tipo { get; set; } = new Tipo_CuentasBancos();
+        public Bancos Banco { get; set; } = new Bancos();
 
-        [Required]
-        [Key]
-        public int Id { get; set; }
-
-        [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
-        [Required]
         public string Nombre { get; set; }
 
-        #region " Devolver Datos "
-        public DataTable Datos()
+        public string Razon_Social { get; set; }
+        
+        public string Numero { get; set; }
+        public string Sucursal { get; set; }
+
+
+
+        public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
+            if (filtro.Length > 0)
+            {
+                filtro = " WHERE " + filtro;
+            }
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM TipoProductos", conexionSql);
+                string Cadena = "SELECT * FROM Cuentas_Bancos {filtro} ORDER BY Id";
+
+                SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
                 SqlDat.Fill(dt);
-
             }
             catch (Exception)
             {
@@ -54,34 +55,27 @@ namespace Programa1.DB
         public bool Existe()
         {
             SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var dt = new DataTable("Datos");
 
             try
             {
-                SqlCommand command = new SqlCommand("SELECT Nombre FROM TipoProductos WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                sql.Open();
-                command.Connection = sql;
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Cuentas_Bancos WHERE Id=" + ID, sql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
 
 
-                var d = command.ExecuteScalar();
 
-                if (string.IsNullOrEmpty(Convert.ToString(d)))
+                if (dt.Rows.Count == 0)
                 {
+                    Nombre = "";
                     return false;
                 }
                 else
                 {
-                    if (d.ToString().Length == 0)
-                    {
-                        Nombre = "";
-                        return false;
-                    }
-                    else
-                    {
-                        Nombre = d.ToString();
-                        return true;
-                    }
-
+                    Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+                    return true;
                 }
 
             }
@@ -90,9 +84,9 @@ namespace Programa1.DB
                 MessageBox.Show(e.Message, "Error");
                 return false;
             }
+
         }
 
-        #endregion
 
         #region " Editar Datos "
         public void Actualizar()
@@ -101,7 +95,14 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("UPDATE TipoProductos SET Nombre='{0}' WHERE Id={1}", Nombre, Id), sql);
+                SqlCommand command = new SqlCommand(string.Format("UPDATE Cuentas_Bancos SET " +
+                    "Nombre='{1}'" +
+                    "Id_Tipo={2}" +
+                    "Id_Banco={3}" +
+                    "Razon_Social='{4}'" +
+                    "Numero='{5}'" +
+                    "Sucursal='{6}'" +
+                    " WHERE Id={0}", ID, Nombre, Tipo.ID, Banco.ID, Razon_Social, Numero, Sucursal), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -122,13 +123,13 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO TipoProductos (Id, Nombre) VALUES({Id}, '{Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Cuentas_Bancos (Id_Tipo, Id_Banco, Nombre, Razon_Social, Numero, Sucursal) VALUES({Tipo.ID}, {Banco.ID}, '{Nombre}', '{Razon_Social}', '{Sucursal}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
-                
+
                 sql.Close();
             }
             catch (Exception e)
@@ -143,14 +144,14 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("DELETE FROM TipoProductos WHERE Id={0}", Id), sql);
+                SqlCommand command = new SqlCommand(string.Format("DELETE FROM Cuentas_Bancos WHERE Id={0}", ID), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
 
-                Id = 0;
+                ID = 0;
 
                 sql.Close();
             }
