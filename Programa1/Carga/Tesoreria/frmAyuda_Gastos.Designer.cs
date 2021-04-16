@@ -52,6 +52,7 @@
             this.lst.Name = "lst";
             this.lst.Size = new System.Drawing.Size(427, 380);
             this.lst.TabIndex = 1;
+            this.lst.DoubleClick += new System.EventHandler(this.lst_DoubleClick);
             // 
             // cmdAceptar
             // 

@@ -38,6 +38,13 @@
             this.borrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.rdDetalle = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdSubtipo = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdTipo = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdCaja = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdNinguno = new MaterialSkin.Controls.MaterialRadioButton();
+            this.label5 = new System.Windows.Forms.Label();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.lblTotalGrillaGastos = new MaterialSkin.Controls.MaterialLabel();
             this.grdSalidas = new Grilla2.SpeedGrilla();
@@ -67,13 +74,7 @@
             this.cmdCerrar_Fecha = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.mntFecha = new System.Windows.Forms.MonthCalendar();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.rdNinguno = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdCaja = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdTipo = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdSubtipo = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdDetalle = new MaterialSkin.Controls.MaterialRadioButton();
+            this.cmdTransferencia = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splPrincipal)).BeginInit();
             this.splPrincipal.Panel1.SuspendLayout();
             this.splPrincipal.Panel2.SuspendLayout();
@@ -83,8 +84,8 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.mnuEntradas.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splPrincipal
@@ -140,7 +141,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEntradas.BackColor = System.Drawing.SystemColors.Control;
             this.lblEntradas.Depth = 0;
-            this.lblEntradas.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblEntradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblEntradas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblEntradas.Location = new System.Drawing.Point(3, 3);
             this.lblEntradas.MouseState = MaterialSkin.MouseState.HOVER;
@@ -156,7 +157,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalGrillaEntrada.BackColor = System.Drawing.SystemColors.Control;
             this.lblTotalGrillaEntrada.Depth = 0;
-            this.lblTotalGrillaEntrada.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblTotalGrillaEntrada.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblTotalGrillaEntrada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalGrillaEntrada.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaEntrada.MouseState = MaterialSkin.MouseState.HOVER;
@@ -238,13 +239,129 @@
             this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.imprimirToolStripMenuItem.Text = "Imprimir";
             // 
+            // panel7
+            // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel7.Controls.Add(this.rdDetalle);
+            this.panel7.Controls.Add(this.rdSubtipo);
+            this.panel7.Controls.Add(this.rdTipo);
+            this.panel7.Controls.Add(this.rdCaja);
+            this.panel7.Controls.Add(this.rdNinguno);
+            this.panel7.Controls.Add(this.label5);
+            this.panel7.Location = new System.Drawing.Point(340, 693);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(419, 24);
+            this.panel7.TabIndex = 3;
+            // 
+            // rdDetalle
+            // 
+            this.rdDetalle.AutoSize = true;
+            this.rdDetalle.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rdDetalle.Depth = 0;
+            this.rdDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdDetalle.Location = new System.Drawing.Point(338, -2);
+            this.rdDetalle.Margin = new System.Windows.Forms.Padding(0);
+            this.rdDetalle.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdDetalle.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdDetalle.Name = "rdDetalle";
+            this.rdDetalle.Ripple = true;
+            this.rdDetalle.Size = new System.Drawing.Size(72, 30);
+            this.rdDetalle.TabIndex = 2;
+            this.rdDetalle.Text = "Detalle";
+            this.rdDetalle.UseVisualStyleBackColor = true;
+            this.rdDetalle.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
+            // 
+            // rdSubtipo
+            // 
+            this.rdSubtipo.AutoSize = true;
+            this.rdSubtipo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rdSubtipo.Depth = 0;
+            this.rdSubtipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdSubtipo.Location = new System.Drawing.Point(258, -2);
+            this.rdSubtipo.Margin = new System.Windows.Forms.Padding(0);
+            this.rdSubtipo.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdSubtipo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdSubtipo.Name = "rdSubtipo";
+            this.rdSubtipo.Ripple = true;
+            this.rdSubtipo.Size = new System.Drawing.Size(80, 30);
+            this.rdSubtipo.TabIndex = 2;
+            this.rdSubtipo.Text = "SubTipo";
+            this.rdSubtipo.UseVisualStyleBackColor = true;
+            this.rdSubtipo.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
+            // 
+            // rdTipo
+            // 
+            this.rdTipo.AutoSize = true;
+            this.rdTipo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rdTipo.Depth = 0;
+            this.rdTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdTipo.Location = new System.Drawing.Point(202, -2);
+            this.rdTipo.Margin = new System.Windows.Forms.Padding(0);
+            this.rdTipo.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdTipo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdTipo.Name = "rdTipo";
+            this.rdTipo.Ripple = true;
+            this.rdTipo.Size = new System.Drawing.Size(56, 30);
+            this.rdTipo.TabIndex = 2;
+            this.rdTipo.Text = "Tipo";
+            this.rdTipo.UseVisualStyleBackColor = true;
+            this.rdTipo.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
+            // 
+            // rdCaja
+            // 
+            this.rdCaja.AutoSize = true;
+            this.rdCaja.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rdCaja.Checked = true;
+            this.rdCaja.Depth = 0;
+            this.rdCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdCaja.Location = new System.Drawing.Point(146, -2);
+            this.rdCaja.Margin = new System.Windows.Forms.Padding(0);
+            this.rdCaja.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdCaja.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdCaja.Name = "rdCaja";
+            this.rdCaja.Ripple = true;
+            this.rdCaja.Size = new System.Drawing.Size(56, 30);
+            this.rdCaja.TabIndex = 2;
+            this.rdCaja.TabStop = true;
+            this.rdCaja.Text = "Caja";
+            this.rdCaja.UseVisualStyleBackColor = true;
+            this.rdCaja.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
+            // 
+            // rdNinguno
+            // 
+            this.rdNinguno.AutoSize = true;
+            this.rdNinguno.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rdNinguno.Depth = 0;
+            this.rdNinguno.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdNinguno.Location = new System.Drawing.Point(65, -2);
+            this.rdNinguno.Margin = new System.Windows.Forms.Padding(0);
+            this.rdNinguno.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdNinguno.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdNinguno.Name = "rdNinguno";
+            this.rdNinguno.Ripple = true;
+            this.rdNinguno.Size = new System.Drawing.Size(81, 30);
+            this.rdNinguno.TabIndex = 2;
+            this.rdNinguno.Text = "Ninguno";
+            this.rdNinguno.UseVisualStyleBackColor = true;
+            this.rdNinguno.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label5.Location = new System.Drawing.Point(3, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 18);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Repetir:";
+            // 
             // materialLabel3
             // 
             this.materialLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.materialLabel3.BackColor = System.Drawing.SystemColors.Control;
             this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel3.Location = new System.Drawing.Point(3, 3);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
@@ -260,7 +377,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalGrillaGastos.BackColor = System.Drawing.SystemColors.Control;
             this.lblTotalGrillaGastos.Depth = 0;
-            this.lblTotalGrillaGastos.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblTotalGrillaGastos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblTotalGrillaGastos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalGrillaGastos.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaGastos.MouseState = MaterialSkin.MouseState.HOVER;
@@ -313,6 +430,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.cmdTransferencia);
             this.panel1.Controls.Add(this.lblUltimo);
             this.panel1.Controls.Add(this.grdCajas);
             this.panel1.Controls.Add(this.lblTotal);
@@ -346,9 +464,9 @@
             this.lblUltimo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUltimo.Depth = 0;
-            this.lblUltimo.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblUltimo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblUltimo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblUltimo.Location = new System.Drawing.Point(3, 446);
+            this.lblUltimo.Location = new System.Drawing.Point(3, 412);
             this.lblUltimo.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblUltimo.Name = "lblUltimo";
             this.lblUltimo.Size = new System.Drawing.Size(264, 19);
@@ -359,7 +477,8 @@
             // 
             this.grdCajas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
             this.grdCajas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdCajas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.grdCajas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdCajas.AutoResize = false;
             this.grdCajas.bColor = System.Drawing.SystemColors.Window;
@@ -386,7 +505,7 @@
             this.grdCajas.Redraw = true;
             this.grdCajas.Row = 0;
             this.grdCajas.Rows = 50;
-            this.grdCajas.Size = new System.Drawing.Size(254, 131);
+            this.grdCajas.Size = new System.Drawing.Size(254, 217);
             this.grdCajas.TabIndex = 7;
             // 
             // lblTotal
@@ -563,12 +682,12 @@
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(0, 162);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(47, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(46, 18);
             this.materialLabel1.TabIndex = 4;
             this.materialLabel1.Text = "Cajas";
             // 
@@ -576,12 +695,12 @@
             // 
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
-            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel5.Location = new System.Drawing.Point(0, 81);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(58, 19);
+            this.materialLabel5.Size = new System.Drawing.Size(56, 18);
             this.materialLabel5.TabIndex = 4;
             this.materialLabel5.Text = "Salidas";
             // 
@@ -589,12 +708,12 @@
             // 
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel2.Location = new System.Drawing.Point(0, 0);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(68, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(67, 18);
             this.materialLabel2.TabIndex = 4;
             this.materialLabel2.Text = "Entradas";
             // 
@@ -621,7 +740,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.materialLabel4.BackColor = System.Drawing.SystemColors.Control;
             this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel4.Location = new System.Drawing.Point(8, 3);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
@@ -634,128 +753,23 @@
             // mntFecha
             // 
             this.mntFecha.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.mntFecha.BackColor = System.Drawing.Color.Gainsboro;
+            this.mntFecha.BackColor = System.Drawing.Color.White;
             this.mntFecha.Location = new System.Drawing.Point(46, 26);
             this.mntFecha.MaxSelectionCount = 1;
             this.mntFecha.Name = "mntFecha";
             this.mntFecha.TabIndex = 0;
             this.mntFecha.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.mntFecha_DateSelected);
             // 
-            // panel7
+            // cmdTransferencia
             // 
-            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel7.Controls.Add(this.rdDetalle);
-            this.panel7.Controls.Add(this.rdSubtipo);
-            this.panel7.Controls.Add(this.rdTipo);
-            this.panel7.Controls.Add(this.rdCaja);
-            this.panel7.Controls.Add(this.rdNinguno);
-            this.panel7.Controls.Add(this.label5);
-            this.panel7.Location = new System.Drawing.Point(340, 693);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(419, 24);
-            this.panel7.TabIndex = 3;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label5.Location = new System.Drawing.Point(3, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 18);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Repetir:";
-            // 
-            // rdNinguno
-            // 
-            this.rdNinguno.AutoSize = true;
-            this.rdNinguno.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rdNinguno.Depth = 0;
-            this.rdNinguno.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdNinguno.Location = new System.Drawing.Point(65, -2);
-            this.rdNinguno.Margin = new System.Windows.Forms.Padding(0);
-            this.rdNinguno.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdNinguno.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdNinguno.Name = "rdNinguno";
-            this.rdNinguno.Ripple = true;
-            this.rdNinguno.Size = new System.Drawing.Size(81, 30);
-            this.rdNinguno.TabIndex = 2;
-            this.rdNinguno.Text = "Ninguno";
-            this.rdNinguno.UseVisualStyleBackColor = true;
-            this.rdNinguno.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
-            // 
-            // rdCaja
-            // 
-            this.rdCaja.AutoSize = true;
-            this.rdCaja.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rdCaja.Checked = true;
-            this.rdCaja.Depth = 0;
-            this.rdCaja.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdCaja.Location = new System.Drawing.Point(146, -2);
-            this.rdCaja.Margin = new System.Windows.Forms.Padding(0);
-            this.rdCaja.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdCaja.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdCaja.Name = "rdCaja";
-            this.rdCaja.Ripple = true;
-            this.rdCaja.Size = new System.Drawing.Size(56, 30);
-            this.rdCaja.TabIndex = 2;
-            this.rdCaja.TabStop = true;
-            this.rdCaja.Text = "Caja";
-            this.rdCaja.UseVisualStyleBackColor = true;
-            this.rdCaja.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
-            // 
-            // rdTipo
-            // 
-            this.rdTipo.AutoSize = true;
-            this.rdTipo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rdTipo.Depth = 0;
-            this.rdTipo.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdTipo.Location = new System.Drawing.Point(202, -2);
-            this.rdTipo.Margin = new System.Windows.Forms.Padding(0);
-            this.rdTipo.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdTipo.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdTipo.Name = "rdTipo";
-            this.rdTipo.Ripple = true;
-            this.rdTipo.Size = new System.Drawing.Size(56, 30);
-            this.rdTipo.TabIndex = 2;
-            this.rdTipo.Text = "Tipo";
-            this.rdTipo.UseVisualStyleBackColor = true;
-            this.rdTipo.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
-            // 
-            // rdSubtipo
-            // 
-            this.rdSubtipo.AutoSize = true;
-            this.rdSubtipo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rdSubtipo.Depth = 0;
-            this.rdSubtipo.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdSubtipo.Location = new System.Drawing.Point(258, -2);
-            this.rdSubtipo.Margin = new System.Windows.Forms.Padding(0);
-            this.rdSubtipo.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdSubtipo.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdSubtipo.Name = "rdSubtipo";
-            this.rdSubtipo.Ripple = true;
-            this.rdSubtipo.Size = new System.Drawing.Size(80, 30);
-            this.rdSubtipo.TabIndex = 2;
-            this.rdSubtipo.Text = "SubTipo";
-            this.rdSubtipo.UseVisualStyleBackColor = true;
-            this.rdSubtipo.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
-            // 
-            // rdDetalle
-            // 
-            this.rdDetalle.AutoSize = true;
-            this.rdDetalle.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rdDetalle.Depth = 0;
-            this.rdDetalle.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdDetalle.Location = new System.Drawing.Point(338, -2);
-            this.rdDetalle.Margin = new System.Windows.Forms.Padding(0);
-            this.rdDetalle.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdDetalle.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdDetalle.Name = "rdDetalle";
-            this.rdDetalle.Ripple = true;
-            this.rdDetalle.Size = new System.Drawing.Size(72, 30);
-            this.rdDetalle.TabIndex = 2;
-            this.rdDetalle.Text = "Detalle";
-            this.rdDetalle.UseVisualStyleBackColor = true;
-            this.rdDetalle.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
+            this.cmdTransferencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdTransferencia.Location = new System.Drawing.Point(0, 434);
+            this.cmdTransferencia.Name = "cmdTransferencia";
+            this.cmdTransferencia.Size = new System.Drawing.Size(267, 36);
+            this.cmdTransferencia.TabIndex = 9;
+            this.cmdTransferencia.Texto = "Transferencia";
+            this.cmdTransferencia.Click += new System.EventHandler(this.cmdTransferencia_Click);
             // 
             // frmCaja_Diaria
             // 
@@ -776,10 +790,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.mnuEntradas.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -830,5 +844,6 @@
         private MaterialSkin.Controls.MaterialRadioButton rdSubtipo;
         private MaterialSkin.Controls.MaterialRadioButton rdTipo;
         private MaterialSkin.Controls.MaterialRadioButton rdCaja;
+        private Controles.cBoton cmdTransferencia;
     }
 }

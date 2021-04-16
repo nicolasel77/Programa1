@@ -25,7 +25,7 @@
 
             try
             {
-                string Cadena = "SELECT Id, Nombre FROM Tipo_CuentasBancos {filtro} ORDER BY Id";
+                string Cadena = $"SELECT Id, Nombre FROM Tipo_CuentasBancos {filtro} ORDER BY Id";
 
                 SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;

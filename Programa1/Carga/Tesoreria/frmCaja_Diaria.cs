@@ -178,6 +178,12 @@ namespace Programa1.Carga.Tesoreria
             if (rdDetalle.Checked) { o_Repetir = t_Repetir.Detalle; }
             if (rdNinguno.Checked) { o_Repetir = t_Repetir.Ninguno; }
         }
+
+        private void cmdTransferencia_Click(object sender, EventArgs e)
+        {
+            frmTransferencia fr = new frmTransferencia();
+            fr.ShowDialog();
+        }
         #endregion
 
         #region " SUBS "
@@ -835,8 +841,9 @@ namespace Programa1.Carga.Tesoreria
             }
         }
 
+
         #endregion
 
-        
+       
     }
 }

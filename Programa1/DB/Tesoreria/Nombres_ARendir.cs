@@ -4,30 +4,32 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
-    class Bancos
+
+    class Nombres_ARendir
     {
-        public Bancos()
+        public Nombres_ARendir()
         {
         }
 
         public int ID { get; set; }
         public string Nombre { get; set; }
 
-
-
         public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            if (filtro.Length > 0)
+            if (filtro.Length == 0)
+            {
+            }
+            else
             {
                 filtro = " WHERE " + filtro;
             }
 
             try
             {
-                string Cadena = $"SELECT Id, Nombre FROM Bancos {filtro} ORDER BY Id";
+                string Cadena = $"SELECT Id, Nombre FROM Nombres_ARendir {filtro} ORDER BY Id";
 
                 SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -50,7 +52,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Bancos WHERE Id=" + ID, sql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Nombres_ARendir WHERE Id=" + ID, sql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

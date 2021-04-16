@@ -193,5 +193,10 @@ namespace Programa1.Carga.Tesoreria
             Valor = lst.Text;
             this.Hide();
         }
+
+        private void lst_DoubleClick(object sender, EventArgs e)
+        {
+            cmdAceptar.PerformClick();
+        }
     }
 }

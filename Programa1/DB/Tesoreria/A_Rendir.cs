@@ -4,39 +4,27 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
-    class Cuentas_Bancos
+
+    class A_Rendir
     {
-        public Cuentas_Bancos()
+        public A_Rendir()
         {
         }
 
-        public int ID { get; set; }
-        
-        public Tipo_CuentasBancos Tipo { get; set; } = new Tipo_CuentasBancos();
-        public Bancos Banco { get; set; } = new Bancos();
-
-        public string Nombre { get; set; }
-
-        public string Razon_Social { get; set; }
-        
-        public string Numero { get; set; }
-        public string Sucursal { get; set; }
-
-
+        public int ID_Entrada { get; set; }
+        public int ID_Salida { get; set; }
+        public int ID_NARendir { get; set; }
 
         public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
 
             try
             {
-                string Cadena = $"SELECT * FROM Cuentas_Bancos {filtro} ORDER BY Id";
+                string Cadena = $"SELECT * FROM A_Rendir {filtro} ORDER BY Id";
 
                 SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -52,78 +40,15 @@
             return dt;
         }
 
-        public bool Existe()
-        {
-            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            var dt = new DataTable("Datos");
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Cuentas_Bancos WHERE Id=" + ID, sql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-
-
-                if (dt.Rows.Count == 0)
-                {
-                    Nombre = "";
-                    return false;
-                }
-                else
-                {
-                    Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
-                    return true;
-                }
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-                return false;
-            }
-
-        }
-
 
         #region " Editar Datos "
-        public void Actualizar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand(string.Format("UPDATE Cuentas_Bancos SET " +
-                    "Nombre='{1}'" +
-                    "Id_Tipo={2}" +
-                    "Id_Banco={3}" +
-                    "Razon_Social='{4}'" +
-                    "Numero='{5}'" +
-                    "Sucursal='{6}'" +
-                    " WHERE Id={0}", ID, Nombre, Tipo.ID, Banco.ID, Razon_Social, Numero, Sucursal), sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
         public void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Cuentas_Bancos (Id_Tipo, Id_Banco, Nombre, Razon_Social, Numero, Sucursal) VALUES({Tipo.ID}, {Banco.ID}, '{Nombre}', '{Razon_Social}', '{Sucursal}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO A_Rendir (Id_Entrada, Id_Salida, Id_NARendir) VALUES({ID_Entrada}, {ID_Salida}, {ID_NARendir})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -138,20 +63,83 @@
             }
         }
 
-        public void Borrar()
+        public void Actualizar_Entrada()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("DELETE FROM Cuentas_Bancos WHERE Id={0}", ID), sql);
+                SqlCommand command = new SqlCommand(string.Format("UPDATE A_Rendir SET ID_NARendir={0} WHERE ID_Entrada={1}", ID_NARendir, ID_Entrada), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
 
-                ID = 0;
+                sql.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
+        public void Actualizar_Salida()
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand(string.Format("UPDATE A_Rendir SET ID_NARendir={0} WHERE ID_Salida={1}", ID_NARendir, ID_Salida), sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
+
+                var d = command.ExecuteNonQuery();
+
+                sql.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }        
+
+        public void Borrar_Entrada()
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand(string.Format("DELETE FROM A_Rendir WHERE Id_Entrada={0}", ID_Entrada), sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
+
+                var d = command.ExecuteNonQuery();
+
+                ID_Entrada = 0;
+
+                sql.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
+        public void Borrar_Salida()
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand(string.Format("DELETE FROM A_Rendir WHERE Id_Salida={0}", ID_Salida), sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
+
+                var d = command.ExecuteNonQuery();
+
+                ID_Salida = 0;
 
                 sql.Close();
             }
@@ -162,6 +150,7 @@
         }
 
         #endregion
+
 
     }
 }
