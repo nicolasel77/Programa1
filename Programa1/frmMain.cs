@@ -1472,10 +1472,10 @@
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
-                Form frmCaja_Diaria = new Programa1.Carga.Tesoreria.frmCaja_Diaria();
+                Form frmCaja_Diaria = new Programa1.Carga.Tesoreria.frmCaja_Diaria(usuario);
                 frmCaja_Diaria.MdiParent = this;
                 frmCaja_Diaria.Disposed += FrmCaja_Diaria_Disposed;
-                forms.Add(frmCaja_Diaria);
+                forms.Add(frmCaja_Diaria);                
                 frmCaja_Diaria.Show();
                 frmCaja_Diaria.WindowState = FormWindowState.Minimized;
                 frmCaja_Diaria.WindowState = FormWindowState.Maximized;

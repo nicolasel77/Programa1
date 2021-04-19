@@ -2,22 +2,24 @@
 namespace Programa1.Carga.Tesoreria
 {
     using Programa1.DB.Tesoreria;
+    using Programa1.DB.Varios;
     using System;
     using System.Data;
     using System.Windows.Forms;
 
     public partial class frmCaja_Diaria : Form
     {
-        private enum t_Repetir : int
-            {
-              Ninguno = 0,
-              Caja = 1,
-              Tipo = 2,
-              SubTipo = 3,
-              Detalle = 4
-            }
-        private t_Repetir o_Repetir;
+        Usuarios usuario;        
 
+        private enum t_Repetir : int
+        {
+            Ninguno = 0,
+            Caja = 1,
+            Tipo = 2,
+            SubTipo = 3,
+            Detalle = 4
+        }
+        private t_Repetir o_Repetir;
 
         #region " Columnas Entradas "
         private Byte e_Id;
@@ -60,8 +62,15 @@ namespace Programa1.Carga.Tesoreria
 
         private Detalle_Gastos dg = new Detalle_Gastos();
 
+
         public frmCaja_Diaria()
         {
+            InitializeComponent();
+        }
+        public frmCaja_Diaria(Usuarios user)
+        {
+            usuario = user;
+            cGastos.Usuario = user;
             InitializeComponent();
         }
 
@@ -183,6 +192,34 @@ namespace Programa1.Carga.Tesoreria
         {
             frmTransferencia fr = new frmTransferencia();
             fr.ShowDialog();
+            if (fr.OK == true)
+            {
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+                cGastos.ID = 0;
+                cGastos.Fecha = mntFecha.SelectionStart.Date;
+                cGastos.caja.Id = h.Codigo_Seleccionado(fr.lstDesde.Text);
+                cGastos.TG.Id_Tipo = 100;
+                cGastos.Id_SubTipoGastos = h.Codigo_Seleccionado(fr.lstHacia.Text);
+                cGastos.Desc_SubTipo = h.Nombre_Seleccionado(fr.lstHacia.Text);
+                cGastos.Id_DetalleGastos = h.Codigo_Seleccionado(fr.lstARendir.Text); 
+                cGastos.Descripcion = h.Nombre_Seleccionado(fr.lstARendir.Text); ;
+                cGastos.Importe = Convert.ToDouble(fr.txtImporte.Text);
+
+                cGastos.Agregar();
+
+                cEntradas.ID = 0;
+                cEntradas.Fecha = mntFecha.SelectionStart.Date;
+                cEntradas.caja.Id = h.Codigo_Seleccionado(fr.lstHacia.Text);
+                cEntradas.TE.Id_Tipo = 100;
+                cEntradas.Id_SubTipoEntrada = h.Codigo_Seleccionado(fr.lstDesde.Text);
+                cEntradas.Descripcion = "Desde la caja: " + h.Nombre_Seleccionado(fr.lstDesde.Text); ;
+                cEntradas.Importe = Convert.ToDouble(fr.txtImporte.Text);
+
+                cEntradas.Agregar();
+
+                Cargar_Datos();
+            }
         }
         #endregion
 
@@ -614,7 +651,7 @@ namespace Programa1.Carga.Tesoreria
                                 grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
 
                                 grdSalidas.AgregarFila();
-                                                                
+
                                 switch (o_Repetir)
                                 {
                                     case t_Repetir.Caja:
@@ -646,7 +683,7 @@ namespace Programa1.Carga.Tesoreria
                                         grdSalidas.set_Texto(f + 1, s_SubTipo, cGastos.Id_SubTipoGastos);
                                         grdSalidas.set_Texto(f + 1, s_SubTipo + 1, cGastos.Desc_SubTipo);
                                         grdSalidas.set_Texto(f + 1, s_Detalle, cGastos.Id_DetalleGastos);
-                                        grdSalidas.set_Texto(f + 1, s_Detalle + 1, cGastos.Desc_Detalle);
+                                        grdSalidas.set_Texto(f + 1, s_Detalle + 1, cGastos.Descripcion);
                                         grdSalidas.ActivarCelda(f + 1, s_Descripcion);
                                         break;
                                     default:
@@ -844,6 +881,6 @@ namespace Programa1.Carga.Tesoreria
 
         #endregion
 
-       
+
     }
 }

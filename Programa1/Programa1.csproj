@@ -383,6 +383,12 @@
     <Compile Include="Carga\Tesoreria\frmCargarEntregas.Designer.cs">
       <DependentUpon>frmCargarEntregas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmNARendir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmNARendir.Designer.cs">
+      <DependentUpon>frmNARendir.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmNuevaFecha.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -705,6 +711,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmCargarEntregas.resx">
       <DependentUpon>frmCargarEntregas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmNARendir.resx">
+      <DependentUpon>frmNARendir.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmNuevaFecha.resx">
       <DependentUpon>frmNuevaFecha.cs</DependentUpon>

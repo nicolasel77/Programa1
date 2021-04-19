@@ -1,5 +1,6 @@
 ﻿namespace Programa1.DB.Tesoreria
 {
+    using Programa1.DB.Varios;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
@@ -27,15 +28,14 @@
         public int Id_SubTipoGastos { get; set; }
         public int Id_DetalleGastos { get; set; }
         public string Desc_SubTipo { get; set; }
-        
-        public string Desc_Detalle { get; set; }
-
+                
         [MaxLength(500, ErrorMessage = "El campo Descripción solo puede tener 500 caracteres.")]
         public string Descripcion { get; set; }
         public Double Importe { get; set; }
 
         public bool Autorizado { get; set; }
         public DateTime Fecha_Autorizado { get; set; }
+        public Usuarios Usuario { get; set; } = new Usuarios();
 
 
         #region " Editrar Datos "
@@ -48,7 +48,7 @@
                 SqlCommand command = new SqlCommand($"UPDATE CD_Gastos SET " +
                     $" Fecha='{Fecha:MM/dd/yy}', ID_Caja={caja.Id}, ID_TipoGastos={TG.Id_Tipo}, Id_SubTipoGastos={Id_SubTipoGastos}" +
                     $", Id_DetalleGastos={Id_DetalleGastos}, Desc_SubTipo='{Desc_SubTipo}', Descripcion='{Descripcion}', Importe={Importe.ToString().Replace(",", ".")}" +
-                    $", Autorizado={(Autorizado ? "1" : "0")}, Fecha_Autorizado='{Fecha_Autorizado:MM/dd/yy HH:mm}'" +
+                    $", Autorizado={(Autorizado ? "1" : "0")}, Fecha_Autorizado='{Fecha_Autorizado:MM/dd/yy HH:mm}', Usuario={Usuario.ID}" +
                     $" WHERE ID={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -72,9 +72,9 @@
             try
             {
                 SqlCommand command = new SqlCommand($"INSERT INTO CD_Gastos " +
-                    $"(Fecha, ID_Caja, ID_TipoGastos, ID_SubTipoGastos, Desc_SubTipo, ID_DetalleGastos, Descripcion, Importe, Autorizado, Fecha_Autorizado) " +
+                    $"(Fecha, ID_Caja, ID_TipoGastos, ID_SubTipoGastos, Desc_SubTipo, ID_DetalleGastos, Descripcion, Importe, Autorizado, Fecha_Autorizado, Usuario) " +
                     $"VALUES('{Fecha:MM/dd/yy}', {caja.Id}, {TG.Id_Tipo}, {Id_SubTipoGastos}, '{Desc_SubTipo}', {Id_DetalleGastos}, '{Descripcion}', " +
-                    $"{Importe.ToString().Replace(",", ".")}, {(Autorizado ? "1" : "0")}, '{Fecha_Autorizado:MM/dd/yy HH:mm}')", sql);
+                    $"{Importe.ToString().Replace(",", ".")}, {(Autorizado ? "1" : "0")}, '{Fecha_Autorizado:MM/dd/yy HH:mm}', {Usuario.ID})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -412,7 +412,7 @@
                 dg.Id_Tipo = TG.Id_Tipo;
                 dg.ID_Detalle = Id_DetalleGastos;
                 s = dg.Nombre;
-                Desc_Detalle = s;
+                Descripcion = s;
             }
             return s;
         }
