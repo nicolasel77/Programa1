@@ -80,6 +80,9 @@
             }
         }
 
+        private A_Rendir a_Rendir { get; set; } = new A_Rendir();
+
+
         public void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -105,6 +108,15 @@
                 else
                 {
                     ID = n2;
+
+                    //HORRIBLE.
+                    if (caja.Id == 12)
+                    {
+                        if (caja.nombre_ARendir.ID == 0) { caja.Seleccionar_Nombre(); }
+                        a_Rendir.ID_Entrada = ID;
+                        a_Rendir.ID_NARendir = caja.nombre_ARendir.ID;
+                        a_Rendir.Agregar();
+                    }
                 }
 
             }
@@ -132,6 +144,15 @@
                 command.Connection = sql;                
 
                 d = command.ExecuteNonQuery();
+
+                //HORRIBLE.
+                if (caja.Id == 12)
+                {
+                    if (caja.nombre_ARendir.ID == 0) { caja.Seleccionar_Nombre(); }
+                    a_Rendir.ID_Entrada = ID;
+                    a_Rendir.ID_NARendir = caja.nombre_ARendir.ID;
+                    a_Rendir.Borrar_Entrada();
+                }
 
                 ID = 0;
 

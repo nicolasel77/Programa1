@@ -4,13 +4,12 @@
     using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
 
     class Ofertas
     {
         public Ofertas()
-        {            
+        {
         }
 
         public Ofertas(int id, DateTime fecha, Productos prod, string desc, Sucursales.Sucursales sucursal, Single costo_or, Single costo_of, float kilos)

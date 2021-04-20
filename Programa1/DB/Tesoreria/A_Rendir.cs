@@ -15,6 +15,7 @@
         public int ID_Salida { get; set; }
         public int ID_NARendir { get; set; }
 
+        #region " Devolver Datos "
         public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
@@ -24,7 +25,30 @@
 
             try
             {
-                string Cadena = $"SELECT * FROM A_Rendir {filtro} ORDER BY Id";
+                string Cadena = $"SELECT * FROM vw_ARendirSalidas {filtro} ORDER BY Id";
+
+                SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        } 
+
+        public DataTable Saldos(DateTime fecha)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+                       
+            try
+            {
+                string Cadena = $"SELECT * FROM vw_ARendirSalidas '{fecha:MM/dd/yyy}' ORDER BY Id";
 
                 SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -39,6 +63,8 @@
 
             return dt;
         }
+        #endregion
+
 
 
         #region " Editar Datos "

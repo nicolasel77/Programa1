@@ -1,5 +1,6 @@
 ﻿namespace Programa1.DB.Tesoreria
 {
+    using Programa1.Carga.Tesoreria;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
@@ -17,6 +18,7 @@
             Nombre = nombre;
         }
 
+
         [Required]
         [Key]
         public int Id { get; set; }
@@ -25,6 +27,7 @@
         [Required]
         public string Nombre { get; set; }
 
+        public Nombres_ARendir nombre_ARendir { get; set; } = new Nombres_ARendir();
 
         public DataTable Datos(string Filtro = "")
         {
@@ -75,6 +78,14 @@
             return dt;
         }
 
+
+        public void Seleccionar_Nombre()
+        {
+            frmNARendir fr = new frmNARendir();
+            fr.ShowDialog();
+
+            nombre_ARendir = fr.nombres_ARendir;
+        }
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);

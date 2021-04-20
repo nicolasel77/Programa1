@@ -205,6 +205,7 @@ namespace Programa1.Carga.Tesoreria
                 cGastos.Id_DetalleGastos = h.Codigo_Seleccionado(fr.lstARendir.Text); 
                 cGastos.Descripcion = h.Nombre_Seleccionado(fr.lstARendir.Text); ;
                 cGastos.Importe = Convert.ToDouble(fr.txtImporte.Text);
+                if (cGastos.caja.Id==12) { cGastos.caja.nombre_ARendir.ID = cGastos.Id_DetalleGastos;  }
 
                 cGastos.Agregar();
 
@@ -215,6 +216,7 @@ namespace Programa1.Carga.Tesoreria
                 cEntradas.Id_SubTipoEntrada = h.Codigo_Seleccionado(fr.lstDesde.Text);
                 cEntradas.Descripcion = "Desde la caja: " + h.Nombre_Seleccionado(fr.lstDesde.Text); ;
                 cEntradas.Importe = Convert.ToDouble(fr.txtImporte.Text);
+                if (cGastos.caja.Id == 12) { cEntradas.caja.nombre_ARendir.ID = cGastos.Id_DetalleGastos; }
 
                 cEntradas.Agregar();
 
@@ -237,12 +239,23 @@ namespace Programa1.Carga.Tesoreria
 
 
             Totales();
-
-            grdCajas.MostrarDatos(CD.Saldos(mntFecha.SelectionStart.Date), true, 2);
-            grdCajas.Columnas[2].Style.Format = "N1";
-            grdCajas.AutosizeAll();
-
+            Cargar_Cajas();
             this.Cursor = Cursors.Default;
+        }
+
+        private void Cargar_Cajas()
+        {
+            if (rdCajas.Checked == true)
+            {
+                grdCajas.MostrarDatos(CD.Saldos(mntFecha.SelectionStart.Date), true, 2);
+                grdCajas.Columnas[2].Style.Format = "N1";
+            }
+            else
+            {
+                grdCajas.MostrarDatos(CD.Saldos_ARendir(mntFecha.SelectionStart.Date), true, 2);
+                grdCajas.Columnas[2].Style.Format = "N1";
+            }
+            grdCajas.AutosizeAll();
         }
 
         private void Formato_Entradas()
@@ -560,6 +573,7 @@ namespace Programa1.Carga.Tesoreria
                         {
                             grdSalidas.set_Texto(f, c, a);
                             grdSalidas.set_Texto(f, c + 1, cGastos.caja.Nombre);
+
                             grdSalidas.ActivarCelda(f, e_Tipo);
 
                         }
@@ -649,6 +663,7 @@ namespace Programa1.Carga.Tesoreria
                                 cGastos.Agregar();
                                 grdSalidas.set_Texto(f, s_Id, Convert.ToInt32(cGastos.ID));
                                 grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
+                                                              
 
                                 grdSalidas.AgregarFila();
 
@@ -879,8 +894,12 @@ namespace Programa1.Carga.Tesoreria
         }
 
 
+
         #endregion
 
-
+        private void rdCajas_CheckedChanged(object sender, EventArgs e)
+        {
+            Cargar_Cajas();
+        }
     }
 }

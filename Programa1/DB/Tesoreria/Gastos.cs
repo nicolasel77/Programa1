@@ -28,7 +28,7 @@
         public int Id_SubTipoGastos { get; set; }
         public int Id_DetalleGastos { get; set; }
         public string Desc_SubTipo { get; set; }
-                
+
         [MaxLength(500, ErrorMessage = "El campo Descripción solo puede tener 500 caracteres.")]
         public string Descripcion { get; set; }
         public Double Importe { get; set; }
@@ -37,6 +37,7 @@
         public DateTime Fecha_Autorizado { get; set; }
         public Usuarios Usuario { get; set; } = new Usuarios();
 
+        private A_Rendir a_Rendir { get; set; } = new A_Rendir();
 
         #region " Editrar Datos "
         public void Actualizar()
@@ -91,6 +92,15 @@
                 else
                 {
                     ID = n2;
+
+                    //HORRIBLE.
+                    if (caja.Id == 12)
+                    {
+                        if (caja.nombre_ARendir.ID == 0) { caja.Seleccionar_Nombre(); }
+                        a_Rendir.ID_Salida = ID;
+                        a_Rendir.ID_NARendir = caja.nombre_ARendir.ID;
+                        a_Rendir.Agregar();
+                    }
                 }
 
             }
@@ -111,7 +121,16 @@
                 command.Connection = sql;
                 sql.Open();
 
-                var d = command.ExecuteNonQuery();                
+                var d = command.ExecuteNonQuery();
+
+                //HORRIBLE.
+                if (caja.Id == 12)
+                {
+                    if (caja.nombre_ARendir.ID == 0) { caja.Seleccionar_Nombre(); }
+                    a_Rendir.ID_Salida = ID;
+                    a_Rendir.ID_NARendir = caja.nombre_ARendir.ID;
+                    a_Rendir.Borrar_Salida();
+                }
 
                 ID = 0;
 
