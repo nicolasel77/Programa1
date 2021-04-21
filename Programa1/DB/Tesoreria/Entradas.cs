@@ -34,7 +34,7 @@
         /// Tipo Entradas
         /// </summary>
         public Tipos_Entradas TE { get; set; } = new Tipos_Entradas();
-        public int Id_SubTipoEntrada { get; set; }        
+        public int Id_SubTipoEntrada { get; set; }
 
         [MaxLength(500, ErrorMessage = "El campo Descripción solo puede tener 500 caracteres.")]
         public string Descripcion { get; set; }
@@ -51,7 +51,7 @@
                 TE.Id_Tipo = Convert.ToInt32(dt.Rows[0]["ID_TipoEntrada"]);
                 Id_SubTipoEntrada = Convert.ToInt32(dt.Rows[0]["ID_SubTipoEntrada"]);
                 Descripcion = Convert.ToString(dt.Rows[0]["Descripcion"]);
-                Importe = Convert.ToDouble(dt.Rows[0]["Importe"]); 
+                Importe = Convert.ToDouble(dt.Rows[0]["Importe"]);
             }
         }
 
@@ -107,16 +107,7 @@
                 }
                 else
                 {
-                    ID = n2;
-
-                    //HORRIBLE.
-                    if (caja.Id == 12)
-                    {
-                        if (caja.nombre_ARendir.ID == 0) { caja.Seleccionar_Nombre(); }
-                        a_Rendir.ID_Entrada = ID;
-                        a_Rendir.ID_NARendir = caja.nombre_ARendir.ID;
-                        a_Rendir.Agregar();
-                    }
+                    ID = n2;                   
                 }
 
             }
@@ -141,18 +132,9 @@
 
                 command = new SqlCommand($"DELETE FROM Fecha_Entregas WHERE ID_Entradas={ID}", sql);
                 command.CommandType = CommandType.Text;
-                command.Connection = sql;                
+                command.Connection = sql;
 
                 d = command.ExecuteNonQuery();
-
-                //HORRIBLE.
-                if (caja.Id == 12)
-                {
-                    if (caja.nombre_ARendir.ID == 0) { caja.Seleccionar_Nombre(); }
-                    a_Rendir.ID_Entrada = ID;
-                    a_Rendir.ID_NARendir = caja.nombre_ARendir.ID;
-                    a_Rendir.Borrar_Entrada();
-                }
 
                 ID = 0;
 

@@ -78,7 +78,7 @@
         }
         public DataTable Saldos_ARendir(DateTime fecha)
         {
-            return Cajas.nombre_ARendir.Saldos(fecha);
+            return Cajas.a_Rendir.Saldos(fecha);
         }
 
         public DataTable Datos()

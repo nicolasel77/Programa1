@@ -395,6 +395,18 @@
     <Compile Include="Carga\Tesoreria\frmNuevaFecha.Designer.cs">
       <DependentUpon>frmNuevaFecha.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmResumenARendir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmResumenARendir.Designer.cs">
+      <DependentUpon>frmResumenARendir.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmResumenTransferencias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmResumenTransferencias.Designer.cs">
+      <DependentUpon>frmResumenTransferencias.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmResumen_Gastos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -717,6 +729,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmNuevaFecha.resx">
       <DependentUpon>frmNuevaFecha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmResumenARendir.resx">
+      <DependentUpon>frmResumenARendir.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmResumenTransferencias.resx">
+      <DependentUpon>frmResumenTransferencias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmResumen_Gastos.resx">
       <DependentUpon>frmResumen_Gastos.cs</DependentUpon>

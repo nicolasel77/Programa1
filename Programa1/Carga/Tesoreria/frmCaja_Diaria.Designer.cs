@@ -49,6 +49,8 @@
             this.lblTotalGrillaGastos = new MaterialSkin.Controls.MaterialLabel();
             this.grdSalidas = new Grilla2.SpeedGrilla();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.rdARendir = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdCajas = new MaterialSkin.Controls.MaterialRadioButton();
             this.lblUltimo = new MaterialSkin.Controls.MaterialLabel();
             this.grdCajas = new Grilla2.SpeedGrilla();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -73,9 +75,10 @@
             this.cmdCerrar_Fecha = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.mntFecha = new System.Windows.Forms.MonthCalendar();
-            this.rdCajas = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdARendir = new MaterialSkin.Controls.MaterialRadioButton();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.verTransferenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmdTransferencia = new Programa1.Controles.cBoton();
+            this.aRendirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splPrincipal)).BeginInit();
             this.splPrincipal.Panel1.SuspendLayout();
             this.splPrincipal.Panel2.SuspendLayout();
@@ -87,6 +90,7 @@
             this.mnuEntradas.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splPrincipal
@@ -198,7 +202,7 @@
             this.grdEntradas.MenuActivado = false;
             this.grdEntradas.Name = "grdEntradas";
             this.grdEntradas.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdEntradas.PintarFilaSel = true;
+            this.grdEntradas.PintarFilaSel = false;
             this.grdEntradas.Redraw = true;
             this.grdEntradas.Row = 0;
             this.grdEntradas.Rows = 50;
@@ -417,7 +421,7 @@
             this.grdSalidas.MenuActivado = false;
             this.grdSalidas.Name = "grdSalidas";
             this.grdSalidas.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdSalidas.PintarFilaSel = true;
+            this.grdSalidas.PintarFilaSel = false;
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 50;
@@ -462,6 +466,43 @@
             this.panel1.Size = new System.Drawing.Size(261, 507);
             this.panel1.TabIndex = 4;
             // 
+            // rdARendir
+            // 
+            this.rdARendir.AutoSize = true;
+            this.rdARendir.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rdARendir.Depth = 0;
+            this.rdARendir.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdARendir.Location = new System.Drawing.Point(72, 162);
+            this.rdARendir.Margin = new System.Windows.Forms.Padding(0);
+            this.rdARendir.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdARendir.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdARendir.Name = "rdARendir";
+            this.rdARendir.Ripple = true;
+            this.rdARendir.Size = new System.Drawing.Size(81, 30);
+            this.rdARendir.TabIndex = 11;
+            this.rdARendir.Text = "A Rendir";
+            this.rdARendir.UseVisualStyleBackColor = true;
+            // 
+            // rdCajas
+            // 
+            this.rdCajas.AutoSize = true;
+            this.rdCajas.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rdCajas.Checked = true;
+            this.rdCajas.Depth = 0;
+            this.rdCajas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdCajas.Location = new System.Drawing.Point(0, 162);
+            this.rdCajas.Margin = new System.Windows.Forms.Padding(0);
+            this.rdCajas.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdCajas.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdCajas.Name = "rdCajas";
+            this.rdCajas.Ripple = true;
+            this.rdCajas.Size = new System.Drawing.Size(63, 30);
+            this.rdCajas.TabIndex = 10;
+            this.rdCajas.TabStop = true;
+            this.rdCajas.Text = "Cajas";
+            this.rdCajas.UseVisualStyleBackColor = true;
+            this.rdCajas.CheckedChanged += new System.EventHandler(this.rdCajas_CheckedChanged);
+            // 
             // lblUltimo
             // 
             this.lblUltimo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -492,7 +533,7 @@
             this.grdCajas.Cols = 10;
             this.grdCajas.DataMember = "";
             this.grdCajas.DataSource = null;
-            this.grdCajas.EnableEdicion = true;
+            this.grdCajas.EnableEdicion = false;
             this.grdCajas.Encabezado = "";
             this.grdCajas.fColor = System.Drawing.SystemColors.Control;
             this.grdCajas.FixCols = 0;
@@ -750,42 +791,22 @@
             this.mntFecha.TabIndex = 0;
             this.mntFecha.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.mntFecha_DateSelected);
             // 
-            // rdCajas
+            // menuStrip1
             // 
-            this.rdCajas.AutoSize = true;
-            this.rdCajas.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rdCajas.Checked = true;
-            this.rdCajas.Depth = 0;
-            this.rdCajas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.rdCajas.Location = new System.Drawing.Point(0, 162);
-            this.rdCajas.Margin = new System.Windows.Forms.Padding(0);
-            this.rdCajas.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdCajas.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdCajas.Name = "rdCajas";
-            this.rdCajas.Ripple = true;
-            this.rdCajas.Size = new System.Drawing.Size(63, 30);
-            this.rdCajas.TabIndex = 10;
-            this.rdCajas.TabStop = true;
-            this.rdCajas.Text = "Cajas";
-            this.rdCajas.UseVisualStyleBackColor = true;
-            this.rdCajas.CheckedChanged += new System.EventHandler(this.rdCajas_CheckedChanged);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verTransferenciasToolStripMenuItem,
+            this.aRendirToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1517, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // rdARendir
+            // verTransferenciasToolStripMenuItem
             // 
-            this.rdARendir.AutoSize = true;
-            this.rdARendir.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rdARendir.Depth = 0;
-            this.rdARendir.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.rdARendir.Location = new System.Drawing.Point(72, 162);
-            this.rdARendir.Margin = new System.Windows.Forms.Padding(0);
-            this.rdARendir.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdARendir.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdARendir.Name = "rdARendir";
-            this.rdARendir.Ripple = true;
-            this.rdARendir.Size = new System.Drawing.Size(81, 30);
-            this.rdARendir.TabIndex = 11;
-            this.rdARendir.Text = "A Rendir";
-            this.rdARendir.UseVisualStyleBackColor = true;
+            this.verTransferenciasToolStripMenuItem.Name = "verTransferenciasToolStripMenuItem";
+            this.verTransferenciasToolStripMenuItem.Size = new System.Drawing.Size(112, 20);
+            this.verTransferenciasToolStripMenuItem.Text = "Ver Transferencias";
             // 
             // cmdTransferencia
             // 
@@ -798,12 +819,21 @@
             this.cmdTransferencia.Texto = "Transferencia";
             this.cmdTransferencia.Click += new System.EventHandler(this.cmdTransferencia_Click);
             // 
+            // aRendirToolStripMenuItem
+            // 
+            this.aRendirToolStripMenuItem.Name = "aRendirToolStripMenuItem";
+            this.aRendirToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.aRendirToolStripMenuItem.Text = "A Rendir";
+            this.aRendirToolStripMenuItem.Click += new System.EventHandler(this.aRendirToolStripMenuItem_Click);
+            // 
             // frmCaja_Diaria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1517, 719);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.splPrincipal);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmCaja_Diaria";
             this.Text = "Caja Diaria";
             this.Load += new System.EventHandler(this.frmCaja_Diaria_Load);
@@ -821,7 +851,10 @@
             this.panel7.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -873,5 +906,8 @@
         private Controles.cBoton cmdTransferencia;
         private MaterialSkin.Controls.MaterialRadioButton rdARendir;
         private MaterialSkin.Controls.MaterialRadioButton rdCajas;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem verTransferenciasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aRendirToolStripMenuItem;
     }
 }

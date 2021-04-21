@@ -94,6 +94,7 @@
                     ID = n2;
 
                     //HORRIBLE.
+                    //SE AGREGA EL DETALLE A RENDIR SOLO SI ESTA CARGANDO UN GASTO DE LA CAJA 12
                     if (caja.Id == 12)
                     {
                         if (caja.nombre_ARendir.ID == 0) { caja.Seleccionar_Nombre(); }
@@ -126,7 +127,6 @@
                 //HORRIBLE.
                 if (caja.Id == 12)
                 {
-                    if (caja.nombre_ARendir.ID == 0) { caja.Seleccionar_Nombre(); }
                     a_Rendir.ID_Salida = ID;
                     a_Rendir.ID_NARendir = caja.nombre_ARendir.ID;
                     a_Rendir.Borrar_Salida();

@@ -77,7 +77,7 @@ namespace Programa1.Carga.Tesoreria
             this.lstDesde.ItemHeight = 20;
             this.lstDesde.Location = new System.Drawing.Point(12, 31);
             this.lstDesde.Name = "lstDesde";
-            this.lstDesde.Size = new System.Drawing.Size(162, 380);
+            this.lstDesde.Size = new System.Drawing.Size(162, 360);
             this.lstDesde.TabIndex = 0;
             // 
             // lstHacia
@@ -90,7 +90,7 @@ namespace Programa1.Carga.Tesoreria
             this.lstHacia.ItemHeight = 20;
             this.lstHacia.Location = new System.Drawing.Point(195, 29);
             this.lstHacia.Name = "lstHacia";
-            this.lstHacia.Size = new System.Drawing.Size(162, 380);
+            this.lstHacia.Size = new System.Drawing.Size(162, 360);
             this.lstHacia.TabIndex = 1;
             this.lstHacia.SelectedIndexChanged += new System.EventHandler(this.lstHacia_SelectedIndexChanged);
             // 
@@ -98,10 +98,10 @@ namespace Programa1.Carga.Tesoreria
             // 
             this.cmdAcpetar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdAcpetar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.cmdAcpetar.Location = new System.Drawing.Point(378, 422);
+            this.cmdAcpetar.Location = new System.Drawing.Point(378, 411);
             this.cmdAcpetar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.cmdAcpetar.Name = "cmdAcpetar";
-            this.cmdAcpetar.Size = new System.Drawing.Size(76, 16);
+            this.cmdAcpetar.Size = new System.Drawing.Size(76, 27);
             this.cmdAcpetar.TabIndex = 3;
             this.cmdAcpetar.Texto = "Aceptar";
             this.cmdAcpetar.Click += new System.EventHandler(this.cmdAcpetar_Click);
@@ -109,9 +109,9 @@ namespace Programa1.Carga.Tesoreria
             // cmdCancelar
             // 
             this.cmdCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdCancelar.Location = new System.Drawing.Point(464, 422);
+            this.cmdCancelar.Location = new System.Drawing.Point(464, 411);
             this.cmdCancelar.Name = "cmdCancelar";
-            this.cmdCancelar.Size = new System.Drawing.Size(76, 16);
+            this.cmdCancelar.Size = new System.Drawing.Size(76, 27);
             this.cmdCancelar.TabIndex = 4;
             this.cmdCancelar.Texto = "Cancelar";
             this.cmdCancelar.Click += new System.EventHandler(this.cmdCancelar_Click);
@@ -127,6 +127,7 @@ namespace Programa1.Carga.Tesoreria
             this.txtImporte.Size = new System.Drawing.Size(345, 16);
             this.txtImporte.TabIndex = 5;
             this.txtImporte.TextChanged += new System.EventHandler(this.txtImporte_TextChanged);
+            this.txtImporte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtImporte_KeyPress);
             // 
             // lstARendir
             // 
@@ -140,7 +141,7 @@ namespace Programa1.Carga.Tesoreria
             this.lstARendir.ItemHeight = 20;
             this.lstARendir.Location = new System.Drawing.Point(378, 29);
             this.lstARendir.Name = "lstARendir";
-            this.lstARendir.Size = new System.Drawing.Size(162, 380);
+            this.lstARendir.Size = new System.Drawing.Size(162, 360);
             this.lstARendir.TabIndex = 6;
             // 
             // materialLabel3

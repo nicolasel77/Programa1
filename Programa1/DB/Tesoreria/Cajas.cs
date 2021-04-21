@@ -28,6 +28,7 @@
         public string Nombre { get; set; }
 
         public Nombres_ARendir nombre_ARendir { get; set; } = new Nombres_ARendir();
+        public A_Rendir a_Rendir { get; set; } = new A_Rendir();
 
         public DataTable Datos(string Filtro = "")
         {

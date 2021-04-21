@@ -44,29 +44,7 @@
 
             return dt;
         }
-        public DataTable Saldos(DateTime fecha)
-        {
-
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand($"SELECT ID, Nombre, dbo.f_SaldoARendir('{fecha:MM/dd/yy}', ID) AS Saldo  FROM Nombres_ARendir", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
+        
 
         public bool Existe()
         {

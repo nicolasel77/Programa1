@@ -25,30 +25,7 @@
 
             try
             {
-                string Cadena = $"SELECT * FROM vw_ARendirSalidas {filtro} ORDER BY Id";
-
-                SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        } 
-
-        public DataTable Saldos(DateTime fecha)
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-                       
-            try
-            {
-                string Cadena = $"SELECT * FROM vw_ARendirSalidas '{fecha:MM/dd/yyy}' ORDER BY Id";
+                string Cadena = $"SELECT * FROM vw_ARendirSalidas {filtro} ORDER BY Fecha";
 
                 SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -63,6 +40,88 @@
 
             return dt;
         }
+
+        public DataTable Salidas(string filtro)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+            
+            if (ID_NARendir != 0) { filtro = h.Unir(filtro, " ID_DetalleGastos=" + ID_NARendir); }            
+
+            try
+            {
+                string Cadena = $"SELECT Fecha, Importe FROM CD_Gastos WHERE ID_TipoGastos=100 AND ID_SubTipoGastos=12 AND {filtro} ORDER BY Fecha";
+
+                SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        public DataTable Gastos(string filtro = "")
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+
+            if (ID_NARendir != 0) { filtro = h.Unir(filtro, " ID_NARendir=" + ID_NARendir); }
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+
+            try
+            {
+                string Cadena = $"SELECT Fecha, ID_TipoGastos TG, Desc_Tipo Tipo, ID_SubTipoGastos ST, Desc_SubTipo SubTipo, ID_DetalleGastos DT, Descripcion, Importe FROM vw_ARendirGastos {filtro} ORDER BY Fecha";
+
+                SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        public DataTable Saldos(DateTime fecha)
+        {
+
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT ID, Nombre, dbo.f_SaldoARendir('{fecha:MM/dd/yy}', ID) AS Saldo  FROM Nombres_ARendir", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+
         #endregion
 
 
@@ -128,7 +187,7 @@
             {
                 MessageBox.Show(e.Message, "Error");
             }
-        }        
+        }
 
         public void Borrar_Entrada()
         {

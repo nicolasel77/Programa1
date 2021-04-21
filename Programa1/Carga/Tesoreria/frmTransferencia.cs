@@ -87,5 +87,14 @@
                 lstARendir.BackColor = Color.WhiteSmoke;
             }
         }
+
+        private void txtImporte_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                e.Handled = true;
+                cmdAcpetar.cmd.PerformClick();
+            }
+        }
     }
 }

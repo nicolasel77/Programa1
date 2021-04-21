@@ -58,7 +58,7 @@
             this.cajaDiariaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenGastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenEntradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripSeparator();
             this.bancosCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripSeparator();
             this.editarTiposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -317,7 +317,7 @@
             this.cajaDiariaToolStripMenuItem,
             this.resumenGastosToolStripMenuItem,
             this.resumenEntradasToolStripMenuItem,
-            this.toolStripMenuItem10,
+            this.toolStripMenuItem16,
             this.bancosCuentasToolStripMenuItem,
             this.toolStripMenuItem13,
             this.editarTiposToolStripMenuItem,
@@ -346,10 +346,10 @@
             this.resumenEntradasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.resumenEntradasToolStripMenuItem.Text = "Resumen &Entradas";
             // 
-            // toolStripMenuItem10
+            // toolStripMenuItem16
             // 
-            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(180, 6);
+            this.toolStripMenuItem16.Name = "toolStripMenuItem16";
+            this.toolStripMenuItem16.Size = new System.Drawing.Size(180, 6);
             // 
             // bancosCuentasToolStripMenuItem
             // 
@@ -813,7 +813,6 @@
         private System.Windows.Forms.ToolStripMenuItem cajaDiariaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resumenGastosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resumenEntradasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
         private System.Windows.Forms.ToolStripMenuItem bancosCuentasToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem13;
         private System.Windows.Forms.ToolStripMenuItem editarTiposToolStripMenuItem;
@@ -828,6 +827,7 @@
         private System.Windows.Forms.ToolStripMenuItem editarTiposGastosToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem15;
         private System.Windows.Forms.ToolStripMenuItem promediosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem16;
     }
 }
 

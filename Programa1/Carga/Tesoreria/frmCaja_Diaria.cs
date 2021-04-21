@@ -5,11 +5,12 @@ namespace Programa1.Carga.Tesoreria
     using Programa1.DB.Varios;
     using System;
     using System.Data;
+    using System.Drawing;
     using System.Windows.Forms;
 
     public partial class frmCaja_Diaria : Form
     {
-        Usuarios usuario;        
+        Usuarios usuario;
 
         private enum t_Repetir : int
         {
@@ -46,6 +47,7 @@ namespace Programa1.Carga.Tesoreria
         private Byte s_Autorizado;
         private Byte s_Fecha_Autorizado;
         private Byte s_Grupo;
+        private Byte s_Usuario;
 
         #endregion
 
@@ -126,7 +128,7 @@ namespace Programa1.Carga.Tesoreria
             s_Autorizado = Convert.ToByte(grdSalidas.get_ColIndex("Autorizado"));
             s_Fecha_Autorizado = Convert.ToByte(grdSalidas.get_ColIndex("Fecha_Autorizado"));
             s_Grupo = Convert.ToByte(grdSalidas.get_ColIndex("Grupo"));
-
+            s_Usuario = Convert.ToByte(grdSalidas.get_ColIndex("Usuario"));
 
             // 13: Enter
             // 43: +
@@ -195,33 +197,55 @@ namespace Programa1.Carga.Tesoreria
             if (fr.OK == true)
             {
                 Herramientas.Herramientas h = new Herramientas.Herramientas();
+                int cDesde = h.Codigo_Seleccionado(fr.lstDesde.Text);
+                int cHacia = h.Codigo_Seleccionado(fr.lstHacia.Text);
+                int cARendir = h.Codigo_Seleccionado(fr.lstARendir.Text);
 
                 cGastos.ID = 0;
                 cGastos.Fecha = mntFecha.SelectionStart.Date;
-                cGastos.caja.Id = h.Codigo_Seleccionado(fr.lstDesde.Text);
+                cGastos.caja.Id = cDesde;
                 cGastos.TG.Id_Tipo = 100;
-                cGastos.Id_SubTipoGastos = h.Codigo_Seleccionado(fr.lstHacia.Text);
+                cGastos.Id_SubTipoGastos = cHacia;
                 cGastos.Desc_SubTipo = h.Nombre_Seleccionado(fr.lstHacia.Text);
-                cGastos.Id_DetalleGastos = h.Codigo_Seleccionado(fr.lstARendir.Text); 
-                cGastos.Descripcion = h.Nombre_Seleccionado(fr.lstARendir.Text); ;
                 cGastos.Importe = Convert.ToDouble(fr.txtImporte.Text);
-                if (cGastos.caja.Id==12) { cGastos.caja.nombre_ARendir.ID = cGastos.Id_DetalleGastos;  }
+                if (cHacia == 12)
+                {
+                    cGastos.Id_DetalleGastos = cARendir;
+                    cGastos.Descripcion = h.Nombre_Seleccionado(fr.lstARendir.Text); ;
+                }
+                else
+                {
+                    cGastos.Id_DetalleGastos = 0;
+                    cGastos.Descripcion = "Transferencia";
+                }
+
 
                 cGastos.Agregar();
 
                 cEntradas.ID = 0;
                 cEntradas.Fecha = mntFecha.SelectionStart.Date;
-                cEntradas.caja.Id = h.Codigo_Seleccionado(fr.lstHacia.Text);
+                cEntradas.caja.Id = cHacia;
                 cEntradas.TE.Id_Tipo = 100;
-                cEntradas.Id_SubTipoEntrada = h.Codigo_Seleccionado(fr.lstDesde.Text);
-                cEntradas.Descripcion = "Desde la caja: " + h.Nombre_Seleccionado(fr.lstDesde.Text); ;
+                cEntradas.Id_SubTipoEntrada = cDesde;
+                cEntradas.Descripcion = "Desde la caja: " + h.Nombre_Seleccionado(fr.lstDesde.Text);
                 cEntradas.Importe = Convert.ToDouble(fr.txtImporte.Text);
-                if (cGastos.caja.Id == 12) { cEntradas.caja.nombre_ARendir.ID = cGastos.Id_DetalleGastos; }
 
                 cEntradas.Agregar();
 
                 Cargar_Datos();
             }
+        }
+
+        private void rdCajas_CheckedChanged(object sender, EventArgs e)
+        {
+            Cargar_Cajas();
+        }
+
+        private void aRendirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmResumenARendir fr = new frmResumenARendir();
+            fr.ShowDialog();
+
         }
         #endregion
 
@@ -294,6 +318,7 @@ namespace Programa1.Carga.Tesoreria
             grdSalidas.set_ColW(s_Autorizado, 50);
             grdSalidas.set_ColW(s_Fecha_Autorizado, 90);
             grdSalidas.set_ColW(s_Grupo, 0);
+            grdSalidas.set_ColW(s_Usuario, 0);
 
             grdSalidas.set_Texto(0, s_Tipo, "Tipo");
             grdSalidas.set_Texto(0, s_SubTipo, "SubTipo");
@@ -303,6 +328,21 @@ namespace Programa1.Carga.Tesoreria
 
             grdSalidas.Columnas[s_Importe].Style.Format = "N2";
             grdSalidas.Columnas[s_Fecha_Autorizado].Style.Format = "dd/MM/yy HH:mm";
+
+            C1.Win.C1FlexGrid.CellStyle cellStyle = grdSalidas.Styles.Add("Otro_User");
+            cellStyle.BackColor = Color.MistyRose;
+
+            for (int i = 1; i <= grdSalidas.Rows - 2; i++)
+            {
+                if (Convert.ToInt32(grdSalidas.get_Texto(i, s_Usuario)) != usuario.ID)
+                {
+                    grdSalidas.Filas[i].Style = cellStyle;
+                }
+                else
+                {
+                    grdSalidas.Filas[i].Style = null;
+                }
+            }
         }
 
         /// <summary>
@@ -574,6 +614,9 @@ namespace Programa1.Carga.Tesoreria
                             grdSalidas.set_Texto(f, c, a);
                             grdSalidas.set_Texto(f, c + 1, cGastos.caja.Nombre);
 
+                            //HORRIBLE
+                            if (cGastos.caja.Id == 12) { cGastos.caja.Seleccionar_Nombre(); }
+
                             grdSalidas.ActivarCelda(f, e_Tipo);
 
                         }
@@ -663,7 +706,7 @@ namespace Programa1.Carga.Tesoreria
                                 cGastos.Agregar();
                                 grdSalidas.set_Texto(f, s_Id, Convert.ToInt32(cGastos.ID));
                                 grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
-                                                              
+
 
                                 grdSalidas.AgregarFila();
 
@@ -895,11 +938,9 @@ namespace Programa1.Carga.Tesoreria
 
 
 
+
         #endregion
 
-        private void rdCajas_CheckedChanged(object sender, EventArgs e)
-        {
-            Cargar_Cajas();
-        }
+       
     }
 }
