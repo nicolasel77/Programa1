@@ -395,6 +395,12 @@
     <Compile Include="Carga\Tesoreria\frmNuevaFecha.Designer.cs">
       <DependentUpon>frmNuevaFecha.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmPagos_Autorizados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmPagos_Autorizados.Designer.cs">
+      <DependentUpon>frmPagos_Autorizados.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmResumenARendir.cs">
       <SubType>Form</SubType>
     </Compile>
