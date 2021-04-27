@@ -2,7 +2,7 @@
 {
     using System;
     using System.Data;
-    using System.Data.Odbc;
+    using System.Data.SqlClient;
     using System.Windows.Forms;
 
     public class c_Base
@@ -15,11 +15,11 @@
         #region " Editar Datos "
         public void Actualizar()
         {
-            var cnn = new OdbcConnection(Kiosko.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                OdbcCommand command = new OdbcCommand(string.Format("UPDATE {2} SET Nombre='{0}' WHERE Id={1}", Nombre, ID, Tabla), cnn);
+                SqlCommand command = new SqlCommand(string.Format("UPDATE {2} SET Nombre='{0}' WHERE Id={1}", Nombre, ID, Tabla), cnn);
                 command.CommandType = CommandType.Text;
                 command.Connection = cnn;
                 cnn.Open();
@@ -36,11 +36,11 @@
 
         public void Agregar()
         {
-            var cnn = new OdbcConnection(Kiosko.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                OdbcCommand cmd = new OdbcCommand($"INSERT INTO {Tabla} (Id, Nombre) VALUES({ID}, '{Nombre}')", cnn);
+                SqlCommand cmd = new SqlCommand($"INSERT INTO {Tabla} (Id, Nombre) VALUES({ID}, '{Nombre}')", cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -57,11 +57,11 @@
 
         public void Borrar()
         {
-            var cnn = new OdbcConnection(Kiosko.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                OdbcCommand cmd = new OdbcCommand(string.Format("DELETE FROM {1} WHERE Id={0}", ID, Tabla), cnn);
+                SqlCommand cmd = new SqlCommand(string.Format("DELETE FROM {1} WHERE Id={0}", ID, Tabla), cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -85,7 +85,7 @@
         public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
-            var cnn = new OdbcConnection(Kiosko.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             if (filtro.Length > 0)
             {
@@ -96,10 +96,10 @@
             {
                 string Cadena = $"SELECT Id, Nombre FROM {Tabla} {filtro} ORDER BY Id";
 
-                OdbcCommand cmd = new OdbcCommand(Cadena, cnn);
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
 
-                OdbcDataAdapter daAdapt = new OdbcDataAdapter(cmd);
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
                 daAdapt.Fill(dt);
             }
             catch (Exception)
@@ -113,15 +113,15 @@
         public bool Existe()
         {
 
-            OdbcConnection cnn = new OdbcConnection(Kiosko.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             var dt = new DataTable("Datos");
 
             try
             {
-                OdbcCommand cmd = new OdbcCommand($"SELECT * FROM {Tabla} WHERE Id={ID}", cnn);
+                SqlCommand cmd = new SqlCommand($"SELECT * FROM {Tabla} WHERE Id={ID}", cnn);
                 cmd.CommandType = CommandType.Text;
 
-                OdbcDataAdapter daAdapt = new OdbcDataAdapter(cmd);
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
                 daAdapt.Fill(dt);
 
                 if (dt.Rows.Count == 0)

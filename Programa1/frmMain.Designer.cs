@@ -111,6 +111,7 @@
             this.seberosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pruebaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
+            this.pagosAutorizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -315,6 +316,7 @@
             // 
             this.tesoreríaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cajaDiariaToolStripMenuItem,
+            this.pagosAutorizadosToolStripMenuItem,
             this.resumenGastosToolStripMenuItem,
             this.resumenEntradasToolStripMenuItem,
             this.toolStripMenuItem16,
@@ -723,6 +725,13 @@
             this.tstMenu.ItemAdded += new System.Windows.Forms.ToolStripItemEventHandler(this.tstMenu_ItemAdded);
             this.tstMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tstMenu_ItemClicked);
             // 
+            // pagosAutorizadosToolStripMenuItem
+            // 
+            this.pagosAutorizadosToolStripMenuItem.Name = "pagosAutorizadosToolStripMenuItem";
+            this.pagosAutorizadosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.pagosAutorizadosToolStripMenuItem.Text = "&Pagos Autorizados";
+            this.pagosAutorizadosToolStripMenuItem.Click += new System.EventHandler(this.pagosAutorizadosToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -828,6 +837,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem15;
         private System.Windows.Forms.ToolStripMenuItem promediosToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem16;
+        private System.Windows.Forms.ToolStripMenuItem pagosAutorizadosToolStripMenuItem;
     }
 }
 

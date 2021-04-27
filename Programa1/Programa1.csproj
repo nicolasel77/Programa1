@@ -497,6 +497,7 @@
     <Compile Include="Datos\frmSucursales.Designer.cs">
       <DependentUpon>frmSucursales.cs</DependentUpon>
     </Compile>
+    <Compile Include="DB\c_Base.cs" />
     <Compile Include="DB\Hacienda\Agregados_Hacienda.cs" />
     <Compile Include="DB\Hacienda\Categorias.cs" />
     <Compile Include="DB\Hacienda\Compra_Hacienda.cs" />
@@ -555,6 +556,7 @@
     <Compile Include="DB\Sucursales\Traslados.cs" />
     <Compile Include="DB\Sucursales\Ventas.cs" />
     <Compile Include="DB\Hacienda\TipoStock.cs" />
+    <Compile Include="DB\Varios\Pagos_Autorizados.cs" />
     <Compile Include="DB\Varios\Partidos.cs" />
     <Compile Include="DB\Productos\Productos.cs" />
     <Compile Include="DB\Sucursales\Reintegros.cs" />

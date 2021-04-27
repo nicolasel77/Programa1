@@ -1712,5 +1712,52 @@
             e.Item.BackColor = Color.LightSkyBlue;
         }
 
+        private void pagosAutorizadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPagos_Autorizados")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmPagos_Autorizados");
+                t.Text = "Pagos_Autorizados";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmPagos_Autorizados = new Carga.Tesoreria.frmPagos_Autorizados();
+                frmPagos_Autorizados.MdiParent = this;
+                frmPagos_Autorizados.Disposed += FrmPagos_Autorizados_Disposed;
+                forms.Add(frmPagos_Autorizados);
+                frmPagos_Autorizados.Show();
+                frmPagos_Autorizados.WindowState = FormWindowState.Minimized;
+                frmPagos_Autorizados.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmPagos_Autorizados_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Pagos_Autorizados")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPagos_Autorizados")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }
