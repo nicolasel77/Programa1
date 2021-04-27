@@ -736,6 +736,9 @@
     <EmbeddedResource Include="Carga\Tesoreria\frmNuevaFecha.resx">
       <DependentUpon>frmNuevaFecha.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmPagos_Autorizados.resx">
+      <DependentUpon>frmPagos_Autorizados.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmResumenARendir.resx">
       <DependentUpon>frmResumenARendir.cs</DependentUpon>
     </EmbeddedResource>
