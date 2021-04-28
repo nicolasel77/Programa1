@@ -109,6 +109,28 @@
 
             return dt;
         }
+        public DataTable sp_Datos()
+        {
+            var dt = new DataTable("Datos");
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(Tabla, cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                daAdapt.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
 
         public bool Existe()
         {

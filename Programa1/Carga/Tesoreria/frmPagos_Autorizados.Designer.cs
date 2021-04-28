@@ -32,6 +32,8 @@ namespace Programa1.Carga.Tesoreria
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPagos_Autorizados));
             this.grdAutorizados = new Grilla2.SpeedGrilla();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.cmdRefresh = new Programa1.Controles.cBoton();
+            this.cmdImprimir = new Programa1.Controles.cBoton();
             this.SuspendLayout();
             // 
             // grdAutorizados
@@ -62,11 +64,11 @@ namespace Programa1.Carga.Tesoreria
             this.grdAutorizados.MenuActivado = false;
             this.grdAutorizados.Name = "grdAutorizados";
             this.grdAutorizados.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdAutorizados.PintarFilaSel = true;
+            this.grdAutorizados.PintarFilaSel = false;
             this.grdAutorizados.Redraw = true;
             this.grdAutorizados.Row = 0;
             this.grdAutorizados.Rows = 50;
-            this.grdAutorizados.Size = new System.Drawing.Size(1349, 557);
+            this.grdAutorizados.Size = new System.Drawing.Size(1349, 525);
             this.grdAutorizados.TabIndex = 0;
             // 
             // materialLabel1
@@ -82,11 +84,33 @@ namespace Programa1.Carga.Tesoreria
             this.materialLabel1.TabIndex = 1;
             this.materialLabel1.Text = "Pagos Autorizados";
             // 
+            // cmdRefresh
+            // 
+            this.cmdRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdRefresh.Location = new System.Drawing.Point(1265, 562);
+            this.cmdRefresh.Name = "cmdRefresh";
+            this.cmdRefresh.Size = new System.Drawing.Size(96, 26);
+            this.cmdRefresh.TabIndex = 2;
+            this.cmdRefresh.Texto = "Actualizar";
+            this.cmdRefresh.Click += new System.EventHandler(this.cmdRefresh_Click);
+            // 
+            // cmdImprimir
+            // 
+            this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdImprimir.Location = new System.Drawing.Point(1163, 562);
+            this.cmdImprimir.Name = "cmdImprimir";
+            this.cmdImprimir.Size = new System.Drawing.Size(96, 26);
+            this.cmdImprimir.TabIndex = 2;
+            this.cmdImprimir.Texto = "Imprimir";
+            this.cmdImprimir.Click += new System.EventHandler(this.cmdRefresh_Click);
+            // 
             // frmPagos_Autorizados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1373, 600);
+            this.Controls.Add(this.cmdImprimir);
+            this.Controls.Add(this.cmdRefresh);
             this.Controls.Add(this.grdAutorizados);
             this.Controls.Add(this.materialLabel1);
             this.Name = "frmPagos_Autorizados";
@@ -101,5 +125,7 @@ namespace Programa1.Carga.Tesoreria
 
         private Grilla2.SpeedGrilla grdAutorizados;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private Controles.cBoton cmdRefresh;
+        private Controles.cBoton cmdImprimir;
     }
 }

@@ -5,11 +5,11 @@
 
     class Pagos_Autorizados : c_Base
     {
-        public Pagos_Autorizados() { Tabla = "Productos"; }
+        public Pagos_Autorizados() { Tabla = "sp_PagosAutorizados"; }
 
         public DataTable Datos()
         {
-            return Datos("Ver=1");
+            return sp_Datos();
         }
     }
 }
