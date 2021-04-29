@@ -32,8 +32,9 @@ namespace Programa1.Carga.Tesoreria
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPagos_Autorizados));
             this.grdAutorizados = new Grilla2.SpeedGrilla();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.cmdRefresh = new Programa1.Controles.cBoton();
+            this.lstFiltros = new System.Windows.Forms.ListBox();
             this.cmdImprimir = new Programa1.Controles.cBoton();
+            this.cmdRefresh = new Programa1.Controles.cBoton();
             this.SuspendLayout();
             // 
             // grdAutorizados
@@ -68,47 +69,67 @@ namespace Programa1.Carga.Tesoreria
             this.grdAutorizados.Redraw = true;
             this.grdAutorizados.Row = 0;
             this.grdAutorizados.Rows = 50;
-            this.grdAutorizados.Size = new System.Drawing.Size(1349, 525);
+            this.grdAutorizados.Size = new System.Drawing.Size(1183, 539);
             this.grdAutorizados.TabIndex = 0;
             // 
             // materialLabel1
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(12, 9);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(136, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(134, 18);
             this.materialLabel1.TabIndex = 1;
             this.materialLabel1.Text = "Pagos Autorizados";
             // 
-            // cmdRefresh
+            // lstFiltros
             // 
-            this.cmdRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdRefresh.Location = new System.Drawing.Point(1265, 562);
-            this.cmdRefresh.Name = "cmdRefresh";
-            this.cmdRefresh.Size = new System.Drawing.Size(96, 26);
-            this.cmdRefresh.TabIndex = 2;
-            this.cmdRefresh.Texto = "Actualizar";
-            this.cmdRefresh.Click += new System.EventHandler(this.cmdRefresh_Click);
+            this.lstFiltros.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstFiltros.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstFiltros.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lstFiltros.ForeColor = System.Drawing.Color.DimGray;
+            this.lstFiltros.FormattingEnabled = true;
+            this.lstFiltros.ItemHeight = 20;
+            this.lstFiltros.Items.AddRange(new object[] {
+            "0. Proveedores",
+            "1. P1 Hacienda",
+            "2. P2 Hacienda",
+            "3. Empleados"});
+            this.lstFiltros.Location = new System.Drawing.Point(1201, 31);
+            this.lstFiltros.Name = "lstFiltros";
+            this.lstFiltros.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstFiltros.Size = new System.Drawing.Size(198, 260);
+            this.lstFiltros.TabIndex = 4;
             // 
             // cmdImprimir
             // 
             this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdImprimir.Location = new System.Drawing.Point(1163, 562);
+            this.cmdImprimir.Location = new System.Drawing.Point(1201, 544);
             this.cmdImprimir.Name = "cmdImprimir";
             this.cmdImprimir.Size = new System.Drawing.Size(96, 26);
             this.cmdImprimir.TabIndex = 2;
             this.cmdImprimir.Texto = "Imprimir";
             this.cmdImprimir.Click += new System.EventHandler(this.cmdRefresh_Click);
             // 
+            // cmdRefresh
+            // 
+            this.cmdRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdRefresh.Location = new System.Drawing.Point(1303, 544);
+            this.cmdRefresh.Name = "cmdRefresh";
+            this.cmdRefresh.Size = new System.Drawing.Size(96, 26);
+            this.cmdRefresh.TabIndex = 2;
+            this.cmdRefresh.Texto = "Actualizar";
+            this.cmdRefresh.Click += new System.EventHandler(this.cmdRefresh_Click);
+            // 
             // frmPagos_Autorizados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1373, 600);
+            this.ClientSize = new System.Drawing.Size(1411, 582);
+            this.Controls.Add(this.lstFiltros);
             this.Controls.Add(this.cmdImprimir);
             this.Controls.Add(this.cmdRefresh);
             this.Controls.Add(this.grdAutorizados);
@@ -127,5 +148,6 @@ namespace Programa1.Carga.Tesoreria
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private Controles.cBoton cmdRefresh;
         private Controles.cBoton cmdImprimir;
+        private System.Windows.Forms.ListBox lstFiltros;
     }
 }

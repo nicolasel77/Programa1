@@ -8,6 +8,8 @@
     public class c_Base
     {
         public string Tabla { get; set; }
+        public string Vista { get; set; }
+
         public int ID { get; set; }
         public string Nombre { get; set; }
 
@@ -87,10 +89,7 @@
             var dt = new DataTable("Datos");
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
 
             try
             {
@@ -109,12 +108,44 @@
 
             return dt;
         }
-        public DataTable sp_Datos()
+
+        /// <summary>
+        /// A Diferencia de Datos, devuelve los datos de la Vista.
+        /// </summary>
+        /// <param name="filtro">Filtro</param>
+        /// <param name="Campos">Filtro de campos a devolver</param>
+        /// <param name="Orden">Por defecto es por Id</param>
+        /// <returns>Datatable</returns>
+        public DataTable Datos_Vista(string filtro = "", string Campos = "*", string Orden = "ORDER BY Id")
         {
             var dt = new DataTable("Datos");
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+            if (Orden != "") { if (Orden != "ORDER BY Id") { Orden = " ORDER BY " + Orden; } }
+
+            try
+            {
+                string Cadena = $"SELECT {Campos} FROM {Vista} {filtro} {Orden}";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                daAdapt.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        public DataTable sp_Datos()
+        {
+            var dt = new DataTable("Datos");
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -164,7 +195,26 @@
                 return false;
             }
 
-        } 
+        }
+        #endregion
+
+        #region " Subs "
+        public void Ejecutar_sp(string sp)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            try
+            {
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand(sp, cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteScalar();
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+            }
+
+        }
         #endregion
     }
 }

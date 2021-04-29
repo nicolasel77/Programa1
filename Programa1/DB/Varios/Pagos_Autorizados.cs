@@ -5,11 +5,13 @@
 
     class Pagos_Autorizados : c_Base
     {
-        public Pagos_Autorizados() { Tabla = "sp_PagosAutorizados"; }
+        public Pagos_Autorizados() { Vista = "vw_PagosAutorizados"; }
+        public string filtro = "";
 
         public DataTable Datos()
         {
-            return sp_Datos();
+            Ejecutar_sp("sp_PagosAutorizados");
+            return Datos_Vista(filtro, "*", "Venc");
         }
     }
 }

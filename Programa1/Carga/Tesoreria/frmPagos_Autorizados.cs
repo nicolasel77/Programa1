@@ -8,7 +8,8 @@
     public partial class frmPagos_Autorizados : Form
     {
         C1.Win.C1FlexGrid.CellStyle e_prov;
-        C1.Win.C1FlexGrid.CellStyle e_p1ha;
+        C1.Win.C1FlexGrid.CellStyle e_Hacienda;
+        C1.Win.C1FlexGrid.CellStyle e_HaciendaError;
 
         public frmPagos_Autorizados()
         {
@@ -20,10 +21,12 @@
         private void frmPagos_Autorizados_Load(object sender, EventArgs e)
         {
             e_prov = grdAutorizados.Styles.Add("Prov");
-            e_p1ha = grdAutorizados.Styles.Add("p1hac");
+            e_Hacienda = grdAutorizados.Styles.Add("p1hac");
+            e_HaciendaError = grdAutorizados.Styles.Add("p2hac");
 
             e_prov.BackColor = Color.LightBlue;
-            e_p1ha.BackColor = Color.MistyRose;
+            e_Hacienda.BackColor = Color.LightCyan;
+            e_HaciendaError.BackColor = Color.LightCoral;
 
             Cargar();
         }
@@ -36,9 +39,45 @@
         private void Cargar()
         {
             this.Cursor = Cursors.WaitCursor;
+
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            
+            //Filtros**********
+            string f = h.Codigos_Seleccionados(lstFiltros);
+
+            if (f.Length != 0) { f = $"ID IN {f}"; }
+            Pagos.filtro = f;
+
+            //Datos
             grdAutorizados.MostrarDatos(Pagos.Datos(), true, grdAutorizados.get_ColIndex("Saldo"));
-            // 0  1       2      3     4       5     7       8       9          10       11    12      13    14       15
-            //ID, Origen, Fecha, Plazo, Venc, Dias, ID_N, Nombre, Cant, Descripcion, Kilos, Costo, Total, Pagos, Saldo, Observacion 
+
+            Formato_Grlla();
+
+
+            //Pintar
+            for (int i = 1; i < grdAutorizados.Rows - 1; i++)
+            {
+                short vId = Convert.ToInt16(grdAutorizados.get_Texto(i, 0));
+                short vCorroborar = Convert.ToInt16(grdAutorizados.get_Texto(i, grdAutorizados.get_ColIndex("Corroborar")));
+
+                if (vId == 0) { grdAutorizados.Filas[i].Style = e_prov; }
+
+                if (vId == 1 | vId == 2)
+                {
+                    if (vCorroborar == 1) { grdAutorizados.Filas[i].Style = e_Hacienda; }
+                }
+                else 
+                { 
+                    if (vCorroborar == 2) { grdAutorizados.Filas[i].Style = e_HaciendaError; } 
+                }
+            }
+
+            this.Cursor = Cursors.Default;
+
+        }
+
+        private void Formato_Grlla()
+        {
             grdAutorizados.set_ColW(grdAutorizados.get_ColIndex("ID"), 0);
             grdAutorizados.set_ColW(grdAutorizados.get_ColIndex("Origen"), 80);
             grdAutorizados.set_ColW(grdAutorizados.get_ColIndex("Fecha"), 55);
@@ -55,21 +94,13 @@
             grdAutorizados.set_ColW(grdAutorizados.get_ColIndex("Pagos"), 80);
             grdAutorizados.set_ColW(grdAutorizados.get_ColIndex("Saldo"), 90);
             grdAutorizados.set_ColW(grdAutorizados.get_ColIndex("Observacion"), 200);
+            grdAutorizados.set_ColW(grdAutorizados.get_ColIndex("Corroborar"), 0);
 
-            grdAutorizados.Columnas[grdAutorizados.get_ColIndex("Kilos")].Style.Format = "N";
+            grdAutorizados.Columnas[grdAutorizados.get_ColIndex("Kilos")].Style.Format = "N1";
             grdAutorizados.Columnas[grdAutorizados.get_ColIndex("Costo")].Style.Format = "N1";
             grdAutorizados.Columnas[grdAutorizados.get_ColIndex("Total")].Style.Format = "N1";
             grdAutorizados.Columnas[grdAutorizados.get_ColIndex("Pagos")].Style.Format = "N1";
             grdAutorizados.Columnas[grdAutorizados.get_ColIndex("Saldo")].Style.Format = "N1";
-
-            for (int i = 1; i < grdAutorizados.Rows - 1; i++)
-            {
-                if (Convert.ToInt16(grdAutorizados.get_Texto(i, 0)) == 0) { grdAutorizados.Filas[i].Style = e_prov; }
-                if (Convert.ToInt16(grdAutorizados.get_Texto(i, 0)) == 1) { grdAutorizados.Filas[i].Style = e_p1ha; }
-            }
-
-            this.Cursor = Cursors.Default;
-
         }
     }
 }
