@@ -88,6 +88,46 @@ namespace Programa1.Herramientas
             }
             return a;
         }
+
+        /// <summary>
+        /// Devuelve una cadena con el formato para SQL
+        /// </summary>
+        /// <param name="valor"></param>
+        /// <returns></returns>
+        public string Formato_SQL(object valor)
+        {
+            string s = "";
+            switch (valor.GetType().ToString())
+            {
+                case "System.Int16":
+                case "System.Int32":
+                case "System.Int64":
+                    s = Convert.ToInt64(valor).ToString();
+                    break;
+                case "System.Single":
+                case "System.Double":
+                    s = Convert.ToDouble(valor).ToString();
+                    s = s.Replace(",", ".");
+                    break;
+                case "System.Date":
+                case "System.DateTime":
+                    DateTime d = Convert.ToDateTime(valor);
+                    s = $"'{d:MM/dd/yyyy}'";
+                    break;
+                case "System.bool":
+                case "System.Boolean":
+                    if (Convert.ToBoolean(valor) == true)
+                    {
+                        s = "1";
+                    }
+                    else
+                    {
+                        s = "0";
+                    }
+                    break;
+            }
+            return s;
+        }
         #endregion
 
 

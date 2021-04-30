@@ -56,6 +56,7 @@
             this.proveedoresToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tesoreríaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cajaDiariaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pagosAutorizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenGastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenEntradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripSeparator();
@@ -111,7 +112,6 @@
             this.seberosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pruebaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
-            this.pagosAutorizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -334,6 +334,14 @@
             this.cajaDiariaToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.cajaDiariaToolStripMenuItem.Text = "&Caja diaria";
             this.cajaDiariaToolStripMenuItem.Click += new System.EventHandler(this.cajaDiariaToolStripMenuItem_Click);
+            // 
+            // pagosAutorizadosToolStripMenuItem
+            // 
+            this.pagosAutorizadosToolStripMenuItem.BackColor = System.Drawing.Color.LightBlue;
+            this.pagosAutorizadosToolStripMenuItem.Name = "pagosAutorizadosToolStripMenuItem";
+            this.pagosAutorizadosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.pagosAutorizadosToolStripMenuItem.Text = "&Pagos Autorizados";
+            this.pagosAutorizadosToolStripMenuItem.Click += new System.EventHandler(this.pagosAutorizadosToolStripMenuItem_Click);
             // 
             // resumenGastosToolStripMenuItem
             // 
@@ -724,13 +732,6 @@
             this.tstMenu.Text = "toolStrip1";
             this.tstMenu.ItemAdded += new System.Windows.Forms.ToolStripItemEventHandler(this.tstMenu_ItemAdded);
             this.tstMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tstMenu_ItemClicked);
-            // 
-            // pagosAutorizadosToolStripMenuItem
-            // 
-            this.pagosAutorizadosToolStripMenuItem.Name = "pagosAutorizadosToolStripMenuItem";
-            this.pagosAutorizadosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.pagosAutorizadosToolStripMenuItem.Text = "&Pagos Autorizados";
-            this.pagosAutorizadosToolStripMenuItem.Click += new System.EventHandler(this.pagosAutorizadosToolStripMenuItem_Click);
             // 
             // frmMain
             // 

@@ -1,5 +1,6 @@
 ﻿namespace Kiosko.Clases
 {
+    using Programa1.Herramientas;
     using System;
     using System.Data;
     using System.Data.SqlClient;
@@ -35,7 +36,29 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
+        public void Actualizar(string Campo, object valor)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
+            Herramientas h = new Herramientas();
+            valor = h.Formato_SQL(valor);
+
+            try
+            {
+                SqlCommand command = new SqlCommand(string.Format("UPDATE {0} SET {1}={2} WHERE Id={3}", Tabla, Campo, valor, ID), cnn);
+                command.CommandType = CommandType.Text;
+                command.Connection = cnn;
+                cnn.Open();
+
+                var d = command.ExecuteNonQuery();
+
+                cnn.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
         public void Agregar()
         {
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -56,7 +79,34 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
+        /// <summary>
+        /// Agrega el registro sumando un campo. Ej: SubTipo 
+        /// </summary>
+        /// <param name="Campo">El nombre del Campo que se agrega a Id y Nombre.</param>
+        /// <param name="valor">Valor tipo objet. Se formatea en el mismo procedimiento.</param>
+        public void Agregar(string Campo, object valor)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
+            Herramientas h = new Herramientas();
+            valor = h.Formato_SQL(valor);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(string.Format("INSERT INTO {0} (Id, Nombre, {3}) VALUES({1}, '{2}', {4})", Tabla, ID, Nombre, Campo, valor), cnn);
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = cnn;
+                cnn.Open();
+
+                var d = cmd.ExecuteNonQuery();
+
+                cnn.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
         public void Borrar()
         {
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
