@@ -35,13 +35,13 @@
 
             //Si no hay una sucursal seleccionada se devuelve el primer precio encontrado
             string suc = $"(SELECT TOP 1 Id_Sucursales FROM Precios_Sucursales WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={Producto.Id} ORDER BY Fecha DESC)";
+                    $" AND Id_Productos={Producto.ID} ORDER BY Fecha DESC)";
             if (Sucursal.Id > 0) { suc = Sucursal.Id.ToString(); }
             try
             {
 
                 SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Sucursales  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={Producto.Id} AND ID_Sucursales={suc} ORDER BY Fecha DESC", conexionSql);
+                    $" AND Id_Productos={Producto.ID} AND ID_Sucursales={suc} ORDER BY Fecha DESC", conexionSql);
 
                 conexionSql.Open();
 
@@ -286,7 +286,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Precios_Sucursales " +
-                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Sucursales={Sucursal.Id}, Id_Productos={Producto.Id}, Precio={Precio.ToString().Replace(",", ".")} " +
+                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Sucursales={Sucursal.Id}, Id_Productos={Producto.ID}, Precio={Precio.ToString().Replace(",", ".")} " +
                     $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -309,7 +309,7 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"DELETE FROM Precios_Sucursales WHERE Fecha='{Fecha:MM/dd/yyy}' AND Id_Sucursales={Sucursal.Id} AND Id_Productos={Producto.Id}", sql);
+                    new SqlCommand($"DELETE FROM Precios_Sucursales WHERE Fecha='{Fecha:MM/dd/yyy}' AND Id_Sucursales={Sucursal.Id} AND Id_Productos={Producto.ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -317,7 +317,7 @@
                 var d = command.ExecuteNonQuery();
 
                 command.CommandText = $"INSERT INTO Precios_Sucursales (Fecha, Id_Sucursales, Id_Productos, Precio) " +
-                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.Id}, {Precio.ToString().Replace(",", ".")} )";
+                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.ID}, {Precio.ToString().Replace(",", ".")} )";
 
                 d = command.ExecuteNonQuery();
 

@@ -188,15 +188,15 @@
                     if (cmbProds.SelectedIndex > -1)
                     {
                         Herramientas.Herramientas h = new Herramientas.Herramientas();
-                        Traslados.Producto.Id = h.Codigo_Seleccionado(cmbProds.Text);
+                        Traslados.Producto.ID = h.Codigo_Seleccionado(cmbProds.Text);
 
-                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Productos"), Traslados.Producto.Id);
+                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Productos"), Traslados.Producto.ID);
                         string s = cmbProds.Text;
                         s = s.Substring(s.IndexOf(".") + 1);
                         grdResultado.set_Texto(f, grdResultado.get_ColIndex("Descripcion"), s);
                     }
                 }
-                precios.Producto.Id = Traslados.Producto.Id;
+                precios.Producto.ID = Traslados.Producto.ID;
 
                 if (chDescripcion.Checked)
                 {
@@ -286,7 +286,7 @@
                 Traslados.Fecha = Convert.ToDateTime(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Fecha")));
                 Traslados.sucS.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Suc_Salida")));
                 Traslados.sucE.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Suc_Entrada")));
-                Traslados.Producto.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Productos")));
+                Traslados.Producto.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Productos")));
                 Traslados.Descripcion = Convert.ToString(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Descripcion")));
                 Traslados.CostoS = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Salida")));
                 Traslados.CostoE = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Entrada")));

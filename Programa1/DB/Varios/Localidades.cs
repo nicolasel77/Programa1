@@ -15,7 +15,7 @@
         public Localidades(int id,int partido, string nombre)
         {
             Id = id;
-            Partido.Id = partido;
+            Partido.ID = partido;
             Nombre = nombre;
         }
 
@@ -59,7 +59,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"UPDATE Localidades SET Nombre='{Nombre}', Id_Partido={Partido.Id} WHERE Id={Id}", sql);
+                SqlCommand command = new SqlCommand($"UPDATE Localidades SET Nombre='{Nombre}', Id_Partido={Partido.ID} WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -80,7 +80,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Localidades (Id, Id_Partido, Nombre) VALUES({Id}, {Partido.Id}, '{Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Localidades (Id, Id_Partido, Nombre) VALUES({Id}, {Partido.ID}, '{Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

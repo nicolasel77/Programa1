@@ -1,4 +1,4 @@
-﻿namespace Kiosko.Clases
+﻿namespace Programa1.Clases
 {
     using Programa1.Herramientas;
     using System;
@@ -246,6 +246,40 @@
             }
 
         }
+        public bool Existe(int value)
+        {
+            SqlConnection cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var dt = new DataTable("Datos");
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand($"SELECT * FROM {Tabla} WHERE Id={value}", cnn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                daAdapt.Fill(dt);
+
+                if (dt.Rows.Count == 0)
+                {
+                    ID = 0;
+                    Nombre = "";
+                    return false;
+                }
+                else
+                {
+                    ID = value;
+                    Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+                    return true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+                return false;
+            }
+
+        }
         #endregion
 
         #region " Subs "
@@ -257,6 +291,46 @@
                 cnn.Open();
                 SqlCommand cmd = new SqlCommand(sp, cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteScalar();
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+            }
+
+        }
+        public void Ejecutar_sp(string sp, string nombreParametro, int n)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            try
+            {
+                SqlParameter sqlP = new SqlParameter(nombreParametro, SqlDbType.Int);
+                sqlP.SqlValue = n;
+
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand(sp, cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(sqlP);
+                cmd.ExecuteScalar();
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+            }
+
+        }
+        public void Ejecutar_sp(string sp, string nombreParametro, string n)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            try
+            {
+                SqlParameter sqlP = new SqlParameter(nombreParametro, SqlDbType.Text);
+                sqlP.SqlValue = n;
+
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand(sp, cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(sqlP);
                 cmd.ExecuteScalar();
                 cnn.Close();
             }

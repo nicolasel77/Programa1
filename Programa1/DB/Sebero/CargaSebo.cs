@@ -14,13 +14,13 @@ namespace Programa1.DB
             
         }
 
-        public CargaSebo(int id, DateTime fecha, Productos prod, Sucursales.Sucursales sucu, Seberos sebero, Single costo, Single kilos)
+        public CargaSebo(int id, DateTime fecha, Productos prod, Sucursales.Sucursales sucu, Seberos Sebero, Single costo, Single kilos)
         {
             Id = id;
             Fecha = fecha;
             Producto = prod;
             Sucursal = sucu;
-            Sebero = sebero;
+            Sebero = Sebero;
             Costo = costo;
             Kilos = kilos;
 
@@ -108,7 +108,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE CargaSebo SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={Sucursal.Id}, Id_Seberos={Sebero.Id}, Id_Productos={Producto.Id}, " +
+                        $"Id_Sucursales={Sucursal.Id}, Id_Seberos={Sebero.ID}, Id_Productos={Producto.ID}, " +
                         $"Cost={Costo.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -133,7 +133,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO CargaSebo (Fecha, Id_Sucursales, Id_Seberos, Id_Productos, Costo, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Sebero.Id}, {Producto.Id}, {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Sebero.ID}, {Producto.ID}, {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -225,9 +225,9 @@ namespace Programa1.DB
 
                 Id = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
-                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
-                Sebero.Id = Convert.ToInt32(dr["Id_Seberos"]);
+                Sebero.ID = Convert.ToInt32(dr["Id_Seberos"]);
                 Costo = Convert.ToSingle(dr["Costo_Compra"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
 

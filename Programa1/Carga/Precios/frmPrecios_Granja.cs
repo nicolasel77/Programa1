@@ -144,7 +144,7 @@ namespace Programa1.Carga.Precios
 
                 if (prod != 0)
                 {
-                    precios.Producto.Id = prod;
+                    precios.Producto.ID = prod;
                     precios.Precio = Convert.ToSingle((grd.get_Texto(i, grd.get_ColIndex("Precio"))));
                     precios.Agregar();
                 }

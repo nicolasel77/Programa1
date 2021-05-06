@@ -419,6 +419,12 @@
     <Compile Include="Carga\Tesoreria\frmResumen_Gastos.Designer.cs">
       <DependentUpon>frmResumen_Gastos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmSeleccionar_PagosAutorizados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmSeleccionar_PagosAutorizados.Designer.cs">
+      <DependentUpon>frmSeleccionar_PagosAutorizados.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmTipos_Entradas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -530,6 +536,7 @@
     <Compile Include="DB\Tesoreria\Tipo_CuentasBancos.cs" />
     <Compile Include="DB\Tesoreria\Tipo_Entradas.cs" />
     <Compile Include="DB\Tesoreria\Tipo_Gastos.cs" />
+    <Compile Include="DB\Tesoreria\Tipo_PagoAutorizado.cs" />
     <Compile Include="DB\Varios\Camiones.cs" />
     <Compile Include="DB\Varios\Datos_Genericos.cs" />
     <Compile Include="DB\Varios\Empresas.cs" />
@@ -749,6 +756,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmResumen_Gastos.resx">
       <DependentUpon>frmResumen_Gastos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmSeleccionar_PagosAutorizados.resx">
+      <DependentUpon>frmSeleccionar_PagosAutorizados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmTipos_Entradas.resx">
       <DependentUpon>frmTipos_Entradas.cs</DependentUpon>

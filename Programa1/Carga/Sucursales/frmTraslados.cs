@@ -282,7 +282,7 @@ namespace Programa1.Carga
                     break;
                 case 6:
                     //ID_Productos
-                    Traslados.Producto.Id = Convert.ToInt32(a);
+                    Traslados.Producto.ID = Convert.ToInt32(a);
                     if (Traslados.Producto.Existe() == true)
                     {
                         Traslados.precios.Producto = Traslados.Producto;
@@ -398,7 +398,7 @@ namespace Programa1.Carga
 
                         Traslados.Descripcion = Traslados.Producto.Nombre;
 
-                        grdTraslados.set_Texto(grdTraslados.Row, c_IdProd, Traslados.Producto.Id);
+                        grdTraslados.set_Texto(grdTraslados.Row, c_IdProd, Traslados.Producto.ID);
                         grdTraslados.set_Texto(grdTraslados.Row, c_Descripcion, Traslados.Descripcion);
 
                         Traslados.precios.Sucursal = Traslados.sucS;

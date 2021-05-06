@@ -261,7 +261,7 @@
                     break;
                 case 5:
                     //ID_Productos
-                    Compras.Producto.Id = Convert.ToInt32(a);
+                    Compras.Producto.ID = Convert.ToInt32(a);
                     if (Compras.Producto.Existe() == true)
                     {
                         Compras.precios.Producto = Compras.Producto;
@@ -329,7 +329,7 @@
 
                         Compras.Descripcion = Compras.Producto.Nombre;
 
-                        grdCompras.set_Texto(f + 1, c_IdProd, Compras.Producto.Id);
+                        grdCompras.set_Texto(f + 1, c_IdProd, Compras.Producto.ID);
                         grdCompras.set_Texto(f + 1, c_Descripcion, Compras.Descripcion);
 
                         Compras.Costo = Compras.precios.Buscar();
@@ -373,7 +373,7 @@
 
                         Compras.Descripcion = Compras.Producto.Nombre;
 
-                        grdCompras.set_Texto(grdCompras.Row, c_IdProd, Compras.Producto.Id);
+                        grdCompras.set_Texto(grdCompras.Row, c_IdProd, Compras.Producto.ID);
                         grdCompras.set_Texto(grdCompras.Row, c_Descripcion, Compras.Descripcion);
 
                         Compras.Costo = Compras.precios.Buscar();

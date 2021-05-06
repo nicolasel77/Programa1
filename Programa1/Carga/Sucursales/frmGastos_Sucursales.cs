@@ -218,7 +218,7 @@
                     break;
                 case 4:
                     //Id_Tipo
-                    Gastos_Sucursales.Tipo.Id = Convert.ToInt32(a);
+                    Gastos_Sucursales.Tipo.ID = Convert.ToInt32(a);
                     if (Gastos_Sucursales.Tipo.Existe() == true)
                     {
                         Gastos_Sucursales.Descripcion = Gastos_Sucursales.Tipo.Nombre;

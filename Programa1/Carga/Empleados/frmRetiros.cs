@@ -156,7 +156,7 @@
             if (c == c_Sueldo)
             {
                 sueldos.Sueldo = Convert.ToSingle(a);
-                sueldos.Tipo.Id = 1;
+                sueldos.Tipo.ID = 1;
                 sueldos.Actualizar();
 
                 grdRetiros.set_Texto(f, c, a);
@@ -167,7 +167,7 @@
             if (c == c_Adelanto)
             {
                 sueldos.Sueldo = Convert.ToSingle(a);
-                sueldos.Tipo.Id = 2;
+                sueldos.Tipo.ID = 2;
                 sueldos.Actualizar();
 
                 grdRetiros.set_Texto(f, c, a);
@@ -179,7 +179,7 @@
             {
                 retiros.Fecha = v_Mes.AddDays(6);
                 retiros.Importe = Convert.ToSingle(a);
-                retiros.Tipo.Id = 100;
+                retiros.Tipo.ID = 100;
                 retiros.Borrar();
                 retiros.Actualizar();
                 a = retiros.Total_Adelantos();
@@ -192,7 +192,7 @@
             {
                 retiros.Fecha = v_Mes.AddDays(13);
                 retiros.Importe = Convert.ToSingle(a);
-                retiros.Tipo.Id = 100;
+                retiros.Tipo.ID = 100;
                 retiros.Borrar();
                 retiros.Actualizar();
                 a = retiros.Total_Adelantos();
@@ -205,7 +205,7 @@
             {
                 retiros.Fecha = v_Mes.AddDays(20);
                 retiros.Importe = Convert.ToSingle(a);
-                retiros.Tipo.Id = 100;
+                retiros.Tipo.ID = 100;
                 retiros.Borrar();
                 retiros.Actualizar();
                 a = retiros.Total_Adelantos();
@@ -218,7 +218,7 @@
             {
                 retiros.Fecha = dtResto.Value;
                 retiros.Importe = Convert.ToSingle(a);
-                retiros.Tipo.Id = 1;
+                retiros.Tipo.ID = 1;
                 retiros.Borrar();
                 retiros.Actualizar();
                 a = retiros.Total_Resto();
@@ -231,7 +231,7 @@
             {
                 retiros.Fecha = dtResto.Value;
                 retiros.Importe = Convert.ToSingle(a);
-                retiros.Tipo.Id = 6;
+                retiros.Tipo.ID = 6;
                 retiros.Borrar();
                 retiros.Actualizar();
                 grdRetiros.set_Texto(f, c, a);
@@ -243,7 +243,7 @@
             {
                 retiros.Fecha = dtResto.Value;
                 retiros.Importe = Convert.ToSingle(a);
-                retiros.Tipo.Id = 10;
+                retiros.Tipo.ID = 10;
                 retiros.Borrar();
                 retiros.Actualizar();
                 grdRetiros.set_Texto(f, c, a);
@@ -271,7 +271,7 @@
                         fr.grdRetiros = grdRetiros;
                         fr.retiros = this.retiros;
                         fr.retiros.Fecha = v_Mes.AddDays(6);
-                        fr.retiros.Tipo.Id = 100;
+                        fr.retiros.Tipo.ID = 100;
                         fr.Cargar();
                         fr.ShowDialog();
                         this.Focus();
@@ -284,7 +284,7 @@
                             fr.grdRetiros = grdRetiros;
                             fr.retiros = this.retiros;
                             fr.retiros.Fecha = v_Mes.AddDays(13);
-                            fr.retiros.Tipo.Id = 100;
+                            fr.retiros.Tipo.ID = 100;
                             fr.Cargar();
                             fr.ShowDialog();
                             this.Focus();
@@ -297,7 +297,7 @@
                                 fr.grdRetiros = grdRetiros;
                                 fr.retiros = this.retiros;
                                 fr.retiros.Fecha = v_Mes.AddDays(20);
-                                fr.retiros.Tipo.Id = 100;
+                                fr.retiros.Tipo.ID = 100;
                                 fr.Cargar();
                                 fr.ShowDialog();
                                 this.Focus();
@@ -310,7 +310,7 @@
                                     fr.grdRetiros = grdRetiros;
                                     fr.retiros = this.retiros;
                                     fr.retiros.Fecha = v_Mes.AddDays(26);
-                                    fr.retiros.Tipo.Id = 1;
+                                    fr.retiros.Tipo.ID = 1;
                                     fr.Cargar();
                                     fr.ShowDialog();
                                     this.Focus();
@@ -323,7 +323,7 @@
                                         fr.grdRetiros = grdRetiros;
                                         fr.retiros = this.retiros;
                                         fr.retiros.Fecha = v_Mes;
-                                        fr.retiros.Tipo.Id = 2;
+                                        fr.retiros.Tipo.ID = 2;
                                         fr.Cargar();
                                         fr.ShowDialog();
                                         this.Focus();
@@ -336,7 +336,7 @@
                                             fr.grdRetiros = grdRetiros;
                                             fr.retiros = this.retiros;
                                             fr.retiros.Fecha = v_Mes;
-                                            fr.retiros.Tipo.Id = 6;
+                                            fr.retiros.Tipo.ID = 6;
                                             fr.Cargar();
                                             fr.ShowDialog();
                                             this.Focus();
@@ -349,7 +349,7 @@
                                                 fr.grdRetiros = grdRetiros;
                                                 fr.retiros = this.retiros;
                                                 fr.retiros.Fecha = v_Mes;
-                                                fr.retiros.Tipo.Id = 11;
+                                                fr.retiros.Tipo.ID = 11;
                                                 fr.Cargar();
                                                 fr.ShowDialog();
                                                 this.Focus();
@@ -396,7 +396,7 @@
                     if (grdRetiros.Col == c_Sueldo)
                     {
                         sueldos.Fecha = v_Mes;
-                        sueldos.Tipo.Id = 1;
+                        sueldos.Tipo.ID = 1;
                         sueldos.Borrar();
                         grdRetiros.set_Texto(-1, -1, 0);
                         Saldo(grdRetiros.Row);
@@ -406,7 +406,7 @@
                         if (grdRetiros.Col == c_Adelanto)
                         {
                             sueldos.Fecha = v_Mes;
-                            sueldos.Tipo.Id = 2;
+                            sueldos.Tipo.ID = 2;
                             sueldos.Borrar();
                             grdRetiros.set_Texto(-1, -1, 0);
                             Saldo(grdRetiros.Row);
@@ -416,7 +416,7 @@
                             if (grdRetiros.Col == c_D7)
                             {
                                 retiros.Fecha = v_Mes.AddDays(6);
-                                retiros.Tipo.Id = 100;
+                                retiros.Tipo.ID = 100;
                                 retiros.Borrar();
                                 grdRetiros.set_Texto(-1, -1, 0);
                                 Saldo(grdRetiros.Row);
@@ -426,7 +426,7 @@
                                 if (grdRetiros.Col == c_D14)
                                 {
                                     retiros.Fecha = v_Mes.AddDays(13);
-                                    retiros.Tipo.Id = 100;
+                                    retiros.Tipo.ID = 100;
                                     retiros.Borrar();
                                     grdRetiros.set_Texto(-1, -1, 0);
                                     Saldo(grdRetiros.Row);
@@ -436,7 +436,7 @@
                                     if (grdRetiros.Col == c_D21)
                                     {
                                         retiros.Fecha = v_Mes.AddDays(20);
-                                        retiros.Tipo.Id = 100;
+                                        retiros.Tipo.ID = 100;
                                         retiros.Borrar();
                                         grdRetiros.set_Texto(-1, -1, 0);
                                         Saldo(grdRetiros.Row);
@@ -446,7 +446,7 @@
                                         if (grdRetiros.Col == c_Resto)
                                         {
                                             retiros.Fecha = v_Mes.AddDays(28);
-                                            retiros.Tipo.Id = 1;
+                                            retiros.Tipo.ID = 1;
                                             retiros.Borrar();
                                             grdRetiros.set_Texto(-1, -1, 0);
                                             Saldo(grdRetiros.Row);
@@ -456,7 +456,7 @@
                                             if (grdRetiros.Col == c_Ajustes)
                                             {
                                                 retiros.Fecha = v_Mes;
-                                                retiros.Tipo.Id = 10;
+                                                retiros.Tipo.ID = 10;
                                                 retiros.Borrar_Mes();
                                                 grdRetiros.set_Texto(-1, -1, 0);
                                                 Saldo(grdRetiros.Row);

@@ -1162,7 +1162,7 @@
             }
         }
 
-        private void seberosToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void SeberosToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             bool found = false;
             foreach (Form f in forms)

@@ -124,7 +124,7 @@
 
                     break;
                 case 10: // Tipo
-                    empleados.Tipo.Id = Convert.ToInt32(a);
+                    empleados.Tipo.ID = Convert.ToInt32(a);
                     if (empleados.Tipo.Existe() == true)
                     {
                         grdEmpleados.set_Texto(f, c, a);
@@ -222,7 +222,7 @@
             empleados.Baja = Convert.ToDateTime(grdEmpleados.get_Texto(Fila, 7));
             if (empleados.Baja.Year < 2000) empleados.Baja = new DateTime(1900, 1, 1);
             empleados.Localidad.Id = Convert.ToInt32(grdEmpleados.get_Texto(Fila, 8));
-            empleados.Tipo.Id = Convert.ToInt32(grdEmpleados.get_Texto(Fila, 10));
+            empleados.Tipo.ID = Convert.ToInt32(grdEmpleados.get_Texto(Fila, 10));
             empleados.Sucursal.Id = Convert.ToInt32(grdEmpleados.get_Texto(Fila, 12));
         }
 

@@ -153,7 +153,7 @@ namespace Programa1.Carga.Precios
                         int vProd = Convert.ToInt32(grdProductos.get_Texto(i, grdProductos.get_ColIndex("ID_Productos")));
                         if (vProd != 0)
                         {
-                            pr.Producto.Id = vProd;
+                            pr.Producto.ID = vProd;
 
                             Single precio = pr.Buscar();
 
@@ -329,7 +329,7 @@ namespace Programa1.Carga.Precios
                     pr.Sucursal.Id = h.Codigo_Seleccionado(suc);
 
                     //Guardar primero la integracion
-                    pr.Producto.Id = 1;
+                    pr.Producto.ID = 1;
                     pr.Precio = integracion;
                     pr.Agregar();
 
@@ -341,7 +341,7 @@ namespace Programa1.Carga.Precios
 
                         if (prod != 0)
                         {
-                            pr.Producto.Id = prod;
+                            pr.Producto.ID = prod;
                             pr.Precio = Convert.ToSingle((grdProductos.get_Texto(i, grdProductos.get_ColIndex("Precio"))));
                             pr.Agregar();
                         }
@@ -353,7 +353,7 @@ namespace Programa1.Carga.Precios
 
                         if (prod != 0)
                         {
-                            pr.Producto.Id = prod;
+                            pr.Producto.ID = prod;
                             pr.Precio = Convert.ToSingle((grdFormulas.get_Texto(i, grdFormulas.get_ColIndex("Precio"))));
                             pr.Agregar();
                         }

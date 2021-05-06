@@ -58,7 +58,7 @@
                     }
                     else
                     {
-                        tipoProveedores.Id = Convert.ToInt32(a);
+                        tipoProveedores.ID = Convert.ToInt32(a);
                         if (tipoProveedores.Existe() == true)
                         {
                             Mensaje($"El Tipo '{a.ToString()}' ya existe.");
@@ -81,7 +81,7 @@
                     }
                     else
                     {
-                        tipoProveedores.Id = i;
+                        tipoProveedores.ID = i;
                         tipoProveedores.Nombre = a.ToString();
                         grdTipo.set_Texto(f, c, a);
                         tipoProveedores.Actualizar();
@@ -94,7 +94,7 @@
 
         private void GrdTipo_CambioFila(short Fila)
         {
-            tipoProveedores.Id = Convert.ToInt32(grdTipo.get_Texto(Fila, 0));
+            tipoProveedores.ID = Convert.ToInt32(grdTipo.get_Texto(Fila, 0));
             tipoProveedores.Nombre = grdTipo.get_Texto(Fila, 1).ToString();
         }
 
@@ -123,7 +123,7 @@
                 {
                     if (Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0)) != 0)
                     {
-                        tipoProveedores.Id = Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0));
+                        tipoProveedores.ID = Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0));
                         tipoProveedores.Borrar();
                         grdTipo.BorrarFila(grdTipo.Row);
                     }
@@ -174,7 +174,7 @@
                     else
                     {
                         provs.Id = i;
-                        provs.Tipo.Id = Convert.ToInt32(a);
+                        provs.Tipo.ID = Convert.ToInt32(a);
                         if (provs.Tipo.Existe()  == true)
                         {
                             grdProveedores.set_Texto(f, c, a);
@@ -254,7 +254,7 @@
             // 3 bool Ver
             
             provs.Id = Convert.ToInt32(grdProveedores.get_Texto(Fila, 0));
-            provs.Tipo.Id = Convert.ToInt32(grdProveedores.get_Texto(Fila, 1));
+            provs.Tipo.ID = Convert.ToInt32(grdProveedores.get_Texto(Fila, 1));
             provs.Nombre = grdProveedores.get_Texto(Fila, 2).ToString();
             provs.Ver = bool.Parse(grdProveedores.get_Texto(Fila, 3).ToString());
             

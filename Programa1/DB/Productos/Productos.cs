@@ -14,9 +14,9 @@
 
         public Productos(int id, string nombre, int tipo, bool ver, bool imp, bool pesable, int multi)
         {
-            Id = id;
+            ID = id;
             Nombre = nombre;
-            Tipo.Id = tipo;
+            Tipo.ID = tipo;
             Ver = ver;
             Imprimir = imp;
             Pesable = pesable;
@@ -25,7 +25,7 @@
 
         [Required]
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [MaxLength(80, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
@@ -102,7 +102,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 * FROM vw_Productos WHERE Id>{Id} ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 * FROM vw_Productos WHERE Id>{ID} ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -130,15 +130,15 @@
             }
             catch (Exception)
             {
-                Id = 0;
+                ID = 0;
             }
         }
 
         private void Asignar(DataRow dr)
         {
-            Id = Convert.ToInt32(dr["Id"]);
+            ID = Convert.ToInt32(dr["Id"]);
             Nombre = dr["Nombre"].ToString();
-            Tipo.Id = Convert.ToInt32(dr["Id_Tipo"]);
+            Tipo.ID = Convert.ToInt32(dr["Id_Tipo"]);
             Ver = Convert.ToBoolean(dr["Ver"]);
             Imprimir = Convert.ToBoolean(dr["Imprimir"]);
             Pesable = Convert.ToBoolean(dr["Pesable"]);
@@ -156,7 +156,7 @@
                 string vpesa = Pesable ? "1" : "0";
 
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Productos SET Nombre='{Nombre}', Id_Tipo={Tipo.Id}, Ver={vver}, Imprimir={vimp}, Pesable={vpesa}, Multiplicador={Multiplicador} WHERE Id={Id}", sql);
+                    new SqlCommand($"UPDATE Productos SET Nombre='{Nombre}', Id_Tipo={Tipo.ID}, Ver={vver}, Imprimir={vimp}, Pesable={vpesa}, Multiplicador={Multiplicador} WHERE Id={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -182,7 +182,7 @@
                 string vpesa = Pesable ? "1" : "0";
 
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Productos (Id, Nombre, Id_Tipo, Ver, Imprimir, Pesable, Multiplicador) VALUES({Id}, '{Nombre}', {Tipo.Id}, {vver}, " +
+                    new SqlCommand($"INSERT INTO Productos (Id, Nombre, Id_Tipo, Ver, Imprimir, Pesable, Multiplicador) VALUES({ID}, '{Nombre}', {Tipo.ID}, {vver}, " +
                     $"{vimp}, {vpesa}, {Multiplicador})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -204,14 +204,14 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Productos WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM Productos WHERE Id=" + ID, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
 
-                Id = 0;
+                ID = 0;
 
                 sql.Close();
             }
@@ -229,7 +229,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Productos WHERE Id=" + Id, sql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Productos WHERE Id=" + ID, sql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

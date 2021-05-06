@@ -4,12 +4,14 @@
     using System;
     using System.Drawing;
     using System.Windows.Forms;
-
+    
     public partial class frmPagos_Autorizados : Form
     {
         C1.Win.C1FlexGrid.CellStyle e_prov;
         C1.Win.C1FlexGrid.CellStyle e_Hacienda;
         C1.Win.C1FlexGrid.CellStyle e_HaciendaError;
+
+        Herramientas.Herramientas h = new Herramientas.Herramientas();
 
         public frmPagos_Autorizados()
         {
@@ -27,30 +29,44 @@
             e_prov.BackColor = Color.LightBlue;
             e_Hacienda.BackColor = Color.LightCyan;
             e_HaciendaError.BackColor = Color.LightCoral;
-
-            Cargar();
+                        
         }
 
         private void cmdRefresh_Click(object sender, EventArgs e)
         {
             Cargar();
         }
+        private void cmdImprimir_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            try
+            {
+                h.Ejecutar_Macro("Pagos_Autorizados", "Cargar", Pagos.filtro);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            this.Cursor = Cursors.Default;
+        }
+
 
         private void Cargar()
         {
             this.Cursor = Cursors.WaitCursor;
 
-            Herramientas.Herramientas h = new Herramientas.Herramientas();
-            
             //Filtros**********
-            string f = h.Codigos_Seleccionados(lstFiltros);
+            Pagos.f_ID = -1;
 
-            if (f.Length != 0) { f = $"ID IN {f}"; }
-            Pagos.filtro = f;
+            Pagos.filtro = h.Codigos_Seleccionados(lstFiltros, "ID IN({0})"); ;
+
+            if (lstFiltros.SelectedItems.Count == 1) { Pagos.f_ID = h.Codigo_Seleccionado(lstFiltros.Text); }
 
             //Datos
-            grdAutorizados.MostrarDatos(Pagos.Datos(), true, grdAutorizados.get_ColIndex("Saldo"));
-
+            grdAutorizados.MostrarDatos(Pagos.Datos(), true);
+            grdAutorizados.SumarCol(grdAutorizados.get_ColIndex("Saldo"), true);
             Formato_Grlla();
 
 
@@ -102,5 +118,7 @@
             grdAutorizados.Columnas[grdAutorizados.get_ColIndex("Pagos")].Style.Format = "N1";
             grdAutorizados.Columnas[grdAutorizados.get_ColIndex("Saldo")].Style.Format = "N1";
         }
+
+        
     }
 }

@@ -67,7 +67,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Tipo.Id = Convert.ToInt32(a);
+                        Sucs.Tipo.ID = Convert.ToInt32(a);
                         if (Sucs.Tipo.Existe() == true)
                         {
                             Mensaje($"El Tipo '{a.ToString()}' ya existe.");
@@ -90,7 +90,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Tipo.Id = i;
+                        Sucs.Tipo.ID = i;
                         Sucs.Tipo.Nombre = a.ToString();
                         grdTipo.set_Texto(f, c, a);
                         Sucs.Tipo.Actualizar();
@@ -103,7 +103,7 @@ namespace Programa1.Datos
 
         private void GrdTipo_CambioFila(short Fila)
         {
-            Sucs.Tipo.Id = Convert.ToInt32(grdTipo.get_Texto(Fila, 0));
+            Sucs.Tipo.ID = Convert.ToInt32(grdTipo.get_Texto(Fila, 0));
             Sucs.Tipo.Nombre = grdTipo.get_Texto(Fila, 1).ToString();
         }
 
@@ -132,7 +132,7 @@ namespace Programa1.Datos
                 {
                     if (Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0)) != 0)
                     {
-                        Sucs.Tipo.Id = Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0));
+                        Sucs.Tipo.ID = Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0));
                         Sucs.Tipo.Borrar();
                         grdTipo.BorrarFila(grdTipo.Row);
                     }
@@ -158,7 +158,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Partidos.Id = Convert.ToInt32(a);
+                        Partidos.ID = Convert.ToInt32(a);
                         if (Partidos.Existe() == true)
                         {
                             Mensaje($"El Tipo '{a.ToString()}' ya existe.");
@@ -181,7 +181,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Partidos.Id = i;
+                        Partidos.ID = i;
                         Partidos.Nombre = a.ToString();
                         grdPartidos.set_Texto(f, c, a);
                         Partidos.Actualizar();
@@ -194,7 +194,7 @@ namespace Programa1.Datos
 
         private void grdPartidos_CambioFila(short Fila)
         {
-            Partidos.Id = Convert.ToInt32(grdPartidos.get_Texto(Fila, 0));
+            Partidos.ID = Convert.ToInt32(grdPartidos.get_Texto(Fila, 0));
             Partidos.Nombre = grdPartidos.get_Texto(Fila, 1).ToString();
         }
 
@@ -223,7 +223,7 @@ namespace Programa1.Datos
                 {
                     if (Convert.ToInt32(grdPartidos.get_Texto(grdPartidos.Row, 0)) != 0)
                     {
-                        Partidos.Id = Convert.ToInt32(grdPartidos.get_Texto(grdPartidos.Row, 0));
+                        Partidos.ID = Convert.ToInt32(grdPartidos.get_Texto(grdPartidos.Row, 0));
                         Partidos.Borrar();
                         grdPartidos.BorrarFila(grdPartidos.Row);
                     }
@@ -264,7 +264,7 @@ namespace Programa1.Datos
                     }
                     break;
                 case 1: // Id_Partido
-                    Localidades.Partido.Id = Convert.ToInt32(a);
+                    Localidades.Partido.ID = Convert.ToInt32(a);
                     if (Partidos.Existe(Convert.ToInt32(a)) != true)
                     {
                         Mensaje($"No se encontró el Partido '{a.ToString()}'.");
@@ -404,7 +404,7 @@ namespace Programa1.Datos
                     else
                     {
                         Sucs.Id = i;
-                        Sucs.Tipo.Id = Convert.ToInt32(a);
+                        Sucs.Tipo.ID = Convert.ToInt32(a);
                         if (Sucs.Tipo.Existe() == true)
                         {
                             grdSucursales.set_Texto(f, c, a);
@@ -590,7 +590,7 @@ namespace Programa1.Datos
             // 10 string CUIT
             Sucs.Id = Convert.ToInt32(grdSucursales.get_Texto(Fila, 0));
             Sucs.Nombre = grdSucursales.get_Texto(Fila, 1).ToString();
-            Sucs.Tipo.Id = Convert.ToInt32(grdSucursales.get_Texto(Fila, 2));
+            Sucs.Tipo.ID = Convert.ToInt32(grdSucursales.get_Texto(Fila, 2));
             Sucs.Ver = bool.Parse(grdSucursales.get_Texto(Fila, 3).ToString());
             Sucs.Propio = bool.Parse(grdSucursales.get_Texto(Fila, 4).ToString());
             Sucs.Titular = grdSucursales.get_Texto(Fila, 5).ToString();

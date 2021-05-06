@@ -190,9 +190,9 @@
                     if (cmbProds.SelectedIndex > -1)
                     {
                         Herramientas.Herramientas h = new Herramientas.Herramientas();
-                        Ventas.Producto.Id = h.Codigo_Seleccionado(cmbProds.Text);
+                        Ventas.Producto.ID = h.Codigo_Seleccionado(cmbProds.Text);
 
-                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Productos"), Ventas.Producto.Id);
+                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Productos"), Ventas.Producto.ID);
                         string s = cmbProds.Text;
                         s = s.Substring(s.IndexOf(".") + 1);
                         grdResultado.set_Texto(f, grdResultado.get_ColIndex("Descripcion"), s);
@@ -289,7 +289,7 @@
                 Ventas.Fecha = Convert.ToDateTime(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Fecha")));
                 Ventas.Sucursal.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Proveedores")));
                 Ventas.Sucursal.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Sucursales")));
-                Ventas.Producto.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Productos")));
+                Ventas.Producto.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Productos")));
                 Ventas.Descripcion = Convert.ToString(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Descripcion")));
                 Ventas.CostoCompra = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Compra")));
                 Ventas.CostoVenta = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Venta")));

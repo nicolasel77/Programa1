@@ -151,7 +151,7 @@
                 SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
                     $" AND '{Fecha.AddMonths(1).AddDays(-1).ToString("MM/dd/yyy")}' " +
                     $" AND Id_Empleados={Empleado.Id}" +
-                    $" AND Id_Tipo={Tipo.Id}" +
+                    $" AND Id_Tipo={Tipo.ID}" +
                     $" ORDER BY Fecha", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
@@ -469,7 +469,7 @@
                     command.CommandText =
                     $"UPDATE Retiros SET " +
                     $"  Fecha='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $", Id_Tipo={Tipo.Id}" +
+                    $", Id_Tipo={Tipo.ID}" +
                     $", Id_Sucursales={Sucursal.Id}" +
                     $", Id_Empleados={Empleado.Id}" +
                     $", Importe={Importe.ToString().Replace(",", ".")} " +
@@ -484,7 +484,7 @@
                     $"'{Fecha.ToString("MM/dd/yyy")}'" +
                     $", {Empleado.Id}" +
                     $", {Sucursal.Id}" +
-                    $", {Tipo.Id}" +
+                    $", {Tipo.ID}" +
                     $", {Importe.ToString().Replace(",", ".")})";
 
                     var d = command.ExecuteNonQuery();
@@ -550,7 +550,7 @@
                     command.CommandText =
                     $"DELETE FROM Retiros WHERE " +
                     $"  Fecha {f} " +
-                    $" AND Id_Tipo={Tipo.Id}" +
+                    $" AND Id_Tipo={Tipo.ID}" +
                     $" AND Id_Empleados={Empleado.Id}";
 
                     var d = command.ExecuteNonQuery();
@@ -585,7 +585,7 @@
                 command.CommandText =
                 $"DELETE FROM Retiros WHERE " +
                 $"  Fecha {f} " +
-                $" AND Id_Tipo={Tipo.Id}" +
+                $" AND Id_Tipo={Tipo.ID}" +
                 $" AND Id_Empleados={Empleado.Id}";
 
                 var d = command.ExecuteNonQuery();

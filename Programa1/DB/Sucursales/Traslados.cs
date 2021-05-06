@@ -77,7 +77,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Traslados SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Suc_Salida={sucS.Id}, Suc_Entrada={sucE.Id}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', " +
+                        $"Suc_Salida={sucS.Id}, Suc_Entrada={sucE.Id}, Id_Productos={Producto.ID}, Descripcion='{Descripcion}', " +
                         $"Costo_Salida={CostoS.ToString().Replace(",", ".")}, Costo_Entrada={CostoE.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -102,7 +102,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Traslados (Fecha, Suc_Salida, Suc_Entrada, Id_Productos, Descripcion, Costo_Salida, Costo_Entrada, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {sucS.Id}, {sucE.Id}, {Producto.Id}, '{Descripcion}', {CostoS.ToString().Replace(",", ".")}, {CostoE.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {sucS.Id}, {sucE.Id}, {Producto.ID}, '{Descripcion}', {CostoS.ToString().Replace(",", ".")}, {CostoE.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -194,7 +194,7 @@ namespace Programa1.DB
 
                 Id = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
-                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
                 sucS.Id = Convert.ToInt32(dr["Suc_Salida"]);
                 sucE.Id = Convert.ToInt32(dr["Suc_Entrada"]);

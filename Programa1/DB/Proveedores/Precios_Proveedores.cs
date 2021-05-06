@@ -36,7 +36,7 @@ namespace Programa1.DB
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Proveedores  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={Producto.Id} AND ID_Proveedores={Proveedor.Id} ORDER BY Fecha DESC", conexionSql);
+                    $" AND Id_Productos={Producto.ID} AND ID_Proveedores={Proveedor.Id} ORDER BY Fecha DESC", conexionSql);
 
                 conexionSql.Open();
 
@@ -132,7 +132,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Precios_Proveedores " +
-                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Proveedores={Proveedor.Id}, Id_Productos={Producto.Id}, Precio={Precio.ToString().Replace(",", ".")} " +
+                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Proveedores={Proveedor.Id}, Id_Productos={Producto.ID}, Precio={Precio.ToString().Replace(",", ".")} " +
                     $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -156,7 +156,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Precio_Proveedores (Fecha, Id_Proveedores, Id_Productos, Precio) " +
-                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Proveedor.Id}, {Producto.Id}, {Precio.ToString().Replace(",", ".")} )", sql);
+                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Proveedor.Id}, {Producto.ID}, {Precio.ToString().Replace(",", ".")} )", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

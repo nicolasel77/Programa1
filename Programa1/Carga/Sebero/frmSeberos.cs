@@ -7,7 +7,7 @@
 
     public partial class frmSeberos : Form
     {
-        private Seberos sebero = new Seberos();
+        private Seberos Sebero = new Seberos();
         private DataTable dt;
 
         public frmSeberos()
@@ -23,7 +23,7 @@
 
             //Seberos
             //Datos
-            dt = sebero.Datos();
+            dt = Sebero.Datos();
             grdSeberos.MostrarDatos(dt, true);
             //Formato
             grdSeberos.set_ColW(0, 40);
@@ -47,8 +47,8 @@
                     }
                     else
                     {
-                        sebero.Id = Convert.ToInt32(a);
-                        if (sebero.Existe() == true)
+                        Sebero.ID = Convert.ToInt32(a);
+                        if (Sebero.Existe() == true)
                         {
                             Mensaje($"El proveedor '{a.ToString()}' ya existe.");
                             grdSeberos.ErrorEnTxt();
@@ -56,7 +56,7 @@
                         else
                         {
                             grdSeberos.set_Texto(f, c, a);
-                            sebero.Agregar();
+                            Sebero.Agregar();
                             grdSeberos.AgregarFila();
                             grdSeberos.ActivarCelda(f, 1);
                         }
@@ -71,10 +71,10 @@
                     }
                     else
                     {
-                        sebero.Id = i;
-                        sebero.Nombre = a.ToString();
+                        Sebero.ID = i;
+                        Sebero.Nombre = a.ToString();
                         grdSeberos.set_Texto(f, c, a);
-                        sebero.Actualizar();
+                        Sebero.Actualizar();
                         grdSeberos.ActivarCelda(f + 1, 1);
                     }
                     break;
@@ -91,8 +91,8 @@
                 {
                     if (Convert.ToInt32(grdSeberos.get_Texto(grdSeberos.Row, 0)) != 0)
                     {
-                        sebero.Id = Convert.ToInt32(grdSeberos.get_Texto(grdSeberos.Row, 0));
-                        sebero.Borrar();
+                        Sebero.ID = Convert.ToInt32(grdSeberos.get_Texto(grdSeberos.Row, 0));
+                        Sebero.Borrar();
                         grdSeberos.BorrarFila(grdSeberos.Row);
                     }
 
@@ -105,8 +105,8 @@
             // 0 int Id 
             // 1 string Nombre 
 
-            sebero.Id = Convert.ToInt32(grdSeberos.get_Texto(Fila, 0));
-            sebero.Nombre = grdSeberos.get_Texto(Fila, 2).ToString();
+            Sebero.ID = Convert.ToInt32(grdSeberos.get_Texto(Fila, 0));
+            Sebero.Nombre = grdSeberos.get_Texto(Fila, 2).ToString();
 
         }
               

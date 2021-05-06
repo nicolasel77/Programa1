@@ -268,7 +268,7 @@
                     break;
                 case 4:
                     //ID_Productos_A
-                    APicada.Producto_A.Id = Convert.ToInt32(a);
+                    APicada.Producto_A.ID = Convert.ToInt32(a);
                     if (APicada.Producto_A.Existe() == true)
                     {
                         APicada.precios.Producto = APicada.Producto_A;
@@ -309,7 +309,7 @@
                     break;
                 case 7:
                     //ID_Productos_S
-                    APicada.Producto_S.Id = Convert.ToInt32(a);
+                    APicada.Producto_S.ID = Convert.ToInt32(a);
                     if (APicada.Producto_S.Existe() == true)
                     {
                         APicada.precios.Producto = APicada.Producto_S;
@@ -412,7 +412,7 @@
                         APicada.Producto_A.Siguiente();
                         APicada.precios.Producto = APicada.Producto_A;
                         
-                        grdAPicada.set_Texto(grdAPicada.Row, c_IdProd_A, APicada.Producto_A.Id);
+                        grdAPicada.set_Texto(grdAPicada.Row, c_IdProd_A, APicada.Producto_A.ID);
                         grdAPicada.set_Texto(grdAPicada.Row, c_IdProd_A + 1, APicada.Producto_A.Nombre);
 
                         APicada.Costo_A = APicada.precios.Buscar();

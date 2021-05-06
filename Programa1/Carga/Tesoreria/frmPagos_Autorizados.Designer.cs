@@ -68,8 +68,8 @@ namespace Programa1.Carga.Tesoreria
             this.grdAutorizados.PintarFilaSel = false;
             this.grdAutorizados.Redraw = true;
             this.grdAutorizados.Row = 0;
-            this.grdAutorizados.Rows = 50;
-            this.grdAutorizados.Size = new System.Drawing.Size(1183, 539);
+            this.grdAutorizados.Rows = 1;
+            this.grdAutorizados.Size = new System.Drawing.Size(1162, 459);
             this.grdAutorizados.TabIndex = 0;
             // 
             // materialLabel1
@@ -98,7 +98,7 @@ namespace Programa1.Carga.Tesoreria
             "1. P1 Hacienda",
             "2. P2 Hacienda",
             "3. Empleados"});
-            this.lstFiltros.Location = new System.Drawing.Point(1201, 31);
+            this.lstFiltros.Location = new System.Drawing.Point(1180, 31);
             this.lstFiltros.Name = "lstFiltros";
             this.lstFiltros.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lstFiltros.Size = new System.Drawing.Size(198, 260);
@@ -107,19 +107,19 @@ namespace Programa1.Carga.Tesoreria
             // cmdImprimir
             // 
             this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdImprimir.Location = new System.Drawing.Point(1201, 544);
+            this.cmdImprimir.Location = new System.Drawing.Point(1180, 464);
             this.cmdImprimir.Name = "cmdImprimir";
-            this.cmdImprimir.Size = new System.Drawing.Size(96, 26);
+            this.cmdImprimir.Size = new System.Drawing.Size(198, 26);
             this.cmdImprimir.TabIndex = 2;
             this.cmdImprimir.Texto = "Imprimir";
-            this.cmdImprimir.Click += new System.EventHandler(this.cmdRefresh_Click);
+            this.cmdImprimir.Click += new System.EventHandler(this.cmdImprimir_Click);
             // 
             // cmdRefresh
             // 
-            this.cmdRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdRefresh.Location = new System.Drawing.Point(1303, 544);
+            this.cmdRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdRefresh.Location = new System.Drawing.Point(1180, 297);
             this.cmdRefresh.Name = "cmdRefresh";
-            this.cmdRefresh.Size = new System.Drawing.Size(96, 26);
+            this.cmdRefresh.Size = new System.Drawing.Size(198, 26);
             this.cmdRefresh.TabIndex = 2;
             this.cmdRefresh.Texto = "Actualizar";
             this.cmdRefresh.Click += new System.EventHandler(this.cmdRefresh_Click);
@@ -128,7 +128,7 @@ namespace Programa1.Carga.Tesoreria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1411, 582);
+            this.ClientSize = new System.Drawing.Size(1390, 502);
             this.Controls.Add(this.lstFiltros);
             this.Controls.Add(this.cmdImprimir);
             this.Controls.Add(this.cmdRefresh);

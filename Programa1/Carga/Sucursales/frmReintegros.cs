@@ -233,7 +233,7 @@
                     break;
                 case 4:
                     //Id_Tipo
-                    Reintegros.Tipo.Id = Convert.ToInt32(a);
+                    Reintegros.Tipo.ID = Convert.ToInt32(a);
                     if (Reintegros.Tipo.Existe() == true)
                     {
                         Reintegros.Descripcion = Reintegros.Tipo.Nombre;

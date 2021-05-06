@@ -79,7 +79,7 @@ namespace Programa1.Carga.Precios
                 kprom = Convert.ToDouble(dt.Rows[0]["KProm"]);
             }
             lstFechas.Items.Clear();
-            pr.Producto.Id = prod;
+            pr.Producto.ID = prod;
 
             //Esto es solo para que se cargen los datos
             //Mas que nada el Tipo
@@ -88,7 +88,7 @@ namespace Programa1.Carga.Precios
             string fSuc = "";
             if (cSucs.Valor_Actual > 0) { fSuc = cSucs.Valor_Actual.ToString(); }
 
-            DataTable dtP = pr.Fechas(pr.Producto.Tipo.Id, prod, fSuc);
+            DataTable dtP = pr.Fechas(pr.Producto.Tipo.ID, prod, fSuc);
             foreach (DataRow dr in dtP.Rows)
             {
                 if (prod == 1 | prod == 300)
@@ -184,7 +184,7 @@ namespace Programa1.Carga.Precios
                     if (Convert.ToInt32(grdPromedios.get_Texto(i, 0)) != 0)
                     {
 
-                        pr.Producto.Id = Convert.ToInt32(grdPromedios.get_Texto(i, 0));
+                        pr.Producto.ID = Convert.ToInt32(grdPromedios.get_Texto(i, 0));
 
                         Single precio = pr.Buscar();
                         grdPromedios.set_Texto(i, 2, precio);

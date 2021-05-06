@@ -32,7 +32,7 @@
                 var dt = new DataTable("Datos");
                 var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-                string sel = $"SELECT TOP 1 * FROM vw_PreciosOfertas WHERE Id_Productos={Producto.Id} ORDER BY Orden";
+                string sel = $"SELECT TOP 1 * FROM vw_PreciosOfertas WHERE Id_Productos={Producto.ID} ORDER BY Orden";
                 
                 SqlCommand comandoSql = new SqlCommand(sel, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -43,7 +43,7 @@
                 DataRow dr = dt.Rows[0];
 
                 Orden = Convert.ToInt32(dr["Orden"]);
-                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
                 Costo = Convert.ToSingle(dr["Costo"]);
 
@@ -74,7 +74,7 @@
                 DataRow dr = dt.Rows[0];
 
                 Orden = Convert.ToInt32(dr["Orden"]);
-                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
                 Costo = Convert.ToSingle(dr["Costo"]);
 
@@ -123,7 +123,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Precios_Ofertas " +
-                    $"SET Orden={Orden}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', Costo={Costo.ToString().Replace(",", ".")} " +
+                    $"SET Orden={Orden}, Id_Productos={Producto.ID}, Descripcion='{Descripcion}', Costo={Costo.ToString().Replace(",", ".")} " +
                     $"WHERE Orden={Orden}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -147,7 +147,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Precios_Ofertas (Orden, Id_Productos, Descripcion, Costo) " +
-                    $"VALUES({Orden}, {Producto.Id}, '{Descripcion}', {Costo.ToString().Replace(",", ".")} )", sql);
+                    $"VALUES({Orden}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")} )", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

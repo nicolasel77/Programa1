@@ -53,7 +53,7 @@
                     }
                     else
                     {
-                        prods.Tipo.Id = Convert.ToInt32(a);
+                        prods.Tipo.ID = Convert.ToInt32(a);
                         if (prods.Tipo.Existe() == true)
                         {
                             Mensaje($"El Tipo '{a.ToString()}' ya existe.");
@@ -76,7 +76,7 @@
                     }
                     else
                     {
-                        prods.Tipo.Id = i;
+                        prods.Tipo.ID = i;
                         prods.Tipo.Nombre = a.ToString();
                         grdTipo.set_Texto(f, c, a);
                         prods.Tipo.Actualizar();
@@ -89,7 +89,7 @@
 
         private void GrdTipo_CambioFila(short Fila)
         {
-            prods.Tipo.Id = Convert.ToInt32(grdTipo.get_Texto(Fila, 0));
+            prods.Tipo.ID = Convert.ToInt32(grdTipo.get_Texto(Fila, 0));
             prods.Tipo.Nombre = grdTipo.get_Texto(Fila, 1).ToString();
         }
 
@@ -118,7 +118,7 @@
                 {
                     if (Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0)) != 0)
                     {
-                        prods.Tipo.Id = Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0));
+                        prods.Tipo.ID = Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0));
                         prods.Tipo.Borrar();
                         grdTipo.BorrarFila(grdTipo.Row);
                     }
@@ -145,7 +145,7 @@
                     }
                     else
                     {
-                        prods.Id = Convert.ToInt32(a);
+                        prods.ID = Convert.ToInt32(a);
                         if (prods.Existe() == true)
                         {
                             Mensaje($"El producto '{a.ToString()}' ya existe.");
@@ -168,8 +168,8 @@
                     }
                     else
                     {
-                        prods.Id = i;
-                        prods.Tipo.Id = Convert.ToInt32(a);
+                        prods.ID = i;
+                        prods.Tipo.ID = Convert.ToInt32(a);
                         if (prods.Tipo.Existe() == true)
                         {
                             grdProductos.set_Texto(f, c, a);
@@ -192,7 +192,7 @@
                     }
                     else
                     {
-                        prods.Id = i;
+                        prods.ID = i;
                         prods.Nombre = a.ToString();
                         grdProductos.set_Texto(f, c, a);
                         prods.Actualizar();
@@ -207,7 +207,7 @@
                     }
                     else
                     {
-                        prods.Id = i;
+                        prods.ID = i;
                         prods.Ver = bool.Parse(a.ToString());
                         grdProductos.set_Texto(f, c, a);
                         prods.Actualizar();
@@ -222,7 +222,7 @@
                     }
                     else
                     {
-                        prods.Id = i;
+                        prods.ID = i;
                         prods.Imprimir = bool.Parse(a.ToString());
                         grdProductos.set_Texto(f, c, a);
                         prods.Actualizar();
@@ -237,7 +237,7 @@
                     }
                     else
                     {
-                        prods.Id = i;
+                        prods.ID = i;
                         prods.Pesable = bool.Parse(a.ToString());
                         grdProductos.set_Texto(f, c, a);
                         prods.Actualizar();
@@ -252,7 +252,7 @@
                     }
                     else
                     {
-                        prods.Id = i;
+                        prods.ID = i;
                         prods.Multiplicador = Convert.ToInt32(a);
                         grdProductos.set_Texto(f, c, a);
                         prods.Actualizar();
@@ -271,7 +271,7 @@
                 {
                     if (Convert.ToInt32(grdProductos.get_Texto(grdProductos.Row, 0)) != 0)
                     {
-                        prods.Id = Convert.ToInt32(grdProductos.get_Texto(grdProductos.Row, 0));
+                        prods.ID = Convert.ToInt32(grdProductos.get_Texto(grdProductos.Row, 0));
                         prods.Borrar();
                         grdProductos.BorrarFila(grdProductos.Row);
                     }
@@ -290,8 +290,8 @@
             // 5 bool Imprimir
             // 6 bool Pesable
             // 7 int Multiplicador
-            prods.Id = Convert.ToInt32(grdProductos.get_Texto(Fila, 0));
-            prods.Tipo.Id = Convert.ToInt32(grdProductos.get_Texto(Fila, 1));
+            prods.ID = Convert.ToInt32(grdProductos.get_Texto(Fila, 0));
+            prods.Tipo.ID = Convert.ToInt32(grdProductos.get_Texto(Fila, 1));
             prods.Nombre = grdProductos.get_Texto(Fila, 3).ToString();
             prods.Ver = bool.Parse(grdProductos.get_Texto(Fila, 4).ToString());
             prods.Imprimir = bool.Parse(grdProductos.get_Texto(Fila, 5).ToString());

@@ -1,11 +1,15 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
-
+﻿
 namespace Programa1.Herramientas
 {
+    using System;
+    using System.Data;
+    using System.IO;
+    using System.Windows.Forms;
+    using Excel = Microsoft.Office.Interop.Excel;
+
     class Herramientas
     {
+
 
         #region " Funciones "
         public int Codigo_Seleccionado(string s)
@@ -48,13 +52,13 @@ namespace Programa1.Herramientas
         /// Deben tener el formato "numero. nombre"
         /// </summary>
         /// <param name="ls">ListBox a analizar</param>
-        /// <param name="formato">Formato a devolver, por defecto: ({0})</param>
+        /// <param name="formato">Formato a devolver, por defecto: ({0}). Si no hay nada devuelve una cadena vacía.</param>
         /// <returns></returns>
         public string Codigos_Seleccionados(ListBox ls, string formato = "({0})")
         {
             string s = "";
 
-            foreach(string item in ls.SelectedItems)
+            foreach (string item in ls.SelectedItems)
             {
                 s = Unir(s, Codigo_Seleccionado(item).ToString(), ", ");
             }
@@ -102,12 +106,18 @@ namespace Programa1.Herramientas
                 case "System.Int16":
                 case "System.Int32":
                 case "System.Int64":
+                case "System.Short":
+                case "System.Integer":
                     s = Convert.ToInt64(valor).ToString();
                     break;
                 case "System.Single":
                 case "System.Double":
+                case "System.Decimal":
                     s = Convert.ToDouble(valor).ToString();
                     s = s.Replace(",", ".");
+                    break;
+                case "System.String":
+                    s = $"'{s}'";
                     break;
                 case "System.Date":
                 case "System.DateTime":
@@ -129,7 +139,6 @@ namespace Programa1.Herramientas
             return s;
         }
         #endregion
-
 
         #region " Procedimientos "
 
@@ -170,8 +179,6 @@ namespace Programa1.Herramientas
         }
 
         #endregion
-
-
 
         #region " Calcular Texto "
 
@@ -375,7 +382,66 @@ namespace Programa1.Herramientas
                 i = t.IndexOf("/");
             }
             return t;
-        } 
+        }
+        #endregion
+
+        #region " Excel "
+        /// <summary>
+        /// Ejecuta una macro de un tiro.
+        /// </summary>
+        /// <param name="excel">Nombre del archivo sin extensión. Debe estar en la misma carpeta.</param>
+        /// <param name="macro"></param>
+        public void Ejecutar_Macro(string excel, string macro)
+        {
+            string rutaArchivo = $"{AppContext.BaseDirectory}\\{excel}.xlsm";
+            if (File.Exists(rutaArchivo) == true)
+            {
+                Excel.Application xlApp = new Excel.Application();
+
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(rutaArchivo);
+                xlApp.Run(macro);
+
+                xlApp.DisplayAlerts = false;
+                xlWorkbook.Close();
+                xlApp.Quit();
+
+                xlWorkbook = null;
+                xlApp = null;
+            }
+            else
+            {
+                MessageBox.Show("No se encontro el archivo " + excel);
+            }
+        }
+        /// <summary>
+        /// Ejecuta una macro de un tiro.
+        /// </summary>
+        /// <param name="excel">Nombre del archivo sin extensión. Debe estar en la misma carpeta.</param>
+        /// <param name="macro">Nombre de la macro</param>
+        /// <param name="parametros">Parametro</param>
+        public void Ejecutar_Macro(string excel, string macro, string parametro)
+        {
+            string rutaArchivo = $"{AppContext.BaseDirectory}\\{excel}.xlsm";
+            if (File.Exists(rutaArchivo) == true)
+            {
+                Excel.Application xlApp = new Excel.Application();
+
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(rutaArchivo);
+                xlApp.Run(macro, parametro);
+
+                xlApp.DisplayAlerts = false;
+                xlWorkbook.Close();
+                xlApp.Quit();
+
+                xlWorkbook = null;
+                xlApp = null;
+            }
+            else
+            {
+                MessageBox.Show("No se encontro el archivo " + excel);
+            }
+        }
+
         #endregion
     }
 

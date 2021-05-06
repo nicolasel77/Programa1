@@ -61,7 +61,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"UPDATE GastosSucursales_Rubros SET Nombre='{Nombre}', Id_Grupo={Grupo.Id} WHERE Id={Id}", sql);
+                SqlCommand command = new SqlCommand($"UPDATE GastosSucursales_Rubros SET Nombre='{Nombre}', Id_Grupo={Grupo.ID} WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -82,7 +82,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO GastosSucursales_Rubros (Id, Id_Grupo, Nombre) VALUES({Id}, {Grupo.Id}, '{Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO GastosSucursales_Rubros (Id, Id_Grupo, Nombre) VALUES({Id}, {Grupo.ID}, '{Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

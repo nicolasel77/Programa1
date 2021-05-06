@@ -278,7 +278,7 @@
 
                 case 6:
                     //ID_Productos
-                    Venta.Producto.Id = Convert.ToInt32(a);
+                    Venta.Producto.ID = Convert.ToInt32(a);
                     if (Venta.Producto.Existe() == true)
                     {
                         Venta.precios.Producto = Venta.Producto;
@@ -369,7 +369,7 @@
 
                         Venta.Descripcion = Venta.Producto.Nombre;
 
-                        GrdDevoluciones.set_Texto(f + 1, c_IdProd, Venta.Producto.Id);
+                        GrdDevoluciones.set_Texto(f + 1, c_IdProd, Venta.Producto.ID);
                         GrdDevoluciones.set_Texto(f + 1, c_Descripcion, Venta.Descripcion);
 
 
@@ -425,7 +425,7 @@
 
                         Venta.Descripcion = Venta.Producto.Nombre;
 
-                        GrdDevoluciones.set_Texto(GrdDevoluciones.Row, c_IdProd, Venta.Producto.Id);
+                        GrdDevoluciones.set_Texto(GrdDevoluciones.Row, c_IdProd, Venta.Producto.ID);
                         GrdDevoluciones.set_Texto(GrdDevoluciones.Row, c_Descripcion, Venta.Descripcion);
 
                         Venta.precios.Sucursal = Venta.Sucursal;

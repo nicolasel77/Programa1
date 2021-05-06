@@ -15,13 +15,13 @@ namespace Programa1.DB
 
         public TipoProductos(int id, string nombre)
         {
-            Id = id;
+            ID = id;
             Nombre = nombre;
         }
 
         [Required]
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
@@ -57,7 +57,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand("SELECT Nombre FROM TipoProductos WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("SELECT Nombre FROM TipoProductos WHERE Id=" + ID, sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;
@@ -101,7 +101,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("UPDATE TipoProductos SET Nombre='{0}' WHERE Id={1}", Nombre, Id), sql);
+                SqlCommand command = new SqlCommand(string.Format("UPDATE TipoProductos SET Nombre='{0}' WHERE Id={1}", Nombre, ID), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -122,7 +122,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO TipoProductos (Id, Nombre) VALUES({Id}, '{Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO TipoProductos (Id, Nombre) VALUES({ID}, '{Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -143,14 +143,14 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("DELETE FROM TipoProductos WHERE Id={0}", Id), sql);
+                SqlCommand command = new SqlCommand(string.Format("DELETE FROM TipoProductos WHERE Id={0}", ID), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
 
-                Id = 0;
+                ID = 0;
 
                 sql.Close();
             }

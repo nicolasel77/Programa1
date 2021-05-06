@@ -112,7 +112,7 @@
                     }
                     break;
                 case "Id_Tipo":
-                    empleado.Tipo.Id = Convert.ToInt32(a);
+                    empleado.Tipo.ID = Convert.ToInt32(a);
                     if (!empleado.Tipo.Existe())
                     {
                         grdEmpleado.ErrorEnTxt();

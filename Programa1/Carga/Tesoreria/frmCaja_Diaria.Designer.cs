@@ -237,7 +237,7 @@
             this.cambiarFechaToolStripMenuItem.Name = "cambiarFechaToolStripMenuItem";
             this.cambiarFechaToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.cambiarFechaToolStripMenuItem.Text = "Cambiar Fecha";
-            this.cambiarFechaToolStripMenuItem.Click += new System.EventHandler(this.cambiarFechaToolStripMenuItem_Click);
+            this.cambiarFechaToolStripMenuItem.Click += new System.EventHandler(this.cambiarFechaEntradas);
             // 
             // imprimirToolStripMenuItem
             // 

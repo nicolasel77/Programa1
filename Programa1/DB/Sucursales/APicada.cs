@@ -73,7 +73,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE APicada SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={Sucursal.Id}, Id_Productos_A={Producto_A.Id}, Id_Productos_S={Producto_S.Id}, " +
+                        $"Id_Sucursales={Sucursal.Id}, Id_Productos_A={Producto_A.ID}, Id_Productos_S={Producto_S.ID}, " +
                         $"Costo_A={Costo_A.ToString().Replace(",", ".")}, Costo_S={Costo_S.ToString().Replace(",", ".")}," +
                         $"Kilos_A={Kilos_A.ToString().Replace(",", ".")}, Kilos_S={Kilos_S.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
@@ -99,7 +99,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO APicada (Fecha, Id_Sucursales, Id_Productos_A, Id_Productos_S, Costo_A, Costo_S, Kilos_A, Kilos_S) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto_A.Id}, {Producto_S.Id}, {Costo_A.ToString().Replace(",", ".")}, {Costo_S.ToString().Replace(",", ".")}, " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto_A.ID}, {Producto_S.ID}, {Costo_A.ToString().Replace(",", ".")}, {Costo_S.ToString().Replace(",", ".")}, " +
                         $"{Kilos_A.ToString().Replace(",", ".")}, {Kilos_S.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -193,10 +193,10 @@
                 Id = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
                 Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
-                Producto_A.Id = Convert.ToInt32(dr["Id_Productos_A"]);
+                Producto_A.ID = Convert.ToInt32(dr["Id_Productos_A"]);
                 Costo_A = Convert.ToSingle(dr["Costo_A"]);
                 Kilos_A = Convert.ToSingle(dr["Kilos_A"]);
-                Producto_S.Id = Convert.ToInt32(dr["Id_Productos_S"]);
+                Producto_S.ID = Convert.ToInt32(dr["Id_Productos_S"]);
                 Costo_S = Convert.ToSingle(dr["Costo_S"]);
                 Kilos_S = Convert.ToSingle(dr["Kilos_S"]);
             }

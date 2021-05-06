@@ -306,7 +306,7 @@
 
                 case 7:
                     //ID_Productos
-                    Venta.Producto.Id = Convert.ToInt32(a);
+                    Venta.Producto.ID = Convert.ToInt32(a);
                     if (Venta.Producto.Existe() == true)
                     {
                         Venta.precios.Producto = Venta.Producto;
@@ -397,7 +397,7 @@
 
                         Venta.Descripcion = Venta.Producto.Nombre;
 
-                        grdVenta.set_Texto(f + 1, c_IdProd, Venta.Producto.Id);
+                        grdVenta.set_Texto(f + 1, c_IdProd, Venta.Producto.ID);
                         grdVenta.set_Texto(f + 1, c_Descripcion, Venta.Descripcion);
 
 
@@ -453,7 +453,7 @@
 
                         Venta.Descripcion = Venta.Producto.Nombre;
 
-                        grdVenta.set_Texto(grdVenta.Row, c_IdProd, Venta.Producto.Id);
+                        grdVenta.set_Texto(grdVenta.Row, c_IdProd, Venta.Producto.ID);
                         grdVenta.set_Texto(grdVenta.Row, c_Descripcion, Venta.Descripcion);
 
                         Venta.precios.Sucursal = Venta.Sucursal;
@@ -545,7 +545,7 @@
                 {
                     compras.Fecha = Convert.ToDateTime(dr["Fecha"]);
                     compras.Proveedor.Id = Convert.ToInt16(dr["Id_Proveedores"]);
-                    compras.Producto.Id = Convert.ToInt16(dr["Id_Productos"]);
+                    compras.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
                     compras.Descripcion = dr["Descripcion"].ToString();
                     compras.Costo = Convert.ToSingle(dr["Costo"]);
                     compras.Kilos = Convert.ToSingle(dr["Kilos"]);
@@ -580,7 +580,7 @@
                     traslados.Fecha = Convert.ToDateTime(dr["Fecha"]);
                     traslados.sucS.Id = 50;
                     traslados.sucE.Id = Convert.ToInt16(dr["Suc_Entrada"]); ;
-                    traslados.Producto.Id = Convert.ToInt16(dr["Id_Productos"]);
+                    traslados.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
                     traslados.Descripcion = dr["Descripcion"].ToString();
                     traslados.CostoS = Convert.ToSingle(dr["Costo_Salida"]);
                     traslados.CostoE = Convert.ToSingle(dr["Costo_Entrada"]);

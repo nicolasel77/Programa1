@@ -14,14 +14,14 @@
 
         public GastosSucursales_Tipos(int id, GastosSucursales_Rubros rubro, string nombre)
         {
-            Id = id;
+            ID = id;
             Rubro = rubro;
             Nombre = nombre;
         }
 
         [Required]
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         public GastosSucursales_Rubros Rubro { get; set; } = new GastosSucursales_Rubros();
 
@@ -69,7 +69,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"UPDATE GastosSucursales_Tipos SET Nombre='{Nombre}', Id_Rubro={Rubro.Id} WHERE Id={Id}", sql);
+                SqlCommand command = new SqlCommand($"UPDATE GastosSucursales_Tipos SET Nombre='{Nombre}', Id_Rubro={Rubro.Id} WHERE Id={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -90,7 +90,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO GastosSucursales_Tipos (Id, Id_Rubro, Nombre) VALUES({Id}, {Rubro.Id}, '{Nombre}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO GastosSucursales_Tipos (Id, Id_Rubro, Nombre) VALUES({ID}, {Rubro.Id}, '{Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -111,14 +111,14 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM GastosSucursales_Tipos WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM GastosSucursales_Tipos WHERE Id=" + ID, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
 
-                Id = 0;
+                ID = 0;
 
                 sql.Close();
             }
@@ -135,7 +135,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"SELECT Nombre FROM GastosSucursales_Tipos WHERE Id={Id}", sql);
+                SqlCommand command = new SqlCommand($"SELECT Nombre FROM GastosSucursales_Tipos WHERE Id={ID}", sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;

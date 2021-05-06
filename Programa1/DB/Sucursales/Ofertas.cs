@@ -73,7 +73,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Ofertas SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={Sucursal.Id}, Id_Productos={Producto.Id}, Descripcion='{Descripcion}', " +
+                        $"Id_Sucursales={Sucursal.Id}, Id_Productos={Producto.ID}, Descripcion='{Descripcion}', " +
                         $"Costo_Original={Costo_Original.ToString().Replace(",", ".")}, Costo_Oferta={Costo_Oferta.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -98,7 +98,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Ofertas (Fecha, Id_Sucursales, Id_Productos, Descripcion, Costo_Original, Costo_Oferta, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.Id}, '{Descripcion}', {Costo_Original.ToString().Replace(",", ".")}, {Costo_Oferta.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.ID}, '{Descripcion}', {Costo_Original.ToString().Replace(",", ".")}, {Costo_Oferta.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -190,7 +190,7 @@
 
                 Id = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
-                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
                 Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
                 Costo_Original = Convert.ToSingle(dr["Costo_Original"]);

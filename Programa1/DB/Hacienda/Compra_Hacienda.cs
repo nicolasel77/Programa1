@@ -68,7 +68,7 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Hacienda_Compras SET NBoleta={NBoleta.NBoleta}, Id_Consignatarios={Consignatario.Id}, Id_Productos={Producto.Id}, " +
+                    new SqlCommand($"UPDATE Hacienda_Compras SET NBoleta={NBoleta.NBoleta}, Id_Consignatarios={Consignatario.ID}, Id_Productos={Producto.ID}, " +
                         $"Cabezas={Cabezas}, Kilos={Kilos.ToString().Replace(",", ".")}, Costo={Costo.ToString().Replace(",", ".")}, IVA={IVA.ToString().Replace(",", ".")}, Plazo={Plazo} " +    
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -93,7 +93,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Hacienda_Compras (NBoleta, Id_Consignatarios, Id_Productos, Cabezas, Kilos, Costo, IVA, Plazo) " +
-                        $"VALUES({NBoleta.NBoleta},{Consignatario.Id},{Producto.Id},{Cabezas},{Kilos.ToString().Replace(",", ".")},{Costo.ToString().Replace(",", ".")},{IVA.ToString().Replace(",", ".")},{Plazo})", sql);
+                        $"VALUES({NBoleta.NBoleta},{Consignatario.ID},{Producto.ID},{Cabezas},{Kilos.ToString().Replace(",", ".")},{Costo.ToString().Replace(",", ".")},{IVA.ToString().Replace(",", ".")},{Plazo})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -185,8 +185,8 @@
 
                 Id = Convert.ToInt32(dr["Id"]);
                 NBoleta.NBoleta = Convert.ToInt32(dr["NBoleta"]);
-                Consignatario.Id = Convert.ToInt32(dr["Id_Consignatarios"]);
-                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Consignatario.ID = Convert.ToInt32(dr["Id_Consignatarios"]);
+                Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Cabezas = Convert.ToInt32(dr["Cabezas"]);
                 Costo = Convert.ToSingle(dr["Costo"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
@@ -219,8 +219,8 @@
 
                 Id = id;
                 NBoleta.NBoleta = Convert.ToInt32(dr["NBoleta"]);
-                Consignatario.Id = Convert.ToInt32(dr["Id_Consignatarios"]);
-                Producto.Id = Convert.ToInt32(dr["Id_Productos"]);
+                Consignatario.ID = Convert.ToInt32(dr["Id_Consignatarios"]);
+                Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Cabezas = Convert.ToInt32(dr["Cabezas"]);
                 Costo = Convert.ToSingle(dr["Costo"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);

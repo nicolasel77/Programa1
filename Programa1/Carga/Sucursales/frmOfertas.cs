@@ -239,7 +239,7 @@
                     break;
                 case 4:
                     //ID_Productos
-                    Ofertas.Producto.Id = Convert.ToInt32(a);
+                    Ofertas.Producto.ID = Convert.ToInt32(a);
                     if (Ofertas.Producto.Existe() == true)
                     {
                         Ofertas.precios.Producto = Ofertas.Producto;
@@ -330,7 +330,7 @@
 
                         Ofertas.Descripcion = $"{Ofertas.precios.Producto.Nombre} :: {Ofertas.precios_ofertas.Descripcion}";
 
-                        grdOfertas.set_Texto(f + 1, c_IdProd, Ofertas.Producto.Id);
+                        grdOfertas.set_Texto(f + 1, c_IdProd, Ofertas.Producto.ID);
                         grdOfertas.set_Texto(f + 1, c_Descripcion, Ofertas.Descripcion);
 
 
@@ -381,7 +381,7 @@
 
                         Ofertas.Descripcion = $"{Ofertas.precios.Producto.Nombre} :: {Ofertas.precios_ofertas.Descripcion}";
 
-                        grdOfertas.set_Texto(grdOfertas.Row, c_IdProd, Ofertas.Producto.Id);
+                        grdOfertas.set_Texto(grdOfertas.Row, c_IdProd, Ofertas.Producto.ID);
                         grdOfertas.set_Texto(grdOfertas.Row, c_Descripcion, Ofertas.Descripcion);
 
 

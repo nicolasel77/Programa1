@@ -73,7 +73,7 @@
                     }
                     break;
                 case "Id_Tipo":
-                    retiros.Tipo.Id = Convert.ToInt32(a);
+                    retiros.Tipo.ID = Convert.ToInt32(a);
                     if (retiros.Tipo.Existe() == true)
                     {
                         grdDetalle.set_Texto(f, c, a);

@@ -40,7 +40,7 @@ namespace Programa1.Carga.Precios
             this.Cursor = Cursors.WaitCursor;
             
             pr.Fecha = fecha;
-            pr.Producto.Id = 1;
+            pr.Producto.ID = 1;
             for (int i = 0; i <= lstSucursales.Items.Count - 1; i++)
             {
                 string suc = lstSucursales.Items[i].ToString();

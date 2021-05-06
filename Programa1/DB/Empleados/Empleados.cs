@@ -1,7 +1,6 @@
 ﻿
 namespace Programa1.DB
 {
-    using Programa1.DB.Sucursales;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
@@ -130,15 +129,26 @@ namespace Programa1.DB
             Id = Convert.ToInt32(dr["Id"]);
             Nombre = dr["Nombre"].ToString();
             DNI = Convert.ToInt32(dr["DNI"]);
-            if (dr["Fecha_Nacimiento"] != DBNull.Value) Fecha_Nacimiento = Convert.ToDateTime(dr["Fecha_Nacimiento"]);
+            if (dr["Fecha_Nacimiento"] != DBNull.Value)
+            {
+                Fecha_Nacimiento = Convert.ToDateTime(dr["Fecha_Nacimiento"]);
+            }
+
             Domicilio = dr["Domicilio"].ToString();
             Telefono = dr["Telefono"].ToString();
-            if (dr["Alta"] != DBNull.Value) Alta = Convert.ToDateTime(dr["Alta"]);
-            if (dr["Baja"] != DBNull.Value) Baja = Convert.ToDateTime(dr["Baja"]);
+            if (dr["Alta"] != DBNull.Value)
+            {
+                Alta = Convert.ToDateTime(dr["Alta"]);
+            }
+
+            if (dr["Baja"] != DBNull.Value)
+            {
+                Baja = Convert.ToDateTime(dr["Baja"]);
+            }
 
             Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
             Localidad.Id = Convert.ToInt32(dr["Id_Localidades"]);
-            Tipo.Id = Convert.ToInt32(dr["Id_Tipo"]);
+            Tipo.ID = Convert.ToInt32(dr["Id_Tipo"]);
         }
 
         public void Actualizar()
@@ -154,7 +164,7 @@ namespace Programa1.DB
                 }
 
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Empleados SET Nombre='{Nombre}', Id_Tipo={Tipo.Id}, Telefono='{Telefono}', Domicilio='{Domicilio}'" +
+                    new SqlCommand($"UPDATE Empleados SET Nombre='{Nombre}', Id_Tipo={Tipo.ID}, Telefono='{Telefono}', Domicilio='{Domicilio}'" +
                     $", Fecha_Nacimiento='{Fecha_Nacimiento.ToString("MM/dd/yyy")}', Alta='{Alta.ToString("MM/dd/yyy")}', Baja={vBaja}" +
                     $", DNI={DNI}, Id_Localidades={Localidad.Id}, Id_Sucursales={Sucursal.Id} WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -181,7 +191,7 @@ namespace Programa1.DB
                     new SqlCommand($"INSERT INTO Empleados (Id, Nombre, DNI, Fecha_Nacimiento, Domicilio, Telefono, Alta, Baja, Id_Tipo, Id_Localidades, Id_Sucursales)" +
                     $" VALUES({Id}, '{Nombre}', {DNI}, '{Fecha_Nacimiento.ToString("MM/dd/yyy")}'" +
                     $", '{Domicilio}', '{Telefono}', '{Alta.ToString("MM/dd/yyy")}', '{Baja.ToString("MM/dd/yyy")}'" +
-                    $", {Tipo.Id}, {Localidad.Id}, {Sucursal.Id})", sql);
+                    $", {Tipo.ID}, {Localidad.Id}, {Sucursal.Id})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

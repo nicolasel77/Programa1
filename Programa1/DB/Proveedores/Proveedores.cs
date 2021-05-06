@@ -16,7 +16,7 @@
         {
             Id = id;
             Nombre = nombre;
-            Tipo.Id = tipo;
+            Tipo.ID = tipo;
             Ver = ver;            
         }
 
@@ -89,7 +89,7 @@
                 string vver = Ver ? "1" : "0";
                 
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Proveedores SET Nombre='{Nombre}', Tipo={Tipo.Id}, Ver={vver} WHERE Id={Id}", sql);
+                    new SqlCommand($"UPDATE Proveedores SET Nombre='{Nombre}', Tipo={Tipo.ID}, Ver={vver} WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -113,7 +113,7 @@
                 string vver = Ver ? "1" : "0";
                 
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Proveedores (Id, Nombre, Tipo, Ver) VALUES({Id}, '{Nombre}', {Tipo.Id}, {vver})", sql);
+                    new SqlCommand($"INSERT INTO Proveedores (Id, Nombre, Tipo, Ver) VALUES({Id}, '{Nombre}', {Tipo.ID}, {vver})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -190,7 +190,7 @@
         {
             Id = Convert.ToInt32(dr["Id"]);
             Nombre = dr["Nombre"].ToString();
-            Tipo.Id = Convert.ToInt32(dr["Tipo"]);
+            Tipo.ID = Convert.ToInt32(dr["Tipo"]);
             Ver = Convert.ToBoolean(dr["Ver"]);            
         }
     }

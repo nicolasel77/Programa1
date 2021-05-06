@@ -222,10 +222,10 @@
                     break;
                 case 2:
                     //Id_Seberos
-                    cargaSebo.Sebero.Id = Convert.ToInt32(a);
+                    cargaSebo.Sebero.ID = Convert.ToInt32(a);
                     if (cargaSebo.Sebero.Existe() == true)
                     {
-                        cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.Id;
+                        cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
 
                         if (id != 0) { cargaSebo.Actualizar(); }
 
@@ -261,7 +261,7 @@
 
                 case 6:
                     //ID_Productos
-                    cargaSebo.Producto.Id = Convert.ToInt32(a);
+                    cargaSebo.Producto.ID = Convert.ToInt32(a);
                     if (cargaSebo.Producto.Existe() == true)
                     {
                         cargaSebo.precios_Seberos.Producto = cargaSebo.Producto;
@@ -269,7 +269,7 @@
                         grdVenta.set_Texto(f, c, a);
                         grdVenta.set_Texto(f, c + 1, cargaSebo.Producto.Nombre);
 
-                        cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.Id;
+                        cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
                         grdVenta.set_Texto(f, c_Costo, cargaSebo.Costo);
                         grdVenta.set_Texto(f, c_Total, cargaSebo.Kilos * cargaSebo.Costo);
 
@@ -315,7 +315,7 @@
                         //Rellenar nueva fila
 
                         grdVenta.set_Texto(f + 1, c_Fecha, cargaSebo.Fecha);
-                        grdVenta.set_Texto(f + 1, c_IdSebero, cargaSebo.Sebero.Id);
+                        grdVenta.set_Texto(f + 1, c_IdSebero, cargaSebo.Sebero.ID);
                         grdVenta.set_Texto(f + 1, c_IdSebero + 1, cargaSebo.Sucursal.Nombre);
                         grdVenta.set_Texto(f + 1, c_IdSuc, cargaSebo.Sucursal.Id);
                         grdVenta.set_Texto(f + 1, c_IdSuc + 1, cargaSebo.Sucursal.Nombre);
@@ -323,7 +323,7 @@
                         cargaSebo.Producto.Siguiente();
                         cargaSebo.precios_Seberos.Producto = cargaSebo.Producto;
 
-                        grdVenta.set_Texto(f + 1, c_IdProd, cargaSebo.Producto.Id);
+                        grdVenta.set_Texto(f + 1, c_IdProd, cargaSebo.Producto.ID);
                         grdVenta.set_Texto(f + 1, c_Descripcion, cargaSebo.Producto.Nombre);
 
                         cargaSebo.Costo = cargaSebo.precios_Seberos.Buscar();
@@ -351,7 +351,7 @@
             cargaSebo.Cargar_Fila(i);
 
             cargaSebo.precios_Seberos.Fecha = cargaSebo.Fecha;
-            cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.Id;
+            cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
             cargaSebo.precios_Seberos.Producto = cargaSebo.Producto;
 
         }
@@ -367,10 +367,10 @@
                     {
                         cargaSebo.Producto.Siguiente();
 
-                        grdVenta.set_Texto(grdVenta.Row, c_IdProd, cargaSebo.Producto.Id);
+                        grdVenta.set_Texto(grdVenta.Row, c_IdProd, cargaSebo.Producto.ID);
                         grdVenta.set_Texto(grdVenta.Row, c_Descripcion, cargaSebo.Producto.Nombre);
 
-                        cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.Id;
+                        cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
                         cargaSebo.Costo = cargaSebo.precios_Seberos.Buscar();
                         grdVenta.set_Texto(grdVenta.Row, c_Costo, cargaSebo.Costo);
                         grdVenta.set_Texto(grdVenta.Row, c_Total, 0);

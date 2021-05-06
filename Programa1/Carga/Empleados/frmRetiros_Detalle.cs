@@ -24,7 +24,7 @@
             retiros.Empleado.Existe();
             lblNombre.Text = retiros.Empleado.Nombre;
             lblFecha.Text = retiros.Fecha.ToString("dd/MM/yyy");
-            if (retiros.Tipo.Id == 100)
+            if (retiros.Tipo.ID == 100)
             {
                 grdDetalle.MostrarDatos(retiros.Detalle_Adelantos(), true, true);
             }

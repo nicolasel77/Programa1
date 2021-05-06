@@ -45,7 +45,7 @@
         private void Grd_CambioFila(short Fila)
         {
             lista.Orden = Convert.ToInt32(grd.get_Texto(Fila, c_Orden));
-            lista.Producto.Id = Convert.ToInt32(grd.get_Texto(Fila, c_IdProd));
+            lista.Producto.ID = Convert.ToInt32(grd.get_Texto(Fila, c_IdProd));
             lista.Descripcion = Convert.ToString(grd.get_Texto(Fila, c_Descripcion));
             lista.Costo = Convert.ToSingle(grd.get_Texto(Fila, c_Costo));
         }
@@ -71,7 +71,7 @@
                     break;
                 case 1:
                     //Id_Productos
-                    lista.Producto.Id = Convert.ToInt32(a);
+                    lista.Producto.ID = Convert.ToInt32(a);
                     if (lista.Producto.Existe() == true)
                     {
                         grd.set_Texto(f, c, a);

@@ -6,7 +6,7 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Tipo_Gastos
+    public class Tipo_Gastos
     {
         private int vId;
         /// <summary>

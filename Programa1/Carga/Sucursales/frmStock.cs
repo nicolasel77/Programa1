@@ -238,7 +238,7 @@
                     break;
                 case 4:
                     //ID_Productos
-                    stock.Producto.Id = Convert.ToInt32(a);
+                    stock.Producto.ID = Convert.ToInt32(a);
                     if (stock.Producto.Existe() == true)
                     {
                         stock.precios.Producto = stock.Producto;
@@ -305,7 +305,7 @@
 
                         stock.Descripcion = stock.Producto.Nombre;
 
-                        grdStock.set_Texto(f + 1, c_IdProd, stock.Producto.Id);
+                        grdStock.set_Texto(f + 1, c_IdProd, stock.Producto.ID);
                         grdStock.set_Texto(f + 1, c_Descripcion, stock.Descripcion);
 
                         stock.Costo = stock.precios.Buscar();
@@ -349,7 +349,7 @@
 
                         stock.Descripcion = stock.Producto.Nombre;
 
-                        grdStock.set_Texto(grdStock.Row, c_IdProd, stock.Producto.Id);
+                        grdStock.set_Texto(grdStock.Row, c_IdProd, stock.Producto.ID);
                         grdStock.set_Texto(grdStock.Row, c_Descripcion, stock.Descripcion);
 
                         stock.Costo = stock.precios.Buscar();

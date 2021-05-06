@@ -19,7 +19,7 @@ namespace Programa1.DB.Sucursales
         {
             Id = id;
             Nombre = nombre;
-            Tipo.Id = tipo;
+            Tipo.ID = tipo;
             Ver = ver;
             Propio = propio;
             Titular = titular;
@@ -160,7 +160,7 @@ namespace Programa1.DB.Sucursales
         {
             Id = Convert.ToInt32(dr["Id"]);
             Nombre = dr["Nombre"].ToString();
-            Tipo.Id = Convert.ToInt32(dr["Tipo"]);
+            Tipo.ID = Convert.ToInt32(dr["Tipo"]);
             Ver = Convert.ToBoolean(dr["Ver"]);
             Titular = dr["Titular"].ToString();
             Direccion = dr["Direccion"].ToString();
@@ -177,7 +177,7 @@ namespace Programa1.DB.Sucursales
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Sucursales SET Nombre='{Nombre}', Tipo={Tipo.Id}, Ver={(Ver ? "1" : "0")}, Propio={(Propio ? "1" : "0")}, Titular='{Titular}', CUIT='{CUIT}', Direccion='{Direccion}'" +
+                    new SqlCommand($"UPDATE Sucursales SET Nombre='{Nombre}', Tipo={Tipo.ID}, Ver={(Ver ? "1" : "0")}, Propio={(Propio ? "1" : "0")}, Titular='{Titular}', CUIT='{CUIT}', Direccion='{Direccion}'" +
                     $",Alias='{Alias}',Id_Localidad={Localidad.Id}, Balanza='{Balanza}' WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -203,7 +203,7 @@ namespace Programa1.DB.Sucursales
                 string vpropio = Propio ? "1" : "0";
 
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Sucursales (Id, Nombre, Tipo, Ver, Propio, Titular, CUIT, Direccion, Id_Localidad, Alias, Balanza) VALUES({Id}, '{Nombre}', {Tipo.Id}, {vver}, " +
+                    new SqlCommand($"INSERT INTO Sucursales (Id, Nombre, Tipo, Ver, Propio, Titular, CUIT, Direccion, Id_Localidad, Alias, Balanza) VALUES({Id}, '{Nombre}', {Tipo.ID}, {vver}, " +
                     $"{vpropio}, '{Titular}', '{CUIT}', '{Direccion}', {Localidad.Id}, '{Alias}', '{Balanza}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;

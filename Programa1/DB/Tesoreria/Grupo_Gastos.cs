@@ -6,7 +6,7 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Grupo_Gastos
+    public class Grupo_Gastos
     {
         public Grupo_Gastos() { }
 
@@ -38,6 +38,8 @@
         public string Campo_Nombre { get; set; }
         public string Campo_Filtro { get; set; }
 
+        public Tipo_PagoAutorizado TPagoAutorizado { get; set; } = new Tipo_PagoAutorizado();
+
         public void Cargar()
         {
             DataTable dt = Datos("Id=" + Id);
@@ -48,6 +50,7 @@
                 Campo_Id = Convert.ToString(dt.Rows[0]["Campo_Id"]);
                 Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]);
                 Campo_Filtro = Convert.ToString(dt.Rows[0]["Campo_Filtro"]);
+                TPagoAutorizado.ID = Convert.ToInt32(dt.Rows[0]["ID_PagoAutorizado"]);
             }
             else
             {
@@ -56,6 +59,7 @@
                 Campo_Id = "";
                 Campo_Nombre = "";
                 Campo_Filtro = "";
+                TPagoAutorizado.ID = -1;
             }
         }
 
@@ -139,7 +143,7 @@
             try
             {
                 SqlCommand command = new SqlCommand($"UPDATE Grupos_Salidas SET Nombre='{Nombre}', " +
-                    $"Tabla='{Tabla}', Campo_ID='{Campo_Id}', Campo_Nombre='{Campo_Nombre}', Campo_Filtro='{Campo_Filtro}'" +
+                    $"Tabla='{Tabla}', Campo_ID='{Campo_Id}', Campo_Nombre='{Campo_Nombre}', Campo_Filtro='{Campo_Filtro}', ID_PagoAutorizado={TPagoAutorizado.ID}" +
                     $" WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -161,8 +165,8 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Grupos_Salidas (Nombre, Tabla, Campo_ID, Campo_Nombre, Campo_Filtro)" +
-                    $" VALUES('{Nombre}', '{Tabla}', '{Campo_Id}', '{Campo_Nombre}', '{Campo_Filtro}')", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Grupos_Salidas (Nombre, Tabla, Campo_ID, Campo_Nombre, Campo_Filtro, ID_PagoAutorizado)" +
+                    $" VALUES('{Nombre}', '{Tabla}', '{Campo_Id}', '{Campo_Nombre}', '{Campo_Filtro}', {TPagoAutorizado.ID})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
