@@ -7,7 +7,7 @@ namespace Programa1.DB
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class TipoProductos
+    public class TipoProductos
     {
         public TipoProductos()
         {

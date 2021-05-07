@@ -1,36 +1,20 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Productos
+    public class Productos : c_Base
     {
         public Productos()
-        {            
-        }
-
-        public Productos(int id, string nombre, int tipo, bool ver, bool imp, bool pesable, int multi)
         {
-            ID = id;
-            Nombre = nombre;
-            Tipo.ID = tipo;
-            Ver = ver;
-            Imprimir = imp;
-            Pesable = pesable;
-            Multiplicador = multi;
+            Tabla = "Productos";
+            Vista = "vw_Productos";
         }
-
-        [Required]
-        [Key]
-        public int ID { get; set; }
-
-        [MaxLength(80, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
-        [Required]
-        public string Nombre { get; set; }
-
+                
         public TipoProductos Tipo { get; set; } = new TipoProductos();
 
         public bool Ver { get; set; }
@@ -47,53 +31,7 @@
         public bool Filtrar_Ver { get; set; } = true;
 
         public bool Ordern_XId { get; set; } = true;
-
-        public DataTable Datos(string filtro = "")
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            Herramientas.Herramientas h = new Herramientas.Herramientas();
-
-            if (Filtrar_Ver)
-            {
-                if (Mostrar_Ocultos == false)
-                {
-                    filtro = h.Unir(filtro, " (Ver=1) ");
-                }
-            }
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-
-            if (Ordern_XId == false)
-            {
-                filtro += " ORDER BY Nombre ";
-            }
-            else
-            {
-                filtro += " ORDER BY Id";
-            }
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Productos" + filtro, conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
-
+                
         public void Siguiente()
         {
             var dt = new DataTable("Datos");
@@ -145,7 +83,7 @@
             Multiplicador = Convert.ToInt32(dr["Multiplicador"]);
         }
 
-        public void Actualizar()
+        public new void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -171,7 +109,7 @@
             }
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -197,65 +135,6 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
-
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Productos WHERE Id=" + ID, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                ID = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
-
-        public bool Existe()
-        {
-            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            var dt = new DataTable("Datos");
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Productos WHERE Id=" + ID, sql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-
-
-                if (dt.Rows.Count == 0)
-                {
-                    Nombre = "";
-                    return false;
-                }
-                else
-                {
-                    Asignar(dt.Rows[0]);
-                    return true;
-                }
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-                return false;
-            }
-        }
-
-
+            
     }
 }

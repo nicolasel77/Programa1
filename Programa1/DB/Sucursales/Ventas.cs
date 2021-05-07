@@ -90,7 +90,7 @@ namespace Programa1.DB
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, ID_Camion, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra Costo, SUM(Kilos) Kilos, SUM(Total_Compra) Total  " +
                     $"FROM vw_Ventas {filtro} " +
-                    $"GROUP BY Fecha, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra " +
+                    $"GROUP BY Fecha, ID_Camion, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra " +
                     $"ORDER BY  Fecha, Id_Productos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 

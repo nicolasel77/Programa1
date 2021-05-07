@@ -177,6 +177,41 @@ namespace Programa1.Herramientas
                 }
             }
         }
+        public void Llenar_List(ComboBox ls, DataTable dt, string formato = "")
+        {
+            ls.Items.Clear();
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (dt.Columns.Count > 1)
+                    {
+                        ls.Items.Add($"{dr[0]}. {dr[1]}");
+                    }
+                    else
+                    {
+                        if (formato.Length > 0)
+                        {
+                            if (dt.Columns[0].DataType == typeof(DateTime))
+                            {
+                                DateTime d = Convert.ToDateTime(dr[0]);
+                                ls.Items.Add(d.ToString(formato));
+                            }
+                            else
+                            {
+                                ls.Items.Add($"{dr[0]}");
+                            }
+
+                        }
+                        else
+                        {
+                            ls.Items.Add($"{dr[0]}");
+                        }
+                    }
+
+                }
+            }
+        }
 
         #endregion
 

@@ -4,6 +4,7 @@
     using System;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Media;
     using System.Windows.Forms;
 
     public class c_Base
@@ -12,6 +13,11 @@
         public string Vista { get; set; }
 
         public int ID { get; set; }
+
+        /// <summary>
+        /// Es el nombre del campo ID, por defecto es ID.
+        /// </summary>
+        public string Campo_ID { get; set; } = "ID";
         public string Nombre { get; set; }
 
 
@@ -22,7 +28,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("UPDATE {2} SET Nombre='{0}' WHERE Id={1}", Nombre, ID, Tabla), cnn);
+                SqlCommand command = new SqlCommand(string.Format("UPDATE {2} SET Nombre='{0}' WHERE {3}={1}", Nombre, ID, Tabla, Campo_ID), cnn);
                 command.CommandType = CommandType.Text;
                 command.Connection = cnn;
                 cnn.Open();
@@ -45,7 +51,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("UPDATE {0} SET {1}={2} WHERE Id={3}", Tabla, Campo, valor, ID), cnn);
+                SqlCommand command = new SqlCommand(string.Format("UPDATE {0} SET {1}={2} WHERE {3}={4}", Tabla, Campo, valor, Campo_ID, ID), cnn);
                 command.CommandType = CommandType.Text;
                 command.Connection = cnn;
                 cnn.Open();
@@ -59,13 +65,14 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
+
         public void Agregar()
         {
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand cmd = new SqlCommand($"INSERT INTO {Tabla} (Id, Nombre) VALUES({ID}, '{Nombre}')", cnn);
+                SqlCommand cmd = new SqlCommand($"INSERT INTO {Tabla} ({Campo_ID}, Nombre) VALUES({ID}, '{Nombre}')", cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -93,7 +100,7 @@
 
             try
             {
-                SqlCommand cmd = new SqlCommand(string.Format("INSERT INTO {0} (Id, Nombre, {3}) VALUES({1}, '{2}', {4})", Tabla, ID, Nombre, Campo, valor), cnn);
+                SqlCommand cmd = new SqlCommand(string.Format("INSERT INTO {0} ({5}, Nombre, {3}) VALUES({1}, '{2}', {4})", Tabla, ID, Nombre, Campo, valor, Campo_ID), cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -107,6 +114,35 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
+        /// <summary>
+        /// Agrega el registro sin usar ID, Nombre.
+        /// </summary>
+        /// <param name="Campo">El nombre del Campo que se agrega.</param>
+        /// <param name="valor">Valor tipo objet. Se formatea en el mismo procedimiento.</param>
+        public void Agregar_NoID(string Campo, object valor)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            Herramientas h = new Herramientas();
+            valor = h.Formato_SQL(valor);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(string.Format("INSERT INTO {0} ({1}) VALUES({2})", Tabla, Campo, valor), cnn);
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = cnn;
+                cnn.Open();
+
+                var d = cmd.ExecuteNonQuery();
+
+                cnn.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
+
         public void Borrar()
         {
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -192,6 +228,31 @@
             return dt;
         }
 
+        public object Dato(string filtro = "", string Campos = "*", string Orden = "ORDER BY Id")
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object d = null;
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+            if (Orden != "") { if (Orden != "ORDER BY Id") { Orden = " ORDER BY " + Orden; } }
+
+            try
+            {
+                string Cadena = $"SELECT {Campos} FROM {Vista} {filtro} {Orden}";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                d = cmd.ExecuteScalar();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+            }
+
+            return d;
+        }
+
         public DataTable sp_Datos()
         {
             var dt = new DataTable("Datos");
@@ -268,6 +329,42 @@
                 else
                 {
                     ID = value;
+                    Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+                    return true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+                return false;
+            }
+
+        }
+        public bool Existe(string campo, object value)
+        {
+            SqlConnection cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var dt = new DataTable("Datos");
+            Herramientas h = new Herramientas();
+            value = h.Formato_SQL(value);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand($"SELECT * FROM {Tabla} WHERE {campo}={value}", cnn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                daAdapt.Fill(dt);
+
+                if (dt.Rows.Count == 0)
+                {
+                    ID = 0;
+                    Nombre = "";
+                    return false;
+                }
+                else
+                {
+                    ID = Convert.ToInt32(dt.Rows[0][0]);
                     Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
                     return true;
                 }

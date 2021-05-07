@@ -245,6 +245,12 @@
     <Compile Include="Carga\Sucursales\frmGastos_Sucursales.Designer.cs">
       <DependentUpon>frmGastos_Sucursales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Sucursales\frmListas_Carga.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmListas_Carga.Designer.cs">
+      <DependentUpon>frmListas_Carga.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Sucursales\frmOfertas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -540,6 +546,7 @@
     <Compile Include="DB\Varios\Camiones.cs" />
     <Compile Include="DB\Varios\Datos_Genericos.cs" />
     <Compile Include="DB\Varios\Empresas.cs" />
+    <Compile Include="DB\Varios\Listas_Carga.cs" />
     <Compile Include="DB\Varios\Localidades.cs" />
     <Compile Include="DB\Proveedores\Compras.cs" />
     <Compile Include="DB\Proveedores\Devoluciones.cs" />
@@ -563,6 +570,7 @@
     <Compile Include="DB\Sucursales\Traslados.cs" />
     <Compile Include="DB\Sucursales\Ventas.cs" />
     <Compile Include="DB\Hacienda\TipoStock.cs" />
+    <Compile Include="DB\Varios\Nombre_Listas.cs" />
     <Compile Include="DB\Varios\Pagos_Autorizados.cs" />
     <Compile Include="DB\Varios\Partidos.cs" />
     <Compile Include="DB\Productos\Productos.cs" />
@@ -672,6 +680,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmGastos_Sucursales.resx">
       <DependentUpon>frmGastos_Sucursales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sucursales\frmListas_Carga.resx">
+      <DependentUpon>frmListas_Carga.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmOfertas.resx">
       <DependentUpon>frmOfertas.cs</DependentUpon>

@@ -1,6 +1,8 @@
 ﻿namespace Programa1.Carga
 {
+    using Programa1.Carga.Sucursales;
     using Programa1.DB;
+    using Programa1.DB.Varios;
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -10,6 +12,7 @@
     public partial class frmVentas : Form
     {
         private Ventas Venta;
+        private Listas_Carga Listas = new Listas_Carga();
 
         #region " Columnas "
         private Byte c_Id;
@@ -59,6 +62,8 @@
             Totales();
             Herramientas.Herramientas h = new Herramientas.Herramientas();
             h.Llenar_List(lstCamiones, Venta.Camion.Datos());
+            h.Llenar_List(cmbListas, Listas.Datos());
+            cmbListas.Items.Insert(0, "Editar...");
         }
 
         private void FrmVenta_KeyUp(object sender, KeyEventArgs e)
@@ -530,27 +535,30 @@
             frmCopiarVentaACompra cp = new frmCopiarVentaACompra();
             string f = Armar_Cadena();
 
-            DataTable dt = Venta.Resumen_Compra(f);
-
-            cp.Cargar(dt);
-            cp.grd.Columnas[cp.grd.get_ColIndex("Costo")].Format = "C2";
-            cp.grd.Columnas[cp.grd.get_ColIndex("Kilos")].Format = "N2";
-            cp.grd.Columnas[cp.grd.get_ColIndex("Total")].Format = "C2";
-            cp.ShowDialog();
-
-            if (cp.Aceptado == true)
+            if (f != "")
             {
-                Compras compras = new Compras();
-                foreach (DataRow dr in dt.Rows)
+                DataTable dt = Venta.Resumen_Compra(f);
+
+                cp.Cargar(dt);
+                cp.grd.Columnas[cp.grd.get_ColIndex("Costo")].Format = "C2";
+                cp.grd.Columnas[cp.grd.get_ColIndex("Kilos")].Format = "N2";
+                cp.grd.Columnas[cp.grd.get_ColIndex("Total")].Format = "C2";
+                cp.ShowDialog();
+
+                if (cp.Aceptado == true)
                 {
-                    compras.Fecha = Convert.ToDateTime(dr["Fecha"]);
-                    compras.Proveedor.Id = Convert.ToInt16(dr["Id_Proveedores"]);
-                    compras.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
-                    compras.Descripcion = dr["Descripcion"].ToString();
-                    compras.Costo = Convert.ToSingle(dr["Costo"]);
-                    compras.Kilos = Convert.ToSingle(dr["Kilos"]);
-                    compras.Agregar();
-                }
+                    Compras compras = new Compras();
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        compras.Fecha = Convert.ToDateTime(dr["Fecha"]);
+                        compras.Proveedor.Id = Convert.ToInt16(dr["Id_Proveedores"]);
+                        compras.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
+                        compras.Descripcion = dr["Descripcion"].ToString();
+                        compras.Costo = Convert.ToSingle(dr["Costo"]);
+                        compras.Kilos = Convert.ToSingle(dr["Kilos"]);
+                        compras.Agregar();
+                    }
+                } 
             }
         }
 
@@ -598,6 +606,15 @@
         private void lstCamiones_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmdMostrar.PerformClick();
+        }
+
+        private void cmbListas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbListas.Text == "Editar...")
+            {
+                frmListas_Carga fr = new frmListas_Carga();
+                fr.ShowDialog();
+            }
         }
     }
 }
