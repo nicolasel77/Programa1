@@ -80,12 +80,14 @@
                 var d = cmd.ExecuteNonQuery();
 
                 cnn.Close();
+                ID = Max_ID();
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error");
             }
         }
+      
         /// <summary>
         /// Agrega el registro sumando un campo. Ej: SubTipo 
         /// </summary>
@@ -108,6 +110,7 @@
                 var d = cmd.ExecuteNonQuery();
 
                 cnn.Close();
+                ID = Max_ID();
             }
             catch (Exception e)
             {
@@ -136,6 +139,7 @@
                 var d = cmd.ExecuteNonQuery();
 
                 cnn.Close();
+                ID = Max_ID();
             }
             catch (Exception e)
             {
@@ -150,6 +154,32 @@
             try
             {
                 SqlCommand cmd = new SqlCommand(string.Format("DELETE FROM {1} WHERE Id={0}", ID, Tabla), cnn);
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = cnn;
+                cnn.Open();
+
+                var d = cmd.ExecuteNonQuery();
+
+                ID = 0;
+
+                cnn.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
+        /// <summary>
+        /// Para borrar varios registros a la vez.
+        /// </summary>
+        /// <param name="where">sin la palabra where</param>
+        public void Borrar(string where)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(string.Format("DELETE FROM {1} WHERE {0}", where, Tabla), cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -237,13 +267,16 @@
 
             try
             {
-                string Cadena = $"SELECT {Campos} FROM {Vista} {filtro} {Orden}";
+                string Cadena = $"SELECT TOP 1 {Campos} FROM {Vista} {filtro} {Orden}";
 
                 SqlCommand cmd = new SqlCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
 
+                cnn.Open();
+
                 SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
                 d = cmd.ExecuteScalar();
+                cnn.Close();
             }
             catch (Exception)
             {
@@ -272,6 +305,32 @@
             }
 
             return dt;
+        }
+
+        public int Max_ID()
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            int d = 0;
+
+            try
+            {
+                string Cadena = $"SELECT MAX(ID) FROM {Tabla}";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                cnn.Open();
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                d = (int)cmd.ExecuteScalar();
+
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+            }
+
+            return d;
         }
 
         public bool Existe()

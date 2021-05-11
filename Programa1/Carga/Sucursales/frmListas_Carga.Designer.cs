@@ -31,10 +31,11 @@ namespace Programa1.Carga.Sucursales
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListas_Carga));
             this.lstListas = new System.Windows.Forms.ListBox();
-            this.cmdAgregar = new Programa1.Controles.cBoton();
             this.grd = new Grilla2.SpeedGrilla();
-            this.cmdBorrar = new Programa1.Controles.cBoton();
+            this.txtAgregar = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.cmdSalir = new Programa1.Controles.cBoton();
+            this.cmdBorrar = new Programa1.Controles.cBoton();
+            this.cmdAgregar = new Programa1.Controles.cBoton();
             this.SuspendLayout();
             // 
             // lstListas
@@ -47,18 +48,9 @@ namespace Programa1.Carga.Sucursales
             this.lstListas.ItemHeight = 18;
             this.lstListas.Location = new System.Drawing.Point(535, 12);
             this.lstListas.Name = "lstListas";
-            this.lstListas.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstListas.Size = new System.Drawing.Size(187, 558);
+            this.lstListas.Size = new System.Drawing.Size(187, 522);
             this.lstListas.TabIndex = 6;
-            // 
-            // cmdAgregar
-            // 
-            this.cmdAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdAgregar.Location = new System.Drawing.Point(535, 583);
-            this.cmdAgregar.Name = "cmdAgregar";
-            this.cmdAgregar.Size = new System.Drawing.Size(187, 40);
-            this.cmdAgregar.TabIndex = 7;
-            this.cmdAgregar.Texto = "Agregar";
+            this.lstListas.SelectedIndexChanged += new System.EventHandler(this.lstListas_SelectedIndexChanged);
             // 
             // grd
             // 
@@ -96,14 +88,23 @@ namespace Programa1.Carga.Sucursales
             this.grd.TabIndex = 8;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
             // 
-            // cmdBorrar
+            // txtAgregar
             // 
-            this.cmdBorrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdBorrar.Location = new System.Drawing.Point(535, 629);
-            this.cmdBorrar.Name = "cmdBorrar";
-            this.cmdBorrar.Size = new System.Drawing.Size(187, 40);
-            this.cmdBorrar.TabIndex = 7;
-            this.cmdBorrar.Texto = "Borrar";
+            this.txtAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAgregar.Depth = 0;
+            this.txtAgregar.ForeColor = System.Drawing.Color.DimGray;
+            this.txtAgregar.Hint = "Agregar";
+            this.txtAgregar.Location = new System.Drawing.Point(535, 554);
+            this.txtAgregar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtAgregar.Name = "txtAgregar";
+            this.txtAgregar.PasswordChar = '\0';
+            this.txtAgregar.SelectedText = "";
+            this.txtAgregar.SelectionLength = 0;
+            this.txtAgregar.SelectionStart = 0;
+            this.txtAgregar.Size = new System.Drawing.Size(187, 23);
+            this.txtAgregar.TabIndex = 9;
+            this.txtAgregar.Text = "Agregar";
+            this.txtAgregar.UseSystemPasswordChar = false;
             // 
             // cmdSalir
             // 
@@ -113,12 +114,34 @@ namespace Programa1.Carga.Sucursales
             this.cmdSalir.Size = new System.Drawing.Size(187, 40);
             this.cmdSalir.TabIndex = 7;
             this.cmdSalir.Texto = "Salir";
+            this.cmdSalir.Click += new System.EventHandler(this.cmdSalir_Click);
+            // 
+            // cmdBorrar
+            // 
+            this.cmdBorrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdBorrar.Location = new System.Drawing.Point(535, 629);
+            this.cmdBorrar.Name = "cmdBorrar";
+            this.cmdBorrar.Size = new System.Drawing.Size(187, 40);
+            this.cmdBorrar.TabIndex = 7;
+            this.cmdBorrar.Texto = "Borrar";
+            this.cmdBorrar.Click += new System.EventHandler(this.cmdBorrar_Click);
+            // 
+            // cmdAgregar
+            // 
+            this.cmdAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdAgregar.Location = new System.Drawing.Point(535, 583);
+            this.cmdAgregar.Name = "cmdAgregar";
+            this.cmdAgregar.Size = new System.Drawing.Size(187, 40);
+            this.cmdAgregar.TabIndex = 7;
+            this.cmdAgregar.Texto = "Agregar";
+            this.cmdAgregar.Click += new System.EventHandler(this.cmdAgregar_Click);
             // 
             // frmListas_Carga
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 727);
+            this.Controls.Add(this.txtAgregar);
             this.Controls.Add(this.grd);
             this.Controls.Add(this.cmdSalir);
             this.Controls.Add(this.cmdBorrar);
@@ -139,5 +162,6 @@ namespace Programa1.Carga.Sucursales
         private Grilla2.SpeedGrilla grd;
         private Controles.cBoton cmdBorrar;
         private Controles.cBoton cmdSalir;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtAgregar;
     }
 }

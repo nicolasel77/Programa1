@@ -1,12 +1,24 @@
-﻿using Programa1.DB.Varios;
-using System;
-using System.Windows.Forms;
-
-namespace Programa1.Carga.Sucursales
+﻿namespace Programa1.Carga.Sucursales
 {
+    using Programa1.DB.Varios;
+    using System;
+    using System.Windows.Forms;
+
     public partial class frmListas_Carga : Form
     {
         Listas_Carga listas = new Listas_Carga();
+
+        class t_Col
+        {
+            //ID, ID_Lista, Nombre, Orden, Producto, Nombre_Producto
+            public const int ID = 0;
+            public const int ID_Lista = 1;
+            public const int Nombre = 2;
+            public const int Orden = 3;
+            public const int Producto = 4;
+            public const int Nombre_Producto = 5;
+        }
+
         public frmListas_Carga()
         {
             InitializeComponent();
@@ -24,55 +36,101 @@ namespace Programa1.Carga.Sucursales
             Herramientas.Herramientas h = new Herramientas.Herramientas();
 
             string f = "";
-            if (lstListas.SelectedIndex > -1) { f = h.Codigo_Seleccionado(lstListas.Text).ToString(); f = h.Unir(" ID=", f); }
+            if (lstListas.SelectedIndex > -1) { f = h.Codigo_Seleccionado(lstListas.Text).ToString(); f = " ID_Lista=" + f; }
 
             grd.MostrarDatos(listas.Datos_Vista(f, "*", "Orden"), true);
-            grd.set_ColW(0, 30);
-            grd.set_ColW(1, 90);
-            grd.set_ColW(2, 30);
-            grd.set_ColW(3, 60);
-            grd.set_ColW(4, 100);
+            grd.set_ColW(t_Col.ID, 0);
+            grd.set_ColW(t_Col.ID_Lista, 30);
+            grd.set_ColW(t_Col.Nombre, 100);
+            grd.set_ColW(t_Col.Orden, 30);
+            grd.set_ColW(t_Col.Producto, 60);
+            grd.set_ColW(t_Col.Nombre_Producto, 120);
         }
 
         private void grd_Editado(short f, short c, object a)
         {
-            // ID_Lista, Nombre, Orden, Producto, Nombre_Producto
+            int i = (int)grd.get_Texto(f, t_Col.ID);
+
             switch (c)
             {
-                case 0: //ID_Lista
+                case t_Col.ID_Lista:
                     if (listas.Lista.Existe(Convert.ToInt32(a)) == true)
                     {
+                        if (i != 0) { listas.Actualizar("ID_Lista", a); }
                         grd.set_Texto(f, c, a);
                         grd.set_Texto(f, c + 1, listas.Lista.Nombre);
-                        grd.ActivarCelda(f, 2);
+                        grd.ActivarCelda(f, t_Col.Orden);
                     }
                     break;
-                case 2: //Orden
+                case t_Col.Orden:
                     listas.Orden = Convert.ToInt32(a);
-                    if (listas.ID != 0 & listas.Producto.ID != 0) { listas.Actualizar("Orden", a); }
+                    if (i != 0) { listas.Actualizar("Orden", a); }
 
                     grd.set_Texto(f, c, a);
-                    grd.ActivarCelda(f, 3);
+                    grd.ActivarCelda(f, t_Col.Producto);
                     break;
-                case 3: //Producto
+                case t_Col.Producto:
                     if (listas.Producto.Existe(Convert.ToInt32(a)) == true)
                     {
-                        if (listas.ID != 0 & listas.Producto.ID != 0) 
+                        if (i == 0)
                         {
-                            listas.Actualizar("Producto", a);
-                        }
-                        else
-                        {
-                            listas.Agregar_NoID("ID_Lista", a);
-                            //listas.Actualizar("Orden", listas.Orden);
+                            listas.Agregar_NoID("ID_Lista", listas.Lista.ID);
+                            listas.Actualizar("Orden", listas.Orden);
 
+                            grd.AgregarFila();
+                            grd.set_Texto(f + 1, t_Col.ID_Lista, listas.Lista.ID);
+                            grd.set_Texto(f + 1, t_Col.Nombre, listas.Lista.Nombre);
+                            grd.set_Texto(f + 1, t_Col.Orden, listas.Orden + 1);
                         }
+
+                        listas.Actualizar("Producto", a);
 
                         grd.set_Texto(f, c, a);
-                        grd.ActivarCelda(f, 3);
+                        grd.set_Texto(f, t_Col.Nombre_Producto, listas.Producto.Nombre);
+                        grd.set_Texto(f, t_Col.ID, listas.ID);
+
+                        grd.ActivarCelda(f + 1, t_Col.Producto);
                     }
                     break;
             }
+        }
+
+        private void cmdSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void cmdAgregar_Click(object sender, EventArgs e)
+        {
+            string nuevoNombre = txtAgregar.Text;
+            if (nuevoNombre.Length != 0)
+            {
+                listas.Lista.Nombre = nuevoNombre;
+                listas.Lista.ID = listas.Lista.Max_ID() + 1;
+                listas.Lista.Agregar();
+                lstListas.Items.Add($"{listas.Lista.ID}. {nuevoNombre}");
+                txtAgregar.Text = "";
+            }
+        }
+
+        private void cmdBorrar_Click(object sender, EventArgs e)
+        {
+            if (lstListas.SelectedIndex != -1)
+            {
+                if (MessageBox.Show($"¿Seguro que quiere borrar el ítem {lstListas.Text}?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    Herramientas.Herramientas h = new Herramientas.Herramientas();
+                    listas.Lista.ID = h.Codigo_Seleccionado(lstListas.Text);
+                    listas.Lista.Borrar_Hijos();
+                    listas.Lista.Borrar();
+                    lstListas.Items.RemoveAt(lstListas.SelectedIndex);
+                }
+            }
+        }
+
+        private void lstListas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cargar();
         }
     }
 }

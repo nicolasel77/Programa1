@@ -1,6 +1,7 @@
 ﻿namespace Programa1.DB
 {
     using Programa1.Clases;
+    using Programa1.DB.Varios;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
@@ -37,10 +38,11 @@
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-
+            string s = $"SELECT TOP 1 * FROM vw_Productos WHERE Id>{ID} ORDER BY Id";
+           
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 * FROM vw_Productos WHERE Id>{ID} ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand(s, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

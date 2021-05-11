@@ -6,12 +6,27 @@
 
     public class Listas_Carga : c_Base
     {
+        private Productos prod = new Productos();
+        /// <summary>
+        /// Corresponde a la lista de Productos + Lista + Orden
+        /// </summary>
         public Listas_Carga()
         {
             Tabla = "Listas_Carga";
-            Vista = "vw_Listas_Carga";            "
+            Vista = "vw_Listas_Carga";
         }
-        public Productos Producto { get; set; } = new Productos();
+        public Productos Producto
+        {
+            get { return prod; }
+            set 
+            {
+                prod = value;
+                //Buscar el orden
+                int p = Producto.ID;
+                p = Convert.ToInt32(Dato($"ID_Lista={Lista.ID} AND Producto={p}", "Orden", "Orden"));
+                Orden = p;
+            }
+        }
         public int Orden { get; set; }
         public Nombre_Listas Lista { get; set; } = new Nombre_Listas();
 
@@ -26,12 +41,9 @@
         public int Producto_Siguiente()
         {
             int p = Producto.ID;
-            p = Convert.ToInt32(Dato($"ID_Lista={Lista.ID} AND Orden>{Orden}", "Producto, ", "Orden"));
-            if (p == 0)
-            {
-                Producto.ID = p;
-                Producto.Existe();
-            }
+            p = Convert.ToInt32(Dato($"ID_Lista={Lista.ID} AND Orden>{Orden}", "Producto", "Orden"));
+            Producto.ID = p;
+            Producto.Existe();
             return Producto.ID;
         }
 

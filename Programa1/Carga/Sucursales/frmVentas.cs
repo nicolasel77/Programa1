@@ -12,21 +12,21 @@
     public partial class frmVentas : Form
     {
         private Ventas Venta;
-        private Listas_Carga Listas = new Listas_Carga();
+        Listas_Carga Listas = new Listas_Carga();
 
         #region " Columnas "
-        private Byte c_Id;
-        private Byte c_Fecha;
-        private Byte c_IdCamion;
-        private Byte c_IdProv;
-        private Byte c_IdSuc;
-        private Byte c_IdProd;
-        private Byte c_Descripcion;
-        private Byte c_CostoCompra;
-        private Byte c_CostoVenta;
-        private Byte c_Kilos;
-        private Byte c_TotalCompra;
-        private Byte c_TotalVenta;
+        private const Byte c_Id = 0;
+        private const Byte c_Fecha = 1;
+        private const Byte c_IdCamion = 2;
+        private const Byte c_IdProv = 3;
+        private const Byte c_IdSuc = 5;
+        private const Byte c_IdProd = 7;
+        private const Byte c_Descripcion = 8;
+        private const Byte c_CostoCompra = 9;
+        private const Byte c_CostoVenta = 10;
+        private const Byte c_Kilos = 11;
+        private const Byte c_TotalCompra = 12;
+        private const Byte c_TotalVenta = 13;
         #endregion
 
         public frmVentas()
@@ -39,19 +39,6 @@
             Venta = new Ventas();
             grdVenta.MostrarDatos(Venta.Datos("Id=0"), true);
 
-            c_Id = Convert.ToByte(grdVenta.get_ColIndex("Id"));
-            c_Fecha = Convert.ToByte(grdVenta.get_ColIndex("Fecha"));
-            c_IdCamion = Convert.ToByte(grdVenta.get_ColIndex("Id_Camion"));
-            c_IdProv = Convert.ToByte(grdVenta.get_ColIndex("Id_Proveedores"));
-            c_IdSuc = Convert.ToByte(grdVenta.get_ColIndex("Id_Sucursales"));
-            c_IdProd = Convert.ToByte(grdVenta.get_ColIndex("Id_Productos"));
-            c_Descripcion = Convert.ToByte(grdVenta.get_ColIndex("Descripcion"));
-            c_CostoCompra = Convert.ToByte(grdVenta.get_ColIndex("Costo_Compra"));
-            c_CostoVenta = Convert.ToByte(grdVenta.get_ColIndex("Costo_Venta"));
-            c_Kilos = Convert.ToByte(grdVenta.get_ColIndex("Kilos"));
-            c_TotalCompra = Convert.ToByte(grdVenta.get_ColIndex("Total_Compra"));
-            c_TotalVenta = Convert.ToByte(grdVenta.get_ColIndex("Total_Venta"));
-
             formato_Grilla();
 
             //El intercambio de columnas para estas teclas
@@ -61,9 +48,12 @@
 
             Totales();
             Herramientas.Herramientas h = new Herramientas.Herramientas();
-            h.Llenar_List(lstCamiones, Venta.Camion.Datos());
-            h.Llenar_List(cmbListas, Listas.Datos());
-            cmbListas.Items.Insert(0, "Editar...");
+            
+            h.Llenar_List(lstCamiones, Venta.Camion.Datos());                        
+            h.Llenar_List(cmbListas, Listas.Lista.Datos());
+
+            cmbListas.Items.Insert(0, "Ninguna...");
+            cmbListas.Items.Insert(1, "Editar...");
         }
 
         private void FrmVenta_KeyUp(object sender, KeyEventArgs e)
@@ -231,8 +221,7 @@
             int id = Convert.ToInt32(grdVenta.get_Texto(f, c_Id));
             switch (c)
             {
-                case 1:
-                    //Fecha
+                case c_Fecha:
                     DateTime df = Convert.ToDateTime(a);
                     if (df >= cFecha.fecha_Actual)
                     {
@@ -251,8 +240,7 @@
                         grdVenta.ErrorEnTxt();
                     }
                     break;
-                case 2:
-                    //Camion
+                case c_IdCamion:
                     Venta.Camion.ID = Convert.ToInt32(a);
 
                     if (Venta.Camion.Existe() == true)
@@ -265,11 +253,10 @@
                     }
                     else
                     {
-                        MessageBox.Show($"No se encontro el camión {a}.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                        
+                        MessageBox.Show($"No se encontro el camión {a}.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                     break;
-                case 3:
-                    //Id_Proveedores
+                case c_IdProv:
                     Venta.Proveedor.Id = Convert.ToInt32(a);
                     if (Venta.Proveedor.Existe() == true)
                     {
@@ -288,8 +275,7 @@
                         grdVenta.ErrorEnTxt();
                     }
                     break;
-                case 5:
-                    //Id_Sucursales
+                case c_IdSuc:
                     Venta.Sucursal.Id = Convert.ToInt32(a);
                     if (Venta.Sucursal.Existe() == true)
                     {
@@ -309,12 +295,12 @@
                     }
                     break;
 
-                case 7:
-                    //ID_Productos
+                case c_IdProd:
                     Venta.Producto.ID = Convert.ToInt32(a);
                     if (Venta.Producto.Existe() == true)
                     {
                         Venta.precios.Producto = Venta.Producto;
+                        Listas.Producto = Venta.Producto;
                         Venta.precios_Proveedores.Producto = Venta.Producto;
 
                         Venta.Descripcion = Venta.Producto.Nombre;
@@ -343,8 +329,7 @@
                         grdVenta.ErrorEnTxt();
                     }
                     break;
-                case 8:
-                    //Descripcion
+                case c_Descripcion:
                     Venta.Descripcion = a.ToString();
                     grdVenta.set_Texto(f, c, a);
 
@@ -352,8 +337,7 @@
 
                     grdVenta.ActivarCelda(f + 1, c);
                     break;
-                case 9:
-                    //Costo_Compra
+                case c_CostoCompra:
                     Venta.CostoCompra = Convert.ToSingle(a);
                     grdVenta.set_Texto(f, c, a);
                     grdVenta.set_Texto(f, c_TotalCompra, Venta.CostoCompra * Venta.Kilos);
@@ -363,8 +347,7 @@
                     grdVenta.ActivarCelda(f + 1, c);
                     Totales();
                     break;
-                case 10:
-                    //Costo_Venta
+                case c_CostoVenta:
                     Venta.CostoVenta = Convert.ToSingle(a);
                     grdVenta.set_Texto(f, c, a);
                     grdVenta.set_Texto(f, c_TotalVenta, Venta.CostoVenta * Venta.Kilos);
@@ -375,8 +358,7 @@
                     Totales();
                     break;
 
-                case 11:
-                    //Kilos
+                case c_Kilos:
                     Venta.Kilos = Convert.ToSingle(a);
                     grdVenta.set_Texto(f, c, a);
                     grdVenta.set_Texto(f, c_TotalVenta, Venta.CostoVenta * Venta.Kilos);
@@ -396,7 +378,15 @@
                         grdVenta.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.Id);
                         grdVenta.set_Texto(f + 1, c_IdSuc + 1, Venta.Sucursal.Nombre);
 
-                        Venta.Producto.Siguiente();
+                        if (Listas.Lista.ID != 0)
+                        {
+                            Venta.Producto.ID = Listas.Producto_Siguiente();
+                        }
+                        else
+                        {
+                            Venta.Producto.Siguiente();
+                        }
+                                                
                         Venta.precios.Producto = Venta.Producto;
                         Venta.precios_Proveedores.Producto = Venta.Producto;
 
@@ -452,7 +442,16 @@
 
                     if (grdVenta.Col == c_Kilos)
                     {
-                        Venta.Producto.Siguiente();
+                        if (Listas.Lista.ID != 0)
+                        {
+                            Venta.Producto.ID = Listas.Producto_Siguiente();
+                            Listas.Producto = Venta.Producto;
+                        }
+                        else
+                        {
+                            Venta.Producto.Siguiente();
+                        }
+
                         Venta.precios.Producto = Venta.Producto;
                         Venta.precios_Proveedores.Producto = Venta.Producto;
 
@@ -558,7 +557,7 @@
                         compras.Kilos = Convert.ToSingle(dr["Kilos"]);
                         compras.Agregar();
                     }
-                } 
+                }
             }
         }
 
@@ -610,10 +609,22 @@
 
         private void cmbListas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cmbListas.Text == "Editar...")
+            if (cmbListas.Text == "Editar...")
             {
                 frmListas_Carga fr = new frmListas_Carga();
                 fr.ShowDialog();
+            }
+            else
+            {
+                if (cmbListas.Text == "Ninguna...")
+                {
+                    Listas.Lista.ID = 0;
+                }
+                else
+                {
+                    Herramientas.Herramientas h = new Herramientas.Herramientas();
+                    Listas.Lista.ID = h.Codigo_Seleccionado(cmbListas.Text);
+                }
             }
         }
     }
