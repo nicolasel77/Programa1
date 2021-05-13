@@ -131,6 +131,12 @@
     <Compile Include="Carga\Empleados\frmSueldos.Designer.cs">
       <DependentUpon>frmSueldos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Hacienda\frmPagar_Hacienda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmPagar_Hacienda.Designer.cs">
+      <DependentUpon>frmPagar_Hacienda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Precios\frmBorrar_Carne.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -519,6 +525,7 @@
     <Compile Include="DB\Hacienda\Hacienda.cs" />
     <Compile Include="DB\Hacienda\Hacienda_Salidas.cs" />
     <Compile Include="DB\Hacienda\NBoletas.cs" />
+    <Compile Include="DB\Hacienda\Saldos_Consignatarios.cs" />
     <Compile Include="DB\Hacienda\TipoAgregados.cs" />
     <Compile Include="DB\Proveedores\Ajustes.cs" />
     <Compile Include="DB\Proveedores\CCtes_Proveedores.cs" />
@@ -623,6 +630,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Empleados\frmSueldos.resx">
       <DependentUpon>frmSueldos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmPagar_Hacienda.resx">
+      <DependentUpon>frmPagar_Hacienda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Precios\frmBorrar_Carne.resx">
       <DependentUpon>frmBorrar_Carne.cs</DependentUpon>

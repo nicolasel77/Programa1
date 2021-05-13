@@ -1,23 +1,21 @@
 ﻿namespace Programa1.DB.Tesoreria
 {
+    using Programa1.Clases;
     using Programa1.DB.Varios;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
-    class Gastos
+    public class Gastos : c_Base
     {
         Detalle_Gastos dg = new Detalle_Gastos();
 
         public Gastos()
         {
+            ID_Automatico = true;
         }
-
-        /// <summary>
-        /// El ID es automático.
-        /// </summary>
-        public int ID { get; set; }
+                
         public DateTime Fecha { get; set; }
         public Cajas caja { get; set; } = new Cajas();
 
@@ -40,7 +38,7 @@
         private A_Rendir a_Rendir { get; set; } = new A_Rendir();
 
         #region " Editrar Datos "
-        public void Actualizar()
+        public new void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -65,7 +63,7 @@
             }
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             int n = MaxId();

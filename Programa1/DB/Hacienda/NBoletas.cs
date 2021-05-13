@@ -1,27 +1,20 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class NBoletas
+    class NBoletas : c_Base
     {
         public NBoletas()
         {
-
+            Tabla = "NBoletas";
+            Vista = "vw_NBoletas";
+            Campo_ID = "NBoleta";
         }
 
-        public NBoletas(int nboleta, DateTime fecha, int reparto, float costo, float costo_f, bool direct)
-        {
-            NBoleta = nboleta;
-            Fecha = fecha;
-            Reparto = reparto;
-            Costo = costo;
-            Costo_Faena = costo_f;
-            Directo = direct;
-
-        }
 
         public int NBoleta { get; set; }
         public DateTime Fecha { get; set; }
@@ -29,31 +22,8 @@
         public Single Costo { get; set; }
         public Single Costo_Faena { get; set; }
         public bool Directo { get; set; }
-
-        public DataTable Datos(string filtro = "", string top = " TOP 100", string orden = "DESC")
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            if (filtro.Length > 0) filtro = " WHERE " + filtro;
-            
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand($"SELECT {top} * FROM vw_NBoletas {filtro} ORDER BY NBoleta {orden}", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
-
-        public void Actualizar()
+               
+        public new void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -77,10 +47,10 @@
             }
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            int n = MaxId();
+            int n = Max_Boleta();
             try
             {
                 SqlCommand command =
@@ -95,7 +65,7 @@
 
                 sql.Close();
 
-                int n2 = MaxId();
+                int n2 = Max_Boleta();
                 if (n == n2)
                 {
                     NBoleta = 0;
@@ -112,7 +82,7 @@
             }
         }
 
-        public int MaxId()
+        public int Max_Boleta()
         {
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             object d = null;
@@ -137,28 +107,7 @@
             return Convert.ToInt32(d);
         }
 
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM NBoletas WHERE NBoleta=" + NBoleta, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                NBoleta = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
         
+
     }
 }

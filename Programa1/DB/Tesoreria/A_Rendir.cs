@@ -5,7 +5,7 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class A_Rendir
+    public class A_Rendir
     {
         public A_Rendir()
         {

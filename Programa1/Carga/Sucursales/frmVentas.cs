@@ -378,15 +378,8 @@
                         grdVenta.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.Id);
                         grdVenta.set_Texto(f + 1, c_IdSuc + 1, Venta.Sucursal.Nombre);
 
-                        if (Listas.Lista.ID != 0)
-                        {
-                            Venta.Producto.ID = Listas.Producto_Siguiente();
-                        }
-                        else
-                        {
-                            Venta.Producto.Siguiente();
-                        }
-                                                
+                        Venta.Producto.ID = Listas.Producto_Siguiente();
+
                         Venta.precios.Producto = Venta.Producto;
                         Venta.precios_Proveedores.Producto = Venta.Producto;
 
@@ -442,15 +435,7 @@
 
                     if (grdVenta.Col == c_Kilos)
                     {
-                        if (Listas.Lista.ID != 0)
-                        {
-                            Venta.Producto.ID = Listas.Producto_Siguiente();
-                            Listas.Producto = Venta.Producto;
-                        }
-                        else
-                        {
-                            Venta.Producto.Siguiente();
-                        }
+                        Venta.Producto.ID = Listas.Producto_Siguiente();
 
                         Venta.precios.Producto = Venta.Producto;
                         Venta.precios_Proveedores.Producto = Venta.Producto;
@@ -624,6 +609,7 @@
                 {
                     Herramientas.Herramientas h = new Herramientas.Herramientas();
                     Listas.Lista.ID = h.Codigo_Seleccionado(cmbListas.Text);
+                    Listas.Producto= Venta.Producto;
                 }
             }
         }

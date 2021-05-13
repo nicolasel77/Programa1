@@ -6,7 +6,7 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
-    class Cajas
+    public class Cajas
     {
         public Cajas()
         {

@@ -1,6 +1,7 @@
 ﻿
 namespace Programa1.Carga.Tesoreria
 {
+    using Programa1.DB;
     using Programa1.DB.Tesoreria;
     using Programa1.DB.Varios;
     using System;
@@ -10,7 +11,7 @@ namespace Programa1.Carga.Tesoreria
 
     public partial class frmCaja_Diaria : Form
     {
-        
+
         Usuarios usuario;
         private enum t_Repetir : int
         {
@@ -27,34 +28,34 @@ namespace Programa1.Carga.Tesoreria
         private Caja_Diaria CD = new Caja_Diaria();
 
         #region " Columnas Entradas "
-        private Byte e_Id;
-        private Byte e_Fecha;
-        private Byte e_Caja;
-        private Byte e_Tipo;
-        private Byte e_Subtipo;
-        private Byte e_Descripcion;
-        private Byte e_Importe;
-        private Byte e_Grupo;
-        private Byte e_Es_Entrega;
-        private Byte e_Tabla;
+        private const Byte e_Id = 0;
+        private const Byte e_Fecha = 1;
+        private const Byte e_Caja = 2;
+        private const Byte e_Tipo = 4;
+        private const Byte e_Subtipo = 6;
+        private const Byte e_Descripcion = 7;
+        private const Byte e_Importe = 8;
+        private const Byte e_Grupo = 9;
+        private const Byte e_Es_Entrega = 10;
+        private const Byte e_Tabla = 11;
 
         #endregion
         #region " Columnas Salidas "
-        private Byte s_Id;
-        private Byte s_Fecha;
-        private Byte s_Caja;
-        private Byte s_Tipo;
-        private Byte s_SubTipo;
-        private Byte s_IDDetalle;
-        private Byte s_Descripcion;
-        private Byte s_Importe;
-        private Byte s_Autorizado;
-        private Byte s_Fecha_Autorizado;
-        private Byte s_Grupo;
-        private Byte s_Usuario;
+        private const Byte s_Id = 0;
+        private const Byte s_Fecha = 1;
+        private const Byte s_Caja = 2;
+        private const Byte s_Tipo = 4;
+        private const Byte s_SubTipo = 6;
+        private const Byte s_IDDetalle = 8;
+        private const Byte s_Descripcion = 9;
+        private const Byte s_Importe = 10;
+        private const Byte s_Autorizado = 11;
+        private const Byte s_Fecha_Autorizado = 12;
+        private const Byte s_Grupo = 13;
+        private const Byte s_Usuario = 14;
 
         #endregion
-                
+
 
         /// <summary>
         /// Caja Diaria Entradas
@@ -88,16 +89,6 @@ namespace Programa1.Carga.Tesoreria
             //*****************************
             //*********Entradas************
             //*****************************
-            e_Id = Convert.ToByte(grdEntradas.get_ColIndex("Id"));
-            e_Fecha = Convert.ToByte(grdEntradas.get_ColIndex("Fecha"));
-            e_Caja = Convert.ToByte(grdEntradas.get_ColIndex("IDC"));
-            e_Tipo = Convert.ToByte(grdEntradas.get_ColIndex("ID_TipoEntrada"));
-            e_Subtipo = Convert.ToByte(grdEntradas.get_ColIndex("ID_SubTipoEntrada"));
-            e_Descripcion = Convert.ToByte(grdEntradas.get_ColIndex("Descripcion"));
-            e_Importe = Convert.ToByte(grdEntradas.get_ColIndex("Importe"));
-            e_Grupo = Convert.ToByte(grdEntradas.get_ColIndex("Grupo"));
-            e_Es_Entrega = Convert.ToByte(grdEntradas.get_ColIndex("Es_Entrega"));
-            e_Tabla = Convert.ToByte(grdEntradas.get_ColIndex("Tabla"));
 
             //13: Enter
             //43: +
@@ -118,18 +109,6 @@ namespace Programa1.Carga.Tesoreria
             //*****************************
             //*********Gastos**************
             //*****************************
-            s_Id = Convert.ToByte(grdSalidas.get_ColIndex("Id"));
-            s_Fecha = Convert.ToByte(grdSalidas.get_ColIndex("Fecha"));
-            s_Caja = Convert.ToByte(grdSalidas.get_ColIndex("IDC"));
-            s_Tipo = Convert.ToByte(grdSalidas.get_ColIndex("ID_TipoGastos"));
-            s_SubTipo = Convert.ToByte(grdSalidas.get_ColIndex("ID_SubTipoGastos"));
-            s_IDDetalle = Convert.ToByte(grdSalidas.get_ColIndex("ID_DetalleGastos"));
-            s_Descripcion = Convert.ToByte(grdSalidas.get_ColIndex("Descripcion"));
-            s_Importe = Convert.ToByte(grdSalidas.get_ColIndex("Importe"));
-            s_Autorizado = Convert.ToByte(grdSalidas.get_ColIndex("Autorizado"));
-            s_Fecha_Autorizado = Convert.ToByte(grdSalidas.get_ColIndex("Fecha_Autorizado"));
-            s_Grupo = Convert.ToByte(grdSalidas.get_ColIndex("Grupo"));
-            s_Usuario = Convert.ToByte(grdSalidas.get_ColIndex("Usuario"));
 
             // 13: Enter
             // 43: +
@@ -389,7 +368,7 @@ namespace Programa1.Carga.Tesoreria
 
                 switch (c)
                 {
-                    case 2: // Caja
+                    case e_Caja:
                         cEntradas.caja.Id = Convert.ToInt32(a);
                         if (cEntradas.caja.Existe() == true)
                         {
@@ -399,7 +378,7 @@ namespace Programa1.Carga.Tesoreria
 
                         }
                         break;
-                    case 4: //Tipo
+                    case e_Tipo:
                         cEntradas.TE.Id_Tipo = Convert.ToInt32(a);
                         if (cEntradas.TE.Existe() == true)
                         {
@@ -410,7 +389,7 @@ namespace Programa1.Carga.Tesoreria
                         }
                         break;
 
-                    case 6: // SubTipo - Suc - Cliente
+                    case e_Subtipo: // SubTipo - Suc - Cliente
                         cEntradas.TE.Id_Tipo = Convert.ToInt32(grdEntradas.get_Texto(f, e_Tipo));
 
                         if (cEntradas.TE.Existe() == true)
@@ -459,7 +438,7 @@ namespace Programa1.Carga.Tesoreria
                             }
                         }
                         break;
-                    case 7: // Descripcion
+                    case e_Descripcion:
                         if (cEntradas.TE.Id_Tipo != 0 & cEntradas.Id_SubTipoEntrada != 0)
                         {
                             cEntradas.Descripcion = a.ToString();
@@ -469,7 +448,7 @@ namespace Programa1.Carga.Tesoreria
                             if (cEntradas.ID != 0) { cEntradas.Actualizar(); }
                         }
                         break;
-                    case 8: // Importe
+                    case e_Importe:
                         if (cEntradas.TE.Id_Tipo != 0 & cEntradas.Id_SubTipoEntrada != 0)
                         {
                             cEntradas.Fecha = mntFecha.SelectionStart.Date;
@@ -608,7 +587,7 @@ namespace Programa1.Carga.Tesoreria
 
                 switch (c)
                 {
-                    case 2: // Caja
+                    case s_Caja:
                         cGastos.caja.Id = Convert.ToInt32(a);
                         if (cGastos.caja.Existe() == true)
                         {
@@ -622,7 +601,7 @@ namespace Programa1.Carga.Tesoreria
 
                         }
                         break;
-                    case 4: //Tipo
+                    case s_Tipo:
                         cGastos.TG.Id_Tipo = Convert.ToInt32(a);
                         if (cGastos.TG.Existe() == true)
                         {
@@ -633,7 +612,7 @@ namespace Programa1.Carga.Tesoreria
                         }
                         break;
 
-                    case 6: //SubTipo - Buscar Tabla
+                    case s_SubTipo: //SubTipo - Buscar Tabla
                         cGastos.TG.Id_Tipo = Convert.ToInt32(grdSalidas.get_Texto(f, s_Tipo));
 
                         if (cGastos.TG.Existe() == true)
@@ -647,13 +626,22 @@ namespace Programa1.Carga.Tesoreria
                                 grdSalidas.set_Texto(f, s_SubTipo, a);
                                 grdSalidas.set_Texto(f, s_SubTipo + 1, s);
 
+                                //HORRIBLE
+                                if (cGastos.TG.Id_Tipo == 12)
+                                {
+                                    // HACIENDA
+                                    Saldos_Consignatarios sld = new Saldos_Consignatarios();
+                                    sld.gastos = cGastos;
+                                    sld.Cargar_Pago();
+
+                                }
+
                                 grdSalidas.ActivarCelda(f, s_IDDetalle);
                                 if (cGastos.ID != 0) { cGastos.Actualizar(); }
-
                             }
                         }
                         break;
-                    case 7: // Desc_SubTipo
+                    case s_SubTipo + 1: // Desc_SubTipo
                         if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
                         {
                             cGastos.Desc_SubTipo = a.ToString();
@@ -663,7 +651,7 @@ namespace Programa1.Carga.Tesoreria
                             if (cGastos.ID != 0) { cGastos.Actualizar(); }
                         }
                         break;
-                    case 8: //ID_Detalle
+                    case s_IDDetalle:
                         dg.Id_Tipo = cGastos.TG.Id_Tipo;
                         dg.ID_Detalle = Convert.ToInt32(a);
 
@@ -683,7 +671,7 @@ namespace Programa1.Carga.Tesoreria
                             }
                         }
                         break;
-                    case 9: // Descripcion
+                    case s_Descripcion:
                         if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
                         {
                             cGastos.Descripcion = a.ToString();
@@ -693,7 +681,7 @@ namespace Programa1.Carga.Tesoreria
                             if (cGastos.ID != 0) { cGastos.Actualizar(); }
                         }
                         break;
-                    case 10: // Importe
+                    case s_Importe:
                         if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
                         {
                             cGastos.Fecha = mntFecha.SelectionStart.Date;
@@ -762,7 +750,7 @@ namespace Programa1.Carga.Tesoreria
 
                         }
                         break;
-                    case 11: // Autorizacion
+                    case s_Autorizado:
                         if (cGastos.ID != 0)
                         {
                             cGastos.Autorizado = Convert.ToBoolean(a);

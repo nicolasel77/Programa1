@@ -1,9 +1,7 @@
-﻿
-
-namespace Programa1.DB
+﻿namespace Programa1.DB
 {
     using Programa1.Clases;
-    class Consignatarios : c_Base
+    public class Consignatarios : c_Base
     {
         public Consignatarios()
         {

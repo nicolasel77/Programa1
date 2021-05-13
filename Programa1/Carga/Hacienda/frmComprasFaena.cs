@@ -45,7 +45,7 @@
         {
             InitializeComponent();
 
-            grdBoletas.MostrarDatos(hc.nBoletas.Datos(), true, false);
+            grdBoletas.MostrarDatos(hc.nBoletas.Datos_Vista("","", "NBoleta DESC"), true, false);
             grdBoletas.AutosizeAll();
             
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo")].Format = "N3";
@@ -187,7 +187,7 @@
 
             if (grdBoletas.EsUltimaFila() == true)
             {
-                grdBoletas.MostrarDatos(hc.nBoletas.Datos("", ""), false, false);
+                grdBoletas.MostrarDatos(hc.nBoletas.Datos(), false, false);
             }
         }
         private void Totales()

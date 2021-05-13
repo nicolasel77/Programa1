@@ -21,15 +21,16 @@
             set 
             {
                 prod = value;
-                //Buscar el orden
-                int p = Producto.ID;
-                p = Convert.ToInt32(Dato($"ID_Lista={Lista.ID} AND Producto={p}", "Orden", "Orden"));
-                Orden = p;
+                //Buscar el orden                                
+                Orden = Convert.ToInt32(Dato($"ID_Lista={Lista.ID} AND Producto={Producto.ID}", "Orden", "Orden")); 
             }
         }
         public int Orden { get; set; }
         public Nombre_Listas Lista { get; set; } = new Nombre_Listas();
-
+        /// <summary>
+        /// Devuelve la vista vw_Listas_Carga con el filtro de Lista.ID.
+        /// </summary>
+        /// <returns></returns>
         public DataTable Datos()
         {
             return Datos_Vista("ID_Lista=" + Lista.ID, "*", "Orden");
@@ -38,12 +39,29 @@
         {
             return Datos_Vista("ID_Lista=" + Lista.ID, "Producto, Nombre_Producto, ", " Orden");
         }
+
+        /// <summary>
+        /// Asigna el siguiente producto en la lista según el orden.
+        /// Si no hay lista seleccionada devuelve el siguiente producto.
+        /// </summary>
+        /// <returns></returns>
         public int Producto_Siguiente()
         {
-            int p = Producto.ID;
-            p = Convert.ToInt32(Dato($"ID_Lista={Lista.ID} AND Orden>{Orden}", "Producto", "Orden"));
-            Producto.ID = p;
-            Producto.Existe();
+            if (Lista.ID != 0)
+            {
+                Producto.ID = Convert.ToInt32(Dato($"ID_Lista={Lista.ID} AND Orden>{Orden}", "Producto", "Orden"));
+                
+                if (Producto.Existe() == false)
+                {
+                    Producto.ID = Convert.ToInt32(Dato($"ID_Lista={Lista.ID} AND Orden>0", "Producto", "Orden"));
+                    Producto.Existe();
+                }                
+                Orden = Convert.ToInt32(Dato($"ID_Lista={Lista.ID} AND Producto={Producto.ID}", "Orden", "Orden"));
+            }
+            else
+            {
+                Producto.Siguiente();                
+            }            
             return Producto.ID;
         }
 

@@ -14,6 +14,8 @@
 
         public int ID { get; set; }
 
+        public bool ID_Automatico = false;
+
         /// <summary>
         /// Es el nombre del campo ID, por defecto es ID.
         /// </summary>
@@ -72,7 +74,9 @@
 
             try
             {
-                SqlCommand cmd = new SqlCommand($"INSERT INTO {Tabla} ({Campo_ID}, Nombre) VALUES({ID}, '{Nombre}')", cnn);
+                string cadena = $"INSERT INTO {Tabla} ({Campo_ID}, Nombre) VALUES({ID}, '{Nombre}')";
+                if (ID_Automatico == true) { cadena = $"INSERT INTO {Tabla} (Nombre) VALUES('{Nombre}')"; }
+                SqlCommand cmd = new SqlCommand(cadena, cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -87,7 +91,7 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
-      
+
         /// <summary>
         /// Agrega el registro sumando un campo. Ej: SubTipo 
         /// </summary>
@@ -102,7 +106,10 @@
 
             try
             {
-                SqlCommand cmd = new SqlCommand(string.Format("INSERT INTO {0} ({5}, Nombre, {3}) VALUES({1}, '{2}', {4})", Tabla, ID, Nombre, Campo, valor, Campo_ID), cnn);
+                string cadena = string.Format("INSERT INTO {0} ({5}, Nombre, {3}) VALUES({1}, '{2}', {4})", Tabla, ID, Nombre, Campo, valor, Campo_ID);
+                if (ID_Automatico == true) { cadena = string.Format("INSERT INTO {0} (Nombre, {2}) VALUES('{1}', {3})", Tabla, Nombre, Campo, valor); }
+
+                SqlCommand cmd = new SqlCommand(cadena, cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -238,6 +245,7 @@
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+            if (Campos == "") { Campos = "*"; }
             if (Orden != "") { if (Orden != "ORDER BY Id") { Orden = " ORDER BY " + Orden; } }
 
             try

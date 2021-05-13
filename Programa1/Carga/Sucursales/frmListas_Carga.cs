@@ -34,11 +34,10 @@
         private void Cargar()
         {
             Herramientas.Herramientas h = new Herramientas.Herramientas();
+                        
+            if (lstListas.SelectedIndex > -1) { listas.Lista.ID = h.Codigo_Seleccionado(lstListas.Text); }
 
-            string f = "";
-            if (lstListas.SelectedIndex > -1) { f = h.Codigo_Seleccionado(lstListas.Text).ToString(); f = " ID_Lista=" + f; }
-
-            grd.MostrarDatos(listas.Datos_Vista(f, "*", "Orden"), true);
+            grd.MostrarDatos(listas.Datos(), true);
             grd.set_ColW(t_Col.ID, 0);
             grd.set_ColW(t_Col.ID_Lista, 30);
             grd.set_ColW(t_Col.Nombre, 100);
