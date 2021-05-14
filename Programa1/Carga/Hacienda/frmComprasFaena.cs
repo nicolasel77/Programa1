@@ -45,7 +45,7 @@
         {
             InitializeComponent();
 
-            grdBoletas.MostrarDatos(hc.nBoletas.Datos_Vista("","", "NBoleta DESC"), true, false);
+            grdBoletas.MostrarDatos(hc.nBoletas.Datos_Vista("","TOP 100 *", "NBoleta DESC"), true, false);
             grdBoletas.AutosizeAll();
             
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo")].Format = "N3";

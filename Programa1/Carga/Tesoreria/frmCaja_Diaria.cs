@@ -238,7 +238,7 @@ namespace Programa1.Carga.Tesoreria
             grdEntradas.ActivarCelda(grdEntradas.Rows - 1, e_Caja);
             Formato_Entradas();
 
-            grdSalidas.MostrarDatos(cGastos.Datos($"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}'"), true);
+            grdSalidas.MostrarDatos(cGastos.Datos_Vista($"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}'"), true);
             Formato_Salidas();
 
 
@@ -629,15 +629,13 @@ namespace Programa1.Carga.Tesoreria
                                 //HORRIBLE
                                 if (cGastos.TG.Id_Tipo == 12)
                                 {
-                                    // HACIENDA
-                                    Saldos_Consignatarios sld = new Saldos_Consignatarios();
-                                    sld.gastos = cGastos;
-                                    sld.Cargar_Pago();
-
+                                    Seleccionar_Pago_Hacienda();
                                 }
-
-                                grdSalidas.ActivarCelda(f, s_IDDetalle);
-                                if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                else
+                                {
+                                    grdSalidas.ActivarCelda(f, s_IDDetalle);
+                                    if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                }
                             }
                         }
                         break;
@@ -698,48 +696,7 @@ namespace Programa1.Carga.Tesoreria
 
 
                                 grdSalidas.AgregarFila();
-
-                                switch (o_Repetir)
-                                {
-                                    case t_Repetir.Caja:
-                                        grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
-                                        grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
-                                        grdSalidas.ActivarCelda(f + 1, s_Tipo);
-                                        break;
-                                    case t_Repetir.Tipo:
-                                        grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
-                                        grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
-                                        grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
-                                        grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
-                                        grdSalidas.ActivarCelda(f + 1, s_SubTipo);
-                                        break;
-                                    case t_Repetir.SubTipo:
-                                        grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
-                                        grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
-                                        grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
-                                        grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
-                                        grdSalidas.set_Texto(f + 1, s_SubTipo, cGastos.Id_SubTipoGastos);
-                                        grdSalidas.set_Texto(f + 1, s_SubTipo + 1, cGastos.Desc_SubTipo);
-                                        grdSalidas.ActivarCelda(f + 1, s_IDDetalle);
-                                        break;
-                                    case t_Repetir.Detalle:
-                                        grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
-                                        grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
-                                        grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
-                                        grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
-                                        grdSalidas.set_Texto(f + 1, s_SubTipo, cGastos.Id_SubTipoGastos);
-                                        grdSalidas.set_Texto(f + 1, s_SubTipo + 1, cGastos.Desc_SubTipo);
-                                        grdSalidas.set_Texto(f + 1, s_IDDetalle, cGastos.Id_DetalleGastos);
-                                        grdSalidas.set_Texto(f + 1, s_IDDetalle + 1, cGastos.Descripcion);
-                                        grdSalidas.ActivarCelda(f + 1, s_Descripcion);
-                                        break;
-                                    default:
-                                        grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
-                                        grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
-                                        grdSalidas.ActivarCelda(f + 1, s_Tipo);
-                                        break;
-
-                                }
+                                Repetir_FilaG(f);
                             }
                             else
                             {
@@ -836,10 +793,9 @@ namespace Programa1.Carga.Tesoreria
             }
             if (e == Convert.ToInt32(Keys.F1))
             {
+                /* Pagos Autorizados */
                 if (grdSalidas.Col == s_Importe | grdSalidas.Col == s_Descripcion)
                 {
-                    /* Pagos Autorizados */
-
                     frmSeleccionar_PagosAutorizados fr = new frmSeleccionar_PagosAutorizados();
                     fr.Cargar(cGastos.Id_SubTipoGastos);
                     fr.Text = cGastos.Desc_SubTipo;
@@ -913,9 +869,18 @@ namespace Programa1.Carga.Tesoreria
                                 if (grdSalidas.Col == s_SubTipo)
                                 {
                                     cGastos.Id_SubTipoGastos = h.Codigo_Seleccionado(fayuda.Valor);
+                                    cGastos.Desc_SubTipo = h.Nombre_Seleccionado(fayuda.Valor);
                                     grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo, cGastos.Id_SubTipoGastos);
-                                    grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo + 1, h.Nombre_Seleccionado(fayuda.Valor));
-                                    grdSalidas.ActivarCelda(grdSalidas.Row, s_IDDetalle);
+                                    grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo + 1, cGastos.Desc_SubTipo);
+                                    //HORRIBLE
+                                    if (cGastos.TG.Id_Tipo == 12)
+                                    {
+                                        Seleccionar_Pago_Hacienda();
+                                    }
+                                    else
+                                    {                                        
+                                        grdSalidas.ActivarCelda(grdSalidas.Row, s_IDDetalle);
+                                    }
                                 }
                                 else
                                 {
@@ -934,6 +899,20 @@ namespace Programa1.Carga.Tesoreria
             }
         }
 
+        private void Seleccionar_Pago_Hacienda()
+        {
+            // HACIENDA
+            Saldos_Consignatarios sld = new Saldos_Consignatarios();
+            sld.gastos = cGastos;
+            sld.Cargar_Pago();
+            if (sld.Aceptado == true)
+            {
+                Cargar_Datos();
+                Repetir_FilaG(grdSalidas.Rows - 2);
+            }
+            grdSalidas.Focus();
+        }
+
         private void Cargar_FilaSalida(int Fila)
         {
             cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Id));
@@ -945,6 +924,51 @@ namespace Programa1.Carga.Tesoreria
             cGastos.Id_DetalleGastos = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_IDDetalle));
             cGastos.Descripcion = Convert.ToString(grdSalidas.get_Texto(Fila, s_Descripcion));
             cGastos.Importe = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Importe));
+        }
+
+        private void Repetir_FilaG(int f)
+        {
+            switch (o_Repetir)
+            {
+                case t_Repetir.Caja:
+                    grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
+                    grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
+                    grdSalidas.ActivarCelda(f + 1, s_Tipo);
+                    break;
+                case t_Repetir.Tipo:
+                    grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
+                    grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
+                    grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
+                    grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
+                    grdSalidas.ActivarCelda(f + 1, s_SubTipo);
+                    break;
+                case t_Repetir.SubTipo:
+                    grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
+                    grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
+                    grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
+                    grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
+                    grdSalidas.set_Texto(f + 1, s_SubTipo, cGastos.Id_SubTipoGastos);
+                    grdSalidas.set_Texto(f + 1, s_SubTipo + 1, cGastos.Desc_SubTipo);
+                    grdSalidas.ActivarCelda(f + 1, s_IDDetalle);
+                    break;
+                case t_Repetir.Detalle:
+                    grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
+                    grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
+                    grdSalidas.set_Texto(f + 1, s_Tipo, cGastos.TG.Id_Tipo);
+                    grdSalidas.set_Texto(f + 1, s_Tipo + 1, cGastos.TG.Nombre);
+                    grdSalidas.set_Texto(f + 1, s_SubTipo, cGastos.Id_SubTipoGastos);
+                    grdSalidas.set_Texto(f + 1, s_SubTipo + 1, cGastos.Desc_SubTipo);
+                    grdSalidas.set_Texto(f + 1, s_IDDetalle, cGastos.Id_DetalleGastos);
+                    grdSalidas.set_Texto(f + 1, s_IDDetalle + 1, cGastos.Descripcion);
+                    grdSalidas.ActivarCelda(f + 1, s_Descripcion);
+                    break;
+                default:
+                    grdSalidas.set_Texto(f + 1, s_Caja, cGastos.caja.Id);
+                    grdSalidas.set_Texto(f + 1, s_Caja + 1, cGastos.caja.Nombre);
+                    grdSalidas.ActivarCelda(f + 1, s_Tipo);
+                    break;
+
+            }
         }
         #endregion
 

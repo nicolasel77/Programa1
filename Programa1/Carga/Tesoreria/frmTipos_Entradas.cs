@@ -2,7 +2,6 @@
 {
     using Programa1.DB.Tesoreria;
     using System;
-    using System.Data;
     using System.Windows.Forms;
 
     public partial class frmTipos_Entradas : Form
@@ -10,8 +9,6 @@
         private Tipos_Entradas tipos_e = new Tipos_Entradas();
         private Grupos_Entradas grupo_e = new Grupos_Entradas();
         private Cajas cajas = new Cajas();
-
-        private DataTable dt;
 
         public frmTipos_Entradas()
         {
@@ -70,7 +67,7 @@
                         cajas.Id = Convert.ToInt32(a);
                         if (cajas.Existe() == true)
                         {
-                            Mensaje($"El id '{a.ToString()}' ya existe.");
+                            Mensaje($"El id '{a}' ya existe.");
                             grdCajas.ErrorEnTxt();
                         }
                         else
@@ -130,7 +127,7 @@
             // F12
             if (e == 123 | e == 46)
             {
-                if (MessageBox.Show($"¿Esta segura/o de borrar el item '{grdCajas.get_Texto(grdCajas.Row, 1).ToString()}' ?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                if (MessageBox.Show($"¿Esta segura/o de borrar el item '{grdCajas.get_Texto(grdCajas.Row, 1)}' ?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     if (Convert.ToInt32(grdCajas.get_Texto(grdCajas.Row, 0)) != 0)
                     {
@@ -163,7 +160,7 @@
                         grupo_e.Id = Convert.ToInt32(a);
                         if (grupo_e.Existe() == true)
                         {
-                            Mensaje($"El Grupo '{a.ToString()}' ya existe.");
+                            Mensaje($"El Grupo '{a}' ya existe.");
                             grdGrupo.ErrorEnTxt();
                         }
                         else
@@ -268,7 +265,7 @@
             // F12
             if (e == 123 | e == 46)
             {
-                if (MessageBox.Show($"¿Esta segura/o de borrar el item '{grdGrupo.get_Texto(grdGrupo.Row, 1).ToString()}' ?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                if (MessageBox.Show($"¿Esta segura/o de borrar el item '{grdGrupo.get_Texto(grdGrupo.Row, 1)}' ?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     if (Convert.ToInt32(grdGrupo.get_Texto(grdGrupo.Row, 0)) != 0)
                     {
@@ -307,7 +304,7 @@
                         tipos_e.Id_Tipo = Convert.ToInt32(a);
                         if (tipos_e.Existe() == true)
                         {
-                            Mensaje($"El producto '{a.ToString()}' ya existe.");
+                            Mensaje($"El producto '{a}' ya existe.");
                             grdTipos_Entradas.ErrorEnTxt();
                         }
                         else
@@ -355,7 +352,7 @@
                         }
                         else
                         {
-                            Mensaje($"No se encontro el grupo '{a.ToString()}'.");
+                            Mensaje($"No se encontro el grupo '{a}'.");
                             grdTipos_Entradas.ErrorEnTxt();
                         }
                     }
@@ -385,7 +382,7 @@
             // F12
             if (e == 123 | e == 46)
             {
-                if (MessageBox.Show($"¿Esta segura/o de borrar el producto '{grdTipos_Entradas.get_Texto(grdTipos_Entradas.Row, 1).ToString()}' ?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                if (MessageBox.Show($"¿Esta segura/o de borrar el producto '{grdTipos_Entradas.get_Texto(grdTipos_Entradas.Row, 1)}' ?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     if (Convert.ToInt32(grdTipos_Entradas.get_Texto(grdTipos_Entradas.Row, 0)) != 0)
                     {

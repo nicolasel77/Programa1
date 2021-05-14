@@ -6,7 +6,7 @@ namespace Programa1.Controles
     public partial class cBoton : UserControl
     {
 
-        public event EventHandler Click;
+        public new event EventHandler Click;
         public cBoton()
         {
             InitializeComponent();
@@ -18,7 +18,7 @@ namespace Programa1.Controles
             {
                 if (this.Click != null) { this.Click(sender, e); }
             }
-            catch (Exception er)
+            catch (Exception)
             {
 
             }

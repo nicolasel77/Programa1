@@ -14,8 +14,10 @@
         public Gastos()
         {
             ID_Automatico = true;
+            Tabla = "CD_Gastos";
+            Vista = "vw_Gastos";
         }
-                
+
         public DateTime Fecha { get; set; }
         public Cajas caja { get; set; } = new Cajas();
 
@@ -66,7 +68,7 @@
         public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            int n = MaxId();
+            int n = Max_ID();
 
             try
             {
@@ -81,7 +83,7 @@
                 var d = command.ExecuteNonQuery();
                 sql.Close();
 
-                int n2 = MaxId();
+                int n2 = Max_ID();
                 if (n == n2)
                 {
                     ID = 0;
@@ -109,7 +111,7 @@
             }
         }
 
-        public void Borrar()
+        public new void Borrar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -139,33 +141,9 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
-        #endregion 
+        #endregion
 
         #region " Devolver Datos "
-        public DataTable Datos(string filtro = " ID=-1")
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Gastos {filtro} ORDER BY ID", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
-
         /// <summary>
         /// Devuelve un dt con el resumen de Tipos, Nombre en un rango de fechas.
         /// </summary>
@@ -388,7 +366,6 @@
             return t;
         }
 
-
         public string Nombre_SubTipo()
         {
             string s = "";
@@ -433,30 +410,7 @@
             }
             return s;
         }
-
-        public int MaxId()
-        {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM CD_Gastos", conexionSql);
-
-                conexionSql.Open();
-
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
-
-                conexionSql.Close();
-            }
-            catch (Exception)
-            {
-                d = 0;
-            }
-
-            return Convert.ToInt32(d);
-        }
+               
 
         /// <summary>
         /// Devuelve el último valor que se cargo con los datos actuales.

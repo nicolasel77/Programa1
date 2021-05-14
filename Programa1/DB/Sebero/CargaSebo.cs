@@ -13,18 +13,7 @@ namespace Programa1.DB
         {
             
         }
-
-        public CargaSebo(int id, DateTime fecha, Productos prod, Sucursales.Sucursales sucu, Seberos Sebero, Single costo, Single kilos)
-        {
-            Id = id;
-            Fecha = fecha;
-            Producto = prod;
-            Sucursal = sucu;
-            Sebero = Sebero;
-            Costo = costo;
-            Kilos = kilos;
-
-        }
+               
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }

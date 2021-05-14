@@ -106,6 +106,7 @@ namespace Programa1.Carga.Hacienda
             this.cmdSalir.Size = new System.Drawing.Size(220, 40);
             this.cmdSalir.TabIndex = 3;
             this.cmdSalir.Texto = "Salir";
+            this.cmdSalir.Click += new System.EventHandler(this.cmdSalir_Click);
             // 
             // cmdAceptar
             // 

@@ -6,13 +6,9 @@
     public partial class frmPagar_Hacienda : Form
     {
         public Saldos_Consignatarios saldos = new Saldos_Consignatarios();
+        public bool Aceptado = false;
 
         const int cID = 0;
-        const int cFecha = 1;
-        const int cPlazo = 2;
-        const int cVenc = 3;
-        const int cDias = 4;
-        const int cNBoleta = 5;
         const int cCab = 6;
         const int cDescripcion = 7;
         const int cKilos = 8;
@@ -31,7 +27,7 @@
         {
             lblConsignatario.Text = saldos.gastos.Desc_SubTipo;
 
-            grd.TeclasManejadas = new int[] { 43 };
+            grd.TeclasManejadas = new int[] { 13, 43 };
 
             grd.MostrarDatos(saldos.Datos(), true, false);
 
@@ -54,11 +50,12 @@
 
         private void grd_Editado(short f, short c, object a)
         {
-            if (c== cNuevo)
+            if (c == cNuevo)
             {
                 grd.set_Texto(f, c, a);
-                a = Convert.ToDouble( grd.get_Texto(f, cSaldo))  + Convert.ToDouble(a);
+                a = Convert.ToDouble(grd.get_Texto(f, cSaldo)) + Convert.ToDouble(a);
                 grd.set_Texto(f, cSaldo, a);
+                grd.ActivarCelda(f + 1, c);
             }
         }
 
@@ -69,13 +66,48 @@
                 int r = grd.Row;
                 grd.set_Texto(r, cNuevo, Convert.ToDouble(grd.get_Texto(r, cSaldo)) * -1);
                 grd.set_Texto(r, cSaldo, 0);
-                if (r< grd.Rows - 1) { grd.ActivarCelda(r + 1, cNuevo); }
+                if (r < grd.Rows - 1) { grd.ActivarCelda(r + 1, cNuevo); }
+            }
+            else
+            {
+                if (e == 13)
+                {
+                    Aceptarr();
+                    this.Hide();
+                }
             }
         }
 
         private void cmdAceptar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Aceptarr();
+            this.Hide();
+        }
+
+        private void Aceptarr()
+        {
+            for (int i = 1; i <= grd.Rows - 1; i++)
+            {
+                double n = Convert.ToDouble(grd.get_Texto(i, cNuevo));
+
+                if (n != 0)
+                {
+                    int idD = Convert.ToInt32(grd.get_Texto(i, cID));
+                    string t = Convert.ToDouble(grd.get_Texto(i, cSaldo)) == 0 ? "Total" : "Parcial";
+                    string s = string.Format("{0} {1}  - {2}", grd.get_Texto(i, cCab), grd.get_Texto(i, cDescripcion), t);
+
+                    saldos.gastos.Importe = n;
+                    saldos.gastos.Id_DetalleGastos = idD;
+                    saldos.gastos.Descripcion = s;
+                    saldos.gastos.Agregar();
+                }
+            }
+            Aceptado = true;
+        }
+
+        private void cmdSalir_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

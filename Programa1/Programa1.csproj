@@ -413,6 +413,12 @@
     <Compile Include="Carga\Tesoreria\frmPagos_Autorizados.Designer.cs">
       <DependentUpon>frmPagos_Autorizados.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmPartidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmPartidos.Designer.cs">
+      <DependentUpon>frmPartidos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmResumenARendir.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -768,6 +774,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmPagos_Autorizados.resx">
       <DependentUpon>frmPagos_Autorizados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmPartidos.resx">
+      <DependentUpon>frmPartidos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmResumenARendir.resx">
       <DependentUpon>frmResumenARendir.cs</DependentUpon>

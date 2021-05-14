@@ -5,6 +5,7 @@
     using Programa1.Carga.Hacienda;
     using Programa1.Carga.Precios;
     using Programa1.Carga.Sebero;
+    using Programa1.Carga.Tesoreria;
     using Programa1.DB.Tesoreria;
     using Programa1.DB.Varios;
     using System;
@@ -27,6 +28,7 @@
         private void frmMain_Load(object sender, EventArgs e)
         {
             this.Text = usuario.Nombre;
+            cajaDiariaToolStripMenuItem.PerformClick();
         }
 
         private void Mostrar(object sender, EventArgs e)
@@ -94,54 +96,8 @@
         }
         private void PruebaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ecsel = new OpenFileDialog();
-            ecsel.InitialDirectory = "D:\\Proyectos\\Excels A Importar";
-            ecsel.ShowDialog();
-
-            if (ecsel.FileName.Length > 0 )
-            {
-                Excel.Application xlApp = new Excel.Application();
-                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(ecsel.FileName);
-                Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-                Excel.Range xlRange = xlWorksheet.UsedRange;
-
-
-                Entradas en = new Entradas();
-                Detalle_Entregas de = new Detalle_Entregas();
-
-                int fila_actual = 2;
-                int idviejo = 0;
-                for (int i = 2; i <= 5336; i++)
-                {
-                    en.Fecha = Convert.ToDateTime(xlRange.Cells[i, 1].value);
-                    en.TE.Id_Tipo = Convert.ToInt32(xlRange.Cells[i, 2].value);
-                    en.Id_SubTipoEntrada = Convert.ToInt32(xlRange.Cells[i, 4].value);
-                    en.Descripcion = Convert.ToString(xlRange.Cells[i, 5].value);
-                    en.Importe = Convert.ToDouble(xlRange.Cells[i, 6].value);
-                    idviejo = Convert.ToInt32(xlRange.Cells[i, 7].value);
-
-                    en.Agregar();
-
-                    for (int n = fila_actual; n <= 11947; n++)
-                    {
-
-                        if (idviejo == Convert.ToInt32(xlRange.Cells[n, 13].value))
-                        {
-                            de.ID_Entradas = en.ID;
-                            de.Fecha = Convert.ToDateTime(xlRange.Cells[n, 11].value);
-                            de.Importe = Convert.ToDouble(xlRange.Cells[n, 12].value);
-
-                            de.Agregar();
-
-                            fila_actual++;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                } 
-            }
+            frmPartidos fr = new frmPartidos();
+            fr.ShowDialog();
         }
 
         private void FrmMail_Disposed(object sender, EventArgs e)

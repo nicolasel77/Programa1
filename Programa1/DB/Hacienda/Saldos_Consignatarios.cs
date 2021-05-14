@@ -13,6 +13,7 @@
         }
 
         public Gastos gastos { get; set; }
+        public bool Aceptado;
 
         public void Cargar_Pago()
         {
@@ -20,6 +21,7 @@
             fr.saldos = this;
             fr.Cargar();
             fr.ShowDialog();
+            Aceptado = fr.Aceptado;
         }
 
 
