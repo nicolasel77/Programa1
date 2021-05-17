@@ -2,6 +2,8 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Drawing;
+
 
 namespace Programa1.Carga.Tesoreria
 {
@@ -134,7 +136,7 @@ namespace Programa1.Carga.Tesoreria
                     grdGastos.AutosizeAll();
                     grdGastos.set_ColW(grdGastos.get_ColIndex("Descripcion"), 400);
                     break;
-                case e_Orden.SubTipo:                    
+                case e_Orden.SubTipo:
                     if (Tipo > 0)
                     {
                         grdGastos.MostrarDatos(Gastos.TotalPorSubTipo($"{grupo} Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}"), true, true);
@@ -204,12 +206,13 @@ namespace Programa1.Carga.Tesoreria
                         }
                     }
                     grdGastos.MostrarDatos(Gastos.TotalPorDetalle(cadena), true, true);
-                    grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                     grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N1";
                     grdGastos.AutosizeAll();
                     grdGastos.set_ColW(grdGastos.get_ColIndex("Descripcion"), 400);
                     break;
             }
+            double g = grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
+            lblTotal.Text = $"Total: {g:C1}";
             this.Cursor = Cursors.Default;
         }
 
@@ -296,7 +299,7 @@ namespace Programa1.Carga.Tesoreria
             }
             this.Cursor = Cursors.Default;
         }
-                
+
         private void cmdGrupos_Click(object sender, EventArgs e)
         {
             lstGrupos.Visible = !lstGrupos.Visible;
@@ -367,5 +370,6 @@ namespace Programa1.Carga.Tesoreria
                     break;
             }
         }
+
     }
 }

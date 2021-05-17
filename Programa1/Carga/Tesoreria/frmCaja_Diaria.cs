@@ -234,9 +234,11 @@ namespace Programa1.Carga.Tesoreria
         {
             this.Cursor = Cursors.WaitCursor;
 
+            grdEntradas.Visible = false;
             grdEntradas.MostrarDatos(cEntradas.Datos($"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}'"), true);
             grdEntradas.ActivarCelda(grdEntradas.Rows - 1, e_Caja);
             Formato_Entradas();
+            grdEntradas.Visible = true;
 
             grdSalidas.MostrarDatos(cGastos.Datos_Vista($"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}'"), true);
             Formato_Salidas();

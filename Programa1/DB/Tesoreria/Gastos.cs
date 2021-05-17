@@ -348,7 +348,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(ISNULL(Importe, 0)) FROM CD_Gastos WHERE Autorizado=0 AND Fecha<='{f:MM/dd/yy}'", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(ISNULL(Importe, 0)) FROM CD_Gastos WHERE Autorizado=1 AND Fecha<='{f:MM/dd/yy}'", conexionSql);
 
                 conexionSql.Open();
 

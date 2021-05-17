@@ -488,8 +488,8 @@
             // 
             // splitContainer5.Panel2
             // 
-            this.splitContainer5.Panel2.Controls.Add(this.label1);
             this.splitContainer5.Panel2.Controls.Add(this.grdBoletas);
+            this.splitContainer5.Panel2.Controls.Add(this.label1);
             this.splitContainer5.Size = new System.Drawing.Size(1045, 666);
             this.splitContainer5.SplitterDistance = 795;
             this.splitContainer5.TabIndex = 1;

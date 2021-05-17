@@ -33,6 +33,7 @@
             this.lblTipo = new MaterialSkin.Controls.MaterialLabel();
             this.lblSubTipo = new MaterialSkin.Controls.MaterialLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lblTotal = new MaterialSkin.Controls.MaterialLabel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.lst = new System.Windows.Forms.ListBox();
             this.lstGrupos = new System.Windows.Forms.ListBox();
@@ -53,6 +54,9 @@
             // 
             this.grdGastos.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
             this.grdGastos.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdGastos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grdGastos.AutoResize = false;
             this.grdGastos.bColor = System.Drawing.SystemColors.Window;
             this.grdGastos.bColorSel = System.Drawing.SystemColors.Highlight;
@@ -62,7 +66,6 @@
             this.grdGastos.Cols = 10;
             this.grdGastos.DataMember = "";
             this.grdGastos.DataSource = null;
-            this.grdGastos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdGastos.EnableEdicion = true;
             this.grdGastos.Encabezado = "";
             this.grdGastos.fColor = System.Drawing.SystemColors.Control;
@@ -80,7 +83,7 @@
             this.grdGastos.Redraw = true;
             this.grdGastos.Row = 0;
             this.grdGastos.Rows = 1;
-            this.grdGastos.Size = new System.Drawing.Size(782, 664);
+            this.grdGastos.Size = new System.Drawing.Size(782, 634);
             this.grdGastos.TabIndex = 0;
             // 
             // lblTipo
@@ -120,6 +123,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.lblTotal);
             this.splitContainer1.Panel1.Controls.Add(this.grdGastos);
             // 
             // splitContainer1.Panel2
@@ -128,6 +133,20 @@
             this.splitContainer1.Size = new System.Drawing.Size(1062, 664);
             this.splitContainer1.SplitterDistance = 782;
             this.splitContainer1.TabIndex = 4;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Depth = 0;
+            this.lblTotal.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblTotal.Location = new System.Drawing.Point(3, 642);
+            this.lblTotal.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(44, 19);
+            this.lblTotal.TabIndex = 1;
+            this.lblTotal.Text = "Total";
             // 
             // splitContainer2
             // 
@@ -231,6 +250,7 @@
             this.Load += new System.EventHandler(this.frmResumen_Gastos_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmResumen_Gastos_KeyDown);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -255,5 +275,6 @@
         private Controles.cBoton cmdGrupos;
         private System.Windows.Forms.ListBox lstGrupos;
         private System.Windows.Forms.ListBox lst;
+        private MaterialSkin.Controls.MaterialLabel lblTotal;
     }
 }
