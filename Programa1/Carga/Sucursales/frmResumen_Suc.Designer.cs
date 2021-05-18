@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmResumen_Suc));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -44,17 +45,37 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblCarneK = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.cmdStock_Carne = new MaterialSkin.Controls.MaterialFlatButton();
             this.lblSuc = new System.Windows.Forms.Label();
             this.grdVentas = new Grilla2.SpeedGrilla();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.grdSucursales = new Grilla2.SpeedGrilla();
+            this.cFechas1 = new Programa1.Controles.cFechas();
             this.paEstadistica = new System.Windows.Forms.Panel();
             this.paEst = new System.Windows.Forms.Panel();
             this.grdEstadistica = new Grilla2.SpeedGrilla();
             this.label2 = new System.Windows.Forms.Label();
-            this.cFechas1 = new Programa1.Controles.cFechas();
+            this.mnuFiltroSalidas = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.efectivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trasladosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reintegrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ofertasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aPicadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.empleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFiltroEntradas = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ventaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.carneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trasladosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmdCarne = new System.Windows.Forms.Button();
+            this.lblBalance = new System.Windows.Forms.Label();
+            this.lblTBalancesSuc = new System.Windows.Forms.Label();
+            this.lblTBalancesClientes = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.nuTop = new System.Windows.Forms.NumericUpDown();
+            this.mnuFiltroEstadisticas = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.unaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.todasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,12 +91,15 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.paEst.SuspendLayout();
+            this.mnuFiltroSalidas.SuspendLayout();
+            this.mnuFiltroEntradas.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuTop)).BeginInit();
+            this.mnuFiltroEstadisticas.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -94,8 +118,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1123, 701);
-            this.splitContainer1.SplitterDistance = 971;
+            this.splitContainer1.Size = new System.Drawing.Size(1359, 701);
+            this.splitContainer1.SplitterDistance = 1175;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer3
@@ -116,8 +140,8 @@
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer3.Panel2.Controls.Add(this.panel4);
             this.splitContainer3.Panel2.Controls.Add(this.grdVentas);
-            this.splitContainer3.Size = new System.Drawing.Size(971, 701);
-            this.splitContainer3.SplitterDistance = 597;
+            this.splitContainer3.Size = new System.Drawing.Size(1175, 701);
+            this.splitContainer3.SplitterDistance = 572;
             this.splitContainer3.TabIndex = 0;
             // 
             // splitContainer4
@@ -140,8 +164,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.panel2);
             this.splitContainer4.Panel2.Controls.Add(this.grdSalidas);
             this.splitContainer4.Panel2.Controls.Add(this.label1);
-            this.splitContainer4.Size = new System.Drawing.Size(971, 597);
-            this.splitContainer4.SplitterDistance = 523;
+            this.splitContainer4.Size = new System.Drawing.Size(1175, 572);
+            this.splitContainer4.SplitterDistance = 632;
             this.splitContainer4.TabIndex = 0;
             // 
             // panel1
@@ -150,9 +174,9 @@
             this.panel1.Controls.Add(this.rdAgrupado);
             this.panel1.Controls.Add(this.rdDetalle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 571);
+            this.panel1.Location = new System.Drawing.Point(0, 546);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(523, 26);
+            this.panel1.Size = new System.Drawing.Size(632, 26);
             this.panel1.TabIndex = 4;
             // 
             // lblTotalEntradas
@@ -171,8 +195,8 @@
             this.rdAgrupado.AutoSize = true;
             this.rdAgrupado.Checked = true;
             this.rdAgrupado.Depth = 0;
-            this.rdAgrupado.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.rdAgrupado.Location = new System.Drawing.Point(177, 0);
+            this.rdAgrupado.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdAgrupado.Location = new System.Drawing.Point(286, 0);
             this.rdAgrupado.Margin = new System.Windows.Forms.Padding(0);
             this.rdAgrupado.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rdAgrupado.MouseState = MaterialSkin.MouseState.HOVER;
@@ -190,8 +214,8 @@
             this.rdDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdDetalle.AutoSize = true;
             this.rdDetalle.Depth = 0;
-            this.rdDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.rdDetalle.Location = new System.Drawing.Point(266, 0);
+            this.rdDetalle.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdDetalle.Location = new System.Drawing.Point(375, 0);
             this.rdDetalle.Margin = new System.Windows.Forms.Padding(0);
             this.rdDetalle.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rdDetalle.MouseState = MaterialSkin.MouseState.HOVER;
@@ -217,6 +241,7 @@
             this.grdEntradas.bFColorSel = System.Drawing.SystemColors.HighlightText;
             this.grdEntradas.Col = 0;
             this.grdEntradas.Cols = 1;
+            this.grdEntradas.ContextMenuStrip = this.mnuFiltroEntradas;
             this.grdEntradas.DataMember = "";
             this.grdEntradas.DataSource = null;
             this.grdEntradas.EnableEdicion = false;
@@ -235,7 +260,7 @@
             this.grdEntradas.Redraw = true;
             this.grdEntradas.Row = 0;
             this.grdEntradas.Rows = 1;
-            this.grdEntradas.Size = new System.Drawing.Size(517, 544);
+            this.grdEntradas.Size = new System.Drawing.Size(626, 519);
             this.grdEntradas.TabIndex = 1;
             this.grdEntradas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdEntradas_KeyUp);
             this.grdEntradas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdEntradas_DobleClick);
@@ -255,9 +280,9 @@
             // 
             this.panel2.Controls.Add(this.lblTotalSalidas);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 571);
+            this.panel2.Location = new System.Drawing.Point(0, 546);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(444, 26);
+            this.panel2.Size = new System.Drawing.Size(539, 26);
             this.panel2.TabIndex = 5;
             // 
             // lblTotalSalidas
@@ -284,6 +309,7 @@
             this.grdSalidas.bFColorSel = System.Drawing.SystemColors.HighlightText;
             this.grdSalidas.Col = 0;
             this.grdSalidas.Cols = 1;
+            this.grdSalidas.ContextMenuStrip = this.mnuFiltroSalidas;
             this.grdSalidas.DataMember = "";
             this.grdSalidas.DataSource = null;
             this.grdSalidas.EnableEdicion = false;
@@ -302,7 +328,7 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 1;
-            this.grdSalidas.Size = new System.Drawing.Size(438, 544);
+            this.grdSalidas.Size = new System.Drawing.Size(533, 519);
             this.grdSalidas.TabIndex = 1;
             this.grdSalidas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdSalidas_KeyUp);
             this.grdSalidas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdSalidas_DobleClick);
@@ -322,63 +348,38 @@
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel4.Controls.Add(this.cmdCarne);
+            this.panel4.Controls.Add(this.lblBalance);
             this.panel4.Controls.Add(this.lblCarneK);
-            this.panel4.Controls.Add(this.panel3);
             this.panel4.Controls.Add(this.lblSuc);
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(242, 94);
+            this.panel4.Size = new System.Drawing.Size(242, 119);
             this.panel4.TabIndex = 5;
             // 
             // lblCarneK
             // 
+            this.lblCarneK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCarneK.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblCarneK.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblCarneK.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblCarneK.Location = new System.Drawing.Point(0, 0);
+            this.lblCarneK.Location = new System.Drawing.Point(3, 40);
             this.lblCarneK.Name = "lblCarneK";
-            this.lblCarneK.Size = new System.Drawing.Size(242, 18);
+            this.lblCarneK.Size = new System.Drawing.Size(233, 25);
             this.lblCarneK.TabIndex = 3;
             this.lblCarneK.Text = "Kilos Carne";
-            this.lblCarneK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.cmdStock_Carne);
-            this.panel3.Location = new System.Drawing.Point(3, 21);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(236, 52);
-            this.panel3.TabIndex = 2;
-            // 
-            // cmdStock_Carne
-            // 
-            this.cmdStock_Carne.AutoSize = true;
-            this.cmdStock_Carne.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cmdStock_Carne.Depth = 0;
-            this.cmdStock_Carne.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmdStock_Carne.Location = new System.Drawing.Point(0, 0);
-            this.cmdStock_Carne.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cmdStock_Carne.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cmdStock_Carne.Name = "cmdStock_Carne";
-            this.cmdStock_Carne.Primary = false;
-            this.cmdStock_Carne.Size = new System.Drawing.Size(236, 52);
-            this.cmdStock_Carne.TabIndex = 0;
-            this.cmdStock_Carne.Text = "Stock Carne";
-            this.cmdStock_Carne.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cmdStock_Carne.UseVisualStyleBackColor = true;
-            this.cmdStock_Carne.Click += new System.EventHandler(this.cmdStock_Carne_Click);
+            this.lblCarneK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblSuc
             // 
+            this.lblSuc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSuc.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblSuc.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblSuc.Location = new System.Drawing.Point(0, 76);
+            this.lblSuc.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblSuc.Location = new System.Drawing.Point(6, 94);
             this.lblSuc.Name = "lblSuc";
-            this.lblSuc.Size = new System.Drawing.Size(242, 18);
+            this.lblSuc.Size = new System.Drawing.Size(233, 25);
             this.lblSuc.TabIndex = 4;
             this.lblSuc.Text = "Sucursal";
             this.lblSuc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -415,7 +416,7 @@
             this.grdVentas.Redraw = true;
             this.grdVentas.Row = -2;
             this.grdVentas.Rows = 0;
-            this.grdVentas.Size = new System.Drawing.Size(720, 94);
+            this.grdVentas.Size = new System.Drawing.Size(924, 119);
             this.grdVentas.TabIndex = 1;
             // 
             // splitContainer2
@@ -435,7 +436,7 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.cFechas1);
-            this.splitContainer2.Size = new System.Drawing.Size(148, 701);
+            this.splitContainer2.Size = new System.Drawing.Size(180, 701);
             this.splitContainer2.SplitterDistance = 483;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -471,16 +472,29 @@
             this.grdSucursales.Redraw = true;
             this.grdSucursales.Row = 0;
             this.grdSucursales.Rows = 1;
-            this.grdSucursales.Size = new System.Drawing.Size(203, 477);
+            this.grdSucursales.Size = new System.Drawing.Size(235, 477);
             this.grdSucursales.TabIndex = 1;
             this.grdSucursales.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSucursales_CambioFila);
+            // 
+            // cFechas1
+            // 
+            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFechas1.Location = new System.Drawing.Point(0, 0);
+            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFechas1.Mostrar = 0;
+            this.cFechas1.Name = "cFechas1";
+            this.cFechas1.Size = new System.Drawing.Size(180, 214);
+            this.cFechas1.TabIndex = 0;
+            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
             // 
             // paEstadistica
             // 
             this.paEstadistica.BackColor = System.Drawing.Color.Gray;
             this.paEstadistica.Cursor = System.Windows.Forms.Cursors.Hand;
             this.paEstadistica.Dock = System.Windows.Forms.DockStyle.Right;
-            this.paEstadistica.Location = new System.Drawing.Point(1116, 0);
+            this.paEstadistica.Location = new System.Drawing.Point(1352, 0);
             this.paEstadistica.Name = "paEstadistica";
             this.paEstadistica.Size = new System.Drawing.Size(35, 701);
             this.paEstadistica.TabIndex = 1;
@@ -492,11 +506,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.paEst.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.paEst.Controls.Add(this.nuTop);
+            this.paEst.Controls.Add(this.label3);
+            this.paEst.Controls.Add(this.lblTBalancesClientes);
+            this.paEst.Controls.Add(this.lblTBalancesSuc);
             this.paEst.Controls.Add(this.grdEstadistica);
             this.paEst.Controls.Add(this.label2);
-            this.paEst.Location = new System.Drawing.Point(476, 0);
+            this.paEst.Location = new System.Drawing.Point(751, 0);
             this.paEst.Name = "paEst";
-            this.paEst.Size = new System.Drawing.Size(647, 701);
+            this.paEst.Size = new System.Drawing.Size(608, 701);
             this.paEst.TabIndex = 2;
             this.paEst.Visible = false;
             // 
@@ -514,6 +532,7 @@
             this.grdEstadistica.bFColorSel = System.Drawing.SystemColors.HighlightText;
             this.grdEstadistica.Col = 0;
             this.grdEstadistica.Cols = 10;
+            this.grdEstadistica.ContextMenuStrip = this.mnuFiltroEstadisticas;
             this.grdEstadistica.DataMember = "";
             this.grdEstadistica.DataSource = null;
             this.grdEstadistica.EnableEdicion = true;
@@ -532,7 +551,7 @@
             this.grdEstadistica.Redraw = true;
             this.grdEstadistica.Row = 0;
             this.grdEstadistica.Rows = 50;
-            this.grdEstadistica.Size = new System.Drawing.Size(634, 663);
+            this.grdEstadistica.Size = new System.Drawing.Size(595, 646);
             this.grdEstadistica.TabIndex = 2;
             // 
             // label2
@@ -546,24 +565,228 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Estadísticas";
             // 
-            // cFechas1
+            // mnuFiltroSalidas
             // 
-            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFechas1.Location = new System.Drawing.Point(0, 0);
-            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFechas1.Mostrar = 0;
-            this.cFechas1.Name = "cFechas1";
-            this.cFechas1.Size = new System.Drawing.Size(148, 214);
-            this.cFechas1.TabIndex = 0;
-            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
+            this.mnuFiltroSalidas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.efectivoToolStripMenuItem,
+            this.tarjetasToolStripMenuItem,
+            this.trasladosToolStripMenuItem,
+            this.reintegrosToolStripMenuItem,
+            this.ofertasToolStripMenuItem,
+            this.aPicadaToolStripMenuItem,
+            this.empleadosToolStripMenuItem,
+            this.gastosToolStripMenuItem});
+            this.mnuFiltroSalidas.Name = "mnuFiltroSalidas";
+            this.mnuFiltroSalidas.Size = new System.Drawing.Size(133, 180);
+            // 
+            // efectivoToolStripMenuItem
+            // 
+            this.efectivoToolStripMenuItem.Name = "efectivoToolStripMenuItem";
+            this.efectivoToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.efectivoToolStripMenuItem.Tag = "1";
+            this.efectivoToolStripMenuItem.Text = "Efectivo";
+            this.efectivoToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
+            // 
+            // tarjetasToolStripMenuItem
+            // 
+            this.tarjetasToolStripMenuItem.Name = "tarjetasToolStripMenuItem";
+            this.tarjetasToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.tarjetasToolStripMenuItem.Tag = "2";
+            this.tarjetasToolStripMenuItem.Text = "Tarjetas";
+            this.tarjetasToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
+            // 
+            // trasladosToolStripMenuItem
+            // 
+            this.trasladosToolStripMenuItem.Name = "trasladosToolStripMenuItem";
+            this.trasladosToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.trasladosToolStripMenuItem.Tag = "3";
+            this.trasladosToolStripMenuItem.Text = "Traslados";
+            this.trasladosToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
+            // 
+            // reintegrosToolStripMenuItem
+            // 
+            this.reintegrosToolStripMenuItem.Name = "reintegrosToolStripMenuItem";
+            this.reintegrosToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.reintegrosToolStripMenuItem.Tag = "4";
+            this.reintegrosToolStripMenuItem.Text = "Reintegros";
+            this.reintegrosToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
+            // 
+            // ofertasToolStripMenuItem
+            // 
+            this.ofertasToolStripMenuItem.Name = "ofertasToolStripMenuItem";
+            this.ofertasToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.ofertasToolStripMenuItem.Tag = "5";
+            this.ofertasToolStripMenuItem.Text = "Ofertas";
+            this.ofertasToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
+            // 
+            // aPicadaToolStripMenuItem
+            // 
+            this.aPicadaToolStripMenuItem.Name = "aPicadaToolStripMenuItem";
+            this.aPicadaToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.aPicadaToolStripMenuItem.Tag = "6";
+            this.aPicadaToolStripMenuItem.Text = "A Picada";
+            this.aPicadaToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
+            // 
+            // empleadosToolStripMenuItem
+            // 
+            this.empleadosToolStripMenuItem.Name = "empleadosToolStripMenuItem";
+            this.empleadosToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.empleadosToolStripMenuItem.Tag = "7";
+            this.empleadosToolStripMenuItem.Text = "Empleados";
+            this.empleadosToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
+            // 
+            // gastosToolStripMenuItem
+            // 
+            this.gastosToolStripMenuItem.Name = "gastosToolStripMenuItem";
+            this.gastosToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.gastosToolStripMenuItem.Tag = "8";
+            this.gastosToolStripMenuItem.Text = "Gastos";
+            this.gastosToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
+            // 
+            // mnuFiltroEntradas
+            // 
+            this.mnuFiltroEntradas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ventaToolStripMenuItem,
+            this.carneToolStripMenuItem,
+            this.trasladosToolStripMenuItem1});
+            this.mnuFiltroEntradas.Name = "mnuFiltroEntradas";
+            this.mnuFiltroEntradas.Size = new System.Drawing.Size(123, 70);
+            // 
+            // ventaToolStripMenuItem
+            // 
+            this.ventaToolStripMenuItem.Name = "ventaToolStripMenuItem";
+            this.ventaToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.ventaToolStripMenuItem.Tag = "1";
+            this.ventaToolStripMenuItem.Text = "Venta";
+            this.ventaToolStripMenuItem.Click += new System.EventHandler(this.Menu_EntradasClick);
+            // 
+            // carneToolStripMenuItem
+            // 
+            this.carneToolStripMenuItem.Name = "carneToolStripMenuItem";
+            this.carneToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.carneToolStripMenuItem.Tag = "2";
+            this.carneToolStripMenuItem.Text = "Carne";
+            this.carneToolStripMenuItem.Click += new System.EventHandler(this.Menu_EntradasClick);
+            // 
+            // trasladosToolStripMenuItem1
+            // 
+            this.trasladosToolStripMenuItem1.Name = "trasladosToolStripMenuItem1";
+            this.trasladosToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
+            this.trasladosToolStripMenuItem1.Tag = "3";
+            this.trasladosToolStripMenuItem1.Text = "Traslados";
+            this.trasladosToolStripMenuItem1.Click += new System.EventHandler(this.Menu_EntradasClick);
+            // 
+            // cmdCarne
+            // 
+            this.cmdCarne.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdCarne.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdCarne.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdCarne.Location = new System.Drawing.Point(6, 68);
+            this.cmdCarne.Name = "cmdCarne";
+            this.cmdCarne.Size = new System.Drawing.Size(233, 25);
+            this.cmdCarne.TabIndex = 5;
+            this.cmdCarne.Text = "Stock Carne";
+            this.cmdCarne.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cmdCarne.UseVisualStyleBackColor = true;
+            this.cmdCarne.Click += new System.EventHandler(this.cmdStock_Carne_Click);
+            // 
+            // lblBalance
+            // 
+            this.lblBalance.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBalance.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblBalance.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblBalance.Location = new System.Drawing.Point(3, 15);
+            this.lblBalance.Name = "lblBalance";
+            this.lblBalance.Size = new System.Drawing.Size(233, 25);
+            this.lblBalance.TabIndex = 3;
+            this.lblBalance.Text = "Balance";
+            this.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblTBalancesSuc
+            // 
+            this.lblTBalancesSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTBalancesSuc.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblTBalancesSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblTBalancesSuc.Location = new System.Drawing.Point(3, 671);
+            this.lblTBalancesSuc.Name = "lblTBalancesSuc";
+            this.lblTBalancesSuc.Size = new System.Drawing.Size(168, 25);
+            this.lblTBalancesSuc.TabIndex = 4;
+            this.lblTBalancesSuc.Text = "Balances Sucursales";
+            this.lblTBalancesSuc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTBalancesClientes
+            // 
+            this.lblTBalancesClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTBalancesClientes.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblTBalancesClientes.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblTBalancesClientes.Location = new System.Drawing.Point(177, 671);
+            this.lblTBalancesClientes.Name = "lblTBalancesClientes";
+            this.lblTBalancesClientes.Size = new System.Drawing.Size(168, 25);
+            this.lblTBalancesClientes.TabIndex = 4;
+            this.lblTBalancesClientes.Text = "Balances Clientes";
+            this.lblTBalancesClientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label3.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label3.Location = new System.Drawing.Point(521, 671);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 25);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Top";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // nuTop
+            // 
+            this.nuTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nuTop.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nuTop.Location = new System.Drawing.Point(561, 679);
+            this.nuTop.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nuTop.Name = "nuTop";
+            this.nuTop.Size = new System.Drawing.Size(40, 16);
+            this.nuTop.TabIndex = 5;
+            this.nuTop.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // mnuFiltroEstadisticas
+            // 
+            this.mnuFiltroEstadisticas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.unaToolStripMenuItem,
+            this.todasToolStripMenuItem});
+            this.mnuFiltroEstadisticas.Name = "mnuFiltroEstadisticas";
+            this.mnuFiltroEstadisticas.Size = new System.Drawing.Size(105, 48);
+            // 
+            // unaToolStripMenuItem
+            // 
+            this.unaToolStripMenuItem.Checked = true;
+            this.unaToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.unaToolStripMenuItem.Name = "unaToolStripMenuItem";
+            this.unaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.unaToolStripMenuItem.Text = "Una";
+            // 
+            // todasToolStripMenuItem
+            // 
+            this.todasToolStripMenuItem.Name = "todasToolStripMenuItem";
+            this.todasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.todasToolStripMenuItem.Text = "Todas";
+            this.todasToolStripMenuItem.Click += new System.EventHandler(this.todasToolStripMenuItem_Click);
             // 
             // frmResumen_Suc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1151, 701);
+            this.ClientSize = new System.Drawing.Size(1387, 701);
             this.Controls.Add(this.paEst);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.paEstadistica);
@@ -592,14 +815,16 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.paEst.ResumeLayout(false);
             this.paEst.PerformLayout();
+            this.mnuFiltroSalidas.ResumeLayout(false);
+            this.mnuFiltroEntradas.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nuTop)).EndInit();
+            this.mnuFiltroEstadisticas.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -627,10 +852,30 @@
         private System.Windows.Forms.Panel paEst;
         private Grilla2.SpeedGrilla grdEstadistica;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel3;
-        private MaterialSkin.Controls.MaterialFlatButton cmdStock_Carne;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lblCarneK;
         private System.Windows.Forms.Label lblSuc;
+        private System.Windows.Forms.ContextMenuStrip mnuFiltroSalidas;
+        private System.Windows.Forms.ToolStripMenuItem efectivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tarjetasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trasladosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reintegrosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ofertasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aPicadaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem empleadosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gastosToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip mnuFiltroEntradas;
+        private System.Windows.Forms.ToolStripMenuItem ventaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem carneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trasladosToolStripMenuItem1;
+        private System.Windows.Forms.Button cmdCarne;
+        private System.Windows.Forms.Label lblBalance;
+        private System.Windows.Forms.NumericUpDown nuTop;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblTBalancesClientes;
+        private System.Windows.Forms.Label lblTBalancesSuc;
+        private System.Windows.Forms.ContextMenuStrip mnuFiltroEstadisticas;
+        private System.Windows.Forms.ToolStripMenuItem unaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem todasToolStripMenuItem;
     }
 }

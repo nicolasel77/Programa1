@@ -14,6 +14,11 @@
         private Resumen_Sucursales RS = new Resumen_Sucursales();
         private Estadisticas_Sucursales Est = new Estadisticas_Sucursales();
         private int Suc = 0;
+        private byte Filtro_Salidas = 0;
+        private byte Filtro_Entradas = 0;
+        private bool Filtro_SucUnica = true;
+        
+        private bool NoCargar = false;
 
         public frmResumen_Suc()
         {
@@ -28,6 +33,46 @@
             grdSalidas.TeclasManejadas = new int[] { 13, 46 };
         }
 
+        private void Menu_SalidasClick(object sender, EventArgs e)
+        {
+            ToolStripMenuItem n = sender as ToolStripMenuItem;
+            if (n.Checked == false)
+            {
+                foreach (ToolStripMenuItem t in mnuFiltroSalidas.Items)
+                {
+                    t.Checked = false;
+                }
+                n.Checked = true;
+                Filtro_Salidas = Convert.ToByte(n.Tag);
+            }
+            else
+            {
+                n.Checked = false;
+                Filtro_Salidas = 0;
+            }
+            Salidas();
+            this.Cursor = Cursors.Default;
+        }
+        private void Menu_EntradasClick(object sender, EventArgs e)
+        {
+            ToolStripMenuItem n = sender as ToolStripMenuItem;
+            if (n.Checked == false)
+            {
+                foreach (ToolStripMenuItem t in mnuFiltroEntradas.Items)
+                {
+                    t.Checked = false;
+                }
+                n.Checked = true;
+                Filtro_Entradas = Convert.ToByte(n.Tag);
+            }
+            else
+            {
+                n.Checked = false;
+                Filtro_Entradas = 0;
+            }
+            Entradas();
+            this.Cursor = Cursors.Default;
+        }
 
         private void Cargar_Listado(DateTime Semana)
         {
@@ -81,16 +126,14 @@
                 Salidas();
                 Cuentas();
                 if (paEst.Visible == true) { Estadisticas(); }
-                this.Cursor = Cursors.Default; 
+                this.Cursor = Cursors.Default;
             }
         }
-
-
 
         private void Entradas()
         {
             DataTable dt = new DataTable();
-            dt = RS.Entradas(Suc, cFechas1.fecha_Actual, cFechas1.fecha_Fin);
+            dt = RS.Entradas(Suc, cFechas1.fecha_Actual, cFechas1.fecha_Fin, Filtro_Entradas);
             grdEntradas.MostrarDatos(dt, true, false);
             grdEntradas.AutosizeAll();
             grdEntradas.set_ColW(grdEntradas.get_ColIndex("ID_Proveedor"), 0);
@@ -107,7 +150,7 @@
         private void Salidas()
         {
             DataTable dt = new DataTable();
-            dt = RS.Salidas(Suc, cFechas1.fecha_Actual, cFechas1.fecha_Fin);
+            dt = RS.Salidas(Suc, cFechas1.fecha_Actual, cFechas1.fecha_Fin, Filtro_Salidas);
             grdSalidas.MostrarDatos(dt, true, false);
             grdSalidas.AutosizeAll();
             grdSalidas.set_ColW(grdSalidas.get_ColIndex("ID_Proveedor"), 0);
@@ -128,18 +171,65 @@
             Stock st = new Stock();
             string cadena = $"Id_Sucursales={Suc} AND {cFechas1.Cadena()}";
             k = st.Stock_Carne(cadena);
-            cmdStock_Carne.Text = $"STOCK CARNE:  {k:N1} kg";
+            cmdCarne.Text = $"STOCK CARNE:  {k:N1} kg";
+            k = Est.Balance();
+            lblBalance.Text = $"Balance: {k:N1}";
+            if (k > 0) { lblBalance.ForeColor = Color.SteelBlue; } else { lblBalance.ForeColor = Color.Red; }
 
         }
-
 
         private void Estadisticas()
         {
-            grdEstadistica.MostrarDatos(Est.Completa(), true, false);
-            grdEstadistica.AutosizeAll();
-
+            if (Filtro_SucUnica == true) { Estadistica_Unica(); } else { Estadistica_Todas(); }
         }
-
+        private void Estadistica_Unica()
+        {
+            grdEstadistica.MostrarDatos(Est.Unica(), true, false);
+            for (int i = 1; i < grdEstadistica.Cols; i++)
+            {
+                grdEstadistica.Columnas[i].Format = "N";
+            }
+            for (int i = 1; i < grdEstadistica.Rows; i++)
+            {
+                int c = grdEstadistica.get_ColIndex("Balance");
+                double b = Convert.ToDouble(grdEstadistica.get_Texto(i, c));
+                if (b > 0)
+                {
+                    grdEstadistica.set_ColorLetraCelda(i, c - 1, Color.SteelBlue);
+                    grdEstadistica.set_ColorLetraCelda(i, c, Color.SteelBlue);
+                }
+                else
+                {
+                    grdEstadistica.set_ColorLetraCelda(i, c - 1, Color.Red);
+                    grdEstadistica.set_ColorLetraCelda(i, c, Color.Red);
+                }
+            }
+            grdEstadistica.AutosizeAll();
+        }
+        private void Estadistica_Todas()
+        {
+            grdEstadistica.MostrarDatos(Est.Todas(), true, false);
+            for (int i = 1; i < grdEstadistica.Cols; i++)
+            {
+                grdEstadistica.Columnas[i].Format = "N";
+            }
+            for (int i = 1; i < grdEstadistica.Rows; i++)
+            {
+                int c = grdEstadistica.get_ColIndex("Balance");
+                double b = Convert.ToDouble(grdEstadistica.get_Texto(i, c));
+                if (b > 0)
+                {
+                    grdEstadistica.set_ColorLetraCelda(i, c - 1, Color.SteelBlue);
+                    grdEstadistica.set_ColorLetraCelda(i, c, Color.SteelBlue);
+                }
+                else
+                {
+                    grdEstadistica.set_ColorLetraCelda(i, c - 1, Color.Red);
+                    grdEstadistica.set_ColorLetraCelda(i, c, Color.Red);
+                }
+            }
+            grdEstadistica.AutosizeAll();
+        }
         private void paEstadistica_Click(object sender, EventArgs e)
         {
             if (paEst.Visible == false)
@@ -263,6 +353,19 @@
                         grdSucursales.ActivarCelda(grdSucursales.Row - 1, 0);
                     }
                     break;
+            }
+        }
+
+        private void todasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (NoCargar == false)
+            {
+                NoCargar = true;
+                unaToolStripMenuItem.Checked = !unaToolStripMenuItem.Checked;
+                todasToolStripMenuItem.Checked = !todasToolStripMenuItem.Checked;
+                Filtro_SucUnica = unaToolStripMenuItem.Checked;                
+                Estadisticas();
+                NoCargar = false;
             }
         }
     }

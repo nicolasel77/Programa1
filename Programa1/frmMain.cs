@@ -28,7 +28,7 @@
         private void frmMain_Load(object sender, EventArgs e)
         {
             this.Text = usuario.Nombre;
-            cajaDiariaToolStripMenuItem.PerformClick();
+            resumenToolStripMenuItem.PerformClick();
         }
 
         private void Mostrar(object sender, EventArgs e)

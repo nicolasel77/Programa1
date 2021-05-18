@@ -11,25 +11,10 @@ namespace Programa1.DB
     class Ventas
     {        
         public Ventas()
-        {
-            
+        {            
         }
 
-        public Ventas(int id, DateTime fecha, Camiones camion, Productos prod, string desc, Sucursales.Sucursales sucu, Single Costo_Venta, Proveedores.Proveedores proveedor, Single Costo_Compra, Single kilos)
-        {
-            Id = id;
-            Fecha = fecha;
-            Camion = camion;
-            Producto = prod;
-            Descripcion = desc;
-            Sucursal = sucu;
-            CostoVenta = Costo_Venta;
-            Proveedor = proveedor;
-            CostoCompra = Costo_Compra;
-            Kilos = kilos;
-
-        }
-
+      
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public Productos Producto { get; set; } = new Productos();
@@ -57,7 +42,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Ventas {filtro} ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT ID, Fecha, ID_Camion, ID_Proveedores, Nombre_Proveedor, ID_Sucursales, Nombre, ID_Productos, Descripcion, Costo_Compra, Costo_Venta, Kilos, Total_Compra, Total_Venta FROM vw_Ventas {filtro} ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

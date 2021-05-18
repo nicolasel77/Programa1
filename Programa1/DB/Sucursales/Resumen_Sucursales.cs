@@ -1,6 +1,5 @@
 ﻿namespace Programa1.DB.Sucursales
 {
-    using Programa1.DB;
     using System;
     using System.Data;
     using System.Data.SqlClient;
@@ -31,7 +30,7 @@
             return dt;
         }
 
-        public DataTable Entradas(int Suc, DateTime f1, DateTime f2)
+        public DataTable Entradas(int Suc, DateTime f1, DateTime f2, byte Filtro = 0)
         {
             var dt = new DataTable("Entradas");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -43,9 +42,10 @@
                 comandoSql.Parameters.AddWithValue("Suc", Suc);
                 comandoSql.Parameters.AddWithValue("F1", f1);
                 comandoSql.Parameters.AddWithValue("F2", f2);
-                
+                comandoSql.Parameters.AddWithValue("Filtro", Filtro);
+
                 conexionSql.Open();
-                
+
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
                 SqlDat.Fill(dt);
             }
@@ -57,7 +57,7 @@
             return dt;
         }
 
-        public DataTable Salidas(int Suc, DateTime f1, DateTime f2)
+        public DataTable Salidas(int Suc, DateTime f1, DateTime f2, byte Filtro = 0)
         {
             var dt = new DataTable("Salidas");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -69,6 +69,7 @@
                 comandoSql.Parameters.AddWithValue("Suc", Suc);
                 comandoSql.Parameters.AddWithValue("F1", f1);
                 comandoSql.Parameters.AddWithValue("F2", f2);
+                comandoSql.Parameters.AddWithValue("Filtro", Filtro);
 
                 conexionSql.Open();
 
@@ -82,5 +83,7 @@
 
             return dt;
         }
+
+
     }
 }

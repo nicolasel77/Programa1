@@ -15,21 +15,6 @@ namespace Programa1.DB.Sucursales
 
         public enum Filtrar_SucsClientes { Todas = 0, Sucursales, Clientes };
 
-        public Sucursales(int id, string nombre, int tipo, bool ver, bool propio, string titular, string cuit, string direccion, string alias, int localidad, string balanza)
-        {
-            Id = id;
-            Nombre = nombre;
-            Tipo.ID = tipo;
-            Ver = ver;
-            Propio = propio;
-            Titular = titular;
-            CUIT = cuit;
-            Direccion = direccion;
-            Alias = alias;
-            Localidad.Id = localidad;
-            Balanza = balanza;
-        }
-
         [Required]
         [Key]
         public int Id { get; set; }

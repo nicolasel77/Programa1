@@ -27,7 +27,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT f_Balance {Suc.Id}, '{Sem.Semana:MM/dd/yy}', '{Sem.Semana.AddDays(6):MM/dd/yy}'", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT dbo.f_Balance ({Suc.Id}, '{Sem.Semana:MM/dd/yy}', '{Sem.Semana.AddDays(6):MM/dd/yy}')", conexionSql);
 
                 conexionSql.Open();
 
@@ -155,21 +155,45 @@
         }
 
 
-        public DataTable Completa(int Top = 50)
+        public DataTable Unica(int Top = 50)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP {Top} * FROM Estadisticas_Sucursal WHERE " +
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP {Top} Semana, (CASE Carne WHEN 0 THEN 0 ELSE Balance / Carne END) AS Rend, Balance, Carne, Pollo, Granja, Men, Emb, Rec, IntVenta, IntCompra" +
+                    $", Empleados, Gastos, Ganancia, KilosCompra, Clientes, Reintegros" +
+                    $" FROM Estadisticas_Sucursal WHERE " +
                     $" ID_Sucursales={Suc.Id}" +
                     $" AND Semana BETWEEN  '{Sem.Semana.AddYears(-1):MM/dd/yy}' AND '{Sem.Semana.AddMonths(1):MM/dd/yy}' ORDER BY Semana DESC", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);                
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        public DataTable Todas()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT ID_Sucursales Suc, (CASE Carne WHEN 0 THEN 0 ELSE Balance / Carne END) AS Rend, Balance, Carne, Pollo, Granja, Men, Emb, Rec, IntVenta, IntCompra" +
+                    $", Empleados, Gastos, Ganancia, KilosCompra, Clientes, Reintegros" +
+                    $" FROM Estadisticas_Sucursal WHERE " +
+                    $" Semana='{Sem.Semana.AddYears(-1):MM/dd/yy}' ORDER BY ID_Sucursales", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
                 SqlDat.Fill(dt);
-                dt.Columns.Remove("ID_Sucursales");
             }
             catch (Exception)
             {
