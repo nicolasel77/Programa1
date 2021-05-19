@@ -28,7 +28,16 @@
         private void frmMain_Load(object sender, EventArgs e)
         {
             this.Text = usuario.Nombre;
-            resumenToolStripMenuItem.PerformClick();
+            switch (usuario.Nombre)
+            {
+                case "Nicolas":
+                    resumenToolStripMenuItem.PerformClick();
+                    break;
+                case "Alejandro":
+                    cajaDiariaToolStripMenuItem.PerformClick();
+                    break;
+            }
+            
         }
 
         private void Mostrar(object sender, EventArgs e)

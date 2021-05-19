@@ -27,7 +27,7 @@
         public DateTime Ultima_Fecha
         {
             get { return uFecha; }
-            set 
+            set
             {
                 uFecha = value;
                 Cargar();
@@ -119,6 +119,86 @@
             return s;
         }
 
+        public void Anterior()
+        {
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0:
+                    if (lstSemanas.SelectedIndex > -1)
+                    {
+                        if (lstSemanas.SelectedIndex == lstSemanas.Items.Count - 1)
+                        {
+                            lstSemanas.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            lstSemanas.SelectedIndex += 1;
+                        }
+                    }
+                    else
+                    {
+                        lstSemanas.SelectedIndex = 0;
+                    }
+                    break;
+                case 1:
+                    if (fecha_Actual.Year > 2000)
+                    {
+                        fecha_Actual = fecha_Actual.AddDays(1);
+                        mntDias.SetDate(fecha_Actual);
+                    }
+                    break;
+                case 2:
+                    if (lstMes.SelectedIndex > -1)
+                    {
+                        if (lstMes.SelectedIndex == lstMes.Items.Count - 1)
+                        {
+                            lstMes.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            lstMes.SelectedIndex += 1;
+                        }
+                    }
+                    break;
+                case 3:
+                    if (lstAños.SelectedIndex > -1)
+                    {
+                        if (lstAños.SelectedIndex == lstAños.Items.Count - 1)
+                        {
+                            lstAños.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            lstAños.SelectedIndex += 1;
+                        }
+                    }
+                    break;
+            }
+        }
+        public void Siguiente()
+        {
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0:
+                    if (lstSemanas.SelectedIndex > 0)
+                    {
+                        lstSemanas.SelectedIndex -= 1;
+                    }
+                    else
+                    {
+                        lstSemanas.SelectedIndex = lstSemanas.Items.Count - 1;
+                    }
+                    break;
+                case 1:
+                    if (fecha_Actual.Year > 2000)
+                    {
+                        fecha_Actual = fecha_Actual.AddDays(-1);
+                        mntDias.SetDate(fecha_Actual);
+                    }
+                    break;                
+            }
+        }
+
         private void LstSemanas_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstSemanas.Text == "Mas...")
@@ -148,7 +228,7 @@
                     }
                     catch (Exception)
                     {
-                        
+
                     }
                 }
             }

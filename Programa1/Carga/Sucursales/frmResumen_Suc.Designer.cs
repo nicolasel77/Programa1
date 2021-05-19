@@ -38,22 +38,14 @@
             this.rdAgrupado = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdDetalle = new MaterialSkin.Controls.MaterialRadioButton();
             this.grdEntradas = new Grilla2.SpeedGrilla();
+            this.mnuFiltroEntradas = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ventaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.carneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trasladosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lblEntradas = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblTotalSalidas = new System.Windows.Forms.Label();
             this.grdSalidas = new Grilla2.SpeedGrilla();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.lblCarneK = new System.Windows.Forms.Label();
-            this.lblSuc = new System.Windows.Forms.Label();
-            this.grdVentas = new Grilla2.SpeedGrilla();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.grdSucursales = new Grilla2.SpeedGrilla();
-            this.cFechas1 = new Programa1.Controles.cFechas();
-            this.paEstadistica = new System.Windows.Forms.Panel();
-            this.paEst = new System.Windows.Forms.Panel();
-            this.grdEstadistica = new Grilla2.SpeedGrilla();
-            this.label2 = new System.Windows.Forms.Label();
             this.mnuFiltroSalidas = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.efectivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,19 +55,35 @@
             this.aPicadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.empleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFiltroEntradas = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ventaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.carneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trasladosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.cmdCarne = new System.Windows.Forms.Button();
             this.lblBalance = new System.Windows.Forms.Label();
-            this.lblTBalancesSuc = new System.Windows.Forms.Label();
-            this.lblTBalancesClientes = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.nuTop = new System.Windows.Forms.NumericUpDown();
+            this.lblSuc = new System.Windows.Forms.Label();
+            this.grdVentas = new Grilla2.SpeedGrilla();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.grdSucursales = new Grilla2.SpeedGrilla();
+            this.mnuListado = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.sucursalesListado = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cFechas1 = new Programa1.Controles.cFechas();
+            this.paEstadistica = new System.Windows.Forms.Panel();
+            this.paEst = new System.Windows.Forms.Panel();
+            this.cmdRecargar = new Programa1.Controles.cBoton();
+            this.grdEstadistica = new Grilla2.SpeedGrilla();
             this.mnuFiltroEstadisticas = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.unaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.todasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.sucursalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.todosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuTop = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblTBalancesClientes = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblTBalancesSuc = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -89,17 +97,18 @@
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.mnuFiltroEntradas.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.mnuFiltroSalidas.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.mnuListado.SuspendLayout();
             this.paEst.SuspendLayout();
-            this.mnuFiltroSalidas.SuspendLayout();
-            this.mnuFiltroEntradas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nuTop)).BeginInit();
             this.mnuFiltroEstadisticas.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuTop)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -118,8 +127,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1359, 701);
-            this.splitContainer1.SplitterDistance = 1175;
+            this.splitContainer1.Size = new System.Drawing.Size(1346, 701);
+            this.splitContainer1.SplitterDistance = 1032;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer3
@@ -140,7 +149,7 @@
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer3.Panel2.Controls.Add(this.panel4);
             this.splitContainer3.Panel2.Controls.Add(this.grdVentas);
-            this.splitContainer3.Size = new System.Drawing.Size(1175, 701);
+            this.splitContainer3.Size = new System.Drawing.Size(1032, 701);
             this.splitContainer3.SplitterDistance = 572;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -164,8 +173,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.panel2);
             this.splitContainer4.Panel2.Controls.Add(this.grdSalidas);
             this.splitContainer4.Panel2.Controls.Add(this.label1);
-            this.splitContainer4.Size = new System.Drawing.Size(1175, 572);
-            this.splitContainer4.SplitterDistance = 632;
+            this.splitContainer4.Size = new System.Drawing.Size(1032, 572);
+            this.splitContainer4.SplitterDistance = 555;
             this.splitContainer4.TabIndex = 0;
             // 
             // panel1
@@ -176,7 +185,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 546);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(632, 26);
+            this.panel1.Size = new System.Drawing.Size(555, 26);
             this.panel1.TabIndex = 4;
             // 
             // lblTotalEntradas
@@ -196,7 +205,7 @@
             this.rdAgrupado.Checked = true;
             this.rdAgrupado.Depth = 0;
             this.rdAgrupado.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdAgrupado.Location = new System.Drawing.Point(286, 0);
+            this.rdAgrupado.Location = new System.Drawing.Point(209, 0);
             this.rdAgrupado.Margin = new System.Windows.Forms.Padding(0);
             this.rdAgrupado.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rdAgrupado.MouseState = MaterialSkin.MouseState.HOVER;
@@ -215,7 +224,7 @@
             this.rdDetalle.AutoSize = true;
             this.rdDetalle.Depth = 0;
             this.rdDetalle.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdDetalle.Location = new System.Drawing.Point(375, 0);
+            this.rdDetalle.Location = new System.Drawing.Point(298, 0);
             this.rdDetalle.Margin = new System.Windows.Forms.Padding(0);
             this.rdDetalle.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rdDetalle.MouseState = MaterialSkin.MouseState.HOVER;
@@ -260,10 +269,43 @@
             this.grdEntradas.Redraw = true;
             this.grdEntradas.Row = 0;
             this.grdEntradas.Rows = 1;
-            this.grdEntradas.Size = new System.Drawing.Size(626, 519);
+            this.grdEntradas.Size = new System.Drawing.Size(549, 519);
             this.grdEntradas.TabIndex = 1;
             this.grdEntradas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdEntradas_KeyUp);
             this.grdEntradas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdEntradas_DobleClick);
+            // 
+            // mnuFiltroEntradas
+            // 
+            this.mnuFiltroEntradas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ventaToolStripMenuItem,
+            this.carneToolStripMenuItem,
+            this.trasladosToolStripMenuItem1});
+            this.mnuFiltroEntradas.Name = "mnuFiltroEntradas";
+            this.mnuFiltroEntradas.Size = new System.Drawing.Size(123, 70);
+            // 
+            // ventaToolStripMenuItem
+            // 
+            this.ventaToolStripMenuItem.Name = "ventaToolStripMenuItem";
+            this.ventaToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.ventaToolStripMenuItem.Tag = "1";
+            this.ventaToolStripMenuItem.Text = "Venta";
+            this.ventaToolStripMenuItem.Click += new System.EventHandler(this.Menu_EntradasClick);
+            // 
+            // carneToolStripMenuItem
+            // 
+            this.carneToolStripMenuItem.Name = "carneToolStripMenuItem";
+            this.carneToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.carneToolStripMenuItem.Tag = "2";
+            this.carneToolStripMenuItem.Text = "Carne";
+            this.carneToolStripMenuItem.Click += new System.EventHandler(this.Menu_EntradasClick);
+            // 
+            // trasladosToolStripMenuItem1
+            // 
+            this.trasladosToolStripMenuItem1.Name = "trasladosToolStripMenuItem1";
+            this.trasladosToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
+            this.trasladosToolStripMenuItem1.Tag = "3";
+            this.trasladosToolStripMenuItem1.Text = "Traslados";
+            this.trasladosToolStripMenuItem1.Click += new System.EventHandler(this.Menu_EntradasClick);
             // 
             // lblEntradas
             // 
@@ -282,7 +324,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 546);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(539, 26);
+            this.panel2.Size = new System.Drawing.Size(473, 26);
             this.panel2.TabIndex = 5;
             // 
             // lblTotalSalidas
@@ -328,242 +370,10 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 1;
-            this.grdSalidas.Size = new System.Drawing.Size(533, 519);
+            this.grdSalidas.Size = new System.Drawing.Size(467, 519);
             this.grdSalidas.TabIndex = 1;
             this.grdSalidas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdSalidas_KeyUp);
             this.grdSalidas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdSalidas_DobleClick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label1.Location = new System.Drawing.Point(3, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Salidas";
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel4.Controls.Add(this.cmdCarne);
-            this.panel4.Controls.Add(this.lblBalance);
-            this.panel4.Controls.Add(this.lblCarneK);
-            this.panel4.Controls.Add(this.lblSuc);
-            this.panel4.Location = new System.Drawing.Point(3, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(242, 119);
-            this.panel4.TabIndex = 5;
-            // 
-            // lblCarneK
-            // 
-            this.lblCarneK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCarneK.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblCarneK.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblCarneK.Location = new System.Drawing.Point(3, 40);
-            this.lblCarneK.Name = "lblCarneK";
-            this.lblCarneK.Size = new System.Drawing.Size(233, 25);
-            this.lblCarneK.TabIndex = 3;
-            this.lblCarneK.Text = "Kilos Carne";
-            this.lblCarneK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblSuc
-            // 
-            this.lblSuc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSuc.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblSuc.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblSuc.Location = new System.Drawing.Point(6, 94);
-            this.lblSuc.Name = "lblSuc";
-            this.lblSuc.Size = new System.Drawing.Size(233, 25);
-            this.lblSuc.TabIndex = 4;
-            this.lblSuc.Text = "Sucursal";
-            this.lblSuc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // grdVentas
-            // 
-            this.grdVentas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdVentas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdVentas.AutoResize = false;
-            this.grdVentas.bColor = System.Drawing.SystemColors.Window;
-            this.grdVentas.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.grdVentas.bFColor = System.Drawing.SystemColors.WindowText;
-            this.grdVentas.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdVentas.Col = 0;
-            this.grdVentas.Cols = 1;
-            this.grdVentas.DataMember = "";
-            this.grdVentas.DataSource = null;
-            this.grdVentas.EnableEdicion = true;
-            this.grdVentas.Encabezado = "";
-            this.grdVentas.fColor = System.Drawing.SystemColors.Control;
-            this.grdVentas.FixCols = 0;
-            this.grdVentas.FixRows = 0;
-            this.grdVentas.FuenteEncabezado = null;
-            this.grdVentas.FuentePieDePagina = null;
-            this.grdVentas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdVentas.Location = new System.Drawing.Point(251, 3);
-            this.grdVentas.MenuActivado = false;
-            this.grdVentas.Name = "grdVentas";
-            this.grdVentas.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdVentas.PintarFilaSel = true;
-            this.grdVentas.Redraw = true;
-            this.grdVentas.Row = -2;
-            this.grdVentas.Rows = 0;
-            this.grdVentas.Size = new System.Drawing.Size(924, 119);
-            this.grdVentas.TabIndex = 1;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.BackColor = System.Drawing.Color.Gainsboro;
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer2.Panel1.Controls.Add(this.grdSucursales);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer2.Panel2.Controls.Add(this.cFechas1);
-            this.splitContainer2.Size = new System.Drawing.Size(180, 701);
-            this.splitContainer2.SplitterDistance = 483;
-            this.splitContainer2.TabIndex = 0;
-            // 
-            // grdSucursales
-            // 
-            this.grdSucursales.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdSucursales.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdSucursales.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdSucursales.AutoResize = false;
-            this.grdSucursales.bColor = System.Drawing.SystemColors.Window;
-            this.grdSucursales.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.grdSucursales.bFColor = System.Drawing.SystemColors.WindowText;
-            this.grdSucursales.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdSucursales.Col = 0;
-            this.grdSucursales.Cols = 1;
-            this.grdSucursales.DataMember = "";
-            this.grdSucursales.DataSource = null;
-            this.grdSucursales.EnableEdicion = false;
-            this.grdSucursales.Encabezado = "";
-            this.grdSucursales.fColor = System.Drawing.SystemColors.Control;
-            this.grdSucursales.FixCols = 0;
-            this.grdSucursales.FixRows = 0;
-            this.grdSucursales.FuenteEncabezado = null;
-            this.grdSucursales.FuentePieDePagina = null;
-            this.grdSucursales.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdSucursales.Location = new System.Drawing.Point(2, 3);
-            this.grdSucursales.MenuActivado = false;
-            this.grdSucursales.Name = "grdSucursales";
-            this.grdSucursales.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdSucursales.PintarFilaSel = true;
-            this.grdSucursales.Redraw = true;
-            this.grdSucursales.Row = 0;
-            this.grdSucursales.Rows = 1;
-            this.grdSucursales.Size = new System.Drawing.Size(235, 477);
-            this.grdSucursales.TabIndex = 1;
-            this.grdSucursales.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSucursales_CambioFila);
-            // 
-            // cFechas1
-            // 
-            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFechas1.Location = new System.Drawing.Point(0, 0);
-            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFechas1.Mostrar = 0;
-            this.cFechas1.Name = "cFechas1";
-            this.cFechas1.Size = new System.Drawing.Size(180, 214);
-            this.cFechas1.TabIndex = 0;
-            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
-            // 
-            // paEstadistica
-            // 
-            this.paEstadistica.BackColor = System.Drawing.Color.Gray;
-            this.paEstadistica.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.paEstadistica.Dock = System.Windows.Forms.DockStyle.Right;
-            this.paEstadistica.Location = new System.Drawing.Point(1352, 0);
-            this.paEstadistica.Name = "paEstadistica";
-            this.paEstadistica.Size = new System.Drawing.Size(35, 701);
-            this.paEstadistica.TabIndex = 1;
-            this.paEstadistica.Click += new System.EventHandler(this.paEstadistica_Click);
-            // 
-            // paEst
-            // 
-            this.paEst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.paEst.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.paEst.Controls.Add(this.nuTop);
-            this.paEst.Controls.Add(this.label3);
-            this.paEst.Controls.Add(this.lblTBalancesClientes);
-            this.paEst.Controls.Add(this.lblTBalancesSuc);
-            this.paEst.Controls.Add(this.grdEstadistica);
-            this.paEst.Controls.Add(this.label2);
-            this.paEst.Location = new System.Drawing.Point(751, 0);
-            this.paEst.Name = "paEst";
-            this.paEst.Size = new System.Drawing.Size(608, 701);
-            this.paEst.TabIndex = 2;
-            this.paEst.Visible = false;
-            // 
-            // grdEstadistica
-            // 
-            this.grdEstadistica.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdEstadistica.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdEstadistica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdEstadistica.AutoResize = false;
-            this.grdEstadistica.bColor = System.Drawing.SystemColors.Window;
-            this.grdEstadistica.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.grdEstadistica.bFColor = System.Drawing.SystemColors.WindowText;
-            this.grdEstadistica.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdEstadistica.Col = 0;
-            this.grdEstadistica.Cols = 10;
-            this.grdEstadistica.ContextMenuStrip = this.mnuFiltroEstadisticas;
-            this.grdEstadistica.DataMember = "";
-            this.grdEstadistica.DataSource = null;
-            this.grdEstadistica.EnableEdicion = true;
-            this.grdEstadistica.Encabezado = "";
-            this.grdEstadistica.fColor = System.Drawing.SystemColors.Control;
-            this.grdEstadistica.FixCols = 0;
-            this.grdEstadistica.FixRows = 0;
-            this.grdEstadistica.FuenteEncabezado = null;
-            this.grdEstadistica.FuentePieDePagina = null;
-            this.grdEstadistica.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdEstadistica.Location = new System.Drawing.Point(6, 22);
-            this.grdEstadistica.MenuActivado = false;
-            this.grdEstadistica.Name = "grdEstadistica";
-            this.grdEstadistica.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdEstadistica.PintarFilaSel = true;
-            this.grdEstadistica.Redraw = true;
-            this.grdEstadistica.Row = 0;
-            this.grdEstadistica.Rows = 50;
-            this.grdEstadistica.Size = new System.Drawing.Size(595, 646);
-            this.grdEstadistica.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label2.Location = new System.Drawing.Point(3, 1);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 18);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Estadísticas";
             // 
             // mnuFiltroSalidas
             // 
@@ -643,38 +453,28 @@
             this.gastosToolStripMenuItem.Text = "Gastos";
             this.gastosToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
             // 
-            // mnuFiltroEntradas
+            // label1
             // 
-            this.mnuFiltroEntradas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ventaToolStripMenuItem,
-            this.carneToolStripMenuItem,
-            this.trasladosToolStripMenuItem1});
-            this.mnuFiltroEntradas.Name = "mnuFiltroEntradas";
-            this.mnuFiltroEntradas.Size = new System.Drawing.Size(123, 70);
+            this.label1.AutoSize = true;
+            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Salidas";
             // 
-            // ventaToolStripMenuItem
+            // panel4
             // 
-            this.ventaToolStripMenuItem.Name = "ventaToolStripMenuItem";
-            this.ventaToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.ventaToolStripMenuItem.Tag = "1";
-            this.ventaToolStripMenuItem.Text = "Venta";
-            this.ventaToolStripMenuItem.Click += new System.EventHandler(this.Menu_EntradasClick);
-            // 
-            // carneToolStripMenuItem
-            // 
-            this.carneToolStripMenuItem.Name = "carneToolStripMenuItem";
-            this.carneToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.carneToolStripMenuItem.Tag = "2";
-            this.carneToolStripMenuItem.Text = "Carne";
-            this.carneToolStripMenuItem.Click += new System.EventHandler(this.Menu_EntradasClick);
-            // 
-            // trasladosToolStripMenuItem1
-            // 
-            this.trasladosToolStripMenuItem1.Name = "trasladosToolStripMenuItem1";
-            this.trasladosToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
-            this.trasladosToolStripMenuItem1.Tag = "3";
-            this.trasladosToolStripMenuItem1.Text = "Traslados";
-            this.trasladosToolStripMenuItem1.Click += new System.EventHandler(this.Menu_EntradasClick);
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel4.Controls.Add(this.cmdCarne);
+            this.panel4.Controls.Add(this.lblBalance);
+            this.panel4.Controls.Add(this.lblSuc);
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(242, 119);
+            this.panel4.TabIndex = 5;
             // 
             // cmdCarne
             // 
@@ -697,12 +497,342 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBalance.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lblBalance.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblBalance.Location = new System.Drawing.Point(3, 15);
+            this.lblBalance.Location = new System.Drawing.Point(6, 40);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(233, 25);
             this.lblBalance.TabIndex = 3;
             this.lblBalance.Text = "Balance";
             this.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblSuc
+            // 
+            this.lblSuc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSuc.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblSuc.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblSuc.Location = new System.Drawing.Point(6, 94);
+            this.lblSuc.Name = "lblSuc";
+            this.lblSuc.Size = new System.Drawing.Size(233, 25);
+            this.lblSuc.TabIndex = 4;
+            this.lblSuc.Text = "Sucursal";
+            this.lblSuc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // grdVentas
+            // 
+            this.grdVentas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdVentas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdVentas.AutoResize = false;
+            this.grdVentas.bColor = System.Drawing.SystemColors.Window;
+            this.grdVentas.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdVentas.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdVentas.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdVentas.Col = 0;
+            this.grdVentas.Cols = 1;
+            this.grdVentas.DataMember = "";
+            this.grdVentas.DataSource = null;
+            this.grdVentas.EnableEdicion = true;
+            this.grdVentas.Encabezado = "";
+            this.grdVentas.fColor = System.Drawing.SystemColors.Control;
+            this.grdVentas.FixCols = 0;
+            this.grdVentas.FixRows = 1;
+            this.grdVentas.FuenteEncabezado = null;
+            this.grdVentas.FuentePieDePagina = null;
+            this.grdVentas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdVentas.Location = new System.Drawing.Point(251, 3);
+            this.grdVentas.MenuActivado = false;
+            this.grdVentas.Name = "grdVentas";
+            this.grdVentas.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdVentas.PintarFilaSel = true;
+            this.grdVentas.Redraw = true;
+            this.grdVentas.Row = -2;
+            this.grdVentas.Rows = 1;
+            this.grdVentas.Size = new System.Drawing.Size(781, 119);
+            this.grdVentas.TabIndex = 1;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.BackColor = System.Drawing.Color.Gainsboro;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer2.Panel1.Controls.Add(this.grdSucursales);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer2.Panel2.Controls.Add(this.cFechas1);
+            this.splitContainer2.Size = new System.Drawing.Size(310, 701);
+            this.splitContainer2.SplitterDistance = 483;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // grdSucursales
+            // 
+            this.grdSucursales.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdSucursales.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdSucursales.AutoResize = false;
+            this.grdSucursales.bColor = System.Drawing.SystemColors.Window;
+            this.grdSucursales.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdSucursales.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdSucursales.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdSucursales.Col = 0;
+            this.grdSucursales.Cols = 1;
+            this.grdSucursales.ContextMenuStrip = this.mnuListado;
+            this.grdSucursales.DataMember = "";
+            this.grdSucursales.DataSource = null;
+            this.grdSucursales.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdSucursales.EnableEdicion = false;
+            this.grdSucursales.Encabezado = "";
+            this.grdSucursales.fColor = System.Drawing.SystemColors.Control;
+            this.grdSucursales.FixCols = 0;
+            this.grdSucursales.FixRows = 0;
+            this.grdSucursales.FuenteEncabezado = null;
+            this.grdSucursales.FuentePieDePagina = null;
+            this.grdSucursales.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdSucursales.Location = new System.Drawing.Point(0, 0);
+            this.grdSucursales.MenuActivado = false;
+            this.grdSucursales.Name = "grdSucursales";
+            this.grdSucursales.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdSucursales.PintarFilaSel = true;
+            this.grdSucursales.Redraw = true;
+            this.grdSucursales.Row = 0;
+            this.grdSucursales.Rows = 1;
+            this.grdSucursales.Size = new System.Drawing.Size(310, 483);
+            this.grdSucursales.TabIndex = 1;
+            this.grdSucursales.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSucursales_CambioFila);
+            // 
+            // mnuListado
+            // 
+            this.mnuListado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sucursalesListado,
+            this.clientesToolStripMenuItem1});
+            this.mnuListado.Name = "mnuListado";
+            this.mnuListado.Size = new System.Drawing.Size(130, 48);
+            // 
+            // sucursalesListado
+            // 
+            this.sucursalesListado.Checked = true;
+            this.sucursalesListado.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.sucursalesListado.Name = "sucursalesListado";
+            this.sucursalesListado.Size = new System.Drawing.Size(129, 22);
+            this.sucursalesListado.Text = "Sucursales";
+            this.sucursalesListado.Click += new System.EventHandler(this.sucursalesListado_Click);
+            // 
+            // clientesToolStripMenuItem1
+            // 
+            this.clientesToolStripMenuItem1.Name = "clientesToolStripMenuItem1";
+            this.clientesToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
+            this.clientesToolStripMenuItem1.Text = "Clientes";
+            this.clientesToolStripMenuItem1.Click += new System.EventHandler(this.clientesToolStripMenuItem1_Click);
+            // 
+            // cFechas1
+            // 
+            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFechas1.Location = new System.Drawing.Point(0, 0);
+            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFechas1.Mostrar = 0;
+            this.cFechas1.Name = "cFechas1";
+            this.cFechas1.Size = new System.Drawing.Size(310, 214);
+            this.cFechas1.TabIndex = 0;
+            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
+            // 
+            // paEstadistica
+            // 
+            this.paEstadistica.BackColor = System.Drawing.Color.Gray;
+            this.paEstadistica.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.paEstadistica.Dock = System.Windows.Forms.DockStyle.Right;
+            this.paEstadistica.Location = new System.Drawing.Point(1352, 0);
+            this.paEstadistica.Name = "paEstadistica";
+            this.paEstadistica.Size = new System.Drawing.Size(35, 701);
+            this.paEstadistica.TabIndex = 1;
+            this.paEstadistica.Click += new System.EventHandler(this.paEstadistica_Click);
+            // 
+            // paEst
+            // 
+            this.paEst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.paEst.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.paEst.Controls.Add(this.cmdRecargar);
+            this.paEst.Controls.Add(this.grdEstadistica);
+            this.paEst.Controls.Add(this.nuTop);
+            this.paEst.Controls.Add(this.label3);
+            this.paEst.Controls.Add(this.lblTBalancesClientes);
+            this.paEst.Controls.Add(this.label4);
+            this.paEst.Controls.Add(this.lblTBalancesSuc);
+            this.paEst.Controls.Add(this.label2);
+            this.paEst.Location = new System.Drawing.Point(459, 0);
+            this.paEst.Name = "paEst";
+            this.paEst.Size = new System.Drawing.Size(894, 701);
+            this.paEst.TabIndex = 2;
+            this.paEst.Visible = false;
+            // 
+            // cmdRecargar
+            // 
+            this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdRecargar.Location = new System.Drawing.Point(856, 671);
+            this.cmdRecargar.Name = "cmdRecargar";
+            this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
+            this.cmdRecargar.TabIndex = 6;
+            this.cmdRecargar.Texto = "R";
+            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
+            // 
+            // grdEstadistica
+            // 
+            this.grdEstadistica.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdEstadistica.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdEstadistica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdEstadistica.AutoResize = false;
+            this.grdEstadistica.bColor = System.Drawing.SystemColors.Window;
+            this.grdEstadistica.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdEstadistica.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdEstadistica.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdEstadistica.Col = 0;
+            this.grdEstadistica.Cols = 10;
+            this.grdEstadistica.ContextMenuStrip = this.mnuFiltroEstadisticas;
+            this.grdEstadistica.DataMember = "";
+            this.grdEstadistica.DataSource = null;
+            this.grdEstadistica.EnableEdicion = true;
+            this.grdEstadistica.Encabezado = "";
+            this.grdEstadistica.fColor = System.Drawing.SystemColors.Control;
+            this.grdEstadistica.FixCols = 0;
+            this.grdEstadistica.FixRows = 0;
+            this.grdEstadistica.FuenteEncabezado = null;
+            this.grdEstadistica.FuentePieDePagina = null;
+            this.grdEstadistica.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdEstadistica.Location = new System.Drawing.Point(6, 22);
+            this.grdEstadistica.MenuActivado = false;
+            this.grdEstadistica.Name = "grdEstadistica";
+            this.grdEstadistica.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdEstadistica.PintarFilaSel = true;
+            this.grdEstadistica.Redraw = true;
+            this.grdEstadistica.Row = 0;
+            this.grdEstadistica.Rows = 50;
+            this.grdEstadistica.Size = new System.Drawing.Size(881, 620);
+            this.grdEstadistica.TabIndex = 2;
+            // 
+            // mnuFiltroEstadisticas
+            // 
+            this.mnuFiltroEstadisticas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.unaToolStripMenuItem,
+            this.todasToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.sucursalesToolStripMenuItem,
+            this.clientesToolStripMenuItem,
+            this.todosToolStripMenuItem});
+            this.mnuFiltroEstadisticas.Name = "mnuFiltroEstadisticas";
+            this.mnuFiltroEstadisticas.Size = new System.Drawing.Size(130, 120);
+            // 
+            // unaToolStripMenuItem
+            // 
+            this.unaToolStripMenuItem.Checked = true;
+            this.unaToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.unaToolStripMenuItem.Name = "unaToolStripMenuItem";
+            this.unaToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.unaToolStripMenuItem.Text = "Una";
+            this.unaToolStripMenuItem.Click += new System.EventHandler(this.todasToolStripMenuItem_Click);
+            // 
+            // todasToolStripMenuItem
+            // 
+            this.todasToolStripMenuItem.Name = "todasToolStripMenuItem";
+            this.todasToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.todasToolStripMenuItem.Text = "Todas";
+            this.todasToolStripMenuItem.Click += new System.EventHandler(this.todasToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(126, 6);
+            // 
+            // sucursalesToolStripMenuItem
+            // 
+            this.sucursalesToolStripMenuItem.Checked = true;
+            this.sucursalesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.sucursalesToolStripMenuItem.Name = "sucursalesToolStripMenuItem";
+            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.sucursalesToolStripMenuItem.Text = "Sucursales";
+            // 
+            // clientesToolStripMenuItem
+            // 
+            this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.clientesToolStripMenuItem.Text = "Clientes";
+            // 
+            // todosToolStripMenuItem
+            // 
+            this.todosToolStripMenuItem.Name = "todosToolStripMenuItem";
+            this.todosToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.todosToolStripMenuItem.Text = "Todos";
+            // 
+            // nuTop
+            // 
+            this.nuTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nuTop.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nuTop.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nuTop.Location = new System.Drawing.Point(801, 663);
+            this.nuTop.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nuTop.Name = "nuTop";
+            this.nuTop.Size = new System.Drawing.Size(49, 31);
+            this.nuTop.TabIndex = 5;
+            this.nuTop.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nuTop.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nuTop.ValueChanged += new System.EventHandler(this.nuTop_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label3.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label3.Location = new System.Drawing.Point(755, 667);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 25);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Cant";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTBalancesClientes
+            // 
+            this.lblTBalancesClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTBalancesClientes.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblTBalancesClientes.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblTBalancesClientes.Location = new System.Drawing.Point(168, 671);
+            this.lblTBalancesClientes.Name = "lblTBalancesClientes";
+            this.lblTBalancesClientes.Size = new System.Drawing.Size(159, 25);
+            this.lblTBalancesClientes.TabIndex = 4;
+            this.lblTBalancesClientes.Text = "Clientes";
+            this.lblTBalancesClientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label4.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label4.Location = new System.Drawing.Point(3, 645);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(324, 25);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Balances";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblTBalancesSuc
             // 
@@ -711,76 +841,21 @@
             this.lblTBalancesSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.lblTBalancesSuc.Location = new System.Drawing.Point(3, 671);
             this.lblTBalancesSuc.Name = "lblTBalancesSuc";
-            this.lblTBalancesSuc.Size = new System.Drawing.Size(168, 25);
+            this.lblTBalancesSuc.Size = new System.Drawing.Size(159, 25);
             this.lblTBalancesSuc.TabIndex = 4;
-            this.lblTBalancesSuc.Text = "Balances Sucursales";
+            this.lblTBalancesSuc.Text = "Sucursales";
             this.lblTBalancesSuc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblTBalancesClientes
+            // label2
             // 
-            this.lblTBalancesClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTBalancesClientes.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblTBalancesClientes.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblTBalancesClientes.Location = new System.Drawing.Point(177, 671);
-            this.lblTBalancesClientes.Name = "lblTBalancesClientes";
-            this.lblTBalancesClientes.Size = new System.Drawing.Size(168, 25);
-            this.lblTBalancesClientes.TabIndex = 4;
-            this.lblTBalancesClientes.Text = "Balances Clientes";
-            this.lblTBalancesClientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label3.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label3.Location = new System.Drawing.Point(521, 671);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 25);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Top";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // nuTop
-            // 
-            this.nuTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.nuTop.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.nuTop.Location = new System.Drawing.Point(561, 679);
-            this.nuTop.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nuTop.Name = "nuTop";
-            this.nuTop.Size = new System.Drawing.Size(40, 16);
-            this.nuTop.TabIndex = 5;
-            this.nuTop.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // mnuFiltroEstadisticas
-            // 
-            this.mnuFiltroEstadisticas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.unaToolStripMenuItem,
-            this.todasToolStripMenuItem});
-            this.mnuFiltroEstadisticas.Name = "mnuFiltroEstadisticas";
-            this.mnuFiltroEstadisticas.Size = new System.Drawing.Size(105, 48);
-            // 
-            // unaToolStripMenuItem
-            // 
-            this.unaToolStripMenuItem.Checked = true;
-            this.unaToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.unaToolStripMenuItem.Name = "unaToolStripMenuItem";
-            this.unaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.unaToolStripMenuItem.Text = "Una";
-            // 
-            // todasToolStripMenuItem
-            // 
-            this.todasToolStripMenuItem.Name = "todasToolStripMenuItem";
-            this.todasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.todasToolStripMenuItem.Text = "Todas";
-            this.todasToolStripMenuItem.Click += new System.EventHandler(this.todasToolStripMenuItem_Click);
+            this.label2.AutoSize = true;
+            this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label2.Location = new System.Drawing.Point(3, 1);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(88, 18);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Estadísticas";
             // 
             // frmResumen_Suc
             // 
@@ -812,19 +887,20 @@
             this.splitContainer4.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.mnuFiltroEntradas.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.mnuFiltroSalidas.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.mnuListado.ResumeLayout(false);
             this.paEst.ResumeLayout(false);
             this.paEst.PerformLayout();
-            this.mnuFiltroSalidas.ResumeLayout(false);
-            this.mnuFiltroEntradas.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nuTop)).EndInit();
             this.mnuFiltroEstadisticas.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nuTop)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -853,7 +929,6 @@
         private Grilla2.SpeedGrilla grdEstadistica;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label lblCarneK;
         private System.Windows.Forms.Label lblSuc;
         private System.Windows.Forms.ContextMenuStrip mnuFiltroSalidas;
         private System.Windows.Forms.ToolStripMenuItem efectivoToolStripMenuItem;
@@ -877,5 +952,14 @@
         private System.Windows.Forms.ContextMenuStrip mnuFiltroEstadisticas;
         private System.Windows.Forms.ToolStripMenuItem unaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem todasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem sucursalesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem todosToolStripMenuItem;
+        private System.Windows.Forms.Label label4;
+        private Controles.cBoton cmdRecargar;
+        private System.Windows.Forms.ContextMenuStrip mnuListado;
+        private System.Windows.Forms.ToolStripMenuItem sucursalesListado;
+        private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem1;
     }
 }

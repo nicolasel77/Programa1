@@ -9,14 +9,14 @@
         {
         }
 
-        public DataTable Listado_Balances(DateTime Semana)
+        public DataTable Listado_Balances(DateTime Semana, bool esSuc = true)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, dbo.f_Balance (Id, '{Semana:MM/dd/yy}', '{Semana.AddDays(6):MM/dd/yy}') AS Balance FROM Sucursales WHERE Ver=1 AND Propio=1 ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, dbo.f_Balance (Id, '{Semana:MM/dd/yy}', '{Semana.AddDays(6):MM/dd/yy}') AS Balance FROM Sucursales WHERE Ver=1 AND Propio={(esSuc ? "1" : "0")} ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
