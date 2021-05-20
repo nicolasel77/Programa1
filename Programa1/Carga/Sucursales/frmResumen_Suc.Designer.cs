@@ -671,16 +671,16 @@
             this.paEst.Controls.Add(this.label4);
             this.paEst.Controls.Add(this.lblTBalancesSuc);
             this.paEst.Controls.Add(this.label2);
-            this.paEst.Location = new System.Drawing.Point(459, 0);
+            this.paEst.Location = new System.Drawing.Point(559, 0);
             this.paEst.Name = "paEst";
-            this.paEst.Size = new System.Drawing.Size(894, 701);
+            this.paEst.Size = new System.Drawing.Size(794, 701);
             this.paEst.TabIndex = 2;
             this.paEst.Visible = false;
             // 
             // cmdRecargar
             // 
             this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdRecargar.Location = new System.Drawing.Point(856, 671);
+            this.cmdRecargar.Location = new System.Drawing.Point(756, 671);
             this.cmdRecargar.Name = "cmdRecargar";
             this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
             this.cmdRecargar.TabIndex = 6;
@@ -720,7 +720,7 @@
             this.grdEstadistica.Redraw = true;
             this.grdEstadistica.Row = 0;
             this.grdEstadistica.Rows = 50;
-            this.grdEstadistica.Size = new System.Drawing.Size(881, 620);
+            this.grdEstadistica.Size = new System.Drawing.Size(781, 620);
             this.grdEstadistica.TabIndex = 2;
             // 
             // mnuFiltroEstadisticas
@@ -781,7 +781,7 @@
             this.nuTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.nuTop.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nuTop.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nuTop.Location = new System.Drawing.Point(801, 663);
+            this.nuTop.Location = new System.Drawing.Point(701, 663);
             this.nuTop.Minimum = new decimal(new int[] {
             1,
             0,
@@ -803,7 +803,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.label3.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label3.Location = new System.Drawing.Point(755, 667);
+            this.label3.Location = new System.Drawing.Point(655, 667);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 25);
             this.label3.TabIndex = 4;

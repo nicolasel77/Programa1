@@ -273,5 +273,10 @@
         {
             if (e.Button == MouseButtons.Middle) lstBoletas.SelectedIndex = -1;
         }
+
+        private void grdSalida_Editado(short f, short c, object a)
+        {
+
+        }
     }
 }

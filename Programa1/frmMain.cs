@@ -8,6 +8,7 @@
     using Programa1.Carga.Tesoreria;
     using Programa1.DB.Tesoreria;
     using Programa1.DB.Varios;
+    using Programa1.Carga.Varios;
     using System;
     using System.Collections.Generic;
     using System.Drawing;
@@ -31,7 +32,7 @@
             switch (usuario.Nombre)
             {
                 case "Nicolas":
-                    resumenToolStripMenuItem.PerformClick();
+                    capitalDeTrabajoToolStripMenuItem.PerformClick();
                     break;
                 case "Alejandro":
                     cajaDiariaToolStripMenuItem.PerformClick();
@@ -757,7 +758,7 @@
             if (found == false)
             {
                 ToolStripMenuItem t = new ToolStripMenuItem("frmCantidad_Clientes");
-                t.Text = "Cantidad Clientes";
+                t.Text = "Cantidad_Clientes";
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
@@ -1724,5 +1725,54 @@
                 }
             }
         }
+
+        private void capitalDeTrabajoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCapitalDeTrabajo")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmCapitalDeTrabajo");
+                t.Text = "CapitalDeTrabajo";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmCapitalDeTrabajo = new frmCapitalDeTrabajo();
+                frmCapitalDeTrabajo.MdiParent = this;
+                frmCapitalDeTrabajo.Disposed += FrmCapitalDeTrabajo_Disposed;
+                forms.Add(frmCapitalDeTrabajo);
+                frmCapitalDeTrabajo.Show();
+                frmCapitalDeTrabajo.WindowState = FormWindowState.Minimized;
+                frmCapitalDeTrabajo.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmCapitalDeTrabajo_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "CapitalDeTrabajo")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCapitalDeTrabajo")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
     }
 }

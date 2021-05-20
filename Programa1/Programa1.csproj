@@ -461,6 +461,12 @@
     <Compile Include="Carga\Tesoreria\frmTransferencia.Designer.cs">
       <DependentUpon>frmTransferencia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Varios\frmCapitalDeTrabajo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Varios\frmCapitalDeTrabajo.Designer.cs">
+      <DependentUpon>frmCapitalDeTrabajo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controles\cBoton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -557,6 +563,8 @@
     <Compile Include="DB\Tesoreria\Tipo_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Tipo_PagoAutorizado.cs" />
     <Compile Include="DB\Varios\Camiones.cs" />
+    <Compile Include="DB\Varios\Capital_Trabajo.cs" />
+    <Compile Include="DB\Varios\c_base.cs" />
     <Compile Include="DB\Varios\Datos_Genericos.cs" />
     <Compile Include="DB\Varios\Empresas.cs" />
     <Compile Include="DB\Varios\Listas_Carga.cs" />
@@ -798,6 +806,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmTransferencia.resx">
       <DependentUpon>frmTransferencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Varios\frmCapitalDeTrabajo.resx">
+      <DependentUpon>frmCapitalDeTrabajo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cBoton.resx">
       <DependentUpon>cBoton.cs</DependentUpon>

@@ -142,9 +142,7 @@
             {
                 Suc = Convert.ToInt32(grdSucursales.get_Texto(Fila, 0));
                 Est.Suc.Id = Suc;
-
-                lblSuc.Text = $"{grdSucursales.get_Texto(Fila, 1)}";
-                this.Text = $"{lblSuc.Text}  -  Semana: {cFechas1.fecha_Actual:dd/MM/yy}";
+                lblSuc.Text = $"{grdSucursales.get_Texto(Fila, 1)}";                
                 Cargar_Datos();
                 this.Cursor = Cursors.Default;
             }
@@ -158,6 +156,7 @@
                 Entradas();
                 Salidas();
                 Cuentas();
+                this.Text = $"{lblSuc.Text}  -  Semana: {cFechas1.fecha_Actual:dd/MM/yy}";
                 if (paEst.Visible == true) { Estadisticas(); }
                 this.Cursor = Cursors.Default;
             }
