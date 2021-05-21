@@ -38,6 +38,7 @@ namespace Programa1.Carga.Tesoreria
         private const Byte e_Grupo = 9;
         private const Byte e_Es_Entrega = 10;
         private const Byte e_Tabla = 11;
+        private const Byte e_Cheque = 12;
 
         #endregion
         #region " Columnas Salidas "
@@ -49,10 +50,11 @@ namespace Programa1.Carga.Tesoreria
         private const Byte s_IDDetalle = 8;
         private const Byte s_Descripcion = 9;
         private const Byte s_Importe = 10;
-        private const Byte s_Autorizado = 11;
-        private const Byte s_Fecha_Autorizado = 12;
-        private const Byte s_Grupo = 13;
-        private const Byte s_Usuario = 14;
+        private const Byte s_Cheque = 11;
+        private const Byte s_Autorizado = 12;
+        private const Byte s_Fecha_Autorizado = 13;
+        private const Byte s_Grupo = 14;
+        private const Byte s_Usuario = 15;
 
         #endregion
 
@@ -227,6 +229,14 @@ namespace Programa1.Carga.Tesoreria
             fr.ShowDialog();
 
         }
+
+        private void cmdCheques_Click(object sender, EventArgs e)
+        {
+            frmCheques fr = new frmCheques();
+            fr.Nuevo_Cheque = true;
+            fr.Cargar();
+            fr.ShowDialog();
+        }
         #endregion
 
         #region " SUBS "
@@ -278,6 +288,7 @@ namespace Programa1.Carga.Tesoreria
             grdEntradas.set_ColW(e_Grupo, 0);
             grdEntradas.set_ColW(e_Es_Entrega, 0);
             grdEntradas.set_ColW(e_Tabla, 0);
+            grdEntradas.set_ColW(e_Cheque, 0);
 
             grdEntradas.set_Texto(0, e_Tipo, "Tipo");
             grdEntradas.set_Texto(0, e_Subtipo, "SubTipo");
@@ -300,6 +311,7 @@ namespace Programa1.Carga.Tesoreria
             grdSalidas.set_ColW(s_Autorizado, 50);
             grdSalidas.set_ColW(s_Fecha_Autorizado, 90);
             grdSalidas.set_ColW(s_Grupo, 0);
+            grdSalidas.set_ColW(s_Cheque, 0);
             grdSalidas.set_ColW(s_Usuario, 0);
 
             grdSalidas.set_Texto(0, s_Tipo, "Tipo");
@@ -420,10 +432,11 @@ namespace Programa1.Carga.Tesoreria
                                     cEntradas.Actualizar();
 
                                     grdEntradas.set_Texto(f, e_Importe, cEntradas.Importe);
+                                    grdEntradas.set_Texto(f, e_Id, cEntradas.ID);
 
                                     if (grdEntradas.EsUltimaFila() == true) { grdEntradas.AgregarFila(); }
 
-                                    grdEntradas.set_Texto(f + 1, e_Id, cEntradas.ID);
+
                                     grdEntradas.set_Texto(f + 1, e_Caja, cEntradas.caja.Id);
                                     grdEntradas.set_Texto(f + 1, e_Caja + 1, cEntradas.caja.Nombre);
                                     grdEntradas.set_Texto(f + 1, e_Fecha, cEntradas.Fecha);
@@ -434,8 +447,42 @@ namespace Programa1.Carga.Tesoreria
                                 }
                                 else
                                 {
-                                    grdEntradas.ActivarCelda(f, e_Importe);
-                                    if (cEntradas.ID != 0) { cEntradas.Actualizar(); }
+                                    if (cEntradas.caja.EsCheque == true)
+                                    {
+                                        frmCheques fr = new frmCheques();
+                                        fr.Cargar();
+                                        fr.ShowDialog();
+                                        if (fr.Nuevo_Cheque == true)
+                                        {
+                                            cEntradas.Cheque = fr.ch.Numero;
+                                            cEntradas.Descripcion = $"{s} CH {fr.ch.Banco.Nombre}  FAc: {fr.ch.Fecha_Acreditacion:dd/MM/yy}";
+                                            cEntradas.Importe = fr.ch.Importe;
+
+                                            grdEntradas.Focus();
+                                            grdEntradas.set_Texto(f, e_Descripcion, cEntradas.Descripcion);
+                                            grdEntradas.set_Texto(f, e_Importe, cEntradas.Importe);
+                                            grdEntradas.set_Texto(f, e_Cheque, cEntradas.Cheque);
+                                            grdEntradas.set_Texto(f, e_Id, cEntradas.ID);
+
+                                            if (cEntradas.ID == 0) { cEntradas.Agregar(); } else { cEntradas.Actualizar(); }
+                                            if (grdEntradas.EsUltimaFila() == true) { grdEntradas.AgregarFila(); }
+
+                                            grdEntradas.set_Texto(f + 1, e_Caja, cEntradas.caja.Id);
+                                            grdEntradas.set_Texto(f + 1, e_Caja + 1, cEntradas.caja.Nombre);
+                                            grdEntradas.set_Texto(f + 1, e_Fecha, cEntradas.Fecha);
+                                            grdEntradas.set_Texto(f + 1, e_Tipo, cEntradas.TE.Id_Tipo);
+                                            grdEntradas.set_Texto(f + 1, e_Tipo + 1, grdEntradas.get_Texto(f, e_Tipo + 1));
+
+                                            grdEntradas.ActivarCelda(f + 1, e_Subtipo);
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        grdEntradas.ActivarCelda(f, e_Importe);
+                                        if (cEntradas.ID != 0) { cEntradas.Actualizar(); }
+                                    }
+
                                 }
                             }
                         }
@@ -598,7 +645,11 @@ namespace Programa1.Carga.Tesoreria
 
                             //HORRIBLE
                             if (cGastos.caja.Id == 12) { cGastos.caja.Seleccionar_Nombre(); }
+                            if (cGastos.caja.Id == 11)
+                            {
+                                //Chequess
 
+                            }
                             grdSalidas.ActivarCelda(f, e_Tipo);
 
                         }
@@ -880,7 +931,7 @@ namespace Programa1.Carga.Tesoreria
                                         Seleccionar_Pago_Hacienda();
                                     }
                                     else
-                                    {                                        
+                                    {
                                         grdSalidas.ActivarCelda(grdSalidas.Row, s_IDDetalle);
                                     }
                                 }
@@ -997,7 +1048,6 @@ namespace Programa1.Carga.Tesoreria
                 Cargar_Datos();
             }
         }
-
 
         #endregion
 

@@ -6,19 +6,17 @@
     using Programa1.Carga.Precios;
     using Programa1.Carga.Sebero;
     using Programa1.Carga.Tesoreria;
-    using Programa1.DB.Tesoreria;
-    using Programa1.DB.Varios;
     using Programa1.Carga.Varios;
+    using Programa1.DB.Varios;
     using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Windows.Forms;
-    using Excel = Microsoft.Office.Interop.Excel;
 
     public partial class frmMain : Form
     {
         public Usuarios usuario;
-        
+
         List<Form> forms = new List<Form>();
 
         public frmMain()
@@ -32,13 +30,14 @@
             switch (usuario.Nombre)
             {
                 case "Nicolas":
-                    capitalDeTrabajoToolStripMenuItem.PerformClick();
+                    //capitalDeTrabajoToolStripMenuItem.PerformClick();
+                    cajaDiariaToolStripMenuItem.PerformClick();
                     break;
                 case "Alejandro":
                     cajaDiariaToolStripMenuItem.PerformClick();
                     break;
             }
-            
+
         }
 
         private void Mostrar(object sender, EventArgs e)
@@ -1441,7 +1440,7 @@
                 Form frmCaja_Diaria = new Programa1.Carga.Tesoreria.frmCaja_Diaria(usuario);
                 frmCaja_Diaria.MdiParent = this;
                 frmCaja_Diaria.Disposed += FrmCaja_Diaria_Disposed;
-                forms.Add(frmCaja_Diaria);                
+                forms.Add(frmCaja_Diaria);
                 frmCaja_Diaria.Show();
                 frmCaja_Diaria.WindowState = FormWindowState.Minimized;
                 frmCaja_Diaria.WindowState = FormWindowState.Maximized;
@@ -1668,7 +1667,7 @@
             e.ClickedItem.BackColor = Color.LightSkyBlue;
         }
 
-        
+
         private void tstMenu_ItemAdded(object sender, ToolStripItemEventArgs e)
         {
             foreach (ToolStripItem t in tstMenu.Items)

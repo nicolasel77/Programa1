@@ -33,6 +33,8 @@
         public string Descripcion { get; set; }
         public Double Importe { get; set; }
 
+        public int Cheque { get; set; }
+
         public bool Autorizado { get; set; }
         public DateTime Fecha_Autorizado { get; set; }
         public Usuarios Usuario { get; set; } = new Usuarios();
@@ -49,7 +51,7 @@
                 SqlCommand command = new SqlCommand($"UPDATE CD_Gastos SET " +
                     $" Fecha='{Fecha:MM/dd/yy}', ID_Caja={caja.Id}, ID_TipoGastos={TG.Id_Tipo}, Id_SubTipoGastos={Id_SubTipoGastos}" +
                     $", Id_DetalleGastos={Id_DetalleGastos}, Desc_SubTipo='{Desc_SubTipo}', Descripcion='{Descripcion}', Importe={Importe.ToString().Replace(",", ".")}" +
-                    $", Autorizado={(Autorizado ? "1" : "0")}, Fecha_Autorizado='{Fecha_Autorizado:MM/dd/yy HH:mm}', Usuario={Usuario.ID}" +
+                    $", Cheque={Cheque}, Autorizado={(Autorizado ? "1" : "0")}, Fecha_Autorizado='{Fecha_Autorizado:MM/dd/yy HH:mm}', Usuario={Usuario.ID}" +
                     $" WHERE ID={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -73,9 +75,9 @@
             try
             {
                 SqlCommand command = new SqlCommand($"INSERT INTO CD_Gastos " +
-                    $"(Fecha, ID_Caja, ID_TipoGastos, ID_SubTipoGastos, Desc_SubTipo, ID_DetalleGastos, Descripcion, Importe, Autorizado, Fecha_Autorizado, Usuario) " +
+                    $"(Fecha, ID_Caja, ID_TipoGastos, ID_SubTipoGastos, Desc_SubTipo, ID_DetalleGastos, Descripcion, Importe, Cheque, Autorizado, Fecha_Autorizado, Usuario) " +
                     $"VALUES('{Fecha:MM/dd/yy}', {caja.Id}, {TG.Id_Tipo}, {Id_SubTipoGastos}, '{Desc_SubTipo}', {Id_DetalleGastos}, '{Descripcion}', " +
-                    $"{Importe.ToString().Replace(",", ".")}, {(Autorizado ? "1" : "0")}, '{Fecha_Autorizado:MM/dd/yy HH:mm}', {Usuario.ID})", sql);
+                    $"{Importe.ToString().Replace(",", ".")}, {Cheque}, {(Autorizado ? "1" : "0")}, '{Fecha_Autorizado:MM/dd/yy HH:mm}', {Usuario.ID})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

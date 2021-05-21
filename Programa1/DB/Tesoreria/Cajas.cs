@@ -8,6 +8,7 @@
     using System.Windows.Forms;
     public class Cajas
     {
+        
         public Cajas()
         {
         }
@@ -29,6 +30,11 @@
 
         public Nombres_ARendir nombre_ARendir { get; set; } = new Nombres_ARendir();
         public A_Rendir a_Rendir { get; set; } = new A_Rendir();
+
+        /// <summary>
+        /// Por ahora es fijo (solo evalúa que Id=11). Mas que nada se hizo para que quede dentro de la clase.
+        /// </summary>
+        public bool EsCheque { get { return Id == 11; } }
 
         public DataTable Datos(string Filtro = "")
         {

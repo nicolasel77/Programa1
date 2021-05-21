@@ -36,6 +36,11 @@
         public Tipos_Entradas TE { get; set; } = new Tipos_Entradas();
         public int Id_SubTipoEntrada { get; set; }
 
+        /// <summary>
+        /// Campo oculto usado por ahora para Numero de cheque.
+        /// </summary>
+        public int Cheque { get; set; }
+
         [MaxLength(500, ErrorMessage = "El campo Descripción solo puede tener 500 caracteres.")]
         public string Descripcion { get; set; }
         public Double Importe { get; set; }
@@ -55,7 +60,10 @@
             }
         }
 
+        private A_Rendir a_Rendir { get; set; } = new A_Rendir();
+
         #region " Editrar Datos "
+
         public void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -64,7 +72,7 @@
             {
                 SqlCommand command = new SqlCommand($"UPDATE CD_Entradas SET " +
                     $" Fecha='{Fecha:MM/dd/yy}', ID_Caja={caja.Id}, ID_TipoEntrada={TE.Id_Tipo}, ID_SubTipoEntrada={Id_SubTipoEntrada}" +
-                    $", Descripcion='{Descripcion}', Importe={Importe.ToString().Replace(",", ".")}" +
+                    $", Descripcion='{Descripcion}', Detalle={Cheque} , Importe={Importe.ToString().Replace(",", ".")}" +
                     $" WHERE ID={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -79,8 +87,7 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
-
-        private A_Rendir a_Rendir { get; set; } = new A_Rendir();
+              
 
 
         public void Agregar()
@@ -90,8 +97,8 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO CD_Entradas (Fecha, ID_Caja, ID_TipoEntrada, ID_SubTipoEntrada, Descripcion, Importe) " +
-                    $"VALUES('{Fecha:MM/dd/yy}', {caja.Id}, {TE.Id_Tipo}, {Id_SubTipoEntrada}, '{Descripcion}', {Importe.ToString().Replace(",", ".")})", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO CD_Entradas (Fecha, ID_Caja, ID_TipoEntrada, ID_SubTipoEntrada, Descripcion, Detalle, Importe) " +
+                    $"VALUES('{Fecha:MM/dd/yy}', {caja.Id}, {TE.Id_Tipo}, {Id_SubTipoEntrada}, '{Descripcion}', {Cheque}, {Importe.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

@@ -51,7 +51,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.rdARendir = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdCajas = new MaterialSkin.Controls.MaterialRadioButton();
-            this.cmdTransferencia = new Programa1.Controles.cBoton();
             this.lblUltimo = new MaterialSkin.Controls.MaterialLabel();
             this.grdCajas = new Grilla2.SpeedGrilla();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -79,6 +78,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.verTransferenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aRendirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmdCheques = new Programa1.Controles.cBoton();
+            this.cmdTransferencia = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splPrincipal)).BeginInit();
             this.splPrincipal.Panel1.SuspendLayout();
             this.splPrincipal.Panel2.SuspendLayout();
@@ -147,7 +148,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEntradas.BackColor = System.Drawing.SystemColors.Control;
             this.lblEntradas.Depth = 0;
-            this.lblEntradas.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblEntradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblEntradas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblEntradas.Location = new System.Drawing.Point(3, 3);
             this.lblEntradas.MouseState = MaterialSkin.MouseState.HOVER;
@@ -163,7 +164,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalGrillaEntrada.BackColor = System.Drawing.SystemColors.Control;
             this.lblTotalGrillaEntrada.Depth = 0;
-            this.lblTotalGrillaEntrada.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblTotalGrillaEntrada.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblTotalGrillaEntrada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalGrillaEntrada.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaEntrada.MouseState = MaterialSkin.MouseState.HOVER;
@@ -264,7 +265,7 @@
             this.rdDetalle.AutoSize = true;
             this.rdDetalle.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rdDetalle.Depth = 0;
-            this.rdDetalle.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdDetalle.Location = new System.Drawing.Point(338, -2);
             this.rdDetalle.Margin = new System.Windows.Forms.Padding(0);
             this.rdDetalle.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -282,7 +283,7 @@
             this.rdSubtipo.AutoSize = true;
             this.rdSubtipo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rdSubtipo.Depth = 0;
-            this.rdSubtipo.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdSubtipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdSubtipo.Location = new System.Drawing.Point(258, -2);
             this.rdSubtipo.Margin = new System.Windows.Forms.Padding(0);
             this.rdSubtipo.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -300,7 +301,7 @@
             this.rdTipo.AutoSize = true;
             this.rdTipo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rdTipo.Depth = 0;
-            this.rdTipo.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdTipo.Location = new System.Drawing.Point(202, -2);
             this.rdTipo.Margin = new System.Windows.Forms.Padding(0);
             this.rdTipo.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -319,7 +320,7 @@
             this.rdCaja.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rdCaja.Checked = true;
             this.rdCaja.Depth = 0;
-            this.rdCaja.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdCaja.Location = new System.Drawing.Point(146, -2);
             this.rdCaja.Margin = new System.Windows.Forms.Padding(0);
             this.rdCaja.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -338,7 +339,7 @@
             this.rdNinguno.AutoSize = true;
             this.rdNinguno.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rdNinguno.Depth = 0;
-            this.rdNinguno.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdNinguno.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdNinguno.Location = new System.Drawing.Point(65, -2);
             this.rdNinguno.Margin = new System.Windows.Forms.Padding(0);
             this.rdNinguno.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -367,7 +368,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.materialLabel3.BackColor = System.Drawing.SystemColors.Control;
             this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel3.Location = new System.Drawing.Point(3, 3);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
@@ -383,7 +384,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalGrillaGastos.BackColor = System.Drawing.SystemColors.Control;
             this.lblTotalGrillaGastos.Depth = 0;
-            this.lblTotalGrillaGastos.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblTotalGrillaGastos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblTotalGrillaGastos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalGrillaGastos.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaGastos.MouseState = MaterialSkin.MouseState.HOVER;
@@ -438,6 +439,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.rdARendir);
             this.panel1.Controls.Add(this.rdCajas);
+            this.panel1.Controls.Add(this.cmdCheques);
             this.panel1.Controls.Add(this.cmdTransferencia);
             this.panel1.Controls.Add(this.lblUltimo);
             this.panel1.Controls.Add(this.grdCajas);
@@ -459,8 +461,8 @@
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.materialLabel5);
-            this.panel1.Controls.Add(this.materialLabel2);
             this.panel1.Controls.Add(this.cmdCerrar_Fecha);
+            this.panel1.Controls.Add(this.materialLabel2);
             this.panel1.Location = new System.Drawing.Point(8, 204);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(261, 507);
@@ -471,7 +473,7 @@
             this.rdARendir.AutoSize = true;
             this.rdARendir.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rdARendir.Depth = 0;
-            this.rdARendir.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdARendir.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdARendir.Location = new System.Drawing.Point(72, 162);
             this.rdARendir.Margin = new System.Windows.Forms.Padding(0);
             this.rdARendir.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -489,7 +491,7 @@
             this.rdCajas.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rdCajas.Checked = true;
             this.rdCajas.Depth = 0;
-            this.rdCajas.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdCajas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdCajas.Location = new System.Drawing.Point(0, 162);
             this.rdCajas.Margin = new System.Windows.Forms.Padding(0);
             this.rdCajas.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -503,23 +505,12 @@
             this.rdCajas.UseVisualStyleBackColor = true;
             this.rdCajas.CheckedChanged += new System.EventHandler(this.rdCajas_CheckedChanged);
             // 
-            // cmdTransferencia
-            // 
-            this.cmdTransferencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdTransferencia.Location = new System.Drawing.Point(0, 434);
-            this.cmdTransferencia.Name = "cmdTransferencia";
-            this.cmdTransferencia.Size = new System.Drawing.Size(261, 36);
-            this.cmdTransferencia.TabIndex = 9;
-            this.cmdTransferencia.Texto = "Transferencia";
-            this.cmdTransferencia.Click += new System.EventHandler(this.cmdTransferencia_Click);
-            // 
             // lblUltimo
             // 
             this.lblUltimo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUltimo.Depth = 0;
-            this.lblUltimo.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblUltimo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblUltimo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblUltimo.Location = new System.Drawing.Point(3, 412);
             this.lblUltimo.MouseState = MaterialSkin.MouseState.HOVER;
@@ -560,7 +551,7 @@
             this.grdCajas.Redraw = true;
             this.grdCajas.Row = 0;
             this.grdCajas.Rows = 50;
-            this.grdCajas.Size = new System.Drawing.Size(248, 206);
+            this.grdCajas.Size = new System.Drawing.Size(248, 183);
             this.grdCajas.TabIndex = 7;
             // 
             // lblTotal
@@ -737,12 +728,12 @@
             // 
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
-            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel5.Location = new System.Drawing.Point(0, 81);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(58, 19);
+            this.materialLabel5.Size = new System.Drawing.Size(56, 18);
             this.materialLabel5.TabIndex = 4;
             this.materialLabel5.Text = "Salidas";
             // 
@@ -750,12 +741,12 @@
             // 
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel2.Location = new System.Drawing.Point(0, 0);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(68, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(67, 18);
             this.materialLabel2.TabIndex = 4;
             this.materialLabel2.Text = "Entradas";
             // 
@@ -782,7 +773,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.materialLabel4.BackColor = System.Drawing.SystemColors.Control;
             this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel4.Location = new System.Drawing.Point(8, 3);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
@@ -825,6 +816,28 @@
             this.aRendirToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.aRendirToolStripMenuItem.Text = "A Rendir";
             this.aRendirToolStripMenuItem.Click += new System.EventHandler(this.aRendirToolStripMenuItem_Click);
+            // 
+            // cmdCheques
+            // 
+            this.cmdCheques.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdCheques.Location = new System.Drawing.Point(0, 392);
+            this.cmdCheques.Name = "cmdCheques";
+            this.cmdCheques.Size = new System.Drawing.Size(261, 36);
+            this.cmdCheques.TabIndex = 9;
+            this.cmdCheques.Texto = "Cheques";
+            this.cmdCheques.Click += new System.EventHandler(this.cmdCheques_Click);
+            // 
+            // cmdTransferencia
+            // 
+            this.cmdTransferencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdTransferencia.Location = new System.Drawing.Point(0, 434);
+            this.cmdTransferencia.Name = "cmdTransferencia";
+            this.cmdTransferencia.Size = new System.Drawing.Size(261, 36);
+            this.cmdTransferencia.TabIndex = 9;
+            this.cmdTransferencia.Texto = "Transferencia";
+            this.cmdTransferencia.Click += new System.EventHandler(this.cmdTransferencia_Click);
             // 
             // frmCaja_Diaria
             // 
@@ -910,5 +923,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem verTransferenciasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aRendirToolStripMenuItem;
+        private Controles.cBoton cmdCheques;
     }
 }

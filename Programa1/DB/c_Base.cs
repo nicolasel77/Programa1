@@ -14,6 +14,9 @@
 
         public int ID { get; set; }
 
+        /// <summary>
+        /// Por defecto false.
+        /// </summary>
         public bool ID_Automatico = false;
 
         /// <summary>

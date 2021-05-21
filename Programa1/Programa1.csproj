@@ -395,6 +395,12 @@
     <Compile Include="Carga\Tesoreria\frmCargarEntregas.Designer.cs">
       <DependentUpon>frmCargarEntregas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmCheques.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmCheques.Designer.cs">
+      <DependentUpon>frmCheques.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmNARendir.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -773,6 +779,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmCargarEntregas.resx">
       <DependentUpon>frmCargarEntregas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmCheques.resx">
+      <DependentUpon>frmCheques.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmNARendir.resx">
       <DependentUpon>frmNARendir.cs</DependentUpon>
