@@ -12,17 +12,7 @@
         public Entradas()
         {
         }
-        public Entradas(int iD, DateTime fecha, Cajas Caja, Tipos_Entradas tE, int id_SubTipoEntrada, string descripcion, double importe)
-        {
-            ID = iD;
-            Fecha = fecha;
-            caja = Caja;
-            TE = tE;
-            Id_SubTipoEntrada = id_SubTipoEntrada;
-            Descripcion = descripcion;
-            Importe = importe;
-        }
-
+       
         /// <summary>
         /// El ID es automático.
         /// </summary>
@@ -72,7 +62,7 @@
             {
                 SqlCommand command = new SqlCommand($"UPDATE CD_Entradas SET " +
                     $" Fecha='{Fecha:MM/dd/yy}', ID_Caja={caja.Id}, ID_TipoEntrada={TE.Id_Tipo}, ID_SubTipoEntrada={Id_SubTipoEntrada}" +
-                    $", Descripcion='{Descripcion}', Detalle={Cheque} , Importe={Importe.ToString().Replace(",", ".")}" +
+                    $", Descripcion='{Descripcion}', Cheque={Cheque} , Importe={Importe.ToString().Replace(",", ".")}" +
                     $" WHERE ID={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -97,7 +87,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO CD_Entradas (Fecha, ID_Caja, ID_TipoEntrada, ID_SubTipoEntrada, Descripcion, Detalle, Importe) " +
+                SqlCommand command = new SqlCommand($"INSERT INTO CD_Entradas (Fecha, ID_Caja, ID_TipoEntrada, ID_SubTipoEntrada, Descripcion, Cheque, Importe) " +
                     $"VALUES('{Fecha:MM/dd/yy}', {caja.Id}, {TE.Id_Tipo}, {Id_SubTipoEntrada}, '{Descripcion}', {Cheque}, {Importe.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;

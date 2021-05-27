@@ -1,5 +1,7 @@
 ﻿using Programa1.DB.Tesoreria;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Media;
 using System.Windows.Forms;
 
@@ -8,6 +10,7 @@ namespace Programa1.Carga.Tesoreria
     public partial class frmCheques : Form
     {
         public Cheques ch = new Cheques();
+        public List<Cheques> cheques_seleccionados = new List<Cheques>();
 
         const byte Id = 0;
         const byte Numero = 1;
@@ -16,6 +19,7 @@ namespace Programa1.Carga.Tesoreria
         const byte Fecha_Entrada = 4;
         const byte Fecha_Acreditacion = 5;
         const byte Importe = 6;
+        const byte Seleccionado = 9;
 
         /// <summary>
         /// Para avisar que hay nuevo
@@ -24,15 +28,29 @@ namespace Programa1.Carga.Tesoreria
 
         public frmCheques()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            grd.TeclasManejadas = new int[] { 13 };
         }
 
-        public void Cargar()
+        public void Cargar(bool selec = false)
         {
-            grd.MostrarDatos(ch.Datos_Vista(), true, !Nuevo_Cheque);
+            DataTable dt;
+            if (selec == true)
+            {
+                dt = ch.Datos_Vista("Destino=''");
+                dt.Columns.Add("Sel", typeof(bool));
+            }
+            else
+            {
+                dt = ch.Datos_Vista();
+            }
+            grd.MostrarDatos(dt, true, !selec);
             grd.set_ColW(Id, 0);
             grd.Columnas[Importe].Format = "N1";
-            grd.ActivarCelda(grd.Rows - 1, Numero);
+            if (selec == false) { grd.ActivarCelda(grd.Rows - 1, Numero); } else { grd.ActivarCelda(1, Seleccionado); }
+            double t = grd.SumarCol(Importe, false);
+            if (selec == false) { lblTotal.Text = $"Total: {t:C1}"; } else { lblTotal.Text = "Total"; }
+
         }
 
         private void grd_Editado(short f, short c, object a)
@@ -102,7 +120,7 @@ namespace Programa1.Carga.Tesoreria
                     }
                     else
                     {
-                        ch.Fecha_Acreditacion= Convert.ToDateTime(a);
+                        ch.Fecha_Acreditacion = Convert.ToDateTime(a);
                         ch.Actualizar();
                         grd.set_Texto(f, c, a);
                         grd.ActivarCelda(f, Importe);
@@ -120,6 +138,30 @@ namespace Programa1.Carga.Tesoreria
                         ch.Importe = Convert.ToDouble(a);
                         ch.Actualizar();
                         this.Hide();
+                    }
+                    break;
+                case Seleccionado:
+                    cheques_seleccionados.Clear();
+                    double t = 0;
+                    for (int n = 1; n <= grd.Rows - 1; n++)
+                    {
+                        if (Convert.ToBoolean(grd.get_Texto(n, Seleccionado)) == true) 
+                        {
+                            t += Convert.ToDouble(grd.get_Texto(n, Importe));
+                            Cheques cn = new Cheques();
+                            cn.Buscar_Cheque(Convert.ToInt32(grd.get_Texto(n, Numero)));
+                            cheques_seleccionados.Add(cn);
+                        }
+                    }
+                    lblTotal.Text = $"Total: {t:C1}";
+
+                    if (f == grd.Rows - 1)
+                    {
+                        grd.ActivarCelda(1, Seleccionado);
+                    }
+                    else
+                    {
+                        grd.ActivarCelda(f + 1, Seleccionado);
                     }
                     break;
             }

@@ -37,15 +37,15 @@
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.grdSubTipo = new Grilla2.SpeedGrilla();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.lblST = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.lstTablas = new System.Windows.Forms.ListBox();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.grdGrupo = new Grilla2.SpeedGrilla();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblST = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -85,7 +85,7 @@
             this.grdTipo.FuenteEncabezado = null;
             this.grdTipo.FuentePieDePagina = null;
             this.grdTipo.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdTipo.Location = new System.Drawing.Point(4, 33);
+            this.grdTipo.Location = new System.Drawing.Point(4, 42);
             this.grdTipo.MenuActivado = false;
             this.grdTipo.Name = "grdTipo";
             this.grdTipo.PieDePagina = "\t\tPage {0} of {1}";
@@ -93,7 +93,7 @@
             this.grdTipo.Redraw = true;
             this.grdTipo.Row = 0;
             this.grdTipo.Rows = 2;
-            this.grdTipo.Size = new System.Drawing.Size(355, 660);
+            this.grdTipo.Size = new System.Drawing.Size(355, 651);
             this.grdTipo.TabIndex = 13;
             this.grdTipo.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdTipo_Editado);
             this.grdTipo.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdTipo_CambioFila);
@@ -122,7 +122,7 @@
             this.grdDetalles.FuenteEncabezado = null;
             this.grdDetalles.FuentePieDePagina = null;
             this.grdDetalles.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdDetalles.Location = new System.Drawing.Point(3, 33);
+            this.grdDetalles.Location = new System.Drawing.Point(3, 42);
             this.grdDetalles.MenuActivado = false;
             this.grdDetalles.Name = "grdDetalles";
             this.grdDetalles.PieDePagina = "\t\tPage {0} of {1}";
@@ -130,7 +130,7 @@
             this.grdDetalles.Redraw = true;
             this.grdDetalles.Row = 0;
             this.grdDetalles.Rows = 2;
-            this.grdDetalles.Size = new System.Drawing.Size(380, 660);
+            this.grdDetalles.Size = new System.Drawing.Size(372, 651);
             this.grdDetalles.TabIndex = 15;
             this.grdDetalles.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdDetalles_Editado);
             this.grdDetalles.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdDetalles_CambioFila);
@@ -179,7 +179,7 @@
             this.grdSubTipo.FuenteEncabezado = null;
             this.grdSubTipo.FuentePieDePagina = null;
             this.grdSubTipo.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdSubTipo.Location = new System.Drawing.Point(3, 33);
+            this.grdSubTipo.Location = new System.Drawing.Point(3, 42);
             this.grdSubTipo.MenuActivado = false;
             this.grdSubTipo.Name = "grdSubTipo";
             this.grdSubTipo.PieDePagina = "\t\tPage {0} of {1}";
@@ -187,7 +187,7 @@
             this.grdSubTipo.Redraw = true;
             this.grdSubTipo.Row = 0;
             this.grdSubTipo.Rows = 2;
-            this.grdSubTipo.Size = new System.Drawing.Size(325, 660);
+            this.grdSubTipo.Size = new System.Drawing.Size(325, 651);
             this.grdSubTipo.TabIndex = 13;
             this.grdSubTipo.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSubTipo_Editado);
             this.grdSubTipo.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSubTipo_CambioFila);
@@ -201,7 +201,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.materialLabel1);
+            this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.grdTipo);
             // 
             // splitContainer1.Panel2
@@ -210,22 +210,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(1090, 696);
             this.splitContainer1.SplitterDistance = 362;
             this.splitContainer1.TabIndex = 19;
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialLabel1.BackColor = System.Drawing.SystemColors.Control;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(4, 6);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(355, 21);
-            this.materialLabel1.TabIndex = 14;
-            this.materialLabel1.Text = "Tipos";
-            this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // splitContainer2
             // 
@@ -240,43 +224,11 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.materialLabel3);
+            this.splitContainer2.Panel2.Controls.Add(this.label4);
             this.splitContainer2.Panel2.Controls.Add(this.grdDetalles);
             this.splitContainer2.Size = new System.Drawing.Size(724, 696);
             this.splitContainer2.SplitterDistance = 334;
             this.splitContainer2.TabIndex = 0;
-            // 
-            // lblST
-            // 
-            this.lblST.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblST.BackColor = System.Drawing.SystemColors.Control;
-            this.lblST.Depth = 0;
-            this.lblST.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblST.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblST.Location = new System.Drawing.Point(3, 6);
-            this.lblST.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblST.Name = "lblST";
-            this.lblST.Size = new System.Drawing.Size(325, 21);
-            this.lblST.TabIndex = 15;
-            this.lblST.Text = "SubTipos";
-            this.lblST.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // materialLabel3
-            // 
-            this.materialLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialLabel3.BackColor = System.Drawing.SystemColors.Control;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel3.Location = new System.Drawing.Point(3, 6);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(380, 21);
-            this.materialLabel3.TabIndex = 16;
-            this.materialLabel3.Text = "Detalles";
-            this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // splitContainer3
             // 
@@ -289,9 +241,9 @@
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.Controls.Add(this.label1);
             this.splitContainer3.Panel1.Controls.Add(this.lstTablas);
             this.splitContainer3.Panel1.Controls.Add(this.materialLabel5);
-            this.splitContainer3.Panel1.Controls.Add(this.materialLabel4);
             this.splitContainer3.Panel1.Controls.Add(this.grdGrupo);
             // 
             // splitContainer3.Panel2
@@ -310,10 +262,10 @@
             this.lstTablas.ForeColor = System.Drawing.Color.DimGray;
             this.lstTablas.FormattingEnabled = true;
             this.lstTablas.ItemHeight = 16;
-            this.lstTablas.Location = new System.Drawing.Point(3, 533);
+            this.lstTablas.Location = new System.Drawing.Point(7, 533);
             this.lstTablas.Name = "lstTablas";
             this.lstTablas.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.lstTablas.Size = new System.Drawing.Size(337, 160);
+            this.lstTablas.Size = new System.Drawing.Size(333, 160);
             this.lstTablas.TabIndex = 21;
             // 
             // materialLabel5
@@ -329,22 +281,6 @@
             this.materialLabel5.Size = new System.Drawing.Size(54, 19);
             this.materialLabel5.TabIndex = 20;
             this.materialLabel5.Text = "Tablas";
-            // 
-            // materialLabel4
-            // 
-            this.materialLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialLabel4.BackColor = System.Drawing.SystemColors.Control;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel4.Location = new System.Drawing.Point(3, 6);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(337, 21);
-            this.materialLabel4.TabIndex = 14;
-            this.materialLabel4.Text = "Grupos Gastos";
-            this.materialLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // grdGrupo
             // 
@@ -370,7 +306,7 @@
             this.grdGrupo.FuenteEncabezado = null;
             this.grdGrupo.FuentePieDePagina = null;
             this.grdGrupo.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdGrupo.Location = new System.Drawing.Point(3, 33);
+            this.grdGrupo.Location = new System.Drawing.Point(7, 42);
             this.grdGrupo.MenuActivado = false;
             this.grdGrupo.Name = "grdGrupo";
             this.grdGrupo.PieDePagina = "\t\tPage {0} of {1}";
@@ -378,10 +314,62 @@
             this.grdGrupo.Redraw = true;
             this.grdGrupo.Row = 0;
             this.grdGrupo.Rows = 2;
-            this.grdGrupo.Size = new System.Drawing.Size(337, 475);
+            this.grdGrupo.Size = new System.Drawing.Size(333, 466);
             this.grdGrupo.TabIndex = 13;
             this.grdGrupo.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdGrupo_Editado);
             this.grdGrupo.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdGrupo_CambioFila);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(7, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(332, 30);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Grupo";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.BackColor = System.Drawing.SystemColors.Control;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(4, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(355, 30);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Tipo";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblST
+            // 
+            this.lblST.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblST.BackColor = System.Drawing.SystemColors.Control;
+            this.lblST.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblST.Location = new System.Drawing.Point(3, 9);
+            this.lblST.Name = "lblST";
+            this.lblST.Size = new System.Drawing.Size(325, 30);
+            this.lblST.TabIndex = 23;
+            this.lblST.Text = "SubTipo";
+            this.lblST.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.BackColor = System.Drawing.SystemColors.Control;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(372, 30);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Detalle";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmTipos_Gastos
             // 
@@ -422,14 +410,14 @@
         private System.Windows.Forms.Timer tiMensaje;
         private Grilla2.SpeedGrilla grdSubTipo;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private MaterialSkin.Controls.MaterialLabel lblST;
-        private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private Grilla2.SpeedGrilla grdGrupo;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         private System.Windows.Forms.ListBox lstTablas;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblST;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
     }
 }

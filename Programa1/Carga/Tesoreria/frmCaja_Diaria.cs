@@ -449,14 +449,13 @@ namespace Programa1.Carga.Tesoreria
                                 {
                                     if (cEntradas.caja.EsCheque == true)
                                     {
-                                        frmCheques fr = new frmCheques();
-                                        fr.Cargar();
-                                        fr.ShowDialog();
-                                        if (fr.Nuevo_Cheque == true)
+                                        Cheques ch = new Cheques();
+                                        ch.Cargar_Nuevo();
+                                        if (ch.Numero != 0)
                                         {
-                                            cEntradas.Cheque = fr.ch.Numero;
-                                            cEntradas.Descripcion = $"{s} CH {fr.ch.Banco.Nombre}  FAc: {fr.ch.Fecha_Acreditacion:dd/MM/yy}";
-                                            cEntradas.Importe = fr.ch.Importe;
+                                            cEntradas.Cheque = ch.Numero;
+                                            cEntradas.Descripcion = $"{s} CH {ch.Banco.Nombre}  FAc: {ch.Fecha_Acreditacion:dd/MM/yy}";
+                                            cEntradas.Importe = ch.Importe;
 
                                             grdEntradas.Focus();
                                             grdEntradas.set_Texto(f, e_Descripcion, cEntradas.Descripcion);
@@ -642,14 +641,9 @@ namespace Programa1.Carga.Tesoreria
                         {
                             grdSalidas.set_Texto(f, c, a);
                             grdSalidas.set_Texto(f, c + 1, cGastos.caja.Nombre);
-
-                            //HORRIBLE
-                            if (cGastos.caja.Id == 12) { cGastos.caja.Seleccionar_Nombre(); }
-                            if (cGastos.caja.Id == 11)
-                            {
-                                //Chequess
-
-                            }
+                                                        
+                            if (cGastos.caja.EsARendir == true) { cGastos.caja.Seleccionar_Nombre(); }
+                            
                             grdSalidas.ActivarCelda(f, e_Tipo);
 
                         }
@@ -678,17 +672,17 @@ namespace Programa1.Carga.Tesoreria
                                 cGastos.Desc_SubTipo = s;
                                 grdSalidas.set_Texto(f, s_SubTipo, a);
                                 grdSalidas.set_Texto(f, s_SubTipo + 1, s);
-
-                                //HORRIBLE
-                                if (cGastos.TG.Id_Tipo == 12)
+                                                                
+                                if (cGastos.TG.EsHacienda == true)
                                 {
                                     Seleccionar_Pago_Hacienda();
                                 }
                                 else
-                                {
+                                {                                    
                                     grdSalidas.ActivarCelda(f, s_IDDetalle);
                                     if (cGastos.ID != 0) { cGastos.Actualizar(); }
                                 }
+
                             }
                         }
                         break;
@@ -716,9 +710,26 @@ namespace Programa1.Carga.Tesoreria
                                 grdSalidas.set_Texto(f, s_IDDetalle, a);
                                 grdSalidas.set_Texto(f, s_Descripcion, dg.Nombre);
 
-                                grdSalidas.ActivarCelda(f, c + 1);
-                                if (cGastos.ID != 0) { cGastos.Actualizar(); }
-
+                                if (cGastos.caja.EsCheque == true)
+                                {
+                                    //Chequess
+                                    Cheques ch = new Cheques();
+                                    ch.Seleccionar_Cheques();
+                                    foreach (Cheques cn in ch.cheques_seleccionados)
+                                    {
+                                        // Agregar registro por cada cheque.
+                                        cGastos.Importe = cn.Importe;
+                                        cGastos.Cheque = cn.Numero;
+                                        cGastos.Agregar();                                        
+                                    }
+                                    if (ch.cheques_seleccionados.Count != 0) { Cargar_Datos(); }
+                                    grdSalidas.ActivarCelda(grdSalidas.Rows - 1, s_Caja);                                    
+                                }
+                                else
+                                {
+                                    grdSalidas.ActivarCelda(f, c + 1);
+                                    if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                }
                             }
                         }
                         break;
@@ -746,7 +757,6 @@ namespace Programa1.Carga.Tesoreria
                                 cGastos.Agregar();
                                 grdSalidas.set_Texto(f, s_Id, Convert.ToInt32(cGastos.ID));
                                 grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
-
 
                                 grdSalidas.AgregarFila();
                                 Repetir_FilaG(f);
@@ -865,6 +875,7 @@ namespace Programa1.Carga.Tesoreria
                             {
                                 cGastos.Descripcion = $"Compra:  {Convert.ToDateTime(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Fecha"))):yyyy-MM-dd}";
                                 cGastos.Importe = Convert.ToDouble(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Saldo"))) * -1;
+                                //cGastos.Fecha_Acreditacion = 
 
                                 // Esto es por si se esta editando un registro existente
                                 if (cGastos.ID > 0)

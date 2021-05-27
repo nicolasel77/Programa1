@@ -32,39 +32,33 @@
         [MaxLength(500, ErrorMessage = "El campo Descripción solo puede tener 500 caracteres.")]
         public string Descripcion { get; set; }
         public Double Importe { get; set; }
-
+        public DateTime Fecha_Acreditacion { get; set; }
         public int Cheque { get; set; }
 
         public bool Autorizado { get; set; }
         public DateTime Fecha_Autorizado { get; set; }
         public Usuarios Usuario { get; set; } = new Usuarios();
 
+        public bool EsARendir { get { return ID == 12; } }
+
         private A_Rendir a_Rendir { get; set; } = new A_Rendir();
 
         #region " Editrar Datos "
         public new void Actualizar()
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand($"UPDATE CD_Gastos SET " +
-                    $" Fecha='{Fecha:MM/dd/yy}', ID_Caja={caja.Id}, ID_TipoGastos={TG.Id_Tipo}, Id_SubTipoGastos={Id_SubTipoGastos}" +
-                    $", Id_DetalleGastos={Id_DetalleGastos}, Desc_SubTipo='{Desc_SubTipo}', Descripcion='{Descripcion}', Importe={Importe.ToString().Replace(",", ".")}" +
-                    $", Cheque={Cheque}, Autorizado={(Autorizado ? "1" : "0")}, Fecha_Autorizado='{Fecha_Autorizado:MM/dd/yy HH:mm}', Usuario={Usuario.ID}" +
-                    $" WHERE ID={ID}", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
+            Actualizar("Fecha", Fecha);
+            Actualizar("ID_Caja", caja.Id);
+            Actualizar("ID_TipoGastos", TG.Id_Tipo);
+            Actualizar("Id_SubTipoGastos", Id_SubTipoGastos);
+            Actualizar("Id_DetalleGastos", Id_DetalleGastos);
+            Actualizar("Desc_SubTipo", Desc_SubTipo);
+            Actualizar("Descripcion", Descripcion);
+            Actualizar("Importe", Importe);
+            Actualizar("Fecha_Acreditacion", Fecha_Acreditacion);
+            Actualizar("Cheque", Cheque);
+            Actualizar("Autorizado", Autorizado);
+            Actualizar("Fecha_Autorizado", Fecha_Autorizado);
+            Actualizar("Usuario", Usuario.ID);            
         }
 
         public new void Agregar()
@@ -75,9 +69,9 @@
             try
             {
                 SqlCommand command = new SqlCommand($"INSERT INTO CD_Gastos " +
-                    $"(Fecha, ID_Caja, ID_TipoGastos, ID_SubTipoGastos, Desc_SubTipo, ID_DetalleGastos, Descripcion, Importe, Cheque, Autorizado, Fecha_Autorizado, Usuario) " +
+                    $"(Fecha, ID_Caja, ID_TipoGastos, ID_SubTipoGastos, Desc_SubTipo, ID_DetalleGastos, Descripcion, Importe, Cheque, Autorizado, Fecha_Acreditacion, Fecha_Autorizado, Usuario) " +
                     $"VALUES('{Fecha:MM/dd/yy}', {caja.Id}, {TG.Id_Tipo}, {Id_SubTipoGastos}, '{Desc_SubTipo}', {Id_DetalleGastos}, '{Descripcion}', " +
-                    $"{Importe.ToString().Replace(",", ".")}, {Cheque}, {(Autorizado ? "1" : "0")}, '{Fecha_Autorizado:MM/dd/yy HH:mm}', {Usuario.ID})", sql);
+                    $"{Importe.ToString().Replace(",", ".")}, {Cheque}, {(Autorizado ? "1" : "0")}, '{Fecha_Acreditacion:MM/dd/yy HH:mm}', '{Fecha_Autorizado:MM/dd/yy HH:mm}', {Usuario.ID})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -94,10 +88,8 @@
                 else
                 {
                     ID = n2;
-
-                    //HORRIBLE.
-                    //SE AGREGA EL DETALLE A RENDIR SOLO SI ESTA CARGANDO UN GASTO DE LA CAJA 12
-                    if (caja.Id == 12)
+                                        
+                    if (caja.EsARendir == true)
                     {
                         if (caja.nombre_ARendir.ID == 0) { caja.Seleccionar_Nombre(); }
                         a_Rendir.ID_Salida = ID;

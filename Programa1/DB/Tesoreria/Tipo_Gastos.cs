@@ -34,6 +34,10 @@
         [Required]
         public string Nombre { get; set; }
 
+        /// <summary>
+        /// Por ahora es fijo (solo evalúa que Id=12). Mas que nada se hizo para que quede dentro de la clase.
+        /// </summary>
+        public bool EsHacienda { get { return Id_Tipo == 12; } }
 
         public void Cargar()
         {

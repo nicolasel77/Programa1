@@ -35,7 +35,10 @@
         /// Por ahora es fijo (solo evalúa que Id=11). Mas que nada se hizo para que quede dentro de la clase.
         /// </summary>
         public bool EsCheque { get { return Id == 11; } }
-
+        /// <summary>
+        /// Por ahora es fijo (solo evalúa que Id=12). Mas que nada se hizo para que quede dentro de la clase.
+        /// </summary>
+        public bool EsARendir { get { return Id == 12; } }
         public DataTable Datos(string Filtro = "")
         {
             var dt = new DataTable("Datos");

@@ -126,14 +126,7 @@ namespace Programa1.Herramientas
                     break;
                 case "System.bool":
                 case "System.Boolean":
-                    if (Convert.ToBoolean(valor) == true)
-                    {
-                        s = "1";
-                    }
-                    else
-                    {
-                        s = "0";
-                    }
+                    s = Convert.ToBoolean(valor) ? "1" : "0";                    
                     break;
             }
             return s;

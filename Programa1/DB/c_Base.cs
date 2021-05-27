@@ -23,6 +23,7 @@
         /// Es el nombre del campo ID, por defecto es ID.
         /// </summary>
         public string Campo_ID { get; set; } = "ID";
+        public string Campo_Nombre { get; set; } = "Nombre";
         public string Nombre { get; set; }
 
 
@@ -219,7 +220,7 @@
 
             try
             {
-                string Cadena = $"SELECT Id, Nombre FROM {Tabla} {filtro} ORDER BY Id";
+                string Cadena = $"SELECT {Campo_ID}, {Campo_Nombre} FROM {Tabla} {filtro} ORDER BY {Campo_ID}";
 
                 SqlCommand cmd = new SqlCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
