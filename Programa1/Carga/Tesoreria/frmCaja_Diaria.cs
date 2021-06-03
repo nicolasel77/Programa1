@@ -937,7 +937,7 @@ namespace Programa1.Carga.Tesoreria
                                     grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo, cGastos.Id_SubTipoGastos);
                                     grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo + 1, cGastos.Desc_SubTipo);
                                     //HORRIBLE
-                                    if (cGastos.TG.Id_Tipo == 12)
+                                    if (cGastos.TG.EsHacienda == true)
                                     {
                                         Seleccionar_Pago_Hacienda();
                                     }
@@ -963,6 +963,19 @@ namespace Programa1.Carga.Tesoreria
             }
         }
 
+        private void Seleccionar_Pago_Proveedor()
+        {
+            // HACIENDA
+            Saldos_Consignatarios sld = new Saldos_Consignatarios();
+            sld.gastos = cGastos;
+            sld.Cargar_Pago();
+            if (sld.Aceptado == true)
+            {
+                Cargar_Datos();
+                Repetir_FilaG(grdSalidas.Rows - 2);
+            }
+            grdSalidas.Focus();
+        }
         private void Seleccionar_Pago_Hacienda()
         {
             // HACIENDA

@@ -52,12 +52,6 @@
       <HintPath>..\SpeedGrilla\C1.Win.C1FlexGrid.4.dll</HintPath>
     </Reference>
     <Reference Include="C1.Win.C1Schedule.4, Version=4.0.20113.183, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
     </Reference>
@@ -190,6 +184,12 @@
     </Compile>
     <Compile Include="Carga\Proveedores\frmAjustes.Designer.cs">
       <DependentUpon>frmAjustes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Proveedores\frmPagar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Proveedores\frmPagar.Designer.cs">
+      <DependentUpon>frmPagar.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Sucursales\frmAPicada.cs">
       <SubType>Form</SubType>
@@ -570,7 +570,6 @@
     <Compile Include="DB\Tesoreria\Tipo_PagoAutorizado.cs" />
     <Compile Include="DB\Varios\Camiones.cs" />
     <Compile Include="DB\Varios\Capital_Trabajo.cs" />
-    <Compile Include="DB\Varios\c_base.cs" />
     <Compile Include="DB\Varios\Datos_Genericos.cs" />
     <Compile Include="DB\Varios\Empresas.cs" />
     <Compile Include="DB\Varios\Listas_Carga.cs" />
@@ -680,6 +679,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmAjustes.resx">
       <DependentUpon>frmAjustes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Proveedores\frmPagar.resx">
+      <DependentUpon>frmPagar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmAPicada.resx">
       <DependentUpon>frmAPicada.cs</DependentUpon>

@@ -4,35 +4,13 @@ using System.Data.SqlClient;
 
 namespace Programa1.DB
 {
-    class Faena
+    public class Faena
     {
         public Faena()
         {
 
         }
-
-        public Faena(int id,
-                     NBoletas nBoleta,
-                     DateTime fecha,
-                     Categorias categoria,
-                     int nRomaneo,
-                     int tropa,
-                     Frigorificos frigorifico,
-                     Productos producto,
-                     float recupero,
-                     float kilos)
-        {
-            Id = id;
-            this.nBoleta = nBoleta;
-            Fecha = fecha;
-            Categoria = categoria;
-            NRomaneo = nRomaneo;
-            Tropa = tropa;
-            Frigorifico = frigorifico;
-            Producto = producto;
-            Recupero = recupero;
-            Kilos = kilos;
-        }
+                
 
         public int Id { get; set; }
         public NBoletas nBoleta { get; set; } = new NBoletas();

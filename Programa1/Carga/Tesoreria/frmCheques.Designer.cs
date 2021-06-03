@@ -69,6 +69,7 @@ namespace Programa1.Carga.Tesoreria
             this.grd.Size = new System.Drawing.Size(828, 673);
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
+            this.grd.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grd_KeyPress);
             // 
             // lblTotal
             // 
@@ -88,9 +89,11 @@ namespace Programa1.Carga.Tesoreria
             this.ClientSize = new System.Drawing.Size(852, 728);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.grd);
+            this.KeyPreview = true;
             this.Name = "frmCheques";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cheques";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmCheques_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

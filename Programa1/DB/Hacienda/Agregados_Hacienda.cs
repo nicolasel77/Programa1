@@ -6,23 +6,13 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Agregados_Hacienda
+    public class Agregados_Hacienda
     {
         public Agregados_Hacienda()
         {
         }
 
-        public Agregados_Hacienda(int id, NBoletas nBoletas, TipoAgregados tipo, Consignatarios consignatario, Single importe, int plazo)
-        {
-            Id = id;
-            nb = nBoletas;
-            Consignatario = consignatario;
-            tipoAgregados = tipo;
-            Importe = importe;
-            Plazo = plazo;
-
-        }
-
+     
         public int Id { get; set; }
         public NBoletas nb { get; set; } = new NBoletas();
 

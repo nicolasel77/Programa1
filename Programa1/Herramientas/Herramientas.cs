@@ -117,11 +117,12 @@ namespace Programa1.Herramientas
                     s = s.Replace(",", ".");
                     break;
                 case "System.String":
-                    s = $"'{s}'";
+                    s = $"'{valor}'";
                     break;
                 case "System.Date":
                 case "System.DateTime":
                     DateTime d = Convert.ToDateTime(valor);
+                    d = (d.Year < 1900) ? Convert.ToDateTime("1/1/1900") : d;
                     s = $"'{d:MM/dd/yyyy}'";
                     break;
                 case "System.bool":

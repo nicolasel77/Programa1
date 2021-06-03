@@ -166,5 +166,37 @@ namespace Programa1.Carga.Tesoreria
                     break;
             }
         }
+
+        private void frmCheques_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Hide();
+            }
+            else
+            {
+                if (e.KeyCode == Keys.Delete)
+                {
+                    int f = grd.Row;
+                    int i = Convert.ToInt32(grd.get_Texto(f, Id));
+                    if (i != 0)
+                    {
+                        ch.ID = i;
+                        ch.Borrar();
+                        grd.BorrarFila();
+                        grd.ActivarCelda(f, Numero);
+                    }
+                }
+            }
+
+        }
+
+        private void grd_KeyPress(object sender, short e)
+        {
+            if (e == 13)
+            {
+                this.Hide();
+            }
+        }
     }
 }

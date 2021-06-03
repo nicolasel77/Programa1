@@ -2,7 +2,7 @@
 {
     using Programa1.Clases;
 
-    class Frigorificos : c_Base
+    public class Frigorificos : c_Base
     {
         public Frigorificos()
         {

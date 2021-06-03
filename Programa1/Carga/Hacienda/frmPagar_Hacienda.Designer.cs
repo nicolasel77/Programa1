@@ -57,7 +57,7 @@ namespace Programa1.Carga.Hacienda
             this.label1.BackColor = System.Drawing.Color.Gainsboro;
             this.label1.Location = new System.Drawing.Point(13, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(775, 2);
+            this.label1.Size = new System.Drawing.Size(997, 2);
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
@@ -93,7 +93,7 @@ namespace Programa1.Carga.Hacienda
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(776, 359);
+            this.grd.Size = new System.Drawing.Size(998, 447);
             this.grd.TabIndex = 2;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
             this.grd.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grd_KeyPress);
@@ -101,7 +101,7 @@ namespace Programa1.Carga.Hacienda
             // cmdSalir
             // 
             this.cmdSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdSalir.Location = new System.Drawing.Point(577, 398);
+            this.cmdSalir.Location = new System.Drawing.Point(799, 486);
             this.cmdSalir.Name = "cmdSalir";
             this.cmdSalir.Size = new System.Drawing.Size(220, 40);
             this.cmdSalir.TabIndex = 3;
@@ -111,7 +111,7 @@ namespace Programa1.Carga.Hacienda
             // cmdAceptar
             // 
             this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdAceptar.Location = new System.Drawing.Point(351, 398);
+            this.cmdAceptar.Location = new System.Drawing.Point(573, 486);
             this.cmdAceptar.Name = "cmdAceptar";
             this.cmdAceptar.Size = new System.Drawing.Size(220, 40);
             this.cmdAceptar.TabIndex = 3;
@@ -122,15 +122,17 @@ namespace Programa1.Carga.Hacienda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1022, 538);
             this.Controls.Add(this.cmdAceptar);
             this.Controls.Add(this.cmdSalir);
             this.Controls.Add(this.grd);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblConsignatario);
+            this.KeyPreview = true;
             this.Name = "frmPagar_Hacienda";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pagar Hacienda";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmPagar_Hacienda_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

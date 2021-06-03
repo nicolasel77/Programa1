@@ -31,9 +31,10 @@
             {
                 case "Nicolas":
                     //capitalDeTrabajoToolStripMenuItem.PerformClick();
-                    cajaDiariaToolStripMenuItem.PerformClick();
+                    //cajaDiariaToolStripMenuItem.PerformClick();
+                    vencimientosToolStripMenuItem.PerformClick();
                     break;
-                case "Alejandro":
+                case "Ale":
                     cajaDiariaToolStripMenuItem.PerformClick();
                     break;
             }
@@ -1766,6 +1767,54 @@
             foreach (Form f in forms)
             {
                 if (f.Name == "frmCapitalDeTrabajo")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void vencimientosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmVencimientos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmVencimientos");
+                t.Text = "Vencimientos";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmVencimientos = new Carga.Hacienda.frmVencimientos();
+                frmVencimientos.MdiParent = this;
+                frmVencimientos.Disposed += FrmVencimientos_Disposed;
+                forms.Add(frmVencimientos);
+                frmVencimientos.Show();
+                frmVencimientos.WindowState = FormWindowState.Minimized;
+                frmVencimientos.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmVencimientos_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Vencimientos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmVencimientos")
                 {
                     forms.Remove(f);
                     break;

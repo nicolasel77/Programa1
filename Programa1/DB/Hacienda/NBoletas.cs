@@ -6,7 +6,7 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class NBoletas : c_Base
+    public class NBoletas : c_Base
     {
         public NBoletas()
         {

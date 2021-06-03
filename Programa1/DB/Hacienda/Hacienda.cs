@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace Programa1.DB
 {
-    class Hacienda
+    public class Hacienda
     {
         public Hacienda()
         {

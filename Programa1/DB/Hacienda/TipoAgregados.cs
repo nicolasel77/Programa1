@@ -2,7 +2,7 @@
 {
     using Programa1.Clases;
 
-    class TipoAgregados : c_Base
+    public class TipoAgregados : c_Base
     {
         public TipoAgregados()
         {

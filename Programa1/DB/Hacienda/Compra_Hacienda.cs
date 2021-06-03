@@ -1,31 +1,26 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Compra_Hacienda
+    public class Compra_Hacienda : c_Base
     {
+        public enum Estados_Hacienda : byte
+        {
+            Sin_Chequear = 0,
+            Aprovado = 1,
+            Error = 2
+        }
 
         public Compra_Hacienda()
         {
+            Vista = "vw_CompraHacienda";
+            Tabla = "Hacienda_Compras";            
         }
 
-        public Compra_Hacienda(int id, NBoletas nBoleta, Consignatarios consignatario, Productos producto, int cabezas, float kilos, float costo, float iVA, byte plazo)
-        {
-            Id = id;
-            NBoleta = nBoleta;
-            Consignatario = consignatario;
-            Producto = producto;
-            Cabezas = cabezas;
-            Kilos = kilos;
-            Costo = costo;
-            IVA = iVA;
-            Plazo = plazo;
-        }
-
-        public int Id { get; set; }
         public NBoletas NBoleta { get; set; }
         public Consignatarios Consignatario { get; set; }
         public Productos Producto { get; set; }
@@ -34,61 +29,27 @@
         public Single Costo { get; set; }
         public Single IVA { get; set; }
         public Byte Plazo { get; set; }
+        public int Estado { get; set; }
 
-        public DataTable Datos(string filtro = "")
+
+        public new void Actualizar()
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            Actualizar("NBoleta", NBoleta.NBoleta);
+            Actualizar("ID_Consignatarios", Consignatario.ID);
+            Actualizar("Id_Productos", Producto.ID);
+            Actualizar("Cabezas", Cabezas);
+            Actualizar("Kilos", Kilos);
+            Actualizar("Costo", Costo);
+            Actualizar("Iva", IVA);
+            Actualizar("Plazo", Plazo);
+            Actualizar("Estado", Estado);
 
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_CompraHacienda {filtro} ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
-
-        public void Actualizar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command =
-                    new SqlCommand($"UPDATE Hacienda_Compras SET NBoleta={NBoleta.NBoleta}, Id_Consignatarios={Consignatario.ID}, Id_Productos={Producto.ID}, " +
-                        $"Cabezas={Cabezas}, Kilos={Kilos.ToString().Replace(",", ".")}, Costo={Costo.ToString().Replace(",", ".")}, IVA={IVA.ToString().Replace(",", ".")}, Plazo={Plazo} " +    
-                        $"WHERE Id={Id}", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
         }
 
         public void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            int n = MaxId();
+            int n = Max_ID();
             try
             {
                 SqlCommand command =
@@ -102,15 +63,15 @@
 
                 sql.Close();
 
-                int n2 = MaxId();
+                int n2 = Max_ID();
                 if (n == n2)
                 {
-                    Id = 0;
+                    ID = 0;
                     MessageBox.Show("No se pudo guardar el registro.", "Error");
                 }
                 else
                 {
-                    Id = n2;
+                    ID = n2;
                 }
             }
             catch (Exception e)
@@ -118,54 +79,7 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
-
-        public int MaxId()
-        {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Hacienda_Compras", conexionSql);
-
-                conexionSql.Open();
-
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
-
-                conexionSql.Close();
-            }
-            catch (Exception)
-            {
-                d = 0;
-            }
-
-            return Convert.ToInt32(d);
-        }
-
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Hacienda_Compras WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
+                            
 
         public void Cargar_Boleta(int nb)
         {
@@ -183,7 +97,7 @@
 
                 DataRow dr = dt.Rows[0];
 
-                Id = Convert.ToInt32(dr["Id"]);
+                ID = Convert.ToInt32(dr["Id"]);
                 NBoleta.NBoleta = Convert.ToInt32(dr["NBoleta"]);
                 Consignatario.ID = Convert.ToInt32(dr["Id_Consignatarios"]);
                 Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
@@ -195,7 +109,7 @@
             }
             catch (Exception)
             {
-                Id = 0;
+                ID = 0;
             }
 
 
@@ -217,7 +131,7 @@
 
                 DataRow dr = dt.Rows[0];
 
-                Id = id;
+                ID = id;
                 NBoleta.NBoleta = Convert.ToInt32(dr["NBoleta"]);
                 Consignatario.ID = Convert.ToInt32(dr["Id_Consignatarios"]);
                 Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
@@ -229,7 +143,7 @@
             }
             catch (Exception)
             {
-                Id = 0;
+                ID = 0;
             }
         }
     }

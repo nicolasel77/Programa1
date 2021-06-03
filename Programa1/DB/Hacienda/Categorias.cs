@@ -2,7 +2,7 @@
 {
     using Programa1.Clases;
 
-    class Categorias : c_Base
+    public class Categorias : c_Base
     {
         public Categorias()
         {

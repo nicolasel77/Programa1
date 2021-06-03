@@ -1,11 +1,16 @@
 ﻿namespace Programa1.Carga.Hacienda
 {
     using Programa1.DB;
+    using Programa1.DB.Tesoreria;
     using System;
+    using System.Drawing;
+    using System.Linq;
     using System.Windows.Forms;
     public partial class frmPagar_Hacienda : Form
     {
         public Saldos_Consignatarios saldos = new Saldos_Consignatarios();
+        public Gastos gastos;
+        public Cheques ch = new Cheques();
         public bool Aceptado = false;
 
         const int cID = 0;
@@ -15,8 +20,10 @@
         const int cCosto = 9;
         const int cTotal = 10;
         const int cPago = 11;
-        const int cSaldo = 12;
-        const int cNuevo = 13;
+        const int cDif = 12;
+        const int cSaldo = 13;
+        const int cNuevo = 14;
+        const int cEstado = 15;
 
         //Id, Fecha, Plazo, Venc, NBoleta, Cabezas, Descripcion, Kilos, Costo, Total, Pago, Saldo, 0.0 AS Nuevo
         public frmPagar_Hacienda()
@@ -28,13 +35,29 @@
             lblConsignatario.Text = saldos.gastos.Desc_SubTipo;
 
             grd.TeclasManejadas = new int[] { 13, 43 };
-
+            
             grd.MostrarDatos(saldos.Datos(), true, false);
+
+            double valor = 0;
+            for (int i = 1; i <= grd.Rows - 1; i++)
+            {
+                if (valor == Convert.ToDouble(grd.get_Texto(i, cSaldo)))
+                {
+                    grd.set_Texto(i, cSaldo, 0);
+                }
+                else
+                {
+                    valor = Convert.ToDouble(grd.get_Texto(i, cSaldo));
+                }
+                grd.set_ColorLetraCelda(i, cDif, (Convert.ToDouble(grd.get_Texto(i, cDif)) < -1) ? Color.Red : Color.Blue);
+                grd.set_ColorLetraCelda(i, cSaldo, (Convert.ToDouble(grd.get_Texto(i, cSaldo)) < -1) ? Color.Red : Color.Blue);
+            }
 
             grd.Columnas[cKilos].Style.Format = "N1";
             grd.Columnas[cCosto].Style.Format = "N1";
             grd.Columnas[cTotal].Style.Format = "N1";
             grd.Columnas[cPago].Style.Format = "N1";
+            grd.Columnas[cDif].Style.Format = "N1";
             grd.Columnas[cSaldo].Style.Format = "N1";
             grd.Columnas[cNuevo].Style.Format = "N1";
 
@@ -42,8 +65,10 @@
             grd.set_ColW(cID, 0);
             grd.set_ColW(cTotal, 80);
             grd.set_ColW(cPago, 80);
-            grd.set_ColW(cSaldo, 80);
-            grd.set_ColW(cNuevo, 80);
+            grd.set_ColW(cDif, 90);
+            grd.set_ColW(cSaldo, 90);
+            grd.set_ColW(cNuevo, 90);
+            grd.set_ColW(cEstado, 0);
 
             grd.ActivarCelda(1, cNuevo);
         }
@@ -52,20 +77,46 @@
         {
             if (c == cNuevo)
             {
-                grd.set_Texto(f, c, a);
-                a = Convert.ToDouble(grd.get_Texto(f, cSaldo)) + Convert.ToDouble(a);
-                grd.set_Texto(f, cSaldo, a);
-                grd.ActivarCelda(f + 1, c);
+                double dife = Convert.ToDouble(grd.get_Texto(f, cDif));
+                double saldo = Convert.ToDouble(grd.get_Texto(f, cSaldo));
+                double pago = (double)a;
+                if (gastos.caja.EsCheque == true)
+                {
+                    //Seleccionar el cheque                    
+                    ch.Seleccionar_Cheques();
+                    pago = ch.cheques_seleccionados.Sum(item => item.Importe);
+                    grd.Focus();
+                }
+
+                grd.set_Texto(f, cNuevo, pago);
+                grd.set_Texto(f, cDif, dife + pago);
+                grd.set_Texto(f, cSaldo, saldo + pago);
+                if (f < grd.Rows - 1) { grd.ActivarCelda(f + 1, cNuevo); }
             }
         }
 
         private void grd_KeyPress(object sender, short e)
         {
+            //  +
             if (e == 43)
             {
                 int r = grd.Row;
-                grd.set_Texto(r, cNuevo, Convert.ToDouble(grd.get_Texto(r, cSaldo)) * -1);
-                grd.set_Texto(r, cSaldo, 0);
+                double saldo = Convert.ToDouble(grd.get_Texto(r, cSaldo));
+                double pago = 0;
+                if (gastos.caja.EsCheque == true)
+                {
+                    //Seleccionar el cheque                    
+                    ch.Seleccionar_Cheques();
+                    pago = ch.cheques_seleccionados.Sum(item => item.Importe);
+                    grd.Focus();
+                }
+                else
+                {
+                    pago = Convert.ToDouble(grd.get_Texto(r, cDif)) * -1;
+                }
+                grd.set_Texto(r, cNuevo, pago);
+                grd.set_Texto(r, cDif, 0);
+                grd.set_Texto(r, cSaldo, saldo + pago);
                 if (r < grd.Rows - 1) { grd.ActivarCelda(r + 1, cNuevo); }
             }
             else
@@ -78,7 +129,7 @@
             }
         }
 
-        private void cmdAceptar_Click(object sender, EventArgs e)
+        private void cmdAceptar_Click(object sender, System.EventArgs e)
         {
             Aceptarr();
             this.Hide();
@@ -93,21 +144,43 @@
                 if (n != 0)
                 {
                     int idD = Convert.ToInt32(grd.get_Texto(i, cID));
-                    string t = Convert.ToDouble(grd.get_Texto(i, cSaldo)) == 0 ? "Total" : "Parcial";
+                    string t = Convert.ToDouble(grd.get_Texto(i, cDif)) == 0 ? "Total" : "Parcial";
                     string s = string.Format("{0} {1}  - {2}", grd.get_Texto(i, cCab), grd.get_Texto(i, cDescripcion), t);
 
-                    saldos.gastos.Importe = n;
                     saldos.gastos.Id_DetalleGastos = idD;
                     saldos.gastos.Descripcion = s;
-                    saldos.gastos.Agregar();
+
+                    if (saldos.gastos.caja.EsCheque == false)
+                    {
+                        saldos.gastos.Importe = n;
+                        saldos.gastos.Agregar();
+
+                    }
+                    else
+                    {
+                        foreach (Cheques c in ch.cheques_seleccionados)
+                        {
+                            saldos.gastos.Cheque = c.Numero;
+                            saldos.gastos.Importe = c.Importe;
+                            saldos.gastos.Agregar();
+                        }
+                    }
                 }
             }
             Aceptado = true;
         }
 
-        private void cmdSalir_Click(object sender, EventArgs e)
+        private void cmdSalir_Click(object sender, System.EventArgs e)
         {
             this.Hide();
+        }
+
+        private void frmPagar_Hacienda_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Hide();
+            }
         }
     }
 }

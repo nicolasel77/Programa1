@@ -164,7 +164,7 @@
 
             try
             {
-                SqlCommand cmd = new SqlCommand(string.Format("DELETE FROM {1} WHERE Id={0}", ID, Tabla), cnn);
+                SqlCommand cmd = new SqlCommand(string.Format("DELETE FROM {1} WHERE {2}={0}", ID, Tabla, Campo_ID), cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -243,14 +243,14 @@
         /// <param name="Campos">Filtro de campos a devolver</param>
         /// <param name="Orden">Por defecto es por Id</param>
         /// <returns>Datatable</returns>
-        public DataTable Datos_Vista(string filtro = "", string Campos = "*", string Orden = "ORDER BY Id")
+        public DataTable Datos_Vista(string filtro = "", string Campos = "*", string Orden = "ORDER BY ")
         {
             var dt = new DataTable("Datos");
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
             if (Campos == "") { Campos = "*"; }
-            if (Orden != "") { if (Orden != "ORDER BY Id") { Orden = " ORDER BY " + Orden; } }
+            if (Orden != "") { Orden = (Orden != "ORDER BY ") ? " ORDER BY " + Orden : " ORDER BY " + Campo_ID; }
 
             try
             {
@@ -270,12 +270,12 @@
             return dt;
         }
 
-        public object Dato(string filtro = "", string Campos = "*", string Orden = "ORDER BY Id")
+        public object Dato(string filtro = "", string Campos = "*", string Orden = "ORDER BY ")
         {
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             object d = null;
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
-            if (Orden != "") { if (Orden != "ORDER BY Id") { Orden = " ORDER BY " + Orden; } }
+            if (Orden != "") { Orden = (Orden != "ORDER BY ") ?  " ORDER BY " + Orden : " ORDER BY " + Campo_ID; }
 
             try
             {
@@ -326,7 +326,7 @@
 
             try
             {
-                string Cadena = $"SELECT MAX(ID) FROM {Tabla}";
+                string Cadena = $"SELECT MAX({Campo_ID}) FROM {Tabla}";
 
                 SqlCommand cmd = new SqlCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
@@ -385,7 +385,7 @@
 
             try
             {
-                SqlCommand cmd = new SqlCommand($"SELECT * FROM {Tabla} WHERE Id={value}", cnn);
+                SqlCommand cmd = new SqlCommand($"SELECT * FROM {Tabla} WHERE {Campo_ID}={value}", cnn);
                 cmd.CommandType = CommandType.Text;
 
                 SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
@@ -436,7 +436,7 @@
                 else
                 {
                     ID = Convert.ToInt32(dt.Rows[0][0]);
-                    Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+                    Nombre = Convert.ToString(dt.Rows[0][Campo_Nombre]);
                     return true;
                 }
 
