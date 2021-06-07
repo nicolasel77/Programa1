@@ -3,6 +3,8 @@
     using Programa1.Clases;
     using System;
     using System.Data;
+    using System.Data.SqlClient;
+    using System.Windows.Forms;
 
     public class Listas_Carga : c_Base
     {
@@ -10,6 +12,8 @@
         /// <summary>
         /// Corresponde a la lista de Productos + Lista + Orden
         /// </summary>
+        /// 
+        public int Id { get; set; }
         public Listas_Carga()
         {
             Tabla = "Listas_Carga";
@@ -65,5 +69,27 @@
             return Producto.ID;
         }
 
+        public void Borrar()
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand command = new SqlCommand("DELETE FROM Listas_Carga WHERE Id=" + Id, sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                sql.Open();
+
+                var d = command.ExecuteNonQuery();
+
+                Id = 0;
+
+                sql.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
     }
 }

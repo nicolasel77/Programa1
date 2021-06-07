@@ -22,6 +22,8 @@
         public frmListas_Carga()
         {
             InitializeComponent();
+            int[] n = { 8, 46};
+            grd.TeclasManejadas = n;
         }
 
         private void frmListas_Carga_Load(object sender, EventArgs e)
@@ -49,7 +51,14 @@
         private void grd_Editado(short f, short c, object a)
         {
             int i = (int)grd.get_Texto(f, t_Col.ID);
-
+            if (grd.get_Texto(grd.Row, 0) != "")
+            {
+                listas.ID = Convert.ToInt32(grd.get_Texto(grd.Row, 0));
+            }
+            else 
+            {
+                listas.ID = Convert.ToInt32("0");
+            }
             switch (c)
             {
                 case t_Col.ID_Lista:
@@ -63,7 +72,7 @@
                     break;
                 case t_Col.Orden:
                     listas.Orden = Convert.ToInt32(a);
-                    if (i != 0) { listas.Actualizar("Orden", a); }
+                    if (i != 0) { listas.Actualizar("Orden", a);  }
 
                     grd.set_Texto(f, c, a);
                     grd.ActivarCelda(f, t_Col.Producto);
@@ -77,9 +86,10 @@
                             listas.Actualizar("Orden", listas.Orden);
 
                             grd.AgregarFila();
+                            listas.Orden = listas.Orden + 1;
                             grd.set_Texto(f + 1, t_Col.ID_Lista, listas.Lista.ID);
                             grd.set_Texto(f + 1, t_Col.Nombre, listas.Lista.Nombre);
-                            grd.set_Texto(f + 1, t_Col.Orden, listas.Orden + 1);
+                            grd.set_Texto(f + 1, t_Col.Orden, listas.Orden);
                         }
 
                         listas.Actualizar("Producto", a);
@@ -130,6 +140,24 @@
         private void lstListas_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cargar();
+        }
+
+        private void grd_KeyUp(object sender, short e)
+        {
+                switch (Convert.ToInt32(e))
+                {
+                    case 46: //Delete
+                        if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                        {
+                            if (Convert.ToInt32(grd.get_Texto(grd.Row, 0)) != 0)
+                            {
+                                listas.Id = Convert.ToInt32(grd.get_Texto(grd.Row, 0));
+                                listas.Borrar();
+                                grd.BorrarFila(grd.Row);
+                            }
+                        }
+                        break;
+            }
         }
     }
 }

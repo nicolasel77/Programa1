@@ -87,6 +87,7 @@ namespace Programa1.Carga.Sucursales
             this.grd.Size = new System.Drawing.Size(521, 703);
             this.grd.TabIndex = 8;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
+            this.grd.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grd_KeyUp);
             // 
             // txtAgregar
             // 
