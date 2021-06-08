@@ -22,7 +22,6 @@
         const int cIDMat = 16;
         const int cMatricula = 17;
         #endregion
-
         #region Columnas P2
         const int aID = 0;
         const int aDias = 3;
@@ -68,7 +67,6 @@
                 {
                     valor = Convert.ToDouble(grd.get_Texto(i, cSaldo));
                 }
-                grd.set_ColorLetraCelda(i, cDias, (Convert.ToInt32(grd.get_Texto(i, cDias)) < -1) ? Color.Red : Color.Black);
                 grd.set_ColorLetraCelda(i, cDif, (Convert.ToDouble(grd.get_Texto(i, cDif)) < -1) ? Color.Red : (Convert.ToDouble(grd.get_Texto(i, cSaldo)) > 1) ? Color.Blue : Color.Black);
                 grd.set_ColorLetraCelda(i, cSaldo, (Convert.ToDouble(grd.get_Texto(i, cSaldo)) < -1) ? Color.Red : (Convert.ToDouble(grd.get_Texto(i, cSaldo)) > 1) ? Color.Blue : Color.Black);
                 if (Convert.ToInt16(grd.get_Texto(i, cEstado)) == 1) { grd.Filas[i].Style = cs; }
@@ -112,7 +110,6 @@
                 {
                     valor = Convert.ToDouble(grdAgr.get_Texto(i, aSaldo));
                 }
-                grdAgr.set_ColorLetraCelda(i, aDias, (Convert.ToInt32(grdAgr.get_Texto(i, aDias)) < -1) ? Color.Red : Color.Black);
                 grdAgr.set_ColorLetraCelda(i, aDif, (Convert.ToDouble(grdAgr.get_Texto(i, aDif)) < -1) ? Color.Red : (Convert.ToDouble(grdAgr.get_Texto(i, aSaldo)) > 1) ? Color.Blue : Color.Black);
                 grdAgr.set_ColorLetraCelda(i, aSaldo, (Convert.ToDouble(grdAgr.get_Texto(i, aSaldo)) < -1) ? Color.Red : (Convert.ToDouble(grdAgr.get_Texto(i, aSaldo)) > 1) ? Color.Blue : Color.Black);
                 if (Convert.ToInt16(grdAgr.get_Texto(i, aEstado)) == 1) { grdAgr.Filas[i].Style = ca; }

@@ -45,6 +45,7 @@ namespace Programa1.Carga.Proveedores
             this.cmdAceptar.Size = new System.Drawing.Size(220, 40);
             this.cmdAceptar.TabIndex = 7;
             this.cmdAceptar.Texto = "Guardar";
+            this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
             // 
             // cmdSalir
             // 
@@ -54,6 +55,7 @@ namespace Programa1.Carga.Proveedores
             this.cmdSalir.Size = new System.Drawing.Size(220, 40);
             this.cmdSalir.TabIndex = 8;
             this.cmdSalir.Texto = "Salir";
+            this.cmdSalir.Click += new System.EventHandler(this.cmdSalir_Click);
             // 
             // grd
             // 
@@ -89,6 +91,8 @@ namespace Programa1.Carga.Proveedores
             this.grd.Rows = 50;
             this.grd.Size = new System.Drawing.Size(833, 342);
             this.grd.TabIndex = 6;
+            this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
+            this.grd.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grd_KeyPress);
             // 
             // label1
             // 
@@ -126,6 +130,7 @@ namespace Programa1.Carga.Proveedores
             this.Controls.Add(this.lblProveedor);
             this.Name = "frmPagar";
             this.Text = "Cargar Pagos";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmPagar_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

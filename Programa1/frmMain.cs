@@ -31,8 +31,8 @@
             {
                 case "Nicolas":
                     //capitalDeTrabajoToolStripMenuItem.PerformClick();
-                    //cajaDiariaToolStripMenuItem.PerformClick();
-                    vencimientosToolStripMenuItem.PerformClick();
+                    cajaDiariaToolStripMenuItem.PerformClick();
+                    //vencimientosToolStripMenuItem.PerformClick();
                     break;
                 case "Ale":
                     cajaDiariaToolStripMenuItem.PerformClick();

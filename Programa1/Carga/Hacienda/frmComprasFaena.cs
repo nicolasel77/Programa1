@@ -54,7 +54,7 @@
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Kilos_Compra")].Format = "N0";
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Kilos_Faena")].Format = "N0";
 
-            grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=0"), true);
+            grdCompras.MostrarDatos(hc.compra.Datos_Vista("NBoleta=0"), true);
 
             c_Id = Convert.ToByte(grdCompras.get_ColIndex("Id"));
             c_NB = Convert.ToByte(grdCompras.get_ColIndex("NBoleta"));
@@ -97,7 +97,7 @@
             grdCompras.Columnas[c_IVA].Format = "C2";
             grdCompras.Columnas[c_Total].Format = "C2";
 
-            grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=0"), true);
+            grdAgregados.MostrarDatos(hc.Agregados.Datos_Vista("NBoleta=0"), true);
 
             A_Id = Convert.ToByte(grdAgregados.get_ColIndex("Id"));
             A_NB = Convert.ToByte(grdAgregados.get_ColIndex("NBoleta"));
@@ -164,7 +164,7 @@
         private void GrdBoletas_CambioFila(short Fila)
         {
             hc.nBoletas.NBoleta = Convert.ToInt32(grdBoletas.get_Texto(Fila, 0));
-            grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=" + hc.nBoletas.NBoleta), false);
+            grdCompras.MostrarDatos(hc.compra.Datos_Vista("NBoleta=" + hc.nBoletas.NBoleta), false);
             grdCompras.set_Texto(0, c_IdProd, "Prod");
             grdCompras.set_Texto(0, c_IdProd + 1, "Desc");
 
@@ -247,7 +247,18 @@
 
         private void cBoton1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("hola");
+            hc.compra.Actualizar();
+        }
+
+        private void grdCompras_Editado(short f, short c, object a)
+        {
+
+        }
+
+        private void grdCompras_CambioFila(short Fila)
+        {
+            hc.compra.ID = Convert.ToInt32(grdCompras.get_Texto(Fila, c_Id));
+            hc.compra.Cargar_Fila(hc.compra.ID);
         }
     }
 }

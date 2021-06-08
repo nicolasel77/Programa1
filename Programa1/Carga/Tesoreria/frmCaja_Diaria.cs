@@ -1,6 +1,7 @@
 ﻿
 namespace Programa1.Carga.Tesoreria
 {
+    using global::Proveedores;
     using Programa1.DB;
     using Programa1.DB.Tesoreria;
     using Programa1.DB.Varios;
@@ -678,9 +679,23 @@ namespace Programa1.Carga.Tesoreria
                                     Seleccionar_Pago_Hacienda();
                                 }
                                 else
-                                {                                    
-                                    grdSalidas.ActivarCelda(f, s_IDDetalle);
-                                    if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                {
+                                    if (cGastos.TG.EsAgregados == true)
+                                    {
+                                        Seleccionar_Pago_Agregados();
+                                    }
+                                    else
+                                    {
+                                        if (cGastos.TG.EsPagoProveedor == true)
+                                        {
+                                            Seleccionar_Pago_Proveedor();
+                                        }
+                                        else
+                                        {
+                                            grdSalidas.ActivarCelda(f, s_IDDetalle);
+                                            if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                        }
+                                    }
                                 }
 
                             }
@@ -943,7 +958,21 @@ namespace Programa1.Carga.Tesoreria
                                     }
                                     else
                                     {
-                                        grdSalidas.ActivarCelda(grdSalidas.Row, s_IDDetalle);
+                                        if (cGastos.TG.EsAgregados == true)
+                                        {
+                                            Seleccionar_Pago_Agregados();
+                                        }
+                                        else
+                                        {
+                                            if (cGastos.TG.EsPagoProveedor== true)
+                                            {
+                                                Seleccionar_Pago_Proveedor();
+                                            }
+                                            else
+                                            {
+                                                grdSalidas.ActivarCelda(grdSalidas.Row, s_IDDetalle);
+                                            }
+                                        }
                                     }
                                 }
                                 else
@@ -965,8 +994,8 @@ namespace Programa1.Carga.Tesoreria
 
         private void Seleccionar_Pago_Proveedor()
         {
-            // HACIENDA
-            Saldos_Consignatarios sld = new Saldos_Consignatarios();
+            // Proveedor
+            CCtes_Proveedores sld = new CCtes_Proveedores();
             sld.gastos = cGastos;
             sld.Cargar_Pago();
             if (sld.Aceptado == true)
@@ -989,6 +1018,20 @@ namespace Programa1.Carga.Tesoreria
             }
             grdSalidas.Focus();
         }
+        private void Seleccionar_Pago_Agregados()
+        {
+            // Agregados
+            Saldos_Consignatarios sld = new Saldos_Consignatarios();
+            sld.gastos = cGastos;
+            sld.Cargar_PagoAgregados();
+            if (sld.Aceptado == true)
+            {
+                Cargar_Datos();
+                Repetir_FilaG(grdSalidas.Rows - 2);
+            }
+            grdSalidas.Focus();
+        }
+       
 
         private void Cargar_FilaSalida(int Fila)
         {

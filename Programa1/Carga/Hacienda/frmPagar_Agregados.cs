@@ -6,7 +6,7 @@
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
-    public partial class frmPagar_Hacienda : Form
+    public partial class frmPagar_Agregados : Form
     {
         public Saldos_Consignatarios saldos = new Saldos_Consignatarios();
         public Gastos gastos;
@@ -14,20 +14,17 @@
         public bool Aceptado = false;
 
         const int cID = 0;
-        const int cNB = 5;
-        const int cCab = 6;
-        const int cDescripcion = 7;
-        const int cKilos = 8;
-        const int cCosto = 9;
-        const int cTotal = 10;
-        const int cPago = 11;
-        const int cDif = 12;
-        const int cSaldo = 13;
-        const int cNuevo = 14;
-        const int cEstado = 15;
+        const int cNB = 4;
+        const int cDescripcion = 5;
+        const int cImporte = 6;
+        const int cPago = 7;
+        const int cDif = 8;
+        const int cSaldo = 9;
+        const int cNuevo = 10;
+        const int cEstado = 11;
 
-        //Id, Fecha, Plazo, Venc, Dias, NBoleta, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Nuevo
-        public frmPagar_Hacienda()
+        //Id, Fecha, Plazo, Dias, NBoleta, Descripcion, Importe, Pago, Dif, Saldo, Nuevo, Estado
+        public frmPagar_Agregados()
         {
             InitializeComponent();
         }
@@ -37,7 +34,7 @@
 
             grd.TeclasManejadas = new int[] { 13, 43 };
             
-            grd.MostrarDatos(saldos.Datos(), true, false);
+            grd.MostrarDatos(saldos.Datos_Agr(), true, false);
 
             double valor = 0;
             for (int i = 1; i <= grd.Rows - 1; i++)
@@ -54,9 +51,7 @@
                 grd.set_ColorLetraCelda(i, cSaldo, (Convert.ToDouble(grd.get_Texto(i, cSaldo)) < -1) ? Color.Red : Color.Blue);
             }
 
-            grd.Columnas[cKilos].Style.Format = "N1";
-            grd.Columnas[cCosto].Style.Format = "N1";
-            grd.Columnas[cTotal].Style.Format = "N1";
+            grd.Columnas[cImporte].Style.Format = "N1";
             grd.Columnas[cPago].Style.Format = "N1";
             grd.Columnas[cDif].Style.Format = "N1";
             grd.Columnas[cSaldo].Style.Format = "N1";
@@ -64,7 +59,7 @@
 
             grd.AutosizeAll();
             grd.set_ColW(cID, 0);
-            grd.set_ColW(cTotal, 80);
+            grd.set_ColW(cImporte, 80);
             grd.set_ColW(cPago, 80);
             grd.set_ColW(cDif, 90);
             grd.set_ColW(cSaldo, 90);
@@ -140,7 +135,6 @@
         {
             Compra_Hacienda cm = new Compra_Hacienda();
             cm.Consignatario.ID = saldos.gastos.Id_SubTipoGastos;
-
             for (int i = 1; i <= grd.Rows - 1; i++)
             {
                 double n = Convert.ToDouble(grd.get_Texto(i, cNuevo));
@@ -149,7 +143,7 @@
                 {
                     int idD = Convert.ToInt32(grd.get_Texto(i, cID));
                     string t = Convert.ToDouble(grd.get_Texto(i, cDif)) == 0 ? "Total" : "Parcial";
-                    string s = string.Format("{0} {1}  - {2}", grd.get_Texto(i, cCab), grd.get_Texto(i, cDescripcion), t);
+                    string s = string.Format("{0}   - {1}", grd.get_Texto(i, cDescripcion), t);
 
                     saldos.gastos.Id_DetalleGastos = idD;
                     saldos.gastos.Descripcion = s;
@@ -158,6 +152,7 @@
                     {
                         saldos.gastos.Importe = n;
                         saldos.gastos.Agregar();
+
                     }
                     else
                     {
@@ -171,7 +166,7 @@
                     cm.NBoleta.ID = Convert.ToInt32(grd.get_Texto(i, cNB));
                     cm.Actualizar_Saldo();
                 }
-            }            
+            }
             Aceptado = true;
         }
 
@@ -180,7 +175,7 @@
             this.Hide();
         }
 
-        private void frmPagar_Hacienda_KeyUp(object sender, KeyEventArgs e)
+        private void frmPagar_Agregados_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {

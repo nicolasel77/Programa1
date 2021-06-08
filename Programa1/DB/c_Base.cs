@@ -467,6 +467,23 @@
             }
 
         }
+        public void Ejecutar_sp(string sp, SqlParameter[] parameter)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            try
+            {
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand(sp, cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddRange(parameter);                
+                cmd.ExecuteScalar();
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+            }
+
+        }
         public void Ejecutar_sp(string sp, string nombreParametro, int n)
         {
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);

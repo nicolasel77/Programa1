@@ -35,9 +35,11 @@
         public string Nombre { get; set; }
 
         /// <summary>
-        /// Por ahora es fijo (solo evalúa que Id=12). Mas que nada se hizo para que quede dentro de la clase.
+        /// Por ahora es fijo (solo evalúa que Id=x). Mas que nada se hizo para que quede dentro de la clase.
         /// </summary>
         public bool EsHacienda { get { return Id_Tipo == 12; } }
+        public bool EsAgregados { get { return Id_Tipo == 22; } }
+        public bool EsPagoProveedor { get { return Id_Tipo == 13; } }
 
         public void Cargar()
         {

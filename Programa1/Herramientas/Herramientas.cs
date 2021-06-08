@@ -103,6 +103,7 @@ namespace Programa1.Herramientas
             string s = "";
             switch (valor.GetType().ToString())
             {
+                case "System.Byte":
                 case "System.Int16":
                 case "System.Int32":
                 case "System.Int64":

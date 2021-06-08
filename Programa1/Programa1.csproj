@@ -125,6 +125,12 @@
     <Compile Include="Carga\Empleados\frmSueldos.Designer.cs">
       <DependentUpon>frmSueldos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Hacienda\frmPagar_Agregados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmPagar_Agregados.Designer.cs">
+      <DependentUpon>frmPagar_Agregados.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Hacienda\frmPagar_Hacienda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -534,14 +540,15 @@
       <DependentUpon>frmSucursales.cs</DependentUpon>
     </Compile>
     <Compile Include="DB\c_Base.cs" />
-    <Compile Include="DB\Hacienda\Agregados_Hacienda.cs" />
+    <Compile Include="DB\Hacienda\Agregados.cs" />
     <Compile Include="DB\Hacienda\Categorias.cs" />
-    <Compile Include="DB\Hacienda\Compra_Hacienda.cs" />
+    <Compile Include="DB\Hacienda\Compras.cs" />
     <Compile Include="DB\Hacienda\Consignatarios.cs" />
     <Compile Include="DB\Hacienda\Faena.cs" />
     <Compile Include="DB\Hacienda\Frigorificos.cs" />
     <Compile Include="DB\Hacienda\Hacienda.cs" />
     <Compile Include="DB\Hacienda\Hacienda_Salidas.cs" />
+    <Compile Include="DB\Hacienda\Matriculas.cs" />
     <Compile Include="DB\Hacienda\NBoletas.cs" />
     <Compile Include="DB\Hacienda\Saldos_Consignatarios.cs" />
     <Compile Include="DB\Hacienda\TipoAgregados.cs" />
@@ -649,6 +656,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Empleados\frmSueldos.resx">
       <DependentUpon>frmSueldos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmPagar_Agregados.resx">
+      <DependentUpon>frmPagar_Agregados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmPagar_Hacienda.resx">
       <DependentUpon>frmPagar_Hacienda.cs</DependentUpon>

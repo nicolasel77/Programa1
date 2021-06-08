@@ -1,20 +1,40 @@
 ﻿namespace Proveedores
 {
+    using Programa1.Carga.Proveedores;
     using Programa1.DB;
+    using Programa1.DB.Tesoreria;
+    using Programa1.DB.Varios;
     using System;
     using System.Data;
     using System.Data.SqlClient;
 
-    class CCtes_Proveedores
+    public class CCtes_Proveedores
     {
         private Compras Compras = new Compras();
+        public Gastos gastos { get; set; }
+        public bool Aceptado;
 
         public CCtes_Proveedores()
         {
         }
-        
+
+        public void Cargar_Pago()
+        {
+            frmPagar fr = new frmPagar();
+            fr.saldos = this;
+            fr.gastos = gastos;
+            fr.Cargar();
+            fr.ShowDialog();
+            Aceptado = fr.Aceptado;
+        }
+
         public DateTime Ultima_Fecha() { return Compras.Ultima_Fecha(); }
 
+        public DataTable Pagos_Autorizados()
+        {
+            Pagos_Autorizados p = new Pagos_Autorizados();
+            return p.Autorizados_Proveedor(gastos.Id_SubTipoGastos);
+        }
         public DataTable Detalle_Compras(string filtro = "", bool Agrupado = false)
         {
             DataTable dt;
@@ -36,7 +56,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, dbo.f_SaldoProveedor(Id, '{fecha.ToString("MM/dd/yy")}') AS Saldo FROM Proveedores ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, dbo.f_SaldoProveedor(Id, '{fecha:MM/dd/yy}') AS Saldo FROM Proveedores ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
