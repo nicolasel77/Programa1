@@ -598,6 +598,13 @@
             {
                 frmListas_Carga fr = new frmListas_Carga();
                 fr.ShowDialog();
+
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+                cmbListas.Items.Clear();
+                h.Llenar_List(cmbListas, Listas.Lista.Datos());
+
+                cmbListas.Items.Insert(0, "Ninguna...");
+                cmbListas.Items.Insert(1, "Editar...");
             }
             else
             {
