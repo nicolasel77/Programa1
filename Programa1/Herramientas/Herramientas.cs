@@ -101,35 +101,42 @@ namespace Programa1.Herramientas
         public string Formato_SQL(object valor)
         {
             string s = "";
-            switch (valor.GetType().ToString())
+            if (valor != null)
             {
-                case "System.Byte":
-                case "System.Int16":
-                case "System.Int32":
-                case "System.Int64":
-                case "System.Short":
-                case "System.Integer":
-                    s = Convert.ToInt64(valor).ToString();
-                    break;
-                case "System.Single":
-                case "System.Double":
-                case "System.Decimal":
-                    s = Convert.ToDouble(valor).ToString();
-                    s = s.Replace(",", ".");
-                    break;
-                case "System.String":
-                    s = $"'{valor}'";
-                    break;
-                case "System.Date":
-                case "System.DateTime":
-                    DateTime d = Convert.ToDateTime(valor);
-                    d = (d.Year < 1900) ? Convert.ToDateTime("1/1/1900") : d;
-                    s = $"'{d:MM/dd/yyyy}'";
-                    break;
-                case "System.bool":
-                case "System.Boolean":
-                    s = Convert.ToBoolean(valor) ? "1" : "0";                    
-                    break;
+                switch (valor.GetType().ToString())
+                {
+                    case "System.Byte":
+                    case "System.Int16":
+                    case "System.Int32":
+                    case "System.Int64":
+                    case "System.Short":
+                    case "System.Integer":
+                        s = Convert.ToInt64(valor).ToString();
+                        break;
+                    case "System.Single":
+                    case "System.Double":
+                    case "System.Decimal":
+                        s = Convert.ToDouble(valor).ToString();
+                        s = s.Replace(",", ".");
+                        break;
+                    case "System.String":
+                        s = $"'{valor}'";
+                        break;
+                    case "System.Date":
+                    case "System.DateTime":
+                        DateTime d = Convert.ToDateTime(valor);
+                        d = (d.Year < 1900) ? Convert.ToDateTime("1/1/1900") : d;
+                        s = $"'{d:MM/dd/yyyy}'";
+                        break;
+                    case "System.bool":
+                    case "System.Boolean":
+                        s = Convert.ToBoolean(valor) ? "1" : "0";
+                        break;
+                } 
+            }
+            else
+            {
+                 s = "''"; 
             }
             return s;
         }

@@ -6,7 +6,7 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Proveedores
+    public class Proveedores
     {
         public Proveedores()
         {   

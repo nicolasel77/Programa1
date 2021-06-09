@@ -54,7 +54,7 @@
 
             Herramientas h = new Herramientas();
             valor = h.Formato_SQL(valor);
-
+                       
             try
             {
                 SqlCommand command = new SqlCommand(string.Format("UPDATE {0} SET {1}={2} WHERE {3}={4}", Tabla, Campo, valor, Campo_ID, ID), cnn);

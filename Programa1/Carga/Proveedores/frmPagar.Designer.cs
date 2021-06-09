@@ -30,32 +30,12 @@ namespace Programa1.Carga.Proveedores
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPagar));
-            this.cmdAceptar = new Programa1.Controles.cBoton();
-            this.cmdSalir = new Programa1.Controles.cBoton();
             this.grd = new Grilla2.SpeedGrilla();
             this.label1 = new System.Windows.Forms.Label();
             this.lblProveedor = new MaterialSkin.Controls.MaterialLabel();
+            this.cmdSalir = new System.Windows.Forms.Button();
+            this.cmdGuardar = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // cmdAceptar
-            // 
-            this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdAceptar.Location = new System.Drawing.Point(399, 382);
-            this.cmdAceptar.Name = "cmdAceptar";
-            this.cmdAceptar.Size = new System.Drawing.Size(220, 40);
-            this.cmdAceptar.TabIndex = 7;
-            this.cmdAceptar.Texto = "Guardar";
-            this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
-            // 
-            // cmdSalir
-            // 
-            this.cmdSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdSalir.Location = new System.Drawing.Point(625, 382);
-            this.cmdSalir.Name = "cmdSalir";
-            this.cmdSalir.Size = new System.Drawing.Size(220, 40);
-            this.cmdSalir.TabIndex = 8;
-            this.cmdSalir.Texto = "Salir";
-            this.cmdSalir.Click += new System.EventHandler(this.cmdSalir_Click);
             // 
             // grd
             // 
@@ -89,7 +69,7 @@ namespace Programa1.Carga.Proveedores
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(833, 342);
+            this.grd.Size = new System.Drawing.Size(833, 359);
             this.grd.TabIndex = 6;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
             this.grd.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grd_KeyPress);
@@ -118,17 +98,44 @@ namespace Programa1.Carga.Proveedores
             this.lblProveedor.TabIndex = 4;
             this.lblProveedor.Text = "Proveedor";
             // 
+            // cmdSalir
+            // 
+            this.cmdSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cmdSalir.Location = new System.Drawing.Point(733, 399);
+            this.cmdSalir.Name = "cmdSalir";
+            this.cmdSalir.Size = new System.Drawing.Size(112, 23);
+            this.cmdSalir.TabIndex = 7;
+            this.cmdSalir.Text = "Salir";
+            this.cmdSalir.UseVisualStyleBackColor = true;
+            this.cmdSalir.Click += new System.EventHandler(this.cmdSalir_Click);
+            // 
+            // cmdGuardar
+            // 
+            this.cmdGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGuardar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cmdGuardar.Location = new System.Drawing.Point(615, 399);
+            this.cmdGuardar.Name = "cmdGuardar";
+            this.cmdGuardar.Size = new System.Drawing.Size(112, 23);
+            this.cmdGuardar.TabIndex = 7;
+            this.cmdGuardar.Text = "Guardar";
+            this.cmdGuardar.UseVisualStyleBackColor = true;
+            this.cmdGuardar.Click += new System.EventHandler(this.cmdAceptar_Click);
+            // 
             // frmPagar
             // 
+            this.AcceptButton = this.cmdGuardar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cmdSalir;
             this.ClientSize = new System.Drawing.Size(857, 434);
-            this.Controls.Add(this.cmdAceptar);
+            this.Controls.Add(this.cmdGuardar);
             this.Controls.Add(this.cmdSalir);
             this.Controls.Add(this.grd);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblProveedor);
             this.Name = "frmPagar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cargar Pagos";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmPagar_KeyUp);
             this.ResumeLayout(false);
@@ -137,11 +144,10 @@ namespace Programa1.Carga.Proveedores
         }
 
         #endregion
-
-        private Controles.cBoton cmdAceptar;
-        private Controles.cBoton cmdSalir;
         private Grilla2.SpeedGrilla grd;
         private System.Windows.Forms.Label label1;
         private MaterialSkin.Controls.MaterialLabel lblProveedor;
+        private System.Windows.Forms.Button cmdSalir;
+        private System.Windows.Forms.Button cmdGuardar;
     }
 }

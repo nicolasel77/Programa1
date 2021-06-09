@@ -554,6 +554,7 @@
     <Compile Include="DB\Hacienda\TipoAgregados.cs" />
     <Compile Include="DB\Proveedores\Ajustes.cs" />
     <Compile Include="DB\Proveedores\CCtes_Proveedores.cs" />
+    <Compile Include="DB\Proveedores\Estados_Compra.cs" />
     <Compile Include="DB\Sucursales\Estadisticas_Sucursales.cs" />
     <Compile Include="DB\Sucursales\Promedios.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />

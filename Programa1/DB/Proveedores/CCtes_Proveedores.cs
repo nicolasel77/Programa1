@@ -10,7 +10,7 @@
 
     public class CCtes_Proveedores
     {
-        private Compras Compras = new Compras();
+        public Compras Compras = new Compras();
         public Gastos gastos { get; set; }
         public bool Aceptado;
 
@@ -56,7 +56,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, dbo.f_SaldoProveedor(Id, '{fecha:MM/dd/yy}') AS Saldo FROM Proveedores ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, dbo.f_SaldoProveedor(Id, '{fecha:MM/dd/yy}') AS Saldo FROM Proveedores WHERE Ver=1 ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

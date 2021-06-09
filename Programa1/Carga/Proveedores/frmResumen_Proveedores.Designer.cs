@@ -32,16 +32,16 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.grdEntradas = new Grilla2.SpeedGrilla();
             this.lblEntradas = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTotalEntradas = new System.Windows.Forms.Label();
             this.rdAgrupado = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdDetalle = new MaterialSkin.Controls.MaterialRadioButton();
-            this.grdEntradas = new Grilla2.SpeedGrilla();
+            this.grdSalidas = new Grilla2.SpeedGrilla();
             this.label9 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblTotalSalidas = new System.Windows.Forms.Label();
-            this.grdSalidas = new Grilla2.SpeedGrilla();
             this.lblGanancia = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.lblSaldoProveedores = new System.Windows.Forms.Label();
@@ -158,6 +158,45 @@
             this.splitContainer4.SplitterDistance = 443;
             this.splitContainer4.TabIndex = 0;
             // 
+            // grdEntradas
+            // 
+            this.grdEntradas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdEntradas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdEntradas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdEntradas.AutoResize = false;
+            this.grdEntradas.bColor = System.Drawing.SystemColors.Window;
+            this.grdEntradas.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdEntradas.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdEntradas.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdEntradas.Col = 0;
+            this.grdEntradas.Cols = 10;
+            this.grdEntradas.DataMember = "";
+            this.grdEntradas.DataSource = null;
+            this.grdEntradas.EnableEdicion = true;
+            this.grdEntradas.Encabezado = "";
+            this.grdEntradas.fColor = System.Drawing.SystemColors.Control;
+            this.grdEntradas.FixCols = 0;
+            this.grdEntradas.FixRows = 0;
+            this.grdEntradas.FuenteEncabezado = null;
+            this.grdEntradas.FuentePieDePagina = null;
+            this.grdEntradas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdEntradas.Location = new System.Drawing.Point(0, 24);
+            this.grdEntradas.MenuActivado = false;
+            this.grdEntradas.Name = "grdEntradas";
+            this.grdEntradas.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdEntradas.PintarFilaSel = false;
+            this.grdEntradas.Redraw = true;
+            this.grdEntradas.Row = 0;
+            this.grdEntradas.Rows = 50;
+            this.grdEntradas.Size = new System.Drawing.Size(443, 420);
+            this.grdEntradas.TabIndex = 0;
+            this.grdEntradas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdEntradas_Editado);
+            this.grdEntradas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdEntradas_KeyUp);
+            this.grdEntradas.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grdEntradas_KeyPress);
+            this.grdEntradas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdEntradas_DobleClick);
+            // 
             // lblEntradas
             // 
             this.lblEntradas.AutoSize = true;
@@ -196,7 +235,7 @@
             this.rdAgrupado.AutoSize = true;
             this.rdAgrupado.Checked = true;
             this.rdAgrupado.Depth = 0;
-            this.rdAgrupado.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdAgrupado.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdAgrupado.Location = new System.Drawing.Point(273, 0);
             this.rdAgrupado.Margin = new System.Windows.Forms.Padding(0);
             this.rdAgrupado.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -215,7 +254,7 @@
             this.rdDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdDetalle.AutoSize = true;
             this.rdDetalle.Depth = 0;
-            this.rdDetalle.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdDetalle.Location = new System.Drawing.Point(362, 0);
             this.rdDetalle.Margin = new System.Windows.Forms.Padding(0);
             this.rdDetalle.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -226,71 +265,6 @@
             this.rdDetalle.TabIndex = 2;
             this.rdDetalle.Text = "Detalle";
             this.rdDetalle.UseVisualStyleBackColor = true;
-            // 
-            // grdEntradas
-            // 
-            this.grdEntradas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdEntradas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdEntradas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdEntradas.AutoResize = false;
-            this.grdEntradas.bColor = System.Drawing.SystemColors.Window;
-            this.grdEntradas.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.grdEntradas.bFColor = System.Drawing.SystemColors.WindowText;
-            this.grdEntradas.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdEntradas.Col = 0;
-            this.grdEntradas.Cols = 10;
-            this.grdEntradas.DataMember = "";
-            this.grdEntradas.DataSource = null;
-            this.grdEntradas.EnableEdicion = false;
-            this.grdEntradas.Encabezado = "";
-            this.grdEntradas.fColor = System.Drawing.SystemColors.Control;
-            this.grdEntradas.FixCols = 0;
-            this.grdEntradas.FixRows = 0;
-            this.grdEntradas.FuenteEncabezado = null;
-            this.grdEntradas.FuentePieDePagina = null;
-            this.grdEntradas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdEntradas.Location = new System.Drawing.Point(0, 24);
-            this.grdEntradas.MenuActivado = false;
-            this.grdEntradas.Name = "grdEntradas";
-            this.grdEntradas.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdEntradas.PintarFilaSel = true;
-            this.grdEntradas.Redraw = true;
-            this.grdEntradas.Row = 0;
-            this.grdEntradas.Rows = 50;
-            this.grdEntradas.Size = new System.Drawing.Size(443, 420);
-            this.grdEntradas.TabIndex = 0;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label9.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label9.Location = new System.Drawing.Point(3, 3);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(56, 18);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "Salidas";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.lblTotalSalidas);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 444);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(378, 26);
-            this.panel2.TabIndex = 4;
-            // 
-            // lblTotalSalidas
-            // 
-            this.lblTotalSalidas.AutoSize = true;
-            this.lblTotalSalidas.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblTotalSalidas.Location = new System.Drawing.Point(3, 3);
-            this.lblTotalSalidas.Name = "lblTotalSalidas";
-            this.lblTotalSalidas.Size = new System.Drawing.Size(42, 21);
-            this.lblTotalSalidas.TabIndex = 3;
-            this.lblTotalSalidas.Text = "Total";
             // 
             // grdSalidas
             // 
@@ -326,6 +300,36 @@
             this.grdSalidas.Rows = 50;
             this.grdSalidas.Size = new System.Drawing.Size(378, 420);
             this.grdSalidas.TabIndex = 0;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label9.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label9.Location = new System.Drawing.Point(3, 3);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(56, 18);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Salidas";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblTotalSalidas);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 444);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(378, 26);
+            this.panel2.TabIndex = 4;
+            // 
+            // lblTotalSalidas
+            // 
+            this.lblTotalSalidas.AutoSize = true;
+            this.lblTotalSalidas.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblTotalSalidas.Location = new System.Drawing.Point(3, 3);
+            this.lblTotalSalidas.Name = "lblTotalSalidas";
+            this.lblTotalSalidas.Size = new System.Drawing.Size(42, 21);
+            this.lblTotalSalidas.TabIndex = 3;
+            this.lblTotalSalidas.Text = "Total";
             // 
             // lblGanancia
             // 
@@ -499,7 +503,7 @@
             this.chSoloSaldos.Checked = true;
             this.chSoloSaldos.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chSoloSaldos.Depth = 0;
-            this.chSoloSaldos.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chSoloSaldos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chSoloSaldos.Location = new System.Drawing.Point(0, 378);
             this.chSoloSaldos.Margin = new System.Windows.Forms.Padding(0);
             this.chSoloSaldos.MouseLocation = new System.Drawing.Point(-1, -1);

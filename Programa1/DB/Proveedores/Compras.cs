@@ -7,24 +7,12 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Compras
+    public class Compras
     {
         public Compras()
         {
         }
-
-        public Compras(int id, DateTime fecha, Camiones camion, Productos prod, string desc, Proveedores.Proveedores proveedor, float costo, float kilos)
-        {
-            Id = id;
-            Fecha = fecha;
-            Camion = camion;
-            Producto = prod;
-            Descripcion = desc;
-            Proveedor = proveedor;
-            Costo = costo;
-            Kilos = kilos;
-
-        }
+               
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
@@ -85,11 +73,15 @@
 
             try
             {
-                string Cadena = $"SELECT 0 AS ID, Fecha, 0 Id_Productos, '' Descripcion, 0 Costo, SUM(Kilos) Kilos, SUM(Total) Total FROM vw_Compras {filtro}  GROUP BY Fecha ORDER BY Fecha";
+                string Cadena = $"SELECT 0 AS ID, Fecha, 0 Id_Productos, '' Descripcion, 0 Costo, SUM(Kilos) Kilos, SUM(Total) Total" +
+                    $", ISNULL((SELECT e.ID FROM Estados_Compra e WHERE e.Fecha=vw_Compras.Fecha AND e.Id_Proveedor={Proveedor.Id}), 0) Id_Estado" +
+                    $", ISNULL((SELECT e.Estado FROM Estados_Compra e WHERE e.Fecha=vw_Compras.Fecha AND e.Id_Proveedor={Proveedor.Id}), 0) Estado" +
+                    $", ISNULL((SELECT e.Observacion FROM Estados_Compra e WHERE e.Fecha=vw_Compras.Fecha AND e.Id_Proveedor={Proveedor.Id}), '') Observacion" +
+                    $" FROM vw_Compras {filtro}  GROUP BY Fecha ORDER BY Fecha";
 
                 SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
-
+                
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
                 SqlDat.Fill(dt);
             }

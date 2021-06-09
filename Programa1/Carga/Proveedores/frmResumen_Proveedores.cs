@@ -1,4 +1,5 @@
-﻿using Proveedores;
+﻿using Programa1.DB.Proveedores;
+using Proveedores;
 using System;
 using System.Data;
 using System.Drawing;
@@ -10,6 +11,11 @@ namespace Programa1.Carga
     {
         private CCtes_Proveedores cCtes = new CCtes_Proveedores();
         private int Prov = 0;
+
+        private byte c_IDEstado = 7;
+        private byte c_Estado = 8;
+        private byte c_Observacion = 9;
+
         public frmResumen_Proveedores()
         {
             InitializeComponent();
@@ -17,8 +23,9 @@ namespace Programa1.Carga
 
         private void frmResumen_Proveedores_Load(object sender, EventArgs e)
         {
+            grdEntradas.TeclasManejadas = new int[] { 32, 46 };
             Cargar_Proveedores(DateTime.Today);
-            cFechas1.Ultima_Fecha = cCtes.Ultima_Fecha();            
+            cFechas1.Ultima_Fecha = cCtes.Ultima_Fecha();
         }
 
 
@@ -31,7 +38,7 @@ namespace Programa1.Carga
         {
             this.Cursor = Cursors.WaitCursor;
             Prov = Convert.ToInt32(grdProv.get_Texto(grdProv.Row, 0));
-            
+
             grdProv.MostrarDatos(cCtes.Saldos_Proveedores(fecha), true, false);
             grdProv.Columnas[grdProv.get_ColIndex("Saldo")].Style.Format = "#,###.#";
             grdProv.set_Texto(0, 1, "Proveedor");
@@ -40,7 +47,10 @@ namespace Programa1.Carga
             {
                 double v = Convert.ToDouble(grdProv.get_Texto(i, grdProv.get_ColIndex("Saldo")));
                 //Para redondear a 0
-                if (v > -1 & v < 1) v = 0;
+                if (v > -1 & v < 1)
+                {
+                    v = 0;
+                }
 
                 if (v != 0 | chSoloSaldos.Checked == false)
                 {
@@ -57,7 +67,7 @@ namespace Programa1.Carga
                 {
                     grdProv.Filas[i].Visible = false;
                 }
-                
+
                 if (Convert.ToInt32(grdProv.get_Texto(i, 0)) == Prov) { grdProv.ActivarCelda(i, 0); }
             }
             if (Prov != 0) { Cargar_Datos(Prov); }
@@ -89,7 +99,7 @@ namespace Programa1.Carga
             t = Convert.ToDouble(grdProv.get_Texto(grdProv.Row, 2));
             lblSaldo.Text = t.ToString("$ #,##0.0");
 
-            
+
             t = cCtes.Total_Ajustes(prov, f1, f2);
             lblAjustes.Text = t.ToString("$ #,##0.0");
 
@@ -104,6 +114,7 @@ namespace Programa1.Carga
         {
             //COMPRAS
             String s = $"{cFechas1.Cadena()} AND Id_Proveedores={Prov}";
+            cCtes.Compras.Proveedor.Id = Prov;
             DataTable dt = cCtes.Detalle_Compras(s, rdAgrupado.Checked);
             grdEntradas.MostrarDatos(dt, true, false);
 
@@ -128,11 +139,26 @@ namespace Programa1.Carga
 
             C1.Win.C1FlexGrid.CellStyle cTotal;
             cTotal = grdEntradas.Styles.Add("Total");
-            //cTotal.Font = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
             cTotal.ForeColor = Color.DarkBlue;
             cTotal.Format = "#,###.#";
 
             grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style = cTotal;
+
+            grdEntradas.set_ColW(c_IDEstado, 0);
+            grdEntradas.set_ColW(c_Estado, 0);
+            grdEntradas.set_ColW(c_Observacion, 120);
+
+            C1.Win.C1FlexGrid.CellStyle ch = grdEntradas.Styles.Add("ch");
+            C1.Win.C1FlexGrid.CellStyle er = grdEntradas.Styles.Add("er");
+            ch.BackColor = Color.LightBlue;
+            er.BackColor = Color.MistyRose;
+
+            for (int i = 1; i <= grdEntradas.Rows - 1; i++)
+            {
+                int ne = Convert.ToInt32(grdEntradas.get_Texto(i, c_Estado));
+                if (ne == 1) { grdEntradas.Filas[i].Style = ch; }
+                if (ne == 2) { grdEntradas.Filas[i].Style = er; }
+            }
         }
 
         private void Pagos()
@@ -170,7 +196,7 @@ namespace Programa1.Carga
                         grdSalidas.Filas[i].Style = null;
                         break;
                 }
-                    
+
             }
 
             double t = Convert.ToDouble(grdSalidas.SumarCol(grdSalidas.get_ColIndex("Importe"), false));
@@ -191,6 +217,89 @@ namespace Programa1.Carga
         private void rdAgrupado_CheckedChanged(object sender, EventArgs e)
         {
             Cargar_Datos(Prov);
+        }
+
+        private void grdEntradas_DobleClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Esaaa");
+        }
+
+        private void grdEntradas_KeyPress(object sender, short e)
+        {
+            if (e == 32)
+            {
+                int i = grdEntradas.Row;
+                Estados_Compra es = new Estados_Compra();
+                es.Fecha = Convert.ToDateTime(grdEntradas.get_Texto(i, grdEntradas.get_ColIndex("Fecha")));
+                es.Proveedor.Id = Prov;
+                es.ID = Convert.ToInt32(grdEntradas.get_Texto(i, c_IDEstado));
+                int n = Convert.ToInt32(grdEntradas.get_Texto(i, c_Estado));
+                if (n == 0) { es.Estado = Estados_Compra.e_Estado.Sin_Chequear; }
+                if (n == 1) { es.Estado = Estados_Compra.e_Estado.Chequeado; }
+                if (n == 2) { es.Estado = Estados_Compra.e_Estado.Error; }
+
+                es.Siguiente();
+
+                C1.Win.C1FlexGrid.CellStyle ch = grdEntradas.Styles.Add("ch");
+                C1.Win.C1FlexGrid.CellStyle er = grdEntradas.Styles.Add("er");
+                ch.BackColor = Color.LightBlue;
+                er.BackColor = Color.MistyRose;
+
+                grdEntradas.set_Texto(i, c_Estado, es.Estado);
+                grdEntradas.set_Texto(i, c_IDEstado, es.ID);
+
+                if (es.Estado == Estados_Compra.e_Estado.Chequeado) { grdEntradas.Filas[i].Style = ch; }
+                if (es.Estado == Estados_Compra.e_Estado.Error) { grdEntradas.Filas[i].Style = er; }
+                if (es.Estado == Estados_Compra.e_Estado.Sin_Chequear) { grdEntradas.Filas[i].Style = null; }
+
+            }
+        }
+
+        private void grdEntradas_Editado(short f, short c, object a)
+        {
+            if (c == c_Observacion)
+            {
+                Estados_Compra es = new Estados_Compra();
+                es.ID = Convert.ToInt32(grdEntradas.get_Texto(f, c_IDEstado));
+                es.Observacion = a.ToString();
+                if (es.ID == 0)
+                {
+                    es.Fecha = Convert.ToDateTime(grdEntradas.get_Texto(f, grdEntradas.get_ColIndex("Fecha")));
+                    es.Proveedor.Id = Prov;
+                    es.Estado = Estados_Compra.e_Estado.Chequeado;
+                    grdEntradas.set_Texto(f, c_Estado, 1);
+
+                    es.Agregar();
+                    grdEntradas.set_Texto(f, c_IDEstado, es.ID);
+                }
+                else
+                {
+                    es.Actualizar("Observacion", a.ToString());
+                }
+                C1.Win.C1FlexGrid.CellStyle ch = grdEntradas.Styles.Add("ch");
+                ch.BackColor = Color.LightBlue;
+
+                grdEntradas.set_Texto(f, c_IDEstado, es.ID);
+                grdEntradas.set_Texto(f, c_Observacion, a);
+                if (es.Estado == Estados_Compra.e_Estado.Chequeado) { grdEntradas.Filas[f].Style = ch; }
+
+            }
+        }
+
+        private void grdEntradas_KeyUp(object sender, short e)
+        {
+            if (e == Convert.ToInt32(Keys.Delete))
+            {
+                if (grdEntradas.Col == c_Observacion)
+                {
+                    int i = grdEntradas.Row;
+                    Estados_Compra es = new Estados_Compra();
+                    es.ID = Convert.ToInt32(grdEntradas.get_Texto(i, c_IDEstado));
+                    es.Observacion = "";
+                    es.Actualizar("Observacion", es.Observacion);
+                    grdEntradas.set_Texto(i, c_Observacion, "");
+                }
+            }
         }
     }
 }

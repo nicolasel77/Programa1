@@ -686,15 +686,18 @@ namespace Programa1.Carga.Tesoreria
                                     }
                                     else
                                     {
-                                        if (cGastos.TG.EsPagoProveedor == true)
-                                        {
-                                            Seleccionar_Pago_Proveedor();
-                                        }
-                                        else
-                                        {
-                                            grdSalidas.ActivarCelda(f, s_IDDetalle);
-                                            if (cGastos.ID != 0) { cGastos.Actualizar(); }
-                                        }
+                                        grdSalidas.ActivarCelda(f, s_IDDetalle);
+                                        if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                        // ESTO LO TILDO PARA VER MAS ADELANTE SI LO QUIEREN ASÍ O SOLO CON F1
+                                        //if (cGastos.TG.EsPagoProveedor == true)
+                                        //{
+                                        //    Seleccionar_Pago_Proveedor();
+                                        //}
+                                        //else
+                                        //{
+                                        //    grdSalidas.ActivarCelda(f, s_IDDetalle);
+                                        //    if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                        //}
                                     }
                                 }
 
@@ -964,14 +967,7 @@ namespace Programa1.Carga.Tesoreria
                                         }
                                         else
                                         {
-                                            if (cGastos.TG.EsPagoProveedor== true)
-                                            {
-                                                Seleccionar_Pago_Proveedor();
-                                            }
-                                            else
-                                            {
-                                                grdSalidas.ActivarCelda(grdSalidas.Row, s_IDDetalle);
-                                            }
+                                            grdSalidas.ActivarCelda(grdSalidas.Row, s_IDDetalle);
                                         }
                                     }
                                 }

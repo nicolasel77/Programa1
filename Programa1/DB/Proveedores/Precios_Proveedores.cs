@@ -6,7 +6,7 @@ namespace Programa1.DB
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Precios_Proveedores
+    public class Precios_Proveedores
     {
         public Precios_Proveedores()
         {            

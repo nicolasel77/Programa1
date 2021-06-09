@@ -2,7 +2,7 @@
 {
     using Programa1.Clases;
 
-    class TipoProveedores : c_Base
+    public class TipoProveedores : c_Base
     {
         public TipoProveedores()
         {
