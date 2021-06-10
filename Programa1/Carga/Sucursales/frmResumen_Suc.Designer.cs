@@ -69,6 +69,7 @@
             this.cFechas1 = new Programa1.Controles.cFechas();
             this.paEstadistica = new System.Windows.Forms.Panel();
             this.paEst = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmdRecargar = new Programa1.Controles.cBoton();
             this.grdEstadistica = new Grilla2.SpeedGrilla();
             this.mnuFiltroEstadisticas = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -84,6 +85,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lblTBalancesSuc = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lbl4 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lbl5 = new System.Windows.Forms.Label();
+            this.lbl6 = new System.Windows.Forms.Label();
+            this.lbl10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -107,8 +113,10 @@
             this.splitContainer2.SuspendLayout();
             this.mnuListado.SuspendLayout();
             this.paEst.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.mnuFiltroEstadisticas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nuTop)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -659,10 +667,9 @@
             // 
             // paEst
             // 
-            this.paEst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.paEst.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.paEst.Controls.Add(this.panel3);
+            this.paEst.Controls.Add(this.pictureBox1);
             this.paEst.Controls.Add(this.cmdRecargar);
             this.paEst.Controls.Add(this.grdEstadistica);
             this.paEst.Controls.Add(this.nuTop);
@@ -671,16 +678,30 @@
             this.paEst.Controls.Add(this.label4);
             this.paEst.Controls.Add(this.lblTBalancesSuc);
             this.paEst.Controls.Add(this.label2);
-            this.paEst.Location = new System.Drawing.Point(559, 0);
+            this.paEst.Dock = System.Windows.Forms.DockStyle.Right;
+            this.paEst.Location = new System.Drawing.Point(508, 0);
             this.paEst.Name = "paEst";
-            this.paEst.Size = new System.Drawing.Size(794, 701);
+            this.paEst.Size = new System.Drawing.Size(844, 701);
             this.paEst.TabIndex = 2;
             this.paEst.Visible = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.SizeNESW;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(10, 697);
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // cmdRecargar
             // 
             this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdRecargar.Location = new System.Drawing.Point(756, 671);
+            this.cmdRecargar.Location = new System.Drawing.Point(806, 671);
             this.cmdRecargar.Name = "cmdRecargar";
             this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
             this.cmdRecargar.TabIndex = 6;
@@ -704,7 +725,7 @@
             this.grdEstadistica.ContextMenuStrip = this.mnuFiltroEstadisticas;
             this.grdEstadistica.DataMember = "";
             this.grdEstadistica.DataSource = null;
-            this.grdEstadistica.EnableEdicion = true;
+            this.grdEstadistica.EnableEdicion = false;
             this.grdEstadistica.Encabezado = "";
             this.grdEstadistica.fColor = System.Drawing.SystemColors.Control;
             this.grdEstadistica.FixCols = 0;
@@ -712,7 +733,7 @@
             this.grdEstadistica.FuenteEncabezado = null;
             this.grdEstadistica.FuentePieDePagina = null;
             this.grdEstadistica.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdEstadistica.Location = new System.Drawing.Point(6, 22);
+            this.grdEstadistica.Location = new System.Drawing.Point(16, 22);
             this.grdEstadistica.MenuActivado = false;
             this.grdEstadistica.Name = "grdEstadistica";
             this.grdEstadistica.PieDePagina = "\t\tPage {0} of {1}";
@@ -720,7 +741,7 @@
             this.grdEstadistica.Redraw = true;
             this.grdEstadistica.Row = 0;
             this.grdEstadistica.Rows = 50;
-            this.grdEstadistica.Size = new System.Drawing.Size(781, 620);
+            this.grdEstadistica.Size = new System.Drawing.Size(821, 620);
             this.grdEstadistica.TabIndex = 2;
             // 
             // mnuFiltroEstadisticas
@@ -781,7 +802,7 @@
             this.nuTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.nuTop.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nuTop.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nuTop.Location = new System.Drawing.Point(701, 663);
+            this.nuTop.Location = new System.Drawing.Point(751, 663);
             this.nuTop.Minimum = new decimal(new int[] {
             1,
             0,
@@ -803,7 +824,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.label3.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label3.Location = new System.Drawing.Point(655, 667);
+            this.label3.Location = new System.Drawing.Point(705, 667);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 25);
             this.label3.TabIndex = 4;
@@ -815,7 +836,7 @@
             this.lblTBalancesClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTBalancesClientes.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lblTBalancesClientes.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblTBalancesClientes.Location = new System.Drawing.Point(168, 671);
+            this.lblTBalancesClientes.Location = new System.Drawing.Point(181, 671);
             this.lblTBalancesClientes.Name = "lblTBalancesClientes";
             this.lblTBalancesClientes.Size = new System.Drawing.Size(159, 25);
             this.lblTBalancesClientes.TabIndex = 4;
@@ -827,7 +848,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.label4.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label4.Location = new System.Drawing.Point(3, 645);
+            this.label4.Location = new System.Drawing.Point(16, 645);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(324, 25);
             this.label4.TabIndex = 4;
@@ -839,7 +860,7 @@
             this.lblTBalancesSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTBalancesSuc.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lblTBalancesSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblTBalancesSuc.Location = new System.Drawing.Point(3, 671);
+            this.lblTBalancesSuc.Location = new System.Drawing.Point(16, 671);
             this.lblTBalancesSuc.Name = "lblTBalancesSuc";
             this.lblTBalancesSuc.Size = new System.Drawing.Size(159, 25);
             this.lblTBalancesSuc.TabIndex = 4;
@@ -851,11 +872,83 @@
             this.label2.AutoSize = true;
             this.label2.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label2.Location = new System.Drawing.Point(3, 1);
+            this.label2.Location = new System.Drawing.Point(13, 1);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 18);
             this.label2.TabIndex = 1;
             this.label2.Text = "Estadísticas";
+            // 
+            // lbl4
+            // 
+            this.lbl4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl4.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lbl4.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lbl4.Location = new System.Drawing.Point(3, 0);
+            this.lbl4.Name = "lbl4";
+            this.lbl4.Size = new System.Drawing.Size(35, 32);
+            this.lbl4.TabIndex = 4;
+            this.lbl4.Text = "4";
+            this.lbl4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl4.Click += new System.EventHandler(this.lbl4_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.lbl10);
+            this.panel3.Controls.Add(this.lbl6);
+            this.panel3.Controls.Add(this.lbl5);
+            this.panel3.Controls.Add(this.lbl4);
+            this.panel3.Location = new System.Drawing.Point(542, 662);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(157, 32);
+            this.panel3.TabIndex = 8;
+            // 
+            // lbl5
+            // 
+            this.lbl5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl5.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lbl5.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lbl5.Location = new System.Drawing.Point(40, 0);
+            this.lbl5.Name = "lbl5";
+            this.lbl5.Size = new System.Drawing.Size(35, 32);
+            this.lbl5.TabIndex = 4;
+            this.lbl5.Text = "5";
+            this.lbl5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl5.Click += new System.EventHandler(this.lbl5_Click);
+            // 
+            // lbl6
+            // 
+            this.lbl6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl6.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lbl6.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lbl6.Location = new System.Drawing.Point(77, 0);
+            this.lbl6.Name = "lbl6";
+            this.lbl6.Size = new System.Drawing.Size(35, 32);
+            this.lbl6.TabIndex = 4;
+            this.lbl6.Text = "6";
+            this.lbl6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl6.Click += new System.EventHandler(this.lbl6_Click);
+            // 
+            // lbl10
+            // 
+            this.lbl10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl10.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lbl10.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lbl10.Location = new System.Drawing.Point(114, 0);
+            this.lbl10.Name = "lbl10";
+            this.lbl10.Size = new System.Drawing.Size(35, 32);
+            this.lbl10.TabIndex = 4;
+            this.lbl10.Text = "10";
+            this.lbl10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl10.Click += new System.EventHandler(this.lbl10_Click);
             // 
             // frmResumen_Suc
             // 
@@ -899,8 +992,10 @@
             this.mnuListado.ResumeLayout(false);
             this.paEst.ResumeLayout(false);
             this.paEst.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.mnuFiltroEstadisticas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nuTop)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -961,5 +1056,11 @@
         private System.Windows.Forms.ContextMenuStrip mnuListado;
         private System.Windows.Forms.ToolStripMenuItem sucursalesListado;
         private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label lbl10;
+        private System.Windows.Forms.Label lbl6;
+        private System.Windows.Forms.Label lbl5;
+        private System.Windows.Forms.Label lbl4;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Programa1.DB.Proveedores;
+﻿using Programa1.Carga.Proveedores;
+using Programa1.DB.Proveedores;
 using Proveedores;
 using System;
 using System.Data;
@@ -221,7 +222,14 @@ namespace Programa1.Carga
 
         private void grdEntradas_DobleClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Esaaa");
+            String s = $"Fecha='{Convert.ToDateTime(grdEntradas.get_Texto(grdEntradas.Row, 1)):MM/dd/yy}' AND Id_Proveedores={Prov}";
+            cCtes.Compras.Proveedor.Id = Prov;
+            DataTable dt = cCtes.Detalle_Compras(s, false);
+
+            frmDetalle fr = new frmDetalle();
+            fr.grd.MostrarDatos(dt, true, false);
+
+            fr.ShowDialog();
         }
 
         private void grdEntradas_KeyPress(object sender, short e)

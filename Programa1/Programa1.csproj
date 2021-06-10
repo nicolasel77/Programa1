@@ -191,6 +191,12 @@
     <Compile Include="Carga\Proveedores\frmAjustes.Designer.cs">
       <DependentUpon>frmAjustes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Proveedores\frmDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Proveedores\frmDetalle.Designer.cs">
+      <DependentUpon>frmDetalle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Proveedores\frmPagar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -690,6 +696,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmAjustes.resx">
       <DependentUpon>frmAjustes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Proveedores\frmDetalle.resx">
+      <DependentUpon>frmDetalle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmPagar.resx">
       <DependentUpon>frmPagar.cs</DependentUpon>

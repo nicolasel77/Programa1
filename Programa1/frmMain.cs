@@ -30,7 +30,8 @@
             switch (usuario.Nombre)
             {
                 case "Nicolas":
-                    ttResumenProveedores.PerformClick();
+                    resumenToolStripMenuItem.PerformClick();
+                    //ttResumenProveedores.PerformClick();
                     //capitalDeTrabajoToolStripMenuItem.PerformClick();
                     //cajaDiariaToolStripMenuItem.PerformClick();
                     //vencimientosToolStripMenuItem.PerformClick();
