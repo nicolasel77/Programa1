@@ -1222,7 +1222,8 @@ Public Class SpeedGrilla
                         End If
                     End If
                 End If
-                Select Case Grd.Cols(e.Col).DataType.ToString
+                If Not IsNothing(Grd.Cols(e.Col).DataType) Then
+                    Select Case Grd.Cols(e.Col).DataType.ToString
                     Case "System.Int16", "System.Int32", "System.Byte", "System.Int64"
                         If Not IsNumeric(Grd.Editor.Text) Then e.Cancel = True
                     Case "System.Single", "System.Double", "System.Decimal"
@@ -1253,46 +1254,47 @@ Public Class SpeedGrilla
                         MsgBox(Grd.Cols(e.Col).DataType.ToString)
                 End Select
 
-                If e.Cancel = False Then
-                    Select Case Grd.Cols(e.Col).DataType.ToString
-                        Case "System.DateTime"
-                            ObTemp = CDate(Grd.Editor.Text)
-                        Case "System.Boolean"
-                            If e.Checkbox = C1.Win.C1FlexGrid.CheckEnum.Checked Then
-                                ObTemp = True
-                            Else
-                                ObTemp = False
-                            End If
-                            Exit Sub
-                        Case "System.Int16", "System.Int32", "System.Byte"
-                            Try
-                                ObTemp = CInt(Grd.Editor.Text)
-                            Catch es As Exception
-                                ObTemp = 0
-                            End Try
-                        Case "System.Int64"
-                            Try
-                                ObTemp = CLng(Grd.Editor.Text)
-                            Catch es As Exception
-                                ObTemp = 0
-                            End Try
-                        Case "System.Single", "System.Double", "System.Decimal"
-                            Try
-                                ObTemp = CDbl(Grd.Editor.Text)
-                                'ObTemp = CSng(Grd.Editor.Text.Replace(".", ","))
-                            Catch ex As Exception
-                                ObTemp = 0
-                            End Try
-                        Case "System.String"
-                            ObTemp = Grd.Editor.Text
-                        Case Else
-                            ObTemp = Grd.Editor.Text
-                    End Select
-                    Grd.Editor.Text = Grd.GetDataDisplay(e.Row, e.Col)
-                Else
-                    Dim tx As Object = Grd.Editor
-                    tx.SelectAll()
+                    If e.Cancel = False Then
+                        Select Case Grd.Cols(e.Col).DataType.ToString
+                            Case "System.DateTime"
+                                ObTemp = CDate(Grd.Editor.Text)
+                            Case "System.Boolean"
+                                If e.Checkbox = C1.Win.C1FlexGrid.CheckEnum.Checked Then
+                                    ObTemp = True
+                                Else
+                                    ObTemp = False
+                                End If
+                                Exit Sub
+                            Case "System.Int16", "System.Int32", "System.Byte"
+                                Try
+                                    ObTemp = CInt(Grd.Editor.Text)
+                                Catch es As Exception
+                                    ObTemp = 0
+                                End Try
+                            Case "System.Int64"
+                                Try
+                                    ObTemp = CLng(Grd.Editor.Text)
+                                Catch es As Exception
+                                    ObTemp = 0
+                                End Try
+                            Case "System.Single", "System.Double", "System.Decimal"
+                                Try
+                                    ObTemp = CDbl(Grd.Editor.Text)
+                                    'ObTemp = CSng(Grd.Editor.Text.Replace(".", ","))
+                                Catch ex As Exception
+                                    ObTemp = 0
+                                End Try
+                            Case "System.String"
+                                ObTemp = Grd.Editor.Text
+                            Case Else
+                                ObTemp = Grd.Editor.Text
+                        End Select
+                        Grd.Editor.Text = Grd.GetDataDisplay(e.Row, e.Col)
+                    Else
+                        Dim tx As Object = Grd.Editor
+                        tx.SelectAll()
 
+                    End If
                 End If
             End With
         Catch ex As Exception

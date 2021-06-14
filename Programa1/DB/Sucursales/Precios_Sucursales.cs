@@ -106,6 +106,27 @@
 
             return dt;
         }
+        public DataTable Tabla_Precios(string filtro)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, 0.0 Precio FROM Productos WHERE {filtro} AND Ver=1 ORDER BY Id", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
         public DataTable Precios(byte tipo)
         {
             var dt = new DataTable("Datos");
@@ -121,6 +142,34 @@
 
                 SqlCommand comandoSql = new SqlCommand($"SELECT Id_Productos Id, Descripcion Nombre, Precio FROM vw_PreciosSucursales " +
                     $"WHERE Fecha={fecha} {suc} AND Id_Tipo={tipo} AND Ver=1 ORDER BY Id", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        public DataTable Precios(string filtro)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                string fecha = $"(SELECT MAX(Fecha) FROM vw_PreciosSucursales WHERE {filtro})";
+                string suc = "";
+
+                if (Fecha != null) { fecha = $"'{Fecha:MM/dd/yy}'"; }
+                if (Sucursal.Id != 0) { suc = " AND Id_Sucursales=" + Sucursal.Id; }
+
+                SqlCommand comandoSql = new SqlCommand($"SELECT Id_Productos Id, Descripcion Nombre, Precio FROM vw_PreciosSucursales " +
+                    $"WHERE Fecha={fecha} {suc} AND {filtro} AND Ver=1 ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

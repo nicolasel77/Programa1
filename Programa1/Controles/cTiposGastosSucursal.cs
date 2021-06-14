@@ -35,8 +35,7 @@
         {
             get { return splitContainer1.Panel2Collapsed; }
             set
-            {
-                MostrarTipo = value;
+            {                
                 splitContainer1.Panel2Collapsed = !MostrarTipo;
             }
         }

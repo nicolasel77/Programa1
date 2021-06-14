@@ -16,6 +16,12 @@
         private bool MostrarTipo = true;
         private string vFiltroIn = "";
 
+        private void cSucursales_Load(object sender, EventArgs e)
+        {
+            Sucs.Mostrar_Ocultos = true;
+            Sucs.Filtro_SucCliente = Sucursales.Filtrar_SucsClientes.Todas;
+        }
+
         public string Filtro_In
         {
             get
@@ -382,5 +388,7 @@
         {
             Mostrar_Tipo = !MostrarTipo;
         }
+
+        
     }
 }

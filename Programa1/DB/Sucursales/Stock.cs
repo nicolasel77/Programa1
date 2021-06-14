@@ -83,6 +83,26 @@
 
             return Convert.ToDouble(d);
         }
+        public DataTable Stock_CarneSucs(string filtro)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT ID_Sucursales, Nombre, SUM(Kilos) Kilos FROM vw_Stock WHERE {filtro}  AND ID_Tipo=1 GROUP BY ID_Sucursales, Nombre ORDER BY ID_Sucursales", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
 
         public void Actualizar()
         {

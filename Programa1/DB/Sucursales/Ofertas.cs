@@ -51,7 +51,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Ofertas {filtro} ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT *,(Kilos_Vendidos-Kilos) AS Diferencia FROM vw_Ofertas {filtro} ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

@@ -164,7 +164,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_GastosSucursales WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_CantidadClientes WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

@@ -66,11 +66,13 @@
             this.mnuListado = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sucursalesListado = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cFechas1 = new Programa1.Controles.cFechas();
-            this.paEstadistica = new System.Windows.Forms.Panel();
             this.paEst = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lbl10 = new System.Windows.Forms.Label();
+            this.lbl6 = new System.Windows.Forms.Label();
+            this.lbl5 = new System.Windows.Forms.Label();
+            this.lbl4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cmdRecargar = new Programa1.Controles.cBoton();
             this.grdEstadistica = new Grilla2.SpeedGrilla();
             this.mnuFiltroEstadisticas = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.unaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,11 +87,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lblTBalancesSuc = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbl4 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lbl5 = new System.Windows.Forms.Label();
-            this.lbl6 = new System.Windows.Forms.Label();
-            this.lbl10 = new System.Windows.Forms.Label();
+            this.tiOcultar = new System.Windows.Forms.Timer(this.components);
+            this.cmdRecargar = new Programa1.Controles.cBoton();
+            this.cFechas1 = new Programa1.Controles.cFechas();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -113,10 +113,10 @@
             this.splitContainer2.SuspendLayout();
             this.mnuListado.SuspendLayout();
             this.paEst.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.mnuFiltroEstadisticas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nuTop)).BeginInit();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -135,8 +135,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1346, 701);
-            this.splitContainer1.SplitterDistance = 1032;
+            this.splitContainer1.Size = new System.Drawing.Size(1382, 701);
+            this.splitContainer1.SplitterDistance = 1059;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer3
@@ -157,8 +157,8 @@
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer3.Panel2.Controls.Add(this.panel4);
             this.splitContainer3.Panel2.Controls.Add(this.grdVentas);
-            this.splitContainer3.Size = new System.Drawing.Size(1032, 701);
-            this.splitContainer3.SplitterDistance = 572;
+            this.splitContainer3.Size = new System.Drawing.Size(1059, 701);
+            this.splitContainer3.SplitterDistance = 606;
             this.splitContainer3.TabIndex = 0;
             // 
             // splitContainer4
@@ -181,8 +181,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.panel2);
             this.splitContainer4.Panel2.Controls.Add(this.grdSalidas);
             this.splitContainer4.Panel2.Controls.Add(this.label1);
-            this.splitContainer4.Size = new System.Drawing.Size(1032, 572);
-            this.splitContainer4.SplitterDistance = 555;
+            this.splitContainer4.Size = new System.Drawing.Size(1059, 606);
+            this.splitContainer4.SplitterDistance = 569;
             this.splitContainer4.TabIndex = 0;
             // 
             // panel1
@@ -191,9 +191,9 @@
             this.panel1.Controls.Add(this.rdAgrupado);
             this.panel1.Controls.Add(this.rdDetalle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 546);
+            this.panel1.Location = new System.Drawing.Point(0, 580);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(555, 26);
+            this.panel1.Size = new System.Drawing.Size(569, 26);
             this.panel1.TabIndex = 4;
             // 
             // lblTotalEntradas
@@ -212,8 +212,8 @@
             this.rdAgrupado.AutoSize = true;
             this.rdAgrupado.Checked = true;
             this.rdAgrupado.Depth = 0;
-            this.rdAgrupado.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdAgrupado.Location = new System.Drawing.Point(209, 0);
+            this.rdAgrupado.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdAgrupado.Location = new System.Drawing.Point(223, 0);
             this.rdAgrupado.Margin = new System.Windows.Forms.Padding(0);
             this.rdAgrupado.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rdAgrupado.MouseState = MaterialSkin.MouseState.HOVER;
@@ -231,8 +231,8 @@
             this.rdDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdDetalle.AutoSize = true;
             this.rdDetalle.Depth = 0;
-            this.rdDetalle.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdDetalle.Location = new System.Drawing.Point(298, 0);
+            this.rdDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdDetalle.Location = new System.Drawing.Point(312, 0);
             this.rdDetalle.Margin = new System.Windows.Forms.Padding(0);
             this.rdDetalle.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rdDetalle.MouseState = MaterialSkin.MouseState.HOVER;
@@ -277,7 +277,7 @@
             this.grdEntradas.Redraw = true;
             this.grdEntradas.Row = 0;
             this.grdEntradas.Rows = 1;
-            this.grdEntradas.Size = new System.Drawing.Size(549, 519);
+            this.grdEntradas.Size = new System.Drawing.Size(563, 553);
             this.grdEntradas.TabIndex = 1;
             this.grdEntradas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdEntradas_KeyUp);
             this.grdEntradas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdEntradas_DobleClick);
@@ -330,9 +330,9 @@
             // 
             this.panel2.Controls.Add(this.lblTotalSalidas);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 546);
+            this.panel2.Location = new System.Drawing.Point(0, 580);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(473, 26);
+            this.panel2.Size = new System.Drawing.Size(486, 26);
             this.panel2.TabIndex = 5;
             // 
             // lblTotalSalidas
@@ -378,7 +378,7 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 1;
-            this.grdSalidas.Size = new System.Drawing.Size(467, 519);
+            this.grdSalidas.Size = new System.Drawing.Size(480, 553);
             this.grdSalidas.TabIndex = 1;
             this.grdSalidas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdSalidas_KeyUp);
             this.grdSalidas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdSalidas_DobleClick);
@@ -481,7 +481,7 @@
             this.panel4.Controls.Add(this.lblSuc);
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(242, 119);
+            this.panel4.Size = new System.Drawing.Size(242, 85);
             this.panel4.TabIndex = 5;
             // 
             // cmdCarne
@@ -490,7 +490,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdCarne.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmdCarne.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdCarne.Location = new System.Drawing.Point(6, 68);
+            this.cmdCarne.Location = new System.Drawing.Point(6, 34);
             this.cmdCarne.Name = "cmdCarne";
             this.cmdCarne.Size = new System.Drawing.Size(233, 25);
             this.cmdCarne.TabIndex = 5;
@@ -505,7 +505,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBalance.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lblBalance.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblBalance.Location = new System.Drawing.Point(6, 40);
+            this.lblBalance.Location = new System.Drawing.Point(6, 6);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(233, 25);
             this.lblBalance.TabIndex = 3;
@@ -519,7 +519,7 @@
             this.lblSuc.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lblSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.lblSuc.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblSuc.Location = new System.Drawing.Point(6, 94);
+            this.lblSuc.Location = new System.Drawing.Point(6, 60);
             this.lblSuc.Name = "lblSuc";
             this.lblSuc.Size = new System.Drawing.Size(233, 25);
             this.lblSuc.TabIndex = 4;
@@ -558,7 +558,7 @@
             this.grdVentas.Redraw = true;
             this.grdVentas.Row = -2;
             this.grdVentas.Rows = 1;
-            this.grdVentas.Size = new System.Drawing.Size(781, 119);
+            this.grdVentas.Size = new System.Drawing.Size(808, 85);
             this.grdVentas.TabIndex = 1;
             // 
             // splitContainer2
@@ -578,7 +578,7 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.cFechas1);
-            this.splitContainer2.Size = new System.Drawing.Size(310, 701);
+            this.splitContainer2.Size = new System.Drawing.Size(319, 701);
             this.splitContainer2.SplitterDistance = 483;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -613,7 +613,7 @@
             this.grdSucursales.Redraw = true;
             this.grdSucursales.Row = 0;
             this.grdSucursales.Rows = 1;
-            this.grdSucursales.Size = new System.Drawing.Size(310, 483);
+            this.grdSucursales.Size = new System.Drawing.Size(319, 483);
             this.grdSucursales.TabIndex = 1;
             this.grdSucursales.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSucursales_CambioFila);
             // 
@@ -641,30 +641,6 @@
             this.clientesToolStripMenuItem1.Text = "Clientes";
             this.clientesToolStripMenuItem1.Click += new System.EventHandler(this.clientesToolStripMenuItem1_Click);
             // 
-            // cFechas1
-            // 
-            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFechas1.Location = new System.Drawing.Point(0, 0);
-            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFechas1.Mostrar = 0;
-            this.cFechas1.Name = "cFechas1";
-            this.cFechas1.Size = new System.Drawing.Size(310, 214);
-            this.cFechas1.TabIndex = 0;
-            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
-            // 
-            // paEstadistica
-            // 
-            this.paEstadistica.BackColor = System.Drawing.Color.Gray;
-            this.paEstadistica.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.paEstadistica.Dock = System.Windows.Forms.DockStyle.Right;
-            this.paEstadistica.Location = new System.Drawing.Point(1352, 0);
-            this.paEstadistica.Name = "paEstadistica";
-            this.paEstadistica.Size = new System.Drawing.Size(35, 701);
-            this.paEstadistica.TabIndex = 1;
-            this.paEstadistica.Click += new System.EventHandler(this.paEstadistica_Click);
-            // 
             // paEst
             // 
             this.paEst.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -679,11 +655,82 @@
             this.paEst.Controls.Add(this.lblTBalancesSuc);
             this.paEst.Controls.Add(this.label2);
             this.paEst.Dock = System.Windows.Forms.DockStyle.Right;
-            this.paEst.Location = new System.Drawing.Point(508, 0);
+            this.paEst.Location = new System.Drawing.Point(543, 0);
             this.paEst.Name = "paEst";
             this.paEst.Size = new System.Drawing.Size(844, 701);
             this.paEst.TabIndex = 2;
-            this.paEst.Visible = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.lbl10);
+            this.panel3.Controls.Add(this.lbl6);
+            this.panel3.Controls.Add(this.lbl5);
+            this.panel3.Controls.Add(this.lbl4);
+            this.panel3.Location = new System.Drawing.Point(542, 662);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(157, 32);
+            this.panel3.TabIndex = 8;
+            // 
+            // lbl10
+            // 
+            this.lbl10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl10.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lbl10.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lbl10.Location = new System.Drawing.Point(114, 0);
+            this.lbl10.Name = "lbl10";
+            this.lbl10.Size = new System.Drawing.Size(35, 32);
+            this.lbl10.TabIndex = 4;
+            this.lbl10.Text = "10";
+            this.lbl10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl10.Click += new System.EventHandler(this.lbl10_Click);
+            // 
+            // lbl6
+            // 
+            this.lbl6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl6.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lbl6.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lbl6.Location = new System.Drawing.Point(77, 0);
+            this.lbl6.Name = "lbl6";
+            this.lbl6.Size = new System.Drawing.Size(35, 32);
+            this.lbl6.TabIndex = 4;
+            this.lbl6.Text = "6";
+            this.lbl6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl6.Click += new System.EventHandler(this.lbl6_Click);
+            // 
+            // lbl5
+            // 
+            this.lbl5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl5.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lbl5.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lbl5.Location = new System.Drawing.Point(40, 0);
+            this.lbl5.Name = "lbl5";
+            this.lbl5.Size = new System.Drawing.Size(35, 32);
+            this.lbl5.TabIndex = 4;
+            this.lbl5.Text = "5";
+            this.lbl5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl5.Click += new System.EventHandler(this.lbl5_Click);
+            // 
+            // lbl4
+            // 
+            this.lbl4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl4.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lbl4.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lbl4.Location = new System.Drawing.Point(3, 0);
+            this.lbl4.Name = "lbl4";
+            this.lbl4.Size = new System.Drawing.Size(35, 32);
+            this.lbl4.TabIndex = 4;
+            this.lbl4.Text = "4";
+            this.lbl4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl4.Click += new System.EventHandler(this.lbl4_Click);
             // 
             // pictureBox1
             // 
@@ -697,16 +744,6 @@
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
-            // 
-            // cmdRecargar
-            // 
-            this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdRecargar.Location = new System.Drawing.Point(806, 671);
-            this.cmdRecargar.Name = "cmdRecargar";
-            this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
-            this.cmdRecargar.TabIndex = 6;
-            this.cmdRecargar.Texto = "R";
-            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
             // 
             // grdEstadistica
             // 
@@ -878,77 +915,34 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Estadísticas";
             // 
-            // lbl4
+            // tiOcultar
             // 
-            this.lbl4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbl4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbl4.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lbl4.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lbl4.Location = new System.Drawing.Point(3, 0);
-            this.lbl4.Name = "lbl4";
-            this.lbl4.Size = new System.Drawing.Size(35, 32);
-            this.lbl4.TabIndex = 4;
-            this.lbl4.Text = "4";
-            this.lbl4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl4.Click += new System.EventHandler(this.lbl4_Click);
+            this.tiOcultar.Enabled = true;
+            this.tiOcultar.Interval = 300;
+            this.tiOcultar.Tick += new System.EventHandler(this.tiOcultar_Tick);
             // 
-            // panel3
+            // cmdRecargar
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.lbl10);
-            this.panel3.Controls.Add(this.lbl6);
-            this.panel3.Controls.Add(this.lbl5);
-            this.panel3.Controls.Add(this.lbl4);
-            this.panel3.Location = new System.Drawing.Point(542, 662);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(157, 32);
-            this.panel3.TabIndex = 8;
+            this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdRecargar.Location = new System.Drawing.Point(806, 671);
+            this.cmdRecargar.Name = "cmdRecargar";
+            this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
+            this.cmdRecargar.TabIndex = 6;
+            this.cmdRecargar.Texto = "R";
+            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
             // 
-            // lbl5
+            // cFechas1
             // 
-            this.lbl5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbl5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbl5.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lbl5.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lbl5.Location = new System.Drawing.Point(40, 0);
-            this.lbl5.Name = "lbl5";
-            this.lbl5.Size = new System.Drawing.Size(35, 32);
-            this.lbl5.TabIndex = 4;
-            this.lbl5.Text = "5";
-            this.lbl5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl5.Click += new System.EventHandler(this.lbl5_Click);
-            // 
-            // lbl6
-            // 
-            this.lbl6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbl6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbl6.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lbl6.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lbl6.Location = new System.Drawing.Point(77, 0);
-            this.lbl6.Name = "lbl6";
-            this.lbl6.Size = new System.Drawing.Size(35, 32);
-            this.lbl6.TabIndex = 4;
-            this.lbl6.Text = "6";
-            this.lbl6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl6.Click += new System.EventHandler(this.lbl6_Click);
-            // 
-            // lbl10
-            // 
-            this.lbl10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbl10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbl10.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lbl10.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lbl10.Location = new System.Drawing.Point(114, 0);
-            this.lbl10.Name = "lbl10";
-            this.lbl10.Size = new System.Drawing.Size(35, 32);
-            this.lbl10.TabIndex = 4;
-            this.lbl10.Text = "10";
-            this.lbl10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl10.Click += new System.EventHandler(this.lbl10_Click);
+            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFechas1.Location = new System.Drawing.Point(0, 0);
+            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFechas1.Mostrar = 0;
+            this.cFechas1.Name = "cFechas1";
+            this.cFechas1.Size = new System.Drawing.Size(319, 214);
+            this.cFechas1.TabIndex = 0;
+            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
             // 
             // frmResumen_Suc
             // 
@@ -957,7 +951,6 @@
             this.ClientSize = new System.Drawing.Size(1387, 701);
             this.Controls.Add(this.paEst);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.paEstadistica);
             this.KeyPreview = true;
             this.Name = "frmResumen_Suc";
             this.Text = "Resumen";
@@ -992,10 +985,10 @@
             this.mnuListado.ResumeLayout(false);
             this.paEst.ResumeLayout(false);
             this.paEst.PerformLayout();
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.mnuFiltroEstadisticas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nuTop)).EndInit();
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1019,7 +1012,6 @@
         private MaterialSkin.Controls.MaterialRadioButton rdDetalle;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblTotalSalidas;
-        private System.Windows.Forms.Panel paEstadistica;
         private System.Windows.Forms.Panel paEst;
         private Grilla2.SpeedGrilla grdEstadistica;
         private System.Windows.Forms.Label label2;
@@ -1062,5 +1054,6 @@
         private System.Windows.Forms.Label lbl6;
         private System.Windows.Forms.Label lbl5;
         private System.Windows.Forms.Label lbl4;
+        private System.Windows.Forms.Timer tiOcultar;
     }
 }

@@ -33,5 +33,18 @@ namespace Programa1.Carga.Precios
             }
             this.Hide();
         }
+
+        private void cmdTodas_Click(object sender, System.EventArgs e)
+        {
+            for (int i = 0; i < lstSucursales.Items.Count; i++)
+            {
+                lstSucursales.SelectedIndices.Add(i);
+            }
+        }
+
+        private void cmdNinguna_Click(object sender, System.EventArgs e)
+        {
+            lstSucursales.SelectedIndex = -1;
+        }
     }
 }

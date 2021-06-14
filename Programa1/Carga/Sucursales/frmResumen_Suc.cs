@@ -446,7 +446,8 @@
             if (allowResize)
             {
                 int v = this.Width - paEst.Left - e.X;
-                this.paEst.Width = (v > 500) ? v : 500;
+                this.paEst.Width = (v > anchoEst) ? v : anchoEst;
+                anchoEst = v;
                 Application.DoEvents();
             }
         }
@@ -475,6 +476,15 @@
         private void lbl10_Click(object sender, EventArgs e)
         {
             nuTop.Value = 10;
+        }
+
+        int anchoEst = 600;
+        private void tiOcultar_Tick(object sender, EventArgs e)
+        {
+            this.Cursor = new Cursor(Cursor.Current.Handle);
+            int posX = Cursor.Position.X;
+            //this.Text = $"X: {posX}  paEst.Left: {paEst.Left:N1}";
+            paEst.Width = (posX <= paEst.Left) ? 10 : anchoEst;
         }
     }
 }

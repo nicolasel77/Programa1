@@ -2,15 +2,15 @@
 {
     using Programa1.DB;
     using System;
-    using System.Data;
     using System.Drawing;
     using System.Windows.Forms;
 
-    
+
     public partial class frmRendimiento_Compras : Form
     {
         private Rendimiento_Compras Rendimiento_Compras;
         private C1.Win.C1FlexGrid.CellStyle cellStyle;
+        Herramientas.Herramientas h = new Herramientas.Herramientas();
 
         public frmRendimiento_Compras()
         {
@@ -28,10 +28,13 @@
             {
                 grdRendimiento_Compras.set_ColW(i, 60);
                 grdRendimiento_Compras.Columnas[i].Format = "N0";
-            }            
-            
+            }
+
             cellStyle = grdRendimiento_Compras.Styles.Add("Rojo");
             cellStyle.BackColor = Color.MistyRose;
+            
+            Ventas v = new Ventas();
+            h.Llenar_List(lstCamiones, v.Camion.Datos());
         }
 
         private void FrmRendimiento_Compras_KeyUp(object sender, KeyEventArgs e)
@@ -92,9 +95,10 @@
 
             string p = cProds.Cadena("Id");
             string s = cProvs.Cadena("Id_Proveedores");
-            string f = cFecha.Cadena();                        
-            
-            grdRendimiento_Compras.MostrarDatos(Rendimiento_Compras.Datos(f,chOcultar.Checked, s, p), false, true);
+            string f = cFecha.Cadena();
+            string camiones = h.Codigos_Seleccionados(lstCamiones);
+
+            grdRendimiento_Compras.MostrarDatos(Rendimiento_Compras.Datos(f, chOcultar.Checked, s, p, camiones), false, true);
 
             Totales();
 
@@ -107,8 +111,8 @@
         {
             double kcomp = grdRendimiento_Compras.SumarCol(2, true);
             double kven = grdRendimiento_Compras.SumarCol(3, true);
-            double tcomp = grdRendimiento_Compras.SumarCol(4, true);            
-            double tven = grdRendimiento_Compras.SumarCol(5, true);            
+            double tcomp = grdRendimiento_Compras.SumarCol(4, true);
+            double tven = grdRendimiento_Compras.SumarCol(5, true);
             double tdif = grdRendimiento_Compras.SumarCol(6, true);
             double kdif = grdRendimiento_Compras.SumarCol(8, true);
             int c = grdRendimiento_Compras.Rows - 2;
@@ -120,7 +124,7 @@
 
             for (int i = 1; i < grdRendimiento_Compras.Rows - 1; i++)
             {
-                if(Convert.ToSingle(grdRendimiento_Compras.get_Texto(i, 6)) < 0)
+                if (Convert.ToSingle(grdRendimiento_Compras.get_Texto(i, 6)) < 0)
                 {
                     grdRendimiento_Compras.Filas[i].Style = cellStyle;
                 }

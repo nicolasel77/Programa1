@@ -25,7 +25,7 @@ namespace Programa1.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 14.25pt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 11.25pt")]
         public global::System.Drawing.Font lblTitulos {
             get {
                 return ((global::System.Drawing.Font)(this["lblTitulos"]));

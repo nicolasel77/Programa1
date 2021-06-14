@@ -107,6 +107,11 @@
             grdGastos.ActivarCelda(grdGastos.Rows - 1, c_Fecha);
             grdGastos.Focus();
 
+            if (grdGastos.Rows == 2)
+            {
+                cSucs.Filtro_In = "";
+                cTipos.Filtro_In = "";
+            }
             this.Cursor = Cursors.Default;
         }
 
@@ -259,9 +264,12 @@
                         //Rellenar nueva fila
 
                         grdGastos.set_Texto(f + 1, c_Fecha, Gastos_Sucursales.Fecha);
+                        grdGastos.set_Texto(f + 1, c_IdSuc, Gastos_Sucursales.Sucursal.Id);
+                        grdGastos.set_Texto(f + 1, c_IdSuc + 1, Gastos_Sucursales.Sucursal.Nombre);
 
                         Gastos_Sucursales.Importe = 0;
-                        grdGastos.ActivarCelda(f + 1, c_IdSuc);
+                        Gastos_Sucursales.Id = 0;
+                        grdGastos.ActivarCelda(f + 1, c_IdTipo);
                     }
                     else
                     {

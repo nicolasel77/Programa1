@@ -31,6 +31,8 @@
             this.lstSucursales = new System.Windows.Forms.ListBox();
             this.mntFecha = new System.Windows.Forms.MonthCalendar();
             this.cmdGuardar = new Programa1.Controles.cBoton();
+            this.cmdTodas = new System.Windows.Forms.Button();
+            this.cmdNinguna = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstSucursales
@@ -65,11 +67,37 @@
             this.cmdGuardar.Texto = "Guardar";
             this.cmdGuardar.Click += new System.EventHandler(this.cmdGuardar_Click);
             // 
+            // cmdTodas
+            // 
+            this.cmdTodas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdTodas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdTodas.Location = new System.Drawing.Point(334, 186);
+            this.cmdTodas.Name = "cmdTodas";
+            this.cmdTodas.Size = new System.Drawing.Size(192, 23);
+            this.cmdTodas.TabIndex = 3;
+            this.cmdTodas.Text = "Todas";
+            this.cmdTodas.UseVisualStyleBackColor = true;
+            this.cmdTodas.Click += new System.EventHandler(this.cmdTodas_Click);
+            // 
+            // cmdNinguna
+            // 
+            this.cmdNinguna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdNinguna.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdNinguna.Location = new System.Drawing.Point(334, 215);
+            this.cmdNinguna.Name = "cmdNinguna";
+            this.cmdNinguna.Size = new System.Drawing.Size(192, 23);
+            this.cmdNinguna.TabIndex = 3;
+            this.cmdNinguna.Text = "Ninguna";
+            this.cmdNinguna.UseVisualStyleBackColor = true;
+            this.cmdNinguna.Click += new System.EventHandler(this.cmdNinguna_Click);
+            // 
             // frmGuardar_Varios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 653);
+            this.Controls.Add(this.cmdNinguna);
+            this.Controls.Add(this.cmdTodas);
             this.Controls.Add(this.mntFecha);
             this.Controls.Add(this.cmdGuardar);
             this.Controls.Add(this.lstSucursales);
@@ -84,5 +112,7 @@
         private Controles.cBoton cmdGuardar;
         public System.Windows.Forms.ListBox lstSucursales;
         public System.Windows.Forms.MonthCalendar mntFecha;
+        private System.Windows.Forms.Button cmdTodas;
+        private System.Windows.Forms.Button cmdNinguna;
     }
 }

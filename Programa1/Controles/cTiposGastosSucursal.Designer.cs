@@ -269,7 +269,7 @@
             this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.label1.Location = new System.Drawing.Point(0, 284);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 18);
+            this.label1.Size = new System.Drawing.Size(63, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Grupo";
             // 
@@ -292,7 +292,7 @@
             this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 18);
+            this.label2.Size = new System.Drawing.Size(62, 24);
             this.label2.TabIndex = 0;
             this.label2.Text = "Rubro";
             // 

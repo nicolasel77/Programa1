@@ -223,7 +223,7 @@
             {
                 case c_Fecha:
                     DateTime df = Convert.ToDateTime(a);
-                    if (df >= cFecha.fecha_Actual)
+                    if (cFecha.Fecha_En_Rango(df))
                     {
                         Venta.Fecha = df;
                         Venta.precios.Fecha = Venta.Fecha;
@@ -236,7 +236,7 @@
                     }
                     else
                     {
-                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                        Mensaje("La fecha debe estar dentro del rango fecha seleccionado.");
                         grdVenta.ErrorEnTxt();
                     }
                     break;
@@ -373,6 +373,7 @@
                         //Rellenar nueva fila
 
                         grdVenta.set_Texto(f + 1, c_Fecha, Venta.Fecha);
+                        grdVenta.set_Texto(f + 1, c_IdCamion, Venta.Camion.ID);
                         grdVenta.set_Texto(f + 1, c_IdProv, Venta.Proveedor.Id);
                         grdVenta.set_Texto(f + 1, c_IdProv + 1, Venta.Sucursal.Nombre);
                         grdVenta.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.Id);

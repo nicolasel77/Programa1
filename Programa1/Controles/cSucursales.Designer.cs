@@ -104,20 +104,20 @@
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel1.Controls.Add(this.paBotones);
-            this.splitContainer1.Panel1.Controls.Add(this.lblTitulo);
             this.splitContainer1.Panel1.Controls.Add(this.lst);
+            this.splitContainer1.Panel1.Controls.Add(this.lblTitulo);
             this.splitContainer1.Panel1.DoubleClick += new System.EventHandler(this.SplitContainer1_Panel1_DoubleClick);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.lstTipos);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Panel2.Controls.Add(this.cmdTodosTipos);
             this.splitContainer1.Panel2.Controls.Add(this.txtBuscar);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
-            this.splitContainer1.Panel2.Controls.Add(this.lstTipos);
             this.splitContainer1.Panel2.DoubleClick += new System.EventHandler(this.SplitContainer1_Panel1_DoubleClick);
             this.splitContainer1.Size = new System.Drawing.Size(337, 512);
             this.splitContainer1.SplitterDistance = 234;
@@ -359,6 +359,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "cSucursales";
             this.Size = new System.Drawing.Size(343, 518);
+            this.Load += new System.EventHandler(this.cSucursales_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

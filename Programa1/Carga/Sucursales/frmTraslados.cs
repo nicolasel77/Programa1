@@ -53,7 +53,7 @@ namespace Programa1.Carga
             //El intercambio de columnas para estas teclas
             grdTraslados.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdProd, c_Kilos);
             grdTraslados.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSucS, c_Kilos);
-
+            //cSucEntrada.
             Totales();
         }
 

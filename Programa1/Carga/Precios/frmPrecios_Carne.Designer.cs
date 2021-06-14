@@ -42,6 +42,7 @@
             this.lblSuc = new MaterialSkin.Controls.MaterialLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.lstFechas = new System.Windows.Forms.ListBox();
+            this.cmdBorrar = new Programa1.Controles.cBoton();
             this.cmdGuardar = new Programa1.Controles.cBoton();
             this.cmdImprimir = new Programa1.Controles.cBoton();
             this.cmdFormulas = new Programa1.Controles.cBoton();
@@ -50,7 +51,6 @@
             this.cmdCalcular = new Programa1.Controles.cBoton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grdFormulas = new Grilla2.SpeedGrilla();
-            this.cmdBorrar = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -204,9 +204,9 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer3.Panel1.Controls.Add(this.lstFechas);
             this.splitContainer3.Panel1.Controls.Add(this.panel4);
             this.splitContainer3.Panel1.Controls.Add(this.label1);
-            this.splitContainer3.Panel1.Controls.Add(this.lstFechas);
             this.splitContainer3.Panel1.Controls.Add(this.cmdBorrar);
             this.splitContainer3.Panel1.Controls.Add(this.cmdGuardar);
             this.splitContainer3.Panel1.Controls.Add(this.cmdImprimir);
@@ -269,6 +269,18 @@
             this.lstFechas.Size = new System.Drawing.Size(100, 460);
             this.lstFechas.TabIndex = 1;
             this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
+            // 
+            // cmdBorrar
+            // 
+            this.cmdBorrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdBorrar.Enabled = false;
+            this.cmdBorrar.Location = new System.Drawing.Point(3, 584);
+            this.cmdBorrar.Name = "cmdBorrar";
+            this.cmdBorrar.Size = new System.Drawing.Size(103, 30);
+            this.cmdBorrar.TabIndex = 0;
+            this.cmdBorrar.Texto = "Borrar";
+            this.cmdBorrar.Click += new System.EventHandler(this.cmdBorrar_Click);
             // 
             // cmdGuardar
             // 
@@ -407,18 +419,6 @@
             this.grdFormulas.Rows = 50;
             this.grdFormulas.Size = new System.Drawing.Size(580, 126);
             this.grdFormulas.TabIndex = 0;
-            // 
-            // cmdBorrar
-            // 
-            this.cmdBorrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdBorrar.Enabled = false;
-            this.cmdBorrar.Location = new System.Drawing.Point(3, 584);
-            this.cmdBorrar.Name = "cmdBorrar";
-            this.cmdBorrar.Size = new System.Drawing.Size(103, 30);
-            this.cmdBorrar.TabIndex = 0;
-            this.cmdBorrar.Texto = "Borrar";
-            this.cmdBorrar.Click += new System.EventHandler(this.cmdBorrar_Click);
             // 
             // frmPrecios_Carne
             // 

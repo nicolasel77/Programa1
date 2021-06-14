@@ -29,7 +29,7 @@ namespace Programa1.Carga.Precios
 
         private void Cargar_Lista()
         {
-            DataTable dt = precios.Tabla_Precios(4);
+            DataTable dt = precios.Tabla_Precios("Id_Tipo IN (4,6)");
 
 
             grd.MostrarDatos(dt, true, false);
@@ -57,7 +57,7 @@ namespace Programa1.Carga.Precios
             precios.Sucursal.Id = Suc.Valor_Actual;
 
 
-            DataTable dt = precios.Precios(4);
+            DataTable dt = precios.Precios("Id_Tipo IN (4,6)");
 
 
             grd.MostrarDatos(dt, true, false);
@@ -90,6 +90,7 @@ namespace Programa1.Carga.Precios
                     precios.Fecha = f;
                     precios.Sucursal.Id = suc;
                     precios.Borrar_Lista(4);
+                    precios.Borrar_Lista(6);
                     foreach (DataRow dr in precios.Fechas_Granja().Rows)
                     {
                         lstFechas.Items.Add($"{dr[0]:dd/MM/yy}  {dr[1]:N0}");

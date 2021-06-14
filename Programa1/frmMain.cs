@@ -30,7 +30,7 @@
             switch (usuario.Nombre)
             {
                 case "Nicolas":
-                    resumenToolStripMenuItem.PerformClick();
+                    //resumenToolStripMenuItem.PerformClick();
                     //ttResumenProveedores.PerformClick();
                     //capitalDeTrabajoToolStripMenuItem.PerformClick();
                     //cajaDiariaToolStripMenuItem.PerformClick();
@@ -1824,5 +1824,100 @@
             }
         }
 
+        private void stockCarneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmStocks_CarneSucs")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmStocks_CarneSucs");
+                t.Text = "Stocks_CarneSucs";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmStocks_CarneSucs = new Carga.Sucursales.frmStocks_CarneSucs();
+                frmStocks_CarneSucs.MdiParent = this;
+                frmStocks_CarneSucs.Disposed += FrmStocks_CarneSucs_Disposed;
+                forms.Add(frmStocks_CarneSucs);
+                frmStocks_CarneSucs.Show();
+                frmStocks_CarneSucs.WindowState = FormWindowState.Minimized;
+                frmStocks_CarneSucs.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmStocks_CarneSucs_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Stocks_CarneSucs")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmStocks_CarneSucs")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void preciosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPrecios_Proveedores")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmPrecios_Proveedores");
+                t.Text = "Precios_Proveedores";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmPrecios_Proveedores = new Carga.Proveedores.frmPrecios_Proveedores();
+                frmPrecios_Proveedores.MdiParent = this;
+                frmPrecios_Proveedores.Disposed += FrmPrecios_Proveedores_Disposed;
+                forms.Add(frmPrecios_Proveedores);
+                frmPrecios_Proveedores.Show();
+                frmPrecios_Proveedores.WindowState = FormWindowState.Minimized;
+                frmPrecios_Proveedores.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmPrecios_Proveedores_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Precios_Proveedores")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPrecios_Proveedores")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

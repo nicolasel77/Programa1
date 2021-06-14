@@ -9,7 +9,7 @@ namespace Programa1.DB
     public class Precios_Proveedores
     {
         public Precios_Proveedores()
-        {            
+        {
         }
 
         public Precios_Proveedores(int id, DateTime fecha, Productos prod, Proveedores.Proveedores proveedor, Single pr)
@@ -102,14 +102,14 @@ namespace Programa1.DB
             return dt;
         }
 
-        public DataTable Fechas_Men()
+        public DataTable Fechas()
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT Fecha FROM vw_PreciosProveedores WHERE Id_Tipo=2 GROUP BY Fecha ORDER BY Fecha DESC", conexionSql);
+
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 100 Fecha FROM vw_PreciosProveedores WHERE ID_Proveedores={Proveedor.Id} GROUP BY Fecha ORDER BY Fecha DESC", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

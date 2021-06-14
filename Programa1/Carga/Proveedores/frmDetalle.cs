@@ -16,5 +16,10 @@ namespace Programa1.Carga.Proveedores
         {
             InitializeComponent();
         }
+
+        private void cmdCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

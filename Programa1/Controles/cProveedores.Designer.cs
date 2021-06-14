@@ -98,9 +98,9 @@
             this.splitContainer1.Panel1.Controls.Add(this.cmdInvertir);
             this.splitContainer1.Panel1.Controls.Add(this.cmdNinguno);
             this.splitContainer1.Panel1.Controls.Add(this.cmdTodos);
-            this.splitContainer1.Panel1.Controls.Add(this.lblTitulo);
             this.splitContainer1.Panel1.Controls.Add(this.lst);
             this.splitContainer1.Panel1.Controls.Add(this.chVer);
+            this.splitContainer1.Panel1.Controls.Add(this.lblTitulo);
             this.splitContainer1.Panel1.DoubleClick += new System.EventHandler(this.SplitContainer1_Panel1_DoubleClick);
             // 
             // splitContainer1.Panel2
@@ -110,8 +110,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.cmdTodosTipos);
             this.splitContainer1.Panel2.Controls.Add(this.txtBuscar);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.lstTipos);
+            this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.DoubleClick += new System.EventHandler(this.SplitContainer1_Panel1_DoubleClick);
             this.splitContainer1.Size = new System.Drawing.Size(337, 512);
             this.splitContainer1.SplitterDistance = 234;
@@ -163,7 +163,7 @@
             this.lblTitulo.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.lblTitulo.Location = new System.Drawing.Point(3, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(93, 18);
+            this.lblTitulo.Size = new System.Drawing.Size(118, 24);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "Proveedores";
             // 
@@ -269,7 +269,7 @@
             this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 18);
+            this.label2.Size = new System.Drawing.Size(48, 24);
             this.label2.TabIndex = 0;
             this.label2.Text = "Tipo";
             // 

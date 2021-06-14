@@ -228,8 +228,10 @@ namespace Programa1.Carga
 
             frmDetalle fr = new frmDetalle();
             fr.grd.MostrarDatos(dt, true, false);
-
+            fr.grd.AutosizeAll();
             fr.ShowDialog();
+            grdEntradas.Focus();
+            SendKeys.Send("{ESCAPE}");
         }
 
         private void grdEntradas_KeyPress(object sender, short e)

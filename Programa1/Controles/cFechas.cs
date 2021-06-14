@@ -119,6 +119,11 @@
             return s;
         }
 
+        public bool Fecha_En_Rango(DateTime fecha)
+        {
+            return fecha >= fecha_Actual & fecha <= fecha_Fin;
+        }
+
         public void Anterior()
         {
             switch (tabControl1.SelectedIndex)

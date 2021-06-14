@@ -217,7 +217,7 @@
             this.cSucursal.Filtro_In = "";
             this.cSucursal.Location = new System.Drawing.Point(3, 3);
             this.cSucursal.Mostrar_Botones = true;
-            this.cSucursal.Mostrar_Tipo = false;
+            this.cSucursal.Mostrar_Tipo = true;
             this.cSucursal.Name = "cSucursal";
             this.cSucursal.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucursal.Size = new System.Drawing.Size(272, 484);
@@ -235,7 +235,6 @@
             // 
             // splitContainer5.Panel1
             // 
-            this.splitContainer5.Panel1.Controls.Add(this.label3);
             this.splitContainer5.Panel1.Controls.Add(this.chMediasUsadas);
             this.splitContainer5.Panel1.Controls.Add(this.grdResumen);
             this.splitContainer5.Panel1.Controls.Add(this.txtNRomaneo);
@@ -243,6 +242,7 @@
             this.splitContainer5.Panel1.Controls.Add(this.label2);
             this.splitContainer5.Panel1.Controls.Add(this.lstBoletas);
             this.splitContainer5.Panel1.Controls.Add(this.lstTropas);
+            this.splitContainer5.Panel1.Controls.Add(this.label3);
             // 
             // splitContainer5.Panel2
             // 
@@ -393,7 +393,7 @@
             this.cProds.Location = new System.Drawing.Point(0, 3);
             this.cProds.Mostrar_Tipo = false;
             this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(267, 124);
+            this.cProds.Size = new System.Drawing.Size(267, 120);
             this.cProds.TabIndex = 0;
             this.cProds.Titulo = "Productos";
             this.cProds.Valor_Actual = -1;

@@ -361,8 +361,7 @@ namespace Programa1.Carga.Precios
                 }
 
                 Cargar_Fechas();
-                Cargar_Sucursales();
-
+                lstFechas.SelectedIndex = 0;
                 this.Cursor = Cursors.Default;
             }
         }        

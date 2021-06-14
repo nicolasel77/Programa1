@@ -33,14 +33,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProductos));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.grdTipo = new Grilla2.SpeedGrilla();
             this.grdProductos = new Grilla2.SpeedGrilla();
             this.label3 = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.statusStrip1.SuspendLayout();
+            this.lblMensaje = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -65,22 +63,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Productos";
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblMensaje});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 694);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1158, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblMensaje
-            // 
-            this.lblMensaje.ForeColor = System.Drawing.Color.Red;
-            this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(0, 17);
-            // 
             // tiMensaje
             // 
             this.tiMensaje.Interval = 5000;
@@ -88,6 +70,8 @@
             // 
             // grdTipo
             // 
+            this.grdTipo.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdTipo.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
             this.grdTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.grdTipo.AutoResize = false;
@@ -106,6 +90,7 @@
             this.grdTipo.FixRows = 0;
             this.grdTipo.FuenteEncabezado = null;
             this.grdTipo.FuentePieDePagina = null;
+            this.grdTipo.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdTipo.Location = new System.Drawing.Point(12, 30);
             this.grdTipo.MenuActivado = false;
             this.grdTipo.Name = "grdTipo";
@@ -123,6 +108,8 @@
             // 
             // grdProductos
             // 
+            this.grdProductos.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdProductos.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
             this.grdProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -142,6 +129,7 @@
             this.grdProductos.FixRows = 0;
             this.grdProductos.FuenteEncabezado = null;
             this.grdProductos.FuentePieDePagina = null;
+            this.grdProductos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdProductos.Location = new System.Drawing.Point(404, 30);
             this.grdProductos.MenuActivado = false;
             this.grdProductos.Name = "grdProductos";
@@ -150,7 +138,7 @@
             this.grdProductos.Redraw = true;
             this.grdProductos.Row = 0;
             this.grdProductos.Rows = 50;
-            this.grdProductos.Size = new System.Drawing.Size(742, 640);
+            this.grdProductos.Size = new System.Drawing.Size(933, 642);
             this.grdProductos.TabIndex = 1;
             this.grdProductos.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdProductos_Editado);
             this.grdProductos.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdProductos_CambioFila);
@@ -169,30 +157,39 @@
             // txtBuscar
             // 
             this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtBuscar.Location = new System.Drawing.Point(450, 671);
+            this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBuscar.Location = new System.Drawing.Point(450, 678);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(296, 20);
+            this.txtBuscar.Size = new System.Drawing.Size(296, 13);
             this.txtBuscar.TabIndex = 2;
             this.txtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
+            // 
+            // lblMensaje
+            // 
+            this.lblMensaje.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMensaje.ForeColor = System.Drawing.Color.Red;
+            this.lblMensaje.Location = new System.Drawing.Point(752, 678);
+            this.lblMensaje.Name = "lblMensaje";
+            this.lblMensaje.Size = new System.Drawing.Size(585, 16);
+            this.lblMensaje.TabIndex = 6;
             // 
             // frmProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1158, 716);
+            this.ClientSize = new System.Drawing.Size(1349, 703);
+            this.Controls.Add(this.lblMensaje);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.grdProductos);
             this.Controls.Add(this.grdTipo);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frmProductos";
             this.Text = "Productos";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmProductos_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,12 +199,11 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lblMensaje;
         private System.Windows.Forms.Timer tiMensaje;
         private Grilla2.SpeedGrilla grdTipo;
         private Grilla2.SpeedGrilla grdProductos;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.Label lblMensaje;
     }
 }

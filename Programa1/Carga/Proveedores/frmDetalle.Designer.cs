@@ -66,25 +66,26 @@ namespace Programa1.Carga.Proveedores
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(768, 558);
+            this.grd.Size = new System.Drawing.Size(1014, 458);
             this.grd.TabIndex = 0;
             // 
             // cmdCerrar
             // 
             this.cmdCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdCerrar.Location = new System.Drawing.Point(688, 576);
+            this.cmdCerrar.Location = new System.Drawing.Point(934, 476);
             this.cmdCerrar.Name = "cmdCerrar";
             this.cmdCerrar.Size = new System.Drawing.Size(92, 23);
             this.cmdCerrar.TabIndex = 1;
             this.cmdCerrar.Text = "Cerrar";
             this.cmdCerrar.UseVisualStyleBackColor = true;
+            this.cmdCerrar.Click += new System.EventHandler(this.cmdCerrar_Click);
             // 
             // frmDetalle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 611);
+            this.ClientSize = new System.Drawing.Size(1038, 511);
             this.Controls.Add(this.cmdCerrar);
             this.Controls.Add(this.grd);
             this.Name = "frmDetalle";

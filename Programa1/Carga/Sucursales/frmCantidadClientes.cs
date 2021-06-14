@@ -155,6 +155,7 @@
         private void GrdCantidad_Clientes_Editado(short f, short c, object a)
         {
             int id = Convert.ToInt32(grdCantidad_Clientes.get_Texto(f, c_Id));
+            if (id != 0) { Cantidad_Clientes.Id = id; }
             switch (c)
             {
                 case 1:
@@ -179,8 +180,7 @@
                     //ID_Sucursales
                     Cantidad_Clientes.Sucursal.Id = Convert.ToInt32(a);
                     if (Cantidad_Clientes.Sucursal.Existe() == true)
-                    {
-
+                    {                        
                         if (id != 0) { Cantidad_Clientes.Actualizar(); }
 
                         grdCantidad_Clientes.set_Texto(f, c, a);

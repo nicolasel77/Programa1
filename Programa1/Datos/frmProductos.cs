@@ -11,6 +11,16 @@
 
         private DataTable dt;
 
+        private const byte cId = 0;
+        private const byte cTipo = 1;
+        private const byte cNombre = 3;
+        private const byte cVer = 4;
+        private const byte cImprimir = 5;
+        private const byte cPesable = 6;
+        private const byte cMultiplicador = 7;
+        private const byte cResumirPorVenta = 8;
+        private const byte cTiene_Estadistica = 9;
+
         public frmProductos()
         {
             InitializeComponent();
@@ -20,7 +30,7 @@
         {
             //Tipo Producto
             //Datos
-            dt = prods.Tipo.Datos();
+            dt = prods.Tipo.Datos_Vista();
             grdTipo.MostrarDatos(dt, true);
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdTipo.TeclasManejadas = n;
@@ -30,10 +40,10 @@
 
             //Productos
             //Datos
-            dt = prods.Datos();
+            dt = prods.Datos_Vista();
             grdProductos.MostrarDatos(dt, true);
             //Formato
-            grdProductos.set_ColW(0, 40);
+            grdProductos.set_ColW(cId, 40);
             grdProductos.TeclasManejadas = n;
         }
 
@@ -80,8 +90,37 @@
                         prods.Tipo.Nombre = a.ToString();
                         grdTipo.set_Texto(f, c, a);
                         prods.Tipo.Actualizar();
-                        grdTipo.AgregarFila();
-                        grdTipo.ActivarCelda(f + 1, 0);
+                        grdTipo.ActivarCelda(f, c + 1);
+                    }
+                    break;
+                case 2: // ResumirPorVenta
+                    if (i == 0)
+                    {
+                        Mensaje("Debe ingresar el Id primero");
+                        grdTipo.ActivarCelda(f, 0);
+                    }
+                    else
+                    {
+                        prods.Tipo.ID = i;
+                        prods.Tipo.ResumirPorVenta = (bool) a;
+                        grdTipo.set_Texto(f, c, a);
+                        prods.Tipo.Actualizar("ResumirPorVenta", a);
+                        grdTipo.ActivarCelda(f , c + 1);
+                    }
+                    break;
+                case 3: // Tiene_Estadistica
+                    if (i == 0)
+                    {
+                        Mensaje("Debe ingresar el Id primero");
+                        grdTipo.ActivarCelda(f, 0);
+                    }
+                    else
+                    {
+                        prods.Tipo.ID = i;
+                        prods.Tipo.Tiene_Estadistica = (bool)a;
+                        grdTipo.set_Texto(f, c, a);
+                        prods.Tipo.Actualizar("Tiene_Estadistica", a);
+                        grdTipo.ActivarCelda(f + 1, c);
                     }
                     break;
             }
@@ -138,17 +177,17 @@
 
             switch (c)
             {
-                case 0: // Id
+                case cId: // Id
                     if (i != 0)
                     {
-                        Mensaje("Error: no se puede cambiar el Id de un Tipo.");
+                        Mensaje("Error: no se puede cambiar el Id.");
                     }
                     else
                     {
                         prods.ID = Convert.ToInt32(a);
                         if (prods.Existe() == true)
                         {
-                            Mensaje($"El producto '{a.ToString()}' ya existe.");
+                            Mensaje($"El producto '{a}' ya existe.");
                             grdProductos.ErrorEnTxt();
                         }
                         else
@@ -156,15 +195,15 @@
                             grdProductos.set_Texto(f, c, a);
                             prods.Agregar();
                             grdProductos.AgregarFila();
-                            grdProductos.ActivarCelda(f, 1);
+                            grdProductos.ActivarCelda(f, cTipo);
                         }
                     }
                     break;
-                case 1: // Tipo
+                case cTipo: // Tipo
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
-                        grdProductos.ActivarCelda(f, 0);
+                        grdProductos.ActivarCelda(f, cId);
                     }
                     else
                     {
@@ -175,7 +214,7 @@
                             grdProductos.set_Texto(f, c, a);
                             grdProductos.set_Texto(f, c + 1, prods.Tipo.Nombre);
                             prods.Actualizar();
-                            grdProductos.ActivarCelda(f, 3);
+                            grdProductos.ActivarCelda(f, cNombre);
                         }
                         else
                         {
@@ -188,7 +227,7 @@
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
-                        grdProductos.ActivarCelda(f, 0);
+                        grdProductos.ActivarCelda(f, cId);
                     }
                     else
                     {
@@ -196,7 +235,7 @@
                         prods.Nombre = a.ToString();
                         grdProductos.set_Texto(f, c, a);
                         prods.Actualizar();
-                        grdProductos.ActivarCelda(f, 4);
+                        grdProductos.ActivarCelda(f, cVer);
                     }
                     break;
                 case 4: // Ver
@@ -307,16 +346,16 @@
                 bool n = int.TryParse(txtBuscar.Text, out i);
                 if (n)
                 {
-                    grdProductos.MostrarDatos(prods.Datos($"Nombre like '%{i}%' OR Id={i}"));
+                    grdProductos.MostrarDatos(prods.Datos_Vista($"Nombre like '%{i}%' OR Id={i}"));
                 }
                 else
                 {
-                    grdProductos.MostrarDatos(prods.Datos($"Nombre like '%{txtBuscar.Text}%'"));
+                    grdProductos.MostrarDatos(prods.Datos_Vista($"Nombre like '%{txtBuscar.Text}%'"));
                 }
             }
             else
             {
-                grdProductos.MostrarDatos(prods.Datos());
+                grdProductos.MostrarDatos(prods.Datos_Vista());
             }
             
         }
