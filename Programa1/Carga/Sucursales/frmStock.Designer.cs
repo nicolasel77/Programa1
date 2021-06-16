@@ -224,7 +224,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.cFecha);
             this.splitContainer2.Size = new System.Drawing.Size(207, 626);
-            this.splitContainer2.SplitterDistance = 470;
+            this.splitContainer2.SplitterDistance = 389;
             this.splitContainer2.SplitterWidth = 8;
             this.splitContainer2.TabIndex = 4;
             // 
@@ -237,10 +237,10 @@
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(-1, 3);
             this.cSucs.Mostrar_Botones = true;
-            this.cSucs.Mostrar_Tipo = false;
+            this.cSucs.Mostrar_Tipo = true;
             this.cSucs.Name = "cSucs";
             this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.cSucs.Size = new System.Drawing.Size(205, 464);
+            this.cSucs.Size = new System.Drawing.Size(205, 383);
             this.cSucs.TabIndex = 2;
             this.cSucs.Titulo = "Sucursales";
             this.cSucs.Valor_Actual = -1;
@@ -254,7 +254,7 @@
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFecha.Mostrar = 0;
             this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(207, 184);
+            this.cFecha.Size = new System.Drawing.Size(207, 229);
             this.cFecha.TabIndex = 3;
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);

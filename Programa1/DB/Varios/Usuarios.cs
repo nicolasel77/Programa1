@@ -23,11 +23,7 @@ namespace Programa1.DB.Varios
         }
 
         string vNombre = "";
-
-        public Usuarios(string nombre)
-        {
-            Nombre = nombre;
-        }
+                
         public Usuarios()
         {
         }

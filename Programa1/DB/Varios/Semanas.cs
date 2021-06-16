@@ -36,12 +36,7 @@
                 dt = null;
             }            
         }
-        public Semanas(DateTime sem, bool guardada, bool cerrada)
-        {
-            Semana = sem;
-            Guardada = guardada;
-            Cerrada = cerrada;
-        }
+       
         public DateTime Semana { get; set; }
         public bool Guardada { get; set; }
         public bool Cerrada { get; set; }
@@ -60,6 +55,28 @@
                     filtro = " WHERE " + filtro;
                 }
                 SqlCommand comandoSql = new SqlCommand($"SELECT * FROM Semanas {filtro} ORDER BY Semana DESC", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        public DataTable Fechas()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("SELECT TOP 100 Semana FROM Semanas ORDER BY Semana DESC", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
