@@ -211,7 +211,7 @@ namespace Programa1.Carga.Varios
             this.grdPasivos.Redraw = true;
             this.grdPasivos.Row = 0;
             this.grdPasivos.Rows = 50;
-            this.grdPasivos.Size = new System.Drawing.Size(373, 670);
+            this.grdPasivos.Size = new System.Drawing.Size(357, 670);
             this.grdPasivos.TabIndex = 3;
             // 
             // label1
@@ -258,7 +258,7 @@ namespace Programa1.Carga.Varios
             this.grdResultado.Redraw = true;
             this.grdResultado.Row = 0;
             this.grdResultado.Rows = 50;
-            this.grdResultado.Size = new System.Drawing.Size(370, 670);
+            this.grdResultado.Size = new System.Drawing.Size(354, 670);
             this.grdResultado.TabIndex = 3;
             // 
             // label2
@@ -285,7 +285,7 @@ namespace Programa1.Carga.Varios
             "20/12/1977"});
             this.lstSemanas.Location = new System.Drawing.Point(12, 12);
             this.lstSemanas.Name = "lstSemanas";
-            this.lstSemanas.Size = new System.Drawing.Size(103, 700);
+            this.lstSemanas.Size = new System.Drawing.Size(87, 700);
             this.lstSemanas.TabIndex = 0;
             this.lstSemanas.SelectedIndexChanged += new System.EventHandler(this.lstSemanas_SelectedIndexChanged);
             // 

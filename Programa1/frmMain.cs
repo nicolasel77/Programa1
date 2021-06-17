@@ -1919,5 +1919,53 @@
                 }
             }
         }
+
+        private void reintXCambioDePreciosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPrecios_Stock")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmPrecios_Stock");
+                t.Text = "Precios_Stock";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmPrecios_Stock = new Carga.Sucursales.frmPrecios_Stock();
+                frmPrecios_Stock.MdiParent = this;
+                frmPrecios_Stock.Disposed += FrmPrecios_Stock_Disposed;
+                forms.Add(frmPrecios_Stock);
+                frmPrecios_Stock.Show();
+                frmPrecios_Stock.WindowState = FormWindowState.Minimized;
+                frmPrecios_Stock.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmPrecios_Stock_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Precios_Stock")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPrecios_Stock")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

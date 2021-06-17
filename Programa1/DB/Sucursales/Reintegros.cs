@@ -31,7 +31,7 @@
         [MaxLength(80, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
-        public Single Importe { get; set; }
+        public double Importe { get; set; }
 
         public DataTable Datos(string filtro = "")
         {
@@ -187,7 +187,7 @@
                 Tipo.ID = Convert.ToInt32(dr["Id_Tipo"]);
                 Descripcion = dr["Descripcion"].ToString();
                 Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
-                Importe = Convert.ToSingle(dr["Importe"]);
+                Importe = Convert.ToDouble(dr["Importe"]);
 
             }
             catch (Exception)

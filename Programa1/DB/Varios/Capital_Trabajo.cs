@@ -45,7 +45,7 @@ namespace Programa1.DB.Varios
             //  1º Datos a procesar
             DataTable dt = new DataTable();
 
-            dt = Datos_Vista((tipo > 1) ? "Tipo>1" : "Tipo=" + tipo, "*", "Tipo, Orden");
+            dt = Datos_Vista((tipo ==2 ) ? "Tipo IN(2,3)" : "Tipo=" + tipo, "*", "Tipo, Orden");
             if (tipo == 0) { vActivos = 0; }
             if (tipo == 1) { vPasivos = 0; }
 
@@ -119,14 +119,11 @@ namespace Programa1.DB.Varios
             opciones[1, 1] = $"'{Semana.AddDays(-1):MM/dd/yy}'";
             opciones[2, 1] = $"'{Semana:MM/dd/yy}'";
 
-
             t = vActivos - vPasivos;
 
             datos(0);
             datos(1);
-            //DataTable dtAnterior = datos(0);
-            //dtAnterior = datos(1);
-
+            
             dn = dt.NewRow();
             dn[0] = "Dif Capital Ant";
             dn[1] = t - (vActivos - vPasivos);
@@ -134,6 +131,20 @@ namespace Programa1.DB.Varios
 
             //Inversion Externa S
             //Inversion Externa E
+            opciones[0, 1] = $"'{vSem:MM/dd/yy}'";
+            opciones[1, 1] = $"'{vSem.AddDays(6):MM/dd/yy}'";
+            opciones[2, 1] = $"'{vSem.AddDays(7):MM/dd/yy}'";
+
+            DataTable dtInversion = datos(4);
+            foreach(DataRow drn in dtInversion.Rows)
+            {
+                dn = dt.NewRow();
+                dn[0] = drn[0];
+                dn[1] = drn[1];
+                dt.Rows.Add(dn);
+            }
+            
+            //Guardado
 
             return dt;
         }

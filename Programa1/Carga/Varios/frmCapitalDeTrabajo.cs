@@ -47,7 +47,7 @@ namespace Programa1.Carga.Varios
         }
         private void Resultado()
         {
-            grdResultado.MostrarDatos(ct.Resultado(), true, 1);
+            grdResultado.MostrarDatos(ct.Resultado(), true, true);
             grdResultado.set_ColW(0, 200);
             grdResultado.set_ColW(1, 100);
             grdResultado.Columnas[1].Format = "N1";
@@ -57,15 +57,30 @@ namespace Programa1.Carga.Varios
             verde.BackColor = Color.LightGreen;
             rosa.BackColor = Color.LightSalmon;
 
+            double tResultado = 0;
             for (int i = 1; i<grdResultado.Rows-1; i++)
             {
+                if (tResultado != 0)
+                {
+                    tResultado -= Convert.ToDouble(grdResultado.get_Texto(i, 1));
+                }
                 if (grdResultado.get_Texto(i, 0).ToString() == "Resultado")
                 {
-                    double t = Convert.ToDouble(grdResultado.get_Texto(i, 1));
-                    if (t > 0) { grdResultado.Filas[i].Style = verde; }
-                    if (t < 0) { grdResultado.Filas[i].Style = rosa; }
-                }
+                    tResultado = Convert.ToDouble(grdResultado.get_Texto(i, 1));
+                    if (tResultado > 0) { grdResultado.Filas[i].Style = verde; }
+                    if (tResultado < 0) { grdResultado.Filas[i].Style = rosa; }
+                }            
             }
+            
+            grdResultado.set_Texto(grdResultado.Rows - 1, 0, "Diferencia");
+            grdResultado.set_Texto(grdResultado.Rows - 1, 1, tResultado);
+
+            double tActivos = Convert.ToDouble(grdActivos.get_Texto(grdActivos.Rows-1, 1));
+            double tPasivos = Convert.ToDouble(grdPasivos.get_Texto(grdPasivos.Rows - 1, 1));
+            lblTotales.Text = $"Diferencia: {(tActivos - tPasivos):C1}";
         }
+
+       
     }
 }
+
