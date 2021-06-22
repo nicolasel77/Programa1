@@ -52,8 +52,8 @@ namespace Programa1.Carga.Sucursales
             for (int i = 1; i <= grdResumen.Rows - 2; i++)
             {
                 r.Fecha = vSemana;
-                r.Sucursal.Id = Convert.ToInt32(grdResumen.get_Texto(i, 0));
-                if (r.Sucursal.Id != 0)
+                r.Sucursal.ID = Convert.ToInt32(grdResumen.get_Texto(i, 0));
+                if (r.Sucursal.ID != 0)
                 {
                     r.Tipo.ID = 4;
                     r.Descripcion = txtDesc.Text == "" ? "Reintegro por cambio de precios." : txtDesc.Text;

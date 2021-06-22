@@ -218,7 +218,7 @@
                     break;
                 case 2:
                     //ID_Sucursales
-                    stock.Sucursal.Id = Convert.ToInt32(a);
+                    stock.Sucursal.ID = Convert.ToInt32(a);
                     if (stock.Sucursal.Existe() == true)
                     {
                         stock.precios.Sucursal = stock.Sucursal;
@@ -297,7 +297,7 @@
                         //Rellenar nueva fila
 
                         grdStock.set_Texto(f + 1, c_Fecha, stock.Fecha);
-                        grdStock.set_Texto(f + 1, c_IdSuc, stock.Sucursal.Id);
+                        grdStock.set_Texto(f + 1, c_IdSuc, stock.Sucursal.ID);
                         grdStock.set_Texto(f + 1, c_IdSuc + 1, stock.Sucursal.Nombre);
 
                         stock.Producto.Siguiente();

@@ -257,7 +257,7 @@
                     break;
                 case 4:
                     //Id_Sucursales
-                    Venta.Sucursal.Id = Convert.ToInt32(a);
+                    Venta.Sucursal.ID = Convert.ToInt32(a);
                     if (Venta.Sucursal.Existe() == true)
                     {
                         Venta.precios.Sucursal = Venta.Sucursal;
@@ -360,7 +360,7 @@
                         GrdDevoluciones.set_Texto(f + 1, c_Fecha, Venta.Fecha);
                         GrdDevoluciones.set_Texto(f + 1, c_IdProv, Venta.Proveedor.Id);
                         GrdDevoluciones.set_Texto(f + 1, c_IdProv + 1, Venta.Sucursal.Nombre);
-                        GrdDevoluciones.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.Id);
+                        GrdDevoluciones.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.ID);
                         GrdDevoluciones.set_Texto(f + 1, c_IdSuc + 1, Venta.Sucursal.Nombre);
 
                         Venta.Producto.Siguiente();

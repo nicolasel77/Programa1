@@ -1,31 +1,21 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Ofertas
+    public class Ofertas : c_Base
     {
         public Ofertas()
         {
+            Tabla = "Ofertas";
+            Vista = "vw_Ofertas";
+            ID_Automatico = true;
         }
 
-        public Ofertas(int id, DateTime fecha, Productos prod, string desc, Sucursales.Sucursales sucursal, Single costo_or, Single costo_of, float kilos)
-        {
-            Id = id;
-            Fecha = fecha;
-            Producto = prod;
-            Descripcion = desc;
-            Sucursal = sucursal;
-            Costo_Original = costo_or;
-            Costo_Oferta = costo_of;
-            Kilos = kilos;
-
-        }
-
-        public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public Productos Producto { get; set; } = new Productos();
 
@@ -39,66 +29,31 @@
         public Precios_Sucursales precios = new Precios_Sucursales();
         public Lista_Ofertas precios_ofertas = new Lista_Ofertas();
 
-        public DataTable Datos(string filtro = "")
+        public new DataTable Datos(string filtro = "")
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand($"SELECT *,(Kilos_Vendidos-Kilos) AS Diferencia FROM vw_Ofertas {filtro} ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
+            return Datos_Vista(filtro, "*,(Kilos_Vendidos-Kilos) AS Diferencia");            
         }
 
-        public void Actualizar()
+        public new void Actualizar()
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command =
-                    new SqlCommand($"UPDATE Ofertas SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={Sucursal.Id}, Id_Productos={Producto.ID}, Descripcion='{Descripcion}', " +
-                        $"Costo_Original={Costo_Original.ToString().Replace(",", ".")}, Costo_Oferta={Costo_Oferta.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
-                        $"WHERE Id={Id}", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
+                Actualizar("Fecha", Fecha);
+                Actualizar("Id_Sucursales", Sucursal.ID);
+                Actualizar("ID_Productos", Producto.ID);
+                Actualizar("Descripcion", Descripcion);
+                Actualizar("Costo_Original", Costo_Original);
+                Actualizar("Costo_Oferta", Costo_Oferta);
+                Actualizar("Kilos", Kilos);
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            int n = MaxId();
+            int n = Max_ID();
             try
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Ofertas (Fecha, Id_Sucursales, Id_Productos, Descripcion, Costo_Original, Costo_Oferta, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.ID}, '{Descripcion}', {Costo_Original.ToString().Replace(",", ".")}, {Costo_Oferta.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto.ID}, '{Descripcion}', {Costo_Original.ToString().Replace(",", ".")}, {Costo_Oferta.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -107,15 +62,15 @@
 
                 sql.Close();
 
-                int n2 = MaxId();
+                int n2 = Max_ID();
                 if (n == n2)
                 {
-                    Id = 0;
+                    ID = 0;
                     MessageBox.Show("No se pudo guardar el registro.", "Error");
                 }
                 else
                 {
-                    Id = n2;
+                    ID = n2;
                 }
             }
             catch (Exception e)
@@ -124,54 +79,7 @@
             }
         }
 
-        public int MaxId()
-        {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Ofertas", conexionSql);
-
-                conexionSql.Open();
-
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
-
-                conexionSql.Close();
-            }
-            catch (Exception)
-            {
-                d = 0;
-            }
-
-            return Convert.ToInt32(d);
-        }
-
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Ofertas WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
+       
         public void Cargar_Fila(int id)
         {
             var dt = new DataTable("Datos");
@@ -188,11 +96,11 @@
 
                 DataRow dr = dt.Rows[0];
 
-                Id = id;
+                ID = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
                 Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
-                Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+                Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Costo_Original = Convert.ToSingle(dr["Costo_Original"]);
                 Costo_Oferta = Convert.ToSingle(dr["Costo_Oferta"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
@@ -200,10 +108,15 @@
             }
             catch (Exception)
             {
-                Id = 0;
+                ID = 0;
+                Fecha = Convert.ToDateTime("1/1/1");
+                Producto.ID = 0;
+                Descripcion = "";
+                Sucursal.ID = 0;
+                Costo_Original = 0;
+                Costo_Oferta = 0;
+                Kilos = 0;
             }
-
-
         }
     }
 }

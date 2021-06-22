@@ -175,15 +175,15 @@
                     if (cmbSucursal.SelectedIndex > -1)
                     {
                         Herramientas.Herramientas h = new Herramientas.Herramientas();
-                        Ventas.Sucursal.Id = h.Codigo_Seleccionado(cmbSucursal.Text);
+                        Ventas.Sucursal.ID = h.Codigo_Seleccionado(cmbSucursal.Text);
 
-                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Sucursales"), Ventas.Sucursal.Id);
+                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Sucursales"), Ventas.Sucursal.ID);
                         string s = cmbSucursal.Text;
                         s = s.Substring(s.IndexOf(".") + 1);
                         grdResultado.set_Texto(f, grdResultado.get_ColIndex("Nombre"), s);
                     }
                 }
-                precios.Sucursal.Id = Ventas.Sucursal.Id;
+                precios.Sucursal.ID = Ventas.Sucursal.ID;
 
                 if (chProd.Checked)
                 {
@@ -236,7 +236,7 @@
                 {
                     if (rdAutoVenta.Checked)
                     {
-                        precios.Sucursal.Id = Ventas.Sucursal.Id;
+                        precios.Sucursal.ID = Ventas.Sucursal.ID;
                         precios.Buscar();
                         Ventas.CostoVenta = precios.Precio;
 
@@ -287,8 +287,8 @@
                 int i = Convert.ToInt32(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id")).ToString());
                 Ventas.Id = i;
                 Ventas.Fecha = Convert.ToDateTime(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Fecha")));
-                Ventas.Sucursal.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Proveedores")));
-                Ventas.Sucursal.Id = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Sucursales")));
+                Ventas.Sucursal.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Proveedores")));
+                Ventas.Sucursal.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Sucursales")));
                 Ventas.Producto.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Productos")));
                 Ventas.Descripcion = Convert.ToString(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Descripcion")));
                 Ventas.CostoCompra = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Compra")));

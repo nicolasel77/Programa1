@@ -112,7 +112,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Stock SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={Sucursal.Id}, Id_Productos={Producto.ID}, Descripcion='{Descripcion}', " +
+                        $"Id_Sucursales={Sucursal.ID}, Id_Productos={Producto.ID}, Descripcion='{Descripcion}', " +
                         $"Costo={Costo.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -137,7 +137,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Stock (Fecha, Id_Sucursales, Id_Productos, Descripcion, Costo, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -231,7 +231,7 @@
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
                 Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
-                Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+                Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Costo = Convert.ToSingle(dr["Costo"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
 

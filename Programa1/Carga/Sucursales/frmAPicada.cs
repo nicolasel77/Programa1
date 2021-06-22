@@ -33,7 +33,7 @@
             grdAPicada.TeclasManejadas = n;
 
             APicada = new APicada();
-            grdAPicada.MostrarDatos(APicada.Datos("Id=0"), true);
+            grdAPicada.MostrarDatos(APicada.Datos_Vista("Id=0"), true);
 
             c_Id = Convert.ToByte(grdAPicada.get_ColIndex("Id"));
             c_Fecha = Convert.ToByte(grdAPicada.get_ColIndex("Fecha"));
@@ -114,7 +114,7 @@
             this.Cursor = Cursors.WaitCursor;
 
             string s = Armar_Cadena();
-            grdAPicada.MostrarDatos(APicada.Datos(s), true);
+            grdAPicada.MostrarDatos(APicada.Datos_Vista(s), true);
             formato_Grilla();
             Totales();
             grdAPicada.ActivarCelda(grdAPicada.Rows - 1, c_Fecha);
@@ -225,170 +225,188 @@
         private void GrdAPicada_Editado(short f, short c, object a)
         {
             int id = Convert.ToInt32(grdAPicada.get_Texto(f, c_Id));
-            switch (c)
+            DateTime df = Convert.ToDateTime(grdAPicada.get_Texto(f, c_Fecha));
+
+            if (APicada.Fecha_Cerrada(df) == false)
             {
-                case 1:
-                    //Fecha
-                    DateTime df = Convert.ToDateTime(a);
-                    if (df >= cFecha.fecha_Actual)
-                    {
-                        APicada.Fecha = df;
-                        APicada.precios.Fecha = APicada.Fecha;
+                switch (c)
+                {
+                    case 1:
+                        //Fecha
+                        df = Convert.ToDateTime(a);
+                        if (df >= cFecha.fecha_Actual)
+                        {
+                            if (APicada.Fecha_Cerrada(df) == false)
+                            {
+                                APicada.Fecha = df;
+                                APicada.precios.Fecha = APicada.Fecha;
 
-                        if (id != 0) { APicada.Actualizar(); }
+                                if (id != 0) { APicada.Actualizar(); }
 
+                                grdAPicada.set_Texto(f, c, a);
+                                grdAPicada.ActivarCelda(f, c + 1);
+                            }
+                            else
+                            {
+                                Mensaje("La fecha ingresada se encuentra cerrada.");
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                            grdAPicada.ErrorEnTxt();
+                        }
+                        break;
+                    case 2:
+                        //ID_Sucursales
+                        APicada.Sucursal.ID = Convert.ToInt32(a);
+                        if (APicada.Sucursal.Existe() == true)
+                        {
+                            APicada.precios.Sucursal = APicada.Sucursal;
+
+                            if (id != 0) { APicada.Actualizar(); }
+
+                            grdAPicada.set_Texto(f, c, a);
+                            grdAPicada.set_Texto(f, c + 1, APicada.Sucursal.Nombre);
+
+                            grdAPicada.ActivarCelda(f, c + 2);
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró la sucursal " + a.ToString());
+                            grdAPicada.ErrorEnTxt();
+                        }
+                        break;
+                    case 4:
+                        //ID_Productos_A
+                        APicada.Producto_A.ID = Convert.ToInt32(a);
+                        if (APicada.Producto_A.Existe() == true)
+                        {
+                            APicada.precios.Producto = APicada.Producto_A;
+
+                            grdAPicada.set_Texto(f, c, a);
+                            grdAPicada.set_Texto(f, c + 1, APicada.Producto_A.Nombre);
+
+                            APicada.Costo_A = APicada.precios.Buscar();
+                            grdAPicada.set_Texto(f, c_Costo_A, APicada.Costo_A);
+                            grdAPicada.set_Texto(f, c_Total_A, APicada.Costo_A * APicada.Kilos_A);
+                            grdAPicada.set_Texto(f, c_Reintegro, Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_A)) - Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_S)));
+
+                            if (id != 0) { APicada.Actualizar(); }
+
+                            grdAPicada.ActivarCelda(f, c_Kilos_A);
+                            Totales();
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró el producto " + a.ToString());
+                            grdAPicada.ErrorEnTxt();
+                        }
+                        break;
+
+
+                    case 6:
+                        //Kilos_A
+                        APicada.Kilos_A = Convert.ToSingle(a);
                         grdAPicada.set_Texto(f, c, a);
-                        grdAPicada.ActivarCelda(f, c + 1);
-                    }
-                    else
-                    {
-                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
-                        grdAPicada.ErrorEnTxt();
-                    }
-                    break;
-                case 2:
-                    //ID_Sucursales
-                    APicada.Sucursal.Id = Convert.ToInt32(a);
-                    if (APicada.Sucursal.Existe() == true)
-                    {
-                        APicada.precios.Sucursal = APicada.Sucursal;
-
-                        if (id != 0) { APicada.Actualizar(); }
-
-                        grdAPicada.set_Texto(f, c, a);
-                        grdAPicada.set_Texto(f, c + 1, APicada.Sucursal.Nombre);
-
-                        grdAPicada.ActivarCelda(f, c + 2);
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró la sucursal " + a.ToString());
-                        grdAPicada.ErrorEnTxt();
-                    }
-                    break;
-                case 4:
-                    //ID_Productos_A
-                    APicada.Producto_A.ID = Convert.ToInt32(a);
-                    if (APicada.Producto_A.Existe() == true)
-                    {
-                        APicada.precios.Producto = APicada.Producto_A;
-                                                
-                        grdAPicada.set_Texto(f, c, a);
-                        grdAPicada.set_Texto(f, c + 1, APicada.Producto_A.Nombre);
-
-                        APicada.Costo_A = APicada.precios.Buscar();
-                        grdAPicada.set_Texto(f, c_Costo_A, APicada.Costo_A);
                         grdAPicada.set_Texto(f, c_Total_A, APicada.Costo_A * APicada.Kilos_A);
                         grdAPicada.set_Texto(f, c_Reintegro, Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_A)) - Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_S)));
 
                         if (id != 0) { APicada.Actualizar(); }
 
-                        grdAPicada.ActivarCelda(f, c_Kilos_A);
+                        grdAPicada.ActivarCelda(f, c_IdProd_S);
+
                         Totales();
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró el producto " + a.ToString());
-                        grdAPicada.ErrorEnTxt();
-                    }
-                    break;
-               
-                
-                case 6:
-                    //Kilos_A
-                    APicada.Kilos_A = Convert.ToSingle(a);
-                    grdAPicada.set_Texto(f, c, a);
-                    grdAPicada.set_Texto(f, c_Total_A, APicada.Costo_A * APicada.Kilos_A);
-                    grdAPicada.set_Texto(f, c_Reintegro, Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_A)) - Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_S)));
+                        break;
+                    case 7:
+                        //ID_Productos_S
+                        APicada.Producto_S.ID = Convert.ToInt32(a);
+                        if (APicada.Producto_S.Existe() == true)
+                        {
+                            APicada.precios.Producto = APicada.Producto_S;
 
-                    if (id != 0) { APicada.Actualizar(); }
+                            grdAPicada.set_Texto(f, c, a);
+                            grdAPicada.set_Texto(f, c + 1, APicada.Producto_S.Nombre);
 
-                    grdAPicada.ActivarCelda(f, c_IdProd_S);
+                            APicada.Costo_S = APicada.precios.Buscar();
+                            grdAPicada.set_Texto(f, c_Costo_S, APicada.Costo_S);
+                            grdAPicada.set_Texto(f, c_Total_S, APicada.Costo_S * APicada.Kilos_S);
+                            grdAPicada.set_Texto(f, c_Reintegro, Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_A)) - Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_S)));
 
-                    Totales();
-                    break;
-                case 7:
-                    //ID_Productos_S
-                    APicada.Producto_S.ID = Convert.ToInt32(a);
-                    if (APicada.Producto_S.Existe() == true)
-                    {
-                        APicada.precios.Producto = APicada.Producto_S;
+                            if (id != 0) { APicada.Actualizar(); }
 
+                            grdAPicada.ActivarCelda(f, c_Kilos_S);
+                            Totales();
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró el producto " + a.ToString());
+                            grdAPicada.ErrorEnTxt();
+                        }
+                        break;
+
+
+                    case 9:
+                        //Kilos_S
+                        APicada.Kilos_S = Convert.ToSingle(a);
                         grdAPicada.set_Texto(f, c, a);
-                        grdAPicada.set_Texto(f, c + 1, APicada.Producto_S.Nombre);
+                        grdAPicada.set_Texto(f, c_Total_S, APicada.Costo_S * APicada.Kilos_S);
+                        grdAPicada.set_Texto(f, c_Reintegro, Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_A)) - Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_S)));
 
-                        APicada.Costo_S = APicada.precios.Buscar();
-                        grdAPicada.set_Texto(f, c_Costo_S, APicada.Costo_S);
+                        if (grdAPicada.Row == grdAPicada.Rows - 1)
+                        {
+                            if (APicada.Fecha>= cFecha.fecha_Actual & APicada.Sucursal.ID != 0 & APicada.Producto_A.ID != 0 & APicada.Producto_S.ID != 0)
+                            {
+                                APicada.Agregar();
+                                grdAPicada.set_Texto(f, c_Id, APicada.ID);
+                                grdAPicada.AgregarFila();
+                                //Rellenar nueva fila
+
+                                grdAPicada.set_Texto(f + 1, c_Fecha, APicada.Fecha);
+                                grdAPicada.set_Texto(f + 1, c_IdSuc, APicada.Sucursal.ID);
+                                grdAPicada.set_Texto(f + 1, c_IdSuc + 1, APicada.Sucursal.Nombre);
+
+                                grdAPicada.ActivarCelda(f, c_Costo_S); 
+                            }
+                        }
+                        else
+                        {
+                            APicada.Actualizar();
+                            grdAPicada.ActivarCelda(f, c_Costo_A);
+                        }
+
+                        Totales();
+                        break;
+                    case 10:
+                        //Costo_A
+                        APicada.Costo_A = Convert.ToSingle(a);
+                        grdAPicada.set_Texto(f, c, a);
+                        grdAPicada.set_Texto(f, c_Total_A, APicada.Costo_A * APicada.Kilos_A);
+                        grdAPicada.set_Texto(f, c_Reintegro, Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_A)) - Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_S)));
+
+                        if (id != 0) { APicada.Actualizar(); }
+
+                        grdAPicada.ActivarCelda(f, c_Costo_S);
+                        Totales();
+                        break;
+                    case 11:
+                        //Costo_S
+                        APicada.Costo_S = Convert.ToSingle(a);
+                        grdAPicada.set_Texto(f, c, a);
                         grdAPicada.set_Texto(f, c_Total_S, APicada.Costo_S * APicada.Kilos_S);
                         grdAPicada.set_Texto(f, c_Reintegro, Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_A)) - Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_S)));
 
                         if (id != 0) { APicada.Actualizar(); }
 
-                        grdAPicada.ActivarCelda(f, c_Kilos_S);
+                        grdAPicada.ActivarCelda(f + 1, c_Costo_S);
                         Totales();
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró el producto " + a.ToString());
-                        grdAPicada.ErrorEnTxt();
-                    }
-                    break;
-
-
-                case 9:
-                    //Kilos_S
-                    APicada.Kilos_S = Convert.ToSingle(a);
-                    grdAPicada.set_Texto(f, c, a);
-                    grdAPicada.set_Texto(f, c_Total_S, APicada.Costo_S * APicada.Kilos_S);
-                    grdAPicada.set_Texto(f, c_Reintegro, Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_A)) - Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_S)));
-
-                    if (grdAPicada.Row == grdAPicada.Rows - 1)
-                    {
-                        APicada.Agregar();
-                        grdAPicada.set_Texto(f, c_Id, APicada.Id);
-                        grdAPicada.AgregarFila();
-                        //Rellenar nueva fila
-
-                        grdAPicada.set_Texto(f + 1, c_Fecha, APicada.Fecha);
-                        grdAPicada.set_Texto(f + 1, c_IdSuc, APicada.Sucursal.Id);
-                        grdAPicada.set_Texto(f + 1, c_IdSuc + 1, APicada.Sucursal.Nombre);
-
-                        grdAPicada.ActivarCelda(f, c_Costo_S);
-                    }
-                    else
-                    {
-                        APicada.Actualizar();
-                        grdAPicada.ActivarCelda(f, c_Costo_A);
-                    }
-                                        
-                    Totales();
-                    break;
-                case 10:
-                    //Costo_A
-                    APicada.Costo_A = Convert.ToSingle(a);
-                    grdAPicada.set_Texto(f, c, a);
-                    grdAPicada.set_Texto(f, c_Total_A, APicada.Costo_A * APicada.Kilos_A);
-                    grdAPicada.set_Texto(f, c_Reintegro, Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_A)) - Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_S)));
-
-                    if (id != 0) { APicada.Actualizar(); }
-
-                    grdAPicada.ActivarCelda(f, c_Costo_S);
-                    Totales();
-                    break;
-                case 11:
-                    //Costo_S
-                    APicada.Costo_S = Convert.ToSingle(a);
-                    grdAPicada.set_Texto(f, c, a);
-                    grdAPicada.set_Texto(f, c_Total_S, APicada.Costo_S * APicada.Kilos_S);
-                    grdAPicada.set_Texto(f, c_Reintegro, Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_A)) - Convert.ToSingle(grdAPicada.get_Texto(f, c_Total_S)));
-
-                    if (id != 0) { APicada.Actualizar(); }
-
-                    grdAPicada.ActivarCelda(f + 1, c_Costo_S);
-                    Totales();
-                    break;                    
+                        break;
+                } 
             }
-
+            else
+            {
+                Mensaje("La fecha ingresada se encuentra cerrada.");
+            }
         }
 
         private void GrdAPicada_CambioFila(short Fila)
@@ -404,7 +422,7 @@
         {
             if (e == 13)
             {
-                if (APicada.Id == 0)
+                if (APicada.ID == 0)
                 {
 
                     if (grdAPicada.Col == c_Kilos_A)
@@ -438,14 +456,21 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    if (Convert.ToInt32(grdAPicada.get_Texto(grdAPicada.Row, 0)) != 0)                        
                     {
-                        if (Convert.ToInt32(grdAPicada.get_Texto(grdAPicada.Row, 0)) != 0)
+                        if (APicada.Fecha_Cerrada(APicada.Fecha) == false)
                         {
-                            APicada.Id = Convert.ToInt32(grdAPicada.get_Texto(grdAPicada.Row, 0));
-                            APicada.Borrar();
-                            grdAPicada.BorrarFila(grdAPicada.Row);
-                            Totales();
+                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                            {
+                                APicada.ID = Convert.ToInt32(grdAPicada.get_Texto(grdAPicada.Row, 0));
+                                APicada.Borrar();
+                                grdAPicada.BorrarFila(grdAPicada.Row);
+                                Totales();
+                            } 
+                        }
+                        else
+                        {
+                            Mensaje("La fecha ingresada se encuentra cerrada.");
                         }
                     }
                     break;

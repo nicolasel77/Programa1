@@ -365,7 +365,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Id = Convert.ToInt32(a);
+                        Sucs.ID = Convert.ToInt32(a);
                         if (Sucs.Existe() == true)
                         {
                             Mensaje($"El Sucursal '{a.ToString()}' ya existe.");
@@ -388,7 +388,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Id = i;
+                        Sucs.ID = i;
                         Sucs.Nombre = a.ToString();
                         grdSucursales.set_Texto(f, c, a);
                         Sucs.Actualizar();
@@ -403,7 +403,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Id = i;
+                        Sucs.ID = i;
                         Sucs.Tipo.ID = Convert.ToInt32(a);
                         if (Sucs.Tipo.Existe() == true)
                         {
@@ -427,7 +427,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Id = i;
+                        Sucs.ID = i;
                         Sucs.Ver = bool.Parse(a.ToString());
                         grdSucursales.set_Texto(f, c, a);
                         Sucs.Actualizar();
@@ -442,7 +442,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Id = i;
+                        Sucs.ID = i;
                         Sucs.Propio = bool.Parse(a.ToString());
                         grdSucursales.set_Texto(f, c, a);
                         Sucs.Actualizar();
@@ -457,7 +457,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Id = i;
+                        Sucs.ID = i;
                         grdSucursales.set_Texto(f, c, a);
                         Sucs.Titular = a.ToString();
                         Sucs.Actualizar();
@@ -472,7 +472,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Id = i;
+                        Sucs.ID = i;
                         grdSucursales.set_Texto(f, c, a);
                         Sucs.Direccion = a.ToString();
                         Sucs.Actualizar();
@@ -487,7 +487,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Id = i;
+                        Sucs.ID = i;
                         grdSucursales.set_Texto(f, c, a);
                         Sucs.Alias = a.ToString();
                         Sucs.Actualizar();
@@ -502,7 +502,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Id = i;
+                        Sucs.ID = i;
                         grdSucursales.set_Texto(f, c, a);
                         Sucs.Localidad.Id = Convert.ToInt32(a);
                         if (Sucs.Localidad.Existe() == true)
@@ -525,7 +525,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Id = i;
+                        Sucs.ID = i;
                         grdSucursales.set_Texto(f, c, a);
                         Sucs.Balanza = a.ToString();
                         Sucs.Actualizar();
@@ -541,7 +541,7 @@ namespace Programa1.Datos
                     }
                     else
                     {
-                        Sucs.Id = i;
+                        Sucs.ID = i;
                         grdSucursales.set_Texto(f, c, a);
                         Sucs.CUIT = a.ToString();
                         Sucs.Actualizar();
@@ -566,7 +566,7 @@ namespace Programa1.Datos
                 {
                     if (Convert.ToInt32(grdSucursales.get_Texto(grdSucursales.Row, 0)) != 0)
                     {
-                        Sucs.Id = Convert.ToInt32(grdSucursales.get_Texto(grdSucursales.Row, 0));
+                        Sucs.ID = Convert.ToInt32(grdSucursales.get_Texto(grdSucursales.Row, 0));
                         Sucs.Borrar();
                         grdSucursales.BorrarFila(grdSucursales.Row);
                     }
@@ -588,7 +588,7 @@ namespace Programa1.Datos
             // 8 int Id_Localidad
             // 9 string Balanza
             // 10 string CUIT
-            Sucs.Id = Convert.ToInt32(grdSucursales.get_Texto(Fila, 0));
+            Sucs.ID = Convert.ToInt32(grdSucursales.get_Texto(Fila, 0));
             Sucs.Nombre = grdSucursales.get_Texto(Fila, 1).ToString();
             Sucs.Tipo.ID = Convert.ToInt32(grdSucursales.get_Texto(Fila, 2));
             Sucs.Ver = bool.Parse(grdSucursales.get_Texto(Fila, 3).ToString());

@@ -9,15 +9,12 @@
     public class Listas_Carga : c_Base
     {
         private Productos prod = new Productos();
-        /// <summary>
-        /// Corresponde a la lista de Productos + Lista + Orden
-        /// </summary>
-        /// 
-        public int Id { get; set; }
+        
+        
         public Listas_Carga()
         {
             Tabla = "Listas_Carga";
-            Vista = "vw_Listas_Carga";
+            Vista = "vw_Listas_Carga";            
         }
         public Productos Producto
         {
@@ -31,6 +28,7 @@
         }
         public int Orden { get; set; }
         public Nombre_Listas Lista { get; set; } = new Nombre_Listas();
+        
         /// <summary>
         /// Devuelve la vista vw_Listas_Carga con el filtro de Lista.ID.
         /// </summary>
@@ -69,27 +67,6 @@
             return Producto.ID;
         }
 
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Listas_Carga WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
+        
     }
 }

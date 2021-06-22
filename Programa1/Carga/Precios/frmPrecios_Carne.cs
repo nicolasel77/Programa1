@@ -118,7 +118,7 @@ namespace Programa1.Carga.Precios
 
             grdSucursales.Ordenar(Convert.ToInt16(grdSucursales.get_ColIndex("ID")));
 
-            if (pr.Sucursal.Id != 0) { Cargar_Precios(); }
+            if (pr.Sucursal.ID != 0) { Cargar_Precios(); }
         }
         private void Cargar_Fechas()
         {
@@ -131,10 +131,10 @@ namespace Programa1.Carga.Precios
 
         private void grdSucursales_CambioFila(short Fila)
         {
-            pr.Sucursal.Id = 0;
+            pr.Sucursal.ID = 0;
             if (Convert.ToInt32(grdSucursales.get_Texto(Fila, 0)) != 0)
             {
-                pr.Sucursal.Id = Convert.ToInt32(grdSucursales.get_Texto(Fila, 0));
+                pr.Sucursal.ID = Convert.ToInt32(grdSucursales.get_Texto(Fila, 0));
                 lblSuc.Text = Convert.ToString(grdSucursales.get_Texto(Fila, 1));
                 Cargar_Precios();
             }
@@ -144,7 +144,7 @@ namespace Programa1.Carga.Precios
         private void Cargar_Precios()
         {
             this.Cursor = Cursors.WaitCursor;
-            if (pr.Sucursal.Id != 0)
+            if (pr.Sucursal.ID != 0)
             {
                 if (lstFechas.SelectedIndex != -1)
                 {
@@ -326,7 +326,7 @@ namespace Programa1.Carga.Precios
                     //Guardar todo por cada Sucursal
                     Herramientas.Herramientas h = new Herramientas.Herramientas();
 
-                    pr.Sucursal.Id = h.Codigo_Seleccionado(suc);
+                    pr.Sucursal.ID = h.Codigo_Seleccionado(suc);
 
                     //Guardar primero la integracion
                     pr.Producto.ID = 1;

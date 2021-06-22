@@ -215,7 +215,7 @@
                     break;
                 case 2:
                     //ID_Sucursales
-                    Reintegros.Sucursal.Id = Convert.ToInt32(a);
+                    Reintegros.Sucursal.ID = Convert.ToInt32(a);
                     if (Reintegros.Sucursal.Existe() == true)
                     {
                         if (id != 0) { Reintegros.Actualizar(); }

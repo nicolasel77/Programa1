@@ -1,29 +1,21 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Gastos_Sucursales
+    public class Gastos_Sucursales : c_Base
     {
         public Gastos_Sucursales()
-        {            
-        }
-
-        public Gastos_Sucursales(int id, DateTime fecha, GastosSucursales_Tipos tipo, string desc, Sucursales.Sucursales sucursal, float importe)
         {
-            Id = id;
-            Fecha = fecha;
-            Tipo = tipo;
-            Descripcion = desc;
-            Sucursal = sucursal;
-            Importe = importe;
-
+            Tabla = "Gastos_Sucursales";
+            Vista = "vw_GastosSucursales";
+            ID_Automatico = true;
         }
 
-        public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public GastosSucursales_Tipos Tipo { get; set; } = new GastosSucursales_Tipos();
         [MaxLength(80, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
@@ -31,64 +23,31 @@
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Single Importe { get; set; }
 
-        public DataTable Datos(string filtro = "")
+
+        public new DataTable Datos(string filtro = "")
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            if (filtro.Length > 0) filtro = " WHERE " + filtro;            
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Fecha, Id_Sucursales, Nombre, Id_Tipo, Descripcion, Importe FROM vw_GastosSucursales {filtro} ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
+            return Datos_Vista(filtro, "ID, Fecha, ID_Sucursales, Nombre, ID_Tipo, Descripcion, Importe");            
         }
 
 
-        public void Actualizar()
+        public new void Actualizar()
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command =
-                    new SqlCommand($"UPDATE Gastos_Sucursales SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={Sucursal.Id}, Id_Tipo={Tipo.ID}, Descripcion='{Descripcion}', " +
-                        $"Importe={Importe.ToString().Replace(",", ".")} " +
-                        $"WHERE Id={Id}", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
+            Actualizar("Fecha", Fecha);
+            Actualizar("ID_Sucursales", Sucursal.ID);
+            Actualizar("ID_Tipo", Tipo.ID);
+            Actualizar("Descripcion", Descripcion);
+            Actualizar("Importe", Importe);            
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            int n = MaxId();
+            int n = Max_ID();
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Gastos_Sucursales (Fecha, Id_Sucursales, Id_Tipo, Descripcion, Importe) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Tipo.ID}, '{Descripcion}', {Importe.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Gastos_Sucursales (Fecha, ID_Sucursales, ID_Tipo, Descripcion, Importe) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Tipo.ID}, '{Descripcion}', {Importe.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -97,15 +56,15 @@
 
                 sql.Close();
 
-                int n2 = MaxId();
+                int n2 = Max_ID();
                 if (n == n2)
                 {
-                    Id = 0;
+                    ID = 0;
                     MessageBox.Show("No se pudo guardar el registro.", "Error");
                 }
                 else
                 {
-                    Id = n2;
+                    ID = n2;
                 }
             }
             catch (Exception e)
@@ -114,55 +73,8 @@
             }
         }
 
-        public int MaxId()
-        {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Gastos_Sucursales", conexionSql);
-
-                conexionSql.Open();
-
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
-
-                conexionSql.Close();
-            }
-            catch (Exception)
-            {
-                d = 0;
-            }
-
-            return Convert.ToInt32(d);
-        }
-
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Gastos_Sucursales WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
-        public void Cargar_Fila(int id)
+        
+        public void Cargar_Fila(int Id)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -170,7 +82,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_GastosSucursales WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_GastosSucursales WHERE ID=" + Id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -178,17 +90,22 @@
 
                 DataRow dr = dt.Rows[0];
 
-                Id = id;
+                ID = Id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
-                Tipo.ID = Convert.ToInt32(dr["Id_Tipo"]);
+                Tipo.ID = Convert.ToInt32(dr["ID_Tipo"]);
                 Descripcion = dr["Descripcion"].ToString();
-                Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+                Sucursal.ID = Convert.ToInt32(dr["ID_Sucursales"]);
                 Importe = Convert.ToSingle(dr["Importe"]);
 
             }
             catch (Exception)
             {
-                Id = 0;
+                ID = 0;
+                Fecha = Convert.ToDateTime("1/1/1");
+                Tipo.ID = 0;
+                Descripcion = "";
+                Sucursal.ID = 0;
+                Importe = 0;
             }
 
 

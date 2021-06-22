@@ -242,7 +242,7 @@ namespace Programa1.Carga
                     break;
                 case 2:
                     //Suc_Salida
-                    Traslados.sucS.Id = Convert.ToInt32(a);
+                    Traslados.sucS.ID = Convert.ToInt32(a);
                     if (Traslados.sucS.Existe() == true)
                     {
                         Traslados.precios.Sucursal = Traslados.sucS;
@@ -262,7 +262,7 @@ namespace Programa1.Carga
                     break;
                 case 4:
                     //Suc_Entrada
-                    Traslados.sucE.Id = Convert.ToInt32(a);
+                    Traslados.sucE.ID = Convert.ToInt32(a);
                     if (Traslados.sucE.Existe() == true)
                     {
                         Traslados.precios.Sucursal = Traslados.sucE;

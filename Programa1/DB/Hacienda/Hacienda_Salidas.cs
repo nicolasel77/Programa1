@@ -169,7 +169,7 @@ namespace Programa1.DB
                 SqlCommand command =
                     new SqlCommand($"UPDATE Hacienda_Salidas SET " +
                         $"Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={Sucursal.Id}, " +
+                        $"Id_Sucursales={Sucursal.ID}, " +
                         $"Id_Faena={Faena.Id}, " +
                         $"Costo_Salida={Costo_Salida.ToString().Replace(",", ".")}, " +
                         $"Media={Media.ToString().Replace(",", ".")} " +
@@ -196,7 +196,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Hacienda_Salidas (Id, Fecha, Id_Sucursales, Id_Faena, Costo_Salida, Media) " +
-                        $"VALUES({Id}, '{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Faena.Id}, {Costo_Salida.ToString().Replace(",", ".")}, {Media.ToString().Replace(",", ".")})", sql);
+                        $"VALUES({Id}, '{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Faena.Id}, {Costo_Salida.ToString().Replace(",", ".")}, {Media.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -313,7 +313,7 @@ namespace Programa1.DB
                 Id = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
                 Faena.Id = Convert.ToInt32(dr["Id_Faena"]);
-                Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+                Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Costo_Salida = Convert.ToSingle(dr["Costo_Salida"]);
                 Media = Convert.ToSingle(dr["Media"]);
 

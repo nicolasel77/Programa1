@@ -54,7 +54,7 @@
                     else
                     {
                         grdSucursales.ActivarCelda(grdSucursales.Row - 1, 0);
-                    }
+                    }                    
                     break;
                 case Keys.Divide:
                     cFechas1.Anterior();
@@ -141,7 +141,7 @@
             if (Convert.ToInt32(grdSucursales.get_Texto(Fila, 0)) != 0)
             {
                 Suc = Convert.ToInt32(grdSucursales.get_Texto(Fila, 0));
-                Est.Suc.Id = Suc;
+                Est.Suc.ID = Suc;
                 lblSuc.Text = $"{grdSucursales.get_Texto(Fila, 1)}";                
                 Cargar_Datos();
                 this.Cursor = Cursors.Default;

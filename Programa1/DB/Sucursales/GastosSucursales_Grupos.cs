@@ -2,7 +2,7 @@
 {
     using Programa1.Clases;
 
-    class GastosSucursales_Grupos : c_Base
+    public class GastosSucursales_Grupos : c_Base
     {
         public GastosSucursales_Grupos()
         {

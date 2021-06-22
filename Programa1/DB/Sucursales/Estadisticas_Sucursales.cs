@@ -35,7 +35,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT dbo.f_Balance ({Suc.Id}, '{Sem.Semana:MM/dd/yy}', '{Sem.Semana.AddDays(6):MM/dd/yy}')", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT dbo.f_Balance ({Suc.ID}, '{Sem.Semana:MM/dd/yy}', '{Sem.Semana.AddDays(6):MM/dd/yy}')", conexionSql);
 
                 conexionSql.Open();
 
@@ -60,7 +60,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT dbo.f_CarneKilos ({Suc.Id}, '{Sem.Semana:MM/dd/yy}', '{Sem.Semana.AddDays(6):MM/dd/yy}')", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT dbo.f_CarneKilos ({Suc.ID}, '{Sem.Semana:MM/dd/yy}', '{Sem.Semana.AddDays(6):MM/dd/yy}')", conexionSql);
 
                 conexionSql.Open();
 
@@ -133,7 +133,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT dbo.f_TEmpleados ({Suc.Id}, '{Sem.Semana:MM/dd/yy}', '{Sem.Semana.AddDays(6):MM/dd/yy}')", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT dbo.f_TEmpleados ({Suc.ID}, '{Sem.Semana:MM/dd/yy}', '{Sem.Semana.AddDays(6):MM/dd/yy}')", conexionSql);
 
                 conexionSql.Open();
 
@@ -219,7 +219,7 @@
                 SqlCommand comandoSql = new SqlCommand($"SELECT TOP {Top} Semana, Rend, Balance, Carne, Pollo, Granja, Men, Emb, Rec, IntVenta, IntCompra, DifInt" +
                     $", Empleados, Gastos, Ganancia, Clientes, Reintegros" +
                     $" FROM vw_Estadisticas_Sucursal WHERE " +
-                    $" ID_Sucursales={Suc.Id}" +
+                    $" ID_Sucursales={Suc.ID}" +
                     $" AND Semana BETWEEN  '{Sem.Semana.AddYears(-1):MM/dd/yy}' AND '{Sem.Semana:MM/dd/yy}' ORDER BY Semana DESC", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
@@ -280,7 +280,7 @@
             {
                 SqlCommand comandoSql = new SqlCommand("sp_VentasKilos", conexionSql);
                 comandoSql.CommandType = CommandType.StoredProcedure;
-                comandoSql.Parameters.AddWithValue("Suc", Suc.Id);
+                comandoSql.Parameters.AddWithValue("Suc", Suc.ID);
                 comandoSql.Parameters.AddWithValue("F", Sem.Semana);
 
                 conexionSql.Open();
@@ -323,11 +323,11 @@
                     fecha = fecha.AddDays(7);
                 }
 
-                if (Suc.Id != 0)
+                if (Suc.ID != 0)
                 {
                     //cadena = $"SELECT * FROM (SELECT Prod, Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL( Kilos, 0) AS tKilos FROM vw_VentaProductos) AS Venta " +
                     //            $" PIVOT (SUM (tKilos)" +
-                    //            $" Suc={Suc.Id}" +
+                    //            $" Suc={Suc.ID}" +
                     //            $" AND Semana='{Sem.Semana:MM/dd/yy}' ORDER BY Prod "; 
                 }
                 else

@@ -219,7 +219,7 @@
                     break;
                 case 2:
                     //ID_Sucursales
-                    Ofertas.Sucursal.Id = Convert.ToInt32(a);
+                    Ofertas.Sucursal.ID = Convert.ToInt32(a);
                     if (Ofertas.Sucursal.Existe() == true)
                     {
                         Ofertas.precios.Sucursal = Ofertas.Sucursal;
@@ -309,12 +309,12 @@
                     if (grdOfertas.Row == grdOfertas.Rows - 1)
                     {
                         Ofertas.Agregar();
-                        grdOfertas.set_Texto(f, c_Id, Ofertas.Id);
+                        grdOfertas.set_Texto(f, c_Id, Ofertas.ID);
                         grdOfertas.AgregarFila();
                         //Rellenar nueva fila
 
                         grdOfertas.set_Texto(f + 1, c_Fecha, Ofertas.Fecha);
-                        grdOfertas.set_Texto(f + 1, c_IdSuc, Ofertas.Sucursal.Id);
+                        grdOfertas.set_Texto(f + 1, c_IdSuc, Ofertas.Sucursal.ID);
                         grdOfertas.set_Texto(f + 1, c_IdSuc + 1, Ofertas.Sucursal.Nombre);
 
                         //El buscar de precios_ofertas automaticamente busca el siguiente en el orden:
@@ -402,7 +402,7 @@
                     {
                         if (Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id)) != 0)
                         {
-                            Ofertas.Id = Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id));
+                            Ofertas.ID = Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id));
                             Ofertas.Borrar();
                             grdOfertas.BorrarFila(grdOfertas.Row);
                             Totales();

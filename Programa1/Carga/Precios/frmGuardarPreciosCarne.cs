@@ -46,7 +46,7 @@ namespace Programa1.Carga.Precios
                 for (int i = 0; i <= lstSucursales.Items.Count - 1; i++)
                 {
                     string suc = lstSucursales.Items[i].ToString();
-                    pr.Sucursal.Id = h.Codigo_Seleccionado(suc);
+                    pr.Sucursal.ID = h.Codigo_Seleccionado(suc);
                     Single precio = pr.Buscar();
                     if (Math.Round(precio, 3) == Math.Round(integracion, 3))
                     {

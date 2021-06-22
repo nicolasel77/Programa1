@@ -106,7 +106,7 @@
         {
             if (e == Convert.ToInt32(Keys.Enter))
             {
-                object importe = grdEntregas.get_Texto(grdEntregas.Row, d_Importe);
+                string importe  = Convert.ToString(grdEntregas.get_Texto(grdEntregas.Row, d_Importe));
 
                 if (importe == "") { importe = "0"; }
 

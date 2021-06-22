@@ -67,7 +67,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Reintegros SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={Sucursal.Id}, Id_Tipo={Tipo.ID}, Descripcion='{Descripcion}', " +
+                        $"Id_Sucursales={Sucursal.ID}, Id_Tipo={Tipo.ID}, Descripcion='{Descripcion}', " +
                         $"Importe={Importe.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -92,7 +92,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Reintegros (Fecha, Id_Sucursales, Id_Tipo, Descripcion, Importe) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Tipo.ID}, '{Descripcion}', {Importe.ToString().Replace(",", ".")})", sql);
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Tipo.ID}, '{Descripcion}', {Importe.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -186,7 +186,7 @@
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
                 Tipo.ID = Convert.ToInt32(dr["Id_Tipo"]);
                 Descripcion = dr["Descripcion"].ToString();
-                Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+                Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Importe = Convert.ToDouble(dr["Importe"]);
 
             }

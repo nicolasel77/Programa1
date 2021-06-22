@@ -5,21 +5,13 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Precios_Sucursales
+    public class Precios_Sucursales
     {
         public Precios_Sucursales()
         {
         }
 
-        public Precios_Sucursales(int id, DateTime fecha, Productos prod, Sucursales.Sucursales sucursal, float pr)
-        {
-            Id = id;
-            Fecha = fecha;
-            Producto = prod;
-            Sucursal = sucursal;
-            Precio = pr;
-        }
-
+        
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public Productos Producto { get; set; } = new Productos();
@@ -36,7 +28,7 @@
             //Si no hay una sucursal seleccionada se devuelve el primer precio encontrado
             string suc = $"(SELECT TOP 1 Id_Sucursales FROM Precios_Sucursales WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
                     $" AND Id_Productos={Producto.ID} ORDER BY Fecha DESC)";
-            if (Sucursal.Id > 0) { suc = Sucursal.Id.ToString(); }
+            if (Sucursal.ID > 0) { suc = Sucursal.ID.ToString(); }
             try
             {
 
@@ -138,7 +130,7 @@
                 string suc = "";
 
                 if (Fecha != null) { fecha = $"'{Fecha:MM/dd/yy}'"; }
-                if (Sucursal.Id != 0) { suc = " AND Id_Sucursales=" + Sucursal.Id; }
+                if (Sucursal.ID != 0) { suc = " AND Id_Sucursales=" + Sucursal.ID; }
 
                 SqlCommand comandoSql = new SqlCommand($"SELECT Id_Productos Id, Descripcion Nombre, Precio FROM vw_PreciosSucursales " +
                     $"WHERE Fecha={fecha} {suc} AND Id_Tipo={tipo} AND Ver=1 ORDER BY Id", conexionSql);
@@ -166,7 +158,7 @@
                 string suc = "";
 
                 if (Fecha != null) { fecha = $"'{Fecha:MM/dd/yy}'"; }
-                if (Sucursal.Id != 0) { suc = " AND Id_Sucursales=" + Sucursal.Id; }
+                if (Sucursal.ID != 0) { suc = " AND Id_Sucursales=" + Sucursal.ID; }
 
                 SqlCommand comandoSql = new SqlCommand($"SELECT Id_Productos Id, Descripcion Nombre, Precio FROM vw_PreciosSucursales " +
                     $"WHERE Fecha={fecha} {suc} AND {filtro} AND Ver=1 ORDER BY Id", conexionSql);
@@ -335,7 +327,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Precios_Sucursales " +
-                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Sucursales={Sucursal.Id}, Id_Productos={Producto.ID}, Precio={Precio.ToString().Replace(",", ".")} " +
+                    $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Sucursales={Sucursal.ID}, Id_Productos={Producto.ID}, Precio={Precio.ToString().Replace(",", ".")} " +
                     $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -358,7 +350,7 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"DELETE FROM Precios_Sucursales WHERE Fecha='{Fecha:MM/dd/yyy}' AND Id_Sucursales={Sucursal.Id} AND Id_Productos={Producto.ID}", sql);
+                    new SqlCommand($"DELETE FROM Precios_Sucursales WHERE Fecha='{Fecha:MM/dd/yyy}' AND Id_Sucursales={Sucursal.ID} AND Id_Productos={Producto.ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -366,7 +358,7 @@
                 var d = command.ExecuteNonQuery();
 
                 command.CommandText = $"INSERT INTO Precios_Sucursales (Fecha, Id_Sucursales, Id_Productos, Precio) " +
-                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto.ID}, {Precio.ToString().Replace(",", ".")} )";
+                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto.ID}, {Precio.ToString().Replace(",", ".")} )";
 
                 d = command.ExecuteNonQuery();
 
@@ -410,7 +402,7 @@
                 //Se pide el tipo para no borrar listas de distinto tipo. Ej: carne/men/emb
                 SqlCommand command = new SqlCommand($"DELETE FROM Precios_Sucursales " +
                     $"WHERE ID IN(SELECT ID FROM vw_PreciosSucursales " +
-                    $"WHERE ID_Sucursales={Sucursal.Id} AND Fecha='{Fecha:MM/dd/yyyy}' AND Id_Tipo={Tipo})", sql);
+                    $"WHERE ID_Sucursales={Sucursal.ID} AND Fecha='{Fecha:MM/dd/yyyy}' AND Id_Tipo={Tipo})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

@@ -126,7 +126,7 @@
         private void GrdRetiros_CambioFila(short Fila)
         {
             retiros.Empleado.Id = Convert.ToInt32(grdRetiros.get_Texto(Fila, c_IdEmp));
-            retiros.Sucursal.Id = Convert.ToInt32(grdRetiros.get_Texto(Fila, c_IdSuc));
+            retiros.Sucursal.ID = Convert.ToInt32(grdRetiros.get_Texto(Fila, c_IdSuc));
             retiros.Fecha = v_Mes;
             sueldos.Empleado = retiros.Empleado;
             sueldos.Fecha = v_Mes;
@@ -139,7 +139,7 @@
             if (c == c_IdSuc)
             {
                 retiros.Empleado.Existe();
-                retiros.Empleado.Sucursal.Id = Convert.ToInt32(a);
+                retiros.Empleado.Sucursal.ID = Convert.ToInt32(a);
                 if (retiros.Empleado.Sucursal.Existe() == false)
                 {
                     MessageBox.Show("No se encontró la sucursal Nº " + a);

@@ -146,7 +146,7 @@ namespace Programa1.DB
                 Baja = Convert.ToDateTime(dr["Baja"]);
             }
 
-            Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+            Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
             Localidad.Id = Convert.ToInt32(dr["Id_Localidades"]);
             Tipo.ID = Convert.ToInt32(dr["Id_Tipo"]);
         }
@@ -166,7 +166,7 @@ namespace Programa1.DB
                 SqlCommand command =
                     new SqlCommand($"UPDATE Empleados SET Nombre='{Nombre}', Id_Tipo={Tipo.ID}, Telefono='{Telefono}', Domicilio='{Domicilio}'" +
                     $", Fecha_Nacimiento='{Fecha_Nacimiento.ToString("MM/dd/yyy")}', Alta='{Alta.ToString("MM/dd/yyy")}', Baja={vBaja}" +
-                    $", DNI={DNI}, Id_Localidades={Localidad.Id}, Id_Sucursales={Sucursal.Id} WHERE Id={Id}", sql);
+                    $", DNI={DNI}, Id_Localidades={Localidad.Id}, Id_Sucursales={Sucursal.ID} WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -191,7 +191,7 @@ namespace Programa1.DB
                     new SqlCommand($"INSERT INTO Empleados (Id, Nombre, DNI, Fecha_Nacimiento, Domicilio, Telefono, Alta, Baja, Id_Tipo, Id_Localidades, Id_Sucursales)" +
                     $" VALUES({Id}, '{Nombre}', {DNI}, '{Fecha_Nacimiento.ToString("MM/dd/yyy")}'" +
                     $", '{Domicilio}', '{Telefono}', '{Alta.ToString("MM/dd/yyy")}', '{Baja.ToString("MM/dd/yyy")}'" +
-                    $", {Tipo.ID}, {Localidad.Id}, {Sucursal.Id})", sql);
+                    $", {Tipo.ID}, {Localidad.Id}, {Sucursal.ID})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

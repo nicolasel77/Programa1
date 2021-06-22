@@ -441,7 +441,7 @@
                 $", {Empleado.Id}" +
                 $", {Dias_Vacas}" +
                 $", {Importe.ToString().Replace(",", ".")}" +
-                $", {Sucursal.Id}" +
+                $", {Sucursal.ID}" +
                 $", {Dias_Pagados})";
 
                 d = command.ExecuteNonQuery();
@@ -470,7 +470,7 @@
                     $"UPDATE Retiros SET " +
                     $"  Fecha='{Fecha.ToString("MM/dd/yyy")}'" +
                     $", Id_Tipo={Tipo.ID}" +
-                    $", Id_Sucursales={Sucursal.Id}" +
+                    $", Id_Sucursales={Sucursal.ID}" +
                     $", Id_Empleados={Empleado.Id}" +
                     $", Importe={Importe.ToString().Replace(",", ".")} " +
                     $"  WHERE Id={Id}";
@@ -483,7 +483,7 @@
                     $"INSERT INTO Retiros (Fecha, Id_Empleados, Id_Sucursales, Id_Tipo, Importe) VALUES (" +
                     $"'{Fecha.ToString("MM/dd/yyy")}'" +
                     $", {Empleado.Id}" +
-                    $", {Sucursal.Id}" +
+                    $", {Sucursal.ID}" +
                     $", {Tipo.ID}" +
                     $", {Importe.ToString().Replace(",", ".")})";
 
@@ -638,7 +638,7 @@
 
                     string s = $"UPDATE Mes_Temp SET Saldo={importe.ToString().Replace(",", ".")} " +
                     $" WHERE Mes='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Sucursales={Sucursal.Id}" +
+                    $" AND Id_Sucursales={Sucursal.ID}" +
                     $" AND Id_Empleados={Empleado.Id}";
 
                     sql.Open();

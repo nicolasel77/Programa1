@@ -59,7 +59,7 @@ namespace Programa1.Carga.Precios
                 //precios.Fecha = null;
             }
 
-            precios.Sucursal.Id = Suc.Valor_Actual;
+            precios.Sucursal.ID = Suc.Valor_Actual;
 
 
             DataTable dt = precios.Precios(Convert.ToByte(Opcion));
@@ -93,7 +93,7 @@ namespace Programa1.Carga.Precios
                 {
                     this.Cursor = Cursors.WaitCursor;
                     precios.Fecha = f;
-                    precios.Sucursal.Id = suc;
+                    precios.Sucursal.ID = suc;
                     precios.Borrar_Lista(2);
                     h.Llenar_List(lstFechas, precios.Fechas(2), "dd/MM/yyyy");
                     Cargar_Precios();
@@ -134,7 +134,7 @@ namespace Programa1.Carga.Precios
 
         private void Guardar(string suc)
         {
-            precios.Sucursal.Id = h.Codigo_Seleccionado(suc);
+            precios.Sucursal.ID = h.Codigo_Seleccionado(suc);
 
             //Guardar la Lista
             for (int i = 1; i <= grd.Rows - 1; i++)

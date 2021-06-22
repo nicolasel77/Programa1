@@ -1,13 +1,17 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.Data;
     using System.Data.SqlClient;
 
-    class Semanas
+    public class Semanas : c_Base
     {
         public Semanas()
         {
+            Tabla = "Semanas";
+            Vista = "Semanas";
+
             DateTime d = DateTime.Today;
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -40,81 +44,18 @@
         public DateTime Semana { get; set; }
         public bool Guardada { get; set; }
         public bool Cerrada { get; set; }
-
-        public bool Fecha_Cerrada(DateTime f)
+                
+        public new DataTable Datos(string filtro = "")
         {
-
-        }
-
-        public DataTable Datos(string filtro = "")
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-
-            try
-            {
-                if (filtro.Length > 0)
-                {
-                    filtro = " WHERE " + filtro;
-                }
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM Semanas {filtro} ORDER BY Semana DESC", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
+            return Datos_Vista(filtro, "*", "Semana DESC");            
         }
         public DataTable Fechas()
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT TOP 100 Semana FROM Semanas ORDER BY Semana DESC", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
+            return Datos_Vista("", "TOP 100 Semanas", "Semana DESC");            
         }
         public DataTable Años()
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT DISTINCT DATEPART(YEAR, Semana) Años FROM Semanas ORDER BY Años DESC", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
+            return Datos_Vista("", "DISTINCT DATEPART(YEAR, Semana) Años", "Años DESC");            
         }
 
 

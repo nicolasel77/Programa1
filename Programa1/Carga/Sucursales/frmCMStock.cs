@@ -138,15 +138,15 @@
                     if (cmbSucs.SelectedIndex > -1)
                     {
                         Herramientas.Herramientas h = new Herramientas.Herramientas();
-                        stock.Sucursal.Id = h.Codigo_Seleccionado(cmbSucs.Text);
+                        stock.Sucursal.ID = h.Codigo_Seleccionado(cmbSucs.Text);
 
-                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Sucursales"), stock.Sucursal.Id);
+                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("Id_Sucursales"), stock.Sucursal.ID);
                         string s = cmbSucs.Text;
                         s = s.Substring(s.IndexOf(".") + 1);
                         grdResultado.set_Texto(f, grdResultado.get_ColIndex("Nombre"), s);
                     }                    
                 }
-                precios.Sucursal.Id = stock.Sucursal.Id;
+                precios.Sucursal.ID = stock.Sucursal.ID;
 
                 if (chProd.Checked)
                 {
@@ -223,7 +223,7 @@
                 int i = Convert.ToInt32(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id")).ToString());
                 stock.Id = i;
                 stock.Fecha  = Convert.ToDateTime(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Fecha")));
-                stock.Sucursal.Id  = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Sucursales")));
+                stock.Sucursal.ID  = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Sucursales")));
                 stock.Producto.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Productos")));
                 stock.Descripcion = Convert.ToString(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Descripcion")));
                 stock.Costo = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo")));

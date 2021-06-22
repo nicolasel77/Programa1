@@ -2,7 +2,6 @@
 {
     using Programa1.DB;
     using System;
-    using System.Data;
     using System.Windows.Forms;
 
     public partial class frmGastos_Sucursales : Form
@@ -21,7 +20,7 @@
         public frmGastos_Sucursales()
         {
             InitializeComponent();
-            
+
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdGastos.TeclasManejadas = n;
 
@@ -183,109 +182,123 @@
         private void grdGastos_Editado(short f, short c, object a)
         {
             int id = Convert.ToInt32(grdGastos.get_Texto(f, c_Id));
-            switch (c)
+            if (Gastos_Sucursales.Fecha_Cerrada(Gastos_Sucursales.Fecha) == false)
             {
-                case 1:
-                    //Fecha
-                    DateTime df = Convert.ToDateTime(a);
-                    if (df >= cFecha.fecha_Actual)
-                    {
-                        Gastos_Sucursales.Fecha = df;
+                switch (c)
+                {
+                    case 1:
+                        //Fecha
+                        DateTime df = Convert.ToDateTime(a);
+                        if (df >= cFecha.fecha_Actual)
+                        {
+                            if (Gastos_Sucursales.Fecha_Cerrada(df) == false)
+                            {
+                                Gastos_Sucursales.Fecha = df;
+
+                                if (id != 0) { Gastos_Sucursales.Actualizar(); }
+
+                                grdGastos.set_Texto(f, c, a);
+                                grdGastos.ActivarCelda(f, c + 1);
+                            }
+                            else
+                            {
+                                Mensaje("La fecha ingresada se encuentra cerrada.");
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                            grdGastos.ErrorEnTxt();
+                        }
+                        break;
+                    case 2:
+                        //ID_Sucursales
+                        Gastos_Sucursales.Sucursal.ID = Convert.ToInt32(a);
+                        if (Gastos_Sucursales.Sucursal.Existe() == true)
+                        {
+                            if (id != 0) { Gastos_Sucursales.Actualizar(); }
+
+                            grdGastos.set_Texto(f, c, a);
+                            grdGastos.set_Texto(f, c + 1, Gastos_Sucursales.Sucursal.Nombre);
+
+                            grdGastos.ActivarCelda(f, c + 2);
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró la sucursal " + a.ToString());
+                            grdGastos.ErrorEnTxt();
+                        }
+                        break;
+                    case 4:
+                        //Id_Tipo
+                        Gastos_Sucursales.Tipo.ID = Convert.ToInt32(a);
+                        if (Gastos_Sucursales.Tipo.Existe() == true)
+                        {
+                            Gastos_Sucursales.Descripcion = Gastos_Sucursales.Tipo.Nombre;
+
+                            grdGastos.set_Texto(f, c, a);
+                            grdGastos.set_Texto(f, c + 1, Gastos_Sucursales.Tipo.Nombre);
+
+                            if (id != 0) { Gastos_Sucursales.Actualizar(); }
+
+                            grdGastos.ActivarCelda(f, c_Importe);
+                            Totales();
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró el Tipo " + a.ToString());
+                            grdGastos.ErrorEnTxt();
+                        }
+                        break;
+                    case 5:
+                        //Descripcion
+                        Gastos_Sucursales.Descripcion = a.ToString();
+                        grdGastos.set_Texto(f, c, a);
 
                         if (id != 0) { Gastos_Sucursales.Actualizar(); }
 
-                        grdGastos.set_Texto(f, c, a);
-                        grdGastos.ActivarCelda(f, c + 1);
-                    }
-                    else
-                    {
-                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
-                        grdGastos.ErrorEnTxt();
-                    }
-                    break;
-                case 2:
-                    //ID_Sucursales
-                    Gastos_Sucursales.Sucursal.Id = Convert.ToInt32(a);
-                    if (Gastos_Sucursales.Sucursal.Existe() == true)
-                    {
-                        if (id != 0) { Gastos_Sucursales.Actualizar(); }
-
-                        grdGastos.set_Texto(f, c, a);
-                        grdGastos.set_Texto(f, c + 1, Gastos_Sucursales.Sucursal.Nombre);
-
-                        grdGastos.ActivarCelda(f, c + 2);
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró la sucursal " + a.ToString());
-                        grdGastos.ErrorEnTxt();
-                    }
-                    break;
-                case 4:
-                    //Id_Tipo
-                    Gastos_Sucursales.Tipo.ID = Convert.ToInt32(a);
-                    if (Gastos_Sucursales.Tipo.Existe() == true)
-                    {
-                        Gastos_Sucursales.Descripcion = Gastos_Sucursales.Tipo.Nombre;
-
-                        grdGastos.set_Texto(f, c, a);
-                        grdGastos.set_Texto(f, c + 1, Gastos_Sucursales.Tipo.Nombre);
-
-                        if (id != 0) { Gastos_Sucursales.Actualizar(); }
-
-                        grdGastos.ActivarCelda(f, c_Importe);
-                        Totales();
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró el Tipo " + a.ToString());
-                        grdGastos.ErrorEnTxt();
-                    }
-                    break;
-                case 5:
-                    //Descripcion
-                    Gastos_Sucursales.Descripcion = a.ToString();
-                    grdGastos.set_Texto(f, c, a);
-
-                    if (id != 0) { Gastos_Sucursales.Actualizar(); }
-
-                    grdGastos.ActivarCelda(f + 1, c);
-                    break;
-                case 6:
-                    //Importe
-                    Gastos_Sucursales.Importe = Convert.ToSingle(a);
-                    grdGastos.set_Texto(f, c, a);
-
-                    if (grdGastos.Row == grdGastos.Rows - 1)
-                    {
-                        Gastos_Sucursales.Agregar();
-                        grdGastos.set_Texto(f, c_Id, Gastos_Sucursales.Id);
-                        grdGastos.AgregarFila();
-                        //Rellenar nueva fila
-
-                        grdGastos.set_Texto(f + 1, c_Fecha, Gastos_Sucursales.Fecha);
-                        grdGastos.set_Texto(f + 1, c_IdSuc, Gastos_Sucursales.Sucursal.Id);
-                        grdGastos.set_Texto(f + 1, c_IdSuc + 1, Gastos_Sucursales.Sucursal.Nombre);
-
-                        Gastos_Sucursales.Importe = 0;
-                        Gastos_Sucursales.Id = 0;
-                        grdGastos.ActivarCelda(f + 1, c_IdTipo);
-                    }
-                    else
-                    {
-                        Gastos_Sucursales.Actualizar();
                         grdGastos.ActivarCelda(f + 1, c);
-                    }
+                        break;
+                    case 6:
+                        //Importe
+                        Gastos_Sucursales.Importe = Convert.ToSingle(a);
+                        grdGastos.set_Texto(f, c, a);
 
-                    Totales();
-                    break;
+                        if (grdGastos.Row == grdGastos.Rows - 1)
+                        {
+                            Gastos_Sucursales.Agregar();
+                            grdGastos.set_Texto(f, c_Id, Gastos_Sucursales.ID);
+                            grdGastos.AgregarFila();
+                            //Rellenar nueva fila
+
+                            grdGastos.set_Texto(f + 1, c_Fecha, Gastos_Sucursales.Fecha);
+                            grdGastos.set_Texto(f + 1, c_IdSuc, Gastos_Sucursales.Sucursal.ID);
+                            grdGastos.set_Texto(f + 1, c_IdSuc + 1, Gastos_Sucursales.Sucursal.Nombre);
+
+                            Gastos_Sucursales.Importe = 0;
+                            Gastos_Sucursales.ID = 0;
+                            grdGastos.ActivarCelda(f + 1, c_IdTipo);
+                        }
+                        else
+                        {
+                            Gastos_Sucursales.Actualizar();
+                            grdGastos.ActivarCelda(f + 1, c);
+                        }
+
+                        Totales();
+                        break;
+                } 
+            }
+            else
+            {
+                Mensaje("La fecha ingresada se encuentra cerrada.");
             }
 
         }
 
         private void grdGastos_CambioFila(short Fila)
         {
-            int i = Convert.ToInt32(grdGastos.get_Texto(Fila, c_Id).ToString());
+            int i = Convert.ToInt32(grdGastos.get_Texto(Fila, c_Id));
             Gastos_Sucursales.Cargar_Fila(i);
         }
 
@@ -295,14 +308,22 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+
+                    if (Convert.ToInt32(grdGastos.get_Texto(grdGastos.Row, 0)) != 0)
                     {
-                        if (Convert.ToInt32(grdGastos.get_Texto(grdGastos.Row, 0)) != 0)
+                        if (Gastos_Sucursales.Fecha_Cerrada(Gastos_Sucursales.Fecha) == false)
                         {
-                            Gastos_Sucursales.Id = Convert.ToInt32(grdGastos.get_Texto(grdGastos.Row, 0));
-                            Gastos_Sucursales.Borrar();
-                            grdGastos.BorrarFila(grdGastos.Row);
-                            Totales();
+                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                            {
+                                Gastos_Sucursales.ID = Convert.ToInt32(grdGastos.get_Texto(grdGastos.Row, 0));
+                                Gastos_Sucursales.Borrar();
+                                grdGastos.BorrarFila(grdGastos.Row);
+                                Totales();
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha ingresada se encuentra cerrada.");
                         }
                     }
                     break;

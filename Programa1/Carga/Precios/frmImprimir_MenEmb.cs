@@ -55,20 +55,20 @@ namespace Programa1.Carga.Precios
                         {
                             foreach (string suc in lstSucursales.SelectedItems)
                             {
-                                pr.Sucursal.Id = Convert.ToInt32(h.Codigo_Seleccionado(suc));
+                                pr.Sucursal.ID = Convert.ToInt32(h.Codigo_Seleccionado(suc));
                                 // Se agrega el pollo (Tipo 6) porque sino no entra en la seleccion
-                                if (Tipo == 4) { xlApp.Run("Imprimir", pr.Sucursal.Id, pr.Fecha, 6, false, false); }
-                                xlApp.Run("Imprimir", pr.Sucursal.Id, pr.Fecha, Tipo, false, true);
+                                if (Tipo == 4) { xlApp.Run("Imprimir", pr.Sucursal.ID, pr.Fecha, 6, false, false); }
+                                xlApp.Run("Imprimir", pr.Sucursal.ID, pr.Fecha, Tipo, false, true);
                             }
                         }
                         else
                         {
                             for (int i = 0; i <= lstSucursales.Items.Count - 1; i++)
                             {
-                                pr.Sucursal.Id = Convert.ToInt32(h.Codigo_Seleccionado(lstSucursales.Items[i].ToString()));
+                                pr.Sucursal.ID = Convert.ToInt32(h.Codigo_Seleccionado(lstSucursales.Items[i].ToString()));
                                 // Se agrega el pollo (Tipo 6) porque sino no entra en la seleccion
-                                if (Tipo == 4) { xlApp.Run("Imprimir", pr.Sucursal.Id, pr.Fecha, 6, false, false); }
-                                xlApp.Run("Imprimir", pr.Sucursal.Id, pr.Fecha, Tipo, false, true);
+                                if (Tipo == 4) { xlApp.Run("Imprimir", pr.Sucursal.ID, pr.Fecha, 6, false, false); }
+                                xlApp.Run("Imprimir", pr.Sucursal.ID, pr.Fecha, Tipo, false, true);
                             }
                         }
                     }
@@ -82,20 +82,20 @@ namespace Programa1.Carga.Precios
                 {
                     foreach (string suc in lstSucursales.SelectedItems)
                     {
-                        pr.Sucursal.Id = Convert.ToInt32(h.Codigo_Seleccionado(suc));
+                        pr.Sucursal.ID = Convert.ToInt32(h.Codigo_Seleccionado(suc));
                         // Se agrega el pollo (Tipo 6) porque sino no entra en la seleccion
-                        if (Tipo == 4) { xlApp.Run("Imprimir", pr.Sucursal.Id, pr.Fecha, 6, false, false); }
-                        xlApp.Run("Imprimir", pr.Sucursal.Id, pr.Fecha, Tipo, true, true);
+                        if (Tipo == 4) { xlApp.Run("Imprimir", pr.Sucursal.ID, pr.Fecha, 6, false, false); }
+                        xlApp.Run("Imprimir", pr.Sucursal.ID, pr.Fecha, Tipo, true, true);
                     }
                 }
                 else
                 {
                     for (int i = 0; i <= lstSucursales.Items.Count - 1; i++)
                     {
-                        pr.Sucursal.Id = Convert.ToInt32(h.Codigo_Seleccionado(lstSucursales.Items[i].ToString()));
+                        pr.Sucursal.ID = Convert.ToInt32(h.Codigo_Seleccionado(lstSucursales.Items[i].ToString()));
                         // Se agrega el pollo (Tipo 6) porque sino no entra en la seleccion
-                        if (Tipo == 4) { xlApp.Run("Imprimir", pr.Sucursal.Id, pr.Fecha, 6, false, false); }
-                        xlApp.Run("Imprimir", pr.Sucursal.Id, pr.Fecha, Tipo, true, true);
+                        if (Tipo == 4) { xlApp.Run("Imprimir", pr.Sucursal.ID, pr.Fecha, 6, false, false); }
+                        xlApp.Run("Imprimir", pr.Sucursal.ID, pr.Fecha, Tipo, true, true);
                     }
                 }
             }

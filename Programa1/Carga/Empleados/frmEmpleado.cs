@@ -126,7 +126,7 @@
                     }
                     break;
                 case "Id_Sucursales":
-                    empleado.Sucursal.Id = Convert.ToInt32(a);
+                    empleado.Sucursal.ID = Convert.ToInt32(a);
                     if (!empleado.Sucursal.Existe())
                     {
                         grdEmpleado.ErrorEnTxt();

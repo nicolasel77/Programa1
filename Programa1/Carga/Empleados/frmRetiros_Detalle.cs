@@ -65,7 +65,7 @@
                     Actualizar();
                     break;
                 case "Suc":
-                    retiros.Sucursal.Id = Convert.ToInt32(a);
+                    retiros.Sucursal.ID = Convert.ToInt32(a);
                     if (retiros.Sucursal.Existe() == true)
                     {
                         grdDetalle.set_Texto(f, c, a);

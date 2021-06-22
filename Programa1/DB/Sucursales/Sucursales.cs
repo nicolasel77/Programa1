@@ -1,27 +1,21 @@
 ﻿
 namespace Programa1.DB.Sucursales
 {
+    using Programa1.Clases;
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    public class Sucursales
+    public class Sucursales : c_Base
     {
         public Sucursales()
         {
+            Tabla = "Sucursales";
+            Vista = "vw_Sucursales";
         }
 
         public enum Filtrar_SucsClientes { Todas = 0, Sucursales, Clientes };
-
-        [Required]
-        [Key]
-        public int Id { get; set; }
-
-        [MaxLength(50, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
-        [Required]
-        public string Nombre { get; set; }
 
         public TipoSucursales Tipo { get; set; } = new TipoSucursales();
 
@@ -47,10 +41,8 @@ namespace Programa1.DB.Sucursales
         public bool Mostrar_Ocultos { get; set; } = false;
         public bool Ordern_XId { get; set; } = true;
 
-        public DataTable Datos(string filtro = "")
+        public new DataTable Datos(string filtro = "")
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             Herramientas.Herramientas h = new Herramientas.Herramientas();
 
             if (Mostrar_Ocultos == false)
@@ -66,46 +58,21 @@ namespace Programa1.DB.Sucursales
                     filtro = h.Unir(filtro, " (Propio=1) ");
                     break;
             }
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-            if (Ordern_XId == false)
-            {
-                filtro += " ORDER BY Nombre ";
-            }
-            else
-            {
-                filtro += " ORDER BY Id";
-            }
+            
+            return Datos_Vista(filtro, "*", Ordern_XId ? "ID" : "Nombre");
 
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Sucursales" + filtro, conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception er)
-            {
-                MessageBox.Show(er.Message);
-                dt = null;
-            }
-
-            return dt;
         }
 
         public void Siguiente()
         {
+
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 * FROM Sucursales WHERE Id>{Id} ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 * FROM Sucursales WHERE Id>{ID} ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -126,24 +93,24 @@ namespace Programa1.DB.Sucursales
 
                     if (dt.Rows.Count == 0)
                     {
-                        Id = 0;
+                        ID = 0;
                     }
                     else
                     {
                         dr = dt.Rows[0];
                         Asignar(dr);
                     }
-                }                
+                }
             }
             catch (Exception)
             {
-                Id = 0;
+                ID = 0;
             }
         }
 
         private void Asignar(DataRow dr)
         {
-            Id = Convert.ToInt32(dr["Id"]);
+            ID = Convert.ToInt32(dr["Id"]);
             Nombre = dr["Nombre"].ToString();
             Tipo.ID = Convert.ToInt32(dr["Tipo"]);
             Ver = Convert.ToBoolean(dr["Ver"]);
@@ -155,7 +122,7 @@ namespace Programa1.DB.Sucursales
             Localidad.Id = Convert.ToInt32(dr["Id_Localidad"]);
         }
 
-        public void Actualizar()
+        public new void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -163,7 +130,7 @@ namespace Programa1.DB.Sucursales
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Sucursales SET Nombre='{Nombre}', Tipo={Tipo.ID}, Ver={(Ver ? "1" : "0")}, Propio={(Propio ? "1" : "0")}, Titular='{Titular}', CUIT='{CUIT}', Direccion='{Direccion}'" +
-                    $",Alias='{Alias}',Id_Localidad={Localidad.Id}, Balanza='{Balanza}' WHERE Id={Id}", sql);
+                    $",Alias='{Alias}',Id_Localidad={Localidad.Id}, Balanza='{Balanza}' WHERE Id={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -178,7 +145,7 @@ namespace Programa1.DB.Sucursales
             }
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -188,7 +155,7 @@ namespace Programa1.DB.Sucursales
                 string vpropio = Propio ? "1" : "0";
 
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Sucursales (Id, Nombre, Tipo, Ver, Propio, Titular, CUIT, Direccion, Id_Localidad, Alias, Balanza) VALUES({Id}, '{Nombre}', {Tipo.ID}, {vver}, " +
+                    new SqlCommand($"INSERT INTO Sucursales (Id, Nombre, Tipo, Ver, Propio, Titular, CUIT, Direccion, Id_Localidad, Alias, Balanza) VALUES({ID}, '{Nombre}', {Tipo.ID}, {vver}, " +
                     $"{vpropio}, '{Titular}', '{CUIT}', '{Direccion}', {Localidad.Id}, '{Alias}', '{Balanza}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -204,62 +171,6 @@ namespace Programa1.DB.Sucursales
             }
         }
 
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Sucursales WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
-
-        public bool Existe()
-        {
-            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            var dt = new DataTable("Datos");
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Sucursales WHERE Id=" + Id, sql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-
-
-                if (dt.Rows.Count == 0)
-                {
-                    Nombre = "";
-                    return false;
-                }
-                else
-                {
-                    Asignar(dt.Rows[0]);
-                    return true;
-                }
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-                return false;
-            }
-        }
     }
 }

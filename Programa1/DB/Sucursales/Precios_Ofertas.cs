@@ -1,23 +1,19 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Lista_Ofertas
+    public class Lista_Ofertas : c_Base
     {
         public Lista_Ofertas()
         {
+            Vista = "vw_PreciosOfertas";
+            Campo_ID = "Orden";
         }
-
-        public Lista_Ofertas(int orden, Productos prod, string desc, Single pr)
-        {
-            Orden = orden;
-            Producto = prod;
-            Descripcion = desc;
-            Costo = pr;
-        }
+               
 
         public int Orden { get; set; }
         public Productos Producto { get; set; } = new Productos();
@@ -53,6 +49,8 @@
             {
                 Orden = 0;
                 Costo = 0;
+                Producto.ID = 0;
+                Descripcion = "";
             }
             return Costo;
         }
@@ -84,62 +82,27 @@
             {
                 Orden = 0;
                 Costo = 0;
+                Producto.ID = 0;
+                Descripcion = "";
             }
             return Costo;
         }
 
-        public DataTable Datos(string filtro = "")
+        public new DataTable Datos(string filtro = "")
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_PreciosOfertas" + filtro, conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
+            return Datos_Vista(filtro);
         }
 
-        public void Actualizar()
+        public new void Actualizar()
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command =
-                    new SqlCommand($"UPDATE Precios_Ofertas " +
-                    $"SET Orden={Orden}, Id_Productos={Producto.ID}, Descripcion='{Descripcion}', Costo={Costo.ToString().Replace(",", ".")} " +
-                    $"WHERE Orden={Orden}", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
+            Actualizar("Orden", Orden);
+            Actualizar("ID_Productos", Producto.ID);
+            Actualizar("Descripcion", Descripcion);
+            Actualizar("Costo", Costo);
+            
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -161,28 +124,6 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
-
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Precios_Ofertas WHERE Orden=" + Orden, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Orden = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
+        
     }
 }

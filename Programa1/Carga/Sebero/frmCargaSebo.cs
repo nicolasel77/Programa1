@@ -242,7 +242,7 @@
                     break;
                 case 4:
                     //Id_Sucursales
-                    cargaSebo.Sucursal.Id = Convert.ToInt32(a);
+                    cargaSebo.Sucursal.ID = Convert.ToInt32(a);
                     if (cargaSebo.Sucursal.Existe() == true)
                     {
                         if (id != 0) { cargaSebo.Actualizar(); }
@@ -317,7 +317,7 @@
                         grdVenta.set_Texto(f + 1, c_Fecha, cargaSebo.Fecha);
                         grdVenta.set_Texto(f + 1, c_IdSebero, cargaSebo.Sebero.ID);
                         grdVenta.set_Texto(f + 1, c_IdSebero + 1, cargaSebo.Sucursal.Nombre);
-                        grdVenta.set_Texto(f + 1, c_IdSuc, cargaSebo.Sucursal.Id);
+                        grdVenta.set_Texto(f + 1, c_IdSuc, cargaSebo.Sucursal.ID);
                         grdVenta.set_Texto(f + 1, c_IdSuc + 1, cargaSebo.Sucursal.Nombre);
 
                         cargaSebo.Producto.Siguiente();

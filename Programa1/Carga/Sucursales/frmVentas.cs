@@ -276,7 +276,7 @@
                     }
                     break;
                 case c_IdSuc:
-                    Venta.Sucursal.Id = Convert.ToInt32(a);
+                    Venta.Sucursal.ID = Convert.ToInt32(a);
                     if (Venta.Sucursal.Existe() == true)
                     {
                         Venta.precios.Sucursal = Venta.Sucursal;
@@ -376,7 +376,7 @@
                         grdVenta.set_Texto(f + 1, c_IdCamion, Venta.Camion.ID);
                         grdVenta.set_Texto(f + 1, c_IdProv, Venta.Proveedor.Id);
                         grdVenta.set_Texto(f + 1, c_IdProv + 1, Venta.Sucursal.Nombre);
-                        grdVenta.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.Id);
+                        grdVenta.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.ID);
                         grdVenta.set_Texto(f + 1, c_IdSuc + 1, Venta.Sucursal.Nombre);
 
                         Venta.Producto.ID = Listas.Producto_Siguiente();
@@ -571,8 +571,8 @@
                 foreach (DataRow dr in dt.Rows)
                 {
                     traslados.Fecha = Convert.ToDateTime(dr["Fecha"]);
-                    traslados.sucS.Id = 50;
-                    traslados.sucE.Id = Convert.ToInt16(dr["Suc_Entrada"]); ;
+                    traslados.sucS.ID = 50;
+                    traslados.sucE.ID = Convert.ToInt16(dr["Suc_Entrada"]); ;
                     traslados.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
                     traslados.Descripcion = dr["Descripcion"].ToString();
                     traslados.CostoS = Convert.ToSingle(dr["Costo_Salida"]);

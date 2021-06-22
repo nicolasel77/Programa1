@@ -1,33 +1,24 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class APicada
+    public class APicada : c_Base
     {
         public APicada()
         {
+            Tabla = "APicada";
+            Vista = "vw_APicada";
+            ID_Automatico = true;
         }
 
-        public APicada(int id, DateTime fecha, Sucursales.Sucursales sucursal, Productos proda, Productos prods, float costoa, float costos, float kilosa, float kiloss)
-        {
-            Id = id;
-            Fecha = fecha;
-            Sucursal = sucursal;
-            Producto_A = proda;
-            Producto_S = prods;
-            Kilos_A = kilosa;
-            Kilos_S = kiloss;
-            Costo_A = costoa;
-            Costo_S = costos;
-        }
 
-        public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
 
+        public Sucursales.Sucursales Sucursal = new Sucursales.Sucursales();
         public Productos Producto_A { get; set; } = new Productos();
         public Productos Producto_S { get; set; } = new Productos();
 
@@ -39,67 +30,32 @@
 
         public Precios_Sucursales precios = new Precios_Sucursales();
 
-        public DataTable Datos(string filtro = "")
+
+        public new void Actualizar()
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            if (filtro.Length > 0)
+            if (Fecha_Cerrada(Fecha) == false)
             {
-                filtro = " WHERE " + filtro;
-            }
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_APicada {filtro} ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
-
-        public void Actualizar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command =
-                    new SqlCommand($"UPDATE APicada SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={Sucursal.Id}, Id_Productos_A={Producto_A.ID}, Id_Productos_S={Producto_S.ID}, " +
-                        $"Costo_A={Costo_A.ToString().Replace(",", ".")}, Costo_S={Costo_S.ToString().Replace(",", ".")}," +
-                        $"Kilos_A={Kilos_A.ToString().Replace(",", ".")}, Kilos_S={Kilos_S.ToString().Replace(",", ".")} " +
-                        $"WHERE Id={Id}", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
+                Actualizar("Fecha", Fecha);
+                Actualizar("Id_Sucursales", Sucursal.ID);
+                Actualizar("Id_Productos_A", Producto_A.ID);
+                Actualizar("Id_Productos_S", Producto_S.ID);
+                Actualizar("Costo_A", Costo_A);
+                Actualizar("Costo_S", Costo_S);
+                Actualizar("Kilos_A", Kilos_A);
+                Actualizar("Kilos_S", Kilos_S);
             }
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
+
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            int n = MaxId();
+            int n = Max_ID();
             try
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO APicada (Fecha, Id_Sucursales, Id_Productos_A, Id_Productos_S, Costo_A, Costo_S, Kilos_A, Kilos_S) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Producto_A.ID}, {Producto_S.ID}, {Costo_A.ToString().Replace(",", ".")}, {Costo_S.ToString().Replace(",", ".")}, " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto_A.ID}, {Producto_S.ID}, {Costo_A.ToString().Replace(",", ".")}, {Costo_S.ToString().Replace(",", ".")}, " +
                         $"{Kilos_A.ToString().Replace(",", ".")}, {Kilos_S.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -109,70 +65,25 @@
 
                 sql.Close();
 
-                int n2 = MaxId();
+                int n2 = Max_ID();
                 if (n == n2)
                 {
-                    Id = 0;
+                    ID = 0;
                     MessageBox.Show("No se pudo guardar el registro.", "Error");
                 }
                 else
                 {
-                    Id = n2;
+                    ID = n2;
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error");
             }
+
         }
 
-        public int MaxId()
-        {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
 
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM APicada", conexionSql);
-
-                conexionSql.Open();
-
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
-
-                conexionSql.Close();
-            }
-            catch (Exception)
-            {
-                d = 0;
-            }
-
-            return Convert.ToInt32(d);
-        }
-
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM APicada WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
 
         public void Cargar_Fila(int id)
         {
@@ -190,9 +101,9 @@
 
                 DataRow dr = dt.Rows[0];
 
-                Id = id;
+                ID = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
-                Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+                Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Producto_A.ID = Convert.ToInt32(dr["Id_Productos_A"]);
                 Costo_A = Convert.ToSingle(dr["Costo_A"]);
                 Kilos_A = Convert.ToSingle(dr["Kilos_A"]);
@@ -202,7 +113,15 @@
             }
             catch (Exception)
             {
-                Id = 0;
+                ID = 0;
+                Fecha = Convert.ToDateTime("1/1/1");
+                Sucursal.ID = 0;
+                Producto_A.ID = 0;
+                Costo_A = 0;
+                Kilos_A = 0;
+                Producto_S.ID = 0;
+                Costo_S = 0;
+                Kilos_S = 0;
             }
 
 

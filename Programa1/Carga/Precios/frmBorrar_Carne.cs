@@ -44,7 +44,7 @@ namespace Programa1.Carga.Precios
             for (int i = 0; i <= lstSucursales.Items.Count - 1; i++)
             {
                 string suc = lstSucursales.Items[i].ToString();
-                pr.Sucursal.Id = h.Codigo_Seleccionado(suc);
+                pr.Sucursal.ID = h.Codigo_Seleccionado(suc);
                 Single precio = pr.Buscar();
                 if (Math.Round(precio, 3) == Math.Round(integracion, 3))
                 {
@@ -85,7 +85,7 @@ namespace Programa1.Carga.Precios
                 {
                     foreach (string suc in lstSucursales.SelectedItems)
                     {
-                        pr.Sucursal.Id = Convert.ToInt32(h.Codigo_Seleccionado(suc));
+                        pr.Sucursal.ID = Convert.ToInt32(h.Codigo_Seleccionado(suc));
                         pr.Borrar_Lista(1);
                     }
                 }
@@ -93,7 +93,7 @@ namespace Programa1.Carga.Precios
                 {
                     for (int i = 0; i <= lstSucursales.Items.Count - 1; i++)
                     {
-                        pr.Sucursal.Id = Convert.ToInt32(h.Codigo_Seleccionado(lstSucursales.Items[i].ToString()));
+                        pr.Sucursal.ID = Convert.ToInt32(h.Codigo_Seleccionado(lstSucursales.Items[i].ToString()));
                         pr.Borrar_Lista(1);
                     }
                 }

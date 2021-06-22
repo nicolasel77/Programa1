@@ -51,7 +51,7 @@
         private void grd_Editado(short f, short c, object a)
         {
             int i = (int)grd.get_Texto(f, t_Col.ID);
-            if (grd.get_Texto(grd.Row, 0) != "")
+            if (grd.get_Texto(grd.Row, 0).ToString() != "")
             {
                 listas.ID = Convert.ToInt32(grd.get_Texto(grd.Row, 0));
             }
@@ -151,7 +151,7 @@
                         {
                             if (Convert.ToInt32(grd.get_Texto(grd.Row, 0)) != 0)
                             {
-                                listas.Id = Convert.ToInt32(grd.get_Texto(grd.Row, 0));
+                                listas.ID = Convert.ToInt32(grd.get_Texto(grd.Row, 0));
                                 listas.Borrar();
                                 grd.BorrarFila(grd.Row);
                             }

@@ -1,5 +1,6 @@
 ﻿namespace Programa1.Clases
 {
+    using Programa1.DB;
     using Programa1.Herramientas;
     using System;
     using System.Data;
@@ -26,6 +27,7 @@
         public string Campo_Nombre { get; set; } = "Nombre";
         public string Nombre { get; set; }
 
+        
 
         #region " Editar Datos "
         public void Actualizar()
@@ -54,7 +56,7 @@
 
             Herramientas h = new Herramientas();
             valor = h.Formato_SQL(valor);
-                       
+
             try
             {
                 SqlCommand command = new SqlCommand(string.Format("UPDATE {0} SET {1}={2} WHERE {3}={4}", Tabla, Campo, valor, Campo_ID, ID), cnn);
@@ -275,7 +277,7 @@
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             object d = null;
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
-            if (Orden != "") { Orden = (Orden != "ORDER BY ") ?  " ORDER BY " + Orden : " ORDER BY " + Campo_ID; }
+            if (Orden != "") { Orden = (Orden != "ORDER BY ") ? " ORDER BY " + Orden : " ORDER BY " + Campo_ID; }
 
             try
             {
@@ -447,6 +449,34 @@
                 return false;
             }
 
+        }
+
+        public bool Fecha_Cerrada(DateTime f)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object n = null;
+            
+            try
+            {
+                string Cadena = $"SELECT TOP 1 Cerrada FROM Semanas WHERE Semana<='{f:MM/dd/yyyy}' ORDER BY Semana DESC";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                cnn.Open();
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                n = cmd.ExecuteScalar();
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+            }
+            
+            if (n == null) { n = false; }
+
+            return Convert.ToBoolean(n);            
         }
         #endregion
 

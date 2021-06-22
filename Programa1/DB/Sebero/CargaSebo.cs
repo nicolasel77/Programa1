@@ -97,7 +97,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE CargaSebo SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Sucursales={Sucursal.Id}, Id_Seberos={Sebero.ID}, Id_Productos={Producto.ID}, " +
+                        $"Id_Sucursales={Sucursal.ID}, Id_Seberos={Sebero.ID}, Id_Productos={Producto.ID}, " +
                         $"Cost={Costo.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
                         $"WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
@@ -122,7 +122,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO CargaSebo (Fecha, Id_Sucursales, Id_Seberos, Id_Productos, Costo, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.Id}, {Sebero.ID}, {Producto.ID}, {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Sebero.ID}, {Producto.ID}, {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -215,7 +215,7 @@ namespace Programa1.DB
                 Id = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
                 Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
-                Sucursal.Id = Convert.ToInt32(dr["Id_Sucursales"]);
+                Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Sebero.ID = Convert.ToInt32(dr["Id_Seberos"]);
                 Costo = Convert.ToSingle(dr["Costo_Compra"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);

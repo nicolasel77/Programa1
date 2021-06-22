@@ -173,7 +173,7 @@ namespace Programa1.Carga.Precios
                 int s = cSucs.Valor_Actual;
 
                 pr.Fecha = fe;
-                pr.Sucursal.Id = s;
+                pr.Sucursal.ID = s;
 
                 int f = 0;
                 int i = 0;
