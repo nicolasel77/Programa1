@@ -503,6 +503,12 @@
     <Compile Include="Carga\Varios\frmCapitalDeTrabajo.Designer.cs">
       <DependentUpon>frmCapitalDeTrabajo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Varios\frmVenta_Productos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Varios\frmVenta_Productos.Designer.cs">
+      <DependentUpon>frmVenta_Productos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controles\cBoton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -868,6 +874,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Varios\frmCapitalDeTrabajo.resx">
       <DependentUpon>frmCapitalDeTrabajo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Varios\frmVenta_Productos.resx">
+      <DependentUpon>frmVenta_Productos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cBoton.resx">
       <DependentUpon>cBoton.cs</DependentUpon>

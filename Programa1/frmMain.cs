@@ -1967,5 +1967,53 @@
                 }
             }
         }
+
+        private void ventasPorProductoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmVenta_Productos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmVenta_Productos");
+                t.Text = "Venta_Productos";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmVenta_Productos = new Carga.Varios.frmVenta_Productos();
+                frmVenta_Productos.MdiParent = this;
+                frmVenta_Productos.Disposed += FrmVenta_Productos_Disposed;
+                forms.Add(frmVenta_Productos);
+                frmVenta_Productos.Show();
+                frmVenta_Productos.WindowState = FormWindowState.Minimized;
+                frmVenta_Productos.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmVenta_Productos_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Venta_Productos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmVenta_Productos")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

@@ -25,15 +25,15 @@
                 if ((d - d2).TotalDays>6)
                 {
                     d2 = d2.AddDays(7);
-                    comandoSql.CommandText = $"INSERT INTO Semanas (Semana) VALUES('{d2.ToString("MM/dd/yy")}')";
+                    comandoSql.CommandText = $"INSERT INTO Semanas (Semana) VALUES('{d2:MM/dd/yy}')";
                     conexionSql.Open();
                     comandoSql.Connection = conexionSql;
                     comandoSql.ExecuteNonQuery();
                 }
             }
-            catch (Exception)
+            catch (Exception er)
             {
-                dt = null;
+                System.Windows.Forms.MessageBox.Show(er.Message);
             }            
         }
        
@@ -41,6 +41,10 @@
         public bool Guardada { get; set; }
         public bool Cerrada { get; set; }
 
+        public bool Fecha_Cerrada(DateTime f)
+        {
+
+        }
 
         public DataTable Datos(string filtro = "")
         {
@@ -112,6 +116,7 @@
 
             return dt;
         }
+
 
     }
 }

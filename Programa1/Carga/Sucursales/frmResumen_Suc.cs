@@ -198,7 +198,7 @@
         }
         private void Cuentas()
         {
-            grdVentas.MostrarDatos(Est.Ventas_Kilos(), true, false);
+            grdVentas.MostrarDatos(Est.Ventas_KilosPorTipo(), true, false);
             for (int i = 1; i< grdVentas.Cols; i++)
             {
                 grdVentas.Columnas[i].Format = "N1";

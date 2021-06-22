@@ -520,6 +520,7 @@
             this.ventasPorProductoToolStripMenuItem.Name = "ventasPorProductoToolStripMenuItem";
             this.ventasPorProductoToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.ventasPorProductoToolStripMenuItem.Text = "&Ventas por Producto";
+            this.ventasPorProductoToolStripMenuItem.Click += new System.EventHandler(this.ventasPorProductoToolStripMenuItem_Click);
             // 
             // reintXCambioDePreciosToolStripMenuItem
             // 

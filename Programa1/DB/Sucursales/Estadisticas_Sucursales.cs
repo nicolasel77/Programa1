@@ -48,10 +48,10 @@
             {
                 d = 0;
             }
-            
+
             return Convert.ToDouble(d);
         }
-        
+
         public Double Carne_Kilos()
         {
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -81,7 +81,7 @@
             Double t = 0;
             return t;
         }
-        
+
         public Double Pollo_Kilos()
         {
             Double t = 0;
@@ -114,7 +114,7 @@
             Double t = 0;
             return t;
         }
-        
+
         public Double Integracion_Venta()
         {
             Double t = 0;
@@ -224,7 +224,7 @@
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);                
+                SqlDat.Fill(dt);
             }
             catch (Exception)
             {
@@ -271,7 +271,7 @@
         /// Devuelve la venta por Tipo de producto de la semana/suc.
         /// </summary>
         /// <returns></returns>
-        public DataTable Ventas_Kilos()
+        public DataTable Ventas_KilosPorTipo()
         {
             var dt = new DataTable("Ventas");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -282,12 +282,85 @@
                 comandoSql.CommandType = CommandType.StoredProcedure;
                 comandoSql.Parameters.AddWithValue("Suc", Suc.Id);
                 comandoSql.Parameters.AddWithValue("F", Sem.Semana);
-                
+
                 conexionSql.Open();
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
                 SqlDat.Fill(dt);
                 dt.Columns.Add("Venta", typeof(Double), "St_Ant+Compra+Carne+Medias_U+TR_Ent-TR_Sal-Stock");
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        public DataTable Ventas_KilosProdSuc(byte semanas = 5, string filtro_Prods = "")
+        {
+            DataTable dt = new DataTable("Datos");
+
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                string cadena = "";
+                string Columnas_Semanas = "";
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+                if (filtro_Prods != "") { filtro_Prods = $" WHERE {filtro_Prods}"; }
+
+                Columnas_Semanas = "";
+                string suma_Semanas = "";
+
+                DateTime fecha = Sem.Semana.AddDays(7 * (semanas - 1) * -1);
+
+                for (int n = 1; n <= semanas; n++)
+                {
+                    Columnas_Semanas = h.Unir(Columnas_Semanas, $"[{fecha:dd/MM/yyyy}]", ", ");
+                    suma_Semanas = h.Unir(suma_Semanas, $"[{fecha:dd/MM/yyyy}]", "+");
+                    fecha = fecha.AddDays(7);
+                }
+
+                if (Suc.Id != 0)
+                {
+                    //cadena = $"SELECT * FROM (SELECT Prod, Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL( Kilos, 0) AS tKilos FROM vw_VentaProductos) AS Venta " +
+                    //            $" PIVOT (SUM (tKilos)" +
+                    //            $" Suc={Suc.Id}" +
+                    //            $" AND Semana='{Sem.Semana:MM/dd/yy}' ORDER BY Prod "; 
+                }
+                else
+                {
+                    cadena = $"SELECT * FROM (SELECT Prod, Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL( Kilos, 0) AS tKilos FROM vw_VentaProductos) AS Venta " +
+                                $" PIVOT (SUM (tKilos)" +
+                                $"FOR Semana IN({Columnas_Semanas}))" +
+                                $" AS VENTAS {filtro_Prods}  ORDER BY Prod";
+                }
+
+                conexionSql.Open();
+                SqlCommand comandoSql = new SqlCommand(cadena, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+                dt.Columns.Add("Total", typeof(double), suma_Semanas);
+
+                ////Limpiar el dt
+                for (int i = dt.Rows.Count - 1; i > -1; i--)
+                {
+                    DataRow dr = dt.Rows[i];
+
+                    if (dr["Total"] == DBNull.Value)
+                    {
+                        dt.Rows.RemoveAt(i);
+                    }
+                    else
+                    {
+                        if (Convert.ToDouble(dr["Total"]) == 0) { dt.Rows.RemoveAt(i); }
+                    }
+                }
             }
             catch (Exception)
             {
