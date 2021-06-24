@@ -325,16 +325,18 @@
 
                 if (Suc.ID != 0)
                 {
-                    //cadena = $"SELECT * FROM (SELECT Prod, Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL( Kilos, 0) AS tKilos FROM vw_VentaProductos) AS Venta " +
-                    //            $" PIVOT (SUM (tKilos)" +
-                    //            $" Suc={Suc.ID}" +
-                    //            $" AND Semana='{Sem.Semana:MM/dd/yy}' ORDER BY Prod "; 
+                    cadena = $"SELECT * FROM (SELECT Prod, Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL( Kilos, 0) AS tKilos " +
+                                 $" FROM vw_VentaProductos WHERE Suc={Suc.ID}) AS Venta " +
+                                 $" PIVOT (SUM (tKilos)" +
+                                 $" FOR Semana IN({Columnas_Semanas}))" +
+                                 $" AS VENTAS {filtro_Prods}  ORDER BY Prod";
                 }
                 else
                 {
-                    cadena = $"SELECT * FROM (SELECT Prod, Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL( Kilos, 0) AS tKilos FROM vw_VentaProductos) AS Venta " +
+                    cadena = $"SELECT * FROM (SELECT Prod, Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL( Kilos, 0) AS tKilos " +
+                                $" FROM vw_VentaProductos) AS Venta " +
                                 $" PIVOT (SUM (tKilos)" +
-                                $"FOR Semana IN({Columnas_Semanas}))" +
+                                $" FOR Semana IN({Columnas_Semanas}))" +
                                 $" AS VENTAS {filtro_Prods}  ORDER BY Prod";
                 }
 
@@ -346,7 +348,10 @@
                 SqlDat.Fill(dt);
 
                 dt.Columns.Add("Total", typeof(double), suma_Semanas);
+                dt.Columns.Add("Stock", typeof(double));
 
+                
+                Stock st = new Stock();               
                 ////Limpiar el dt
                 for (int i = dt.Rows.Count - 1; i > -1; i--)
                 {
@@ -358,7 +363,23 @@
                     }
                     else
                     {
-                        if (Convert.ToDouble(dr["Total"]) == 0) { dt.Rows.RemoveAt(i); }
+                        if (Convert.ToDouble(dr["Total"]) == 0)
+                        {
+                            dt.Rows.RemoveAt(i);
+                        }
+                        else
+                        {
+                            //Agregar stock
+                            if (Suc.ID != 0)
+                            {
+                                dr["Stock"] = st.Stock_Kilos($"Fecha='{Sem.Semana.AddDays(6):MM/dd/yy}' AND ID_Productos={dr["Prod"]} AND ID_Sucursales={Suc.ID}");
+                            }
+                            else
+                            {
+                                dr["Stock"] = st.Stock_Kilos($"Fecha='{Sem.Semana.AddDays(6):MM/dd/yy}' AND ID_Productos={dr["Prod"]}");
+                            }
+                                
+                        }
                     }
                 }
             }

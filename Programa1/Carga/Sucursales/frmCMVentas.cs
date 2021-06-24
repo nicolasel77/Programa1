@@ -285,7 +285,7 @@
             for (int f = 1; f <= grdResultado.Rows - 1; f++)
             {
                 int i = Convert.ToInt32(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id")).ToString());
-                Ventas.Id = i;
+                Ventas.ID = i;
                 Ventas.Fecha = Convert.ToDateTime(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Fecha")));
                 Ventas.Sucursal.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Proveedores")));
                 Ventas.Sucursal.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Sucursales")));

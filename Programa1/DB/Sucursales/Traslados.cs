@@ -1,35 +1,24 @@
 ﻿
 namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Traslados
+    public class Traslados : c_Base
     {
 
 
         public Traslados()
         {
+            Tabla = "Traslados";
+            Vista = "vw_Traslados";
+            ID_Automatico = true;
         }
 
-        public Traslados(int id, DateTime fecha, Productos prod, string desc, Sucursales.Sucursales suc_Salida, float costo_Salida, Sucursales.Sucursales suc_Entrada, float costo_Entrada, float kilos)
-        {
-            Id = id;
-            Fecha = fecha;
-            Producto = prod;
-            Descripcion = desc;
-            sucS = suc_Salida;
-            CostoS = costo_Salida;
-            sucE = suc_Entrada;
-            CostoE = costo_Entrada;
-            Kilos = kilos;
-
-        }
-
-        public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public Productos Producto { get; set; } = new Productos();
 
@@ -43,61 +32,27 @@ namespace Programa1.DB
 
         public Precios_Sucursales precios = new Precios_Sucursales();
 
-        public DataTable Datos(string filtro = "")
+        public new DataTable Datos(string filtro = "")
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Traslados {filtro} ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
+            return Datos_Vista(filtro);
         }
 
-        public void Actualizar()
+        public new void Actualizar()
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command =
-                    new SqlCommand($"UPDATE Traslados SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Suc_Salida={sucS.ID}, Suc_Entrada={sucE.ID}, Id_Productos={Producto.ID}, Descripcion='{Descripcion}', " +
-                        $"Costo_Salida={CostoS.ToString().Replace(",", ".")}, Costo_Entrada={CostoE.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
-                        $"WHERE Id={Id}", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
+            Actualizar("Fecha", Fecha);
+            Actualizar("Suc_Salida", sucS.ID);
+            Actualizar("Suc_Entrada", sucE.ID);
+            Actualizar("ID_Productos", Producto.ID);
+            Actualizar("Descripcion", Descripcion);
+            Actualizar("Costo_Salida", CostoS);
+            Actualizar("Costo_Entrada", CostoE);
+            Actualizar("Kilos", Kilos);
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            int n = MaxId();
+            int n = Max_ID();
             try
             {
                 SqlCommand command =
@@ -111,64 +66,16 @@ namespace Programa1.DB
 
                 sql.Close();
 
-                int n2 = MaxId();
+                int n2 = Max_ID();
                 if (n == n2)
                 {
-                    Id = 0;
+                    ID = 0;
                     MessageBox.Show("No se pudo guardar el registro.", "Error");
                 }
                 else
                 {
-                    Id = n2;
+                    ID = n2;
                 }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
-        public int MaxId()
-        {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Traslados", conexionSql);
-
-                conexionSql.Open();
-
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
-
-                conexionSql.Close();
-            }
-            catch (Exception)
-            {
-                d = 0;
-            }
-
-            return Convert.ToInt32(d);
-        }
-
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Traslados WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id = 0;
-
-                sql.Close();
             }
             catch (Exception e)
             {
@@ -192,20 +99,28 @@ namespace Programa1.DB
 
                 DataRow dr = dt.Rows[0];
 
-                Id = id;
+                ID = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
                 Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
                 sucS.ID = Convert.ToInt32(dr["Suc_Salida"]);
                 sucE.ID = Convert.ToInt32(dr["Suc_Entrada"]);
                 CostoS = Convert.ToSingle(dr["Costo_Salida"]);
-                CostoS = Convert.ToSingle(dr["Costo_Entrada"]);
+                CostoE = Convert.ToSingle(dr["Costo_Entrada"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
 
             }
             catch (Exception)
             {
-                Id = 0;
+                ID = 0;
+                Fecha = Convert.ToDateTime("1/1/1");
+                Producto.ID = 0;
+                Descripcion = "";
+                sucS.ID = 0;
+                sucE.ID = 0;
+                CostoS = 0;
+                CostoE = 0;
+                Kilos = 0;
             }
 
 

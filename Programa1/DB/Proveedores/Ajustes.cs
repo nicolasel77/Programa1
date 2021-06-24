@@ -1,28 +1,21 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Ajustes
+    public class Ajustes : c_Base
     {
         public Ajustes()
         {
+            Tabla = "Ajustes_Proveedor";
+            Vista = "vw_Ajustes";
+            ID_Automatico = true;
         }
 
-        public Ajustes(int id, DateTime fecha, string desc, Proveedores.Proveedores proveedor, float importe)
-        {
-            Id = id;
-            Fecha = fecha;
-            Descripcion = desc;
-            Proveedor = proveedor;
-            Importe = importe;
-
-        }
-
-        public int Id { get; set; }
         public DateTime Fecha { get; set; }
 
         [MaxLength(100, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
@@ -31,88 +24,24 @@
         public Double Importe { get; set; }
 
 
-
-        public DataTable Datos(string filtro = "")
+        public new DataTable Datos(string filtro = "")
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-
-            try
-            {
-                string Cadena = $"SELECT *  FROM vw_Ajustes {filtro} ORDER BY Id";
-
-                SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
+            return Datos_Vista(filtro);            
         }
        
-        public DateTime Ultima_Fecha()
-        {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand($"SELECT ISNULL(MAX(Fecha), '1/1/2000') FROM Ajustes_Proveedor", conexionSql);
-
-                conexionSql.Open();
-
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
-
-                conexionSql.Close();
-            }
-            catch (Exception)
-            {
-                d = null;
-            }
-            DateTime f = Convert.ToDateTime(d);
-            return f;
-        }
-        public void Actualizar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command =
-                    new SqlCommand($"UPDATE Ajustes_Proveedor SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Proveedor={Proveedor.Id}, Descripcion='{Descripcion}', " +
-                        $"Importe={Importe.ToString().Replace(",", ".")} " +
-                        $"WHERE Id={Id}", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
+        
+        public new void Actualizar()
+        {      
+            Actualizar("Fecha", Fecha);
+            Actualizar("Id_Proveedores", Proveedor.Id);
+            Actualizar("Descripcion", Descripcion);
+            Actualizar("Importe", Importe);
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            int n = MaxId();
+            int n = Max_ID();
             try
             {
                 SqlCommand command =
@@ -126,15 +55,15 @@
 
                 sql.Close();
 
-                int n2 = MaxId();
+                int n2 = Max_ID();
                 if (n == n2)
                 {
-                    Id = 0;
+                    ID = 0;
                     MessageBox.Show("No se pudo guardar el registro.", "Error");
                 }
                 else
                 {
-                    Id = n2;
+                    ID = n2;
                 }
             }
             catch (Exception e)
@@ -142,55 +71,7 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
-
-        public int MaxId()
-        {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Ajustes_Proveedor", conexionSql);
-
-                conexionSql.Open();
-
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
-
-                conexionSql.Close();
-            }
-            catch (Exception)
-            {
-                d = 0;
-            }
-
-            return Convert.ToInt32(d);
-        }
-
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Ajustes_Proveedor WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
+                
         public void Cargar_Fila(int id)
         {
             var dt = new DataTable("Datos");
@@ -207,7 +88,7 @@
 
                 DataRow dr = dt.Rows[0];
 
-                Id = id;
+                ID = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
                 Descripcion = dr["Descripcion"].ToString();
                 Proveedor.Id = Convert.ToInt32(dr["Id_Proveedor"]);
@@ -216,10 +97,12 @@
             }
             catch (Exception)
             {
-                Id = 0;
+                ID = 0;
+                Fecha = Convert.ToDateTime("1/1/1");
+                Proveedor.Id = 0;                
+                Descripcion = "";
+                Importe = 0;
             }
-
-
         }
     }
 }

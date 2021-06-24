@@ -47,7 +47,7 @@
         public new void Actualizar()
         {
             Actualizar("Fecha", Fecha);
-            Actualizar("ID_Caja", caja.Id);
+            Actualizar("ID_Caja", caja.ID);
             Actualizar("ID_TipoGastos", TG.Id_Tipo);
             Actualizar("Id_SubTipoGastos", Id_SubTipoGastos);
             Actualizar("Id_DetalleGastos", Id_DetalleGastos);
@@ -70,7 +70,7 @@
             {
                 SqlCommand command = new SqlCommand($"INSERT INTO CD_Gastos " +
                     $"(Fecha, ID_Caja, ID_TipoGastos, ID_SubTipoGastos, Desc_SubTipo, ID_DetalleGastos, Descripcion, Importe, Cheque, Autorizado, Fecha_Acreditacion, Fecha_Autorizado, Usuario) " +
-                    $"VALUES('{Fecha:MM/dd/yy}', {caja.Id}, {TG.Id_Tipo}, {Id_SubTipoGastos}, '{Desc_SubTipo}', {Id_DetalleGastos}, '{Descripcion}', " +
+                    $"VALUES('{Fecha:MM/dd/yy}', {caja.ID}, {TG.Id_Tipo}, {Id_SubTipoGastos}, '{Desc_SubTipo}', {Id_DetalleGastos}, '{Descripcion}', " +
                     $"{Importe.ToString().Replace(",", ".")}, {Cheque}, {(Autorizado ? "1" : "0")}, '{Fecha_Acreditacion:MM/dd/yy HH:mm}', '{Fecha_Autorizado:MM/dd/yy HH:mm}', {Usuario.ID})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -119,7 +119,7 @@
                 var d = command.ExecuteNonQuery();
 
                 //HORRIBLE.
-                if (caja.Id == 12)
+                if (caja.ID == 12)
                 {
                     a_Rendir.ID_Salida = ID;
                     a_Rendir.ID_NARendir = caja.nombre_ARendir.ID;
@@ -436,6 +436,10 @@
             return dt;
         }
 
+        public bool Fecha_Cerrada()
+        {
+            return Fecha_Cerrada(Fecha);
+        }
         #endregion
 
     }

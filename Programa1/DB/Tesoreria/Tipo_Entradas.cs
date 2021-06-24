@@ -1,12 +1,13 @@
 ﻿namespace Programa1.DB.Tesoreria
 {
+    using Programa1.Clases;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Tipos_Entradas
+    public class Tipos_Entradas : c_Base
     {
         private int vId;
         /// <summary>
@@ -15,16 +16,13 @@
         public Grupos_Entradas grupoE = new Grupos_Entradas();
         public Tipos_Entradas()
         {
+            Tabla = "Tipos_Entradas";
+            Vista = Tabla;
+
+            Campo_ID = "ID_Tipo";
         }
 
-        public Tipos_Entradas(int id, string nombre, int grupo, bool es_entrega)
-        {
-            Id_Tipo = id;
-            Nombre = nombre;
-            Grupo = grupo;
-            Es_Entrega = es_entrega;
-        }
-
+      
         [Required]
         [Key]
         public int Id_Tipo
@@ -36,10 +34,6 @@
                 Cargar();
             }
         }
-
-        [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
-        [Required]
-        public string Nombre { get; set; }
 
         public int Grupo { get; set; }
 
@@ -61,30 +55,9 @@
         }
 
 
-        public DataTable Datos(string filtro = "")
+        public new DataTable Datos(string filtro = "")
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            Herramientas.Herramientas h = new Herramientas.Herramientas();
-
-            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Tipos_Entradas " + filtro, conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
+            return Datos_Vista(filtro);
         }
 
         public DataTable SubTipos(string filtro = "")
@@ -118,7 +91,7 @@
         }
 
 
-        public void Actualizar()
+        public new void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -138,10 +111,10 @@
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error");
-            }
+            }            
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -162,69 +135,5 @@
             }
         }
 
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand(string.Format("DELETE FROM Tipos_Entradas WHERE Id_Tipo={0}", Id_Tipo), sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id_Tipo = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
-
-        public bool Existe()
-        {
-            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("SELECT Nombre FROM Tipos_Entradas WHERE Id_Tipo=" + Id_Tipo, sql);
-                command.CommandType = CommandType.Text;
-                sql.Open();
-                command.Connection = sql;
-
-
-                var d = command.ExecuteScalar();
-
-                if (string.IsNullOrEmpty(Convert.ToString(d)))
-                {
-                    return false;
-                }
-                else
-                {
-                    if (d.ToString().Length == 0)
-                    {
-                        Nombre = "";
-                        return false;
-                    }
-                    else
-                    {
-                        Nombre = d.ToString();
-                        return true;
-                    }
-
-                }
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-                return false;
-            }
-        }
     }
 }

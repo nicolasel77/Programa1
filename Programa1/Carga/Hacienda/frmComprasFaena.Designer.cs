@@ -93,7 +93,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer1.Panel2.Controls.Add(this.statusStrip1);
-            this.splitContainer1.Size = new System.Drawing.Size(987, 666);
+            this.splitContainer1.Size = new System.Drawing.Size(1201, 666);
             this.splitContainer1.SplitterDistance = 255;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -114,8 +114,8 @@
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.statusStrip3);
             this.splitContainer2.Panel2.Controls.Add(this.grdAgregados);
-            this.splitContainer2.Size = new System.Drawing.Size(987, 255);
-            this.splitContainer2.SplitterDistance = 568;
+            this.splitContainer2.Size = new System.Drawing.Size(1201, 255);
+            this.splitContainer2.SplitterDistance = 691;
             this.splitContainer2.TabIndex = 2;
             // 
             // grdCompras
@@ -150,7 +150,7 @@
             this.grdCompras.Redraw = true;
             this.grdCompras.Row = 0;
             this.grdCompras.Rows = 50;
-            this.grdCompras.Size = new System.Drawing.Size(562, 221);
+            this.grdCompras.Size = new System.Drawing.Size(685, 221);
             this.grdCompras.TabIndex = 2;
             this.grdCompras.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdCompras_Editado);
             this.grdCompras.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdCompras_CambioFila);
@@ -166,7 +166,7 @@
             this.lblCInt});
             this.statusStrip2.Location = new System.Drawing.Point(0, 227);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(568, 28);
+            this.statusStrip2.Size = new System.Drawing.Size(691, 28);
             this.statusStrip2.TabIndex = 1;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -216,7 +216,7 @@
             this.lblATotal});
             this.statusStrip3.Location = new System.Drawing.Point(0, 227);
             this.statusStrip3.Name = "statusStrip3";
-            this.statusStrip3.Size = new System.Drawing.Size(415, 28);
+            this.statusStrip3.Size = new System.Drawing.Size(506, 28);
             this.statusStrip3.TabIndex = 4;
             this.statusStrip3.Text = "statusStrip3";
             // 
@@ -263,7 +263,7 @@
             this.grdAgregados.Redraw = true;
             this.grdAgregados.Row = 0;
             this.grdAgregados.Rows = 50;
-            this.grdAgregados.Size = new System.Drawing.Size(415, 255);
+            this.grdAgregados.Size = new System.Drawing.Size(506, 255);
             this.grdAgregados.TabIndex = 3;
             // 
             // splitContainer3
@@ -283,8 +283,8 @@
             this.splitContainer3.Panel2.Controls.Add(this.cmdColumnas);
             this.splitContainer3.Panel2.Controls.Add(this.label2);
             this.splitContainer3.Panel2.Controls.Add(this.grdRomaneos);
-            this.splitContainer3.Size = new System.Drawing.Size(987, 379);
-            this.splitContainer3.SplitterDistance = 742;
+            this.splitContainer3.Size = new System.Drawing.Size(1201, 379);
+            this.splitContainer3.SplitterDistance = 902;
             this.splitContainer3.TabIndex = 2;
             // 
             // grdFaena
@@ -317,7 +317,7 @@
             this.grdFaena.Redraw = true;
             this.grdFaena.Row = 0;
             this.grdFaena.Rows = 50;
-            this.grdFaena.Size = new System.Drawing.Size(742, 379);
+            this.grdFaena.Size = new System.Drawing.Size(902, 379);
             this.grdFaena.TabIndex = 0;
             // 
             // cmdColumnas
@@ -326,7 +326,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdColumnas.Location = new System.Drawing.Point(3, 347);
             this.cmdColumnas.Name = "cmdColumnas";
-            this.cmdColumnas.Size = new System.Drawing.Size(235, 29);
+            this.cmdColumnas.Size = new System.Drawing.Size(289, 29);
             this.cmdColumnas.TabIndex = 2;
             this.cmdColumnas.Texto = "Columnas";
             this.cmdColumnas.Click += new System.EventHandler(this.cBoton1_Click);
@@ -375,7 +375,7 @@
             this.grdRomaneos.Redraw = true;
             this.grdRomaneos.Row = 0;
             this.grdRomaneos.Rows = 50;
-            this.grdRomaneos.Size = new System.Drawing.Size(235, 178);
+            this.grdRomaneos.Size = new System.Drawing.Size(289, 178);
             this.grdRomaneos.TabIndex = 0;
             // 
             // statusStrip1
@@ -391,7 +391,7 @@
             this.lblCostoCarne});
             this.statusStrip1.Location = new System.Drawing.Point(0, 379);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(987, 28);
+            this.statusStrip1.Size = new System.Drawing.Size(1201, 28);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -472,7 +472,7 @@
             this.grdBoletas.Redraw = true;
             this.grdBoletas.Row = 0;
             this.grdBoletas.Rows = 50;
-            this.grdBoletas.Size = new System.Drawing.Size(306, 642);
+            this.grdBoletas.Size = new System.Drawing.Size(375, 642);
             this.grdBoletas.TabIndex = 1;
             this.grdBoletas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdBoletas_CambioFila);
             // 
@@ -492,8 +492,8 @@
             // 
             this.splitContainer5.Panel2.Controls.Add(this.grdBoletas);
             this.splitContainer5.Panel2.Controls.Add(this.label1);
-            this.splitContainer5.Size = new System.Drawing.Size(1300, 666);
-            this.splitContainer5.SplitterDistance = 987;
+            this.splitContainer5.Size = new System.Drawing.Size(1583, 666);
+            this.splitContainer5.SplitterDistance = 1201;
             this.splitContainer5.TabIndex = 1;
             // 
             // label1
@@ -513,7 +513,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(1324, 690);
+            this.ClientSize = new System.Drawing.Size(1607, 690);
             this.Controls.Add(this.splitContainer5);
             this.Name = "frmComprasFaena";
             this.Text = "Compras/Faena";

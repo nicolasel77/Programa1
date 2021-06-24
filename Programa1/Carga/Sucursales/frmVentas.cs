@@ -48,8 +48,8 @@
 
             Totales();
             Herramientas.Herramientas h = new Herramientas.Herramientas();
-            
-            h.Llenar_List(lstCamiones, Venta.Camion.Datos());                        
+
+            h.Llenar_List(lstCamiones, Venta.Camion.Datos());
             h.Llenar_List(cmbListas, Listas.Lista.Datos());
 
             cmbListas.Items.Insert(0, "Ninguna...");
@@ -147,9 +147,9 @@
             grdVenta.set_ColW(c_Fecha, 60);
             grdVenta.set_ColW(c_IdCamion, 30);
             grdVenta.set_ColW(c_IdProv, 35);
-            grdVenta.set_ColW(c_IdProv + 1, 40);
+            grdVenta.set_ColW(c_IdProv + 1, 100);
             grdVenta.set_ColW(c_IdSuc, 35);
-            grdVenta.set_ColW(c_IdSuc + 1, 40);
+            grdVenta.set_ColW(c_IdSuc + 1, 100);
             grdVenta.set_ColW(c_IdProd, 30);
             grdVenta.set_ColW(c_Descripcion, 120);
             grdVenta.set_ColW(c_CostoVenta, 60);
@@ -218,199 +218,212 @@
 
         private void GrdVenta_Editado(short f, short c, object a)
         {
-            int id = Convert.ToInt32(grdVenta.get_Texto(f, c_Id));
-            switch (c)
+            if (Venta.Fecha_Cerrada(Venta.Fecha) == false)
             {
-                case c_Fecha:
-                    DateTime df = Convert.ToDateTime(a);
-                    if (cFecha.Fecha_En_Rango(df))
-                    {
-                        Venta.Fecha = df;
-                        Venta.precios.Fecha = Venta.Fecha;
-                        Venta.precios_Proveedores.Fecha = Venta.Fecha;
+                int id = Convert.ToInt32(grdVenta.get_Texto(f, c_Id));
+                switch (c)
+                {
+                    case c_Fecha:
+                        DateTime df = Convert.ToDateTime(a);
+                        if (cFecha.Fecha_En_Rango(df))
+                        {
+                            if (Venta.Fecha_Cerrada(df) == false)
+                            {
+                                Venta.Fecha = df;
+                                Venta.precios.Fecha = Venta.Fecha;
+                                Venta.precios_Proveedores.Fecha = Venta.Fecha;
+
+                                if (id != 0) { Venta.Actualizar(); }
+
+                                grdVenta.set_Texto(f, c, a);
+                                grdVenta.ActivarCelda(f, c + 1);
+                            }
+                            else
+                            {
+                                Mensaje("La fecha esta cerrada.");
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha debe estar dentro del rango fecha seleccionado.");
+                            grdVenta.ErrorEnTxt();
+                        }
+                        break;
+                    case c_IdCamion:
+                        Venta.Camion.ID = Convert.ToInt32(a);
+
+                        if (Venta.Camion.Existe() == true)
+                        {
+                            grdVenta.set_Texto(f, c, a);
+
+                            if (id != 0) { Venta.Actualizar(); }
+
+                            grdVenta.ActivarCelda(f, c + 1);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"No se encontro el camión {a}.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        break;
+                    case c_IdProv:
+                        Venta.Proveedor.Id = Convert.ToInt32(a);
+                        if (Venta.Proveedor.Existe() == true)
+                        {
+                            Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
+
+                            if (id != 0) { Venta.Actualizar(); }
+
+                            grdVenta.set_Texto(f, c, a);
+                            grdVenta.set_Texto(f, c + 1, Venta.Proveedor.Nombre);
+
+                            grdVenta.ActivarCelda(f, c + 2);
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró el proveedor " + a.ToString());
+                            grdVenta.ErrorEnTxt();
+                        }
+                        break;
+                    case c_IdSuc:
+                        Venta.Sucursal.ID = Convert.ToInt32(a);
+                        if (Venta.Sucursal.Existe() == true)
+                        {
+                            Venta.precios.Sucursal = Venta.Sucursal;
+
+                            if (id != 0) { Venta.Actualizar(); }
+
+                            grdVenta.set_Texto(f, c, a);
+                            grdVenta.set_Texto(f, c + 1, Venta.Sucursal.Nombre);
+
+                            grdVenta.ActivarCelda(f, c + 2);
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró la sucursal " + a.ToString());
+                            grdVenta.ErrorEnTxt();
+                        }
+                        break;
+
+                    case c_IdProd:
+                        Venta.Producto.ID = Convert.ToInt32(a);
+                        if (Venta.Producto.Existe() == true)
+                        {
+                            Venta.precios.Producto = Venta.Producto;
+                            Listas.Producto = Venta.Producto;
+                            Venta.precios_Proveedores.Producto = Venta.Producto;
+
+                            Venta.Descripcion = Venta.Producto.Nombre;
+
+                            grdVenta.set_Texto(f, c, a);
+                            grdVenta.set_Texto(f, c + 1, Venta.Producto.Nombre);
+
+                            Venta.precios.Sucursal = Venta.Sucursal;
+                            Venta.CostoVenta = Venta.precios.Buscar();
+                            grdVenta.set_Texto(f, c_CostoVenta, Venta.CostoVenta);
+                            grdVenta.set_Texto(f, c_TotalVenta, Venta.Kilos * Venta.CostoVenta);
+
+                            Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
+                            Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                            grdVenta.set_Texto(f, c_CostoCompra, Venta.CostoCompra);
+                            grdVenta.set_Texto(f, c_TotalCompra, Venta.Kilos * Venta.CostoCompra);
+
+                            if (id != 0) { Venta.Actualizar(); }
+
+                            grdVenta.ActivarCelda(f, c_Kilos);
+                            Totales();
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró el producto " + a.ToString());
+                            grdVenta.ErrorEnTxt();
+                        }
+                        break;
+                    case c_Descripcion:
+                        Venta.Descripcion = a.ToString();
+                        grdVenta.set_Texto(f, c, a);
 
                         if (id != 0) { Venta.Actualizar(); }
 
-                        grdVenta.set_Texto(f, c, a);
-                        grdVenta.ActivarCelda(f, c + 1);
-                    }
-                    else
-                    {
-                        Mensaje("La fecha debe estar dentro del rango fecha seleccionado.");
-                        grdVenta.ErrorEnTxt();
-                    }
-                    break;
-                case c_IdCamion:
-                    Venta.Camion.ID = Convert.ToInt32(a);
-
-                    if (Venta.Camion.Existe() == true)
-                    {
-                        grdVenta.set_Texto(f, c, a);
-
-                        if (id != 0) { Venta.Actualizar(); }
-
-                        grdVenta.ActivarCelda(f, c + 1);
-                    }
-                    else
-                    {
-                        MessageBox.Show($"No se encontro el camión {a}.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                    break;
-                case c_IdProv:
-                    Venta.Proveedor.Id = Convert.ToInt32(a);
-                    if (Venta.Proveedor.Existe() == true)
-                    {
-                        Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
-
-                        if (id != 0) { Venta.Actualizar(); }
-
-                        grdVenta.set_Texto(f, c, a);
-                        grdVenta.set_Texto(f, c + 1, Venta.Proveedor.Nombre);
-
-                        grdVenta.ActivarCelda(f, c + 2);
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró el proveedor " + a.ToString());
-                        grdVenta.ErrorEnTxt();
-                    }
-                    break;
-                case c_IdSuc:
-                    Venta.Sucursal.ID = Convert.ToInt32(a);
-                    if (Venta.Sucursal.Existe() == true)
-                    {
-                        Venta.precios.Sucursal = Venta.Sucursal;
-
-                        if (id != 0) { Venta.Actualizar(); }
-
-                        grdVenta.set_Texto(f, c, a);
-                        grdVenta.set_Texto(f, c + 1, Venta.Sucursal.Nombre);
-
-                        grdVenta.ActivarCelda(f, c + 2);
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró la sucursal " + a.ToString());
-                        grdVenta.ErrorEnTxt();
-                    }
-                    break;
-
-                case c_IdProd:
-                    Venta.Producto.ID = Convert.ToInt32(a);
-                    if (Venta.Producto.Existe() == true)
-                    {
-                        Venta.precios.Producto = Venta.Producto;
-                        Listas.Producto = Venta.Producto;
-                        Venta.precios_Proveedores.Producto = Venta.Producto;
-
-                        Venta.Descripcion = Venta.Producto.Nombre;
-
-                        grdVenta.set_Texto(f, c, a);
-                        grdVenta.set_Texto(f, c + 1, Venta.Producto.Nombre);
-
-                        Venta.precios.Sucursal = Venta.Sucursal;
-                        Venta.CostoVenta = Venta.precios.Buscar();
-                        grdVenta.set_Texto(f, c_CostoVenta, Venta.CostoVenta);
-                        grdVenta.set_Texto(f, c_TotalVenta, Venta.Kilos * Venta.CostoVenta);
-
-                        Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
-                        Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
-                        grdVenta.set_Texto(f, c_CostoCompra, Venta.CostoCompra);
-                        grdVenta.set_Texto(f, c_TotalCompra, Venta.Kilos * Venta.CostoCompra);
-
-                        if (id != 0) { Venta.Actualizar(); }
-
-                        grdVenta.ActivarCelda(f, c_Kilos);
-                        Totales();
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró el producto " + a.ToString());
-                        grdVenta.ErrorEnTxt();
-                    }
-                    break;
-                case c_Descripcion:
-                    Venta.Descripcion = a.ToString();
-                    grdVenta.set_Texto(f, c, a);
-
-                    if (id != 0) { Venta.Actualizar(); }
-
-                    grdVenta.ActivarCelda(f + 1, c);
-                    break;
-                case c_CostoCompra:
-                    Venta.CostoCompra = Convert.ToSingle(a);
-                    grdVenta.set_Texto(f, c, a);
-                    grdVenta.set_Texto(f, c_TotalCompra, Venta.CostoCompra * Venta.Kilos);
-
-                    if (id != 0) { Venta.Actualizar(); }
-
-                    grdVenta.ActivarCelda(f + 1, c);
-                    Totales();
-                    break;
-                case c_CostoVenta:
-                    Venta.CostoVenta = Convert.ToSingle(a);
-                    grdVenta.set_Texto(f, c, a);
-                    grdVenta.set_Texto(f, c_TotalVenta, Venta.CostoVenta * Venta.Kilos);
-
-                    if (id != 0) { Venta.Actualizar(); }
-
-                    grdVenta.ActivarCelda(f + 1, c);
-                    Totales();
-                    break;
-
-                case c_Kilos:
-                    Venta.Kilos = Convert.ToSingle(a);
-                    grdVenta.set_Texto(f, c, a);
-                    grdVenta.set_Texto(f, c_TotalVenta, Venta.CostoVenta * Venta.Kilos);
-                    grdVenta.set_Texto(f, c_TotalCompra, Venta.CostoCompra * Venta.Kilos);
-
-                    if (grdVenta.Row == grdVenta.Rows - 1)
-                    {
-                        Venta.Agregar();
-                        grdVenta.set_Texto(f, c_Id, Venta.Id);
-                        grdVenta.AgregarFila();
-
-                        //Rellenar nueva fila
-
-                        grdVenta.set_Texto(f + 1, c_Fecha, Venta.Fecha);
-                        grdVenta.set_Texto(f + 1, c_IdCamion, Venta.Camion.ID);
-                        grdVenta.set_Texto(f + 1, c_IdProv, Venta.Proveedor.Id);
-                        grdVenta.set_Texto(f + 1, c_IdProv + 1, Venta.Sucursal.Nombre);
-                        grdVenta.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.ID);
-                        grdVenta.set_Texto(f + 1, c_IdSuc + 1, Venta.Sucursal.Nombre);
-
-                        Venta.Producto.ID = Listas.Producto_Siguiente();
-
-                        Venta.precios.Producto = Venta.Producto;
-                        Venta.precios_Proveedores.Producto = Venta.Producto;
-
-                        Venta.Descripcion = Venta.Producto.Nombre;
-
-                        grdVenta.set_Texto(f + 1, c_IdProd, Venta.Producto.ID);
-                        grdVenta.set_Texto(f + 1, c_Descripcion, Venta.Descripcion);
-
-
-                        Venta.CostoVenta = Venta.precios.Buscar();
-                        grdVenta.set_Texto(f + 1, c_CostoVenta, Venta.CostoVenta);
-                        grdVenta.set_Texto(f + 1, c_TotalVenta, 0);
-
-                        Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
-                        grdVenta.set_Texto(f + 1, c_CostoCompra, Venta.CostoCompra);
-                        grdVenta.set_Texto(f + 1, c_TotalCompra, 0);
-
-                        Venta.Kilos = 0;
-                        grdVenta.ActivarCelda(f + 1, c_Kilos);
-                    }
-                    else
-                    {
-                        Venta.Actualizar();
                         grdVenta.ActivarCelda(f + 1, c);
-                    }
+                        break;
+                    case c_CostoCompra:
+                        Venta.CostoCompra = Convert.ToSingle(a);
+                        grdVenta.set_Texto(f, c, a);
+                        grdVenta.set_Texto(f, c_TotalCompra, Venta.CostoCompra * Venta.Kilos);
 
-                    Totales();
-                    break;
+                        if (id != 0) { Venta.Actualizar(); }
+
+                        grdVenta.ActivarCelda(f + 1, c);
+                        Totales();
+                        break;
+                    case c_CostoVenta:
+                        Venta.CostoVenta = Convert.ToSingle(a);
+                        grdVenta.set_Texto(f, c, a);
+                        grdVenta.set_Texto(f, c_TotalVenta, Venta.CostoVenta * Venta.Kilos);
+
+                        if (id != 0) { Venta.Actualizar(); }
+
+                        grdVenta.ActivarCelda(f + 1, c);
+                        Totales();
+                        break;
+
+                    case c_Kilos:
+                        Venta.Kilos = Convert.ToSingle(a);
+                        grdVenta.set_Texto(f, c, a);
+                        grdVenta.set_Texto(f, c_TotalVenta, Venta.CostoVenta * Venta.Kilos);
+                        grdVenta.set_Texto(f, c_TotalCompra, Venta.CostoCompra * Venta.Kilos);
+
+                        if (grdVenta.Row == grdVenta.Rows - 1)
+                        {
+                            Venta.Agregar();
+                            grdVenta.set_Texto(f, c_Id, Venta.ID);
+                            grdVenta.AgregarFila();
+
+                            //Rellenar nueva fila
+
+                            grdVenta.set_Texto(f + 1, c_Fecha, Venta.Fecha);
+                            grdVenta.set_Texto(f + 1, c_IdCamion, Venta.Camion.ID);
+                            grdVenta.set_Texto(f + 1, c_IdProv, Venta.Proveedor.Id);
+                            grdVenta.set_Texto(f + 1, c_IdProv + 1, Venta.Sucursal.Nombre);
+                            grdVenta.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.ID);
+                            grdVenta.set_Texto(f + 1, c_IdSuc + 1, Venta.Sucursal.Nombre);
+
+                            Venta.Producto.ID = Listas.Producto_Siguiente();
+
+                            Venta.precios.Producto = Venta.Producto;
+                            Venta.precios_Proveedores.Producto = Venta.Producto;
+
+                            Venta.Descripcion = Venta.Producto.Nombre;
+
+                            grdVenta.set_Texto(f + 1, c_IdProd, Venta.Producto.ID);
+                            grdVenta.set_Texto(f + 1, c_Descripcion, Venta.Descripcion);
+
+
+                            Venta.CostoVenta = Venta.precios.Buscar();
+                            grdVenta.set_Texto(f + 1, c_CostoVenta, Venta.CostoVenta);
+                            grdVenta.set_Texto(f + 1, c_TotalVenta, 0);
+
+                            Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                            grdVenta.set_Texto(f + 1, c_CostoCompra, Venta.CostoCompra);
+                            grdVenta.set_Texto(f + 1, c_TotalCompra, 0);
+
+                            Venta.Kilos = 0;
+                            grdVenta.ActivarCelda(f + 1, c_Kilos);
+                        }
+                        else
+                        {
+                            Venta.Actualizar();
+                            grdVenta.ActivarCelda(f + 1, c);
+                        }
+
+                        Totales();
+                        break;
+                }
             }
-
+            else
+            {
+                Mensaje("La fecha esta cerrada.");
+            }
         }
 
         private void GrdVenta_CambioFila(short Fila)
@@ -431,7 +444,7 @@
         {
             if (e == 13)
             {
-                if (Venta.Id == 0)
+                if (Venta.ID == 0)
                 {
 
                     if (grdVenta.Col == c_Kilos)
@@ -465,14 +478,21 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    if (Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0)) != 0)
                     {
-                        if (Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0)) != 0)
+                        if (Venta.Fecha_Cerrada(Venta.Fecha) == false)
                         {
-                            Venta.Id = Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0));
-                            Venta.Borrar();
-                            grdVenta.BorrarFila(grdVenta.Row);
-                            Totales();
+                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes) 
+                            {
+                                Venta.ID = Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0));
+                                Venta.Borrar();
+                                grdVenta.BorrarFila(grdVenta.Row);
+                                Totales();
+                            } 
+                        }
+                        else
+                        {
+                            Mensaje("La fecha esta cerrada.");
                         }
                     }
                     break;
@@ -617,7 +637,7 @@
                 {
                     Herramientas.Herramientas h = new Herramientas.Herramientas();
                     Listas.Lista.ID = h.Codigo_Seleccionado(cmbListas.Text);
-                    Listas.Producto= Venta.Producto;
+                    Listas.Producto = Venta.Producto;
                 }
             }
         }

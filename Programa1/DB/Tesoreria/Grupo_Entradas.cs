@@ -6,7 +6,7 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    class Grupos_Entradas
+    public class Grupos_Entradas
     {
         public Grupos_Entradas()
         {

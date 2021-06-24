@@ -79,7 +79,11 @@
             }
         }
 
-       
+
+        public void Cargar_Fila()
+        {
+            Cargar_Fila(ID);
+        }
         public void Cargar_Fila(int id)
         {
             var dt = new DataTable("Datos");

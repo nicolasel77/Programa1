@@ -97,5 +97,10 @@
                 }
             }
         }
+
+        public new DataTable Datos(string filtro = "")
+        {
+            return Datos_Vista(filtro, "ID, ID_Consignatarios, Nombre, Cabezas Cab, ID_Productos Prod, Nombre_Producto Descr, Kilos, Costo, Sub_Total, IVA, Total, Plazo");
+        }
     }
 }

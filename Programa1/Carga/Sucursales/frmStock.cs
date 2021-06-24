@@ -194,136 +194,149 @@
 
         private void GrdStock_Editado(short f, short c, object a)
         {
-            int id = Convert.ToInt32(grdStock.get_Texto(f, c_Id));
-            switch (c)
+            if (stock.Fecha_Cerrada(stock.Fecha) == false)
             {
-                case 1:
-                    //Fecha
-                    DateTime df = Convert.ToDateTime(a);
-                    if (df >= cFecha.fecha_Actual)
-                    {
-                        stock.Fecha = df;
-                        stock.precios.Fecha = stock.Fecha;
+                int id = Convert.ToInt32(grdStock.get_Texto(f, c_Id));
+                switch (c)
+                {
+                    case 1:
+                        //Fecha
+                        DateTime df = Convert.ToDateTime(a);
+                        if (df >= cFecha.fecha_Actual)
+                        {
+                            if (stock.Fecha_Cerrada(df) == false)
+                            {
+                                stock.Fecha = df;
+                                stock.precios.Fecha = stock.Fecha;
+
+                                if (id != 0) { stock.Actualizar(); }
+
+                                grdStock.set_Texto(f, c, a);
+                                grdStock.ActivarCelda(f, c + 1);
+                            }
+                            else
+                            {
+                                Mensaje("La fecha esta cerrada.");
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                            grdStock.ErrorEnTxt();
+                        }
+                        break;
+                    case 2:
+                        //ID_Sucursales
+                        stock.Sucursal.ID = Convert.ToInt32(a);
+                        if (stock.Sucursal.Existe() == true)
+                        {
+                            stock.precios.Sucursal = stock.Sucursal;
+
+                            if (id != 0) { stock.Actualizar(); }
+
+                            grdStock.set_Texto(f, c, a);
+                            grdStock.set_Texto(f, c + 1, stock.Sucursal.Nombre);
+
+                            grdStock.ActivarCelda(f, c + 2);
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró la sucursal " + a.ToString());
+                            grdStock.ErrorEnTxt();
+                        }
+                        break;
+                    case 4:
+                        //ID_Productos
+                        stock.Producto.ID = Convert.ToInt32(a);
+                        if (stock.Producto.Existe() == true)
+                        {
+                            stock.precios.Producto = stock.Producto;
+
+                            stock.Descripcion = stock.Producto.Nombre;
+
+                            grdStock.set_Texto(f, c, a);
+                            grdStock.set_Texto(f, c + 1, stock.Producto.Nombre);
+
+                            stock.Costo = stock.precios.Buscar();
+                            grdStock.set_Texto(f, c_Costo, stock.Costo);
+                            grdStock.set_Texto(f, c_Total, stock.Costo * stock.Kilos);
+
+                            if (id != 0) { stock.Actualizar(); }
+
+                            grdStock.ActivarCelda(f, c_Kilos);
+                            Totales();
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró el producto " + a.ToString());
+                            grdStock.ErrorEnTxt();
+                        }
+                        break;
+                    case 5:
+                        //Descripcion
+                        stock.Descripcion = a.ToString();
+                        grdStock.set_Texto(f, c, a);
 
                         if (id != 0) { stock.Actualizar(); }
 
+                        grdStock.ActivarCelda(f + 1, c);
+                        break;
+                    case 6:
+                        //Costo
+                        stock.Costo = Convert.ToSingle(a);
                         grdStock.set_Texto(f, c, a);
-                        grdStock.ActivarCelda(f, c + 1);
-                    }
-                    else
-                    {
-                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
-                        grdStock.ErrorEnTxt();
-                    }
-                    break;
-                case 2:
-                    //ID_Sucursales
-                    stock.Sucursal.ID = Convert.ToInt32(a);
-                    if (stock.Sucursal.Existe() == true)
-                    {
-                        stock.precios.Sucursal = stock.Sucursal;
-
-                        if (id != 0) { stock.Actualizar(); }
-
-                        grdStock.set_Texto(f, c, a);
-                        grdStock.set_Texto(f, c + 1, stock.Sucursal.Nombre);
-
-                        grdStock.ActivarCelda(f, c + 2);
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró la sucursal " + a.ToString());
-                        grdStock.ErrorEnTxt();
-                    }
-                    break;
-                case 4:
-                    //ID_Productos
-                    stock.Producto.ID = Convert.ToInt32(a);
-                    if (stock.Producto.Existe() == true)
-                    {
-                        stock.precios.Producto = stock.Producto;
-
-                        stock.Descripcion = stock.Producto.Nombre;
-
-                        grdStock.set_Texto(f, c, a);
-                        grdStock.set_Texto(f, c + 1, stock.Producto.Nombre);
-
-                        stock.Costo = stock.precios.Buscar();
-                        grdStock.set_Texto(f, c_Costo, stock.Costo);
                         grdStock.set_Texto(f, c_Total, stock.Costo * stock.Kilos);
 
                         if (id != 0) { stock.Actualizar(); }
 
-                        grdStock.ActivarCelda(f, c_Kilos);
+                        grdStock.ActivarCelda(f + 1, c);
                         Totales();
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró el producto " + a.ToString());
-                        grdStock.ErrorEnTxt();
-                    }
-                    break;
-                case 5:
-                    //Descripcion
-                    stock.Descripcion = a.ToString();
-                    grdStock.set_Texto(f, c, a);
+                        break;
+                    case 7:
+                        //Kilos
+                        stock.Kilos = Convert.ToSingle(a);
+                        grdStock.set_Texto(f, c, a);
+                        grdStock.set_Texto(f, c_Total, stock.Costo * stock.Kilos);
 
-                    if (id != 0) { stock.Actualizar(); }
+                        if (grdStock.Row == grdStock.Rows - 1)
+                        {
+                            stock.Agregar();
+                            grdStock.set_Texto(f, c_Id, stock.ID);
+                            grdStock.AgregarFila();
+                            //Rellenar nueva fila
 
-                    grdStock.ActivarCelda(f + 1, c);
-                    break;
-                case 6:
-                    //Costo
-                    stock.Costo = Convert.ToSingle(a);
-                    grdStock.set_Texto(f, c, a);
-                    grdStock.set_Texto(f, c_Total, stock.Costo * stock.Kilos);
+                            grdStock.set_Texto(f + 1, c_Fecha, stock.Fecha);
+                            grdStock.set_Texto(f + 1, c_IdSuc, stock.Sucursal.ID);
+                            grdStock.set_Texto(f + 1, c_IdSuc + 1, stock.Sucursal.Nombre);
 
-                    if (id != 0) { stock.Actualizar(); }
+                            stock.Producto.Siguiente();
+                            stock.precios.Producto = stock.Producto;
 
-                    grdStock.ActivarCelda(f + 1, c);
-                    Totales();
-                    break;
-                case 7:
-                    //Kilos
-                    stock.Kilos = Convert.ToSingle(a);
-                    grdStock.set_Texto(f, c, a);
-                    grdStock.set_Texto(f, c_Total, stock.Costo * stock.Kilos);
+                            stock.Descripcion = stock.Producto.Nombre;
 
-                    if (grdStock.Row == grdStock.Rows - 1)
-                    {
-                        stock.Agregar();
-                        grdStock.set_Texto(f, c_Id, stock.Id);
-                        grdStock.AgregarFila();
-                        //Rellenar nueva fila
+                            grdStock.set_Texto(f + 1, c_IdProd, stock.Producto.ID);
+                            grdStock.set_Texto(f + 1, c_Descripcion, stock.Descripcion);
 
-                        grdStock.set_Texto(f + 1, c_Fecha, stock.Fecha);
-                        grdStock.set_Texto(f + 1, c_IdSuc, stock.Sucursal.ID);
-                        grdStock.set_Texto(f + 1, c_IdSuc + 1, stock.Sucursal.Nombre);
+                            stock.Costo = stock.precios.Buscar();
+                            grdStock.set_Texto(f + 1, c_Costo, stock.Costo);
+                            grdStock.set_Texto(f + 1, c_Total, 0);
 
-                        stock.Producto.Siguiente();
-                        stock.precios.Producto = stock.Producto;
+                            stock.Kilos = 0;
+                        }
+                        else
+                        {
+                            stock.Actualizar();
+                        }
+                        grdStock.ActivarCelda(f + 1, c);
 
-                        stock.Descripcion = stock.Producto.Nombre;
-
-                        grdStock.set_Texto(f + 1, c_IdProd, stock.Producto.ID);
-                        grdStock.set_Texto(f + 1, c_Descripcion, stock.Descripcion);
-
-                        stock.Costo = stock.precios.Buscar();
-                        grdStock.set_Texto(f + 1, c_Costo, stock.Costo);
-                        grdStock.set_Texto(f + 1, c_Total, 0);
-
-                        stock.Kilos = 0;
-                    }
-                    else
-                    {
-                        stock.Actualizar();
-                    }
-                    grdStock.ActivarCelda(f + 1, c);
-
-                    Totales();
-                    break;
+                        Totales();
+                        break;
+                } 
             }
-
+            else
+            {
+                Mensaje("La fecha esta cerrada.");
+            }
         }
 
         private void GrdStock_CambioFila(short Fila)
@@ -339,7 +352,7 @@
         {
             if (e == 13)
             {
-                if (stock.Id == 0)
+                if (stock.ID == 0)
                 {
 
                     if (grdStock.Col == c_Kilos)
@@ -365,14 +378,21 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    if (Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0)) != 0)
                     {
-                        if (Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0)) != 0)
+                        if (stock.Fecha_Cerrada(stock.Fecha) == false)
                         {
-                            stock.Id = Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0));
-                            stock.Borrar();
-                            grdStock.BorrarFila(grdStock.Row);
-                            Totales();
+                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes) 
+                            {
+                                stock.ID = Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0));
+                                stock.Borrar();
+                                grdStock.BorrarFila(grdStock.Row);
+                                Totales();
+                            } 
+                        }
+                        else
+                        {
+                            Mensaje("La fecha esta cerrada.");
                         }
                     }
                     break;

@@ -1,5 +1,6 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using Programa1.DB.Varios;
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -7,14 +8,16 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    public class Compras
+    public class Compras : c_Base
     {
         public Compras()
         {
+            Tabla = "Compras";
+            Vista = "vw_Compras";
+            ID_Automatico = true;
         }
-               
 
-        public int Id { get; set; }
+
         public DateTime Fecha { get; set; }
         public Productos Producto { get; set; } = new Productos();
 
@@ -28,32 +31,9 @@
 
         public Precios_Proveedores precios = new Precios_Proveedores();
 
-        public DataTable Datos(string filtro = "")
+        public new DataTable Datos(string filtro = "")
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-
-            try
-            {
-                string Cadena = $"SELECT Id, Fecha, ID_Camion, Id_Proveedores, Nombre, Id_Productos, Descripcion, Costo, Kilos, Total  FROM vw_Compras {filtro} ORDER BY Id";
-
-                SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
+            return Datos_Vista(filtro, "Id, Fecha, ID_Camion, Id_Proveedores, Nombre, Id_Productos, Descripcion, Costo, Kilos, Total");
         }
 
         /// <summary>
@@ -81,7 +61,7 @@
 
                 SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
-                
+
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
                 SqlDat.Fill(dt);
             }
@@ -117,35 +97,21 @@
             DateTime f = Convert.ToDateTime(d);
             return f;
         }
-        public void Actualizar()
+        public new void Actualizar()
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command =
-                    new SqlCommand($"UPDATE Compras SET Fecha='{Fecha.ToString("MM/dd/yyy")}', " +
-                        $"Id_Camion={Camion.ID}, Id_Proveedores={Proveedor.Id}, Id_Productos={Producto.ID}, Descripcion='{Descripcion}', " +
-                        $"Costo={Costo.ToString().Replace(",", ".")}, Kilos={Kilos.ToString().Replace(",", ".")} " +
-                        $"WHERE Id={Id}", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
+            Actualizar("Fecha", Fecha);
+            Actualizar("ID_Camion", Camion.ID);
+            Actualizar("Id_Proveedores", Proveedor.Id);
+            Actualizar("ID_Productos", Producto.ID);
+            Actualizar("Descripcion", Descripcion);
+            Actualizar("Costo", Costo);
+            Actualizar("Kilos", Kilos);
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            int n = MaxId();
+            int n = Max_ID();
             try
             {
                 SqlCommand command =
@@ -159,15 +125,15 @@
 
                 sql.Close();
 
-                int n2 = MaxId();
+                int n2 = Max_ID();
                 if (n == n2)
                 {
-                    Id = 0;
+                    ID = 0;
                     MessageBox.Show("No se pudo guardar el registro.", "Error");
                 }
                 else
                 {
-                    Id = n2;
+                    ID = n2;
                 }
             }
             catch (Exception e)
@@ -176,53 +142,6 @@
             }
         }
 
-        public int MaxId()
-        {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Compras", conexionSql);
-
-                conexionSql.Open();
-
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
-
-                conexionSql.Close();
-            }
-            catch (Exception)
-            {
-                d = 0;
-            }
-
-            return Convert.ToInt32(d);
-        }
-
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand("DELETE FROM Compras WHERE Id=" + Id, sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
 
         public void Cargar_Fila(int id)
         {
@@ -240,7 +159,7 @@
 
                 DataRow dr = dt.Rows[0];
 
-                Id = id;
+                ID = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
                 Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
@@ -251,10 +170,15 @@
             }
             catch (Exception)
             {
-                Id = 0;
+                ID = 0;
+                Fecha = Convert.ToDateTime("1/1/1");
+                Camion.ID = 0;
+                Proveedor.Id = 0;
+                Producto.ID = 0;
+                Descripcion = "";
+                Costo = 0;
+                Kilos = 0;
             }
-
-
         }
     }
 }

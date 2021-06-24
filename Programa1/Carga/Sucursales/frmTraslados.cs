@@ -114,7 +114,7 @@ namespace Programa1.Carga
             this.Cursor = Cursors.WaitCursor;
 
             string s = Armar_Cadena();
-            if (s.Length == 0) { s = "Id=-1";  }
+            if (s.Length == 0) { s = "Id=-1"; }
             grdTraslados.MostrarDatos(Traslados.Datos(s), true);
             formato_Grilla();
             Totales();
@@ -218,161 +218,174 @@ namespace Programa1.Carga
 
         private void GrdTraslados_Editado(short f, short c, object a)
         {
-            int id = Convert.ToInt32(grdTraslados.get_Texto(f, c_Id));
-            switch (c)
+            if (Traslados.Fecha_Cerrada(Traslados.Fecha) == false)
             {
-                case 1:
-                    //Fecha
-                    DateTime df = Convert.ToDateTime(a);
-                    if (df >= cFecha.fecha_Actual)
-                    {
-                        Traslados.Fecha = df;
-                        Traslados.precios.Fecha = Traslados.Fecha;
+                int id = Convert.ToInt32(grdTraslados.get_Texto(f, c_Id));
+                switch (c)
+                {
+                    case 1:
+                        //Fecha
+                        DateTime df = Convert.ToDateTime(a);
+                        if (df >= cFecha.fecha_Actual)
+                        {
+                            if (Traslados.Fecha_Cerrada(df) == false)
+                            {
+                                Traslados.Fecha = df;
+                                Traslados.precios.Fecha = Traslados.Fecha;
+
+                                if (id != 0) { Traslados.Actualizar(); }
+
+                                grdTraslados.set_Texto(f, c, a);
+                                grdTraslados.ActivarCelda(f, c + 1);
+                            }
+                            else
+                            {
+                                Mensaje("La fecha esta cerrada.");
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                            grdTraslados.ErrorEnTxt();
+                        }
+                        break;
+                    case 2:
+                        //Suc_Salida
+                        Traslados.sucS.ID = Convert.ToInt32(a);
+                        if (Traslados.sucS.Existe() == true)
+                        {
+                            Traslados.precios.Sucursal = Traslados.sucS;
+
+                            if (id != 0) { Traslados.Actualizar(); }
+
+                            grdTraslados.set_Texto(f, c, a);
+                            grdTraslados.set_Texto(f, c + 1, Traslados.sucS.Nombre);
+
+                            grdTraslados.ActivarCelda(f, c + 2);
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró la sucursal " + a.ToString());
+                            grdTraslados.ErrorEnTxt();
+                        }
+                        break;
+                    case 4:
+                        //Suc_Entrada
+                        Traslados.sucE.ID = Convert.ToInt32(a);
+                        if (Traslados.sucE.Existe() == true)
+                        {
+                            Traslados.precios.Sucursal = Traslados.sucE;
+
+                            if (id != 0) { Traslados.Actualizar(); }
+
+                            grdTraslados.set_Texto(f, c, a);
+                            grdTraslados.set_Texto(f, c + 1, Traslados.sucE.Nombre);
+
+                            grdTraslados.ActivarCelda(f, c + 2);
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró la sucursal " + a.ToString());
+                            grdTraslados.ErrorEnTxt();
+                        }
+                        break;
+                    case 6:
+                        //ID_Productos
+                        Traslados.Producto.ID = Convert.ToInt32(a);
+                        if (Traslados.Producto.Existe() == true)
+                        {
+                            Traslados.precios.Producto = Traslados.Producto;
+
+                            Traslados.Descripcion = Traslados.Producto.Nombre;
+
+                            grdTraslados.set_Texto(f, c, a);
+                            grdTraslados.set_Texto(f, c + 1, Traslados.Producto.Nombre);
+
+                            Traslados.precios.Sucursal = Traslados.sucS;
+                            Traslados.CostoS = Traslados.precios.Buscar();
+                            grdTraslados.set_Texto(f, c_CostoS, Traslados.CostoS);
+                            grdTraslados.set_Texto(f, c_TotalS, Traslados.Kilos * Traslados.CostoS);
+
+                            Traslados.precios.Sucursal = Traslados.sucE;
+                            Traslados.CostoE = Traslados.precios.Buscar();
+                            grdTraslados.set_Texto(f, c_CostoE, Traslados.CostoE);
+                            grdTraslados.set_Texto(f, c_TotalE, Traslados.Kilos * Traslados.CostoE);
+
+                            if (id != 0) { Traslados.Actualizar(); }
+
+                            grdTraslados.ActivarCelda(f, c_Kilos);
+                            Totales();
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró el producto " + a.ToString());
+                            grdTraslados.ErrorEnTxt();
+                        }
+                        break;
+                    case 7:
+                        //Descripcion
+                        Traslados.Descripcion = a.ToString();
+                        grdTraslados.set_Texto(f, c, a);
 
                         if (id != 0) { Traslados.Actualizar(); }
 
-                        grdTraslados.set_Texto(f, c, a);
-                        grdTraslados.ActivarCelda(f, c + 1);
-                    }
-                    else
-                    {
-                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
-                        grdTraslados.ErrorEnTxt();
-                    }
-                    break;
-                case 2:
-                    //Suc_Salida
-                    Traslados.sucS.ID = Convert.ToInt32(a);
-                    if (Traslados.sucS.Existe() == true)
-                    {
-                        Traslados.precios.Sucursal = Traslados.sucS;
-
-                        if (id != 0) { Traslados.Actualizar(); }
-
-                        grdTraslados.set_Texto(f, c, a);
-                        grdTraslados.set_Texto(f, c + 1, Traslados.sucS.Nombre);
-
-                        grdTraslados.ActivarCelda(f, c + 2);
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró la sucursal " + a.ToString());
-                        grdTraslados.ErrorEnTxt();
-                    }
-                    break;
-                case 4:
-                    //Suc_Entrada
-                    Traslados.sucE.ID = Convert.ToInt32(a);
-                    if (Traslados.sucE.Existe() == true)
-                    {
-                        Traslados.precios.Sucursal = Traslados.sucE;
-
-                        if (id != 0) { Traslados.Actualizar(); }
-
-                        grdTraslados.set_Texto(f, c, a);
-                        grdTraslados.set_Texto(f, c + 1, Traslados.sucE.Nombre);
-
-                        grdTraslados.ActivarCelda(f, c + 2);
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró la sucursal " + a.ToString());
-                        grdTraslados.ErrorEnTxt();
-                    }
-                    break;
-                case 6:
-                    //ID_Productos
-                    Traslados.Producto.ID = Convert.ToInt32(a);
-                    if (Traslados.Producto.Existe() == true)
-                    {
-                        Traslados.precios.Producto = Traslados.Producto;
-
-                        Traslados.Descripcion = Traslados.Producto.Nombre;
-
-                        grdTraslados.set_Texto(f, c, a);
-                        grdTraslados.set_Texto(f, c + 1, Traslados.Producto.Nombre);
-
-                        Traslados.precios.Sucursal = Traslados.sucS;
-                        Traslados.CostoS = Traslados.precios.Buscar();
-                        grdTraslados.set_Texto(f, c_CostoS, Traslados.CostoS);
-                        grdTraslados.set_Texto(f, c_TotalS, Traslados.Kilos * Traslados.CostoS);
-
-                        Traslados.precios.Sucursal = Traslados.sucE;
-                        Traslados.CostoE = Traslados.precios.Buscar();
-                        grdTraslados.set_Texto(f, c_CostoE, Traslados.CostoE);
-                        grdTraslados.set_Texto(f, c_TotalE, Traslados.Kilos * Traslados.CostoE);
-
-                        if (id != 0) { Traslados.Actualizar(); }
-
-                        grdTraslados.ActivarCelda(f, c_Kilos);
-                        Totales();
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró el producto " + a.ToString());
-                        grdTraslados.ErrorEnTxt();
-                    }
-                    break;
-                case 7:
-                    //Descripcion
-                    Traslados.Descripcion = a.ToString();
-                    grdTraslados.set_Texto(f, c, a);
-
-                    if (id != 0) { Traslados.Actualizar(); }
-
-                    grdTraslados.ActivarCelda(f + 1, c);
-                    break;
-                case 8:
-                    //Costo_Salida
-                    Traslados.CostoS = Convert.ToSingle(a);
-                    grdTraslados.set_Texto(f, c, a);
-                    grdTraslados.set_Texto(f, c_TotalS, Traslados.CostoS * Traslados.Kilos);
-
-                    if (id != 0) { Traslados.Actualizar(); }
-
-                    grdTraslados.ActivarCelda(f + 1, c);
-                    Totales();
-                    break;
-                case 9:
-                    //Costo_Entrada
-                    Traslados.CostoE = Convert.ToSingle(a);
-                    grdTraslados.set_Texto(f, c, a);
-                    grdTraslados.set_Texto(f, c_TotalE, Traslados.CostoE * Traslados.Kilos);
-
-                    if (id != 0) { Traslados.Actualizar(); }
-
-                    grdTraslados.ActivarCelda(f + 1, c);
-                    Totales();
-                    break;
-                case 10:
-                    //Kilos
-                    Traslados.Kilos = Convert.ToSingle(a);
-                    grdTraslados.set_Texto(f, c, a);
-                    grdTraslados.set_Texto(f, c_TotalS, Traslados.CostoS * Traslados.Kilos);
-                    grdTraslados.set_Texto(f, c_TotalE, Traslados.CostoE * Traslados.Kilos);
-
-                    if (grdTraslados.Row == grdTraslados.Rows - 1)
-                    {
-                        Traslados.Agregar();
-                        grdTraslados.set_Texto(f, c_Id, Traslados.Id);
-                        grdTraslados.AgregarFila();
-                        //Rellenar nueva fila
-
-                        grdTraslados.set_Texto(f + 1, c_Fecha, Traslados.Fecha);
-
-                        Traslados.Kilos = 0;
-                        grdTraslados.ActivarCelda(f + 1, c_IdSucE);
-                    }
-                    else
-                    {
-                        Traslados.Actualizar();
                         grdTraslados.ActivarCelda(f + 1, c);
-                    }
+                        break;
+                    case 8:
+                        //Costo_Salida
+                        Traslados.CostoS = Convert.ToSingle(a);
+                        grdTraslados.set_Texto(f, c, a);
+                        grdTraslados.set_Texto(f, c_TotalS, Traslados.CostoS * Traslados.Kilos);
 
-                    Totales();
-                    break;
+                        if (id != 0) { Traslados.Actualizar(); }
+
+                        grdTraslados.ActivarCelda(f + 1, c);
+                        Totales();
+                        break;
+                    case 9:
+                        //Costo_Entrada
+                        Traslados.CostoE = Convert.ToSingle(a);
+                        grdTraslados.set_Texto(f, c, a);
+                        grdTraslados.set_Texto(f, c_TotalE, Traslados.CostoE * Traslados.Kilos);
+
+                        if (id != 0) { Traslados.Actualizar(); }
+
+                        grdTraslados.ActivarCelda(f + 1, c);
+                        Totales();
+                        break;
+                    case 10:
+                        //Kilos
+                        Traslados.Kilos = Convert.ToSingle(a);
+                        grdTraslados.set_Texto(f, c, a);
+                        grdTraslados.set_Texto(f, c_TotalS, Traslados.CostoS * Traslados.Kilos);
+                        grdTraslados.set_Texto(f, c_TotalE, Traslados.CostoE * Traslados.Kilos);
+
+                        if (grdTraslados.Row == grdTraslados.Rows - 1)
+                        {
+                            Traslados.Agregar();
+                            grdTraslados.set_Texto(f, c_Id, Traslados.ID);
+                            grdTraslados.AgregarFila();
+                            //Rellenar nueva fila
+
+                            grdTraslados.set_Texto(f + 1, c_Fecha, Traslados.Fecha);
+
+                            Traslados.Kilos = 0;
+                            grdTraslados.ActivarCelda(f + 1, c_IdSucE);
+                        }
+                        else
+                        {
+                            Traslados.Actualizar();
+                            grdTraslados.ActivarCelda(f + 1, c);
+                        }
+
+                        Totales();
+                        break;
+                }
             }
-
+            else
+            {
+                Mensaje("La fecha esta cerrada.");
+            }
         }
 
         private void GrdTraslados_CambioFila(short Fila)
@@ -388,7 +401,7 @@ namespace Programa1.Carga
         {
             if (e == 13)
             {
-                if (Traslados.Id == 0)
+                if (Traslados.ID == 0)
                 {
 
                     if (grdTraslados.Col == c_Kilos)
@@ -420,14 +433,21 @@ namespace Programa1.Carga
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    if (Convert.ToInt32(grdTraslados.get_Texto(grdTraslados.Row, 0)) != 0)
                     {
-                        if (Convert.ToInt32(grdTraslados.get_Texto(grdTraslados.Row, 0)) != 0)
+                        if (Traslados.Fecha_Cerrada(Traslados.Fecha) == false)
                         {
-                            Traslados.Id = Convert.ToInt32(grdTraslados.get_Texto(grdTraslados.Row, 0));
-                            Traslados.Borrar();
-                            grdTraslados.BorrarFila(grdTraslados.Row);
-                            Totales();
+                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                            {
+                                Traslados.ID = Convert.ToInt32(grdTraslados.get_Texto(grdTraslados.Row, 0));
+                                Traslados.Borrar();
+                                grdTraslados.BorrarFila(grdTraslados.Row);
+                                Totales();
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha esta cerrada.");
                         }
                     }
                     break;

@@ -2,6 +2,7 @@
 {
     using Programa1.Clases;
     using System;
+    using System.Data;
     using System.Data.SqlClient;
 
     public class Agregados_Hacienda : c_Base
@@ -22,6 +23,11 @@
         public int Estado { get; set; }
         public double Saldo { get; set; }
         public Matriculas Matricula { get; set; } = new Matriculas();
+
+        public new DataTable Datos(string filtro = "")
+        {
+            return Datos_Vista(filtro);
+        }
 
         public new void Actualizar()
         {

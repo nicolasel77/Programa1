@@ -128,7 +128,7 @@
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
             string c = h.Codigos_Seleccionados(lstCamiones);
-            if (c != "" ) { c = $"ID_Camion IN {c}";  }
+            if (c != "") { c = $"ID_Camion IN {c}"; }
 
             s = h.Unir(f, s);
             s = h.Unir(s, p);
@@ -201,153 +201,166 @@
 
         private void GrdCompras_Editado(short f, short c, object a)
         {
-            int id = Convert.ToInt32(grdCompras.get_Texto(f, c_Id));
-            switch (c)
+            if (Compras.Fecha_Cerrada(Compras.Fecha) == false)
             {
-                case 1:
-                    //Fecha
-                    DateTime df = Convert.ToDateTime(a);
-                    if (df >= cFecha.fecha_Actual)
-                    {
-                        Compras.Fecha = df;
-                        Compras.precios.Fecha = Compras.Fecha;
+                int id = Convert.ToInt32(grdCompras.get_Texto(f, c_Id));
+                switch (c)
+                {
+                    case 1:
+                        //Fecha
+                        DateTime df = Convert.ToDateTime(a);
+                        if (df >= cFecha.fecha_Actual)
+                        {
+                            if (Compras.Fecha_Cerrada(df) == false)
+                            {
+                                Compras.Fecha = df;
+                                Compras.precios.Fecha = Compras.Fecha;
+
+                                if (id != 0) { Compras.Actualizar(); }
+
+                                grdCompras.set_Texto(f, c, a);
+                                grdCompras.ActivarCelda(f, c + 1);
+                            }
+                            else
+                            {
+                                Mensaje("La fecha esta cerrada.");
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                            grdCompras.ErrorEnTxt();
+                        }
+                        break;
+                    case 2:
+                        //Camion
+                        Compras.Camion.ID = Convert.ToInt32(a);
+                        if (Compras.Camion.Existe() == true)
+                        {
+                            grdCompras.set_Texto(f, c, a);
+
+                            if (id != 0) { Compras.Actualizar(); }
+
+                            grdCompras.ActivarCelda(f, c + 1);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"No se encontro el camión {a}.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        break;
+                    case 3:
+                        //ID_Proveedores
+                        Compras.Proveedor.Id = Convert.ToInt32(a);
+                        if (Compras.Proveedor.Existe() == true)
+                        {
+                            Compras.precios.Proveedor = Compras.Proveedor;
+
+                            if (id != 0) { Compras.Actualizar(); }
+
+                            grdCompras.set_Texto(f, c, a);
+                            grdCompras.set_Texto(f, c + 1, Compras.Proveedor.Nombre);
+
+                            grdCompras.ActivarCelda(f, c + 2);
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró la Proveedor " + a.ToString());
+                            grdCompras.ErrorEnTxt();
+                        }
+                        break;
+                    case 5:
+                        //ID_Productos
+                        Compras.Producto.ID = Convert.ToInt32(a);
+                        if (Compras.Producto.Existe() == true)
+                        {
+                            Compras.precios.Producto = Compras.Producto;
+
+                            Compras.Descripcion = Compras.Producto.Nombre;
+
+                            grdCompras.set_Texto(f, c, a);
+                            grdCompras.set_Texto(f, c + 1, Compras.Producto.Nombre);
+
+                            Compras.Costo = Compras.precios.Buscar();
+                            grdCompras.set_Texto(f, c_Costo, Compras.Costo);
+                            grdCompras.set_Texto(f, c_Total, Compras.Costo * Compras.Kilos);
+
+                            if (id != 0) { Compras.Actualizar(); }
+
+                            grdCompras.ActivarCelda(f, c_Kilos);
+                            Totales();
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró el producto " + a.ToString());
+                            grdCompras.ErrorEnTxt();
+                        }
+                        break;
+                    case 6:
+                        //Descripcion
+                        Compras.Descripcion = a.ToString();
+                        grdCompras.set_Texto(f, c, a);
 
                         if (id != 0) { Compras.Actualizar(); }
 
+                        grdCompras.ActivarCelda(f + 1, c);
+                        break;
+                    case 7:
+                        //Costo
+                        Compras.Costo = Convert.ToSingle(a);
                         grdCompras.set_Texto(f, c, a);
-                        grdCompras.ActivarCelda(f, c + 1);
-                    }
-                    else
-                    {
-                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
-                        grdCompras.ErrorEnTxt();
-                    }
-                    break;
-                case 2:
-                    //Camion
-                    Compras.Camion.ID = Convert.ToInt32(a);
-                    if (Compras.Camion.Existe() == true)
-                    {
-                        grdCompras.set_Texto(f, c, a);
-
-                        if (id != 0) { Compras.Actualizar(); }
-
-                        grdCompras.ActivarCelda(f, c + 1);
-                    }
-                    else
-                    {
-                        MessageBox.Show($"No se encontro el camión {a}.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                    break;
-                case 3:
-                    //ID_Proveedores
-                    Compras.Proveedor.Id = Convert.ToInt32(a);
-                    if (Compras.Proveedor.Existe() == true)
-                    {
-                        Compras.precios.Proveedor = Compras.Proveedor;
-
-                        if (id != 0) { Compras.Actualizar(); }
-
-                        grdCompras.set_Texto(f, c, a);
-                        grdCompras.set_Texto(f, c + 1, Compras.Proveedor.Nombre);
-
-                        grdCompras.ActivarCelda(f, c + 2);
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró la Proveedor " + a.ToString());
-                        grdCompras.ErrorEnTxt();
-                    }
-                    break;
-                case 5:
-                    //ID_Productos
-                    Compras.Producto.ID = Convert.ToInt32(a);
-                    if (Compras.Producto.Existe() == true)
-                    {
-                        Compras.precios.Producto = Compras.Producto;
-
-                        Compras.Descripcion = Compras.Producto.Nombre;
-
-                        grdCompras.set_Texto(f, c, a);
-                        grdCompras.set_Texto(f, c + 1, Compras.Producto.Nombre);
-
-                        Compras.Costo = Compras.precios.Buscar();
-                        grdCompras.set_Texto(f, c_Costo, Compras.Costo);
                         grdCompras.set_Texto(f, c_Total, Compras.Costo * Compras.Kilos);
 
                         if (id != 0) { Compras.Actualizar(); }
 
-                        grdCompras.ActivarCelda(f, c_Kilos);
+                        grdCompras.ActivarCelda(f + 1, c);
                         Totales();
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró el producto " + a.ToString());
-                        grdCompras.ErrorEnTxt();
-                    }
-                    break;
-                case 6:
-                    //Descripcion
-                    Compras.Descripcion = a.ToString();
-                    grdCompras.set_Texto(f, c, a);
+                        break;
+                    case 8:
+                        //Kilos
+                        Compras.Kilos = Convert.ToSingle(a);
+                        grdCompras.set_Texto(f, c, a);
+                        grdCompras.set_Texto(f, c_Total, Compras.Costo * Compras.Kilos);
 
-                    if (id != 0) { Compras.Actualizar(); }
+                        if (grdCompras.Row == grdCompras.Rows - 1)
+                        {
+                            Compras.Agregar();
+                            grdCompras.set_Texto(f, c_Id, Compras.ID);
+                            grdCompras.AgregarFila();
+                            //Rellenar nueva fila
 
-                    grdCompras.ActivarCelda(f + 1, c);
-                    break;
-                case 7:
-                    //Costo
-                    Compras.Costo = Convert.ToSingle(a);
-                    grdCompras.set_Texto(f, c, a);
-                    grdCompras.set_Texto(f, c_Total, Compras.Costo * Compras.Kilos);
+                            grdCompras.set_Texto(f + 1, c_Fecha, Compras.Fecha);
+                            grdCompras.set_Texto(f + 1, c_IdCamion, Compras.Camion.ID);
+                            grdCompras.set_Texto(f + 1, c_IdProv, Compras.Proveedor.Id);
+                            grdCompras.set_Texto(f + 1, grdCompras.get_ColIndex("Nombre"), Compras.Proveedor.Nombre);
 
-                    if (id != 0) { Compras.Actualizar(); }
+                            Compras.Producto.Siguiente();
+                            Compras.precios.Producto = Compras.Producto;
 
-                    grdCompras.ActivarCelda(f + 1, c);
-                    Totales();
-                    break;
-                case 8:
-                    //Kilos
-                    Compras.Kilos = Convert.ToSingle(a);
-                    grdCompras.set_Texto(f, c, a);
-                    grdCompras.set_Texto(f, c_Total, Compras.Costo * Compras.Kilos);
+                            Compras.Descripcion = Compras.Producto.Nombre;
 
-                    if (grdCompras.Row == grdCompras.Rows - 1)
-                    {
-                        Compras.Agregar();
-                        grdCompras.set_Texto(f, c_Id, Compras.Id);
-                        grdCompras.AgregarFila();
-                        //Rellenar nueva fila
+                            grdCompras.set_Texto(f + 1, c_IdProd, Compras.Producto.ID);
+                            grdCompras.set_Texto(f + 1, c_Descripcion, Compras.Descripcion);
 
-                        grdCompras.set_Texto(f + 1, c_Fecha, Compras.Fecha);
-                        grdCompras.set_Texto(f + 1, c_IdCamion, Compras.Camion.ID);
-                        grdCompras.set_Texto(f + 1, c_IdProv, Compras.Proveedor.Id);
-                        grdCompras.set_Texto(f + 1, grdCompras.get_ColIndex("Nombre"), Compras.Proveedor.Nombre);
+                            Compras.Costo = Compras.precios.Buscar();
+                            grdCompras.set_Texto(f + 1, c_Costo, Compras.Costo);
+                            grdCompras.set_Texto(f + 1, c_Total, 0);
 
-                        Compras.Producto.Siguiente();
-                        Compras.precios.Producto = Compras.Producto;
+                            Compras.Kilos = 0;
+                        }
+                        else
+                        {
+                            Compras.Actualizar();
+                        }
+                        grdCompras.ActivarCelda(f + 1, c);
 
-                        Compras.Descripcion = Compras.Producto.Nombre;
-
-                        grdCompras.set_Texto(f + 1, c_IdProd, Compras.Producto.ID);
-                        grdCompras.set_Texto(f + 1, c_Descripcion, Compras.Descripcion);
-
-                        Compras.Costo = Compras.precios.Buscar();
-                        grdCompras.set_Texto(f + 1, c_Costo, Compras.Costo);
-                        grdCompras.set_Texto(f + 1, c_Total, 0);
-
-                        Compras.Kilos = 0;
-                    }
-                    else
-                    {
-                        Compras.Actualizar();
-                    }
-                    grdCompras.ActivarCelda(f + 1, c);
-
-                    Totales();
-                    break;
+                        Totales();
+                        break;
+                }
             }
-
+            else
+            {
+                Mensaje("La fecha esta cerrada.");
+            }
         }
 
         private void GrdCompras_CambioFila(short Fila)
@@ -363,7 +376,7 @@
         {
             if (e == 13)
             {
-                if (Compras.Id == 0)
+                if (Compras.ID == 0)
                 {
 
                     if (grdCompras.Col == c_Kilos)
@@ -389,14 +402,21 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    if (Convert.ToInt32(grdCompras.get_Texto(grdCompras.Row, 0)) != 0)
                     {
-                        if (Convert.ToInt32(grdCompras.get_Texto(grdCompras.Row, 0)) != 0)
+                        if (Compras.Fecha_Cerrada(Compras.Fecha) == false)
                         {
-                            Compras.Id = Convert.ToInt32(grdCompras.get_Texto(grdCompras.Row, 0));
-                            Compras.Borrar();
-                            grdCompras.BorrarFila(grdCompras.Row);
-                            Totales();
+                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                            {
+                                Compras.ID = Convert.ToInt32(grdCompras.get_Texto(grdCompras.Row, 0));
+                                Compras.Borrar();
+                                grdCompras.BorrarFila(grdCompras.Row);
+                                Totales();
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha esta cerrada.");
                         }
                     }
                     break;

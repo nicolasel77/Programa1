@@ -197,9 +197,7 @@
                 cmd.Connection = cnn;
                 cnn.Open();
 
-                var d = cmd.ExecuteNonQuery();
-
-                ID = 0;
+                var d = cmd.ExecuteNonQuery();                
 
                 cnn.Close();
             }
@@ -208,7 +206,26 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
+        public void Borrar(string tabla , string where)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
+            try
+            {
+                SqlCommand cmd = new SqlCommand(string.Format("DELETE FROM {1} WHERE {0}", where, tabla), cnn);
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = cnn;
+                cnn.Open();
+
+                var d = cmd.ExecuteNonQuery();
+
+                cnn.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
         #endregion
 
 
@@ -271,7 +288,13 @@
 
             return dt;
         }
-
+        /// <summary>
+        /// Devuelve un dato específico. Usa Top 1
+        /// </summary>
+        /// <param name="filtro"></param>
+        /// <param name="Campos"></param>
+        /// <param name="Orden"></param>
+        /// <returns></returns>
         public object Dato(string filtro = "", string Campos = "*", string Orden = "ORDER BY ")
         {
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -282,6 +305,38 @@
             try
             {
                 string Cadena = $"SELECT TOP 1 {Campos} FROM {Vista} {filtro} {Orden}";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                cnn.Open();
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                d = cmd.ExecuteScalar();
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+            }
+
+            return d;
+        }
+        /// <summary>
+        /// Devuelve un SUM(Campo)
+        /// </summary>
+        /// <param name="filtro"></param>
+        /// <param name="Campo"></param>
+        /// <param name="Orden"></param>
+        /// <returns></returns>
+        public object Dato_Sumado(string filtro, string Campo)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object d = null;
+            
+            try
+            {
+                string Cadena = $"SELECT SUM({Campo}) FROM {Vista} WHERE {filtro}";
 
                 SqlCommand cmd = new SqlCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;

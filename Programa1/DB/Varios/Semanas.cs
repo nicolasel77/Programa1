@@ -51,7 +51,7 @@
         }
         public DataTable Fechas()
         {
-            return Datos_Vista("", "TOP 100 Semanas", "Semana DESC");            
+            return Datos_Vista("", "TOP 100 Semana", "Semana DESC");            
         }
         public DataTable Años()
         {

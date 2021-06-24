@@ -282,7 +282,7 @@
             for (int f = 1; f <= grdResultado.Rows - 1; f++)
             {
                 int i = Convert.ToInt32(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id")).ToString());
-                Traslados.Id = i;
+                Traslados.ID = i;
                 Traslados.Fecha = Convert.ToDateTime(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Fecha")));
                 Traslados.sucS.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Suc_Salida")));
                 Traslados.sucE.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Suc_Entrada")));

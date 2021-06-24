@@ -139,77 +139,91 @@
 
         private void grdAjustes_Editado_1(short f, short c, object a)
         {
-            int id = Convert.ToInt32(grdAjustes.get_Texto(f, c_Id));
-            switch (c)
+            if (Ajustes.Fecha_Cerrada(Ajustes.Fecha) == false)
             {
-                case 1:
-                    //Fecha
-                    DateTime df = Convert.ToDateTime(a);
-                    if (df >= cFecha.fecha_Actual)
-                    {
-                        Ajustes.Fecha = df;
+                int id = Convert.ToInt32(grdAjustes.get_Texto(f, c_Id));
+                switch (c)
+                {
+                    case 1:
+                        //Fecha
+                        DateTime df = Convert.ToDateTime(a);
+                        if (df >= cFecha.fecha_Actual)
+                        {
+                            if (Ajustes.Fecha_Cerrada(df) == false)
+                            {
+                                Ajustes.Fecha = df;
+
+                                if (id != 0) { Ajustes.Actualizar(); }
+
+                                grdAjustes.set_Texto(f, c, a);
+                                grdAjustes.ActivarCelda(f, c + 1);
+                            }
+                            else
+                            {
+                                Mensaje("La fecha esta cerrada.");
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                            grdAjustes.ErrorEnTxt();
+                        }
+                        break;
+                    case 2:
+                        //ID_Proveedores
+                        Ajustes.Proveedor.Id = Convert.ToInt32(a);
+                        if (Ajustes.Proveedor.Existe() == true)
+                        {
+                            if (id != 0) { Ajustes.Actualizar(); }
+
+                            grdAjustes.set_Texto(f, c, a);
+                            grdAjustes.set_Texto(f, c + 1, Ajustes.Proveedor.Nombre);
+
+                            grdAjustes.ActivarCelda(f, c + 2);
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró la Proveedor " + a.ToString());
+                            grdAjustes.ErrorEnTxt();
+                        }
+                        break;
+                    case 4:
+                        //Descripcion
+                        Ajustes.Descripcion = a.ToString();
+                        grdAjustes.set_Texto(f, c, a);
 
                         if (id != 0) { Ajustes.Actualizar(); }
 
+                        grdAjustes.ActivarCelda(f, c_Importe);
+
+                        break;
+
+                    case 5:
+                        //Importe
+                        Ajustes.Importe = Convert.ToDouble(a);
                         grdAjustes.set_Texto(f, c, a);
-                        grdAjustes.ActivarCelda(f, c + 1);
-                    }
-                    else
-                    {
-                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
-                        grdAjustes.ErrorEnTxt();
-                    }
-                    break;
-                case 2:
-                    //ID_Proveedores
-                    Ajustes.Proveedor.Id = Convert.ToInt32(a);
-                    if (Ajustes.Proveedor.Existe() == true)
-                    {
-                        if (id != 0) { Ajustes.Actualizar(); }
-
-                        grdAjustes.set_Texto(f, c, a);
-                        grdAjustes.set_Texto(f, c + 1, Ajustes.Proveedor.Nombre);
-
-                        grdAjustes.ActivarCelda(f, c + 2);
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró la Proveedor " + a.ToString());
-                        grdAjustes.ErrorEnTxt();
-                    }
-                    break;
-                case 4:
-                    //Descripcion
-                    Ajustes.Descripcion = a.ToString();
-                    grdAjustes.set_Texto(f, c, a);
-
-                    if (id != 0) { Ajustes.Actualizar(); }
-
-                    grdAjustes.ActivarCelda(f, c_Importe);
-
-                    break;
-
-                case 5:
-                    //Importe
-                    Ajustes.Importe = Convert.ToDouble(a);
-                    grdAjustes.set_Texto(f, c, a);
 
 
-                    if (grdAjustes.Row == grdAjustes.Rows - 1)
-                    {
-                        Ajustes.Agregar();
-                        grdAjustes.set_Texto(f, c_Id, Ajustes.Id);
-                        grdAjustes.AgregarFila();
+                        if (grdAjustes.Row == grdAjustes.Rows - 1)
+                        {
+                            Ajustes.Agregar();
+                            grdAjustes.set_Texto(f, c_Id, Ajustes.ID);
+                            grdAjustes.AgregarFila();
 
-                        Ajustes.Importe = 0;
-                    }
-                    else
-                    {
-                        Ajustes.Actualizar();
-                    }
-                    grdAjustes.ActivarCelda(f + 1, c);
-                    Total();
-                    break;
+                            Ajustes.Importe = 0;
+                        }
+                        else
+                        {
+                            Ajustes.Actualizar();
+                        }
+                        grdAjustes.ActivarCelda(f + 1, c);
+                        Total();
+                        break;
+                }
+            }
+            else
+            {
+                Mensaje("La fecha esta cerrada.");
             }
         }
 
@@ -218,13 +232,20 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    if (Convert.ToInt32(grdAjustes.get_Texto(grdAjustes.Row, 0)) != 0)
                     {
-                        if (Convert.ToInt32(grdAjustes.get_Texto(grdAjustes.Row, 0)) != 0)
+                        if (Ajustes.Fecha_Cerrada(Ajustes.Fecha) == false)
                         {
-                            Ajustes.Id = Convert.ToInt32(grdAjustes.get_Texto(grdAjustes.Row, 0));
-                            Ajustes.Borrar();
-                            grdAjustes.BorrarFila(grdAjustes.Row);
+                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                            {
+                                Ajustes.ID = Convert.ToInt32(grdAjustes.get_Texto(grdAjustes.Row, 0));
+                                Ajustes.Borrar();
+                                grdAjustes.BorrarFila(grdAjustes.Row);
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha esta cerrada.");
                         }
                     }
                     break;

@@ -31,21 +31,21 @@ namespace Programa1.Carga.Varios
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVenta_Productos));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.lstSemanas = new System.Windows.Forms.ListBox();
             this.grd = new Grilla2.SpeedGrilla();
             this.nuSemanas = new System.Windows.Forms.NumericUpDown();
+            this.lstSemanas = new System.Windows.Forms.ListBox();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.cProductos1 = new Programa1.Controles.cProductos();
-            this.cSucursales1 = new Programa1.Controles.cSucursales();
+            this.cSuc = new Programa1.Controles.cSucursales();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuSemanas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nuSemanas)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -69,43 +69,6 @@ namespace Programa1.Carga.Varios
             this.splitContainer1.SplitterDistance = 1074;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.cProductos1);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.cSucursales1);
-            this.splitContainer2.Panel2Collapsed = true;
-            this.splitContainer2.Size = new System.Drawing.Size(312, 723);
-            this.splitContainer2.SplitterDistance = 324;
-            this.splitContainer2.TabIndex = 2;
-            // 
-            // lstSemanas
-            // 
-            this.lstSemanas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstSemanas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstSemanas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstSemanas.FormattingEnabled = true;
-            this.lstSemanas.ItemHeight = 20;
-            this.lstSemanas.Items.AddRange(new object[] {
-            "20/12/1977"});
-            this.lstSemanas.Location = new System.Drawing.Point(321, 6);
-            this.lstSemanas.Name = "lstSemanas";
-            this.lstSemanas.Size = new System.Drawing.Size(109, 620);
-            this.lstSemanas.TabIndex = 3;
-            this.lstSemanas.SelectedIndexChanged += new System.EventHandler(this.lstSemanas_SelectedIndexChanged);
             // 
             // grd
             // 
@@ -147,7 +110,7 @@ namespace Programa1.Carga.Varios
             this.nuSemanas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.nuSemanas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nuSemanas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nuSemanas.Location = new System.Drawing.Point(389, 694);
+            this.nuSemanas.Location = new System.Drawing.Point(385, 694);
             this.nuSemanas.Maximum = new decimal(new int[] {
             10,
             0,
@@ -167,6 +130,42 @@ namespace Programa1.Carga.Varios
             0,
             0});
             // 
+            // lstSemanas
+            // 
+            this.lstSemanas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstSemanas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstSemanas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstSemanas.FormattingEnabled = true;
+            this.lstSemanas.ItemHeight = 20;
+            this.lstSemanas.Items.AddRange(new object[] {
+            "20/12/1977"});
+            this.lstSemanas.Location = new System.Drawing.Point(317, 6);
+            this.lstSemanas.Name = "lstSemanas";
+            this.lstSemanas.Size = new System.Drawing.Size(109, 680);
+            this.lstSemanas.TabIndex = 3;
+            this.lstSemanas.SelectedIndexChanged += new System.EventHandler(this.lstSemanas_SelectedIndexChanged);
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.cProductos1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.cSuc);
+            this.splitContainer2.Size = new System.Drawing.Size(308, 723);
+            this.splitContainer2.SplitterDistance = 324;
+            this.splitContainer2.TabIndex = 2;
+            // 
             // cProductos1
             // 
             this.cProductos1.BackColor = System.Drawing.Color.Gainsboro;
@@ -176,27 +175,27 @@ namespace Programa1.Carga.Varios
             this.cProductos1.Location = new System.Drawing.Point(0, 0);
             this.cProductos1.Mostrar_Tipo = true;
             this.cProductos1.Name = "cProductos1";
-            this.cProductos1.Size = new System.Drawing.Size(312, 723);
+            this.cProductos1.Size = new System.Drawing.Size(308, 324);
             this.cProductos1.TabIndex = 0;
             this.cProductos1.Titulo = "Productos";
             this.cProductos1.Valor_Actual = -1;
             this.cProductos1.Cambio_Seleccion += new System.EventHandler(this.cProductos1_Cambio_Seleccion);
             // 
-            // cSucursales1
+            // cSuc
             // 
-            this.cSucursales1.BackColor = System.Drawing.Color.Gainsboro;
-            this.cSucursales1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cSucursales1.Filtro_In = "";
-            this.cSucursales1.Location = new System.Drawing.Point(0, 0);
-            this.cSucursales1.Mostrar_Botones = false;
-            this.cSucursales1.Mostrar_Tipo = false;
-            this.cSucursales1.Name = "cSucursales1";
-            this.cSucursales1.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.cSucursales1.Size = new System.Drawing.Size(312, 395);
-            this.cSucursales1.TabIndex = 1;
-            this.cSucursales1.Titulo = "Sucursales";
-            this.cSucursales1.Valor_Actual = -1;
-            this.cSucursales1.Cambio_Seleccion += new System.EventHandler(this.cSucursales1_Cambio_Seleccion);
+            this.cSuc.BackColor = System.Drawing.Color.Gainsboro;
+            this.cSuc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cSuc.Filtro_In = "";
+            this.cSuc.Location = new System.Drawing.Point(0, 0);
+            this.cSuc.Mostrar_Botones = true;
+            this.cSuc.Mostrar_Tipo = false;
+            this.cSuc.Name = "cSuc";
+            this.cSuc.selectionMode = System.Windows.Forms.SelectionMode.One;
+            this.cSuc.Size = new System.Drawing.Size(308, 395);
+            this.cSuc.TabIndex = 1;
+            this.cSuc.Titulo = "Sucursales";
+            this.cSuc.Valor_Actual = -1;
+            this.cSuc.Cambio_Seleccion += new System.EventHandler(this.cSucursales1_Cambio_Seleccion);
             // 
             // frmVenta_Productos
             // 
@@ -211,11 +210,11 @@ namespace Programa1.Carga.Varios
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nuSemanas)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nuSemanas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -225,7 +224,7 @@ namespace Programa1.Carga.Varios
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private Controles.cProductos cProductos1;
-        private Controles.cSucursales cSucursales1;
+        private Controles.cSucursales cSuc;
         private Grilla2.SpeedGrilla grd;
         private System.Windows.Forms.ListBox lstSemanas;
         private System.Windows.Forms.NumericUpDown nuSemanas;

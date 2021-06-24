@@ -221,7 +221,7 @@
             for (int f = 1; f <= grdResultado.Rows - 1; f++)
             {
                 int i = Convert.ToInt32(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id")).ToString());
-                stock.Id = i;
+                stock.ID = i;
                 stock.Fecha  = Convert.ToDateTime(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Fecha")));
                 stock.Sucursal.ID  = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Sucursales")));
                 stock.Producto.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Id_Productos")));

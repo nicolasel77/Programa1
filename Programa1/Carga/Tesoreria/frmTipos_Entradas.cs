@@ -64,7 +64,7 @@
                     }
                     else
                     {
-                        cajas.Id = Convert.ToInt32(a);
+                        cajas.ID = Convert.ToInt32(a);
                         if (cajas.Existe() == true)
                         {
                             Mensaje($"El id '{a}' ya existe.");
@@ -88,7 +88,7 @@
                     }
                     else
                     {
-                        cajas.Id = i;
+                        cajas.ID = i;
                         cajas.Nombre = a.ToString();
                         grdCajas.set_Texto(f, c, a);
                         cajas.Actualizar();
@@ -101,7 +101,7 @@
 
         private void GrdCajas_CambioFila(short Fila)
         {
-            cajas.Id = Convert.ToInt32(grdCajas.get_Texto(Fila, 0));
+            cajas.ID = Convert.ToInt32(grdCajas.get_Texto(Fila, 0));
             cajas.Nombre = grdCajas.get_Texto(Fila, 1).ToString();
 
         }
@@ -131,7 +131,7 @@
                 {
                     if (Convert.ToInt32(grdCajas.get_Texto(grdCajas.Row, 0)) != 0)
                     {
-                        cajas.Id = Convert.ToInt32(grdCajas.get_Texto(grdCajas.Row, 0));
+                        cajas.ID = Convert.ToInt32(grdCajas.get_Texto(grdCajas.Row, 0));
                         cajas.Borrar();
                         grdCajas.BorrarFila(grdCajas.Row);
                     }

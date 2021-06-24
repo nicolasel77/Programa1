@@ -3,6 +3,7 @@
     using Programa1.DB;
     using System;
     using System.Drawing;
+    using System.Threading;
     using System.Windows.Forms;
 
     public partial class frmOfertas : Form
@@ -196,169 +197,185 @@
         private void GrdOfertas_Editado(short f, short c, object a)
         {
             int id = Convert.ToInt32(grdOfertas.get_Texto(f, c_Id));
-            switch (c)
+            if (Ofertas.Fecha_Cerrada(Ofertas.Fecha) == false)
             {
-                case 1:
-                    //Fecha
-                    DateTime df = Convert.ToDateTime(a);
-                    if (df >= cFecha.fecha_Actual)
-                    {
-                        Ofertas.Fecha = df;
-                        Ofertas.precios.Fecha = Ofertas.Fecha;
+                switch (c)
+                {
+                    case 1:
+                        //Fecha
+                        DateTime df = Convert.ToDateTime(a);
+                        if (df >= cFecha.fecha_Actual)
+                        {
+                            if (Ofertas.Fecha_Cerrada(df) == false)
+                            {
+                                Ofertas.Fecha = df;
+                                Ofertas.precios.Fecha = Ofertas.Fecha;
+
+                                if (id != 0) { Ofertas.Actualizar(); }
+
+                                grdOfertas.set_Texto(f, c, a);
+                                grdOfertas.ActivarCelda(f, c + 1);
+                            }
+                            else
+                            {
+                                Mensaje("La fecha ingresada se encuentra cerrada.");
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                            grdOfertas.ErrorEnTxt();
+                        }
+                        break;
+                    case 2:
+                        //ID_Sucursales
+                        Ofertas.Sucursal.ID = Convert.ToInt32(a);
+                        if (Ofertas.Sucursal.Existe() == true)
+                        {
+                            Ofertas.precios.Sucursal = Ofertas.Sucursal;
+
+                            if (id != 0) { Ofertas.Actualizar(); }
+
+                            grdOfertas.set_Texto(f, c, a);
+                            grdOfertas.set_Texto(f, c + 1, Ofertas.Sucursal.Nombre);
+
+                            grdOfertas.ActivarCelda(f, c + 2);
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró la sucursal " + a.ToString());
+                            grdOfertas.ErrorEnTxt();
+                        }
+                        break;
+                    case 4:
+                        //ID_Productos
+                        Ofertas.Producto.ID = Convert.ToInt32(a);
+                        if (Ofertas.Producto.Existe() == true)
+                        {
+                            Ofertas.precios.Producto = Ofertas.Producto;
+                            Ofertas.precios_ofertas.Producto = Ofertas.Producto;
+
+                            grdOfertas.set_Texto(f, c, a);
+
+                            Ofertas.Costo_Original = Ofertas.precios.Buscar();
+                            Ofertas.Costo_Oferta = Ofertas.precios_ofertas.Buscar_Costo();
+
+                            Ofertas.Descripcion = $"{Ofertas.Producto.Nombre} :: {Ofertas.precios_ofertas.Descripcion}";
+                            grdOfertas.set_Texto(f, c + 1, Ofertas.Descripcion);
+
+                            grdOfertas.set_Texto(f, c_CostoOriginal, Ofertas.Costo_Original);
+                            grdOfertas.set_Texto(f, c_CostoOferta, Ofertas.Costo_Oferta);
+
+                            grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original - Ofertas.Costo_Oferta) * Ofertas.Kilos);
+
+                            if (id != 0) { Ofertas.Actualizar(); }
+
+                            grdOfertas.ActivarCelda(f, c_Kilos);
+                            Totales();
+                        }
+                        else
+                        {
+                            Mensaje("No se encontró el producto " + a.ToString());
+                            grdOfertas.ErrorEnTxt();
+                        }
+                        break;
+                    case 5:
+                        //Descripcion
+                        Ofertas.Descripcion = a.ToString();
+                        grdOfertas.set_Texto(f, c, a);
 
                         if (id != 0) { Ofertas.Actualizar(); }
 
+                        grdOfertas.ActivarCelda(f + 1, c);
+                        break;
+                    case 6:
+                        //Costo_Original
+                        Ofertas.Costo_Original = Convert.ToSingle(a);
                         grdOfertas.set_Texto(f, c, a);
-                        grdOfertas.ActivarCelda(f, c + 1);
-                    }
-                    else
-                    {
-                        Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
-                        grdOfertas.ErrorEnTxt();
-                    }
-                    break;
-                case 2:
-                    //ID_Sucursales
-                    Ofertas.Sucursal.ID = Convert.ToInt32(a);
-                    if (Ofertas.Sucursal.Existe() == true)
-                    {
-                        Ofertas.precios.Sucursal = Ofertas.Sucursal;
-
-                        if (id != 0) { Ofertas.Actualizar(); }
-
-                        grdOfertas.set_Texto(f, c, a);
-                        grdOfertas.set_Texto(f, c + 1, Ofertas.Sucursal.Nombre);
-
-                        grdOfertas.ActivarCelda(f, c + 2);
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró la sucursal " + a.ToString());
-                        grdOfertas.ErrorEnTxt();
-                    }
-                    break;
-                case 4:
-                    //ID_Productos
-                    Ofertas.Producto.ID = Convert.ToInt32(a);
-                    if (Ofertas.Producto.Existe() == true)
-                    {
-                        Ofertas.precios.Producto = Ofertas.Producto;
-                        Ofertas.precios_ofertas.Producto = Ofertas.Producto;
-
-                        grdOfertas.set_Texto(f, c, a);
-                        
-                        Ofertas.Costo_Original = Ofertas.precios.Buscar();
-                        Ofertas.Costo_Oferta = Ofertas.precios_ofertas.Buscar_Costo();
-
-                        Ofertas.Descripcion = $"{Ofertas.Producto.Nombre} :: {Ofertas.precios_ofertas.Descripcion}";
-                        grdOfertas.set_Texto(f, c + 1, Ofertas.Descripcion);
-
-                        grdOfertas.set_Texto(f, c_CostoOriginal, Ofertas.Costo_Original);
-                        grdOfertas.set_Texto(f, c_CostoOferta, Ofertas.Costo_Oferta);
-
                         grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original - Ofertas.Costo_Oferta) * Ofertas.Kilos);
 
                         if (id != 0) { Ofertas.Actualizar(); }
 
-                        grdOfertas.ActivarCelda(f, c_Kilos);
+                        grdOfertas.ActivarCelda(f + 1, c);
                         Totales();
-                    }
-                    else
-                    {
-                        Mensaje("No se encontró el producto " + a.ToString());
-                        grdOfertas.ErrorEnTxt();
-                    }
-                    break;
-                case 5:
-                    //Descripcion
-                    Ofertas.Descripcion = a.ToString();
-                    grdOfertas.set_Texto(f, c, a);
+                        break;
+                    case 7:
+                        //Costo_Oferta
+                        Ofertas.Costo_Original = Convert.ToSingle(a);
+                        grdOfertas.set_Texto(f, c, a);
+                        grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original - Ofertas.Costo_Oferta) * Ofertas.Kilos);
 
-                    if (id != 0) { Ofertas.Actualizar(); }
+                        if (id != 0) { Ofertas.Actualizar(); }
 
-                    grdOfertas.ActivarCelda(f + 1, c);
-                    break;
-                case 6:
-                    //Costo_Original
-                    Ofertas.Costo_Original = Convert.ToSingle(a);
-                    grdOfertas.set_Texto(f, c, a);
-                    grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original - Ofertas.Costo_Oferta) * Ofertas.Kilos);
+                        grdOfertas.ActivarCelda(f + 1, c);
+                        Totales();
+                        break;
+                    case 8:
+                        //Kilos
+                        Ofertas.Kilos = Convert.ToSingle(a);
+                        grdOfertas.set_Texto(f, c, a);
+                        grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original - Ofertas.Costo_Oferta) * Ofertas.Kilos);
 
-                    if (id != 0) { Ofertas.Actualizar(); }
+                        if (grdOfertas.Row == grdOfertas.Rows - 1)
+                        {
+                            Ofertas.Agregar();
+                            grdOfertas.set_Texto(f, c_Id, Ofertas.ID);
+                            grdOfertas.AgregarFila();
+                            //Rellenar nueva fila
 
-                    grdOfertas.ActivarCelda(f + 1, c);
-                    Totales();
-                    break;
-                case 7:
-                    //Costo_Oferta
-                    Ofertas.Costo_Original = Convert.ToSingle(a);
-                    grdOfertas.set_Texto(f, c, a);
-                    grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original - Ofertas.Costo_Oferta) * Ofertas.Kilos);
+                            grdOfertas.set_Texto(f + 1, c_Fecha, Ofertas.Fecha);
+                            grdOfertas.set_Texto(f + 1, c_IdSuc, Ofertas.Sucursal.ID);
+                            grdOfertas.set_Texto(f + 1, c_IdSuc + 1, Ofertas.Sucursal.Nombre);
 
-                    if (id != 0) { Ofertas.Actualizar(); }
+                            //El buscar de precios_ofertas automaticamente busca el siguiente en el orden:
+                            Ofertas.Costo_Oferta = Ofertas.precios_ofertas.Buscar_SiguienteCosto();
+                            Ofertas.Producto = Ofertas.precios_ofertas.Producto;
 
-                    grdOfertas.ActivarCelda(f + 1, c);
-                    Totales();
-                    break;
-                case 8:
-                    //Kilos
-                    Ofertas.Kilos = Convert.ToSingle(a);
-                    grdOfertas.set_Texto(f, c, a);
-                    grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original -Ofertas.Costo_Oferta) * Ofertas.Kilos);
+                            //Para que cargue el nombre del producto:
+                            if (Ofertas.Producto.Existe() == true) { }
 
-                    if (grdOfertas.Row == grdOfertas.Rows - 1)
-                    {
-                        Ofertas.Agregar();
-                        grdOfertas.set_Texto(f, c_Id, Ofertas.ID);
-                        grdOfertas.AgregarFila();
-                        //Rellenar nueva fila
-
-                        grdOfertas.set_Texto(f + 1, c_Fecha, Ofertas.Fecha);
-                        grdOfertas.set_Texto(f + 1, c_IdSuc, Ofertas.Sucursal.ID);
-                        grdOfertas.set_Texto(f + 1, c_IdSuc + 1, Ofertas.Sucursal.Nombre);
-
-                        //El buscar de precios_ofertas automaticamente busca el siguiente en el orden:
-                        Ofertas.Costo_Oferta = Ofertas.precios_ofertas.Buscar_SiguienteCosto();
-                        Ofertas.Producto = Ofertas.precios_ofertas.Producto;
-
-                        //Para que cargue el nombre del producto:
-                        if (Ofertas.Producto.Existe() == true) { }
-
-                        Ofertas.precios.Producto = Ofertas.precios_ofertas.Producto;
-                        Ofertas.Costo_Original = Ofertas.precios.Buscar();
+                            Ofertas.precios.Producto = Ofertas.precios_ofertas.Producto;
+                            Ofertas.Costo_Original = Ofertas.precios.Buscar();
 
 
-                        Ofertas.Descripcion = $"{Ofertas.precios.Producto.Nombre} :: {Ofertas.precios_ofertas.Descripcion}";
+                            Ofertas.Descripcion = $"{Ofertas.precios.Producto.Nombre} :: {Ofertas.precios_ofertas.Descripcion}";
 
-                        grdOfertas.set_Texto(f + 1, c_IdProd, Ofertas.Producto.ID);
-                        grdOfertas.set_Texto(f + 1, c_Descripcion, Ofertas.Descripcion);
+                            grdOfertas.set_Texto(f + 1, c_IdProd, Ofertas.Producto.ID);
+                            grdOfertas.set_Texto(f + 1, c_Descripcion, Ofertas.Descripcion);
 
 
-                        grdOfertas.set_Texto(f + 1, c_CostoOriginal, Ofertas.Costo_Original);
-                        grdOfertas.set_Texto(f + 1, c_CostoOferta, Ofertas.Costo_Oferta);
-                        grdOfertas.set_Texto(f + 1, c_Reintegro, 0);
-                        Ofertas.Kilos = 0;
-                    }
-                    else
-                    {
-                        Ofertas.Actualizar();
-                    }
-                    grdOfertas.ActivarCelda(f + 1, c);
+                            grdOfertas.set_Texto(f + 1, c_CostoOriginal, Ofertas.Costo_Original);
+                            grdOfertas.set_Texto(f + 1, c_CostoOferta, Ofertas.Costo_Oferta);
+                            grdOfertas.set_Texto(f + 1, c_Reintegro, 0);
+                            Ofertas.Kilos = 0;
+                        }
+                        else
+                        {
+                            Ofertas.Actualizar();
+                        }
+                        grdOfertas.ActivarCelda(f + 1, c);
 
-                    Totales();
-                    break;
+                        Totales();
+                        break;
+                }
             }
-
+            else
+            {
+                Mensaje("La fecha se encuentra cerrada.");
+            }
         }
 
         private void GrdOfertas_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdOfertas.get_Texto(Fila, c_Id).ToString());
-            Ofertas.Cargar_Fila(i);
+            Ofertas.ID = i;
+           
+            Thread th = new Thread(new ThreadStart(Ofertas.Cargar_Fila));
+            th.Start();
             Ofertas.precios.Fecha = Ofertas.Fecha;
             Ofertas.precios.Sucursal = Ofertas.Sucursal;
             Ofertas.precios.Producto = Ofertas.Producto;
-        }
+        }              
 
         private void GrdOfertas_KeyPress(object sender, short e)
         {
@@ -398,14 +415,21 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    if (Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id)) != 0)
                     {
-                        if (Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id)) != 0)
+                        if (Ofertas.Fecha_Cerrada(Ofertas.Fecha) == false)
                         {
-                            Ofertas.ID = Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id));
-                            Ofertas.Borrar();
-                            grdOfertas.BorrarFila(grdOfertas.Row);
-                            Totales();
+                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                            {
+                                Ofertas.ID = Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id));
+                                Ofertas.Borrar();
+                                grdOfertas.BorrarFila(grdOfertas.Row);
+                                Totales();
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La fecha se encuentra cerrada.");
                         }
                     }
                     break;

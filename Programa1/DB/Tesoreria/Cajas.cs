@@ -1,32 +1,18 @@
 ﻿namespace Programa1.DB.Tesoreria
 {
     using Programa1.Carga.Tesoreria;
+    using Programa1.Clases;
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Windows.Forms;
-    public class Cajas
+    public class Cajas : c_Base
     {
-        
+
         public Cajas()
         {
+            Tabla = "Cajas";
+            Vista = Tabla;
         }
-
-        public Cajas(int id, string nombre)
-        {
-            Id = id;
-            Nombre = nombre;
-        }
-
-
-        [Required]
-        [Key]
-        public int Id { get; set; }
-
-        [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
-        [Required]
-        public string Nombre { get; set; }
 
         public Nombres_ARendir nombre_ARendir { get; set; } = new Nombres_ARendir();
         public A_Rendir a_Rendir { get; set; } = new A_Rendir();
@@ -34,35 +20,12 @@
         /// <summary>
         /// Por ahora es fijo (solo evalúa que Id=11). Mas que nada se hizo para que quede dentro de la clase.
         /// </summary>
-        public bool EsCheque { get { return Id == 11; } }
+        public bool EsCheque { get { return ID == 11; } }
         /// <summary>
         /// Por ahora es fijo (solo evalúa que Id=12). Mas que nada se hizo para que quede dentro de la clase.
         /// </summary>
-        public bool EsARendir { get { return Id == 12; } }
-        public DataTable Datos(string Filtro = "")
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+        public bool EsARendir { get { return ID == 12; } }
 
-
-            try
-            {
-                if (Filtro.Length > 0) { Filtro = " WHERE " + Filtro; }
-
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Cajas" + Filtro, conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
 
         public DataTable Saldos(DateTime fecha)
         {
@@ -88,7 +51,6 @@
             return dt;
         }
 
-
         public void Seleccionar_Nombre()
         {
             frmNARendir fr = new frmNARendir();
@@ -96,118 +58,7 @@
 
             nombre_ARendir = fr.nombres_ARendir;
         }
-        public void Actualizar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            try
-            {
-                SqlCommand command = new SqlCommand($"UPDATE Cajas SET Nombre='{Nombre}' WHERE Id={Id}", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
-        public void Agregar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand($"INSERT INTO Cajas (Id, Nombre) VALUES({Id}, '{Nombre}')", sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
-        public void Borrar()
-        {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand(string.Format("DELETE FROM Cajas WHERE Id={0}", Id), sql);
-                command.CommandType = CommandType.Text;
-                command.Connection = sql;
-                sql.Open();
-
-                var d = command.ExecuteNonQuery();
-
-                Id = 0;
-
-                sql.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
-
-        public bool Existe(int id = 0)
-        {
-            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                string s = "SELECT Nombre FROM Cajas WHERE Id=" + Id;
-                if (id != 0)
-                {
-                    s = "SELECT Nombre FROM Cajas WHERE Id=" + id;
-                }
-
-                SqlCommand command = new SqlCommand(s, sql);
-                command.CommandType = CommandType.Text;
-                sql.Open();
-                command.Connection = sql;
-
-
-                var d = command.ExecuteScalar();
-
-                if (string.IsNullOrEmpty(Convert.ToString(d)))
-                {
-                    return false;
-                }
-                else
-                {
-                    if (d.ToString().Length == 0)
-                    {
-                        Nombre = "";
-                        return false;
-                    }
-                    else
-                    {
-                        Nombre = d.ToString();
-                        return true;
-                    }
-
-                }
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-                return false;
-            }
-        }
     }
 }
 
