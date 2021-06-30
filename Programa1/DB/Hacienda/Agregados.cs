@@ -26,7 +26,7 @@
 
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro);
+            return Datos_Vista(filtro, "ID, ID_TipoAgregados, Descripcion, ID_Consignatarios, Nombre, Importe, Plazo");
         }
 
         public new void Actualizar()

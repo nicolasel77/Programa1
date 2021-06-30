@@ -10,10 +10,6 @@
 
         #region " Columnas "
         private Byte c_Id;
-        //private Byte c_NB;
-        //private Byte c_Fecha;
-        //private Byte c_Directo;
-        //private Byte c_Reparto;
         private Byte c_Consig;
         private Byte c_IdProd;
         private Byte c_Cab;
@@ -25,7 +21,6 @@
         private Byte c_Plazo;
 
         private Byte A_Id;
-        private Byte A_NB;
         private Byte A_Consig;
         private Byte A_Tipo;
         private Byte A_Impporte;
@@ -57,10 +52,6 @@
             grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=0"), true);
 
             c_Id = Convert.ToByte(grdCompras.get_ColIndex("Id"));
-            //c_NB = Convert.ToByte(grdCompras.get_ColIndex("NBoleta"));
-            //c_Fecha = Convert.ToByte(grdCompras.get_ColIndex("Fecha"));
-            //c_Reparto = Convert.ToByte(grdCompras.get_ColIndex("Reparto"));
-            //c_Directo = Convert.ToByte(grdCompras.get_ColIndex("Directo"));
             c_Consig = Convert.ToByte(grdCompras.get_ColIndex("Id_Consignatarios"));
             c_IdProd = Convert.ToByte(grdCompras.get_ColIndex("Prod"));
             c_Cab = Convert.ToByte(grdCompras.get_ColIndex("Cab"));
@@ -71,14 +62,8 @@
             c_Total = Convert.ToByte(grdCompras.get_ColIndex("Total"));
             c_Plazo = Convert.ToByte(grdCompras.get_ColIndex("Plazo"));
 
-            //grdCompras.set_Texto(0, c_IdProd, "Prod");
-            //grdCompras.set_Texto(0, c_IdProd + 1, "Desc");
-
+            
             grdCompras.set_ColW(c_Id, 0);
-            //grdCompras.set_ColW(c_NB, 0);
-            //grdCompras.set_ColW(c_Fecha, 0);
-            //grdCompras.set_ColW(c_Reparto, 0);
-            //grdCompras.set_ColW(c_Directo, 0);
             grdCompras.set_ColW(c_Consig, 40);
             grdCompras.set_ColW(c_Consig + 1, 100);
             grdCompras.set_ColW(c_IdProd, 40);
@@ -97,17 +82,15 @@
             grdCompras.Columnas[c_IVA].Format = "C2";
             grdCompras.Columnas[c_Total].Format = "C2";
 
-            grdAgregados.MostrarDatos(hc.Agregados.Datos_Vista("NBoleta=0"), true);
+            grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=0"), true);
 
             A_Id = Convert.ToByte(grdAgregados.get_ColIndex("Id"));
-            A_NB = Convert.ToByte(grdAgregados.get_ColIndex("NBoleta"));
             A_Consig = Convert.ToByte(grdAgregados.get_ColIndex("Id_Consignatarios"));
             A_Tipo = Convert.ToByte(grdAgregados.get_ColIndex("Id_TipoAgregados"));
             A_Impporte = Convert.ToByte(grdAgregados.get_ColIndex("Importe"));
             A_Plazo = Convert.ToByte(grdAgregados.get_ColIndex("Plazo"));
 
             grdAgregados.set_ColW(A_Id, 0);
-            grdAgregados.set_ColW(A_NB, 0);
             grdAgregados.set_ColW(A_Consig, 40);
             grdAgregados.set_ColW(A_Consig + 1, 100);
             grdAgregados.set_ColW(A_Tipo, 40);
