@@ -44,7 +44,6 @@
             this.grdAgregados = new Grilla2.SpeedGrilla();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.grdFaena = new Grilla2.SpeedGrilla();
-            this.cmdColumnas = new Programa1.Controles.cBoton();
             this.label2 = new System.Windows.Forms.Label();
             this.grdRomaneos = new Grilla2.SpeedGrilla();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -115,7 +114,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.statusStrip3);
             this.splitContainer2.Panel2.Controls.Add(this.grdAgregados);
             this.splitContainer2.Size = new System.Drawing.Size(1201, 255);
-            this.splitContainer2.SplitterDistance = 691;
+            this.splitContainer2.SplitterDistance = 862;
             this.splitContainer2.TabIndex = 2;
             // 
             // grdCompras
@@ -150,7 +149,7 @@
             this.grdCompras.Redraw = true;
             this.grdCompras.Row = 0;
             this.grdCompras.Rows = 50;
-            this.grdCompras.Size = new System.Drawing.Size(685, 221);
+            this.grdCompras.Size = new System.Drawing.Size(856, 221);
             this.grdCompras.TabIndex = 2;
             this.grdCompras.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdCompras_Editado);
             this.grdCompras.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdCompras_CambioFila);
@@ -166,7 +165,7 @@
             this.lblCInt});
             this.statusStrip2.Location = new System.Drawing.Point(0, 227);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(691, 28);
+            this.statusStrip2.Size = new System.Drawing.Size(862, 28);
             this.statusStrip2.TabIndex = 1;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -216,7 +215,7 @@
             this.lblATotal});
             this.statusStrip3.Location = new System.Drawing.Point(0, 227);
             this.statusStrip3.Name = "statusStrip3";
-            this.statusStrip3.Size = new System.Drawing.Size(506, 28);
+            this.statusStrip3.Size = new System.Drawing.Size(335, 28);
             this.statusStrip3.TabIndex = 4;
             this.statusStrip3.Text = "statusStrip3";
             // 
@@ -263,7 +262,7 @@
             this.grdAgregados.Redraw = true;
             this.grdAgregados.Row = 0;
             this.grdAgregados.Rows = 50;
-            this.grdAgregados.Size = new System.Drawing.Size(506, 255);
+            this.grdAgregados.Size = new System.Drawing.Size(335, 255);
             this.grdAgregados.TabIndex = 3;
             // 
             // splitContainer3
@@ -280,7 +279,6 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer3.Panel2.Controls.Add(this.cmdColumnas);
             this.splitContainer3.Panel2.Controls.Add(this.label2);
             this.splitContainer3.Panel2.Controls.Add(this.grdRomaneos);
             this.splitContainer3.Size = new System.Drawing.Size(1201, 379);
@@ -319,17 +317,6 @@
             this.grdFaena.Rows = 50;
             this.grdFaena.Size = new System.Drawing.Size(902, 379);
             this.grdFaena.TabIndex = 0;
-            // 
-            // cmdColumnas
-            // 
-            this.cmdColumnas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdColumnas.Location = new System.Drawing.Point(3, 347);
-            this.cmdColumnas.Name = "cmdColumnas";
-            this.cmdColumnas.Size = new System.Drawing.Size(289, 29);
-            this.cmdColumnas.TabIndex = 2;
-            this.cmdColumnas.Texto = "Columnas";
-            this.cmdColumnas.Click += new System.EventHandler(this.cBoton1_Click);
             // 
             // label2
             // 
@@ -574,6 +561,5 @@
         private System.Windows.Forms.ToolStripStatusLabel lblATotal;
         private System.Windows.Forms.SplitContainer splitContainer5;
         private System.Windows.Forms.Label label1;
-        private Controles.cBoton cmdColumnas;
     }
 }

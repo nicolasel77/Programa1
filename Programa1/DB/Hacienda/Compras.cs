@@ -26,9 +26,11 @@
         public int Cabezas { get; set; }
         public Single Kilos { get; set; }
         public Single Costo { get; set; }
+        public Single Costo2 { get; set; }
         public Single IVA { get; set; }
         public Byte Plazo { get; set; }
         public int Estado { get; set; }
+        public double Percepcion{ get; set; }
         public double Saldo { get; set; }
         public Matriculas Matricula { get; set; } = new Matriculas();
         public new void Actualizar()
@@ -39,7 +41,9 @@
             Actualizar("Cabezas", Cabezas);
             Actualizar("Kilos", Kilos);
             Actualizar("Costo", Costo);
+            Actualizar("Costo2", Costo2);
             Actualizar("Iva", IVA);
+            Actualizar("Percepcion", Percepcion);
             Actualizar("Plazo", Plazo);
             Actualizar("Saldo", Saldo);
             Actualizar("Estado", Estado);
@@ -85,11 +89,13 @@
                     Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                     Cabezas = Convert.ToInt32(dr["Cabezas"]);
                     Costo = Convert.ToSingle(dr["Costo"]);
+                    Costo2 = Convert.ToSingle(dr["Costo2"]);
                     Kilos = Convert.ToSingle(dr["Kilos"]);
                     IVA = Convert.ToSingle(dr["IVA"]);
+                    Percepcion = Convert.ToDouble(dr["Percepcion"]);
                     Plazo = Convert.ToByte(dr["Plazo"]);
                     Saldo = Convert.ToDouble(dr["Saldo"]);
-                    Matricula.ID = Convert.ToInt32(dr["Matricula"]);
+                    Matricula.ID = Convert.ToInt32(dr["ID_Matr"]);
                 }
                 catch (Exception)
                 {
@@ -100,7 +106,7 @@
 
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro, "ID, ID_Consignatarios, Nombre, Cabezas Cab, ID_Productos Prod, Nombre_Producto Descr, Kilos, Costo, Sub_Total, IVA, Total, Plazo");
+            return Datos_Vista(filtro, "ID, ID_Matr, Matricula, ID_Consignatarios, Nombre, Cabezas Cab, ID_Productos Prod, Nombre_Producto Descr, Kilos, Costo, Costo2, Sub_Total, IVA, Percepcion, Total, Plazo");
         }
     }
 }

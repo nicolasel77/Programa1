@@ -7,18 +7,22 @@
     public partial class frmComprasFaena : Form
     {
         Hacienda hc = new Hacienda();
-
+        //ID, ID_Matr, Matricula, ID_Consignatarios, Nombre, Cabezas Cab, ID_Productos Prod, Nombre_Producto Descr, Kilos, Costo, Costo2, Sub_Total, IVA, Percepcion, Total, Plazo
+        //0     1       2               3               4       5               6                   7                   8   9       10      11       12     13          14      15
         #region " Columnas "
-        private Byte c_Id;
-        private Byte c_Consig;
-        private Byte c_IdProd;
-        private Byte c_Cab;
-        private Byte c_Kilos;
-        private Byte c_Costo;
-        private Byte c_SubT;
-        private Byte c_IVA;
-        private Byte c_Total;
-        private Byte c_Plazo;
+        private const Byte c_Id = 0;
+        private const Byte c_Matricula = 1;
+        private const Byte c_Consig = 3;
+        private const Byte c_IdProd = 6;
+        private const Byte c_Cab = 5;
+        private const Byte c_Kilos = 8;
+        private const Byte c_Costo = 9;
+        private const Byte c_Costo2 = 10;
+        private const Byte c_SubT = 11;
+        private const Byte c_IVA = 12;
+        private const Byte c_Perc = 13;
+        private const Byte c_Total = 14;
+        private const Byte c_Plazo = 15;
 
         private Byte A_Id;
         private Byte A_Consig;
@@ -40,9 +44,9 @@
         {
             InitializeComponent();
 
-            grdBoletas.MostrarDatos(hc.nBoletas.Datos_Vista("","TOP 100 *", "NBoleta DESC"), true, false);
+            grdBoletas.MostrarDatos(hc.nBoletas.Datos_Vista("", "TOP 100 *", "NBoleta DESC"), true, false);
             grdBoletas.AutosizeAll();
-            
+
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo")].Format = "N3";
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo_Faena")].Format = "N3";
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo_Carne")].Format = "N3";
@@ -51,19 +55,24 @@
 
             grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=0"), true);
 
-            c_Id = Convert.ToByte(grdCompras.get_ColIndex("Id"));
-            c_Consig = Convert.ToByte(grdCompras.get_ColIndex("Id_Consignatarios"));
-            c_IdProd = Convert.ToByte(grdCompras.get_ColIndex("Prod"));
-            c_Cab = Convert.ToByte(grdCompras.get_ColIndex("Cab"));
-            c_Kilos = Convert.ToByte(grdCompras.get_ColIndex("Kilos"));
-            c_Costo = Convert.ToByte(grdCompras.get_ColIndex("Costo"));
-            c_SubT = Convert.ToByte(grdCompras.get_ColIndex("Sub_Total"));
-            c_IVA = Convert.ToByte(grdCompras.get_ColIndex("IVA"));
-            c_Total = Convert.ToByte(grdCompras.get_ColIndex("Total"));
-            c_Plazo = Convert.ToByte(grdCompras.get_ColIndex("Plazo"));
+            //c_Id = Convert.ToByte(grdCompras.get_ColIndex("Id"));
+            //c_Matricula = Convert.ToByte(grdCompras.get_ColIndex("ID_Matr"));
+            //c_Consig = Convert.ToByte(grdCompras.get_ColIndex("Id_Consignatarios"));
+            //c_IdProd = Convert.ToByte(grdCompras.get_ColIndex("Prod"));
+            //c_Cab = Convert.ToByte(grdCompras.get_ColIndex("Cab"));
+            //c_Kilos = Convert.ToByte(grdCompras.get_ColIndex("Kilos"));
+            //c_Costo = Convert.ToByte(grdCompras.get_ColIndex("Costo"));
+            //c_Costo2 = Convert.ToByte(grdCompras.get_ColIndex("Costo2"));
+            //c_SubT = Convert.ToByte(grdCompras.get_ColIndex("Sub_Total"));
+            //c_IVA = Convert.ToByte(grdCompras.get_ColIndex("IVA"));
+            //c_Perc = Convert.ToByte(grdCompras.get_ColIndex("Percepcion"));
+            //c_Total = Convert.ToByte(grdCompras.get_ColIndex("Total"));
+            //c_Plazo = Convert.ToByte(grdCompras.get_ColIndex("Plazo"));
 
-            
+
             grdCompras.set_ColW(c_Id, 0);
+            grdCompras.set_ColW(c_Matricula, 30);
+            grdCompras.set_ColW(c_Matricula + 1, 30);
             grdCompras.set_ColW(c_Consig, 40);
             grdCompras.set_ColW(c_Consig + 1, 100);
             grdCompras.set_ColW(c_IdProd, 40);
@@ -71,15 +80,19 @@
             grdCompras.set_ColW(c_Cab, 30);
             grdCompras.set_ColW(c_Kilos, 80);
             grdCompras.set_ColW(c_Costo, 60);
+            grdCompras.set_ColW(c_Costo2, 60);
             grdCompras.set_ColW(c_SubT, 100);
             grdCompras.set_ColW(c_IVA, 100);
+            grdCompras.set_ColW(c_Perc, 100);
             grdCompras.set_ColW(c_Total, 100);
             grdCompras.set_ColW(c_Plazo, 40);
 
             grdCompras.Columnas[c_Kilos].Format = "N2";
             grdCompras.Columnas[c_Costo].Format = "C2";
+            grdCompras.Columnas[c_Costo2].Format = "C2";
             grdCompras.Columnas[c_SubT].Format = "C2";
             grdCompras.Columnas[c_IVA].Format = "C2";
+            grdCompras.Columnas[c_Perc].Format = "C2";
             grdCompras.Columnas[c_Total].Format = "C2";
 
             grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=0"), true);
@@ -148,7 +161,7 @@
         {
             hc.nBoletas.NBoleta = Convert.ToInt32(grdBoletas.get_Texto(Fila, 0));
             grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=" + hc.nBoletas.NBoleta), false);
-            
+
             grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=" + hc.nBoletas.NBoleta), false);
 
             hc.Faena.nBoleta = hc.nBoletas;
@@ -175,6 +188,7 @@
         {
             double tCompra = grdCompras.SumarCol(c_Total, false);
             double kCompra = grdCompras.SumarCol(c_Kilos, false);
+            double tPercepcion = grdCompras.SumarCol(c_Perc, false);
             double cabezas = grdCompras.SumarCol(c_Cab, false);
             lblCCant.Text = $"Registros: {cabezas:N0}";
             lblCKilos.Text = $"Kilos: {kCompra:N2}";
@@ -206,7 +220,7 @@
             lblCant.Text = $"Cantidad: {cFaena:N0}";
             lblKilos.Text = $"Kilos: {kFaena:N2}";
             lblTotal.Text = $"Recupero: {tRecupero:C2}";
-            lblCostoCarne.Text = $"Costo Carne: {(tCompra / kFaena) - (tRecupero/kFaena):C3}";
+            lblCostoCarne.Text = $"Costo Carne: {(tCompra / kFaena) - (tRecupero / kFaena):C3}";
 
             if (kCompra != 0)
             {
@@ -216,24 +230,150 @@
             {
                 lblRendimiento.Text = "";
             }
-            if (cabezas != 0 & cFaena != (cabezas*2))
+            if (cabezas != 0 & cFaena != (cabezas * 2))
             {
-                lblCant.BackColor = Color.Red;                
+                lblCant.BackColor = Color.Red;
             }
             else
             {
-                lblCant.BackColor = System.Drawing.SystemColors.Control;                
+                lblCant.BackColor = System.Drawing.SystemColors.Control;
             }
         }
 
         private void cBoton1_Click(object sender, EventArgs e)
         {
-            hc.compra.Actualizar();
+            //hc.compra.Actualizar();
         }
 
         private void grdCompras_Editado(short f, short c, object a)
         {
+            switch (c)
+            {
+                case c_Matricula:
+                    hc.compra.Matricula.ID = Convert.ToInt32(a);
+                    if (hc.compra.Matricula.Existe() == true)
+                    {
+                        grdCompras.set_Texto(f, c, a);
+                        grdCompras.set_Texto(f, c + 1, hc.compra.Matricula.Nombre);
+                        grdCompras.ActivarCelda(f, c_Consig);
+                        if (hc.compra.ID > 0) { hc.compra.Actualizar("Matricula", a); }
+                    }
+                    break;
+                case c_Consig:
+                    hc.compra.Consignatario.ID = Convert.ToInt32(a);
+                    if (hc.compra.Consignatario.Existe() == true)
+                    {
+                        grdCompras.set_Texto(f, c, a);
+                        grdCompras.set_Texto(f, c + 1, hc.compra.Consignatario.Nombre);
+                        grdCompras.ActivarCelda(f, c_Cab);
+                        if (hc.compra.ID > 0) { hc.compra.Actualizar("Id_Consignatarios", a); }
+                    }
+                    break;
+                case c_Cab:
+                    hc.compra.Cabezas = Convert.ToInt32(a);
+                    grdCompras.set_Texto(f, c, a);
+                    grdCompras.ActivarCelda(f, c_IdProd);
+                    if (hc.compra.ID > 0) { hc.compra.Actualizar("Cabezas", a); }
 
+                    break;
+                case c_IdProd:
+                    hc.compra.Producto.ID = Convert.ToInt32(a);
+                    if (hc.compra.Producto.Existe() == true)
+                    {
+                        grdCompras.set_Texto(f, c, a);
+                        grdCompras.set_Texto(f, c + 1, hc.compra.Producto.Nombre);
+                        grdCompras.ActivarCelda(f, c_Kilos);
+                        if (hc.compra.ID > 0) { hc.compra.Actualizar("Id_Productos", a); }
+                    }
+                    break;
+                case c_Kilos:
+                    hc.compra.Kilos = Convert.ToSingle(a);
+                    grdCompras.set_Texto(f, c, a);
+                    grdCompras.ActivarCelda(f, c_Costo);
+
+                    Total_Linea(f);
+
+                    if (hc.compra.ID > 0) { hc.compra.Actualizar("Kilos", a); }
+
+                    break;
+
+                case c_Costo:
+                    hc.compra.Costo = Convert.ToSingle(a);
+                    grdCompras.set_Texto(f, c, a);
+                    grdCompras.ActivarCelda(f, c_Costo2);
+
+                    Total_Linea(f);
+
+                    if (hc.compra.ID > 0) { hc.compra.Actualizar("Costo", a); }
+
+                    break;
+                case c_Costo2:
+                    hc.compra.Costo2 = Convert.ToSingle(a);
+                    grdCompras.set_Texto(f, c, a);
+
+                    Total_Linea(f);
+
+                    if (hc.compra.ID > 0)
+                    {
+                        hc.compra.Actualizar("Costo2", a);
+                    }
+                    else
+                    {
+                        hc.compra.Agregar();
+                        grdCompras.set_Texto(f, c_Id, hc.compra.ID);
+                    }
+
+                    grdCompras.ActivarCelda(f + 1, c_Cab);
+                    break;
+
+                case c_IVA:
+                    hc.compra.IVA = Convert.ToSingle(a);
+                    grdCompras.set_Texto(f, c, a);                    
+
+                    Total_Linea(f);
+
+                    if (hc.compra.ID > 0) { hc.compra.Actualizar("IVA", a); }
+
+                    grdCompras.ActivarCelda(f + 1, c_IVA);
+
+                    break;
+
+                case c_Perc:
+                    hc.compra.Percepcion = Convert.ToSingle(a);
+                    grdCompras.set_Texto(f, c, a);
+
+                    Total_Linea(f);
+
+                    if (hc.compra.ID > 0) { hc.compra.Actualizar("Percepcion", a); }
+
+                    grdCompras.ActivarCelda(f + 1, c_Perc);
+
+                    break;
+
+                case c_Plazo:
+                    hc.compra.Plazo = Convert.ToByte(a);
+                    grdCompras.set_Texto(f, c, a);                    
+
+                    if (hc.compra.ID > 0) { hc.compra.Actualizar("Plazo", a); }
+
+                    grdCompras.ActivarCelda(f + 1, c_Plazo);
+
+                    break;
+            }
+        }
+
+        private void Total_Linea(short f)
+        {
+            Single kilos = Convert.ToSingle(grdCompras.get_Texto(f, c_Kilos));
+            Single costo = Convert.ToSingle(grdCompras.get_Texto(f, c_Costo));
+            Single costo2 = Convert.ToSingle(grdCompras.get_Texto(f, c_Costo2));
+            double iva = (kilos * costo) * 10.5 / 100;
+            Single percepcion = Convert.ToSingle(grdCompras.get_Texto(f, c_Perc));
+
+            grdCompras.set_Texto(f, c_SubT, kilos * costo);
+            grdCompras.set_Texto(f, c_Total, (kilos * costo) + iva + percepcion);
+
+            MessageBox.Show("Falta el calculo de Pago en Mano");
         }
 
         private void grdCompras_CambioFila(short Fila)
