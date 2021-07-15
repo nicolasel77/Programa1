@@ -873,8 +873,9 @@ namespace Programa1.Carga.Tesoreria
                             cGastos.Borrar();
                             if (grdSalidas.EsUltimaFila() == true)
                             {
-                                grdSalidas.Rows = 1;
-                                grdSalidas.Rows = 2;
+                                grdSalidas.BorrarFila(grdSalidas.Rows - 1);
+                                grdSalidas.AgregarFila();
+                                grdSalidas.ActivarCelda(grdSalidas.Rows - 1, s_Caja);
                             }
                             else
                             {
