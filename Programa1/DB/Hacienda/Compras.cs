@@ -18,6 +18,7 @@
         {
             Vista = "vw_Hacienda_Compras";
             Tabla = "Hacienda_Compras";
+            Campo_ID = "ID_CompraFrigo";
         }
 
         public NBoletas NBoleta { get; set; } = new NBoletas();
@@ -32,12 +33,16 @@
         public int Estado { get; set; }
         public double Percepcion{ get; set; }
         public double Saldo { get; set; }
+        public DateTime Fecha { get; set; }
+
         public Matriculas Matricula { get; set; } = new Matriculas();
+
         public new void Actualizar()
         {
-            Actualizar("NBoleta", NBoleta.NBoleta);
+            Actualizar("NBoleta", NBoleta.ID);
             Actualizar("ID_Consignatarios", Consignatario.ID);
             Actualizar("Id_Productos", Producto.ID);
+            Actualizar("Fecha", Fecha);
             Actualizar("Cabezas", Cabezas);
             Actualizar("Kilos", Kilos);
             Actualizar("Costo", Costo);
@@ -55,14 +60,14 @@
         public void Actualizar_Saldo()
         {
             SqlParameter sqC = new SqlParameter("@C", Consignatario.ID);
-            SqlParameter sqNB = new SqlParameter("@NB", NBoleta.NBoleta);
+            SqlParameter sqNB = new SqlParameter("@NB", NBoleta.ID);
             SqlParameter[] sql = { sqC, sqNB };
             Ejecutar_sp("sp_ActualizarSaldosConsignatario", sql);
         }
 
         public new void Agregar()
         {
-            Agregar("NBoleta", NBoleta.NBoleta);
+            Agregar("NBoleta", NBoleta.ID);
             Actualizar();
         }
 
@@ -84,7 +89,8 @@
                     DataRow dr = dt.Rows[0];
 
                     ID = id;
-                    NBoleta.NBoleta = Convert.ToInt32(dr["NBoleta"]);
+                    NBoleta.ID = Convert.ToInt32(dr["NBoleta"]);
+                    Fecha = Convert.ToDateTime(dr["Fecha"]);
                     Consignatario.ID = Convert.ToInt32(dr["Id_Consignatarios"]);
                     Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                     Cabezas = Convert.ToInt32(dr["Cabezas"]);
@@ -95,7 +101,7 @@
                     Percepcion = Convert.ToDouble(dr["Percepcion"]);
                     Plazo = Convert.ToByte(dr["Plazo"]);
                     Saldo = Convert.ToDouble(dr["Saldo"]);
-                    Matricula.ID = Convert.ToInt32(dr["ID_Matr"]);
+                    Matricula.ID = Convert.ToInt32(dr["ID_Matr"]);                    
                 }
                 catch (Exception)
                 {
@@ -106,7 +112,7 @@
 
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro, "ID, ID_Matr, Matricula, ID_Consignatarios, Nombre, Cabezas Cab, ID_Productos Prod, Nombre_Producto Descr, Kilos, Costo, Costo2, Sub_Total, IVA, Percepcion, Total, Plazo");
+            return Datos_Vista(filtro, "ID_CompraFrigo, Fecha, ID_Matr, Matricula, ID_Consignatarios, Nombre, Cabezas Cab, ID_Productos Prod, Nombre_Producto Descr, Kilos, Costo, Costo2, Sub_Total, IVA, Percepcion, Total, Plazo");
         }
     }
 }

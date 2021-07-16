@@ -3,18 +3,33 @@
     using Programa1.Herramientas;
     using System;
     using System.Data;
-    using System.Data.SqlClient;
+    using System.Data.OleDb;
+    using System.IO;
     using System.Media;
     using System.Windows.Forms;
 
-    public class c_Base
+    public class c_Base_Access
     {
+        string conn_string = Programa1.Properties.Settings.Default.dbDatosConnectionString;
 
-        public c_Base() { }
-        public c_Base(string tabla, string vista)
+        public c_Base_Access() { }
+
+        public c_Base_Access(string tabla, string vista)
         {
             Tabla = tabla;
             Vista = vista;
+        }
+        public string Base_Access
+        {
+            get { return conn_string; }
+            set
+            {
+                if (File.Exists(value) == true)
+                {
+                    conn_string = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={value};Jet OLEDB:Database Password=**Oficina02;";
+                }
+                
+            }
         }
 
         public string Tabla { get; set; }
@@ -39,11 +54,11 @@
         #region " Editar Datos "
         public void Actualizar()
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("UPDATE {2} SET Nombre='{0}' WHERE {3}={1}", Nombre, ID, Tabla, Campo_ID), cnn);
+                OleDbCommand command = new OleDbCommand(string.Format("UPDATE {2} SET Nombre='{0}' WHERE {3}={1}", Nombre, ID, Tabla, Campo_ID), cnn);
                 command.CommandType = CommandType.Text;
                 command.Connection = cnn;
                 cnn.Open();
@@ -59,14 +74,14 @@
         }
         public void Actualizar(string Campo, object valor)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
 
             Herramientas h = new Herramientas();
             valor = h.Formato_SQL(valor);
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("UPDATE {0} SET {1}={2} WHERE {3}={4}", Tabla, Campo, valor, Campo_ID, ID), cnn);
+                OleDbCommand command = new OleDbCommand(string.Format("UPDATE {0} SET {1}={2} WHERE {3}={4}", Tabla, Campo, valor, Campo_ID, ID), cnn);
                 command.CommandType = CommandType.Text;
                 command.Connection = cnn;
                 cnn.Open();
@@ -81,16 +96,15 @@
             }
         }
 
-
         public void Agregar()
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
 
             try
             {
                 string cadena = $"INSERT INTO {Tabla} ({Campo_ID}, Nombre) VALUES({ID}, '{Nombre}')";
                 if (ID_Automatico == true) { cadena = $"INSERT INTO {Tabla} (Nombre) VALUES('{Nombre}')"; }
-                SqlCommand cmd = new SqlCommand(cadena, cnn);
+                OleDbCommand cmd = new OleDbCommand(cadena, cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -105,6 +119,7 @@
                 MessageBox.Show(e.Message, "Error");
             }
         }
+
         /// <summary>
         /// Agrega el registro sumando un campo. Ej: SubTipo 
         /// </summary>
@@ -112,7 +127,7 @@
         /// <param name="valor">Valor tipo objet. Se formatea en el mismo procedimiento.</param>
         public void Agregar(string Campo, object valor)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
 
             Herramientas h = new Herramientas();
             valor = h.Formato_SQL(valor);
@@ -122,7 +137,7 @@
                 string cadena = string.Format("INSERT INTO {0} ({5}, Nombre, {3}) VALUES({1}, '{2}', {4})", Tabla, ID, Nombre, Campo, valor, Campo_ID);
                 if (ID_Automatico == true) { cadena = string.Format("INSERT INTO {0} (Nombre, {2}) VALUES('{1}', {3})", Tabla, Nombre, Campo, valor); }
 
-                SqlCommand cmd = new SqlCommand(cadena, cnn);
+                OleDbCommand cmd = new OleDbCommand(cadena, cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -144,14 +159,14 @@
         /// <param name="valor">Valor tipo objet. Se formatea en el mismo procedimiento.</param>
         public void Agregar_NoID(string Campo, object valor)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
 
             Herramientas h = new Herramientas();
             valor = h.Formato_SQL(valor);
 
             try
             {
-                SqlCommand cmd = new SqlCommand(string.Format("INSERT INTO {0} ({1}) VALUES({2})", Tabla, Campo, valor), cnn);
+                OleDbCommand cmd = new OleDbCommand(string.Format("INSERT INTO {0} ({1}) VALUES({2})", Tabla, Campo, valor), cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -167,14 +182,13 @@
             }
         }
 
-        
         public void Borrar()
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
 
             try
             {
-                SqlCommand cmd = new SqlCommand(string.Format("DELETE FROM {1} WHERE {2}={0}", ID, Tabla, Campo_ID), cnn);
+                OleDbCommand cmd = new OleDbCommand(string.Format("DELETE FROM {1} WHERE {2}={0}", ID, Tabla, Campo_ID), cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -196,11 +210,11 @@
         /// <param name="where">sin la palabra where</param>
         public void Borrar(string where)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
 
             try
             {
-                SqlCommand cmd = new SqlCommand(string.Format("DELETE FROM {1} WHERE {0}", where, Tabla), cnn);
+                OleDbCommand cmd = new OleDbCommand(string.Format("DELETE FROM {1} WHERE {0}", where, Tabla), cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -216,11 +230,11 @@
         }
         public void Borrar(string tabla, string where)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
 
             try
             {
-                SqlCommand cmd = new SqlCommand(string.Format("DELETE FROM {1} WHERE {0}", where, tabla), cnn);
+                OleDbCommand cmd = new OleDbCommand(string.Format("DELETE FROM {1} WHERE {0}", where, tabla), cnn);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
                 cnn.Open();
@@ -241,7 +255,7 @@
         public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
 
@@ -249,10 +263,10 @@
             {
                 string Cadena = $"SELECT {Campo_ID}, {Campo_Nombre} FROM {Tabla} {filtro} ORDER BY {Campo_ID}";
 
-                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                OleDbCommand cmd = new OleDbCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
 
-                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
                 daAdapt.Fill(dt);
             }
             catch (Exception)
@@ -273,7 +287,7 @@
         public DataTable Datos_Vista(string filtro = "", string Campos = "*", string Orden = "ORDER BY ")
         {
             var dt = new DataTable("Datos");
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
             if (Campos == "") { Campos = "*"; }
@@ -283,10 +297,10 @@
             {
                 string Cadena = $"SELECT {Campos} FROM {Vista} {filtro} {Orden}";
 
-                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                OleDbCommand cmd = new OleDbCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
 
-                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
                 daAdapt.Fill(dt);
             }
             catch (Exception)
@@ -305,11 +319,8 @@
         /// <returns></returns>
         public object Dato(string filtro = "", string Campos = "*", string Orden = "ORDER BY ")
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
             object d = null;
-
-            if(Vista == null) { Vista = Tabla; }
-
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
             if (Orden != "") { Orden = (Orden != "ORDER BY ") ? " ORDER BY " + Orden : " ORDER BY " + Campo_ID; }
 
@@ -317,12 +328,12 @@
             {
                 string Cadena = $"SELECT TOP 1 {Campos} FROM {Vista} {filtro} {Orden}";
 
-                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                OleDbCommand cmd = new OleDbCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
 
                 cnn.Open();
 
-                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
                 d = cmd.ExecuteScalar();
                 cnn.Close();
             }
@@ -342,19 +353,19 @@
         /// <returns></returns>
         public object Dato_Generico(string tabla, string filtro, string Campo)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
             object d = null;
-
+            
             try
             {
                 string Cadena = $"SELECT TOP 1 {Campo} FROM {tabla} WHERE {filtro}";
 
-                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                OleDbCommand cmd = new OleDbCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
 
                 cnn.Open();
 
-                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
                 d = cmd.ExecuteScalar();
                 cnn.Close();
             }
@@ -374,20 +385,19 @@
         /// <returns></returns>
         public double Dato_Sumado(string filtro, string Campo)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
             object d;
-
             try
             {
                 string Cadena = $"SELECT SUM({Campo}) FROM {Vista} WHERE {filtro}";
 
-                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                OleDbCommand cmd = new OleDbCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
 
                 cnn.Open();
 
-                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
-                d = cmd.ExecuteScalar();
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
+                d = cmd.ExecuteScalar();                
                 cnn.Close();
             }
             catch (Exception)
@@ -402,14 +412,14 @@
         public DataTable sp_Datos()
         {
             var dt = new DataTable("Datos");
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
 
             try
             {
-                SqlCommand cmd = new SqlCommand(Tabla, cnn);
+                OleDbCommand cmd = new OleDbCommand(Tabla, cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
                 daAdapt.Fill(dt);
             }
             catch (Exception)
@@ -422,18 +432,18 @@
 
         public int Max_ID()
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
             int d = 0;
 
             try
             {
                 string Cadena = $"SELECT MAX({Campo_ID}) FROM {Tabla}";
 
-                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                OleDbCommand cmd = new OleDbCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
 
                 cnn.Open();
-                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
                 d = (int)cmd.ExecuteScalar();
 
                 cnn.Close();
@@ -449,15 +459,15 @@
         public bool Existe()
         {
 
-            SqlConnection cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            OleDbConnection cnn = new OleDbConnection(conn_string);
             var dt = new DataTable("Datos");
 
             try
             {
-                SqlCommand cmd = new SqlCommand($"SELECT * FROM {Tabla} WHERE {Campo_ID}={ID}", cnn);
+                OleDbCommand cmd = new OleDbCommand($"SELECT * FROM {Tabla} WHERE Id={ID}", cnn);
                 cmd.CommandType = CommandType.Text;
 
-                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
                 daAdapt.Fill(dt);
 
                 if (dt.Rows.Count == 0)
@@ -467,7 +477,7 @@
                 }
                 else
                 {
-                    if (dt.Columns.Contains("Nombre")) { Nombre = Convert.ToString(dt.Rows[0]["Nombre"]); }
+                    Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
                     return true;
                 }
 
@@ -481,15 +491,15 @@
         }
         public bool Existe(int value)
         {
-            SqlConnection cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            OleDbConnection cnn = new OleDbConnection(conn_string);
             var dt = new DataTable("Datos");
 
             try
             {
-                SqlCommand cmd = new SqlCommand($"SELECT * FROM {Tabla} WHERE {Campo_ID}={value}", cnn);
+                OleDbCommand cmd = new OleDbCommand($"SELECT * FROM {Tabla} WHERE {Campo_ID}={value}", cnn);
                 cmd.CommandType = CommandType.Text;
 
-                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
                 daAdapt.Fill(dt);
 
                 if (dt.Rows.Count == 0)
@@ -515,17 +525,17 @@
         }
         public bool Existe(string campo, object value)
         {
-            SqlConnection cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            OleDbConnection cnn = new OleDbConnection(conn_string);
             var dt = new DataTable("Datos");
             Herramientas h = new Herramientas();
             value = h.Formato_SQL(value);
 
             try
             {
-                SqlCommand cmd = new SqlCommand($"SELECT * FROM {Tabla} WHERE {campo}={value}", cnn);
+                OleDbCommand cmd = new OleDbCommand($"SELECT * FROM {Tabla} WHERE {campo}={value}", cnn);
                 cmd.CommandType = CommandType.Text;
 
-                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
                 daAdapt.Fill(dt);
 
                 if (dt.Rows.Count == 0)
@@ -537,7 +547,7 @@
                 else
                 {
                     ID = Convert.ToInt32(dt.Rows[0][0]);
-                    //Nombre = Convert.ToString(dt.Rows[0][Campo_Nombre]);
+                    Nombre = Convert.ToString(dt.Rows[0][Campo_Nombre]);
                     return true;
                 }
 
@@ -552,19 +562,19 @@
 
         public bool Fecha_Cerrada(DateTime f)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
             object n = null;
 
             try
             {
                 string Cadena = $"SELECT TOP 1 Cerrada FROM Semanas WHERE Semana<='{f:MM/dd/yyyy}' ORDER BY Semana DESC";
 
-                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                OleDbCommand cmd = new OleDbCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
 
                 cnn.Open();
 
-                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
                 n = cmd.ExecuteScalar();
                 cnn.Close();
             }
@@ -580,34 +590,13 @@
         #endregion
 
         #region " Subs "
-        public void Ejecutar_Comando(string comando)
-        {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand(comando, cnn);
-                command.CommandType = CommandType.Text;
-                command.Connection = cnn;
-                cnn.Open();
-
-                command.ExecuteNonQuery();
-
-                cnn.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-        }
-
         public void Ejecutar_sp(string sp)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
             try
             {
                 cnn.Open();
-                SqlCommand cmd = new SqlCommand(sp, cnn);
+                OleDbCommand cmd = new OleDbCommand(sp, cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteScalar();
                 cnn.Close();
@@ -617,13 +606,13 @@
             }
 
         }
-        public void Ejecutar_sp(string sp, SqlParameter[] parameter)
+        public void Ejecutar_sp(string sp, OleDbParameter[] parameter)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
             try
             {
                 cnn.Open();
-                SqlCommand cmd = new SqlCommand(sp, cnn);
+                OleDbCommand cmd = new OleDbCommand(sp, cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddRange(parameter);
                 cmd.ExecuteScalar();
@@ -636,14 +625,14 @@
         }
         public void Ejecutar_sp(string sp, string nombreParametro, int n)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
             try
             {
-                SqlParameter sqlP = new SqlParameter(nombreParametro, SqlDbType.Int);
-                sqlP.SqlValue = n;
+                OleDbParameter sqlP = new OleDbParameter(nombreParametro, SqlDbType.Int);
+                sqlP.Value = n;
 
                 cnn.Open();
-                SqlCommand cmd = new SqlCommand(sp, cnn);
+                OleDbCommand cmd = new OleDbCommand(sp, cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(sqlP);
                 cmd.ExecuteScalar();
@@ -656,14 +645,14 @@
         }
         public void Ejecutar_sp(string sp, string nombreParametro, string n)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new OleDbConnection(conn_string);
             try
             {
-                SqlParameter sqlP = new SqlParameter(nombreParametro, SqlDbType.Text);
-                sqlP.SqlValue = n;
+                OleDbParameter sqlP = new OleDbParameter(nombreParametro, SqlDbType.Text);
+                sqlP.Value = n;
 
                 cnn.Open();
-                SqlCommand cmd = new SqlCommand(sp, cnn);
+                OleDbCommand cmd = new OleDbCommand(sp, cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(sqlP);
                 cmd.ExecuteScalar();

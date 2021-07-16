@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Programa1.Clases;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace Programa1.DB.Varios
 {
-    class Datos_Genericos
+    class Datos_Genericos : c_Base
     {
         public Datos_Genericos()
         {
         }
 
-        public DataTable Datos(String cadena)
+        public new DataTable Datos(String cadena)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);

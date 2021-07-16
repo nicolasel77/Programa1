@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Programa1.Clases;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace Programa1.DB
 {
-    public class Faena
+    public class Faena : c_Base
     {
         public Faena()
         {
-
-        }
-                
-
-        public int Id { get; set; }
+            Tabla = "Faena";
+            Vista = "vw_Faena";            
+        }              
+        
         public NBoletas nBoleta { get; set; } = new NBoletas();
         public DateTime Fecha { get; set; }
         public Categorias Categoria { get; set; } = new Categorias();
@@ -22,31 +22,12 @@ namespace Programa1.DB
         public Productos Producto { get; set; } = new Productos();
         public Single Recupero { get; set; }
         public Single Kilos { get; set; }
-
-        public DataTable Datos()
+        
+        public void Borrar_Faena()
         {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT ID, Fecha, ID_Categorias, Nombre_Categoria, ID_Frigorificos, Nombre_Frigorifico" +
-                    ", NRomaneo, Tropa, ID_Productos, Nombre_Producto, Recupero, Kilos" +
-                    " FROM vw_Faena WHERE NBoleta=" + nBoleta.NBoleta, conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
+            Ejecutar_Comando("DELETE FROM Faena WHERE NBoleta=" + nBoleta.ID);
         }
+
         public DataTable Romaneos()
         {
             var dt = new DataTable("Datos");
@@ -55,7 +36,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT NRomaneo, COUNT(Kilos) AS Cant, SUM(Kilos) AS Kilos FROM vw_Faena WHERE NBoleta={nBoleta.NBoleta}" +
+                SqlCommand comandoSql = new SqlCommand($"SELECT NRomaneo, COUNT(Kilos) AS Cant, SUM(Kilos) AS Kilos FROM vw_Faena WHERE NBoleta={nBoleta.ID}" +
                     $" GROUP BY NRomaneo", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
@@ -70,7 +51,6 @@ namespace Programa1.DB
 
             return dt;
         }
-
         public DataTable Stock_Faena(DateTime f)
         {
             var dt = new DataTable("Datos");
@@ -109,7 +89,7 @@ namespace Programa1.DB
                     $"FROM vw_Faena " +
                     $"WHERE Fecha <='{f.ToString("MM/dd/yy")}' " +
                     $"AND Id NOT IN(SELECT Id_Faena FROM Hacienda_Salidas WHERE Fecha <='{f.ToString("MM/dd/yy")}')  " +
-                    $"AND NBoleta={nBoleta.NBoleta} {filtro}" +
+                    $"AND NBoleta={nBoleta.ID} {filtro}" +
                     $"ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 

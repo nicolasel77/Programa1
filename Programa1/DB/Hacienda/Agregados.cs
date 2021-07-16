@@ -11,6 +11,7 @@
         {
             Tabla = "Hacienda_Agregados";
             Vista = "vw_Hacienda_Agregados";
+            Campo_ID = "ID_Agregados_Frigo";
         }
 
         public NBoletas nb { get; set; } = new NBoletas();
@@ -18,6 +19,7 @@
         public TipoAgregados tipoAgregados = new TipoAgregados();
         public Consignatarios Consignatario { get; set; } = new Consignatarios();
         public TipoAgregados Tipo { get; set; } = new TipoAgregados();
+        public DateTime Fecha { get; set; }
         public Single Importe { get; set; }
         public int Plazo { get; set; }
         public int Estado { get; set; }
@@ -26,12 +28,13 @@
 
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro, "ID, ID_TipoAgregados, Descripcion, ID_Consignatarios, Nombre, Importe, Plazo");
+            return Datos_Vista(filtro, "ID, Fecha, ID_TipoAgregados, Descripcion, ID_Consignatarios, Nombre, Importe, Plazo");
         }
 
         public new void Actualizar()
         {
-            Actualizar("NBoleta", nb.NBoleta);
+            Actualizar("NBoleta", nb.ID);
+            Actualizar("Fecha", Fecha);
             Actualizar("id_Consignatarios", Consignatario.ID);
             Actualizar("id_TipoAgregados", Tipo.ID);
             Actualizar("Importe", Importe);
@@ -46,7 +49,7 @@
         public void Actualizar_Saldo()
         {
             SqlParameter sqC = new SqlParameter("@C", Consignatario.ID);
-            SqlParameter sqNB = new SqlParameter("@NB", nb.NBoleta);
+            SqlParameter sqNB = new SqlParameter("@NB", nb.ID);
             SqlParameter[] sql = { sqC, sqNB };
             Ejecutar_sp("sp_ActualizarSaldosConsignatario", sql);
         }

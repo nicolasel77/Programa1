@@ -7,24 +7,26 @@
     public partial class frmComprasFaena : Form
     {
         Hacienda hc = new Hacienda();
-        //ID, ID_Matr, Matricula, ID_Consignatarios, Nombre, Cabezas Cab, ID_Productos Prod, Nombre_Producto Descr, Kilos, Costo, Costo2, Sub_Total, IVA, Percepcion, Total, Plazo
-        //0     1       2               3               4       5               6                   7                   8   9       10      11       12     13          14      15
+        //ID_CompraFrigo, Fecha, ID_Matr, Matricula, ID_Consignatarios, Nombre, Cabezas Cab, ID_Productos Prod, Nombre_Producto Descr, Kilos, Costo, Costo2, Sub_Total, IVA, Percepcion, Total, Plazo
+        //  0               1       2         3             4             5           6             7                   8               9        10    11       12      13       14        15    16
         #region " Columnas "
         private const Byte c_Id = 0;
-        private const Byte c_Matricula = 1;
-        private const Byte c_Consig = 3;
-        private const Byte c_IdProd = 6;
-        private const Byte c_Cab = 5;
-        private const Byte c_Kilos = 8;
-        private const Byte c_Costo = 9;
-        private const Byte c_Costo2 = 10;
-        private const Byte c_SubT = 11;
-        private const Byte c_IVA = 12;
-        private const Byte c_Perc = 13;
-        private const Byte c_Total = 14;
-        private const Byte c_Plazo = 15;
+        private const Byte c_Fecha = 1;
+        private const Byte c_Matricula = 2;
+        private const Byte c_Consig = 4;
+        private const Byte c_IdProd = 7;
+        private const Byte c_Cab = 6;
+        private const Byte c_Kilos = 9;
+        private const Byte c_Costo = 10;
+        private const Byte c_Costo2 = 11;
+        private const Byte c_SubT = 12;
+        private const Byte c_IVA = 13;
+        private const Byte c_Perc = 14;
+        private const Byte c_Total = 15;
+        private const Byte c_Plazo = 16;
 
         private Byte A_Id;
+        private Byte A_Fecha;
         private Byte A_Consig;
         private Byte A_Tipo;
         private Byte A_Impporte;
@@ -53,24 +55,10 @@
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Kilos_Compra")].Format = "N0";
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Kilos_Faena")].Format = "N0";
 
-            grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=0"), true);
-
-            //c_Id = Convert.ToByte(grdCompras.get_ColIndex("Id"));
-            //c_Matricula = Convert.ToByte(grdCompras.get_ColIndex("ID_Matr"));
-            //c_Consig = Convert.ToByte(grdCompras.get_ColIndex("Id_Consignatarios"));
-            //c_IdProd = Convert.ToByte(grdCompras.get_ColIndex("Prod"));
-            //c_Cab = Convert.ToByte(grdCompras.get_ColIndex("Cab"));
-            //c_Kilos = Convert.ToByte(grdCompras.get_ColIndex("Kilos"));
-            //c_Costo = Convert.ToByte(grdCompras.get_ColIndex("Costo"));
-            //c_Costo2 = Convert.ToByte(grdCompras.get_ColIndex("Costo2"));
-            //c_SubT = Convert.ToByte(grdCompras.get_ColIndex("Sub_Total"));
-            //c_IVA = Convert.ToByte(grdCompras.get_ColIndex("IVA"));
-            //c_Perc = Convert.ToByte(grdCompras.get_ColIndex("Percepcion"));
-            //c_Total = Convert.ToByte(grdCompras.get_ColIndex("Total"));
-            //c_Plazo = Convert.ToByte(grdCompras.get_ColIndex("Plazo"));
-
-
+            grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=0"), true, true);
+                        
             grdCompras.set_ColW(c_Id, 0);
+            grdCompras.set_ColW(c_Fecha, 55);
             grdCompras.set_ColW(c_Matricula, 30);
             grdCompras.set_ColW(c_Matricula + 1, 30);
             grdCompras.set_ColW(c_Consig, 40);
@@ -95,15 +83,17 @@
             grdCompras.Columnas[c_Perc].Format = "C2";
             grdCompras.Columnas[c_Total].Format = "C2";
 
-            grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=0"), true);
+            grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=0"), true, true);
 
             A_Id = Convert.ToByte(grdAgregados.get_ColIndex("Id"));
+            A_Fecha = Convert.ToByte(grdAgregados.get_ColIndex("Fecha"));
             A_Consig = Convert.ToByte(grdAgregados.get_ColIndex("Id_Consignatarios"));
             A_Tipo = Convert.ToByte(grdAgregados.get_ColIndex("Id_TipoAgregados"));
             A_Impporte = Convert.ToByte(grdAgregados.get_ColIndex("Importe"));
             A_Plazo = Convert.ToByte(grdAgregados.get_ColIndex("Plazo"));
 
             grdAgregados.set_ColW(A_Id, 0);
+            grdAgregados.set_ColW(A_Fecha, 55);
             grdAgregados.set_ColW(A_Consig, 40);
             grdAgregados.set_ColW(A_Consig + 1, 100);
             grdAgregados.set_ColW(A_Tipo, 40);
@@ -114,7 +104,7 @@
             grdAgregados.Columnas[A_Impporte].Format = "C2";
 
 
-            grdFaena.MostrarDatos(hc.Faena.Datos(), true, true);
+            grdFaena.MostrarDatos(hc.Faena.Datos_Vista("NBoleta=0"), true, true);
 
             F_Id = Convert.ToByte(grdFaena.get_ColIndex("Id"));
             F_Fecha = Convert.ToByte(grdFaena.get_ColIndex("Fecha"));
@@ -159,13 +149,14 @@
 
         private void GrdBoletas_CambioFila(short Fila)
         {
-            hc.nBoletas.NBoleta = Convert.ToInt32(grdBoletas.get_Texto(Fila, 0));
-            grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=" + hc.nBoletas.NBoleta), false);
+            this.Cursor = Cursors.WaitCursor;
+            hc.nBoletas.ID = Convert.ToInt32(grdBoletas.get_Texto(Fila, 0));
+            grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=" + hc.nBoletas.ID), false);
 
-            grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=" + hc.nBoletas.NBoleta), false);
+            grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=" + hc.nBoletas.ID), false);
 
             hc.Faena.nBoleta = hc.nBoletas;
-            grdFaena.MostrarDatos(hc.Faena.Datos(), false);
+            grdFaena.MostrarDatos(hc.Faena.Datos_Vista("NBoleta=" + hc.nBoletas.ID), false);
 
             grdRomaneos.MostrarDatos(hc.Faena.Romaneos(), true, true);
             grdRomaneos.SumarCol(2, true);
@@ -183,19 +174,25 @@
             {
                 grdBoletas.MostrarDatos(hc.nBoletas.Datos(), false, false);
             }
+            this.Cursor = Cursors.Default;
+
         }
         private void Totales()
         {
+            double tSubTotal = grdCompras.SumarCol(c_SubT, false);
+            double tPercepcion = grdCompras.SumarCol(c_Perc, false);
             double tCompra = grdCompras.SumarCol(c_Total, false);
             double kCompra = grdCompras.SumarCol(c_Kilos, false);
-            double tPercepcion = grdCompras.SumarCol(c_Perc, false);
             double cabezas = grdCompras.SumarCol(c_Cab, false);
-            lblCCant.Text = $"Registros: {cabezas:N0}";
-            lblCKilos.Text = $"Kilos: {kCompra:N2}";
-            lblCTotal.Text = $"Total: {tCompra:C2}";
-
+            lblCCant.Text = $"Cabezas: {cabezas:N0}";
+            lblCKilos.Text = $"Kilos: {kCompra:N1}";
+            lblSubTotal.Text = $"SubTotal: {tSubTotal:C1}";
+            lblTPercepciones.Text = $"Percepciones: {tPercepcion:C1}";
+            lblCTotal.Text = $"Total: {tCompra:C1}";
+            
             double tAgregados = grdAgregados.SumarCol(A_Impporte, false);
-            lblATotal.Text = $"Total: {tAgregados:C2}";
+            lblTAgregados.Text = $"Agregados: {tAgregados:C1}";
+            lblATotal.Text = $"Total: {tAgregados:C1}";
 
             tCompra = (tCompra + tAgregados);
             if (kCompra != 0)
@@ -238,12 +235,7 @@
             {
                 lblCant.BackColor = System.Drawing.SystemColors.Control;
             }
-        }
-
-        private void cBoton1_Click(object sender, EventArgs e)
-        {
-            //hc.compra.Actualizar();
-        }
+        }            
 
         private void grdCompras_Editado(short f, short c, object a)
         {

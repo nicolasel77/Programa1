@@ -36,6 +36,8 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCCant = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCKilos = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblSubTotal = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblTPercepciones = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCInt = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip3 = new System.Windows.Forms.StatusStrip();
@@ -56,6 +58,7 @@
             this.grdBoletas = new Grilla2.SpeedGrilla();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblTAgregados = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -161,7 +164,10 @@
             this.toolStripStatusLabel1,
             this.lblCCant,
             this.lblCKilos,
+            this.lblSubTotal,
+            this.lblTPercepciones,
             this.lblCTotal,
+            this.lblTAgregados,
             this.lblCInt});
             this.statusStrip2.Location = new System.Drawing.Point(0, 227);
             this.statusStrip2.Name = "statusStrip2";
@@ -190,6 +196,18 @@
             this.lblCKilos.Size = new System.Drawing.Size(36, 23);
             this.lblCKilos.Text = "Kilos";
             this.lblCKilos.Click += new System.EventHandler(this.LblCant_Click);
+            // 
+            // lblSubTotal
+            // 
+            this.lblSubTotal.Name = "lblSubTotal";
+            this.lblSubTotal.Size = new System.Drawing.Size(55, 23);
+            this.lblSubTotal.Text = "Sub Total";
+            // 
+            // lblTPercepciones
+            // 
+            this.lblTPercepciones.Name = "lblTPercepciones";
+            this.lblTPercepciones.Size = new System.Drawing.Size(77, 23);
+            this.lblTPercepciones.Text = "Percepciones";
             // 
             // lblCTotal
             // 
@@ -495,6 +513,12 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Boletas";
             // 
+            // lblTAgregados
+            // 
+            this.lblTAgregados.Name = "lblTAgregados";
+            this.lblTAgregados.Size = new System.Drawing.Size(64, 23);
+            this.lblTAgregados.Text = "Agregados";
+            // 
             // frmComprasFaena
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -561,5 +585,8 @@
         private System.Windows.Forms.ToolStripStatusLabel lblATotal;
         private System.Windows.Forms.SplitContainer splitContainer5;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripStatusLabel lblSubTotal;
+        private System.Windows.Forms.ToolStripStatusLabel lblTPercepciones;
+        private System.Windows.Forms.ToolStripStatusLabel lblTAgregados;
     }
 }

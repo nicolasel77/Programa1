@@ -137,6 +137,12 @@
     <Compile Include="Carga\Hacienda\frmPagar_Hacienda.Designer.cs">
       <DependentUpon>frmPagar_Hacienda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Hacienda\frmSincronizarAccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmSincronizarAccess.Designer.cs">
+      <DependentUpon>frmSincronizarAccess.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Precios\frmBorrar_Carne.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -580,6 +586,7 @@
     <Compile Include="DB\Hacienda\Hacienda_Salidas.cs" />
     <Compile Include="DB\Hacienda\Matriculas.cs" />
     <Compile Include="DB\Hacienda\NBoletas.cs" />
+    <Compile Include="DB\Hacienda\Recupero.cs" />
     <Compile Include="DB\Hacienda\Saldos_Consignatarios.cs" />
     <Compile Include="DB\Hacienda\TipoAgregados.cs" />
     <Compile Include="DB\Proveedores\Ajustes.cs" />
@@ -658,6 +665,7 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Herramientas\c_Base_Access.cs" />
     <Compile Include="Herramientas\Herramientas.cs" />
     <Compile Include="Mail\frmMail.cs">
       <SubType>Form</SubType>
@@ -694,6 +702,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmPagar_Hacienda.resx">
       <DependentUpon>frmPagar_Hacienda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmSincronizarAccess.resx">
+      <DependentUpon>frmSincronizarAccess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Precios\frmBorrar_Carne.resx">
       <DependentUpon>frmBorrar_Carne.cs</DependentUpon>

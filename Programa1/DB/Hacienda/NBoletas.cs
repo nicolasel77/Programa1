@@ -15,14 +15,12 @@
             Campo_ID = "NBoleta";
         }
 
-
-        public int NBoleta { get; set; }
         public DateTime Fecha { get; set; }
         public int Reparto { get; set; }
         public Single Costo { get; set; }
         public Single Costo_Faena { get; set; }
         public bool Directo { get; set; }
-               
+
         public new void Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -30,9 +28,9 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"UPDATE NBoletas SET NBoleta={NBoleta}, Fecha='{Fecha.ToString("MM/dd/yyy")}', Directo={(Directo ? "1" : "0")}, " +
+                    new SqlCommand($"UPDATE NBoletas SET NBoleta={ID}, Fecha='{Fecha.ToString("MM/dd/yyy")}', Directo={(Directo ? "1" : "0")}, " +
                         $"Reparto={Reparto}, Costo={Costo.ToString().Replace(",", ".")}, Costo_Faena={Costo_Faena.ToString().Replace(",", ".")} " +
-                        $"WHERE NBoleta={NBoleta}", sql);
+                        $"WHERE NBoleta={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -55,7 +53,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO NBoletas (NBoleta, Fecha, Reparto, Costo, Costo_Faena, Directo) " +
-                        $"VALUES({NBoleta}, '{Fecha.ToString("MM/dd/yyy")}', {Reparto}, {Costo.ToString().Replace(",", ".")}, " +
+                        $"VALUES({ID}, '{Fecha.ToString("MM/dd/yyy")}', {Reparto}, {Costo.ToString().Replace(",", ".")}, " +
                         $"{Costo_Faena.ToString().Replace(",", ".")}, {(Directo ? "1" : "0")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -68,12 +66,12 @@
                 int n2 = Max_Boleta();
                 if (n == n2)
                 {
-                    NBoleta = 0;
+                    ID = 0;
                     MessageBox.Show("No se pudo guardar el registro.", "Error");
                 }
                 else
                 {
-                    NBoleta = n2;
+                    ID = n2;
                 }
             }
             catch (Exception e)
@@ -107,7 +105,7 @@
             return Convert.ToInt32(d);
         }
 
-        
+
 
     }
 }

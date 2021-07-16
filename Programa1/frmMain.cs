@@ -2015,5 +2015,53 @@
                 }
             }
         }
+
+        private void sincronizarAccessToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmSincronizarAccess")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmSincronizarAccess");
+                t.Text = "SincronizarAccess";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmSincronizarAccess = new Carga.Hacienda.frmSincronizarAccess();
+                frmSincronizarAccess.MdiParent = this;
+                frmSincronizarAccess.Disposed += FrmSincronizarAccess_Disposed;
+                forms.Add(frmSincronizarAccess);
+                frmSincronizarAccess.Show();
+                frmSincronizarAccess.WindowState = FormWindowState.Minimized;
+                frmSincronizarAccess.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmSincronizarAccess_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "SincronizarAccess")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmSincronizarAccess")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }
