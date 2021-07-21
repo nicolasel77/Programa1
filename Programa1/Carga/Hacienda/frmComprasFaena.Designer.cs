@@ -39,6 +39,7 @@
             this.lblSubTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTPercepciones = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCTotal = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblTAgregados = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCInt = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip3 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -58,7 +59,8 @@
             this.grdBoletas = new Grilla2.SpeedGrilla();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblTAgregados = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblIVA = new System.Windows.Forms.ToolStripStatusLabel();
+            this.cmdActualizar_Listado = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -165,6 +167,7 @@
             this.lblCCant,
             this.lblCKilos,
             this.lblSubTotal,
+            this.lblIVA,
             this.lblTPercepciones,
             this.lblCTotal,
             this.lblTAgregados,
@@ -216,6 +219,12 @@
             this.lblCTotal.Size = new System.Drawing.Size(36, 23);
             this.lblCTotal.Text = "Total";
             this.lblCTotal.Click += new System.EventHandler(this.LblCant_Click);
+            // 
+            // lblTAgregados
+            // 
+            this.lblTAgregados.Name = "lblTAgregados";
+            this.lblTAgregados.Size = new System.Drawing.Size(64, 23);
+            this.lblTAgregados.Text = "Agregados";
             // 
             // lblCInt
             // 
@@ -477,7 +486,7 @@
             this.grdBoletas.Redraw = true;
             this.grdBoletas.Row = 0;
             this.grdBoletas.Rows = 50;
-            this.grdBoletas.Size = new System.Drawing.Size(375, 642);
+            this.grdBoletas.Size = new System.Drawing.Size(375, 599);
             this.grdBoletas.TabIndex = 1;
             this.grdBoletas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdBoletas_CambioFila);
             // 
@@ -495,6 +504,7 @@
             // 
             // splitContainer5.Panel2
             // 
+            this.splitContainer5.Panel2.Controls.Add(this.cmdActualizar_Listado);
             this.splitContainer5.Panel2.Controls.Add(this.grdBoletas);
             this.splitContainer5.Panel2.Controls.Add(this.label1);
             this.splitContainer5.Size = new System.Drawing.Size(1583, 666);
@@ -513,11 +523,21 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Boletas";
             // 
-            // lblTAgregados
+            // lblIVA
             // 
-            this.lblTAgregados.Name = "lblTAgregados";
-            this.lblTAgregados.Size = new System.Drawing.Size(64, 23);
-            this.lblTAgregados.Text = "Agregados";
+            this.lblIVA.Name = "lblIVA";
+            this.lblIVA.Size = new System.Drawing.Size(24, 23);
+            this.lblIVA.Text = "IVA";
+            // 
+            // cmdActualizar_Listado
+            // 
+            this.cmdActualizar_Listado.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cmdActualizar_Listado.Location = new System.Drawing.Point(0, 626);
+            this.cmdActualizar_Listado.Name = "cmdActualizar_Listado";
+            this.cmdActualizar_Listado.Size = new System.Drawing.Size(378, 40);
+            this.cmdActualizar_Listado.TabIndex = 3;
+            this.cmdActualizar_Listado.Texto = "Actualizar";
+            this.cmdActualizar_Listado.Click += new System.EventHandler(this.cmdActualizar_Listado_Click);
             // 
             // frmComprasFaena
             // 
@@ -588,5 +608,7 @@
         private System.Windows.Forms.ToolStripStatusLabel lblSubTotal;
         private System.Windows.Forms.ToolStripStatusLabel lblTPercepciones;
         private System.Windows.Forms.ToolStripStatusLabel lblTAgregados;
+        private System.Windows.Forms.ToolStripStatusLabel lblIVA;
+        private Controles.cBoton cmdActualizar_Listado;
     }
 }

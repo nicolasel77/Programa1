@@ -180,6 +180,7 @@
         private void Totales()
         {
             double tSubTotal = grdCompras.SumarCol(c_SubT, false);
+            double tIVA = grdCompras.SumarCol(c_IVA, false);
             double tPercepcion = grdCompras.SumarCol(c_Perc, false);
             double tCompra = grdCompras.SumarCol(c_Total, false);
             double kCompra = grdCompras.SumarCol(c_Kilos, false);
@@ -188,6 +189,7 @@
             lblCKilos.Text = $"Kilos: {kCompra:N1}";
             lblSubTotal.Text = $"SubTotal: {tSubTotal:C1}";
             lblTPercepciones.Text = $"Percepciones: {tPercepcion:C1}";
+            lblIVA.Text = $"IVA: {tIVA:C1}";
             lblCTotal.Text = $"Total: {tCompra:C1}";
             
             double tAgregados = grdAgregados.SumarCol(A_Impporte, false);
@@ -234,7 +236,7 @@
             else
             {
                 lblCant.BackColor = System.Drawing.SystemColors.Control;
-            }
+            }            
         }            
 
         private void grdCompras_Editado(short f, short c, object a)
@@ -372,6 +374,11 @@
         {
             hc.compra.ID = Convert.ToInt32(grdCompras.get_Texto(Fila, c_Id));
             hc.compra.Cargar_Fila(hc.compra.ID);
+        }
+
+        private void cmdActualizar_Listado_Click(object sender, EventArgs e)
+        {
+            grdBoletas.MostrarDatos(hc.nBoletas.Datos_Vista("", "TOP 100 *", "NBoleta DESC"), false, false);
         }
     }
 }

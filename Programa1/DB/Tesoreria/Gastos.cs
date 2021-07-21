@@ -438,6 +438,7 @@
 
         public bool Fecha_Cerrada()
         {
+            if ( Usuario.Permiso == Usuarios.e_Permiso.Administrador) { return false; }
             return Fecha_Cerrada(Fecha);
         }
         #endregion

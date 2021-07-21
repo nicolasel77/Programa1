@@ -44,7 +44,7 @@
             }
             catch (Exception)
             {
-                d = null;
+                d = 0;
             }
             Precio = Convert.ToSingle(d);
             return Precio;

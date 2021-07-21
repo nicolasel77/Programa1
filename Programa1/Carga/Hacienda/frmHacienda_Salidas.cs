@@ -244,7 +244,7 @@
                     {
                         if (Convert.ToInt32(grdSalida.get_Texto(grdSalida.Row, 0)) != 0)
                         {
-                            Salidas.Id = Convert.ToInt32(grdSalida.get_Texto(grdSalida.Row, 0));
+                            Salidas.ID = Convert.ToInt32(grdSalida.get_Texto(grdSalida.Row, 0));
                             Salidas.Borrar();
                             grdSalida.BorrarFila(grdSalida.Row);
                             Totales();

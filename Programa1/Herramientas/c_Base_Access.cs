@@ -310,6 +310,33 @@
 
             return dt;
         }
+        public DataTable Datos_Vista(string filtro, string Campos, string Orden, string GroupBy)
+        {
+            var dt = new DataTable("Datos");
+            var cnn = new OleDbConnection(conn_string);
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+            if (Campos == "") { Campos = "*"; }
+            if (GroupBy.Length > 0) { GroupBy = " GROUP BY " + GroupBy; }
+            if (Orden != "") { Orden = (Orden != "ORDER BY ") ? " ORDER BY " + Orden : " ORDER BY " + Campo_ID; }
+
+            try
+            {
+                string Cadena = $"SELECT {Campos} FROM {Vista} {filtro} {GroupBy} {Orden}";
+
+                OleDbCommand cmd = new OleDbCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
+                daAdapt.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
         /// <summary>
         /// Devuelve un dato específico. Usa Top 1
         /// </summary>

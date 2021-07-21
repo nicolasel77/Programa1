@@ -85,7 +85,7 @@ namespace Programa1.Carga.Tesoreria
         private void frmCaja_Diaria_Load(object sender, EventArgs e)
         {
             mntFecha.SetDate(CD.Fecha);
-            mntFecha.MaxDate = CD.Fecha;
+            //mntFecha.MaxDate = CD.Fecha;
 
             Cargar_Datos();
 
@@ -639,7 +639,7 @@ namespace Programa1.Carga.Tesoreria
         #region " Grilla Salidas "
         private void grdSalidas_Editado(short f, short c, object a)
         {
-            if (mntFecha.SelectionStart.Date >= CD.Fecha)
+            if (mntFecha.SelectionStart.Date >= CD.Fecha | usuario.Permiso == Usuarios.e_Permiso.Administrador)
             {
                 cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(f, s_Id));
                 cGastos.Fecha = mntFecha.SelectionStart.Date;
@@ -864,7 +864,7 @@ namespace Programa1.Carga.Tesoreria
             }
             if (e == Convert.ToInt32(Keys.Delete))
             {
-                if (mntFecha.SelectionStart.Date >= CD.Fecha)
+                if (mntFecha.SelectionStart.Date >= CD.Fecha | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                 {
                     if (cGastos.Fecha_Cerrada() == false)
                     {

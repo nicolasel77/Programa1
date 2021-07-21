@@ -23,6 +23,20 @@ namespace Programa1.DB
         public Single Recupero { get; set; }
         public Single Kilos { get; set; }
         
+        public void Cargar_Registro()
+        {
+            DataTable d = Datos_Vista("ID=" + ID);
+            nBoleta.ID =Convert.ToInt32(d.Rows[0]["NBoleta"]);
+            Fecha = Convert.ToDateTime(d.Rows[0]["Fecha"]);
+            Categoria.ID = Convert.ToInt32(d.Rows[0]["ID_Categorias"]);
+            NRomaneo = Convert.ToInt32(d.Rows[0]["NRomaneo"]);
+            Tropa = Convert.ToInt32(d.Rows[0]["Tropa"]);
+            Frigorifico.ID = Convert.ToInt32(d.Rows[0]["ID_Frigorificos"]);
+            Producto.ID = Convert.ToInt32(d.Rows[0]["ID_Productos"]);
+            Recupero = Convert.ToSingle(d.Rows[0]["Recupero"]);
+            Kilos = Convert.ToSingle(d.Rows[0]["Kilos"]);
+        }
+
         public void Borrar_Faena()
         {
             Ejecutar_Comando("DELETE FROM Faena WHERE NBoleta=" + nBoleta.ID);

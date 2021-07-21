@@ -36,9 +36,9 @@ namespace Programa1.Carga.Hacienda
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.mDesde = new System.Windows.Forms.MonthCalendar();
             this.label5 = new System.Windows.Forms.Label();
-            this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
+            this.mHasta = new System.Windows.Forms.MonthCalendar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flBuscar = new System.Windows.Forms.OpenFileDialog();
             this.lstActualizacion = new System.Windows.Forms.ListBox();
@@ -46,6 +46,9 @@ namespace Programa1.Carga.Hacienda
             this.lstBoletas = new System.Windows.Forms.ListBox();
             this.chCompra = new MaterialSkin.Controls.MaterialCheckBox();
             this.chFaena = new MaterialSkin.Controls.MaterialCheckBox();
+            this.mdSincSalidas = new System.Windows.Forms.Button();
+            this.chSaldo = new MaterialSkin.Controls.MaterialCheckBox();
+            this.cmdSaldos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nuCant)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -80,7 +83,7 @@ namespace Programa1.Carga.Hacienda
             this.cmdSincronizar.BackColor = System.Drawing.Color.MistyRose;
             this.cmdSincronizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmdSincronizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.cmdSincronizar.Location = new System.Drawing.Point(16, 400);
+            this.cmdSincronizar.Location = new System.Drawing.Point(16, 409);
             this.cmdSincronizar.Name = "cmdSincronizar";
             this.cmdSincronizar.Size = new System.Drawing.Size(419, 45);
             this.cmdSincronizar.TabIndex = 0;
@@ -91,7 +94,7 @@ namespace Programa1.Carga.Hacienda
             // nuCant
             // 
             this.nuCant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.nuCant.Location = new System.Drawing.Point(171, 104);
+            this.nuCant.Location = new System.Drawing.Point(171, 73);
             this.nuCant.Name = "nuCant";
             this.nuCant.Size = new System.Drawing.Size(48, 26);
             this.nuCant.TabIndex = 2;
@@ -105,7 +108,7 @@ namespace Programa1.Carga.Hacienda
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label2.Location = new System.Drawing.Point(12, 106);
+            this.label2.Location = new System.Drawing.Point(12, 75);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(153, 20);
             this.label2.TabIndex = 1;
@@ -131,11 +134,11 @@ namespace Programa1.Carga.Hacienda
             this.label4.TabIndex = 1;
             this.label4.Text = "Desde";
             // 
-            // monthCalendar1
+            // mDesde
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(11, 63);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 3;
+            this.mDesde.Location = new System.Drawing.Point(11, 63);
+            this.mDesde.Name = "mDesde";
+            this.mDesde.TabIndex = 3;
             // 
             // label5
             // 
@@ -147,23 +150,23 @@ namespace Programa1.Carga.Hacienda
             this.label5.TabIndex = 1;
             this.label5.Text = "Hasta";
             // 
-            // monthCalendar2
+            // mHasta
             // 
-            this.monthCalendar2.Location = new System.Drawing.Point(216, 63);
-            this.monthCalendar2.Name = "monthCalendar2";
-            this.monthCalendar2.TabIndex = 3;
+            this.mHasta.Location = new System.Drawing.Point(216, 63);
+            this.mHasta.Name = "mHasta";
+            this.mHasta.TabIndex = 3;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel1.Controls.Add(this.monthCalendar2);
-            this.panel1.Controls.Add(this.monthCalendar1);
+            this.panel1.Controls.Add(this.mHasta);
+            this.panel1.Controls.Add(this.mDesde);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(16, 145);
+            this.panel1.Location = new System.Drawing.Point(16, 114);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(419, 249);
+            this.panel1.Size = new System.Drawing.Size(419, 237);
             this.panel1.TabIndex = 4;
             // 
             // flBuscar
@@ -240,11 +243,56 @@ namespace Programa1.Carga.Hacienda
             this.chFaena.Text = "Faena";
             this.chFaena.UseVisualStyleBackColor = true;
             // 
+            // mdSincSalidas
+            // 
+            this.mdSincSalidas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mdSincSalidas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.mdSincSalidas.Location = new System.Drawing.Point(16, 357);
+            this.mdSincSalidas.Name = "mdSincSalidas";
+            this.mdSincSalidas.Size = new System.Drawing.Size(419, 28);
+            this.mdSincSalidas.TabIndex = 7;
+            this.mdSincSalidas.Text = "Sincronizar Salidas";
+            this.mdSincSalidas.UseVisualStyleBackColor = true;
+            this.mdSincSalidas.Click += new System.EventHandler(this.mdSincSalidas_Click);
+            // 
+            // chSaldo
+            // 
+            this.chSaldo.AutoSize = true;
+            this.chSaldo.Depth = 0;
+            this.chSaldo.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chSaldo.Location = new System.Drawing.Point(142, 540);
+            this.chSaldo.Margin = new System.Windows.Forms.Padding(0);
+            this.chSaldo.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chSaldo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chSaldo.Name = "chSaldo";
+            this.chSaldo.Ripple = true;
+            this.chSaldo.Size = new System.Drawing.Size(65, 30);
+            this.chSaldo.TabIndex = 6;
+            this.chSaldo.Text = "Saldo";
+            this.chSaldo.UseVisualStyleBackColor = true;
+            // 
+            // cmdSaldos
+            // 
+            this.cmdSaldos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdSaldos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdSaldos.Location = new System.Drawing.Point(150, 573);
+            this.cmdSaldos.Name = "cmdSaldos";
+            this.cmdSaldos.Size = new System.Drawing.Size(151, 28);
+            this.cmdSaldos.TabIndex = 8;
+            this.cmdSaldos.Text = "Saldo Hacia Adelante";
+            this.cmdSaldos.UseVisualStyleBackColor = true;
+            this.cmdSaldos.Click += new System.EventHandler(this.cmdSaldos_Click);
+            // 
             // frmSincronizarAccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 668);
+            this.Controls.Add(this.cmdSaldos);
+            this.Controls.Add(this.mdSincSalidas);
+            this.Controls.Add(this.chSaldo);
             this.Controls.Add(this.chFaena);
             this.Controls.Add(this.chCompra);
             this.Controls.Add(this.lstBoletas);
@@ -275,9 +323,9 @@ namespace Programa1.Carga.Hacienda
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.MonthCalendar mDesde;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.MonthCalendar monthCalendar2;
+        private System.Windows.Forms.MonthCalendar mHasta;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.OpenFileDialog flBuscar;
         private System.Windows.Forms.ListBox lstActualizacion;
@@ -285,5 +333,8 @@ namespace Programa1.Carga.Hacienda
         private System.Windows.Forms.ListBox lstBoletas;
         private MaterialSkin.Controls.MaterialCheckBox chCompra;
         private MaterialSkin.Controls.MaterialCheckBox chFaena;
+        private System.Windows.Forms.Button mdSincSalidas;
+        private MaterialSkin.Controls.MaterialCheckBox chSaldo;
+        private System.Windows.Forms.Button cmdSaldos;
     }
 }

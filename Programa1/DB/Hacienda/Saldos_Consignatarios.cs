@@ -40,11 +40,11 @@
             if (gastos is null) { gastos = new Gastos(); }
             if (gastos.Id_SubTipoGastos != 0)
             {
-                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND (Saldo >10 OR Saldo<-10)", $"TOP 100 Id, Fecha, Plazo, Venc, Dias, NBoleta, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo, Estado" : "")}", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND (Saldo >10 OR Saldo<-10)", $"TOP 1000 Id_CompraFrigo, Fecha, Plazo, Venc, Dias, NBoleta, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo, Estado" : "")}", "NBoleta DESC, ID_Consignatarios");
             }
             else
             {
-                return Datos_Vista("(Saldo >10 OR Saldo<-10)", $"TOP 100 Id, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo" : "")}, Estado", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista("(Saldo >10 OR Saldo<-10)", $"TOP 1000 Id_CompraFrigo, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo" : "")}, Estado", "NBoleta DESC, ID_Consignatarios");
             }            
         }
         public DataTable Datos_Agr(bool conNuevo = true)
@@ -53,11 +53,11 @@
             if (gastos is null) { gastos = new Gastos(); }
             if (gastos.Id_SubTipoGastos != 0)
             {
-                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND (Saldo >10 OR Saldo<-10)", $"TOP 100 Id, Fecha, Plazo, Dias, NBoleta, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo, Estado" : "")}", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND (Saldo >10 OR Saldo<-10)", $"TOP 1000 Id, Fecha, Plazo, Dias, NBoleta, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo, Estado" : "")}", "NBoleta DESC, ID_Consignatarios");
             }
             else
             {
-                return Datos_Vista("(Saldo >10 OR Saldo<-10)", $"TOP 100 Id, Fecha, Plazo, Dias, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo" : "")}, Estado", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista("(Saldo >10 OR Saldo<-10)", $"TOP 1000 Id, Fecha, Plazo, Dias, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo" : "")}, Estado", "NBoleta DESC, ID_Consignatarios");
             }
         }
 
@@ -67,11 +67,11 @@
             if (gastos is null) { gastos = new Gastos(); }
             if (gastos.Id_SubTipoGastos != 0)
             {
-                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND (Saldo >10 OR Saldo<-10)", $"TOP 100 Id, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND (Saldo >10 OR Saldo<-10)", $"TOP 1000 Id_CompraFrigo, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
             else
             {
-                return Datos_Vista("(Saldo >10 OR Saldo<-10)", $"TOP 100 Id, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista("(Saldo >10 OR Saldo<-10)", $"TOP 1000 Id_CompraFrigo, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
         }
         public DataTable Vencimientos_Agr()
@@ -80,11 +80,11 @@
             if (gastos is null) { gastos = new Gastos(); }
             if (gastos.Id_SubTipoGastos != 0)
             {
-                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND (Saldo >10 OR Saldo<-10)", $"TOP 100 Id, Fecha, Plazo, Dias, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND (Saldo >10 OR Saldo<-10)", $"TOP 1000 Id, Fecha, Plazo, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
             else
             {
-                return Datos_Vista("(Saldo >10 OR Saldo<-10)", $"TOP 100 Id, Fecha, Plazo, Dias, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista("(Saldo >10 OR Saldo<-10)", $"TOP 1000 Id, Fecha, Plazo, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
         }
                 
