@@ -10,9 +10,9 @@ namespace Programa1.DB
         public Faena()
         {
             Tabla = "Faena";
-            Vista = "vw_Faena";            
-        }              
-        
+            Vista = "vw_Faena";
+        }
+
         public NBoletas nBoleta { get; set; } = new NBoletas();
         public DateTime Fecha { get; set; }
         public Categorias Categoria { get; set; } = new Categorias();
@@ -22,19 +22,25 @@ namespace Programa1.DB
         public Productos Producto { get; set; } = new Productos();
         public Single Recupero { get; set; }
         public Single Kilos { get; set; }
-        
+
         public void Cargar_Registro()
         {
             DataTable d = Datos_Vista("ID=" + ID);
-            nBoleta.ID =Convert.ToInt32(d.Rows[0]["NBoleta"]);
-            Fecha = Convert.ToDateTime(d.Rows[0]["Fecha"]);
-            Categoria.ID = Convert.ToInt32(d.Rows[0]["ID_Categorias"]);
-            NRomaneo = Convert.ToInt32(d.Rows[0]["NRomaneo"]);
-            Tropa = Convert.ToInt32(d.Rows[0]["Tropa"]);
-            Frigorifico.ID = Convert.ToInt32(d.Rows[0]["ID_Frigorificos"]);
-            Producto.ID = Convert.ToInt32(d.Rows[0]["ID_Productos"]);
-            Recupero = Convert.ToSingle(d.Rows[0]["Recupero"]);
-            Kilos = Convert.ToSingle(d.Rows[0]["Kilos"]);
+            if (d != null)
+            {
+                if (d.Rows.Count != 0)
+                {
+                    nBoleta.ID = Convert.ToInt32(d.Rows[0]["NBoleta"]);
+                    Fecha = Convert.ToDateTime(d.Rows[0]["Fecha"]);
+                    Categoria.ID = Convert.ToInt32(d.Rows[0]["ID_Categorias"]);
+                    NRomaneo = Convert.ToInt32(d.Rows[0]["NRomaneo"]);
+                    Tropa = Convert.ToInt32(d.Rows[0]["Tropa"]);
+                    Frigorifico.ID = Convert.ToInt32(d.Rows[0]["ID_Frigorificos"]);
+                    Producto.ID = Convert.ToInt32(d.Rows[0]["ID_Productos"]);
+                    Recupero = Convert.ToSingle(d.Rows[0]["Recupero"]);
+                    Kilos = Convert.ToSingle(d.Rows[0]["Kilos"]);
+                }
+            }
         }
 
         public void Borrar_Faena()
@@ -90,12 +96,16 @@ namespace Programa1.DB
 
             return dt;
         }
-        public DataTable Stock_DetalleFaena(DateTime f, string filtro ="")
+        public DataTable Stock_DetalleFaena(DateTime f, string filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            if (filtro.Length > 0) filtro = " AND " + filtro;
+            if (filtro.Length > 0)
+            {
+                filtro = " AND " + filtro;
+            }
+
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, Id_Categorias Cat, Nombre_Categoria Descr, Id_Frigorificos Frig, Nombre_Frigorifico Nombre" +

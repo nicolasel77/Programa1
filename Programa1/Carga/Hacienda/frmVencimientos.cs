@@ -11,7 +11,6 @@
 
         #region Columnas P1
         const int cID = 0;
-        const int cDias = 4;
         const int cKilos = 9;
         const int cCosto = 10;
         const int cTotal = 11;
@@ -22,16 +21,17 @@
         const int cIDMat = 16;
         const int cMatricula = 17;
         #endregion
+
         #region Columnas P2
+        //Id_Agregados_Frigo, Fecha, Plazo, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula
         const int aID = 0;
-        const int aDias = 3;
-        const int aImporte = 7;
-        const int aPago = 8;
-        const int aDif = 9;
-        const int aSaldo = 10;
-        const int aEstado = 11;
-        const int aIDMat = 12;
-        const int aMatricula = 13;
+        const int aImporte = 6;
+        const int aPago = 7;
+        const int aDif = 8;
+        const int aSaldo = 9;
+        const int aEstado = 10;
+        const int aIDMat = 11;
+        const int aMatricula = 12;
         #endregion
         
         public frmVencimientos()
@@ -96,7 +96,7 @@
             C1.Win.C1FlexGrid.CellStyle ca = grdAgr.Styles.Add("");
             ca.BackColor = Color.LightCyan;
 
-            grdAgr.MostrarDatos(saldos.Vencimientos_Agr(), true, false);
+            grdAgr.MostrarDatos(saldos.Vencimientos_Agr(), true, aImporte);
 
 
             double valor = 0;
@@ -130,7 +130,7 @@
             grdAgr.set_ColW(aIDMat, 0);
             grdAgr.set_ColW(aMatricula, 30);
 
-            grdAgr.ActivarCelda(1, 0);
+            grdAgr.ActivarCelda(1, grdAgr.Rows -1);
         }
 
         private void cmdActualizar_Click(object sender, System.EventArgs e)

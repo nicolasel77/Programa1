@@ -99,7 +99,7 @@ namespace Programa1.Carga.Hacienda
             this.nuCant.Size = new System.Drawing.Size(48, 26);
             this.nuCant.TabIndex = 2;
             this.nuCant.Value = new decimal(new int[] {
-            50,
+            10,
             0,
             0,
             0});
@@ -210,6 +210,7 @@ namespace Programa1.Carga.Hacienda
             this.lstBoletas.Size = new System.Drawing.Size(123, 180);
             this.lstBoletas.TabIndex = 5;
             this.lstBoletas.DoubleClick += new System.EventHandler(this.lstBoletas_DoubleClick);
+            this.lstBoletas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstBoletas_MouseUp);
             // 
             // chCompra
             // 

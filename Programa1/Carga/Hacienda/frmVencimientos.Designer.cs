@@ -33,9 +33,9 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.grd = new Grilla2.SpeedGrilla();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmdActualizar = new Programa1.Controles.cBoton();
             this.grdAgr = new Grilla2.SpeedGrilla();
             this.label2 = new System.Windows.Forms.Label();
+            this.cmdActualizar = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -64,7 +64,7 @@
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel2.Controls.Add(this.cmdActualizar);
             this.splitContainer1.Size = new System.Drawing.Size(1456, 780);
-            this.splitContainer1.SplitterDistance = 705;
+            this.splitContainer1.SplitterDistance = 730;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -85,7 +85,7 @@
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.grdAgr);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(1456, 705);
+            this.splitContainer2.Size = new System.Drawing.Size(1456, 730);
             this.splitContainer2.SplitterDistance = 815;
             this.splitContainer2.TabIndex = 1;
             // 
@@ -121,7 +121,7 @@
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(809, 671);
+            this.grd.Size = new System.Drawing.Size(809, 696);
             this.grd.TabIndex = 3;
             // 
             // label1
@@ -134,16 +134,6 @@
             this.label1.Size = new System.Drawing.Size(96, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Compras P1";
-            // 
-            // cmdActualizar
-            // 
-            this.cmdActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdActualizar.Location = new System.Drawing.Point(1301, 32);
-            this.cmdActualizar.Name = "cmdActualizar";
-            this.cmdActualizar.Size = new System.Drawing.Size(143, 27);
-            this.cmdActualizar.TabIndex = 0;
-            this.cmdActualizar.Texto = "Actualizar";
-            this.cmdActualizar.Click += new System.EventHandler(this.cmdActualizar_Click);
             // 
             // grdAgr
             // 
@@ -177,7 +167,7 @@
             this.grdAgr.Redraw = true;
             this.grdAgr.Row = 0;
             this.grdAgr.Rows = 50;
-            this.grdAgr.Size = new System.Drawing.Size(631, 671);
+            this.grdAgr.Size = new System.Drawing.Size(631, 696);
             this.grdAgr.TabIndex = 5;
             // 
             // label2
@@ -190,6 +180,16 @@
             this.label2.Size = new System.Drawing.Size(96, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Compras P2";
+            // 
+            // cmdActualizar
+            // 
+            this.cmdActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdActualizar.Location = new System.Drawing.Point(1301, 7);
+            this.cmdActualizar.Name = "cmdActualizar";
+            this.cmdActualizar.Size = new System.Drawing.Size(143, 27);
+            this.cmdActualizar.TabIndex = 0;
+            this.cmdActualizar.Texto = "Actualizar";
+            this.cmdActualizar.Click += new System.EventHandler(this.cmdActualizar_Click);
             // 
             // frmVencimientos
             // 

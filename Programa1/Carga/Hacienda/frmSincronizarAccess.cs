@@ -34,11 +34,17 @@ namespace Programa1.Carga.Hacienda
             {
                 cmdBase.Text = "";
             }
-            NBoletas nb = new NBoletas();
-            Herramientas.Herramientas h = new Herramientas.Herramientas();
-            h.Llenar_List(lstBoletas, nb.Datos_Vista("", "TOP 100 NBoleta", "NBoleta DESC"));
+            Cargar_Boletas();
 
             mDesde.SetDate(DateTime.Today.AddDays(-10));
+        }
+
+        private void Cargar_Boletas()
+        {
+            NBoletas nb = new NBoletas();
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            lstBoletas.Items.Clear();
+            h.Llenar_List(lstBoletas, nb.Datos_Vista("", "TOP 100 NBoleta", "NBoleta DESC"));
         }
 
         private void cmdSincronizar_Click(object sender, System.EventArgs e)
@@ -174,9 +180,7 @@ namespace Programa1.Carga.Hacienda
             clsAccess.Campo_ID = "ID_Agregados";
 
             acCompras = clsAccess.Datos_Vista("NBoleta=" + nb, "*");
-
-            matricula = clsAccess.Dato_Generico("NBoletas", "NBoleta=" + nb, "Matricula");
-
+                        
             hacienda.Agregados.Borrar("NBoleta=" + nb);
             hacienda.Agregados.Matricula.Cargar_Por_Nombre(matricula.ToString());
 
@@ -318,21 +322,31 @@ namespace Programa1.Carga.Hacienda
         {
             if (chSaldo.Checked == true)
             {
-                this.Cursor = Cursors.WaitCursor;
-                DB.Hacienda hacienda = new DB.Hacienda();
-
-                int nb = Convert.ToInt32(lstBoletas.Text);
-
-                DataTable dt = hacienda.compra.Datos_Vista("NBoleta>=" + nb, "ID_Consignatarios, Nombre, NBoleta", "NBoleta", "NBoleta, ID_Consignatarios, Nombre");
-                foreach (DataRow dr in dt.Rows)
+                if (lstBoletas.SelectedIndex > -1)
                 {
-                    cmdSaldos.Text = $"{dr["Nombre"]} NBoleta {dr["NBoleta"]}";
-                    Application.DoEvents();
-                    hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldosConsignatario {dr["ID_Consignatarios"]}, {dr["NBoleta"]}");
+                    this.Cursor = Cursors.WaitCursor;
+                    DB.Hacienda hacienda = new DB.Hacienda();
 
+                    int nb = Convert.ToInt32(lstBoletas.Text);
+
+                    DataTable dt = hacienda.compra.Datos_Vista("NBoleta>=" + nb, "ID_Consignatarios, Nombre, NBoleta", "NBoleta", "NBoleta, ID_Consignatarios, Nombre");
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        cmdSaldos.Text = $"{dr["Nombre"]} NBoleta {dr["NBoleta"]}";
+                        Application.DoEvents();
+                        hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldosConsignatario {dr["ID_Consignatarios"]}, {dr["NBoleta"]}");
+
+                    }
+                    this.Cursor = Cursors.Default; 
                 }
-                this.Cursor = Cursors.Default;
+            }
+        }
 
+        private void lstBoletas_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                Cargar_Boletas();
             }
         }
     }

@@ -33,15 +33,18 @@ namespace Programa1.DB
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
                 SqlDat.Fill(dt);
 
-                nBoletas.ID = nb;
-                nBoletas.Fecha = dt.Rows[0]["Fecha"] == DBNull.Value ? Convert.ToDateTime("1/1/0") : Convert.ToDateTime(dt.Rows[0]["Fecha"]);
-                nBoletas.Reparto = dt.Rows[0]["Reparto"] == DBNull.Value ? 0 : Convert.ToInt16(dt.Rows[0]["Reparto"]);
-                nBoletas.Costo = dt.Rows[0]["Costo"] == DBNull.Value ? 0 : Convert.ToSingle(dt.Rows[0]["Costo"]);
-                nBoletas.Costo_Faena = dt.Rows[0]["Costo_Faena"] == DBNull.Value ? 0 : Convert.ToSingle(dt.Rows[0]["Costo_Faena"]);
-                if (dt.Rows[0]["Directo"] == DBNull.Value) { nBoletas.Actualizar("Directo", false); }
-                nBoletas.Directo = dt.Rows[0]["Directo"] == DBNull.Value ? false : Convert.ToBoolean(dt.Rows[0]["Directo"]);
+                if (dt != null)
+                {
+                    nBoletas.ID = nb;
+                    nBoletas.Fecha = dt.Rows[0]["Fecha"] == DBNull.Value ? Convert.ToDateTime("1/1/0") : Convert.ToDateTime(dt.Rows[0]["Fecha"]);
+                    nBoletas.Reparto = dt.Rows[0]["Reparto"] == DBNull.Value ? 0 : Convert.ToInt16(dt.Rows[0]["Reparto"]);
+                    nBoletas.Costo = dt.Rows[0]["Costo"] == DBNull.Value ? 0 : Convert.ToSingle(dt.Rows[0]["Costo"]);
+                    nBoletas.Costo_Faena = dt.Rows[0]["Costo_Faena"] == DBNull.Value ? 0 : Convert.ToSingle(dt.Rows[0]["Costo_Faena"]);
+                    if (dt.Rows[0]["Directo"] == DBNull.Value) { nBoletas.Actualizar("Directo", false); }
+                    nBoletas.Directo = dt.Rows[0]["Directo"] == DBNull.Value ? false : Convert.ToBoolean(dt.Rows[0]["Directo"]);
 
-                compra.NBoleta = nBoletas;
+                    compra.NBoleta = nBoletas; 
+                }
 
             }
             catch (Exception)

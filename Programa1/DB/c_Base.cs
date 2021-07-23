@@ -158,8 +158,7 @@
 
                 var d = cmd.ExecuteNonQuery();
 
-                cnn.Close();
-                ID = Max_ID();
+                cnn.Close();                
             }
             catch (Exception e)
             {
