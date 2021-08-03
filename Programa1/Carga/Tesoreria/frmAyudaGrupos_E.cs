@@ -4,32 +4,27 @@ using System.Data;
 using System.Windows.Forms;
 namespace Programa1.Carga.Tesoreria
 {
-
-    public partial class frmAyuda_Entradas : Form
+    public partial class frmAyudaGrupos_E : Form
     {
-        string tabla = "";
-        string campo_ID = "";
-        string campo_Nombre = "";
-        private Tipos_Entradas TEntradas;
+        private Tablas Tablas = new Tablas();
         private Cajas eCajas;
+        private Herramientas.Herramientas h = new Herramientas.Herramientas();
 
-        private enum TOpcion : byte
-        {
-            eCaja = 0,
-            eTipo = 1,
-            eSubTipo = 2
-        }
-        private TOpcion Opcion;
         public string Valor = "";
+        public string tabla = "";
+        public string campo_ID = "";
+        public string campo_Nombre = "";
+        public DataTable names;
         private string Filtro_Tipo = "";
 
-        public frmAyuda_Entradas()
+        public frmAyudaGrupos_E()
         {
             InitializeComponent();
         }
 
         private void frmAyuda_Load(object sender, EventArgs e)
         {
+            Cargar();
             txtBuscar.Focus();
         }
 
@@ -46,17 +41,15 @@ namespace Programa1.Carga.Tesoreria
 
         public void Cargar_TiposEntradas(int Tipo)
         {
-            TEntradas = new Tipos_Entradas();
-            TEntradas.Id_Tipo = Tipo;
-            Opcion = TOpcion.eTipo;
+            Tablas = new Tablas();
+            Tablas.Id = Tipo;
             Cargar();
         }
         public void Cargar_SubTiposEntradas(int Tipo)
         {
-            TEntradas = new Tipos_Entradas();
-            TEntradas.Id_Tipo = Tipo;
-            TEntradas.Cargar();
-            Opcion = TOpcion.eSubTipo;
+            Tablas = new Tablas();
+            Tablas.Id = Tipo;
+            Tablas.Cargar();
 
             Cargar();
         }
@@ -65,56 +58,17 @@ namespace Programa1.Carga.Tesoreria
         {
             DataTable dt = new DataTable();
             string sf = "";
-
+            dt = Tablas.Datos_Tablas();
+            h.Llenar_List(lst, dt);
             lst.Items.Clear();
 
-            switch (Opcion)
+            if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text}%'"; }
+
+
+
+            foreach (DataRow dr in dt.Rows)
             {
-                case TOpcion.eCaja:
-                    if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text}%'"; }
-
-                    dt = eCajas.Datos(sf);
-
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        lst.Items.Add($"{dr[0]}. {dr[1]}");
-                    }
-                    break;
-                case TOpcion.eTipo:
-                    if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text}%'"; }
-
-                    dt = TEntradas.Datos(sf);
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        lst.Items.Add($"{dr[0]}. {dr[1]}");
-                    }
-                    break;
-                case TOpcion.eSubTipo:
-                    if (txtBuscar.Text.Length != 0)
-                    {
-                        if (Filtro_Tipo.Length > 0)
-                        {
-                            sf = $"{Filtro_Tipo} AND {TEntradas.grupoE.Campo_Nombre} LIKE '%{txtBuscar.Text}%'";
-                        }
-                        else
-                        {
-                            sf = $"{TEntradas.grupoE.Campo_Nombre} LIKE '%{txtBuscar.Text}%'";
-                        }
-                    }
-                    else
-                    {
-                        sf = Filtro_Tipo;
-                    }
-
-                    dt = TEntradas.SubTipos(sf);
-                    if (dt != null)
-                    {
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            lst.Items.Add($"{dr[0]}. {dr[1]}");
-                        }
-                    }
-                    break;
+                lst.Items.Add($"{dr[0]}. {dr[1]}");
             }
 
             txtBuscar.Focus();
@@ -185,22 +139,28 @@ namespace Programa1.Carga.Tesoreria
         {
             if (e.KeyChar == Convert.ToChar(13))
             {
-                Tablas tabl = new Tablas();
-                Herramientas.Herramientas h = new Herramientas.Herramientas();
-                e.Handled = true;
-                Valor = lst.Text;
-                tabl.Id = h.Codigo_Seleccionado(lst.Text);
-                tabla = tabl.Tabla;
-                campo_Nombre = tabl.Campo_Nombre;
-                campo_ID = tabl.Campo_Id;
-                this.Hide();
+                cmdAceptar.PerformClick();
             }
         }
 
         private void cmdAceptar_Click(object sender, EventArgs e)
         {
-            Valor = lst.Text;
-            this.Hide();
+            if (lst.Items.Count > 0)
+            {
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+                Tablas tab = new Tablas();
+                tab.Id = h.Codigo_Seleccionado(lst.Text);
+                tabla = tab.Tabla;
+                campo_Nombre = tab.Campo_Nombre;
+                campo_ID = tab.Campo_Id;
+
+                this.Hide();
+            }
+            else
+            {
+                cmdCancelar.PerformClick();
+            }
+
         }
 
         private void lst_DoubleClick(object sender, EventArgs e)

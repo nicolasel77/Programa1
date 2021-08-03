@@ -37,6 +37,7 @@
             this.lblCCant = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCKilos = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblSubTotal = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblIVA = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTPercepciones = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTAgregados = new System.Windows.Forms.ToolStripStatusLabel();
@@ -58,9 +59,8 @@
             this.lblCostoCarne = new System.Windows.Forms.ToolStripStatusLabel();
             this.grdBoletas = new Grilla2.SpeedGrilla();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblIVA = new System.Windows.Forms.ToolStripStatusLabel();
             this.cmdActualizar_Listado = new Programa1.Controles.cBoton();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -205,6 +205,12 @@
             this.lblSubTotal.Name = "lblSubTotal";
             this.lblSubTotal.Size = new System.Drawing.Size(55, 23);
             this.lblSubTotal.Text = "Sub Total";
+            // 
+            // lblIVA
+            // 
+            this.lblIVA.Name = "lblIVA";
+            this.lblIVA.Size = new System.Drawing.Size(24, 23);
+            this.lblIVA.Text = "IVA";
             // 
             // lblTPercepciones
             // 
@@ -511,6 +517,16 @@
             this.splitContainer5.SplitterDistance = 1201;
             this.splitContainer5.TabIndex = 1;
             // 
+            // cmdActualizar_Listado
+            // 
+            this.cmdActualizar_Listado.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cmdActualizar_Listado.Location = new System.Drawing.Point(0, 626);
+            this.cmdActualizar_Listado.Name = "cmdActualizar_Listado";
+            this.cmdActualizar_Listado.Size = new System.Drawing.Size(378, 40);
+            this.cmdActualizar_Listado.TabIndex = 3;
+            this.cmdActualizar_Listado.Texto = "Actualizar";
+            this.cmdActualizar_Listado.Click += new System.EventHandler(this.cmdActualizar_Listado_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -522,22 +538,6 @@
             this.label1.Size = new System.Drawing.Size(58, 18);
             this.label1.TabIndex = 2;
             this.label1.Text = "Boletas";
-            // 
-            // lblIVA
-            // 
-            this.lblIVA.Name = "lblIVA";
-            this.lblIVA.Size = new System.Drawing.Size(24, 23);
-            this.lblIVA.Text = "IVA";
-            // 
-            // cmdActualizar_Listado
-            // 
-            this.cmdActualizar_Listado.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cmdActualizar_Listado.Location = new System.Drawing.Point(0, 626);
-            this.cmdActualizar_Listado.Name = "cmdActualizar_Listado";
-            this.cmdActualizar_Listado.Size = new System.Drawing.Size(378, 40);
-            this.cmdActualizar_Listado.TabIndex = 3;
-            this.cmdActualizar_Listado.Texto = "Actualizar";
-            this.cmdActualizar_Listado.Click += new System.EventHandler(this.cmdActualizar_Listado_Click);
             // 
             // frmComprasFaena
             // 

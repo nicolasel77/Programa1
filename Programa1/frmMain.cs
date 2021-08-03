@@ -2063,5 +2063,10 @@
                 }
             }
         }
+
+        private void resumenEntradasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

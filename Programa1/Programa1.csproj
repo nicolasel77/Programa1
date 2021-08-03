@@ -407,6 +407,12 @@
     <Compile Include="Carga\Sebero\frmResumenSebero.Designer.cs">
       <DependentUpon>frmResumenSebero.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmAyudaGrupos_E.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmAyudaGrupos_E.Designer.cs">
+      <DependentUpon>frmAyudaGrupos_E.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmAyuda_Entradas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -588,6 +594,7 @@
     <Compile Include="DB\Hacienda\NBoletas.cs" />
     <Compile Include="DB\Hacienda\Recupero.cs" />
     <Compile Include="DB\Hacienda\Saldos_Consignatarios.cs" />
+    <Compile Include="DB\Hacienda\Tablas.cs" />
     <Compile Include="DB\Hacienda\TipoAgregados.cs" />
     <Compile Include="DB\Proveedores\Ajustes.cs" />
     <Compile Include="DB\Proveedores\CCtes_Proveedores.cs" />

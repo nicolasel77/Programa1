@@ -75,7 +75,7 @@
                 else
                 {
                     detalle_Entregas.Agregar();
-                    grdEntregas.set_Texto(f, d_Id, detalle_Entregas.Id);
+                    grdEntregas.set_Texto(f, d_Id, detalle_Entregas.MaxId());
                     grdEntregas.set_Texto(f, d_IDE, detalle_Entregas.ID_Entradas);
 
                     grdEntregas.AgregarFila();

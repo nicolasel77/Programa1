@@ -103,7 +103,7 @@
         public new void Borrar()
         {
             Borrar("Fecha_Entregas", "ID_Entradas=" + ID);
-            Borrar();            
+            Borrar("CD_Entradas", "ID= " +ID);
         }
         #endregion 
 

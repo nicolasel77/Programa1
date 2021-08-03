@@ -174,6 +174,7 @@
                     break;
 
                 case 1: // Nombre
+
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -189,49 +190,57 @@
                     }
                     break;
                 case 2: // Tabla
-                    if (i == 0)
-                    {
-                        Mensaje("Debe ingresar el Id primero");
-                        grdGrupo.ActivarCelda(f, 0);
-                    }
-                    else
-                    {
-                        grupo_e.Tabla = a.ToString();
-                        grdGrupo.set_Texto(f, c, a);
-                        grupo_e.Actualizar();
-                        if (grdGrupo.EsUltimaFila() == true) { grdGrupo.AgregarFila(); }
-                        grdGrupo.ActivarCelda(f, 3);
-                    }
+                    Grupo_eAyuda();
                     break;
-                case 3: // Campo Id
-                    if (i == 0)
-                    {
-                        Mensaje("Debe ingresar el Id primero");
-                        grdGrupo.ActivarCelda(f, 0);
-                    }
-                    else
-                    {
-                        grupo_e.Id = i;
-                        grupo_e.Campo_Id = a.ToString();
-                        grdGrupo.set_Texto(f, c, a);
-                        grupo_e.Actualizar();
-                        grdGrupo.ActivarCelda(f, 4);
-                    }
+                case 3: // Tabla
+                    Grupo_eAyuda();
                     break;
-                case 4: // Campo Nombre
-                    if (i == 0)
-                    {
-                        Mensaje("Debe ingresar el Id primero");
-                        grdGrupo.ActivarCelda(f, 0);
-                    }
-                    else
-                    {
-                        grupo_e.Id = i;
-                        grupo_e.Campo_Nombre = a.ToString();
-                        grdGrupo.set_Texto(f, c, a);
-                        grupo_e.Actualizar();
-                        grdGrupo.ActivarCelda(f + 1, 0);
-                    }
+                case 4: // Tabla
+                    Grupo_eAyuda();
+
+                    //    if (i == 0)
+                    //    {
+                    //        Mensaje("Debe ingresar el Id primero");
+                    //        grdGrupo.ActivarCelda(f, 0);
+                    //    }
+                    //    else
+                    //    {
+                    //        grupo_e.Tabla = a.ToString();
+                    //        grdGrupo.set_Texto(f, c, a);
+                    //        grupo_e.Actualizar();
+                    //        if (grdGrupo.EsUltimaFila() == true) { grdGrupo.AgregarFila(); }
+                    //        grdGrupo.ActivarCelda(f, 3);
+                    //    }
+                    //    break;
+                    //case 3: // Campo Id
+                    //    if (i == 0)
+                    //    {
+                    //        Mensaje("Debe ingresar el Id primero");
+                    //        grdGrupo.ActivarCelda(f, 0);
+                    //    }
+                    //    else
+                    //    {
+                    //        grupo_e.Id = i;
+                    //        grupo_e.Campo_Id = a.ToString();
+                    //        grdGrupo.set_Texto(f, c, a);
+                    //        grupo_e.Actualizar();
+                    //        grdGrupo.ActivarCelda(f, 4);
+                    //    }
+                    //    break;
+                    //case 4: // Campo Nombre
+                    //    if (i == 0)
+                    //    {
+                    //        Mensaje("Debe ingresar el Id primero");
+                    //        grdGrupo.ActivarCelda(f, 0);
+                    //    }
+                    //    else
+                    //    {
+                    //        grupo_e.Id = i;
+                    //        grupo_e.Campo_Nombre = a.ToString();
+                    //        grdGrupo.set_Texto(f, c, a);
+                    //        grupo_e.Actualizar();
+                    //        grdGrupo.ActivarCelda(f + 1, 0);
+                    //    }
                     break;
             }
         }
@@ -273,11 +282,44 @@
                         grupo_e.Borrar();
                         grdGrupo.BorrarFila(grdGrupo.Row);
                     }
-
+                }
+            }
+            if (e == 112)
+            {
+                if (grdGrupo.Col > grdGrupo.get_ColIndex("Nombre"))
+                {
+                    Grupo_eAyuda();
                 }
             }
         }
 
+        private void Grupo_eAyuda()
+        {
+            frmAyudaGrupos_E fayuda = new frmAyudaGrupos_E();
+            fayuda.ShowDialog();
+
+            if (fayuda.tabla != "")
+            {
+                string tabla = fayuda.tabla;
+                string campo_ID = fayuda.campo_ID;
+                string campo_Nombre = fayuda.campo_Nombre;
+                grdGrupo.set_Texto(grdGrupo.Row, grdGrupo.get_ColIndex("Tabla"), tabla);
+                grdGrupo.set_Texto(grdGrupo.Row, grdGrupo.get_ColIndex("campo_ID"), campo_ID);
+                grdGrupo.set_Texto(grdGrupo.Row, grdGrupo.get_ColIndex("campo_Nombre"), campo_Nombre);
+                grupo_e.Id = Convert.ToInt32(grdGrupo.get_Texto(grdGrupo.Row, grdGrupo.get_ColIndex("Id")));
+                grupo_e.Tabla = tabla;
+                grupo_e.Campo_Id = campo_ID;
+                grupo_e.Campo_Nombre = campo_Nombre;
+                if (Convert.ToInt32(grdGrupo.get_Texto(grdGrupo.Row, grdGrupo.get_ColIndex("Id"))) != 0)
+                {
+                    grupo_e.Actualizar();
+                }
+                else
+                {
+                    grupo_e.Agregar();
+                }
+            }
+        }
         #endregion
 
 

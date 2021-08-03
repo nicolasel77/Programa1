@@ -69,6 +69,7 @@
             this.cmdCerrar.AutoSize = true;
             this.cmdCerrar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.cmdCerrar.Depth = 0;
+            this.cmdCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cmdCerrar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmdCerrar.Location = new System.Drawing.Point(0, 0);
             this.cmdCerrar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
@@ -133,6 +134,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cmdCerrar;
             this.ClientSize = new System.Drawing.Size(294, 277);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblTotal);

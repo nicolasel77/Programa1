@@ -381,7 +381,7 @@ namespace Programa1.Carga.Tesoreria
                 cEntradas.ID = Convert.ToInt32(grdEntradas.get_Texto(f, e_Id));
                 cEntradas.Fecha = mntFecha.SelectionStart.Date;
 
-                if (cEntradas.Fecha_Cerrada()==false)
+                if (cEntradas.Fecha_Cerrada() == false)
                 {
                     switch (c)
                     {
@@ -392,7 +392,10 @@ namespace Programa1.Carga.Tesoreria
                                 grdEntradas.set_Texto(f, c, a);
                                 grdEntradas.set_Texto(f, c + 1, cEntradas.caja.Nombre);
                                 grdEntradas.ActivarCelda(f, e_Tipo);
-
+                                if (cEntradas.ID > 0)
+                                {
+                                    cEntradas.Actualizar();
+                                }
                             }
                             break;
                         case e_Tipo:
@@ -530,7 +533,7 @@ namespace Programa1.Carga.Tesoreria
                                 grdEntradas.ActivarCelda(f + 1, e_Caja);
                             }
                             break;
-                    } 
+                    }
                 }
             }
             else
@@ -551,6 +554,7 @@ namespace Programa1.Carga.Tesoreria
             cEntradas.caja.ID = Convert.ToInt32(grdEntradas.get_Texto(Fila, e_Caja));
             cEntradas.TE.Id_Tipo = Convert.ToInt32(grdEntradas.get_Texto(Fila, e_Tipo));
             cEntradas.Descripcion = grdEntradas.get_Texto(Fila, e_Descripcion).ToString();
+            cEntradas.Importe = Convert.ToDouble(grdEntradas.get_Texto(Fila, e_Importe));
         }
 
         private void grdEntradas_KeyUp(object sender, short e)
@@ -564,6 +568,7 @@ namespace Programa1.Carga.Tesoreria
                     {
                         if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                         {
+
                             cEntradas.Borrar();
                             if (grdEntradas.EsUltimaFila() == true)
                             {
@@ -574,8 +579,9 @@ namespace Programa1.Carga.Tesoreria
                             {
                                 grdEntradas.BorrarFila();
                             }
+                            Cargar_FilaEntradas(Convert.ToByte(grdEntradas.Row));
                             Totales();
-                        } 
+                        }
                     }
                     else
                     {
@@ -884,7 +890,7 @@ namespace Programa1.Carga.Tesoreria
                                 Cargar_FilaSalida(fila);
                             }
                             Totales();
-                        } 
+                        }
                     }
                     else
                     {

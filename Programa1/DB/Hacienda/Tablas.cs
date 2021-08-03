@@ -6,22 +6,24 @@
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    public class Grupos_Entradas
+    public class Tablas
     {
-        public Grupos_Entradas()
+        public Tablas()
         {
         }
         private int vId;
 
         [Required]
         [Key]
-        public int Id { 
-            get { return vId; } 
-            set { 
-                vId = value; 
-                Cargar(); } 
+        public int Id
+        {
+            get { return vId; }
+            set
+            {
+                vId = value;
+                Cargar();
+            }
         }
-
 
         [MaxLength(20, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
@@ -34,18 +36,18 @@
         /// Campo a buscar.
         /// </summary>
         public string Campo_Id { get; set; }
-        public string Campo_Nombre { get; set; }        
+        public string Campo_Nombre { get; set; }
 
         public void Cargar()
         {
             DataTable dt = Datos("Id=" + Id);
             if (dt != null & dt.Rows.Count != 0)
             {
-                Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
                 Tabla = Convert.ToString(dt.Rows[0]["Tabla"]);
                 Campo_Id = Convert.ToString(dt.Rows[0]["Campo_Id"]);
-                Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]); 
+                Campo_Nombre = Convert.ToString(dt.Rows[0]["Campo_Nombre"]);
             }
+
         }
 
         public DataTable Datos(string filtro = "")
@@ -57,7 +59,30 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Grupos_Entradas" + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM Tablas" + filtro, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        public DataTable Datos_Tablas(string filtro = "")
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("SELECT Id, Tabla FROM Tablas" + filtro, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -78,7 +103,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"UPDATE Grupos_Entradas SET Nombre='{Nombre}', " +
+                SqlCommand command = new SqlCommand($"UPDATE Tablas SET Nombre='{Nombre}', " +
                     $"Tabla='{Tabla}', Campo_ID='{Campo_Id}', Campo_Nombre='{Campo_Nombre}' WHERE Id={Id}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -100,7 +125,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Grupos_Entradas (Id, Nombre, Tabla, Campo_ID, Campo_Nombre)" +
+                SqlCommand command = new SqlCommand($"INSERT INTO Tablas (Id, Nombre, Tabla, Campo_ID, Campo_Nombre)" +
                     $" VALUES({Id}, '{Nombre}', '{Tabla}', '{Campo_Id}', '{Campo_Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -122,7 +147,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand(string.Format("DELETE FROM Grupos_Entradas WHERE Id={0}", Id), sql);
+                SqlCommand command = new SqlCommand(string.Format("DELETE FROM Tablas WHERE Id={0}", Id), sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -146,7 +171,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand("SELECT Nombre FROM Grupos_Entradas WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("SELECT Nombre FROM Tablas WHERE Id=" + Id, sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;
