@@ -23,6 +23,7 @@ namespace Programa1.Carga.Tesoreria
             Detalle = 4
         }
         private t_Repetir o_Repetir;
+        private DateTime fdd;
         /// <summary>
         /// Caja Diaria
         /// </summary>
@@ -69,7 +70,6 @@ namespace Programa1.Carga.Tesoreria
         /// </summary>
         private Gastos cGastos = new Gastos();
         private Detalle_Gastos dg = new Detalle_Gastos();
-
         #region " FORM "
         public frmCaja_Diaria()
         {
@@ -431,9 +431,11 @@ namespace Programa1.Carga.Tesoreria
                                         frmCargarEntregas fr = new frmCargarEntregas();
                                         fr.lblSuc.Text = s;
                                         fr.Detalle_Entregas.ID_Entradas = cEntradas.ID;
+                                        if (fdd > Convert.ToDateTime("1/1/1910")) { fr.fdd = fdd; }
                                         fr.Cargar();
                                         fr.ShowDialog();
                                         grdEntradas.Focus();
+                                        if (fr.fdd > Convert.ToDateTime("1/1/1910")) { fdd = fr.fdd; }
                                         cEntradas.Importe = fr.Detalle_Entregas.Total_IDEntradas(cEntradas.ID);
                                         cEntradas.Actualizar();
 
@@ -450,6 +452,7 @@ namespace Programa1.Carga.Tesoreria
                                         grdEntradas.set_Texto(f + 1, e_Tipo + 1, grdEntradas.get_Texto(f, e_Tipo + 1));
 
                                         grdEntradas.ActivarCelda(f + 1, e_Subtipo);
+                                        Totales();
                                     }
                                     else
                                     {

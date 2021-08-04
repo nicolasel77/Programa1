@@ -28,8 +28,7 @@
         public DateTime Fecha { get; set; }
 
         public Double Importe { get; set; }
-
-
+        
         public DataTable Datos(String filtro = "")
         {
             var dt = new DataTable("Datos");
