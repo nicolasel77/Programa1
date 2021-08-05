@@ -137,6 +137,39 @@ namespace Programa1.Carga.Hacienda
                 this.Cursor = Cursors.Default;
             }
         }
+        private void Cargar_Boleta(int nb)
+        {
+            DB.Hacienda hacienda = new DB.Hacienda();
+
+            c_Base_Access clsAccess = new c_Base_Access("NBoletas", "NBoletas");
+            clsAccess.Campo_ID = "NBoleta";
+            clsAccess.Base_Access = cmdBase.Text;
+
+            hacienda.Cargar(nb);
+            DataTable dtBoleta = clsAccess.Datos_Vista("NBoleta=" + nb, "*");
+            if (dtBoleta.Rows.Count != 0)
+            {
+                if (hacienda.nBoletas.ID == 0)
+                {
+                    //lstActualizacion.Items.Add($"{n}. Agr {nb}");
+
+                    hacienda.nBoletas.Agregar_NoID("NBoleta", nb);
+
+                }
+
+                if (hacienda.nBoletas.Reparto != Convert.ToInt32(dtBoleta.Rows[0]["Reparto"]))
+                {
+                    hacienda.nBoletas.Actualizar("Reparto", Convert.ToInt32(dtBoleta.Rows[0]["Reparto"]));
+                    //lstActualizacion.Items.Add($"{n}. Act Repaprto {nb}");
+                }
+                if (hacienda.nBoletas.Directo != !Convert.ToBoolean(dtBoleta.Rows[0]["Mercado"]))
+                {
+                    hacienda.nBoletas.Actualizar("Directo", !Convert.ToBoolean(dtBoleta.Rows[0]["Mercado"]));
+                    //lstActualizacion.Items.Add($"{n}. Act Directo {nb}");
+                } 
+            }
+        }
+
         private void Cargar_CompraYAgregados(int nb)
         {
             DB.Hacienda hacienda = new DB.Hacienda();
@@ -295,13 +328,14 @@ namespace Programa1.Carga.Hacienda
             if (lstBoletas.SelectedIndex > -1)
             {
                 int nb = Convert.ToInt32(lstBoletas.Text);
+                if (chBoleta.Checked == true) { Cargar_Boleta(nb); }
                 if (chCompra.Checked == true) { Cargar_CompraYAgregados(nb); }
                 if (chFaena.Checked == true) { Cargar_Faena(nb); }
                 if (chSaldo.Checked == true)
                 {
                     DB.Hacienda hacienda = new DB.Hacienda();
-
-                    DataTable dt = hacienda.compra.Datos_Vista("NBoleta=" + nb);
+                    
+                    DataTable dt = hacienda.compra.Consignatarios_En_Boleta(nb);
                     
                     foreach (DataRow dr in dt.Rows)
                     {
@@ -312,6 +346,7 @@ namespace Programa1.Carga.Hacienda
             this.Cursor = Cursors.Default;
 
         }
+
 
         private void mdSincSalidas_Click(object sender, EventArgs e)
         {
@@ -347,6 +382,39 @@ namespace Programa1.Carga.Hacienda
             if (e.Button == MouseButtons.Middle)
             {
                 Cargar_Boletas();
+            }
+        }
+
+        private void cmdAdelante_Click(object sender, EventArgs e)
+        {
+            if (lstBoletas.SelectedIndex > -1)
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                DB.Hacienda hacienda = new DB.Hacienda();
+
+                for (int i = lstBoletas.SelectedIndex; i >= 0; i--)
+                {
+                    int nb = Convert.ToInt32(lstBoletas.Items[i]);
+                    cmdAdelante.Text = nb.ToString();
+                    Application.DoEvents();
+
+                    if (chBoleta.Checked == true) { Cargar_Boleta(nb); }
+                    if (chCompra.Checked == true) { Cargar_CompraYAgregados(nb); }
+                    if (chFaena.Checked == true) { Cargar_Faena(nb); }
+                    if (chSaldo.Checked == true)
+                    {
+
+                        DataTable dt = hacienda.compra.Datos_Vista("NBoleta=" + nb);
+
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldosConsignatario {dr["ID_Consignatarios"]}, {nb}");
+                        }
+                    }
+                }
+                cmdAdelante.Text = "Listo!";
+                this.Cursor = Cursors.Default;
             }
         }
     }

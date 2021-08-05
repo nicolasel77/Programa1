@@ -125,7 +125,7 @@
 
         private void GrdRetiros_CambioFila(short Fila)
         {
-            retiros.Empleado.Id = Convert.ToInt32(grdRetiros.get_Texto(Fila, c_IdEmp));
+            retiros.Empleado.ID = Convert.ToInt32(grdRetiros.get_Texto(Fila, c_IdEmp));
             retiros.Sucursal.ID = Convert.ToInt32(grdRetiros.get_Texto(Fila, c_IdSuc));
             retiros.Fecha = v_Mes;
             sueldos.Empleado = retiros.Empleado;
@@ -134,7 +134,7 @@
         }
         private void GrdRetiros_Editado(short f, short c, object a)
         {
-            if (Convert.ToInt32(grdRetiros.get_Texto(f, c_IdEmp)) != retiros.Empleado.Id) { retiros.Empleado.Id = Convert.ToInt32(grdRetiros.get_Texto(f, c_IdEmp)); }
+            if (Convert.ToInt32(grdRetiros.get_Texto(f, c_IdEmp)) != retiros.Empleado.ID) { retiros.Empleado.ID = Convert.ToInt32(grdRetiros.get_Texto(f, c_IdEmp)); }
 
             if (c == c_IdSuc)
             {

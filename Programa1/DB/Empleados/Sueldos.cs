@@ -9,33 +9,24 @@
     {
         public Sueldos()
         {
+
         }
 
-        public Sueldos(int id, DateTime fecha, Empleados prod, TipoSueldo tipo, Single sueldo)
-        {
-            Id = id;
-            Fecha = fecha;
-            Empleado = prod;
-            Tipo = tipo;
-            Sueldo = sueldo;
-        }
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public Empleados Empleado { get; set; } = new Empleados();
         public TipoSueldo Tipo { get; set; } = new TipoSueldo();
-        public Single Sueldo { get; set; }
+        public float Sueldo { get; set; }
 
-        public Single Buscar()
+        public float Buscar()
         {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-
+            SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object d;
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Sueldo FROM Sueldos  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Empleados={Empleado.Id} AND ID_Tipo={Tipo.ID} ORDER BY Fecha DESC", conexionSql);
+                    $" AND Id_Empleados={Empleado.ID} AND ID_Tipo={Tipo.ID} ORDER BY Fecha DESC", conexionSql);
 
                 conexionSql.Open();
 
@@ -51,6 +42,7 @@
             Sueldo = Convert.ToSingle(d);
             return Sueldo;
         }
+
 
         public DataTable Datos(string filtro = "")
         {
@@ -86,7 +78,7 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"DELETE FROM  Sueldos WHERE Fecha='{Fecha.ToString("MM/dd/yyy")}' AND Id_Tipo={Tipo.ID} AND Id_Empleados={Empleado.Id}", sql);
+                    new SqlCommand($"DELETE FROM  Sueldos WHERE Fecha='{Fecha:MM/dd/yyy}' AND Id_Tipo={Tipo.ID} AND Id_Empleados={Empleado.ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -94,10 +86,10 @@
                 var d = command.ExecuteNonQuery();
 
                 command.CommandText = $"INSERT INTO Sueldos (Fecha, Id_Empleados, Id_Tipo, Sueldo) VALUES(" +
-                    $"'{Fecha.ToString("MM/dd/yyy")}', {Empleado.Id}, {Tipo.ID}, {Sueldo.ToString().Replace(",", ".")})";
+                    $"'{Fecha:MM/dd/yyy}', {Empleado.ID}, {Tipo.ID}, {Sueldo.ToString().Replace(",", ".")})";
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
-                
+
 
                 d = command.ExecuteNonQuery();
 
@@ -117,7 +109,7 @@
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO Sueldos (Fecha, Id_Tipo, Id_Empleados, Sueldo) " +
-                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Tipo.ID}, {Empleado.Id}, {Sueldo.ToString().Replace(",", ".")} )", sql);
+                    $"VALUES('{Fecha:MM/dd/yyy}', {Tipo.ID}, {Empleado.ID}, {Sueldo.ToString().Replace(",", ".")} )", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -146,13 +138,13 @@
                 if (Id == 0)
                 {
                     command.CommandText = $"DELETE FROM Sueldos WHERE " +
-                        $"Fecha='{Fecha.ToString("MM/dd/yyy")}'" +
+                        $"Fecha='{Fecha:MM/dd/yyy}'" +
                         $" AND Id_Tipo={Tipo.ID}" +
-                        $" AND Id_Empleados={Empleado.Id}";
+                        $" AND Id_Empleados={Empleado.ID}";
                 }
 
                 var d = command.ExecuteNonQuery();
-                
+
                 Id = 0;
 
                 sql.Close();

@@ -13,7 +13,7 @@
         /// Grupo_Gastos
         /// </summary>
         public Grupo_Gastos grupoS = new Grupo_Gastos();
-
+        
         public Tipo_Gastos()
         {
         }        
@@ -40,6 +40,7 @@
         public bool EsHacienda { get { return Id_Tipo == 12; } }
         public bool EsAgregados { get { return Id_Tipo == 22; } }
         public bool EsPagoProveedor { get { return Id_Tipo == 13; } }
+        public bool EsEmpleados { get { return Id_Tipo == 16; } }
 
         public void Cargar()
         {

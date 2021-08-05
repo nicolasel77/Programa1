@@ -49,6 +49,8 @@ namespace Programa1.Carga.Hacienda
             this.mdSincSalidas = new System.Windows.Forms.Button();
             this.chSaldo = new MaterialSkin.Controls.MaterialCheckBox();
             this.cmdSaldos = new System.Windows.Forms.Button();
+            this.chBoleta = new MaterialSkin.Controls.MaterialCheckBox();
+            this.cmdAdelante = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nuCant)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -217,7 +219,7 @@ namespace Programa1.Carga.Hacienda
             this.chCompra.AutoSize = true;
             this.chCompra.Depth = 0;
             this.chCompra.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chCompra.Location = new System.Drawing.Point(142, 480);
+            this.chCompra.Location = new System.Drawing.Point(142, 515);
             this.chCompra.Margin = new System.Windows.Forms.Padding(0);
             this.chCompra.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chCompra.MouseState = MaterialSkin.MouseState.HOVER;
@@ -233,7 +235,7 @@ namespace Programa1.Carga.Hacienda
             this.chFaena.AutoSize = true;
             this.chFaena.Depth = 0;
             this.chFaena.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chFaena.Location = new System.Drawing.Point(142, 510);
+            this.chFaena.Location = new System.Drawing.Point(142, 545);
             this.chFaena.Margin = new System.Windows.Forms.Padding(0);
             this.chFaena.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chFaena.MouseState = MaterialSkin.MouseState.HOVER;
@@ -262,7 +264,7 @@ namespace Programa1.Carga.Hacienda
             this.chSaldo.AutoSize = true;
             this.chSaldo.Depth = 0;
             this.chSaldo.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chSaldo.Location = new System.Drawing.Point(142, 540);
+            this.chSaldo.Location = new System.Drawing.Point(142, 575);
             this.chSaldo.Margin = new System.Windows.Forms.Padding(0);
             this.chSaldo.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chSaldo.MouseState = MaterialSkin.MouseState.HOVER;
@@ -278,7 +280,7 @@ namespace Programa1.Carga.Hacienda
             this.cmdSaldos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdSaldos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdSaldos.Location = new System.Drawing.Point(150, 573);
+            this.cmdSaldos.Location = new System.Drawing.Point(145, 642);
             this.cmdSaldos.Name = "cmdSaldos";
             this.cmdSaldos.Size = new System.Drawing.Size(151, 28);
             this.cmdSaldos.TabIndex = 8;
@@ -286,15 +288,46 @@ namespace Programa1.Carga.Hacienda
             this.cmdSaldos.UseVisualStyleBackColor = true;
             this.cmdSaldos.Click += new System.EventHandler(this.cmdSaldos_Click);
             // 
+            // chBoleta
+            // 
+            this.chBoleta.AutoSize = true;
+            this.chBoleta.Depth = 0;
+            this.chBoleta.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chBoleta.Location = new System.Drawing.Point(142, 480);
+            this.chBoleta.Margin = new System.Windows.Forms.Padding(0);
+            this.chBoleta.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chBoleta.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chBoleta.Name = "chBoleta";
+            this.chBoleta.Ripple = true;
+            this.chBoleta.Size = new System.Drawing.Size(69, 30);
+            this.chBoleta.TabIndex = 6;
+            this.chBoleta.Text = "Boleta";
+            this.chBoleta.UseVisualStyleBackColor = true;
+            // 
+            // cmdAdelante
+            // 
+            this.cmdAdelante.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdAdelante.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdAdelante.Location = new System.Drawing.Point(145, 608);
+            this.cmdAdelante.Name = "cmdAdelante";
+            this.cmdAdelante.Size = new System.Drawing.Size(151, 28);
+            this.cmdAdelante.TabIndex = 8;
+            this.cmdAdelante.Text = "Hacia Adelante";
+            this.cmdAdelante.UseVisualStyleBackColor = true;
+            this.cmdAdelante.Click += new System.EventHandler(this.cmdAdelante_Click);
+            // 
             // frmSincronizarAccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 668);
+            this.Controls.Add(this.cmdAdelante);
             this.Controls.Add(this.cmdSaldos);
             this.Controls.Add(this.mdSincSalidas);
             this.Controls.Add(this.chSaldo);
             this.Controls.Add(this.chFaena);
+            this.Controls.Add(this.chBoleta);
             this.Controls.Add(this.chCompra);
             this.Controls.Add(this.lstBoletas);
             this.Controls.Add(this.lstActualizacion);
@@ -337,5 +370,7 @@ namespace Programa1.Carga.Hacienda
         private System.Windows.Forms.Button mdSincSalidas;
         private MaterialSkin.Controls.MaterialCheckBox chSaldo;
         private System.Windows.Forms.Button cmdSaldos;
+        private MaterialSkin.Controls.MaterialCheckBox chBoleta;
+        private System.Windows.Forms.Button cmdAdelante;
     }
 }

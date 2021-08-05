@@ -35,6 +35,7 @@ namespace Programa1.Carga.Hacienda
             this.grd = new Grilla2.SpeedGrilla();
             this.cmdSalir = new Programa1.Controles.cBoton();
             this.cmdAceptar = new Programa1.Controles.cBoton();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblConsignatario
@@ -52,7 +53,7 @@ namespace Programa1.Carga.Hacienda
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.BackColor = System.Drawing.Color.Gainsboro;
             this.label1.Location = new System.Drawing.Point(13, 28);
@@ -65,8 +66,8 @@ namespace Programa1.Carga.Hacienda
             // 
             this.grd.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
             this.grd.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.grd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grd.AutoResize = false;
             this.grd.bColor = System.Drawing.SystemColors.Window;
@@ -118,11 +119,22 @@ namespace Programa1.Carga.Hacienda
             this.cmdAceptar.Texto = "Guardar";
             this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 513);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(144, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Tecla + copia el valor actual.";
+            // 
             // frmPagar_Agregados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1022, 538);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdAceptar);
             this.Controls.Add(this.cmdSalir);
             this.Controls.Add(this.grd);
@@ -145,5 +157,6 @@ namespace Programa1.Carga.Hacienda
         private Grilla2.SpeedGrilla grd;
         private Controles.cBoton cmdSalir;
         private Controles.cBoton cmdAceptar;
+        private System.Windows.Forms.Label label2;
     }
 }

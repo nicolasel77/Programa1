@@ -126,6 +126,24 @@
                     a_Rendir.Borrar_Salida();
                 }
 
+                if (TG.EsHacienda == true)
+                {
+                    Compra_Hacienda c = new Compra_Hacienda();
+                    c.Consignatario.ID = Id_SubTipoGastos;
+                    int n = Id_DetalleGastos;
+                    n = Convert.ToInt32( c.Dato("ID_CompraFrigo=" + n, "TOP 1 NBoleta", ""));
+
+                    c.Actualizar_Saldo();
+                }
+                if (TG.EsAgregados == true)
+                {
+                    Agregados_Hacienda c = new Agregados_Hacienda();
+                    c.Consignatario.ID = Id_SubTipoGastos;
+                    int n = Id_DetalleGastos;
+                    n = Convert.ToInt32(c.Dato("ID_Agregados_Frigo=" + n, "TOP 1 NBoleta", ""));
+
+                    c.Actualizar_Saldo();
+                }
                 ID = 0;
 
                 sql.Close();
