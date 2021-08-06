@@ -10,7 +10,7 @@ namespace Programa1.Carga.Hacienda
 {
     public partial class frmSincronizarAccess : Form
     {
-        Datos_Genericos datos = new Datos_Genericos();
+        readonly Datos_Genericos datos = new Datos_Genericos();
         public frmSincronizarAccess()
         {
             InitializeComponent();
@@ -41,10 +41,15 @@ namespace Programa1.Carga.Hacienda
 
         private void Cargar_Boletas()
         {
-            NBoletas nb = new NBoletas();
+
             Herramientas.Herramientas h = new Herramientas.Herramientas();
             lstBoletas.Items.Clear();
-            h.Llenar_List(lstBoletas, nb.Datos_Vista("", "TOP 100 NBoleta", "NBoleta DESC"));
+
+            c_Base_Access clsAccess = new c_Base_Access("NBoletas", "NBoletas");
+            clsAccess.Campo_ID = "NBoleta";
+            clsAccess.Base_Access = cmdBase.Text;
+
+            h.Llenar_List(lstBoletas, clsAccess.Datos_Vista("", "TOP 100 NBoleta", "NBoleta DESC"));
         }
 
         private void cmdSincronizar_Click(object sender, System.EventArgs e)
@@ -137,45 +142,55 @@ namespace Programa1.Carga.Hacienda
                 this.Cursor = Cursors.Default;
             }
         }
+
         private void Cargar_Boleta(int nb)
         {
-            DB.Hacienda hacienda = new DB.Hacienda();
-
             c_Base_Access clsAccess = new c_Base_Access("NBoletas", "NBoletas");
             clsAccess.Campo_ID = "NBoleta";
             clsAccess.Base_Access = cmdBase.Text;
 
-            hacienda.Cargar(nb);
-            DataTable dtBoleta = clsAccess.Datos_Vista("NBoleta=" + nb, "*");
-            if (dtBoleta.Rows.Count != 0)
+            DataTable dtBoleta_Access = clsAccess.Datos_Vista("NBoleta=" + nb);
+
+            DB.Hacienda hacienda = new DB.Hacienda();
+            hacienda.nBoletas.ID = nb;
+            hacienda.nBoletas.Borrar();
+
+            if (dtBoleta_Access != null)
             {
-                if (hacienda.nBoletas.ID == 0)
-                {
-                    //lstActualizacion.Items.Add($"{n}. Agr {nb}");
+                hacienda.nBoletas.ID = nb;
 
-                    hacienda.nBoletas.Agregar_NoID("NBoleta", nb);
+                hacienda.nBoletas.Reparto = Convert.ToInt32(dtBoleta_Access.Rows[0]["Reparto"]);
+                hacienda.nBoletas.Directo = !Convert.ToBoolean(dtBoleta_Access.Rows[0]["Mercado"]);
+                hacienda.nBoletas.Costo = Convert.ToSingle(dtBoleta_Access.Rows[0]["Costo"]);
+                hacienda.nBoletas.Costo_Faena = Convert.ToSingle(dtBoleta_Access.Rows[0]["Costo_Faena"]);
 
+                object s = clsAccess.Dato_Generico("Compra", "NBoleta=" + nb, "Fecha_Compra");
+                DateTime fecha; double kilosCompra; double kilosFaena;
+                if (s != null)
+                {                    
+                    DateTime.TryParse(s.ToString(), out fecha);
+
+                    hacienda.nBoletas.Fecha = fecha; 
                 }
 
-                if (hacienda.nBoletas.Reparto != Convert.ToInt32(dtBoleta.Rows[0]["Reparto"]))
-                {
-                    hacienda.nBoletas.Actualizar("Reparto", Convert.ToInt32(dtBoleta.Rows[0]["Reparto"]));
-                    //lstActualizacion.Items.Add($"{n}. Act Repaprto {nb}");
-                }
-                if (hacienda.nBoletas.Directo != !Convert.ToBoolean(dtBoleta.Rows[0]["Mercado"]))
-                {
-                    hacienda.nBoletas.Actualizar("Directo", !Convert.ToBoolean(dtBoleta.Rows[0]["Mercado"]));
-                    //lstActualizacion.Items.Add($"{n}. Act Directo {nb}");
-                } 
+                hacienda.nBoletas.Costo_Final = hacienda.nBoletas.Costo_Faena;
+
+                kilosCompra = clsAccess.Dato_Sumado("Compra", "NBoleta=" + nb, "Kilos");
+                kilosFaena = clsAccess.Dato_Sumado("Faena", "NBoleta=" + nb, "Kilos");
+                hacienda.nBoletas.Kilos_Compra = kilosCompra;
+                hacienda.nBoletas.Kilos_Faena = kilosFaena;
+
+                hacienda.nBoletas.Agregar();
             }
+
         }
 
         private void Cargar_CompraYAgregados(int nb)
         {
             DB.Hacienda hacienda = new DB.Hacienda();
-            c_Base_Access clsAccess = new c_Base_Access("NBoletas", "NBoletas");
+            c_Base_Access clsAccess = new c_Base_Access("vw_Compras", "vw_Compras");
+
             clsAccess.Base_Access = cmdBase.Text;
-            clsAccess.Vista = "vw_Compras";
 
             DataTable acCompras = clsAccess.Datos_Vista("NBoleta=" + nb, "*", "ID_Compra");
 
@@ -213,10 +228,9 @@ namespace Programa1.Carga.Hacienda
             clsAccess.Campo_ID = "ID_Agregados";
 
             acCompras = clsAccess.Datos_Vista("NBoleta=" + nb, "*");
-                        
-            hacienda.Agregados.Borrar("NBoleta=" + nb);
-            hacienda.Agregados.Matricula.Cargar_Por_Nombre(matricula.ToString());
 
+            hacienda.Agregados.Borrar("NBoleta=" + nb);
+            
             foreach (DataRow drAccess in acCompras.Rows)
             {
                 hacienda.Agregados.ID = Convert.ToInt32(drAccess["ID_Agregados"]);
@@ -234,6 +248,7 @@ namespace Programa1.Carga.Hacienda
                 hacienda.Agregados.Actualizar("Matricula", hacienda.compra.Matricula.ID);
             }
         }
+
 
         private void Cargar_Faena(int nb)
         {
@@ -266,7 +281,8 @@ namespace Programa1.Carga.Hacienda
 
                 hacienda.Faena.Actualizar("Recupero", recu.Buscar(Convert.ToDateTime(dr["Fecha"]), Convert.ToInt32(dr["ID_Productos"]), Convert.ToInt32(dr["ID_Frigorifico"]), hacienda.nBoletas.Directo));
 
-            }            
+            }
+            hacienda.nBoletas.Actualizar_CostoFinal(nb);
         }
 
         private void Cargar_Salida()
@@ -296,8 +312,8 @@ namespace Programa1.Carga.Hacienda
                     {
                         salidas_sistema.Borrar($"Fecha='{Convert.ToDateTime(drF["Fecha"]):MM/dd/yy}' AND ID_Sucursales={drF["Suc"]}");
 
-                        DataTable dtSalidas = clsAccess.Datos_Vista($"Fecha=#{Convert.ToDateTime(drF["Fecha"]):MM/dd/yy}# AND ID_Sucursales={drF["Suc"]}","ID_Salidas, Fecha, ID_Sucursales, ID_Faena, Media");
-                        foreach(DataRow drS in dtSalidas.Rows)
+                        DataTable dtSalidas = clsAccess.Datos_Vista($"Fecha=#{Convert.ToDateTime(drF["Fecha"]):MM/dd/yy}# AND ID_Sucursales={drF["Suc"]}", "ID_Salidas, Fecha, ID_Sucursales, ID_Faena, Media");
+                        foreach (DataRow drS in dtSalidas.Rows)
                         {
                             salidas_sistema.ID = Convert.ToInt32(drS["ID_Salidas"]);
                             salidas_sistema.Fecha = Convert.ToDateTime(drS["Fecha"]);
@@ -309,7 +325,7 @@ namespace Programa1.Carga.Hacienda
                             salidas_sistema.Agregar();
                         }
                     }
-                } 
+                }
             }
         }
 
@@ -334,9 +350,9 @@ namespace Programa1.Carga.Hacienda
                 if (chSaldo.Checked == true)
                 {
                     DB.Hacienda hacienda = new DB.Hacienda();
-                    
+
                     DataTable dt = hacienda.compra.Consignatarios_En_Boleta(nb);
-                    
+
                     foreach (DataRow dr in dt.Rows)
                     {
                         hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldosConsignatario {dr["ID_Consignatarios"]}, {nb}");
@@ -372,7 +388,7 @@ namespace Programa1.Carga.Hacienda
                         hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldosConsignatario {dr["ID_Consignatarios"]}, {dr["NBoleta"]}");
 
                     }
-                    this.Cursor = Cursors.Default; 
+                    this.Cursor = Cursors.Default;
                 }
             }
         }

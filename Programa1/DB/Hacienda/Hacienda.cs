@@ -40,9 +40,11 @@ namespace Programa1.DB
                     nBoletas.Reparto = dt.Rows[0]["Reparto"] == DBNull.Value ? 0 : Convert.ToInt16(dt.Rows[0]["Reparto"]);
                     nBoletas.Costo = dt.Rows[0]["Costo"] == DBNull.Value ? 0 : Convert.ToSingle(dt.Rows[0]["Costo"]);
                     nBoletas.Costo_Faena = dt.Rows[0]["Costo_Faena"] == DBNull.Value ? 0 : Convert.ToSingle(dt.Rows[0]["Costo_Faena"]);
+                    nBoletas.Costo_Final = dt.Rows[0]["Costo_Final"] == DBNull.Value ? 0 : Convert.ToSingle(dt.Rows[0]["Costo_Final"]);
                     if (dt.Rows[0]["Directo"] == DBNull.Value) { nBoletas.Actualizar("Directo", false); }
                     nBoletas.Directo = dt.Rows[0]["Directo"] == DBNull.Value ? false : Convert.ToBoolean(dt.Rows[0]["Directo"]);
-
+                    nBoletas.Kilos_Compra = dt.Rows[0]["Kilos_Compra"] == DBNull.Value ? 0 : Convert.ToDouble(dt.Rows[0]["Kilos_Compra"]);
+                    nBoletas.Kilos_Faena = dt.Rows[0]["Kilos_Faena"] == DBNull.Value ? 0 : Convert.ToDouble(dt.Rows[0]["Kilos_Faena"]);
                     compra.NBoleta = nBoletas; 
                 }
 

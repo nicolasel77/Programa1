@@ -435,6 +435,31 @@
             if (d == DBNull.Value) { d = 0; }
             return Convert.ToDouble(d);
         }
+        public double Dato_Sumado(string tabla, string filtro, string Campo)
+        {
+            var cnn = new OleDbConnection(conn_string);
+            object d;
+            try
+            {
+                string Cadena = $"SELECT SUM({Campo}) FROM {tabla} WHERE {filtro}";
+
+                OleDbCommand cmd = new OleDbCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                cnn.Open();
+
+                OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
+                d = cmd.ExecuteScalar();
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+                d = 0;
+            }
+            if (d == DBNull.Value) { d = 0; }
+            return Convert.ToDouble(d);
+        }
 
         public DataTable sp_Datos()
         {

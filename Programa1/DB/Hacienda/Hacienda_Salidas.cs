@@ -49,7 +49,7 @@ namespace Programa1.DB
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT Id, Fecha, Id_Sucursales, Nombre, Tropa, Nombre_Categoria, Nombre_Producto, NBoleta, " +
-                    $"Costo_Carne, Costo_Salida, Media, Kilos AS Original, Total_Compra, Total_Salida FROM vw_Hacienda_Salidas {filtro} ORDER BY Id", conexionSql);
+                    $"Costo_Final, Costo_Salida, Media, Kilos AS Original, Total_Compra, Total_Salida FROM vw_Hacienda_Salidas {filtro} ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

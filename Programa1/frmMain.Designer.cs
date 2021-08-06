@@ -334,9 +334,9 @@
             // 
             this.tesoreríaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cajaDiariaToolStripMenuItem,
-            this.pagosAutorizadosToolStripMenuItem,
             this.resumenGastosToolStripMenuItem,
             this.resumenEntradasToolStripMenuItem,
+            this.pagosAutorizadosToolStripMenuItem,
             this.toolStripMenuItem16,
             this.bancosCuentasToolStripMenuItem,
             this.toolStripMenuItem13,
@@ -385,6 +385,7 @@
             this.bancosCuentasToolStripMenuItem.Name = "bancosCuentasToolStripMenuItem";
             this.bancosCuentasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.bancosCuentasToolStripMenuItem.Text = "&Bancos/Cuentas";
+            this.bancosCuentasToolStripMenuItem.Click += new System.EventHandler(this.bancosCuentasToolStripMenuItem_Click);
             // 
             // toolStripMenuItem13
             // 

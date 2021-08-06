@@ -17,9 +17,23 @@
 
         public DateTime Fecha { get; set; }
         public int Reparto { get; set; }
-        public Single Costo { get; set; }
-        public Single Costo_Faena { get; set; }
+        public float Costo { get; set; }
+        public float Costo_Faena { get; set; }
         public bool Directo { get; set; }
+        public float Costo_Final { get; internal set; }
+        public double Kilos_Compra { get; internal set; }
+        public double Kilos_Faena { get; internal set; }
+
+        internal void Actualizar_CostoFinal(int nb)
+        {
+            object vRecu = Dato_Sumado("vw_Faena", "NBoleta=" + nb, "Kilos*Recupero");
+            double tRecu = Convert.ToDouble(vRecu);
+            if (Kilos_Faena != 0)
+            {
+                Costo_Final = (float)(((Kilos_Compra * Costo) - tRecu) / Kilos_Faena);
+                Actualizar("Costo_Final", Costo_Final); 
+            }
+        }
 
         public new void Actualizar()
         {
@@ -29,7 +43,8 @@
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE NBoletas SET NBoleta={ID}, Fecha='{Fecha.ToString("MM/dd/yyy")}', Directo={(Directo ? "1" : "0")}, " +
-                        $"Reparto={Reparto}, Costo={Costo.ToString().Replace(",", ".")}, Costo_Faena={Costo_Faena.ToString().Replace(",", ".")} " +
+                        $"Reparto={Reparto}, Costo={Costo.ToString().Replace(",", ".")}, Costo_Faena={Costo_Faena.ToString().Replace(",", ".")}, Costo_Final={Costo_Final.ToString().Replace(",", ".")} " +
+                        $"Kilos_Faena={Kilos_Faena.ToString().Replace(",", ".")}, Kilos_Compra={Kilos_Compra.ToString().Replace(",", ".")} " +
                         $"WHERE NBoleta={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -52,9 +67,9 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO NBoletas (NBoleta, Fecha, Reparto, Costo, Costo_Faena, Directo) " +
+                    new SqlCommand($"INSERT INTO NBoletas (NBoleta, Fecha, Reparto, Costo, Costo_Faena, Costo_Final, Directo, Kilos_Compra, Kilos_Faena) " +
                         $"VALUES({ID}, '{Fecha.ToString("MM/dd/yyy")}', {Reparto}, {Costo.ToString().Replace(",", ".")}, " +
-                        $"{Costo_Faena.ToString().Replace(",", ".")}, {(Directo ? "1" : "0")})", sql);
+                        $"{Costo_Faena.ToString().Replace(",", ".")}, {Costo_Final.ToString().Replace(",", ".")}, {(Directo ? "1" : "0")}, {Kilos_Compra.ToString().Replace(",", ".")}, {Kilos_Faena.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -63,16 +78,16 @@
 
                 sql.Close();
 
-                int n2 = Max_Boleta();
-                if (n == n2)
-                {
-                    ID = 0;
-                    MessageBox.Show("No se pudo guardar el registro.", "Error");
-                }
-                else
-                {
-                    ID = n2;
-                }
+                //int n2 = Max_Boleta();
+                //if (n == n2)
+                //{
+                //    ID = 0;
+                //    MessageBox.Show("No se pudo guardar el registro.", "Error");
+                //}
+                //else
+                //{
+                //    ID = n2;
+                //}
             }
             catch (Exception e)
             {
@@ -104,8 +119,6 @@
 
             return Convert.ToInt32(d);
         }
-
-
 
     }
 }

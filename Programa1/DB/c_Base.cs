@@ -425,6 +425,33 @@
             return Convert.ToDouble(d);
         }
 
+        public double Dato_Sumado(string tabla, string filtro, string Campo)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object d;
+
+            try
+            {
+                string Cadena = $"SELECT SUM({Campo}) FROM {tabla} WHERE {filtro}";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                cnn.Open();
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                d = cmd.ExecuteScalar();
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+                d = 0;
+            }
+            if (d == DBNull.Value) { d = 0; }
+            return Convert.ToDouble(d);
+        }
+
         public DataTable sp_Datos()
         {
             var dt = new DataTable("Datos");

@@ -2068,5 +2068,10 @@
         {
 
         }
+
+        private void bancosCuentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

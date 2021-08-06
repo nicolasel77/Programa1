@@ -666,6 +666,8 @@ namespace Programa1.Carga.Tesoreria
 
                                 if (cGastos.caja.EsARendir == true) { cGastos.caja.Seleccionar_Nombre(); }
 
+                                if(cGastos.ID != 0) { cGastos.Actualizar("ID_Caja", cGastos.caja.ID); Cargar_Cajas(); }
+
                                 grdSalidas.ActivarCelda(f, e_Tipo);
 
                             }
@@ -676,6 +678,15 @@ namespace Programa1.Carga.Tesoreria
                             {
                                 grdSalidas.set_Texto(f, c, a);
                                 grdSalidas.set_Texto(f, c + 1, cGastos.TG.Nombre);
+
+                                if(cGastos.ID == 0)
+                                {
+                                    grdSalidas.set_Texto(f, s_SubTipo, 0);
+                                    grdSalidas.set_Texto(f, s_SubTipo + 1, "");
+                                    grdSalidas.set_Texto(f, s_IDDetalle, 0);
+                                    grdSalidas.set_Texto(f, s_IDDetalle + 1, "");
+                                }
+
                                 grdSalidas.ActivarCelda(f, s_SubTipo);
 
                             }
