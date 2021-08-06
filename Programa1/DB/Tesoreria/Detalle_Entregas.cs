@@ -28,8 +28,7 @@
         public DateTime Fecha { get; set; }
 
         public Double Importe { get; set; }
-
-
+        
         public DataTable Datos(String filtro = "")
         {
             var dt = new DataTable("Datos");
@@ -90,7 +89,7 @@
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             object d = null;
 
-            int n = MaxId();
+            int n = 0;
 
             try
             {
@@ -101,7 +100,7 @@
                 comandoSql.CommandType = CommandType.Text;
                 d = comandoSql.ExecuteScalar();
 
-                int n2 = MaxId();
+                int n2 = Convert.ToInt32(d);
                 if (n == n2)
                 {
                     Id = 0;

@@ -13,7 +13,7 @@
         private Byte d_IDE;
         private Byte d_Fecha;
         private Byte d_Importe;
-
+        public DateTime fdd;
 
         #endregion
         public frmCargarEntregas()
@@ -48,6 +48,7 @@
 
             Double t = grdEntregas.SumarCol(d_Importe, false);
             lblTotal.Text = "Total: " + t.ToString("C1");
+            if (fdd > Convert.ToDateTime("1/1/1910") & Convert.ToDouble(grdEntregas.get_Texto(1, d_Importe)) == 0) { grdEntregas.set_Texto(1, d_Fecha, fdd); grdEntregas.ActivarCelda(1, d_Importe); detalle_Entregas.Fecha = fdd; }
         }
 
         private void grdEntregas_Editado(short f, short c, object a)
@@ -57,7 +58,11 @@
             if (c == d_Fecha)
             {
                 detalle_Entregas.Fecha = Convert.ToDateTime(a);
-                if (detalle_Entregas.Id > 0) { detalle_Entregas.Actualizar(); }
+                if (detalle_Entregas.Id > 0) 
+                {
+                    detalle_Entregas.Actualizar();
+                    if (f == 1) { fdd = Convert.ToDateTime(a); }
+                }
 
                 grdEntregas.set_Texto(f, d_Fecha, a);
                 grdEntregas.ActivarCelda(f, d_Importe);
@@ -75,8 +80,10 @@
                 else
                 {
                     detalle_Entregas.Agregar();
-                    grdEntregas.set_Texto(f, d_Id, detalle_Entregas.Id);
+                    grdEntregas.set_Texto(f, d_Id, detalle_Entregas.MaxId());
                     grdEntregas.set_Texto(f, d_IDE, detalle_Entregas.ID_Entradas);
+
+                    if (grdEntregas.Rows - 1 == 1) { fdd = Convert.ToDateTime(grdEntregas.get_Texto(f,d_Fecha)); }
 
                     grdEntregas.AgregarFila();
                     grdEntregas.set_Texto(f + 1, d_IDE, detalle_Entregas.ID_Entradas);

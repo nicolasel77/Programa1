@@ -31,6 +31,7 @@
             set
             {
                 vId = value;
+                ID = value;
                 Cargar();
             }
         }

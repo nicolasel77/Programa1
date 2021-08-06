@@ -22,6 +22,7 @@ namespace Programa1.Carga.Tesoreria
             Detalle = 4
         }
         private t_Repetir o_Repetir;
+        private DateTime fdd;
         /// <summary>
         /// Caja Diaria
         /// </summary>
@@ -66,8 +67,10 @@ namespace Programa1.Carga.Tesoreria
         /// <summary>
         /// Caja Diaria Gastos
         /// </summary>
+
         private readonly Gastos cGastos = new Gastos();
         private readonly Detalle_Gastos dg = new Detalle_Gastos();
+
 
         #region " FORM "
 
@@ -390,7 +393,10 @@ namespace Programa1.Carga.Tesoreria
                                 grdEntradas.set_Texto(f, c, a);
                                 grdEntradas.set_Texto(f, c + 1, cEntradas.caja.Nombre);
                                 grdEntradas.ActivarCelda(f, e_Tipo);
-
+                                if (cEntradas.ID > 0)
+                                {
+                                    cEntradas.Actualizar();
+                                }
                             }
                             break;
                         case e_Tipo:
@@ -426,9 +432,11 @@ namespace Programa1.Carga.Tesoreria
                                         frmCargarEntregas fr = new frmCargarEntregas();
                                         fr.lblSuc.Text = s;
                                         fr.Detalle_Entregas.ID_Entradas = cEntradas.ID;
+                                        if (fdd > Convert.ToDateTime("1/1/1910")) { fr.fdd = fdd; }
                                         fr.Cargar();
                                         fr.ShowDialog();
                                         grdEntradas.Focus();
+                                        if (fr.fdd > Convert.ToDateTime("1/1/1910")) { fdd = fr.fdd; }
                                         cEntradas.Importe = fr.Detalle_Entregas.Total_IDEntradas(cEntradas.ID);
                                         cEntradas.Actualizar();
 
@@ -445,6 +453,7 @@ namespace Programa1.Carga.Tesoreria
                                         grdEntradas.set_Texto(f + 1, e_Tipo + 1, grdEntradas.get_Texto(f, e_Tipo + 1));
 
                                         grdEntradas.ActivarCelda(f + 1, e_Subtipo);
+                                        Totales();
                                     }
                                     else
                                     {
@@ -549,6 +558,7 @@ namespace Programa1.Carga.Tesoreria
             cEntradas.caja.ID = Convert.ToInt32(grdEntradas.get_Texto(Fila, e_Caja));
             cEntradas.TE.Id_Tipo = Convert.ToInt32(grdEntradas.get_Texto(Fila, e_Tipo));
             cEntradas.Descripcion = grdEntradas.get_Texto(Fila, e_Descripcion).ToString();
+            cEntradas.Importe = Convert.ToDouble(grdEntradas.get_Texto(Fila, e_Importe));
         }
 
         private void grdEntradas_KeyUp(object sender, short e)
@@ -562,6 +572,7 @@ namespace Programa1.Carga.Tesoreria
                     {
                         if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                         {
+
                             cEntradas.Borrar();
                             if (grdEntradas.EsUltimaFila() == true)
                             {
@@ -572,6 +583,7 @@ namespace Programa1.Carga.Tesoreria
                             {
                                 grdEntradas.BorrarFila();
                             }
+                            Cargar_FilaEntradas(Convert.ToByte(grdEntradas.Row));
                             Totales();
                         }
                     }

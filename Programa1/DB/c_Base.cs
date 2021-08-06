@@ -599,7 +599,7 @@
                 SystemSounds.Beep.Play();
             }
 
-            if (n == null) { n = false; }
+            if (n == DBNull.Value) { n = false; }
 
             return Convert.ToBoolean(n);
         }
