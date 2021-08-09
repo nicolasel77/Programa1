@@ -557,6 +557,7 @@ namespace Programa1.Carga.Tesoreria
             cEntradas.Fecha = Convert.ToDateTime(grdEntradas.get_Texto(Fila, e_Fecha));
             cEntradas.caja.ID = Convert.ToInt32(grdEntradas.get_Texto(Fila, e_Caja));
             cEntradas.TE.Id_Tipo = Convert.ToInt32(grdEntradas.get_Texto(Fila, e_Tipo));
+            cEntradas.Id_SubTipoEntrada = Convert.ToInt32(grdEntradas.get_Texto(Fila, e_Subtipo));
             cEntradas.Descripcion = grdEntradas.get_Texto(Fila, e_Descripcion).ToString();
             cEntradas.Importe = Convert.ToDouble(grdEntradas.get_Texto(Fila, e_Importe));
         }
@@ -639,6 +640,7 @@ namespace Programa1.Carga.Tesoreria
                 cEntradas.Actualizar();
 
                 grdEntradas.set_Texto(grdEntradas.Row, e_Importe, cEntradas.Importe);
+                Totales();
                 this.Focus();
                 grdEntradas.Focus();
             }

@@ -501,6 +501,12 @@
     <Compile Include="Carga\Tesoreria\frmResumenTransferencias.Designer.cs">
       <DependentUpon>frmResumenTransferencias.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmResumen_Entradas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmResumen_Entradas.Designer.cs">
+      <DependentUpon>frmResumen_Entradas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmResumen_Gastos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -899,6 +905,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmResumenTransferencias.resx">
       <DependentUpon>frmResumenTransferencias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmResumen_Entradas.resx">
+      <DependentUpon>frmResumen_Entradas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmResumen_Gastos.resx">
       <DependentUpon>frmResumen_Gastos.cs</DependentUpon>

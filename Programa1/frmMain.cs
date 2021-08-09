@@ -1497,6 +1497,36 @@
                 frmResumen_Gastos.WindowState = FormWindowState.Maximized;
             }
         }
+
+        private void resumenEntradasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmResumen_Entradas")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmResumen_Entradas");
+                t.Text = "Resumen_Entradas";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmResumen_Entradas = new Programa1.Carga.Tesoreria.frmResumen_Entradas();
+                frmResumen_Entradas.MdiParent = this;
+                frmResumen_Entradas.Disposed += FrmTipos_Entradas_Disposed;
+                forms.Add(frmResumen_Entradas);
+                frmResumen_Entradas.Show();
+                frmResumen_Entradas.WindowState = FormWindowState.Minimized;
+                frmResumen_Entradas.WindowState = FormWindowState.Maximized;
+            }
+        }
+
         private void FrmResumen_Gastos_Disposed(object sender, EventArgs e)
         {
             foreach (ToolStripMenuItem t in tstMenu.Items)
@@ -2062,16 +2092,6 @@
                     break;
                 }
             }
-        }
-
-        private void resumenEntradasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bancosCuentasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
