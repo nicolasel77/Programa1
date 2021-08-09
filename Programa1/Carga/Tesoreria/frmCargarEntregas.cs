@@ -98,6 +98,11 @@
 
         private void grdEntregas_CambioFila(short Fila)
         {
+            asignar_variables(Fila);
+        }
+
+        private void asignar_variables(short f)
+        {
             detalle_Entregas.Id = Convert.ToInt32(grdEntregas.get_Texto(grdEntregas.Row, d_Id));
             detalle_Entregas.ID_Entradas = Convert.ToInt32(grdEntregas.get_Texto(grdEntregas.Row, d_IDE));
             detalle_Entregas.Fecha = Convert.ToDateTime(grdEntregas.get_Texto(grdEntregas.Row, d_Fecha));
@@ -131,12 +136,14 @@
                         detalle_Entregas.Borrar();
                         if (grdEntregas.EsUltimaFila() == true)
                         {
-                            grdEntregas.set_Texto(grdEntregas.Row, d_Importe, 0);
-                            grdEntregas.set_Texto(grdEntregas.Row, d_Id, 0);
+                            grdEntregas.BorrarFila(grdEntregas.Rows - 1);
+                            grdEntregas.AgregarFila();
+                            grdEntregas.ActivarCelda(grdEntregas.Rows -1, d_Fecha);
                         }
                         else
                         {
                             grdEntregas.BorrarFila();
+                            asignar_variables(Convert.ToSByte(grdEntregas.Row));
                         }
                     }
                 }
@@ -147,8 +154,8 @@
         {
             if (e.KeyChar == Convert.ToChar(43))
             {
-                SendKeys.Send("000");
-                SendKeys.Send("{ENTER}");
+                    SendKeys.Send("000");
+                    SendKeys.Send("{ENTER}");
             }
         }
     }

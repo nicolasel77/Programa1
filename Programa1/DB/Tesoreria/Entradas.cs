@@ -105,12 +105,173 @@
             Borrar("Fecha_Entregas", "ID_Entradas=" + ID);
             Borrar("CD_Entradas", "ID= " +ID);
         }
-        #endregion 
+        #endregion
 
         #region " Devolver Datos "
+
+        /// <summary>
+        /// Devuelve un dt con el resumen de Tipos, Nombre en un rango de fechas.
+        /// </summary>
+        /// <param name="filtro">La fecha a filtrar.</param>
+        /// <returns></returns>
+        public DataTable Tipos_Rango(string filtro = "")
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT ID_TipoEntrada, Nombre FROM vw_Entradas" +
+                    $" {filtro}  GROUP BY ID_TipoEntrada, Nombre ORDER BY ID_TipoEntrada", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        /// <summary>
+        /// Devuelve un dt con el resumen de SubTipo, Nombre en un rango de fechas.
+        /// </summary>
+        /// <param name="filtro">La fecha a filtrar.</param>
+        /// <returns></returns>
+        public DataTable SubTipos_Rango(string filtro = "")
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT ID_SubTipoEntrada, Descripcion FROM vw_Entradas" +
+                    $" {filtro}  GROUP BY ID_SubTipoEntrada, Descripcion ORDER BY ID_SubTipoEntrada", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
         public new DataTable Datos(string filtro = " ID=-1")
         {
             return Datos_Vista(filtro);            
+        }
+
+        /// <summary>
+        /// Devuelve un total por Tipo, Nombre, Total según la fecha seleccionada.
+        /// </summary>
+        /// <param name="filtro">Rango a filtrar.</param>
+        /// <returns></returns>
+        public DataTable TotalPorTipo(string filtro = "")
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT ID_TipoEntrada ID, Nombre Descripcion, SUM(Importe) Total FROM vw_Entradas" +
+                    $" {filtro}  GROUP BY ID_TipoEntrada, Nombre ORDER BY ID_TipoEntrada", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        /// <summary>
+        /// Devuelve un total por SubTipo, Nombre, Total según el Tipo y la fecha seleccionada.
+        /// </summary>
+        /// <param name="filtro">Tipo y rango a filtrar.</param>
+        /// <returns></returns>
+        public DataTable TotalPorSubTipo(string filtro = "")
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT ID_TipoEntrada IDT, Nombre, ID_SubTipoEntrada ID, Descripcion, SUM(Importe) Total FROM vw_Entradas" +
+                    $" {filtro}  GROUP BY ID_TipoEntrada, Nombre, ID_SubTipoEntrada, Descripcion ORDER BY ID_TipoEntrada, ID_SubTipoEntrada", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        /// <summary>
+        /// Devuelve un total por Detalle, Nombre, Total según el Tipo y la fecha seleccionada.
+        /// </summary>
+        /// <param name="filtro">Tipo y rango a filtrar.</param>
+        /// <returns></returns>
+        public DataTable TotalPorDetalle(string filtro = "", bool Mostrar_Fecha = false)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+
+            try
+            {
+                string fe = Mostrar_Fecha ? "Fecha, " : "";
+                string ob = Mostrar_Fecha ? "ORDER BY Fecha" : "";
+                SqlCommand comandoSql = new SqlCommand(
+                    $"SELECT {fe}ID_TipoEntrada IDT, Nombre, ID_SubTipoEntrada ID_ST, Descripcion " +
+                    $", SUM(Importe) Total FROM vw_Entradas" +
+                    $" {filtro}  GROUP BY {fe}ID_TipoEntrada, Nombre, ID_SubTipoEntrada, Descripcion " +
+                    ob , conexionSql) ;
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
         }
 
         /// <summary>
