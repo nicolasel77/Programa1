@@ -167,10 +167,10 @@ namespace Programa1.Carga.Hacienda
                 object s = clsAccess.Dato_Generico("Compra", "NBoleta=" + nb, "Fecha_Compra");
                 DateTime fecha; double kilosCompra; double kilosFaena;
                 if (s != null)
-                {                    
+                {
                     DateTime.TryParse(s.ToString(), out fecha);
 
-                    hacienda.nBoletas.Fecha = fecha; 
+                    hacienda.nBoletas.Fecha = fecha;
                 }
 
                 hacienda.nBoletas.Costo_Final = hacienda.nBoletas.Costo_Faena;
@@ -195,6 +195,8 @@ namespace Programa1.Carga.Hacienda
             DataTable acCompras = clsAccess.Datos_Vista("NBoleta=" + nb, "*", "ID_Compra");
 
             object matricula = clsAccess.Dato_Generico("NBoletas", "NBoleta=" + nb, "Matricula");
+
+            if (matricula == null) { matricula = ""; }
 
             hacienda.compra.Borrar("NBoleta=" + nb);
             hacienda.compra.Matricula.Cargar_Por_Nombre(matricula.ToString());
@@ -230,7 +232,7 @@ namespace Programa1.Carga.Hacienda
             acCompras = clsAccess.Datos_Vista("NBoleta=" + nb, "*");
 
             hacienda.Agregados.Borrar("NBoleta=" + nb);
-            
+
             foreach (DataRow drAccess in acCompras.Rows)
             {
                 hacienda.Agregados.ID = Convert.ToInt32(drAccess["ID_Agregados"]);
@@ -343,26 +345,29 @@ namespace Programa1.Carga.Hacienda
             this.Cursor = Cursors.WaitCursor;
             if (lstBoletas.SelectedIndex > -1)
             {
-                int nb = Convert.ToInt32(lstBoletas.Text);
-                if (chBoleta.Checked == true) { Cargar_Boleta(nb); }
-                if (chCompra.Checked == true) { Cargar_CompraYAgregados(nb); }
-                if (chFaena.Checked == true) { Cargar_Faena(nb); }
-                if (chSaldo.Checked == true)
-                {
-                    DB.Hacienda hacienda = new DB.Hacienda();
-
-                    DataTable dt = hacienda.compra.Consignatarios_En_Boleta(nb);
-
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldosConsignatario {dr["ID_Consignatarios"]}, {nb}");
-                    }
-                }
+                Cargar(Convert.ToInt32(lstBoletas.Text));
             }
             this.Cursor = Cursors.Default;
 
         }
 
+        private void Cargar(int nb)
+        {
+            if (chBoleta.Checked == true) { Cargar_Boleta(nb); }
+            if (chCompra.Checked == true) { Cargar_CompraYAgregados(nb); }
+            if (chFaena.Checked == true) { Cargar_Faena(nb); }
+            if (chSaldo.Checked == true)
+            {
+                DB.Hacienda hacienda = new DB.Hacienda();
+
+                DataTable dt = hacienda.compra.Consignatarios_En_Boleta(nb);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldosConsignatario {dr["ID_Consignatarios"]}, {nb}");
+                }
+            }
+        }
 
         private void mdSincSalidas_Click(object sender, EventArgs e)
         {
@@ -431,6 +436,33 @@ namespace Programa1.Carga.Hacienda
                 }
                 cmdAdelante.Text = "Listo!";
                 this.Cursor = Cursors.Default;
+            }
+        }
+
+        private void txtBoleta_Validated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBoleta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((short)e.KeyChar == 13)
+            {
+                e.Handled = true;
+                if (txtBoleta.TextLength != 0)
+                {
+                    if (txtHasta.Text == "")
+                    {
+                        Cargar(Convert.ToInt32(txtBoleta.Text));
+                    }
+                    else
+                    {
+                        for (int i = Convert.ToInt32(txtBoleta.Text); i <= Convert.ToInt32(txtHasta.Text); i++)
+                        {
+                            Cargar(i);
+                        }
+                    }
+                }
             }
         }
     }

@@ -80,7 +80,7 @@ namespace Programa1.DB
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT Reparto, Tropa, Nombre_Producto Prod, Nombre_Categoria Cat, COUNT(Kilos) Cant, SUM(Kilos) Kilos, Costo, Costo_Final, Fecha, NBoleta " +
-                    $"FROM vw_Faena WHERE Fecha <='{f.ToString("MM/dd/yy")}' AND Id NOT IN(SELECT Id_Faena FROM Hacienda_Salidas WHERE Fecha <='{f.ToString("MM/dd/yy")}') " +
+                    $"FROM vw_Faena WHERE Fecha <='{f:MM/dd/yy}' AND Id NOT IN(SELECT Id_Faena FROM Hacienda_Salidas WHERE Fecha<='{f:MM/dd/yy}') " +
                     $"GROUP BY Reparto, Tropa, Nombre_Producto, Nombre_Categoria, Costo, Costo_Final, Fecha, NBoleta " +
                     $"ORDER BY Reparto, Fecha", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -137,7 +137,7 @@ namespace Programa1.DB
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT Tipo_Stock Tipo, COUNT(Kilos) Cant, SUM(Kilos) Kilos, SUM(Costo_Final*Kilos)/SUM(Kilos) Integracion " +
-                    $"FROM vw_Faena WHERE Fecha<='{f.ToString("MM/dd/yy")}' AND Id NOT IN(SELECT Id_Faena FROM Hacienda_Salidas WHERE Fecha<='{f.ToString("MM/dd/yy")}') " +
+                    $"FROM vw_Faena WHERE Fecha<='{f:MM/dd/yy}' AND Id NOT IN(SELECT Id_Faena FROM Hacienda_Salidas WHERE Fecha<='{f:MM/dd/yy}') " +
                     $"GROUP BY Tipo_Stock", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
