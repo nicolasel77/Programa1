@@ -8,13 +8,34 @@
     class Caja_Diaria
     {
         private Cajas Cajas = new Cajas();
+        private int usuario;
+
+        public int Usuario
+        {
+            get
+            {
+                return usuario;
+            }
+            set
+            {
+                usuario = value;
+                Cargar();
+            }
+        }
+
 
         public Caja_Diaria()
+        {
+            Cargar();
+
+        }
+
+        private void Cargar()
         {
             SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
 
-            string s = "SELECT ISNULL(Fecha, '1/1/1900') FROM CD_Fecha";
+            string s = "SELECT ISNULL(Fecha, '1/1/1900') FROM CD_Fecha WHERE Usuario=" + Usuario;
 
             SqlCommand command = new SqlCommand(s, sql);
             command.CommandType = CommandType.Text;
@@ -31,7 +52,7 @@
                 { Fecha = f; }
                 else
                 {
-                    command.CommandText = "SELECT MAX(Fecha) FROM CD_Entradas"; 
+                    command.CommandText = "SELECT MAX(Fecha) FROM CD_Entradas";
                     d = command.ExecuteScalar();
                     if (DateTime.TryParse(d.ToString(), out f) == true) { Fecha = f; }
 
@@ -43,7 +64,6 @@
                     }
                 }
             }
-
         }
 
         public DateTime Fecha { get; set; }
@@ -54,14 +74,14 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"DELETE FROM CD_Fecha", sql);
+                SqlCommand command = new SqlCommand($"DELETE FROM CD_Fecha WHERE Usuario=" + usuario, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
 
-                command.CommandText = $"INSERT INTO CD_Fecha (Fecha) VALUES('{Fecha:MM/dd/yy}')";
+                command.CommandText = $"INSERT INTO CD_Fecha (Fecha, Usuario) VALUES('{Fecha:MM/dd/yy}', {usuario})";
                 d = command.ExecuteNonQuery();
 
                 sql.Close();

@@ -18,7 +18,7 @@
         private void Cargar()
         {
             grdEmpleados.MostrarDatos(empleados.Datos(cSuc.Cadena("Id_Sucursales")), true);
-            int i = empleados.MaxId();
+            int i = empleados.Max_ID();
             grdEmpleados.set_Texto(grdEmpleados.Rows - 1, 0, i + 1);
 
             grdEmpleados.set_ColW(0, 40);
@@ -53,7 +53,7 @@
 
         private void grdEmpleados_Editado(short f, short c, object a)
         {
-            empleados.Id = Convert.ToInt32(grdEmpleados.get_Texto(f, 0)); ;
+            empleados.ID = Convert.ToInt32(grdEmpleados.get_Texto(f, 0)); ;
             bool esiste = empleados.Existe();
 
             switch (c)
@@ -156,7 +156,7 @@
                             {
                                 empleados.Agregar();
                                 grdEmpleados.AgregarFila();
-                                int i = empleados.MaxId();
+                                int i = empleados.Max_ID();
                                 grdEmpleados.set_Texto(f + 1, 0, i + 1);
                                 grdEmpleados.ActivarCelda(f + 1, 1);
                             }
@@ -186,7 +186,7 @@
                 {
                     if (Convert.ToInt32(grdEmpleados.get_Texto(grdEmpleados.Row, 0)) != 0)
                     {
-                        empleados.Id = Convert.ToInt32(grdEmpleados.get_Texto(grdEmpleados.Row, 0));
+                        empleados.ID = Convert.ToInt32(grdEmpleados.get_Texto(grdEmpleados.Row, 0));
                         empleados.Borrar();
                         grdEmpleados.BorrarFila(grdEmpleados.Row);
                     }
@@ -210,7 +210,7 @@
             // 10 int Tipo
             // 11 string Nombre
             // 12 int Sucursal
-            empleados.Id = Convert.ToInt32(grdEmpleados.get_Texto(Fila, 0));
+            empleados.ID = Convert.ToInt32(grdEmpleados.get_Texto(Fila, 0));
             empleados.Nombre = grdEmpleados.get_Texto(Fila, 1).ToString();
             empleados.DNI = Convert.ToInt32(grdEmpleados.get_Texto(Fila, 2));
             empleados.Fecha_Nacimiento = Convert.ToDateTime(grdEmpleados.get_Texto(Fila, 3));

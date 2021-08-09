@@ -14,16 +14,16 @@
         public bool Aceptado = false;
 
         const int cID = 0;
-        const int cNB = 4;
-        const int cDescripcion = 5;
-        const int cImporte = 6;
-        const int cPago = 7;
-        const int cDif = 8;
-        const int cSaldo = 9;
-        const int cNuevo = 10;
-        const int cEstado = 11;
+        const int cNB = 3;
+        const int cDescripcion = 4;
+        const int cImporte = 5;
+        const int cPago = 6;
+        const int cDif = 7;
+        const int cSaldo = 8;
+        const int cNuevo = 9;        
 
-        //Id, Fecha, Plazo, Dias, NBoleta, Descripcion, Importe, Pago, Dif, Saldo, Nuevo, Estado
+        //Id, Fecha, Plazo, NBoleta, Descripcion, Importe, Pago, Dif, Saldo, Nuevo
+        
         public frmPagar_Agregados()
         {
             InitializeComponent();
@@ -33,7 +33,7 @@
             lblConsignatario.Text = saldos.gastos.Desc_SubTipo;
 
             grd.TeclasManejadas = new int[] { 13, 43 };
-            
+
             grd.MostrarDatos(saldos.Datos_Agr(), true, false);
 
             double valor = 0;
@@ -62,11 +62,10 @@
             grd.set_ColW(cImporte, 80);
             grd.set_ColW(cPago, 80);
             grd.set_ColW(cDif, 90);
-            grd.set_ColW(cSaldo, 90);
-            grd.set_ColW(cNuevo, 90);
-            grd.set_ColW(cEstado, 0);
+            grd.set_ColW(cSaldo, 0);
+            grd.set_ColW(cNuevo, 90);            
 
-            grd.ActivarCelda(1, cNuevo);
+            grd.ActivarCelda(grd.Rows - 1, cNuevo);
         }
 
         private void grd_Editado(short f, short c, object a)
@@ -133,6 +132,11 @@
 
         private void Aceptarr()
         {
+            if (saldos.gastos.Fecha < Convert.ToDateTime("1/1/2020"))
+            {
+                MessageBox.Show("error");
+            }
+            this.Cursor = Cursors.WaitCursor;
             Compra_Hacienda cm = new Compra_Hacienda();
             cm.Consignatario.ID = saldos.gastos.Id_SubTipoGastos;
             for (int i = 1; i <= grd.Rows - 1; i++)
@@ -146,6 +150,7 @@
                     string s = string.Format("{0}   - {1}", grd.get_Texto(i, cDescripcion), t);
 
                     saldos.gastos.Id_DetalleGastos = idD;
+                    saldos.gastos.Fecha = gastos.Fecha;
                     saldos.gastos.Descripcion = s;
 
                     if (saldos.gastos.caja.EsCheque == false)
@@ -168,6 +173,8 @@
                 }
             }
             Aceptado = true;
+            this.Cursor = Cursors.Default;
+
         }
 
         private void cmdSalir_Click(object sender, System.EventArgs e)

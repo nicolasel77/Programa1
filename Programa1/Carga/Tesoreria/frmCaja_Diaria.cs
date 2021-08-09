@@ -12,8 +12,7 @@ namespace Programa1.Carga.Tesoreria
 
     public partial class frmCaja_Diaria : Form
     {
-
-        Usuarios usuario;
+        readonly Usuarios usuario;
         private enum t_Repetir : int
         {
             Ninguno = 0,
@@ -27,7 +26,7 @@ namespace Programa1.Carga.Tesoreria
         /// <summary>
         /// Caja Diaria
         /// </summary>
-        private Caja_Diaria CD = new Caja_Diaria();
+        private readonly Caja_Diaria CD = new Caja_Diaria();
 
         #region " Columnas Entradas "
         private const Byte e_Id = 0;
@@ -64,17 +63,17 @@ namespace Programa1.Carga.Tesoreria
         /// <summary>
         /// Caja Diaria Entradas
         /// </summary>
-        private Entradas cEntradas = new Entradas();
+        private readonly Entradas cEntradas = new Entradas();
         /// <summary>
         /// Caja Diaria Gastos
         /// </summary>
-        private Gastos cGastos = new Gastos();
-        private Detalle_Gastos dg = new Detalle_Gastos();
+
+        private readonly Gastos cGastos = new Gastos();
+        private readonly Detalle_Gastos dg = new Detalle_Gastos();
+
+
         #region " FORM "
-        public frmCaja_Diaria()
-        {
-            InitializeComponent();
-        }
+
         public frmCaja_Diaria(Usuarios user)
         {
             usuario = user;
@@ -84,6 +83,7 @@ namespace Programa1.Carga.Tesoreria
 
         private void frmCaja_Diaria_Load(object sender, EventArgs e)
         {
+            CD.Usuario = usuario.ID;
             mntFecha.SetDate(CD.Fecha);
             //mntFecha.MaxDate = CD.Fecha;
 
@@ -118,7 +118,7 @@ namespace Programa1.Carga.Tesoreria
             // 45: -
             // 46: Delete
             //112: F1
-            grdSalidas.TeclasManejadas = new int[] { 13, 43, 45, 46, 112, 120 };
+            grdSalidas.TeclasManejadas = new int[] { 13, 42, 43, 45, 46, 47, 106, 111, 112, 120 };
 
             grdSalidas.AgregarTeclas(Convert.ToInt32(Keys.Add), s_Caja, s_Tipo, s_SubTipo, s_IDDetalle, s_Importe);
             grdSalidas.AgregarTeclas(Convert.ToInt32(Keys.Subtract), s_Caja, s_Tipo, s_SubTipo, s_IDDetalle, s_Importe);
@@ -252,6 +252,7 @@ namespace Programa1.Carga.Tesoreria
             grdEntradas.Visible = true;
 
             grdSalidas.MostrarDatos(cGastos.Datos_Vista($"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}'"), true);
+            grdSalidas.ActivarCelda(grdSalidas.Rows - 1, s_Caja);
             Formato_Salidas();
 
 
@@ -667,6 +668,8 @@ namespace Programa1.Carga.Tesoreria
 
                                 if (cGastos.caja.EsARendir == true) { cGastos.caja.Seleccionar_Nombre(); }
 
+                                if(cGastos.ID != 0) { cGastos.Actualizar("ID_Caja", cGastos.caja.ID); Cargar_Cajas(); }
+
                                 grdSalidas.ActivarCelda(f, e_Tipo);
 
                             }
@@ -677,6 +680,15 @@ namespace Programa1.Carga.Tesoreria
                             {
                                 grdSalidas.set_Texto(f, c, a);
                                 grdSalidas.set_Texto(f, c + 1, cGastos.TG.Nombre);
+
+                                if(cGastos.ID == 0)
+                                {
+                                    grdSalidas.set_Texto(f, s_SubTipo, 0);
+                                    grdSalidas.set_Texto(f, s_SubTipo + 1, "");
+                                    grdSalidas.set_Texto(f, s_IDDetalle, 0);
+                                    grdSalidas.set_Texto(f, s_IDDetalle + 1, "");
+                                }
+
                                 grdSalidas.ActivarCelda(f, s_SubTipo);
 
                             }
@@ -731,7 +743,7 @@ namespace Programa1.Carga.Tesoreria
                             {
                                 cGastos.Desc_SubTipo = a.ToString();
                                 grdSalidas.set_Texto(f, s_SubTipo + 1, a);
-                                grdSalidas.ActivarCelda(f, s_Importe);
+                                grdSalidas.ActivarCelda(f, s_IDDetalle);
 
                                 if (cGastos.ID != 0) { cGastos.Actualizar(); }
                             }
@@ -799,7 +811,7 @@ namespace Programa1.Carga.Tesoreria
                                     grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
 
                                     grdSalidas.AgregarFila();
-                                    Repetir_FilaG(f);
+                                    Repetir_FilaG();
                                 }
                                 else
                                 {
@@ -815,7 +827,10 @@ namespace Programa1.Carga.Tesoreria
                             {
                                 cGastos.Autorizado = Convert.ToBoolean(a);
                                 cGastos.Fecha_Autorizado = DateTime.Now;
-                                cGastos.Actualizar();
+
+                                cGastos.Actualizar("Autorizado", cGastos.Autorizado);
+                                cGastos.Actualizar("Fecha_Autorizado", DateTime.Now);
+                                cGastos.Actualizar("Usuario", cGastos.Usuario.ID);
 
                                 grdSalidas.set_Texto(f, s_Autorizado, a);
                                 grdSalidas.set_Texto(f, s_Autorizado + 1, DateTime.Now);
@@ -860,17 +875,93 @@ namespace Programa1.Carga.Tesoreria
                     lblUltimo.Text = "No encontrado.";
                 }
             }
+            if (e == Convert.ToInt32(Keys.Multiply))
+            {
+                if (rdNinguno.Checked == true)
+                {
+                    rdCaja.Checked = true;
+                }
+                else
+                {
+                    if (rdCaja.Checked == true)
+                    {
+                        rdTipo.Checked = true;
+                    }
+                    else
+                    {
+                        if (rdTipo.Checked == true)
+                        {
+                            rdSubtipo.Checked = true;
+                        }
+                        else
+                        {
+                            if (rdSubtipo.Checked == true)
+                            {
+                                rdDetalle.Checked = true;
+                            }
+                            else
+                            {
+                                if (rdDetalle.Checked == true) { rdNinguno.Checked = true; }
+                            }
+                        }
+                    }
+                }
+            }
+            if (e == Convert.ToInt32(Keys.Divide))
+            {
+                if (rdNinguno.Checked == true)
+                {
+                    rdDetalle.Checked = true;
+                }
+                else
+                {
+                    if (rdCaja.Checked == true)
+                    {
+                        rdNinguno.Checked = true;
+                    }
+                    else
+                    {
+                        if (rdTipo.Checked == true)
+                        {
+                            rdCaja.Checked = true;
+                        }
+                        else
+                        {
+                            if (rdSubtipo.Checked == true)
+                            {
+                                rdTipo.Checked = true;
+                            }
+                            else
+                            {
+                                if (rdDetalle.Checked == true) { rdSubtipo.Checked = true; }
+                            }
+                        }
+                    }
+                }
+            }
             if (e == Convert.ToInt32(Keys.Enter))
             {
                 if (grdSalidas.Col == s_Importe) { grdSalidas.ActivarCelda(fila + 1, s_Tipo); }
                 else
                 {
-                    if (grdSalidas.Col == s_IDDetalle) { grdSalidas.ActivarCelda(fila, s_IDDetalle + 1); }
-                    if (grdSalidas.Col == s_IDDetalle + 1) { grdSalidas.ActivarCelda(fila, s_Importe); }
-                    if (grdSalidas.Col == s_IDDetalle) { grdSalidas.ActivarCelda(fila, s_Importe); }
-                    if (grdSalidas.Col == s_SubTipo) { grdSalidas.ActivarCelda(fila, s_IDDetalle); }
-                    if (grdSalidas.Col == s_Tipo) { grdSalidas.ActivarCelda(fila, s_SubTipo); }
-                    if (grdSalidas.Col == s_Caja) { grdSalidas.ActivarCelda(fila, s_Tipo); }
+                    int columna = grdSalidas.Col;
+                    if (grdSalidas.Row == grdSalidas.Rows - 1 & grdSalidas.Rows > 2 & columna != s_IDDetalle + 1)
+                    {
+                        object a;
+                                                
+                        a = grdSalidas.get_Texto(fila - 1, columna);
+
+                        grdSalidas_Editado(Convert.ToInt16(fila), Convert.ToInt16(columna), a);
+                    }
+                    else
+                    {
+                        if (columna == s_Importe) { grdSalidas.ActivarCelda(fila, s_Caja); }
+                        if (columna == s_IDDetalle + 1) { grdSalidas.ActivarCelda(fila, s_Importe); }
+                        if (columna == s_IDDetalle) { grdSalidas.ActivarCelda(fila, s_IDDetalle + 1); }
+                        if (columna == s_SubTipo) { grdSalidas.ActivarCelda(fila, s_IDDetalle); }
+                        if (columna == s_Tipo) { grdSalidas.ActivarCelda(fila, s_SubTipo); }
+                        if (columna == s_Caja) { grdSalidas.ActivarCelda(fila, s_Tipo); }
+                    }
                 }
             }
             if (e == Convert.ToInt32(Keys.Delete))
@@ -958,62 +1049,70 @@ namespace Programa1.Carga.Tesoreria
                     if (grdSalidas.Col == s_Tipo) { fayuda.Cargar_TiposGastos(cGastos.TG.Id_Tipo); }
                     if (grdSalidas.Col == s_SubTipo) { fayuda.Cargar_SubTiposGastos(cGastos.TG.Id_Tipo); }
                     if (grdSalidas.Col == s_IDDetalle) { fayuda.Cargar_Detalles(cGastos.TG.Id_Tipo); }
-                    fayuda.ShowDialog();
 
-                    if (fayuda.Valor != "")
+                    if (cGastos.TG.EsEmpleados == true & grdSalidas.Col == s_SubTipo)
                     {
-                        if (grdSalidas.Col == s_Caja)
+                        Seleccionar_Sueldos();
+                    }
+                    else
+                    {
+                        fayuda.ShowDialog();
+
+                        if (fayuda.Valor != "")
                         {
-                            cGastos.caja.ID = h.Codigo_Seleccionado(fayuda.Valor);
-                            if (cGastos.caja.Existe() == true)
+                            if (grdSalidas.Col == s_Caja)
                             {
-                                grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Caja, cGastos.caja.ID);
-                                grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Caja + 1, cGastos.caja.Nombre);
-                                grdSalidas.ActivarCelda(grdSalidas.Row, s_Tipo);
-                            }
-                        }
-                        else
-                        {
-                            if (grdSalidas.Col == s_Tipo)
-                            {
-                                cGastos.TG.Id_Tipo = h.Codigo_Seleccionado(fayuda.Valor);
-                                grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Tipo, cGastos.TG.Id_Tipo);
-                                grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Tipo + 1, cGastos.TG.Nombre);
-                                grdSalidas.ActivarCelda(grdSalidas.Row, s_SubTipo);
+                                cGastos.caja.ID = h.Codigo_Seleccionado(fayuda.Valor);
+                                if (cGastos.caja.Existe() == true)
+                                {
+                                    grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Caja, cGastos.caja.ID);
+                                    grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Caja + 1, cGastos.caja.Nombre);
+                                    grdSalidas.ActivarCelda(grdSalidas.Row, s_Tipo);
+                                }
                             }
                             else
                             {
-                                if (grdSalidas.Col == s_SubTipo)
+                                if (grdSalidas.Col == s_Tipo)
                                 {
-                                    cGastos.Id_SubTipoGastos = h.Codigo_Seleccionado(fayuda.Valor);
-                                    cGastos.Desc_SubTipo = h.Nombre_Seleccionado(fayuda.Valor);
-                                    grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo, cGastos.Id_SubTipoGastos);
-                                    grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo + 1, cGastos.Desc_SubTipo);
-                                    //HORRIBLE
-                                    if (cGastos.TG.EsHacienda == true)
-                                    {
-                                        Seleccionar_Pago_Hacienda();
-                                    }
-                                    else
-                                    {
-                                        if (cGastos.TG.EsAgregados == true)
-                                        {
-                                            Seleccionar_Pago_Agregados();
-                                        }
-                                        else
-                                        {
-                                            grdSalidas.ActivarCelda(grdSalidas.Row, s_IDDetalle);
-                                        }
-                                    }
+                                    cGastos.TG.Id_Tipo = h.Codigo_Seleccionado(fayuda.Valor);
+                                    grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Tipo, cGastos.TG.Id_Tipo);
+                                    grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Tipo + 1, cGastos.TG.Nombre);
+                                    grdSalidas.ActivarCelda(grdSalidas.Row, s_SubTipo);
                                 }
                                 else
                                 {
-                                    if (grdSalidas.Col == s_IDDetalle)
+                                    if (grdSalidas.Col == s_SubTipo)
                                     {
-                                        cGastos.Id_DetalleGastos = h.Codigo_Seleccionado(fayuda.Valor);
-                                        grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_IDDetalle, cGastos.Id_DetalleGastos);
-                                        grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Descripcion, h.Nombre_Seleccionado(fayuda.Valor));
-                                        grdSalidas.ActivarCelda(grdSalidas.Row, s_Descripcion);
+                                        cGastos.Id_SubTipoGastos = h.Codigo_Seleccionado(fayuda.Valor);
+                                        cGastos.Desc_SubTipo = h.Nombre_Seleccionado(fayuda.Valor);
+                                        grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo, cGastos.Id_SubTipoGastos);
+                                        grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_SubTipo + 1, cGastos.Desc_SubTipo);
+                                        //HORRIBLE
+                                        if (cGastos.TG.EsHacienda == true)
+                                        {
+                                            Seleccionar_Pago_Hacienda();
+                                        }
+                                        else
+                                        {
+                                            if (cGastos.TG.EsAgregados == true)
+                                            {
+                                                Seleccionar_Pago_Agregados();
+                                            }
+                                            else
+                                            {
+                                                grdSalidas.ActivarCelda(grdSalidas.Row, s_IDDetalle);
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (grdSalidas.Col == s_IDDetalle)
+                                        {
+                                            cGastos.Id_DetalleGastos = h.Codigo_Seleccionado(fayuda.Valor);
+                                            grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_IDDetalle, cGastos.Id_DetalleGastos);
+                                            grdSalidas.set_Texto(Convert.ToInt16(grdSalidas.Row), s_Descripcion, h.Nombre_Seleccionado(fayuda.Valor));
+                                            grdSalidas.ActivarCelda(grdSalidas.Row, s_Descripcion);
+                                        }
                                     }
                                 }
                             }
@@ -1032,7 +1131,20 @@ namespace Programa1.Carga.Tesoreria
             if (sld.Aceptado == true)
             {
                 Cargar_Datos();
-                Repetir_FilaG(grdSalidas.Rows - 2);
+                Repetir_FilaG();
+            }
+            grdSalidas.Focus();
+        }
+        private void Seleccionar_Sueldos()
+        {
+            // Sueldos
+            frmCargar_Sueldos fr = new frmCargar_Sueldos();
+            fr.gastos = cGastos;
+            fr.ShowDialog();
+            if (fr.Aceptado == true)
+            {
+                Cargar_Datos();
+                Repetir_FilaG();
             }
             grdSalidas.Focus();
         }
@@ -1045,7 +1157,7 @@ namespace Programa1.Carga.Tesoreria
             if (sld.Aceptado == true)
             {
                 Cargar_Datos();
-                Repetir_FilaG(grdSalidas.Rows - 2);
+                Repetir_FilaG();
             }
             grdSalidas.Focus();
         }
@@ -1058,16 +1170,17 @@ namespace Programa1.Carga.Tesoreria
             if (sld.Aceptado == true)
             {
                 Cargar_Datos();
-                Repetir_FilaG(grdSalidas.Rows - 2);
+                Repetir_FilaG();
             }
             grdSalidas.Focus();
+            sld = null;
         }
 
 
         private void Cargar_FilaSalida(int Fila)
         {
             cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Id));
-            cGastos.Fecha = Convert.ToDateTime(grdSalidas.get_Texto(Fila, s_Fecha));
+            cGastos.Fecha = mntFecha.SelectionStart.Date;
             cGastos.caja.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Caja));
             cGastos.TG.Id_Tipo = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Tipo));
             cGastos.Id_SubTipoGastos = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_SubTipo));
@@ -1075,10 +1188,15 @@ namespace Programa1.Carga.Tesoreria
             cGastos.Id_DetalleGastos = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_IDDetalle));
             cGastos.Descripcion = Convert.ToString(grdSalidas.get_Texto(Fila, s_Descripcion));
             cGastos.Importe = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Importe));
+            cGastos.Autorizado = Convert.ToBoolean(grdSalidas.get_Texto(Fila, s_Autorizado));
+            cGastos.Fecha_Autorizado = Convert.ToDateTime(grdSalidas.get_Texto(Fila, s_Fecha_Autorizado));
         }
 
-        private void Repetir_FilaG(int f)
+        private void Repetir_FilaG()
         {
+            int f = grdSalidas.Rows - 2;
+            Cargar_FilaSalida(f);
+
             switch (o_Repetir)
             {
                 case t_Repetir.Caja:

@@ -27,7 +27,7 @@
             empleado = Empleado;
             lblNombre.Text = Empleado.Nombre;
 
-            DataTable dt = Empleado.Datos("Id=" + Empleado.Id);
+            DataTable dt = Empleado.Datos("Id=" + Empleado.ID);
             grdEmpleado.Rows = dt.Columns.Count;
 
             for (int c = 0; c < dt.Columns.Count; c++)

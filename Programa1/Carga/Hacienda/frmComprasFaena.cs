@@ -51,7 +51,7 @@
 
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo")].Format = "N3";
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo_Faena")].Format = "N3";
-            grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo_Carne")].Format = "N3";
+            grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo_Final")].Format = "N3";
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Kilos_Compra")].Format = "N0";
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Kilos_Faena")].Format = "N0";
 
@@ -219,7 +219,8 @@
             lblCant.Text = $"Cantidad: {cFaena:N0}";
             lblKilos.Text = $"Kilos: {kFaena:N2}";
             lblTotal.Text = $"Recupero: {tRecupero:C2}";
-            lblCostoCarne.Text = $"Costo Carne: {(tCompra / kFaena) - (tRecupero / kFaena):C3}";
+            lblCostoFaena.Text = $"Costo Faena: {tCompra / kFaena:C3}";
+            lblCostoFinal.Text = $"Costo Carne: {(tCompra / kFaena) - (tRecupero / kFaena):C3}";
 
             if (kCompra != 0)
             {
@@ -379,6 +380,11 @@
         private void cmdActualizar_Listado_Click(object sender, EventArgs e)
         {
             grdBoletas.MostrarDatos(hc.nBoletas.Datos_Vista("", "TOP 100 *", "NBoleta DESC"), false, false);
+        }
+
+        private void lblSubTotal_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -16,6 +16,21 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -436,6 +451,12 @@
     </Compile>
     <Compile Include="Carga\Tesoreria\frmCargarEntregas.Designer.cs">
       <DependentUpon>frmCargarEntregas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmCargar_Sueldos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmCargar_Sueldos.Designer.cs">
+      <DependentUpon>frmCargar_Sueldos.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Tesoreria\frmCheques.cs">
       <SubType>Form</SubType>
@@ -860,6 +881,9 @@
     <EmbeddedResource Include="Carga\Tesoreria\frmCargarEntregas.resx">
       <DependentUpon>frmCargarEntregas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmCargar_Sueldos.resx">
+      <DependentUpon>frmCargar_Sueldos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmCheques.resx">
       <DependentUpon>frmCheques.cs</DependentUpon>
     </EmbeddedResource>
@@ -952,6 +976,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include=".editorconfig" />
     <None Include="Herramientas\Imprimir_Precios.xlsm" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -1046,7 +1071,18 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

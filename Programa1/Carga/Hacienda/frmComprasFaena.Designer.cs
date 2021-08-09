@@ -56,11 +56,12 @@
             this.lblKilos = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRendimiento = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblCostoCarne = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCostoFinal = new System.Windows.Forms.ToolStripStatusLabel();
             this.grdBoletas = new Grilla2.SpeedGrilla();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.cmdActualizar_Listado = new Programa1.Controles.cBoton();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblCostoFaena = new System.Windows.Forms.ToolStripStatusLabel();
+            this.cmdActualizar_Listado = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -186,7 +187,7 @@
             // 
             // lblCCant
             // 
-            this.lblCCant.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCCant.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lblCCant.Name = "lblCCant";
             this.lblCCant.Size = new System.Drawing.Size(57, 23);
             this.lblCCant.Text = "Cabezas";
@@ -202,25 +203,29 @@
             // 
             // lblSubTotal
             // 
+            this.lblSubTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lblSubTotal.Name = "lblSubTotal";
-            this.lblSubTotal.Size = new System.Drawing.Size(55, 23);
+            this.lblSubTotal.Size = new System.Drawing.Size(62, 23);
             this.lblSubTotal.Text = "Sub Total";
+            this.lblSubTotal.Click += new System.EventHandler(this.lblSubTotal_Click);
             // 
             // lblIVA
             // 
+            this.lblIVA.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lblIVA.Name = "lblIVA";
-            this.lblIVA.Size = new System.Drawing.Size(24, 23);
+            this.lblIVA.Size = new System.Drawing.Size(26, 23);
             this.lblIVA.Text = "IVA";
             // 
             // lblTPercepciones
             // 
+            this.lblTPercepciones.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lblTPercepciones.Name = "lblTPercepciones";
-            this.lblTPercepciones.Size = new System.Drawing.Size(77, 23);
+            this.lblTPercepciones.Size = new System.Drawing.Size(85, 23);
             this.lblTPercepciones.Text = "Percepciones";
             // 
             // lblCTotal
             // 
-            this.lblCTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lblCTotal.Name = "lblCTotal";
             this.lblCTotal.Size = new System.Drawing.Size(36, 23);
             this.lblCTotal.Text = "Total";
@@ -228,15 +233,16 @@
             // 
             // lblTAgregados
             // 
+            this.lblTAgregados.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lblTAgregados.Name = "lblTAgregados";
-            this.lblTAgregados.Size = new System.Drawing.Size(64, 23);
+            this.lblTAgregados.Size = new System.Drawing.Size(73, 23);
             this.lblTAgregados.Text = "Agregados";
             // 
             // lblCInt
             // 
-            this.lblCInt.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCInt.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblCInt.Name = "lblCInt";
-            this.lblCInt.Size = new System.Drawing.Size(76, 23);
+            this.lblCInt.Size = new System.Drawing.Size(82, 23);
             this.lblCInt.Text = "Integración:";
             this.lblCInt.Click += new System.EventHandler(this.LblCant_Click);
             // 
@@ -408,7 +414,8 @@
             this.lblKilos,
             this.lblTotal,
             this.lblRendimiento,
-            this.lblCostoCarne});
+            this.lblCostoFaena,
+            this.lblCostoFinal});
             this.statusStrip1.Location = new System.Drawing.Point(0, 379);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1201, 28);
@@ -453,12 +460,12 @@
             this.lblRendimiento.Text = "Rendimiento";
             this.lblRendimiento.Click += new System.EventHandler(this.LblCant_Click);
             // 
-            // lblCostoCarne
+            // lblCostoFinal
             // 
-            this.lblCostoCarne.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCostoCarne.Name = "lblCostoCarne";
-            this.lblCostoCarne.Size = new System.Drawing.Size(42, 23);
-            this.lblCostoCarne.Text = "Carne";
+            this.lblCostoFinal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCostoFinal.Name = "lblCostoFinal";
+            this.lblCostoFinal.Size = new System.Drawing.Size(34, 23);
+            this.lblCostoFinal.Text = "Final";
             // 
             // grdBoletas
             // 
@@ -517,16 +524,6 @@
             this.splitContainer5.SplitterDistance = 1201;
             this.splitContainer5.TabIndex = 1;
             // 
-            // cmdActualizar_Listado
-            // 
-            this.cmdActualizar_Listado.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cmdActualizar_Listado.Location = new System.Drawing.Point(0, 626);
-            this.cmdActualizar_Listado.Name = "cmdActualizar_Listado";
-            this.cmdActualizar_Listado.Size = new System.Drawing.Size(378, 40);
-            this.cmdActualizar_Listado.TabIndex = 3;
-            this.cmdActualizar_Listado.Texto = "Actualizar";
-            this.cmdActualizar_Listado.Click += new System.EventHandler(this.cmdActualizar_Listado_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -538,6 +535,23 @@
             this.label1.Size = new System.Drawing.Size(58, 18);
             this.label1.TabIndex = 2;
             this.label1.Text = "Boletas";
+            // 
+            // lblCostoFaena
+            // 
+            this.lblCostoFaena.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCostoFaena.Name = "lblCostoFaena";
+            this.lblCostoFaena.Size = new System.Drawing.Size(42, 23);
+            this.lblCostoFaena.Text = "Faena";
+            // 
+            // cmdActualizar_Listado
+            // 
+            this.cmdActualizar_Listado.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cmdActualizar_Listado.Location = new System.Drawing.Point(0, 626);
+            this.cmdActualizar_Listado.Name = "cmdActualizar_Listado";
+            this.cmdActualizar_Listado.Size = new System.Drawing.Size(378, 40);
+            this.cmdActualizar_Listado.TabIndex = 3;
+            this.cmdActualizar_Listado.Texto = "Actualizar";
+            this.cmdActualizar_Listado.Click += new System.EventHandler(this.cmdActualizar_Listado_Click);
             // 
             // frmComprasFaena
             // 
@@ -599,7 +613,7 @@
         private System.Windows.Forms.Label label2;
         private Grilla2.SpeedGrilla grdRomaneos;
         private System.Windows.Forms.ToolStripStatusLabel lblRendimiento;
-        private System.Windows.Forms.ToolStripStatusLabel lblCostoCarne;
+        private System.Windows.Forms.ToolStripStatusLabel lblCostoFinal;
         private System.Windows.Forms.StatusStrip statusStrip3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel lblATotal;
@@ -610,5 +624,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblTAgregados;
         private System.Windows.Forms.ToolStripStatusLabel lblIVA;
         private Controles.cBoton cmdActualizar_Listado;
+        private System.Windows.Forms.ToolStripStatusLabel lblCostoFaena;
     }
 }

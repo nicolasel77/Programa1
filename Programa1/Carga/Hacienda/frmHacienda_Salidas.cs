@@ -56,7 +56,7 @@
             c_Categoria = Convert.ToByte(grdSalida.get_ColIndex("Nombre_Categoria"));
             c_Prod = Convert.ToByte(grdSalida.get_ColIndex("Nombre_Producto"));
             c_Boleta = Convert.ToByte(grdSalida.get_ColIndex("NBoleta"));
-            c_CostoCarne = Convert.ToByte(grdSalida.get_ColIndex("Costo_Carne"));
+            c_CostoCarne = Convert.ToByte(grdSalida.get_ColIndex("Costo_Final"));
             c_CostoSalida = Convert.ToByte(grdSalida.get_ColIndex("Costo_Salida"));
             c_Media = Convert.ToByte(grdSalida.get_ColIndex("Media"));
             c_Original = Convert.ToByte(grdSalida.get_ColIndex("Original"));

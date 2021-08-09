@@ -8,8 +8,7 @@
     using System.Windows.Forms;
     public partial class frmPagar_Hacienda : Form
     {
-        public Saldos_Consignatarios saldos = new Saldos_Consignatarios();
-        public Gastos gastos;
+        public Saldos_Consignatarios saldos = new Saldos_Consignatarios();        
         public Cheques ch = new Cheques();
         public bool Aceptado = false;
 
@@ -67,11 +66,11 @@
             grd.set_ColW(cTotal, 80);
             grd.set_ColW(cPago, 80);
             grd.set_ColW(cDif, 90);
-            grd.set_ColW(cSaldo, 90);
+            grd.set_ColW(cSaldo, 0);
             grd.set_ColW(cNuevo, 90);
             grd.set_ColW(cEstado, 0);
 
-            grd.ActivarCelda(1, cNuevo);
+            grd.ActivarCelda(grd.Rows - 1, cNuevo);
         }
 
         private void grd_Editado(short f, short c, object a)
@@ -81,7 +80,7 @@
                 double dife = Convert.ToDouble(grd.get_Texto(f, cDif));
                 double saldo = Convert.ToDouble(grd.get_Texto(f, cSaldo));
                 double pago = (double)a;
-                if (gastos.caja.EsCheque == true)
+                if (saldos.gastos.caja.EsCheque == true)
                 {
                     //Seleccionar el cheque                    
                     ch.Seleccionar_Cheques();
@@ -104,7 +103,7 @@
                 int r = grd.Row;
                 double saldo = Convert.ToDouble(grd.get_Texto(r, cSaldo));
                 double pago = 0;
-                if (gastos.caja.EsCheque == true)
+                if (saldos.gastos.caja.EsCheque == true)
                 {
                     //Seleccionar el cheque                    
                     ch.Seleccionar_Cheques();
@@ -138,6 +137,11 @@
 
         private void Aceptarr()
         {
+            if(saldos.gastos.Fecha < Convert.ToDateTime("1/1/2020"))
+            {
+                MessageBox.Show("error");
+            }
+            this.Cursor = Cursors.WaitCursor;
             Compra_Hacienda cm = new Compra_Hacienda();
             cm.Consignatario.ID = saldos.gastos.Id_SubTipoGastos;
 
@@ -171,8 +175,10 @@
                     cm.NBoleta.ID = Convert.ToInt32(grd.get_Texto(i, cNB));
                     cm.Actualizar_Saldo();
                 }
-            }            
+            }
             Aceptado = true;
+            this.Cursor = Cursors.Default;
+
         }
 
         private void cmdSalir_Click(object sender, System.EventArgs e)
@@ -187,5 +193,7 @@
                 this.Hide();
             }
         }
+
+      
     }
 }

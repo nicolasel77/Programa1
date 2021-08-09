@@ -114,5 +114,10 @@
         {
             return Datos_Vista(filtro, "ID_CompraFrigo, Fecha, ID_Matr, Matricula, ID_Consignatarios, Nombre, Cabezas Cab, ID_Productos Prod, Nombre_Producto Descr, Kilos, Costo, Costo2, Sub_Total, IVA, Percepcion, Total, Plazo");
         }
+        public DataTable Consignatarios_En_Boleta(int nb)
+        {
+            return Datos_Vista("NBoleta=" + nb, "ID_Consignatarios", "ID_Consignatarios", "ID_Consignatarios");
+
+        }
     }
 }

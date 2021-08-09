@@ -78,7 +78,7 @@ namespace Programa1.Carga.Tesoreria
             switch (Opcion)
             {
                 case TOpcion.gCaja:
-                    if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text}%'"; }
+                    if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'"; }
 
                     dt = gCajas.Datos(sf);
 
@@ -88,7 +88,7 @@ namespace Programa1.Carga.Tesoreria
                     }
                     break;
                 case TOpcion.gTipo:
-                    if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text}%'"; }
+                    if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'"; }
 
                     dt = TGastos.Datos(sf);
                     foreach (DataRow dr in dt.Rows)
@@ -102,11 +102,11 @@ namespace Programa1.Carga.Tesoreria
                         //if (TGastos.grupoS.Campo_Filtro.Length > 0) { Filtro_Tipo = $"{TGastos.grupoS.Campo_Filtro}={TGastos.Id_Tipo}"; }
                         if (Filtro_Tipo.Length > 0)
                         {
-                            sf = $"{Filtro_Tipo} AND {TGastos.grupoS.Campo_Nombre} LIKE '%{txtBuscar.Text}%'";
+                            sf = $"{Filtro_Tipo} AND {TGastos.grupoS.Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
                         }
                         else
                         {
-                            sf = $"{TGastos.grupoS.Campo_Nombre} LIKE '%{txtBuscar.Text}%'";
+                            sf = $"{TGastos.grupoS.Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
                         }
                     }
                     else
@@ -128,7 +128,7 @@ namespace Programa1.Carga.Tesoreria
                     {
                         if (Filtro_Tipo.Length > 0)
                         {
-                            sf = $"{Filtro_Tipo} AND Nombre LIKE '%{txtBuscar.Text}%'";
+                            sf = $"{Filtro_Tipo} AND Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
                         }
                     }
                     else

@@ -18,8 +18,7 @@
         public void Cargar_Pago()
         {
             frmPagar_Hacienda fr = new frmPagar_Hacienda();
-            fr.saldos = this;
-            fr.gastos = gastos;
+            fr.saldos = this;            
             fr.Cargar();
             fr.ShowDialog();
             Aceptado = fr.Aceptado;
@@ -53,11 +52,11 @@
             if (gastos is null) { gastos = new Gastos(); }
             if (gastos.Id_SubTipoGastos != 0)
             {
-                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND (Saldo >10 OR Saldo<-10)", $"TOP 1000 Id_Agregados_Frigo, Fecha, Plazo, Dias, NBoleta, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo, Estado" : "")}", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND (Saldo >10 OR Saldo<-10)", $"TOP 1000 Id_Agregados_Frigo, Fecha, Plazo, NBoleta, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo" : "")}", "NBoleta DESC, ID_Consignatarios");
             }
             else
             {
-                return Datos_Vista("(Saldo >10 OR Saldo<-10)", $"TOP 1000 Id_Agregados_Frigo, Fecha, Plazo, Dias, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo" : "")}, Estado", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista("(Saldo >10 OR Saldo<-10)", $"TOP 1000 Id_Agregados_Frigo, Fecha, Plazo, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo{(conNuevo ? ", 0.0 AS Nuevo" : "")}", "NBoleta DESC, ID_Consignatarios");
             }
         }
 
