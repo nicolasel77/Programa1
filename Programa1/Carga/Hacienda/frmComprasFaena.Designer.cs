@@ -56,12 +56,13 @@
             this.lblKilos = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRendimiento = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCostoFaena = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCostoFinal = new System.Windows.Forms.ToolStripStatusLabel();
             this.grdBoletas = new Grilla2.SpeedGrilla();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblCostoFaena = new System.Windows.Forms.ToolStripStatusLabel();
             this.cmdActualizar_Listado = new Programa1.Controles.cBoton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nuTop = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -81,6 +82,7 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuTop)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -460,6 +462,13 @@
             this.lblRendimiento.Text = "Rendimiento";
             this.lblRendimiento.Click += new System.EventHandler(this.LblCant_Click);
             // 
+            // lblCostoFaena
+            // 
+            this.lblCostoFaena.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCostoFaena.Name = "lblCostoFaena";
+            this.lblCostoFaena.Size = new System.Drawing.Size(42, 23);
+            this.lblCostoFaena.Text = "Faena";
+            // 
             // lblCostoFinal
             // 
             this.lblCostoFinal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -499,7 +508,7 @@
             this.grdBoletas.Redraw = true;
             this.grdBoletas.Row = 0;
             this.grdBoletas.Rows = 50;
-            this.grdBoletas.Size = new System.Drawing.Size(375, 599);
+            this.grdBoletas.Size = new System.Drawing.Size(375, 577);
             this.grdBoletas.TabIndex = 1;
             this.grdBoletas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdBoletas_CambioFila);
             // 
@@ -517,12 +526,23 @@
             // 
             // splitContainer5.Panel2
             // 
+            this.splitContainer5.Panel2.Controls.Add(this.nuTop);
             this.splitContainer5.Panel2.Controls.Add(this.cmdActualizar_Listado);
             this.splitContainer5.Panel2.Controls.Add(this.grdBoletas);
             this.splitContainer5.Panel2.Controls.Add(this.label1);
             this.splitContainer5.Size = new System.Drawing.Size(1583, 666);
             this.splitContainer5.SplitterDistance = 1201;
             this.splitContainer5.TabIndex = 1;
+            // 
+            // cmdActualizar_Listado
+            // 
+            this.cmdActualizar_Listado.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cmdActualizar_Listado.Location = new System.Drawing.Point(0, 626);
+            this.cmdActualizar_Listado.Name = "cmdActualizar_Listado";
+            this.cmdActualizar_Listado.Size = new System.Drawing.Size(378, 40);
+            this.cmdActualizar_Listado.TabIndex = 3;
+            this.cmdActualizar_Listado.Texto = "Actualizar";
+            this.cmdActualizar_Listado.Click += new System.EventHandler(this.cmdActualizar_Listado_Click);
             // 
             // label1
             // 
@@ -536,22 +556,24 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Boletas";
             // 
-            // lblCostoFaena
+            // nuTop
             // 
-            this.lblCostoFaena.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCostoFaena.Name = "lblCostoFaena";
-            this.lblCostoFaena.Size = new System.Drawing.Size(42, 23);
-            this.lblCostoFaena.Text = "Faena";
-            // 
-            // cmdActualizar_Listado
-            // 
-            this.cmdActualizar_Listado.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cmdActualizar_Listado.Location = new System.Drawing.Point(0, 626);
-            this.cmdActualizar_Listado.Name = "cmdActualizar_Listado";
-            this.cmdActualizar_Listado.Size = new System.Drawing.Size(378, 40);
-            this.cmdActualizar_Listado.TabIndex = 3;
-            this.cmdActualizar_Listado.Texto = "Actualizar";
-            this.cmdActualizar_Listado.Click += new System.EventHandler(this.cmdActualizar_Listado_Click);
+            this.nuTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nuTop.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nuTop.Location = new System.Drawing.Point(3, 604);
+            this.nuTop.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nuTop.Name = "nuTop";
+            this.nuTop.Size = new System.Drawing.Size(55, 16);
+            this.nuTop.TabIndex = 4;
+            this.nuTop.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             // 
             // frmComprasFaena
             // 
@@ -586,6 +608,7 @@
             this.splitContainer5.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nuTop)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -625,5 +648,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblIVA;
         private Controles.cBoton cmdActualizar_Listado;
         private System.Windows.Forms.ToolStripStatusLabel lblCostoFaena;
+        private System.Windows.Forms.NumericUpDown nuTop;
     }
 }

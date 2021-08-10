@@ -51,6 +51,8 @@ namespace Programa1.Carga.Hacienda
             this.cmdSaldos = new System.Windows.Forms.Button();
             this.chBoleta = new MaterialSkin.Controls.MaterialCheckBox();
             this.cmdAdelante = new System.Windows.Forms.Button();
+            this.txtBoleta = new System.Windows.Forms.TextBox();
+            this.txtHasta = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nuCant)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -209,7 +211,7 @@ namespace Programa1.Carga.Hacienda
             this.lstBoletas.ItemHeight = 20;
             this.lstBoletas.Location = new System.Drawing.Point(16, 480);
             this.lstBoletas.Name = "lstBoletas";
-            this.lstBoletas.Size = new System.Drawing.Size(123, 180);
+            this.lstBoletas.Size = new System.Drawing.Size(123, 140);
             this.lstBoletas.TabIndex = 5;
             this.lstBoletas.DoubleClick += new System.EventHandler(this.lstBoletas_DoubleClick);
             this.lstBoletas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstBoletas_MouseUp);
@@ -248,8 +250,6 @@ namespace Programa1.Carga.Hacienda
             // 
             // mdSincSalidas
             // 
-            this.mdSincSalidas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.mdSincSalidas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.mdSincSalidas.Location = new System.Drawing.Point(16, 357);
             this.mdSincSalidas.Name = "mdSincSalidas";
@@ -277,8 +277,6 @@ namespace Programa1.Carga.Hacienda
             // 
             // cmdSaldos
             // 
-            this.cmdSaldos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdSaldos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmdSaldos.Location = new System.Drawing.Point(145, 642);
             this.cmdSaldos.Name = "cmdSaldos";
@@ -306,8 +304,6 @@ namespace Programa1.Carga.Hacienda
             // 
             // cmdAdelante
             // 
-            this.cmdAdelante.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdAdelante.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmdAdelante.Location = new System.Drawing.Point(145, 608);
             this.cmdAdelante.Name = "cmdAdelante";
@@ -317,11 +313,33 @@ namespace Programa1.Carga.Hacienda
             this.cmdAdelante.UseVisualStyleBackColor = true;
             this.cmdAdelante.Click += new System.EventHandler(this.cmdAdelante_Click);
             // 
+            // txtBoleta
+            // 
+            this.txtBoleta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtBoleta.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBoleta.Location = new System.Drawing.Point(16, 642);
+            this.txtBoleta.Name = "txtBoleta";
+            this.txtBoleta.Size = new System.Drawing.Size(59, 13);
+            this.txtBoleta.TabIndex = 10;
+            this.txtBoleta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoleta_KeyPress);
+            this.txtBoleta.Validated += new System.EventHandler(this.txtBoleta_Validated);
+            // 
+            // txtHasta
+            // 
+            this.txtHasta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtHasta.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtHasta.Location = new System.Drawing.Point(81, 642);
+            this.txtHasta.Name = "txtHasta";
+            this.txtHasta.Size = new System.Drawing.Size(58, 13);
+            this.txtHasta.TabIndex = 11;
+            // 
             // frmSincronizarAccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 668);
+            this.Controls.Add(this.txtHasta);
+            this.Controls.Add(this.txtBoleta);
             this.Controls.Add(this.cmdAdelante);
             this.Controls.Add(this.cmdSaldos);
             this.Controls.Add(this.mdSincSalidas);
@@ -372,5 +390,7 @@ namespace Programa1.Carga.Hacienda
         private System.Windows.Forms.Button cmdSaldos;
         private MaterialSkin.Controls.MaterialCheckBox chBoleta;
         private System.Windows.Forms.Button cmdAdelante;
+        private System.Windows.Forms.TextBox txtBoleta;
+        private System.Windows.Forms.TextBox txtHasta;
     }
 }

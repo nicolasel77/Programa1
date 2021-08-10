@@ -303,9 +303,10 @@
                 OleDbDataAdapter daAdapt = new OleDbDataAdapter(cmd);
                 daAdapt.Fill(dt);
             }
-            catch (Exception)
+            catch (Exception er)
             {
                 dt = null;
+                MessageBox.Show(er.Message);
             }
 
             return dt;

@@ -46,7 +46,7 @@
         {
             InitializeComponent();
 
-            grdBoletas.MostrarDatos(hc.nBoletas.Datos_Vista("", "TOP 100 *", "NBoleta DESC"), true, false);
+            grdBoletas.MostrarDatos(hc.nBoletas.Datos_Vista("", $"TOP {nuTop.Value} *", "NBoleta DESC"), true, false);
             grdBoletas.AutosizeAll();
 
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Costo")].Format = "N3";
@@ -82,6 +82,8 @@
             grdCompras.Columnas[c_IVA].Format = "C2";
             grdCompras.Columnas[c_Perc].Format = "C2";
             grdCompras.Columnas[c_Total].Format = "C2";
+
+            grdCompras.Filas[0].TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.CenterCenter;
 
             grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=0"), true, true);
 
@@ -150,13 +152,17 @@
         private void GrdBoletas_CambioFila(short Fila)
         {
             this.Cursor = Cursors.WaitCursor;
+            
             hc.nBoletas.ID = Convert.ToInt32(grdBoletas.get_Texto(Fila, 0));
+            
             grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=" + hc.nBoletas.ID), false);
+            grdCompras.Filas[0].TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.CenterCenter;
 
             grdAgregados.MostrarDatos(hc.Agregados.Datos("NBoleta=" + hc.nBoletas.ID), false);
 
             hc.Faena.nBoleta = hc.nBoletas;
             grdFaena.MostrarDatos(hc.Faena.Datos_Vista("NBoleta=" + hc.nBoletas.ID), false);
+            grdFaena.AutosizeAll();
 
             grdRomaneos.MostrarDatos(hc.Faena.Romaneos(), true, true);
             grdRomaneos.SumarCol(2, true);
@@ -379,7 +385,7 @@
 
         private void cmdActualizar_Listado_Click(object sender, EventArgs e)
         {
-            grdBoletas.MostrarDatos(hc.nBoletas.Datos_Vista("", "TOP 100 *", "NBoleta DESC"), false, false);
+            grdBoletas.MostrarDatos(hc.nBoletas.Datos_Vista("", $"TOP {nuTop.Value} *", "NBoleta DESC"), false, false);
         }
 
         private void lblSubTotal_Click(object sender, EventArgs e)
