@@ -2,7 +2,6 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
-using System.Drawing;
 
 
 namespace Programa1.Carga.Tesoreria
@@ -41,6 +40,7 @@ namespace Programa1.Carga.Tesoreria
             Cargar_List();
 
             Cargar_Grilla();
+            if (lst.Items.Count > 0) { lst.SelectedIndex = 0; }
         }
 
         private void Cargar_List()
@@ -312,62 +312,69 @@ namespace Programa1.Carga.Tesoreria
 
         private void frmResumen_Gastos_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            if (lst.Items.Count > 0)
             {
-                case Keys.Right:
-                    e.Handled = true;
-                    switch (Orden)
-                    {
-                        case e_Orden.Tipo:
-                            Orden = e_Orden.SubTipo;
-                            Cargar_List();
-                            Cargar_Grilla();
-                            break;
-                        case e_Orden.SubTipo:
-                            Orden = e_Orden.Detalle;
-                            Cargar_List();
-                            Cargar_Grilla();
-                            break;
-
-                    }
-                    break;
-                case Keys.Left:
-                    e.Handled = true;
-                    switch (Orden)
-                    {
-                        case e_Orden.Detalle:
-                            Orden = e_Orden.SubTipo;
-                            Cargar_List();
-                            Cargar_Grilla();
-                            break;
-                        case e_Orden.SubTipo:
-                            Orden = e_Orden.Tipo;
-                            Cargar_List();
-                            Cargar_Grilla();
-                            break;
-
-                    }
-                    // Activar el último seleccionado
-                    for (int i = 0; i <= lst.Items.Count - 1; i++)
-                    {
-                        if (Orden == e_Orden.SubTipo)
+                switch (e.KeyCode)
+                {
+                    case Keys.Right:
+                        e.Handled = true;
+                        if (lst.SelectedIndex > 0)
                         {
-                            if (SubTipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
+                            switch (Orden)
                             {
-                                lst.SelectedIndex = i;
-                                break;
+                                case e_Orden.Tipo:
+                                    Orden = e_Orden.SubTipo;
+                                    Cargar_List();
+                                    Cargar_Grilla();
+                                    break;
+                                case e_Orden.SubTipo:
+                                    Orden = e_Orden.Detalle;
+                                    Cargar_List();
+                                    Cargar_Grilla();
+                                    break;
+
                             }
                         }
-                        else
-                        {
-                            if (Tipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
+                        break;
+
+                    case Keys.Left:
+                        e.Handled = true;
+                            switch (Orden)
                             {
-                                lst.SelectedIndex = i;
-                                break;
+                                case e_Orden.Detalle:
+                                    Orden = e_Orden.SubTipo;
+                                    Cargar_List();
+                                    Cargar_Grilla();
+                                    break;
+                                case e_Orden.SubTipo:
+                                    Orden = e_Orden.Tipo;
+                                    Cargar_List();
+                                    Cargar_Grilla();
+                                    break;
+
                             }
-                        }
-                    }
-                    break;
+                            // Activar el último seleccionado
+                            for (int i = 0; i <= lst.Items.Count - 1; i++)
+                            {
+                                if (Orden == e_Orden.SubTipo)
+                                {
+                                    if (SubTipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
+                                    {
+                                        lst.SelectedIndex = i;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    if (Tipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
+                                    {
+                                        lst.SelectedIndex = i;
+                                        break;
+                                    }
+                                }
+                            }
+                        break;
+                }
             }
         }
 

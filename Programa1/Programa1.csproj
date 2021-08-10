@@ -16,21 +16,6 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,6 +45,7 @@
     <StartupObject>Programa1.clsMain</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C1.C1DataExtender.2, Version=2.0.20113.81, Culture=neutral, PublicKeyToken=7c4b5683f80b910e, processorArchitecture=MSIL" />
     <Reference Include="C1.Common">
       <HintPath>..\SpeedGrilla\C1.Common.dll</HintPath>
     </Reference>
@@ -78,9 +64,12 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Linq.Dynamic.Core, Version=1.2.2.0, Culture=neutral, PublicKeyToken=0f07ec44de6ac832, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.Dynamic.Core.1.2.2\lib\net46\System.Linq.Dynamic.Core.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -464,6 +453,12 @@
     <Compile Include="Carga\Tesoreria\frmCheques.Designer.cs">
       <DependentUpon>frmCheques.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmDetalles_Pagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmDetalles_Pagos.Designer.cs">
+      <DependentUpon>frmDetalles_Pagos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmNARendir.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -636,6 +631,7 @@
     <Compile Include="DB\Tesoreria\Caja_Diaria.cs" />
     <Compile Include="DB\Tesoreria\Cheques.cs" />
     <Compile Include="DB\Tesoreria\Cuentas_Bancos.cs" />
+    <Compile Include="DB\Tesoreria\Detalles_Pagos.cs" />
     <Compile Include="DB\Tesoreria\Detalle_Entregas.cs" />
     <Compile Include="DB\Tesoreria\Detalle_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Entradas.cs" />
@@ -887,6 +883,9 @@
     <EmbeddedResource Include="Carga\Tesoreria\frmCheques.resx">
       <DependentUpon>frmCheques.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmDetalles_Pagos.resx">
+      <DependentUpon>frmDetalles_Pagos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmNARendir.resx">
       <DependentUpon>frmNARendir.cs</DependentUpon>
     </EmbeddedResource>
@@ -976,7 +975,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include=".editorconfig" />
     <None Include="Herramientas\Imprimir_Precios.xlsm" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -1071,18 +1069,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

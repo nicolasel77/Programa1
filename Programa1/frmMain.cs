@@ -2093,5 +2093,33 @@
                 }
             }
         }
+
+        private void detallesPagosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmDetalles_Pagos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmDetalles_Pagos");
+                t.Text = "Detalles_Pagos";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmDetalles_Pagos = new Programa1.Carga.Tesoreria.frmDetalles_Pagos();
+                frmDetalles_Pagos.MdiParent = this;
+                forms.Add(frmDetalles_Pagos);
+                frmDetalles_Pagos.Show();
+                frmDetalles_Pagos.WindowState = FormWindowState.Minimized;
+                frmDetalles_Pagos.WindowState = FormWindowState.Maximized;
+            }
+        }
     }
 }

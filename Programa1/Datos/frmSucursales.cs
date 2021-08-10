@@ -1,8 +1,8 @@
 ﻿
 namespace Programa1.Datos
 {
-    using Programa1.DB.Sucursales;
     using Programa1.DB;
+    using Programa1.DB.Sucursales;
     using System;
     using System.Windows.Forms;
 
@@ -12,6 +12,21 @@ namespace Programa1.Datos
         private Partidos Partidos = new Partidos();
         private Localidades Localidades = new Localidades();
 
+        #region " Columnas grdSucursales"
+        private const Byte c_Id = 0;
+        private const Byte c_Nombre = 1;
+        private const Byte c_tipo = 2;
+        private const Byte c_Descripcion = 3;
+        private const Byte c_Ver = 4;
+        private const Byte c_Propio = 5;
+        private const Byte c_Titular = 6;
+        private const Byte c_Direccion = 7;
+        private const Byte c_Alias = 8;
+        private const Byte c_Id_Localidad = 9;
+        private const Byte c_Balanza = 10;
+        private const Byte c_CUIT = 11;
+
+        #endregion
 
         public frmSucursales()
         {
@@ -358,7 +373,7 @@ namespace Programa1.Datos
 
             switch (c)
             {
-                case 0: // Id
+                case c_Id: // Id
                     if (i != 0)
                     {
                         Mensaje("Error: no se puede cambiar el Id de una sucursal existente.");
@@ -380,7 +395,7 @@ namespace Programa1.Datos
                         }
                     }
                     break;
-                case 1: // Nombre
+                case c_Nombre: // Nombre
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -395,7 +410,7 @@ namespace Programa1.Datos
                         grdSucursales.ActivarCelda(f, 2);
                     }
                     break;
-                case 2: // Tipo
+                case c_tipo: // Tipo
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -419,7 +434,7 @@ namespace Programa1.Datos
                     }
                     break;
 
-                case 3: // Ver
+                case c_Ver: // Ver
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -434,7 +449,7 @@ namespace Programa1.Datos
                         grdSucursales.ActivarCelda(f, 4);
                     }
                     break;
-                case 4: // Propio
+                case c_Propio: // Propio
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -449,7 +464,7 @@ namespace Programa1.Datos
                         grdSucursales.ActivarCelda(f, 5);
                     }
                     break;
-                case 5: // Titular
+                case c_Titular: // Titular
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -464,7 +479,7 @@ namespace Programa1.Datos
                         grdSucursales.ActivarCelda(f, 6);
                     }
                     break;
-                case 6: // Direccion
+                case c_Direccion: // Direccion
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -479,7 +494,7 @@ namespace Programa1.Datos
                         grdSucursales.ActivarCelda(f, 7);
                     }
                     break;
-                case 7: // Alias
+                case c_Alias: // Alias
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -494,7 +509,7 @@ namespace Programa1.Datos
                         grdSucursales.ActivarCelda(f, 8);
                     }
                     break;
-                case 8: // Id_Localidad
+                case c_Id_Localidad: // Id_Localidad
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -517,7 +532,7 @@ namespace Programa1.Datos
                         }
                     }
                     break;
-                case 9: // Balanza
+                case c_Balanza: // Balanza
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -533,7 +548,7 @@ namespace Programa1.Datos
                     }
                     break;
 
-                case 10: // CUIT
+                case c_CUIT: // CUIT
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -588,17 +603,17 @@ namespace Programa1.Datos
             // 8 int Id_Localidad
             // 9 string Balanza
             // 10 string CUIT
-            Sucs.ID = Convert.ToInt32(grdSucursales.get_Texto(Fila, 0));
-            Sucs.Nombre = grdSucursales.get_Texto(Fila, 1).ToString();
-            Sucs.Tipo.ID = Convert.ToInt32(grdSucursales.get_Texto(Fila, 2));
-            Sucs.Ver = bool.Parse(grdSucursales.get_Texto(Fila, 3).ToString());
-            Sucs.Propio = bool.Parse(grdSucursales.get_Texto(Fila, 4).ToString());
-            Sucs.Titular = grdSucursales.get_Texto(Fila, 5).ToString();
-            Sucs.Direccion = grdSucursales.get_Texto(Fila, 6).ToString();
-            Sucs.Alias = grdSucursales.get_Texto(Fila, 7).ToString();
-            Sucs.Localidad.Id = Convert.ToInt32(grdSucursales.get_Texto(Fila, 8));
-            Sucs.Balanza = grdSucursales.get_Texto(Fila, 9).ToString();
-            Sucs.CUIT = grdSucursales.get_Texto(Fila, 10).ToString();
+            Sucs.ID = Convert.ToInt32(grdSucursales.get_Texto(Fila, c_Id));
+            Sucs.Nombre = grdSucursales.get_Texto(Fila, c_Nombre).ToString();
+            Sucs.Tipo.ID = Convert.ToInt32(grdSucursales.get_Texto(Fila, c_tipo));
+            Sucs.Ver = bool.Parse(grdSucursales.get_Texto(Fila, c_Ver).ToString());
+            Sucs.Propio = bool.Parse(grdSucursales.get_Texto(Fila, c_Propio).ToString());
+            Sucs.Titular = grdSucursales.get_Texto(Fila, c_Titular).ToString();
+            Sucs.Direccion = grdSucursales.get_Texto(Fila, c_Direccion).ToString();
+            Sucs.Alias = grdSucursales.get_Texto(Fila, c_Alias).ToString();
+            Sucs.Localidad.Id = Convert.ToInt32(grdSucursales.get_Texto(Fila, c_Id_Localidad));
+            Sucs.Balanza = grdSucursales.get_Texto(Fila, c_Balanza).ToString();
+            Sucs.CUIT = grdSucursales.get_Texto(Fila, c_CUIT).ToString();
 
         }
 

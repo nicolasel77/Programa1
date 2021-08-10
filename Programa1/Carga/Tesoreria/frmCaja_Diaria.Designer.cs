@@ -71,8 +71,8 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.cmdCerrar_Fecha = new MaterialSkin.Controls.MaterialFlatButton();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.mntFecha = new System.Windows.Forms.MonthCalendar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -737,19 +737,6 @@
             this.materialLabel5.TabIndex = 4;
             this.materialLabel5.Text = "Salidas";
             // 
-            // materialLabel2
-            // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(0, 0);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(67, 18);
-            this.materialLabel2.TabIndex = 4;
-            this.materialLabel2.Text = "Entradas";
-            // 
             // cmdCerrar_Fecha
             // 
             this.cmdCerrar_Fecha.AutoSize = true;
@@ -766,6 +753,19 @@
             this.cmdCerrar_Fecha.Text = "Cambiar Fecha";
             this.cmdCerrar_Fecha.UseVisualStyleBackColor = true;
             this.cmdCerrar_Fecha.Click += new System.EventHandler(this.cmdCerrar_Fecha_Click);
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel2.Location = new System.Drawing.Point(0, 0);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(67, 18);
+            this.materialLabel2.TabIndex = 4;
+            this.materialLabel2.Text = "Entradas";
             // 
             // materialLabel4
             // 

@@ -2,7 +2,6 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
-using System.Drawing;
 
 
 namespace Programa1.Carga.Tesoreria
@@ -187,53 +186,62 @@ namespace Programa1.Carga.Tesoreria
 
         private void frmResumen_Entradas_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            if (lst.Items.Count > 0)
             {
-                case Keys.Right:
-                    e.Handled = true;
-                    switch (Orden)
-                    {
-                        case e_Orden.Tipo:
-                            Orden = e_Orden.SubTipo;
-                            Cargar_List();
-                            Cargar_Grilla();
-                            break;
-                    }
-                    break;
-                case Keys.Left:
-                    e.Handled = true;
-                    switch (Orden)
-                    {
-                        case e_Orden.SubTipo:
-                            Orden = e_Orden.Tipo;
-                            Cargar_List();
-                            Cargar_Grilla();
-                            break;
+                switch (e.KeyCode)
+                {
+                    case Keys.Right:
+                        e.Handled = true;
+                        switch (Orden)
+                        {
+                            case e_Orden.Tipo:
+                                if (lst.SelectedIndex > 0)
+                                {
+                                    Orden = e_Orden.SubTipo;
+                                    Cargar_List();
+                                    Cargar_Grilla();
+                                }
+                                break;
+                        }
+                        break;
+                    case Keys.Left:
+                        e.Handled = true;
 
-                    }
-                    // Activar el último seleccionado
-                    for (int i = 0; i <= lst.Items.Count - 1; i++)
-                    {
-                        if (Orden == e_Orden.SubTipo)
+                        switch (Orden)
                         {
-                            if (SubTipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
-                            {
-                                lst.SelectedIndex = i;
+                            case e_Orden.SubTipo:
+                                    Orden = e_Orden.Tipo;
+                                    Cargar_List();
+                                    Cargar_Grilla();
+                                // Activar el último seleccionado
+
+                                for (int i = 0; i <= lst.Items.Count - 1; i++)
+                                {
+                                    if (Orden == e_Orden.SubTipo)
+                                    {
+                                        if (SubTipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
+                                        {
+                                            lst.SelectedIndex = i;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (Tipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
+                                        {
+                                            lst.SelectedIndex = i;
+                                            break;
+                                        }
+                                    }
+                                }
                                 break;
-                            }
                         }
-                        else
-                        {
-                            if (Tipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
-                            {
-                                lst.SelectedIndex = i;
-                                break;
-                            }
-                        }
-                    }
-                    break;
+                        break;
+                }
+
             }
-        }
 
+        }
     }
+
 }
