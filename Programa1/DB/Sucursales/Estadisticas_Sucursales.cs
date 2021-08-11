@@ -216,11 +216,17 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP {Top} Semana, Rend, Balance, Carne, Pollo, Granja, Men, Emb, Rec, IntVenta, IntCompra, DifInt" +
-                    $", Empleados, Gastos, Ganancia, Clientes, Reintegros" +
-                    $" FROM vw_Estadisticas_Sucursal WHERE " +
-                    $" ID_Sucursales={Suc.ID}" +
-                    $" AND Semana BETWEEN  '{Sem.Semana.AddYears(-1):MM/dd/yy}' AND '{Sem.Semana:MM/dd/yy}' ORDER BY Semana DESC", conexionSql);
+                string cmdText = "";
+
+                cmdText = $"SELECT TOP {Top} Semana, Rend, Balance, Carne, Pollo, Granja, Men, Emb, Rec, IntVenta, IntCompra, DifInt" +
+                            $", Empleados, Gastos, Ganancia, Clientes, Reintegros" +
+                            $" FROM vw_Estadisticas_Sucursal WHERE " +
+                            $" ID_Sucursales={Suc.ID}" +
+                            $" AND Semana BETWEEN  '{Sem.Semana.AddYears(-1):MM/dd/yy}' AND '{Sem.Semana:MM/dd/yy}' ORDER BY Semana DESC";
+
+
+                SqlCommand comandoSql = new SqlCommand(cmdText, conexionSql);
+
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -240,20 +246,29 @@
 
             try
             {
-                string f = "";
+
+                string cmdText = "";
+
                 switch (Filtro_Propio)
                 {
                     case Tipo_Propio.Sucursales:
-                        f = "Propio=1 AND";
+                        cmdText = $"SELECT ID_Sucursales Suc, Nombre, Rend, Balance, Carne, Pollo, Granja, Men, Emb, Rec, IntVenta, IntCompra, DifInt" +
+                                    $", Empleados, Gastos, Ganancia, Clientes, Reintegros" +
+                                    $" FROM vw_Estadisticas_Sucursal WHERE " +
+                                    $" Propio=1 AND {(Filtro_Ver ? "Ver=1 AND " : "")} Semana='{Sem.Semana:MM/dd/yy}' ORDER BY ID_Sucursales";
                         break;
                     case Tipo_Propio.Clientes:
-                        f = "Propio=0 AND";
+                        cmdText = $"SELECT ID_Sucursales Suc, Nombre" +
+                                    $", (SELECT SUM(b.Total_Venta) FROM vw_Ventas b WHERE b.ID_Sucursales=vw_Estadisticas_Sucursal.ID_Sucursales AND b.Fecha BETWEEN Semana AND Semana + 6) AS Compra" +
+                                    $", (SELECT SUM(b.Total_Entrada) FROM vw_Traslados b WHERE b.Suc_Entrada=vw_Estadisticas_Sucursal.ID_Sucursales AND b.Fecha BETWEEN Semana AND Semana + 6) AS Trasl_E" +
+                                    $", (SELECT SUM(b.Total_Salida) FROM vw_Traslados b WHERE b.Suc_Salida=vw_Estadisticas_Sucursal.ID_Sucursales AND b.Fecha BETWEEN Semana AND Semana + 6) AS Trasl_S" +
+                                    $", Balance AS Saldo" +
+                                    $" FROM vw_Estadisticas_Sucursal WHERE " +
+                                    $" Propio=0 AND {(Filtro_Ver ? "Ver=1 AND " : "")} Semana='{Sem.Semana:MM/dd/yy}' ORDER BY ID_Sucursales";
                         break;
                 }
-                SqlCommand comandoSql = new SqlCommand($"SELECT ID_Sucursales Suc, Nombre, Rend, Balance, Carne, Pollo, Granja, Men, Emb, Rec, IntVenta, IntCompra, DifInt" +
-                    $", Empleados, Gastos, Ganancia, Clientes, Reintegros" +
-                    $" FROM vw_Estadisticas_Sucursal WHERE " +
-                    $" {f} {(Filtro_Ver ? "Ver=1 AND " : "")} Semana='{Sem.Semana:MM/dd/yy}' ORDER BY ID_Sucursales", conexionSql);
+
+                SqlCommand comandoSql = new SqlCommand(cmdText, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -350,8 +365,8 @@
                 dt.Columns.Add("Total", typeof(double), suma_Semanas);
                 dt.Columns.Add("Stock", typeof(double));
 
-                
-                Stock st = new Stock();               
+
+                Stock st = new Stock();
                 ////Limpiar el dt
                 for (int i = dt.Rows.Count - 1; i > -1; i--)
                 {
@@ -378,7 +393,7 @@
                             {
                                 dr["Stock"] = st.Stock_Kilos($"Fecha='{Sem.Semana.AddDays(6):MM/dd/yy}' AND ID_Productos={dr["Prod"]}");
                             }
-                                
+
                         }
                     }
                 }

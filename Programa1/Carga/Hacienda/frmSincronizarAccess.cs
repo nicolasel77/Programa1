@@ -221,6 +221,9 @@ namespace Programa1.Carga.Hacienda
                 hacienda.compra.Actualizar("Plazo", Convert.ToInt16(drAccess["Plazo"]));
                 hacienda.compra.Actualizar("Percepcion", Convert.ToDouble(drAccess["Percepcion"]));
                 hacienda.compra.Actualizar("Matricula", hacienda.compra.Matricula.ID);
+
+                object estado = hacienda.compra.Dato_Generico("dbStock.dbo.DCompra", "ID_Compra=" + hacienda.compra.ID, "Corroborar");
+                hacienda.compra.Actualizar("Estado", estado);
             }
             //  ****************************
             //  3º Agregados
@@ -248,6 +251,9 @@ namespace Programa1.Carga.Hacienda
                 hacienda.Agregados.Actualizar("Importe", Convert.ToDouble(drAccess["Importe"]));
                 hacienda.Agregados.Actualizar("Plazo", Convert.ToInt16(drAccess["Plazo"]));
                 hacienda.Agregados.Actualizar("Matricula", hacienda.compra.Matricula.ID);
+
+                object estado = hacienda.Agregados.Dato_Generico("dbStock.dbo.AgrCompra", "ID_Agregados=" + hacienda.Agregados.ID, "Corroborar");
+                hacienda.Agregados.Actualizar("Estado", estado);
             }
         }
 
