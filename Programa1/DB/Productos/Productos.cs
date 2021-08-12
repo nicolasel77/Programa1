@@ -32,7 +32,12 @@
         public bool Filtrar_Ver { get; set; } = true;
 
         public bool Ordern_XId { get; set; } = true;
-                
+
+        public new DataTable Datos(string filtro = "")
+        {
+            return Datos_Vista(filtro, " Id, Id_Tipo, Descripcion, Nombre, Ver, Imprimir, Pesable, Multiplicador ");
+        }
+
         public void Siguiente()
         {
             var dt = new DataTable("Datos");

@@ -2121,5 +2121,33 @@
                 frmDetalles_Pagos.WindowState = FormWindowState.Maximized;
             }
         }
+
+        private void tarjetasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmTarjetas")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmTarjetas");
+                t.Text = "Resumen_Tarjetas";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmTarjetas = new Programa1.Carga.Tesoreria.frmTarjetas();
+                frmTarjetas.MdiParent = this;
+                forms.Add(frmTarjetas);
+                frmTarjetas.Show();
+                frmTarjetas.WindowState = FormWindowState.Minimized;
+                frmTarjetas.WindowState = FormWindowState.Maximized;
+            }
+        }
     }
 }

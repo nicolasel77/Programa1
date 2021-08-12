@@ -13,13 +13,14 @@
 
         private const byte cId = 0;
         private const byte cTipo = 1;
+        private const byte cDescripcion = 2;
         private const byte cNombre = 3;
         private const byte cVer = 4;
         private const byte cImprimir = 5;
         private const byte cPesable = 6;
         private const byte cMultiplicador = 7;
-        private const byte cResumirPorVenta = 8;
-        private const byte cTiene_Estadistica = 9;
+        private const byte cResumirPorVenta = 2;
+        private const byte cTiene_Estadistica = 3;
 
         public frmProductos()
         {
@@ -40,7 +41,7 @@
 
             //Productos
             //Datos
-            dt = prods.Datos_Vista();
+            dt = prods.Datos();
             grdProductos.MostrarDatos(dt, true);
             //Formato
             grdProductos.set_ColW(cId, 40);
@@ -73,7 +74,10 @@
                         {
                             grdTipo.set_Texto(f, c, a);
                             prods.Tipo.Agregar();
+                            grdTipo.AgregarFila();
                             grdTipo.ActivarCelda(f, 1);
+                            grdTipo.set_Texto(f, cResumirPorVenta, 1);
+                            grdTipo.set_Texto(f, cTiene_Estadistica, 1);
                         }
                     }
                     break;
@@ -93,7 +97,7 @@
                         grdTipo.ActivarCelda(f, c + 1);
                     }
                     break;
-                case 2: // ResumirPorVenta
+                case cResumirPorVenta: // ResumirPorVenta
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -108,7 +112,7 @@
                         grdTipo.ActivarCelda(f , c + 1);
                     }
                     break;
-                case 3: // Tiene_Estadistica
+                case cTiene_Estadistica: // Tiene_Estadistica
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -223,7 +227,7 @@
                         }
                     }
                     break;
-                case 3: // Nombre
+                case cNombre: // Nombre
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -238,7 +242,7 @@
                         grdProductos.ActivarCelda(f, cVer);
                     }
                     break;
-                case 4: // Ver
+                case cVer: // Ver
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -253,7 +257,7 @@
                         grdProductos.ActivarCelda(f, 5);
                     }
                     break;
-                case 5: // Imp
+                case cImprimir: // Imp
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -268,7 +272,7 @@
                         grdProductos.ActivarCelda(f, 6);
                     }
                     break;
-                case 6: // Pesable
+                case cPesable: // Pesable
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -283,7 +287,7 @@
                         grdProductos.ActivarCelda(f, 7);
                     }
                     break;
-                case 7: // Multiplicador
+                case cMultiplicador: // Multiplicador
                     if (i == 0)
                     {
                         Mensaje("Debe ingresar el Id primero");
@@ -298,6 +302,21 @@
                         grdProductos.ActivarCelda(f + 1, 0);
                     }
                     break;
+                //case cResumirPorVenta: // ResumirPorVenta
+                //    if (i == 0)
+                //    {
+                //        Mensaje("Debe ingresar el Id primero");
+                //        grdProductos.ActivarCelda(f, 0);
+                //    }
+                //    else
+                //    {
+                //        prods.ID = i;
+                //        prods.Multiplicador = Convert.ToInt32(a);
+                //        grdProductos.set_Texto(f, c, a);
+                //        prods.Actualizar();
+                //        grdProductos.ActivarCelda(f + 1, 0);
+                //    }
+                //    break;
             }
         }
 

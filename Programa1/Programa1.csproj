@@ -514,6 +514,12 @@
     <Compile Include="Carga\Tesoreria\frmSeleccionar_PagosAutorizados.Designer.cs">
       <DependentUpon>frmSeleccionar_PagosAutorizados.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmTarjetas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmTarjetas.Designer.cs">
+      <DependentUpon>frmTarjetas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmTipos_Entradas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -641,6 +647,8 @@
     <Compile Include="DB\Tesoreria\Grupo_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Nombres_ARendir.cs" />
     <Compile Include="DB\Tesoreria\SubTipo_Gastos.cs" />
+    <Compile Include="DB\Tesoreria\Tarjetas.cs" />
+    <Compile Include="DB\Tesoreria\Tipos_Tarjeta.cs" />
     <Compile Include="DB\Tesoreria\Tipo_CuentasBancos.cs" />
     <Compile Include="DB\Tesoreria\Tipo_Entradas.cs" />
     <Compile Include="DB\Tesoreria\Tipo_Gastos.cs" />
@@ -913,6 +921,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmSeleccionar_PagosAutorizados.resx">
       <DependentUpon>frmSeleccionar_PagosAutorizados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmTarjetas.resx">
+      <DependentUpon>frmTarjetas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmTipos_Entradas.resx">
       <DependentUpon>frmTipos_Entradas.cs</DependentUpon>
