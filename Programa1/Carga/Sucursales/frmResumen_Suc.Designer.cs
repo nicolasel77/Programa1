@@ -66,6 +66,7 @@
             this.mnuListado = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sucursalesListado = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cFechas1 = new Programa1.Controles.cFechas();
             this.paEst = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lbl10 = new System.Windows.Forms.Label();
@@ -73,6 +74,7 @@
             this.lbl5 = new System.Windows.Forms.Label();
             this.lbl4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cmdRecargar = new Programa1.Controles.cBoton();
             this.grdEstadistica = new Grilla2.SpeedGrilla();
             this.mnuFiltroEstadisticas = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.unaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,8 +90,6 @@
             this.lblTBalancesSuc = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tiOcultar = new System.Windows.Forms.Timer(this.components);
-            this.cmdRecargar = new Programa1.Controles.cBoton();
-            this.cFechas1 = new Programa1.Controles.cFechas();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -212,7 +212,7 @@
             this.rdAgrupado.AutoSize = true;
             this.rdAgrupado.Checked = true;
             this.rdAgrupado.Depth = 0;
-            this.rdAgrupado.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdAgrupado.Font = new System.Drawing.Font("Roboto", 10F);
             this.rdAgrupado.Location = new System.Drawing.Point(223, 0);
             this.rdAgrupado.Margin = new System.Windows.Forms.Padding(0);
             this.rdAgrupado.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -231,7 +231,7 @@
             this.rdDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdDetalle.AutoSize = true;
             this.rdDetalle.Depth = 0;
-            this.rdDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdDetalle.Font = new System.Drawing.Font("Roboto", 10F);
             this.rdDetalle.Location = new System.Drawing.Point(312, 0);
             this.rdDetalle.Margin = new System.Windows.Forms.Padding(0);
             this.rdDetalle.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -278,7 +278,7 @@
             this.grdEntradas.Row = 0;
             this.grdEntradas.Rows = 1;
             this.grdEntradas.Size = new System.Drawing.Size(563, 553);
-            this.grdEntradas.TabIndex = 1;
+            this.grdEntradas.TabIndex = 0;
             this.grdEntradas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdEntradas_KeyUp);
             this.grdEntradas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdEntradas_DobleClick);
             // 
@@ -379,7 +379,7 @@
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 1;
             this.grdSalidas.Size = new System.Drawing.Size(480, 553);
-            this.grdSalidas.TabIndex = 1;
+            this.grdSalidas.TabIndex = 0;
             this.grdSalidas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdSalidas_KeyUp);
             this.grdSalidas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdSalidas_DobleClick);
             // 
@@ -493,7 +493,7 @@
             this.cmdCarne.Location = new System.Drawing.Point(6, 34);
             this.cmdCarne.Name = "cmdCarne";
             this.cmdCarne.Size = new System.Drawing.Size(233, 25);
-            this.cmdCarne.TabIndex = 5;
+            this.cmdCarne.TabIndex = 0;
             this.cmdCarne.Text = "Stock Carne";
             this.cmdCarne.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cmdCarne.UseVisualStyleBackColor = true;
@@ -614,7 +614,7 @@
             this.grdSucursales.Row = 0;
             this.grdSucursales.Rows = 1;
             this.grdSucursales.Size = new System.Drawing.Size(319, 483);
-            this.grdSucursales.TabIndex = 1;
+            this.grdSucursales.TabIndex = 0;
             this.grdSucursales.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSucursales_CambioFila);
             // 
             // mnuListado
@@ -641,6 +641,19 @@
             this.clientesToolStripMenuItem1.Text = "Clientes";
             this.clientesToolStripMenuItem1.Click += new System.EventHandler(this.clientesToolStripMenuItem1_Click);
             // 
+            // cFechas1
+            // 
+            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFechas1.Location = new System.Drawing.Point(0, 0);
+            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFechas1.Mostrar = 0;
+            this.cFechas1.Name = "cFechas1";
+            this.cFechas1.Size = new System.Drawing.Size(319, 214);
+            this.cFechas1.TabIndex = 0;
+            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
+            // 
             // paEst
             // 
             this.paEst.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -655,9 +668,9 @@
             this.paEst.Controls.Add(this.lblTBalancesSuc);
             this.paEst.Controls.Add(this.label2);
             this.paEst.Dock = System.Windows.Forms.DockStyle.Right;
-            this.paEst.Location = new System.Drawing.Point(543, 0);
+            this.paEst.Location = new System.Drawing.Point(248, 0);
             this.paEst.Name = "paEst";
-            this.paEst.Size = new System.Drawing.Size(844, 701);
+            this.paEst.Size = new System.Drawing.Size(1139, 701);
             this.paEst.TabIndex = 2;
             // 
             // panel3
@@ -667,7 +680,7 @@
             this.panel3.Controls.Add(this.lbl6);
             this.panel3.Controls.Add(this.lbl5);
             this.panel3.Controls.Add(this.lbl4);
-            this.panel3.Location = new System.Drawing.Point(542, 662);
+            this.panel3.Location = new System.Drawing.Point(837, 662);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(157, 32);
             this.panel3.TabIndex = 8;
@@ -745,6 +758,16 @@
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
+            // cmdRecargar
+            // 
+            this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdRecargar.Location = new System.Drawing.Point(1101, 671);
+            this.cmdRecargar.Name = "cmdRecargar";
+            this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
+            this.cmdRecargar.TabIndex = 6;
+            this.cmdRecargar.Texto = "R";
+            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);            
+            // 
             // grdEstadistica
             // 
             this.grdEstadistica.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
@@ -778,8 +801,8 @@
             this.grdEstadistica.Redraw = true;
             this.grdEstadistica.Row = 0;
             this.grdEstadistica.Rows = 50;
-            this.grdEstadistica.Size = new System.Drawing.Size(821, 620);
-            this.grdEstadistica.TabIndex = 2;
+            this.grdEstadistica.Size = new System.Drawing.Size(1116, 620);
+            this.grdEstadistica.TabIndex = 0;
             // 
             // mnuFiltroEstadisticas
             // 
@@ -819,14 +842,16 @@
             this.sucursalesToolStripMenuItem.Checked = true;
             this.sucursalesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.sucursalesToolStripMenuItem.Name = "sucursalesToolStripMenuItem";
-            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sucursalesToolStripMenuItem.Text = "Sucursales";
+            this.sucursalesToolStripMenuItem.Click += new System.EventHandler(this.sucursalesToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clientesToolStripMenuItem.Text = "Clientes";
+            this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // todosToolStripMenuItem
             // 
@@ -839,7 +864,7 @@
             this.nuTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.nuTop.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nuTop.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nuTop.Location = new System.Drawing.Point(751, 663);
+            this.nuTop.Location = new System.Drawing.Point(1046, 663);
             this.nuTop.Minimum = new decimal(new int[] {
             1,
             0,
@@ -861,7 +886,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.label3.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label3.Location = new System.Drawing.Point(705, 667);
+            this.label3.Location = new System.Drawing.Point(1000, 667);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 25);
             this.label3.TabIndex = 4;
@@ -920,29 +945,6 @@
             this.tiOcultar.Enabled = true;
             this.tiOcultar.Interval = 300;
             this.tiOcultar.Tick += new System.EventHandler(this.tiOcultar_Tick);
-            // 
-            // cmdRecargar
-            // 
-            this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdRecargar.Location = new System.Drawing.Point(806, 671);
-            this.cmdRecargar.Name = "cmdRecargar";
-            this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
-            this.cmdRecargar.TabIndex = 6;
-            this.cmdRecargar.Texto = "R";
-            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
-            // 
-            // cFechas1
-            // 
-            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFechas1.Location = new System.Drawing.Point(0, 0);
-            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFechas1.Mostrar = 0;
-            this.cFechas1.Name = "cFechas1";
-            this.cFechas1.Size = new System.Drawing.Size(319, 214);
-            this.cFechas1.TabIndex = 0;
-            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
             // 
             // frmResumen_Suc
             // 

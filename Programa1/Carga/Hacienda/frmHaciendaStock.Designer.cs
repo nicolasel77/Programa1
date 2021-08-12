@@ -35,8 +35,8 @@
             this.grdStock = new Grilla2.SpeedGrilla();
             this.grdDetalle = new Grilla2.SpeedGrilla();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.calFecha = new System.Windows.Forms.MonthCalendar();
             this.cmdMostrar = new Programa1.Controles.cBoton();
+            this.calFecha = new System.Windows.Forms.MonthCalendar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -65,7 +65,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.grdDetalle);
             this.splitContainer1.Size = new System.Drawing.Size(922, 651);
-            this.splitContainer1.SplitterDistance = 212;
+            this.splitContainer1.SplitterDistance = 425;
             this.splitContainer1.TabIndex = 2;
             // 
             // grdCategorias
@@ -99,7 +99,7 @@
             this.grdCategorias.Redraw = true;
             this.grdCategorias.Row = 0;
             this.grdCategorias.Rows = 50;
-            this.grdCategorias.Size = new System.Drawing.Size(224, 212);
+            this.grdCategorias.Size = new System.Drawing.Size(224, 425);
             this.grdCategorias.TabIndex = 1;
             // 
             // grdTipo
@@ -133,7 +133,7 @@
             this.grdTipo.Redraw = true;
             this.grdTipo.Row = 0;
             this.grdTipo.Rows = 50;
-            this.grdTipo.Size = new System.Drawing.Size(206, 212);
+            this.grdTipo.Size = new System.Drawing.Size(206, 425);
             this.grdTipo.TabIndex = 1;
             // 
             // grdStock
@@ -168,7 +168,7 @@
             this.grdStock.Redraw = true;
             this.grdStock.Row = 0;
             this.grdStock.Rows = 50;
-            this.grdStock.Size = new System.Drawing.Size(475, 212);
+            this.grdStock.Size = new System.Drawing.Size(475, 425);
             this.grdStock.TabIndex = 0;
             this.grdStock.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdStock_CambioFila);
             // 
@@ -202,7 +202,7 @@
             this.grdDetalle.Redraw = true;
             this.grdDetalle.Row = 1;
             this.grdDetalle.Rows = 2;
-            this.grdDetalle.Size = new System.Drawing.Size(922, 435);
+            this.grdDetalle.Size = new System.Drawing.Size(922, 222);
             this.grdDetalle.TabIndex = 1;
             // 
             // splitContainer2
@@ -227,13 +227,6 @@
             this.splitContainer2.SplitterDistance = 922;
             this.splitContainer2.TabIndex = 3;
             // 
-            // calFecha
-            // 
-            this.calFecha.Location = new System.Drawing.Point(3, 0);
-            this.calFecha.Name = "calFecha";
-            this.calFecha.TabIndex = 2;
-            this.calFecha.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.CalFecha_DateSelected);
-            // 
             // cmdMostrar
             // 
             this.cmdMostrar.Location = new System.Drawing.Point(3, 174);
@@ -242,6 +235,13 @@
             this.cmdMostrar.TabIndex = 3;
             this.cmdMostrar.Texto = "Mostrar Actual";
             this.cmdMostrar.Click += new System.EventHandler(this.cmdMostrar_Click);
+            // 
+            // calFecha
+            // 
+            this.calFecha.Location = new System.Drawing.Point(3, 0);
+            this.calFecha.Name = "calFecha";
+            this.calFecha.TabIndex = 2;
+            this.calFecha.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.CalFecha_DateSelected);
             // 
             // frmHaciendaStock
             // 

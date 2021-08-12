@@ -39,6 +39,7 @@
             InitializeComponent();
             grd.TeclasManejadas = new int[] { 32 };
             grdAgr.TeclasManejadas = new int[] { 32 };
+            Cargar();
         }
         public void Cargar()
         {
