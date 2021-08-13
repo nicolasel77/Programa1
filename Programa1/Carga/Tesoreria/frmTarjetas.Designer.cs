@@ -42,6 +42,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.lblTotal = new MaterialSkin.Controls.MaterialLabel();
+            this.rdOrdenPorSuc = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdOrdenxFecha = new MaterialSkin.Controls.MaterialRadioButton();
             this.SuspendLayout();
             // 
             // grdTarjetas
@@ -56,11 +58,11 @@
             this.grdTarjetas.bColorSel = System.Drawing.SystemColors.Highlight;
             this.grdTarjetas.bFColor = System.Drawing.SystemColors.WindowText;
             this.grdTarjetas.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdTarjetas.Col = -2;
-            this.grdTarjetas.Cols = 0;
+            this.grdTarjetas.Col = 0;
+            this.grdTarjetas.Cols = 1;
             this.grdTarjetas.DataMember = "";
             this.grdTarjetas.DataSource = null;
-            this.grdTarjetas.EnableEdicion = true;
+            this.grdTarjetas.EnableEdicion = false;
             this.grdTarjetas.Encabezado = "";
             this.grdTarjetas.fColor = System.Drawing.SystemColors.Control;
             this.grdTarjetas.FixCols = 0;
@@ -74,10 +76,11 @@
             this.grdTarjetas.PieDePagina = "\t\tPage {0} of {1}";
             this.grdTarjetas.PintarFilaSel = true;
             this.grdTarjetas.Redraw = true;
-            this.grdTarjetas.Row = -2;
-            this.grdTarjetas.Rows = 0;
+            this.grdTarjetas.Row = 0;
+            this.grdTarjetas.Rows = 1;
             this.grdTarjetas.Size = new System.Drawing.Size(555, 513);
             this.grdTarjetas.TabIndex = 0;
+            this.grdTarjetas.Load += new System.EventHandler(this.grdTarjetas_Load);
             // 
             // lstTipos
             // 
@@ -100,7 +103,7 @@
             this.chAgrupar.Checked = true;
             this.chAgrupar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chAgrupar.Depth = 0;
-            this.chAgrupar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chAgrupar.Font = new System.Drawing.Font("Roboto", 10F);
             this.chAgrupar.Location = new System.Drawing.Point(570, 14);
             this.chAgrupar.Margin = new System.Windows.Forms.Padding(0);
             this.chAgrupar.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -118,7 +121,7 @@
             this.chSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chSuc.AutoSize = true;
             this.chSuc.Depth = 0;
-            this.chSuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chSuc.Font = new System.Drawing.Font("Roboto", 10F);
             this.chSuc.Location = new System.Drawing.Point(570, 44);
             this.chSuc.Margin = new System.Windows.Forms.Padding(0);
             this.chSuc.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -136,7 +139,7 @@
             this.chFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chFecha.AutoSize = true;
             this.chFecha.Depth = 0;
-            this.chFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chFecha.Font = new System.Drawing.Font("Roboto", 10F);
             this.chFecha.Location = new System.Drawing.Point(570, 74);
             this.chFecha.Margin = new System.Windows.Forms.Padding(0);
             this.chFecha.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -154,7 +157,7 @@
             this.chTipo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chTipo.AutoSize = true;
             this.chTipo.Depth = 0;
-            this.chTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chTipo.Font = new System.Drawing.Font("Roboto", 10F);
             this.chTipo.Location = new System.Drawing.Point(570, 104);
             this.chTipo.Margin = new System.Windows.Forms.Padding(0);
             this.chTipo.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -172,7 +175,7 @@
             this.chAcreditados.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chAcreditados.AutoSize = true;
             this.chAcreditados.Depth = 0;
-            this.chAcreditados.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chAcreditados.Font = new System.Drawing.Font("Roboto", 10F);
             this.chAcreditados.Location = new System.Drawing.Point(570, 132);
             this.chAcreditados.Margin = new System.Windows.Forms.Padding(0);
             this.chAcreditados.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -206,7 +209,7 @@
             this.cSuc.Filtro_In = "";
             this.cSuc.Location = new System.Drawing.Point(741, 12);
             this.cSuc.Mostrar_Botones = true;
-            this.cSuc.Mostrar_Tipo = false;
+            this.cSuc.Mostrar_Tipo = true;
             this.cSuc.Name = "cSuc";
             this.cSuc.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSuc.Size = new System.Drawing.Size(257, 535);
@@ -252,11 +255,52 @@
             this.lblTotal.TabIndex = 11;
             this.lblTotal.Text = "$0";
             // 
+            // rdOrdenPorSuc
+            // 
+            this.rdOrdenPorSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdOrdenPorSuc.AutoSize = true;
+            this.rdOrdenPorSuc.Depth = 0;
+            this.rdOrdenPorSuc.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdOrdenPorSuc.Location = new System.Drawing.Point(570, 382);
+            this.rdOrdenPorSuc.Margin = new System.Windows.Forms.Padding(0);
+            this.rdOrdenPorSuc.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdOrdenPorSuc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdOrdenPorSuc.Name = "rdOrdenPorSuc";
+            this.rdOrdenPorSuc.Ripple = true;
+            this.rdOrdenPorSuc.Size = new System.Drawing.Size(127, 30);
+            this.rdOrdenPorSuc.TabIndex = 12;
+            this.rdOrdenPorSuc.TabStop = true;
+            this.rdOrdenPorSuc.Text = "Ordenar por suc";
+            this.rdOrdenPorSuc.UseVisualStyleBackColor = true;
+            this.rdOrdenPorSuc.CheckedChanged += new System.EventHandler(this.rdOrdenPorSuc_CheckedChanged);
+            // 
+            // rdOrdenxFecha
+            // 
+            this.rdOrdenxFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdOrdenxFecha.AutoSize = true;
+            this.rdOrdenxFecha.Checked = true;
+            this.rdOrdenxFecha.Depth = 0;
+            this.rdOrdenxFecha.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdOrdenxFecha.Location = new System.Drawing.Point(570, 352);
+            this.rdOrdenxFecha.Margin = new System.Windows.Forms.Padding(0);
+            this.rdOrdenxFecha.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdOrdenxFecha.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdOrdenxFecha.Name = "rdOrdenxFecha";
+            this.rdOrdenxFecha.Ripple = true;
+            this.rdOrdenxFecha.Size = new System.Drawing.Size(143, 30);
+            this.rdOrdenxFecha.TabIndex = 13;
+            this.rdOrdenxFecha.TabStop = true;
+            this.rdOrdenxFecha.Text = "Ordenar por Fecha";
+            this.rdOrdenxFecha.UseVisualStyleBackColor = true;
+            this.rdOrdenxFecha.CheckedChanged += new System.EventHandler(this.rdOrdenxFecha_CheckedChanged);
+            // 
             // frmTarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 559);
+            this.Controls.Add(this.rdOrdenxFecha);
+            this.Controls.Add(this.rdOrdenPorSuc);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.panel3);
@@ -291,5 +335,7 @@
         private System.Windows.Forms.Panel panel3;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialLabel lblTotal;
+        private MaterialSkin.Controls.MaterialRadioButton rdOrdenPorSuc;
+        private MaterialSkin.Controls.MaterialRadioButton rdOrdenxFecha;
     }
 }

@@ -10,13 +10,12 @@
     {
         private TipoProveedores tipoProveedores = new TipoProveedores();
         private Proveedores provs = new Proveedores();
-
         private DataTable dt;
 
         public frmProveedores()
         {
             InitializeComponent();
-
+            provs.Mostrar_Ocultos = true;
         }
 
         private void FrmProveedores_Load(object sender, EventArgs e)
@@ -85,7 +84,7 @@
                         tipoProveedores.Nombre = a.ToString();
                         grdTipo.set_Texto(f, c, a);
                         tipoProveedores.Actualizar();
-                        grdTipo.AgregarFila();
+                        if (grdTipo.EsUltimaFila()) { grdTipo.AgregarFila(); }
                         grdTipo.ActivarCelda(f + 1, 0);
                     }
                     break;

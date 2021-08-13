@@ -974,6 +974,7 @@ Public Class SpeedGrilla
     Public Sub Alinear(ByVal Align As Int16, Optional ByVal Col As Int16 = -1)
         Dim i As Int16
         With Grd
+            Dim sasd As String = sasd = .Cols.Item(0).Caption.ToString()
             If Col > -1 Then
                 .Cols.Item(Col).TextAlign = Align
             Else

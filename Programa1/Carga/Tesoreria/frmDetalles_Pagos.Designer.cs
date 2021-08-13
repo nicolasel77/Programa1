@@ -42,6 +42,7 @@
             this.cFecha = new Programa1.Controles.cFechas();
             this.cFechaCarga = new Programa1.Controles.cFechas();
             this.cSuc = new Programa1.Controles.cSucursales();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -49,6 +50,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdDetalles
@@ -64,10 +66,10 @@
             this.grdDetalles.bFColor = System.Drawing.SystemColors.WindowText;
             this.grdDetalles.bFColorSel = System.Drawing.SystemColors.HighlightText;
             this.grdDetalles.Col = 0;
-            this.grdDetalles.Cols = 10;
+            this.grdDetalles.Cols = 1;
             this.grdDetalles.DataMember = "";
             this.grdDetalles.DataSource = null;
-            this.grdDetalles.EnableEdicion = true;
+            this.grdDetalles.EnableEdicion = false;
             this.grdDetalles.Encabezado = "";
             this.grdDetalles.fColor = System.Drawing.SystemColors.Control;
             this.grdDetalles.FixCols = 0;
@@ -81,8 +83,8 @@
             this.grdDetalles.PieDePagina = "\t\tPage {0} of {1}";
             this.grdDetalles.PintarFilaSel = true;
             this.grdDetalles.Redraw = true;
-            this.grdDetalles.Row = -2;
-            this.grdDetalles.Rows = 0;
+            this.grdDetalles.Row = 0;
+            this.grdDetalles.Rows = 1;
             this.grdDetalles.Size = new System.Drawing.Size(688, 568);
             this.grdDetalles.TabIndex = 2;
             // 
@@ -119,7 +121,7 @@
             this.lblTotal.Depth = 0;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblTotal.Location = new System.Drawing.Point(706, 519);
+            this.lblTotal.Location = new System.Drawing.Point(3, 4);
             this.lblTotal.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(45, 18);
@@ -172,6 +174,7 @@
             this.chFcarga.TabIndex = 3;
             this.chFcarga.Text = "Fecha carga";
             this.chFcarga.UseVisualStyleBackColor = true;
+            this.chFcarga.CheckedChanged += new System.EventHandler(this.chFcarga_CheckedChanged_1);
             // 
             // panel4
             // 
@@ -241,7 +244,7 @@
             this.cSuc.Filtro_In = "";
             this.cSuc.Location = new System.Drawing.Point(706, 12);
             this.cSuc.Mostrar_Botones = true;
-            this.cSuc.Mostrar_Tipo = false;
+            this.cSuc.Mostrar_Tipo = true;
             this.cSuc.Name = "cSuc";
             this.cSuc.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSuc.Size = new System.Drawing.Size(253, 508);
@@ -250,13 +253,22 @@
             this.cSuc.Valor_Actual = -1;
             this.cSuc.Cambio_Seleccion += new System.EventHandler(this.cSuc_Cambio_Seleccion);
             // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.lblTotal);
+            this.panel2.Location = new System.Drawing.Point(706, 519);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(253, 24);
+            this.panel2.TabIndex = 18;
+            // 
             // frmDetalles_Pagos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1162, 590);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.grdDetalles);
             this.Controls.Add(this.cSuc);
@@ -272,8 +284,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -291,5 +304,6 @@
         private MaterialSkin.Controls.MaterialCheckBox chFecha;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

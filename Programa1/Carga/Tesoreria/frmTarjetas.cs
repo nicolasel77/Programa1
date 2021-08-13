@@ -22,12 +22,16 @@
 
         private void Cargar()
         {
-            grdTarjetas.MostrarDatos(tarjetas.Datos_Resumen(),true,false);
-            if (grdTarjetas.Cols > 0) { grdTarjetas.Columnas[grdTarjetas.get_ColIndex("Importe")].Style.Format = "N2"; }
-            grdTarjetas.AgregarFila();
-            grdTarjetas.set_Texto(grdTarjetas.Rows -1, grdTarjetas.get_ColIndex("Importe")-1, "Total:");
-            lblTotal.Text = grdTarjetas.SumarCol(grdTarjetas.get_ColIndex("Importe")).ToString("C1");
-            grdTarjetas.AutosizeAll();
+            grdTarjetas.MostrarDatos(tarjetas.Datos_Resumen(), true, false);
+            if (grdTarjetas.Rows > 0)
+            {
+                if (grdTarjetas.Cols > 0) { grdTarjetas.Columnas[grdTarjetas.get_ColIndex("Importe")].Style.Format = "N2"; }
+                grdTarjetas.AgregarFila();
+                grdTarjetas.set_Texto(grdTarjetas.Rows - 1, grdTarjetas.get_ColIndex("Importe") - 1, "Total:");
+                lblTotal.Text = grdTarjetas.SumarCol(grdTarjetas.get_ColIndex("Importe")).ToString("C1");
+                grdTarjetas.AutosizeAll();
+            }
+
         }
         private void cargarfiltros()
         {
@@ -40,6 +44,7 @@
             tarjetas.aFecha = Convert.ToBoolean(chFecha.CheckState);
             tarjetas.aTipo = Convert.ToBoolean(chTipo.CheckState);
             tarjetas.aAcreditados = Convert.ToBoolean(chAcreditados.CheckState);
+            tarjetas.OrdenxSuc = rdOrdenPorSuc.Checked;
             Cargar();
         }
 
@@ -95,9 +100,25 @@
             cargarfiltros();
         }
 
+        private void rdOrdenPorSuc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdOrdenPorSuc.Checked == true) { rdOrdenxFecha.Checked = false; }
+            cargarfiltros();
+        }
+
         private void lstTipos_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle) { lstTipos.SelectedIndex = -1; }
+        }
+
+        private void rdOrdenxFecha_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdOrdenxFecha.Checked == true) { rdOrdenPorSuc.Checked = false; }
+        }
+
+        private void grdTarjetas_Load(object sender, EventArgs e)
+        {
+            grdTarjetas.BorrarFila();
         }
     }
 }

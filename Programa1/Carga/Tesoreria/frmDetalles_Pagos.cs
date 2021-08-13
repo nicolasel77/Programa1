@@ -6,7 +6,7 @@
     using System.Windows.Forms;
     public partial class frmDetalles_Pagos : Form
     {
-        private Detalles_Pagos Detalles;
+        private Detalles_Pagos Detalles = new Detalles_Pagos();
         #region " Columnas "
         //private Byte c_Id;
         private Byte c_Fecha;
@@ -31,8 +31,7 @@
 
         private void cargar(string filtro)
         {
-            Detalles_Pagos Detalles = new Detalles_Pagos();
-            grdDetalles.MostrarDatos(Detalles.Datos(filtro), true);
+            grdDetalles.MostrarDatos(Detalles.Datos(filtro), true,false);
             c_Fecha = Convert.ToByte(grdDetalles.get_ColIndex("Fecha"));
             c_IdSubTipo = Convert.ToByte(grdDetalles.get_ColIndex("ID_SubTipoEntrada"));
             c_Descripcion = Convert.ToByte(grdDetalles.get_ColIndex("Descripcion"));
@@ -40,7 +39,6 @@
             c_Carga = Convert.ToByte(grdDetalles.get_ColIndex("Carga"));
             formato_Grilla();
             Totales();
-
         }
 
         private void formato_Grilla()
@@ -54,7 +52,6 @@
 
             grdDetalles.Columnas[c_Importe].Format = "C2";
             //grdDetalles.Columnas[c_Total].Format = "C2";
-
             grdDetalles.Columnas[c_IdSubTipo + 1].Style.ForeColor = Color.DimGray;
 
             grdDetalles.set_Texto(0, c_IdSubTipo, "Suc");
@@ -62,6 +59,7 @@
 
         private void Totales()
         {
+            grdDetalles.AgregarFila();
             double total = grdDetalles.SumarCol(c_Importe);
             lblTotal.Text = $"Total: {total:C1}";
         }
@@ -74,7 +72,7 @@
             string f = "";
             string fc = "";
             if (chFecha.Checked == true) {  f = cFecha.Cadena(); }
-            if (chFcarga.Checked == true) { fc = cFechaCarga.Cadena(); }
+            if (chFcarga.Checked == true) { fc = cFechaCarga.Cadena("Carga"); }
             if (cSuc.Valor_Actual > 0) { suc = cSuc.Cadena("ID_SubTipoEntrada"); }
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
@@ -87,6 +85,10 @@
                 if (suc != "") { s = h.Unir(s, suc); }
                 cargar(s);
             }
+            else
+            {
+                grdDetalles.Rows = 0;
+            }
         }
 
         private void cFecha_Cambio_Seleccion(object sender, EventArgs e)
@@ -96,7 +98,7 @@
 
         private void cFechaCarga_Cambio_Seleccion(object sender, EventArgs e)
         {
-            if (chFcarga.Checked == true) { Armar_Cadena(); }
+            Armar_Cadena();
         }
 
         private void cSuc_Cambio_Seleccion(object sender, EventArgs e)
@@ -114,6 +116,11 @@
         }
 
         private void cmdMostrar_Click(object sender, EventArgs e)
+        {
+            Armar_Cadena();
+        }
+
+        private void chFcarga_CheckedChanged_1(object sender, EventArgs e)
         {
             Armar_Cadena();
         }

@@ -22,7 +22,7 @@
         public Boolean aSucs { get; set; }
         public Boolean aFecha { get; set; }
         public Boolean aTipo { get; set; }
-
+        public Boolean OrdenxSuc { get; set; }
         public bool aAcreditados { get; set; }
 
         public new DataTable Datos(string filtro = "")
@@ -36,23 +36,27 @@
             {
                 string s = "";
                 string campos = "*";
-                string OrderBy = "Fecha, Suc";
+                string OrderBy = "";
                 Herramientas h = new Herramientas();
-                s = h.Unir(Fecha,sucs);
+                s = h.Unir(Fecha, sucs);
                 if (aAcreditados == true) { s = h.Unir(s, " Acreditado = 1 "); }
                 if (Tipos.Length > 0) { s = h.Unir(s, $"Id_Tipo IN{Tipos}"); }
                 campos = "Fecha, Suc, Id_Tipo, Nombre, Importe, Acreditado";
                 if (Agrupar == true)
                 {
                     campos = "";
-                    if (aFecha == true) { campos = h.Unir(campos, "Fecha", ","); }
+                    if (aFecha == true) { campos = h.Unir(campos, "Fecha", ","); } 
                     if (aSucs == true) { campos = h.Unir(campos, "Suc", ","); }
                     if (aTipo == true) { campos = h.Unir(campos, "Id_Tipo, Nombre", ","); }
                     s = s + " GROUP BY " + campos;
-                    OrderBy = campos;
-                    campos = campos + ", SUM(Importe) as Importe ";
+                    if (OrdenxSuc == false) { OrderBy = campos; } else { if (campos.IndexOf(", Suc") > -1) { OrderBy = "Suc ," + campos.Replace(", Suc", ""); } }
+                    campos = h.Unir(campos , " SUM(Importe) as Importe ", ",");
                 }
-                return Datos_Vista(s, campos,OrderBy);
+                else
+                {
+                OrderBy = OrdenxSuc == false ? "Fecha, Suc" : "suc, Fecha";
+                }
+                return Datos_Vista(s, campos, OrderBy);
             }
             return null;
         }

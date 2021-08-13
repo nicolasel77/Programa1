@@ -1497,7 +1497,25 @@
                 frmResumen_Gastos.WindowState = FormWindowState.Maximized;
             }
         }
-
+        private void FrmResumen_Gastos_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Resumen_Gastos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmResumen_Gastos")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
         private void resumenEntradasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -1519,7 +1537,7 @@
 
                 Form frmResumen_Entradas = new Programa1.Carga.Tesoreria.frmResumen_Entradas();
                 frmResumen_Entradas.MdiParent = this;
-                frmResumen_Entradas.Disposed += FrmTipos_Entradas_Disposed;
+                frmResumen_Entradas.Disposed += FrmResumen_Entradas_Disposed;
                 forms.Add(frmResumen_Entradas);
                 frmResumen_Entradas.Show();
                 frmResumen_Entradas.WindowState = FormWindowState.Minimized;
@@ -1527,11 +1545,11 @@
             }
         }
 
-        private void FrmResumen_Gastos_Disposed(object sender, EventArgs e)
+        private void FrmResumen_Entradas_Disposed(object sender, EventArgs e)
         {
             foreach (ToolStripMenuItem t in tstMenu.Items)
             {
-                if (t.Text == "Resumen_Gastos")
+                if (t.Text == "Resumen_Entradas")
                 {
                     tstMenu.Items.Remove(t);
                     break;
@@ -1539,7 +1557,7 @@
             }
             foreach (Form f in forms)
             {
-                if (f.Name == "frmResumen_Gastos")
+                if (f.Name == "frmResumen_Entradas")
                 {
                     forms.Remove(f);
                     break;
@@ -2113,41 +2131,81 @@
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
-                Form frmDetalles_Pagos = new Programa1.Carga.Tesoreria.frmDetalles_Pagos();
+                Form frmDetalles_Pagos = new Carga.Tesoreria.frmDetalles_Pagos();
                 frmDetalles_Pagos.MdiParent = this;
+                frmDetalles_Pagos.Disposed += frmDetalles_Pagos_Disposed;
                 forms.Add(frmDetalles_Pagos);
                 frmDetalles_Pagos.Show();
                 frmDetalles_Pagos.WindowState = FormWindowState.Minimized;
                 frmDetalles_Pagos.WindowState = FormWindowState.Maximized;
             }
         }
-
-        private void tarjetasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void frmDetalles_Pagos_Disposed(object sender, EventArgs e)
         {
-            bool found = false;
-            foreach (Form f in forms)
+            foreach (ToolStripMenuItem t in tstMenu.Items)
             {
-                if (f.Name == "frmTarjetas")
+                if (t.Text == "Detalles_Pagos")
                 {
-                    f.BringToFront();
-                    found = true;
+                    tstMenu.Items.Remove(t);
                     break;
                 }
             }
-            if (found == false)
+            foreach (Form f in forms)
             {
-                ToolStripMenuItem t = new ToolStripMenuItem("frmTarjetas");
-                t.Text = "Resumen_Tarjetas";
-                t.Click += new EventHandler(Mostrar);
-                this.tstMenu.Items.Add(t);
-
-                Form frmTarjetas = new Programa1.Carga.Tesoreria.frmTarjetas();
-                frmTarjetas.MdiParent = this;
-                forms.Add(frmTarjetas);
-                frmTarjetas.Show();
-                frmTarjetas.WindowState = FormWindowState.Minimized;
-                frmTarjetas.WindowState = FormWindowState.Maximized;
+                if (f.Name == "frmDetalles_Pagos")
+                {
+                    forms.Remove(f);
+                    break;
+                }
             }
         }
-    }
+
+        private void tarjetasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+                bool found = false;
+                foreach (Form f in forms)
+                {
+                    if (f.Name == "frmTarjetas")
+                    {
+                        f.BringToFront();
+                        found = true;
+                        break;
+                    }
+                }
+                if (found == false)
+                {
+                    ToolStripMenuItem t = new ToolStripMenuItem("frmTarjetas");
+                    t.Text = "Tarjetas";
+                    t.Click += new EventHandler(Mostrar);
+                    this.tstMenu.Items.Add(t);
+
+                    Form frmTarjetas = new Carga.Tesoreria.frmTarjetas();
+                    frmTarjetas.MdiParent = this;
+                    frmTarjetas.Disposed += frmTarjetas_Disposed;
+                    forms.Add(frmTarjetas);
+                    frmTarjetas.Show();
+                    frmTarjetas.WindowState = FormWindowState.Minimized;
+                    frmTarjetas.WindowState = FormWindowState.Maximized;
+                }
+            }
+            private void frmTarjetas_Disposed(object sender, EventArgs e)
+            {
+                foreach (ToolStripMenuItem t in tstMenu.Items)
+                {
+                    if (t.Text == "Tarjetas")
+                    {
+                        tstMenu.Items.Remove(t);
+                        break;
+                    }
+                }
+                foreach (Form f in forms)
+                {
+                    if (f.Name == "frmTarjetas")
+                    {
+                        forms.Remove(f);
+                        break;
+                    }
+                }
+            }
+        }
 }

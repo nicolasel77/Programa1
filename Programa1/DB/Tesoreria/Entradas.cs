@@ -253,13 +253,8 @@
 
             try
             {
-                string fe = Mostrar_Fecha ? "Fecha, " : "";
-                string ob = Mostrar_Fecha ? "ORDER BY Fecha" : "";
-                SqlCommand comandoSql = new SqlCommand(
-                    $"SELECT {fe}ID_TipoEntrada IDT, Nombre, ID_SubTipoEntrada ID_ST, Descripcion " +
-                    $", SUM(Importe) Total FROM vw_Entradas" +
-                    $" {filtro}  GROUP BY {fe}ID_TipoEntrada, Nombre, ID_SubTipoEntrada, Descripcion " +
-                    ob , conexionSql) ;
+                SqlCommand comandoSql = new SqlCommand($"SELECT Fecha,ID_TipoEntrada IDT, Nombre, ID_SubTipoEntrada ID, Descripcion, Importe Total FROM vw_Entradas" +
+                    filtro + " ORDER BY Nombre, Descripcion, Fecha ", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

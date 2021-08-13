@@ -63,7 +63,7 @@
             this.grdEntradas.bFColor = System.Drawing.SystemColors.WindowText;
             this.grdEntradas.bFColorSel = System.Drawing.SystemColors.HighlightText;
             this.grdEntradas.Col = 0;
-            this.grdEntradas.Cols = 10;
+            this.grdEntradas.Cols = 1;
             this.grdEntradas.DataMember = "";
             this.grdEntradas.DataSource = null;
             this.grdEntradas.EnableEdicion = true;

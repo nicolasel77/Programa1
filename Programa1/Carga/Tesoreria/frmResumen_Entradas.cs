@@ -35,12 +35,12 @@ namespace Programa1.Carga.Tesoreria
 
         private void cFechas1_Cambio_Seleccion(object sender, EventArgs e)
         {
-            Cargar_List();
+            Cargar_Lst();
 
             Cargar_Grilla();
         }
 
-        private void Cargar_List()
+        private void Cargar_Lst()
         {
             this.Cursor = Cursors.WaitCursor;
 
@@ -98,7 +98,7 @@ namespace Programa1.Carga.Tesoreria
                     string s = h.Unir(cFechas1.Cadena(), grupo);
                     grdEntradas.MostrarDatos(Entradas.TotalPorTipo(s), true, true);
                     grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
-                    grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N1";
+                    grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";
                     grdEntradas.AutosizeAll();
                     grdEntradas.set_ColW(grdEntradas.get_ColIndex("Descripcion"), 400);
                     break;
@@ -109,10 +109,10 @@ namespace Programa1.Carga.Tesoreria
                     }
                     else
                     {
-                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND")))), true, true);
+                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), grupo != "" ? grupo.Substring(0, grupo.IndexOf(" AND")) : "")), true, true);
                     }
                     grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
-                    grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N1";
+                    grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";
                     grdEntradas.AutosizeAll();
                     grdEntradas.set_ColW(grdEntradas.get_ColIndex("Descripcion"), 400);
                     break;
@@ -154,7 +154,10 @@ namespace Programa1.Carga.Tesoreria
                     if (lst.SelectedIndex > 0)
                     {
                         SubTipo = h.Codigo_Seleccionado(lblSubTipo.Text);
-                        grdEntradas.MostrarDatos(Entradas.TotalPorDetalle($"Id_TipoEntrada={Tipo} AND ID_SubTipoEntrada={SubTipo} AND {cFechas1.Cadena()}"), true, true);
+                        string s = cFechas1.Cadena();
+                        s = h.Unir(s, Tipo > 0 ? $"Id_TipoEntrada={Tipo}" : "");
+                        s = h.Unir(s, $"ID_SubTipoEntrada ={SubTipo}");
+                        grdEntradas.MostrarDatos(Entradas.TotalPorDetalle(s), true, true);
                         grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
                         grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";
                         grdEntradas.AutosizeAll();
@@ -163,7 +166,9 @@ namespace Programa1.Carga.Tesoreria
                     else
                     {
                         SubTipo = 0;
-                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo($"Id_TipoEntrada={Tipo} AND {cFechas1.Cadena()}"), true, true);
+                        string s = cFechas1.Cadena();
+                        s = h.Unir(s, Tipo > 0 ? $"Id_TipoEntrada={Tipo}" : "");
+                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo(s), true, true);
                         grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
                         grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";
                         grdEntradas.AutosizeAll();
@@ -195,10 +200,10 @@ namespace Programa1.Carga.Tesoreria
                         switch (Orden)
                         {
                             case e_Orden.Tipo:
-                                if (lst.SelectedIndex > 0)
+                                if (lst.SelectedIndex > -1)
                                 {
                                     Orden = e_Orden.SubTipo;
-                                    Cargar_List();
+                                    Cargar_Lst();
                                     Cargar_Grilla();
                                 }
                                 break;
@@ -210,9 +215,9 @@ namespace Programa1.Carga.Tesoreria
                         switch (Orden)
                         {
                             case e_Orden.SubTipo:
-                                    Orden = e_Orden.Tipo;
-                                    Cargar_List();
-                                    Cargar_Grilla();
+                                Orden = e_Orden.Tipo;
+                                Cargar_Lst();
+                                Cargar_Grilla();
                                 // Activar el último seleccionado
 
                                 for (int i = 0; i <= lst.Items.Count - 1; i++)
@@ -242,6 +247,7 @@ namespace Programa1.Carga.Tesoreria
             }
 
         }
+
     }
 
 }
