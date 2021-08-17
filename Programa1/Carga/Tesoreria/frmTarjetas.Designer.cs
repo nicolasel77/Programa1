@@ -44,6 +44,8 @@
             this.lblTotal = new MaterialSkin.Controls.MaterialLabel();
             this.rdOrdenPorSuc = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdOrdenxFecha = new MaterialSkin.Controls.MaterialRadioButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdTarjetas
@@ -209,7 +211,7 @@
             this.cSuc.Filtro_In = "";
             this.cSuc.Location = new System.Drawing.Point(741, 12);
             this.cSuc.Mostrar_Botones = true;
-            this.cSuc.Mostrar_Tipo = true;
+            this.cSuc.Mostrar_Tipo = false;
             this.cSuc.Name = "cSuc";
             this.cSuc.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSuc.Size = new System.Drawing.Size(257, 535);
@@ -234,7 +236,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(12, 528);
+            this.materialLabel1.Location = new System.Drawing.Point(3, 2);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(48, 19);
@@ -248,7 +250,7 @@
             this.lblTotal.Depth = 0;
             this.lblTotal.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblTotal.Location = new System.Drawing.Point(66, 528);
+            this.lblTotal.Location = new System.Drawing.Point(57, 2);
             this.lblTotal.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(25, 19);
@@ -294,15 +296,24 @@
             this.rdOrdenxFecha.UseVisualStyleBackColor = true;
             this.rdOrdenxFecha.CheckedChanged += new System.EventHandler(this.rdOrdenxFecha_CheckedChanged);
             // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel2.Controls.Add(this.materialLabel1);
+            this.panel2.Controls.Add(this.lblTotal);
+            this.panel2.Location = new System.Drawing.Point(12, 531);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(253, 24);
+            this.panel2.TabIndex = 19;
+            // 
             // frmTarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 559);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.rdOrdenxFecha);
             this.Controls.Add(this.rdOrdenPorSuc);
-            this.Controls.Add(this.lblTotal);
-            this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.cFecha);
             this.Controls.Add(this.chAcreditados);
@@ -316,6 +327,8 @@
             this.Name = "frmTarjetas";
             this.Text = "frmTarjetas";
             this.Load += new System.EventHandler(this.frmTarjetas_Load);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -337,5 +350,6 @@
         private MaterialSkin.Controls.MaterialLabel lblTotal;
         private MaterialSkin.Controls.MaterialRadioButton rdOrdenPorSuc;
         private MaterialSkin.Controls.MaterialRadioButton rdOrdenxFecha;
+        private System.Windows.Forms.Panel panel2;
     }
 }

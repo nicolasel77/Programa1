@@ -108,10 +108,12 @@
 
         private void chFecha_CheckedChanged(object sender, EventArgs e)
         {
+            grdDetalles.MostrarDatos(null,true,false);
             Armar_Cadena();
         }
         private void chFcarga_CheckedChanged(object sender, EventArgs e)
         {
+            grdDetalles.MostrarDatos(null, true, false);
             Armar_Cadena();
         }
 
