@@ -25,13 +25,16 @@
             grdTarjetas.MostrarDatos(tarjetas.Datos_Resumen(), true, false);
             if (grdTarjetas.Rows > 0)
             {
-                if (grdTarjetas.Cols > 0) { grdTarjetas.Columnas[grdTarjetas.get_ColIndex("Importe")].Style.Format = "N2"; }
-                grdTarjetas.AgregarFila();
-                grdTarjetas.set_Texto(grdTarjetas.Rows - 1, grdTarjetas.get_ColIndex("Importe") - 1, "Total:");
-                lblTotal.Text = grdTarjetas.SumarCol(grdTarjetas.get_ColIndex("Importe")).ToString("C1");
-                grdTarjetas.AutosizeAll();
+                int c_imp = grdTarjetas.get_ColIndex("Importe");
+                if (c_imp > 0)
+                {
+                    if (grdTarjetas.Cols > 0) { grdTarjetas.Columnas[c_imp].Style.Format = "N2"; }
+                    grdTarjetas.AgregarFila();
+                    grdTarjetas.set_Texto(grdTarjetas.Rows - 1, grdTarjetas.get_ColIndex("Importe") - 1, "Total:");
+                    lblTotal.Text = grdTarjetas.SumarCol(grdTarjetas.get_ColIndex("Importe")).ToString("C1");
+                    grdTarjetas.AutosizeAll();
+                }
             }
-
         }
         private void cargarfiltros()
         {

@@ -10,8 +10,8 @@
     {
         public Lista_Ofertas()
         {
+            Tabla = "Precios_Ofertas";
             Vista = "vw_PreciosOfertas";
-            Campo_ID = "Orden";
         }
                
 
@@ -90,7 +90,7 @@
 
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro);
+            return Datos_Vista(filtro,"*","Orden");
         }
 
         public new void Actualizar()

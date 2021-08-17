@@ -67,6 +67,39 @@
             return Producto.ID;
         }
 
+        public new void Agregar()
+        {
+                var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+                int n = Max_ID();
+                try
+                {
+                    SqlCommand command =
+                        new SqlCommand($"INSERT INTO Listas_Carga (Producto, Orden, ID_Lista) " +
+                            $"VALUES('{Producto.ID}', {Orden}, {Lista.ID})", sql);
+                    command.CommandType = CommandType.Text;
+                    command.Connection = sql;
+                    sql.Open();
+
+                    var d = command.ExecuteNonQuery();
+
+                    sql.Close();
+
+                    int n2 = Max_ID();
+                    if (n == n2)
+                    {
+                        ID = 0;
+                        MessageBox.Show("No se pudo guardar el registro.", "Error");
+                    }
+                    else
+                    {
+                        ID = n2;
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "Error");
+                }
+        }
         
     }
 }

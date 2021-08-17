@@ -22,7 +22,7 @@
         public frmListas_Carga()
         {
             InitializeComponent();
-            int[] n = { 8, 46};
+            int[] n = { 8, 46 };
             grd.TeclasManejadas = n;
         }
 
@@ -36,7 +36,7 @@
         private void Cargar()
         {
             Herramientas.Herramientas h = new Herramientas.Herramientas();
-                        
+
             if (lstListas.SelectedIndex > -1) { listas.Lista.ID = h.Codigo_Seleccionado(lstListas.Text); }
 
             grd.MostrarDatos(listas.Datos(), true);
@@ -55,7 +55,7 @@
             {
                 listas.ID = Convert.ToInt32(grd.get_Texto(grd.Row, 0));
             }
-            else 
+            else
             {
                 listas.ID = Convert.ToInt32("0");
             }
@@ -72,7 +72,7 @@
                     break;
                 case t_Col.Orden:
                     listas.Orden = Convert.ToInt32(a);
-                    if (i != 0) { listas.Actualizar("Orden", a);  }
+                    if (i != 0) { listas.Actualizar("Orden", a); }
 
                     grd.set_Texto(f, c, a);
                     grd.ActivarCelda(f, t_Col.Producto);
@@ -82,8 +82,12 @@
                     {
                         if (i == 0)
                         {
-                            listas.Agregar_NoID("ID_Lista", listas.Lista.ID);
-                            listas.Actualizar("Orden", listas.Orden);
+                            listas.Producto.ID = Convert.ToInt32(a);
+                            listas.Agregar();
+                            grd.set_Texto(f, t_Col.ID, listas.Max_ID());
+                            grd.set_Texto(f, t_Col.Producto, listas.Producto.ID);
+                            grd.set_Texto(f, t_Col.Nombre_Producto, listas.Producto.Nombre);
+                            listas.ID = Convert.ToInt32(grd.get_Texto(f, 0));
 
                             grd.AgregarFila();
                             listas.Orden = listas.Orden + 1;
@@ -91,13 +95,12 @@
                             grd.set_Texto(f + 1, t_Col.Nombre, listas.Lista.Nombre);
                             grd.set_Texto(f + 1, t_Col.Orden, listas.Orden);
                         }
-
-                        listas.Actualizar("Producto", a);
-
-                        grd.set_Texto(f, c, a);
-                        grd.set_Texto(f, t_Col.Nombre_Producto, listas.Producto.Nombre);
-                        grd.set_Texto(f, t_Col.ID, listas.ID);
-
+                        else
+                        {
+                            listas.Actualizar("Producto", a);
+                            grd.set_Texto(f, t_Col.Producto, a);
+                            grd.set_Texto(f, t_Col.Nombre_Producto, listas.Producto.Nombre);
+                        }
                         grd.ActivarCelda(f + 1, t_Col.Producto);
                     }
                     break;
@@ -144,19 +147,19 @@
 
         private void grd_KeyUp(object sender, short e)
         {
-                switch (Convert.ToInt32(e))
-                {
-                    case 46: //Delete
-                        if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            switch (Convert.ToInt32(e))
+            {
+                case 46: //Delete
+                    if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+                        if (Convert.ToInt32(grd.get_Texto(grd.Row, 0)) != 0)
                         {
-                            if (Convert.ToInt32(grd.get_Texto(grd.Row, 0)) != 0)
-                            {
-                                listas.ID = Convert.ToInt32(grd.get_Texto(grd.Row, 0));
-                                listas.Borrar();
-                                grd.BorrarFila(grd.Row);
-                            }
+                            listas.ID = Convert.ToInt32(grd.get_Texto(grd.Row, 0));
+                            listas.Borrar();
+                            grd.BorrarFila(grd.Row);
                         }
-                        break;
+                    }
+                    break;
             }
         }
     }

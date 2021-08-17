@@ -10,6 +10,7 @@
         private Lista_Ofertas lista = new Lista_Ofertas();
 
         #region " Columnas "
+        private Byte c_Id;
         private Byte c_Orden;
         private Byte c_IdProd;
         private Byte c_Descripcion;
@@ -26,8 +27,8 @@
         {
             DataTable dt = lista.Datos();
 
-            grd.MostrarDatos(dt, true, false);
-
+            grd.MostrarDatos(dt, true, true);
+            c_Id = Convert.ToByte(grd.get_ColIndex("ID"));
             c_Orden = Convert.ToByte(grd.get_ColIndex("Orden"));
             c_IdProd = Convert.ToByte(grd.get_ColIndex("Id_Productos"));
             c_Descripcion = Convert.ToByte(grd.get_ColIndex("Descripcion"));
@@ -37,6 +38,7 @@
             grd.TeclasManejadas = n;
 
             grd.AutosizeAll();
+            grd.set_ColW(c_Id, 0);
         }
         private void CmdAceptar_Click(object sender, EventArgs e)
         {
@@ -44,6 +46,7 @@
 
         private void Grd_CambioFila(short Fila)
         {
+            lista.ID = Convert.ToInt32(grd.get_Texto(Fila, c_Id));
             lista.Orden = Convert.ToInt32(grd.get_Texto(Fila, c_Orden));
             lista.Producto.ID = Convert.ToInt32(grd.get_Texto(Fila, c_IdProd));
             lista.Descripcion = Convert.ToString(grd.get_Texto(Fila, c_Descripcion));
@@ -119,6 +122,7 @@
                     else
                     {
                         lista.Agregar();
+                        grd.set_Texto(f, c_Id, lista.Max_ID());
                         grd.AgregarFila();
                         grd.ActivarCelda(f + 1, c_Orden);
                     }

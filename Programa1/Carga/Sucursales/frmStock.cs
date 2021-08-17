@@ -342,10 +342,15 @@
         private void GrdStock_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdStock.get_Texto(Fila, c_Id).ToString());
-            stock.Cargar_Fila(i);
-            stock.precios.Fecha = stock.Fecha;
-            stock.precios.Sucursal = stock.Sucursal;
-            stock.precios.Producto = stock.Producto;
+            stock.ID = i;
+            if (grdStock.EsUltimaFila() == false)
+            {
+                stock.Cargar_Fila(i);
+                stock.precios.Fecha = stock.Fecha;
+                stock.precios.Sucursal = stock.Sucursal;
+                stock.precios.Producto = stock.Producto;
+            }
+           
         }
 
         private void GrdStock_KeyPress(object sender, short e)

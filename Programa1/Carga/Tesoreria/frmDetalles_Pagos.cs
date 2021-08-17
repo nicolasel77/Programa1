@@ -111,11 +111,6 @@
             grdDetalles.MostrarDatos(null,true,false);
             Armar_Cadena();
         }
-        private void chFcarga_CheckedChanged(object sender, EventArgs e)
-        {
-            grdDetalles.MostrarDatos(null, true, false);
-            Armar_Cadena();
-        }
 
         private void cmdMostrar_Click(object sender, EventArgs e)
         {
@@ -124,6 +119,7 @@
 
         private void chFcarga_CheckedChanged_1(object sender, EventArgs e)
         {
+            grdDetalles.MostrarDatos(null, true, false);
             Armar_Cadena();
         }
     }

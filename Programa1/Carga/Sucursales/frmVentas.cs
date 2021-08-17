@@ -429,217 +429,221 @@
         private void GrdVenta_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdVenta.get_Texto(Fila, c_Id).ToString());
-            Venta.Cargar_Fila(i);
-            Venta.precios.Fecha = Venta.Fecha;
-            Venta.precios.Sucursal = Venta.Sucursal;
-            Venta.precios.Producto = Venta.Producto;
-
-            Venta.precios_Proveedores.Fecha = Venta.Fecha;
-            Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
-            Venta.precios_Proveedores.Producto = Venta.Producto;
-
+            Venta.ID = i;
+            if (grdVenta.EsUltimaFila() == false)
+            {
+                Venta.Cargar_Fila(i);
+                Venta.precios.Fecha = Venta.Fecha;
+                Venta.precios.Sucursal = Venta.Sucursal;
+                Venta.precios.Producto = Venta.Producto;
+                
+                Venta.precios_Proveedores.Fecha = Venta.Fecha;
+                Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
+                Venta.precios_Proveedores.Producto = Venta.Producto;
+            }
         }
 
-        private void GrdVenta_KeyPress(object sender, short e)
+    private void GrdVenta_KeyPress(object sender, short e)
+    {
+        if (e == 13)
         {
-            if (e == 13)
-            {
+            
                 if (Venta.ID == 0)
-                {
-
-                    if (grdVenta.Col == c_Kilos)
-                    {
-                        Venta.Producto.ID = Listas.Producto_Siguiente();
-
-                        Venta.precios.Producto = Venta.Producto;
-                        Venta.precios_Proveedores.Producto = Venta.Producto;
-
-                        Venta.Descripcion = Venta.Producto.Nombre;
-
-                        grdVenta.set_Texto(grdVenta.Row, c_IdProd, Venta.Producto.ID);
-                        grdVenta.set_Texto(grdVenta.Row, c_Descripcion, Venta.Descripcion);
-
-                        Venta.precios.Sucursal = Venta.Sucursal;
-                        Venta.CostoVenta = Venta.precios.Buscar();
-                        grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
-                        grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
-
-                        Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
-                        Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
-                        grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
-                        grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
-                    }
-                }
-            }
-        }
-
-        private void GrdVenta_KeyUp(object sender, short e)
-        {
-            switch (Convert.ToInt32(e))
             {
-                case 46: //Delete
-                    if (Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0)) != 0)
-                    {
-                        if (Venta.Fecha_Cerrada(Venta.Fecha) == false)
-                        {
-                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes) 
-                            {
-                                Venta.ID = Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0));
-                                Venta.Borrar();
-                                grdVenta.BorrarFila(grdVenta.Row);
-                                Totales();
-                            } 
-                        }
-                        else
-                        {
-                            Mensaje("La fecha esta cerrada.");
-                        }
-                    }
-                    break;
-            }
-        }
 
-
-        private void LblCant_Click(object sender, EventArgs e)
-        {
-            ToolStripLabel lbl = sender as ToolStripLabel;
-            string s = lbl.Text.Substring(lbl.Text.IndexOf(":") + 1);
-
-            Clipboard.SetText(s);
-
-            Mensaje($"Copiado: {s}");
-        }
-
-        private void CmdCambioMasivo_Click(object sender, EventArgs e)
-        {
-            if (grdVenta.Rows > 2)
-            {
-                frmCMVentas cm = new frmCMVentas();
-                List<int> n = new List<int>();
-
-                int d = grdVenta.Selection.r1;
-                int h = grdVenta.Selection.r2;
-                if (d == -1)
+                if (grdVenta.Col == c_Kilos)
                 {
-                    d = 1;
-                    h = grdVenta.Rows - 2;
-                }
-                for (int i = d; i <= h; i++)
-                {
-                    n.Add(Convert.ToInt32(grdVenta.get_Texto(i, c_Id)));
-                }
-                cm.Ids = n;
-                cm.ShowDialog();
-                cmdMostrar.PerformClick();
-            }
-        }
+                    Venta.Producto.ID = Listas.Producto_Siguiente();
 
+                    Venta.precios.Producto = Venta.Producto;
+                    Venta.precios_Proveedores.Producto = Venta.Producto;
 
-        private void CmdACompras_Click(object sender, EventArgs e)
-        {
-            frmCopiarVentaACompra cp = new frmCopiarVentaACompra();
-            string f = Armar_Cadena();
+                    Venta.Descripcion = Venta.Producto.Nombre;
 
-            if (f != "")
-            {
-                DataTable dt = Venta.Resumen_Compra(f);
+                    grdVenta.set_Texto(grdVenta.Row, c_IdProd, Venta.Producto.ID);
+                    grdVenta.set_Texto(grdVenta.Row, c_Descripcion, Venta.Descripcion);
 
-                cp.Cargar(dt);
-                cp.grd.Columnas[cp.grd.get_ColIndex("Costo")].Format = "C2";
-                cp.grd.Columnas[cp.grd.get_ColIndex("Kilos")].Format = "N2";
-                cp.grd.Columnas[cp.grd.get_ColIndex("Total")].Format = "C2";
-                cp.ShowDialog();
+                    Venta.precios.Sucursal = Venta.Sucursal;
+                    Venta.CostoVenta = Venta.precios.Buscar();
+                    grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
+                    grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
 
-                if (cp.Aceptado == true)
-                {
-                    Compras compras = new Compras();
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        compras.Fecha = Convert.ToDateTime(dr["Fecha"]);
-                        compras.Proveedor.Id = Convert.ToInt16(dr["Id_Proveedores"]);
-                        compras.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
-                        compras.Descripcion = dr["Descripcion"].ToString();
-                        compras.Costo = Convert.ToSingle(dr["Costo"]);
-                        compras.Kilos = Convert.ToSingle(dr["Kilos"]);
-                        compras.Agregar();
-                    }
-                }
-            }
-        }
-
-        private void CmdATraslados_Click(object sender, EventArgs e)
-        {
-            frmCopiarVentaACompra cp = new frmCopiarVentaACompra();
-            string f = Armar_Cadena();
-
-            DataTable dt = Venta.Resumen_ATraslados(f);
-
-            cp.Text = "Copiar a Traslados";
-
-            cp.Cargar(dt);
-            cp.grd.Columnas[cp.grd.get_ColIndex("Costo_Entrada")].Format = "C2";
-            cp.grd.Columnas[cp.grd.get_ColIndex("Costo_Salida")].Format = "C2";
-            cp.grd.Columnas[cp.grd.get_ColIndex("Kilos")].Format = "N2";
-            cp.grd.Columnas[cp.grd.get_ColIndex("Total_Entrada")].Format = "C2";
-            cp.grd.Columnas[cp.grd.get_ColIndex("Total_Salida")].Format = "C2";
-
-            cp.ShowDialog();
-
-            if (cp.Aceptado == true)
-            {
-                Traslados traslados = new Traslados();
-                foreach (DataRow dr in dt.Rows)
-                {
-                    traslados.Fecha = Convert.ToDateTime(dr["Fecha"]);
-                    traslados.sucS.ID = 50;
-                    traslados.sucE.ID = Convert.ToInt16(dr["Suc_Entrada"]); ;
-                    traslados.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
-                    traslados.Descripcion = dr["Descripcion"].ToString();
-                    traslados.CostoS = Convert.ToSingle(dr["Costo_Salida"]);
-                    traslados.CostoE = Convert.ToSingle(dr["Costo_Entrada"]);
-                    traslados.Kilos = Convert.ToSingle(dr["Kilos"]);
-                    traslados.Agregar();
-                }
-            }
-        }
-
-        private void lstCamiones_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Middle) { lstCamiones.SelectedIndex = -1; }
-        }
-
-        private void lstCamiones_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmdMostrar.PerformClick();
-        }
-
-        private void cmbListas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbListas.Text == "Editar...")
-            {
-                frmListas_Carga fr = new frmListas_Carga();
-                fr.ShowDialog();
-
-                Herramientas.Herramientas h = new Herramientas.Herramientas();
-                cmbListas.Items.Clear();
-                h.Llenar_List(cmbListas, Listas.Lista.Datos());
-
-                cmbListas.Items.Insert(0, "Ninguna...");
-                cmbListas.Items.Insert(1, "Editar...");
-            }
-            else
-            {
-                if (cmbListas.Text == "Ninguna...")
-                {
-                    Listas.Lista.ID = 0;
-                }
-                else
-                {
-                    Herramientas.Herramientas h = new Herramientas.Herramientas();
-                    Listas.Lista.ID = h.Codigo_Seleccionado(cmbListas.Text);
-                    Listas.Producto = Venta.Producto;
+                    Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
+                    Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                    grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
+                    grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
                 }
             }
         }
     }
+
+    private void GrdVenta_KeyUp(object sender, short e)
+    {
+        switch (Convert.ToInt32(e))
+        {
+            case 46: //Delete
+                if (Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0)) != 0)
+                {
+                    if (Venta.Fecha_Cerrada(Venta.Fecha) == false)
+                    {
+                        if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                        {
+                            Venta.ID = Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0));
+                            Venta.Borrar();
+                            grdVenta.BorrarFila(grdVenta.Row);
+                            Totales();
+                        }
+                    }
+                    else
+                    {
+                        Mensaje("La fecha esta cerrada.");
+                    }
+                }
+                break;
+        }
+    }
+
+
+    private void LblCant_Click(object sender, EventArgs e)
+    {
+        ToolStripLabel lbl = sender as ToolStripLabel;
+        string s = lbl.Text.Substring(lbl.Text.IndexOf(":") + 1);
+
+        Clipboard.SetText(s);
+
+        Mensaje($"Copiado: {s}");
+    }
+
+    private void CmdCambioMasivo_Click(object sender, EventArgs e)
+    {
+        if (grdVenta.Rows > 2)
+        {
+            frmCMVentas cm = new frmCMVentas();
+            List<int> n = new List<int>();
+
+            int d = grdVenta.Selection.r1;
+            int h = grdVenta.Selection.r2;
+            if (d == -1)
+            {
+                d = 1;
+                h = grdVenta.Rows - 2;
+            }
+            for (int i = d; i <= h; i++)
+            {
+                n.Add(Convert.ToInt32(grdVenta.get_Texto(i, c_Id)));
+            }
+            cm.Ids = n;
+            cm.ShowDialog();
+            cmdMostrar.PerformClick();
+        }
+    }
+
+
+    private void CmdACompras_Click(object sender, EventArgs e)
+    {
+        frmCopiarVentaACompra cp = new frmCopiarVentaACompra();
+        string f = Armar_Cadena();
+
+        if (f != "")
+        {
+            DataTable dt = Venta.Resumen_Compra(f);
+
+            cp.Cargar(dt);
+            cp.grd.Columnas[cp.grd.get_ColIndex("Costo")].Format = "C2";
+            cp.grd.Columnas[cp.grd.get_ColIndex("Kilos")].Format = "N2";
+            cp.grd.Columnas[cp.grd.get_ColIndex("Total")].Format = "C2";
+            cp.ShowDialog();
+
+            if (cp.Aceptado == true)
+            {
+                Compras compras = new Compras();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    compras.Fecha = Convert.ToDateTime(dr["Fecha"]);
+                    compras.Proveedor.Id = Convert.ToInt16(dr["Id_Proveedores"]);
+                    compras.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
+                    compras.Descripcion = dr["Descripcion"].ToString();
+                    compras.Costo = Convert.ToSingle(dr["Costo"]);
+                    compras.Kilos = Convert.ToSingle(dr["Kilos"]);
+                    compras.Agregar();
+                }
+            }
+        }
+    }
+
+    private void CmdATraslados_Click(object sender, EventArgs e)
+    {
+        frmCopiarVentaACompra cp = new frmCopiarVentaACompra();
+        string f = Armar_Cadena();
+
+        DataTable dt = Venta.Resumen_ATraslados(f);
+
+        cp.Text = "Copiar a Traslados";
+
+        cp.Cargar(dt);
+        cp.grd.Columnas[cp.grd.get_ColIndex("Costo_Entrada")].Format = "C2";
+        cp.grd.Columnas[cp.grd.get_ColIndex("Costo_Salida")].Format = "C2";
+        cp.grd.Columnas[cp.grd.get_ColIndex("Kilos")].Format = "N2";
+        cp.grd.Columnas[cp.grd.get_ColIndex("Total_Entrada")].Format = "C2";
+        cp.grd.Columnas[cp.grd.get_ColIndex("Total_Salida")].Format = "C2";
+
+        cp.ShowDialog();
+
+        if (cp.Aceptado == true)
+        {
+            Traslados traslados = new Traslados();
+            foreach (DataRow dr in dt.Rows)
+            {
+                traslados.Fecha = Convert.ToDateTime(dr["Fecha"]);
+                traslados.sucS.ID = 50;
+                traslados.sucE.ID = Convert.ToInt16(dr["Suc_Entrada"]); ;
+                traslados.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
+                traslados.Descripcion = dr["Descripcion"].ToString();
+                traslados.CostoS = Convert.ToSingle(dr["Costo_Salida"]);
+                traslados.CostoE = Convert.ToSingle(dr["Costo_Entrada"]);
+                traslados.Kilos = Convert.ToSingle(dr["Kilos"]);
+                traslados.Agregar();
+            }
+        }
+    }
+
+    private void lstCamiones_MouseUp(object sender, MouseEventArgs e)
+    {
+        if (e.Button == MouseButtons.Middle) { lstCamiones.SelectedIndex = -1; }
+    }
+
+    private void lstCamiones_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        cmdMostrar.PerformClick();
+    }
+
+    private void cmbListas_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (cmbListas.Text == "Editar...")
+        {
+            frmListas_Carga fr = new frmListas_Carga();
+            fr.ShowDialog();
+
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            cmbListas.Items.Clear();
+            h.Llenar_List(cmbListas, Listas.Lista.Datos());
+
+            cmbListas.Items.Insert(0, "Ninguna...");
+            cmbListas.Items.Insert(1, "Editar...");
+        }
+        else
+        {
+            if (cmbListas.Text == "Ninguna...")
+            {
+                Listas.Lista.ID = 0;
+            }
+            else
+            {
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+                Listas.Lista.ID = h.Codigo_Seleccionado(cmbListas.Text);
+                Listas.Producto = Venta.Producto;
+            }
+        }
+    }
+}
 }

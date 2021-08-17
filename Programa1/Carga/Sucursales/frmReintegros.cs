@@ -295,7 +295,7 @@
 
                         Totales();
                         break;
-                } 
+                }
             }
             else
             {
@@ -306,7 +306,18 @@
         private void GrdReintegros_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdReintegros.get_Texto(Fila, c_Id).ToString());
-            Reintegros.Cargar_Fila(i);
+            if (i > 0)
+            {
+                Reintegros.Cargar_Fila(i);
+            }
+            else
+            {
+                Reintegros.Fecha = Convert.ToDateTime(grdReintegros.get_Texto(Fila, c_Fecha));
+                Reintegros.Sucursal.ID = Convert.ToInt32(grdReintegros.get_Texto(Fila, c_IdSuc));
+                Reintegros.Tipo.ID = Convert.ToInt32(grdReintegros.get_Texto(Fila, c_IdTipo));
+                Reintegros.Descripcion = grdReintegros.get_Texto(Fila, c_Descripcion).ToString();
+                Reintegros.Importe = Convert.ToDouble(grdReintegros.get_Texto(Fila, c_Importe));
+            }
         }
 
 
@@ -319,13 +330,13 @@
                     {
                         if (Reintegros.Fecha_Cerrada(Reintegros.Fecha) == false)
                         {
-                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes) 
+                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                             {
                                 Reintegros.ID = Convert.ToInt32(grdReintegros.get_Texto(grdReintegros.Row, 0));
                                 Reintegros.Borrar();
                                 grdReintegros.BorrarFila(grdReintegros.Row);
                                 Totales();
-                            } 
+                            }
                         }
                         else
                         {

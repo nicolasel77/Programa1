@@ -172,6 +172,7 @@ namespace Programa1.DB
 
                 ID = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
+                Camion.ID = Convert.ToInt32(dr["Id_Camion"]);
                 Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
                 Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
