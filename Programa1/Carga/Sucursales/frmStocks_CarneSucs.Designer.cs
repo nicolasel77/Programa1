@@ -31,8 +31,8 @@ namespace Programa1.Carga.Sucursales
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStocks_CarneSucs));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.grd = new Grilla2.SpeedGrilla();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.cSucursales1 = new Programa1.Controles.cSucursales();
             this.cFechas1 = new Programa1.Controles.cFechas();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -62,25 +62,6 @@ namespace Programa1.Carga.Sucursales
             this.splitContainer1.SplitterDistance = 835;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.cSucursales1);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.cFechas1);
-            this.splitContainer2.Size = new System.Drawing.Size(295, 666);
-            this.splitContainer2.SplitterDistance = 434;
-            this.splitContainer2.SplitterWidth = 8;
-            this.splitContainer2.TabIndex = 0;
             // 
             // grd
             // 
@@ -117,6 +98,25 @@ namespace Programa1.Carga.Sucursales
             this.grd.Size = new System.Drawing.Size(803, 642);
             this.grd.TabIndex = 0;
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.cSucursales1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.cFechas1);
+            this.splitContainer2.Size = new System.Drawing.Size(295, 666);
+            this.splitContainer2.SplitterDistance = 434;
+            this.splitContainer2.SplitterWidth = 8;
+            this.splitContainer2.TabIndex = 0;
+            // 
             // cSucursales1
             // 
             this.cSucursales1.BackColor = System.Drawing.Color.Gainsboro;
@@ -124,13 +124,14 @@ namespace Programa1.Carga.Sucursales
             this.cSucursales1.Filtro_In = "";
             this.cSucursales1.Location = new System.Drawing.Point(0, 0);
             this.cSucursales1.Mostrar_Botones = true;
-            this.cSucursales1.Mostrar_Tipo = true;
+            this.cSucursales1.Mostrar_Tipo = false;
             this.cSucursales1.Name = "cSucursales1";
             this.cSucursales1.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucursales1.Size = new System.Drawing.Size(295, 434);
             this.cSucursales1.TabIndex = 0;
             this.cSucursales1.Titulo = "Sucursales";
             this.cSucursales1.Valor_Actual = -1;
+            this.cSucursales1.Cambio_Seleccion += new System.EventHandler(this.cSucursales1_Cambio_Seleccion);
             // 
             // cFechas1
             // 

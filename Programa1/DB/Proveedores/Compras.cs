@@ -161,6 +161,7 @@
 
                 ID = id;
                 Fecha = Convert.ToDateTime(dr["Fecha"]);
+                Camion.ID = Convert.ToInt32(dr["Id_Camion"]);
                 Producto.ID = Convert.ToInt32(dr["Id_Productos"]);
                 Descripcion = dr["Descripcion"].ToString();
                 Proveedor.Id = Convert.ToInt32(dr["Id_Proveedores"]);

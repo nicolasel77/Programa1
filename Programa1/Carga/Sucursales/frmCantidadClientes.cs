@@ -241,8 +241,18 @@
 
         private void GrdCantidad_Clientes_CambioFila(short Fila)
         {
-            int i = Convert.ToInt32(grdCantidad_Clientes.get_Texto(Fila, c_Id).ToString());
+            int i = Convert.ToInt32(grdCantidad_Clientes.get_Texto(Fila, c_Id));
+            if (i > 0)
+            { 
             Cantidad_Clientes.Cargar_Fila(i);
+            }
+            else
+            {
+                Cantidad_Clientes.ID = 0;
+                Cantidad_Clientes.Fecha = Convert.ToDateTime(grdCantidad_Clientes.get_Texto(Fila,c_Fecha));
+                Cantidad_Clientes.Sucursal.ID = Convert.ToInt32(grdCantidad_Clientes.get_Texto(Fila, c_IdSuc));
+                Cantidad_Clientes.Cantidad = Convert.ToInt32(grdCantidad_Clientes.get_Texto(Fila, c_Cantidad));
+            }
         }
 
         private void GrdCantidad_Clientes_KeyPress(object sender, short e)

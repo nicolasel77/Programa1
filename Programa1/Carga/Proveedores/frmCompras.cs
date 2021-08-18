@@ -366,10 +366,28 @@
         private void GrdCompras_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdCompras.get_Texto(Fila, c_Id).ToString());
-            Compras.Cargar_Fila(i);
-            Compras.precios.Fecha = Compras.Fecha;
-            Compras.precios.Proveedor = Compras.Proveedor;
-            Compras.precios.Producto = Compras.Producto;
+            if (i > 0)
+            {
+                Compras.Cargar_Fila(i);
+                Compras.precios.Fecha = Compras.Fecha;
+                Compras.precios.Proveedor = Compras.Proveedor;
+                Compras.precios.Producto = Compras.Producto;
+            }
+            else
+            {
+                Compras.ID = 0;
+                Compras.Camion.ID = Convert.ToInt32(grdCompras.get_Texto(Fila, c_IdCamion));
+                Compras.Fecha = Convert.ToDateTime(grdCompras.get_Texto(Fila,c_Fecha));
+                Compras.Producto.ID = Convert.ToInt32(grdCompras.get_Texto(Fila, c_IdProd));
+                Compras.Descripcion = grdCompras.get_Texto(Fila, c_Descripcion).ToString();
+                Compras.Proveedor.Id = Convert.ToInt32(grdCompras.get_Texto(Fila, c_IdProv));
+                Compras.Costo = Convert.ToSingle(grdCompras.get_Texto(Fila, c_Costo));
+                Compras.Kilos = Convert.ToSingle(grdCompras.get_Texto(Fila, c_Kilos));
+
+                Compras.precios.Fecha = Compras.Fecha;
+                Compras.precios.Proveedor = Compras.Proveedor;
+                Compras.precios.Producto = Compras.Producto;
+            }
         }
 
         private void GrdCompras_KeyPress(object sender, short e)

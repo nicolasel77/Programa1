@@ -2,7 +2,6 @@
 {
     using Programa1.DB;
     using System;
-    using System.Collections.Generic;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -46,7 +45,7 @@
             c_Costo_S = Convert.ToByte(grdAPicada.get_ColIndex("Costo_S"));
             c_Kilos_S = Convert.ToByte(grdAPicada.get_ColIndex("Kilos_S"));
             c_Total_S = Convert.ToByte(grdAPicada.get_ColIndex("Total_S"));
-            c_Reintegro= Convert.ToByte(grdAPicada.get_ColIndex("Reintegro"));
+            c_Reintegro = Convert.ToByte(grdAPicada.get_ColIndex("Reintegro"));
 
             formato_Grilla();
 
@@ -355,7 +354,7 @@
 
                         if (grdAPicada.Row == grdAPicada.Rows - 1)
                         {
-                            if (APicada.Fecha>= cFecha.fecha_Actual & APicada.Sucursal.ID != 0 & APicada.Producto_A.ID != 0 & APicada.Producto_S.ID != 0)
+                            if (APicada.Fecha >= cFecha.fecha_Actual & APicada.Sucursal.ID != 0 & APicada.Producto_A.ID != 0 & APicada.Producto_S.ID != 0)
                             {
                                 APicada.Agregar();
                                 grdAPicada.set_Texto(f, c_Id, APicada.ID);
@@ -366,7 +365,7 @@
                                 grdAPicada.set_Texto(f + 1, c_IdSuc, APicada.Sucursal.ID);
                                 grdAPicada.set_Texto(f + 1, c_IdSuc + 1, APicada.Sucursal.Nombre);
 
-                                grdAPicada.ActivarCelda(f, c_Costo_S); 
+                                grdAPicada.ActivarCelda(f, c_Costo_S);
                             }
                         }
                         else
@@ -401,7 +400,7 @@
                         grdAPicada.ActivarCelda(f + 1, c_Costo_S);
                         Totales();
                         break;
-                } 
+                }
             }
             else
             {
@@ -412,10 +411,25 @@
         private void GrdAPicada_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdAPicada.get_Texto(Fila, c_Id).ToString());
-            APicada.Cargar_Fila(i);
-            APicada.precios.Fecha = APicada.Fecha;
-            APicada.precios.Sucursal = APicada.Sucursal;
-            APicada.precios.Producto = APicada.Producto_A;
+            if (i > 0)
+            {
+                APicada.Cargar_Fila(i);
+                APicada.precios.Fecha = APicada.Fecha;
+                APicada.precios.Sucursal = APicada.Sucursal;
+                APicada.precios.Producto = APicada.Producto_A;
+            }
+            else
+            {
+                APicada.ID = 0;
+                APicada.Fecha = Convert.ToDateTime(grdAPicada.get_Texto(Fila,c_Fecha));
+                APicada.Sucursal.ID = Convert.ToInt32(grdAPicada.get_Texto(Fila, c_IdSuc));
+                APicada.Producto_A.ID = Convert.ToInt32(grdAPicada.get_Texto(Fila, c_IdProd_A));
+                APicada.Costo_A = Convert.ToSingle(grdAPicada.get_Texto(Fila, c_Costo_A));
+                APicada.Kilos_A = Convert.ToSingle(grdAPicada.get_Texto(Fila, c_Kilos_A));
+                APicada.Producto_S.ID = Convert.ToInt32(grdAPicada.get_Texto(Fila, c_IdProd_S));
+                APicada.Costo_S = Convert.ToSingle(grdAPicada.get_Texto(Fila, c_Costo_S));
+                APicada.Kilos_S = Convert.ToSingle(grdAPicada.get_Texto(Fila, c_Kilos_S));
+            }
         }
 
         private void GrdAPicada_KeyPress(object sender, short e)
@@ -429,14 +443,14 @@
                     {
                         APicada.Producto_A.Siguiente();
                         APicada.precios.Producto = APicada.Producto_A;
-                        
+
                         grdAPicada.set_Texto(grdAPicada.Row, c_IdProd_A, APicada.Producto_A.ID);
                         grdAPicada.set_Texto(grdAPicada.Row, c_IdProd_A + 1, APicada.Producto_A.Nombre);
 
                         APicada.Costo_A = APicada.precios.Buscar();
                         grdAPicada.set_Texto(grdAPicada.Row, c_Costo_A, APicada.Costo_A);
                         grdAPicada.set_Texto(grdAPicada.Row, c_Total_A, 0);
-                    }                    
+                    }
                 }
                 else
                 {
@@ -456,7 +470,7 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (Convert.ToInt32(grdAPicada.get_Texto(grdAPicada.Row, 0)) != 0)                        
+                    if (Convert.ToInt32(grdAPicada.get_Texto(grdAPicada.Row, 0)) != 0)
                     {
                         if (APicada.Fecha_Cerrada(APicada.Fecha) == false)
                         {
@@ -466,7 +480,7 @@
                                 APicada.Borrar();
                                 grdAPicada.BorrarFila(grdAPicada.Row);
                                 Totales();
-                            } 
+                            }
                         }
                         else
                         {
@@ -513,6 +527,6 @@
             }
         }
 
-       
+
     }
 }

@@ -366,7 +366,7 @@
 
                             GrdDevoluciones.set_Texto(f + 1, c_Fecha, devoluciones.Fecha);
                             GrdDevoluciones.set_Texto(f + 1, c_IdProv, devoluciones.Proveedor.Id);
-                            GrdDevoluciones.set_Texto(f + 1, c_IdProv + 1, devoluciones.Sucursal.Nombre);
+                            GrdDevoluciones.set_Texto(f + 1, c_IdProv + 1, devoluciones.Proveedor.Nombre);
                             GrdDevoluciones.set_Texto(f + 1, c_IdSuc, devoluciones.Sucursal.ID);
                             GrdDevoluciones.set_Texto(f + 1, c_IdSuc + 1, devoluciones.Sucursal.Nombre);
 
@@ -410,14 +410,37 @@
         private void GrdDevoluciones_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(GrdDevoluciones.get_Texto(Fila, c_Id).ToString());
-            devoluciones.Cargar_Fila(i);
-            devoluciones.precios.Fecha = devoluciones.Fecha;
-            devoluciones.precios.Sucursal = devoluciones.Sucursal;
-            devoluciones.precios.Producto = devoluciones.Producto;
+            if (i > 0)
+            {
+                devoluciones.Cargar_Fila(i);
+                devoluciones.precios.Fecha = devoluciones.Fecha;
+                devoluciones.precios.Sucursal = devoluciones.Sucursal;
+                devoluciones.precios.Producto = devoluciones.Producto;
 
-            devoluciones.precios_Proveedores.Fecha = devoluciones.Fecha;
-            devoluciones.precios_Proveedores.Proveedor = devoluciones.Proveedor;
-            devoluciones.precios_Proveedores.Producto = devoluciones.Producto;
+                devoluciones.precios_Proveedores.Fecha = devoluciones.Fecha;
+                devoluciones.precios_Proveedores.Proveedor = devoluciones.Proveedor;
+                devoluciones.precios_Proveedores.Producto = devoluciones.Producto;
+            }
+            else
+            {
+                devoluciones.ID = 0;
+                devoluciones.Fecha = Convert.ToDateTime(GrdDevoluciones.get_Texto(Fila, c_Fecha));
+                devoluciones.Producto.ID = Convert.ToInt32(GrdDevoluciones.get_Texto(Fila, c_IdProd));
+                devoluciones.Descripcion = GrdDevoluciones.get_Texto(Fila, c_Descripcion).ToString();
+                devoluciones.Sucursal.ID = Convert.ToInt32(GrdDevoluciones.get_Texto(Fila, c_IdSuc));
+                devoluciones.Proveedor.Id = Convert.ToInt32(GrdDevoluciones.get_Texto(Fila, c_IdProv));
+                devoluciones.CostoVenta = Convert.ToSingle(GrdDevoluciones.get_Texto(Fila, c_CostoVenta));
+                devoluciones.CostoCompra = Convert.ToSingle(GrdDevoluciones.get_Texto(Fila, c_CostoVenta));
+                devoluciones.Kilos = Convert.ToSingle(GrdDevoluciones.get_Texto(Fila, c_Kilos));
+
+                devoluciones.precios.Fecha = devoluciones.Fecha;
+                devoluciones.precios.Sucursal = devoluciones.Sucursal;
+                devoluciones.precios.Producto = devoluciones.Producto;
+
+                devoluciones.precios_Proveedores.Fecha = devoluciones.Fecha;
+                devoluciones.precios_Proveedores.Proveedor = devoluciones.Proveedor;
+                devoluciones.precios_Proveedores.Producto = devoluciones.Producto;
+            }
 
         }
 

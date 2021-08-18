@@ -368,6 +368,8 @@ namespace Programa1.Carga
                             //Rellenar nueva fila
 
                             grdTraslados.set_Texto(f + 1, c_Fecha, Traslados.Fecha);
+                            grdTraslados.set_Texto(f + 1, c_IdSucS, Traslados.sucS.ID);
+                            grdTraslados.set_Texto(f + 1, c_IdSucS + 1, Traslados.sucS.Nombre);
 
                             Traslados.Kilos = 0;
                             grdTraslados.ActivarCelda(f + 1, c_IdSucE);
@@ -391,10 +393,26 @@ namespace Programa1.Carga
         private void GrdTraslados_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdTraslados.get_Texto(Fila, c_Id).ToString());
-            Traslados.Cargar_Fila(i);
-            Traslados.precios.Fecha = Traslados.Fecha;
-            Traslados.precios.Sucursal = Traslados.sucS;
-            Traslados.precios.Producto = Traslados.Producto;
+            if (i > 0)
+            {
+                Traslados.Cargar_Fila(i);
+                Traslados.precios.Fecha = Traslados.Fecha;
+                Traslados.precios.Sucursal = Traslados.sucS;
+                Traslados.precios.Producto = Traslados.Producto;
+            }
+            else
+            {
+                Traslados.ID = 0;
+                Traslados.Fecha = Convert.ToDateTime(grdTraslados.get_Texto(Fila, c_Fecha));
+                Traslados.Producto.ID = Convert.ToInt32(grdTraslados.get_Texto(Fila, c_IdProd));
+                Traslados.Descripcion = grdTraslados.get_Texto(Fila, c_Descripcion).ToString();
+                Traslados.sucS.ID = Convert.ToInt32(grdTraslados.get_Texto(Fila, c_IdSucS));
+                Traslados.sucE.ID = Convert.ToInt32(grdTraslados.get_Texto(Fila, c_IdSucE));
+                Traslados.CostoS = Convert.ToSingle(grdTraslados.get_Texto(Fila, c_CostoS));
+                Traslados.CostoE = Convert.ToSingle(grdTraslados.get_Texto(Fila, c_CostoE));
+                Traslados.Kilos = Convert.ToSingle(grdTraslados.get_Texto(Fila, c_Kilos));
+            }
+
         }
 
         private void GrdTraslados_KeyPress(object sender, short e)

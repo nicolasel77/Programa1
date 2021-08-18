@@ -122,5 +122,32 @@
                 Kilos = 0;
             }
         }
+
+        public double Buscarkg_Venta()
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            double kv = 0;
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand("SELECT TOP 1 Kilos_Vendidos FROM vw_Ofertas WHERE Id=" + ID, conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+                DataRow dr = dt.Rows[0];
+                kv = Convert.ToDouble(dr["Kilos_Vendidos"]);
+                
+
+            }
+            catch (Exception)
+            {
+                kv = 0;
+            }
+            return kv;
+        }
+
     }
 }

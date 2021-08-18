@@ -299,7 +299,18 @@
         private void grdGastos_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdGastos.get_Texto(Fila, c_Id));
-            Gastos_Sucursales.Cargar_Fila(i);
+            if (i > 0)
+            {
+                Gastos_Sucursales.Cargar_Fila(i);
+            }
+            else
+            {
+                Gastos_Sucursales.Fecha = Convert.ToDateTime(grdGastos.get_Texto(Fila, c_Fecha));
+                Gastos_Sucursales.Sucursal.ID = Convert.ToInt32(grdGastos.get_Texto(Fila, c_IdSuc));
+                Gastos_Sucursales.Tipo.ID = Convert.ToInt32(grdGastos.get_Texto(Fila, c_IdTipo));
+                Gastos_Sucursales.Descripcion = grdGastos.get_Texto(Fila, c_Descripcion).ToString();
+                Gastos_Sucursales.Importe = Convert.ToSingle(grdGastos.get_Texto(Fila, c_Importe));
+            }
         }
 
 

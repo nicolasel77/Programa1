@@ -20,6 +20,8 @@
         private Byte c_CostoOferta;
         private Byte c_Kilos;
         private Byte c_Reintegro;
+        private Byte c_Kilos_Ven;
+        private Byte c_Dif;
         #endregion
 
         public frmOfertas()
@@ -41,7 +43,8 @@
             c_CostoOferta = Convert.ToByte(grdOfertas.get_ColIndex("Costo_Oferta"));
             c_Kilos = Convert.ToByte(grdOfertas.get_ColIndex("Kilos"));
             c_Reintegro = Convert.ToByte(grdOfertas.get_ColIndex("Reintegro"));
-
+            c_Kilos_Ven = Convert.ToByte(grdOfertas.get_ColIndex("Kilos_Vendidos"));
+            c_Dif = Convert.ToByte(grdOfertas.get_ColIndex("Diferencia"));
             formato_Grilla();
 
             //El intercambio de columnas para estas teclas
@@ -240,6 +243,7 @@
                             grdOfertas.set_Texto(f, c + 1, Ofertas.Sucursal.Nombre);
 
                             grdOfertas.ActivarCelda(f, c + 2);
+                            kgvYDif(f);
                         }
                         else
                         {
@@ -272,6 +276,7 @@
 
                             grdOfertas.ActivarCelda(f, c_Kilos);
                             Totales();
+                            kgvYDif(f);
                         }
                         else
                         {
@@ -301,7 +306,7 @@
                         break;
                     case 7:
                         //Costo_Oferta
-                        Ofertas.Costo_Original = Convert.ToSingle(a);
+                        Ofertas.Costo_Oferta = Convert.ToSingle(a);
                         grdOfertas.set_Texto(f, c, a);
                         grdOfertas.set_Texto(f, c_Reintegro, (Ofertas.Costo_Original - Ofertas.Costo_Oferta) * Ofertas.Kilos);
 
@@ -320,6 +325,7 @@
                         {
                             Ofertas.Agregar();
                             grdOfertas.set_Texto(f, c_Id, Ofertas.ID);
+                            kgvYDif(f);
                             grdOfertas.AgregarFila();
                             //Rellenar nueva fila
 
@@ -352,6 +358,7 @@
                         else
                         {
                             Ofertas.Actualizar();
+                            kgvYDif(f);
                         }
                         grdOfertas.ActivarCelda(f + 1, c);
 
@@ -365,16 +372,26 @@
             }
         }
 
+        private void kgvYDif(short Fila)
+        {
+            Ofertas.ID = Convert.ToInt32(grdOfertas.get_Texto(Fila, c_Id));
+            double kv = Ofertas.Buscarkg_Venta();
+            grdOfertas.set_Texto(Fila, c_Kilos_Ven, kv);
+            grdOfertas.set_Texto(Fila, c_Dif, kv - Convert.ToDouble(grdOfertas.get_Texto(Fila,c_Kilos)));
+        }
+
         private void GrdOfertas_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdOfertas.get_Texto(Fila, c_Id).ToString());
             Ofertas.ID = i;
-           
-            Thread th = new Thread(new ThreadStart(Ofertas.Cargar_Fila));
-            th.Start();
-            Ofertas.precios.Fecha = Ofertas.Fecha;
-            Ofertas.precios.Sucursal = Ofertas.Sucursal;
-            Ofertas.precios.Producto = Ofertas.Producto;
+            if (i > 0)
+            {
+                Thread th = new Thread(new ThreadStart(Ofertas.Cargar_Fila));
+                th.Start();
+                Ofertas.precios.Fecha = Ofertas.Fecha;
+                Ofertas.precios.Sucursal = Ofertas.Sucursal;
+                Ofertas.precios.Producto = Ofertas.Producto;
+            }
         }              
 
         private void GrdOfertas_KeyPress(object sender, short e)

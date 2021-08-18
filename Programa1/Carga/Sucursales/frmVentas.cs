@@ -436,7 +436,28 @@
                 Venta.precios.Fecha = Venta.Fecha;
                 Venta.precios.Sucursal = Venta.Sucursal;
                 Venta.precios.Producto = Venta.Producto;
-                
+
+                Venta.precios_Proveedores.Fecha = Venta.Fecha;
+                Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
+                Venta.precios_Proveedores.Producto = Venta.Producto;
+            }
+            else
+            {
+                Venta.ID = i;
+                Venta.Fecha = Convert.ToDateTime(grdVenta.get_Texto(Fila,c_Fecha));
+                Venta.Camion.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdCamion));
+                Venta.Producto.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdProd));
+                Venta.Descripcion = grdVenta.get_Texto(Fila, c_Descripcion).ToString();
+                Venta.Sucursal.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdSuc));
+                Venta.Proveedor.Id = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdProv));
+                Venta.CostoVenta = Convert.ToSingle(grdVenta.get_Texto(Fila, c_CostoVenta));
+                Venta.CostoCompra = Convert.ToSingle(grdVenta.get_Texto(Fila, c_CostoCompra));
+                Venta.Kilos = Convert.ToSingle(grdVenta.get_Texto(Fila, c_Kilos));
+
+                Venta.precios.Fecha = Venta.Fecha;
+                Venta.precios.Sucursal = Venta.Sucursal;
+                Venta.precios.Producto = Venta.Producto;
+
                 Venta.precios_Proveedores.Fecha = Venta.Fecha;
                 Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
                 Venta.precios_Proveedores.Producto = Venta.Producto;

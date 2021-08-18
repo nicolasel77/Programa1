@@ -764,7 +764,7 @@
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
-                Form frmCantidad_Clientes = new frmCantidad_Clientes();
+                Form frmCantidad_Clientes = new Carga.frmCantidad_Clientes();
                 frmCantidad_Clientes.MdiParent = this;
                 frmCantidad_Clientes.Disposed += FrmCantidad_Clientes_Disposed;
                 forms.Add(frmCantidad_Clientes);
@@ -777,7 +777,7 @@
         {
             foreach (ToolStripMenuItem t in tstMenu.Items)
             {
-                if (t.Text == "Cantidad Clientes")
+                if (t.Text == "Cantidad_Clientes")
                 {
                     tstMenu.Items.Remove(t);
                     break;
@@ -792,8 +792,7 @@
                 }
             }
         }
-
-        private void EmpleadosToolStripMenuItem1_Click(object sender, EventArgs e)
+            private void EmpleadosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             bool found = false;
             foreach (Form f in forms)

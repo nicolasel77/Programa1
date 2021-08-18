@@ -488,7 +488,7 @@
         int anchoEst = 600;
         private void tiOcultar_Tick(object sender, EventArgs e)
         {
-            this.Cursor = new Cursor(Cursor.Current.Handle);
+            if (Cursor.Current != null) { this.Cursor = new Cursor(Cursor.Current.Handle); }
             int posX = Cursor.Position.X;
             //this.Text = $"X: {posX}  paEst.Left: {paEst.Left:N1}";
             paEst.Width = (posX <= paEst.Left) ? 10 : anchoEst;

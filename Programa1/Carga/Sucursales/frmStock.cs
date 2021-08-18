@@ -350,6 +350,20 @@
                 stock.precios.Sucursal = stock.Sucursal;
                 stock.precios.Producto = stock.Producto;
             }
+            else
+            {
+                stock.ID = 0;
+                stock.Fecha = Convert.ToDateTime(grdStock.get_Texto(Fila,c_Fecha));
+                stock.Producto.ID = Convert.ToInt32(grdStock.get_Texto(Fila, c_IdProd));
+                stock.Descripcion = grdStock.get_Texto(Fila, c_Descripcion).ToString();
+                stock.Sucursal.ID = Convert.ToInt32(grdStock.get_Texto(Fila, c_IdSuc));
+                stock.Costo = Convert.ToSingle(grdStock.get_Texto(Fila, c_Costo));
+                stock.Kilos = Convert.ToSingle(grdStock.get_Texto(Fila, c_Kilos));
+
+                stock.precios.Fecha = stock.Fecha;
+                stock.precios.Sucursal = stock.Sucursal;
+                stock.precios.Producto = stock.Producto;
+            }
            
         }
 

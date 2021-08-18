@@ -16,7 +16,10 @@ namespace Programa1.Carga.Sucursales
         {
             Cargar();
         }
-
+        private void cSucursales1_Cambio_Seleccion(object sender, EventArgs e)
+        {
+            Cargar();
+        }
         private void Cargar()
         {
 
@@ -28,4 +31,5 @@ namespace Programa1.Carga.Sucursales
             grd.AutosizeAll();
         }
     }
+
 }
