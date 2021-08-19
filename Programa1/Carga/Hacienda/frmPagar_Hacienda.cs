@@ -24,11 +24,17 @@
         const int cSaldo = 13;
         const int cNuevo = 14;
         const int cEstado = 15;
+        readonly C1.Win.C1FlexGrid.CellStyle estP1Azul;
+        readonly C1.Win.C1FlexGrid.CellStyle estP1Rojo;
 
         //Id, Fecha, Plazo, Venc, Dias, NBoleta, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Nuevo
         public frmPagar_Hacienda()
         {
             InitializeComponent();
+            estP1Azul = grd.Styles.Add("");
+            estP1Rojo = grd.Styles.Add("");
+            estP1Azul.BackColor = Color.LightCyan;
+            estP1Rojo.BackColor = Color.LightCoral;
         }
         public void Cargar()
         {
@@ -51,6 +57,19 @@
                 }
                 grd.set_ColorLetraCelda(i, cDif, (Convert.ToDouble(grd.get_Texto(i, cDif)) < -1) ? Color.Red : Color.Blue);
                 grd.set_ColorLetraCelda(i, cSaldo, (Convert.ToDouble(grd.get_Texto(i, cSaldo)) < -1) ? Color.Red : Color.Blue);
+
+                if (Convert.ToInt16(grd.get_Texto(i, cEstado)) == 1)
+                {
+                    grd.Filas[i].Style = estP1Azul;
+                }
+                else
+                {
+                    if (Convert.ToInt16(grd.get_Texto(i, cEstado)) == 2)
+                    {
+                        grd.Filas[i].Style = estP1Rojo;
+                    }
+                }
+
             }
 
             grd.Columnas[cKilos].Style.Format = "N1";
@@ -77,22 +96,25 @@
         {
             if (c == cNuevo)
             {
-                double dife = Convert.ToDouble(grd.get_Texto(f, cDif));
-                double saldo = Convert.ToDouble(grd.get_Texto(f, cSaldo));
-                double pago = (double)a;
-                if (saldos.gastos.caja.EsCheque == true)
+                if (Convert.ToInt16(grd.get_Texto(f, cEstado)) == 1)
                 {
-                    //Seleccionar el cheque                    
-                    ch.Seleccionar_Cheques();
-                    pago = ch.cheques_seleccionados.Sum(item => item.Importe);
-                    grd.Focus();
-                }
+                    double dife = Convert.ToDouble(grd.get_Texto(f, cDif));
+                    double saldo = Convert.ToDouble(grd.get_Texto(f, cSaldo));
+                    double pago = (double)a;
+                    if (saldos.gastos.caja.EsCheque == true)
+                    {
+                        //Seleccionar el cheque                    
+                        ch.Seleccionar_Cheques();
+                        pago = ch.cheques_seleccionados.Sum(item => item.Importe);
+                        grd.Focus();
+                    }
 
-                grd.set_Texto(f, cNuevo, pago);
-                grd.set_Texto(f, cDif, dife + pago);
-                grd.set_Texto(f, cSaldo, saldo + pago);
-                if (f > 1) { grd.ActivarCelda(f - 1, cNuevo); }
-                lblTotal.Text = $"Pagos: {grd.SumarCol(cNuevo, false):C1}";
+                    grd.set_Texto(f, cNuevo, pago);
+                    grd.set_Texto(f, cDif, dife + pago);
+                    grd.set_Texto(f, cSaldo, saldo + pago);
+                    if (f > 1) { grd.ActivarCelda(f - 1, cNuevo); }
+                    lblTotal.Text = $"Pagos: {grd.SumarCol(cNuevo, false):C1}";
+                }
             }
         }
 
@@ -102,24 +124,27 @@
             if (e == 43)
             {
                 int r = grd.Row;
-                double saldo = Convert.ToDouble(grd.get_Texto(r, cSaldo));
-                double pago = 0;
-                if (saldos.gastos.caja.EsCheque == true)
+                if (Convert.ToInt16(grd.get_Texto(r, cEstado)) == 1)
                 {
-                    //Seleccionar el cheque                    
-                    ch.Seleccionar_Cheques();
-                    pago = ch.cheques_seleccionados.Sum(item => item.Importe);
-                    grd.Focus();
+                    double saldo = Convert.ToDouble(grd.get_Texto(r, cSaldo));
+                    double pago = 0;
+                    if (saldos.gastos.caja.EsCheque == true)
+                    {
+                        //Seleccionar el cheque                    
+                        ch.Seleccionar_Cheques();
+                        pago = ch.cheques_seleccionados.Sum(item => item.Importe);
+                        grd.Focus();
+                    }
+                    else
+                    {
+                        pago = Convert.ToDouble(grd.get_Texto(r, cDif)) * -1;
+                    }
+                    grd.set_Texto(r, cNuevo, pago);
+                    grd.set_Texto(r, cDif, 0);
+                    grd.set_Texto(r, cSaldo, saldo + pago);
+                    if (r > 1) { grd.ActivarCelda(r - 1, cNuevo); }
+                    lblTotal.Text = $"Pagos: {grd.SumarCol(cNuevo, false):C1}";
                 }
-                else
-                {
-                    pago = Convert.ToDouble(grd.get_Texto(r, cDif)) * -1;
-                }
-                grd.set_Texto(r, cNuevo, pago);
-                grd.set_Texto(r, cDif, 0);
-                grd.set_Texto(r, cSaldo, saldo + pago);
-                if (r > 1) { grd.ActivarCelda(r - 1, cNuevo); }
-                lblTotal.Text = $"Pagos: {grd.SumarCol(cNuevo, false):C1}";
             }
             else
             {

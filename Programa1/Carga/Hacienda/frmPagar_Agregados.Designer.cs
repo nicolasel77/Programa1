@@ -90,7 +90,7 @@ namespace Programa1.Carga.Hacienda
             this.grd.MenuActivado = false;
             this.grd.Name = "grd";
             this.grd.PieDePagina = "\t\tPage {0} of {1}";
-            this.grd.PintarFilaSel = true;
+            this.grd.PintarFilaSel = false;
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
