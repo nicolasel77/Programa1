@@ -54,93 +54,93 @@ namespace Programa1.Carga.Hacienda
 
         private void cmdSincronizar_Click(object sender, System.EventArgs e)
         {
-            if (cmdBase.Text.Length > 0)
-            {
-                this.Cursor = Cursors.WaitCursor;
-                DB.Hacienda hacienda = new DB.Hacienda();
+            //if (cmdBase.Text.Length > 0)
+            //{
+            //    this.Cursor = Cursors.WaitCursor;
+            //    DB.Hacienda hacienda = new DB.Hacienda();
 
-                c_Base_Access clsAccess = new c_Base_Access("NBoletas", "NBoletas");
-                clsAccess.Base_Access = cmdBase.Text;
+            //    c_Base_Access clsAccess = new c_Base_Access("NBoletas", "NBoletas");
+            //    clsAccess.Base_Access = cmdBase.Text;
 
-                //  ****************************
-                //  1º NBoletas
-                //  ****************************
-                int n = 1;
-                DataTable dtBoletas = clsAccess.Datos_Vista("", $"TOP {nuCant.Value} *", "NBoleta DESC");
-                foreach (DataRow drBoleta in dtBoletas.Rows)
-                {
-                    int nb = Convert.ToInt32(drBoleta["NBoleta"]);
-                    hacienda.Cargar(nb);
+            //    //  ****************************
+            //    //  1º NBoletas
+            //    //  ****************************
+            //    int n = 1;
+            //    DataTable dtBoletas = clsAccess.Datos_Vista("", $"TOP {nuCant.Value} *", "NBoleta DESC");
+            //    foreach (DataRow drBoleta in dtBoletas.Rows)
+            //    {
+            //        int nb = Convert.ToInt32(drBoleta["NBoleta"]);
+            //        hacienda.Cargar(nb);
 
-                    if (hacienda.nBoletas.ID == 0)
-                    {
-                        lstActualizacion.Items.Add($"{n}. Agr {nb}");
+            //        if (hacienda.nBoletas.ID == 0)
+            //        {
+            //            lstActualizacion.Items.Add($"{n}. Agr {nb}");
 
-                        hacienda.nBoletas.Agregar_NoID("NBoleta", nb);
+            //            hacienda.nBoletas.Agregar_NoID("NBoleta", nb);
 
-                        n++;
-                    }
+            //            n++;
+            //        }
 
-                    if (hacienda.nBoletas.Reparto != Convert.ToInt32(drBoleta["Reparto"]))
-                    {
-                        hacienda.nBoletas.Actualizar("Reparto", Convert.ToInt32(drBoleta["Reparto"]));
-                        lstActualizacion.Items.Add($"{n}. Act Repaprto {nb}");
-                    }
-                    if (hacienda.nBoletas.Directo != !Convert.ToBoolean(drBoleta["Mercado"]))
-                    {
-                        hacienda.nBoletas.Actualizar("Directo", !Convert.ToBoolean(drBoleta["Mercado"]));
-                        lstActualizacion.Items.Add($"{n}. Act Directo {nb}");
-                    }
+            //        if (hacienda.nBoletas.Reparto != Convert.ToInt32(drBoleta["Reparto"]))
+            //        {
+            //            hacienda.nBoletas.Actualizar("Reparto", Convert.ToInt32(drBoleta["Reparto"]));
+            //            lstActualizacion.Items.Add($"{n}. Act Repaprto {nb}");
+            //        }
+            //        if (hacienda.nBoletas.Directo != !Convert.ToBoolean(drBoleta["Mercado"]))
+            //        {
+            //            hacienda.nBoletas.Actualizar("Directo", !Convert.ToBoolean(drBoleta["Mercado"]));
+            //            lstActualizacion.Items.Add($"{n}. Act Directo {nb}");
+            //        }
 
-                    bool YaEstaLaCompra = false;
-                    if (hacienda.nBoletas.Costo != Convert.ToSingle(drBoleta["Costo"]))
-                    {
-                        hacienda.nBoletas.Actualizar("Costo", Convert.ToSingle(drBoleta["Costo"]));
+            //        bool YaEstaLaCompra = false;
+            //        if (hacienda.nBoletas.Costo != Convert.ToSingle(drBoleta["Costo"]))
+            //        {
+            //            hacienda.nBoletas.Actualizar("Costo", Convert.ToSingle(drBoleta["Costo"]));
 
-                        //  ****************************
-                        //  2º Compras Y Agregados
-                        //  ****************************
-                        Cargar_CompraYAgregados(nb);
-                        hacienda.compra.Actualizar_Saldo();
-                        YaEstaLaCompra = true;
+            //            //  ****************************
+            //            //  2º Compras Y Agregados
+            //            //  ****************************
+            //            Cargar_CompraYAgregados(nb);
+            //            hacienda.compra.Actualizar_Saldo();
+            //            YaEstaLaCompra = true;
 
-                        lstActualizacion.Items.Add($"{n}. Act costo {nb}");
-                        lstActualizacion.Items.Add($"{n}. Act compra {nb}");
+            //            lstActualizacion.Items.Add($"{n}. Act costo {nb}");
+            //            lstActualizacion.Items.Add($"{n}. Act compra {nb}");
 
-                    }
+            //        }
 
-                    if (hacienda.nBoletas.Costo_Faena != Convert.ToSingle(drBoleta["Costo_Faena"]))
-                    {
-                        hacienda.nBoletas.Actualizar("Costo_Faena", Convert.ToSingle(drBoleta["Costo_Faena"]));
-                        lstActualizacion.Items.Add($"{n}. Act c faena {nb}");
+            //        if (hacienda.nBoletas.Costo_Faena != Convert.ToSingle(drBoleta["Costo_Faena"]))
+            //        {
+            //            hacienda.nBoletas.Actualizar("Costo_Faena", Convert.ToSingle(drBoleta["Costo_Faena"]));
+            //            lstActualizacion.Items.Add($"{n}. Act c faena {nb}");
 
-                        if (YaEstaLaCompra == false)
-                        {
-                            //  ****************************
-                            //  2º Compras Y Agregados
-                            //  ****************************
-                            Cargar_CompraYAgregados(nb);
-                            hacienda.compra.Actualizar_Saldo();
-                        }
+            //            if (YaEstaLaCompra == false)
+            //            {
+            //                //  ****************************
+            //                //  2º Compras Y Agregados
+            //                //  ****************************
+            //                Cargar_CompraYAgregados(nb);
+            //                hacienda.compra.Actualizar_Saldo();
+            //            }
 
-                        //  ****************************
-                        //  3º Faena
-                        //  ****************************
-                        Cargar_Faena(nb);
-                    }
-                    clsAccess.Vista = "vw_Faena";
-                    double aids = clsAccess.Dato_Sumado("NBoleta=" + nb, "ID_Faena");
-                    double sids = hacienda.Faena.Dato_Sumado("NBoleta=" + nb, "ID");
-                    if (aids != sids) { Cargar_Faena(nb); lstActualizacion.Items.Add($"{n}. Act faena {nb}"); }
+            //            //  ****************************
+            //            //  3º Faena
+            //            //  ****************************
+            //            Cargar_Faena(nb);
+            //        }
+            //        clsAccess.Vista = "vw_Faena";
+            //        double aids = clsAccess.Dato_Sumado("NBoleta=" + nb, "ID_Faena");
+            //        double sids = hacienda.Faena.Dato_Sumado("NBoleta=" + nb, "ID");
+            //        if (aids != sids) { Cargar_Faena(nb); lstActualizacion.Items.Add($"{n}. Act faena {nb}"); }
 
-                }
-                //  ****************************
-                //  4º Salidas 
-                //  ***************************
-                Cargar_Salida();
+            //    }
+            //    //  ****************************
+            //    //  4º Salidas 
+            //    //  ***************************
+            //    Cargar_Salida();
 
-                this.Cursor = Cursors.Default;
-            }
+            //    this.Cursor = Cursors.Default;
+            //}
         }
 
         private void Cargar_Boleta(int nb)
@@ -159,13 +159,17 @@ namespace Programa1.Carga.Hacienda
             {
                 hacienda.nBoletas.ID = nb;
 
+                DateTime fecha; double kilosCompra; double kilosFaena;
+
+                kilosCompra = clsAccess.Dato_Sumado("Compra", "NBoleta=" + nb, "Kilos");
+                kilosFaena = clsAccess.Dato_Sumado("Faena", "NBoleta=" + nb, "Kilos");
+                hacienda.nBoletas.Kilos_Compra = kilosCompra;
+                hacienda.nBoletas.Kilos_Faena = kilosFaena;
+
                 hacienda.nBoletas.Reparto = Convert.ToInt32(dtBoleta_Access.Rows[0]["Reparto"]);
                 hacienda.nBoletas.Directo = !Convert.ToBoolean(dtBoleta_Access.Rows[0]["Mercado"]);
-                hacienda.nBoletas.Costo = Convert.ToSingle(dtBoleta_Access.Rows[0]["Costo"]);
-                hacienda.nBoletas.Costo_Faena = Convert.ToSingle(dtBoleta_Access.Rows[0]["Costo_Faena"]);
 
                 object s = clsAccess.Dato_Generico("Compra", "NBoleta=" + nb, "Fecha_Compra");
-                DateTime fecha; double kilosCompra; double kilosFaena;
                 if (s != null)
                 {
                     DateTime.TryParse(s.ToString(), out fecha);
@@ -173,14 +177,16 @@ namespace Programa1.Carga.Hacienda
                     hacienda.nBoletas.Fecha = fecha;
                 }
 
-                hacienda.nBoletas.Costo_Final = hacienda.nBoletas.Costo_Faena;
-
-                kilosCompra = clsAccess.Dato_Sumado("Compra", "NBoleta=" + nb, "Kilos");
-                kilosFaena = clsAccess.Dato_Sumado("Faena", "NBoleta=" + nb, "Kilos");
-                hacienda.nBoletas.Kilos_Compra = kilosCompra;
-                hacienda.nBoletas.Kilos_Faena = kilosFaena;
 
                 hacienda.nBoletas.Agregar();
+
+                hacienda.nBoletas.Cargar();
+                hacienda.Calcular_Costo();
+                hacienda.nBoletas.Actualizar("Costo", hacienda.nBoletas.Costo);
+                hacienda.nBoletas.Actualizar_CostoFaena();
+                hacienda.nBoletas.Actualizar_CostoFinal(hacienda.nBoletas.ID);
+                hacienda.nBoletas.Actualizar("Costo_Faena", hacienda.nBoletas.Costo_Faena);
+                hacienda.nBoletas.Actualizar("Costo_Final", hacienda.nBoletas.Costo_Final);
             }
 
         }
@@ -222,8 +228,23 @@ namespace Programa1.Carga.Hacienda
                 hacienda.compra.Actualizar("Percepcion", Convert.ToDouble(drAccess["Percepcion"]));
                 hacienda.compra.Actualizar("Matricula", hacienda.compra.Matricula.ID);
 
+
+                double t = 0;
+                if (Convert.ToDouble(drAccess["Kilos"]) != 0) { t = ((Convert.ToDouble(drAccess["Costo2"]) * Convert.ToDouble(drAccess["Kilos"])) + Convert.ToDouble(drAccess["IVA"]) + Convert.ToDouble(drAccess["Percepcion"])) / Convert.ToDouble(drAccess["Kilos"]); }
+                hacienda.compra.Calcular_Saldo();
+
                 object estado = hacienda.compra.Dato_Generico("dbStock.dbo.DCompra", "ID_Compra=" + hacienda.compra.ID, "Corroborar");
                 hacienda.compra.Actualizar("Estado", estado);
+
+
+                hacienda.nBoletas.ID = nb;
+                hacienda.nBoletas.Cargar();
+                hacienda.Calcular_Costo();
+                hacienda.nBoletas.Actualizar("Costo", hacienda.nBoletas.Costo);
+                hacienda.nBoletas.Actualizar_CostoFaena();
+                hacienda.nBoletas.Actualizar_CostoFinal(hacienda.nBoletas.ID);
+                hacienda.nBoletas.Actualizar("Costo_Faena", hacienda.nBoletas.Costo_Faena);
+                hacienda.nBoletas.Actualizar("Costo_Final", hacienda.nBoletas.Costo_Final);
             }
             //  ****************************
             //  3º Agregados
@@ -249,14 +270,23 @@ namespace Programa1.Carga.Hacienda
                 hacienda.Agregados.Actualizar("Id_Consignatarios", hacienda.compra.Consignatario.Traducir_Consignatario(Convert.ToInt32(drAccess["Id_Consignatario"])));
                 hacienda.Agregados.Actualizar("Id_TipoAgregados", Convert.ToInt32(drAccess["Id_TipoAgregados"]));
                 hacienda.Agregados.Actualizar("Importe", Convert.ToDouble(drAccess["Importe"]));
+                hacienda.Agregados.Actualizar("Saldo", Convert.ToDouble(drAccess["Importe"]) * -1);
                 hacienda.Agregados.Actualizar("Plazo", Convert.ToInt16(drAccess["Plazo"]));
                 hacienda.Agregados.Actualizar("Matricula", hacienda.compra.Matricula.ID);
 
                 object estado = hacienda.Agregados.Dato_Generico("dbStock.dbo.AgrCompra", "ID_Agregados=" + hacienda.Agregados.ID, "Corroborar");
                 hacienda.Agregados.Actualizar("Estado", estado);
+                hacienda.compra.Calcular_Saldo();
             }
+            hacienda.nBoletas.ID = nb;
+            hacienda.nBoletas.Cargar();
+            hacienda.Calcular_Costo();
+            hacienda.nBoletas.Actualizar("Costo", hacienda.nBoletas.Costo);
+            hacienda.nBoletas.Actualizar_CostoFaena();
+            hacienda.nBoletas.Actualizar_CostoFinal(hacienda.nBoletas.ID);
+            hacienda.nBoletas.Actualizar("Costo_Faena", hacienda.nBoletas.Costo_Faena);
+            hacienda.nBoletas.Actualizar("Costo_Final", hacienda.nBoletas.Costo_Final);
         }
-
 
         private void Cargar_Faena(int nb)
         {
@@ -370,7 +400,8 @@ namespace Programa1.Carga.Hacienda
 
                 foreach (DataRow dr in dt.Rows)
                 {
-                    hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldosConsignatario {dr["ID_Consignatarios"]}, {nb}");
+                    hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldoBoleta {dr["ID_Consignatarios"]}, {nb}");
+                    lstActualizacion.Items.Add($"Actualizando saldo NB {nb} Consig {dr["ID_Consignatarios"]}");
                 }
             }
         }
@@ -396,8 +427,8 @@ namespace Programa1.Carga.Hacienda
                     {
                         cmdSaldos.Text = $"{dr["Nombre"]} NBoleta {dr["NBoleta"]}";
                         Application.DoEvents();
-                        hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldosConsignatario {dr["ID_Consignatarios"]}, {dr["NBoleta"]}");
-
+                        hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldoBoleta {dr["ID_Consignatarios"]}, {dr["NBoleta"]}");
+                        lstActualizacion.Items.Add($"Actualizando saldo NB {nb} Consig {dr["ID_Consignatarios"]}");
                     }
                     this.Cursor = Cursors.Default;
                 }
@@ -436,7 +467,8 @@ namespace Programa1.Carga.Hacienda
 
                         foreach (DataRow dr in dt.Rows)
                         {
-                            hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldosConsignatario {dr["ID_Consignatarios"]}, {nb}");
+                            hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldoBoleta {dr["ID_Consignatarios"]}, {nb}");
+                            lstActualizacion.Items.Add($"Actualizando saldo NB {nb} Consig {dr["ID_Consignatarios"]}");
                         }
                     }
                 }

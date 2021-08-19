@@ -6,7 +6,7 @@
     using System.Windows.Forms;
     public partial class frmComprasFaena : Form
     {
-        Hacienda hc = new Hacienda();
+        readonly Hacienda hc = new Hacienda();
         //ID_CompraFrigo, Fecha, ID_Matr, Matricula, ID_Consignatarios, Nombre, Cabezas Cab, ID_Productos Prod, Nombre_Producto Descr, Kilos, Costo, Costo2, Sub_Total, IVA, Percepcion, Total, Plazo
         //  0               1       2         3             4             5           6             7                   8               9        10    11       12      13       14        15    16
         #region " Columnas "
@@ -25,22 +25,22 @@
         private const Byte c_Total = 15;
         private const Byte c_Plazo = 16;
 
-        private Byte A_Id;
-        private Byte A_Fecha;
-        private Byte A_Consig;
-        private Byte A_Tipo;
-        private Byte A_Impporte;
-        private Byte A_Plazo;
+        private readonly Byte A_Id;
+        private readonly Byte A_Fecha;
+        private readonly Byte A_Consig;
+        private readonly Byte A_Tipo;
+        private readonly Byte A_Impporte;
+        private readonly Byte A_Plazo;
 
-        private Byte F_Id;
-        private Byte F_Fecha;
-        private Byte F_Cat;
-        private Byte F_NRomaneo;
-        private Byte F_Tropa;
-        private Byte F_Prod;
-        private Byte F_Frigo;
-        private Byte F_Recu;
-        private Byte F_Kilos;
+        private readonly Byte F_Id;
+        private readonly Byte F_Fecha;
+        private readonly Byte F_Cat;
+        private readonly Byte F_NRomaneo;
+        private readonly Byte F_Tropa;
+        private readonly Byte F_Prod;
+        private readonly Byte F_Frigo;
+        private readonly Byte F_Recu;
+        private readonly Byte F_Kilos;
         #endregion
         public frmComprasFaena()
         {
@@ -56,7 +56,7 @@
             grdBoletas.Columnas[grdBoletas.get_ColIndex("Kilos_Faena")].Format = "N0";
 
             grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=0"), true, true);
-                        
+
             grdCompras.set_ColW(c_Id, 0);
             grdCompras.set_ColW(c_Fecha, 55);
             grdCompras.set_ColW(c_Matricula, 30);
@@ -152,9 +152,17 @@
         private void GrdBoletas_CambioFila(short Fila)
         {
             this.Cursor = Cursors.WaitCursor;
-            
+
             hc.nBoletas.ID = Convert.ToInt32(grdBoletas.get_Texto(Fila, 0));
-            
+
+            Cargar_Boleta();
+
+            this.Cursor = Cursors.Default;
+
+        }
+
+        private void Cargar_Boleta()
+        {
             grdCompras.MostrarDatos(hc.compra.Datos("NBoleta=" + hc.nBoletas.ID), false);
             grdCompras.Filas[0].TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.CenterCenter;
 
@@ -175,14 +183,8 @@
             grdRomaneos.set_ColW(2, 70);
 
             Totales();
-
-            if (grdBoletas.EsUltimaFila() == true)
-            {
-                grdBoletas.MostrarDatos(hc.nBoletas.Datos(), false, false);
-            }
-            this.Cursor = Cursors.Default;
-
         }
+
         private void Totales()
         {
             double tSubTotal = grdCompras.SumarCol(c_SubT, false);
@@ -197,7 +199,7 @@
             lblTPercepciones.Text = $"Percepciones: {tPercepcion:C1}";
             lblIVA.Text = $"IVA: {tIVA:C1}";
             lblCTotal.Text = $"Total: {tCompra:C1}";
-            
+
             double tAgregados = grdAgregados.SumarCol(A_Impporte, false);
             lblTAgregados.Text = $"Agregados: {tAgregados:C1}";
             lblATotal.Text = $"Total: {tAgregados:C1}";
@@ -243,8 +245,8 @@
             else
             {
                 lblCant.BackColor = System.Drawing.SystemColors.Control;
-            }            
-        }            
+            }
+        }
 
         private void grdCompras_Editado(short f, short c, object a)
         {
@@ -329,7 +331,7 @@
 
                 case c_IVA:
                     hc.compra.IVA = Convert.ToSingle(a);
-                    grdCompras.set_Texto(f, c, a);                    
+                    grdCompras.set_Texto(f, c, a);
 
                     Total_Linea(f);
 
@@ -353,7 +355,7 @@
 
                 case c_Plazo:
                     hc.compra.Plazo = Convert.ToByte(a);
-                    grdCompras.set_Texto(f, c, a);                    
+                    grdCompras.set_Texto(f, c, a);
 
                     if (hc.compra.ID > 0) { hc.compra.Actualizar("Plazo", a); }
 
@@ -365,14 +367,22 @@
 
         private void Total_Linea(short f)
         {
-            Single kilos = Convert.ToSingle(grdCompras.get_Texto(f, c_Kilos));
-            Single costo = Convert.ToSingle(grdCompras.get_Texto(f, c_Costo));
-            Single costo2 = Convert.ToSingle(grdCompras.get_Texto(f, c_Costo2));
+            float kilos = Convert.ToSingle(grdCompras.get_Texto(f, c_Kilos));
+            float costo = Convert.ToSingle(grdCompras.get_Texto(f, c_Costo));
+            float costo2 = Convert.ToSingle(grdCompras.get_Texto(f, c_Costo2));
             double iva = (kilos * costo) * 10.5 / 100;
-            Single percepcion = Convert.ToSingle(grdCompras.get_Texto(f, c_Perc));
+            double percepcion = Convert.ToSingle(grdCompras.get_Texto(f, c_Perc));
 
             grdCompras.set_Texto(f, c_SubT, kilos * costo);
             grdCompras.set_Texto(f, c_Total, (kilos * costo) + iva + percepcion);
+
+            hc.compra.Actualizar("Kilos", kilos);
+            hc.compra.Actualizar("Costo", costo);
+            hc.compra.Actualizar("Costo2", costo2);
+            hc.compra.Actualizar("Iva", iva);
+            hc.compra.Actualizar("Percepcion", percepcion);
+
+            hc.compra.Calcular_Saldo();
 
             MessageBox.Show("Falta el calculo de Pago en Mano");
         }
@@ -391,6 +401,20 @@
         private void lblSubTotal_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtNBoleta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                e.Handled = true;
+                int nb = 0;
+                if (int.TryParse(txtNBoleta.Text, out nb) == true)
+                {
+                    hc.nBoletas.ID = Convert.ToInt32(txtNBoleta.Text);
+                    Cargar_Boleta();
+                }
+            }
         }
     }
 }

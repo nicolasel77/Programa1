@@ -20,10 +20,10 @@
         const int cPago = 6;
         const int cDif = 7;
         const int cSaldo = 8;
-        const int cNuevo = 9;        
+        const int cNuevo = 9;
 
         //Id, Fecha, Plazo, NBoleta, Descripcion, Importe, Pago, Dif, Saldo, Nuevo
-        
+
         public frmPagar_Agregados()
         {
             InitializeComponent();
@@ -51,11 +51,11 @@
                 grd.set_ColorLetraCelda(i, cSaldo, (Convert.ToDouble(grd.get_Texto(i, cSaldo)) < -1) ? Color.Red : Color.Blue);
             }
 
-            grd.Columnas[cImporte].Style.Format = "N1";
-            grd.Columnas[cPago].Style.Format = "N1";
-            grd.Columnas[cDif].Style.Format = "N1";
-            grd.Columnas[cSaldo].Style.Format = "N1";
-            grd.Columnas[cNuevo].Style.Format = "N1";
+            grd.Columnas[cImporte].Style.Format = "N2";
+            grd.Columnas[cPago].Style.Format = "N2";
+            grd.Columnas[cDif].Style.Format = "N2";
+            grd.Columnas[cSaldo].Style.Format = "N2";
+            grd.Columnas[cNuevo].Style.Format = "N2";
 
             grd.AutosizeAll();
             grd.set_ColW(cID, 0);
@@ -63,7 +63,7 @@
             grd.set_ColW(cPago, 80);
             grd.set_ColW(cDif, 90);
             grd.set_ColW(cSaldo, 0);
-            grd.set_ColW(cNuevo, 90);            
+            grd.set_ColW(cNuevo, 90);
 
             grd.ActivarCelda(grd.Rows - 1, cNuevo);
         }
@@ -86,7 +86,7 @@
                 grd.set_Texto(f, cNuevo, pago);
                 grd.set_Texto(f, cDif, dife + pago);
                 grd.set_Texto(f, cSaldo, saldo + pago);
-                if (f < grd.Rows - 1) { grd.ActivarCelda(f + 1, cNuevo); }
+                if (f > 1) { grd.ActivarCelda(f - 1, cNuevo); }
             }
         }
 
@@ -112,14 +112,14 @@
                 grd.set_Texto(r, cNuevo, pago);
                 grd.set_Texto(r, cDif, 0);
                 grd.set_Texto(r, cSaldo, saldo + pago);
-                if (r < grd.Rows - 1) { grd.ActivarCelda(r + 1, cNuevo); }
+                if (r > 1) { grd.ActivarCelda(r - 1, cNuevo); }
             }
             else
             {
                 if (e == 13)
                 {
                     Aceptarr();
-                    this.Hide();
+                    Hide();
                 }
             }
         }
@@ -136,9 +136,9 @@
             {
                 MessageBox.Show("error");
             }
-            this.Cursor = Cursors.WaitCursor;
-            Compra_Hacienda cm = new Compra_Hacienda();
-            cm.Consignatario.ID = saldos.gastos.Id_SubTipoGastos;
+            Cursor = Cursors.WaitCursor;
+            Agregados_Hacienda agregadosHacienda = new Agregados_Hacienda();
+            agregadosHacienda.Consignatario.ID = saldos.gastos.Id_SubTipoGastos;
             for (int i = 1; i <= grd.Rows - 1; i++)
             {
                 double n = Convert.ToDouble(grd.get_Texto(i, cNuevo));
@@ -147,7 +147,7 @@
                 {
                     int idD = Convert.ToInt32(grd.get_Texto(i, cID));
                     string t = Convert.ToDouble(grd.get_Texto(i, cDif)) == 0 ? "Total" : "Parcial";
-                    string s = string.Format("{0}   - {1}", grd.get_Texto(i, cDescripcion), t);
+                    string s = string.Format("{0}: {1}", grd.get_Texto(i, cNB), grd.get_Texto(i, cDescripcion), t);
 
                     saldos.gastos.Id_DetalleGastos = idD;
                     saldos.gastos.Fecha = gastos.Fecha;
@@ -168,12 +168,13 @@
                             saldos.gastos.Agregar();
                         }
                     }
-                    cm.NBoleta.ID = Convert.ToInt32(grd.get_Texto(i, cNB));
-                    cm.Actualizar_Saldo();
+                    agregadosHacienda.Saldo = Convert.ToDouble(grd.get_Texto(i, cDif));
+                    agregadosHacienda.ID = idD;
+                    agregadosHacienda.Actualizar_Saldo();
                 }
             }
             Aceptado = true;
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
 
         }
 

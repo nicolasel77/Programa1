@@ -24,6 +24,39 @@
         public double Kilos_Compra { get; internal set; }
         public double Kilos_Faena { get; internal set; }
 
+
+        public void Cargar() 
+        {
+            DataTable dt = Datos_Vista("NBoleta=" + ID);
+            if (dt != null)
+            {
+                try
+                {
+                    Fecha = Convert.ToDateTime(dt.Rows[0]["Fecha"]);
+                    Reparto = Convert.ToInt32(dt.Rows[0]["Reparto"]);
+                    Costo = Convert.ToSingle(dt.Rows[0]["Costo"]);
+                    Costo_Faena = Convert.ToSingle(dt.Rows[0]["Costo_Faena"]);
+                    Costo_Final = Convert.ToSingle(dt.Rows[0]["Costo_Final"]);
+                    Kilos_Compra = Convert.ToSingle(dt.Rows[0]["Kilos_Compra"]);
+                    Kilos_Faena = Convert.ToSingle(dt.Rows[0]["Kilos_Faena"]);
+                    Directo = Convert.ToBoolean(dt.Rows[0]["Directo"]);
+                }
+                catch (Exception)
+                {
+
+                    
+                }
+            }
+        }
+        internal void Actualizar_CostoFaena()
+        {
+            if (Kilos_Faena != 0)
+            {
+                Costo_Faena = (float)((Kilos_Compra * Costo)  / Kilos_Faena);
+                Actualizar("Costo_Faena", Costo_Faena);
+            }
+        }
+
         internal void Actualizar_CostoFinal(int nb)
         {
             object vRecu = Dato_Sumado("vw_Faena", "NBoleta=" + nb, "Kilos*Recupero");

@@ -144,7 +144,7 @@ namespace Programa1.Carga.Varios
             this.grdActivos.bFColor = System.Drawing.SystemColors.WindowText;
             this.grdActivos.bFColorSel = System.Drawing.SystemColors.HighlightText;
             this.grdActivos.Col = 0;
-            this.grdActivos.Cols = 10;
+            this.grdActivos.Cols = 1;
             this.grdActivos.DataMember = "";
             this.grdActivos.DataSource = null;
             this.grdActivos.EnableEdicion = false;
@@ -163,7 +163,7 @@ namespace Programa1.Carga.Varios
             this.grdActivos.PintarFilaSel = false;
             this.grdActivos.Redraw = true;
             this.grdActivos.Row = 0;
-            this.grdActivos.Rows = 50;
+            this.grdActivos.Rows = 1;
             this.grdActivos.Size = new System.Drawing.Size(429, 670);
             this.grdActivos.TabIndex = 2;
             // 
@@ -211,7 +211,7 @@ namespace Programa1.Carga.Varios
             this.grdPasivos.Redraw = true;
             this.grdPasivos.Row = 0;
             this.grdPasivos.Rows = 50;
-            this.grdPasivos.Size = new System.Drawing.Size(357, 670);
+            this.grdPasivos.Size = new System.Drawing.Size(377, 670);
             this.grdPasivos.TabIndex = 3;
             // 
             // label1
@@ -258,7 +258,7 @@ namespace Programa1.Carga.Varios
             this.grdResultado.Redraw = true;
             this.grdResultado.Row = 0;
             this.grdResultado.Rows = 50;
-            this.grdResultado.Size = new System.Drawing.Size(354, 670);
+            this.grdResultado.Size = new System.Drawing.Size(374, 670);
             this.grdResultado.TabIndex = 3;
             // 
             // label2
@@ -285,7 +285,7 @@ namespace Programa1.Carga.Varios
             "20/12/1977"});
             this.lstSemanas.Location = new System.Drawing.Point(12, 12);
             this.lstSemanas.Name = "lstSemanas";
-            this.lstSemanas.Size = new System.Drawing.Size(87, 700);
+            this.lstSemanas.Size = new System.Drawing.Size(107, 700);
             this.lstSemanas.TabIndex = 0;
             this.lstSemanas.SelectedIndexChanged += new System.EventHandler(this.lstSemanas_SelectedIndexChanged);
             // 
