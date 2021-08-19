@@ -42,16 +42,16 @@
             Actualizar("Saldo", Saldo);
             Actualizar("Estado", Estado);
             Actualizar("Matricula", Matricula.ID);
-
-            Actualizar_Saldo();
+            Actualizar("Saldo", Saldo);
         }
+        public void Calcular_Saldo()
+        {
+            Ejecutar_Comando($"EXEC sp_ActualizarSaldoBoleta {Consignatario.ID}, {nb.ID}");
 
+        }
         public void Actualizar_Saldo()
         {
-            SqlParameter sqC = new SqlParameter("@C", Consignatario.ID);
-            SqlParameter sqNB = new SqlParameter("@NB", nb.ID);
-            SqlParameter[] sql = { sqC, sqNB };
-            Ejecutar_sp("sp_ActualizarSaldosConsignatario", sql);
+            Actualizar("Saldo", Saldo);
         }
     }
 }

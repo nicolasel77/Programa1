@@ -45,7 +45,7 @@ namespace Programa1.DB
                     nBoletas.Directo = dt.Rows[0]["Directo"] == DBNull.Value ? false : Convert.ToBoolean(dt.Rows[0]["Directo"]);
                     nBoletas.Kilos_Compra = dt.Rows[0]["Kilos_Compra"] == DBNull.Value ? 0 : Convert.ToDouble(dt.Rows[0]["Kilos_Compra"]);
                     nBoletas.Kilos_Faena = dt.Rows[0]["Kilos_Faena"] == DBNull.Value ? 0 : Convert.ToDouble(dt.Rows[0]["Kilos_Faena"]);
-                    compra.NBoleta = nBoletas; 
+                    compra.NBoleta = nBoletas;
                 }
 
             }
@@ -55,13 +55,19 @@ namespace Programa1.DB
             }
         }
 
+        /// <summary>
+        /// Calcula el Costo para NBoleta
+        /// </summary>
         public void Calcular_Costo()
         {
+            compra.NBoleta = nBoletas;
+            compra.NBoleta.Cargar();
             object tCompra = compra.Dato_Sumado("NBoleta=" + compra.NBoleta.ID, "Total");
-            object tAgregados = Agregados.Dato_Sumado("NBoleta=" + compra.NBoleta.ID, "Importe"); ;
-            object tKilos = compra.Dato_Sumado("NBoleta=" + compra.NBoleta.ID, "Kilos"); ;
+            object tAgregados = Agregados.Dato_Sumado("NBoleta=" + compra.NBoleta.ID, "Importe");
+            object tKilos = compra.Dato_Sumado("NBoleta=" + compra.NBoleta.ID, "Kilos");
 
-            double t = (Convert.ToDouble(tCompra) + Convert.ToDouble(tAgregados)) / Convert.ToDouble(tKilos);
+            double t = 0;
+            if (Convert.ToDouble(tKilos) != 0) { t = (Convert.ToDouble(tCompra) + Convert.ToDouble(tAgregados)) / Convert.ToDouble(tKilos); }
 
             nBoletas.Costo = Convert.ToSingle(t);
         }

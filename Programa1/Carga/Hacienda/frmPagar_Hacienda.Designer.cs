@@ -36,6 +36,7 @@ namespace Programa1.Carga.Hacienda
             this.cmdSalir = new Programa1.Controles.cBoton();
             this.cmdAceptar = new Programa1.Controles.cBoton();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblConsignatario
@@ -129,11 +130,21 @@ namespace Programa1.Carga.Hacienda
             this.label2.TabIndex = 4;
             this.label2.Text = "Tecla + copia el valor actual.";
             // 
+            // lblTotal
+            // 
+            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(13, 486);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(0, 13);
+            this.lblTotal.TabIndex = 4;
+            // 
             // frmPagar_Hacienda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1022, 538);
+            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdAceptar);
             this.Controls.Add(this.cmdSalir);
@@ -158,5 +169,6 @@ namespace Programa1.Carga.Hacienda
         private Controles.cBoton cmdSalir;
         private Controles.cBoton cmdAceptar;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblTotal;
     }
 }

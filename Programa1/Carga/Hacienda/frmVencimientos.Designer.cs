@@ -123,6 +123,7 @@
             this.grd.Rows = 50;
             this.grd.Size = new System.Drawing.Size(809, 696);
             this.grd.TabIndex = 3;
+            this.grd.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grd_KeyPress);
             // 
             // label1
             // 
@@ -169,6 +170,7 @@
             this.grdAgr.Rows = 50;
             this.grdAgr.Size = new System.Drawing.Size(631, 696);
             this.grdAgr.TabIndex = 5;
+            this.grdAgr.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grdAgr_KeyPress);
             // 
             // label2
             // 

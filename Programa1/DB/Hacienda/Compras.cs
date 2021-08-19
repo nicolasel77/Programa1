@@ -3,7 +3,6 @@
     using Programa1.Clases;
     using System;
     using System.Data;
-    using System.Data.SqlClient;
 
     public class Compra_Hacienda : c_Base
     {
@@ -31,7 +30,7 @@
         public Single IVA { get; set; }
         public Byte Plazo { get; set; }
         public int Estado { get; set; }
-        public double Percepcion{ get; set; }
+        public double Percepcion { get; set; }
         public double Saldo { get; set; }
         public DateTime Fecha { get; set; }
 
@@ -53,16 +52,20 @@
             Actualizar("Saldo", Saldo);
             Actualizar("Estado", Estado);
             Actualizar("Matricula", Matricula.ID);
+            Actualizar("Saldo", Saldo);
+            
+        }
 
-            Actualizar_Saldo();
+
+        public void Calcular_Saldo()
+        {
+            Ejecutar_Comando($"EXEC sp_ActualizarSaldoBoleta {Consignatario.ID}, {NBoleta.ID}");
+            
         }
 
         public void Actualizar_Saldo()
         {
-            SqlParameter sqC = new SqlParameter("@C", Consignatario.ID);
-            SqlParameter sqNB = new SqlParameter("@NB", NBoleta.ID);
-            SqlParameter[] sql = { sqC, sqNB };
-            Ejecutar_sp("sp_ActualizarSaldosConsignatario", sql);
+            Actualizar("Saldo", Saldo);
         }
 
         public new void Agregar()
@@ -101,7 +104,7 @@
                     Percepcion = Convert.ToDouble(dr["Percepcion"]);
                     Plazo = Convert.ToByte(dr["Plazo"]);
                     Saldo = Convert.ToDouble(dr["Saldo"]);
-                    Matricula.ID = Convert.ToInt32(dr["ID_Matr"]);                    
+                    Matricula.ID = Convert.ToInt32(dr["ID_Matr"]);
                 }
                 catch (Exception)
                 {

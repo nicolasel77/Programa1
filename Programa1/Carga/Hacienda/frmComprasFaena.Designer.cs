@@ -60,9 +60,11 @@
             this.lblCostoFinal = new System.Windows.Forms.ToolStripStatusLabel();
             this.grdBoletas = new Grilla2.SpeedGrilla();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.txtNBoleta = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.nuTop = new System.Windows.Forms.NumericUpDown();
             this.cmdActualizar_Listado = new Programa1.Controles.cBoton();
             this.label1 = new System.Windows.Forms.Label();
-            this.nuTop = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -526,6 +528,8 @@
             // 
             // splitContainer5.Panel2
             // 
+            this.splitContainer5.Panel2.Controls.Add(this.txtNBoleta);
+            this.splitContainer5.Panel2.Controls.Add(this.label3);
             this.splitContainer5.Panel2.Controls.Add(this.nuTop);
             this.splitContainer5.Panel2.Controls.Add(this.cmdActualizar_Listado);
             this.splitContainer5.Panel2.Controls.Add(this.grdBoletas);
@@ -533,6 +537,45 @@
             this.splitContainer5.Size = new System.Drawing.Size(1583, 666);
             this.splitContainer5.SplitterDistance = 1201;
             this.splitContainer5.TabIndex = 1;
+            // 
+            // txtNBoleta
+            // 
+            this.txtNBoleta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtNBoleta.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtNBoleta.Location = new System.Drawing.Point(49, 607);
+            this.txtNBoleta.Name = "txtNBoleta";
+            this.txtNBoleta.Size = new System.Drawing.Size(100, 13);
+            this.txtNBoleta.TabIndex = 6;
+            this.txtNBoleta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNBoleta_KeyPress);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 607);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Buscar";
+            // 
+            // nuTop
+            // 
+            this.nuTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nuTop.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nuTop.Location = new System.Drawing.Point(320, 604);
+            this.nuTop.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nuTop.Name = "nuTop";
+            this.nuTop.Size = new System.Drawing.Size(55, 16);
+            this.nuTop.TabIndex = 4;
+            this.nuTop.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             // 
             // cmdActualizar_Listado
             // 
@@ -555,25 +598,6 @@
             this.label1.Size = new System.Drawing.Size(58, 18);
             this.label1.TabIndex = 2;
             this.label1.Text = "Boletas";
-            // 
-            // nuTop
-            // 
-            this.nuTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nuTop.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.nuTop.Location = new System.Drawing.Point(3, 604);
-            this.nuTop.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nuTop.Name = "nuTop";
-            this.nuTop.Size = new System.Drawing.Size(55, 16);
-            this.nuTop.TabIndex = 4;
-            this.nuTop.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
             // 
             // frmComprasFaena
             // 
@@ -649,5 +673,7 @@
         private Controles.cBoton cmdActualizar_Listado;
         private System.Windows.Forms.ToolStripStatusLabel lblCostoFaena;
         private System.Windows.Forms.NumericUpDown nuTop;
+        private System.Windows.Forms.TextBox txtNBoleta;
+        private System.Windows.Forms.Label label3;
     }
 }

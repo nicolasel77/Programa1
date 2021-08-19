@@ -14,7 +14,7 @@
 
         private void FrmHaciendaStock_Load(object sender, EventArgs e)
         {
-            calFecha.MaxDate = DateTime.Today;
+            
         }
 
         private void Cargar(DateTime f)
@@ -84,7 +84,9 @@
 
         private void cmdMostrar_Click(object sender, EventArgs e)
         {
-            Cargar(DateTime.Today.AddMonths(1));
+            Cargar(DateTime.Today.AddMonths(10));
         }
+
+      
     }
 }

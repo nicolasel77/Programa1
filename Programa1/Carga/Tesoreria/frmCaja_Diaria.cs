@@ -308,7 +308,7 @@ namespace Programa1.Carga.Tesoreria
             grdSalidas.set_ColW(s_SubTipo, 50);
             grdSalidas.set_ColW(s_SubTipo + 1, 90);
             grdSalidas.set_ColW(s_IDDetalle, 50);
-            grdSalidas.set_ColW(s_Descripcion, 200);
+            grdSalidas.set_ColW(s_Descripcion, 400);
             grdSalidas.set_ColW(s_Importe, 90);
             grdSalidas.set_ColW(s_Autorizado, 50);
             grdSalidas.set_ColW(s_Fecha_Autorizado, 90);
@@ -745,7 +745,7 @@ namespace Programa1.Carga.Tesoreria
                                 grdSalidas.set_Texto(f, s_SubTipo + 1, a);
                                 grdSalidas.ActivarCelda(f, s_IDDetalle);
 
-                                if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                if (cGastos.ID != 0) { cGastos.Actualizar("Desc_SubTipo", cGastos.Desc_SubTipo); }
                             }
                             break;
                         case s_IDDetalle:
@@ -792,7 +792,7 @@ namespace Programa1.Carga.Tesoreria
                                 grdSalidas.set_Texto(f, s_Descripcion, a);
                                 grdSalidas.ActivarCelda(f, s_Importe);
 
-                                if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                if (cGastos.ID != 0) { cGastos.Actualizar("Descripcion", cGastos.Descripcion); }
                             }
                             break;
                         case s_Importe:
@@ -815,7 +815,24 @@ namespace Programa1.Carga.Tesoreria
                                 }
                                 else
                                 {
-                                    cGastos.Actualizar();
+                                    cGastos.Actualizar("Importe", cGastos.Importe);
+                                    if(cGastos.TG.EsHacienda == true)
+                                    {
+                                        Compra_Hacienda ch = new Compra_Hacienda();
+                                        ch.Consignatario.ID = cGastos.Id_SubTipoGastos;
+                                        int n = Convert.ToInt32(ch.Dato("ID_CompraFrigo=" + cGastos.Id_DetalleGastos, "NBoleta", ""));
+                                        ch.NBoleta.ID = n;
+                                        ch.Calcular_Saldo();
+                                    }
+                                    if (cGastos.TG.EsAgregados == true)
+                                    {
+                                        Agregados_Hacienda ah = new Agregados_Hacienda();
+                                        ah.Consignatario.ID = cGastos.Id_SubTipoGastos;
+                                        int n = Convert.ToInt32(ah.Dato("ID_Agregados_Frigo=" + cGastos.Id_DetalleGastos, "NBoleta", ""));
+                                        ah.nb.ID = n;
+
+                                        ah.Calcular_Saldo();
+                                    }
                                 }
 
                                 Totales();
