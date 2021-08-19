@@ -448,6 +448,7 @@
             tipos_e.Nombre = grdTipos_Entradas.get_Texto(Fila, 1).ToString();
             tipos_e.Grupo = Convert.ToInt32(grdTipos_Entradas.get_Texto(Fila, 2));
             tipos_e.Es_Entrega = Convert.ToBoolean(grdTipos_Entradas.get_Texto(Fila, 3));
+            tipos_e.Efect
 
             grupo_e.Id = tipos_e.Grupo;
         }

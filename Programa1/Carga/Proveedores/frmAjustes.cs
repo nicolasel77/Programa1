@@ -210,13 +210,18 @@
                             grdAjustes.set_Texto(f, c_Id, Ajustes.ID);
                             grdAjustes.AgregarFila();
 
+                            Ajustes.Proveedor.Id = 0;
+                            Ajustes.Descripcion = "";
                             Ajustes.Importe = 0;
+
+                            grdAjustes.set_Texto(f + 1, c_Fecha, Ajustes.Fecha);
+                            grdAjustes.ActivarCelda(f + 1, c_IdProv);
                         }
                         else
                         {
                             Ajustes.Actualizar();
+                            grdAjustes.ActivarCelda(f + 1, c);
                         }
-                        grdAjustes.ActivarCelda(f + 1, c);
                         Total();
                         break;
                 }
@@ -226,6 +231,8 @@
                 Mensaje("La fecha esta cerrada.");
             }
         }
+
+
 
         private void grdAjustes_KeyUp(object sender, short e)
         {
@@ -241,6 +248,7 @@
                                 Ajustes.ID = Convert.ToInt32(grdAjustes.get_Texto(grdAjustes.Row, 0));
                                 Ajustes.Borrar();
                                 grdAjustes.BorrarFila(grdAjustes.Row);
+                                grdAjustes_CambioFila(Convert.ToByte(grdAjustes.Row));
                             }
                         }
                         else
@@ -257,6 +265,23 @@
             grdAjustes.MostrarDatos(Ajustes.Datos(Armar_Cadena()), true);
             formato_Grilla();
             Total();
+        }
+
+        private void grdAjustes_CambioFila(short Fila)
+        {
+            int i = Convert.ToInt32(grdAjustes.get_Texto(Fila, c_Id));
+            if (i > 0)
+            { 
+                Ajustes.Cargar_Fila(i); 
+            }
+            else
+            {
+                Ajustes.ID = 0;
+                Ajustes.Fecha = Convert.ToDateTime(grdAjustes.get_Texto(Fila,c_Fecha));
+                Ajustes.Descripcion = grdAjustes.get_Texto(Fila,c_Descripcion).ToString();
+                Ajustes.Proveedor.Id = Convert.ToInt32(grdAjustes.get_Texto(Fila, c_IdProv));
+                Ajustes.Importe = Convert.ToSingle(grdAjustes.get_Texto(Fila,c_Importe));
+            }
         }
     }
 }

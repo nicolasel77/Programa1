@@ -479,6 +479,7 @@
                                 APicada.ID = Convert.ToInt32(grdAPicada.get_Texto(grdAPicada.Row, 0));
                                 APicada.Borrar();
                                 grdAPicada.BorrarFila(grdAPicada.Row);
+                                GrdAPicada_CambioFila(Convert.ToByte(grdAPicada.Row));
                                 Totales();
                             }
                         }

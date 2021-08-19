@@ -429,6 +429,7 @@
                                 Compras.ID = Convert.ToInt32(grdCompras.get_Texto(grdCompras.Row, 0));
                                 Compras.Borrar();
                                 grdCompras.BorrarFila(grdCompras.Row);
+                                GrdCompras_CambioFila(Convert.ToByte(grdCompras.Row));
                                 Totales();
                             }
                         }

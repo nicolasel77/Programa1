@@ -335,6 +335,7 @@
                                 Reintegros.ID = Convert.ToInt32(grdReintegros.get_Texto(grdReintegros.Row, 0));
                                 Reintegros.Borrar();
                                 grdReintegros.BorrarFila(grdReintegros.Row);
+                                GrdReintegros_CambioFila(Convert.ToByte(grdReintegros.Row));
                                 Totales();
                             }
                         }

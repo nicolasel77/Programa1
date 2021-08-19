@@ -141,7 +141,8 @@
                         {
                             lista.Orden = Convert.ToInt32(grd.get_Texto(grd.Row, c_Orden));
                             lista.Borrar();
-                            grd.BorrarFila(grd.Row);                            
+                            grd.BorrarFila(grd.Row);
+                            Grd_CambioFila(Convert.ToByte(grd.Row));
                         }
                     }
                     break;
