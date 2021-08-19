@@ -439,123 +439,75 @@
             // comprasFaenaToolStripMenuItem
             // 
             this.comprasFaenaToolStripMenuItem.Name = "comprasFaenaToolStripMenuItem";
-<<<<<<< Updated upstream
             this.comprasFaenaToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-=======
-            this.comprasFaenaToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
->>>>>>> Stashed changes
             this.comprasFaenaToolStripMenuItem.Text = "&Compras/Faena";
             this.comprasFaenaToolStripMenuItem.Click += new System.EventHandler(this.ComprasFaenaToolStripMenuItem_Click);
             // 
             // repartoToolStripMenuItem
             // 
             this.repartoToolStripMenuItem.Name = "repartoToolStripMenuItem";
-<<<<<<< Updated upstream
             this.repartoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-=======
-            this.repartoToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
->>>>>>> Stashed changes
             this.repartoToolStripMenuItem.Text = "&Reparto";
             this.repartoToolStripMenuItem.Click += new System.EventHandler(this.RepartoToolStripMenuItem_Click);
             // 
             // stockToolStripMenuItem1
             // 
             this.stockToolStripMenuItem1.Name = "stockToolStripMenuItem1";
-<<<<<<< Updated upstream
             this.stockToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
-=======
-            this.stockToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
->>>>>>> Stashed changes
             this.stockToolStripMenuItem1.Text = "&Stock";
             this.stockToolStripMenuItem1.Click += new System.EventHandler(this.StockToolStripMenuItem1_Click);
             // 
             // vencimientosToolStripMenuItem
             // 
             this.vencimientosToolStripMenuItem.Name = "vencimientosToolStripMenuItem";
-<<<<<<< Updated upstream
             this.vencimientosToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-=======
-            this.vencimientosToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
->>>>>>> Stashed changes
             this.vencimientosToolStripMenuItem.Text = "&Vencimientos";
             this.vencimientosToolStripMenuItem.Click += new System.EventHandler(this.vencimientosToolStripMenuItem_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-<<<<<<< Updated upstream
             this.toolStripMenuItem9.Size = new System.Drawing.Size(168, 6);
-=======
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(158, 6);
->>>>>>> Stashed changes
             // 
             // controlToolStripMenuItem
             // 
             this.controlToolStripMenuItem.Name = "controlToolStripMenuItem";
-<<<<<<< Updated upstream
             this.controlToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-=======
-            this.controlToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
->>>>>>> Stashed changes
             this.controlToolStripMenuItem.Text = "C&ontrol";
             // 
             // stockCorralesToolStripMenuItem
             // 
             this.stockCorralesToolStripMenuItem.Name = "stockCorralesToolStripMenuItem";
-<<<<<<< Updated upstream
             this.stockCorralesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-=======
-            this.stockCorralesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
->>>>>>> Stashed changes
             this.stockCorralesToolStripMenuItem.Text = "&Stock Corrales";
             // 
             // deudaHaciendaToolStripMenuItem
             // 
             this.deudaHaciendaToolStripMenuItem.Name = "deudaHaciendaToolStripMenuItem";
-<<<<<<< Updated upstream
             this.deudaHaciendaToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-=======
-            this.deudaHaciendaToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
->>>>>>> Stashed changes
             this.deudaHaciendaToolStripMenuItem.Text = "&Deuda Hacienda";
             // 
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-<<<<<<< Updated upstream
             this.toolStripMenuItem11.Size = new System.Drawing.Size(168, 6);
-=======
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(158, 6);
->>>>>>> Stashed changes
             // 
             // recuperoToolStripMenuItem
             // 
             this.recuperoToolStripMenuItem.Name = "recuperoToolStripMenuItem";
-<<<<<<< Updated upstream
             this.recuperoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-=======
-            this.recuperoToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
->>>>>>> Stashed changes
             this.recuperoToolStripMenuItem.Text = "R&ecupero";
             // 
             // valoresToolStripMenuItem
             // 
             this.valoresToolStripMenuItem.Name = "valoresToolStripMenuItem";
-<<<<<<< Updated upstream
             this.valoresToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-=======
-            this.valoresToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
->>>>>>> Stashed changes
             this.valoresToolStripMenuItem.Text = "V&alores";
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-<<<<<<< Updated upstream
             this.toolStripMenuItem12.Size = new System.Drawing.Size(168, 6);
-=======
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(158, 6);
->>>>>>> Stashed changes
             // 
             // aBMToolStripMenuItem
             // 
@@ -563,11 +515,7 @@
             this.frigorificosToolStripMenuItem,
             this.consignatariosToolStripMenuItem});
             this.aBMToolStripMenuItem.Name = "aBMToolStripMenuItem";
-<<<<<<< Updated upstream
             this.aBMToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-=======
-            this.aBMToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
->>>>>>> Stashed changes
             this.aBMToolStripMenuItem.Text = "ABM";
             // 
             // frigorificosToolStripMenuItem

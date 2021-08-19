@@ -39,7 +39,7 @@
         public int Grupo { get; set; }
 
         public bool Es_Entrega { get; set; }
-
+        public bool Efectivo { get; set; }
 
         public void Cargar()
         {
@@ -100,7 +100,7 @@
             {
 
                 SqlCommand command = new SqlCommand($"UPDATE Tipos_Entradas SET Nombre='{Nombre}', " +
-                    $"Grupo={Grupo}, Es_Entrega={(Es_Entrega ? "1" : "0")} WHERE Id_Tipo={Id_Tipo}", sql);
+                    $"Grupo={Grupo}, Es_Entrega={(Es_Entrega ? "1" : "0")}, Efectivo={(Efectivo ? "1" : "0")} WHERE Id_Tipo={Id_Tipo}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -121,7 +121,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Tipos_Entradas (Id_Tipo, Nombre, Grupo, Es_Entrega) VALUES({Id_Tipo}, '{Nombre}', {Grupo}, {(Es_Entrega ? "1" : "0")})", sql);
+                SqlCommand command = new SqlCommand($"INSERT INTO Tipos_Entradas (Id_Tipo, Nombre, Grupo, Es_Entrega, Efectivo) VALUES({Id_Tipo}, '{Nombre}', {Grupo}, {(Es_Entrega ? "1" : "0")}, {(Efectivo ? "1" : "0")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

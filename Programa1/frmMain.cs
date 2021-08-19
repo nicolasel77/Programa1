@@ -2132,22 +2132,14 @@
 
                 Form frmDetalles_Pagos = new Carga.Tesoreria.frmDetalles_Pagos();
                 frmDetalles_Pagos.MdiParent = this;
-<<<<<<< Updated upstream
                 frmDetalles_Pagos.Disposed += frmDetalles_Pagos_Disposed;
-=======
-                frmDetalles_Pagos.Disposed += FrmDetalles_Pagos_Disposed;
->>>>>>> Stashed changes
                 forms.Add(frmDetalles_Pagos);
                 frmDetalles_Pagos.Show();
                 frmDetalles_Pagos.WindowState = FormWindowState.Minimized;
                 frmDetalles_Pagos.WindowState = FormWindowState.Maximized;
             }
         }
-<<<<<<< Updated upstream
         private void frmDetalles_Pagos_Disposed(object sender, EventArgs e)
-=======
-        private void FrmDetalles_Pagos_Disposed(object sender, EventArgs e)
->>>>>>> Stashed changes
         {
             foreach (ToolStripMenuItem t in tstMenu.Items)
             {
@@ -2166,8 +2158,6 @@
                 }
             }
         }
-<<<<<<< Updated upstream
-
         private void tarjetasToolStripMenuItem_Click(object sender, EventArgs e)
         {
                 bool found = false;
@@ -2216,7 +2206,4 @@
                 }
             }
         }
-=======
     }
->>>>>>> Stashed changes
-}
