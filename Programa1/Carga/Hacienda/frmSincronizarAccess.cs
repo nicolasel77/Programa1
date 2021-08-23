@@ -326,42 +326,32 @@ namespace Programa1.Carga.Hacienda
         private void Cargar_Salida()
         {
             Hacienda_Salidas salidas_sistema = new Hacienda_Salidas("Hacienda_Salidas", "vw_Hacienda_Salidas");
+            salidas_sistema.Borrar($"Fecha BETWEEN '{mDesde.SelectionStart:MM/dd/yy}' AND '{mHasta.SelectionStart:MM/dd/yy}'");
 
             c_Base_Access clsAccess = new c_Base_Access("Salidas", "vw_Salidas");
             clsAccess.Campo_ID = "ID_Salidas";
             clsAccess.Base_Access = cmdBase.Text;
 
-            DataTable dtFechas = clsAccess.Datos_Vista($"Fecha BETWEEN #{mDesde.SelectionStart:MM/dd/yy}# AND #{mHasta.SelectionStart:MM/dd/yy}#", "Fecha, ID_Sucursales AS Suc, SUM(ID_Salidas+ID_Sucursales) AS IDs", "Fecha DESC", "Fecha, ID_Sucursales");
+            DataTable dtFechas = clsAccess.Datos_Vista($"Fecha BETWEEN #{mDesde.SelectionStart:MM/dd/yy}# AND #{mHasta.SelectionStart:MM/dd/yy}#", "Fecha", "Fecha", "Fecha");
 
             if (dtFechas != null)
             {
-                foreach (DataRow drF in dtFechas.Rows)
+                foreach (DataRow drF in dtFechas.Rows)               
                 {
-                    DataTable dtSistema = salidas_sistema.Datos_Vista($"Fecha='{Convert.ToDateTime(drF["Fecha"]):MM/dd/yy}'", "Fecha, ID_Sucursales Suc, SUM(ID_Salidas+ID_Sucursales) AS IDs", "Fecha DESC", "Fecha, ID_Sucursales");
-                    if (dtSistema != null)
-                    {
-                        if (dtSistema.Rows[0]["IDs"] != drF["IDs"])
-                        {
-                            lstActualizacion.Items.Add($"Salida: {Convert.ToDateTime(drF["Fecha"]):dd/MM} Suc {drF["Suc"]}");
+                    lstActualizacion.Items.Insert(0, $"Salida: {Convert.ToDateTime(drF["Fecha"]):dd/MM}");
+                    Application.DoEvents();
+                    DataTable dtSalidas = clsAccess.Datos_Vista($"Fecha=#{Convert.ToDateTime(drF["Fecha"]):MM/dd/yy}#", "ID_Salidas, Fecha, ID_Sucursales, ID_Faena, Media");
 
-                        }
-                    }
-                    else
+                    foreach (DataRow drS in dtSalidas.Rows)
                     {
-                        salidas_sistema.Borrar($"Fecha='{Convert.ToDateTime(drF["Fecha"]):MM/dd/yy}' AND ID_Sucursales={drF["Suc"]}");
-
-                        DataTable dtSalidas = clsAccess.Datos_Vista($"Fecha=#{Convert.ToDateTime(drF["Fecha"]):MM/dd/yy}# AND ID_Sucursales={drF["Suc"]}", "ID_Salidas, Fecha, ID_Sucursales, ID_Faena, Media");
-                        foreach (DataRow drS in dtSalidas.Rows)
-                        {
-                            salidas_sistema.ID = Convert.ToInt32(drS["ID_Salidas"]);
-                            salidas_sistema.Fecha = Convert.ToDateTime(drS["Fecha"]);
-                            salidas_sistema.Sucursal.ID = Convert.ToInt32(drS["ID_Sucursales"]);
-                            salidas_sistema.Faena.ID = Convert.ToInt32(drS["ID_Faena"]);
-                            salidas_sistema.Faena.Cargar_Registro();
-                            salidas_sistema.Media = Convert.ToInt32(drS["Media"]);
-                            salidas_sistema.Cargar_CostoSalida();
-                            salidas_sistema.Agregar();
-                        }
+                        salidas_sistema.ID = Convert.ToInt32(drS["ID_Salidas"]);
+                        salidas_sistema.Fecha = Convert.ToDateTime(drS["Fecha"]);
+                        salidas_sistema.Sucursal.ID = Convert.ToInt32(drS["ID_Sucursales"]);
+                        salidas_sistema.Faena.ID = Convert.ToInt32(drS["ID_Faena"]);
+                        salidas_sistema.Faena.Cargar_Registro();
+                        salidas_sistema.Media = Convert.ToInt32(drS["Media"]);
+                        salidas_sistema.Cargar_CostoSalida();
+                        salidas_sistema.Agregar();
                     }
                 }
             }
@@ -402,6 +392,7 @@ namespace Programa1.Carga.Hacienda
                 {
                     hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldoBoleta {dr["ID_Consignatarios"]}, {nb}");
                     lstActualizacion.Items.Add($"Actualizando saldo NB {nb} Consig {dr["ID_Consignatarios"]}");
+                    
                 }
             }
         }
@@ -497,11 +488,24 @@ namespace Programa1.Carga.Hacienda
                     {
                         for (int i = Convert.ToInt32(txtBoleta.Text); i <= Convert.ToInt32(txtHasta.Text); i++)
                         {
+                            lstActualizacion.Items.Insert(0, $"Actualizando {i}");
+                            Application.DoEvents();
                             Cargar(i);
                         }
                     }
                 }
             }
+        }
+
+        private void cmdCostos_Salida_Click(object sender, EventArgs e)
+        {
+            Hacienda_Salidas hs = new Hacienda_Salidas();
+            DateTime f1 = mDesde.SelectionStart;
+            DateTime f2 = mHasta.SelectionStart;
+            lstActualizacion.Items.Insert(0, $"Salidas desde {f1:d} - hasta {f2:d}");
+            Application.DoEvents();
+            hs.Actualizar_Costos(f1, f2);
+
         }
     }
 }

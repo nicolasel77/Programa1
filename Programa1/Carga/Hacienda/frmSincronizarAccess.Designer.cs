@@ -50,13 +50,12 @@ namespace Programa1.Carga.Hacienda
             this.cmdAdelante = new System.Windows.Forms.Button();
             this.txtBoleta = new System.Windows.Forms.TextBox();
             this.txtHasta = new System.Windows.Forms.TextBox();
+            this.cmdCostos_Salida = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmdBase
             // 
-            this.cmdBase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdBase.BackColor = System.Drawing.Color.WhiteSmoke;
             this.cmdBase.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmdBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -213,7 +212,7 @@ namespace Programa1.Carga.Hacienda
             this.mdSincSalidas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.mdSincSalidas.Location = new System.Drawing.Point(16, 306);
             this.mdSincSalidas.Name = "mdSincSalidas";
-            this.mdSincSalidas.Size = new System.Drawing.Size(225, 28);
+            this.mdSincSalidas.Size = new System.Drawing.Size(145, 28);
             this.mdSincSalidas.TabIndex = 7;
             this.mdSincSalidas.Text = "Sincronizar Salidas";
             this.mdSincSalidas.UseVisualStyleBackColor = true;
@@ -293,6 +292,17 @@ namespace Programa1.Carga.Hacienda
             this.txtHasta.Size = new System.Drawing.Size(58, 13);
             this.txtHasta.TabIndex = 11;
             // 
+            // cmdCostos_Salida
+            // 
+            this.cmdCostos_Salida.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdCostos_Salida.Location = new System.Drawing.Point(167, 306);
+            this.cmdCostos_Salida.Name = "cmdCostos_Salida";
+            this.cmdCostos_Salida.Size = new System.Drawing.Size(145, 28);
+            this.cmdCostos_Salida.TabIndex = 7;
+            this.cmdCostos_Salida.Text = "Sincronizar Costo Salida";
+            this.cmdCostos_Salida.UseVisualStyleBackColor = true;
+            this.cmdCostos_Salida.Click += new System.EventHandler(this.cmdCostos_Salida_Click);
+            // 
             // frmSincronizarAccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,6 +312,7 @@ namespace Programa1.Carga.Hacienda
             this.Controls.Add(this.txtBoleta);
             this.Controls.Add(this.cmdAdelante);
             this.Controls.Add(this.cmdSaldos);
+            this.Controls.Add(this.cmdCostos_Salida);
             this.Controls.Add(this.mdSincSalidas);
             this.Controls.Add(this.chSaldo);
             this.Controls.Add(this.chFaena);
@@ -345,5 +356,6 @@ namespace Programa1.Carga.Hacienda
         private System.Windows.Forms.Button cmdAdelante;
         private System.Windows.Forms.TextBox txtBoleta;
         private System.Windows.Forms.TextBox txtHasta;
+        private System.Windows.Forms.Button cmdCostos_Salida;
     }
 }

@@ -219,8 +219,8 @@
         private void CFecha_Cambio_Seleccion(object sender, EventArgs e)
         {
             string vFecha = cFecha.Cadena();
-            cSucursal.Filtro_In = $" (SELECT DISTINCT Id_Sucursales FROM Hacienda_Salidas WHERE {vFecha})";
-            cProds.Filtro_In = $" (SELECT DISTINCT Id_Productos FROM vw_Hacienda_Salidas WHERE {vFecha})";
+            cSucursal.Filtro_In = $" SELECT DISTINCT Id_Sucursales FROM Hacienda_Salidas WHERE {vFecha}";
+            cProds.Filtro_In = $" SELECT DISTINCT Id_Productos FROM vw_Hacienda_Salidas WHERE {vFecha}";
 
 
             cmdMostrar.PerformClick();

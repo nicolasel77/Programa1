@@ -2133,14 +2133,12 @@
                 Form frmDetalles_Pagos = new Carga.Tesoreria.frmDetalles_Pagos();
                 frmDetalles_Pagos.MdiParent = this;
                 frmDetalles_Pagos.Disposed += frmDetalles_Pagos_Disposed;
-
                 forms.Add(frmDetalles_Pagos);
                 frmDetalles_Pagos.Show();
                 frmDetalles_Pagos.WindowState = FormWindowState.Minimized;
                 frmDetalles_Pagos.WindowState = FormWindowState.Maximized;
             }
         }
-
         private void frmDetalles_Pagos_Disposed(object sender, EventArgs e)
         {
             foreach (ToolStripMenuItem t in tstMenu.Items)
@@ -2160,7 +2158,6 @@
                 }
             }
         }
-
         private void tarjetasToolStripMenuItem_Click(object sender, EventArgs e)
         {
                 bool found = false;

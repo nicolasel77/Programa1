@@ -220,5 +220,10 @@ namespace Programa1.DB
 
 
         }
+
+        internal void Actualizar_Costos(DateTime f1, DateTime f2)
+        {
+            Ejecutar_Comando($"sp_Acualizar_Costos_Salida '{f1:MM/dd/yy}', '{f2:MM/dd/yy}'");
+        }
     }
 }
