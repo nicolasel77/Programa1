@@ -430,7 +430,7 @@
                 devoluciones.Sucursal.ID = Convert.ToInt32(GrdDevoluciones.get_Texto(Fila, c_IdSuc));
                 devoluciones.Proveedor.Id = Convert.ToInt32(GrdDevoluciones.get_Texto(Fila, c_IdProv));
                 devoluciones.CostoVenta = Convert.ToSingle(GrdDevoluciones.get_Texto(Fila, c_CostoVenta));
-                devoluciones.CostoCompra = Convert.ToSingle(GrdDevoluciones.get_Texto(Fila, c_CostoVenta));
+                devoluciones.CostoCompra = Convert.ToSingle(GrdDevoluciones.get_Texto(Fila, c_CostoCompra));
                 devoluciones.Kilos = Convert.ToSingle(GrdDevoluciones.get_Texto(Fila, c_Kilos));
 
                 devoluciones.precios.Fecha = devoluciones.Fecha;
@@ -490,6 +490,7 @@
                                 devoluciones.ID = Convert.ToInt32(GrdDevoluciones.get_Texto(GrdDevoluciones.Row, 0));
                                 devoluciones.Borrar();
                                 GrdDevoluciones.BorrarFila(GrdDevoluciones.Row);
+                                GrdDevoluciones_CambioFila(Convert.ToByte(GrdDevoluciones.Row));
                                 Totales();
                             }
                         }

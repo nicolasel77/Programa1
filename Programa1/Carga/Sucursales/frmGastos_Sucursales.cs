@@ -329,7 +329,8 @@
                                 Gastos_Sucursales.ID = Convert.ToInt32(grdGastos.get_Texto(grdGastos.Row, 0));
                                 Gastos_Sucursales.Borrar();
                                 grdGastos.BorrarFila(grdGastos.Row);
-                                Totales();
+                                grdGastos_CambioFila(Convert.ToByte(grdGastos.Row));
+                                //Totales();
                             }
                         }
                         else

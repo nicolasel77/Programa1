@@ -125,6 +125,7 @@
                         tipoProveedores.ID = Convert.ToInt32(grdTipo.get_Texto(grdTipo.Row, 0));
                         tipoProveedores.Borrar();
                         grdTipo.BorrarFila(grdTipo.Row);
+                        GrdTipo_CambioFila(Convert.ToByte(grdTipo.Row));
                     }
 
                 }
@@ -239,6 +240,7 @@
                         provs.Id = Convert.ToInt32(grdProveedores.get_Texto(grdProveedores.Row, 0));
                         provs.Borrar();
                         grdProveedores.BorrarFila(grdProveedores.Row);
+                        GrdProveedores_CambioFila(Convert.ToByte(grdProveedores.Row));
                     }
 
                 }

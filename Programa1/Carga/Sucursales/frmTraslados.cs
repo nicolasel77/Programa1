@@ -460,6 +460,7 @@ namespace Programa1.Carga
                                 Traslados.ID = Convert.ToInt32(grdTraslados.get_Texto(grdTraslados.Row, 0));
                                 Traslados.Borrar();
                                 grdTraslados.BorrarFila(grdTraslados.Row);
+                                GrdTraslados_CambioFila(Convert.ToByte(grdTraslados.Row));
                                 Totales();
                             }
                         }

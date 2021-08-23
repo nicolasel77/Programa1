@@ -139,6 +139,7 @@
             this.grdAjustes.Size = new System.Drawing.Size(709, 631);
             this.grdAjustes.TabIndex = 0;
             this.grdAjustes.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdAjustes_Editado_1);
+            this.grdAjustes.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdAjustes_CambioFila);
             this.grdAjustes.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdAjustes_KeyUp);
             // 
             // splitContainer3
@@ -164,7 +165,7 @@
             this.cProvs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cProvs.Filtro_In = "";
             this.cProvs.Location = new System.Drawing.Point(0, 0);
-            this.cProvs.Mostrar_Tipo = false;
+            this.cProvs.Mostrar_Tipo = true;
             this.cProvs.Name = "cProvs";
             this.cProvs.Size = new System.Drawing.Size(247, 637);
             this.cProvs.TabIndex = 2;

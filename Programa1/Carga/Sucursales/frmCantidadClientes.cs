@@ -287,6 +287,7 @@
                                 Cantidad_Clientes.ID = Convert.ToInt32(grdCantidad_Clientes.get_Texto(grdCantidad_Clientes.Row, 0));
                                 Cantidad_Clientes.Borrar();
                                 grdCantidad_Clientes.BorrarFila(grdCantidad_Clientes.Row);
+                                GrdCantidad_Clientes_CambioFila(Convert.ToByte(grdCantidad_Clientes.Row));
                                 Totales();
                             } 
                         }

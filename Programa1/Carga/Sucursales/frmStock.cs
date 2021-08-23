@@ -406,6 +406,7 @@
                                 stock.ID = Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0));
                                 stock.Borrar();
                                 grdStock.BorrarFila(grdStock.Row);
+                                GrdStock_CambioFila(Convert.ToByte(grdStock.Row));
                                 Totales();
                             } 
                         }

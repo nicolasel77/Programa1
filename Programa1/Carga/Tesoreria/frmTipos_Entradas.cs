@@ -72,10 +72,13 @@
                         }
                         else
                         {
-                            grdCajas.set_Texto(f, c, a);
-                            cajas.Agregar();
-                            grdCajas.ActivarCelda(f, 1);
-                            if (grdCajas.EsUltimaFila() == true) { grdCajas.AgregarFila(); }
+                            if (Convert.ToInt32(a) > 0)
+                            {
+                                grdCajas.set_Texto(f, c, a);
+                                cajas.Agregar();
+                                grdCajas.ActivarCelda(f, 1);
+                                if (grdCajas.EsUltimaFila() == true) { grdCajas.AgregarFila(); }
+                            }
                         }
                     }
                     break;
@@ -134,6 +137,7 @@
                         cajas.ID = Convert.ToInt32(grdCajas.get_Texto(grdCajas.Row, 0));
                         cajas.Borrar();
                         grdCajas.BorrarFila(grdCajas.Row);
+                        GrdCajas_CambioFila(Convert.ToByte(grdCajas.Row));
                     }
 
                 }
@@ -157,18 +161,21 @@
                     }
                     else
                     {
-                        grupo_e.Id = Convert.ToInt32(a);
-                        if (grupo_e.Existe() == true)
+                        if (Convert.ToInt32(a) > 0)
                         {
-                            Mensaje($"El Grupo '{a}' ya existe.");
-                            grdGrupo.ErrorEnTxt();
-                        }
-                        else
-                        {
-                            grdGrupo.set_Texto(f, c, a);
-                            grupo_e.Agregar();
-                            grdGrupo.ActivarCelda(f, 1);
-                            if (grdGrupo.EsUltimaFila() == true) { grdGrupo.AgregarFila(); }
+                            grupo_e.Id = Convert.ToInt32(a);
+                            if (grupo_e.Existe() == true)
+                            {
+                                Mensaje($"El Grupo '{a}' ya existe.");
+                                grdGrupo.ErrorEnTxt();
+                            }
+                            else
+                            {
+                                grdGrupo.set_Texto(f, c, a);
+                                grupo_e.Agregar();
+                                grdGrupo.ActivarCelda(f, 1);
+                                if (grdGrupo.EsUltimaFila() == true) { grdGrupo.AgregarFila(); }
+                            }
                         }
                     }
                     break;
@@ -281,6 +288,7 @@
                         grupo_e.Id = Convert.ToInt32(grdGrupo.get_Texto(grdGrupo.Row, 0));
                         grupo_e.Borrar();
                         grdGrupo.BorrarFila(grdGrupo.Row);
+                        GrdGrupo_CambioFila(Convert.ToByte(grdGrupo.Row));
                     }
                 }
             }
@@ -343,18 +351,21 @@
                     }
                     else
                     {
-                        tipos_e.Id_Tipo = Convert.ToInt32(a);
-                        if (tipos_e.Existe() == true)
+                        if (Convert.ToInt32(a) > 0)
                         {
-                            Mensaje($"El producto '{a}' ya existe.");
-                            grdTipos_Entradas.ErrorEnTxt();
-                        }
-                        else
-                        {
-                            grdTipos_Entradas.set_Texto(f, c, a);
-                            tipos_e.Agregar();
-                            if (grdTipos_Entradas.EsUltimaFila() == true) { grdTipos_Entradas.AgregarFila(); }
-                            grdTipos_Entradas.ActivarCelda(f, 1);
+                            tipos_e.Id_Tipo = Convert.ToInt32(a);
+                            if (tipos_e.Existe() == true)
+                            {
+                                Mensaje($"El producto '{a}' ya existe.");
+                                grdTipos_Entradas.ErrorEnTxt();
+                            }
+                            else
+                            {
+                                grdTipos_Entradas.set_Texto(f, c, a);
+                                tipos_e.Agregar();
+                                if (grdTipos_Entradas.EsUltimaFila() == true) { grdTipos_Entradas.AgregarFila(); }
+                                grdTipos_Entradas.ActivarCelda(f, 1);
+                            }
                         }
                     }
                     break;
@@ -415,7 +426,22 @@
                         grdTipos_Entradas.ActivarCelda(f + 1, 0);
                     }
                     break;
-
+                case 4: //Efectivo
+                    if (i == 0)
+                    {
+                        Mensaje("Debe ingresar el Id primero");
+                        grdTipos_Entradas.ActivarCelda(f, 0);
+                    }
+                    else
+                    {
+                        tipos_e.Id_Tipo = i;
+                        tipos_e.Efectivo = bool.Parse(a.ToString());
+                        grdTipos_Entradas.set_Texto(f, c, a);
+                        tipos_e.Actualizar();
+                        if (grdTipos_Entradas.EsUltimaFila() == true) { grdTipos_Entradas.AgregarFila(); }
+                        grdTipos_Entradas.ActivarCelda(f + 1, 0);
+                    }
+                    break;
             }
         }
 
@@ -431,6 +457,7 @@
                         tipos_e.Id_Tipo = Convert.ToInt32(grdTipos_Entradas.get_Texto(grdTipos_Entradas.Row, 0));
                         tipos_e.Borrar();
                         grdTipos_Entradas.BorrarFila(grdTipos_Entradas.Row);
+                        GrdTipos_Entradas_CambioFila(Convert.ToByte(grdTipos_Entradas.Row));
                     }
 
                 }
@@ -448,6 +475,7 @@
             tipos_e.Nombre = grdTipos_Entradas.get_Texto(Fila, 1).ToString();
             tipos_e.Grupo = Convert.ToInt32(grdTipos_Entradas.get_Texto(Fila, 2));
             tipos_e.Es_Entrega = Convert.ToBoolean(grdTipos_Entradas.get_Texto(Fila, 3));
+            tipos_e.Efectivo = Convert.ToBoolean(grdTipos_Entradas.get_Texto(Fila, 4));
 
             grupo_e.Id = tipos_e.Grupo;
         }

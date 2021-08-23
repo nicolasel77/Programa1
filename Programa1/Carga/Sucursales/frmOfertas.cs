@@ -392,6 +392,23 @@
                 Ofertas.precios.Sucursal = Ofertas.Sucursal;
                 Ofertas.precios.Producto = Ofertas.Producto;
             }
+            else
+            {
+
+                Ofertas.ID = 0;
+                Ofertas.Fecha = Convert.ToDateTime(grdOfertas.get_Texto(Fila, c_Fecha));
+                Ofertas.Producto.ID = Convert.ToInt32(grdOfertas.get_Texto(Fila, c_IdProd));
+                Ofertas.Descripcion = grdOfertas.get_Texto(Fila, c_Descripcion).ToString();
+                Ofertas.Sucursal.ID = Convert.ToInt32(grdOfertas.get_Texto(Fila, c_IdSuc));
+                Ofertas.Costo_Original = Convert.ToSingle(grdOfertas.get_Texto(Fila, c_CostoOriginal));
+                Ofertas.Costo_Oferta = Convert.ToSingle(grdOfertas.get_Texto(Fila, c_CostoOferta));
+                Ofertas.Kilos = Convert.ToSingle(grdOfertas.get_Texto(Fila, c_Kilos));
+
+
+                Ofertas.precios.Fecha = Ofertas.Fecha;
+                Ofertas.precios.Sucursal = Ofertas.Sucursal;
+                Ofertas.precios.Producto = Ofertas.Producto;
+            }
         }              
 
         private void GrdOfertas_KeyPress(object sender, short e)
@@ -441,6 +458,7 @@
                                 Ofertas.ID = Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id));
                                 Ofertas.Borrar();
                                 grdOfertas.BorrarFila(grdOfertas.Row);
+                                GrdOfertas_CambioFila(Convert.ToByte(grdOfertas.Row));
                                 Totales();
                             }
                         }
