@@ -300,7 +300,7 @@
                     Totales();
                     break;
 
-                case 10:
+                case 9:
                     //Kilos
                     cargaSebo.Kilos = Convert.ToSingle(a);
                     grdVenta.set_Texto(f, c, a);
@@ -316,7 +316,7 @@
 
                         grdVenta.set_Texto(f + 1, c_Fecha, cargaSebo.Fecha);
                         grdVenta.set_Texto(f + 1, c_IdSebero, cargaSebo.Sebero.ID);
-                        grdVenta.set_Texto(f + 1, c_IdSebero + 1, cargaSebo.Sucursal.Nombre);
+                        grdVenta.set_Texto(f + 1, c_IdSebero + 1, cargaSebo.Sebero.Nombre);
                         grdVenta.set_Texto(f + 1, c_IdSuc, cargaSebo.Sucursal.ID);
                         grdVenta.set_Texto(f + 1, c_IdSuc + 1, cargaSebo.Sucursal.Nombre);
 
@@ -348,12 +348,28 @@
         private void GrdVenta_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdVenta.get_Texto(Fila, c_Id).ToString());
-            cargaSebo.Cargar_Fila(i);
+            if (i > 0)
+            {
+                cargaSebo.Cargar_Fila(i);
 
-            cargaSebo.precios_Seberos.Fecha = cargaSebo.Fecha;
-            cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
-            cargaSebo.precios_Seberos.Producto = cargaSebo.Producto;
+                cargaSebo.precios_Seberos.Fecha = cargaSebo.Fecha;
+                cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
+                cargaSebo.precios_Seberos.Producto = cargaSebo.Producto;
+            }
+            else
+            {
+                cargaSebo.Id = 0;
+                cargaSebo.Fecha = Convert.ToDateTime(grdVenta.get_Texto(Fila, c_Fecha));
+                cargaSebo.Producto.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdProd));
+                cargaSebo.Sucursal.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdSuc));
+                cargaSebo.Sebero.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdSebero));
+                cargaSebo.Costo = Convert.ToSingle(grdVenta.get_Texto(Fila, c_Costo));
+                cargaSebo.Kilos = Convert.ToSingle(c_Kilos);
 
+                cargaSebo.precios_Seberos.Fecha = cargaSebo.Fecha;
+                cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
+                cargaSebo.precios_Seberos.Producto = cargaSebo.Producto;
+            }
         }
 
         private void GrdVenta_KeyPress(object sender, short e)

@@ -18,6 +18,9 @@
         {
             Herramientas h = new Herramientas();
             h.Llenar_List(lstTipos, t_tarjetas.Datos());
+
+            //Esto es para que la primera vez que se filtre no tire filas vacias
+            chTipo.Checked = true;
         }
 
         private void Cargar()

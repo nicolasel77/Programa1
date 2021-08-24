@@ -2205,5 +2205,53 @@
                     }
                 }
             }
+
+        private void frigorificosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmFrigorificosABM")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmFrigorificosABM");
+                t.Text = "Frigorificos y Consignatarios";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmFrigorificosABM = new Carga.Hacienda.frmFriorificosABM();
+                frmFrigorificosABM.MdiParent = this;
+                frmFrigorificosABM.Disposed += frmFrigorificosABM_Disposed;
+                forms.Add(frmFrigorificosABM);
+                frmFrigorificosABM.Show();
+                frmFrigorificosABM.WindowState = FormWindowState.Minimized;
+                frmFrigorificosABM.WindowState = FormWindowState.Maximized;
+            }
         }
+        private void frmFrigorificosABM_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Frigorificos y Consignatarios")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmFrigorificosABM")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+    }
     }

@@ -11,8 +11,8 @@
         public Tarjetas()
         {
             ID_Automatico = true;
-            Tabla = "dbGastos.dbo.vw_EntradasTarjeta";
-            Vista = "dbGastos.dbo.vw_EntradasTarjeta";
+            Tabla = "vw_Tarjetas";
+            Vista = "vw_Tarjetas";
         }
 
         public string Fecha { get; set; }
@@ -41,15 +41,15 @@
                 s = h.Unir(Fecha, sucs);
                 if (aAcreditados == true) { s = h.Unir(s, " Acreditado = 1 "); }
                 if (Tipos.Length > 0) { s = h.Unir(s, $"Id_Tipo IN{Tipos}"); }
-                campos = "Fecha, Suc, Id_Tipo, Nombre, Importe, Acreditado";
+                campos = "Fecha, Suc, Sucursal, Id_Tipo, Nombre, Importe, Acreditado";
                 if (Agrupar == true)
                 {
                     campos = "";
                     if (aFecha == true) { campos = h.Unir(campos, "Fecha", ","); } 
-                    if (aSucs == true) { campos = h.Unir(campos, "Suc", ","); }
+                    if (aSucs == true) { campos = h.Unir(campos, "Suc, Sucursal", ","); }
                     if (aTipo == true) { campos = h.Unir(campos, "Id_Tipo, Nombre", ","); }
                     s = s + " GROUP BY " + campos;
-                    if (OrdenxSuc == false) { OrderBy = campos; } else { if (campos.IndexOf(", Suc") > -1) { OrderBy = "Suc ," + campos.Replace(", Suc", ""); } }
+                    if (OrdenxSuc == false) { OrderBy = campos; } else { if (campos.IndexOf(", Suc") > -1) { OrderBy = "Suc ," + campos.Replace(", Suc, Sucursal", ", Sucursal"); } }
                     campos = h.Unir(campos , " SUM(Importe) as Importe ", ",");
                 }
                 else
