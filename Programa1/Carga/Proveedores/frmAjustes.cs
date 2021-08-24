@@ -36,7 +36,7 @@
 
             //El intercambio de columnas para estas teclas
             grdAjustes.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_Fecha, c_Importe);
-            grdAjustes.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdProv, c_Importe);
+            grdAjustes.AgregarTeclas(Convert.ToInt32(Keys.Multiply), c_IdProv, c_Importe);
 
             Total();
         }

@@ -361,7 +361,7 @@
             }
         }
 
-        private void MenudenciasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PreciosMenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
             foreach (Form f in forms)
@@ -376,24 +376,24 @@
             if (found == false)
             {
                 ToolStripMenuItem t = new ToolStripMenuItem("frmPreciosMen");
-                t.Text = "Precios Men";
+                t.Text = "PreciosMen";
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
-                Form frmPrecios = new frmPreciosMen();
-                frmPrecios.MdiParent = this;
-                frmPrecios.Disposed += FrmPrecios_Disposed;
-                forms.Add(frmPrecios);
-                frmPrecios.Show();
-                frmPrecios.WindowState = FormWindowState.Minimized;
-                frmPrecios.WindowState = FormWindowState.Maximized;
+                Form frmPreciosMen = new Carga.Precios.frmPreciosMen();
+                frmPreciosMen.MdiParent = this;
+                frmPreciosMen.Disposed += frmPreciosMen_Disposed;
+                forms.Add(frmPreciosMen);
+                frmPreciosMen.Show();
+                frmPreciosMen.WindowState = FormWindowState.Minimized;
+                frmPreciosMen.WindowState = FormWindowState.Maximized;
             }
         }
-        private void FrmPrecios_Disposed(object sender, EventArgs e)
+        private void frmPreciosMen_Disposed(object sender, EventArgs e)
         {
             foreach (ToolStripMenuItem t in tstMenu.Items)
             {
-                if (t.Text == "Precios Men")
+                if (t.Text == "PreciosMen")
                 {
                     tstMenu.Items.Remove(t);
                     break;
@@ -408,6 +408,7 @@
                 }
             }
         }
+
 
         private void TrasladosToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -24,7 +24,7 @@ namespace Programa1.DB
         public Single Kilos { get; set; }
 
 
-        public Precios_Proveedores precios_Seberos = new Precios_Proveedores();
+        public Precios_Sebo precios_Seberos = new Precios_Sebo();
 
         public DataTable Datos(string filtro = "")
         {

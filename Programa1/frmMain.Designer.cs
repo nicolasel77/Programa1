@@ -600,7 +600,7 @@
             this.menudenciasToolStripMenuItem.Name = "menudenciasToolStripMenuItem";
             this.menudenciasToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.menudenciasToolStripMenuItem.Text = "&Men/Emb";
-            this.menudenciasToolStripMenuItem.Click += new System.EventHandler(this.MenudenciasToolStripMenuItem_Click);
+            this.menudenciasToolStripMenuItem.Click += new System.EventHandler(this.PreciosMenToolStripMenuItem_Click);
             // 
             // granjaToolStripMenuItem
             // 

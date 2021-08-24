@@ -66,7 +66,7 @@
             this.grdGastos.Cols = 10;
             this.grdGastos.DataMember = "";
             this.grdGastos.DataSource = null;
-            this.grdGastos.EnableEdicion = true;
+            this.grdGastos.EnableEdicion = false;
             this.grdGastos.Encabezado = "";
             this.grdGastos.fColor = System.Drawing.SystemColors.Control;
             this.grdGastos.FixCols = 0;

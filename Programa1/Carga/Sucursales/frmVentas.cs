@@ -43,8 +43,8 @@
 
             //El intercambio de columnas para estas teclas
             grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdProd, c_Kilos);
-            grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSuc, c_Kilos);
-            grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Multiply), c_IdProv, c_Kilos);
+            grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Multiply), c_IdSuc, c_Kilos);
+            grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdProv, c_Kilos);
 
             Totales();
             Herramientas.Herramientas h = new Herramientas.Herramientas();
@@ -384,7 +384,7 @@
                             grdVenta.set_Texto(f + 1, c_Fecha, Venta.Fecha);
                             grdVenta.set_Texto(f + 1, c_IdCamion, Venta.Camion.ID);
                             grdVenta.set_Texto(f + 1, c_IdProv, Venta.Proveedor.Id);
-                            grdVenta.set_Texto(f + 1, c_IdProv + 1, Venta.Sucursal.Nombre);
+                            grdVenta.set_Texto(f + 1, c_IdProv + 1, Venta.Proveedor.Nombre);
                             grdVenta.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.ID);
                             grdVenta.set_Texto(f + 1, c_IdSuc + 1, Venta.Sucursal.Nombre);
 

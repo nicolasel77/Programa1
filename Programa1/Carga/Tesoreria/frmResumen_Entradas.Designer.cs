@@ -33,23 +33,23 @@
             this.lblTipo = new MaterialSkin.Controls.MaterialLabel();
             this.lblSubTipo = new MaterialSkin.Controls.MaterialLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.lblTotal = new MaterialSkin.Controls.MaterialLabel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.lst = new System.Windows.Forms.ListBox();
             this.lstGrupos = new System.Windows.Forms.ListBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.cmdGrupos = new Programa1.Controles.cBoton();
             this.cFechas1 = new Programa1.Controles.cFechas();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdEntradas
@@ -68,7 +68,7 @@
             this.grdEntradas.Cols = 1;
             this.grdEntradas.DataMember = "";
             this.grdEntradas.DataSource = null;
-            this.grdEntradas.EnableEdicion = true;
+            this.grdEntradas.EnableEdicion = false;
             this.grdEntradas.Encabezado = "";
             this.grdEntradas.fColor = System.Drawing.SystemColors.Control;
             this.grdEntradas.FixCols = 0;
@@ -92,12 +92,12 @@
             // 
             this.lblTipo.AutoSize = true;
             this.lblTipo.Depth = 0;
-            this.lblTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblTipo.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblTipo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTipo.Location = new System.Drawing.Point(3, 1);
             this.lblTipo.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTipo.Name = "lblTipo";
-            this.lblTipo.Size = new System.Drawing.Size(37, 18);
+            this.lblTipo.Size = new System.Drawing.Size(39, 19);
             this.lblTipo.TabIndex = 3;
             this.lblTipo.Text = "Tipo";
             // 
@@ -105,12 +105,12 @@
             // 
             this.lblSubTipo.AutoSize = true;
             this.lblSubTipo.Depth = 0;
-            this.lblSubTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblSubTipo.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblSubTipo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblSubTipo.Location = new System.Drawing.Point(3, 19);
             this.lblSubTipo.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblSubTipo.Name = "lblSubTipo";
-            this.lblSubTipo.Size = new System.Drawing.Size(63, 18);
+            this.lblSubTipo.Size = new System.Drawing.Size(64, 19);
             this.lblSubTipo.TabIndex = 3;
             this.lblSubTipo.Text = "SubTipo";
             // 
@@ -136,17 +136,26 @@
             this.splitContainer1.SplitterDistance = 782;
             this.splitContainer1.TabIndex = 4;
             // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel2.Controls.Add(this.lblTotal);
+            this.panel2.Location = new System.Drawing.Point(3, 637);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(253, 24);
+            this.panel2.TabIndex = 19;
+            // 
             // lblTotal
             // 
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotal.AutoSize = true;
             this.lblTotal.Depth = 0;
-            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblTotal.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotal.Location = new System.Drawing.Point(3, 3);
             this.lblTotal.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(41, 18);
+            this.lblTotal.Size = new System.Drawing.Size(44, 19);
             this.lblTotal.TabIndex = 1;
             this.lblTotal.Text = "Total";
             // 
@@ -203,17 +212,6 @@
             this.lstGrupos.Visible = false;
             this.lstGrupos.SelectedIndexChanged += new System.EventHandler(this.lstGrupos_SelectedIndexChanged);
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Location = new System.Drawing.Point(6, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1075, 679);
-            this.panel1.TabIndex = 5;
-            // 
             // cmdGrupos
             // 
             this.cmdGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -239,14 +237,16 @@
             this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
             // 
-            // panel2
+            // panel1
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel2.Controls.Add(this.lblTotal);
-            this.panel2.Location = new System.Drawing.Point(3, 637);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(253, 24);
-            this.panel2.TabIndex = 19;
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Location = new System.Drawing.Point(6, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1075, 679);
+            this.panel1.TabIndex = 5;
             // 
             // frmResumen_Entradas
             // 
@@ -264,13 +264,13 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }

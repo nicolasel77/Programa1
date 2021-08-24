@@ -15,6 +15,7 @@
         private Byte c_Importe;
         private Byte c_Carga;
         #endregion
+
         public frmDetalles_Pagos()
         {
             InitializeComponent();
@@ -27,6 +28,9 @@
             //grdDetalles.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdProd, c_Kilos);
             //grdDetalles.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdProv, c_Kilos);
 
+        }
+        private void frmDetalles_Pagos_Load(object sender, EventArgs e)
+        {
         }
 
         private void cargar(string filtro)
@@ -93,11 +97,15 @@
 
         private void cFecha_Cambio_Seleccion(object sender, EventArgs e)
         {
-            if (chFecha.Checked == true) { Armar_Cadena(); chFecha.Checked = true; }            
+            //Esto es para que cargue los titulos bien
+            grdDetalles.MostrarDatos(Detalles.Datos("Id=-1"));
+            Armar_Cadena(); 
         }
 
         private void cFechaCarga_Cambio_Seleccion(object sender, EventArgs e)
         {
+            //Esto es para que cargue los titulos bien
+            grdDetalles.MostrarDatos(Detalles.Datos("Id=-1"));
             Armar_Cadena();
         }
 
@@ -105,22 +113,20 @@
         {
              Armar_Cadena(); 
         }
-
-        private void chFecha_CheckedChanged(object sender, EventArgs e)
+        private void cmdMostrar_Click(object sender, EventArgs e)
         {
-            grdDetalles.MostrarDatos(null,true,false);
             Armar_Cadena();
         }
 
-        private void cmdMostrar_Click(object sender, EventArgs e)
+        private void chFecha_CheckedChanged(object sender, EventArgs e)
         {
             Armar_Cadena();
         }
 
         private void chFcarga_CheckedChanged_1(object sender, EventArgs e)
         {
-            grdDetalles.MostrarDatos(null, true, false);
             Armar_Cadena();
         }
+
     }
 }

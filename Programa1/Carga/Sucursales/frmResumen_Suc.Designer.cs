@@ -542,7 +542,7 @@
             this.grdVentas.Cols = 1;
             this.grdVentas.DataMember = "";
             this.grdVentas.DataSource = null;
-            this.grdVentas.EnableEdicion = true;
+            this.grdVentas.EnableEdicion = false;
             this.grdVentas.Encabezado = "";
             this.grdVentas.fColor = System.Drawing.SystemColors.Control;
             this.grdVentas.FixCols = 0;
@@ -766,7 +766,7 @@
             this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
             this.cmdRecargar.TabIndex = 6;
             this.cmdRecargar.Texto = "R";
-            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);            
+            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
             // 
             // grdEstadistica
             // 
@@ -842,14 +842,14 @@
             this.sucursalesToolStripMenuItem.Checked = true;
             this.sucursalesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.sucursalesToolStripMenuItem.Name = "sucursalesToolStripMenuItem";
-            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.sucursalesToolStripMenuItem.Text = "Sucursales";
             this.sucursalesToolStripMenuItem.Click += new System.EventHandler(this.sucursalesToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 

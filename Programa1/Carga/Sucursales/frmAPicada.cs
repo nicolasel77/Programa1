@@ -51,7 +51,7 @@
 
             //El intercambio de columnas para estas teclas
             grdAPicada.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdProd_A, c_Kilos_A);
-            grdAPicada.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSuc, c_Kilos_A);
+            grdAPicada.AgregarTeclas(Convert.ToInt32(Keys.Multiply), c_IdSuc, c_Kilos_A);
 
             Totales();
         }
@@ -421,7 +421,7 @@
             else
             {
                 APicada.ID = 0;
-                APicada.Fecha = Convert.ToDateTime(grdAPicada.get_Texto(Fila,c_Fecha));
+                APicada.Fecha = Convert.ToDateTime(grdAPicada.get_Texto(Fila, c_Fecha));
                 APicada.Sucursal.ID = Convert.ToInt32(grdAPicada.get_Texto(Fila, c_IdSuc));
                 APicada.Producto_A.ID = Convert.ToInt32(grdAPicada.get_Texto(Fila, c_IdProd_A));
                 APicada.Costo_A = Convert.ToSingle(grdAPicada.get_Texto(Fila, c_Costo_A));

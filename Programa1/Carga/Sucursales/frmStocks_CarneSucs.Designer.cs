@@ -79,7 +79,7 @@ namespace Programa1.Carga.Sucursales
             this.grd.Cols = 10;
             this.grd.DataMember = "";
             this.grd.DataSource = null;
-            this.grd.EnableEdicion = true;
+            this.grd.EnableEdicion = false;
             this.grd.Encabezado = "";
             this.grd.fColor = System.Drawing.SystemColors.Control;
             this.grd.FixCols = 0;
@@ -124,7 +124,7 @@ namespace Programa1.Carga.Sucursales
             this.cSucursales1.Filtro_In = "";
             this.cSucursales1.Location = new System.Drawing.Point(0, 0);
             this.cSucursales1.Mostrar_Botones = true;
-            this.cSucursales1.Mostrar_Tipo = false;
+            this.cSucursales1.Mostrar_Tipo = true;
             this.cSucursales1.Name = "cSucursales1";
             this.cSucursales1.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucursales1.Size = new System.Drawing.Size(295, 434);

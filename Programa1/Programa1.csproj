@@ -570,6 +570,12 @@
     <Compile Include="Controles\cFechas.Designer.cs">
       <DependentUpon>cFechas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controles\cHerramientas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\cHerramientas.Designer.cs">
+      <DependentUpon>cHerramientas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controles\cProductos.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -636,6 +642,7 @@
     <Compile Include="DB\Proveedores\Ajustes.cs" />
     <Compile Include="DB\Proveedores\CCtes_Proveedores.cs" />
     <Compile Include="DB\Proveedores\Estados_Compra.cs" />
+    <Compile Include="DB\Sebero\Precios_Sebo.cs" />
     <Compile Include="DB\Sucursales\Cambio_Precios_Stock.cs" />
     <Compile Include="DB\Sucursales\Estadisticas_Sucursales.cs" />
     <Compile Include="DB\Sucursales\Promedios.cs" />
@@ -956,6 +963,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cFechas.resx">
       <DependentUpon>cFechas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\cHerramientas.resx">
+      <DependentUpon>cHerramientas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\cProductos.resx">
       <DependentUpon>cProductos.cs</DependentUpon>
