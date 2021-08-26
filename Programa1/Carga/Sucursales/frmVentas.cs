@@ -478,6 +478,8 @@
             grdVenta.set_Texto(Fila + 1, c_TotalVenta, 0);
             grdVenta.set_Texto(Fila + 1, c_CostoCompra, Venta.CostoCompra);
             grdVenta.set_Texto(Fila + 1, c_TotalCompra, 0);
+            grdVenta.ActivarCelda(Fila + 1, grdVenta.Col);
+
         }
 
         private void GrdVenta_CambioFila(short Fila)
