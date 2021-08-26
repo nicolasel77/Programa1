@@ -6,15 +6,15 @@
 
     public partial class frmGastos_Sucursales : Form
     {
-        private Gastos_Sucursales Gastos_Sucursales = new Gastos_Sucursales();
+        private readonly Gastos_Sucursales Gastos_Sucursales = new Gastos_Sucursales();
 
         #region " Columnas "
-        private Byte c_Id;
-        private Byte c_Fecha;
-        private Byte c_IdSuc;
-        private Byte c_IdTipo;
-        private Byte c_Descripcion;
-        private Byte c_Importe;
+        private readonly Byte c_Id;
+        private readonly Byte c_Fecha;
+        private readonly Byte c_IdSuc;
+        private readonly Byte c_IdTipo;
+        private readonly Byte c_Descripcion;
+        private readonly Byte c_Importe;
 
         #endregion
         public frmGastos_Sucursales()
@@ -136,7 +136,7 @@
             grdGastos.set_ColW(c_Id, 0);
             grdGastos.set_ColW(c_Fecha, 60);
             grdGastos.set_ColW(c_IdSuc, 30);
-            grdGastos.set_ColW(c_IdSuc + 1, 100);
+            grdGastos.set_ColW(c_IdSuc + 1, 250);
             grdGastos.set_ColW(c_IdTipo, 30);
             grdGastos.set_ColW(c_Descripcion, 350);
             grdGastos.set_ColW(c_Importe, 60);
@@ -287,7 +287,7 @@
 
                         Totales();
                         break;
-                } 
+                }
             }
             else
             {
@@ -352,5 +352,24 @@
             Mensaje($"Copiado: {s}");
         }
 
+        private void grdGastos_SeleccionCambio(int FilaInicio, int FilaFin, int ColInicio, int ColFin)
+        {
+            if (FilaInicio == FilaFin)
+            {
+                Totales();
+            }
+            else
+            {
+                float t = 0;
+                for (int i = FilaInicio; i <= FilaFin; i++)
+                {
+                    t += Convert.ToSingle(grdGastos.get_Texto(i, c_Importe));
+                }
+
+                int c = FilaFin - FilaInicio + 1;
+                lblCant.Text = $"Registros: {c:N0}";
+                lblTotal.Text = $"Total: {t:C2}";
+            }
+        }
     }
 }

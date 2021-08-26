@@ -335,5 +335,26 @@
                 //cmdMostrar.PerformClick();
             }
         }
+
+        private void grdCantidad_Clientes_SeleccionCambio(int FilaInicio, int FilaFin, int ColInicio, int ColFin)
+        {
+            if (FilaInicio == FilaFin)
+            {
+                Totales();
+            }
+            else
+            {
+                float t = 0;
+                for (int i = FilaInicio; i <= FilaFin; i++)
+                {
+                    t += Convert.ToSingle(grdCantidad_Clientes.get_Texto(i, c_Cantidad));
+                    
+                }
+
+                int c = FilaFin - FilaInicio + 1;
+                lblCant.Text = $"Registros: {c:N0}";                
+                lblTotal.Text = $"Total: {t:C2}";
+            }
+        }
     }
 }

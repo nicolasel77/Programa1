@@ -26,8 +26,8 @@
             grdRendimiento_Compras.set_ColW(1, 150);
             for (int i = 2; i < grdRendimiento_Compras.Cols; i++)
             {
-                grdRendimiento_Compras.set_ColW(i, 60);
-                grdRendimiento_Compras.Columnas[i].Format = "N0";
+                grdRendimiento_Compras.set_ColW(i, 80);
+                grdRendimiento_Compras.Columnas[i].Format = "N1";
             }
 
             cellStyle = grdRendimiento_Compras.Styles.Add("Rojo");

@@ -71,9 +71,10 @@
             this.lblMensaje,
             this.lblCant,
             this.lblTotal});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 687);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 793);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1362, 28);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1589, 32);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -81,13 +82,13 @@
             // 
             this.lblMensaje.ForeColor = System.Drawing.Color.Red;
             this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(0, 23);
+            this.lblMensaje.Size = new System.Drawing.Size(0, 27);
             // 
             // lblCant
             // 
             this.lblCant.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCant.Name = "lblCant";
-            this.lblCant.Size = new System.Drawing.Size(60, 23);
+            this.lblCant.Size = new System.Drawing.Size(60, 27);
             this.lblCant.Text = "Cantidad";
             this.lblCant.Click += new System.EventHandler(this.LblCant_Click);
             // 
@@ -95,7 +96,7 @@
             // 
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(49, 23);
+            this.lblTotal.Size = new System.Drawing.Size(49, 27);
             this.lblTotal.Text = "Totales";
             this.lblTotal.Click += new System.EventHandler(this.LblCant_Click);
             // 
@@ -115,9 +116,9 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new System.Drawing.Size(1362, 687);
-            this.splitContainer1.SplitterDistance = 831;
-            this.splitContainer1.SplitterWidth = 8;
+            this.splitContainer1.Size = new System.Drawing.Size(1589, 793);
+            this.splitContainer1.SplitterDistance = 969;
+            this.splitContainer1.SplitterWidth = 9;
             this.splitContainer1.TabIndex = 1;
             // 
             // grdReintegros
@@ -144,7 +145,7 @@
             this.grdReintegros.FuenteEncabezado = null;
             this.grdReintegros.FuentePieDePagina = null;
             this.grdReintegros.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdReintegros.Location = new System.Drawing.Point(3, 6);
+            this.grdReintegros.Location = new System.Drawing.Point(3, 7);
             this.grdReintegros.MenuActivado = false;
             this.grdReintegros.Name = "grdReintegros";
             this.grdReintegros.PieDePagina = "\t\tPage {0} of {1}";
@@ -152,11 +153,12 @@
             this.grdReintegros.Redraw = true;
             this.grdReintegros.Row = 0;
             this.grdReintegros.Rows = 50;
-            this.grdReintegros.Size = new System.Drawing.Size(825, 678);
+            this.grdReintegros.Size = new System.Drawing.Size(962, 782);
             this.grdReintegros.TabIndex = 0;
             this.grdReintegros.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdReintegros_Editado);
             this.grdReintegros.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdReintegros_CambioFila);
             this.grdReintegros.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdReintegros_KeyUp);
+            this.grdReintegros.SeleccionCambio += new Grilla2.SpeedGrilla.SeleccionCambioEventHandler(this.grdReintegros_SeleccionCambio);
             // 
             // splitContainer3
             // 
@@ -172,8 +174,9 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.panel1);
             this.splitContainer3.Panel2.Controls.Add(this.cFecha);
-            this.splitContainer3.Size = new System.Drawing.Size(523, 687);
-            this.splitContainer3.SplitterDistance = 296;
+            this.splitContainer3.Size = new System.Drawing.Size(611, 793);
+            this.splitContainer3.SplitterDistance = 345;
+            this.splitContainer3.SplitterWidth = 5;
             this.splitContainer3.TabIndex = 0;
             // 
             // cSucs
@@ -184,9 +187,11 @@
             this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(3, 3);
+            this.cSucs.Mostrar_Botones = true;
             this.cSucs.Mostrar_Tipo = true;
             this.cSucs.Name = "cSucs";
-            this.cSucs.Size = new System.Drawing.Size(290, 680);
+            this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.cSucs.Size = new System.Drawing.Size(338, 785);
             this.cSucs.TabIndex = 2;
             this.cSucs.Titulo = "Sucursales";
             this.cSucs.Valor_Actual = -1;
@@ -200,7 +205,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(217, 298);
+            this.panel1.Size = new System.Drawing.Size(254, 344);
             this.panel1.TabIndex = 5;
             // 
             // panel2
@@ -211,7 +216,7 @@
             this.panel2.Controls.Add(this.lstTipo);
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(211, 292);
+            this.panel2.Size = new System.Drawing.Size(247, 337);
             this.panel2.TabIndex = 5;
             // 
             // lstTipo
@@ -225,7 +230,7 @@
             this.lstTipo.Location = new System.Drawing.Point(0, 0);
             this.lstTipo.Name = "lstTipo";
             this.lstTipo.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstTipo.Size = new System.Drawing.Size(211, 292);
+            this.lstTipo.Size = new System.Drawing.Size(247, 337);
             this.lstTipo.TabIndex = 4;
             // 
             // cFecha
@@ -234,11 +239,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(3, 307);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Location = new System.Drawing.Point(3, 354);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 212);
             this.cFecha.Mostrar = 0;
             this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(217, 376);
+            this.cFecha.Size = new System.Drawing.Size(254, 434);
             this.cFecha.TabIndex = 3;
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
@@ -254,18 +259,18 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.Controls.Add(this.paMostrar);
             this.panel3.Controls.Add(this.paLimpiar);
-            this.panel3.Location = new System.Drawing.Point(770, 688);
+            this.panel3.Location = new System.Drawing.Point(898, 794);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(592, 27);
+            this.panel3.Size = new System.Drawing.Size(691, 31);
             this.panel3.TabIndex = 8;
             // 
             // paMostrar
             // 
             this.paMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.paMostrar.Controls.Add(this.cmdMostrar);
-            this.paMostrar.Location = new System.Drawing.Point(412, 2);
+            this.paMostrar.Location = new System.Drawing.Point(481, 2);
             this.paMostrar.Name = "paMostrar";
-            this.paMostrar.Size = new System.Drawing.Size(177, 25);
+            this.paMostrar.Size = new System.Drawing.Size(206, 29);
             this.paMostrar.TabIndex = 5;
             // 
             // cmdMostrar
@@ -275,11 +280,11 @@
             this.cmdMostrar.Depth = 0;
             this.cmdMostrar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmdMostrar.Location = new System.Drawing.Point(0, 0);
-            this.cmdMostrar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdMostrar.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.cmdMostrar.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdMostrar.Name = "cmdMostrar";
             this.cmdMostrar.Primary = false;
-            this.cmdMostrar.Size = new System.Drawing.Size(177, 25);
+            this.cmdMostrar.Size = new System.Drawing.Size(206, 29);
             this.cmdMostrar.TabIndex = 0;
             this.cmdMostrar.Text = "Mostrar";
             this.cmdMostrar.UseVisualStyleBackColor = true;
@@ -289,9 +294,9 @@
             // 
             this.paLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.paLimpiar.Controls.Add(this.cmdLimpiar);
-            this.paLimpiar.Location = new System.Drawing.Point(228, 2);
+            this.paLimpiar.Location = new System.Drawing.Point(266, 2);
             this.paLimpiar.Name = "paLimpiar";
-            this.paLimpiar.Size = new System.Drawing.Size(177, 25);
+            this.paLimpiar.Size = new System.Drawing.Size(206, 29);
             this.paLimpiar.TabIndex = 5;
             // 
             // cmdLimpiar
@@ -301,11 +306,11 @@
             this.cmdLimpiar.Depth = 0;
             this.cmdLimpiar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmdLimpiar.Location = new System.Drawing.Point(0, 0);
-            this.cmdLimpiar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdLimpiar.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.cmdLimpiar.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdLimpiar.Name = "cmdLimpiar";
             this.cmdLimpiar.Primary = false;
-            this.cmdLimpiar.Size = new System.Drawing.Size(177, 25);
+            this.cmdLimpiar.Size = new System.Drawing.Size(206, 29);
             this.cmdLimpiar.TabIndex = 0;
             this.cmdLimpiar.Text = "Limpiar";
             this.cmdLimpiar.UseVisualStyleBackColor = true;
@@ -313,12 +318,13 @@
             // 
             // frmReintegros
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1362, 715);
+            this.ClientSize = new System.Drawing.Size(1589, 825);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
             this.Name = "frmReintegros";
             this.Text = "Reintegros";

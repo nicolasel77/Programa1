@@ -8,18 +8,18 @@
 
     public partial class frmStock : Form
     {
-        private Stock stock;
+        private readonly Stock stock;
 
 
         #region " Columnas "
-        private Byte c_Id;
-        private Byte c_Fecha;
-        private Byte c_IdSuc;
-        private Byte c_IdProd;
-        private Byte c_Descripcion;
-        private Byte c_Costo;
-        private Byte c_Kilos;
-        private Byte c_Total;
+        private readonly Byte c_Id;
+        private readonly Byte c_Fecha;
+        private readonly Byte c_IdSuc;
+        private readonly Byte c_IdProd;
+        private readonly Byte c_Descripcion;
+        private readonly Byte c_Costo;
+        private readonly Byte c_Kilos;
+        private readonly Byte c_Total;
         #endregion
         public frmStock()
         {
@@ -135,9 +135,9 @@
             grdStock.set_ColW(c_Id, 0);
             grdStock.set_ColW(c_Fecha, 60);
             grdStock.set_ColW(c_IdSuc, 30);
-            grdStock.set_ColW(c_IdSuc + 1, 100);
+            grdStock.set_ColW(c_IdSuc + 1, 200);
             grdStock.set_ColW(c_IdProd, 30);
-            grdStock.set_ColW(c_Descripcion, 150);
+            grdStock.set_ColW(c_Descripcion, 250);
             grdStock.set_ColW(c_Costo, 60);
             grdStock.set_ColW(c_Kilos, 60);
             grdStock.set_ColW(c_Total, 80);
@@ -331,7 +331,7 @@
 
                         Totales();
                         break;
-                } 
+                }
             }
             else
             {
@@ -353,7 +353,7 @@
             else
             {
                 stock.ID = 0;
-                stock.Fecha = Convert.ToDateTime(grdStock.get_Texto(Fila,c_Fecha));
+                stock.Fecha = Convert.ToDateTime(grdStock.get_Texto(Fila, c_Fecha));
                 stock.Producto.ID = Convert.ToInt32(grdStock.get_Texto(Fila, c_IdProd));
                 stock.Descripcion = grdStock.get_Texto(Fila, c_Descripcion).ToString();
                 stock.Sucursal.ID = Convert.ToInt32(grdStock.get_Texto(Fila, c_IdSuc));
@@ -364,7 +364,7 @@
                 stock.precios.Sucursal = stock.Sucursal;
                 stock.precios.Producto = stock.Producto;
             }
-           
+
         }
 
         private void GrdStock_KeyPress(object sender, short e)
@@ -401,14 +401,14 @@
                     {
                         if (stock.Fecha_Cerrada(stock.Fecha) == false)
                         {
-                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes) 
+                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                             {
                                 stock.ID = Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0));
                                 stock.Borrar();
                                 grdStock.BorrarFila(grdStock.Row);
                                 GrdStock_CambioFila(Convert.ToByte(grdStock.Row));
                                 Totales();
-                            } 
+                            }
                         }
                         else
                         {
@@ -452,6 +452,28 @@
                 cm.Ids = n;
                 cm.ShowDialog();
                 cmdMostrar.PerformClick();
+            }
+        }
+
+        private void grdStock_SeleccionCambio(int FilaInicio, int FilaFin, int ColInicio, int ColFin)
+        {
+            if (FilaInicio == FilaFin)
+            {
+                Totales();
+            }
+            else
+            {
+                float k = 0, t = 0;
+                for (int i = FilaInicio; i <= FilaFin; i++)
+                {
+                    k += Convert.ToSingle(grdStock.get_Texto(i, c_Kilos));
+                    t += Convert.ToSingle(grdStock.get_Texto(i, c_Total));
+                }
+
+                int c = FilaFin - FilaInicio + 1;
+                lblCant.Text = $"Registros: {c:N0}";
+                lblKilos.Text = $"Kilos: {k:N2}";
+                lblTotal.Text = $"Total: {t:C2}";
             }
         }
     }

@@ -26,15 +26,21 @@
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            this.Text = usuario.Nombre;
+            Text = usuario.Nombre;
+            foreach (ToolStripMenuItem n in mnuPrincipal.Items)
+            {
+                if (n.Tag != null)
+                {
+                    if (n.Tag.ToString().IndexOf(usuario.Tipo.ToString().ToLower()) > -1)
+                    {
+                        n.Visible = true;
+                    } 
+                }
+            }
             switch (usuario.Nombre)
             {
                 case "Nicolas":
-                    //resumenToolStripMenuItem.PerformClick();
-                    //ttResumenProveedores.PerformClick();
-                    //capitalDeTrabajoToolStripMenuItem.PerformClick();
-                    //cajaDiariaToolStripMenuItem.PerformClick();
-                    //vencimientosToolStripMenuItem.PerformClick();
+                    
                     break;
                 case "Ale":
                     cajaDiariaToolStripMenuItem.PerformClick();
@@ -76,7 +82,7 @@
 
                 this.tstMenu.Items.Add(t);
 
-                Form frmResumen_Suc = new Programa1.Carga.frmResumen_Suc();
+                Form frmResumen_Suc = new Programa1.Carga.frmResumen_Suc(usuario);                
                 frmResumen_Suc.MdiParent = this;
                 frmResumen_Suc.Disposed += FrmResumen_Suc_Dispose;
                 forms.Add(frmResumen_Suc);

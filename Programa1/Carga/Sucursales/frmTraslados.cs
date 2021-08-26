@@ -149,7 +149,7 @@ namespace Programa1.Carga
             grdTraslados.set_ColW(c_IdSucE, 35);
             grdTraslados.set_ColW(c_IdSucE + 1, 100);
             grdTraslados.set_ColW(c_IdProd, 30);
-            grdTraslados.set_ColW(c_Descripcion, 100);
+            grdTraslados.set_ColW(c_Descripcion, 200);
             grdTraslados.set_ColW(c_CostoS, 60);
             grdTraslados.set_ColW(c_CostoE, 60);
             grdTraslados.set_ColW(c_Kilos, 60);
@@ -509,6 +509,29 @@ namespace Programa1.Carga
             }
         }
 
+        private void grdTraslados_SeleccionCambio(int FilaInicio, int FilaFin, int ColInicio, int ColFin)
+        {
+            if (FilaInicio == FilaFin)
+            {
+                Totales();
+            }
+            else
+            {
+                float k = 0, tEntrada = 0, tSalida = 0;                
+                for (int i = FilaInicio; i <= FilaFin; i++)
+                {
+                    k += Convert.ToSingle(grdTraslados.get_Texto(i, c_Kilos));
+                    tSalida += Convert.ToSingle(grdTraslados.get_Texto(i, c_TotalS));
+                    tEntrada += Convert.ToSingle(grdTraslados.get_Texto(i, c_TotalE));
+                }
 
+                int c = FilaFin - FilaInicio + 1;
+                lblCant.Text = $"Registros: {c:N0}";
+                lblKilos.Text = $"Kilos: {k:N2}";
+                lblTotalS.Text = $"Total Salida: {tSalida:C2}";
+                lblTotalE.Text = $"Total Entrada: {tEntrada:C2}";
+                lblDiferencia.Text = $"Diferencia: {(tEntrada - tSalida):C2}";
+            }
+        }
     }
 }

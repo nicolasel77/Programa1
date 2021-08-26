@@ -8,8 +8,9 @@
         [STAThread]
         static public void Main()
         {
-            Usuarios usuario = new Usuarios();            
+            Usuarios usuario = new Usuarios();
             usuario.Nombre = System.Environment.UserName;
+            //usuario.Nombre = "Flor";
 
             frmMain fr = new frmMain();
             fr.usuario = usuario;

@@ -136,6 +136,7 @@
             this.grdCantidad_Clientes.fColor = System.Drawing.SystemColors.Control;
             this.grdCantidad_Clientes.FixCols = 0;
             this.grdCantidad_Clientes.FixRows = 0;
+            this.grdCantidad_Clientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grdCantidad_Clientes.FuenteEncabezado = null;
             this.grdCantidad_Clientes.FuentePieDePagina = null;
             this.grdCantidad_Clientes.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -153,6 +154,7 @@
             this.grdCantidad_Clientes.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdCantidad_Clientes_CambioFila);
             this.grdCantidad_Clientes.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdCantidad_Clientes_KeyUp);
             this.grdCantidad_Clientes.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.GrdCantidad_Clientes_KeyPress);
+            this.grdCantidad_Clientes.SeleccionCambio += new Grilla2.SpeedGrilla.SeleccionCambioEventHandler(this.grdCantidad_Clientes_SeleccionCambio);
             // 
             // splitContainer3
             // 
@@ -179,8 +181,10 @@
             this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(3, 3);
+            this.cSucs.Mostrar_Botones = true;
             this.cSucs.Mostrar_Tipo = false;
             this.cSucs.Name = "cSucs";
+            this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucs.Size = new System.Drawing.Size(250, 681);
             this.cSucs.TabIndex = 2;
             this.cSucs.Titulo = "Sucursales";

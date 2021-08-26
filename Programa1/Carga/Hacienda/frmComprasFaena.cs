@@ -230,6 +230,13 @@
             lblCostoFaena.Text = $"Costo Faena: {tCompra / kFaena:C3}";
             lblCostoFinal.Text = $"Costo Carne: {(tCompra / kFaena) - (tRecupero / kFaena):C3}";
 
+            hc.nBoletas.Actualizar("Costo", tCompra / kCompra);
+            hc.nBoletas.Actualizar("Costo_Faena", tCompra / kFaena);
+            hc.nBoletas.Actualizar("Costo_Final", (tCompra / kFaena) - (tRecupero / kFaena));
+            hc.nBoletas.Actualizar("Kilos_Compra", kCompra);
+            hc.nBoletas.Actualizar("Kilos_Faena", kFaena);
+
+
             if (kCompra != 0)
             {
                 lblRendimiento.Text = $"Rendimiento: {(kFaena / kCompra * 100):N2}";
@@ -384,6 +391,10 @@
 
             hc.compra.Calcular_Saldo();
 
+            if (grdFaena.Rows > 2)
+            {
+                Totales();                
+            }
             MessageBox.Show("Falta el calculo de Pago en Mano");
         }
 

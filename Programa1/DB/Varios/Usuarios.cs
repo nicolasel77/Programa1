@@ -95,6 +95,6 @@ namespace Programa1.DB.Varios
         public string Clave { get; set; }
         public e_Permiso Permiso { get; set; }
         public e_TipoUsuario Tipo { get; set; }
-
+        public char Grupo { get; internal set; }
     }
 }

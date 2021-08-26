@@ -151,7 +151,7 @@
             grdVenta.set_ColW(c_IdSuc, 35);
             grdVenta.set_ColW(c_IdSuc + 1, 100);
             grdVenta.set_ColW(c_IdProd, 30);
-            grdVenta.set_ColW(c_Descripcion, 120);
+            grdVenta.set_ColW(c_Descripcion, 160);
             grdVenta.set_ColW(c_CostoVenta, 60);
             grdVenta.set_ColW(c_CostoCompra, 60);
             grdVenta.set_ColW(c_Kilos, 60);
@@ -175,15 +175,15 @@
 
         private void Totales()
         {
-            double tSalida = grdVenta.SumarCol(c_TotalVenta, false);
-            double tEntrada = grdVenta.SumarCol(c_TotalCompra, false);
+            double tVenta = grdVenta.SumarCol(c_TotalVenta, false);
+            double tCompra = grdVenta.SumarCol(c_TotalCompra, false);
             double k = grdVenta.SumarCol(c_Kilos, false);
             int c = grdVenta.Rows - 2;
             lblCant.Text = $"Registros: {c:N0}";
             lblKilos.Text = $"Kilos: {k:N2}";
-            lblTotalS.Text = $"Total Venta: {tSalida:C2}";
-            lblTotalE.Text = $"Total Compra: {tEntrada:C2}";
-            lblDiferencia.Text = $"Diferencia: {(tSalida - tEntrada):C2}";
+            lblTotalS.Text = $"Total Venta: {tVenta:C2}";
+            lblTotalE.Text = $"Total Compra: {tCompra:C2}";
+            lblDiferencia.Text = $"Diferencia: {(tVenta - tCompra):C2}";
 
         }
 
@@ -665,6 +665,31 @@
                     Listas.Lista.ID = h.Codigo_Seleccionado(cmbListas.Text);
                     Listas.Producto = Venta.Producto;
                 }
+            }
+        }
+
+        private void grdVenta_SeleccionCambio(int FilaInicio, int FilaFin, int ColInicio, int ColFin)
+        {
+            if (FilaInicio == FilaFin)
+            {
+                Totales();
+            }
+            else
+            {
+                float k = 0, tCompra = 0, tVenta = 0;
+                for (int i = FilaInicio; i <= FilaFin; i++)
+                {
+                    k += Convert.ToSingle(grdVenta.get_Texto(i, c_Kilos));
+                    tVenta += Convert.ToSingle(grdVenta.get_Texto(i, c_TotalVenta));
+                    tCompra += Convert.ToSingle(grdVenta.get_Texto(i, c_TotalCompra));
+                }
+
+                int c = FilaFin - FilaInicio + 1;
+                lblCant.Text = $"Registros: {c:N0}";
+                lblKilos.Text = $"Kilos: {k:N2}";
+                lblTotalS.Text = $"Total Venta: {tVenta:C2}";
+                lblTotalE.Text = $"Total Compra: {tCompra:C2}";
+                lblDiferencia.Text = $"Diferencia: {(tVenta - tCompra):C2}";
             }
         }
     }

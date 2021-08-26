@@ -77,7 +77,7 @@ namespace Programa1.Carga.Tesoreria
         public frmCaja_Diaria(Usuarios user)
         {
             usuario = user;
-            cGastos.Usuario = user;
+            cGastos.Usuario.ID = user.ID;
             InitializeComponent();
         }
 
@@ -202,7 +202,7 @@ namespace Programa1.Carga.Tesoreria
                     cGastos.Descripcion = "Transferencia";
                 }
 
-
+                cGastos.Usuario = usuario;
                 cGastos.Agregar();
 
                 cEntradas.ID = 0;
@@ -651,232 +651,245 @@ namespace Programa1.Carga.Tesoreria
         #region " Grilla Salidas "
         private void grdSalidas_Editado(short f, short c, object a)
         {
-            if (mntFecha.SelectionStart.Date >= CD.Fecha | usuario.Permiso == Usuarios.e_Permiso.Administrador)
+            if (cGastos.Usuario.ID == 0 | usuario.ID == cGastos.Usuario.ID | usuario.Permiso == Usuarios.e_Permiso.Administrador)
             {
-                cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(f, s_Id));
-                cGastos.Fecha = mntFecha.SelectionStart.Date;
-                if (cGastos.Fecha_Cerrada() == false)
+                if (mntFecha.SelectionStart.Date >= CD.Fecha | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                 {
-                    switch (c)
+                    cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(f, s_Id));
+                    cGastos.Fecha = mntFecha.SelectionStart.Date;
+                    if (cGastos.Fecha_Cerrada() == false)
                     {
-                        case s_Caja:
-                            cGastos.caja.ID = Convert.ToInt32(a);
-                            if (cGastos.caja.Existe() == true)
-                            {
-                                grdSalidas.set_Texto(f, c, a);
-                                grdSalidas.set_Texto(f, c + 1, cGastos.caja.Nombre);
-
-                                if (cGastos.caja.EsARendir == true) { cGastos.caja.Seleccionar_Nombre(); }
-
-                                if(cGastos.ID != 0) { cGastos.Actualizar("ID_Caja", cGastos.caja.ID); Cargar_Cajas(); }
-
-                                grdSalidas.ActivarCelda(f, e_Tipo);
-
-                            }
-                            break;
-                        case s_Tipo:
-                            cGastos.TG.Id_Tipo = Convert.ToInt32(a);
-                            if (cGastos.TG.Existe() == true)
-                            {
-                                grdSalidas.set_Texto(f, c, a);
-                                grdSalidas.set_Texto(f, c + 1, cGastos.TG.Nombre);
-
-                                if(cGastos.ID == 0)
+                        switch (c)
+                        {
+                            case s_Caja:
+                                cGastos.caja.ID = Convert.ToInt32(a);
+                                if (cGastos.caja.Existe() == true)
                                 {
-                                    grdSalidas.set_Texto(f, s_SubTipo, 0);
-                                    grdSalidas.set_Texto(f, s_SubTipo + 1, "");
-                                    grdSalidas.set_Texto(f, s_IDDetalle, 0);
-                                    grdSalidas.set_Texto(f, s_IDDetalle + 1, "");
+                                    grdSalidas.set_Texto(f, c, a);
+                                    grdSalidas.set_Texto(f, c + 1, cGastos.caja.Nombre);
+
+                                    if (cGastos.caja.EsARendir == true) { cGastos.caja.Seleccionar_Nombre(); }
+
+                                    if (cGastos.ID != 0) { cGastos.Actualizar("ID_Caja", cGastos.caja.ID); Cargar_Cajas(); }
+
+                                    grdSalidas.ActivarCelda(f, e_Tipo);
+
                                 }
-
-                                grdSalidas.ActivarCelda(f, s_SubTipo);
-
-                            }
-                            break;
-
-                        case s_SubTipo: //SubTipo - Buscar Tabla
-                            cGastos.TG.Id_Tipo = Convert.ToInt32(grdSalidas.get_Texto(f, s_Tipo));
-
-                            if (cGastos.TG.Existe() == true)
-                            {
-                                cGastos.Id_SubTipoGastos = Convert.ToInt32(a);
-                                string s = cGastos.Nombre_SubTipo();
-
-                                if (s.Length > 0)
+                                break;
+                            case s_Tipo:
+                                cGastos.TG.Id_Tipo = Convert.ToInt32(a);
+                                if (cGastos.TG.Existe() == true)
                                 {
-                                    cGastos.Desc_SubTipo = s;
-                                    grdSalidas.set_Texto(f, s_SubTipo, a);
-                                    grdSalidas.set_Texto(f, s_SubTipo + 1, s);
+                                    grdSalidas.set_Texto(f, c, a);
+                                    grdSalidas.set_Texto(f, c + 1, cGastos.TG.Nombre);
 
-                                    if (cGastos.TG.EsHacienda == true)
+                                    if (cGastos.ID == 0)
                                     {
-                                        Seleccionar_Pago_Hacienda();
+                                        grdSalidas.set_Texto(f, s_SubTipo, 0);
+                                        grdSalidas.set_Texto(f, s_SubTipo + 1, "");
+                                        grdSalidas.set_Texto(f, s_IDDetalle, 0);
+                                        grdSalidas.set_Texto(f, s_IDDetalle + 1, "");
                                     }
                                     else
                                     {
-                                        if (cGastos.TG.EsAgregados == true)
-                                        {
-                                            Seleccionar_Pago_Agregados();
-                                        }
-                                        else
-                                        {
-                                            grdSalidas.ActivarCelda(f, s_IDDetalle);
-                                            if (cGastos.ID != 0) { cGastos.Actualizar(); }
-                                            // ESTO LO TILDO PARA VER MAS ADELANTE SI LO QUIEREN ASÍ O SOLO CON F1
-                                            //if (cGastos.TG.EsPagoProveedor == true)
-                                            //{
-                                            //    Seleccionar_Pago_Proveedor();
-                                            //}
-                                            //else
-                                            //{
-                                            //    grdSalidas.ActivarCelda(f, s_IDDetalle);
-                                            //    if (cGastos.ID != 0) { cGastos.Actualizar(); }
-                                            //}
-                                        }
+                                        cGastos.Actualizar("ID_TipoGastos", a);
                                     }
+
+                                    grdSalidas.ActivarCelda(f, s_SubTipo);
 
                                 }
-                            }
-                            break;
-                        case s_SubTipo + 1: // Desc_SubTipo
-                            if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
-                            {
-                                cGastos.Desc_SubTipo = a.ToString();
-                                grdSalidas.set_Texto(f, s_SubTipo + 1, a);
-                                grdSalidas.ActivarCelda(f, s_IDDetalle);
+                                break;
 
-                                if (cGastos.ID != 0) { cGastos.Actualizar("Desc_SubTipo", cGastos.Desc_SubTipo); }
-                            }
-                            break;
-                        case s_IDDetalle:
-                            dg.Id_Tipo = cGastos.TG.Id_Tipo;
-                            if (cGastos.TG.EsHacienda == false && cGastos.TG.EsAgregados == false)
-                            {
-                                dg.ID_Detalle = Convert.ToInt32(a);
+                            case s_SubTipo: //SubTipo - Buscar Tabla
+                                cGastos.TG.Id_Tipo = Convert.ToInt32(grdSalidas.get_Texto(f, s_Tipo));
 
-                                if (dg.Existe() == true)
+                                if (cGastos.TG.Existe() == true)
                                 {
-                                    cGastos.Id_DetalleGastos = Convert.ToInt32(a);
+                                    cGastos.Id_SubTipoGastos = Convert.ToInt32(a);
+                                    string s = cGastos.Nombre_SubTipo();
 
-                                    if (dg.Nombre.Length > 0)
+                                    if (s.Length > 0)
                                     {
-                                        cGastos.Descripcion = dg.Nombre;
-                                        grdSalidas.set_Texto(f, s_IDDetalle, a);
-                                        grdSalidas.set_Texto(f, s_Descripcion, dg.Nombre);
+                                        cGastos.Desc_SubTipo = s;
+                                        grdSalidas.set_Texto(f, s_SubTipo, a);
+                                        grdSalidas.set_Texto(f, s_SubTipo + 1, s);
 
-                                        if (cGastos.caja.EsCheque == true)
-                                        {
-                                            //Chequess
-                                            Cheques ch = new Cheques();
-                                            ch.Seleccionar_Cheques();
-                                            foreach (Cheques cn in ch.cheques_seleccionados)
-                                            {
-                                                // Agregar registro por cada cheque.
-                                                cGastos.Importe = cn.Importe;
-                                                cGastos.Cheque = cn.Numero;
-                                                cGastos.Agregar();
-                                            }
-                                            if (ch.cheques_seleccionados.Count != 0) { Cargar_Datos(); }
-                                            grdSalidas.ActivarCelda(grdSalidas.Rows - 1, s_Caja);
-                                        }
-                                        else
-                                        {
-                                            grdSalidas.ActivarCelda(f, c + 1);
-                                            if (cGastos.ID != 0) { cGastos.Actualizar(); }
-                                        }
-                                    }
-                                } 
-                            }
-                            break;
-                        case s_Descripcion:
-                            if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
-                            {
-                                cGastos.Descripcion = a.ToString();
-                                grdSalidas.set_Texto(f, s_Descripcion, a);
-                                grdSalidas.ActivarCelda(f, s_Importe);
-
-                                if (cGastos.ID != 0) { cGastos.Actualizar("Descripcion", cGastos.Descripcion); }
-                            }
-                            break;
-                        case s_Importe:
-                            if (cGastos.TG.EsHacienda == false && cGastos.TG.EsAgregados == false)
-                            {
-                                if (cGastos.TG.Id_Tipo != 0 && cGastos.Id_SubTipoGastos != 0)
-                                {
-                                    cGastos.Fecha = mntFecha.SelectionStart.Date;
-                                    cGastos.Desc_SubTipo = grdSalidas.get_Texto(f, s_SubTipo + 1).ToString();
-                                    cGastos.Descripcion = grdSalidas.get_Texto(f, s_Descripcion).ToString();
-                                    cGastos.Importe = Convert.ToDouble(a);
-                                    grdSalidas.set_Texto(f, s_Importe, a);
-
-                                    if (grdSalidas.EsUltimaFila() == true)
-                                    {
-                                        cGastos.Agregar();
-                                        grdSalidas.set_Texto(f, s_Id, Convert.ToInt32(cGastos.ID));
-                                        grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
-
-                                        grdSalidas.AgregarFila();
-                                        Repetir_FilaG();
-                                    }
-                                    else
-                                    {
-                                        cGastos.Actualizar("Importe", cGastos.Importe);
                                         if (cGastos.TG.EsHacienda == true)
                                         {
-                                            Compra_Hacienda ch = new Compra_Hacienda();
-                                            ch.Consignatario.ID = cGastos.Id_SubTipoGastos;
-                                            int n = Convert.ToInt32(ch.Dato("ID_CompraFrigo=" + cGastos.Id_DetalleGastos, "NBoleta", ""));
-                                            ch.NBoleta.ID = n;
-                                            ch.Calcular_Saldo();
+                                            Seleccionar_Pago_Hacienda();
                                         }
-                                        if (cGastos.TG.EsAgregados == true)
+                                        else
                                         {
-                                            Agregados_Hacienda ah = new Agregados_Hacienda();
-                                            ah.Consignatario.ID = cGastos.Id_SubTipoGastos;
-                                            int n = Convert.ToInt32(ah.Dato("ID_Agregados_Frigo=" + cGastos.Id_DetalleGastos, "NBoleta", ""));
-                                            ah.nb.ID = n;
+                                            if (cGastos.TG.EsAgregados == true)
+                                            {
+                                                Seleccionar_Pago_Agregados();
+                                            }
+                                            else
+                                            {
+                                                grdSalidas.ActivarCelda(f, s_IDDetalle);
+                                                if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                                // ESTO LO TILDO PARA VER MAS ADELANTE SI LO QUIEREN ASÍ O SOLO CON F1
+                                                //if (cGastos.TG.EsPagoProveedor == true)
+                                                //{
+                                                //    Seleccionar_Pago_Proveedor();
+                                                //}
+                                                //else
+                                                //{
+                                                //    grdSalidas.ActivarCelda(f, s_IDDetalle);
+                                                //    if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                                //}
+                                            }
+                                        }
 
-                                            ah.Calcular_Saldo();
+                                    }
+                                }
+                                break;
+                            case s_SubTipo + 1: // Desc_SubTipo
+                                if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
+                                {
+                                    cGastos.Desc_SubTipo = a.ToString();
+                                    grdSalidas.set_Texto(f, s_SubTipo + 1, a);
+                                    grdSalidas.ActivarCelda(f, s_IDDetalle);
+
+                                    if (cGastos.ID != 0) { cGastos.Actualizar("Desc_SubTipo", cGastos.Desc_SubTipo); }
+                                }
+                                break;
+                            case s_IDDetalle:
+                                dg.Id_Tipo = cGastos.TG.Id_Tipo;
+                                if (cGastos.TG.EsHacienda == false && cGastos.TG.EsAgregados == false)
+                                {
+                                    dg.ID_Detalle = Convert.ToInt32(a);
+
+                                    if (dg.Existe() == true)
+                                    {
+                                        cGastos.Id_DetalleGastos = Convert.ToInt32(a);
+
+                                        if (dg.Nombre.Length > 0)
+                                        {
+                                            cGastos.Descripcion = dg.Nombre;
+                                            grdSalidas.set_Texto(f, s_IDDetalle, a);
+                                            grdSalidas.set_Texto(f, s_Descripcion, dg.Nombre);
+
+                                            if (cGastos.caja.EsCheque == true)
+                                            {
+                                                //Chequess
+                                                Cheques ch = new Cheques();
+                                                ch.Seleccionar_Cheques();
+                                                cGastos.Usuario = usuario;
+                                                foreach (Cheques cn in ch.cheques_seleccionados)
+                                                {
+                                                    // Agregar registro por cada cheque.
+                                                    cGastos.Importe = cn.Importe;
+                                                    cGastos.Cheque = cn.Numero;
+                                                    cGastos.Agregar();
+                                                }
+                                                if (ch.cheques_seleccionados.Count != 0) { Cargar_Datos(); }
+                                                grdSalidas.ActivarCelda(grdSalidas.Rows - 1, s_Caja);
+                                            }
+                                            else
+                                            {
+                                                grdSalidas.ActivarCelda(f, c + 1);
+                                                if (cGastos.ID != 0) { cGastos.Actualizar(); }
+                                            }
                                         }
                                     }
+                                }
+                                break;
+                            case s_Descripcion:
+                                if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
+                                {
+                                    cGastos.Descripcion = a.ToString();
+                                    grdSalidas.set_Texto(f, s_Descripcion, a);
+                                    grdSalidas.ActivarCelda(f, s_Importe);
+
+                                    if (cGastos.ID != 0) { cGastos.Actualizar("Descripcion", cGastos.Descripcion); }
+                                }
+                                break;
+                            case s_Importe:
+                                if (cGastos.TG.EsHacienda == false && cGastos.TG.EsAgregados == false)
+                                {
+                                    if (cGastos.TG.Id_Tipo != 0 && cGastos.Id_SubTipoGastos != 0)
+                                    {
+                                        cGastos.Fecha = mntFecha.SelectionStart.Date;
+                                        cGastos.Desc_SubTipo = grdSalidas.get_Texto(f, s_SubTipo + 1).ToString();
+                                        cGastos.Descripcion = grdSalidas.get_Texto(f, s_Descripcion).ToString();
+                                        cGastos.Importe = Convert.ToDouble(a);
+                                        grdSalidas.set_Texto(f, s_Importe, a);
+
+                                        if (grdSalidas.EsUltimaFila() == true)
+                                        {
+                                            cGastos.Usuario = usuario;
+                                            cGastos.Agregar();
+                                            grdSalidas.set_Texto(f, s_Id, Convert.ToInt32(cGastos.ID));
+                                            grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
+
+                                            grdSalidas.AgregarFila();
+                                            Repetir_FilaG();
+                                        }
+                                        else
+                                        {
+                                            cGastos.Actualizar("Importe", cGastos.Importe);
+                                            if (cGastos.TG.EsHacienda == true)
+                                            {
+                                                Compra_Hacienda ch = new Compra_Hacienda();
+                                                ch.Consignatario.ID = cGastos.Id_SubTipoGastos;
+                                                int n = Convert.ToInt32(ch.Dato("ID_CompraFrigo=" + cGastos.Id_DetalleGastos, "NBoleta", ""));
+                                                ch.NBoleta.ID = n;
+                                                ch.Calcular_Saldo();
+                                            }
+                                            if (cGastos.TG.EsAgregados == true)
+                                            {
+                                                Agregados_Hacienda ah = new Agregados_Hacienda();
+                                                ah.Consignatario.ID = cGastos.Id_SubTipoGastos;
+                                                int n = Convert.ToInt32(ah.Dato("ID_Agregados_Frigo=" + cGastos.Id_DetalleGastos, "NBoleta", ""));
+                                                ah.nb.ID = n;
+
+                                                ah.Calcular_Saldo();
+                                            }
+                                        }
+
+                                        Totales();
+
+                                    }
+                                }
+                                else
+                                {
+                                    grdSalidas.ActivarCelda(f, s_Tipo);
+                                }
+                                break;
+                            case s_Autorizado:
+                                if (cGastos.ID != 0)
+                                {
+                                    cGastos.Autorizado = Convert.ToBoolean(a);
+                                    cGastos.Fecha_Autorizado = DateTime.Now;
+
+                                    cGastos.Actualizar("Autorizado", cGastos.Autorizado);
+                                    cGastos.Actualizar("Fecha_Autorizado", DateTime.Now);
+                                    cGastos.Actualizar("Usuario", cGastos.Usuario.ID);
+
+                                    grdSalidas.set_Texto(f, s_Autorizado, a);
+                                    grdSalidas.set_Texto(f, s_Autorizado + 1, DateTime.Now);
 
                                     Totales();
 
+                                    grdSalidas.ActivarCelda(f + 1, c);
                                 }
-                            }
-                            else
-                            {
-                                grdSalidas.ActivarCelda(f, s_Tipo);
-                            }
-                            break;
-                        case s_Autorizado:
-                            if (cGastos.ID != 0)
-                            {
-                                cGastos.Autorizado = Convert.ToBoolean(a);
-                                cGastos.Fecha_Autorizado = DateTime.Now;
-
-                                cGastos.Actualizar("Autorizado", cGastos.Autorizado);
-                                cGastos.Actualizar("Fecha_Autorizado", DateTime.Now);
-                                cGastos.Actualizar("Usuario", cGastos.Usuario.ID);
-
-                                grdSalidas.set_Texto(f, s_Autorizado, a);
-                                grdSalidas.set_Texto(f, s_Autorizado + 1, DateTime.Now);
-
-                                Totales();
-
-                                grdSalidas.ActivarCelda(f + 1, c);
-                            }
-                            break;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("La fecha se encuentra cerrada.", "Error");
                     }
                 }
                 else
                 {
                     MessageBox.Show("La fecha se encuentra cerrada.", "Error");
-                }
+                } 
             }
             else
             {
-                MessageBox.Show("La fecha se encuentra cerrada.", "Error");
+                MessageBox.Show("No se puede modificar un registro de otro usuario.", "Error");
             }
             lblUltimo.Text = "";
         }
@@ -993,36 +1006,39 @@ namespace Programa1.Carga.Tesoreria
             }
             if (e == Convert.ToInt32(Keys.Delete))
             {
-                if (mntFecha.SelectionStart.Date >= CD.Fecha | usuario.Permiso == Usuarios.e_Permiso.Administrador)
+                if (cGastos.Usuario.ID == 0 | usuario.ID == cGastos.Usuario.ID | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                 {
-                    if (cGastos.Fecha_Cerrada() == false)
+                    if (mntFecha.SelectionStart.Date >= CD.Fecha | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                     {
-                        if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                        if (cGastos.Fecha_Cerrada() == false)
                         {
-                            cGastos.Borrar();
-                            if (grdSalidas.EsUltimaFila() == true)
+                            if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                             {
-                                grdSalidas.BorrarFila(grdSalidas.Rows - 1);
-                                grdSalidas.AgregarFila();
-                                grdSalidas.ActivarCelda(grdSalidas.Rows - 1, s_Caja);
+                                cGastos.Borrar();
+                                if (grdSalidas.EsUltimaFila() == true)
+                                {
+                                    grdSalidas.BorrarFila(grdSalidas.Rows - 1);
+                                    grdSalidas.AgregarFila();
+                                    grdSalidas.ActivarCelda(grdSalidas.Rows - 1, s_Caja);
+                                }
+                                else
+                                {
+                                    grdSalidas.BorrarFila();
+                                    grdSalidas.ActivarCelda(fila, s_Caja);
+                                    Cargar_FilaSalida(fila);
+                                }
+                                Totales();
                             }
-                            else
-                            {
-                                grdSalidas.BorrarFila();
-                                grdSalidas.ActivarCelda(fila, s_Caja);
-                                Cargar_FilaSalida(fila);
-                            }
-                            Totales();
+                        }
+                        else
+                        {
+                            MessageBox.Show("La fecha se encuentra cerrada.", "Error");
                         }
                     }
                     else
                     {
                         MessageBox.Show("La fecha se encuentra cerrada.", "Error");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("La fecha se encuentra cerrada.", "Error");
+                    } 
                 }
             }
             if (e == Convert.ToInt32(Keys.F1))
@@ -1055,6 +1071,7 @@ namespace Programa1.Carga.Tesoreria
                                 }
                                 else
                                 {
+                                    cGastos.Usuario = usuario;
                                     cGastos.Agregar();
                                 }
                                 // Luego ya se agregan nuevos registros
@@ -1215,6 +1232,7 @@ namespace Programa1.Carga.Tesoreria
             cGastos.Id_DetalleGastos = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_IDDetalle));
             cGastos.Descripcion = Convert.ToString(grdSalidas.get_Texto(Fila, s_Descripcion));
             cGastos.Importe = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Importe));
+            cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Usuario));
             cGastos.Autorizado = Convert.ToBoolean(grdSalidas.get_Texto(Fila, s_Autorizado));
             cGastos.Fecha_Autorizado = Convert.ToDateTime(grdSalidas.get_Texto(Fila, s_Fecha_Autorizado));
         }

@@ -181,6 +181,7 @@
             this.grdTraslados.fColor = System.Drawing.SystemColors.Control;
             this.grdTraslados.FixCols = 0;
             this.grdTraslados.FixRows = 0;
+            this.grdTraslados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grdTraslados.FuenteEncabezado = null;
             this.grdTraslados.FuentePieDePagina = null;
             this.grdTraslados.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -198,6 +199,7 @@
             this.grdTraslados.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdTraslados_CambioFila);
             this.grdTraslados.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdTraslados_KeyUp);
             this.grdTraslados.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.GrdTraslados_KeyPress);
+            this.grdTraslados.SeleccionCambio += new Grilla2.SpeedGrilla.SeleccionCambioEventHandler(this.grdTraslados_SeleccionCambio);
             // 
             // splitContainer2
             // 
@@ -242,8 +244,10 @@
             this.cSucSalida.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucSalida.Filtro_In = "";
             this.cSucSalida.Location = new System.Drawing.Point(3, 3);
+            this.cSucSalida.Mostrar_Botones = true;
             this.cSucSalida.Mostrar_Tipo = false;
             this.cSucSalida.Name = "cSucSalida";
+            this.cSucSalida.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucSalida.Size = new System.Drawing.Size(253, 392);
             this.cSucSalida.TabIndex = 3;
             this.cSucSalida.Titulo = "Sucursales Salida";
@@ -258,8 +262,10 @@
             this.cSucEntrada.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucEntrada.Filtro_In = "";
             this.cSucEntrada.Location = new System.Drawing.Point(0, 3);
+            this.cSucEntrada.Mostrar_Botones = true;
             this.cSucEntrada.Mostrar_Tipo = false;
             this.cSucEntrada.Name = "cSucEntrada";
+            this.cSucEntrada.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucEntrada.Size = new System.Drawing.Size(260, 392);
             this.cSucEntrada.TabIndex = 2;
             this.cSucEntrada.Titulo = "Sucursales Entrada";
@@ -310,7 +316,7 @@
             this.cProds.Location = new System.Drawing.Point(3, 0);
             this.cProds.Mostrar_Tipo = true;
             this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(294, 288);
+            this.cProds.Size = new System.Drawing.Size(286, 288);
             this.cProds.TabIndex = 1;
             this.cProds.Titulo = "Productos";
             this.cProds.Valor_Actual = -1;

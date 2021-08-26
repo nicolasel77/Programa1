@@ -44,8 +44,9 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.cProdA = new Programa1.Controles.cProductos();
             this.cProdS = new Programa1.Controles.cProductos();
-            this.cFecha = new Programa1.Controles.cFechas();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.cSucs = new Programa1.Controles.cSucursales();
+            this.cFecha = new Programa1.Controles.cFechas();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.paCambio = new System.Windows.Forms.Panel();
@@ -54,7 +55,6 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -68,14 +68,14 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.paCambio.SuspendLayout();
-            this.paMostrar.SuspendLayout();
-            this.paLimpiar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.paCambio.SuspendLayout();
+            this.paMostrar.SuspendLayout();
+            this.paLimpiar.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -191,6 +191,7 @@
             this.grdAPicada.fColor = System.Drawing.SystemColors.Control;
             this.grdAPicada.FixCols = 0;
             this.grdAPicada.FixRows = 0;
+            this.grdAPicada.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grdAPicada.FuenteEncabezado = null;
             this.grdAPicada.FuentePieDePagina = null;
             this.grdAPicada.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -208,6 +209,7 @@
             this.grdAPicada.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdAPicada_CambioFila);
             this.grdAPicada.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdAPicada_KeyUp);
             this.grdAPicada.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.GrdAPicada_KeyPress);
+            this.grdAPicada.SeleccionCambio += new Grilla2.SpeedGrilla.SeleccionCambioEventHandler(this.grdAPicada_SeleccionCambio);
             // 
             // splitContainer3
             // 
@@ -278,6 +280,43 @@
             this.cProdS.Valor_Actual = -1;
             this.cProdS.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
             // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer4.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.cSucs);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.cFecha);
+            this.splitContainer4.Size = new System.Drawing.Size(202, 684);
+            this.splitContainer4.SplitterDistance = 528;
+            this.splitContainer4.SplitterWidth = 8;
+            this.splitContainer4.TabIndex = 4;
+            // 
+            // cSucs
+            // 
+            this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
+            this.cSucs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cSucs.Filtro_In = "";
+            this.cSucs.Location = new System.Drawing.Point(0, 0);
+            this.cSucs.Mostrar_Botones = true;
+            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Name = "cSucs";
+            this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.cSucs.Size = new System.Drawing.Size(202, 528);
+            this.cSucs.TabIndex = 2;
+            this.cSucs.Titulo = "Sucursales";
+            this.cSucs.Valor_Actual = -1;
+            this.cSucs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
+            // 
             // cFecha
             // 
             this.cFecha.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -290,20 +329,6 @@
             this.cFecha.TabIndex = 3;
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
-            // 
-            // cSucs
-            // 
-            this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
-            this.cSucs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cSucs.Filtro_In = "";
-            this.cSucs.Location = new System.Drawing.Point(0, 0);
-            this.cSucs.Mostrar_Tipo = true;
-            this.cSucs.Name = "cSucs";
-            this.cSucs.Size = new System.Drawing.Size(202, 528);
-            this.cSucs.TabIndex = 2;
-            this.cSucs.Titulo = "Sucursales";
-            this.cSucs.Valor_Actual = -1;
-            this.cSucs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
             // 
             // tiMensaje
             // 
@@ -400,27 +425,6 @@
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
             // 
-            // splitContainer4
-            // 
-            this.splitContainer4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer4.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer4.Name = "splitContainer4";
-            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer4.Panel1
-            // 
-            this.splitContainer4.Panel1.Controls.Add(this.cSucs);
-            // 
-            // splitContainer4.Panel2
-            // 
-            this.splitContainer4.Panel2.Controls.Add(this.cFecha);
-            this.splitContainer4.Size = new System.Drawing.Size(202, 684);
-            this.splitContainer4.SplitterDistance = 528;
-            this.splitContainer4.SplitterWidth = 8;
-            this.splitContainer4.TabIndex = 4;
-            // 
             // frmAPicada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -447,6 +451,10 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.paCambio.ResumeLayout(false);
             this.paCambio.PerformLayout();
@@ -454,10 +462,6 @@
             this.paMostrar.PerformLayout();
             this.paLimpiar.ResumeLayout(false);
             this.paLimpiar.PerformLayout();
-            this.splitContainer4.Panel1.ResumeLayout(false);
-            this.splitContainer4.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
-            this.splitContainer4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

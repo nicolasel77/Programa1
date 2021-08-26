@@ -143,9 +143,9 @@
             grdReintegros.set_ColW(c_Id, 0);
             grdReintegros.set_ColW(c_Fecha, 60);
             grdReintegros.set_ColW(c_IdSuc, 30);
-            grdReintegros.set_ColW(c_IdSuc + 1, 100);
+            grdReintegros.set_ColW(c_IdSuc + 1, 200);
             grdReintegros.set_ColW(c_IdTipo, 30);
-            grdReintegros.set_ColW(c_Descripcion, 150);
+            grdReintegros.set_ColW(c_Descripcion, 200);
             grdReintegros.set_ColW(c_Importe, 60);
 
             grdReintegros.Columnas[c_Importe].Format = "N2";
@@ -359,5 +359,24 @@
             Mensaje($"Copiado: {s}");
         }
 
+        private void grdReintegros_SeleccionCambio(int FilaInicio, int FilaFin, int ColInicio, int ColFin)
+        {
+            if (FilaInicio == FilaFin)
+            {
+                Totales();
+            }
+            else
+            {
+                float t = 0;
+                for (int i = FilaInicio; i <= FilaFin; i++)
+                {
+                    t += Convert.ToSingle(grdReintegros.get_Texto(i, c_Importe));
+                }
+
+                int c = FilaFin - FilaInicio + 1;
+                lblCant.Text = $"Registros: {c:N0}";
+                lblTotal.Text = $"Total: {t:C2}";
+            }
+        }
     }
 }

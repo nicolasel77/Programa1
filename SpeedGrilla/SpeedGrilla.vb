@@ -65,27 +65,27 @@ Public Class SpeedGrilla
     Friend WithEvents MnuCargarExcel As MenuItem
     Public WithEvents Grd As C1.Win.C1FlexGrid.C1FlexGrid
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Me.MnuGrilla = New ContextMenu()
-        Me.MnuOrdenar = New MenuItem()
-        Me.MnuFit = New MenuItem()
-        Me.MnuEdit = New MenuItem()
-        Me.MnuOcultar = New MenuItem()
-        Me.MenuItem4 = New MenuItem()
-        Me.MnuImprimir = New MenuItem()
-        Me.MnuGuardarExcel = New MenuItem()
-        Me.MnuCargarExcel = New MenuItem()
-        Me.mnuCrearExcel = New MenuItem()
-        Me.OpenExcel = New OpenFileDialog()
-        Me.SaveExcel = New SaveFileDialog()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SpeedGrilla))
+        Me.MnuGrilla = New System.Windows.Forms.ContextMenu()
+        Me.MnuOrdenar = New System.Windows.Forms.MenuItem()
+        Me.MnuFit = New System.Windows.Forms.MenuItem()
+        Me.MnuEdit = New System.Windows.Forms.MenuItem()
+        Me.MnuOcultar = New System.Windows.Forms.MenuItem()
+        Me.MenuItem4 = New System.Windows.Forms.MenuItem()
+        Me.MnuImprimir = New System.Windows.Forms.MenuItem()
+        Me.MnuGuardarExcel = New System.Windows.Forms.MenuItem()
+        Me.MnuCargarExcel = New System.Windows.Forms.MenuItem()
+        Me.mnuCrearExcel = New System.Windows.Forms.MenuItem()
+        Me.OpenExcel = New System.Windows.Forms.OpenFileDialog()
+        Me.SaveExcel = New System.Windows.Forms.SaveFileDialog()
         Me.Grd = New C1.Win.C1FlexGrid.C1FlexGrid()
-        Me.ttGenenral = New ToolTip(Me.components)
+        Me.ttGenenral = New System.Windows.Forms.ToolTip()
         CType(Me.Grd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MnuGrilla
         '
-        Me.MnuGrilla.MenuItems.AddRange(New MenuItem() {Me.MnuOrdenar, Me.MnuFit, Me.MnuEdit, Me.MnuOcultar, Me.MenuItem4, Me.MnuImprimir, Me.MnuGuardarExcel, Me.MnuCargarExcel, Me.mnuCrearExcel})
+        Me.MnuGrilla.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.MnuOrdenar, Me.MnuFit, Me.MnuEdit, Me.MnuOcultar, Me.MenuItem4, Me.MnuImprimir, Me.MnuGuardarExcel, Me.MnuCargarExcel, Me.mnuCrearExcel})
         '
         'MnuOrdenar
         '
@@ -146,16 +146,18 @@ Public Class SpeedGrilla
         '
         'Grd
         '
-        Me.Grd.ColumnInfo = "10,0,0,0,0,85,Columns:"
-        Me.Grd.Dock = DockStyle.Fill
+        Me.Grd.ColumnInfo = "10,0,0,0,0,100,Columns:"
+        Me.Grd.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Grd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None
         Me.Grd.Language = C1.Util.Localization.Language.Spanish
         Me.Grd.Location = New System.Drawing.Point(0, 0)
         Me.Grd.Name = "Grd"
-        Me.Grd.Rows.DefaultSize = 17
+        Me.Grd.Rows.DefaultSize = 20
         Me.Grd.Rows.Fixed = 0
         Me.Grd.ShowCellLabels = True
         Me.Grd.Size = New System.Drawing.Size(714, 456)
+        Me.Grd.StyleInfo = resources.GetString("Grd.StyleInfo")
         Me.Grd.TabIndex = 0
         Me.Grd.UseCompatibleTextRendering = False
         '

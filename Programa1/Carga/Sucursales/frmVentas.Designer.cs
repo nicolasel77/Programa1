@@ -32,6 +32,7 @@
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmbListas = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.cmdACompras = new MaterialSkin.Controls.MaterialFlatButton();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -42,7 +43,6 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
-            this.cmbListas = new System.Windows.Forms.ComboBox();
             this.cSucursal = new Programa1.Controles.cSucursales();
             this.cProds = new Programa1.Controles.cProductos();
             this.cFecha = new Programa1.Controles.cFechas();
@@ -187,6 +187,7 @@
             this.grdVenta.fColor = System.Drawing.SystemColors.Control;
             this.grdVenta.FixCols = 0;
             this.grdVenta.FixRows = 0;
+            this.grdVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grdVenta.FuenteEncabezado = null;
             this.grdVenta.FuentePieDePagina = null;
             this.grdVenta.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -204,6 +205,7 @@
             this.grdVenta.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdVenta_CambioFila);
             this.grdVenta.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdVenta_KeyUp);
             this.grdVenta.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.GrdVenta_KeyPress);
+            this.grdVenta.SeleccionCambio += new Grilla2.SpeedGrilla.SeleccionCambioEventHandler(this.grdVenta_SeleccionCambio);
             // 
             // splitContainer2
             // 
@@ -308,6 +310,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(794, 27);
             this.panel1.TabIndex = 8;
+            // 
+            // cmbListas
+            // 
+            this.cmbListas.BackColor = System.Drawing.Color.Gainsboro;
+            this.cmbListas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmbListas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cmbListas.ForeColor = System.Drawing.Color.DimGray;
+            this.cmbListas.FormattingEnabled = true;
+            this.cmbListas.Location = new System.Drawing.Point(3, 3);
+            this.cmbListas.Name = "cmbListas";
+            this.cmbListas.Size = new System.Drawing.Size(153, 24);
+            this.cmbListas.TabIndex = 6;
+            this.cmbListas.Text = "Lista";
+            this.cmbListas.SelectedIndexChanged += new System.EventHandler(this.cmbListas_SelectedIndexChanged);
             // 
             // panel3
             // 
@@ -439,20 +455,6 @@
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
             // 
-            // cmbListas
-            // 
-            this.cmbListas.BackColor = System.Drawing.Color.Gainsboro;
-            this.cmbListas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmbListas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.cmbListas.ForeColor = System.Drawing.Color.DimGray;
-            this.cmbListas.FormattingEnabled = true;
-            this.cmbListas.Location = new System.Drawing.Point(3, 3);
-            this.cmbListas.Name = "cmbListas";
-            this.cmbListas.Size = new System.Drawing.Size(153, 24);
-            this.cmbListas.TabIndex = 6;
-            this.cmbListas.Text = "Lista";
-            this.cmbListas.SelectedIndexChanged += new System.EventHandler(this.cmbListas_SelectedIndexChanged);
-            // 
             // cSucursal
             // 
             this.cSucursal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -462,7 +464,7 @@
             this.cSucursal.Filtro_In = "";
             this.cSucursal.Location = new System.Drawing.Point(3, 3);
             this.cSucursal.Mostrar_Botones = true;
-            this.cSucursal.Mostrar_Tipo = false;
+            this.cSucursal.Mostrar_Tipo = true;
             this.cSucursal.Name = "cSucursal";
             this.cSucursal.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucursal.Size = new System.Drawing.Size(253, 406);
@@ -511,7 +513,7 @@
             this.cProveedores.BackColor = System.Drawing.Color.Gainsboro;
             this.cProveedores.Filtro_In = "";
             this.cProveedores.Location = new System.Drawing.Point(0, 0);
-            this.cProveedores.Mostrar_Tipo = false;
+            this.cProveedores.Mostrar_Tipo = true;
             this.cProveedores.Name = "cProveedores";
             this.cProveedores.Size = new System.Drawing.Size(290, 271);
             this.cProveedores.TabIndex = 2;

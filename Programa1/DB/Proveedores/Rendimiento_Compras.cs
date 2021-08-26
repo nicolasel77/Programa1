@@ -36,7 +36,7 @@
                 SqlDat.Fill(dt);
 
                 dt.Columns.Add("DifKilos", typeof(Single), "KVentas-KCompras");
-                dt.Columns.Add("Rend", typeof(Single), "KVentas/KCompras*100");
+                dt.Columns.Add("Rend", typeof(Single), "(KVentas/KCompras*100)-100");
                 dt.Columns.Add("Diferencia", typeof(Single), "TVentas-TCompras");
 
                 if (ocultar_ceros == true)

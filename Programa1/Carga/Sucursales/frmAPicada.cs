@@ -145,12 +145,12 @@
             grdAPicada.set_ColW(c_IdSuc, 30);
             grdAPicada.set_ColW(c_IdSuc + 1, 60);
             grdAPicada.set_ColW(c_IdProd_A, 30);
-            grdAPicada.set_ColW(c_IdProd_A + 1, 80);
+            grdAPicada.set_ColW(c_IdProd_A + 1, 130);
             grdAPicada.set_ColW(c_Costo_A, 60);
             grdAPicada.set_ColW(c_Kilos_A, 60);
             grdAPicada.set_ColW(c_Total_A, 80);
             grdAPicada.set_ColW(c_IdProd_S, 30);
-            grdAPicada.set_ColW(c_IdProd_S + 1, 80);
+            grdAPicada.set_ColW(c_IdProd_S + 1, 130);
             grdAPicada.set_ColW(c_Costo_S, 60);
             grdAPicada.set_ColW(c_Kilos_S, 60);
             grdAPicada.set_ColW(c_Total_S, 80);
@@ -528,6 +528,32 @@
             }
         }
 
-
+        private void grdAPicada_SeleccionCambio(int FilaInicio, int FilaFin, int ColInicio, int ColFin)
+        {
+            if (FilaInicio == FilaFin)
+            {
+                Totales();
+            }
+            else
+            {
+                float k = 0, t = 0;
+                float kS = 0, tS = 0;
+                float r = 0;
+                for (int i = FilaInicio; i <= FilaFin; i++)
+                {
+                    k += Convert.ToSingle(grdAPicada.get_Texto(i, c_Kilos_A));
+                    t += Convert.ToSingle(grdAPicada.get_Texto(i, c_Total_A));
+                    kS += Convert.ToSingle(grdAPicada.get_Texto(i, c_Kilos_S));
+                    tS += Convert.ToSingle(grdAPicada.get_Texto(i, c_Total_S));
+                    r += Convert.ToSingle(grdAPicada.get_Texto(i, c_Reintegro));
+                }
+                                
+                lblKilosA.Text = $"Kilos A: {k:N2}";
+                lblTotalA.Text = $"Total A: {t:C2}";
+                lblKilosS.Text = $"Kilos S: {kS:N2}";
+                lblTotalS.Text = $"Total S: {tS:C2}";
+                lblReintegro.Text = $"Reintegro: {r:C2}";
+            }
+        }
     }
 }
