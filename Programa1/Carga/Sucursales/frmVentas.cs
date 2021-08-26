@@ -28,7 +28,7 @@
         private const Byte c_TotalCompra = 12;
         private const Byte c_TotalVenta = 13;
         #endregion
-
+        int vi = 4;
         public frmVentas()
         {
             InitializeComponent();
@@ -381,34 +381,36 @@
 
                             //Rellenar nueva fila
 
-                            grdVenta.set_Texto(f + 1, c_Fecha, Venta.Fecha);
-                            grdVenta.set_Texto(f + 1, c_IdCamion, Venta.Camion.ID);
-                            grdVenta.set_Texto(f + 1, c_IdProv, Venta.Proveedor.Id);
-                            grdVenta.set_Texto(f + 1, c_IdProv + 1, Venta.Proveedor.Nombre);
-                            grdVenta.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.ID);
-                            grdVenta.set_Texto(f + 1, c_IdSuc + 1, Venta.Sucursal.Nombre);
+                            Rellenar_nueva_Fila(f);
 
-                            Venta.Producto.ID = Listas.Producto_Siguiente();
+                            //grdVenta.set_Texto(f + 1, c_Fecha, Venta.Fecha);
+                            //grdVenta.set_Texto(f + 1, c_IdCamion, Venta.Camion.ID);
+                            //grdVenta.set_Texto(f + 1, c_IdProv, Venta.Proveedor.Id);
+                            //grdVenta.set_Texto(f + 1, c_IdProv + 1, Venta.Proveedor.Nombre);
+                            //grdVenta.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.ID);
+                            //grdVenta.set_Texto(f + 1, c_IdSuc + 1, Venta.Sucursal.Nombre);
 
-                            Venta.precios.Producto = Venta.Producto;
-                            Venta.precios_Proveedores.Producto = Venta.Producto;
+                            //Venta.Producto.ID = Listas.Producto_Siguiente();
 
-                            Venta.Descripcion = Venta.Producto.Nombre;
+                            //Venta.precios.Producto = Venta.Producto;
+                            //Venta.precios_Proveedores.Producto = Venta.Producto;
 
-                            grdVenta.set_Texto(f + 1, c_IdProd, Venta.Producto.ID);
-                            grdVenta.set_Texto(f + 1, c_Descripcion, Venta.Descripcion);
+                            //Venta.Descripcion = Venta.Producto.Nombre;
+
+                            //grdVenta.set_Texto(f + 1, c_IdProd, Venta.Producto.ID);
+                            //grdVenta.set_Texto(f + 1, c_Descripcion, Venta.Descripcion);
 
 
-                            Venta.CostoVenta = Venta.precios.Buscar();
-                            grdVenta.set_Texto(f + 1, c_CostoVenta, Venta.CostoVenta);
-                            grdVenta.set_Texto(f + 1, c_TotalVenta, 0);
+                            //Venta.CostoVenta = Venta.precios.Buscar();
+                            //grdVenta.set_Texto(f + 1, c_CostoVenta, Venta.CostoVenta);
+                            //grdVenta.set_Texto(f + 1, c_TotalVenta, 0);
 
-                            Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
-                            grdVenta.set_Texto(f + 1, c_CostoCompra, Venta.CostoCompra);
-                            grdVenta.set_Texto(f + 1, c_TotalCompra, 0);
+                            //Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                            //grdVenta.set_Texto(f + 1, c_CostoCompra, Venta.CostoCompra);
+                            //grdVenta.set_Texto(f + 1, c_TotalCompra, 0);
 
-                            Venta.Kilos = 0;
-                            grdVenta.ActivarCelda(f + 1, c_Kilos);
+                            //Venta.Kilos = 0;
+                            //grdVenta.ActivarCelda(f + 1, c_Kilos);
                         }
                         else
                         {
@@ -424,6 +426,58 @@
             {
                 Mensaje("La fecha esta cerrada.");
             }
+        }
+
+        private void Rellenar_nueva_Fila(short Fila)
+        {
+            switch (vi)
+            {
+                //Fecha
+                case 1:
+                    Venta.Fecha = Venta.Fecha.AddDays(1);
+
+                    Venta.precios.Fecha = Venta.Fecha;
+                    Venta.precios_Proveedores.Fecha = Venta.Fecha;
+
+                    Venta.CostoVenta = Venta.precios.Buscar();
+
+                    Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                    break;
+                //Suc
+                case 2:
+                    Venta.Sucursal.Siguiente();
+
+                    Venta.precios.Sucursal = Venta.Sucursal;
+                    Venta.CostoVenta = Venta.precios.Buscar();
+                    break;
+                //Producto
+                case 4:
+                    Venta.Producto.ID = Listas.Producto_Siguiente();
+
+                    Venta.precios.Producto = Venta.Producto;
+                    Venta.precios_Proveedores.Producto = Venta.Producto;
+
+                    Venta.Descripcion = Venta.Producto.Nombre;
+
+                    Venta.precios.Sucursal = Venta.Sucursal;
+                    Venta.CostoVenta = Venta.precios.Buscar();
+
+                    Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
+                    Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                    break;
+            }
+            grdVenta.set_Texto(Fila + 1, c_Fecha, Venta.Fecha);
+            grdVenta.set_Texto(Fila + 1, c_IdCamion, Venta.Camion.ID);
+            grdVenta.set_Texto(Fila + 1, c_IdProv, Venta.Proveedor.Id);
+            grdVenta.set_Texto(Fila + 1, c_IdProv + 1, Venta.Proveedor.Nombre);
+            grdVenta.set_Texto(Fila + 1, c_IdSuc, Venta.Sucursal.ID);
+            grdVenta.set_Texto(Fila + 1, c_IdSuc + 1, Venta.Sucursal.Nombre);
+            grdVenta.set_Texto(Fila + 1, c_IdProd, Venta.Producto.ID);
+            grdVenta.set_Texto(Fila + 1, c_Descripcion, Venta.Descripcion);
+            grdVenta.set_Texto(Fila + 1, c_CostoVenta, Venta.CostoVenta);
+            grdVenta.set_Texto(Fila + 1, c_TotalVenta, 0);
+            grdVenta.set_Texto(Fila + 1, c_CostoCompra, Venta.CostoCompra);
+            grdVenta.set_Texto(Fila + 1, c_TotalCompra, 0);
         }
 
         private void GrdVenta_CambioFila(short Fila)
@@ -474,25 +528,88 @@
 
                     if (grdVenta.Col == c_Kilos)
                     {
-                        Venta.Producto.ID = Listas.Producto_Siguiente();
+                        switch (vi)
+                        {
+                            //Fecha
+                            case 1:
+                                Venta.Fecha = Venta.Fecha.AddDays(1);
 
-                        Venta.precios.Producto = Venta.Producto;
-                        Venta.precios_Proveedores.Producto = Venta.Producto;
+                                Venta.precios.Fecha = Venta.Fecha;
+                                Venta.precios_Proveedores.Fecha = Venta.Fecha;
 
-                        Venta.Descripcion = Venta.Producto.Nombre;
+                                grdVenta.set_Texto(grdVenta.Row, c_Fecha, Venta.Fecha);
 
-                        grdVenta.set_Texto(grdVenta.Row, c_IdProd, Venta.Producto.ID);
-                        grdVenta.set_Texto(grdVenta.Row, c_Descripcion, Venta.Descripcion);
+                                Venta.CostoVenta = Venta.precios.Buscar();
+                                grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
+                                grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
 
-                        Venta.precios.Sucursal = Venta.Sucursal;
-                        Venta.CostoVenta = Venta.precios.Buscar();
-                        grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
-                        grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
+                                Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                                grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
+                                grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
+                                break;
+                            //Suc
+                            case 2:
+                                Venta.Sucursal.Siguiente();
 
-                        Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
-                        Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
-                        grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
-                        grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
+                                grdVenta.set_Texto(grdVenta.Row, c_IdSuc, Venta.Sucursal.ID);
+                                grdVenta.set_Texto(grdVenta.Row, c_IdSuc + 1, Venta.Sucursal.Nombre);
+
+                                Venta.precios.Sucursal = Venta.Sucursal;
+                                Venta.CostoVenta = Venta.precios.Buscar();
+                                grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
+                                grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
+                                break;
+                            //Nada
+                            case 3:
+
+                                break;
+                            //Proveedor
+                            //case 4:
+                            //Venta.Proveedor.siguiente();
+                            //Venta.Proveedor.Id = Listas.Producto_Siguiente();
+
+                            //Venta.precios.Producto = Venta.Producto;
+                            //Venta.precios_Proveedores.Producto = Venta.Producto;
+
+                            //Venta.Descripcion = Venta.Producto.Nombre;
+
+                            //grdVenta.set_Texto(grdVenta.Row, c_IdProd, Venta.Producto.ID);
+                            //grdVenta.set_Texto(grdVenta.Row, c_Descripcion, Venta.Descripcion);
+
+                            //Venta.precios.Sucursal = Venta.Sucursal;
+                            //Venta.CostoVenta = Venta.precios.Buscar();
+                            //grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
+                            //grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
+
+                            //Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
+                            //Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                            //grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
+                            //grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
+                            //break;
+
+                            //Producto
+                            case 4:
+                                Venta.Producto.ID = Listas.Producto_Siguiente();
+
+                                Venta.precios.Producto = Venta.Producto;
+                                Venta.precios_Proveedores.Producto = Venta.Producto;
+
+                                Venta.Descripcion = Venta.Producto.Nombre;
+
+                                grdVenta.set_Texto(grdVenta.Row, c_IdProd, Venta.Producto.ID);
+                                grdVenta.set_Texto(grdVenta.Row, c_Descripcion, Venta.Descripcion);
+
+                                Venta.precios.Sucursal = Venta.Sucursal;
+                                Venta.CostoVenta = Venta.precios.Buscar();
+                                grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
+                                grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
+
+                                Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
+                                Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                                grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
+                                grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
+                                break;
+                        }
                     }
                 }
             }
@@ -524,7 +641,6 @@
                     break;
             }
         }
-
 
         private void LblCant_Click(object sender, EventArgs e)
         {
@@ -563,23 +679,32 @@
 
         private void CmdACompras_Click(object sender, EventArgs e)
         {
+            string g = "";
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            if (grdVenta.Grd.Selection.r1 != grdVenta.Grd.Selection.r2)
+            {
+                for (int i = grdVenta.Grd.Selection.r1; i <= grdVenta.Grd.Selection.r2; i++)
+                {
+                    g = h.Unir(g, grdVenta.get_Texto(i, 0).ToString(), ", ");
+                }
+                if (g.Length > 0)
+                { g = "Id IN (" + g + ")"; }
+            }
+
             frmCopiarVentaACompra cp = new frmCopiarVentaACompra();
             string f = Armar_Cadena();
-
+            f = h.Unir(f, g);
             if (f != "")
             {
-                DataTable dt = Venta.Resumen_Compra(f);
-
-                cp.Cargar(dt);
-                cp.grd.Columnas[cp.grd.get_ColIndex("Costo")].Format = "C2";
-                cp.grd.Columnas[cp.grd.get_ColIndex("Kilos")].Format = "N2";
-                cp.grd.Columnas[cp.grd.get_ColIndex("Total")].Format = "C2";
+                cp.filtro = f;
+                cp.cargado = 1;
+                cp.Cargarc();
                 cp.ShowDialog();
 
                 if (cp.Aceptado == true)
                 {
                     Compras compras = new Compras();
-                    foreach (DataRow dr in dt.Rows)
+                    foreach (DataRow dr in cp.dt.Rows)
                     {
                         compras.Fecha = Convert.ToDateTime(dr["Fecha"]);
                         compras.Proveedor.Id = Convert.ToInt16(dr["Id_Proveedores"]);
@@ -589,42 +714,60 @@
                         compras.Kilos = Convert.ToSingle(dr["Kilos"]);
                         compras.Agregar();
                     }
+                    if (cp.BorrarOri == true)
+                    {
+                        Venta.Borrar(f);
+                        cmdMostrar.PerformClick();
+                    }
                 }
             }
         }
 
         private void CmdATraslados_Click(object sender, EventArgs e)
         {
+            string g = "";
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            if (grdVenta.Grd.Selection.r1 != grdVenta.Grd.Selection.r2)
+            {
+                for (int i = grdVenta.Grd.Selection.r1; i <= grdVenta.Grd.Selection.r2; i++)
+                {
+                    g = h.Unir(g, grdVenta.get_Texto(i, 0).ToString(), ", ");
+                }
+                if (g.Length > 0)
+                { g = "Id IN (" + g + ")"; }
+            }
+
             frmCopiarVentaACompra cp = new frmCopiarVentaACompra();
             string f = Armar_Cadena();
-
-            DataTable dt = Venta.Resumen_ATraslados(f);
-
-            cp.Text = "Copiar a Traslados";
-
-            cp.Cargar(dt);
-            cp.grd.Columnas[cp.grd.get_ColIndex("Costo_Entrada")].Format = "C2";
-            cp.grd.Columnas[cp.grd.get_ColIndex("Costo_Salida")].Format = "C2";
-            cp.grd.Columnas[cp.grd.get_ColIndex("Kilos")].Format = "N2";
-            cp.grd.Columnas[cp.grd.get_ColIndex("Total_Entrada")].Format = "C2";
-            cp.grd.Columnas[cp.grd.get_ColIndex("Total_Salida")].Format = "C2";
-
-            cp.ShowDialog();
-
-            if (cp.Aceptado == true)
+            f = h.Unir(f, g);
+            if (f != "")
             {
-                Traslados traslados = new Traslados();
-                foreach (DataRow dr in dt.Rows)
+                cp.filtro = f;
+                cp.cargado = 2;
+                cp.cargarT();
+                cp.Text = "Copiar a Traslados";
+                cp.ShowDialog();
+
+                if (cp.Aceptado == true)
                 {
-                    traslados.Fecha = Convert.ToDateTime(dr["Fecha"]);
-                    traslados.sucS.ID = 50;
-                    traslados.sucE.ID = Convert.ToInt16(dr["Suc_Entrada"]); ;
-                    traslados.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
-                    traslados.Descripcion = dr["Descripcion"].ToString();
-                    traslados.CostoS = Convert.ToSingle(dr["Costo_Salida"]);
-                    traslados.CostoE = Convert.ToSingle(dr["Costo_Entrada"]);
-                    traslados.Kilos = Convert.ToSingle(dr["Kilos"]);
-                    traslados.Agregar();
+                    Traslados traslados = new Traslados();
+                    foreach (DataRow dr in cp.dt.Rows)
+                    {
+                        traslados.Fecha = Convert.ToDateTime(dr["Fecha"]);
+                        traslados.sucS.ID = 50;
+                        traslados.sucE.ID = Convert.ToInt16(dr["Suc_Entrada"]); ;
+                        traslados.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
+                        traslados.Descripcion = dr["Descripcion"].ToString();
+                        traslados.CostoS = Convert.ToSingle(dr["Costo_Salida"]);
+                        traslados.CostoE = Convert.ToSingle(dr["Costo_Entrada"]);
+                        traslados.Kilos = Convert.ToSingle(dr["Kilos"]);
+                        traslados.Agregar();
+                    }
+                    if (cp.BorrarOri == true)
+                    {
+                        Venta.Borrar(f);
+                        cmdMostrar.PerformClick();
+                    }
                 }
             }
         }
@@ -665,6 +808,60 @@
                     Listas.Lista.ID = h.Codigo_Seleccionado(cmbListas.Text);
                     Listas.Producto = Venta.Producto;
                 }
+            }
+        }
+
+        private void cmdHerramientas_Click(object sender, EventArgs e)
+        {
+            panel5.Visible = true;
+        }
+
+        private void grdVenta_Click()
+        {
+            panel5.Visible = false;
+        }
+
+        private void rdFecha_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdFecha.Checked == true)
+            {
+                rdSuc.Checked = false;
+                rdNada.Checked = false;
+                rdProd.Checked = false;
+                vi = 1;
+            }
+        }
+
+        private void rdSuc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSuc.Checked == true)
+            {
+                rdFecha.Checked = false;
+                rdNada.Checked = false;
+                rdProd.Checked = false;
+                vi = 2;
+            }
+        }
+
+        private void rdNada_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdNada.Checked == true)
+            {
+                rdSuc.Checked = false;
+                rdFecha.Checked = false;
+                rdProd.Checked = false;
+                vi = 3;
+            }
+        }
+
+        private void rdProd_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdProd.Checked == true)
+            {
+                rdSuc.Checked = false;
+                rdFecha.Checked = false;
+                rdNada.Checked = false;
+                vi = 4;
             }
         }
     }

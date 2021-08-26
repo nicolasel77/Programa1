@@ -50,16 +50,19 @@
     <Reference Include="C1.Common">
       <HintPath>..\SpeedGrilla\C1.Common.dll</HintPath>
     </Reference>
+    <Reference Include="C1.Win.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04" />
     <Reference Include="C1.Win.C1Command.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=e808566f358766d8, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1FlexGrid.4">
       <HintPath>..\SpeedGrilla\C1.Win.C1FlexGrid.4.dll</HintPath>
     </Reference>
+    <Reference Include="C1.Win.C1Input.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1Schedule.4, Version=4.0.20113.183, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>

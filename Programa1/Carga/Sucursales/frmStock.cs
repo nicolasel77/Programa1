@@ -49,6 +49,8 @@
             Totales();
         }
 
+        int vi = 4;
+
         private void FrmStock_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -304,24 +306,7 @@
                             grdStock.set_Texto(f, c_Id, stock.ID);
                             grdStock.AgregarFila();
                             //Rellenar nueva fila
-
-                            grdStock.set_Texto(f + 1, c_Fecha, stock.Fecha);
-                            grdStock.set_Texto(f + 1, c_IdSuc, stock.Sucursal.ID);
-                            grdStock.set_Texto(f + 1, c_IdSuc + 1, stock.Sucursal.Nombre);
-
-                            stock.Producto.Siguiente();
-                            stock.precios.Producto = stock.Producto;
-
-                            stock.Descripcion = stock.Producto.Nombre;
-
-                            grdStock.set_Texto(f + 1, c_IdProd, stock.Producto.ID);
-                            grdStock.set_Texto(f + 1, c_Descripcion, stock.Descripcion);
-
-                            stock.Costo = stock.precios.Buscar();
-                            grdStock.set_Texto(f + 1, c_Costo, stock.Costo);
-                            grdStock.set_Texto(f + 1, c_Total, 0);
-
-                            stock.Kilos = 0;
+                            Rellenar_nueva_Fila(f);
                         }
                         else
                         {
@@ -331,7 +316,7 @@
 
                         Totales();
                         break;
-                } 
+                }
             }
             else
             {
@@ -353,7 +338,7 @@
             else
             {
                 stock.ID = 0;
-                stock.Fecha = Convert.ToDateTime(grdStock.get_Texto(Fila,c_Fecha));
+                stock.Fecha = Convert.ToDateTime(grdStock.get_Texto(Fila, c_Fecha));
                 stock.Producto.ID = Convert.ToInt32(grdStock.get_Texto(Fila, c_IdProd));
                 stock.Descripcion = grdStock.get_Texto(Fila, c_Descripcion).ToString();
                 stock.Sucursal.ID = Convert.ToInt32(grdStock.get_Texto(Fila, c_IdSuc));
@@ -364,33 +349,122 @@
                 stock.precios.Sucursal = stock.Sucursal;
                 stock.precios.Producto = stock.Producto;
             }
-           
+
+        }
+        private void Rellenar_nueva_Fila(short Fila)
+        {
+            switch (vi)
+            {
+                //Fecha
+                case 1:
+                    stock.Fecha = stock.Fecha.AddDays(1);
+                    stock.precios.Fecha = stock.Fecha;
+                    stock.Costo = stock.precios.Buscar();
+                    break;
+                //Suc
+                case 2:
+                    stock.Sucursal.Siguiente();
+                    stock.precios.Sucursal = stock.Sucursal;
+                    stock.Costo = stock.precios.Buscar();
+                    break;
+                //Producto
+                case 4:
+                    stock.Producto.Siguiente(" AND ver = 1");
+                    stock.precios.Producto = stock.Producto;
+                    stock.Descripcion = stock.Producto.Nombre;
+                    stock.Costo = stock.precios.Buscar();
+                    break;
+            }
+            grdStock.set_Texto(Fila + 1, c_Fecha, stock.Fecha);
+            grdStock.set_Texto(Fila + 1, c_IdSuc, stock.Sucursal.ID);
+            grdStock.set_Texto(Fila + 1, c_IdSuc + 1, stock.Sucursal.Nombre);
+            grdStock.set_Texto(Fila + 1, c_IdProd, stock.Producto.ID);
+            grdStock.set_Texto(Fila + 1, c_Descripcion, stock.Descripcion);
+            grdStock.set_Texto(Fila + 1, c_Costo, stock.Costo);
+            grdStock.set_Texto(Fila + 1, c_Total, 0);
         }
 
         private void GrdStock_KeyPress(object sender, short e)
         {
             if (e == 13)
             {
+
                 if (stock.ID == 0)
                 {
 
                     if (grdStock.Col == c_Kilos)
                     {
-                        stock.Producto.Siguiente();
-                        stock.precios.Producto = stock.Producto;
+                        switch (vi)
+                        {
+                            //Fecha
+                            case 1:
+                                stock.Fecha = stock.Fecha.AddDays(1);
+                                stock.precios.Fecha = stock.Fecha;
 
-                        stock.Descripcion = stock.Producto.Nombre;
+                                grdStock.set_Texto(grdStock.Row, c_Fecha, stock.Fecha);
 
-                        grdStock.set_Texto(grdStock.Row, c_IdProd, stock.Producto.ID);
-                        grdStock.set_Texto(grdStock.Row, c_Descripcion, stock.Descripcion);
+                                stock.Costo = stock.precios.Buscar();
+                                grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
+                                grdStock.set_Texto(grdStock.Row, c_Total, 0);
+                                break;
+                            //Suc
+                            case 2:
+                                stock.Sucursal.Siguiente();
 
-                        stock.Costo = stock.precios.Buscar();
-                        grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
-                        grdStock.set_Texto(grdStock.Row, c_Total, 0);
+                                grdStock.set_Texto(grdStock.Row, c_IdSuc, stock.Sucursal.ID);
+                                grdStock.set_Texto(grdStock.Row, c_IdSuc + 1, stock.Sucursal.Nombre);
+
+                                stock.precios.Sucursal = stock.Sucursal;
+                                stock.Costo = stock.precios.Buscar();
+                                grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
+                                grdStock.set_Texto(grdStock.Row, c_Total, 0);
+                                break;
+                            //Nada
+                            case 3:
+
+                                break;
+                            //Producto
+                            case 4:
+                                stock.Producto.Siguiente();
+                                stock.precios.Producto = stock.Producto;
+
+                                stock.Descripcion = stock.Producto.Nombre;
+
+                                grdStock.set_Texto(grdStock.Row, c_IdProd, stock.Producto.ID);
+                                grdStock.set_Texto(grdStock.Row, c_Descripcion, stock.Descripcion);
+
+                                stock.Costo = stock.precios.Buscar();
+                                grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
+                                grdStock.set_Texto(grdStock.Row, c_Total, 0);
+                                break;
+                        }
                     }
                 }
             }
         }
+        //{
+        //    if (e == 13)
+        //    {
+        //        if (stock.ID == 0)
+        //        {
+
+        //            if (grdStock.Col == c_Kilos)
+        //            {
+        //                stock.Producto.Siguiente();
+        //                stock.precios.Producto = stock.Producto;
+
+        //                stock.Descripcion = stock.Producto.Nombre;
+
+        //                grdStock.set_Texto(grdStock.Row, c_IdProd, stock.Producto.ID);
+        //                grdStock.set_Texto(grdStock.Row, c_Descripcion, stock.Descripcion);
+
+        //                stock.Costo = stock.precios.Buscar();
+        //                grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
+        //                grdStock.set_Texto(grdStock.Row, c_Total, 0);
+        //            }
+        //        }
+        //    }
+        //}
 
         private void GrdStock_KeyUp(object sender, short e)
         {
@@ -401,14 +475,14 @@
                     {
                         if (stock.Fecha_Cerrada(stock.Fecha) == false)
                         {
-                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes) 
+                            if (MessageBox.Show($"¿Esta segura/o de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                             {
                                 stock.ID = Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0));
                                 stock.Borrar();
                                 grdStock.BorrarFila(grdStock.Row);
                                 GrdStock_CambioFila(Convert.ToByte(grdStock.Row));
                                 Totales();
-                            } 
+                            }
                         }
                         else
                         {
@@ -452,6 +526,60 @@
                 cm.Ids = n;
                 cm.ShowDialog();
                 cmdMostrar.PerformClick();
+            }
+        }
+
+        private void cmdHerramientas_Click(object sender, EventArgs e)
+        {
+            panel5.Visible = true;
+        }
+
+        private void grdStock_Click()
+        {
+            panel5.Visible = false;
+        }
+
+        private void rdFecha_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdFecha.Checked == true)
+            {
+                rdSuc.Checked = false;
+                rdNada.Checked = false;
+                rdProd.Checked = false;
+                vi = 1;
+            }
+        }
+
+        private void rdSuc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSuc.Checked == true)
+            {
+                rdFecha.Checked = false;
+                rdNada.Checked = false;
+                rdProd.Checked = false;
+                vi = 2;
+            }
+        }
+
+        private void rdNada_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdNada.Checked == true)
+            {
+                rdSuc.Checked = false;
+                rdFecha.Checked = false;
+                rdProd.Checked = false;
+                vi = 3;
+            }
+        }
+
+        private void rdProd_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdProd.Checked == true)
+            {
+                rdSuc.Checked = false;
+                rdFecha.Checked = false;
+                rdNada.Checked = false;
+                vi = 4;
             }
         }
     }

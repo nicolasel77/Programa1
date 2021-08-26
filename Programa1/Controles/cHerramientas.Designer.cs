@@ -148,7 +148,7 @@
             this.Controls.Add(this.rdNada);
             this.Controls.Add(this.rdFecha);
             this.Name = "cHerramientas";
-            this.Size = new System.Drawing.Size(289, 91);
+            this.Size = new System.Drawing.Size(261, 91);
             this.ResumeLayout(false);
             this.PerformLayout();
 

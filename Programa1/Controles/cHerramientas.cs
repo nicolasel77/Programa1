@@ -2,7 +2,7 @@
 {
     using System;
     using System.Windows.Forms;
-
+  
     public partial class cHerramientas : UserControl
     {
         public cHerramientas()
@@ -64,6 +64,15 @@
             rdNada.Checked = false;
             rdProv.Checked = false;
             vi = 5;
+        }
+
+        public void cargar_lst(Grilla2.SpeedGrilla grd)
+        {
+            for (int i = 1; i == grd.Cols - 1; i++)
+            {
+                if ( grd.get_TipoCol(i) == Type.GetType("System.Int32"))
+                        { }
+            }
         }
     }
 }

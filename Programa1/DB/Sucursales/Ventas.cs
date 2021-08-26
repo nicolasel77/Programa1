@@ -43,21 +43,27 @@ namespace Programa1.DB
         /// </summary>
         /// <param name="filtro"></param>
         /// <returns></returns>
-        public DataTable Resumen_Compra(string filtro = "")
+        public DataTable Resumen_Compra(string filtro = "", Boolean Agrupar = true)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
+            string GroupBy = "";
+            string Camposuma = ", Kilos, Total_compra Total";
             if (filtro.Length > 0)
             {
                 filtro = " WHERE " + filtro;
             }
+            if (Agrupar == true)
+            {
+                Camposuma = ", SUM(Kilos) Kilos, SUM(Total_Compra) Total ";
+                GroupBy = " GROUP BY Fecha, ID_Camion, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra ";
+            }
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, ID_Camion, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra Costo, SUM(Kilos) Kilos, SUM(Total_Compra) Total  " +
+                SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, ID_Camion, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra Costo{Camposuma}  " +
                     $"FROM vw_Ventas {filtro} " +
-                    $"GROUP BY Fecha, ID_Camion, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra " +
+                    GroupBy +
                     $"ORDER BY  Fecha, Id_Productos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
@@ -76,22 +82,28 @@ namespace Programa1.DB
         /// </summary>
         /// <param name="filtro"></param>
         /// <returns></returns>
-        public DataTable Resumen_ATraslados(string filtro = "")
+        public DataTable Resumen_ATraslados(string filtro = "", Boolean Agrupar = true)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            string GroupBy = "";
+            string Camposuma = ", Kilos, Total_Compra Total_Salida, Total_Venta Total_Entrada ";
 
             if (filtro.Length > 0)
             {
                 filtro = " WHERE " + filtro;
             }
-
+            if (Agrupar == true)
+            {
+                Camposuma = ", SUM(Kilos) Kilos , SUM(Total_Compra) Total_Salida, SUM(Total_Venta) Total_Entrada ";
+                GroupBy = " GROUP BY Fecha, Id_Sucursales, Nombre, Id_Productos, Descripcion, Costo_Compra, Costo_Venta ";
+            }
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, 50 Suc_Salida, 'CAMARA' Nombre_Salida, Id_Sucursales Suc_Entrada, Nombre Nombre_Entrada, Id_Productos, Descripcion, Costo_Compra Costo_Salida, Costo_Venta Costo_Entrada, SUM(Kilos) Kilos" +
-                    $", SUM(Total_Compra) Total_Salida, SUM(Total_Venta) Total_Entrada   " +
+                SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, 50 Suc_Salida, 'CAMARA' Nombre_Salida, Id_Sucursales Suc_Entrada, Nombre Nombre_Entrada, Id_Productos, Descripcion, Costo_Compra Costo_Salida, Costo_Venta Costo_Entrada" +
+                    Camposuma +
                     $"FROM vw_Ventas {filtro} " +
-                    $"GROUP BY Fecha, Id_Sucursales, Nombre, Id_Productos, Descripcion, Costo_Compra, Costo_Venta " +
+                    GroupBy +
                     $"ORDER BY  Fecha, Id_Productos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
