@@ -582,5 +582,27 @@
                 vi = 4;
             }
         }
+
+        private void grdStock_SeleccionCambio(int FilaInicio, int FilaFin, int ColInicio, int ColFin)
+        {
+            if (FilaInicio == FilaFin)
+            {
+                Totales();
+            }
+            else
+            {
+                float k = 0, t = 0;
+                for (int i = FilaInicio; i <= FilaFin; i++)
+                {
+                    k += Convert.ToSingle(grdStock.get_Texto(i, c_Kilos));
+                    t += Convert.ToSingle(grdStock.get_Texto(i, c_Total));
+                }
+
+                int c = FilaFin - FilaInicio + 1;
+                lblCant.Text = $"Registros: {c:N0}";
+                lblKilos.Text = $"Kilos: {k:N2}";
+                lblTotal.Text = $"Total Salida: {t:C2}";                
+            }
+        }
     }
 }

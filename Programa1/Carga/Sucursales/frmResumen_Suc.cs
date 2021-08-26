@@ -67,6 +67,10 @@
                 case Keys.Multiply:
                     cFechas1.Siguiente();
                     break;
+                case Keys.S:
+                    grdSalidas.Focus();
+                    grdSalidas.ActivarCelda(1,0);
+                    break;
             }
         }
 
@@ -187,6 +191,7 @@
             grdEntradas.Columnas[grdEntradas.get_ColIndex("Kilos")].Style.Format = "#,###.#";
             grdEntradas.Columnas[grdEntradas.get_ColIndex("Costo")].Style.Format = "#,###.#";
             grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "#,###.#";
+            grdEntradas.Columnas[grdEntradas.get_ColIndex("Kilos")].Style.Font = new Font(grdEntradas.Font, FontStyle.Bold);
 
             double T = grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), false);
             lblTotalEntradas.Text = "Total: " + T.ToString("C1");
@@ -204,6 +209,7 @@
             grdSalidas.Columnas[grdSalidas.get_ColIndex("Kilos")].Style.Format = "#,###.#";
             grdSalidas.Columnas[grdSalidas.get_ColIndex("Costo")].Style.Format = "#,###.#";
             grdSalidas.Columnas[grdSalidas.get_ColIndex("Total")].Style.Format = "#,###.#";
+            grdSalidas.Columnas[grdSalidas.get_ColIndex("Kilos")].Style.Font  = new Font(grdSalidas.Font, FontStyle.Bold);
 
             double T = grdSalidas.SumarCol(grdSalidas.get_ColIndex("Total"), false);
             lblTotalSalidas.Text = "Total: " + T.ToString("C1");

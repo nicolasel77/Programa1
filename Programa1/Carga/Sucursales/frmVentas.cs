@@ -524,95 +524,101 @@
         {
             if (e == 13)
             {
-
-                if (Venta.ID == 0)
+                if (grdVenta.Col == c_IdCamion)
                 {
-
-                    if (grdVenta.Col == c_Kilos)
+                    grdVenta.ActivarCelda(grdVenta.Row, c_IdProv);
+                }
+                else                        
+                {
+                    if (Venta.ID == 0)
                     {
-                        switch (vi)
+
+                        if (grdVenta.Col == c_Kilos)
                         {
-                            //Fecha
-                            case 1:
-                                Venta.Fecha = Venta.Fecha.AddDays(1);
+                            switch (vi)
+                            {
+                                //Fecha
+                                case 1:
+                                    Venta.Fecha = Venta.Fecha.AddDays(1);
 
-                                Venta.precios.Fecha = Venta.Fecha;
-                                Venta.precios_Proveedores.Fecha = Venta.Fecha;
+                                    Venta.precios.Fecha = Venta.Fecha;
+                                    Venta.precios_Proveedores.Fecha = Venta.Fecha;
 
-                                grdVenta.set_Texto(grdVenta.Row, c_Fecha, Venta.Fecha);
+                                    grdVenta.set_Texto(grdVenta.Row, c_Fecha, Venta.Fecha);
 
-                                Venta.CostoVenta = Venta.precios.Buscar();
-                                grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
-                                grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
+                                    Venta.CostoVenta = Venta.precios.Buscar();
+                                    grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
+                                    grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
 
-                                Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
-                                grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
-                                grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
-                                break;
-                            //Suc
-                            case 2:
-                                Venta.Sucursal.Siguiente();
+                                    Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                                    grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
+                                    grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
+                                    break;
+                                //Suc
+                                case 2:
+                                    Venta.Sucursal.Siguiente();
 
-                                grdVenta.set_Texto(grdVenta.Row, c_IdSuc, Venta.Sucursal.ID);
-                                grdVenta.set_Texto(grdVenta.Row, c_IdSuc + 1, Venta.Sucursal.Nombre);
+                                    grdVenta.set_Texto(grdVenta.Row, c_IdSuc, Venta.Sucursal.ID);
+                                    grdVenta.set_Texto(grdVenta.Row, c_IdSuc + 1, Venta.Sucursal.Nombre);
 
-                                Venta.precios.Sucursal = Venta.Sucursal;
-                                Venta.CostoVenta = Venta.precios.Buscar();
-                                grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
-                                grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
-                                break;
-                            //Nada
-                            case 3:
+                                    Venta.precios.Sucursal = Venta.Sucursal;
+                                    Venta.CostoVenta = Venta.precios.Buscar();
+                                    grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
+                                    grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
+                                    break;
+                                //Nada
+                                case 3:
 
-                                break;
-                            //Proveedor
-                            //case 4:
-                            //Venta.Proveedor.siguiente();
-                            //Venta.Proveedor.Id = Listas.Producto_Siguiente();
+                                    break;
+                                //Proveedor
+                                //case 4:
+                                //Venta.Proveedor.siguiente();
+                                //Venta.Proveedor.Id = Listas.Producto_Siguiente();
 
-                            //Venta.precios.Producto = Venta.Producto;
-                            //Venta.precios_Proveedores.Producto = Venta.Producto;
+                                //Venta.precios.Producto = Venta.Producto;
+                                //Venta.precios_Proveedores.Producto = Venta.Producto;
 
-                            //Venta.Descripcion = Venta.Producto.Nombre;
+                                //Venta.Descripcion = Venta.Producto.Nombre;
 
-                            //grdVenta.set_Texto(grdVenta.Row, c_IdProd, Venta.Producto.ID);
-                            //grdVenta.set_Texto(grdVenta.Row, c_Descripcion, Venta.Descripcion);
+                                //grdVenta.set_Texto(grdVenta.Row, c_IdProd, Venta.Producto.ID);
+                                //grdVenta.set_Texto(grdVenta.Row, c_Descripcion, Venta.Descripcion);
 
-                            //Venta.precios.Sucursal = Venta.Sucursal;
-                            //Venta.CostoVenta = Venta.precios.Buscar();
-                            //grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
-                            //grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
+                                //Venta.precios.Sucursal = Venta.Sucursal;
+                                //Venta.CostoVenta = Venta.precios.Buscar();
+                                //grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
+                                //grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
 
-                            //Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
-                            //Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
-                            //grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
-                            //grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
-                            //break;
+                                //Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
+                                //Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                                //grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
+                                //grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
+                                //break;
 
-                            //Producto
-                            case 4:
-                                Venta.Producto.ID = Listas.Producto_Siguiente();
+                                //Producto
+                                case 4:
+                                    Venta.Producto.ID = Listas.Producto_Siguiente();
 
-                                Venta.precios.Producto = Venta.Producto;
-                                Venta.precios_Proveedores.Producto = Venta.Producto;
+                                    Venta.precios.Producto = Venta.Producto;
+                                    Venta.precios_Proveedores.Producto = Venta.Producto;
 
-                                Venta.Descripcion = Venta.Producto.Nombre;
+                                    Venta.Descripcion = Venta.Producto.Nombre;
 
-                                grdVenta.set_Texto(grdVenta.Row, c_IdProd, Venta.Producto.ID);
-                                grdVenta.set_Texto(grdVenta.Row, c_Descripcion, Venta.Descripcion);
+                                    grdVenta.set_Texto(grdVenta.Row, c_IdProd, Venta.Producto.ID);
+                                    grdVenta.set_Texto(grdVenta.Row, c_Descripcion, Venta.Descripcion);
 
-                                Venta.precios.Sucursal = Venta.Sucursal;
-                                Venta.CostoVenta = Venta.precios.Buscar();
-                                grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
-                                grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
+                                    Venta.precios.Sucursal = Venta.Sucursal;
+                                    Venta.CostoVenta = Venta.precios.Buscar();
+                                    grdVenta.set_Texto(grdVenta.Row, c_CostoVenta, Venta.CostoVenta);
+                                    grdVenta.set_Texto(grdVenta.Row, c_TotalVenta, 0);
 
-                                Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
-                                Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
-                                grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
-                                grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
-                                break;
+                                    Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
+                                    Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                                    grdVenta.set_Texto(grdVenta.Row, c_CostoCompra, Venta.CostoCompra);
+                                    grdVenta.set_Texto(grdVenta.Row, c_TotalCompra, 0);
+                                    break;
+                            }
                         }
-                    }
+                    } 
                 }
             }
         }
@@ -813,10 +819,6 @@
             }
         }
 
-        private void cmdHerramientas_Click(object sender, EventArgs e)
-        {
-            panel5.Visible = true;
-        }
 
         private void grdVenta_Click()
         {
@@ -865,6 +867,35 @@
                 rdNada.Checked = false;
                 vi = 4;
             }
+        }
+
+        private void grdVenta_SeleccionCambio(int FilaInicio, int FilaFin, int ColInicio, int ColFin)
+        {
+            if (FilaInicio == FilaFin)
+            {
+                Totales();
+            }
+            else
+            {
+                float k = 0, tc = 0, tv = 0;
+                for (int i = FilaInicio; i <= FilaFin; i++)
+                {
+                    k += Convert.ToSingle(grdVenta.get_Texto(i, c_Kilos));
+                    tc += Convert.ToSingle(grdVenta.get_Texto(i, c_TotalCompra));
+                    tv += Convert.ToSingle(grdVenta.get_Texto(i, c_TotalVenta));
+                }
+
+                int c = FilaFin - FilaInicio + 1;
+                lblCant.Text = $"Registros: {c:N0}";
+                lblKilos.Text = $"Kilos: {k:N2}";
+                lblTotalE.Text = $"Total Compra: {tc:C2}";
+                lblTotalS.Text = $"Total Venta: {tv:C2}";
+            }
+        }
+
+        private void cmdHerramientas_Click_1(object sender, EventArgs e)
+        {
+            panel5.Visible = true;
         }
     }
 }

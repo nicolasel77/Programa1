@@ -66,6 +66,7 @@
             this.mnuListado = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sucursalesListado = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cFechas1 = new Programa1.Controles.cFechas();
             this.paEst = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lbl10 = new System.Windows.Forms.Label();
@@ -73,6 +74,7 @@
             this.lbl5 = new System.Windows.Forms.Label();
             this.lbl4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cmdRecargar = new Programa1.Controles.cBoton();
             this.grdEstadistica = new Grilla2.SpeedGrilla();
             this.mnuFiltroEstadisticas = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.unaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,8 +90,6 @@
             this.lblTBalancesSuc = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tiOcultar = new System.Windows.Forms.Timer(this.components);
-            this.cmdRecargar = new Programa1.Controles.cBoton();
-            this.cFechas1 = new Programa1.Controles.cFechas();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -212,7 +212,7 @@
             this.rdAgrupado.AutoSize = true;
             this.rdAgrupado.Checked = true;
             this.rdAgrupado.Depth = 0;
-            this.rdAgrupado.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdAgrupado.Font = new System.Drawing.Font("Roboto", 10F);
             this.rdAgrupado.Location = new System.Drawing.Point(271, 0);
             this.rdAgrupado.Margin = new System.Windows.Forms.Padding(0);
             this.rdAgrupado.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -231,7 +231,7 @@
             this.rdDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdDetalle.AutoSize = true;
             this.rdDetalle.Depth = 0;
-            this.rdDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdDetalle.Font = new System.Drawing.Font("Roboto", 10F);
             this.rdDetalle.Location = new System.Drawing.Point(360, 0);
             this.rdDetalle.Margin = new System.Windows.Forms.Padding(0);
             this.rdDetalle.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -519,7 +519,7 @@
             this.lblSuc.Location = new System.Drawing.Point(6, 60);
             this.lblSuc.Name = "lblSuc";
             this.lblSuc.Size = new System.Drawing.Size(233, 25);
-            this.lblSuc.TabIndex = 4;
+            this.lblSuc.TabIndex = 1;
             this.lblSuc.Text = "Sucursal";
             this.lblSuc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -555,7 +555,7 @@
             this.grdVentas.Row = -2;
             this.grdVentas.Rows = 1;
             this.grdVentas.Size = new System.Drawing.Size(899, 85);
-            this.grdVentas.TabIndex = 1;
+            this.grdVentas.TabIndex = 0;
             // 
             // splitContainer2
             // 
@@ -636,6 +636,19 @@
             this.clientesToolStripMenuItem1.Text = "Clientes";
             this.clientesToolStripMenuItem1.Click += new System.EventHandler(this.clientesToolStripMenuItem1_Click);
             // 
+            // cFechas1
+            // 
+            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFechas1.Location = new System.Drawing.Point(0, 0);
+            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFechas1.Mostrar = 0;
+            this.cFechas1.Name = "cFechas1";
+            this.cFechas1.Size = new System.Drawing.Size(228, 184);
+            this.cFechas1.TabIndex = 0;
+            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
+            // 
             // paEst
             // 
             this.paEst.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -650,9 +663,9 @@
             this.paEst.Controls.Add(this.lblTBalancesSuc);
             this.paEst.Controls.Add(this.label2);
             this.paEst.Dock = System.Windows.Forms.DockStyle.Right;
-            this.paEst.Location = new System.Drawing.Point(248, 0);
+            this.paEst.Location = new System.Drawing.Point(293, 0);
             this.paEst.Name = "paEst";
-            this.paEst.Size = new System.Drawing.Size(1139, 701);
+            this.paEst.Size = new System.Drawing.Size(1094, 701);
             this.paEst.TabIndex = 2;
             // 
             // panel3
@@ -662,7 +675,7 @@
             this.panel3.Controls.Add(this.lbl6);
             this.panel3.Controls.Add(this.lbl5);
             this.panel3.Controls.Add(this.lbl4);
-            this.panel3.Location = new System.Drawing.Point(837, 662);
+            this.panel3.Location = new System.Drawing.Point(792, 662);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(157, 32);
             this.panel3.TabIndex = 8;
@@ -740,6 +753,16 @@
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
+            // cmdRecargar
+            // 
+            this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdRecargar.Location = new System.Drawing.Point(1056, 671);
+            this.cmdRecargar.Name = "cmdRecargar";
+            this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
+            this.cmdRecargar.TabIndex = 6;
+            this.cmdRecargar.Texto = "R";
+            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
+            // 
             // grdEstadistica
             // 
             this.grdEstadistica.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
@@ -772,7 +795,7 @@
             this.grdEstadistica.Redraw = true;
             this.grdEstadistica.Row = 0;
             this.grdEstadistica.Rows = 50;
-            this.grdEstadistica.Size = new System.Drawing.Size(1116, 620);
+            this.grdEstadistica.Size = new System.Drawing.Size(1071, 620);
             this.grdEstadistica.TabIndex = 0;
             // 
             // mnuFiltroEstadisticas
@@ -835,7 +858,7 @@
             this.nuTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.nuTop.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nuTop.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nuTop.Location = new System.Drawing.Point(1046, 663);
+            this.nuTop.Location = new System.Drawing.Point(1001, 663);
             this.nuTop.Minimum = new decimal(new int[] {
             1,
             0,
@@ -857,7 +880,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.label3.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label3.Location = new System.Drawing.Point(1000, 667);
+            this.label3.Location = new System.Drawing.Point(955, 667);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 25);
             this.label3.TabIndex = 4;
@@ -916,29 +939,6 @@
             this.tiOcultar.Enabled = true;
             this.tiOcultar.Interval = 300;
             this.tiOcultar.Tick += new System.EventHandler(this.tiOcultar_Tick);
-            // 
-            // cmdRecargar
-            // 
-            this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdRecargar.Location = new System.Drawing.Point(1101, 671);
-            this.cmdRecargar.Name = "cmdRecargar";
-            this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
-            this.cmdRecargar.TabIndex = 6;
-            this.cmdRecargar.Texto = "R";
-            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
-            // 
-            // cFechas1
-            // 
-            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFechas1.Location = new System.Drawing.Point(0, 0);
-            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFechas1.Mostrar = 0;
-            this.cFechas1.Name = "cFechas1";
-            this.cFechas1.Size = new System.Drawing.Size(228, 184);
-            this.cFechas1.TabIndex = 0;
-            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
             // 
             // frmResumen_Suc
             // 

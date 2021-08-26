@@ -3,7 +3,6 @@
     using Programa1.Carga;
     using Programa1.Carga.Empleados;
     using Programa1.Carga.Hacienda;
-    using Programa1.Carga.Precios;
     using Programa1.Carga.Sebero;
     using Programa1.Carga.Tesoreria;
     using Programa1.Carga.Varios;
@@ -16,8 +15,7 @@
     public partial class frmMain : Form
     {
         public Usuarios usuario;
-
-        List<Form> forms = new List<Form>();
+        readonly List<Form> forms = new List<Form>();
 
         public frmMain()
         {
@@ -34,13 +32,13 @@
                     if (n.Tag.ToString().IndexOf(usuario.Tipo.ToString().ToLower()) > -1)
                     {
                         n.Visible = true;
-                    } 
+                    }
                 }
             }
             switch (usuario.Nombre)
             {
                 case "Nicolas":
-                    
+
                     break;
                 case "Ale":
                     cajaDiariaToolStripMenuItem.PerformClick();
@@ -82,7 +80,7 @@
 
                 this.tstMenu.Items.Add(t);
 
-                Form frmResumen_Suc = new Programa1.Carga.frmResumen_Suc(usuario);                
+                Form frmResumen_Suc = new Programa1.Carga.frmResumen_Suc(usuario);
                 frmResumen_Suc.MdiParent = this;
                 frmResumen_Suc.Disposed += FrmResumen_Suc_Dispose;
                 forms.Add(frmResumen_Suc);
@@ -799,7 +797,7 @@
                 }
             }
         }
-            private void EmpleadosToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void EmpleadosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             bool found = false;
             foreach (Form f in forms)
@@ -2167,51 +2165,51 @@
         }
         private void tarjetasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                bool found = false;
-                foreach (Form f in forms)
-                {
-                    if (f.Name == "frmTarjetas")
-                    {
-                        f.BringToFront();
-                        found = true;
-                        break;
-                    }
-                }
-                if (found == false)
-                {
-                    ToolStripMenuItem t = new ToolStripMenuItem("frmTarjetas");
-                    t.Text = "Tarjetas";
-                    t.Click += new EventHandler(Mostrar);
-                    this.tstMenu.Items.Add(t);
-
-                    Form frmTarjetas = new Carga.Tesoreria.frmTarjetas();
-                    frmTarjetas.MdiParent = this;
-                    frmTarjetas.Disposed += frmTarjetas_Disposed;
-                    forms.Add(frmTarjetas);
-                    frmTarjetas.Show();
-                    frmTarjetas.WindowState = FormWindowState.Minimized;
-                    frmTarjetas.WindowState = FormWindowState.Maximized;
-                }
-            }
-            private void frmTarjetas_Disposed(object sender, EventArgs e)
+            bool found = false;
+            foreach (Form f in forms)
             {
-                foreach (ToolStripMenuItem t in tstMenu.Items)
+                if (f.Name == "frmTarjetas")
                 {
-                    if (t.Text == "Tarjetas")
-                    {
-                        tstMenu.Items.Remove(t);
-                        break;
-                    }
-                }
-                foreach (Form f in forms)
-                {
-                    if (f.Name == "frmTarjetas")
-                    {
-                        forms.Remove(f);
-                        break;
-                    }
+                    f.BringToFront();
+                    found = true;
+                    break;
                 }
             }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmTarjetas");
+                t.Text = "Tarjetas";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmTarjetas = new Carga.Tesoreria.frmTarjetas();
+                frmTarjetas.MdiParent = this;
+                frmTarjetas.Disposed += frmTarjetas_Disposed;
+                forms.Add(frmTarjetas);
+                frmTarjetas.Show();
+                frmTarjetas.WindowState = FormWindowState.Minimized;
+                frmTarjetas.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void frmTarjetas_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Tarjetas")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmTarjetas")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
 
         private void frigorificosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2261,4 +2259,4 @@
             }
         }
     }
-    }
+}

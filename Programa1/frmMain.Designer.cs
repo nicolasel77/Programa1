@@ -152,7 +152,7 @@
             this.stockCarneToolStripMenuItem});
             this.mnuCarga.Name = "mnuCarga";
             this.mnuCarga.Size = new System.Drawing.Size(50, 20);
-            this.mnuCarga.Tag = "admin, sistemas, supervisor, datos, operadores";
+            this.mnuCarga.Tag = "administrador, sistemas, supervisor, datos, operadores";
             this.mnuCarga.Text = "&Carga";
             this.mnuCarga.Visible = false;
             // 
@@ -261,7 +261,7 @@
             this.proveedoresToolStripMenuItem1});
             this.mnuProveedores.Name = "mnuProveedores";
             this.mnuProveedores.Size = new System.Drawing.Size(84, 20);
-            this.mnuProveedores.Tag = "admin, sistemas, supervisor, datos, tesoreria, operadores";
+            this.mnuProveedores.Tag = "administrador, sistemas, supervisor, datos, tesoreria, operadores";
             this.mnuProveedores.Text = "&Proveedores";
             this.mnuProveedores.Visible = false;
             // 
@@ -345,7 +345,7 @@
             this.editarTiposGastosToolStripMenuItem});
             this.mnuTesoreria.Name = "mnuTesoreria";
             this.mnuTesoreria.Size = new System.Drawing.Size(65, 20);
-            this.mnuTesoreria.Tag = "admin, sistemas, tesoreria";
+            this.mnuTesoreria.Tag = "administrador, sistemas, tesoreria";
             this.mnuTesoreria.Text = "&Tesorería";
             this.mnuTesoreria.Visible = false;
             // 
@@ -441,14 +441,14 @@
             this.sincronizarAccessToolStripMenuItem});
             this.mnuHacienda.Name = "mnuHacienda";
             this.mnuHacienda.Size = new System.Drawing.Size(69, 20);
-            this.mnuHacienda.Tag = "admin, sistemas, tesoreria, datos, operadores";
+            this.mnuHacienda.Tag = "administrador, sistemas, tesoreria, datos, operadores";
             this.mnuHacienda.Text = "&Hacienda";
             this.mnuHacienda.Visible = false;
             // 
             // comprasFaenaToolStripMenuItem
             // 
             this.comprasFaenaToolStripMenuItem.Name = "comprasFaenaToolStripMenuItem";
-            this.comprasFaenaToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.comprasFaenaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.comprasFaenaToolStripMenuItem.Text = "&Compras/Faena";
             this.comprasFaenaToolStripMenuItem.Click += new System.EventHandler(this.ComprasFaenaToolStripMenuItem_Click);
             // 
@@ -462,68 +462,68 @@
             // stockToolStripMenuItem1
             // 
             this.stockToolStripMenuItem1.Name = "stockToolStripMenuItem1";
-            this.stockToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
+            this.stockToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.stockToolStripMenuItem1.Text = "&Stock";
             this.stockToolStripMenuItem1.Click += new System.EventHandler(this.StockToolStripMenuItem1_Click);
             // 
             // vencimientosToolStripMenuItem
             // 
             this.vencimientosToolStripMenuItem.Name = "vencimientosToolStripMenuItem";
-            this.vencimientosToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.vencimientosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.vencimientosToolStripMenuItem.Text = "&Vencimientos";
             this.vencimientosToolStripMenuItem.Click += new System.EventHandler(this.vencimientosToolStripMenuItem_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(168, 6);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(177, 6);
             // 
             // controlToolStripMenuItem
             // 
             this.controlToolStripMenuItem.Name = "controlToolStripMenuItem";
-            this.controlToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.controlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.controlToolStripMenuItem.Text = "C&ontrol";
             // 
             // stockCorralesToolStripMenuItem
             // 
             this.stockCorralesToolStripMenuItem.Name = "stockCorralesToolStripMenuItem";
-            this.stockCorralesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.stockCorralesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.stockCorralesToolStripMenuItem.Text = "&Stock Corrales";
             // 
             // deudaHaciendaToolStripMenuItem
             // 
             this.deudaHaciendaToolStripMenuItem.Name = "deudaHaciendaToolStripMenuItem";
-            this.deudaHaciendaToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.deudaHaciendaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deudaHaciendaToolStripMenuItem.Text = "&Deuda Hacienda";
             // 
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(168, 6);
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(177, 6);
             // 
             // recuperoToolStripMenuItem
             // 
             this.recuperoToolStripMenuItem.Name = "recuperoToolStripMenuItem";
-            this.recuperoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.recuperoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.recuperoToolStripMenuItem.Text = "R&ecupero";
             // 
             // valoresToolStripMenuItem
             // 
             this.valoresToolStripMenuItem.Name = "valoresToolStripMenuItem";
-            this.valoresToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.valoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.valoresToolStripMenuItem.Text = "V&alores";
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(168, 6);
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(177, 6);
             // 
             // aBMToolStripMenuItem
             // 
             this.aBMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.frigorificosToolStripMenuItem});
             this.aBMToolStripMenuItem.Name = "aBMToolStripMenuItem";
-            this.aBMToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.aBMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aBMToolStripMenuItem.Text = "ABM";
             // 
             // frigorificosToolStripMenuItem
@@ -551,7 +551,7 @@
             this.promediosToolStripMenuItem});
             this.mnuPrecios.Name = "mnuPrecios";
             this.mnuPrecios.Size = new System.Drawing.Size(57, 20);
-            this.mnuPrecios.Tag = "admin, sistemas, supervisor, datos, operadores";
+            this.mnuPrecios.Tag = "administrador, sistemas, supervisor, datos, operadores";
             this.mnuPrecios.Text = "P&recios";
             this.mnuPrecios.Visible = false;
             // 
@@ -604,7 +604,7 @@
             this.analisisToolStripMenuItem});
             this.mnuHerramientas.Name = "mnuHerramientas";
             this.mnuHerramientas.Size = new System.Drawing.Size(90, 20);
-            this.mnuHerramientas.Tag = "admin, sistemas";
+            this.mnuHerramientas.Tag = "administrador, sistemas";
             this.mnuHerramientas.Text = "Herramien&tas";
             this.mnuHerramientas.Visible = false;
             // 
@@ -644,7 +644,7 @@
             // 
             this.mnuGuardar.Name = "mnuGuardar";
             this.mnuGuardar.Size = new System.Drawing.Size(106, 20);
-            this.mnuGuardar.Tag = "admin, sistemas, supervisor";
+            this.mnuGuardar.Tag = "administrador, sistemas, supervisor";
             this.mnuGuardar.Text = "&Guardar Semana";
             this.mnuGuardar.Visible = false;
             // 
@@ -655,7 +655,11 @@
             this.cargaToolStripMenuItem1,
             this.preciosToolStripMenuItem2,
             this.toolStripMenuItem7,
-            this.SeberosToolStripMenuItem});            
+            this.SeberosToolStripMenuItem});
+            this.mnuSebo.Name = "mnuSebo";
+            this.mnuSebo.Size = new System.Drawing.Size(45, 20);
+            this.mnuSebo.Tag = "administrador, sistemas, supervisor, datos, operadores";
+            this.mnuSebo.Text = "Sebo";
             // 
             // resumenToolStripMenuItem2
             // 
@@ -697,7 +701,7 @@
             this.SeberosToolStripMenuItem1});
             this.mnuDatos.Name = "mnuDatos";
             this.mnuDatos.Size = new System.Drawing.Size(49, 20);
-            this.mnuDatos.Tag = "admin, sistemas, datos, operadores";
+            this.mnuDatos.Tag = "administrador, sistemas, datos, operadores";
             this.mnuDatos.Text = "&Datos";
             this.mnuDatos.Visible = false;
             // 

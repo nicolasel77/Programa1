@@ -10,6 +10,7 @@
         {
             Usuarios usuario = new Usuarios();
             usuario.Nombre = System.Environment.UserName;
+            //System.Windows.Forms.MessageBox.Show(usuario.Nombre);
             //usuario.Nombre = "Flor";
 
             frmMain fr = new frmMain();
