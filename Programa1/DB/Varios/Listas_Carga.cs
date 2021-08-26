@@ -62,7 +62,7 @@
             }
             else
             {
-                Producto.Siguiente();                
+                Producto.Siguiente(" AND ver = 1 ");                
             }            
             return Producto.ID;
         }

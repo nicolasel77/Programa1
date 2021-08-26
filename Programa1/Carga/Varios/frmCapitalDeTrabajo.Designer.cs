@@ -157,7 +157,6 @@ namespace Programa1.Carga.Varios
             this.grdActivos.FuentePieDePagina = null;
             this.grdActivos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdActivos.Location = new System.Drawing.Point(3, 21);
-            this.grdActivos.MenuActivado = false;
             this.grdActivos.Name = "grdActivos";
             this.grdActivos.PieDePagina = "\t\tPage {0} of {1}";
             this.grdActivos.PintarFilaSel = false;
@@ -204,7 +203,6 @@ namespace Programa1.Carga.Varios
             this.grdPasivos.FuentePieDePagina = null;
             this.grdPasivos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdPasivos.Location = new System.Drawing.Point(3, 21);
-            this.grdPasivos.MenuActivado = false;
             this.grdPasivos.Name = "grdPasivos";
             this.grdPasivos.PieDePagina = "\t\tPage {0} of {1}";
             this.grdPasivos.PintarFilaSel = false;
@@ -251,7 +249,6 @@ namespace Programa1.Carga.Varios
             this.grdResultado.FuentePieDePagina = null;
             this.grdResultado.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdResultado.Location = new System.Drawing.Point(3, 24);
-            this.grdResultado.MenuActivado = false;
             this.grdResultado.Name = "grdResultado";
             this.grdResultado.PieDePagina = "\t\tPage {0} of {1}";
             this.grdResultado.PintarFilaSel = false;

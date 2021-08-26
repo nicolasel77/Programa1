@@ -85,7 +85,6 @@
             this.grdSeberos.FuentePieDePagina = null;
             this.grdSeberos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdSeberos.Location = new System.Drawing.Point(12, 30);
-            this.grdSeberos.MenuActivado = false;
             this.grdSeberos.Name = "grdSeberos";
             this.grdSeberos.PieDePagina = "\t\tPage {0} of {1}";
             this.grdSeberos.PintarFilaSel = true;

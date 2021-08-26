@@ -72,7 +72,7 @@ namespace Programa1.DB.Sucursales
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 * FROM Sucursales WHERE Id>{ID} ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 * FROM Sucursales WHERE Id>{ID} AND Ver = 1 ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

@@ -36,11 +36,11 @@
             this.lblTotal = new MaterialSkin.Controls.MaterialLabel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.chFecha = new MaterialSkin.Controls.MaterialCheckBox();
+            this.cFecha = new Programa1.Controles.cFechas();
             this.chFcarga = new MaterialSkin.Controls.MaterialCheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.cFecha = new Programa1.Controles.cFechas();
             this.cFechaCarga = new Programa1.Controles.cFechas();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.cSuc = new Programa1.Controles.cSucursales();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
@@ -78,7 +78,6 @@
             this.grdDetalles.FuentePieDePagina = null;
             this.grdDetalles.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdDetalles.Location = new System.Drawing.Point(12, 12);
-            this.grdDetalles.MenuActivado = false;
             this.grdDetalles.Name = "grdDetalles";
             this.grdDetalles.PieDePagina = "\t\tPage {0} of {1}";
             this.grdDetalles.PintarFilaSel = true;
@@ -119,12 +118,12 @@
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotal.AutoSize = true;
             this.lblTotal.Depth = 0;
-            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblTotal.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotal.Location = new System.Drawing.Point(3, 4);
             this.lblTotal.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(45, 18);
+            this.lblTotal.Size = new System.Drawing.Size(48, 19);
             this.lblTotal.TabIndex = 14;
             this.lblTotal.Text = "Total:";
             // 
@@ -145,8 +144,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chFecha.AutoSize = true;
+            this.chFecha.Checked = true;
+            this.chFecha.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chFecha.Depth = 0;
-            this.chFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chFecha.Font = new System.Drawing.Font("Roboto", 10F);
             this.chFecha.Location = new System.Drawing.Point(0, 0);
             this.chFecha.Margin = new System.Windows.Forms.Padding(0);
             this.chFecha.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -159,11 +160,28 @@
             this.chFecha.UseVisualStyleBackColor = true;
             this.chFecha.CheckedChanged += new System.EventHandler(this.chFecha_CheckedChanged);
             // 
+            // cFecha
+            // 
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(0, 32);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(188, 249);
+            this.cFecha.TabIndex = 1;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
+            // 
             // chFcarga
             // 
             this.chFcarga.AutoSize = true;
+            this.chFcarga.Checked = true;
+            this.chFcarga.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chFcarga.Depth = 0;
-            this.chFcarga.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chFcarga.Font = new System.Drawing.Font("Roboto", 10F);
             this.chFcarga.Location = new System.Drawing.Point(-4, -6);
             this.chFcarga.Margin = new System.Windows.Forms.Padding(0);
             this.chFcarga.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -187,6 +205,21 @@
             this.panel4.Size = new System.Drawing.Size(184, 274);
             this.panel4.TabIndex = 16;
             // 
+            // cFechaCarga
+            // 
+            this.cFechaCarga.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cFechaCarga.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFechaCarga.Location = new System.Drawing.Point(-1, 24);
+            this.cFechaCarga.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFechaCarga.Mostrar = 0;
+            this.cFechaCarga.Name = "cFechaCarga";
+            this.cFechaCarga.Size = new System.Drawing.Size(188, 247);
+            this.cFechaCarga.TabIndex = 0;
+            this.cFechaCarga.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFechaCarga.Cambio_Seleccion += new System.EventHandler(this.cFechaCarga_Cambio_Seleccion);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -206,36 +239,6 @@
             this.splitContainer1.SplitterDistance = 284;
             this.splitContainer1.TabIndex = 17;
             // 
-            // cFecha
-            // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(0, 32);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Mostrar = 0;
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(188, 249);
-            this.cFecha.TabIndex = 1;
-            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
-            // 
-            // cFechaCarga
-            // 
-            this.cFechaCarga.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cFechaCarga.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFechaCarga.Location = new System.Drawing.Point(-1, 24);
-            this.cFechaCarga.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFechaCarga.Mostrar = 0;
-            this.cFechaCarga.Name = "cFechaCarga";
-            this.cFechaCarga.Size = new System.Drawing.Size(188, 247);
-            this.cFechaCarga.TabIndex = 0;
-            this.cFechaCarga.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFechaCarga.Cambio_Seleccion += new System.EventHandler(this.cFechaCarga_Cambio_Seleccion);
-            // 
             // cSuc
             // 
             this.cSuc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -244,7 +247,7 @@
             this.cSuc.Filtro_In = "";
             this.cSuc.Location = new System.Drawing.Point(706, 12);
             this.cSuc.Mostrar_Botones = true;
-            this.cSuc.Mostrar_Tipo = true;
+            this.cSuc.Mostrar_Tipo = false;
             this.cSuc.Name = "cSuc";
             this.cSuc.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSuc.Size = new System.Drawing.Size(253, 508);
@@ -274,6 +277,7 @@
             this.Controls.Add(this.cSuc);
             this.Name = "frmDetalles_Pagos";
             this.Text = "frmDetalles_Pagos";
+            this.Load += new System.EventHandler(this.frmDetalles_Pagos_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);

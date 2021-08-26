@@ -38,12 +38,12 @@
             return Datos_Vista(filtro, " Id, Id_Tipo, Descripcion, Nombre, Ver, Imprimir, Pesable, Multiplicador ");
         }
 
-        public void Siguiente()
+        public void Siguiente(string Filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-            string s = $"SELECT TOP 1 * FROM vw_Productos WHERE Id>{ID} ORDER BY Id";
+            string s = $"SELECT TOP 1 * FROM vw_Productos WHERE Id>{ID} {Filtro} ORDER BY Id";
            
             try
             {
@@ -61,7 +61,7 @@
                 }
                 else
                 {
-                    comandoSql.CommandText = ($"SELECT TOP 1 * FROM vw_Productos ORDER BY Id");
+                    comandoSql.CommandText = ($"SELECT TOP 1 * FROM vw_Productos {Filtro} ORDER BY Id");
                     comandoSql.CommandType = CommandType.Text;
 
                     SqlDat.Fill(dt);

@@ -121,7 +121,6 @@
             this.grdTipo.FuenteEncabezado = null;
             this.grdTipo.FuentePieDePagina = null;
             this.grdTipo.Location = new System.Drawing.Point(6, 21);
-            this.grdTipo.MenuActivado = false;
             this.grdTipo.Name = "grdTipo";
             this.grdTipo.PieDePagina = "\t\tPage {0} of {1}";
             this.grdTipo.PintarFilaSel = true;
@@ -157,7 +156,6 @@
             this.grdSucursales.FuenteEncabezado = null;
             this.grdSucursales.FuentePieDePagina = null;
             this.grdSucursales.Location = new System.Drawing.Point(404, 30);
-            this.grdSucursales.MenuActivado = false;
             this.grdSucursales.Name = "grdSucursales";
             this.grdSucursales.PieDePagina = "\t\tPage {0} of {1}";
             this.grdSucursales.PintarFilaSel = true;
@@ -254,7 +252,6 @@
             this.grdPartidos.FuenteEncabezado = null;
             this.grdPartidos.FuentePieDePagina = null;
             this.grdPartidos.Location = new System.Drawing.Point(6, 21);
-            this.grdPartidos.MenuActivado = false;
             this.grdPartidos.Name = "grdPartidos";
             this.grdPartidos.PieDePagina = "\t\tPage {0} of {1}";
             this.grdPartidos.PintarFilaSel = true;
@@ -301,7 +298,6 @@
             this.grdLocalidades.FuenteEncabezado = null;
             this.grdLocalidades.FuentePieDePagina = null;
             this.grdLocalidades.Location = new System.Drawing.Point(6, 21);
-            this.grdLocalidades.MenuActivado = false;
             this.grdLocalidades.Name = "grdLocalidades";
             this.grdLocalidades.PieDePagina = "\t\tPage {0} of {1}";
             this.grdLocalidades.PintarFilaSel = true;

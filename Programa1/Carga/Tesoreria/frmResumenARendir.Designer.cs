@@ -76,7 +76,6 @@ namespace Programa1.Carga.Tesoreria
             this.grdSalidas.FuentePieDePagina = null;
             this.grdSalidas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdSalidas.Location = new System.Drawing.Point(3, 23);
-            this.grdSalidas.MenuActivado = false;
             this.grdSalidas.Name = "grdSalidas";
             this.grdSalidas.PieDePagina = "\t\tPage {0} of {1}";
             this.grdSalidas.PintarFilaSel = true;
@@ -171,7 +170,6 @@ namespace Programa1.Carga.Tesoreria
             this.grdGastos.FuentePieDePagina = null;
             this.grdGastos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdGastos.Location = new System.Drawing.Point(3, 21);
-            this.grdGastos.MenuActivado = false;
             this.grdGastos.Name = "grdGastos";
             this.grdGastos.PieDePagina = "\t\tPage {0} of {1}";
             this.grdGastos.PintarFilaSel = true;

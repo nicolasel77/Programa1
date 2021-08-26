@@ -69,7 +69,6 @@
             this.grdEmpleados.FuentePieDePagina = null;
             this.grdEmpleados.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdEmpleados.Location = new System.Drawing.Point(0, 0);
-            this.grdEmpleados.MenuActivado = false;
             this.grdEmpleados.Name = "grdEmpleados";
             this.grdEmpleados.PieDePagina = "\t\tPage {0} of {1}";
             this.grdEmpleados.PintarFilaSel = true;

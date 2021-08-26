@@ -172,6 +172,7 @@
             if (Convert.ToInt32(grdTipo.get_Texto(Fila, grdTipo.get_ColIndex("Id_Tipo"))) != 0)
             {
                 tg.Id_Tipo = Convert.ToInt32(grdTipo.get_Texto(Fila, grdTipo.get_ColIndex("Id_Tipo")));
+                tg.Nombre = grdTipo.get_Texto(Fila, grdTipo.get_ColIndex("Nombre")).ToString();
                 lblST.Text = tg.grupoS.Tabla;
 
                 string sf = "";
@@ -197,32 +198,38 @@
         {
             int vId = tg.Id_Tipo;
             int vSId = Convert.ToInt32(grdSubTipo.get_Texto(f, grdSubTipo.get_ColIndex(tg.grupoS.Campo_Id)));
-                        
-            if (c != Convert.ToInt32(grdSubTipo.get_ColIndex("Nombre")))
+            if (c == 0 & Convert.ToInt32(grdSubTipo.get_Texto(f, 0)) != 0)
             {
-                stg.ID_SubTipo = Convert.ToInt32(a);
-                grdSubTipo.set_Texto(f, c, a);
-
-                grdSubTipo.ActivarCelda(f, c + 1);
+                MessageBox.Show("No se puede modificar el ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            if (c == Convert.ToInt32(grdSubTipo.get_ColIndex("Nombre")))
+            else
             {
-                grdSubTipo.set_Texto(f, c, a);
-                stg.Id_Tipo = vId;
-                stg.ID_SubTipo = vSId;
-                stg.Nombre = Convert.ToString(a);
-
-                if (grdSubTipo.EsUltimaFila() == false)
+                if (c != Convert.ToInt32(grdSubTipo.get_ColIndex("Nombre")))
                 {
-                    stg.Actualizar();
-                }
-                else
-                {
-                    stg.Agregar();
-                    grdSubTipo.AgregarFila();
-                }
+                    stg.ID_SubTipo = Convert.ToInt32(a);
+                    grdSubTipo.set_Texto(f, c, a);
 
-                grdSubTipo.ActivarCelda(f + 1, c - 1);
+                    grdSubTipo.ActivarCelda(f, c + 1);
+                }
+                if (c == Convert.ToInt32(grdSubTipo.get_ColIndex("Nombre")))
+                {
+                    grdSubTipo.set_Texto(f, c, a);
+                    stg.Id_Tipo = vId;
+                    stg.ID_SubTipo = vSId;
+                    stg.Nombre = Convert.ToString(a);
+
+                    if (grdSubTipo.EsUltimaFila() == false)
+                    {
+                        stg.Actualizar();
+                    }
+                    else
+                    {
+                        stg.Agregar();
+                        grdSubTipo.AgregarFila();
+                    }
+
+                    grdSubTipo.ActivarCelda(f + 1, c - 1);
+                }
             }
         }
 
@@ -244,13 +251,14 @@
             {
                 if (c == Convert.ToInt32(grdDetalles.get_ColIndex("Id_Detalle")))
                 {
-                    dtg.ID_Detalle = Convert.ToInt32(a);
-                    grdDetalles.set_Texto(f, c, a);
-                    if (vId != 0 & vSId != 0)
-                    { dtg.Actualizar(); }
+                    if (vSId != 0)
+                    { MessageBox.Show("No se puede modificar el ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                     else
-                    { grdDetalles.ActivarCelda(f, grdDetalles.get_ColIndex("Id_Detalle")); }
-                    grdDetalles.ActivarCelda(f, c + 1);
+                    {
+                        dtg.ID_Detalle = Convert.ToInt32(a);
+                        grdDetalles.set_Texto(f, c, a);
+                        grdDetalles.ActivarCelda(f, c + 1);
+                    }
                 }
                 if (c == Convert.ToInt32(grdDetalles.get_ColIndex("Nombre")))
                 {
@@ -268,7 +276,7 @@
                     {
                         dtg.Agregar();
                         grdDetalles.AgregarFila();
-                        grdDetalles.set_Texto(f + 1, grdDetalles.get_ColIndex("Id_Tipo"), vId);
+                        grdDetalles.set_Texto(f, grdDetalles.get_ColIndex("Id_Tipo"), vId);
                     }
 
                     grdDetalles.ActivarCelda(f + 1, grdDetalles.get_ColIndex("Id_Detalle"));

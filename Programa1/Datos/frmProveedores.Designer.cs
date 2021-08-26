@@ -96,7 +96,6 @@
             this.grdTipo.FuenteEncabezado = null;
             this.grdTipo.FuentePieDePagina = null;
             this.grdTipo.Location = new System.Drawing.Point(12, 30);
-            this.grdTipo.MenuActivado = false;
             this.grdTipo.Name = "grdTipo";
             this.grdTipo.PieDePagina = "\t\tPage {0} of {1}";
             this.grdTipo.PintarFilaSel = true;
@@ -132,7 +131,6 @@
             this.grdProveedores.FuenteEncabezado = null;
             this.grdProveedores.FuentePieDePagina = null;
             this.grdProveedores.Location = new System.Drawing.Point(404, 30);
-            this.grdProveedores.MenuActivado = false;
             this.grdProveedores.Name = "grdProveedores";
             this.grdProveedores.PieDePagina = "\t\tPage {0} of {1}";
             this.grdProveedores.PintarFilaSel = true;

@@ -148,7 +148,6 @@
             this.grdVenta.FuentePieDePagina = null;
             this.grdVenta.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdVenta.Location = new System.Drawing.Point(0, 0);
-            this.grdVenta.MenuActivado = false;
             this.grdVenta.Name = "grdVenta";
             this.grdVenta.PieDePagina = "\t\tPage {0} of {1}";
             this.grdVenta.PintarFilaSel = true;

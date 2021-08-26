@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
             this.lstSemanas = new System.Windows.Forms.ListBox();
             this.tabDia = new System.Windows.Forms.TabPage();
             this.mntDias = new System.Windows.Forms.MonthCalendar();
@@ -46,7 +47,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtDesde = new System.Windows.Forms.DateTimePicker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label4 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabDia.SuspendLayout();
@@ -88,6 +88,18 @@
             this.tabPage1.Text = "Sem";
             this.toolTip1.SetToolTip(this.tabPage1, "Semana");
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(309, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 18);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Fecha";
             // 
             // lstSemanas
             // 
@@ -275,18 +287,6 @@
             this.dtDesde.Size = new System.Drawing.Size(86, 22);
             this.dtDesde.TabIndex = 0;
             this.dtDesde.ValueChanged += new System.EventHandler(this.DtDesde_ValueChanged);
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(309, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 18);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Fecha";
             // 
             // cFechas
             // 

@@ -117,7 +117,6 @@ namespace Programa1.Carga.Sucursales
             this.grd.FuentePieDePagina = null;
             this.grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grd.Location = new System.Drawing.Point(12, 12);
-            this.grd.MenuActivado = false;
             this.grd.Name = "grd";
             this.grd.PieDePagina = "\t\tPage {0} of {1}";
             this.grd.PintarFilaSel = true;
@@ -152,7 +151,6 @@ namespace Programa1.Carga.Sucursales
             this.grdResumen.FuentePieDePagina = null;
             this.grdResumen.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdResumen.Location = new System.Drawing.Point(15, 12);
-            this.grdResumen.MenuActivado = false;
             this.grdResumen.Name = "grdResumen";
             this.grdResumen.PieDePagina = "\t\tPage {0} of {1}";
             this.grdResumen.PintarFilaSel = true;

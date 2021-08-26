@@ -28,7 +28,6 @@
             this.cFecha = new Programa1.Controles.cFechas();
             this.cSucursal = new Programa1.Controles.cSucursales();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.label3 = new System.Windows.Forms.Label();
             this.chMediasUsadas = new MaterialSkin.Controls.MaterialCheckBox();
             this.grdResumen = new Grilla2.SpeedGrilla();
             this.txtNRomaneo = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -36,6 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lstBoletas = new System.Windows.Forms.ListBox();
             this.lstTropas = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.cProds = new Programa1.Controles.cProductos();
             this.cmdLimpiar = new System.Windows.Forms.Button();
             this.cmdMostrar = new System.Windows.Forms.Button();
@@ -161,7 +161,6 @@
             this.grdSalida.FuentePieDePagina = null;
             this.grdSalida.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdSalida.Location = new System.Drawing.Point(0, 0);
-            this.grdSalida.MenuActivado = false;
             this.grdSalida.Name = "grdSalida";
             this.grdSalida.PieDePagina = "\t\tPage {0} of {1}";
             this.grdSalida.PintarFilaSel = true;
@@ -217,7 +216,7 @@
             this.cSucursal.Filtro_In = "";
             this.cSucursal.Location = new System.Drawing.Point(3, 3);
             this.cSucursal.Mostrar_Botones = true;
-            this.cSucursal.Mostrar_Tipo = true;
+            this.cSucursal.Mostrar_Tipo = false;
             this.cSucursal.Name = "cSucursal";
             this.cSucursal.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucursal.Size = new System.Drawing.Size(272, 484);
@@ -252,19 +251,6 @@
             this.splitContainer5.SplitterWidth = 8;
             this.splitContainer5.TabIndex = 7;
             // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.label3.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label3.Location = new System.Drawing.Point(4, 191);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 18);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Resumen";
-            // 
             // chMediasUsadas
             // 
             this.chMediasUsadas.AutoSize = true;
@@ -297,7 +283,7 @@
             this.grdResumen.Cols = 10;
             this.grdResumen.DataMember = "";
             this.grdResumen.DataSource = null;
-            this.grdResumen.EnableEdicion = true;
+            this.grdResumen.EnableEdicion = false;
             this.grdResumen.Encabezado = "";
             this.grdResumen.fColor = System.Drawing.SystemColors.Control;
             this.grdResumen.FixCols = 0;
@@ -306,7 +292,6 @@
             this.grdResumen.FuentePieDePagina = null;
             this.grdResumen.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdResumen.Location = new System.Drawing.Point(0, 212);
-            this.grdResumen.MenuActivado = false;
             this.grdResumen.Name = "grdResumen";
             this.grdResumen.PieDePagina = "\t\tPage {0} of {1}";
             this.grdResumen.PintarFilaSel = true;
@@ -382,6 +367,19 @@
             this.lstTropas.TabIndex = 0;
             this.lstTropas.SelectedIndexChanged += new System.EventHandler(this.LstBoletas_SelectedIndexChanged);
             // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label3.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label3.Location = new System.Drawing.Point(4, 191);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 18);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Resumen";
+            // 
             // cProds
             // 
             this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -393,7 +391,7 @@
             this.cProds.Location = new System.Drawing.Point(0, 3);
             this.cProds.Mostrar_Tipo = false;
             this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(267, 120);
+            this.cProds.Size = new System.Drawing.Size(267, 116);
             this.cProds.TabIndex = 0;
             this.cProds.Titulo = "Productos";
             this.cProds.Valor_Actual = -1;

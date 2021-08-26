@@ -158,7 +158,6 @@
             this.grdOfertas.FuentePieDePagina = null;
             this.grdOfertas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdOfertas.Location = new System.Drawing.Point(3, 3);
-            this.grdOfertas.MenuActivado = false;
             this.grdOfertas.Name = "grdOfertas";
             this.grdOfertas.PieDePagina = "\t\tPage {0} of {1}";
             this.grdOfertas.PintarFilaSel = true;

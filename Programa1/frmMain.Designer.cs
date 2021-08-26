@@ -83,7 +83,6 @@
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripSeparator();
             this.aBMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.frigorificosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consignatariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sincronizarAccessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrecios = new System.Windows.Forms.ToolStripMenuItem();
             this.carneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -449,7 +448,7 @@
             // comprasFaenaToolStripMenuItem
             // 
             this.comprasFaenaToolStripMenuItem.Name = "comprasFaenaToolStripMenuItem";
-            this.comprasFaenaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.comprasFaenaToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.comprasFaenaToolStripMenuItem.Text = "&Compras/Faena";
             this.comprasFaenaToolStripMenuItem.Click += new System.EventHandler(this.ComprasFaenaToolStripMenuItem_Click);
             // 
@@ -463,82 +462,76 @@
             // stockToolStripMenuItem1
             // 
             this.stockToolStripMenuItem1.Name = "stockToolStripMenuItem1";
-            this.stockToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.stockToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.stockToolStripMenuItem1.Text = "&Stock";
             this.stockToolStripMenuItem1.Click += new System.EventHandler(this.StockToolStripMenuItem1_Click);
             // 
             // vencimientosToolStripMenuItem
             // 
             this.vencimientosToolStripMenuItem.Name = "vencimientosToolStripMenuItem";
-            this.vencimientosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.vencimientosToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.vencimientosToolStripMenuItem.Text = "&Vencimientos";
             this.vencimientosToolStripMenuItem.Click += new System.EventHandler(this.vencimientosToolStripMenuItem_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(168, 6);
             // 
             // controlToolStripMenuItem
             // 
             this.controlToolStripMenuItem.Name = "controlToolStripMenuItem";
-            this.controlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.controlToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.controlToolStripMenuItem.Text = "C&ontrol";
             // 
             // stockCorralesToolStripMenuItem
             // 
             this.stockCorralesToolStripMenuItem.Name = "stockCorralesToolStripMenuItem";
-            this.stockCorralesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stockCorralesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.stockCorralesToolStripMenuItem.Text = "&Stock Corrales";
             // 
             // deudaHaciendaToolStripMenuItem
             // 
             this.deudaHaciendaToolStripMenuItem.Name = "deudaHaciendaToolStripMenuItem";
-            this.deudaHaciendaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deudaHaciendaToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.deudaHaciendaToolStripMenuItem.Text = "&Deuda Hacienda";
             // 
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(168, 6);
             // 
             // recuperoToolStripMenuItem
             // 
             this.recuperoToolStripMenuItem.Name = "recuperoToolStripMenuItem";
-            this.recuperoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.recuperoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.recuperoToolStripMenuItem.Text = "R&ecupero";
             // 
             // valoresToolStripMenuItem
             // 
             this.valoresToolStripMenuItem.Name = "valoresToolStripMenuItem";
-            this.valoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.valoresToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.valoresToolStripMenuItem.Text = "V&alores";
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(168, 6);
             // 
             // aBMToolStripMenuItem
             // 
             this.aBMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.frigorificosToolStripMenuItem,
-            this.consignatariosToolStripMenuItem});
+            this.frigorificosToolStripMenuItem});
             this.aBMToolStripMenuItem.Name = "aBMToolStripMenuItem";
-            this.aBMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aBMToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.aBMToolStripMenuItem.Text = "ABM";
             // 
             // frigorificosToolStripMenuItem
             // 
             this.frigorificosToolStripMenuItem.Name = "frigorificosToolStripMenuItem";
-            this.frigorificosToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.frigorificosToolStripMenuItem.Text = "&Frigorificos";
-            // 
-            // consignatariosToolStripMenuItem
-            // 
-            this.consignatariosToolStripMenuItem.Name = "consignatariosToolStripMenuItem";
-            this.consignatariosToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.consignatariosToolStripMenuItem.Text = "&Consignatarios";
+            this.frigorificosToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.frigorificosToolStripMenuItem.Text = "&Frigorificos y Consignatarios";
+            this.frigorificosToolStripMenuItem.Click += new System.EventHandler(this.frigorificosToolStripMenuItem_Click);
             // 
             // sincronizarAccessToolStripMenuItem
             // 
@@ -574,7 +567,7 @@
             this.menudenciasToolStripMenuItem.Name = "menudenciasToolStripMenuItem";
             this.menudenciasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.menudenciasToolStripMenuItem.Text = "&Men/Emb";
-            this.menudenciasToolStripMenuItem.Click += new System.EventHandler(this.MenudenciasToolStripMenuItem_Click);
+            this.menudenciasToolStripMenuItem.Click += new System.EventHandler(this.PreciosMenToolStripMenuItem_Click);
             // 
             // granjaToolStripMenuItem
             // 
@@ -662,12 +655,7 @@
             this.cargaToolStripMenuItem1,
             this.preciosToolStripMenuItem2,
             this.toolStripMenuItem7,
-            this.SeberosToolStripMenuItem});
-            this.mnuSebo.Enabled = false;
-            this.mnuSebo.Name = "mnuSebo";
-            this.mnuSebo.Size = new System.Drawing.Size(45, 20);
-            this.mnuSebo.Text = "&Sebo";
-            this.mnuSebo.Visible = false;
+            this.SeberosToolStripMenuItem});            
             // 
             // resumenToolStripMenuItem2
             // 
@@ -845,7 +833,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem12;
         private System.Windows.Forms.ToolStripMenuItem aBMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem frigorificosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consignatariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cajaDiariaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resumenGastosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resumenEntradasToolStripMenuItem;

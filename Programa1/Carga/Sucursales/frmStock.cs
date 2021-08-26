@@ -44,10 +44,12 @@
 
             //El intercambio de columnas para estas teclas
             grdStock.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdProd, c_Kilos);
-            grdStock.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSuc, c_Kilos);
+            grdStock.AgregarTeclas(Convert.ToInt32(Keys.Multiply), c_IdSuc, c_Kilos);
 
             Totales();
         }
+
+        int vi = 4;
 
         private void FrmStock_KeyUp(object sender, KeyEventArgs e)
         {
@@ -304,24 +306,7 @@
                             grdStock.set_Texto(f, c_Id, stock.ID);
                             grdStock.AgregarFila();
                             //Rellenar nueva fila
-
-                            grdStock.set_Texto(f + 1, c_Fecha, stock.Fecha);
-                            grdStock.set_Texto(f + 1, c_IdSuc, stock.Sucursal.ID);
-                            grdStock.set_Texto(f + 1, c_IdSuc + 1, stock.Sucursal.Nombre);
-
-                            stock.Producto.Siguiente();
-                            stock.precios.Producto = stock.Producto;
-
-                            stock.Descripcion = stock.Producto.Nombre;
-
-                            grdStock.set_Texto(f + 1, c_IdProd, stock.Producto.ID);
-                            grdStock.set_Texto(f + 1, c_Descripcion, stock.Descripcion);
-
-                            stock.Costo = stock.precios.Buscar();
-                            grdStock.set_Texto(f + 1, c_Costo, stock.Costo);
-                            grdStock.set_Texto(f + 1, c_Total, 0);
-
-                            stock.Kilos = 0;
+                            Rellenar_nueva_Fila(f);
                         }
                         else
                         {
@@ -366,31 +351,120 @@
             }
 
         }
+        private void Rellenar_nueva_Fila(short Fila)
+        {
+            switch (vi)
+            {
+                //Fecha
+                case 1:
+                    stock.Fecha = stock.Fecha.AddDays(1);
+                    stock.precios.Fecha = stock.Fecha;
+                    stock.Costo = stock.precios.Buscar();
+                    break;
+                //Suc
+                case 2:
+                    stock.Sucursal.Siguiente();
+                    stock.precios.Sucursal = stock.Sucursal;
+                    stock.Costo = stock.precios.Buscar();
+                    break;
+                //Producto
+                case 4:
+                    stock.Producto.Siguiente(" AND ver = 1");
+                    stock.precios.Producto = stock.Producto;
+                    stock.Descripcion = stock.Producto.Nombre;
+                    stock.Costo = stock.precios.Buscar();
+                    break;
+            }
+            grdStock.set_Texto(Fila + 1, c_Fecha, stock.Fecha);
+            grdStock.set_Texto(Fila + 1, c_IdSuc, stock.Sucursal.ID);
+            grdStock.set_Texto(Fila + 1, c_IdSuc + 1, stock.Sucursal.Nombre);
+            grdStock.set_Texto(Fila + 1, c_IdProd, stock.Producto.ID);
+            grdStock.set_Texto(Fila + 1, c_Descripcion, stock.Descripcion);
+            grdStock.set_Texto(Fila + 1, c_Costo, stock.Costo);
+            grdStock.set_Texto(Fila + 1, c_Total, 0);
+        }
 
         private void GrdStock_KeyPress(object sender, short e)
         {
             if (e == 13)
             {
+
                 if (stock.ID == 0)
                 {
 
                     if (grdStock.Col == c_Kilos)
                     {
-                        stock.Producto.Siguiente();
-                        stock.precios.Producto = stock.Producto;
+                        switch (vi)
+                        {
+                            //Fecha
+                            case 1:
+                                stock.Fecha = stock.Fecha.AddDays(1);
+                                stock.precios.Fecha = stock.Fecha;
 
-                        stock.Descripcion = stock.Producto.Nombre;
+                                grdStock.set_Texto(grdStock.Row, c_Fecha, stock.Fecha);
 
-                        grdStock.set_Texto(grdStock.Row, c_IdProd, stock.Producto.ID);
-                        grdStock.set_Texto(grdStock.Row, c_Descripcion, stock.Descripcion);
+                                stock.Costo = stock.precios.Buscar();
+                                grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
+                                grdStock.set_Texto(grdStock.Row, c_Total, 0);
+                                break;
+                            //Suc
+                            case 2:
+                                stock.Sucursal.Siguiente();
 
-                        stock.Costo = stock.precios.Buscar();
-                        grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
-                        grdStock.set_Texto(grdStock.Row, c_Total, 0);
+                                grdStock.set_Texto(grdStock.Row, c_IdSuc, stock.Sucursal.ID);
+                                grdStock.set_Texto(grdStock.Row, c_IdSuc + 1, stock.Sucursal.Nombre);
+
+                                stock.precios.Sucursal = stock.Sucursal;
+                                stock.Costo = stock.precios.Buscar();
+                                grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
+                                grdStock.set_Texto(grdStock.Row, c_Total, 0);
+                                break;
+                            //Nada
+                            case 3:
+
+                                break;
+                            //Producto
+                            case 4:
+                                stock.Producto.Siguiente();
+                                stock.precios.Producto = stock.Producto;
+
+                                stock.Descripcion = stock.Producto.Nombre;
+
+                                grdStock.set_Texto(grdStock.Row, c_IdProd, stock.Producto.ID);
+                                grdStock.set_Texto(grdStock.Row, c_Descripcion, stock.Descripcion);
+
+                                stock.Costo = stock.precios.Buscar();
+                                grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
+                                grdStock.set_Texto(grdStock.Row, c_Total, 0);
+                                break;
+                        }
                     }
                 }
             }
         }
+        //{
+        //    if (e == 13)
+        //    {
+        //        if (stock.ID == 0)
+        //        {
+
+        //            if (grdStock.Col == c_Kilos)
+        //            {
+        //                stock.Producto.Siguiente();
+        //                stock.precios.Producto = stock.Producto;
+
+        //                stock.Descripcion = stock.Producto.Nombre;
+
+        //                grdStock.set_Texto(grdStock.Row, c_IdProd, stock.Producto.ID);
+        //                grdStock.set_Texto(grdStock.Row, c_Descripcion, stock.Descripcion);
+
+        //                stock.Costo = stock.precios.Buscar();
+        //                grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
+        //                grdStock.set_Texto(grdStock.Row, c_Total, 0);
+        //            }
+        //        }
+        //    }
+        //}
 
         private void GrdStock_KeyUp(object sender, short e)
         {
@@ -455,25 +529,57 @@
             }
         }
 
-        private void grdStock_SeleccionCambio(int FilaInicio, int FilaFin, int ColInicio, int ColFin)
+        private void cmdHerramientas_Click(object sender, EventArgs e)
         {
-            if (FilaInicio == FilaFin)
-            {
-                Totales();
-            }
-            else
-            {
-                float k = 0, t = 0;
-                for (int i = FilaInicio; i <= FilaFin; i++)
-                {
-                    k += Convert.ToSingle(grdStock.get_Texto(i, c_Kilos));
-                    t += Convert.ToSingle(grdStock.get_Texto(i, c_Total));
-                }
+            panel5.Visible = true;
+        }
 
-                int c = FilaFin - FilaInicio + 1;
-                lblCant.Text = $"Registros: {c:N0}";
-                lblKilos.Text = $"Kilos: {k:N2}";
-                lblTotal.Text = $"Total: {t:C2}";
+        private void grdStock_Click()
+        {
+            panel5.Visible = false;
+        }
+
+        private void rdFecha_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdFecha.Checked == true)
+            {
+                rdSuc.Checked = false;
+                rdNada.Checked = false;
+                rdProd.Checked = false;
+                vi = 1;
+            }
+        }
+
+        private void rdSuc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSuc.Checked == true)
+            {
+                rdFecha.Checked = false;
+                rdNada.Checked = false;
+                rdProd.Checked = false;
+                vi = 2;
+            }
+        }
+
+        private void rdNada_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdNada.Checked == true)
+            {
+                rdSuc.Checked = false;
+                rdFecha.Checked = false;
+                rdProd.Checked = false;
+                vi = 3;
+            }
+        }
+
+        private void rdProd_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdProd.Checked == true)
+            {
+                rdSuc.Checked = false;
+                rdFecha.Checked = false;
+                rdNada.Checked = false;
+                vi = 4;
             }
         }
     }

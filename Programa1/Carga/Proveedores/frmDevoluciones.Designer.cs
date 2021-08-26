@@ -266,7 +266,6 @@
             this.GrdDevoluciones.FuentePieDePagina = null;
             this.GrdDevoluciones.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.GrdDevoluciones.Location = new System.Drawing.Point(0, 0);
-            this.GrdDevoluciones.MenuActivado = false;
             this.GrdDevoluciones.Name = "GrdDevoluciones";
             this.GrdDevoluciones.PieDePagina = "\t\tPage {0} of {1}";
             this.GrdDevoluciones.PintarFilaSel = true;

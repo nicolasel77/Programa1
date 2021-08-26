@@ -196,7 +196,6 @@
             this.grdAPicada.FuentePieDePagina = null;
             this.grdAPicada.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdAPicada.Location = new System.Drawing.Point(3, 3);
-            this.grdAPicada.MenuActivado = false;
             this.grdAPicada.Name = "grdAPicada";
             this.grdAPicada.PieDePagina = "\t\tPage {0} of {1}";
             this.grdAPicada.PintarFilaSel = true;

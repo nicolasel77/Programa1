@@ -19,7 +19,6 @@ Public Class SpeedGrilla
     Private Archivo As String = "Grilla.xls"
     Public TeclasManejadas() As Int32 = {555}
     Private FilaSeleccionada As Integer = 1
-    Friend WithEvents mnuCrearExcel As MenuItem
     Friend WithEvents ttGenenral As ToolTip
     Private PintarFilas As Boolean = True
 
@@ -48,89 +47,18 @@ Public Class SpeedGrilla
 
     'Requerido por el Diseñador de Windows Forms
     Private components As System.ComponentModel.IContainer
-
-    'NOTA: el Diseñador de Windows Forms requiere el siguiente procedimiento
-    'Puede modificarse utilizando el Diseñador de Windows Forms. 
-    'No lo modifique con el editor de código.
-    Friend WithEvents MnuGrilla As ContextMenu
     Friend WithEvents OpenExcel As OpenFileDialog
     Friend WithEvents SaveExcel As SaveFileDialog
-    Friend WithEvents MenuItem4 As MenuItem
-    Friend WithEvents MnuOrdenar As MenuItem
-    Friend WithEvents MnuFit As MenuItem
-    Friend WithEvents MnuEdit As MenuItem
-    Friend WithEvents MnuImprimir As MenuItem
-    Friend WithEvents MnuGuardarExcel As MenuItem
-    Friend WithEvents MnuOcultar As MenuItem
-    Friend WithEvents MnuCargarExcel As MenuItem
     Public WithEvents Grd As C1.Win.C1FlexGrid.C1FlexGrid
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SpeedGrilla))
-        Me.MnuGrilla = New System.Windows.Forms.ContextMenu()
-        Me.MnuOrdenar = New System.Windows.Forms.MenuItem()
-        Me.MnuFit = New System.Windows.Forms.MenuItem()
-        Me.MnuEdit = New System.Windows.Forms.MenuItem()
-        Me.MnuOcultar = New System.Windows.Forms.MenuItem()
-        Me.MenuItem4 = New System.Windows.Forms.MenuItem()
-        Me.MnuImprimir = New System.Windows.Forms.MenuItem()
-        Me.MnuGuardarExcel = New System.Windows.Forms.MenuItem()
-        Me.MnuCargarExcel = New System.Windows.Forms.MenuItem()
-        Me.mnuCrearExcel = New System.Windows.Forms.MenuItem()
         Me.OpenExcel = New System.Windows.Forms.OpenFileDialog()
         Me.SaveExcel = New System.Windows.Forms.SaveFileDialog()
         Me.Grd = New C1.Win.C1FlexGrid.C1FlexGrid()
-        Me.ttGenenral = New System.Windows.Forms.ToolTip()
+        Me.ttGenenral = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.Grd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'MnuGrilla
-        '
-        Me.MnuGrilla.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.MnuOrdenar, Me.MnuFit, Me.MnuEdit, Me.MnuOcultar, Me.MenuItem4, Me.MnuImprimir, Me.MnuGuardarExcel, Me.MnuCargarExcel, Me.mnuCrearExcel})
-        '
-        'MnuOrdenar
-        '
-        Me.MnuOrdenar.Index = 0
-        Me.MnuOrdenar.Text = "Ordenar por Columna Seleccionada"
-        '
-        'MnuFit
-        '
-        Me.MnuFit.Index = 1
-        Me.MnuFit.Text = "Ajustar Columna Seleccionada"
-        '
-        'MnuEdit
-        '
-        Me.MnuEdit.Index = 2
-        Me.MnuEdit.Text = "Editar Celda Seleccionada(F2)"
-        '
-        'MnuOcultar
-        '
-        Me.MnuOcultar.Index = 3
-        Me.MnuOcultar.Text = "Ocultar Columna Seleccionada"
-        '
-        'MenuItem4
-        '
-        Me.MenuItem4.Index = 4
-        Me.MenuItem4.Text = "-"
-        '
-        'MnuImprimir
-        '
-        Me.MnuImprimir.Index = 5
-        Me.MnuImprimir.Text = "Imprimir"
-        '
-        'MnuGuardarExcel
-        '
-        Me.MnuGuardarExcel.Index = 6
-        Me.MnuGuardarExcel.Text = "Guardar en excel"
-        '
-        'MnuCargarExcel
-        '
-        Me.MnuCargarExcel.Index = 7
-        Me.MnuCargarExcel.Text = "Cargar desde excel"
-        '
-        'mnuCrearExcel
-        '
-        Me.mnuCrearExcel.Index = 8
-        Me.mnuCrearExcel.Text = "Crear Excel"
         '
         'OpenExcel
         '
@@ -467,18 +395,7 @@ Public Class SpeedGrilla
         Next
     End Sub
 
-    Public Sub AbrirEnExcel() Handles mnuCrearExcel.Click
-        Dim s As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\datos.xls"
-        Grd.SaveExcel(s, "", C1.Win.C1FlexGrid.FileFlags.IncludeFixedCells Or C1.Win.C1FlexGrid.FileFlags.VisibleOnly)
-        Dim xApp As Object
-        Dim xLibros As Object
-        Dim xLibro As Object
-        xApp = CreateObject("excel.application")
-        xLibros = xApp.Workbooks
-        xLibros.Open(s)
-        xLibro = xApp.ActiveWorkbook
-        xApp.visible = True
-    End Sub
+
     Public Sub GuardarEnExcel(ByVal NombreArch As String)
         Grd.SaveExcel(NombreArch, "", C1.Win.C1FlexGrid.FileFlags.IncludeFixedCells Or C1.Win.C1FlexGrid.FileFlags.VisibleOnly)
     End Sub
@@ -819,7 +736,7 @@ Public Class SpeedGrilla
                         End Select
                     End If
                 Else
-                        Return Grd.Item(f, c)
+                    Return Grd.Item(f, c)
                 End If
             Catch er As Exception
                 RaiseEvent grdError(er.Message)
@@ -894,20 +811,7 @@ Public Class SpeedGrilla
             Grd.Redraw = Value
         End Set
     End Property
-    Public Property MenuActivado() As Boolean
-        Get
-            Return HayMenu
-        End Get
-        Set(ByVal Value As Boolean)
-            If Value Then
-                Grd.ContextMenu = MnuGrilla
-                HayMenu = True
-            Else
-                Grd.ContextMenu = Nothing
-                HayMenu = False
-            End If
-        End Set
-    End Property
+
     Public Property PintarFilaSel() As Boolean
         Get
             Return PintarFilas
@@ -1227,35 +1131,35 @@ Public Class SpeedGrilla
                 End If
                 If Not IsNothing(Grd.Cols(e.Col).DataType) Then
                     Select Case Grd.Cols(e.Col).DataType.ToString
-                    Case "System.Int16", "System.Int32", "System.Byte", "System.Int64"
-                        If Not IsNumeric(Grd.Editor.Text) Then e.Cancel = True
-                    Case "System.Single", "System.Double", "System.Decimal"
-                        If Grd.Editor.Text.StartsWith(",") Or Grd.Editor.Text.StartsWith(".") Then Grd.Editor.Text = "0" & Grd.Editor.Text
-                        If Not IsNumeric(Grd.Editor.Text) Then e.Cancel = True
-                    Case "System.DateTime"
-                        If IsNumeric(.Text) Then
-                            Dim f As Date
-                            If IsDate(Grd.GetData(Grd.Row, Grd.Col)) Then
-                                f = Grd.GetData(Grd.Row, Grd.Col)
-                                If f.Year < 2000 Then
+                        Case "System.Int16", "System.Int32", "System.Byte", "System.Int64"
+                            If Not IsNumeric(Grd.Editor.Text) Then e.Cancel = True
+                        Case "System.Single", "System.Double", "System.Decimal"
+                            If Grd.Editor.Text.StartsWith(",") Or Grd.Editor.Text.StartsWith(".") Then Grd.Editor.Text = "0" & Grd.Editor.Text
+                            If Not IsNumeric(Grd.Editor.Text) Then e.Cancel = True
+                        Case "System.DateTime"
+                            If IsNumeric(.Text) Then
+                                Dim f As Date
+                                If IsDate(Grd.GetData(Grd.Row, Grd.Col)) Then
+                                    f = Grd.GetData(Grd.Row, Grd.Col)
+                                    If f.Year < 2000 Then
+                                        f = Date.Today
+                                    End If
+                                Else
                                     f = Date.Today
                                 End If
-                            Else
-                                f = Date.Today
+                                Dim s As String = String.Format("{0}/{1}/{2}", .Text, f.Month, f.Year)
+                                If IsDate(s) Then .Text = s
                             End If
-                            Dim s As String = String.Format("{0}/{1}/{2}", .Text, f.Month, f.Year)
-                            If IsDate(s) Then .Text = s
-                        End If
-                        If Not IsDate(Grd.Editor.Text) Then
-                            e.Cancel = True
-                        Else
-                            e.Cancel = False
-                        End If
-                    Case "System.Boolean"
-                    Case "System.String"
-                    Case Else
-                        MsgBox(Grd.Cols(e.Col).DataType.ToString)
-                End Select
+                            If Not IsDate(Grd.Editor.Text) Then
+                                e.Cancel = True
+                            Else
+                                e.Cancel = False
+                            End If
+                        Case "System.Boolean"
+                        Case "System.String"
+                        Case Else
+                            MsgBox(Grd.Cols(e.Col).DataType.ToString)
+                    End Select
 
                     If e.Cancel = False Then
                         Select Case Grd.Cols(e.Col).DataType.ToString
@@ -1411,25 +1315,25 @@ Public Class SpeedGrilla
 
 #End Region
 #Region "Menu Contextual"
-    Private Sub Editar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuEdit.Click
+    Private Sub Editar_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Grd.Select()
         SendKeys.Send("{F2}")
     End Sub
-    Private Sub Imprimir_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuImprimir.Click
+    Private Sub Imprimir_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim ts As New Threading.ThreadStart(AddressOf Imprimir)
         Dim th As New Threading.Thread(ts)
         th.Start()
     End Sub
-    Private Sub Excel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuGuardarExcel.Click
+    Private Sub Excel_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         If SaveExcel.ShowDialog() = DialogResult.OK Then
             Archivo = SaveExcel.FileName
             GuardarEnExcel(Archivo)
         End If
     End Sub
-    Private Sub AutosizeCol_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuFit.Click
+    Private Sub AutosizeCol_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         AutosizeCol(Grd.Col)
     End Sub
-    Private Sub CargarDesdeExcel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuCargarExcel.Click
+    Private Sub CargarDesdeExcel_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim ts As New Threading.ThreadStart(AddressOf CargarDesdeExcel)
         Dim th As New Threading.Thread(ts)
         If MsgBox("Cuidado! Se perderá toda la informacion no guardada! Desea continuar?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
@@ -1440,7 +1344,7 @@ Public Class SpeedGrilla
             End If
         End If
     End Sub
-    Private Sub MnuOcultar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuOcultar.Click
+    Private Sub MnuOcultar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If Grd.Col <> -1 Then Grd.Cols(Grd.Col).Visible = False
     End Sub
 #End Region

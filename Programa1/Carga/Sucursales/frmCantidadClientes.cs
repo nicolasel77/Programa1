@@ -34,7 +34,7 @@
             formato_Grilla();
 
             //El intercambio de columnas para estas teclas
-            grdCantidad_Clientes.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSuc, c_Cantidad);
+            grdCantidad_Clientes.AgregarTeclas(Convert.ToInt32(Keys.Multiply), c_IdSuc, c_Cantidad);
 
             Totales();
         }

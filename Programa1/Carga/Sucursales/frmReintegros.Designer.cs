@@ -146,7 +146,6 @@
             this.grdReintegros.FuentePieDePagina = null;
             this.grdReintegros.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdReintegros.Location = new System.Drawing.Point(3, 7);
-            this.grdReintegros.MenuActivado = false;
             this.grdReintegros.Name = "grdReintegros";
             this.grdReintegros.PieDePagina = "\t\tPage {0} of {1}";
             this.grdReintegros.PintarFilaSel = true;

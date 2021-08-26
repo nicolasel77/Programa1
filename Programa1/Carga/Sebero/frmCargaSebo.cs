@@ -164,9 +164,7 @@
             lblCant.Text = $"Registros: {c:N0}";
             lblKilos.Text = $"Kilos: {k:N2}";
             lblTotalE.Text = $"Total: {tEntrada:C2}";
-
         }
-
 
         private void CmdLimpiar_Click(object sender, EventArgs e)
         {
@@ -174,7 +172,6 @@
             grdVenta.Rows = 2;
             Totales();
         }
-
 
         private void CProds_Cambio_Seleccion(object sender, EventArgs e)
         {
@@ -194,7 +191,6 @@
             //cSeberos.Filtro_In = $" (SELECT DISTINCT Id_Seberos FROM Ventas WHERE {vFecha})";
             cmdMostrar.PerformClick();
         }
-
 
         private void GrdVenta_Editado(short f, short c, object a)
         {
@@ -270,6 +266,7 @@
                         grdVenta.set_Texto(f, c + 1, cargaSebo.Producto.Nombre);
 
                         cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
+                        cargaSebo.Costo = cargaSebo.precios_Seberos.Buscar();
                         grdVenta.set_Texto(f, c_Costo, cargaSebo.Costo);
                         grdVenta.set_Texto(f, c_Total, cargaSebo.Kilos * cargaSebo.Costo);
 
@@ -300,7 +297,7 @@
                     Totales();
                     break;
 
-                case 10:
+                case 9:
                     //Kilos
                     cargaSebo.Kilos = Convert.ToSingle(a);
                     grdVenta.set_Texto(f, c, a);
@@ -316,7 +313,7 @@
 
                         grdVenta.set_Texto(f + 1, c_Fecha, cargaSebo.Fecha);
                         grdVenta.set_Texto(f + 1, c_IdSebero, cargaSebo.Sebero.ID);
-                        grdVenta.set_Texto(f + 1, c_IdSebero + 1, cargaSebo.Sucursal.Nombre);
+                        grdVenta.set_Texto(f + 1, c_IdSebero + 1, cargaSebo.Sebero.Nombre);
                         grdVenta.set_Texto(f + 1, c_IdSuc, cargaSebo.Sucursal.ID);
                         grdVenta.set_Texto(f + 1, c_IdSuc + 1, cargaSebo.Sucursal.Nombre);
 
@@ -338,22 +335,36 @@
                         cargaSebo.Actualizar();
                         grdVenta.ActivarCelda(f + 1, c);
                     }
-
                     Totales();
                     break;
             }
-
         }
 
         private void GrdVenta_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdVenta.get_Texto(Fila, c_Id).ToString());
-            cargaSebo.Cargar_Fila(i);
+            if (i > 0)
+            {
+                cargaSebo.Cargar_Fila(i);
 
-            cargaSebo.precios_Seberos.Fecha = cargaSebo.Fecha;
-            cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
-            cargaSebo.precios_Seberos.Producto = cargaSebo.Producto;
+                cargaSebo.precios_Seberos.Fecha = cargaSebo.Fecha;
+                cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
+                cargaSebo.precios_Seberos.Producto = cargaSebo.Producto;
+            }
+            else
+            {
+                cargaSebo.Id = 0;
+                cargaSebo.Fecha = Convert.ToDateTime(grdVenta.get_Texto(Fila, c_Fecha));
+                cargaSebo.Producto.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdProd));
+                cargaSebo.Sucursal.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdSuc));
+                cargaSebo.Sebero.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdSebero));
+                cargaSebo.Costo = Convert.ToSingle(grdVenta.get_Texto(Fila, c_Costo));
+                cargaSebo.Kilos = Convert.ToSingle(grdVenta.get_Texto(Fila,c_Kilos));
 
+                cargaSebo.precios_Seberos.Fecha = cargaSebo.Fecha;
+                cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
+                cargaSebo.precios_Seberos.Producto = cargaSebo.Producto;
+            }
         }
 
         private void GrdVenta_KeyPress(object sender, short e)
@@ -391,13 +402,13 @@
                             cargaSebo.Id = Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0));
                             cargaSebo.Borrar();
                             grdVenta.BorrarFila(grdVenta.Row);
+                            GrdVenta_CambioFila(Convert.ToByte(grdVenta.Row));
                             Totales();
                         }
                     }
                     break;
             }
         }
-
 
         private void LblCant_Click(object sender, EventArgs e)
         {
@@ -408,7 +419,5 @@
 
             Mensaje($"Copiado: {s}");
         }
-
-
     }
 }

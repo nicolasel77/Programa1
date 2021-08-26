@@ -186,7 +186,6 @@
             this.grdTraslados.FuentePieDePagina = null;
             this.grdTraslados.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdTraslados.Location = new System.Drawing.Point(3, 3);
-            this.grdTraslados.MenuActivado = false;
             this.grdTraslados.Name = "grdTraslados";
             this.grdTraslados.PieDePagina = "\t\tPage {0} of {1}";
             this.grdTraslados.PintarFilaSel = true;

@@ -141,7 +141,6 @@
             this.grdCantidad_Clientes.FuentePieDePagina = null;
             this.grdCantidad_Clientes.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdCantidad_Clientes.Location = new System.Drawing.Point(3, 3);
-            this.grdCantidad_Clientes.MenuActivado = false;
             this.grdCantidad_Clientes.Name = "grdCantidad_Clientes";
             this.grdCantidad_Clientes.PieDePagina = "\t\tPage {0} of {1}";
             this.grdCantidad_Clientes.PintarFilaSel = true;

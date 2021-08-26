@@ -152,7 +152,6 @@
             this.grdCompras.FuentePieDePagina = null;
             this.grdCompras.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdCompras.Location = new System.Drawing.Point(3, 3);
-            this.grdCompras.MenuActivado = false;
             this.grdCompras.Name = "grdCompras";
             this.grdCompras.PieDePagina = "\t\tPage {0} of {1}";
             this.grdCompras.PintarFilaSel = true;
@@ -298,7 +297,6 @@
             this.grdAgregados.FuentePieDePagina = null;
             this.grdAgregados.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdAgregados.Location = new System.Drawing.Point(0, 0);
-            this.grdAgregados.MenuActivado = false;
             this.grdAgregados.Name = "grdAgregados";
             this.grdAgregados.PieDePagina = "\t\tPage {0} of {1}";
             this.grdAgregados.PintarFilaSel = true;
@@ -351,7 +349,6 @@
             this.grdFaena.FuentePieDePagina = null;
             this.grdFaena.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdFaena.Location = new System.Drawing.Point(0, 0);
-            this.grdFaena.MenuActivado = false;
             this.grdFaena.Name = "grdFaena";
             this.grdFaena.PieDePagina = "\t\tPage {0} of {1}";
             this.grdFaena.PintarFilaSel = true;
@@ -398,7 +395,6 @@
             this.grdRomaneos.FuentePieDePagina = null;
             this.grdRomaneos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdRomaneos.Location = new System.Drawing.Point(3, 23);
-            this.grdRomaneos.MenuActivado = false;
             this.grdRomaneos.Name = "grdRomaneos";
             this.grdRomaneos.PieDePagina = "\t\tPage {0} of {1}";
             this.grdRomaneos.PintarFilaSel = true;
@@ -503,7 +499,6 @@
             this.grdBoletas.FuentePieDePagina = null;
             this.grdBoletas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdBoletas.Location = new System.Drawing.Point(3, 21);
-            this.grdBoletas.MenuActivado = false;
             this.grdBoletas.Name = "grdBoletas";
             this.grdBoletas.PieDePagina = "\t\tPage {0} of {1}";
             this.grdBoletas.PintarFilaSel = true;

@@ -30,17 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPromedios));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.grdPromedios = new Grilla2.SpeedGrilla();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.cmdEditar = new Programa1.Controles.cBoton();
+            this.cmdAgregar = new Programa1.Controles.cBoton();
+            this.cmdBorrar = new Programa1.Controles.cBoton();
+            this.cSucs = new Programa1.Controles.cSucursales();
             this.lstFechas = new System.Windows.Forms.ListBox();
             this.lstPromedios = new System.Windows.Forms.ListBox();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.cSucs = new Programa1.Controles.cSucursales();
-            this.cmdBorrar = new Programa1.Controles.cBoton();
-            this.cmdAgregar = new Programa1.Controles.cBoton();
-            this.cmdEditar = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -76,20 +76,6 @@
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 0;
             // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.BackColor = System.Drawing.SystemColors.Control;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(3, 5);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(53, 18);
-            this.materialLabel1.TabIndex = 1;
-            this.materialLabel1.Text = "Detalle";
-            // 
             // grdPromedios
             // 
             this.grdPromedios.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
@@ -106,7 +92,7 @@
             this.grdPromedios.Cols = 11;
             this.grdPromedios.DataMember = "";
             this.grdPromedios.DataSource = null;
-            this.grdPromedios.EnableEdicion = true;
+            this.grdPromedios.EnableEdicion = false;
             this.grdPromedios.Encabezado = "";
             this.grdPromedios.fColor = System.Drawing.SystemColors.Control;
             this.grdPromedios.FixCols = 2;
@@ -115,7 +101,6 @@
             this.grdPromedios.FuentePieDePagina = null;
             this.grdPromedios.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdPromedios.Location = new System.Drawing.Point(6, 33);
-            this.grdPromedios.MenuActivado = false;
             this.grdPromedios.Name = "grdPromedios";
             this.grdPromedios.PieDePagina = "\t\tPage {0} of {1}";
             this.grdPromedios.PintarFilaSel = true;
@@ -135,6 +120,64 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(606, 27);
             this.panel1.TabIndex = 2;
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.BackColor = System.Drawing.SystemColors.Control;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(3, 5);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(56, 19);
+            this.materialLabel1.TabIndex = 1;
+            this.materialLabel1.Text = "Detalle";
+            // 
+            // cmdEditar
+            // 
+            this.cmdEditar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdEditar.Location = new System.Drawing.Point(7, 569);
+            this.cmdEditar.Name = "cmdEditar";
+            this.cmdEditar.Size = new System.Drawing.Size(251, 40);
+            this.cmdEditar.TabIndex = 4;
+            this.cmdEditar.Texto = "Editar";
+            // 
+            // cmdAgregar
+            // 
+            this.cmdAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdAgregar.Location = new System.Drawing.Point(7, 615);
+            this.cmdAgregar.Name = "cmdAgregar";
+            this.cmdAgregar.Size = new System.Drawing.Size(251, 40);
+            this.cmdAgregar.TabIndex = 4;
+            this.cmdAgregar.Texto = "Agregar";
+            // 
+            // cmdBorrar
+            // 
+            this.cmdBorrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdBorrar.Location = new System.Drawing.Point(7, 661);
+            this.cmdBorrar.Name = "cmdBorrar";
+            this.cmdBorrar.Size = new System.Drawing.Size(251, 40);
+            this.cmdBorrar.TabIndex = 4;
+            this.cmdBorrar.Texto = "Borrar";
+            // 
+            // cSucs
+            // 
+            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
+            this.cSucs.Filtro_In = "";
+            this.cSucs.Location = new System.Drawing.Point(440, 3);
+            this.cSucs.Mostrar_Botones = false;
+            this.cSucs.Mostrar_Tipo = false;
+            this.cSucs.Name = "cSucs";
+            this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.One;
+            this.cSucs.Size = new System.Drawing.Size(297, 701);
+            this.cSucs.TabIndex = 3;
+            this.cSucs.Titulo = "Sucursales";
+            this.cSucs.Valor_Actual = -1;
             // 
             // lstFechas
             // 
@@ -168,12 +211,12 @@
             // 
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel3.Location = new System.Drawing.Point(261, 5);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(57, 18);
+            this.materialLabel3.Size = new System.Drawing.Size(57, 19);
             this.materialLabel3.TabIndex = 1;
             this.materialLabel3.Text = "Fechas";
             // 
@@ -181,58 +224,14 @@
             // 
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel2.Location = new System.Drawing.Point(3, 5);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(53, 18);
+            this.materialLabel2.Size = new System.Drawing.Size(56, 19);
             this.materialLabel2.TabIndex = 1;
             this.materialLabel2.Text = "Detalle";
-            // 
-            // cSucs
-            // 
-            this.cSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
-            this.cSucs.Filtro_In = "";
-            this.cSucs.Location = new System.Drawing.Point(440, 3);
-            this.cSucs.Mostrar_Botones = false;
-            this.cSucs.Mostrar_Tipo = true;
-            this.cSucs.Name = "cSucs";
-            this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.One;
-            this.cSucs.Size = new System.Drawing.Size(301, 701);
-            this.cSucs.TabIndex = 3;
-            this.cSucs.Titulo = "Sucursales";
-            this.cSucs.Valor_Actual = -1;
-            // 
-            // cmdBorrar
-            // 
-            this.cmdBorrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmdBorrar.Location = new System.Drawing.Point(7, 661);
-            this.cmdBorrar.Name = "cmdBorrar";
-            this.cmdBorrar.Size = new System.Drawing.Size(251, 40);
-            this.cmdBorrar.TabIndex = 4;
-            this.cmdBorrar.Texto = "Borrar";
-            // 
-            // cmdAgregar
-            // 
-            this.cmdAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmdAgregar.Location = new System.Drawing.Point(7, 615);
-            this.cmdAgregar.Name = "cmdAgregar";
-            this.cmdAgregar.Size = new System.Drawing.Size(251, 40);
-            this.cmdAgregar.TabIndex = 4;
-            this.cmdAgregar.Texto = "Agregar";
-            // 
-            // cmdEditar
-            // 
-            this.cmdEditar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmdEditar.Location = new System.Drawing.Point(7, 569);
-            this.cmdEditar.Name = "cmdEditar";
-            this.cmdEditar.Size = new System.Drawing.Size(251, 40);
-            this.cmdEditar.TabIndex = 4;
-            this.cmdEditar.Texto = "Editar";
             // 
             // frmPromedios
             // 

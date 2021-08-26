@@ -99,7 +99,6 @@
             this.grdRetiros.FuentePieDePagina = null;
             this.grdRetiros.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdRetiros.Location = new System.Drawing.Point(12, 12);
-            this.grdRetiros.MenuActivado = false;
             this.grdRetiros.Name = "grdRetiros";
             this.grdRetiros.PieDePagina = "\t\tPage {0} of {1}";
             this.grdRetiros.PintarFilaSel = true;

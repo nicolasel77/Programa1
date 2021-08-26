@@ -158,7 +158,7 @@
             this.grdRendimiento_Compras.Cols = 10;
             this.grdRendimiento_Compras.DataMember = "";
             this.grdRendimiento_Compras.DataSource = null;
-            this.grdRendimiento_Compras.EnableEdicion = true;
+            this.grdRendimiento_Compras.EnableEdicion = false;
             this.grdRendimiento_Compras.Encabezado = "";
             this.grdRendimiento_Compras.fColor = System.Drawing.SystemColors.Control;
             this.grdRendimiento_Compras.FixCols = 0;
@@ -167,7 +167,6 @@
             this.grdRendimiento_Compras.FuentePieDePagina = null;
             this.grdRendimiento_Compras.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdRendimiento_Compras.Location = new System.Drawing.Point(3, 3);
-            this.grdRendimiento_Compras.MenuActivado = false;
             this.grdRendimiento_Compras.Name = "grdRendimiento_Compras";
             this.grdRendimiento_Compras.PieDePagina = "\t\tPage {0} of {1}";
             this.grdRendimiento_Compras.PintarFilaSel = false;

@@ -161,7 +161,6 @@
             this.grdCompras.FuentePieDePagina = null;
             this.grdCompras.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdCompras.Location = new System.Drawing.Point(3, 3);
-            this.grdCompras.MenuActivado = false;
             this.grdCompras.Name = "grdCompras";
             this.grdCompras.PieDePagina = "\t\tPage {0} of {1}";
             this.grdCompras.PintarFilaSel = true;

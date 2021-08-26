@@ -92,7 +92,6 @@
             this.grdTipo.FuentePieDePagina = null;
             this.grdTipo.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdTipo.Location = new System.Drawing.Point(12, 30);
-            this.grdTipo.MenuActivado = false;
             this.grdTipo.Name = "grdTipo";
             this.grdTipo.PieDePagina = "\t\tPage {0} of {1}";
             this.grdTipo.PintarFilaSel = true;
@@ -131,7 +130,6 @@
             this.grdProductos.FuentePieDePagina = null;
             this.grdProductos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdProductos.Location = new System.Drawing.Point(404, 30);
-            this.grdProductos.MenuActivado = false;
             this.grdProductos.Name = "grdProductos";
             this.grdProductos.PieDePagina = "\t\tPage {0} of {1}";
             this.grdProductos.PintarFilaSel = true;

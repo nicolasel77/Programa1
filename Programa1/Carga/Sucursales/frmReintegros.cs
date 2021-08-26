@@ -45,8 +45,8 @@
             formato_Grilla();
 
             //El intercambio de columnas para estas teclas
-            grdReintegros.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdTipo, c_Importe);
-            grdReintegros.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSuc, c_Importe);
+            grdReintegros.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdTipo, c_Importe);
+            grdReintegros.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdSuc, c_Importe);
 
             Totales();
         }

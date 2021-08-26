@@ -125,11 +125,14 @@ namespace Programa1.Carga.Precios
                     //Guardar todo por cada Sucursal                    
                     Guardar(suc);
                 }
+                int i = lstFechas.SelectedIndex;
+                DataTable dt = precios.Tabla_Precios("Id_Tipo IN (4,6)");
+                lstFechas.Items.Clear();
                 foreach (DataRow dr in precios.Fechas_Granja().Rows)
                 {
                     lstFechas.Items.Add($"{dr[0]:dd/MM/yy}  {dr[1]:N0}");
                 }
-
+                lstFechas.SelectedIndex = i;
                 this.Cursor = Cursors.Default;
             }
         }
@@ -141,12 +144,12 @@ namespace Programa1.Carga.Precios
             //Guardar la Lista
             for (int i = 1; i <= grd.Rows - 1; i++)
             {
-                int prod = Convert.ToInt32((grd.get_Texto(i, grd.get_ColIndex("Id"))));
+                int prod = Convert.ToInt32(grd.get_Texto(i, grd.get_ColIndex("Id")));
 
                 if (prod != 0)
                 {
                     precios.Producto.ID = prod;
-                    precios.Precio = Convert.ToSingle((grd.get_Texto(i, grd.get_ColIndex("Precio"))));
+                    precios.Precio = Convert.ToSingle(grd.get_Texto(i, grd.get_ColIndex("Precio")));
                     precios.Agregar();
                 }
             }

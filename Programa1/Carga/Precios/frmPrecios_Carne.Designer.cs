@@ -159,7 +159,6 @@
             this.grdProductos.FuentePieDePagina = null;
             this.grdProductos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdProductos.Location = new System.Drawing.Point(3, 3);
-            this.grdProductos.MenuActivado = false;
             this.grdProductos.Name = "grdProductos";
             this.grdProductos.PieDePagina = "\t\tPage {0} of {1}";
             this.grdProductos.PintarFilaSel = true;
@@ -353,7 +352,6 @@
             this.grdSucursales.FuentePieDePagina = null;
             this.grdSucursales.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdSucursales.Location = new System.Drawing.Point(3, 3);
-            this.grdSucursales.MenuActivado = false;
             this.grdSucursales.Name = "grdSucursales";
             this.grdSucursales.PieDePagina = "\t\tPage {0} of {1}";
             this.grdSucursales.PintarFilaSel = false;
@@ -410,7 +408,6 @@
             this.grdFormulas.FuentePieDePagina = null;
             this.grdFormulas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdFormulas.Location = new System.Drawing.Point(3, 3);
-            this.grdFormulas.MenuActivado = false;
             this.grdFormulas.Name = "grdFormulas";
             this.grdFormulas.PieDePagina = "\t\tPage {0} of {1}";
             this.grdFormulas.PintarFilaSel = true;

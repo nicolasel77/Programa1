@@ -66,7 +66,7 @@
             this.grdGastos.Cols = 10;
             this.grdGastos.DataMember = "";
             this.grdGastos.DataSource = null;
-            this.grdGastos.EnableEdicion = true;
+            this.grdGastos.EnableEdicion = false;
             this.grdGastos.Encabezado = "";
             this.grdGastos.fColor = System.Drawing.SystemColors.Control;
             this.grdGastos.FixCols = 0;
@@ -76,7 +76,6 @@
             this.grdGastos.FuentePieDePagina = null;
             this.grdGastos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdGastos.Location = new System.Drawing.Point(0, 0);
-            this.grdGastos.MenuActivado = false;
             this.grdGastos.Name = "grdGastos";
             this.grdGastos.PieDePagina = "\t\tPage {0} of {1}";
             this.grdGastos.PintarFilaSel = true;

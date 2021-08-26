@@ -62,7 +62,6 @@ namespace Programa1.Carga.Tesoreria
             this.grdAutorizados.FuentePieDePagina = null;
             this.grdAutorizados.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdAutorizados.Location = new System.Drawing.Point(12, 31);
-            this.grdAutorizados.MenuActivado = false;
             this.grdAutorizados.Name = "grdAutorizados";
             this.grdAutorizados.PieDePagina = "\t\tPage {0} of {1}";
             this.grdAutorizados.PintarFilaSel = false;

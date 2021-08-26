@@ -86,7 +86,6 @@
             this.grdTipo.FuentePieDePagina = null;
             this.grdTipo.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdTipo.Location = new System.Drawing.Point(4, 42);
-            this.grdTipo.MenuActivado = false;
             this.grdTipo.Name = "grdTipo";
             this.grdTipo.PieDePagina = "\t\tPage {0} of {1}";
             this.grdTipo.PintarFilaSel = true;
@@ -123,7 +122,6 @@
             this.grdDetalles.FuentePieDePagina = null;
             this.grdDetalles.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdDetalles.Location = new System.Drawing.Point(3, 42);
-            this.grdDetalles.MenuActivado = false;
             this.grdDetalles.Name = "grdDetalles";
             this.grdDetalles.PieDePagina = "\t\tPage {0} of {1}";
             this.grdDetalles.PintarFilaSel = true;
@@ -180,7 +178,6 @@
             this.grdSubTipo.FuentePieDePagina = null;
             this.grdSubTipo.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdSubTipo.Location = new System.Drawing.Point(3, 42);
-            this.grdSubTipo.MenuActivado = false;
             this.grdSubTipo.Name = "grdSubTipo";
             this.grdSubTipo.PieDePagina = "\t\tPage {0} of {1}";
             this.grdSubTipo.PintarFilaSel = true;
@@ -307,7 +304,6 @@
             this.grdGrupo.FuentePieDePagina = null;
             this.grdGrupo.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdGrupo.Location = new System.Drawing.Point(7, 42);
-            this.grdGrupo.MenuActivado = false;
             this.grdGrupo.Name = "grdGrupo";
             this.grdGrupo.PieDePagina = "\t\tPage {0} of {1}";
             this.grdGrupo.PintarFilaSel = true;

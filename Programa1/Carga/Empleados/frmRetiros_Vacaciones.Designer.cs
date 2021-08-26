@@ -186,7 +186,6 @@
             this.grdRetiros.FuentePieDePagina = null;
             this.grdRetiros.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdRetiros.Location = new System.Drawing.Point(160, 77);
-            this.grdRetiros.MenuActivado = false;
             this.grdRetiros.Name = "grdRetiros";
             this.grdRetiros.PieDePagina = "\t\tPage {0} of {1}";
             this.grdRetiros.PintarFilaSel = true;
@@ -222,7 +221,6 @@
             this.grdDetalle.FuentePieDePagina = null;
             this.grdDetalle.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdDetalle.Location = new System.Drawing.Point(12, 77);
-            this.grdDetalle.MenuActivado = false;
             this.grdDetalle.Name = "grdDetalle";
             this.grdDetalle.PieDePagina = "\t\tPage {0} of {1}";
             this.grdDetalle.PintarFilaSel = true;

@@ -183,7 +183,6 @@
             this.grdEntradas.FuentePieDePagina = null;
             this.grdEntradas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdEntradas.Location = new System.Drawing.Point(0, 24);
-            this.grdEntradas.MenuActivado = false;
             this.grdEntradas.Name = "grdEntradas";
             this.grdEntradas.PieDePagina = "\t\tPage {0} of {1}";
             this.grdEntradas.PintarFilaSel = false;
@@ -291,7 +290,6 @@
             this.grdSalidas.FuentePieDePagina = null;
             this.grdSalidas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdSalidas.Location = new System.Drawing.Point(0, 24);
-            this.grdSalidas.MenuActivado = false;
             this.grdSalidas.Name = "grdSalidas";
             this.grdSalidas.PieDePagina = "\t\tPage {0} of {1}";
             this.grdSalidas.PintarFilaSel = true;
@@ -541,7 +539,6 @@
             this.grdProv.FuentePieDePagina = null;
             this.grdProv.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdProv.Location = new System.Drawing.Point(0, 0);
-            this.grdProv.MenuActivado = false;
             this.grdProv.Name = "grdProv";
             this.grdProv.PieDePagina = "\t\tPage {0} of {1}";
             this.grdProv.PintarFilaSel = true;
