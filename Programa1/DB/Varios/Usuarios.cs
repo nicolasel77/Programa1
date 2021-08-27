@@ -19,11 +19,12 @@ namespace Programa1.DB.Varios
             Administrador = 2,
             Supervisor = 3,
             RRHH = 4,
-            Sistemas = 5
+            Sistemas = 5,
+            Hacienda = 6
         }
 
         string vNombre = "";
-                
+
         public Usuarios()
         {
         }
@@ -36,7 +37,7 @@ namespace Programa1.DB.Varios
             {
                 var dt = new DataTable("Datos");
                 var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-                                
+
                 try
                 {
                     string Cadena = $"SELECT * FROM dbGastos.dbo.Usuarios WHERE Usuario LIKE '{value}%'";
@@ -53,10 +54,10 @@ namespace Programa1.DB.Varios
                     ID = 0;
                 }
 
-                ID = Convert.ToInt32( dt.Rows[0]["ID"]);
+                ID = Convert.ToInt32(dt.Rows[0]["ID"]);
                 vNombre = Convert.ToString(dt.Rows[0]["Usuario"]);
                 //Contraseña por ahora no, se usa la de sistema para iniciar sesion.
-                switch( Convert.ToByte(dt.Rows[0]["Permiso"]))
+                switch (Convert.ToByte(dt.Rows[0]["Permiso"]))
                 {
                     case 1:
                         Permiso = e_Permiso.Operador;
@@ -88,6 +89,9 @@ namespace Programa1.DB.Varios
                         break;
                     case 5:
                         Tipo = e_TipoUsuario.Sistemas;
+                        break;
+                    case 6:
+                        Tipo = e_TipoUsuario.Hacienda;
                         break;
                 }
             }

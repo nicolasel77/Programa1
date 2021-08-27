@@ -4,6 +4,7 @@ namespace Programa1.DB
     using System;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Media;
     using System.Windows.Forms;
 
     public class Precios_Proveedores
@@ -155,7 +156,7 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Precio_Proveedores (Fecha, Id_Proveedores, Id_Productos, Precio) " +
+                    new SqlCommand($"INSERT INTO Precios_Proveedores (Fecha, Id_Proveedores, Id_Productos, Precio) " +
                     $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Proveedor.Id}, {Producto.ID}, {Precio.ToString().Replace(",", ".")} )", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -192,6 +193,32 @@ namespace Programa1.DB
             {
                 MessageBox.Show(e.Message, "Error");
             }
+        }
+
+        public int Max_ID()
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            int d = 0;
+
+            try
+            {
+                string Cadena = $"SELECT MAX(ID) FROM Precio_Proveedores";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                cnn.Open();
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                d = (int)cmd.ExecuteScalar();
+                Id = d;
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+            }
+
+            return d;
         }
     }
 }

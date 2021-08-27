@@ -8,20 +8,20 @@
 
     public partial class frmOfertas : Form
     {
-        private Ofertas Ofertas;
+        private readonly Ofertas Ofertas;
 
         #region " Columnas "
-        private Byte c_Id;
-        private Byte c_Fecha;
-        private Byte c_IdSuc;
-        private Byte c_IdProd;
-        private Byte c_Descripcion;
-        private Byte c_CostoOriginal;
-        private Byte c_CostoOferta;
-        private Byte c_Kilos;
-        private Byte c_Reintegro;
-        private Byte c_Kilos_Ven;
-        private Byte c_Dif;
+        private readonly Byte c_Id;
+        private readonly Byte c_Fecha;
+        private readonly Byte c_IdSuc;
+        private readonly Byte c_IdProd;
+        private readonly Byte c_Descripcion;
+        private readonly Byte c_CostoOriginal;
+        private readonly Byte c_CostoOferta;
+        private readonly Byte c_Kilos;
+        private readonly Byte c_Reintegro;
+        private readonly Byte c_Kilos_Ven;
+        private readonly Byte c_Dif;
         #endregion
 
         public frmOfertas()
@@ -377,17 +377,16 @@
             Ofertas.ID = Convert.ToInt32(grdOfertas.get_Texto(Fila, c_Id));
             double kv = Ofertas.Buscarkg_Venta();
             grdOfertas.set_Texto(Fila, c_Kilos_Ven, kv);
-            grdOfertas.set_Texto(Fila, c_Dif, kv - Convert.ToDouble(grdOfertas.get_Texto(Fila,c_Kilos)));
+            grdOfertas.set_Texto(Fila, c_Dif, kv - Convert.ToDouble(grdOfertas.get_Texto(Fila, c_Kilos)));
         }
 
         private void GrdOfertas_CambioFila(short Fila)
         {
             int i = Convert.ToInt32(grdOfertas.get_Texto(Fila, c_Id).ToString());
-            Ofertas.ID = i;
             if (i > 0)
             {
-                Thread th = new Thread(new ThreadStart(Ofertas.Cargar_Fila));
-                th.Start();
+                Ofertas.ID = i;
+                Ofertas.Cargar_Fila();
                 Ofertas.precios.Fecha = Ofertas.Fecha;
                 Ofertas.precios.Sucursal = Ofertas.Sucursal;
                 Ofertas.precios.Producto = Ofertas.Producto;
@@ -409,7 +408,7 @@
                 Ofertas.precios.Sucursal = Ofertas.Sucursal;
                 Ofertas.precios.Producto = Ofertas.Producto;
             }
-        }              
+        }
 
         private void GrdOfertas_KeyPress(object sender, short e)
         {
