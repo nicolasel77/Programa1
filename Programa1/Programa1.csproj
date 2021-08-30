@@ -141,6 +141,12 @@
     <Compile Include="Carga\Hacienda\frmFrigorificosABM.Designer.cs">
       <DependentUpon>frmFrigorificosABM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Hacienda\frmGenerarnvaBoleta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmGenerarnvaBoleta.Designer.cs">
+      <DependentUpon>frmGenerarnvaBoleta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Hacienda\frmPagar_Agregados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -640,6 +646,7 @@
     <Compile Include="DB\Hacienda\Consignatarios.cs" />
     <Compile Include="DB\Hacienda\Faena.cs" />
     <Compile Include="DB\Hacienda\Frigorificos.cs" />
+    <Compile Include="DB\Hacienda\Generar_Boleta.cs" />
     <Compile Include="DB\Hacienda\Hacienda.cs" />
     <Compile Include="DB\Hacienda\Hacienda_Salidas.cs" />
     <Compile Include="DB\Hacienda\Matriculas.cs" />
@@ -762,6 +769,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmFrigorificosABM.resx">
       <DependentUpon>frmFrigorificosABM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmGenerarnvaBoleta.resx">
+      <DependentUpon>frmGenerarnvaBoleta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmPagar_Agregados.resx">
       <DependentUpon>frmPagar_Agregados.cs</DependentUpon>

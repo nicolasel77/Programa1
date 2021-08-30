@@ -396,6 +396,10 @@
             {
                 if (Compras.ID == 0)
                 {
+                    if (grdCompras.Col == c_IdCamion)
+                    {
+                        grdCompras.ActivarCelda(grdCompras.Row, grdCompras.Col +1);
+                    }
 
                     if (grdCompras.Col == c_Kilos)
                     {
@@ -486,6 +490,28 @@
         private void lstCamiones_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmdMostrar.PerformClick();
+        }
+
+        private void grdCompras_SeleccionCambio(int FilaInicio, int FilaFin, int ColInicio, int ColFin)
+        {
+            if (FilaInicio == FilaFin)
+            {
+                Totales();
+            }
+            else
+            {
+                float k = 0, tc = 0;
+                for (int i = FilaInicio; i <= FilaFin; i++)
+                {
+                    k += Convert.ToSingle(grdCompras.get_Texto(i, c_Kilos));
+                    tc += Convert.ToSingle(grdCompras.get_Texto(i, c_Total));
+                }
+
+                int c = FilaFin - FilaInicio + 1;
+                lblCant.Text = $"Registros: {c:N0}";
+                lblKilos.Text = $"Kilos: {k:N2}";
+                lblTotal.Text = $"Total Venta: {tc:C2}";
+            }
         }
     }
 }

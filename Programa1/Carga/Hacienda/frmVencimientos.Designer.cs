@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.grdAgr = new Grilla2.SpeedGrilla();
             this.label2 = new System.Windows.Forms.Label();
+            this.cmbnvaBoleta = new Programa1.Controles.cBoton();
             this.cmdActualizar = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -62,6 +63,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.cmbnvaBoleta);
             this.splitContainer1.Panel2.Controls.Add(this.cmdActualizar);
             this.splitContainer1.Size = new System.Drawing.Size(1456, 780);
             this.splitContainer1.SplitterDistance = 730;
@@ -181,6 +183,16 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Compras P2";
             // 
+            // cmbnvaBoleta
+            // 
+            this.cmbnvaBoleta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmbnvaBoleta.Location = new System.Drawing.Point(3, 7);
+            this.cmbnvaBoleta.Name = "cmbnvaBoleta";
+            this.cmbnvaBoleta.Size = new System.Drawing.Size(143, 27);
+            this.cmbnvaBoleta.TabIndex = 1;
+            this.cmbnvaBoleta.Texto = "Generar Boleta";
+            this.cmbnvaBoleta.Click += new System.EventHandler(this.cmbnvaBoleta_Click);
+            // 
             // cmdActualizar
             // 
             this.cmdActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -222,5 +234,6 @@
         private Controles.cBoton cmdActualizar;
         private Grilla2.SpeedGrilla grdAgr;
         private System.Windows.Forms.Label label2;
+        private Controles.cBoton cmbnvaBoleta;
     }
 }

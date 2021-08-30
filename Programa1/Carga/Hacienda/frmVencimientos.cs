@@ -4,7 +4,7 @@
     using System;
     using System.Drawing;
     using System.Windows.Forms;
-
+    using System.Data;
     public partial class frmVencimientos : Form
     {
         public Saldos_Consignatarios saldos = new Saldos_Consignatarios();
@@ -40,7 +40,9 @@
         const int aIDMat = 11;
         const int aMatricula = 12;
         #endregion
-        
+
+        private DataTable dtgboleta = null;
+
         public frmVencimientos()
         {
             InitializeComponent();
@@ -70,7 +72,8 @@
 
         private void Compras_P1()
         {
-            grd.MostrarDatos(saldos.Vencimientos(), true, cDif);
+            dtgboleta = saldos.Vencimientos();
+            grd.MostrarDatos(dtgboleta, true, cDif);
 
 
             double valor = 0;
@@ -224,6 +227,14 @@
                 }
                 saldos.Ejecutar_Comando($"UPDATE Hacienda_Agregados SET Estado={grdAgr.get_Texto(f, aEstado)} WHERE ID_Agregados_Frigo={grdAgr.get_Texto(f, aID)}");
             }
+        }
+
+        private void cmbnvaBoleta_Click(object sender, EventArgs e)
+        {
+            frmGenerarnvaBoleta fr = new frmGenerarnvaBoleta();
+            fr.dt = dtgboleta;
+            fr.Cargar();
+            fr.ShowDialog();
         }
     }
 }

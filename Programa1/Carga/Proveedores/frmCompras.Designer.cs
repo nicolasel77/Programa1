@@ -39,11 +39,8 @@
             this.grdCompras = new Grilla2.SpeedGrilla();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.cProds = new Programa1.Controles.cProductos();
             this.lstCamiones = new System.Windows.Forms.ListBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.cFecha = new Programa1.Controles.cFechas();
-            this.cProvs = new Programa1.Controles.cProveedores();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.paCambio = new System.Windows.Forms.Panel();
@@ -52,6 +49,9 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
+            this.cProds = new Programa1.Controles.cProductos();
+            this.cFecha = new Programa1.Controles.cFechas();
+            this.cProvs = new Programa1.Controles.cProveedores();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -93,25 +93,25 @@
             // 
             // lblCant
             // 
-            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblCant.Name = "lblCant";
-            this.lblCant.Size = new System.Drawing.Size(60, 23);
+            this.lblCant.Size = new System.Drawing.Size(72, 23);
             this.lblCant.Text = "Cantidad";
             this.lblCant.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblKilos
             // 
-            this.lblKilos.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblKilos.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblKilos.Name = "lblKilos";
-            this.lblKilos.Size = new System.Drawing.Size(36, 23);
+            this.lblKilos.Size = new System.Drawing.Size(43, 23);
             this.lblKilos.Text = "Kilos";
             this.lblKilos.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblTotal
             // 
-            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(49, 23);
+            this.lblTotal.Size = new System.Drawing.Size(57, 23);
             this.lblTotal.Text = "Totales";
             this.lblTotal.Click += new System.EventHandler(this.LblCant_Click);
             // 
@@ -173,6 +173,7 @@
             this.grdCompras.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdCompras_CambioFila);
             this.grdCompras.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdCompras_KeyUp);
             this.grdCompras.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.GrdCompras_KeyPress);
+            this.grdCompras.SeleccionCambio += new Grilla2.SpeedGrilla.SeleccionCambioEventHandler(this.grdCompras_SeleccionCambio);
             // 
             // splitContainer3
             // 
@@ -211,23 +212,6 @@
             this.splitContainer2.SplitterDistance = 587;
             this.splitContainer2.TabIndex = 2;
             // 
-            // cProds
-            // 
-            this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cProds.BackColor = System.Drawing.Color.Gainsboro;
-            this.cProds.Filtrar_Ver = true;
-            this.cProds.Filtro_In = "";
-            this.cProds.Location = new System.Drawing.Point(3, 3);
-            this.cProds.Mostrar_Tipo = true;
-            this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(250, 581);
-            this.cProds.TabIndex = 1;
-            this.cProds.Titulo = "Productos";
-            this.cProds.Valor_Actual = -1;
-            this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
-            // 
             // lstCamiones
             // 
             this.lstCamiones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -249,44 +233,14 @@
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(3, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(77, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(76, 18);
             this.materialLabel1.TabIndex = 0;
             this.materialLabel1.Text = "Camiones";
-            // 
-            // cFecha
-            // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(3, 381);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Mostrar = 0;
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(249, 303);
-            this.cFecha.TabIndex = 3;
-            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
-            // 
-            // cProvs
-            // 
-            this.cProvs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cProvs.BackColor = System.Drawing.Color.Gainsboro;
-            this.cProvs.Filtro_In = "";
-            this.cProvs.Location = new System.Drawing.Point(2, 3);
-            this.cProvs.Mostrar_Tipo = false;
-            this.cProvs.Name = "cProvs";
-            this.cProvs.Size = new System.Drawing.Size(258, 372);
-            this.cProvs.TabIndex = 2;
-            this.cProvs.Titulo = "Proveedores";
-            this.cProvs.Valor_Actual = -1;
-            this.cProvs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
             // 
             // tiMensaje
             // 
@@ -382,6 +336,53 @@
             this.cmdLimpiar.Text = "Limpiar";
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
+            // 
+            // cProds
+            // 
+            this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cProds.BackColor = System.Drawing.Color.Gainsboro;
+            this.cProds.Filtrar_Ver = true;
+            this.cProds.Filtro_In = "";
+            this.cProds.Location = new System.Drawing.Point(3, 3);
+            this.cProds.Mostrar_Tipo = true;
+            this.cProds.Name = "cProds";
+            this.cProds.Size = new System.Drawing.Size(250, 581);
+            this.cProds.TabIndex = 1;
+            this.cProds.Titulo = "Productos";
+            this.cProds.Valor_Actual = -1;
+            this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
+            // 
+            // cFecha
+            // 
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(3, 381);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(249, 303);
+            this.cFecha.TabIndex = 3;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
+            // 
+            // cProvs
+            // 
+            this.cProvs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cProvs.BackColor = System.Drawing.Color.Gainsboro;
+            this.cProvs.Filtro_In = "";
+            this.cProvs.Location = new System.Drawing.Point(2, 3);
+            this.cProvs.Mostrar_Tipo = true;
+            this.cProvs.Name = "cProvs";
+            this.cProvs.Size = new System.Drawing.Size(258, 372);
+            this.cProvs.TabIndex = 2;
+            this.cProvs.Titulo = "Proveedores";
+            this.cProvs.Valor_Actual = -1;
+            this.cProvs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
             // 
             // frmCompras
             // 
