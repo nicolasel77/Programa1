@@ -12,7 +12,7 @@
             usuario.Nombre = System.Environment.UserName;
             //System.Windows.Forms.MessageBox.Show(usuario.Nombre);
             //usuario.Nombre = "Hacienda";
-
+            
             frmMain fr = new frmMain();
             fr.usuario = usuario;
             fr.ShowDialog();

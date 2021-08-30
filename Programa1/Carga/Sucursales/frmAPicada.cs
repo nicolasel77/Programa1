@@ -165,9 +165,10 @@
             grdAPicada.Columnas[c_Reintegro].Format = "C2";
 
             grdAPicada.Columnas[c_IdSuc + 1].Style.ForeColor = Color.DimGray;
-            grdAPicada.Columnas[c_Kilos_A].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
-            grdAPicada.Columnas[c_Kilos_S].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
-            grdAPicada.Columnas[c_Reintegro].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
+            grdAPicada.Columnas[c_IdSuc].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grdAPicada.Columnas[c_Kilos_A].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grdAPicada.Columnas[c_Kilos_S].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grdAPicada.Columnas[c_Reintegro].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
 
             grdAPicada.set_Texto(0, c_IdSuc, "Suc");
             grdAPicada.set_Texto(0, c_IdProd_A, "Prod");

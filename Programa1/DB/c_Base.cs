@@ -640,6 +640,7 @@
             try
             {
                 SqlCommand command = new SqlCommand(comando, cnn);
+                command.CommandTimeout = 20000;
                 command.CommandType = CommandType.Text;
                 command.Connection = cnn;
                 cnn.Open();
