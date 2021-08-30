@@ -196,8 +196,8 @@
                         }
                         else
                         {
-                            grdProductos.set_Texto(f, c, a);
                             prods.Agregar();
+                            grdProductos.set_Texto(f, c, a);
                             grdProductos.AgregarFila();
                             grdProductos.ActivarCelda(f, cTipo);
                         }
@@ -215,9 +215,9 @@
                         prods.Tipo.ID = Convert.ToInt32(a);
                         if (prods.Tipo.Existe() == true)
                         {
+                            prods.Actualizar();
                             grdProductos.set_Texto(f, c, a);
                             grdProductos.set_Texto(f, c + 1, prods.Tipo.Nombre);
-                            prods.Actualizar();
                             grdProductos.ActivarCelda(f, cNombre);
                         }
                         else
@@ -237,8 +237,8 @@
                     {
                         prods.ID = i;
                         prods.Nombre = a.ToString();
-                        grdProductos.set_Texto(f, c, a);
                         prods.Actualizar();
+                        grdProductos.set_Texto(f, c, a);
                         grdProductos.ActivarCelda(f, cVer);
                     }
                     break;

@@ -2258,5 +2258,11 @@
                 }
             }
         }
+
+        private void mnuGuardar_Click(object sender, EventArgs e)
+        {
+            frmGuardar_Semana fr = new frmGuardar_Semana();
+            fr.ShowDialog();
+        }
     }
 }

@@ -11,7 +11,7 @@
             Usuarios usuario = new Usuarios();
             usuario.Nombre = System.Environment.UserName;
             //System.Windows.Forms.MessageBox.Show(usuario.Nombre);
-            //usuario.Nombre = "Flor";
+            //usuario.Nombre = "Hacienda";
 
             frmMain fr = new frmMain();
             fr.usuario = usuario;
