@@ -59,6 +59,8 @@
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.lblTotalR = new System.Windows.Forms.ToolStripStatusLabel();
             this.grdResultado = new Grilla2.SpeedGrilla();
+            this.cmbCamion = new System.Windows.Forms.ComboBox();
+            this.chCamion = new MaterialSkin.Controls.MaterialCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -83,6 +85,8 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.cmbCamion);
+            this.splitContainer1.Panel1.Controls.Add(this.chCamion);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             this.splitContainer1.Panel1.Controls.Add(this.cmdGuardar);
             this.splitContainer1.Panel1.Controls.Add(this.txtKilos);
@@ -536,6 +540,7 @@
             this.grdOriginal.FuentePieDePagina = null;
             this.grdOriginal.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdOriginal.Location = new System.Drawing.Point(0, 0);
+            this.grdOriginal.Name = "grdOriginal";
             this.grdOriginal.PieDePagina = "\t\tPage {0} of {1}";
             this.grdOriginal.PintarFilaSel = true;
             this.grdOriginal.Redraw = true;
@@ -590,6 +595,35 @@
             this.grdResultado.Rows = 50;
             this.grdResultado.Size = new System.Drawing.Size(1222, 286);
             this.grdResultado.TabIndex = 1;
+            // 
+            // cmbCamion
+            // 
+            this.cmbCamion.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cmbCamion.Enabled = false;
+            this.cmbCamion.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.cmbCamion.FormattingEnabled = true;
+            this.cmbCamion.Location = new System.Drawing.Point(331, 107);
+            this.cmbCamion.Name = "cmbCamion";
+            this.cmbCamion.Size = new System.Drawing.Size(175, 26);
+            this.cmbCamion.TabIndex = 8;
+            this.cmbCamion.Text = "Seleccionar";
+            // 
+            // chCamion
+            // 
+            this.chCamion.AutoSize = true;
+            this.chCamion.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chCamion.Depth = 0;
+            this.chCamion.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.chCamion.Location = new System.Drawing.Point(326, 74);
+            this.chCamion.Margin = new System.Windows.Forms.Padding(0);
+            this.chCamion.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chCamion.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chCamion.Name = "chCamion";
+            this.chCamion.Ripple = true;
+            this.chCamion.Size = new System.Drawing.Size(77, 30);
+            this.chCamion.TabIndex = 7;
+            this.chCamion.Text = "Camión";
+            this.chCamion.UseVisualStyleBackColor = true;
             // 
             // frmCMVentas
             // 
@@ -652,5 +686,7 @@
         private MaterialSkin.Controls.MaterialCheckBox chCostoVenta;
         private System.Windows.Forms.ComboBox cmbSucursal;
         private MaterialSkin.Controls.MaterialCheckBox chSucursal;
+        private System.Windows.Forms.ComboBox cmbCamion;
+        private MaterialSkin.Controls.MaterialCheckBox chCamion;
     }
 }

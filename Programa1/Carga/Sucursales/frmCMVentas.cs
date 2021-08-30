@@ -53,6 +53,11 @@
             {
                 cmbProds.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
             }
+            dt = Ventas.Camion.Datos();
+            foreach (DataRow dr in dt.Rows)
+            {
+                cmbCamion.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
+            }
         }
         private void formato_Grilla()
         {
@@ -275,6 +280,17 @@
                 }
                 grdResultado.set_Texto(f, grdResultado.get_ColIndex("Total_Compra"), Ventas.CostoCompra * Ventas.Kilos);
                 grdResultado.set_Texto(f, grdResultado.get_ColIndex("Total_Venta"), Ventas.CostoVenta * Ventas.Kilos);
+
+                if (chCamion.Checked)
+                {
+                    if (cmbCamion.SelectedIndex > -1)
+                    {
+                        Herramientas.Herramientas h = new Herramientas.Herramientas();
+                        Ventas.Camion.ID = h.Codigo_Seleccionado(cmbCamion.Text);
+
+                        grdResultado.set_Texto(f, grdResultado.get_ColIndex("ID_Camion"), Ventas.Camion.ID);
+                    }
+                }
             }
             Totales();
         }
@@ -294,6 +310,7 @@
                 Ventas.CostoCompra = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Compra")));
                 Ventas.CostoVenta = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Venta")));
                 Ventas.Kilos = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Kilos")));
+                Ventas.Camion.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("ID_Camion")));
                 Ventas.Actualizar();
             }
             this.Close();
