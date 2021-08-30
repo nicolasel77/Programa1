@@ -30,10 +30,10 @@
         private void InitializeComponent()
         {
             this.lstSemanas = new System.Windows.Forms.ListBox();
-            this.cmdGuardar = new Programa1.Controles.cBoton();
             this.chSemana = new MaterialSkin.Controls.MaterialCheckBox();
             this.chVentaPorProducto = new MaterialSkin.Controls.MaterialCheckBox();
             this.chBloquear = new MaterialSkin.Controls.MaterialCheckBox();
+            this.cmdGuardar = new Programa1.Controles.cBoton();
             this.SuspendLayout();
             // 
             // lstSemanas
@@ -47,19 +47,9 @@
             this.lstSemanas.ItemHeight = 20;
             this.lstSemanas.Location = new System.Drawing.Point(12, 12);
             this.lstSemanas.Name = "lstSemanas";
-            this.lstSemanas.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstSemanas.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstSemanas.Size = new System.Drawing.Size(237, 340);
             this.lstSemanas.TabIndex = 0;
-            // 
-            // cmdGuardar
-            // 
-            this.cmdGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdGuardar.Location = new System.Drawing.Point(12, 395);
-            this.cmdGuardar.Name = "cmdGuardar";
-            this.cmdGuardar.Size = new System.Drawing.Size(237, 43);
-            this.cmdGuardar.TabIndex = 1;
-            this.cmdGuardar.Texto = "Guardar";
             // 
             // chSemana
             // 
@@ -68,7 +58,7 @@
             this.chSemana.Checked = true;
             this.chSemana.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chSemana.Depth = 0;
-            this.chSemana.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chSemana.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chSemana.Location = new System.Drawing.Point(12, 362);
             this.chSemana.Margin = new System.Windows.Forms.Padding(0);
             this.chSemana.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -87,7 +77,7 @@
             this.chVentaPorProducto.Checked = true;
             this.chVentaPorProducto.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chVentaPorProducto.Depth = 0;
-            this.chVentaPorProducto.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chVentaPorProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chVentaPorProducto.Location = new System.Drawing.Point(91, 362);
             this.chVentaPorProducto.Margin = new System.Windows.Forms.Padding(0);
             this.chVentaPorProducto.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -104,7 +94,7 @@
             this.chBloquear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chBloquear.AutoSize = true;
             this.chBloquear.Depth = 0;
-            this.chBloquear.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chBloquear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chBloquear.Location = new System.Drawing.Point(157, 362);
             this.chBloquear.Margin = new System.Windows.Forms.Padding(0);
             this.chBloquear.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -115,6 +105,17 @@
             this.chBloquear.TabIndex = 2;
             this.chBloquear.Text = "Bloquear";
             this.chBloquear.UseVisualStyleBackColor = true;
+            // 
+            // cmdGuardar
+            // 
+            this.cmdGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGuardar.Location = new System.Drawing.Point(12, 395);
+            this.cmdGuardar.Name = "cmdGuardar";
+            this.cmdGuardar.Size = new System.Drawing.Size(237, 43);
+            this.cmdGuardar.TabIndex = 1;
+            this.cmdGuardar.Texto = "Guardar";
+            this.cmdGuardar.Click += new System.EventHandler(this.cmdGuardar_Click);
             // 
             // frmGuardar_Semana
             // 

@@ -71,6 +71,18 @@
                     grdSalidas.Focus();
                     grdSalidas.ActivarCelda(1,0);
                     break;
+                case Keys.NumPad1:
+                case Keys.NumPad2:
+                case Keys.NumPad3:
+                case Keys.NumPad4:
+                case Keys.NumPad5:
+                case Keys.NumPad6:
+                case Keys.NumPad7:
+                case Keys.NumPad8:
+                case Keys.NumPad9:
+                    nuTop.Value = (int)e.KeyValue - 96;
+                    Estadisticas();
+                    break;
             }
         }
 
@@ -429,8 +441,8 @@
                 unaToolStripMenuItem.Checked = !unaToolStripMenuItem.Checked;
                 todasToolStripMenuItem.Checked = !todasToolStripMenuItem.Checked;
                 Filtro_SucUnica = unaToolStripMenuItem.Checked;
-                Estadisticas();
                 NoCargar = false;
+                Estadisticas();
             }
         }
 

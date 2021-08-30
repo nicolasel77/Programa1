@@ -101,41 +101,41 @@
             // 
             // lblCant
             // 
-            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCant.Name = "lblCant";
-            this.lblCant.Size = new System.Drawing.Size(60, 23);
+            this.lblCant.Size = new System.Drawing.Size(73, 23);
             this.lblCant.Text = "Cantidad";
             this.lblCant.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblKilos
             // 
-            this.lblKilos.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblKilos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblKilos.Name = "lblKilos";
-            this.lblKilos.Size = new System.Drawing.Size(36, 23);
+            this.lblKilos.Size = new System.Drawing.Size(42, 23);
             this.lblKilos.Text = "Kilos";
             this.lblKilos.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblTotalS
             // 
-            this.lblTotalS.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalS.Name = "lblTotalS";
-            this.lblTotalS.Size = new System.Drawing.Size(88, 23);
+            this.lblTotalS.Size = new System.Drawing.Size(109, 23);
             this.lblTotalS.Text = "Totales Salida";
             this.lblTotalS.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblTotalE
             // 
-            this.lblTotalE.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalE.Name = "lblTotalE";
-            this.lblTotalE.Size = new System.Drawing.Size(98, 23);
+            this.lblTotalE.Size = new System.Drawing.Size(122, 23);
             this.lblTotalE.Text = "Totales Entrada";
             this.lblTotalE.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblDiferencia
             // 
-            this.lblDiferencia.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiferencia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDiferencia.Name = "lblDiferencia";
-            this.lblDiferencia.Size = new System.Drawing.Size(66, 23);
+            this.lblDiferencia.Size = new System.Drawing.Size(81, 23);
             this.lblDiferencia.Text = "Diferencia";
             this.lblDiferencia.Click += new System.EventHandler(this.LblCant_Click);
             // 
@@ -244,7 +244,7 @@
             this.cSucSalida.Filtro_In = "";
             this.cSucSalida.Location = new System.Drawing.Point(3, 3);
             this.cSucSalida.Mostrar_Botones = true;
-            this.cSucSalida.Mostrar_Tipo = false;
+            this.cSucSalida.Mostrar_Tipo = true;
             this.cSucSalida.Name = "cSucSalida";
             this.cSucSalida.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucSalida.Size = new System.Drawing.Size(253, 392);
@@ -262,7 +262,7 @@
             this.cSucEntrada.Filtro_In = "";
             this.cSucEntrada.Location = new System.Drawing.Point(0, 3);
             this.cSucEntrada.Mostrar_Botones = true;
-            this.cSucEntrada.Mostrar_Tipo = false;
+            this.cSucEntrada.Mostrar_Tipo = true;
             this.cSucEntrada.Name = "cSucEntrada";
             this.cSucEntrada.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucEntrada.Size = new System.Drawing.Size(260, 392);
@@ -315,7 +315,7 @@
             this.cProds.Location = new System.Drawing.Point(3, 0);
             this.cProds.Mostrar_Tipo = true;
             this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(286, 288);
+            this.cProds.Size = new System.Drawing.Size(282, 288);
             this.cProds.TabIndex = 1;
             this.cProds.Titulo = "Productos";
             this.cProds.Valor_Actual = -1;

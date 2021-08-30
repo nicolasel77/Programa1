@@ -103,49 +103,49 @@
             // 
             // lblCant
             // 
-            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCant.Name = "lblCant";
-            this.lblCant.Size = new System.Drawing.Size(60, 23);
+            this.lblCant.Size = new System.Drawing.Size(72, 23);
             this.lblCant.Text = "Cantidad";
             this.lblCant.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblKilosA
             // 
-            this.lblKilosA.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblKilosA.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblKilosA.Name = "lblKilosA";
-            this.lblKilosA.Size = new System.Drawing.Size(36, 23);
+            this.lblKilosA.Size = new System.Drawing.Size(43, 23);
             this.lblKilosA.Text = "Kilos";
             this.lblKilosA.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblKilosS
             // 
-            this.lblKilosS.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblKilosS.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblKilosS.Name = "lblKilosS";
-            this.lblKilosS.Size = new System.Drawing.Size(36, 23);
+            this.lblKilosS.Size = new System.Drawing.Size(43, 23);
             this.lblKilosS.Text = "Kilos";
             this.lblKilosS.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblTotalA
             // 
-            this.lblTotalA.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalA.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalA.Name = "lblTotalA";
-            this.lblTotalA.Size = new System.Drawing.Size(49, 23);
+            this.lblTotalA.Size = new System.Drawing.Size(57, 23);
             this.lblTotalA.Text = "Totales";
             this.lblTotalA.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblTotalS
             // 
-            this.lblTotalS.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalS.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalS.Name = "lblTotalS";
-            this.lblTotalS.Size = new System.Drawing.Size(49, 23);
+            this.lblTotalS.Size = new System.Drawing.Size(57, 23);
             this.lblTotalS.Text = "Totales";
             this.lblTotalS.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblReintegro
             // 
-            this.lblReintegro.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReintegro.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblReintegro.Name = "lblReintegro";
-            this.lblReintegro.Size = new System.Drawing.Size(65, 23);
+            this.lblReintegro.Size = new System.Drawing.Size(78, 23);
             this.lblReintegro.Text = "Reintegro";
             this.lblReintegro.Click += new System.EventHandler(this.LblCant_Click);
             // 
@@ -307,7 +307,7 @@
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(0, 0);
             this.cSucs.Mostrar_Botones = true;
-            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Mostrar_Tipo = false;
             this.cSucs.Name = "cSucs";
             this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucs.Size = new System.Drawing.Size(202, 528);

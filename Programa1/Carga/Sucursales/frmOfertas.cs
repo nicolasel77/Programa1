@@ -153,7 +153,8 @@
             grdOfertas.Columnas[c_Reintegro].Format = "C2";
 
             grdOfertas.Columnas[c_IdSuc + 1].Style.ForeColor = Color.DimGray;
-            grdOfertas.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
+            grdOfertas.Columnas[c_IdSuc].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grdOfertas.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
 
             grdOfertas.set_Texto(0, c_IdSuc, "Suc");
             grdOfertas.set_Texto(0, c_IdProd, "Prod");

@@ -40,8 +40,13 @@
                 System.Windows.Forms.MessageBox.Show(er.Message);
             }            
         }
-       
-        public DateTime Semana { get; set; }
+
+        internal void Bloquear(DateTime semana)
+        {
+            Ejecutar_Comando($"UPDATE Semanas SET Cerrada=1 WHERE Semana='{semana:MM/dd/yy}'");
+        }
+
+        public DateTime Semana { get; set; } = new DateTime(1900, 1, 1);
         public bool Guardada { get; set; }
         public bool Cerrada { get; set; }
                 
@@ -52,6 +57,10 @@
         public DataTable Fechas()
         {
             return Datos_Vista("", "TOP 100 Semana", "Semana DESC");            
+        }
+        public DataTable Fechas(int Top)
+        {
+            return Datos_Vista("", $"TOP {Top} Semana", "Semana DESC");
         }
         public DataTable Años()
         {

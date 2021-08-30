@@ -681,6 +681,7 @@
     <Compile Include="DB\Varios\Capital_Trabajo.cs" />
     <Compile Include="DB\Varios\Datos_Genericos.cs" />
     <Compile Include="DB\Varios\Empresas.cs" />
+    <Compile Include="DB\Varios\Estadisticas.cs" />
     <Compile Include="DB\Varios\Listas_Carga.cs" />
     <Compile Include="DB\Varios\Localidades.cs" />
     <Compile Include="DB\Proveedores\Compras.cs" />

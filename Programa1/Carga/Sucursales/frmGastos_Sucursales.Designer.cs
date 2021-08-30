@@ -72,7 +72,7 @@
             this.lblMensaje,
             this.lblCant,
             this.lblTotal});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 793);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 671);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
             this.statusStrip1.Size = new System.Drawing.Size(1329, 32);
@@ -87,17 +87,17 @@
             // 
             // lblCant
             // 
-            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCant.Name = "lblCant";
-            this.lblCant.Size = new System.Drawing.Size(60, 27);
+            this.lblCant.Size = new System.Drawing.Size(72, 27);
             this.lblCant.Text = "Cantidad";
             this.lblCant.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblTotal
             // 
-            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(49, 27);
+            this.lblTotal.Size = new System.Drawing.Size(57, 27);
             this.lblTotal.Text = "Totales";
             this.lblTotal.Click += new System.EventHandler(this.LblCant_Click);
             // 
@@ -117,7 +117,7 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new System.Drawing.Size(1329, 793);
+            this.splitContainer1.Size = new System.Drawing.Size(1329, 671);
             this.splitContainer1.SplitterDistance = 809;
             this.splitContainer1.SplitterWidth = 9;
             this.splitContainer1.TabIndex = 1;
@@ -153,7 +153,7 @@
             this.grdGastos.Redraw = true;
             this.grdGastos.Row = 0;
             this.grdGastos.Rows = 50;
-            this.grdGastos.Size = new System.Drawing.Size(802, 782);
+            this.grdGastos.Size = new System.Drawing.Size(802, 660);
             this.grdGastos.TabIndex = 0;
             this.grdGastos.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdGastos_Editado);
             this.grdGastos.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdGastos_CambioFila);
@@ -173,7 +173,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer3.Size = new System.Drawing.Size(511, 793);
+            this.splitContainer3.Size = new System.Drawing.Size(511, 671);
             this.splitContainer3.SplitterDistance = 248;
             this.splitContainer3.SplitterWidth = 5;
             this.splitContainer3.TabIndex = 0;
@@ -187,10 +187,10 @@
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(3, 3);
             this.cSucs.Mostrar_Botones = true;
-            this.cSucs.Mostrar_Tipo = false;
+            this.cSucs.Mostrar_Tipo = true;
             this.cSucs.Name = "cSucs";
             this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.cSucs.Size = new System.Drawing.Size(241, 785);
+            this.cSucs.Size = new System.Drawing.Size(241, 663);
             this.cSucs.TabIndex = 2;
             this.cSucs.Titulo = "Sucursales";
             this.cSucs.Valor_Actual = -1;
@@ -212,8 +212,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.cFecha);
-            this.splitContainer2.Size = new System.Drawing.Size(253, 789);
-            this.splitContainer2.SplitterDistance = 604;
+            this.splitContainer2.Size = new System.Drawing.Size(252, 667);
+            this.splitContainer2.SplitterDistance = 510;
             this.splitContainer2.SplitterWidth = 9;
             this.splitContainer2.TabIndex = 6;
             // 
@@ -225,7 +225,7 @@
             this.cTipos.Location = new System.Drawing.Point(0, 0);
             this.cTipos.Mostrar_Tipo = false;
             this.cTipos.Name = "cTipos";
-            this.cTipos.Size = new System.Drawing.Size(253, 604);
+            this.cTipos.Size = new System.Drawing.Size(252, 510);
             this.cTipos.TabIndex = 5;
             this.cTipos.Titulo = "Tipo";
             this.cTipos.Valor_Actual = -1;
@@ -239,7 +239,7 @@
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 212);
             this.cFecha.Mostrar = 0;
             this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(253, 212);
+            this.cFecha.Size = new System.Drawing.Size(252, 212);
             this.cFecha.TabIndex = 3;
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
@@ -255,7 +255,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.paMostrar);
             this.panel1.Controls.Add(this.paLimpiar);
-            this.panel1.Location = new System.Drawing.Point(638, 794);
+            this.panel1.Location = new System.Drawing.Point(638, 672);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(691, 31);
             this.panel1.TabIndex = 7;
@@ -316,7 +316,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1329, 825);
+            this.ClientSize = new System.Drawing.Size(1329, 703);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);

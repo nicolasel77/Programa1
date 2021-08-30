@@ -54,6 +54,7 @@
 
             cmbListas.Items.Insert(0, "Ninguna...");
             cmbListas.Items.Insert(1, "Editar...");
+            rdProd.Checked = true;
         }
 
         private void FrmVenta_KeyUp(object sender, KeyEventArgs e)
@@ -166,7 +167,8 @@
 
             grdVenta.Columnas[c_IdProv + 1].Style.ForeColor = Color.DimGray;
             grdVenta.Columnas[c_IdSuc + 1].Style.ForeColor = Color.DimGray;
-            grdVenta.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
+            grdVenta.Columnas[c_IdSuc].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grdVenta.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
 
             grdVenta.set_Texto(0, c_IdSuc, "Suc");
             grdVenta.set_Texto(0, c_IdProv, "Prov");

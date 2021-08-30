@@ -167,7 +167,9 @@ namespace Programa1.Carga
 
             grdTraslados.Columnas[c_IdSucS + 1].Style.ForeColor = Color.DimGray;
             grdTraslados.Columnas[c_IdSucE + 1].Style.ForeColor = Color.DimGray;
-            grdTraslados.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
+            grdTraslados.Columnas[c_IdSucE].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grdTraslados.Columnas[c_IdSucS].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grdTraslados.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
 
             grdTraslados.set_Texto(0, c_IdSucS, "Suc S");
             grdTraslados.set_Texto(0, c_IdSucE, "Suc E");
