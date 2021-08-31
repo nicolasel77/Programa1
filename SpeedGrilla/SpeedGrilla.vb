@@ -368,15 +368,15 @@ Public Class SpeedGrilla
         '    Else
         '        Grd.Rows.Add(Fila)
         '    End If
-        '    With Grd
-        '        If .Rows.Count > 2 Then
-        '            Dim b As Boolean
-        '            For i As Integer = 0 To .Cols.Count - 1
-        '                .Rows(Fila).Item(i)
-        '                '.Rows(Fila).Item(i). (.Rows.Count - 1, i, .GetData(.Rows.Count - 2, i))
-        '            Next
-        '        End If
-        '    End With
+        '    'With Grd
+        '    If .Rows.Count > 2 Then
+        '        Dim b As Boolean
+        '        For i As Integer = 0 To .Cols.Count - 1
+        '            .Rows(Fila).Item(i)
+        '            .Rows(Fila).Item(i). (.Rows.Count - 1, i, .GetData(.Rows.Count - 2, i))
+        '        Next
+        '    End If
+        'End With
         'Catch er As Exception
         'End Try
     End Sub

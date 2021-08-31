@@ -35,8 +35,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.grdAgr = new Grilla2.SpeedGrilla();
             this.label2 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.cmbnvaBoleta = new Programa1.Controles.cBoton();
             this.cmdActualizar = new Programa1.Controles.cBoton();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -45,6 +47,8 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -63,8 +67,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer1.Panel2.Controls.Add(this.cmbnvaBoleta);
-            this.splitContainer1.Panel2.Controls.Add(this.cmdActualizar);
+            this.splitContainer1.Panel2.Controls.Add(this.panel2);
+            this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Size = new System.Drawing.Size(1456, 780);
             this.splitContainer1.SplitterDistance = 730;
             this.splitContainer1.TabIndex = 0;
@@ -183,25 +187,45 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Compras P2";
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.Controls.Add(this.cmbnvaBoleta);
+            this.panel1.Location = new System.Drawing.Point(2, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(170, 40);
+            this.panel1.TabIndex = 2;
+            // 
             // cmbnvaBoleta
             // 
-            this.cmbnvaBoleta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmbnvaBoleta.Location = new System.Drawing.Point(3, 7);
+            this.cmbnvaBoleta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbnvaBoleta.Location = new System.Drawing.Point(0, 0);
             this.cmbnvaBoleta.Name = "cmbnvaBoleta";
-            this.cmbnvaBoleta.Size = new System.Drawing.Size(143, 27);
+            this.cmbnvaBoleta.Size = new System.Drawing.Size(170, 40);
             this.cmbnvaBoleta.TabIndex = 1;
             this.cmbnvaBoleta.Texto = "Generar Boleta";
             this.cmbnvaBoleta.Click += new System.EventHandler(this.cmbnvaBoleta_Click);
             // 
             // cmdActualizar
             // 
-            this.cmdActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdActualizar.Location = new System.Drawing.Point(1301, 7);
+            this.cmdActualizar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdActualizar.Location = new System.Drawing.Point(0, 0);
             this.cmdActualizar.Name = "cmdActualizar";
-            this.cmdActualizar.Size = new System.Drawing.Size(143, 27);
+            this.cmdActualizar.Size = new System.Drawing.Size(187, 44);
             this.cmdActualizar.TabIndex = 0;
             this.cmdActualizar.Texto = "Actualizar";
             this.cmdActualizar.Click += new System.EventHandler(this.cmdActualizar_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.cmdActualizar);
+            this.panel2.Location = new System.Drawing.Point(1269, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(187, 44);
+            this.panel2.TabIndex = 3;
             // 
             // frmVencimientos
             // 
@@ -221,6 +245,8 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -235,5 +261,7 @@
         private Grilla2.SpeedGrilla grdAgr;
         private System.Windows.Forms.Label label2;
         private Controles.cBoton cmbnvaBoleta;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

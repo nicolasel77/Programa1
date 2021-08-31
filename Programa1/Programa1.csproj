@@ -56,6 +56,7 @@
       <HintPath>..\SpeedGrilla\C1.Win.C1FlexGrid.4.dll</HintPath>
     </Reference>
     <Reference Include="C1.Win.C1Input.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1InputPanel.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1Schedule.4, Version=4.0.20113.183, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
@@ -646,7 +647,6 @@
     <Compile Include="DB\Hacienda\Consignatarios.cs" />
     <Compile Include="DB\Hacienda\Faena.cs" />
     <Compile Include="DB\Hacienda\Frigorificos.cs" />
-    <Compile Include="DB\Hacienda\Generar_Boleta.cs" />
     <Compile Include="DB\Hacienda\Hacienda.cs" />
     <Compile Include="DB\Hacienda\Hacienda_Salidas.cs" />
     <Compile Include="DB\Hacienda\Matriculas.cs" />
