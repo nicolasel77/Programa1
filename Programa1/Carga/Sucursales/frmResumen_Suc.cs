@@ -35,7 +35,8 @@
             grdEntradas.TeclasManejadas = new int[] { 13, 46 };
             grdSalidas.TeclasManejadas = new int[] { 13, 46 };
 
-            if (userr.Permiso != Usuarios.e_Permiso.Administrador) { paEst.Visible = false; }
+            if (userr.Permiso == Usuarios.e_Permiso.Operador) { paEst.Visible = false; }
+
         }
         private void frmResumen_Suc_KeyUp(object sender, KeyEventArgs e)
         {
@@ -69,7 +70,7 @@
                     break;
                 case Keys.S:
                     grdSalidas.Focus();
-                    grdSalidas.ActivarCelda(1,0);
+                    grdSalidas.ActivarCelda(1, 0);
                     break;
                 case Keys.NumPad1:
                 case Keys.NumPad2:
@@ -80,7 +81,7 @@
                 case Keys.NumPad7:
                 case Keys.NumPad8:
                 case Keys.NumPad9:
-                    nuTop.Value = (int)e.KeyValue - 96;
+                    nuTop.Value = e.KeyValue - 96;
                     Estadisticas();
                     break;
             }
@@ -158,6 +159,7 @@
         private void cFechas1_Cambio_Seleccion(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+
             Est.Sem.Semana = cFechas1.fecha_Actual;
             Cargar_Listado(cFechas1.fecha_Actual);
             Cargar_Datos();
@@ -178,16 +180,13 @@
 
         private void Cargar_Datos()
         {
-            if (grdSucursales.Row > 0)
-            {
-                this.Cursor = Cursors.WaitCursor;
-                Entradas();
-                Salidas();
-                Cuentas();
-                this.Text = $"{lblSuc.Text}  -  Semana: {cFechas1.fecha_Actual:dd/MM/yy}";
-                if (paEst.Visible == true) { Estadisticas(); }
-                this.Cursor = Cursors.Default;
-            }
+            this.Cursor = Cursors.WaitCursor;
+            Entradas();
+            Salidas();
+            Cuentas();
+            this.Text = $"{lblSuc.Text}  -  Semana: {cFechas1.fecha_Actual:dd/MM/yy}";
+            if (paEst.Visible == true) { Estadisticas(); }
+            this.Cursor = Cursors.Default;
         }
 
         private void Entradas()
@@ -221,7 +220,7 @@
             grdSalidas.Columnas[grdSalidas.get_ColIndex("Kilos")].Style.Format = "#,###.#";
             grdSalidas.Columnas[grdSalidas.get_ColIndex("Costo")].Style.Format = "#,###.#";
             grdSalidas.Columnas[grdSalidas.get_ColIndex("Total")].Style.Format = "#,###.#";
-            grdSalidas.Columnas[grdSalidas.get_ColIndex("Kilos")].Style.Font  = new Font(grdSalidas.Font, FontStyle.Bold);
+            grdSalidas.Columnas[grdSalidas.get_ColIndex("Kilos")].Style.Font = new Font(grdSalidas.Font, FontStyle.Bold);
 
             double T = grdSalidas.SumarCol(grdSalidas.get_ColIndex("Total"), false);
             lblTotalSalidas.Text = "Total: " + T.ToString("C1");
@@ -250,88 +249,107 @@
                 if (k > 0) { lblTBalancesSuc.ForeColor = Color.SteelBlue; } else { lblTBalancesSuc.ForeColor = Color.Red; }
 
                 k = Est.Balances(false);
-                lblTBalancesClientes.Text = $"Cln: {k:N1}";
+                lblTBalancesClientes.Text = $"Clientes: {k:N1}";
                 if (k > 0) { lblTBalancesClientes.ForeColor = Color.SteelBlue; } else { lblTBalancesClientes.ForeColor = Color.Red; }
+
             }
+            k = Est.Carne_Kilos(true);
+            lblKilos.Text = $"Kilos Carne: {k:N0}";
         }
 
         private void Estadisticas()
         {
             Cursor = Cursors.WaitCursor;
-            if (userr.Permiso == Usuarios.e_Permiso.Administrador)
+            if (NoCargar == false)
             {
-                if (NoCargar == false)
+                if (Suc != 0)
                 {
-                    if (Suc != 0)
+                    if (Filtro_SucUnica == true)
                     {
-                        if (Filtro_SucUnica == true) { grdEstadistica.MostrarDatos(Est.Unica(Convert.ToInt32(nuTop.Value)), true, true); } else { grdEstadistica.MostrarDatos(Est.Todas(), true, true); }
+                        grdEstadistica.MostrarDatos(Est.Unica(Convert.ToInt32(nuTop.Value)), true, true);
+                    }
+                    else
+                    {
+                        grdEstadistica.MostrarDatos(Est.Todas(), true, true);
+                    }
 
-                        for (int i = 2; i < grdEstadistica.Cols; i++)
+                    for (int i = 2; i < grdEstadistica.Cols; i++)
+                    {
+                        grdEstadistica.Columnas[i].Format = "N1";
+                        grdEstadistica.SumarCol(i, true);
+                    }
+
+                    if (Est.Filtro_Propio == Estadisticas_Sucursales.Tipo_Propio.Sucursales)
+                    {
+                        int c = grdEstadistica.get_ColIndex("Balance");
+                        int f = grdEstadistica.Rows - 1;
+                        double balance = Convert.ToDouble(grdEstadistica.get_Texto(f, c));
+                        double kilos = Convert.ToDouble(grdEstadistica.get_Texto(f, grdEstadistica.get_ColIndex("Carne")));
+                        double tIntV = 0;
+                        double tIntC = 0;
+                        double b = 0;
+                        for (int i = 1; i < f; i++)
                         {
-                            grdEstadistica.Columnas[i].Format = "N1";
-                            grdEstadistica.SumarCol(i, true);
-                        }
 
-                        if (Est.Filtro_Propio == Estadisticas_Sucursales.Tipo_Propio.Sucursales)
-                        {
-                            int c = grdEstadistica.get_ColIndex("Balance");
-                            int f = grdEstadistica.Rows - 1;
-                            double balance = Convert.ToDouble(grdEstadistica.get_Texto(f, c));
-                            double kilos = Convert.ToDouble(grdEstadistica.get_Texto(f, grdEstadistica.get_ColIndex("Carne")));
-                            double tIntV = 0;
-                            double tIntC = 0;
-                            double b = 0;
-                            for (int i = 1; i < f; i++)
-                            {
-
-                                b = Convert.ToDouble(grdEstadistica.get_Texto(i, c));
-
-                                if (b > 0)
-                                {
-                                    grdEstadistica.set_ColorLetraCelda(i, c - 1, Color.SteelBlue);
-                                    grdEstadistica.set_ColorLetraCelda(i, c, Color.SteelBlue);
-                                }
-                                else
-                                {
-                                    grdEstadistica.set_ColorLetraCelda(i, c - 1, Color.Red);
-                                    grdEstadistica.set_ColorLetraCelda(i, c, Color.Red);
-                                }
-                                tIntV += (Convert.ToDouble(grdEstadistica.get_Texto(i, grdEstadistica.get_ColIndex("Carne"))) * Convert.ToDouble(grdEstadistica.get_Texto(i, grdEstadistica.get_ColIndex("IntVenta"))));
-                                tIntC += (Convert.ToDouble(grdEstadistica.get_Texto(i, grdEstadistica.get_ColIndex("Carne"))) * Convert.ToDouble(grdEstadistica.get_Texto(i, grdEstadistica.get_ColIndex("IntCompra"))));
-                            }
-
-
-                            if (kilos != 0)
-                            {
-                                grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("Rend"), balance / kilos);
-                                grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("IntVenta"), tIntV / kilos);
-                                grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("IntCompra"), tIntC / kilos);
-                                grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("DifInt"), (tIntV / kilos) - (tIntC / kilos));
-                            }
-                            else
-                            {
-                                grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("Rend"), 0);
-                                grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("IntVenta"), 0);
-                                grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("IntCompra"), 0);
-                                grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("DifInt"), 0);
-                            }
-                            b = Convert.ToDouble(grdEstadistica.get_Texto(f, c));
+                            b = Convert.ToDouble(grdEstadistica.get_Texto(i, c));
 
                             if (b > 0)
                             {
-                                grdEstadistica.set_ColorLetraCelda(f, c - 1, Color.SteelBlue);
-                                grdEstadistica.set_ColorLetraCelda(f, c, Color.SteelBlue);
+                                grdEstadistica.set_ColorLetraCelda(i, c - 1, Color.SteelBlue);
+                                grdEstadistica.set_ColorLetraCelda(i, c, Color.SteelBlue);
                             }
                             else
                             {
-                                grdEstadistica.set_ColorLetraCelda(f, c - 1, Color.Red);
-                                grdEstadistica.set_ColorLetraCelda(f, c, Color.Red);
+                                grdEstadistica.set_ColorLetraCelda(i, c - 1, Color.Red);
+                                grdEstadistica.set_ColorLetraCelda(i, c, Color.Red);
                             }
+                            tIntV += (Convert.ToDouble(grdEstadistica.get_Texto(i, grdEstadistica.get_ColIndex("Carne"))) * Convert.ToDouble(grdEstadistica.get_Texto(i, grdEstadistica.get_ColIndex("IntVenta"))));
+                            tIntC += (Convert.ToDouble(grdEstadistica.get_Texto(i, grdEstadistica.get_ColIndex("Carne"))) * Convert.ToDouble(grdEstadistica.get_Texto(i, grdEstadistica.get_ColIndex("IntCompra"))));
                         }
-                        grdEstadistica.AutosizeAll();
+
+
+                        if (kilos != 0)
+                        {
+                            grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("Rend"), balance / kilos);
+                            grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("IntVenta"), tIntV / kilos);
+                            grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("IntCompra"), tIntC / kilos);
+                            grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("DifInt"), (tIntV / kilos) - (tIntC / kilos));
+                        }
+                        else
+                        {
+                            grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("Rend"), 0);
+                            grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("IntVenta"), 0);
+                            grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("IntCompra"), 0);
+                            grdEstadistica.set_Texto(f, grdEstadistica.get_ColIndex("DifInt"), 0);
+                        }
+                        b = Convert.ToDouble(grdEstadistica.get_Texto(f, c));
+
+                        if (b > 0)
+                        {
+                            grdEstadistica.set_ColorLetraCelda(f, c - 1, Color.SteelBlue);
+                            grdEstadistica.set_ColorLetraCelda(f, c, Color.SteelBlue);
+                        }
+                        else
+                        {
+                            grdEstadistica.set_ColorLetraCelda(f, c - 1, Color.Red);
+                            grdEstadistica.set_ColorLetraCelda(f, c, Color.Red);
+                        }
                     }
-                } 
+
+                    grdEstadistica.AutosizeAll();
+                    if (userr.Permiso != Usuarios.e_Permiso.Administrador)
+                    {
+                        grdEstadistica.Columnas["Rend"].Width = 0;
+                        grdEstadistica.Columnas["Balance"].Width = 0;
+                        grdEstadistica.Columnas["Ganancia"].Width = 0;
+                        grdEstadistica.Columnas["Rec"].Width = 0;
+                        grdEstadistica.Columnas["IntVenta"].Width = 0;
+                        grdEstadistica.Columnas["IntCompra"].Width = 0;
+                        grdEstadistica.Columnas["DifInt"].Width = 0;
+                    }
+                }
             }
+
             Cursor = Cursors.Default;
 
         }
@@ -525,7 +543,6 @@
         {
             if (Cursor.Current != null) { this.Cursor = new Cursor(Cursor.Current.Handle); }
             int posX = Cursor.Position.X;
-            //this.Text = $"X: {posX}  paEst.Left: {paEst.Left:N1}";
             paEst.Width = (posX <= paEst.Left) ? 10 : anchoEst;
         }
 

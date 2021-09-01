@@ -96,6 +96,9 @@
             this.lblCant.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblCant.Name = "lblCant";
             this.lblCant.Size = new System.Drawing.Size(72, 23);
+            this.lblCant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCant.Name = "lblCant";
+            this.lblCant.Size = new System.Drawing.Size(73, 23);
             this.lblCant.Text = "Cantidad";
             this.lblCant.Click += new System.EventHandler(this.LblCant_Click);
             // 
@@ -104,6 +107,9 @@
             this.lblKilos.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblKilos.Name = "lblKilos";
             this.lblKilos.Size = new System.Drawing.Size(43, 23);
+            this.lblKilos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblKilos.Name = "lblKilos";
+            this.lblKilos.Size = new System.Drawing.Size(42, 23);
             this.lblKilos.Text = "Kilos";
             this.lblKilos.Click += new System.EventHandler(this.LblCant_Click);
             // 
@@ -112,6 +118,9 @@
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(57, 23);
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(61, 23);
             this.lblTotal.Text = "Totales";
             this.lblTotal.Click += new System.EventHandler(this.LblCant_Click);
             // 
@@ -241,6 +250,36 @@
             this.materialLabel1.Size = new System.Drawing.Size(76, 18);
             this.materialLabel1.TabIndex = 0;
             this.materialLabel1.Text = "Camiones";
+            // 
+            // cFecha
+            // 
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(3, 381);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(249, 303);
+            this.cFecha.TabIndex = 3;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
+            // 
+            // cProvs
+            // 
+            this.cProvs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cProvs.BackColor = System.Drawing.Color.Gainsboro;
+            this.cProvs.Filtro_In = "";
+            this.cProvs.Location = new System.Drawing.Point(2, 3);
+            this.cProvs.Mostrar_Tipo = true;
+            this.cProvs.Name = "cProvs";
+            this.cProvs.Size = new System.Drawing.Size(258, 372);
+            this.cProvs.TabIndex = 2;
+            this.cProvs.Titulo = "Proveedores";
+            this.cProvs.Valor_Actual = -1;
+            this.cProvs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
             // 
             // tiMensaje
             // 

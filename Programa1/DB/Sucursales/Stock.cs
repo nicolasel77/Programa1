@@ -51,7 +51,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT ID_Sucursales, Nombre, SUM(Kilos) Kilos FROM vw_Stock WHERE {filtro}  AND ID_Tipo=1 GROUP BY ID_Sucursales, Nombre ORDER BY ID_Sucursales", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT ID_Sucursales Suc, Nombre, SUM(Kilos) Kilos FROM vw_Stock WHERE {filtro}  AND ID_Tipo=1 GROUP BY ID_Sucursales, Nombre ORDER BY ID_Sucursales", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

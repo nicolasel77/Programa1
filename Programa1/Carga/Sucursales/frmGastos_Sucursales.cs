@@ -318,6 +318,10 @@
         {
             switch (Convert.ToInt32(e))
             {
+                case 32:
+                    Gastos_Sucursales.Fecha = Gastos_Sucursales.Fecha.AddDays(1);
+                    grdGastos_Editado((short)grdGastos.Row, c_Fecha, Gastos_Sucursales.Fecha);
+                    break;
                 case 46: //Delete
 
                     if (Convert.ToInt32(grdGastos.get_Texto(grdGastos.Row, 0)) != 0)
@@ -369,6 +373,15 @@
                 int c = FilaFin - FilaInicio + 1;
                 lblCant.Text = $"Registros: {c:N0}";
                 lblTotal.Text = $"Total: {t:C2}";
+            }
+        }
+
+        private void grdGastos_KeyPress(object sender, short e)
+        {
+            if (e == 42)
+            {
+                Gastos_Sucursales.Sucursal.Siguiente();
+                grdGastos_Editado((short)grdGastos.Row, c_IdSuc, Gastos_Sucursales.Sucursal.ID);
             }
         }
     }

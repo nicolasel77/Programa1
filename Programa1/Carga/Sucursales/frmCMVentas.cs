@@ -9,9 +9,9 @@
     public partial class frmCMVentas : Form
     {
         private List<int> Id;
-        private Ventas Ventas = new Ventas();
-        private Precios_Sucursales precios = new Precios_Sucursales();
-        private Precios_Proveedores preciosPr = new Precios_Proveedores();
+        private readonly Ventas Ventas = new Ventas();
+        private readonly Precios_Sucursales precios = new Precios_Sucursales();
+        private readonly Precios_Proveedores preciosPr = new Precios_Proveedores();
 
         public frmCMVentas()
         {
@@ -152,6 +152,7 @@
 
                 precios.Sucursal = Ventas.Sucursal;
                 precios.Producto = Ventas.Producto;
+                preciosPr.Proveedor = Ventas.Proveedor;
 
                 if (chFecha.Checked)
                 {
@@ -315,8 +316,6 @@
             }
             this.Close();
         }
-
-
 
         private void ChFecha_CheckedChanged(object sender, System.EventArgs e)
         {

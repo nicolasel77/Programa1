@@ -2,22 +2,23 @@
 {
     using Programa1.DB;
     using System;
+    using System.IO;
     using System.Windows.Forms;
 
     public partial class frmCargaSebo : Form
     {
-        private CargaSebo cargaSebo = new CargaSebo();
+        private readonly CargaSebo cargaSebo = new CargaSebo();
 
         #region " Columnas "
-        private Byte c_Id;
-        private Byte c_Fecha;
-        private Byte c_IdSebero;
-        private Byte c_IdSuc;
-        private Byte c_IdProd;
-        private Byte c_Descripcion;
-        private Byte c_Costo;
-        private Byte c_Kilos;
-        private Byte c_Total;
+        private readonly Byte c_Id;
+        private readonly Byte c_Fecha;
+        private readonly Byte c_IdSebero;
+        private readonly Byte c_IdSuc;
+        private readonly Byte c_IdProd;
+        private readonly Byte c_Descripcion;
+        private readonly Byte c_Costo;
+        private readonly Byte c_Kilos;
+        private readonly Byte c_Total;
         #endregion
 
         public frmCargaSebo()
@@ -38,7 +39,7 @@
             c_Costo = Convert.ToByte(grdVenta.get_ColIndex("Costo"));
             c_Kilos = Convert.ToByte(grdVenta.get_ColIndex("Kilos"));
             c_Total = Convert.ToByte(grdVenta.get_ColIndex("Total"));
-            
+
             formato_Grilla();
 
             //El intercambio de columnas para estas teclas
@@ -82,6 +83,12 @@
                             cProds.Anterior();
                         }
                     }
+                    break;
+                case Keys.Space:
+                    int c = grdVenta.Col;
+                    cargaSebo.Fecha = cargaSebo.Fecha.AddDays(1);
+                    GrdVenta_Editado((short)grdVenta.Row, c_Fecha, cargaSebo.Fecha);
+                    grdVenta.ActivarCelda(grdVenta.Row, c);
                     break;
             }
         }
@@ -317,7 +324,7 @@
                         grdVenta.set_Texto(f + 1, c_IdSuc, cargaSebo.Sucursal.ID);
                         grdVenta.set_Texto(f + 1, c_IdSuc + 1, cargaSebo.Sucursal.Nombre);
 
-                        cargaSebo.Producto.Siguiente();
+                        cargaSebo.Producto.Siguiente("ID IN(401, 402)");
                         cargaSebo.precios_Seberos.Producto = cargaSebo.Producto;
 
                         grdVenta.set_Texto(f + 1, c_IdProd, cargaSebo.Producto.ID);
@@ -359,7 +366,7 @@
                 cargaSebo.Sucursal.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdSuc));
                 cargaSebo.Sebero.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdSebero));
                 cargaSebo.Costo = Convert.ToSingle(grdVenta.get_Texto(Fila, c_Costo));
-                cargaSebo.Kilos = Convert.ToSingle(grdVenta.get_Texto(Fila,c_Kilos));
+                cargaSebo.Kilos = Convert.ToSingle(grdVenta.get_Texto(Fila, c_Kilos));
 
                 cargaSebo.precios_Seberos.Fecha = cargaSebo.Fecha;
                 cargaSebo.precios_Seberos.Proveedor.Id = cargaSebo.Sebero.ID;
@@ -376,7 +383,7 @@
 
                     if (grdVenta.Col == c_Kilos)
                     {
-                        cargaSebo.Producto.Siguiente();
+                        cargaSebo.Producto.Siguiente("ID IN(401, 402)");
 
                         grdVenta.set_Texto(grdVenta.Row, c_IdProd, cargaSebo.Producto.ID);
                         grdVenta.set_Texto(grdVenta.Row, c_Descripcion, cargaSebo.Producto.Nombre);
@@ -418,6 +425,34 @@
             Clipboard.SetText(s);
 
             Mensaje($"Copiado: {s}");
+        }
+
+        private void cmdExcel_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sf = new SaveFileDialog();
+
+            sf.Filter = "excel files (*.xlsm)|*.xlsm";
+            sf.FilterIndex = 2;
+            sf.RestoreDirectory = true;
+            sf.FileName = "Sebo";
+            string v = System.Environment.GetEnvironmentVariable("USERPROFILE");
+            v = v + "\\Desktop\\";
+            sf.InitialDirectory = v;
+
+
+            if (sf.ShowDialog() == DialogResult.OK)
+            {
+                v = sf.FileName;
+                if (File.Exists(v) == true) { File.Delete(v); }
+
+                File.Copy(AppContext.BaseDirectory + "Sebo.xlsm", v);
+
+                Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(v + "Sebo.xlsm");
+                xlApp.Run("Cargar", cFecha.fecha_Actual, cFecha.fecha_Fin);
+                xlApp.Visible = true;
+            }
+
         }
     }
 }

@@ -46,17 +46,12 @@
     <StartupObject>Programa1.clsMain</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="C1.C1DataExtender.2, Version=2.0.20113.81, Culture=neutral, PublicKeyToken=7c4b5683f80b910e, processorArchitecture=MSIL" />
     <Reference Include="C1.Common">
       <HintPath>..\SpeedGrilla\C1.Common.dll</HintPath>
     </Reference>
-    <Reference Include="C1.Win.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04" />
-    <Reference Include="C1.Win.C1Command.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=e808566f358766d8, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1FlexGrid.4">
       <HintPath>..\SpeedGrilla\C1.Win.C1FlexGrid.4.dll</HintPath>
     </Reference>
-    <Reference Include="C1.Win.C1Input.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL" />
-    <Reference Include="C1.Win.C1Schedule.4, Version=4.0.20113.183, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
     </Reference>
@@ -71,6 +66,7 @@
     </Reference>
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Linq.Dynamic.Core, Version=1.2.2.0, Culture=neutral, PublicKeyToken=0f07ec44de6ac832, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.Dynamic.Core.1.2.2\lib\net46\System.Linq.Dynamic.Core.dll</HintPath>

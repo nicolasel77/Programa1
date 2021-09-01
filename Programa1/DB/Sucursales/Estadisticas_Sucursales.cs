@@ -52,7 +52,7 @@
             return Convert.ToDouble(d);
         }
 
-        public Double Carne_Kilos()
+        public Double Carne_Kilos(bool todas = false)
         {
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             object d = null;
@@ -60,7 +60,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT dbo.f_CarneKilos ({Suc.ID}, '{Sem.Semana:MM/dd/yy}', '{Sem.Semana.AddDays(6):MM/dd/yy}')", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT dbo.f_VentaCarne ({(todas ? 0 : Suc.ID)}, '{Sem.Semana:MM/dd/yy}', '{Sem.Semana.AddDays(6):MM/dd/yy}')", conexionSql);
 
                 conexionSql.Open();
 

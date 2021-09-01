@@ -70,8 +70,9 @@ namespace Programa1.Carga.Varios
             // 
             this.split1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.split1.Panel2.Controls.Add(this.lstSemanas);
+            this.split1.Panel2MinSize = 100;
             this.split1.Size = new System.Drawing.Size(1359, 727);
-            this.split1.SplitterDistance = 1220;
+            this.split1.SplitterDistance = 1244;
             this.split1.SplitterWidth = 8;
             this.split1.TabIndex = 0;
             // 
@@ -90,8 +91,8 @@ namespace Programa1.Carga.Varios
             // 
             this.splitContainer2.Panel2.Controls.Add(this.grdResultado);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(1220, 727);
-            this.splitContainer2.SplitterDistance = 832;
+            this.splitContainer2.Size = new System.Drawing.Size(1244, 727);
+            this.splitContainer2.SplitterDistance = 847;
             this.splitContainer2.SplitterWidth = 8;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -126,8 +127,8 @@ namespace Programa1.Carga.Varios
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer3.Panel2.Controls.Add(this.grdPasivos);
             this.splitContainer3.Panel2.Controls.Add(this.label1);
-            this.splitContainer3.Size = new System.Drawing.Size(826, 694);
-            this.splitContainer3.SplitterDistance = 435;
+            this.splitContainer3.Size = new System.Drawing.Size(841, 694);
+            this.splitContainer3.SplitterDistance = 442;
             this.splitContainer3.SplitterWidth = 8;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -163,7 +164,7 @@ namespace Programa1.Carga.Varios
             this.grdActivos.Redraw = true;
             this.grdActivos.Row = 0;
             this.grdActivos.Rows = 1;
-            this.grdActivos.Size = new System.Drawing.Size(429, 670);
+            this.grdActivos.Size = new System.Drawing.Size(436, 670);
             this.grdActivos.TabIndex = 2;
             // 
             // lblEntradas
@@ -255,7 +256,7 @@ namespace Programa1.Carga.Varios
             this.grdResultado.Redraw = true;
             this.grdResultado.Row = 0;
             this.grdResultado.Rows = 50;
-            this.grdResultado.Size = new System.Drawing.Size(374, 670);
+            this.grdResultado.Size = new System.Drawing.Size(373, 670);
             this.grdResultado.TabIndex = 3;
             // 
             // label2
@@ -271,18 +272,16 @@ namespace Programa1.Carga.Varios
             // 
             // lstSemanas
             // 
-            this.lstSemanas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstSemanas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstSemanas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstSemanas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstSemanas.FormattingEnabled = true;
             this.lstSemanas.ItemHeight = 20;
             this.lstSemanas.Items.AddRange(new object[] {
             "20/12/1977"});
-            this.lstSemanas.Location = new System.Drawing.Point(12, 12);
+            this.lstSemanas.Location = new System.Drawing.Point(0, 0);
             this.lstSemanas.Name = "lstSemanas";
-            this.lstSemanas.Size = new System.Drawing.Size(107, 700);
+            this.lstSemanas.Size = new System.Drawing.Size(107, 727);
             this.lstSemanas.TabIndex = 0;
             this.lstSemanas.SelectedIndexChanged += new System.EventHandler(this.lstSemanas_SelectedIndexChanged);
             // 

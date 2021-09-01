@@ -115,6 +115,11 @@
             }
         }
 
+        public int Cantidad_Seleccionada()
+        {
+            return lst.SelectedItems.Count;
+        }
+
         public string Cadena(string campo)
         {
             string s = "";

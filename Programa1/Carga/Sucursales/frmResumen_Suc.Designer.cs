@@ -85,6 +85,7 @@
             this.todosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuTop = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblKilos = new System.Windows.Forms.Label();
             this.lblTBalancesClientes = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblTBalancesSuc = new System.Windows.Forms.Label();
@@ -158,7 +159,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.panel4);
             this.splitContainer3.Panel2.Controls.Add(this.grdVentas);
             this.splitContainer3.Size = new System.Drawing.Size(1150, 701);
-            this.splitContainer3.SplitterDistance = 606;
+            this.splitContainer3.SplitterDistance = 617;
             this.splitContainer3.TabIndex = 0;
             // 
             // splitContainer4
@@ -181,7 +182,7 @@
             this.splitContainer4.Panel2.Controls.Add(this.panel2);
             this.splitContainer4.Panel2.Controls.Add(this.grdSalidas);
             this.splitContainer4.Panel2.Controls.Add(this.label1);
-            this.splitContainer4.Size = new System.Drawing.Size(1150, 606);
+            this.splitContainer4.Size = new System.Drawing.Size(1150, 617);
             this.splitContainer4.SplitterDistance = 617;
             this.splitContainer4.TabIndex = 0;
             // 
@@ -191,7 +192,7 @@
             this.panel1.Controls.Add(this.rdAgrupado);
             this.panel1.Controls.Add(this.rdDetalle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 580);
+            this.panel1.Location = new System.Drawing.Point(0, 591);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(617, 26);
             this.panel1.TabIndex = 4;
@@ -276,7 +277,7 @@
             this.grdEntradas.Redraw = true;
             this.grdEntradas.Row = 0;
             this.grdEntradas.Rows = 1;
-            this.grdEntradas.Size = new System.Drawing.Size(611, 553);
+            this.grdEntradas.Size = new System.Drawing.Size(611, 564);
             this.grdEntradas.TabIndex = 0;
             this.grdEntradas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdEntradas_KeyUp);
             this.grdEntradas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdEntradas_DobleClick);
@@ -329,7 +330,7 @@
             // 
             this.panel2.Controls.Add(this.lblTotalSalidas);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 580);
+            this.panel2.Location = new System.Drawing.Point(0, 591);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(529, 26);
             this.panel2.TabIndex = 5;
@@ -376,7 +377,7 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 1;
-            this.grdSalidas.Size = new System.Drawing.Size(523, 553);
+            this.grdSalidas.Size = new System.Drawing.Size(523, 564);
             this.grdSalidas.TabIndex = 0;
             this.grdSalidas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdSalidas_KeyUp);
             this.grdSalidas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdSalidas_DobleClick);
@@ -479,7 +480,7 @@
             this.panel4.Controls.Add(this.lblSuc);
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(242, 85);
+            this.panel4.Size = new System.Drawing.Size(242, 74);
             this.panel4.TabIndex = 5;
             // 
             // cmdCarne
@@ -488,7 +489,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdCarne.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmdCarne.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdCarne.Location = new System.Drawing.Point(6, 34);
+            this.cmdCarne.Location = new System.Drawing.Point(6, 23);
             this.cmdCarne.Name = "cmdCarne";
             this.cmdCarne.Size = new System.Drawing.Size(233, 25);
             this.cmdCarne.TabIndex = 0;
@@ -503,7 +504,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBalance.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lblBalance.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblBalance.Location = new System.Drawing.Point(6, 6);
+            this.lblBalance.Location = new System.Drawing.Point(6, -5);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(233, 25);
             this.lblBalance.TabIndex = 3;
@@ -516,7 +517,7 @@
             this.lblSuc.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lblSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.lblSuc.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblSuc.Location = new System.Drawing.Point(6, 60);
+            this.lblSuc.Location = new System.Drawing.Point(6, 49);
             this.lblSuc.Name = "lblSuc";
             this.lblSuc.Size = new System.Drawing.Size(233, 25);
             this.lblSuc.TabIndex = 1;
@@ -554,7 +555,7 @@
             this.grdVentas.Redraw = true;
             this.grdVentas.Row = -2;
             this.grdVentas.Rows = 1;
-            this.grdVentas.Size = new System.Drawing.Size(899, 85);
+            this.grdVentas.Size = new System.Drawing.Size(899, 74);
             this.grdVentas.TabIndex = 0;
             // 
             // splitContainer2
@@ -658,6 +659,7 @@
             this.paEst.Controls.Add(this.grdEstadistica);
             this.paEst.Controls.Add(this.nuTop);
             this.paEst.Controls.Add(this.label3);
+            this.paEst.Controls.Add(this.lblKilos);
             this.paEst.Controls.Add(this.lblTBalancesClientes);
             this.paEst.Controls.Add(this.label4);
             this.paEst.Controls.Add(this.lblTBalancesSuc);
@@ -887,6 +889,18 @@
             this.label3.Text = "Cant";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblKilos
+            // 
+            this.lblKilos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblKilos.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblKilos.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblKilos.Location = new System.Drawing.Point(404, 671);
+            this.lblKilos.Name = "lblKilos";
+            this.lblKilos.Size = new System.Drawing.Size(159, 25);
+            this.lblKilos.TabIndex = 4;
+            this.lblKilos.Text = "Kilos";
+            this.lblKilos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // lblTBalancesClientes
             // 
             this.lblTBalancesClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -894,7 +908,7 @@
             this.lblTBalancesClientes.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.lblTBalancesClientes.Location = new System.Drawing.Point(181, 671);
             this.lblTBalancesClientes.Name = "lblTBalancesClientes";
-            this.lblTBalancesClientes.Size = new System.Drawing.Size(159, 25);
+            this.lblTBalancesClientes.Size = new System.Drawing.Size(217, 25);
             this.lblTBalancesClientes.TabIndex = 4;
             this.lblTBalancesClientes.Text = "Clientes";
             this.lblTBalancesClientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1051,5 +1065,6 @@
         private System.Windows.Forms.Label lbl5;
         private System.Windows.Forms.Label lbl4;
         private System.Windows.Forms.Timer tiOcultar;
+        private System.Windows.Forms.Label lblKilos;
     }
 }

@@ -35,8 +35,8 @@
             this.cmdInvertir = new System.Windows.Forms.Button();
             this.cmdNinguno = new System.Windows.Forms.Button();
             this.cmdTodos = new System.Windows.Forms.Button();
-            this.lblTitulo = new System.Windows.Forms.Label();
             this.chVer = new System.Windows.Forms.CheckBox();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.rdOrden = new System.Windows.Forms.RadioButton();
             this.rdId = new System.Windows.Forms.RadioButton();
@@ -57,11 +57,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lst.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lst.FormattingEnabled = true;
+            this.lst.ItemHeight = 16;
             this.lst.Location = new System.Drawing.Point(3, 21);
             this.lst.Name = "lst";
             this.lst.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lst.Size = new System.Drawing.Size(228, 455);
+            this.lst.Size = new System.Drawing.Size(228, 448);
             this.lst.TabIndex = 0;
             this.lst.SelectedIndexChanged += new System.EventHandler(this.Lst_SelectedIndexChanged);
             this.lst.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Lst_MouseUp);
@@ -154,17 +156,6 @@
             this.cmdTodos.UseVisualStyleBackColor = true;
             this.cmdTodos.Click += new System.EventHandler(this.CmdTodos_Click);
             // 
-            // lblTitulo
-            // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblTitulo.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblTitulo.Location = new System.Drawing.Point(3, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(95, 24);
-            this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "Productos";
-            // 
             // chVer
             // 
             this.chVer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -178,6 +169,17 @@
             this.toolTip1.SetToolTip(this.chVer, "Oculta/muestra según filtro Ver");
             this.chVer.UseVisualStyleBackColor = true;
             this.chVer.CheckedChanged += new System.EventHandler(this.ChVer_CheckedChanged);
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblTitulo.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblTitulo.Location = new System.Drawing.Point(3, 0);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(77, 18);
+            this.lblTitulo.TabIndex = 0;
+            this.lblTitulo.Text = "Productos";
             // 
             // label4
             // 
@@ -259,7 +261,7 @@
             this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 24);
+            this.label2.Size = new System.Drawing.Size(37, 18);
             this.label2.TabIndex = 0;
             this.label2.Text = "Tipo";
             // 

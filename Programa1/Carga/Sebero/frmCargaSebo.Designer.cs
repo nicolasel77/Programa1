@@ -82,25 +82,25 @@
             // 
             // lblCant
             // 
-            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCant.Name = "lblCant";
-            this.lblCant.Size = new System.Drawing.Size(60, 23);
+            this.lblCant.Size = new System.Drawing.Size(73, 23);
             this.lblCant.Text = "Cantidad";
             this.lblCant.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblKilos
             // 
-            this.lblKilos.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblKilos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblKilos.Name = "lblKilos";
-            this.lblKilos.Size = new System.Drawing.Size(36, 23);
+            this.lblKilos.Size = new System.Drawing.Size(42, 23);
             this.lblKilos.Text = "Kilos";
             this.lblKilos.Click += new System.EventHandler(this.LblCant_Click);
             // 
             // lblTotalE
             // 
-            this.lblTotalE.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalE.Name = "lblTotalE";
-            this.lblTotalE.Size = new System.Drawing.Size(36, 23);
+            this.lblTotalE.Size = new System.Drawing.Size(44, 23);
             this.lblTotalE.Text = "Total";
             this.lblTotalE.Click += new System.EventHandler(this.LblCant_Click);
             // 
@@ -204,8 +204,10 @@
             this.cSucursal.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucursal.Filtro_In = "";
             this.cSucursal.Location = new System.Drawing.Point(3, 3);
-            this.cSucursal.Mostrar_Tipo = true;
+            this.cSucursal.Mostrar_Botones = true;
+            this.cSucursal.Mostrar_Tipo = false;
             this.cSucursal.Name = "cSucursal";
+            this.cSucursal.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucursal.Size = new System.Drawing.Size(228, 447);
             this.cSucursal.TabIndex = 3;
             this.cSucursal.Titulo = "Sucursales";
@@ -317,6 +319,7 @@
             this.cmdExcel.TabIndex = 0;
             this.cmdExcel.Text = "Excel";
             this.cmdExcel.UseVisualStyleBackColor = true;
+            this.cmdExcel.Click += new System.EventHandler(this.cmdExcel_Click);
             // 
             // paMostrar
             // 

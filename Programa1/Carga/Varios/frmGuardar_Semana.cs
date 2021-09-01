@@ -17,11 +17,6 @@
 
         private void cmdGuardar_Click(object sender, System.EventArgs e)
         {
-            //string[] nn = lstSemanas.SelectedItems;
-            //foreach(string n in lstSemanas.SelectedItems.Reverse<string>())
-            //{
-
-            //}
             for (int i = lstSemanas.Items.Count - 1; i > -1; i--)
             {
 

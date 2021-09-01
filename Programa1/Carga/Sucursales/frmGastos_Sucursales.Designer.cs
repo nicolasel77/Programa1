@@ -158,6 +158,7 @@
             this.grdGastos.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdGastos_Editado);
             this.grdGastos.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdGastos_CambioFila);
             this.grdGastos.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdGastos_KeyUp);
+            this.grdGastos.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grdGastos_KeyPress);
             this.grdGastos.SeleccionCambio += new Grilla2.SpeedGrilla.SeleccionCambioEventHandler(this.grdGastos_SeleccionCambio);
             // 
             // splitContainer3
@@ -187,7 +188,7 @@
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(3, 3);
             this.cSucs.Mostrar_Botones = true;
-            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Mostrar_Tipo = false;
             this.cSucs.Name = "cSucs";
             this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucs.Size = new System.Drawing.Size(241, 663);
@@ -212,7 +213,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.cFecha);
-            this.splitContainer2.Size = new System.Drawing.Size(252, 667);
+            this.splitContainer2.Size = new System.Drawing.Size(251, 667);
             this.splitContainer2.SplitterDistance = 510;
             this.splitContainer2.SplitterWidth = 9;
             this.splitContainer2.TabIndex = 6;
@@ -225,7 +226,7 @@
             this.cTipos.Location = new System.Drawing.Point(0, 0);
             this.cTipos.Mostrar_Tipo = false;
             this.cTipos.Name = "cTipos";
-            this.cTipos.Size = new System.Drawing.Size(252, 510);
+            this.cTipos.Size = new System.Drawing.Size(251, 510);
             this.cTipos.TabIndex = 5;
             this.cTipos.Titulo = "Tipo";
             this.cTipos.Valor_Actual = -1;
@@ -239,7 +240,7 @@
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 212);
             this.cFecha.Mostrar = 0;
             this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(252, 212);
+            this.cFecha.Size = new System.Drawing.Size(251, 212);
             this.cFecha.TabIndex = 3;
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);

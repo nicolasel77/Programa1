@@ -94,7 +94,7 @@ namespace Programa1.Carga.Sucursales
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(803, 642);
+            this.grd.Size = new System.Drawing.Size(820, 642);
             this.grd.TabIndex = 0;
             // 
             // splitContainer2
@@ -123,7 +123,7 @@ namespace Programa1.Carga.Sucursales
             this.cSucursales1.Filtro_In = "";
             this.cSucursales1.Location = new System.Drawing.Point(0, 0);
             this.cSucursales1.Mostrar_Botones = true;
-            this.cSucursales1.Mostrar_Tipo = true;
+            this.cSucursales1.Mostrar_Tipo = false;
             this.cSucursales1.Name = "cSucursales1";
             this.cSucursales1.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucursales1.Size = new System.Drawing.Size(295, 434);

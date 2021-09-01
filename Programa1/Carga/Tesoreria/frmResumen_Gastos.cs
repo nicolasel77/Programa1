@@ -211,9 +211,14 @@ namespace Programa1.Carga.Tesoreria
                     grdGastos.set_ColW(grdGastos.get_ColIndex("Descripcion"), 400);
                     break;
             }
+            Totales();
+            Cursor = Cursors.Default;
+        }
+
+        private void Totales()
+        {
             double g = grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
             lblTotal.Text = $"Total: {g:C1}";
-            this.Cursor = Cursors.Default;
         }
 
         private void lst_SelectedIndexChanged(object sender, EventArgs e)
@@ -297,6 +302,7 @@ namespace Programa1.Carga.Tesoreria
                     }
                     break;
             }
+            Totales();
             this.Cursor = Cursors.Default;
         }
 
