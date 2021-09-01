@@ -35,10 +35,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.grdAgr = new Grilla2.SpeedGrilla();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.cmbnvaBoleta = new Programa1.Controles.cBoton();
-            this.cmdActualizar = new Programa1.Controles.cBoton();
+            this.chConSaldo = new MaterialSkin.Controls.MaterialCheckBox();
+            this.grdDetalle = new Grilla2.SpeedGrilla();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cFecha = new Programa1.Controles.cFechas();
+            this.cmdActualizar = new Programa1.Controles.cBoton();
+            this.cmbnvaBoleta = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -47,8 +50,8 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -67,10 +70,13 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.chConSaldo);
+            this.splitContainer1.Panel2.Controls.Add(this.cFecha);
+            this.splitContainer1.Panel2.Controls.Add(this.grdDetalle);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Size = new System.Drawing.Size(1456, 780);
-            this.splitContainer1.SplitterDistance = 730;
+            this.splitContainer1.SplitterDistance = 695;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -91,7 +97,7 @@
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.grdAgr);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(1456, 730);
+            this.splitContainer2.Size = new System.Drawing.Size(1456, 695);
             this.splitContainer2.SplitterDistance = 815;
             this.splitContainer2.TabIndex = 1;
             // 
@@ -126,8 +132,9 @@
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(809, 696);
+            this.grd.Size = new System.Drawing.Size(809, 661);
             this.grd.TabIndex = 3;
+            this.grd.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grd_CambioFila);
             this.grd.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grd_KeyPress);
             // 
             // label1
@@ -162,6 +169,7 @@
             this.grdAgr.fColor = System.Drawing.SystemColors.Control;
             this.grdAgr.FixCols = 0;
             this.grdAgr.FixRows = 0;
+            this.grdAgr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grdAgr.FuenteEncabezado = null;
             this.grdAgr.FuentePieDePagina = null;
             this.grdAgr.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -172,8 +180,9 @@
             this.grdAgr.Redraw = true;
             this.grdAgr.Row = 0;
             this.grdAgr.Rows = 50;
-            this.grdAgr.Size = new System.Drawing.Size(631, 696);
+            this.grdAgr.Size = new System.Drawing.Size(631, 661);
             this.grdAgr.TabIndex = 5;
+            this.grdAgr.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdAgr_CambioFila);
             this.grdAgr.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grdAgr_KeyPress);
             // 
             // label2
@@ -187,6 +196,69 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Compras P2";
             // 
+            // chConSaldo
+            // 
+            this.chConSaldo.AutoSize = true;
+            this.chConSaldo.Checked = true;
+            this.chConSaldo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chConSaldo.Depth = 0;
+            this.chConSaldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chConSaldo.Location = new System.Drawing.Point(1019, 3);
+            this.chConSaldo.Margin = new System.Windows.Forms.Padding(0);
+            this.chConSaldo.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chConSaldo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chConSaldo.Name = "chConSaldo";
+            this.chConSaldo.Ripple = true;
+            this.chConSaldo.Size = new System.Drawing.Size(91, 30);
+            this.chConSaldo.TabIndex = 6;
+            this.chConSaldo.Text = "Con saldo";
+            this.chConSaldo.UseVisualStyleBackColor = true;
+            this.chConSaldo.CheckedChanged += new System.EventHandler(this.chConSaldo_CheckedChanged);
+            // 
+            // grdDetalle
+            // 
+            this.grdDetalle.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdDetalle.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdDetalle.AutoResize = false;
+            this.grdDetalle.bColor = System.Drawing.SystemColors.Window;
+            this.grdDetalle.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdDetalle.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdDetalle.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdDetalle.Col = 0;
+            this.grdDetalle.Cols = 10;
+            this.grdDetalle.DataMember = "";
+            this.grdDetalle.DataSource = null;
+            this.grdDetalle.EnableEdicion = false;
+            this.grdDetalle.Encabezado = "";
+            this.grdDetalle.fColor = System.Drawing.SystemColors.Control;
+            this.grdDetalle.FixCols = 0;
+            this.grdDetalle.FixRows = 0;
+            this.grdDetalle.FuenteEncabezado = null;
+            this.grdDetalle.FuentePieDePagina = null;
+            this.grdDetalle.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdDetalle.Location = new System.Drawing.Point(178, 2);
+            this.grdDetalle.Name = "grdDetalle";
+            this.grdDetalle.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdDetalle.PintarFilaSel = false;
+            this.grdDetalle.Redraw = true;
+            this.grdDetalle.Row = 0;
+            this.grdDetalle.Rows = 50;
+            this.grdDetalle.Size = new System.Drawing.Size(634, 75);
+            this.grdDetalle.TabIndex = 4;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.cmdActualizar);
+            this.panel2.Location = new System.Drawing.Point(1266, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(187, 74);
+            this.panel2.TabIndex = 3;
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -194,38 +266,42 @@
             this.panel1.Controls.Add(this.cmbnvaBoleta);
             this.panel1.Location = new System.Drawing.Point(2, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(170, 40);
+            this.panel1.Size = new System.Drawing.Size(170, 75);
             this.panel1.TabIndex = 2;
             // 
-            // cmbnvaBoleta
+            // cFecha
             // 
-            this.cmbnvaBoleta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbnvaBoleta.Location = new System.Drawing.Point(0, 0);
-            this.cmbnvaBoleta.Name = "cmbnvaBoleta";
-            this.cmbnvaBoleta.Size = new System.Drawing.Size(170, 40);
-            this.cmbnvaBoleta.TabIndex = 1;
-            this.cmbnvaBoleta.Texto = "Generar Boleta";
-            this.cmbnvaBoleta.Click += new System.EventHandler(this.cmbnvaBoleta_Click);
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(818, 3);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(198, 184);
+            this.cFecha.TabIndex = 5;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
             // 
             // cmdActualizar
             // 
             this.cmdActualizar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmdActualizar.Location = new System.Drawing.Point(0, 0);
             this.cmdActualizar.Name = "cmdActualizar";
-            this.cmdActualizar.Size = new System.Drawing.Size(187, 44);
+            this.cmdActualizar.Size = new System.Drawing.Size(187, 74);
             this.cmdActualizar.TabIndex = 0;
             this.cmdActualizar.Texto = "Actualizar";
             this.cmdActualizar.Click += new System.EventHandler(this.cmdActualizar_Click);
             // 
-            // panel2
+            // cmbnvaBoleta
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.cmdActualizar);
-            this.panel2.Location = new System.Drawing.Point(1269, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(187, 44);
-            this.panel2.TabIndex = 3;
+            this.cmbnvaBoleta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbnvaBoleta.Location = new System.Drawing.Point(0, 0);
+            this.cmbnvaBoleta.Name = "cmbnvaBoleta";
+            this.cmbnvaBoleta.Size = new System.Drawing.Size(170, 75);
+            this.cmbnvaBoleta.TabIndex = 1;
+            this.cmbnvaBoleta.Texto = "Generar Boleta";
+            this.cmbnvaBoleta.Click += new System.EventHandler(this.cmbnvaBoleta_Click);
             // 
             // frmVencimientos
             // 
@@ -237,6 +313,7 @@
             this.Text = "Vencimientos";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -245,8 +322,8 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -263,5 +340,8 @@
         private Controles.cBoton cmbnvaBoleta;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private Grilla2.SpeedGrilla grdDetalle;
+        private MaterialSkin.Controls.MaterialCheckBox chConSaldo;
+        private Controles.cFechas cFecha;
     }
 }

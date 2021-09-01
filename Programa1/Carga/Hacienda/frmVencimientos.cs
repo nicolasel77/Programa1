@@ -1,10 +1,10 @@
 ﻿namespace Programa1.Carga.Hacienda
 {
     using Programa1.DB;
+    using Programa1.DB.Tesoreria;
     using System;
     using System.Drawing;
     using System.Windows.Forms;
-    using System.Data;
     public partial class frmVencimientos : Form
     {
         public Saldos_Consignatarios saldos = new Saldos_Consignatarios();
@@ -15,6 +15,7 @@
         C1.Win.C1FlexGrid.CellStyle estP2Azul;
         C1.Win.C1FlexGrid.CellStyle estP2Rojo;
 
+        C1.Win.C1FlexGrid.CellStyle estDefault;
 
         #region Columnas P1
         const int cID = 0;
@@ -41,6 +42,9 @@
         const int aMatricula = 12;
         #endregion
 
+        int FilaanteriorP1 = -1;
+        int FilaanteriorP2 = -1;
+
         public frmVencimientos()
         {
             InitializeComponent();
@@ -55,8 +59,11 @@
 
             estP2Azul = grd.Styles.Add("");
             estP2Rojo = grd.Styles.Add("");
+            estDefault = grd.Styles.Add("");
+
             estP2Azul.BackColor = Color.LightCyan;
             estP2Rojo.BackColor = Color.LightCoral;
+            estDefault.BackColor = Color.LightBlue;
 
             Cargar();
         }
@@ -70,7 +77,7 @@
 
         private void Compras_P1()
         {
-            grd.MostrarDatos(saldos.Vencimientos(), true, cDif);
+            grd.MostrarDatos(saldos.Vencimientos(chConSaldo.Checked), true, cDif);
 
 
             double valor = 0;
@@ -86,9 +93,9 @@
                 }
                 grd.set_ColorLetraCelda(i, cDif, (Convert.ToDouble(grd.get_Texto(i, cDif)) < -1) ? Color.Red : (Convert.ToDouble(grd.get_Texto(i, cSaldo)) > 1) ? Color.Blue : Color.Black);
                 grd.set_ColorLetraCelda(i, cSaldo, (Convert.ToDouble(grd.get_Texto(i, cSaldo)) < -1) ? Color.Red : (Convert.ToDouble(grd.get_Texto(i, cSaldo)) > 1) ? Color.Blue : Color.Black);
-                if (Convert.ToInt16(grd.get_Texto(i, cEstado)) == 1) 
-                { 
-                    grd.Filas[i].Style = estP1Azul; 
+                if (Convert.ToInt16(grd.get_Texto(i, cEstado)) == 1)
+                {
+                    grd.Filas[i].Style = estP1Azul;
                 }
                 else
                 {
@@ -102,6 +109,7 @@
             grd.Columnas[cKilos].Style.Format = "N1";
             grd.Columnas[cCosto].Style.Format = "N1";
             grd.Columnas[cTotal].Style.Format = "N1";
+            grd.Columnas[cTotal].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
             grd.Columnas[cPago].Style.Format = "N1";
             grd.Columnas[cDif].Style.Format = "N1";
             grd.Columnas[cSaldo].Style.Format = "N1";
@@ -120,7 +128,7 @@
         }
         private void Compras_P2()
         {
-            grdAgr.MostrarDatos(saldos.Vencimientos_Agr(), true, aDif);
+            grdAgr.MostrarDatos(saldos.Vencimientos_Agr(chConSaldo.Checked), true, aDif);
 
 
             double valor = 0;
@@ -148,8 +156,8 @@
                     }
                 }
             }
-
             grdAgr.Columnas[aImporte].Style.Format = "N1";
+            grdAgr.Columnas[aImporte].Style.Font =  new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
             grdAgr.Columnas[aPago].Style.Format = "N1";
             grdAgr.Columnas[aDif].Style.Format = "N1";
             grdAgr.Columnas[aSaldo].Style.Format = "N1";
@@ -164,7 +172,7 @@
             grdAgr.set_ColW(aIDMat, 0);
             grdAgr.set_ColW(aMatricula, 30);
 
-            grdAgr.ActivarCelda(1, grdAgr.Rows -1);
+            grdAgr.ActivarCelda(1, grdAgr.Rows - 1);
         }
 
         private void cmdActualizar_Click(object sender, System.EventArgs e)
@@ -180,7 +188,7 @@
                 if (Convert.ToInt16(grd.get_Texto(f, cEstado)) == 0)
                 {
                     grd.set_Texto(f, cEstado, 1);
-                    grd.Filas[f].Style = estP1Azul;                    
+                    grd.Filas[f].Style = estP1Azul;
                 }
                 else
                 {
@@ -229,10 +237,77 @@
         private void cmbnvaBoleta_Click(object sender, EventArgs e)
         {
             frmGenerarnvaBoleta fr = new frmGenerarnvaBoleta();
-            fr.dt = saldos.Vencimientos();
+            fr.dt = saldos.Vencimientos(chConSaldo.Checked);
             fr.Cargar();
             fr.ShowDialog();
             fr.Close();
+        }
+
+        private void grd_CambioFila(short Fila)
+        {
+            if (FilaanteriorP1 > 0)
+            {
+                if (Convert.ToInt16(grd.get_Texto(FilaanteriorP1, aEstado)) == 0)
+                {
+                    grd.Filas[FilaanteriorP1].Style = null;
+                }
+
+                if (Convert.ToInt16(grd.get_Texto(FilaanteriorP1, cEstado)) == 1)
+                {
+                    grd.Filas[FilaanteriorP1].Style = estP1Azul;
+                }
+                else
+                {
+                    if (Convert.ToInt16(grd.get_Texto(FilaanteriorP1, cEstado)) == 2)
+                    {
+                        grd.Filas[FilaanteriorP1].Style = estP1Rojo;
+                    }
+                }
+            }
+            FilaanteriorP1 = grd.Row;
+            grd.Filas[FilaanteriorP1].Style = estDefault;
+            Gastos gastos = new Gastos();
+            grdDetalle.MostrarDatos(gastos.Datos_DetalleP($"Id = {grd.get_Texto(FilaanteriorP1, cID)} AND ID_TipoGastos = 12"), true, false);
+            grdDetalle.AutosizeAll();
+        }
+
+        private void grdAgr_CambioFila(short Fila)
+        {
+            if (FilaanteriorP2 > 0)
+            {
+                if (Convert.ToInt16(grdAgr.get_Texto(FilaanteriorP2, aEstado)) == 0)
+                {
+                    grdAgr.Filas[FilaanteriorP2].Style = null;
+                }
+
+                if (Convert.ToInt16(grdAgr.get_Texto(FilaanteriorP2, aEstado)) == 1)
+                {
+                    grdAgr.Filas[FilaanteriorP2].Style = estP2Azul;
+                }
+                else
+                {
+                    if (Convert.ToInt16(grdAgr.get_Texto(FilaanteriorP2, aEstado)) == 2)
+                    {
+                        grdAgr.Filas[FilaanteriorP2].Style = estP2Rojo;
+                    }
+                }
+            }
+            FilaanteriorP2 = grdAgr.Row;
+            grdAgr.Filas[FilaanteriorP2].Style = estDefault;
+            Gastos gastos = new Gastos();
+            grdDetalle.MostrarDatos(gastos.Datos_DetalleP($"Id = {grdAgr.get_Texto(FilaanteriorP2,aID)} AND ID_TipoGastos = 22"),true,false);
+            grdDetalle.AutosizeAll();
+        }
+
+        private void chConSaldo_CheckedChanged(object sender, EventArgs e)
+        {
+            Compras_P1();
+            Compras_P2();
+        }
+
+        private void cFecha_Cambio_Seleccion(object sender, EventArgs e)
+        {
+
         }
     }
 }

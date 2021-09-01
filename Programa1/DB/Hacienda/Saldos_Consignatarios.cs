@@ -60,26 +60,36 @@
             }
         }
 
-        public DataTable Vencimientos()
+        public DataTable Vencimientos(bool Saldo = true)
         {
+            string saldo = "";
+            if (Saldo == true)
+            {
+                saldo = "AND Saldo<-10";
+            }
             Vista = "vw_Hacienda_Saldos";
             if (gastos is null) { gastos = new Gastos(); }
             if (gastos.Id_SubTipoGastos != 0)
             {
-                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND Saldo<-10", $" Id_CompraFrigo, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} {saldo} ", $" Id_CompraFrigo, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
             else
             {
                 return Datos_Vista("Saldo<-10", $" Id_CompraFrigo, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
         }
-        public DataTable Vencimientos_Agr()
+        public DataTable Vencimientos_Agr(bool Saldo = true)
         {
+            string saldo = "";
+            if (Saldo == true)
+            {
+                saldo = "AND Saldo<-10";
+            }
             Vista = "vw_Hacienda_Agregados";
             if (gastos is null) { gastos = new Gastos(); }
             if (gastos.Id_SubTipoGastos != 0)
             {
-                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} AND Saldo<-10", $" Id_Agregados_Frigo, Fecha, Plazo, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} {saldo}", $" Id_Agregados_Frigo, Fecha, Plazo, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
             else
             {

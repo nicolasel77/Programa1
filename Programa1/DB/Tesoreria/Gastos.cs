@@ -456,6 +456,31 @@
             return dt;
         }
 
+        public DataTable Datos_DetalleP(string filtro = "")
+        {
+            var dt = new DataTable("Datos");
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+
+            try
+            {
+                string Cadena = $"SELECT Fecha, ID_SubTipoGastos as ID_consignatario, Desc_SubTipo as Consignatario, Descripcion as NBoleta FROM {Tabla} {filtro} ORDER BY {Campo_ID}";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                daAdapt.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
         public bool Fecha_Cerrada()
         {
             if ( Usuario.Permiso == Usuarios.e_Permiso.Administrador) { return false; }

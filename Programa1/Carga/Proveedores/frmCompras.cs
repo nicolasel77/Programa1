@@ -377,7 +377,7 @@
             {
                 Compras.ID = 0;
                 Compras.Camion.ID = Convert.ToInt32(grdCompras.get_Texto(Fila, c_IdCamion));
-                Compras.Fecha = Convert.ToDateTime(grdCompras.get_Texto(Fila,c_Fecha));
+                Compras.Fecha = Convert.ToDateTime(grdCompras.get_Texto(Fila, c_Fecha));
                 Compras.Producto.ID = Convert.ToInt32(grdCompras.get_Texto(Fila, c_IdProd));
                 Compras.Descripcion = grdCompras.get_Texto(Fila, c_Descripcion).ToString();
                 Compras.Proveedor.Id = Convert.ToInt32(grdCompras.get_Texto(Fila, c_IdProv));
@@ -398,7 +398,7 @@
                 {
                     if (grdCompras.Col == c_IdCamion)
                     {
-                        grdCompras.ActivarCelda(grdCompras.Row, grdCompras.Col +1);
+                        grdCompras.ActivarCelda(grdCompras.Row, grdCompras.Col + 1);
                     }
 
                     if (grdCompras.Col == c_Kilos)

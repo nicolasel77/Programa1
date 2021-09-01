@@ -69,9 +69,11 @@
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Kilos")].Style.Format = "N1";
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Costo")].Style.Format = "N1";
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Total")].Style.Format = "N1";
+            grdOriginal.Columnas[grdOriginal.get_ColIndex("Total")].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Pago")].Style.Format = "N1";
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Dif")].Style.Format = "N1";
             grdOriginal.Columnas[cSaldo].Style.Format = "N1";
+
 
             grdOriginal.AutosizeAll();
             grdOriginal.set_ColW(cID, 0);
@@ -99,7 +101,8 @@
             grdnvaBoleta.AgregarFila();
             grdnvaBoleta.AgregarFila();
 
-            grdnvaBoleta.Columnas[grdnvaBoleta.get_ColIndex("Importe")].Style.Format = "N1";
+            grdnvaBoleta.Columnas[cImporte].Style.Format = "N1";
+            grdnvaBoleta.Columnas[cImporte].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
 
             grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cNombre, "Total:");
             //Compras_P2();
