@@ -41,8 +41,6 @@
         const int aMatricula = 12;
         #endregion
 
-        private DataTable dtgboleta = null;
-
         public frmVencimientos()
         {
             InitializeComponent();
@@ -72,8 +70,7 @@
 
         private void Compras_P1()
         {
-            dtgboleta = saldos.Vencimientos();
-            grd.MostrarDatos(dtgboleta, true, cDif);
+            grd.MostrarDatos(saldos.Vencimientos(), true, cDif);
 
 
             double valor = 0;
@@ -232,9 +229,10 @@
         private void cmbnvaBoleta_Click(object sender, EventArgs e)
         {
             frmGenerarnvaBoleta fr = new frmGenerarnvaBoleta();
-            fr.dt = dtgboleta;
+            fr.dt = saldos.Vencimientos();
             fr.Cargar();
             fr.ShowDialog();
+            fr.Close();
         }
     }
 }

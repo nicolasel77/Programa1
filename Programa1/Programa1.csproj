@@ -651,6 +651,7 @@
     <Compile Include="DB\Hacienda\Hacienda_Salidas.cs" />
     <Compile Include="DB\Hacienda\Matriculas.cs" />
     <Compile Include="DB\Hacienda\NBoletas.cs" />
+    <Compile Include="DB\Hacienda\nvaBoleta.cs" />
     <Compile Include="DB\Hacienda\Recupero.cs" />
     <Compile Include="DB\Hacienda\Saldos_Consignatarios.cs" />
     <Compile Include="DB\Hacienda\Tablas.cs" />
