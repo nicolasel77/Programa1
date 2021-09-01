@@ -336,3 +336,6 @@ Programa1/App.config
 Programa1/Properties/Settings.Designer.cs
 Programa1/App.config
 *.settings
+Programa1/DB/Hacienda/Generar_Boleta.cs
+Programa1/Programa1.csproj
+Programa1/Properties/licenses.licx
