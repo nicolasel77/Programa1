@@ -9,10 +9,9 @@
         static public void Main()
         {
             Usuarios usuario = new Usuarios();
-            //usuario.Nombre = System.Environment.UserName;
-            //System.Windows.Forms.MessageBox.Show(usuario.Nombre);
-            usuario.Nombre = "Edi";
-            
+            usuario.Nombre = System.Environment.UserName;
+            System.Windows.Forms.MessageBox.Show(usuario.Nombre);
+
             frmMain fr = new frmMain();
             fr.usuario = usuario;
             fr.ShowDialog();

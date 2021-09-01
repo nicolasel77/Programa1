@@ -65,7 +65,7 @@
             this.cmbImprimir.AutoSize = true;
             this.cmbImprimir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.cmbImprimir.Depth = 0;
-            this.cmbImprimir.Location = new System.Drawing.Point(1344, 638);
+            this.cmbImprimir.Location = new System.Drawing.Point(1445, 638);
             this.cmbImprimir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.cmbImprimir.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmbImprimir.Name = "cmbImprimir";
@@ -92,8 +92,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.grdnvaBoleta);
-            this.splitContainer1.Size = new System.Drawing.Size(1406, 629);
-            this.splitContainer1.SplitterDistance = 880;
+            this.splitContainer1.Size = new System.Drawing.Size(1507, 629);
+            this.splitContainer1.SplitterDistance = 953;
             this.splitContainer1.TabIndex = 4;
             // 
             // grdOriginal
@@ -125,7 +125,7 @@
             this.grdOriginal.Redraw = true;
             this.grdOriginal.Row = 0;
             this.grdOriginal.Rows = 50;
-            this.grdOriginal.Size = new System.Drawing.Size(880, 629);
+            this.grdOriginal.Size = new System.Drawing.Size(953, 629);
             this.grdOriginal.TabIndex = 1;
             this.grdOriginal.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdOriginal_Editado);
             // 
@@ -158,7 +158,7 @@
             this.grdnvaBoleta.Redraw = true;
             this.grdnvaBoleta.Row = 0;
             this.grdnvaBoleta.Rows = 3;
-            this.grdnvaBoleta.Size = new System.Drawing.Size(522, 629);
+            this.grdnvaBoleta.Size = new System.Drawing.Size(550, 629);
             this.grdnvaBoleta.TabIndex = 0;
             this.grdnvaBoleta.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdnvaBoleta_Editado);
             // 
@@ -166,7 +166,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1430, 676);
+            this.ClientSize = new System.Drawing.Size(1531, 676);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.cmbImprimir);
             this.Controls.Add(this.chCargarPagos);

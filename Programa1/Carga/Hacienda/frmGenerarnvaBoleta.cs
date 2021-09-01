@@ -76,7 +76,6 @@
 
 
             grdOriginal.AutosizeAll();
-            grdOriginal.set_ColW(cID, 0);
             grdOriginal.set_ColW(cTotal, 80);
             grdOriginal.set_ColW(cPago, 80);
             grdOriginal.set_ColW(cDif, 90);
