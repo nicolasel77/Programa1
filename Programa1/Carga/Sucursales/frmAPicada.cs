@@ -2,6 +2,7 @@
 {
     using Programa1.DB;
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -509,23 +510,23 @@
         {
             if (grdAPicada.Rows > 2)
             {
-                //frmCMAPicada cm = new frmCMAPicada();
-                //List<int> n = new List<int>();
+                frmCMApicada cm = new frmCMApicada();
+                List<int> n = new List<int>();
 
-                //int d = grdAPicada.Selection.r1;
-                //int h = grdAPicada.Selection.r2;
-                //if (d == -1)
-                //{
-                //    d = 1;
-                //    h = grdAPicada.Rows - 2;
-                //}
-                //for (int i = d; i <= h; i++)
-                //{
-                //    n.Add(Convert.ToInt32(grdAPicada.get_Texto(i, c_Id)));
-                //}
-                //cm.Ids = n;
-                //cm.ShowDialog();
-                //cmdMostrar.PerformClick();
+                int d = grdAPicada.Selection.r1;
+                int h = grdAPicada.Selection.r2;
+                if (d == -1)
+                {
+                    d = 1;
+                    h = grdAPicada.Rows - 2;
+                }
+                for (int i = d; i <= h; i++)
+                {
+                    n.Add(Convert.ToInt32(grdAPicada.get_Texto(i, c_Id)));
+                }
+                cm.Ids = n;
+                cm.ShowDialog();
+                cmdMostrar.PerformClick();
             }
         }
 

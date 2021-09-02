@@ -370,6 +370,7 @@
             this.cmdCambio.TabIndex = 0;
             this.cmdCambio.Text = "Cambio Masivo";
             this.cmdCambio.UseVisualStyleBackColor = true;
+            this.cmdCambio.Visible = false;
             this.cmdCambio.Click += new System.EventHandler(this.CmdCambioMasivo_Click);
             // 
             // paMostrar

@@ -245,6 +245,12 @@
     <Compile Include="Carga\Sucursales\frmCantidadClientes.Designer.cs">
       <DependentUpon>frmCantidadClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Sucursales\frmCMApicada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmCMApicada.Designer.cs">
+      <DependentUpon>frmCMApicada.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Sucursales\frmCMStock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -821,6 +827,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmCantidadClientes.resx">
       <DependentUpon>frmCantidadClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sucursales\frmCMApicada.resx">
+      <DependentUpon>frmCMApicada.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmCMStock.resx">
       <DependentUpon>frmCMStock.cs</DependentUpon>

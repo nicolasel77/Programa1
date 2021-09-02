@@ -77,8 +77,10 @@
 
         private void Compras_P1()
         {
-            grd.MostrarDatos(saldos.Vencimientos(armarCadena()), true, cDif);
-
+            grd.MostrarDatos(saldos.Vencimientos(armarCadena()), true);
+            grd.AgregarFila();
+            grd.SumarCol(cDif);
+            grd.SumarCol(cTotal);
 
             double valor = 0;
             for (int i = 1; i <= grd.Rows - 1; i++)
@@ -128,8 +130,10 @@
         }
         private void Compras_P2()
         {
-            grdAgr.MostrarDatos(saldos.Vencimientos_Agr(armarCadena()), true, aDif);
-
+            grdAgr.MostrarDatos(saldos.Vencimientos_Agr(armarCadena()), true);
+            grdAgr.AgregarFila();
+            grdAgr.SumarCol(aDif);
+            grdAgr.SumarCol(aImporte);
 
             double valor = 0;
             for (int i = 1; i <= grdAgr.Rows - 1; i++)
@@ -274,6 +278,7 @@
                 Gastos gastos = new Gastos();
                 grdDetalle.MostrarDatos(gastos.Datos_DetalleP($"ID_DetalleGastos = {grd.get_Texto(FilaanteriorP1, cID)} AND ID_TipoGastos = 12"), true, false);
                 grdDetalle.AutosizeAll();
+                grdDetalle.Columnas[grdDetalle.get_ColIndex("Importe")].Style.Format = "N1";
             }
             else
             {
@@ -312,6 +317,7 @@
                 Gastos gastos = new Gastos();
                 grdDetalle.MostrarDatos(gastos.Datos_DetalleP($"ID_DetalleGastos = {grdAgr.get_Texto(FilaanteriorP2, aID)} AND ID_TipoGastos = 22"), true, false);
                 grdDetalle.AutosizeAll();
+                grdDetalle.Columnas[grdDetalle.get_ColIndex("Importe")].Style.Format = "N1";
             }
             else
             {
@@ -340,7 +346,6 @@
             s = h.Unir(s, f);
             return s;
         }
-
         private void chFecha_CheckedChanged(object sender, EventArgs e)
         {
             Compras_P1();
