@@ -465,7 +465,7 @@
 
             try
             {
-                string Cadena = $"SELECT Fecha, ID_SubTipoGastos as ID_consignatario, Desc_SubTipo as Consignatario, Descripcion as NBoleta FROM {Tabla} {filtro} ORDER BY {Campo_ID}";
+                string Cadena = $"SELECT Fecha, ID_SubTipoGastos as ID_consignatario, Desc_SubTipo as Consignatario, Descripcion as NBoleta, Importe FROM {Tabla} {filtro} ORDER BY {Campo_ID}";
 
                 SqlCommand cmd = new SqlCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;

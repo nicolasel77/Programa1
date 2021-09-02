@@ -60,42 +60,32 @@
             }
         }
 
-        public DataTable Vencimientos(bool Saldo = true)
+        public DataTable Vencimientos(string filtro = "")
         {
-            string saldo = "";
-            if (Saldo == true)
-            {
-                saldo = "Saldo<-10";
-            }
             Vista = "vw_Hacienda_Saldos";
             if (gastos is null) { gastos = new Gastos(); }
             if (gastos.Id_SubTipoGastos != 0)
             {
-                if (saldo.Length > 0) { saldo = " AND " + saldo; }
-                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} {saldo} ", $" Id_CompraFrigo, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
+                if (filtro.Length > 0) { filtro = " AND " + filtro; }
+                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} {filtro} ", $" Id_CompraFrigo, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
             else
             {
-                return Datos_Vista(saldo, $" Id_CompraFrigo, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista(filtro, $" Id_CompraFrigo, Fecha, Plazo, Venc, Dias, NBoleta, Nombre, Cabezas Cab, Descripcion Descr, Kilos, Costo, Total, Pago, Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
         }
-        public DataTable Vencimientos_Agr(bool Saldo = true)
+        public DataTable Vencimientos_Agr(string filtro = "")
         {
-            string saldo = "";
-            if (Saldo == true)
-            {
-                saldo = "Saldo<-10";
-            }
             Vista = "vw_Hacienda_Agregados";
             if (gastos is null) { gastos = new Gastos(); }
             if (gastos.Id_SubTipoGastos != 0)
             {
-                if (saldo.Length > 0) { saldo = " AND " + saldo; }
-                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} {saldo}", $" Id_Agregados_Frigo, Fecha, Plazo, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
+                if (filtro.Length > 0) { filtro = " AND " + filtro; }
+                return Datos_Vista($"ID_Consignatarios={gastos.Id_SubTipoGastos} {filtro}", $" Id_Agregados_Frigo, Fecha, Plazo, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
             else
             {
-                return Datos_Vista(saldo, $" Id_Agregados_Frigo, Fecha, Plazo, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
+                return Datos_Vista(filtro, $" Id_Agregados_Frigo, Fecha, Plazo, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
         }
                 
