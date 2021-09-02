@@ -11,7 +11,7 @@
         public GastosSucursales_Tipos()
         {
             Tabla = "GastosSucursales_Tipos";
-            Vista = "GastosSucursales_Tipos";
+            Vista = "vw_GastosSucursalesTipos";
         }
 
 

@@ -3,26 +3,28 @@
     using Programa1.DB;
     using System;
     using System.Data;
+    using System.Drawing;
     using System.Windows.Forms;
 
     public partial class frmHacienda_Salidas : Form
     {
-        private Hacienda_Salidas Salidas = new Hacienda_Salidas();
+        private readonly Hacienda_Salidas Salidas = new Hacienda_Salidas();
 
         #region " Columnas "
-        private Byte c_Id;
-        private Byte c_Fecha;
-        private Byte c_IdSuc;
-        private Byte c_Tropa;
-        private Byte c_Categoria;
-        private Byte c_Prod;
-        private Byte c_Boleta;
-        private Byte c_CostoCarne;
-        private Byte c_CostoSalida;
-        private Byte c_Media;
-        private Byte c_Original;
-        private Byte c_TotalCompra;
-        private Byte c_TotalSalida;
+        private readonly Byte c_Id;
+        private readonly Byte c_Fecha;
+        private readonly Byte c_IdSuc;
+        private readonly Byte c_Tropa;
+        private readonly Byte c_Categoria;
+        private readonly Byte c_Prod;
+        private readonly Byte c_Boleta;
+        private readonly Byte c_CostoCarne;
+        private readonly Byte c_CostoSalida;
+        private readonly Byte c_Media;
+        private readonly Byte c_Original;
+        private readonly Byte c_TotalCompra;
+        private readonly Byte c_TotalSalida;
+        private readonly Byte c_MU;
         #endregion
 
         public frmHacienda_Salidas()
@@ -62,6 +64,7 @@
             c_Original = Convert.ToByte(grdSalida.get_ColIndex("Original"));
             c_TotalCompra = Convert.ToByte(grdSalida.get_ColIndex("Total_Compra"));
             c_TotalSalida = Convert.ToByte(grdSalida.get_ColIndex("Total_Salida"));
+            c_MU = Convert.ToByte(grdSalida.get_ColIndex("MU"));
 
             formato_Grilla();
 
@@ -70,6 +73,7 @@
             grdSalida.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSuc, c_Media);
 
             Totales();
+                        
         }
 
         private void FrmSalida_KeyUp(object sender, KeyEventArgs e)
@@ -122,6 +126,7 @@
                 grdResumen.MostrarDatos(Salidas.Resumen_Salidas(s), true);
                 formato_Grilla();
                 Totales();
+                                
                 grdSalida.ActivarCelda(grdSalida.Rows - 1, c_Fecha);
                 grdSalida.Focus();
             }
@@ -133,11 +138,18 @@
             string s = cSucursal.Cadena("Id_Sucursales");
             string p = cProds.Cadena("Id_Productos");
             string f = cFecha.Cadena();
-            
+
             Herramientas.Herramientas h = new Herramientas.Herramientas();
 
-            if (lstBoletas.SelectedIndex > -1) f = h.Unir("NBoleta=" + lstBoletas.Text, f);
-            if (lstTropas.SelectedIndex > -1) f = h.Unir("Tropa=" + lstTropas.Text, f);
+            if (lstBoletas.SelectedIndex > -1)
+            {
+                f = h.Unir("NBoleta=" + lstBoletas.Text, f);
+            }
+
+            if (lstTropas.SelectedIndex > -1)
+            {
+                f = h.Unir("Tropa=" + lstTropas.Text, f);
+            }
 
             s = h.Unir(s, f);
             s = h.Unir(s, p);
@@ -148,18 +160,19 @@
         {
             grdSalida.set_ColW(c_Id, 0);
             grdSalida.set_ColW(c_Fecha, 60);
-            grdSalida.set_ColW(c_IdSuc, 35);
-            grdSalida.set_ColW(c_IdSuc + 1, 50);
+            grdSalida.set_ColW(c_IdSuc, 45);
+            grdSalida.set_ColW(c_IdSuc + 1, 150);
             grdSalida.set_ColW(c_Categoria, 40);
             grdSalida.set_ColW(c_Prod, 40);
-            grdSalida.set_ColW(c_Tropa, 50);
-            grdSalida.set_ColW(c_Boleta, 40);
+            grdSalida.set_ColW(c_Tropa, 60);
+            grdSalida.set_ColW(c_Boleta, 50);
             grdSalida.set_ColW(c_CostoSalida, 60);
             grdSalida.set_ColW(c_CostoCarne, 60);
-            grdSalida.set_ColW(c_Media, 50);
-            grdSalida.set_ColW(c_Original, 50);
-            grdSalida.set_ColW(c_TotalCompra, 80);
-            grdSalida.set_ColW(c_TotalSalida, 80);
+            grdSalida.set_ColW(c_Media, 60);
+            grdSalida.set_ColW(c_Original, 60);
+            grdSalida.set_ColW(c_TotalCompra, 90);
+            grdSalida.set_ColW(c_TotalSalida, 90);
+            grdSalida.set_ColW(c_MU, 40);
 
             grdSalida.Columnas[c_CostoSalida].Format = "N3";
             grdSalida.Columnas[c_CostoCarne].Format = "N3";
@@ -271,12 +284,18 @@
 
         private void LstBoletas_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Middle) lstBoletas.SelectedIndex = -1;
+            if (e.Button == MouseButtons.Middle)
+            {
+                lstBoletas.SelectedIndex = -1;
+            }
         }
 
         private void grdSalida_Editado(short f, short c, object a)
         {
-
+            Salidas.ID = Convert.ToInt32(grdSalida.get_Texto(f, 0));
+            Salidas.Media_Utilizada = Convert.ToBoolean(a);
+            Salidas.Actualizar("MU", a);
+            grdSalida.ActivarCelda(f + 1, c);
         }
     }
 }

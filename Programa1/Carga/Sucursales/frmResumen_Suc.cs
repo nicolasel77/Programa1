@@ -130,8 +130,9 @@
 
         private void Cargar_Listado(DateTime Semana)
         {
-            grdSucursales.MostrarDatos(RS.Listado_Balances(Semana, sucursalesListado.Checked), true, false);
-            grdSucursales.set_ColW(0, 30);
+
+            grdSucursales.MostrarDatos(RS.Listado_Balances(Semana, userr.Permiso, sucursalesListado.Checked), true, false);
+            grdSucursales.AutosizeCol(0);
             grdSucursales.set_ColW(1, 180);
             if (userr.Permiso == Usuarios.e_Permiso.Administrador)
             {
@@ -174,6 +175,8 @@
                 Est.Suc.ID = Suc;
                 lblSuc.Text = $"{grdSucursales.get_Texto(Fila, 1)}";
                 Cargar_Datos();
+                grdEntradas.Focus();
+                grdEntradas.ActivarCelda(1, 0);
                 this.Cursor = Cursors.Default;
             }
         }
@@ -553,6 +556,7 @@
             NoCargar = false;
             sucursalesToolStripMenuItem.Checked = false;
             Filtro_EsSucursal = Estadisticas_Sucursales.Tipo_Propio.Clientes;
+            Est.Filtro_Ver = false;
             Est.Filtro_Propio = Filtro_EsSucursal;
             Estadisticas();
         }
@@ -564,6 +568,7 @@
             NoCargar = false;
             clientesToolStripMenuItem.Checked = false;
             Filtro_EsSucursal = Estadisticas_Sucursales.Tipo_Propio.Sucursales;
+            Est.Filtro_Ver = true;
             Est.Filtro_Propio = Filtro_EsSucursal;
             Estadisticas();
         }

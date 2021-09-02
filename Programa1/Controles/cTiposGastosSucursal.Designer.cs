@@ -65,7 +65,7 @@
             this.lst.Location = new System.Drawing.Point(6, 21);
             this.lst.Name = "lst";
             this.lst.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lst.Size = new System.Drawing.Size(225, 455);
+            this.lst.Size = new System.Drawing.Size(302, 533);
             this.lst.TabIndex = 0;
             this.lst.SelectedIndexChanged += new System.EventHandler(this.Lst_SelectedIndexChanged);
             this.lst.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Lst_MouseUp);
@@ -80,7 +80,7 @@
             this.lstRubros.Location = new System.Drawing.Point(3, 21);
             this.lstRubros.Name = "lstRubros";
             this.lstRubros.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstRubros.Size = new System.Drawing.Size(93, 221);
+            this.lstRubros.Size = new System.Drawing.Size(127, 299);
             this.lstRubros.TabIndex = 4;
             this.lstRubros.SelectedIndexChanged += new System.EventHandler(this.LstTipos_SelectedIndexChanged);
             // 
@@ -114,15 +114,15 @@
             this.splitContainer1.Panel2.Controls.Add(this.lstGrupos);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.lstRubros);
-            this.splitContainer1.Size = new System.Drawing.Size(337, 512);
-            this.splitContainer1.SplitterDistance = 234;
+            this.splitContainer1.Size = new System.Drawing.Size(448, 591);
+            this.splitContainer1.SplitterDistance = 311;
             this.splitContainer1.TabIndex = 2;
             // 
             // cmdInvertir
             // 
             this.cmdInvertir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdInvertir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdInvertir.Location = new System.Drawing.Point(194, 484);
+            this.cmdInvertir.Location = new System.Drawing.Point(271, 563);
             this.cmdInvertir.Name = "cmdInvertir";
             this.cmdInvertir.Size = new System.Drawing.Size(37, 23);
             this.cmdInvertir.TabIndex = 3;
@@ -135,7 +135,7 @@
             // 
             this.cmdNinguno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdNinguno.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdNinguno.Location = new System.Drawing.Point(149, 484);
+            this.cmdNinguno.Location = new System.Drawing.Point(226, 563);
             this.cmdNinguno.Name = "cmdNinguno";
             this.cmdNinguno.Size = new System.Drawing.Size(37, 23);
             this.cmdNinguno.TabIndex = 2;
@@ -148,7 +148,7 @@
             // 
             this.cmdTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdTodos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdTodos.Location = new System.Drawing.Point(104, 484);
+            this.cmdTodos.Location = new System.Drawing.Point(181, 563);
             this.cmdTodos.Name = "cmdTodos";
             this.cmdTodos.Size = new System.Drawing.Size(37, 23);
             this.cmdTodos.TabIndex = 1;
@@ -174,7 +174,7 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.rdId);
             this.panel1.Controls.Add(this.rdOrden);
-            this.panel1.Location = new System.Drawing.Point(3, 400);
+            this.panel1.Location = new System.Drawing.Point(3, 479);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(93, 68);
             this.panel1.TabIndex = 9;
@@ -218,19 +218,19 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(64, 376);
+            this.button1.Location = new System.Drawing.Point(98, 455);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(31, 19);
             this.button1.TabIndex = 5;
             this.button1.Text = "N";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.CmdTodosTipos_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // cmdTodosTipos
             // 
             this.cmdTodosTipos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdTodosTipos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdTodosTipos.Location = new System.Drawing.Point(64, 252);
+            this.cmdTodosTipos.Location = new System.Drawing.Point(98, 331);
             this.cmdTodosTipos.Name = "cmdTodosTipos";
             this.cmdTodosTipos.Size = new System.Drawing.Size(31, 19);
             this.cmdTodosTipos.TabIndex = 5;
@@ -244,9 +244,9 @@
             this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBuscar.Location = new System.Drawing.Point(6, 489);
+            this.txtBuscar.Location = new System.Drawing.Point(6, 568);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(82, 13);
+            this.txtBuscar.Size = new System.Drawing.Size(116, 13);
             this.txtBuscar.TabIndex = 6;
             this.toolTip1.SetToolTip(this.txtBuscar, "Busca por Id y Nombre");
             this.txtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
@@ -255,7 +255,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 471);
+            this.label3.Location = new System.Drawing.Point(3, 550);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 2;
@@ -267,9 +267,9 @@
             this.label1.AutoSize = true;
             this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label1.Location = new System.Drawing.Point(0, 284);
+            this.label1.Location = new System.Drawing.Point(0, 363);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 24);
+            this.label1.Size = new System.Drawing.Size(50, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Grupo";
             // 
@@ -279,11 +279,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lstGrupos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lstGrupos.FormattingEnabled = true;
-            this.lstGrupos.Location = new System.Drawing.Point(2, 305);
+            this.lstGrupos.Location = new System.Drawing.Point(2, 384);
             this.lstGrupos.Name = "lstGrupos";
             this.lstGrupos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstGrupos.Size = new System.Drawing.Size(93, 65);
+            this.lstGrupos.Size = new System.Drawing.Size(127, 65);
             this.lstGrupos.TabIndex = 4;
+            this.lstGrupos.SelectedIndexChanged += new System.EventHandler(this.lstGrupos_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -292,18 +293,17 @@
             this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 24);
+            this.label2.Size = new System.Drawing.Size(49, 18);
             this.label2.TabIndex = 0;
             this.label2.Text = "Rubro";
             // 
             // cTiposGastosSucursal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.Controls.Add(this.splitContainer1);
             this.Name = "cTiposGastosSucursal";
-            this.Size = new System.Drawing.Size(343, 518);
+            this.Size = new System.Drawing.Size(454, 597);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

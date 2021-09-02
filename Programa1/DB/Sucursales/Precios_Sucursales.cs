@@ -16,37 +16,44 @@
         public DateTime Fecha { get; set; }
         public Productos Producto { get; set; } = new Productos();
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
-        public Single Precio { get; set; }
+        public float Precio { get; set; }
 
 
         #region " Devolver Datos "
-        public Single Buscar()
+        public float Buscar()
         {
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            object d = null;
-
-            //Si no hay una sucursal seleccionada se devuelve el primer precio encontrado
-            string suc = $"(SELECT TOP 1 Id_Sucursales FROM Precios_Sucursales WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={Producto.ID} ORDER BY Fecha DESC)";
-            if (Sucursal.ID > 0) { suc = Sucursal.ID.ToString(); }
-            try
+            if (Producto.ID == 399)
             {
-
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Sucursales  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={Producto.ID} AND ID_Sucursales={suc} ORDER BY Fecha DESC", conexionSql);
-
-                conexionSql.Open();
-
-                comandoSql.CommandType = CommandType.Text;
-                d = comandoSql.ExecuteScalar();
-
-                conexionSql.Close();
+                Precio = 1;
             }
-            catch (Exception)
+            else
             {
-                d = 0;
+                var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+                object d = null;
+
+                //Si no hay una sucursal seleccionada se devuelve el primer precio encontrado
+                string suc = $"(SELECT TOP 1 Id_Sucursales FROM Precios_Sucursales WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
+                        $" AND Id_Productos={Producto.ID} ORDER BY Fecha DESC)";
+                if (Sucursal.ID > 0) { suc = Sucursal.ID.ToString(); }
+                try
+                {
+
+                    SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Sucursales  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
+                        $" AND Id_Productos={Producto.ID} AND ID_Sucursales={suc} ORDER BY Fecha DESC", conexionSql);
+
+                    conexionSql.Open();
+
+                    comandoSql.CommandType = CommandType.Text;
+                    d = comandoSql.ExecuteScalar();
+
+                    conexionSql.Close();
+                }
+                catch (Exception)
+                {
+                    d = 0;
+                }
+                Precio = Convert.ToSingle(d); 
             }
-            Precio = Convert.ToSingle(d);
             return Precio;
         }
 

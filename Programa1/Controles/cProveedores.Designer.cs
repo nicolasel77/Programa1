@@ -35,8 +35,8 @@
             this.cmdInvertir = new System.Windows.Forms.Button();
             this.cmdNinguno = new System.Windows.Forms.Button();
             this.cmdTodos = new System.Windows.Forms.Button();
-            this.lblTitulo = new System.Windows.Forms.Label();
             this.chVer = new System.Windows.Forms.CheckBox();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.rdId = new System.Windows.Forms.RadioButton();
@@ -156,17 +156,6 @@
             this.cmdTodos.UseVisualStyleBackColor = true;
             this.cmdTodos.Click += new System.EventHandler(this.CmdTodos_Click);
             // 
-            // lblTitulo
-            // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lblTitulo.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lblTitulo.Location = new System.Drawing.Point(3, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(118, 24);
-            this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "Proveedores";
-            // 
             // chVer
             // 
             this.chVer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -180,6 +169,17 @@
             this.toolTip1.SetToolTip(this.chVer, "Oculta/muestra según filtro Ver");
             this.chVer.UseVisualStyleBackColor = true;
             this.chVer.CheckedChanged += new System.EventHandler(this.ChVer_CheckedChanged);
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lblTitulo.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lblTitulo.Location = new System.Drawing.Point(3, 0);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(93, 18);
+            this.lblTitulo.TabIndex = 0;
+            this.lblTitulo.Text = "Proveedores";
             // 
             // panel1
             // 
@@ -269,14 +269,13 @@
             this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 24);
+            this.label2.Size = new System.Drawing.Size(37, 18);
             this.label2.TabIndex = 0;
             this.label2.Text = "Tipo";
             // 
             // cProveedores
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.Controls.Add(this.splitContainer1);
             this.Name = "cProveedores";
