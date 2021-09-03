@@ -307,7 +307,7 @@
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(0, 0);
             this.cSucs.Mostrar_Botones = true;
-            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Mostrar_Tipo = false;
             this.cSucs.Name = "cSucs";
             this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucs.Size = new System.Drawing.Size(202, 528);
@@ -370,7 +370,6 @@
             this.cmdCambio.TabIndex = 0;
             this.cmdCambio.Text = "Cambio Masivo";
             this.cmdCambio.UseVisualStyleBackColor = true;
-            this.cmdCambio.Visible = false;
             this.cmdCambio.Click += new System.EventHandler(this.CmdCambioMasivo_Click);
             // 
             // paMostrar
