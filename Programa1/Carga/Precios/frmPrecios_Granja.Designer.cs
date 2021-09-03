@@ -32,11 +32,13 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grd = new Grilla2.SpeedGrilla();
-            this.lstFechas = new System.Windows.Forms.ListBox();
             this.cmdGuardar = new Programa1.Controles.cBoton();
             this.cmdImprimir = new Programa1.Controles.cBoton();
             this.cmdBorrar = new Programa1.Controles.cBoton();
+            this.lstFechas = new System.Windows.Forms.ListBox();
             this.Suc = new Programa1.Controles.cSucursales();
+            this.cmdLimpiar = new Programa1.Controles.cBoton();
+            this.chValoresCero = new MaterialSkin.Controls.MaterialCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -58,8 +60,10 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.chValoresCero);
             this.splitContainer1.Panel2.Controls.Add(this.cmdGuardar);
             this.splitContainer1.Panel2.Controls.Add(this.cmdImprimir);
+            this.splitContainer1.Panel2.Controls.Add(this.cmdLimpiar);
             this.splitContainer1.Panel2.Controls.Add(this.cmdBorrar);
             this.splitContainer1.Panel2.Controls.Add(this.lstFechas);
             this.splitContainer1.Panel2.Controls.Add(this.Suc);
@@ -114,21 +118,6 @@
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
             // 
-            // lstFechas
-            // 
-            this.lstFechas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lstFechas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstFechas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lstFechas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lstFechas.FormattingEnabled = true;
-            this.lstFechas.ItemHeight = 18;
-            this.lstFechas.Location = new System.Drawing.Point(349, 3);
-            this.lstFechas.Name = "lstFechas";
-            this.lstFechas.Size = new System.Drawing.Size(154, 594);
-            this.lstFechas.TabIndex = 2;
-            this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
-            // 
             // cmdGuardar
             // 
             this.cmdGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -159,6 +148,21 @@
             this.cmdBorrar.Texto = "Borrar";
             this.cmdBorrar.Click += new System.EventHandler(this.cmdBorrar_Click);
             // 
+            // lstFechas
+            // 
+            this.lstFechas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstFechas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstFechas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lstFechas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lstFechas.FormattingEnabled = true;
+            this.lstFechas.ItemHeight = 18;
+            this.lstFechas.Location = new System.Drawing.Point(349, 3);
+            this.lstFechas.Name = "lstFechas";
+            this.lstFechas.Size = new System.Drawing.Size(154, 540);
+            this.lstFechas.TabIndex = 2;
+            this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
+            // 
             // Suc
             // 
             this.Suc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -167,7 +171,7 @@
             this.Suc.Filtro_In = "";
             this.Suc.Location = new System.Drawing.Point(2, 3);
             this.Suc.Mostrar_Botones = false;
-            this.Suc.Mostrar_Tipo = false;
+            this.Suc.Mostrar_Tipo = true;
             this.Suc.Name = "Suc";
             this.Suc.selectionMode = System.Windows.Forms.SelectionMode.One;
             this.Suc.Size = new System.Drawing.Size(340, 742);
@@ -175,6 +179,33 @@
             this.Suc.Titulo = "Sucursales";
             this.Suc.Valor_Actual = -1;
             this.Suc.Cambio_Seleccion += new System.EventHandler(this.Suc_Cambio_Seleccion);
+            // 
+            // cmdLimpiar
+            // 
+            this.cmdLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdLimpiar.Location = new System.Drawing.Point(349, 564);
+            this.cmdLimpiar.Name = "cmdLimpiar";
+            this.cmdLimpiar.Size = new System.Drawing.Size(154, 40);
+            this.cmdLimpiar.TabIndex = 3;
+            this.cmdLimpiar.Texto = "Limpiar";
+            this.cmdLimpiar.Click += new System.EventHandler(this.cmdLimpiar_Click);
+            // 
+            // chValoresCero
+            // 
+            this.chValoresCero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chValoresCero.AutoSize = true;
+            this.chValoresCero.Depth = 0;
+            this.chValoresCero.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chValoresCero.Location = new System.Drawing.Point(506, 710);
+            this.chValoresCero.Margin = new System.Windows.Forms.Padding(0);
+            this.chValoresCero.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chValoresCero.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chValoresCero.Name = "chValoresCero";
+            this.chValoresCero.Ripple = true;
+            this.chValoresCero.Size = new System.Drawing.Size(162, 30);
+            this.chValoresCero.TabIndex = 4;
+            this.chValoresCero.Text = "Guardar Valores Cero";
+            this.chValoresCero.UseVisualStyleBackColor = true;
             // 
             // frmPrecios_Granja
             // 
@@ -188,6 +219,7 @@
             this.Load += new System.EventHandler(this.FrmPrecios_Granja_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -205,5 +237,7 @@
         private Controles.cBoton cmdBorrar;
         private System.Windows.Forms.ListBox lstFechas;
         private Controles.cSucursales Suc;
+        private Controles.cBoton cmdLimpiar;
+        private MaterialSkin.Controls.MaterialCheckBox chValoresCero;
     }
 }

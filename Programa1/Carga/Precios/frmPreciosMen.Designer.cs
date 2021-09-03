@@ -32,13 +32,13 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grd = new Grilla2.SpeedGrilla();
-            this.rdEmbutidos = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdMenudencias = new MaterialSkin.Controls.MaterialRadioButton();
             this.cmdGuardar = new Programa1.Controles.cBoton();
             this.cmdImprimir = new Programa1.Controles.cBoton();
             this.cmdBorrar = new Programa1.Controles.cBoton();
+            this.lstTipos = new System.Windows.Forms.ListBox();
             this.lstFechas = new System.Windows.Forms.ListBox();
             this.Suc = new Programa1.Controles.cSucursales();
+            this.chValoresCero = new MaterialSkin.Controls.MaterialCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,15 +60,15 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.rdEmbutidos);
-            this.splitContainer1.Panel2.Controls.Add(this.rdMenudencias);
+            this.splitContainer1.Panel2.Controls.Add(this.chValoresCero);
             this.splitContainer1.Panel2.Controls.Add(this.cmdGuardar);
             this.splitContainer1.Panel2.Controls.Add(this.cmdImprimir);
             this.splitContainer1.Panel2.Controls.Add(this.cmdBorrar);
+            this.splitContainer1.Panel2.Controls.Add(this.lstTipos);
             this.splitContainer1.Panel2.Controls.Add(this.lstFechas);
             this.splitContainer1.Panel2.Controls.Add(this.Suc);
-            this.splitContainer1.Size = new System.Drawing.Size(1039, 673);
-            this.splitContainer1.SplitterDistance = 397;
+            this.splitContainer1.Size = new System.Drawing.Size(1096, 673);
+            this.splitContainer1.SplitterDistance = 418;
             this.splitContainer1.TabIndex = 0;
             // 
             // panel1
@@ -80,7 +80,7 @@
             this.panel1.Controls.Add(this.grd);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(391, 667);
+            this.panel1.Size = new System.Drawing.Size(412, 667);
             this.panel1.TabIndex = 1;
             // 
             // grd
@@ -114,45 +114,9 @@
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(385, 661);
+            this.grd.Size = new System.Drawing.Size(406, 661);
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
-            // 
-            // rdEmbutidos
-            // 
-            this.rdEmbutidos.AutoSize = true;
-            this.rdEmbutidos.Depth = 0;
-            this.rdEmbutidos.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdEmbutidos.Location = new System.Drawing.Point(506, 37);
-            this.rdEmbutidos.Margin = new System.Windows.Forms.Padding(0);
-            this.rdEmbutidos.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdEmbutidos.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdEmbutidos.Name = "rdEmbutidos";
-            this.rdEmbutidos.Ripple = true;
-            this.rdEmbutidos.Size = new System.Drawing.Size(95, 30);
-            this.rdEmbutidos.TabIndex = 4;
-            this.rdEmbutidos.Text = "Embutidos";
-            this.rdEmbutidos.UseVisualStyleBackColor = true;
-            this.rdEmbutidos.CheckedChanged += new System.EventHandler(this.rdMenudencias_CheckedChanged);
-            // 
-            // rdMenudencias
-            // 
-            this.rdMenudencias.AutoSize = true;
-            this.rdMenudencias.Checked = true;
-            this.rdMenudencias.Depth = 0;
-            this.rdMenudencias.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdMenudencias.Location = new System.Drawing.Point(506, 6);
-            this.rdMenudencias.Margin = new System.Windows.Forms.Padding(0);
-            this.rdMenudencias.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdMenudencias.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdMenudencias.Name = "rdMenudencias";
-            this.rdMenudencias.Ripple = true;
-            this.rdMenudencias.Size = new System.Drawing.Size(112, 30);
-            this.rdMenudencias.TabIndex = 4;
-            this.rdMenudencias.TabStop = true;
-            this.rdMenudencias.Text = "Menudencias";
-            this.rdMenudencias.UseVisualStyleBackColor = true;
-            this.rdMenudencias.CheckedChanged += new System.EventHandler(this.rdMenudencias_CheckedChanged);
             // 
             // cmdGuardar
             // 
@@ -183,6 +147,21 @@
             this.cmdBorrar.TabIndex = 3;
             this.cmdBorrar.Texto = "Borrar";
             this.cmdBorrar.Click += new System.EventHandler(this.cmdBorrar_Click);
+            // 
+            // lstTipos
+            // 
+            this.lstTipos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstTipos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstTipos.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lstTipos.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lstTipos.FormattingEnabled = true;
+            this.lstTipos.ItemHeight = 18;
+            this.lstTipos.Location = new System.Drawing.Point(509, 3);
+            this.lstTipos.Name = "lstTipos";
+            this.lstTipos.Size = new System.Drawing.Size(155, 162);
+            this.lstTipos.TabIndex = 2;
+            this.lstTipos.SelectedIndexChanged += new System.EventHandler(this.lstTipos_SelectedIndexChanged);
             // 
             // lstFechas
             // 
@@ -216,11 +195,28 @@
             this.Suc.Valor_Actual = -1;
             this.Suc.Cambio_Seleccion += new System.EventHandler(this.Suc_Cambio_Seleccion);
             // 
+            // chValoresCero
+            // 
+            this.chValoresCero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chValoresCero.AutoSize = true;
+            this.chValoresCero.Depth = 0;
+            this.chValoresCero.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chValoresCero.Location = new System.Drawing.Point(509, 636);
+            this.chValoresCero.Margin = new System.Windows.Forms.Padding(0);
+            this.chValoresCero.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chValoresCero.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chValoresCero.Name = "chValoresCero";
+            this.chValoresCero.Ripple = true;
+            this.chValoresCero.Size = new System.Drawing.Size(162, 30);
+            this.chValoresCero.TabIndex = 5;
+            this.chValoresCero.Text = "Guardar Valores Cero";
+            this.chValoresCero.UseVisualStyleBackColor = true;
+            // 
             // frmPreciosMen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1044, 677);
+            this.ClientSize = new System.Drawing.Size(1101, 677);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmPreciosMen";
             this.Text = "Precios Menudencias";
@@ -245,7 +241,7 @@
         private Controles.cBoton cmdGuardar;
         private Controles.cBoton cmdImprimir;
         private Controles.cBoton cmdBorrar;
-        private MaterialSkin.Controls.MaterialRadioButton rdEmbutidos;
-        private MaterialSkin.Controls.MaterialRadioButton rdMenudencias;
+        private System.Windows.Forms.ListBox lstTipos;
+        private MaterialSkin.Controls.MaterialCheckBox chValoresCero;
     }
 }

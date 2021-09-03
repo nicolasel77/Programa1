@@ -12,34 +12,30 @@ namespace Programa1.Carga.Precios
         Precios_Sucursales precios;
         Herramientas h = new Herramientas();
 
-        private enum TOpcion : byte
-        {
-            Menudencias = 2,
-            Embutidos = 3
-        }
-        TOpcion Opcion = TOpcion.Menudencias;
-
+        
         public frmPreciosMen()
         {
             InitializeComponent();
             precios = new Precios_Sucursales();
+            h.Llenar_List(lstTipos, precios.Producto.Tipo.Datos());
         }
 
         private void FrmPreciosMen_Load(object sender, EventArgs e)
         {
-            Cargar_Lista();
-
-            h.Llenar_List(lstFechas, precios.Fechas(Convert.ToByte(Opcion)), "dd/MM/yyyy");
+            
         }
 
         private void Cargar_Lista()
         {
-            DataTable dt = precios.Tabla_Precios(Convert.ToInt32(Opcion));
+            if (lstTipos.SelectedIndex > -1)
+            {
+                DataTable dt = precios.Tabla_Precios(h.Codigo_Seleccionado(lstTipos.Text));
 
-
-            grd.MostrarDatos(dt, true, false);
-            grd.set_ColW(0, 60);
-            grd.set_ColW(1, 300);
+                grd.MostrarDatos(dt, true, false);
+                grd.set_ColW(0, 60);
+                grd.set_ColW(1, 300);
+                grd.Columnas[2].Format = "N3";
+            }
         }
 
         private void lstFechas_SelectedIndexChanged(object sender, EventArgs e)
@@ -62,12 +58,15 @@ namespace Programa1.Carga.Precios
             precios.Sucursal.ID = Suc.Valor_Actual;
 
 
-            DataTable dt = precios.Precios(Convert.ToByte(Opcion));
+            if (lstTipos.SelectedIndex > -1)
+            {
+                DataTable dt = precios.Precios((byte)h.Codigo_Seleccionado(lstTipos.Text));
 
-
-            grd.MostrarDatos(dt, true, false);
-            grd.set_ColW(0, 60);
-            grd.set_ColW(1, 300);
+                grd.MostrarDatos(dt, true, false);
+                grd.set_ColW(0, 60);
+                grd.set_ColW(1, 300);
+                grd.Columnas[2].Format = "N3";
+            }
             this.Cursor = Cursors.Default;
         }
 
@@ -94,7 +93,8 @@ namespace Programa1.Carga.Precios
                     this.Cursor = Cursors.WaitCursor;
                     precios.Fecha = f;
                     precios.Sucursal.ID = suc;
-                    precios.Borrar_Lista(2);
+                    //precios.Borrar_Lista(2);
+                    MessageBox.Show("No implementado.");
                     h.Llenar_List(lstFechas, precios.Fechas(2), "dd/MM/yyyy");
                     Cargar_Precios();
                     this.Cursor = Cursors.Default;
@@ -105,9 +105,12 @@ namespace Programa1.Carga.Precios
 
         private void cmdImprimir_Click(object sender, EventArgs e)
         {
-            frmImprimir_MenEmb fr = new frmImprimir_MenEmb();
-            fr.Tipo = Convert.ToInt32(Opcion);
-            fr.ShowDialog();
+            if (lstTipos.SelectedIndex >-1)
+            {
+                frmImprimir_MenEmb fr = new frmImprimir_MenEmb();
+                fr.Tipo = Convert.ToInt32(h.Codigo_Seleccionado(lstTipos.Text));
+                fr.ShowDialog(); 
+            }
         }
 
         private void cmdGuardar_Click(object sender, EventArgs e)
@@ -117,7 +120,7 @@ namespace Programa1.Carga.Precios
             fr.ShowDialog();
             if (fr.Guardar == true)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 precios.Fecha = fr.mntFecha.SelectionStart.Date;
 
@@ -126,9 +129,9 @@ namespace Programa1.Carga.Precios
                     //Guardar todo por cada Sucursal                    
                     Guardar(suc);
                 }
-                h.Llenar_List(lstFechas, precios.Fechas(Convert.ToByte(Opcion)), "dd/MM/yyyy");
+                h.Llenar_List(lstFechas, precios.Fechas(Convert.ToByte(h.Codigo_Seleccionado(lstTipos.Text))), "dd/MM/yyyy");
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -145,7 +148,10 @@ namespace Programa1.Carga.Precios
                 {
                     precios.Producto.ID = prod;
                     precios.Precio = Convert.ToSingle((grd.get_Texto(i, grd.get_ColIndex("Precio"))));
-                    precios.Agregar();
+                    if (precios.Precio != 0 | chValoresCero.Checked == true)
+                    {
+                        precios.Agregar();
+                    }
                 }
             }
         }
@@ -160,26 +166,11 @@ namespace Programa1.Carga.Precios
             }
         }
 
-        private void rdMenudencias_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdMenudencias.Checked == true)
-            {
-                Opcion = TOpcion.Menudencias;
-            }
-            else
-            {
-                Opcion = TOpcion.Embutidos;
-            }
-            if (Suc.Valor_Actual > 0)
-            {
-                Cargar_Precios();
-            }
-            else
-            {
-                Cargar_Lista();
-            }
-            h.Llenar_List(lstFechas, precios.Fechas(Convert.ToByte(Opcion)), "dd/MM/yyyy");
-        }
+       
 
+        private void lstTipos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cargar_Lista();
+        }
     }
 }

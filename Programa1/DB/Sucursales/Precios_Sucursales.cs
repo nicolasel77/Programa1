@@ -11,7 +11,7 @@
         {
         }
 
-        
+
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public Productos Producto { get; set; } = new Productos();
@@ -52,7 +52,7 @@
                 {
                     d = 0;
                 }
-                Precio = Convert.ToSingle(d); 
+                Precio = Convert.ToSingle(d);
             }
             return Precio;
         }
@@ -134,17 +134,16 @@
             try
             {
                 string fecha = $"(SELECT MAX(Fecha) FROM vw_PreciosSucursales WHERE Id_Tipo={tipo})";
-                string suc = "";
 
                 if (Fecha != null) { fecha = $"'{Fecha:MM/dd/yy}'"; }
-                if (Sucursal.ID != 0) { suc = " AND Id_Sucursales=" + Sucursal.ID; }
+                if(Sucursal.ID != 0)
+                {
+                    SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, dbo.f_Precio({fecha}, {Sucursal.ID}, Id) Precio FROM Productos WHERE Id_Tipo={tipo} AND Ver=1 ORDER BY Id", conexionSql);
+                    comandoSql.CommandType = CommandType.Text;
 
-                SqlCommand comandoSql = new SqlCommand($"SELECT Id_Productos Id, Descripcion Nombre, Precio FROM vw_PreciosSucursales " +
-                    $"WHERE Fecha={fecha} {suc} AND Id_Tipo={tipo} AND Ver=1 ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
+                    SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                    SqlDat.Fill(dt);
+                }
 
             }
             catch (Exception)
@@ -162,17 +161,15 @@
             try
             {
                 string fecha = $"(SELECT MAX(Fecha) FROM vw_PreciosSucursales WHERE {filtro})";
-                string suc = "";
-
                 if (Fecha != null) { fecha = $"'{Fecha:MM/dd/yy}'"; }
-                if (Sucursal.ID != 0) { suc = " AND Id_Sucursales=" + Sucursal.ID; }
+                if (Sucursal.ID != 0)
+                {
+                    SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, dbo.f_Precio({fecha}, {Sucursal.ID}, Id) Precio FROM Productos WHERE {filtro} AND Ver=1 ORDER BY Id", conexionSql);
+                    comandoSql.CommandType = CommandType.Text;
 
-                SqlCommand comandoSql = new SqlCommand($"SELECT Id_Productos Id, Descripcion Nombre, Precio FROM vw_PreciosSucursales " +
-                    $"WHERE Fecha={fecha} {suc} AND {filtro} AND Ver=1 ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
+                    SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                    SqlDat.Fill(dt);
+                }
 
             }
             catch (Exception)
@@ -191,7 +188,7 @@
             string filtroProd = "";
             if (prod != 0) { filtroProd = " AND ID_Productos=" + prod; }
 
-            if (filtroSuc != "") { filtroSuc = $" ID_Sucursales IN({filtroSuc}) AND ";  }
+            if (filtroSuc != "") { filtroSuc = $" ID_Sucursales IN({filtroSuc}) AND "; }
 
             try
             {

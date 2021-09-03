@@ -63,6 +63,7 @@ namespace Programa1.Carga.Precios
             grd.MostrarDatos(dt, true, false);
             grd.set_ColW(0, 60);
             grd.set_ColW(1, 300);
+            grd.Columnas[2].Format = "N3";
             this.Cursor = Cursors.Default;
         }
 
@@ -116,7 +117,7 @@ namespace Programa1.Carga.Precios
             fr.ShowDialog();
             if (fr.Guardar == true)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 precios.Fecha = fr.mntFecha.SelectionStart.Date;
 
@@ -125,15 +126,13 @@ namespace Programa1.Carga.Precios
                     //Guardar todo por cada Sucursal                    
                     Guardar(suc);
                 }
-                int i = lstFechas.SelectedIndex;
-                DataTable dt = precios.Tabla_Precios("Id_Tipo IN (4,6)");
+                
                 lstFechas.Items.Clear();
                 foreach (DataRow dr in precios.Fechas_Granja().Rows)
                 {
                     lstFechas.Items.Add($"{dr[0]:dd/MM/yy}  {dr[1]:N0}");
                 }
-                lstFechas.SelectedIndex = i;
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -150,7 +149,10 @@ namespace Programa1.Carga.Precios
                 {
                     precios.Producto.ID = prod;
                     precios.Precio = Convert.ToSingle(grd.get_Texto(i, grd.get_ColIndex("Precio")));
-                    precios.Agregar();
+                    if (precios.Precio != 0 | chValoresCero.Checked == true)
+                    {
+                        precios.Agregar(); 
+                    }
                 }
             }
         }
@@ -165,5 +167,9 @@ namespace Programa1.Carga.Precios
             }
         }
 
+        private void cmdLimpiar_Click(object sender, EventArgs e)
+        {
+            Cargar_Lista();
+        }
     }
 }

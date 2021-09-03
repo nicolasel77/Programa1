@@ -8,6 +8,7 @@ namespace Programa1.Carga.Tesoreria
     using System;
     using System.Data;
     using System.Drawing;
+    using System.Globalization;
     using System.Windows.Forms;
 
     public partial class frmCaja_Diaria : Form
@@ -85,7 +86,11 @@ namespace Programa1.Carga.Tesoreria
         {
             CD.Usuario = usuario.ID;
             mntFecha.SetDate(CD.Fecha);
-            //mntFecha.MaxDate = CD.Fecha;
+
+            string f = $"{CD.Fecha:MMMM}";
+            f = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(f);
+
+            txtInsert.Text = $"({f} /{CD.Fecha:yyyy})";
 
             Cargar_Datos();
 
@@ -130,19 +135,29 @@ namespace Programa1.Carga.Tesoreria
             grdSalidas.set_AlineamientoCelda(0, s_Importe, style);
             Totales();
         }
+        private void frmCaja_Diaria_Resize(object sender, EventArgs e)
+        {
+            if (splPrincipal.Width != 0 & splPrincipal.Width > 212) { splPrincipal.SplitterDistance = (splPrincipal.Width - 212); }
+        }
+
+        private void frmCaja_Diaria_Activated(object sender, EventArgs e)
+        {
+            grdSalidas.Focus();
+            grdSalidas.ActivarCelda();
+        }
 
         #endregion
 
         #region " VARIOS "
         private void mntFecha_DateSelected(object sender, DateRangeEventArgs e)
         {
+            string f = $"{CD.Fecha:MMMM}";
+            f = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(f);
+
+            txtInsert.Text = $"({f} /{CD.Fecha:yyyy})";
             Cargar_Datos();
         }
 
-        private void frmCaja_Diaria_Resize(object sender, EventArgs e)
-        {
-            if (splPrincipal.Width != 0 & splPrincipal.Width > 212) { splPrincipal.SplitterDistance = (splPrincipal.Width - 212); }
-        }
 
         private void splPrincipal_Panel2_Resize(object sender, EventArgs e)
         {
@@ -243,7 +258,7 @@ namespace Programa1.Carga.Tesoreria
         #region " SUBS "
         private void Cargar_Datos()
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
 
             grdEntradas.Visible = false;
             grdEntradas.MostrarDatos(cEntradas.Datos($"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}'"), true);
@@ -258,7 +273,7 @@ namespace Programa1.Carga.Tesoreria
 
             Totales();
             Cargar_Cajas();
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private void Cargar_Cajas()
@@ -798,8 +813,17 @@ namespace Programa1.Carga.Tesoreria
                             case s_Descripcion:
                                 if (cGastos.TG.Id_Tipo != 0 & cGastos.Id_SubTipoGastos != 0)
                                 {
-                                    cGastos.Descripcion = a.ToString();
-                                    grdSalidas.set_Texto(f, s_Descripcion, a);
+                                    int n = 0; string s = a.ToString();
+                                    if (int.TryParse(s, out n) == true)
+                                    {
+                                        string nf = $"{DateTime.Parse("1/" + n):MMMM}";
+                                        nf = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(nf);
+
+                                        txtInsert.Text = $" ({nf} /{CD.Fecha:yyyy})";
+                                        s = cGastos.Descripcion + txtInsert.Text;
+                                    }
+                                    cGastos.Descripcion = s;
+                                    grdSalidas.set_Texto(f, s_Descripcion, s);
                                     grdSalidas.ActivarCelda(f, s_Importe);
 
                                     if (cGastos.ID != 0) { cGastos.Actualizar("Descripcion", cGastos.Descripcion); }
@@ -885,7 +909,7 @@ namespace Programa1.Carga.Tesoreria
                 else
                 {
                     MessageBox.Show("La fecha se encuentra cerrada.", "Error");
-                } 
+                }
             }
             else
             {
@@ -988,7 +1012,7 @@ namespace Programa1.Carga.Tesoreria
                     if (grdSalidas.Row == grdSalidas.Rows - 1 & grdSalidas.Rows > 2 & columna != s_IDDetalle + 1)
                     {
                         object a;
-                                                
+
                         a = grdSalidas.get_Texto(fila - 1, columna);
 
                         grdSalidas_Editado(Convert.ToInt16(fila), Convert.ToInt16(columna), a);
@@ -1038,7 +1062,7 @@ namespace Programa1.Carga.Tesoreria
                     else
                     {
                         MessageBox.Show("La fecha se encuentra cerrada.", "Error");
-                    } 
+                    }
                 }
             }
             if (e == Convert.ToInt32(Keys.F1))
@@ -1163,6 +1187,11 @@ namespace Programa1.Carga.Tesoreria
                         }
                     }
                 }
+            }
+            if (e == Convert.ToInt32(Keys.Insert))
+            {
+                cGastos.Descripcion = $"{cGastos.Descripcion} {txtInsert.Text}";
+                grdSalidas.set_Texto(fila, s_Descripcion, cGastos.Descripcion);
             }
         }
 
@@ -1309,6 +1338,7 @@ namespace Programa1.Carga.Tesoreria
                 Cargar_Datos();
             }
         }
+
 
         #endregion
 
