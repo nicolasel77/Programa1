@@ -20,7 +20,7 @@
         public Consignatarios Consignatario { get; set; } = new Consignatarios();
         public TipoAgregados Tipo { get; set; } = new TipoAgregados();
         public DateTime Fecha { get; set; }
-        public Single Importe { get; set; }
+        public float Importe { get; set; }
         public int Plazo { get; set; }
         public int Estado { get; set; }
         public double Saldo { get; set; }

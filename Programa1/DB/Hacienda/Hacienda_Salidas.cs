@@ -12,7 +12,8 @@ namespace Programa1.DB
     {        
         public Hacienda_Salidas()
         {
-            
+            Tabla = "Hacienda_Salidas";
+            Vista = "vw_Hacienda_Salidas";
         }
         public Hacienda_Salidas(string tabla, string vista)
         {
@@ -23,8 +24,9 @@ namespace Programa1.DB
         public DateTime Fecha { get; set; }
         public Faena Faena { get; set; } = new Faena();
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
-        public Single Costo_Salida { get; set; }
-        public Single Media { get; set; }
+        public float Costo_Salida { get; set; }
+        public float Media { get; set; }
+        public bool Media_Utilizada { get; set; }
 
         public Precios_Sucursales precios = new Precios_Sucursales();        
         
@@ -49,7 +51,7 @@ namespace Programa1.DB
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT Id, Fecha, Id_Sucursales, Nombre, Tropa, Nombre_Categoria, Nombre_Producto, NBoleta, " +
-                    $"Costo_Final, Costo_Salida, Media, Kilos AS Original, Total_Compra, Total_Salida FROM vw_Hacienda_Salidas {filtro} ORDER BY Id", conexionSql);
+                    $"Costo_Final, Costo_Salida, Media, Kilos AS Original, Total_Compra, Total_Salida, MU FROM vw_Hacienda_Salidas {filtro} ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -211,6 +213,7 @@ namespace Programa1.DB
                 Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Costo_Salida = Convert.ToSingle(dr["Costo_Salida"]);
                 Media = Convert.ToSingle(dr["Media"]);
+                Media_Utilizada = Convert.ToBoolean(dr["MU"]);
 
             }
             catch (Exception)

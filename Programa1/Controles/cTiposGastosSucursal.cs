@@ -332,5 +332,14 @@
             lst.SelectedIndex = -1;
         }
 
+        private void lstGrupos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cargar();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            lstGrupos.SelectedIndex = -1;
+        }
     }
 }
