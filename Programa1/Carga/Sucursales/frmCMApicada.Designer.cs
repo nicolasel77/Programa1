@@ -55,9 +55,9 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblTotalO = new System.Windows.Forms.ToolStripStatusLabel();
-            this.grdOriginal = new Grilla2.SpeedGrilla();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.lblTotalR = new System.Windows.Forms.ToolStripStatusLabel();
+            this.grdOriginal = new Grilla2.SpeedGrilla();
             this.grdResultado = new Grilla2.SpeedGrilla();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -152,7 +152,7 @@
             this.cmbProdsS.Enabled = false;
             this.cmbProdsS.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.cmbProdsS.FormattingEnabled = true;
-            this.cmbProdsS.Location = new System.Drawing.Point(331, 107);
+            this.cmbProdsS.Location = new System.Drawing.Point(493, 40);
             this.cmbProdsS.Name = "cmbProdsS";
             this.cmbProdsS.Size = new System.Drawing.Size(175, 26);
             this.cmbProdsS.TabIndex = 8;
@@ -165,7 +165,7 @@
             this.chProdS.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chProdS.Depth = 0;
             this.chProdS.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.chProdS.Location = new System.Drawing.Point(326, 74);
+            this.chProdS.Location = new System.Drawing.Point(490, 9);
             this.chProdS.Margin = new System.Windows.Forms.Padding(0);
             this.chProdS.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chProdS.MouseState = MaterialSkin.MouseState.HOVER;
@@ -212,7 +212,7 @@
             this.rdManualS.Checked = true;
             this.rdManualS.Depth = 0;
             this.rdManualS.Enabled = false;
-            this.rdManualS.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdManualS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdManualS.Location = new System.Drawing.Point(64, 33);
             this.rdManualS.Margin = new System.Windows.Forms.Padding(0);
             this.rdManualS.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -230,7 +230,7 @@
             this.rdAutoS.AutoSize = true;
             this.rdAutoS.Depth = 0;
             this.rdAutoS.Enabled = false;
-            this.rdAutoS.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdAutoS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdAutoS.Location = new System.Drawing.Point(2, 33);
             this.rdAutoS.Margin = new System.Windows.Forms.Padding(0);
             this.rdAutoS.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -259,6 +259,7 @@
             this.chCostoS.TabIndex = 0;
             this.chCostoS.Text = "Costo S";
             this.chCostoS.UseVisualStyleBackColor = true;
+            this.chCostoS.CheckedChanged += new System.EventHandler(this.chCostoS_CheckedChanged);
             // 
             // cmdGuardar
             // 
@@ -315,7 +316,7 @@
             this.rdManualA.Checked = true;
             this.rdManualA.Depth = 0;
             this.rdManualA.Enabled = false;
-            this.rdManualA.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdManualA.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdManualA.Location = new System.Drawing.Point(736, 42);
             this.rdManualA.Margin = new System.Windows.Forms.Padding(0);
             this.rdManualA.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -333,7 +334,7 @@
             this.rdAutoA.AutoSize = true;
             this.rdAutoA.Depth = 0;
             this.rdAutoA.Enabled = false;
-            this.rdAutoA.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdAutoA.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdAutoA.Location = new System.Drawing.Point(674, 42);
             this.rdAutoA.Margin = new System.Windows.Forms.Padding(0);
             this.rdAutoA.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -352,7 +353,7 @@
             this.cmbProdsA.Enabled = false;
             this.cmbProdsA.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.cmbProdsA.FormattingEnabled = true;
-            this.cmbProdsA.Location = new System.Drawing.Point(331, 42);
+            this.cmbProdsA.Location = new System.Drawing.Point(312, 40);
             this.cmbProdsA.Name = "cmbProdsA";
             this.cmbProdsA.Size = new System.Drawing.Size(175, 26);
             this.cmbProdsA.TabIndex = 2;
@@ -370,6 +371,7 @@
             this.cmbSuc.Size = new System.Drawing.Size(175, 26);
             this.cmbSuc.TabIndex = 2;
             this.cmbSuc.Text = "Seleccionar";
+            this.cmbSuc.SelectedIndexChanged += new System.EventHandler(this.cmbSuc_SelectedIndexChanged);
             // 
             // dtFecha
             // 
@@ -377,7 +379,7 @@
             this.dtFecha.Enabled = false;
             this.dtFecha.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFecha.Location = new System.Drawing.Point(12, 42);
+            this.dtFecha.Location = new System.Drawing.Point(12, 40);
             this.dtFecha.Name = "dtFecha";
             this.dtFecha.Size = new System.Drawing.Size(113, 24);
             this.dtFecha.TabIndex = 1;
@@ -425,7 +427,7 @@
             this.chProdA.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chProdA.Depth = 0;
             this.chProdA.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.chProdA.Location = new System.Drawing.Point(326, 9);
+            this.chProdA.Location = new System.Drawing.Point(309, 9);
             this.chProdA.Margin = new System.Windows.Forms.Padding(0);
             this.chProdA.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chProdA.MouseState = MaterialSkin.MouseState.HOVER;
@@ -443,7 +445,7 @@
             this.chSuc.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chSuc.Depth = 0;
             this.chSuc.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.chSuc.Location = new System.Drawing.Point(126, 7);
+            this.chSuc.Location = new System.Drawing.Point(128, 9);
             this.chSuc.Margin = new System.Windows.Forms.Padding(0);
             this.chSuc.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chSuc.MouseState = MaterialSkin.MouseState.HOVER;
@@ -508,8 +510,25 @@
             // 
             // lblTotalO
             // 
+            this.lblTotalO.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalO.Name = "lblTotalO";
             this.lblTotalO.Size = new System.Drawing.Size(0, 17);
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblTotalR});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 264);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(1222, 22);
+            this.statusStrip2.TabIndex = 2;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // lblTotalR
+            // 
+            this.lblTotalR.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalR.Name = "lblTotalR";
+            this.lblTotalR.Size = new System.Drawing.Size(0, 17);
             // 
             // grdOriginal
             // 
@@ -525,7 +544,7 @@
             this.grdOriginal.DataMember = "";
             this.grdOriginal.DataSource = null;
             this.grdOriginal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdOriginal.EnableEdicion = true;
+            this.grdOriginal.EnableEdicion = false;
             this.grdOriginal.Encabezado = "";
             this.grdOriginal.fColor = System.Drawing.SystemColors.Control;
             this.grdOriginal.FixCols = 0;
@@ -543,21 +562,6 @@
             this.grdOriginal.Size = new System.Drawing.Size(1222, 202);
             this.grdOriginal.TabIndex = 0;
             // 
-            // statusStrip2
-            // 
-            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblTotalR});
-            this.statusStrip2.Location = new System.Drawing.Point(0, 264);
-            this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1222, 22);
-            this.statusStrip2.TabIndex = 2;
-            this.statusStrip2.Text = "statusStrip2";
-            // 
-            // lblTotalR
-            // 
-            this.lblTotalR.Name = "lblTotalR";
-            this.lblTotalR.Size = new System.Drawing.Size(0, 17);
-            // 
             // grdResultado
             // 
             this.grdResultado.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
@@ -572,7 +576,7 @@
             this.grdResultado.DataMember = "";
             this.grdResultado.DataSource = null;
             this.grdResultado.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdResultado.EnableEdicion = true;
+            this.grdResultado.EnableEdicion = false;
             this.grdResultado.Encabezado = "";
             this.grdResultado.fColor = System.Drawing.SystemColors.Control;
             this.grdResultado.FixCols = 0;
@@ -598,7 +602,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmCMApicada";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cambio Masivo Traslados";
+            this.Text = "Cambio Masivo A picada";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
