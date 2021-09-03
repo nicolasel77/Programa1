@@ -330,8 +330,9 @@
                 string suma_Semanas = "";
 
                 DateTime fecha = Sem.Semana.AddDays(7 * (semanas - 1) * -1);
+                int n;
 
-                for (int n = 1; n <= semanas; n++)
+                for (n = 1; n <= semanas; n++)
                 {
                     Columnas_Semanas = h.Unir(Columnas_Semanas, $"[{fecha:dd/MM/yyyy}]", ", ");
                     suma_Semanas = h.Unir(suma_Semanas, $"[{fecha:dd/MM/yyyy}]", "+");
@@ -362,7 +363,14 @@
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
                 SqlDat.Fill(dt);
 
-                dt.Columns.Add("Total", typeof(double), suma_Semanas);
+                if (n != 0)
+                {
+                    dt.Columns.Add("Promedio", typeof(double), $"({suma_Semanas})/{n - 1}"); 
+                }
+                else
+                {
+                    dt.Columns.Add("Promedio", typeof(double));
+                }
                 dt.Columns.Add("Stock", typeof(double));
 
 
@@ -372,13 +380,13 @@
                 {
                     DataRow dr = dt.Rows[i];
 
-                    if (dr["Total"] == DBNull.Value)
+                    if (dr["Promedio"] == DBNull.Value)
                     {
                         dt.Rows.RemoveAt(i);
                     }
                     else
                     {
-                        if (Convert.ToDouble(dr["Total"]) == 0)
+                        if (Convert.ToDouble(dr["Promedio"]) == 0)
                         {
                             dt.Rows.RemoveAt(i);
                         }

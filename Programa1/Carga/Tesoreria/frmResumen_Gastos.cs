@@ -324,7 +324,7 @@ namespace Programa1.Carga.Tesoreria
                 {
                     case Keys.Right:
                         e.Handled = true;
-                        if (lst.SelectedIndex > 0)
+                        if (lst.SelectedIndex > -1)
                         {
                             switch (Orden)
                             {

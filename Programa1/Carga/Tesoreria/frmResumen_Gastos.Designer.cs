@@ -82,7 +82,7 @@
             this.grdGastos.Redraw = true;
             this.grdGastos.Row = 0;
             this.grdGastos.Rows = 1;
-            this.grdGastos.Size = new System.Drawing.Size(782, 634);
+            this.grdGastos.Size = new System.Drawing.Size(956, 634);
             this.grdGastos.TabIndex = 0;
             // 
             // lblTipo
@@ -129,8 +129,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1062, 664);
-            this.splitContainer1.SplitterDistance = 782;
+            this.splitContainer1.Size = new System.Drawing.Size(1299, 664);
+            this.splitContainer1.SplitterDistance = 956;
             this.splitContainer1.TabIndex = 4;
             // 
             // lblTotal
@@ -138,12 +138,12 @@
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotal.AutoSize = true;
             this.lblTotal.Depth = 0;
-            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotal.Location = new System.Drawing.Point(3, 642);
             this.lblTotal.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(44, 20);
+            this.lblTotal.Size = new System.Drawing.Size(44, 19);
             this.lblTotal.TabIndex = 1;
             this.lblTotal.Text = "Total";
             // 
@@ -168,7 +168,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.lblSubTipo);
             this.splitContainer2.Panel2.Controls.Add(this.cFechas1);
             this.splitContainer2.Panel2.Controls.Add(this.lblTipo);
-            this.splitContainer2.Size = new System.Drawing.Size(276, 664);
+            this.splitContainer2.Size = new System.Drawing.Size(339, 664);
             this.splitContainer2.SplitterDistance = 413;
             this.splitContainer2.TabIndex = 4;
             // 
@@ -181,7 +181,7 @@
             this.lst.ItemHeight = 20;
             this.lst.Location = new System.Drawing.Point(0, 0);
             this.lst.Name = "lst";
-            this.lst.Size = new System.Drawing.Size(276, 413);
+            this.lst.Size = new System.Drawing.Size(339, 413);
             this.lst.TabIndex = 0;
             this.lst.SelectedIndexChanged += new System.EventHandler(this.lst_SelectedIndexChanged);
             // 
@@ -192,7 +192,7 @@
             this.lstGrupos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lstGrupos.FormattingEnabled = true;
             this.lstGrupos.ItemHeight = 18;
-            this.lstGrupos.Location = new System.Drawing.Point(112, 39);
+            this.lstGrupos.Location = new System.Drawing.Point(175, 39);
             this.lstGrupos.Name = "lstGrupos";
             this.lstGrupos.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lstGrupos.Size = new System.Drawing.Size(161, 198);
@@ -203,7 +203,7 @@
             // cmdGrupos
             // 
             this.cmdGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdGrupos.Location = new System.Drawing.Point(142, 3);
+            this.cmdGrupos.Location = new System.Drawing.Point(205, 3);
             this.cmdGrupos.Name = "cmdGrupos";
             this.cmdGrupos.Size = new System.Drawing.Size(131, 30);
             this.cmdGrupos.TabIndex = 4;
@@ -220,7 +220,7 @@
             this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFechas1.Mostrar = 0;
             this.cFechas1.Name = "cFechas1";
-            this.cFechas1.Size = new System.Drawing.Size(276, 207);
+            this.cFechas1.Size = new System.Drawing.Size(339, 207);
             this.cFechas1.TabIndex = 1;
             this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
@@ -233,14 +233,14 @@
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.Location = new System.Drawing.Point(6, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1075, 679);
+            this.panel1.Size = new System.Drawing.Size(1312, 679);
             this.panel1.TabIndex = 5;
             // 
             // frmResumen_Gastos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1086, 688);
+            this.ClientSize = new System.Drawing.Size(1323, 688);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.KeyPreview = true;

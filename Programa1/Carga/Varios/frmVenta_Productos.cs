@@ -2,6 +2,7 @@
 using Programa1.DB.Sucursales;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Programa1.Carga.Varios
@@ -41,7 +42,10 @@ namespace Programa1.Carga.Varios
                 }
                 grd.AutosizeAll();
                 grd.set_ColW(0, 40);
-                grd.set_ColW(1, 200); 
+                grd.set_ColW(1, 200);
+                grd.Columnas[0].Style.BackColor = Color.WhiteSmoke;
+                grd.Columnas[1].Style.BackColor = Color.WhiteSmoke;
+                grd.Columnas["Promedio"].Style.BackColor = Color.Gainsboro;
             }
 
             this.Cursor = Cursors.Default;
