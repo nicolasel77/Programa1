@@ -24,9 +24,11 @@
         private const Byte c_Descripcion = 8;
         private const Byte c_CostoCompra = 9;
         private const Byte c_CostoVenta = 10;
-        private const Byte c_Kilos = 11;
-        private const Byte c_TotalCompra = 12;
-        private const Byte c_TotalVenta = 13;
+        private const Byte c_Cantidad = 11;
+        private const Byte c_Kilos = 12;
+        private const Byte c_TotalCompra = 13;
+        private const Byte c_TotalVenta = 14;
+        private const Byte c_Promedio = 15;
         #endregion
         int vi = 4;
         public frmVentas()
@@ -153,17 +155,33 @@
             grdVenta.set_ColW(c_IdSuc + 1, 100);
             grdVenta.set_ColW(c_IdProd, 30);
             grdVenta.set_ColW(c_Descripcion, 160);
+            grdVenta.set_ColW(c_Cantidad, 60);
             grdVenta.set_ColW(c_CostoVenta, 60);
             grdVenta.set_ColW(c_CostoCompra, 60);
             grdVenta.set_ColW(c_Kilos, 60);
             grdVenta.set_ColW(c_TotalCompra, 80);
             grdVenta.set_ColW(c_TotalVenta, 80);
+            grdVenta.set_ColW(c_Promedio, 60);
+
+            if (chMenudencias.Checked == true)
+            {
+                grdVenta.Columnas[c_IdCamion].Visible = true;
+                grdVenta.Columnas[c_Cantidad].Visible = true;
+                grdVenta.Columnas[c_Promedio].Visible = true;
+            }
+            else
+            {
+                grdVenta.Columnas[c_IdCamion].Visible = false;
+                grdVenta.Columnas[c_Cantidad].Visible = false;
+                grdVenta.Columnas[c_Promedio].Visible = false;
+            }
 
             grdVenta.Columnas[c_CostoVenta].Format = "C2";
             grdVenta.Columnas[c_CostoCompra].Format = "C2";
             grdVenta.Columnas[c_Kilos].Format = "N2";
             grdVenta.Columnas[c_TotalCompra].Format = "C2";
             grdVenta.Columnas[c_TotalVenta].Format = "C2";
+            grdVenta.Columnas[c_Promedio].Format = "N2";
 
             grdVenta.Columnas[c_IdProv + 1].Style.ForeColor = Color.DimGray;
             grdVenta.Columnas[c_IdSuc + 1].Style.ForeColor = Color.DimGray;
@@ -186,9 +204,7 @@
             lblTotalS.Text = $"Total Venta: {tVenta:C2}";
             lblTotalE.Text = $"Total Compra: {tCompra:C2}";
             lblDiferencia.Text = $"Diferencia: {(tVenta - tCompra):C2}";
-
         }
-
 
         private void CmdLimpiar_Click(object sender, EventArgs e)
         {
@@ -196,7 +212,6 @@
             grdVenta.Rows = 2;
             Totales();
         }
-
 
         private void CProds_Cambio_Seleccion(object sender, EventArgs e)
         {
@@ -217,7 +232,6 @@
             cmdMostrar.PerformClick();
         }
 
-
         private void GrdVenta_Editado(short f, short c, object a)
         {
             if (Venta.Fecha_Cerrada(Venta.Fecha) == false)
@@ -235,10 +249,13 @@
                                 Venta.precios.Fecha = Venta.Fecha;
                                 Venta.precios_Proveedores.Fecha = Venta.Fecha;
 
-                                if (id != 0) { Venta.Actualizar(); }
-
                                 grdVenta.set_Texto(f, c, a);
-                                grdVenta.ActivarCelda(f, c + 1);
+                                if (id != 0) { Venta.Actualizar(); grdVenta.ActivarCelda(f + 1, c); }
+                                else
+                                {
+                                    if (chMenudencias.Checked == true) { grdVenta.ActivarCelda(f, c + 1); }
+                                    else { grdVenta.ActivarCelda(f, c + 2); }
+                                }
                             }
                             else
                             {
@@ -254,13 +271,12 @@
                     case c_IdCamion:
                         Venta.Camion.ID = Convert.ToInt32(a);
 
-                        if (Venta.Camion.Existe() == true)
+                        if (Venta.Camion.Existe() == true || Convert.ToInt32(a) == 0)
                         {
                             grdVenta.set_Texto(f, c, a);
 
-                            if (id != 0) { Venta.Actualizar(); }
-
-                            grdVenta.ActivarCelda(f, c + 1);
+                            if (id != 0) { Venta.Actualizar(); grdVenta.ActivarCelda(f + 1, c); }
+                            else { grdVenta.ActivarCelda(f, c + 1); }
                         }
                         else
                         {
@@ -273,12 +289,11 @@
                         {
                             Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
 
-                            if (id != 0) { Venta.Actualizar(); }
-
                             grdVenta.set_Texto(f, c, a);
                             grdVenta.set_Texto(f, c + 1, Venta.Proveedor.Nombre);
 
-                            grdVenta.ActivarCelda(f, c + 2);
+                            if (id != 0) { Venta.Actualizar(); grdVenta.ActivarCelda(f + 1, c); }
+                            else { grdVenta.ActivarCelda(f, c + 2); }
                         }
                         else
                         {
@@ -292,12 +307,11 @@
                         {
                             Venta.precios.Sucursal = Venta.Sucursal;
 
-                            if (id != 0) { Venta.Actualizar(); }
-
                             grdVenta.set_Texto(f, c, a);
                             grdVenta.set_Texto(f, c + 1, Venta.Sucursal.Nombre);
 
-                            grdVenta.ActivarCelda(f, c + 2);
+                            if (id != 0) { Venta.Actualizar(); grdVenta.ActivarCelda(f + 1, c); }
+                            else { grdVenta.ActivarCelda(f, c + 2); }
                         }
                         else
                         {
@@ -329,9 +343,18 @@
                             grdVenta.set_Texto(f, c_CostoCompra, Venta.CostoCompra);
                             grdVenta.set_Texto(f, c_TotalCompra, Venta.Kilos * Venta.CostoCompra);
 
-                            if (id != 0) { Venta.Actualizar(); }
-
-                            grdVenta.ActivarCelda(f, c_Kilos);
+                            if (id != 0) { Venta.Actualizar(); grdVenta.ActivarCelda(f + 1, c); }
+                            else
+                            {
+                                if (chMenudencias.Checked == true)
+                                {
+                                    grdVenta.ActivarCelda(f, c_Cantidad);
+                                }
+                                else
+                                {
+                                    grdVenta.ActivarCelda(f, c_Kilos);
+                                }
+                            }
                             Totales();
                         }
                         else
@@ -344,18 +367,31 @@
                         Venta.Descripcion = a.ToString();
                         grdVenta.set_Texto(f, c, a);
 
-                        if (id != 0) { Venta.Actualizar(); }
+                        if (id != 0) { Venta.Actualizar(); grdVenta.ActivarCelda(f + 1, c); }
+                        else
+                        { grdVenta.ActivarCelda(f, c + 1); }
 
-                        grdVenta.ActivarCelda(f + 1, c);
                         break;
+
+                    case c_Cantidad:
+                        Venta.Cantidad = Convert.ToInt32(a);
+                        grdVenta.set_Texto(f, c, a);
+                        if (Venta.Kilos > 0 & Convert.ToInt32(a) > 0) { grdVenta.set_Texto(f, c_Promedio, Venta.Kilos / Venta.Cantidad); }
+                        else { grdVenta.set_Texto(f, c_Promedio, 0); }
+
+                        if (id != 0) { Venta.Actualizar(); grdVenta.ActivarCelda(f + 1, c); }
+                        else { grdVenta.ActivarCelda(f, c_Kilos); }
+                        Totales();
+                        break;
+
                     case c_CostoCompra:
                         Venta.CostoCompra = Convert.ToSingle(a);
                         grdVenta.set_Texto(f, c, a);
                         grdVenta.set_Texto(f, c_TotalCompra, Venta.CostoCompra * Venta.Kilos);
 
-                        if (id != 0) { Venta.Actualizar(); }
+                        if (id != 0) { Venta.Actualizar(); grdVenta.ActivarCelda(f + 1, c); }
+                        else { grdVenta.ActivarCelda(f, c + 1); }
 
-                        grdVenta.ActivarCelda(f + 1, c);
                         Totales();
                         break;
                     case c_CostoVenta:
@@ -363,9 +399,9 @@
                         grdVenta.set_Texto(f, c, a);
                         grdVenta.set_Texto(f, c_TotalVenta, Venta.CostoVenta * Venta.Kilos);
 
-                        if (id != 0) { Venta.Actualizar(); }
+                        if (id != 0) { Venta.Actualizar(); grdVenta.ActivarCelda(f + 1, c); }
+                        else { grdVenta.ActivarCelda(f, c + 1); }
 
-                        grdVenta.ActivarCelda(f + 1, c);
                         Totales();
                         break;
 
@@ -374,6 +410,8 @@
                         grdVenta.set_Texto(f, c, a);
                         grdVenta.set_Texto(f, c_TotalVenta, Venta.CostoVenta * Venta.Kilos);
                         grdVenta.set_Texto(f, c_TotalCompra, Venta.CostoCompra * Venta.Kilos);
+                        if (Venta.Cantidad > 0 & Convert.ToSingle(a) > 0) { grdVenta.set_Texto(f, c_Promedio, Venta.Kilos / Venta.Cantidad); }
+                        else { grdVenta.set_Texto(f, c_Promedio, 0); }
 
                         if (grdVenta.Row == grdVenta.Rows - 1)
                         {
@@ -381,38 +419,7 @@
                             grdVenta.set_Texto(f, c_Id, Venta.ID);
                             grdVenta.AgregarFila();
 
-                            //Rellenar nueva fila
-
                             Rellenar_nueva_Fila(f);
-
-                            //grdVenta.set_Texto(f + 1, c_Fecha, Venta.Fecha);
-                            //grdVenta.set_Texto(f + 1, c_IdCamion, Venta.Camion.ID);
-                            //grdVenta.set_Texto(f + 1, c_IdProv, Venta.Proveedor.Id);
-                            //grdVenta.set_Texto(f + 1, c_IdProv + 1, Venta.Proveedor.Nombre);
-                            //grdVenta.set_Texto(f + 1, c_IdSuc, Venta.Sucursal.ID);
-                            //grdVenta.set_Texto(f + 1, c_IdSuc + 1, Venta.Sucursal.Nombre);
-
-                            //Venta.Producto.ID = Listas.Producto_Siguiente();
-
-                            //Venta.precios.Producto = Venta.Producto;
-                            //Venta.precios_Proveedores.Producto = Venta.Producto;
-
-                            //Venta.Descripcion = Venta.Producto.Nombre;
-
-                            //grdVenta.set_Texto(f + 1, c_IdProd, Venta.Producto.ID);
-                            //grdVenta.set_Texto(f + 1, c_Descripcion, Venta.Descripcion);
-
-
-                            //Venta.CostoVenta = Venta.precios.Buscar();
-                            //grdVenta.set_Texto(f + 1, c_CostoVenta, Venta.CostoVenta);
-                            //grdVenta.set_Texto(f + 1, c_TotalVenta, 0);
-
-                            //Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
-                            //grdVenta.set_Texto(f + 1, c_CostoCompra, Venta.CostoCompra);
-                            //grdVenta.set_Texto(f + 1, c_TotalCompra, 0);
-
-                            //Venta.Kilos = 0;
-                            //grdVenta.ActivarCelda(f + 1, c_Kilos);
                         }
                         else
                         {
@@ -480,8 +487,15 @@
             grdVenta.set_Texto(Fila + 1, c_TotalVenta, 0);
             grdVenta.set_Texto(Fila + 1, c_CostoCompra, Venta.CostoCompra);
             grdVenta.set_Texto(Fila + 1, c_TotalCompra, 0);
-            grdVenta.ActivarCelda(Fila + 1, grdVenta.Col);
 
+            if (chMenudencias.Checked == true)
+            {
+                grdVenta.ActivarCelda(Fila + 1, c_Cantidad);
+            }
+            else
+            {
+                grdVenta.ActivarCelda(Fila + 1, grdVenta.Col);
+            }
         }
 
         private void GrdVenta_CambioFila(short Fila)
@@ -508,6 +522,7 @@
                 Venta.Descripcion = grdVenta.get_Texto(Fila, c_Descripcion).ToString();
                 Venta.Sucursal.ID = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdSuc));
                 Venta.Proveedor.Id = Convert.ToInt32(grdVenta.get_Texto(Fila, c_IdProv));
+                Venta.Cantidad = Convert.ToInt32(grdVenta.get_Texto(Fila, c_Cantidad));
                 Venta.CostoVenta = Convert.ToSingle(grdVenta.get_Texto(Fila, c_CostoVenta));
                 Venta.CostoCompra = Convert.ToSingle(grdVenta.get_Texto(Fila, c_CostoCompra));
                 Venta.Kilos = Convert.ToSingle(grdVenta.get_Texto(Fila, c_Kilos));
@@ -530,7 +545,7 @@
                 {
                     grdVenta.ActivarCelda(grdVenta.Row, c_IdProv);
                 }
-                else                        
+                else
                 {
                     if (Venta.ID == 0)
                     {
@@ -620,7 +635,7 @@
                                     break;
                             }
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -639,7 +654,7 @@
                                 Venta.ID = Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0));
                                 Venta.Borrar();
                                 grdVenta.BorrarFila(grdVenta.Row);
-                                GrdVenta_CambioFila(Convert.ToByte(grdVenta.Row));
+                                GrdVenta_CambioFila(Convert.ToInt16(grdVenta.Row));
                                 Totales();
                             }
                         }
@@ -898,6 +913,22 @@
         private void cmdHerramientas_Click_1(object sender, EventArgs e)
         {
             panel5.Visible = true;
+        }
+
+        private void chMenudencias_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chMenudencias.Checked == true)
+            {
+                grdVenta.Columnas[c_IdCamion].Visible = true;
+                grdVenta.Columnas[c_Cantidad].Visible = true;
+                grdVenta.Columnas[c_Promedio].Visible = true;
+            }
+            else
+            {
+                grdVenta.Columnas[c_IdCamion].Visible = false;
+                grdVenta.Columnas[c_Cantidad].Visible = false;
+                grdVenta.Columnas[c_Promedio].Visible = false;
+            }
         }
     }
 }

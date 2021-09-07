@@ -21,9 +21,11 @@ namespace Programa1.Carga
         private Byte c_Descripcion;
         private Byte c_CostoS;
         private Byte c_CostoE;
+        private Byte c_Cantidad;
         private Byte c_Kilos;
         private Byte c_TotalS;
         private Byte c_TotalE;
+        private Byte c_Promedio;
         #endregion
 
         public frmTraslados()
@@ -44,9 +46,11 @@ namespace Programa1.Carga
             c_Descripcion = Convert.ToByte(grdTraslados.get_ColIndex("Descripcion"));
             c_CostoS = Convert.ToByte(grdTraslados.get_ColIndex("Costo_Salida"));
             c_CostoE = Convert.ToByte(grdTraslados.get_ColIndex("Costo_Entrada"));
+            c_Cantidad = Convert.ToByte(grdTraslados.get_ColIndex("Cantidad"));
             c_Kilos = Convert.ToByte(grdTraslados.get_ColIndex("Kilos"));
             c_TotalS = Convert.ToByte(grdTraslados.get_ColIndex("Total_Salida"));
             c_TotalE = Convert.ToByte(grdTraslados.get_ColIndex("Total_Entrada"));
+            c_Promedio = Convert.ToByte(grdTraslados.get_ColIndex("Promedio"));
 
             formato_Grilla();
 
@@ -153,17 +157,31 @@ namespace Programa1.Carga
             grdTraslados.set_ColW(c_Descripcion, 200);
             grdTraslados.set_ColW(c_CostoS, 60);
             grdTraslados.set_ColW(c_CostoE, 60);
+            grdTraslados.set_ColW(c_Cantidad, 60);
             grdTraslados.set_ColW(c_Kilos, 60);
             grdTraslados.set_ColW(c_TotalS, 80);
             grdTraslados.set_ColW(c_TotalE, 80);
-            grdTraslados.set_ColW(c_TotalE + 1, 0);
             grdTraslados.set_ColW(c_TotalE + 2, 0);
+            grdTraslados.set_ColW(c_TotalE + 3, 0);
+            grdTraslados.set_ColW(c_Promedio, 60);
 
             grdTraslados.Columnas[c_CostoS].Format = "C2";
             grdTraslados.Columnas[c_CostoE].Format = "C2";
             grdTraslados.Columnas[c_Kilos].Format = "N2";
             grdTraslados.Columnas[c_TotalS].Format = "C2";
             grdTraslados.Columnas[c_TotalE].Format = "C2";
+            grdTraslados.Columnas[c_Promedio].Format = "N2";
+
+            if (chMenudencias.Checked == true)
+            {
+                grdTraslados.Columnas[c_Cantidad].Visible = true;
+                grdTraslados.Columnas[c_Promedio].Visible = true;
+            }
+            else
+            {
+                grdTraslados.Columnas[c_Cantidad].Visible = false;
+                grdTraslados.Columnas[c_Promedio].Visible = false;
+            }
 
             grdTraslados.Columnas[c_IdSucS + 1].Style.ForeColor = Color.DimGray;
             grdTraslados.Columnas[c_IdSucE + 1].Style.ForeColor = Color.DimGray;
@@ -190,14 +208,12 @@ namespace Programa1.Carga
 
         }
 
-
         private void CmdLimpiar_Click(object sender, EventArgs e)
         {
             grdTraslados.Rows = 1;
             grdTraslados.Rows = 2;
             Totales();
         }
-
 
         private void CProds_Cambio_Seleccion(object sender, EventArgs e)
         {
@@ -217,8 +233,6 @@ namespace Programa1.Carga
             cSucEntrada.Filtro_In = $" (SELECT DISTINCT Suc_Entrada FROM Traslados WHERE {vFecha})";
             cmdMostrar.PerformClick();
         }
-
-
         private void GrdTraslados_Editado(short f, short c, object a)
         {
             if (Traslados.Fecha_Cerrada(Traslados.Fecha) == false)
@@ -229,17 +243,17 @@ namespace Programa1.Carga
                     case 1:
                         //Fecha
                         DateTime df = Convert.ToDateTime(a);
-                        if (df >= cFecha.fecha_Actual)
+                        if (cFecha.Fecha_En_Rango(df))
                         {
                             if (Traslados.Fecha_Cerrada(df) == false)
                             {
                                 Traslados.Fecha = df;
                                 Traslados.precios.Fecha = Traslados.Fecha;
 
-                                if (id != 0) { Traslados.Actualizar(); }
-
                                 grdTraslados.set_Texto(f, c, a);
-                                grdTraslados.ActivarCelda(f, c + 1);
+
+                                if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
+                                else { grdTraslados.ActivarCelda(f, c + 1); }
                             }
                             else
                             {
@@ -248,7 +262,7 @@ namespace Programa1.Carga
                         }
                         else
                         {
-                            Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                            Mensaje("La fecha debe estar dentro del rango fecha seleccionado.");
                             grdTraslados.ErrorEnTxt();
                         }
                         break;
@@ -259,12 +273,11 @@ namespace Programa1.Carga
                         {
                             Traslados.precios.Sucursal = Traslados.sucS;
 
-                            if (id != 0) { Traslados.Actualizar(); }
-
                             grdTraslados.set_Texto(f, c, a);
                             grdTraslados.set_Texto(f, c + 1, Traslados.sucS.Nombre);
 
-                            grdTraslados.ActivarCelda(f, c + 2);
+                            if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
+                            else { grdTraslados.ActivarCelda(f, c + 2); }
                         }
                         else
                         {
@@ -279,12 +292,12 @@ namespace Programa1.Carga
                         {
                             Traslados.precios.Sucursal = Traslados.sucE;
 
-                            if (id != 0) { Traslados.Actualizar(); }
-
                             grdTraslados.set_Texto(f, c, a);
                             grdTraslados.set_Texto(f, c + 1, Traslados.sucE.Nombre);
 
-                            grdTraslados.ActivarCelda(f, c + 2);
+                            if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
+                            else { grdTraslados.ActivarCelda(f, c + 2); }
+
                         }
                         else
                         {
@@ -314,9 +327,15 @@ namespace Programa1.Carga
                             grdTraslados.set_Texto(f, c_CostoE, Traslados.CostoE);
                             grdTraslados.set_Texto(f, c_TotalE, Traslados.Kilos * Traslados.CostoE);
 
-                            if (id != 0) { Traslados.Actualizar(); }
+                            if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
+                            else
+                            {
+                                if (chMenudencias.Checked == true)
+                                { grdTraslados.ActivarCelda(f, c_Cantidad); }
+                                else
+                                { grdTraslados.ActivarCelda(f, c_Kilos); }
+                            }
 
-                            grdTraslados.ActivarCelda(f, c_Kilos);
                             Totales();
                         }
                         else
@@ -330,9 +349,8 @@ namespace Programa1.Carga
                         Traslados.Descripcion = a.ToString();
                         grdTraslados.set_Texto(f, c, a);
 
-                        if (id != 0) { Traslados.Actualizar(); }
-
-                        grdTraslados.ActivarCelda(f + 1, c);
+                        if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
+                        else { grdTraslados.ActivarCelda(f, c + 1); }
                         break;
                     case 8:
                         //Costo_Salida
@@ -340,9 +358,9 @@ namespace Programa1.Carga
                         grdTraslados.set_Texto(f, c, a);
                         grdTraslados.set_Texto(f, c_TotalS, Traslados.CostoS * Traslados.Kilos);
 
-                        if (id != 0) { Traslados.Actualizar(); }
+                        if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
+                        else { grdTraslados.ActivarCelda(f, c_Kilos); }
 
-                        grdTraslados.ActivarCelda(f + 1, c);
                         Totales();
                         break;
                     case 9:
@@ -351,17 +369,32 @@ namespace Programa1.Carga
                         grdTraslados.set_Texto(f, c, a);
                         grdTraslados.set_Texto(f, c_TotalE, Traslados.CostoE * Traslados.Kilos);
 
-                        if (id != 0) { Traslados.Actualizar(); }
+                        if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
+                        else { grdTraslados.ActivarCelda(f, c_Kilos); }
 
-                        grdTraslados.ActivarCelda(f + 1, c);
                         Totales();
                         break;
+
                     case 10:
+                        //Cantidad
+                        Traslados.Cantidad = Convert.ToInt32(a);
+                        grdTraslados.set_Texto(f, c, a);
+                        if (Traslados.Kilos > 0 & Convert.ToInt32(a) > 0) { grdTraslados.set_Texto(f, c_Promedio, Traslados.Kilos / Traslados.Cantidad); }
+                        else { grdTraslados.set_Texto(f, c_Promedio, 0); }
+
+                        if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
+                        else { grdTraslados.ActivarCelda(f, c_Kilos); }
+                        Totales();
+                        break;
+
+                    case 11:
                         //Kilos
                         Traslados.Kilos = Convert.ToSingle(a);
                         grdTraslados.set_Texto(f, c, a);
                         grdTraslados.set_Texto(f, c_TotalS, Traslados.CostoS * Traslados.Kilos);
                         grdTraslados.set_Texto(f, c_TotalE, Traslados.CostoE * Traslados.Kilos);
+                        if (Traslados.Cantidad > 0 & Convert.ToInt32(a) > 0) { grdTraslados.set_Texto(f, c_Promedio, Traslados.Kilos / Traslados.Cantidad); }
+                        else { grdTraslados.set_Texto(f, c_Promedio, 0); }
 
                         if (grdTraslados.Row == grdTraslados.Rows - 1)
                         {
@@ -413,6 +446,7 @@ namespace Programa1.Carga
                 Traslados.sucE.ID = Convert.ToInt32(grdTraslados.get_Texto(Fila, c_IdSucE));
                 Traslados.CostoS = Convert.ToSingle(grdTraslados.get_Texto(Fila, c_CostoS));
                 Traslados.CostoE = Convert.ToSingle(grdTraslados.get_Texto(Fila, c_CostoE));
+                Traslados.Cantidad = Convert.ToInt32(grdTraslados.get_Texto(Fila, c_Cantidad));
                 Traslados.Kilos = Convert.ToSingle(grdTraslados.get_Texto(Fila, c_Kilos));
             }
 
@@ -520,7 +554,7 @@ namespace Programa1.Carga
             }
             else
             {
-                float k = 0, tEntrada = 0, tSalida = 0;                
+                float k = 0, tEntrada = 0, tSalida = 0;
                 for (int i = FilaInicio; i <= FilaFin; i++)
                 {
                     k += Convert.ToSingle(grdTraslados.get_Texto(i, c_Kilos));
@@ -534,6 +568,20 @@ namespace Programa1.Carga
                 lblTotalS.Text = $"Total Salida: {tSalida:C2}";
                 lblTotalE.Text = $"Total Entrada: {tEntrada:C2}";
                 lblDiferencia.Text = $"Diferencia: {(tEntrada - tSalida):C2}";
+            }
+        }
+
+        private void chMenudencias_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chMenudencias.Checked == true)
+            {
+                grdTraslados.Columnas[c_Cantidad].Visible = true;
+                grdTraslados.Columnas[c_Promedio].Visible = true;
+            }
+            else
+            {
+                grdTraslados.Columnas[c_Cantidad].Visible = false;
+                grdTraslados.Columnas[c_Promedio].Visible = false;
             }
         }
     }

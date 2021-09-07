@@ -39,8 +39,11 @@
             this.grdCompras = new Grilla2.SpeedGrilla();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.cProds = new Programa1.Controles.cProductos();
             this.lstCamiones = new System.Windows.Forms.ListBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.cFecha = new Programa1.Controles.cFechas();
+            this.cProvs = new Programa1.Controles.cProveedores();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.paCambio = new System.Windows.Forms.Panel();
@@ -49,9 +52,7 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
-            this.cProds = new Programa1.Controles.cProductos();
-            this.cFecha = new Programa1.Controles.cFechas();
-            this.cProvs = new Programa1.Controles.cProveedores();
+            this.chMenudencias = new MaterialSkin.Controls.MaterialCheckBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -93,9 +94,6 @@
             // 
             // lblCant
             // 
-            this.lblCant.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblCant.Name = "lblCant";
-            this.lblCant.Size = new System.Drawing.Size(72, 23);
             this.lblCant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCant.Name = "lblCant";
             this.lblCant.Size = new System.Drawing.Size(73, 23);
@@ -104,9 +102,6 @@
             // 
             // lblKilos
             // 
-            this.lblKilos.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblKilos.Name = "lblKilos";
-            this.lblKilos.Size = new System.Drawing.Size(43, 23);
             this.lblKilos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblKilos.Name = "lblKilos";
             this.lblKilos.Size = new System.Drawing.Size(42, 23);
@@ -115,9 +110,6 @@
             // 
             // lblTotal
             // 
-            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(57, 23);
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(61, 23);
@@ -215,11 +207,29 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.chMenudencias);
             this.splitContainer2.Panel2.Controls.Add(this.lstCamiones);
             this.splitContainer2.Panel2.Controls.Add(this.materialLabel1);
             this.splitContainer2.Size = new System.Drawing.Size(256, 687);
             this.splitContainer2.SplitterDistance = 587;
             this.splitContainer2.TabIndex = 2;
+            // 
+            // cProds
+            // 
+            this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cProds.BackColor = System.Drawing.Color.Gainsboro;
+            this.cProds.Filtrar_Ver = true;
+            this.cProds.Filtro_In = "";
+            this.cProds.Location = new System.Drawing.Point(3, 3);
+            this.cProds.Mostrar_Tipo = true;
+            this.cProds.Name = "cProds";
+            this.cProds.Size = new System.Drawing.Size(250, 581);
+            this.cProds.TabIndex = 1;
+            this.cProds.Titulo = "Productos";
+            this.cProds.Valor_Actual = -1;
+            this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
             // 
             // lstCamiones
             // 
@@ -233,7 +243,7 @@
             this.lstCamiones.Location = new System.Drawing.Point(3, 22);
             this.lstCamiones.Name = "lstCamiones";
             this.lstCamiones.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstCamiones.Size = new System.Drawing.Size(250, 72);
+            this.lstCamiones.Size = new System.Drawing.Size(134, 72);
             this.lstCamiones.TabIndex = 1;
             this.lstCamiones.SelectedIndexChanged += new System.EventHandler(this.lstCamiones_SelectedIndexChanged);
             this.lstCamiones.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstCamiones_MouseUp);
@@ -242,12 +252,12 @@
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(3, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(76, 18);
+            this.materialLabel1.Size = new System.Drawing.Size(77, 19);
             this.materialLabel1.TabIndex = 0;
             this.materialLabel1.Text = "Camiones";
             // 
@@ -273,7 +283,7 @@
             this.cProvs.BackColor = System.Drawing.Color.Gainsboro;
             this.cProvs.Filtro_In = "";
             this.cProvs.Location = new System.Drawing.Point(2, 3);
-            this.cProvs.Mostrar_Tipo = true;
+            this.cProvs.Mostrar_Tipo = false;
             this.cProvs.Name = "cProvs";
             this.cProvs.Size = new System.Drawing.Size(258, 372);
             this.cProvs.TabIndex = 2;
@@ -376,52 +386,23 @@
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
             // 
-            // cProds
+            // chMenudencias
             // 
-            this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cProds.BackColor = System.Drawing.Color.Gainsboro;
-            this.cProds.Filtrar_Ver = true;
-            this.cProds.Filtro_In = "";
-            this.cProds.Location = new System.Drawing.Point(3, 3);
-            this.cProds.Mostrar_Tipo = true;
-            this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(250, 581);
-            this.cProds.TabIndex = 1;
-            this.cProds.Titulo = "Productos";
-            this.cProds.Valor_Actual = -1;
-            this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
-            // 
-            // cFecha
-            // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(3, 381);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Mostrar = 0;
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(249, 303);
-            this.cFecha.TabIndex = 3;
-            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
-            // 
-            // cProvs
-            // 
-            this.cProvs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cProvs.BackColor = System.Drawing.Color.Gainsboro;
-            this.cProvs.Filtro_In = "";
-            this.cProvs.Location = new System.Drawing.Point(2, 3);
-            this.cProvs.Mostrar_Tipo = true;
-            this.cProvs.Name = "cProvs";
-            this.cProvs.Size = new System.Drawing.Size(258, 372);
-            this.cProvs.TabIndex = 2;
-            this.cProvs.Titulo = "Proveedores";
-            this.cProvs.Valor_Actual = -1;
-            this.cProvs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
+            this.chMenudencias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chMenudencias.AutoSize = true;
+            this.chMenudencias.Depth = 0;
+            this.chMenudencias.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chMenudencias.Location = new System.Drawing.Point(140, 66);
+            this.chMenudencias.Margin = new System.Windows.Forms.Padding(0);
+            this.chMenudencias.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chMenudencias.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chMenudencias.Name = "chMenudencias";
+            this.chMenudencias.Ripple = true;
+            this.chMenudencias.Size = new System.Drawing.Size(113, 30);
+            this.chMenudencias.TabIndex = 7;
+            this.chMenudencias.Text = "Menudencias";
+            this.chMenudencias.UseVisualStyleBackColor = true;
+            this.chMenudencias.CheckedChanged += new System.EventHandler(this.chMenudencias_CheckedChanged);
             // 
             // frmCompras
             // 
@@ -485,5 +466,6 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ListBox lstCamiones;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialCheckBox chMenudencias;
     }
 }

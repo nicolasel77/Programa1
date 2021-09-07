@@ -9,12 +9,12 @@ namespace Programa1.DB
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    public class Ventas : c_Base
+    public class  Ventas : c_Base
     {
         public Ventas()
         {
-            Tabla = "Ventas";
-            Vista = "vw_Ventas";
+            Tabla = "Ventas_2";
+            Vista = "vw_Ventas_2";
             ID_Automatico = true;
         }
 
@@ -24,6 +24,7 @@ namespace Programa1.DB
         [MaxLength(100, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
+        public int Cantidad { get; set; }
         public Single CostoVenta { get; set; }
         public Proveedores.Proveedores Proveedor { get; set; } = new Proveedores.Proveedores();
         public Single CostoCompra { get; set; }
@@ -35,7 +36,7 @@ namespace Programa1.DB
 
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro, "ID, Fecha, ID_Camion, ID_Proveedores, Nombre_Proveedor, ID_Sucursales, Nombre, ID_Productos, Descripcion, Costo_Compra, Costo_Venta, Kilos, Total_Compra, Total_Venta");
+            return Datos_Vista(filtro, "ID, Fecha, ID_Camion, ID_Proveedores, Nombre_Proveedor, ID_Sucursales, Nombre, ID_Productos, Descripcion, Costo_Compra, Costo_Venta, Cantidad, Kilos, Total_Compra, Total_Venta, Promedio");
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace Programa1.DB
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, ID_Camion, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra Costo{Camposuma}  " +
-                    $"FROM vw_Ventas {filtro} " +
+                    $"FROM vw_Ventas_2 {filtro} " +
                     GroupBy +
                     $"ORDER BY  Fecha, Id_Productos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -102,7 +103,7 @@ namespace Programa1.DB
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, 50 Suc_Salida, 'CAMARA' Nombre_Salida, Id_Sucursales Suc_Entrada, Nombre Nombre_Entrada, Id_Productos, Descripcion, Costo_Compra Costo_Salida, Costo_Venta Costo_Entrada" +
                     Camposuma +
-                    $"FROM vw_Ventas {filtro} " +
+                    $"FROM vw_Ventas_2 {filtro} " +
                     GroupBy +
                     $"ORDER BY  Fecha, Id_Productos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -126,6 +127,7 @@ namespace Programa1.DB
             Actualizar("Id_Proveedores", Proveedor.Id);
             Actualizar("ID_Productos", Producto.ID);
             Actualizar("Descripcion", Descripcion);
+            Actualizar("Cantidad", Cantidad);
             Actualizar("Costo_Compra", CostoCompra);
             Actualizar("Costo_Venta", CostoVenta);
             Actualizar("Kilos", Kilos);
@@ -138,8 +140,8 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Ventas (Fecha, Id_Sucursales, ID_Camion, Id_Proveedores, Id_Productos, Descripcion, Costo_Venta, Costo_Compra, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {CostoVenta.ToString().Replace(",", ".")}, {CostoCompra.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO  Ventas_2 (Fecha, Id_Sucursales, ID_Camion, Id_Proveedores, Id_Productos, Descripcion, Cantidad, Costo_Venta, Costo_Compra, Kilos) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {Cantidad}, {CostoVenta.ToString().Replace(",", ".")}, {CostoCompra.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -174,7 +176,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Ventas WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Ventas_2 WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -189,6 +191,7 @@ namespace Programa1.DB
                 Descripcion = dr["Descripcion"].ToString();
                 Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Proveedor.Id = Convert.ToInt32(dr["Id_Proveedores"]);
+                Cantidad = Convert.ToInt32(dr["Cantidad"]);
                 CostoVenta = Convert.ToSingle(dr["Costo_Venta"]);
                 CostoCompra = Convert.ToSingle(dr["Costo_Compra"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
@@ -203,6 +206,7 @@ namespace Programa1.DB
                 Producto.ID = 0;
                 Descripcion = "";
                 Sucursal.ID = 0;
+                Cantidad = 0;
                 CostoCompra = 0;
                 CostoVenta = 0;
                 Kilos = 0;

@@ -16,6 +16,7 @@ namespace Programa1.Carga.Proveedores
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grd.TeclasManejadas = n;
+            grd.AgregarTeclas(Convert.ToInt32(Keys.Subtract), 4, 6);
             Cargar();
         }
 
@@ -148,6 +149,24 @@ namespace Programa1.Carga.Proveedores
             Precios.Producto.ID = Convert.ToInt32(grd.get_Texto(Fila, grd.get_ColIndex("ID_Productos")));
             Precios.Precio = Convert.ToSingle(grd.get_Texto(Fila, grd.get_ColIndex("Precio")));
 
+        }
+
+        private void grd_KeyUp(object sender, short e)
+        {
+            // F12
+            if (e == 123 | e == 46)
+            {
+                if (MessageBox.Show($"¿Esta segura/o de borrar el item '{grd.get_Texto(grd.Row, 1).ToString()}' ?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    if (Convert.ToInt32(grd.get_Texto(grd.Row, 0)) != 0)
+                    {
+                        Precios.Id = Convert.ToInt32(grd.get_Texto(grd.Row, 0));
+                        Precios.Borrar();
+                        grd.BorrarFila(grd.Row);
+                    }
+
+                }
+            }
         }
     }
 }

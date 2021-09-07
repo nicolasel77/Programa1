@@ -12,8 +12,8 @@
     {
         public Compras()
         {
-            Tabla = "Compras";
-            Vista = "vw_Compras";
+            Tabla = "Compras_2";
+            Vista = "vw_Compras_2";
             ID_Automatico = true;
         }
 
@@ -25,6 +25,7 @@
         public string Descripcion { get; set; }
         public Proveedores.Proveedores Proveedor { get; set; } = new Proveedores.Proveedores();
         public Single Costo { get; set; }
+        public int Cantidad { get; set; }
         public Single Kilos { get; set; }
 
         public Camiones Camion { get; set; } = new Camiones();
@@ -33,7 +34,7 @@
 
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro, "Id, Fecha, ID_Camion, Id_Proveedores, Nombre, Id_Productos, Descripcion, Costo, Kilos, Total");
+            return Datos_Vista(filtro, "Id, Fecha, ID_Camion, Id_Proveedores, Nombre, Id_Productos, Descripcion, Costo, Cantidad, Kilos, Total, Promedio");
         }
 
         /// <summary>
@@ -57,7 +58,7 @@
                     $", ISNULL((SELECT e.ID FROM Estados_Compra e WHERE e.Fecha=vw_Compras.Fecha AND e.Id_Proveedor={Proveedor.Id}), 0) Id_Estado" +
                     $", ISNULL((SELECT e.Estado FROM Estados_Compra e WHERE e.Fecha=vw_Compras.Fecha AND e.Id_Proveedor={Proveedor.Id}), 0) Estado" +
                     $", ISNULL((SELECT e.Observacion FROM Estados_Compra e WHERE e.Fecha=vw_Compras.Fecha AND e.Id_Proveedor={Proveedor.Id}), '') Observacion" +
-                    $" FROM vw_Compras {filtro}  GROUP BY Fecha ORDER BY Fecha";
+                    $" FROM vw_Compras_2 {filtro}  GROUP BY Fecha ORDER BY Fecha";
 
                 SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -105,6 +106,7 @@
             Actualizar("ID_Productos", Producto.ID);
             Actualizar("Descripcion", Descripcion);
             Actualizar("Costo", Costo);
+            Actualizar("Cantidad", Cantidad);
             Actualizar("Kilos", Kilos);
         }
 
@@ -115,8 +117,8 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Compras (Fecha, Id_Camion, Id_Proveedores, Id_Productos, Descripcion, Costo, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Compras_2 (Fecha, Id_Camion, Id_Proveedores, Id_Productos, Descripcion, Costo, Cantidad, Kilos) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Cantidad}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -151,7 +153,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Compras WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Compras_2 WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -166,6 +168,7 @@
                 Descripcion = dr["Descripcion"].ToString();
                 Proveedor.Id = Convert.ToInt32(dr["Id_Proveedores"]);
                 Costo = Convert.ToSingle(dr["Costo"]);
+                Cantidad = Convert.ToInt32(dr["Cantidad"].ToString());
                 Kilos = Convert.ToSingle(dr["Kilos"]);
 
             }
@@ -178,6 +181,7 @@
                 Producto.ID = 0;
                 Descripcion = "";
                 Costo = 0;
+                Cantidad = 0;
                 Kilos = 0;
             }
         }

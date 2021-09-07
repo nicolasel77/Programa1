@@ -8,14 +8,12 @@ namespace Programa1.DB
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    public class Traslados : c_Base
+    public class Traslados: c_Base
     {
-
-
         public Traslados()
         {
-            Tabla = "Traslados";
-            Vista = "vw_Traslados";
+            Tabla = "Traslados_2";
+            Vista = "vw_Traslados_2";
             ID_Automatico = true;
         }
 
@@ -28,6 +26,7 @@ namespace Programa1.DB
         public float CostoS { get; set; }
         public Sucursales.Sucursales sucE { get; set; } = new Sucursales.Sucursales();
         public float CostoE { get; set; }
+        public int Cantidad { get; set; }
         public Single Kilos { get; set; }
 
         public Precios_Sucursales precios = new Precios_Sucursales();
@@ -46,6 +45,7 @@ namespace Programa1.DB
             Actualizar("Descripcion", Descripcion);
             Actualizar("Costo_Salida", CostoS);
             Actualizar("Costo_Entrada", CostoE);
+            Actualizar("Cantidad", Cantidad);
             Actualizar("Kilos", Kilos);
         }
 
@@ -56,8 +56,8 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Traslados (Fecha, Suc_Salida, Suc_Entrada, Id_Productos, Descripcion, Costo_Salida, Costo_Entrada, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {sucS.ID}, {sucE.ID}, {Producto.ID}, '{Descripcion}', {CostoS.ToString().Replace(",", ".")}, {CostoE.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Traslados_2 (Fecha, Suc_Salida, Suc_Entrada, Id_Productos, Descripcion, Costo_Salida, Costo_Entrada, Cantidad, Kilos) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {sucS.ID}, {sucE.ID}, {Producto.ID}, '{Descripcion}', {CostoS.ToString().Replace(",", ".")}, {CostoE.ToString().Replace(",", ".")}, {Cantidad}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -91,7 +91,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Traslados WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Traslados_2 WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -107,6 +107,7 @@ namespace Programa1.DB
                 sucE.ID = Convert.ToInt32(dr["Suc_Entrada"]);
                 CostoS = Convert.ToSingle(dr["Costo_Salida"]);
                 CostoE = Convert.ToSingle(dr["Costo_Entrada"]);
+                Cantidad = Convert.ToInt32(dr["Cantidad"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
 
             }
@@ -120,10 +121,9 @@ namespace Programa1.DB
                 sucE.ID = 0;
                 CostoS = 0;
                 CostoE = 0;
+                Cantidad = 0;
                 Kilos = 0;
             }
-
-
         }
     }
 }

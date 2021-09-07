@@ -17,8 +17,10 @@
         private Byte c_IdProd;
         private Byte c_Descripcion;
         private Byte c_Costo;
+        private Byte c_Cantidad;
         private Byte c_Kilos;
         private Byte c_Total;
+        private Byte c_Promedio;
         #endregion
 
         public frmCompras()
@@ -38,8 +40,10 @@
             c_IdProd = Convert.ToByte(grdCompras.get_ColIndex("Id_Productos"));
             c_Descripcion = Convert.ToByte(grdCompras.get_ColIndex("Descripcion"));
             c_Costo = Convert.ToByte(grdCompras.get_ColIndex("Costo"));
+            c_Cantidad = Convert.ToByte(grdCompras.get_ColIndex("Cantidad"));
             c_Kilos = Convert.ToByte(grdCompras.get_ColIndex("Kilos"));
             c_Total = Convert.ToByte(grdCompras.get_ColIndex("Total"));
+            c_Promedio = Convert.ToByte(grdCompras.get_ColIndex("Promedio"));
 
             formato_Grilla();
 
@@ -146,13 +150,29 @@
             grdCompras.set_ColW(c_IdProv + 1, 100);
             grdCompras.set_ColW(c_IdProd, 30);
             grdCompras.set_ColW(c_Descripcion, 150);
+            grdCompras.set_ColW(c_Cantidad, 60);
             grdCompras.set_ColW(c_Costo, 60);
             grdCompras.set_ColW(c_Kilos, 60);
             grdCompras.set_ColW(c_Total, 80);
+            grdCompras.set_ColW(c_Promedio, 60);
+
+            if (chMenudencias.Checked == true)
+            {
+                grdCompras.Columnas[c_IdCamion].Visible = true;
+                grdCompras.Columnas[c_Cantidad].Visible = true;
+                grdCompras.Columnas[c_Promedio].Visible = true;
+            }
+            else
+            {
+                grdCompras.Columnas[c_IdCamion].Visible = false;
+                grdCompras.Columnas[c_Cantidad].Visible = false;
+                grdCompras.Columnas[c_Promedio].Visible = false;
+            }
 
             grdCompras.Columnas[c_Costo].Format = "C2";
             grdCompras.Columnas[c_Kilos].Format = "N2";
             grdCompras.Columnas[c_Total].Format = "C2";
+            grdCompras.Columnas[c_Promedio].Format = "N2";
 
             grdCompras.Columnas[c_IdProv + 1].Style.ForeColor = Color.DimGray;
             grdCompras.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
@@ -209,17 +229,22 @@
                     case 1:
                         //Fecha
                         DateTime df = Convert.ToDateTime(a);
-                        if (df >= cFecha.fecha_Actual)
+                        if (cFecha.Fecha_En_Rango(df))
                         {
                             if (Compras.Fecha_Cerrada(df) == false)
                             {
                                 Compras.Fecha = df;
                                 Compras.precios.Fecha = Compras.Fecha;
 
-                                if (id != 0) { Compras.Actualizar(); }
-
                                 grdCompras.set_Texto(f, c, a);
-                                grdCompras.ActivarCelda(f, c + 1);
+
+                                if (id != 0) { Compras.Actualizar(); grdCompras.ActivarCelda(f + 1, c); }
+                                else
+                                {
+                                    if (chMenudencias.Checked == true) { grdCompras.ActivarCelda(f, c + 1); }
+                                    else { grdCompras.ActivarCelda(f, c + 2); }
+                                }
+
                             }
                             else
                             {
@@ -228,20 +253,19 @@
                         }
                         else
                         {
-                            Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                            Mensaje("La fecha debe estar dentro del rango fecha seleccionado.");
                             grdCompras.ErrorEnTxt();
                         }
                         break;
                     case 2:
                         //Camion
                         Compras.Camion.ID = Convert.ToInt32(a);
-                        if (Compras.Camion.Existe() == true)
+                        if (Compras.Camion.Existe() == true || Compras.Camion.ID == 0)
                         {
                             grdCompras.set_Texto(f, c, a);
 
-                            if (id != 0) { Compras.Actualizar(); }
-
-                            grdCompras.ActivarCelda(f, c + 1);
+                            if (id != 0) { Compras.Actualizar(); grdCompras.ActivarCelda(f + 1, c); }
+                            else { grdCompras.ActivarCelda(f, c + 1); }
                         }
                         else
                         {
@@ -255,12 +279,11 @@
                         {
                             Compras.precios.Proveedor = Compras.Proveedor;
 
-                            if (id != 0) { Compras.Actualizar(); }
-
                             grdCompras.set_Texto(f, c, a);
                             grdCompras.set_Texto(f, c + 1, Compras.Proveedor.Nombre);
 
-                            grdCompras.ActivarCelda(f, c + 2);
+                            if (id != 0) { Compras.Actualizar(); grdCompras.ActivarCelda(f + 1, c); }
+                            else { grdCompras.ActivarCelda(f, c + 2); }
                         }
                         else
                         {
@@ -284,9 +307,12 @@
                             grdCompras.set_Texto(f, c_Costo, Compras.Costo);
                             grdCompras.set_Texto(f, c_Total, Compras.Costo * Compras.Kilos);
 
-                            if (id != 0) { Compras.Actualizar(); }
-
-                            grdCompras.ActivarCelda(f, c_Kilos);
+                            if (id != 0) { Compras.Actualizar(); grdCompras.ActivarCelda(f + 1, c); }
+                            else
+                            {
+                                if (chMenudencias.Checked == true) { grdCompras.ActivarCelda(f, c_Cantidad); }
+                                else { grdCompras.ActivarCelda(f, c_Kilos); }
+                            }
                             Totales();
                         }
                         else
@@ -300,26 +326,46 @@
                         Compras.Descripcion = a.ToString();
                         grdCompras.set_Texto(f, c, a);
 
-                        if (id != 0) { Compras.Actualizar(); }
-
-                        grdCompras.ActivarCelda(f + 1, c);
+                        if (id != 0) { Compras.Actualizar(); grdCompras.ActivarCelda(f + 1, c); }
+                        else
+                        {
+                            if (chMenudencias.Checked == true) { grdCompras.ActivarCelda(f, c_Cantidad); }
+                            else { grdCompras.ActivarCelda(f, c_Kilos); }
+                        }
                         break;
+
                     case 7:
                         //Costo
                         Compras.Costo = Convert.ToSingle(a);
                         grdCompras.set_Texto(f, c, a);
                         grdCompras.set_Texto(f, c_Total, Compras.Costo * Compras.Kilos);
 
-                        if (id != 0) { Compras.Actualizar(); }
-
+                        if (id != 0) { Compras.Actualizar(); grdCompras.ActivarCelda(f + 1, c); }
+                        else { grdCompras.ActivarCelda(f, c + 1); }
                         grdCompras.ActivarCelda(f + 1, c);
                         Totales();
                         break;
+
                     case 8:
+                        //Cantidad
+                        Compras.Cantidad = Convert.ToInt32(a);
+                        grdCompras.set_Texto(f, c, a);
+                        if (Compras.Kilos > 0 & Convert.ToInt32(a) > 0) { grdCompras.set_Texto(f, c_Promedio, Compras.Kilos / Compras.Cantidad); }
+                        else { grdCompras.set_Texto(f, c_Promedio, 0); }
+
+                        if (id != 0) { Compras.Actualizar(); grdCompras.ActivarCelda(f + 1, c); }
+                        else { grdCompras.ActivarCelda(f, c_Kilos); }
+                        Totales();
+                        break;
+
+                    case 9:
                         //Kilos
                         Compras.Kilos = Convert.ToSingle(a);
                         grdCompras.set_Texto(f, c, a);
                         grdCompras.set_Texto(f, c_Total, Compras.Costo * Compras.Kilos);
+                        if (Convert.ToSingle(a) > 0 & Compras.Cantidad > 0)
+                        { grdCompras.set_Texto(f, c_Promedio, Compras.Kilos / Compras.Cantidad); }
+                        else { grdCompras.set_Texto(f, c_Promedio, 0); }
 
                         if (grdCompras.Row == grdCompras.Rows - 1)
                         {
@@ -346,12 +392,21 @@
                             grdCompras.set_Texto(f + 1, c_Total, 0);
 
                             Compras.Kilos = 0;
+
+                            if (chMenudencias.Checked == true)
+                            {
+                                grdCompras.ActivarCelda(f + 1, c_Cantidad);
+                            }
+                            else
+                            {
+                                grdCompras.ActivarCelda(f + 1, c);
+                            }
                         }
                         else
                         {
                             Compras.Actualizar();
+                            grdCompras.ActivarCelda(f + 1, c);
                         }
-                        grdCompras.ActivarCelda(f + 1, c);
 
                         Totales();
                         break;
@@ -382,6 +437,7 @@
                 Compras.Descripcion = grdCompras.get_Texto(Fila, c_Descripcion).ToString();
                 Compras.Proveedor.Id = Convert.ToInt32(grdCompras.get_Texto(Fila, c_IdProv));
                 Compras.Costo = Convert.ToSingle(grdCompras.get_Texto(Fila, c_Costo));
+                Compras.Cantidad = Convert.ToInt32(grdCompras.get_Texto(Fila, c_Cantidad));
                 Compras.Kilos = Convert.ToSingle(grdCompras.get_Texto(Fila, c_Kilos));
 
                 Compras.precios.Fecha = Compras.Fecha;
@@ -511,6 +567,22 @@
                 lblCant.Text = $"Registros: {c:N0}";
                 lblKilos.Text = $"Kilos: {k:N2}";
                 lblTotal.Text = $"Total Venta: {tc:C2}";
+            }
+        }
+
+        private void chMenudencias_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chMenudencias.Checked == true)
+            {
+                grdCompras.Columnas[c_IdCamion].Visible = true;
+                grdCompras.Columnas[c_Cantidad].Visible = true;
+                grdCompras.Columnas[c_Promedio].Visible = true;
+            }
+            else
+            {
+                grdCompras.Columnas[c_IdCamion].Visible = false;
+                grdCompras.Columnas[c_Cantidad].Visible = false;
+                grdCompras.Columnas[c_Promedio].Visible = false;
             }
         }
     }

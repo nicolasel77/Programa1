@@ -54,6 +54,7 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
+            this.chMenudencias = new MaterialSkin.Controls.MaterialCheckBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -244,7 +245,7 @@
             this.cSucSalida.Filtro_In = "";
             this.cSucSalida.Location = new System.Drawing.Point(3, 3);
             this.cSucSalida.Mostrar_Botones = true;
-            this.cSucSalida.Mostrar_Tipo = true;
+            this.cSucSalida.Mostrar_Tipo = false;
             this.cSucSalida.Name = "cSucSalida";
             this.cSucSalida.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucSalida.Size = new System.Drawing.Size(253, 392);
@@ -262,7 +263,7 @@
             this.cSucEntrada.Filtro_In = "";
             this.cSucEntrada.Location = new System.Drawing.Point(0, 3);
             this.cSucEntrada.Mostrar_Botones = true;
-            this.cSucEntrada.Mostrar_Tipo = true;
+            this.cSucEntrada.Mostrar_Tipo = false;
             this.cSucEntrada.Name = "cSucEntrada";
             this.cSucEntrada.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucEntrada.Size = new System.Drawing.Size(260, 392);
@@ -279,6 +280,7 @@
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.Controls.Add(this.chMenudencias);
             this.splitContainer4.Panel1.Controls.Add(this.cFecha);
             // 
             // splitContainer4.Panel2
@@ -299,7 +301,7 @@
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFecha.Mostrar = 0;
             this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(212, 288);
+            this.cFecha.Size = new System.Drawing.Size(212, 255);
             this.cFecha.TabIndex = 3;
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
@@ -315,7 +317,7 @@
             this.cProds.Location = new System.Drawing.Point(3, 0);
             this.cProds.Mostrar_Tipo = true;
             this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(282, 288);
+            this.cProds.Size = new System.Drawing.Size(278, 288);
             this.cProds.TabIndex = 1;
             this.cProds.Titulo = "Productos";
             this.cProds.Valor_Actual = -1;
@@ -416,6 +418,24 @@
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
             // 
+            // chMenudencias
+            // 
+            this.chMenudencias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chMenudencias.AutoSize = true;
+            this.chMenudencias.Depth = 0;
+            this.chMenudencias.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chMenudencias.Location = new System.Drawing.Point(3, 258);
+            this.chMenudencias.Margin = new System.Windows.Forms.Padding(0);
+            this.chMenudencias.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chMenudencias.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chMenudencias.Name = "chMenudencias";
+            this.chMenudencias.Ripple = true;
+            this.chMenudencias.Size = new System.Drawing.Size(113, 30);
+            this.chMenudencias.TabIndex = 9;
+            this.chMenudencias.Text = "Menudencias";
+            this.chMenudencias.UseVisualStyleBackColor = true;
+            this.chMenudencias.CheckedChanged += new System.EventHandler(this.chMenudencias_CheckedChanged);
+            // 
             // frmTraslados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,6 +463,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel1.PerformLayout();
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
@@ -483,5 +504,6 @@
         private MaterialSkin.Controls.MaterialFlatButton cmdMostrar;
         private System.Windows.Forms.Panel paLimpiar;
         private MaterialSkin.Controls.MaterialFlatButton cmdLimpiar;
+        private MaterialSkin.Controls.MaterialCheckBox chMenudencias;
     }
 }
