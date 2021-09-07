@@ -13,8 +13,8 @@ namespace Programa1.DB
     {
         public Ventas()
         {
-            Tabla = "Ventas_2";
-            Vista = "vw_Ventas_2";
+            Tabla = "Ventas";
+            Vista = "vw_Ventas";
             ID_Automatico = true;
         }
 
@@ -63,7 +63,7 @@ namespace Programa1.DB
             try
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, ID_Camion, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra Costo{Camposuma}  " +
-                    $"FROM vw_Ventas_2 {filtro} " +
+                    $"FROM vw_Ventas {filtro} " +
                     GroupBy +
                     $"ORDER BY  Fecha, Id_Productos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -103,7 +103,7 @@ namespace Programa1.DB
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT Fecha, 50 Suc_Salida, 'CAMARA' Nombre_Salida, Id_Sucursales Suc_Entrada, Nombre Nombre_Entrada, Id_Productos, Descripcion, Costo_Compra Costo_Salida, Costo_Venta Costo_Entrada" +
                     Camposuma +
-                    $"FROM vw_Ventas_2 {filtro} " +
+                    $"FROM vw_Ventas {filtro} " +
                     GroupBy +
                     $"ORDER BY  Fecha, Id_Productos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -140,7 +140,7 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO  Ventas_2 (Fecha, Id_Sucursales, ID_Camion, Id_Proveedores, Id_Productos, Descripcion, Cantidad, Costo_Venta, Costo_Compra, Kilos) " +
+                    new SqlCommand($"INSERT INTO  Ventas (Fecha, Id_Sucursales, ID_Camion, Id_Proveedores, Id_Productos, Descripcion, Cantidad, Costo_Venta, Costo_Compra, Kilos) " +
                         $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {Cantidad}, {CostoVenta.ToString().Replace(",", ".")}, {CostoCompra.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -176,7 +176,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Ventas_2 WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Ventas WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

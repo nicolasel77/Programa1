@@ -12,8 +12,8 @@
     {
         public Compras()
         {
-            Tabla = "Compras_2";
-            Vista = "vw_Compras_2";
+            Tabla = "Compras";
+            Vista = "vw_Compras";
             ID_Automatico = true;
         }
 
@@ -58,7 +58,7 @@
                     $", ISNULL((SELECT e.ID FROM Estados_Compra e WHERE e.Fecha=vw_Compras.Fecha AND e.Id_Proveedor={Proveedor.Id}), 0) Id_Estado" +
                     $", ISNULL((SELECT e.Estado FROM Estados_Compra e WHERE e.Fecha=vw_Compras.Fecha AND e.Id_Proveedor={Proveedor.Id}), 0) Estado" +
                     $", ISNULL((SELECT e.Observacion FROM Estados_Compra e WHERE e.Fecha=vw_Compras.Fecha AND e.Id_Proveedor={Proveedor.Id}), '') Observacion" +
-                    $" FROM vw_Compras_2 {filtro}  GROUP BY Fecha ORDER BY Fecha";
+                    $" FROM vw_Compras {filtro}  GROUP BY Fecha ORDER BY Fecha";
 
                 SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
@@ -117,7 +117,7 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Compras_2 (Fecha, Id_Camion, Id_Proveedores, Id_Productos, Descripcion, Costo, Cantidad, Kilos) " +
+                    new SqlCommand($"INSERT INTO Compras (Fecha, Id_Camion, Id_Proveedores, Id_Productos, Descripcion, Costo, Cantidad, Kilos) " +
                         $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Cantidad}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -153,7 +153,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Compras_2 WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Compras WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

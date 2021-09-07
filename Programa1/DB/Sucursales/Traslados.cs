@@ -12,8 +12,8 @@ namespace Programa1.DB
     {
         public Traslados()
         {
-            Tabla = "Traslados_2";
-            Vista = "vw_Traslados_2";
+            Tabla = "Traslados";
+            Vista = "vw_Traslados";
             ID_Automatico = true;
         }
 
@@ -56,7 +56,7 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Traslados_2 (Fecha, Suc_Salida, Suc_Entrada, Id_Productos, Descripcion, Costo_Salida, Costo_Entrada, Cantidad, Kilos) " +
+                    new SqlCommand($"INSERT INTO Traslados (Fecha, Suc_Salida, Suc_Entrada, Id_Productos, Descripcion, Costo_Salida, Costo_Entrada, Cantidad, Kilos) " +
                         $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {sucS.ID}, {sucE.ID}, {Producto.ID}, '{Descripcion}', {CostoS.ToString().Replace(",", ".")}, {CostoE.ToString().Replace(",", ".")}, {Cantidad}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -91,7 +91,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Traslados_2 WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Traslados WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
