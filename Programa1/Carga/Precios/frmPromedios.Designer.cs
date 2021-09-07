@@ -72,7 +72,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.materialLabel3);
             this.splitContainer1.Panel2.Controls.Add(this.materialLabel2);
             this.splitContainer1.Size = new System.Drawing.Size(1376, 707);
-            this.splitContainer1.SplitterDistance = 616;
+            this.splitContainer1.SplitterDistance = 625;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -92,11 +92,12 @@
             this.grdPromedios.Cols = 11;
             this.grdPromedios.DataMember = "";
             this.grdPromedios.DataSource = null;
-            this.grdPromedios.EnableEdicion = false;
+            this.grdPromedios.EnableEdicion = true;
             this.grdPromedios.Encabezado = "";
             this.grdPromedios.fColor = System.Drawing.SystemColors.Control;
             this.grdPromedios.FixCols = 2;
             this.grdPromedios.FixRows = 1;
+            this.grdPromedios.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grdPromedios.FuenteEncabezado = null;
             this.grdPromedios.FuentePieDePagina = null;
             this.grdPromedios.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -107,8 +108,9 @@
             this.grdPromedios.Redraw = true;
             this.grdPromedios.Row = 1;
             this.grdPromedios.Rows = 11;
-            this.grdPromedios.Size = new System.Drawing.Size(607, 668);
+            this.grdPromedios.Size = new System.Drawing.Size(616, 668);
             this.grdPromedios.TabIndex = 0;
+            this.grdPromedios.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdPromedios_Editado);
             // 
             // panel1
             // 
@@ -118,7 +120,7 @@
             this.panel1.Controls.Add(this.materialLabel1);
             this.panel1.Location = new System.Drawing.Point(7, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(606, 27);
+            this.panel1.Size = new System.Drawing.Size(615, 27);
             this.panel1.TabIndex = 2;
             // 
             // materialLabel1
@@ -169,12 +171,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cSucs.BackColor = System.Drawing.Color.Gainsboro;
             this.cSucs.Filtro_In = "";
-            this.cSucs.Location = new System.Drawing.Point(440, 3);
+            this.cSucs.Location = new System.Drawing.Point(447, 3);
             this.cSucs.Mostrar_Botones = false;
-            this.cSucs.Mostrar_Tipo = false;
+            this.cSucs.Mostrar_Tipo = true;
             this.cSucs.Name = "cSucs";
             this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.One;
-            this.cSucs.Size = new System.Drawing.Size(297, 701);
+            this.cSucs.Size = new System.Drawing.Size(289, 701);
             this.cSucs.TabIndex = 3;
             this.cSucs.Titulo = "Sucursales";
             this.cSucs.Valor_Actual = -1;
@@ -189,7 +191,7 @@
             this.lstFechas.ItemHeight = 20;
             this.lstFechas.Location = new System.Drawing.Point(264, 31);
             this.lstFechas.Name = "lstFechas";
-            this.lstFechas.Size = new System.Drawing.Size(170, 660);
+            this.lstFechas.Size = new System.Drawing.Size(177, 660);
             this.lstFechas.TabIndex = 2;
             this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
             // 

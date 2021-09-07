@@ -1,18 +1,21 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    public class Precios_Sucursales
+    public class Precios_Sucursales : c_Base
     {
         public Precios_Sucursales()
         {
+            Tabla = "Precios_Sucursales";
+            Vista = "vw_PreciosSucursales";
         }
 
 
-        public int Id { get; set; }
+        
         public DateTime Fecha { get; set; }
         public Productos Producto { get; set; } = new Productos();
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
@@ -56,33 +59,7 @@
             }
             return Precio;
         }
-
-        public DataTable Datos(string filtro = "")
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_PreciosSucursales" + filtro, conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
+             
 
         public DataTable Tabla_Precios(int tipo)
         {
@@ -133,7 +110,7 @@
 
             try
             {
-                string fecha = $"(SELECT MAX(Fecha) FROM vw_PreciosSucursales WHERE Id_Tipo={tipo})";
+                string fecha = Dato_Generico("vw_PreciosSucursales", "Id_Tipo=" + tipo, "MAX(Fecha)").ToString();
 
                 if (Fecha != null) { fecha = $"'{Fecha:MM/dd/yy}'"; }
                 if(Sucursal.ID != 0)
@@ -160,7 +137,8 @@
 
             try
             {
-                string fecha = $"(SELECT MAX(Fecha) FROM vw_PreciosSucursales WHERE {filtro})";
+                string fecha = Dato_Generico("vw_PreciosSucursales", filtro, "MAX(Fecha)").ToString();
+                
                 if (Fecha != null) { fecha = $"'{Fecha:MM/dd/yy}'"; }
                 if (Sucursal.ID != 0)
                 {
@@ -323,7 +301,7 @@
         #endregion
 
         #region " Editar Datos "
-        public void Actualizar()
+        public new void  Actualizar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -332,7 +310,7 @@
                 SqlCommand command =
                     new SqlCommand($"UPDATE Precios_Sucursales " +
                     $"SET Fecha='{Fecha.ToString("MM/dd/yyy")}', Id_Sucursales={Sucursal.ID}, Id_Productos={Producto.ID}, Precio={Precio.ToString().Replace(",", ".")} " +
-                    $"WHERE Id={Id}", sql);
+                    $"WHERE Id={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -347,7 +325,7 @@
             }
         }
 
-        public void Agregar()
+        public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
@@ -374,20 +352,20 @@
             }
         }
 
-        public void Borrar()
+        public new void Borrar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Precios_Sucursales WHERE Id=" + Id, sql);
+                SqlCommand command = new SqlCommand("DELETE FROM Precios_Sucursales WHERE Id=" + ID, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
 
                 var d = command.ExecuteNonQuery();
 
-                Id = 0;
+                ID = 0;
 
                 sql.Close();
             }
@@ -413,7 +391,7 @@
 
                 var d = command.ExecuteNonQuery();
 
-                Id = 0;
+                ID = 0;
 
                 sql.Close();
             }

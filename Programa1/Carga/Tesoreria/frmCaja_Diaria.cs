@@ -820,7 +820,7 @@ namespace Programa1.Carga.Tesoreria
                                         nf = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(nf);
 
                                         txtInsert.Text = $" ({nf} /{CD.Fecha:yyyy})";
-                                        s = cGastos.Descripcion + txtInsert.Text;
+                                        s = grdSalidas.get_Texto(f, s_Descripcion) + txtInsert.Text;
                                     }
                                     cGastos.Descripcion = s;
                                     grdSalidas.set_Texto(f, s_Descripcion, s);

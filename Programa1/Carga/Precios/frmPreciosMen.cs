@@ -72,6 +72,7 @@ namespace Programa1.Carga.Precios
 
         private void Suc_Cambio_Seleccion(object sender, EventArgs e)
         {
+            h.Llenar_List(lstFechas, precios.Fechas(h.Codigo_Seleccionado(lstTipos.Text)), "dd/MM/yyyy");
             Cargar_Precios();
         }
 
@@ -95,7 +96,7 @@ namespace Programa1.Carga.Precios
                     precios.Sucursal.ID = suc;
                     //precios.Borrar_Lista(2);
                     MessageBox.Show("No implementado.");
-                    h.Llenar_List(lstFechas, precios.Fechas(2), "dd/MM/yyyy");
+                    h.Llenar_List(lstFechas, precios.Fechas(h.Codigo_Seleccionado(lstTipos.Text)), "dd/MM/yyyy");
                     Cargar_Precios();
                     this.Cursor = Cursors.Default;
                 }
@@ -171,6 +172,7 @@ namespace Programa1.Carga.Precios
         private void lstTipos_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cargar_Lista();
+            if (Suc.Cantidad_Seleccionada() > 0) { h.Llenar_List(lstFechas, precios.Fechas(h.Codigo_Seleccionado(lstTipos.Text)), "dd/MM/yyyy"); }
         }
     }
 }

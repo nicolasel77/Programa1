@@ -83,8 +83,9 @@ namespace Programa1.Carga.Precios
 
             //Esto es solo para que se cargen los datos
             //Mas que nada el Tipo
-            if (pr.Producto.Existe() == true) { }
+            pr.Producto.Buscar();
             
+
             string fSuc = "";
             if (cSucs.Valor_Actual > 0) { fSuc = cSucs.Valor_Actual.ToString(); }
 
@@ -101,18 +102,7 @@ namespace Programa1.Carga.Precios
                 }
 
             }
-            //    Dim sp As String = "SELECT TOP 50 Fecha FROM Precios WHERE CodProd={0} {1} ORDER BY Fecha DESC"
-            //    If PreciosSuc.ValorActual <> 0 Then
-            //        sp = String.Format(sp, dt.Rows(0).Item("Prod"), " AND CodSuc=" & PreciosSuc.ValorActual)
-            //    Else
-            //        sp = String.Format(sp, dt.Rows(0).Item("Prod"), "")
-            //    End If
-            //    Dim dtP As DataTable = dbPrecios.Datos(sp)
-            //    If dtP.Rows.Count Then
-            //        For Each dr As DataRow In dtP.Rows
-            //            lstPromFechas.Items.Add(Format(dr.Item(0), "dd/MM/yy"))
-            //        Next
-            //    End If
+            
 
             dtP = Promedios.Detalle_Promedio(h.Codigo_Seleccionado(lstPromedios.Text));
             int f = 2;
@@ -159,9 +149,10 @@ namespace Programa1.Carga.Precios
             {
                 grdPromedios.set_ColorCelda(1, 5, Color.LightGreen);
             }
-            grdPromedios.Columnas[4].Format = "####,###.0";
-            grdPromedios.Columnas[7].Format = "$ ####,###.00";
-            grdPromedios.Columnas[8].Format = "####,###.00";
+            grdPromedios.Columnas[2].Format = "C2";
+            grdPromedios.Columnas[4].Format = "N0";
+            grdPromedios.Columnas[7].Format = "C2";
+            grdPromedios.Columnas[8].Format = "N0";
             grdPromedios.AutosizeAll();
         }
 
@@ -175,8 +166,7 @@ namespace Programa1.Carga.Precios
                 pr.Fecha = fe;
                 pr.Sucursal.ID = s;
 
-                int f = 0;
-                int i = 0;
+                int i;
 
 
                 for (i = 1; i <= grdPromedios.Rows - 7; i++)
@@ -186,76 +176,101 @@ namespace Programa1.Carga.Precios
 
                         pr.Producto.ID = Convert.ToInt32(grdPromedios.get_Texto(i, 0));
 
-                        Single precio = pr.Buscar();
+                        float precio = pr.Buscar();
                         grdPromedios.set_Texto(i, 2, precio);
                         grdPromedios.set_Texto(i, 7, precio * Convert.ToDouble(grdPromedios.get_Texto(i, 6)));
                     }
                 }
-                f = i;
+                Calcular();
+            }
+        }
 
-                Double tK = 0;
-                Double tI = 0;
-                for (i = 2; i <= f - 1; i++)
+        private void Calcular()
+        {
+            int f;
+            int i;
+
+            for (i = 1; i <= grdPromedios.Rows - 7; i++)
+            {
+                if (Convert.ToInt32(grdPromedios.get_Texto(i, 0)) != 0)
                 {
-                    tK += Convert.ToDouble(grdPromedios.get_Texto(i, 6));
-                    tI += Convert.ToDouble(grdPromedios.get_Texto(i, 7));
+
+                    pr.Producto.ID = Convert.ToInt32(grdPromedios.get_Texto(i, 0));
+
+                    float precio = Convert.ToSingle(grdPromedios.get_Texto(i, 2));
+                    grdPromedios.set_Texto(i, 7, precio * Convert.ToDouble(grdPromedios.get_Texto(i, 6)));
                 }
+            }
+            f = i;
 
-                f++;
+            double tK = 0;
+            double tI = 0;
+            for (i = 2; i <= f - 1; i++)
+            {
+                tK += Convert.ToDouble(grdPromedios.get_Texto(i, 6));
+                tI += Convert.ToDouble(grdPromedios.get_Texto(i, 7));
+            }
 
-                grdPromedios.set_Texto(f, 6, tK);
-                grdPromedios.set_Texto(f, 7, tI);
-                grdPromedios.set_Texto(f, 8, tK / Convert.ToDouble(grdPromedios.get_Texto(1, 6)) * 100);
-                grdPromedios.set_Texto(f + 1, 7, tI - Convert.ToDouble(grdPromedios.get_Texto(1, 2)) * Convert.ToDouble(grdPromedios.get_Texto(1, 5)));
+            f++;
 
-                f += 3;
+            grdPromedios.set_Texto(f, 6, tK);
+            grdPromedios.set_Texto(f, 7, tI);
+            grdPromedios.set_Texto(f, 8, tK / Convert.ToDouble(grdPromedios.get_Texto(1, 6)) * 100);
+            grdPromedios.set_Texto(f + 1, 7, tI - Convert.ToDouble(grdPromedios.get_Texto(1, 2)) * Convert.ToDouble(grdPromedios.get_Texto(1, 5)));
 
-                Double prom = 0;
+            f += 3;
 
+            double prom = 0;
+
+            if (Convert.ToDouble(grdPromedios.get_Texto(1, 5)) != 0)
+            {
+                prom = tI / Convert.ToDouble(grdPromedios.get_Texto(1, 5));
+            }
+            else
+            {
+                if (Convert.ToDouble(grdPromedios.get_Texto(1, 6)) != 0) { prom = tI / Convert.ToDouble(grdPromedios.get_Texto(1, 6)); }
+            }
+
+            grdPromedios.set_Texto(f, 1, "Promedio");
+            grdPromedios.set_Texto(f + 1, 1, "Dif");
+            grdPromedios.set_Texto(f, 7, prom);
+            grdPromedios.set_Texto(f + 1, 7, prom - Convert.ToDouble(grdPromedios.get_Texto(1, 2)));
+
+            if (Convert.ToDouble(grdPromedios.get_Texto(f + 1, 7)) < 0)
+            {
+                grdPromedios.set_ColorCelda(f + 1, 7, Color.LightCoral);
                 if (Convert.ToDouble(grdPromedios.get_Texto(1, 5)) != 0)
                 {
-                    prom = tI / Convert.ToDouble(grdPromedios.get_Texto(1, 5));
+                    grdPromedios.set_ColorCelda(1, 5, Color.LightCoral);
+                    grdPromedios.set_ColorCelda(1, 6, Color.White);
                 }
                 else
                 {
-                    if (Convert.ToDouble(grdPromedios.get_Texto(1, 6)) != 0) { prom = tI / Convert.ToDouble(grdPromedios.get_Texto(1, 6)); }
+                    grdPromedios.set_ColorCelda(1, 6, Color.LightCoral);
+                    grdPromedios.set_ColorCelda(1, 5, Color.White);
                 }
-
-                grdPromedios.set_Texto(f, 1, "Promedio");
-                grdPromedios.set_Texto(f + 1, 1, "Dif");
-                grdPromedios.set_Texto(f, 7, prom);
-                grdPromedios.set_Texto(f + 1, 7, prom - Convert.ToDouble(grdPromedios.get_Texto(1, 2)));
-
-                if (Convert.ToDouble(grdPromedios.get_Texto(f + 1, 7)) < 0)
-                {
-                    grdPromedios.set_ColorCelda(f + 1, 7, Color.LightCoral);
-                    if (Convert.ToDouble(grdPromedios.get_Texto(1, 5)) != 0)
-                    {
-                        grdPromedios.set_ColorCelda(1, 5, Color.LightCoral);
-                        grdPromedios.set_ColorCelda(1, 6, Color.White);
-                    }
-                    else
-                    {
-                        grdPromedios.set_ColorCelda(1, 6, Color.LightCoral);
-                        grdPromedios.set_ColorCelda(1, 5, Color.White);
-                    }
-                }
-                else
-                {
-                    grdPromedios.set_ColorCelda(f + 1, 7, Color.LightGreen);
-                    if (Convert.ToDouble(grdPromedios.get_Texto(1, 5)) != 0)
-                    {
-                        grdPromedios.set_ColorCelda(1, 5, Color.LightGreen);
-                        grdPromedios.set_ColorCelda(1, 6, Color.White);
-                    }
-                    else
-                    {
-                        grdPromedios.set_ColorCelda(1, 6, Color.LightGreen);
-                        grdPromedios.set_ColorCelda(1, 5, Color.White);
-                    }
-                }
-                grdPromedios.AutosizeAll();
             }
+            else
+            {
+                grdPromedios.set_ColorCelda(f + 1, 7, Color.LightGreen);
+                if (Convert.ToDouble(grdPromedios.get_Texto(1, 5)) != 0)
+                {
+                    grdPromedios.set_ColorCelda(1, 5, Color.LightGreen);
+                    grdPromedios.set_ColorCelda(1, 6, Color.White);
+                }
+                else
+                {
+                    grdPromedios.set_ColorCelda(1, 6, Color.LightGreen);
+                    grdPromedios.set_ColorCelda(1, 5, Color.White);
+                }
+            }
+            grdPromedios.AutosizeAll();
+
+        }
+       
+        private void grdPromedios_Editado(short f, short c, object a)
+        {
+            Calcular();
         }
     }
 }

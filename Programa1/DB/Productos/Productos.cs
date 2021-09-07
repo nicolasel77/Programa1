@@ -87,6 +87,12 @@
             }
         }
 
+        public void Buscar()
+        {
+            DataTable dr = Datos("ID=" + ID);
+            Asignar(dr.Rows[0]);
+        }
+
         private void Asignar(DataRow dr)
         {
             ID = Convert.ToInt32(dr["Id"]);
