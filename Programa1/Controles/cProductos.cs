@@ -29,11 +29,8 @@
             }
             set
             {
-                if (value != vFiltroIn)
-                {
                     vFiltroIn = value;
                     Cargar();
-                }
             }
         }
         public bool Mostrar_Tipo

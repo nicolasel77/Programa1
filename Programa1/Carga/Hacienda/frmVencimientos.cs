@@ -243,8 +243,7 @@
             frmGenerarnvaBoleta fr = new frmGenerarnvaBoleta();
             fr.dt = saldos.Vencimientos();
             fr.Cargar();
-            fr.ShowDialog();
-            fr.Close();
+            fr.Show();
         }
 
         private void grd_CambioFila(short Fila)

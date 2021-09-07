@@ -55,6 +55,7 @@
             this.cProds = new Programa1.Controles.cProductos();
             this.cFecha = new Programa1.Controles.cFechas();
             this.cProveedores = new Programa1.Controles.cProveedores();
+            this.chMenudencias = new MaterialSkin.Controls.MaterialCheckBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -358,6 +359,7 @@
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.Controls.Add(this.chMenudencias);
             this.splitContainer4.Panel1.Controls.Add(this.lstCamiones);
             this.splitContainer4.Panel1.Controls.Add(this.materialLabel1);
             this.splitContainer4.Panel1.Controls.Add(this.cFecha);
@@ -380,7 +382,7 @@
             this.lstCamiones.Location = new System.Drawing.Point(3, 255);
             this.lstCamiones.Name = "lstCamiones";
             this.lstCamiones.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstCamiones.Size = new System.Drawing.Size(250, 54);
+            this.lstCamiones.Size = new System.Drawing.Size(134, 54);
             this.lstCamiones.TabIndex = 5;
             this.lstCamiones.SelectedIndexChanged += new System.EventHandler(this.lstCamiones_SelectedIndexChanged);
             this.lstCamiones.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstCamiones_MouseUp);
@@ -656,6 +658,24 @@
             this.cProveedores.Valor_Actual = -1;
             this.cProveedores.Cambio_Seleccion += new System.EventHandler(this.Csuc_Cambio_Seleccion);
             // 
+            // chMenudencias
+            // 
+            this.chMenudencias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chMenudencias.AutoSize = true;
+            this.chMenudencias.Depth = 0;
+            this.chMenudencias.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chMenudencias.Location = new System.Drawing.Point(140, 281);
+            this.chMenudencias.Margin = new System.Windows.Forms.Padding(0);
+            this.chMenudencias.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chMenudencias.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chMenudencias.Name = "chMenudencias";
+            this.chMenudencias.Ripple = true;
+            this.chMenudencias.Size = new System.Drawing.Size(113, 30);
+            this.chMenudencias.TabIndex = 6;
+            this.chMenudencias.Text = "Menudencias";
+            this.chMenudencias.UseVisualStyleBackColor = true;
+            this.chMenudencias.CheckedChanged += new System.EventHandler(this.chMenudencias_CheckedChanged);
+            // 
             // frmVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -749,5 +769,6 @@
         private MaterialSkin.Controls.MaterialRadioButton rdFecha;
         private System.Windows.Forms.Panel panel6;
         private MaterialSkin.Controls.MaterialFlatButton cmdHerramientas;
+        private MaterialSkin.Controls.MaterialCheckBox chMenudencias;
     }
 }

@@ -205,7 +205,7 @@
                     case 1:
                         //Fecha
                         DateTime df = Convert.ToDateTime(a);
-                        if (df >= cFecha.fecha_Actual)
+                        if (cFecha.Fecha_En_Rango(df))
                         {
                             if (stock.Fecha_Cerrada(df) == false)
                             {
@@ -224,7 +224,7 @@
                         }
                         else
                         {
-                            Mensaje("La fecha debe ser mayor o igual que la seleccionada en el filtro.");
+                            Mensaje("La fecha debe estar dentro del rango fecha seleccionado.");
                             grdStock.ErrorEnTxt();
                         }
                         break;

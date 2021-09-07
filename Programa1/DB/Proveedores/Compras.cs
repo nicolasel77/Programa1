@@ -25,6 +25,7 @@
         public string Descripcion { get; set; }
         public Proveedores.Proveedores Proveedor { get; set; } = new Proveedores.Proveedores();
         public Single Costo { get; set; }
+        public int Cantidad { get; set; }
         public Single Kilos { get; set; }
 
         public Camiones Camion { get; set; } = new Camiones();
@@ -33,7 +34,7 @@
 
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro, "Id, Fecha, ID_Camion, Id_Proveedores, Nombre, Id_Productos, Descripcion, Costo, Kilos, Total");
+            return Datos_Vista(filtro, "Id, Fecha, ID_Camion, Id_Proveedores, Nombre, Id_Productos, Descripcion, Costo, Cantidad, Kilos, Total, Promedio");
         }
 
         /// <summary>
@@ -105,6 +106,7 @@
             Actualizar("ID_Productos", Producto.ID);
             Actualizar("Descripcion", Descripcion);
             Actualizar("Costo", Costo);
+            Actualizar("Cantidad", Cantidad);
             Actualizar("Kilos", Kilos);
         }
 
@@ -115,8 +117,8 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Compras (Fecha, Id_Camion, Id_Proveedores, Id_Productos, Descripcion, Costo, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Compras (Fecha, Id_Camion, Id_Proveedores, Id_Productos, Descripcion, Costo, Cantidad, Kilos) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Cantidad}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -166,6 +168,7 @@
                 Descripcion = dr["Descripcion"].ToString();
                 Proveedor.Id = Convert.ToInt32(dr["Id_Proveedores"]);
                 Costo = Convert.ToSingle(dr["Costo"]);
+                Cantidad = Convert.ToInt32(dr["Cantidad"].ToString());
                 Kilos = Convert.ToSingle(dr["Kilos"]);
 
             }
@@ -178,6 +181,7 @@
                 Producto.ID = 0;
                 Descripcion = "";
                 Costo = 0;
+                Cantidad = 0;
                 Kilos = 0;
             }
         }

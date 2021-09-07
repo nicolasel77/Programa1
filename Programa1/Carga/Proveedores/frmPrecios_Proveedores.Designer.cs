@@ -96,6 +96,7 @@ namespace Programa1.Carga.Proveedores
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
             this.grd.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grd_CambioFila);
+            this.grd.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grd_KeyUp);
             // 
             // lstFechas
             // 
@@ -107,7 +108,7 @@ namespace Programa1.Carga.Proveedores
             this.lstFechas.ItemHeight = 20;
             this.lstFechas.Location = new System.Drawing.Point(6, 545);
             this.lstFechas.Name = "lstFechas";
-            this.lstFechas.Size = new System.Drawing.Size(291, 200);
+            this.lstFechas.Size = new System.Drawing.Size(287, 200);
             this.lstFechas.TabIndex = 1;
             this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
             // 
@@ -129,9 +130,9 @@ namespace Programa1.Carga.Proveedores
             this.cProveedores1.BackColor = System.Drawing.Color.Gainsboro;
             this.cProveedores1.Filtro_In = "";
             this.cProveedores1.Location = new System.Drawing.Point(6, 3);
-            this.cProveedores1.Mostrar_Tipo = false;
+            this.cProveedores1.Mostrar_Tipo = true;
             this.cProveedores1.Name = "cProveedores1";
-            this.cProveedores1.Size = new System.Drawing.Size(291, 515);
+            this.cProveedores1.Size = new System.Drawing.Size(287, 515);
             this.cProveedores1.TabIndex = 0;
             this.cProveedores1.Titulo = "Proveedores";
             this.cProveedores1.Valor_Actual = -1;
