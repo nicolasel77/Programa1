@@ -131,6 +131,12 @@
     <Compile Include="Carga\Empleados\frmSueldos.Designer.cs">
       <DependentUpon>frmSueldos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Hacienda\frmControl_Carne.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmControl_Carne.Designer.cs">
+      <DependentUpon>frmControl_Carne.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Hacienda\frmFrigorificosABM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,11 +161,29 @@
     <Compile Include="Carga\Hacienda\frmPagar_Hacienda.Designer.cs">
       <DependentUpon>frmPagar_Hacienda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Hacienda\frmResumen_Recupero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmResumen_Recupero.Designer.cs">
+      <DependentUpon>frmResumen_Recupero.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Hacienda\frmSincronizarAccess.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Carga\Hacienda\frmSincronizarAccess.Designer.cs">
       <DependentUpon>frmSincronizarAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmStock_Corrales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmStock_Corrales.Designer.cs">
+      <DependentUpon>frmStock_Corrales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmValores_Recupero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmValores_Recupero.Designer.cs">
+      <DependentUpon>frmValores_Recupero.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Precios\frmBorrar_Carne.cs">
       <SubType>Form</SubType>
@@ -771,6 +795,9 @@
     <EmbeddedResource Include="Carga\Empleados\frmSueldos.resx">
       <DependentUpon>frmSueldos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmControl_Carne.resx">
+      <DependentUpon>frmControl_Carne.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmFrigorificosABM.resx">
       <DependentUpon>frmFrigorificosABM.cs</DependentUpon>
     </EmbeddedResource>
@@ -783,8 +810,17 @@
     <EmbeddedResource Include="Carga\Hacienda\frmPagar_Hacienda.resx">
       <DependentUpon>frmPagar_Hacienda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmResumen_Recupero.resx">
+      <DependentUpon>frmResumen_Recupero.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmSincronizarAccess.resx">
       <DependentUpon>frmSincronizarAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmStock_Corrales.resx">
+      <DependentUpon>frmStock_Corrales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmValores_Recupero.resx">
+      <DependentUpon>frmValores_Recupero.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Precios\frmBorrar_Carne.resx">
       <DependentUpon>frmBorrar_Carne.cs</DependentUpon>
@@ -1068,6 +1104,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sistema_Clases\Sistema_Clases.csproj">
+      <Project>{4ead2d2f-4e6b-4482-9414-439756870e04}</Project>
+      <Name>Sistema_Clases</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpeedGrilla\SpeedGrilla.vbproj">
       <Project>{64f92811-4680-4543-a345-0f68983286e2}</Project>
       <Name>SpeedGrilla</Name>

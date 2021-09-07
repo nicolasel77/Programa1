@@ -49,6 +49,7 @@
             this.lblTotalGrillaGastos = new MaterialSkin.Controls.MaterialLabel();
             this.grdSalidas = new Grilla2.SpeedGrilla();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtInsert = new System.Windows.Forms.TextBox();
             this.rdARendir = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdCajas = new MaterialSkin.Controls.MaterialRadioButton();
             this.lblUltimo = new MaterialSkin.Controls.MaterialLabel();
@@ -76,7 +77,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.verTransferenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aRendirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtInsert = new System.Windows.Forms.TextBox();
+            this.mnuGastos = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.cmdCheques = new Programa1.Controles.cBoton();
             this.cmdTransferencia = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splPrincipal)).BeginInit();
@@ -222,26 +223,26 @@
             this.imprimirToolStripMenuItem});
             this.mnuEntradas.MouseState = MaterialSkin.MouseState.HOVER;
             this.mnuEntradas.Name = "mnuEntradas";
-            this.mnuEntradas.Size = new System.Drawing.Size(154, 70);
+            this.mnuEntradas.Size = new System.Drawing.Size(181, 92);
             // 
             // borrarToolStripMenuItem
             // 
             this.borrarToolStripMenuItem.Name = "borrarToolStripMenuItem";
-            this.borrarToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.borrarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.borrarToolStripMenuItem.Text = "Borrar";
             this.borrarToolStripMenuItem.Click += new System.EventHandler(this.borrarToolStripMenuItem_Click);
             // 
             // cambiarFechaToolStripMenuItem
             // 
             this.cambiarFechaToolStripMenuItem.Name = "cambiarFechaToolStripMenuItem";
-            this.cambiarFechaToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.cambiarFechaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cambiarFechaToolStripMenuItem.Text = "Cambiar Fecha";
             this.cambiarFechaToolStripMenuItem.Click += new System.EventHandler(this.cambiarFechaEntradas);
             // 
             // imprimirToolStripMenuItem
             // 
             this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
-            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.imprimirToolStripMenuItem.Text = "Imprimir";
             // 
             // panel7
@@ -406,6 +407,7 @@
             this.grdSalidas.bFColorSel = System.Drawing.SystemColors.HighlightText;
             this.grdSalidas.Col = -2;
             this.grdSalidas.Cols = 0;
+            this.grdSalidas.ContextMenuStrip = this.mnuGastos;
             this.grdSalidas.DataMember = "";
             this.grdSalidas.DataSource = null;
             this.grdSalidas.EnableEdicion = true;
@@ -463,6 +465,19 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(261, 507);
             this.panel1.TabIndex = 4;
+            // 
+            // txtInsert
+            // 
+            this.txtInsert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtInsert.BackColor = System.Drawing.Color.Gainsboro;
+            this.txtInsert.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtInsert.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInsert.Location = new System.Drawing.Point(0, 371);
+            this.txtInsert.Name = "txtInsert";
+            this.txtInsert.Size = new System.Drawing.Size(261, 15);
+            this.txtInsert.TabIndex = 12;
+            this.txtInsert.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // rdARendir
             // 
@@ -793,18 +808,13 @@
             this.aRendirToolStripMenuItem.Text = "A Rendir";
             this.aRendirToolStripMenuItem.Click += new System.EventHandler(this.aRendirToolStripMenuItem_Click);
             // 
-            // txtInsert
+            // mnuGastos
             // 
-            this.txtInsert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtInsert.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtInsert.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtInsert.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInsert.Location = new System.Drawing.Point(0, 371);
-            this.txtInsert.Name = "txtInsert";
-            this.txtInsert.Size = new System.Drawing.Size(261, 15);
-            this.txtInsert.TabIndex = 12;
-            this.txtInsert.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mnuGastos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mnuGastos.Depth = 0;
+            this.mnuGastos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mnuGastos.Name = "mnuGastos";
+            this.mnuGastos.Size = new System.Drawing.Size(61, 4);
             // 
             // cmdCheques
             // 
@@ -913,5 +923,6 @@
         private System.Windows.Forms.ToolStripMenuItem aRendirToolStripMenuItem;
         private Controles.cBoton cmdCheques;
         private System.Windows.Forms.TextBox txtInsert;
+        private MaterialSkin.Controls.MaterialContextMenuStrip mnuGastos;
     }
 }

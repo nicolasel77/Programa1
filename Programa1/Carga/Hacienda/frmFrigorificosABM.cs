@@ -15,10 +15,6 @@
         {
             InitializeComponent();
             cons.Mostrar_Ocultos = true;
-        }
-
-        private void frmFriorificosABM_Load_1(object sender, EventArgs e)
-        {
             //Tipo proveedor
             //Datos
             dt = frigorificos.Datos();
@@ -39,6 +35,7 @@
             grdConsignatarios.set_ColW(2, 70);
             grdConsignatarios.TeclasManejadas = n;
         }
+      
 
         #region " Tipo Consignatarios "
         private void grdfrigorificos_Editado_1(short f, short c, object a)
