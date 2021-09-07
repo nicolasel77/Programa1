@@ -25,7 +25,7 @@
         public double Kilos_Faena { get; internal set; }
 
 
-        public void Cargar() 
+        public void Cargar()
         {
             DataTable dt = Datos_Vista("NBoleta=" + ID);
             if (dt != null)
@@ -44,7 +44,7 @@
                 catch (Exception)
                 {
 
-                    
+
                 }
             }
         }
@@ -52,7 +52,7 @@
         {
             if (Kilos_Faena != 0)
             {
-                Costo_Faena = (float)((Kilos_Compra * Costo)  / Kilos_Faena);
+                Costo_Faena = (float)((Kilos_Compra * Costo) / Kilos_Faena);
                 Actualizar("Costo_Faena", Costo_Faena);
             }
         }
@@ -64,7 +64,7 @@
             if (Kilos_Faena != 0)
             {
                 Costo_Final = (float)(((Kilos_Compra * Costo) - tRecu) / Kilos_Faena);
-                Actualizar("Costo_Final", Costo_Final); 
+                Actualizar("Costo_Final", Costo_Final);
             }
         }
 
@@ -153,5 +153,50 @@
             return Convert.ToInt32(d);
         }
 
+        public enum t_Opcion : byte
+        {
+            Compras_Faena = 0,
+            Faena_Salidas = 1,
+            Compras_Salidas = 2
+        }
+
+        public DataTable Control(DateTime f1, DateTime f2, t_Opcion opcion)
+        {
+            SqlParameter p1 = new SqlParameter("f1", f1);
+            SqlParameter p2 = new SqlParameter("f2", f2);
+            SqlParameter op = new SqlParameter("opcion", (int)opcion);
+
+            DataTable dt = new DataTable("Datos");
+
+            dt = sp_Datos("sp_ControlCarne", new SqlParameter[] { p1, p2, op });
+            if (dt != null)
+            {
+                switch (opcion)
+                {
+                    case t_Opcion.Compras_Faena:
+                        dt.Columns.Add("Dif_Medias", typeof(float), "(Cab*2)-Medias");
+                        dt.Columns["Dif_Medias"].SetOrdinal(4);
+                        dt.Columns.Add("Diferencia", typeof(float), "Compra+Agregados-Faena");
+                        break;
+
+                    case t_Opcion.Faena_Salidas:
+                        dt.Columns.Add("Dif_Medias", typeof(float), "Medias-M_Sal");
+                        dt.Columns["Dif_Medias"].SetOrdinal(4);
+                        dt.Columns.Add("Dif_Kg", typeof(float), "k_Faena-k_Sal");
+                        dt.Columns["Dif_Kg"].SetOrdinal(7);
+                        dt.Columns.Add("Diferencia", typeof(float), "t_Faena-t_Sal");
+                        break;
+                    case t_Opcion.Compras_Salidas:
+                        dt.Columns.Add("Dif_Medias", typeof(float), "(Cab*2)-M_Sal");
+                        dt.Columns["Dif_Medias"].SetOrdinal(4);
+                        dt.Columns.Add("Total", typeof(float), "Compra+Agregados");
+                        dt.Columns["Total"].SetOrdinal(7);
+                        dt.Columns.Add("Diferencia", typeof(float), "Compra+Agregados-t_Sal");
+                        break;
+                }
+            }
+
+            return dt;
+        }
     }
 }

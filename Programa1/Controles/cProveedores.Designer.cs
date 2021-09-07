@@ -79,7 +79,7 @@
             this.lstTipos.Location = new System.Drawing.Point(3, 21);
             this.lstTipos.Name = "lstTipos";
             this.lstTipos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstTipos.Size = new System.Drawing.Size(85, 156);
+            this.lstTipos.Size = new System.Drawing.Size(93, 156);
             this.lstTipos.TabIndex = 4;
             this.lstTipos.SelectedIndexChanged += new System.EventHandler(this.LstTipos_SelectedIndexChanged);
             // 
@@ -189,7 +189,7 @@
             this.panel1.Controls.Add(this.rdOrden);
             this.panel1.Location = new System.Drawing.Point(3, 400);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(80, 68);
+            this.panel1.Size = new System.Drawing.Size(93, 68);
             this.panel1.TabIndex = 9;
             // 
             // label4
@@ -231,7 +231,7 @@
             // 
             this.cmdTodosTipos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdTodosTipos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdTodosTipos.Location = new System.Drawing.Point(57, 183);
+            this.cmdTodosTipos.Location = new System.Drawing.Point(65, 183);
             this.cmdTodosTipos.Name = "cmdTodosTipos";
             this.cmdTodosTipos.Size = new System.Drawing.Size(31, 19);
             this.cmdTodosTipos.TabIndex = 5;

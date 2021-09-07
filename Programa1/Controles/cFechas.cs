@@ -3,6 +3,7 @@
     using Programa1.DB;
     using System;
     using System.Data;
+    using System.Media;
     using System.Windows.Forms;
 
     public partial class cFechas : UserControl
@@ -305,7 +306,14 @@
             {
                 fecha_Actual = Convert.ToDateTime($"1/1/{lstAños.Text}");
                 fecha_Fin = fecha_Actual.AddYears(1).AddDays(-1);
-                Cambio_Seleccion(null, null);
+                try
+                {
+                    Cambio_Seleccion(null, null);
+                }
+                catch (Exception)
+                {
+                    
+                }
             }
         }
 

@@ -158,7 +158,7 @@
 
                 var d = cmd.ExecuteNonQuery();
 
-                cnn.Close();                
+                cnn.Close();
             }
             catch (Exception e)
             {
@@ -166,7 +166,7 @@
             }
         }
 
-        
+
         public void Borrar()
         {
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -334,7 +334,7 @@
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             object d = null;
 
-            if(Vista == null) { Vista = Tabla; }
+            if (Vista == null) { Vista = Tabla; }
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
             if (Orden != "") { Orden = (Orden != "ORDER BY ") ? " ORDER BY " + Orden : " ORDER BY " + Campo_ID; }
@@ -383,6 +383,27 @@
                 SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
                 d = cmd.ExecuteScalar();
                 cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+            }
+
+            return d;
+        }
+
+        public DataTable Datos_Genericos(string consulta)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            DataTable d = new DataTable("Datos");
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(consulta, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                daAdapt.Fill(d);
             }
             catch (Exception)
             {
@@ -452,15 +473,17 @@
             return Convert.ToDouble(d);
         }
 
-        public DataTable sp_Datos()
+        public DataTable sp_Datos(string sp, SqlParameter[] parameter)
         {
             var dt = new DataTable("Datos");
             var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand cmd = new SqlCommand(Tabla, cnn);
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand(sp, cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddRange(parameter);                
 
                 SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
                 daAdapt.Fill(dt);

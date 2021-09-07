@@ -71,7 +71,8 @@ namespace Programa1.Carga.Tesoreria
 
         private readonly Gastos cGastos = new Gastos();
         private readonly Detalle_Gastos dg = new Detalle_Gastos();
-
+        
+        private int filtroTipoG = 0;
 
         #region " FORM "
 
@@ -261,19 +262,53 @@ namespace Programa1.Carga.Tesoreria
             Cursor = Cursors.WaitCursor;
 
             grdEntradas.Visible = false;
-            grdEntradas.MostrarDatos(cEntradas.Datos($"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}'"), true);
+            string filtro = $"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}'";
+            grdEntradas.MostrarDatos(cEntradas.Datos(filtro), true);
             grdEntradas.ActivarCelda(grdEntradas.Rows - 1, e_Caja);
             Formato_Entradas();
             grdEntradas.Visible = true;
 
-            grdSalidas.MostrarDatos(cGastos.Datos_Vista($"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}'"), true);
+            if(filtroTipoG != 0) { filtro = $"ID_TipoGastos={filtroTipoG} AND {filtro}"; }
+
+            grdSalidas.MostrarDatos(cGastos.Datos_Vista(filtro), true);
             grdSalidas.ActivarCelda(grdSalidas.Rows - 1, s_Caja);
             Formato_Salidas();
 
+            Crear_Menu_Gastos(filtro);
 
             Totales();
             Cargar_Cajas();
             Cursor = Cursors.Default;
+        }
+
+        private void Crear_Menu_Gastos(string filtro)
+        {
+            mnuGastos.Items.Clear();
+
+            DataTable dt = cGastos.Tipos_Rango(filtro);
+            foreach(DataRow dr in dt.Rows)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem();
+                t.Text = $"{dr[0]}. {dr[1]}";
+                t.Name = dr[0].ToString();
+                t.Click += new EventHandler(onClick);
+                mnuGastos.Items.Add(t);
+            }
+        }
+        private void onClick(object sender, EventArgs e)
+        {
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            int n = h.Codigo_Seleccionado(sender.ToString());
+            if(n != filtroTipoG)
+            {
+                filtroTipoG = n;
+                Cargar_Datos();
+            }
+            else
+            {
+                filtroTipoG = 0;
+                Cargar_Datos();
+            }
         }
 
         private void Cargar_Cajas()

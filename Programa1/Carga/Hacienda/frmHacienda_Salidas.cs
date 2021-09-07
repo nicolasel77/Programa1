@@ -150,7 +150,10 @@
             {
                 f = h.Unir("Tropa=" + lstTropas.Text, f);
             }
-
+            if(chMediasUsadas.Checked == true)
+            {
+                f = h.Unir("MU=1", f);
+            }
             s = h.Unir(s, f);
             s = h.Unir(s, p);
             return s;
@@ -161,13 +164,13 @@
             grdSalida.set_ColW(c_Id, 0);
             grdSalida.set_ColW(c_Fecha, 60);
             grdSalida.set_ColW(c_IdSuc, 45);
-            grdSalida.set_ColW(c_IdSuc + 1, 150);
+            grdSalida.set_ColW(c_IdSuc + 1, 250);
             grdSalida.set_ColW(c_Categoria, 40);
             grdSalida.set_ColW(c_Prod, 40);
             grdSalida.set_ColW(c_Tropa, 60);
             grdSalida.set_ColW(c_Boleta, 50);
-            grdSalida.set_ColW(c_CostoSalida, 60);
-            grdSalida.set_ColW(c_CostoCarne, 60);
+            grdSalida.set_ColW(c_CostoSalida, 65);
+            grdSalida.set_ColW(c_CostoCarne, 65);
             grdSalida.set_ColW(c_Media, 60);
             grdSalida.set_ColW(c_Original, 60);
             grdSalida.set_ColW(c_TotalCompra, 90);

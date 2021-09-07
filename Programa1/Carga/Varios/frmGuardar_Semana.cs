@@ -17,6 +17,8 @@
 
         private void cmdGuardar_Click(object sender, System.EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
+            this.Enabled = false;
             for (int i = lstSemanas.Items.Count - 1; i > -1; i--)
             {
 
@@ -24,18 +26,25 @@
                 {
                     string n = lstSemanas.Items[i].ToString();
 
-                    cmdGuardar.Texto = $"Guardando {n:dd/MM/yy}";
+                    cmdGuardar.Text = $"Guardando {n:dd/MM/yy}";
                     Application.DoEvents();
                     if (chSemana.Checked == true) { estadisticas.Guardar(DateTime.Parse(n)); }
-                    cmdGuardar.Texto = $"Venta por productos {n:dd/MM/yy}";
+                    cmdGuardar.Text = $"Venta por productos {n:dd/MM/yy}";
                     Application.DoEvents();
                     if (chVentaPorProducto.Checked == true) { estadisticas.Venta_PorProductos(DateTime.Parse(n)); }
-                    cmdGuardar.Texto = $"Bloqueando {n:dd/MM/yy}";
+                    cmdGuardar.Text = $"Bloqueando {n:dd/MM/yy}";
                     Application.DoEvents();
                     if (chBloquear.Checked == true) { estadisticas.semanas.Bloquear(DateTime.Parse(n)); }
                 }
             }
             Close();
+            this.Cursor = Cursors.Default;
+
+        }
+
+        private void lstSemanas_DoubleClick(object sender, EventArgs e)
+        {
+            cmdGuardar.PerformClick();
         }
     }
 }

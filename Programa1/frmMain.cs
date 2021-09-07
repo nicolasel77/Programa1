@@ -2264,5 +2264,70 @@
             frmGuardar_Semana fr = new frmGuardar_Semana();
             fr.ShowDialog();
         }
+
+        private void valoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmValores_Recupero fr = new frmValores_Recupero();
+            fr.ShowDialog();
+        }
+
+        private void recuperoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmResumen_Recupero fr = new frmResumen_Recupero();
+            fr.Show();
+        }
+
+        private void controlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmControl_Carne")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmControl_Carne");
+                t.Text = "Control_Carne";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmControl_Carne = new Carga.Hacienda.frmControl_Carne();
+                frmControl_Carne.MdiParent = this;
+                frmControl_Carne.Disposed += FrmControl_Carne_Disposed;
+                forms.Add(frmControl_Carne);
+                frmControl_Carne.Show();
+                frmControl_Carne.WindowState = FormWindowState.Minimized;
+                frmControl_Carne.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmControl_Carne_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Control_Carne")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmControl_Carne")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void stockCorralesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
