@@ -40,6 +40,7 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.cProds = new Programa1.Controles.cProductos();
+            this.chCantidad = new MaterialSkin.Controls.MaterialCheckBox();
             this.lstCamiones = new System.Windows.Forms.ListBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.cFecha = new Programa1.Controles.cFechas();
@@ -52,7 +53,7 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
-            this.chMenudencias = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chCamiones = new MaterialSkin.Controls.MaterialCheckBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -207,7 +208,8 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.chMenudencias);
+            this.splitContainer2.Panel2.Controls.Add(this.chCamiones);
+            this.splitContainer2.Panel2.Controls.Add(this.chCantidad);
             this.splitContainer2.Panel2.Controls.Add(this.lstCamiones);
             this.splitContainer2.Panel2.Controls.Add(this.materialLabel1);
             this.splitContainer2.Size = new System.Drawing.Size(256, 687);
@@ -230,6 +232,24 @@
             this.cProds.Titulo = "Productos";
             this.cProds.Valor_Actual = -1;
             this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
+            // 
+            // chCantidad
+            // 
+            this.chCantidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chCantidad.AutoSize = true;
+            this.chCantidad.Depth = 0;
+            this.chCantidad.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chCantidad.Location = new System.Drawing.Point(140, 36);
+            this.chCantidad.Margin = new System.Windows.Forms.Padding(0);
+            this.chCantidad.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chCantidad.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chCantidad.Name = "chCantidad";
+            this.chCantidad.Ripple = true;
+            this.chCantidad.Size = new System.Drawing.Size(99, 30);
+            this.chCantidad.TabIndex = 7;
+            this.chCantidad.Text = "Cantidades";
+            this.chCantidad.UseVisualStyleBackColor = true;
+            this.chCantidad.CheckedChanged += new System.EventHandler(this.chMenudencias_CheckedChanged);
             // 
             // lstCamiones
             // 
@@ -283,7 +303,7 @@
             this.cProvs.BackColor = System.Drawing.Color.Gainsboro;
             this.cProvs.Filtro_In = "";
             this.cProvs.Location = new System.Drawing.Point(2, 3);
-            this.cProvs.Mostrar_Tipo = false;
+            this.cProvs.Mostrar_Tipo = true;
             this.cProvs.Name = "cProvs";
             this.cProvs.Size = new System.Drawing.Size(258, 372);
             this.cProvs.TabIndex = 2;
@@ -386,23 +406,23 @@
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
             // 
-            // chMenudencias
+            // chCamiones
             // 
-            this.chMenudencias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chMenudencias.AutoSize = true;
-            this.chMenudencias.Depth = 0;
-            this.chMenudencias.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chMenudencias.Location = new System.Drawing.Point(140, 66);
-            this.chMenudencias.Margin = new System.Windows.Forms.Padding(0);
-            this.chMenudencias.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chMenudencias.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chMenudencias.Name = "chMenudencias";
-            this.chMenudencias.Ripple = true;
-            this.chMenudencias.Size = new System.Drawing.Size(113, 30);
-            this.chMenudencias.TabIndex = 7;
-            this.chMenudencias.Text = "Menudencias";
-            this.chMenudencias.UseVisualStyleBackColor = true;
-            this.chMenudencias.CheckedChanged += new System.EventHandler(this.chMenudencias_CheckedChanged);
+            this.chCamiones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chCamiones.AutoSize = true;
+            this.chCamiones.Depth = 0;
+            this.chCamiones.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chCamiones.Location = new System.Drawing.Point(140, 66);
+            this.chCamiones.Margin = new System.Windows.Forms.Padding(0);
+            this.chCamiones.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chCamiones.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chCamiones.Name = "chCamiones";
+            this.chCamiones.Ripple = true;
+            this.chCamiones.Size = new System.Drawing.Size(92, 30);
+            this.chCamiones.TabIndex = 8;
+            this.chCamiones.Text = "Camiones";
+            this.chCamiones.UseVisualStyleBackColor = true;
+            this.chCamiones.CheckedChanged += new System.EventHandler(this.chCamiones_CheckedChanged);
             // 
             // frmCompras
             // 
@@ -466,6 +486,7 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ListBox lstCamiones;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private MaterialSkin.Controls.MaterialCheckBox chMenudencias;
+        private MaterialSkin.Controls.MaterialCheckBox chCantidad;
+        private MaterialSkin.Controls.MaterialCheckBox chCamiones;
     }
 }

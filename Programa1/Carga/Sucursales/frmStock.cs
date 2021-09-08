@@ -370,7 +370,7 @@
                     break;
                 //Producto
                 case 4:
-                    stock.Producto.Siguiente(" AND ver = 1");
+                    stock.Producto.Siguiente(" ver = 1");
                     stock.precios.Producto = stock.Producto;
                     stock.Descripcion = stock.Producto.Nombre;
                     stock.Costo = stock.precios.Buscar();

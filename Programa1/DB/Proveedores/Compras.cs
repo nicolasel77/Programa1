@@ -168,7 +168,7 @@
                 Descripcion = dr["Descripcion"].ToString();
                 Proveedor.Id = Convert.ToInt32(dr["Id_Proveedores"]);
                 Costo = Convert.ToSingle(dr["Costo"]);
-                Cantidad = Convert.ToInt32(dr["Cantidad"].ToString());
+                Cantidad = Convert.ToInt32(dr["Cantidad"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
 
             }

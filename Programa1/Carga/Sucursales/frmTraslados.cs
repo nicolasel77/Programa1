@@ -172,7 +172,7 @@ namespace Programa1.Carga
             grdTraslados.Columnas[c_TotalE].Format = "C2";
             grdTraslados.Columnas[c_Promedio].Format = "N2";
 
-            if (chMenudencias.Checked == true)
+            if (chCantidades.Checked == true)
             {
                 grdTraslados.Columnas[c_Cantidad].Visible = true;
                 grdTraslados.Columnas[c_Promedio].Visible = true;
@@ -330,7 +330,7 @@ namespace Programa1.Carga
                             if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
                             else
                             {
-                                if (chMenudencias.Checked == true)
+                                if (chCantidades.Checked == true)
                                 { grdTraslados.ActivarCelda(f, c_Cantidad); }
                                 else
                                 { grdTraslados.ActivarCelda(f, c_Kilos); }
@@ -573,7 +573,7 @@ namespace Programa1.Carga
 
         private void chMenudencias_CheckedChanged(object sender, EventArgs e)
         {
-            if (chMenudencias.Checked == true)
+            if (chCantidades.Checked == true)
             {
                 grdTraslados.Columnas[c_Cantidad].Visible = true;
                 grdTraslados.Columnas[c_Promedio].Visible = true;

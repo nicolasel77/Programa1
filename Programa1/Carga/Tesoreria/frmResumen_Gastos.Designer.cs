@@ -203,6 +203,7 @@
             // cmdGrupos
             // 
             this.cmdGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGrupos.BackColor = System.Drawing.Color.MistyRose;
             this.cmdGrupos.Location = new System.Drawing.Point(205, 3);
             this.cmdGrupos.Name = "cmdGrupos";
             this.cmdGrupos.Size = new System.Drawing.Size(131, 30);

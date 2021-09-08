@@ -16,7 +16,6 @@ namespace Programa1.Carga.Proveedores
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grd.TeclasManejadas = n;
-            grd.AgregarTeclas(Convert.ToInt32(Keys.Subtract), 4, 6);
             Cargar();
             grd.AgregarTeclas(Convert.ToInt32(Keys.Subtract), grd.get_ColIndex("ID_Productos"), grd.get_ColIndex("Precio"));
             grd.AgregarTeclas(Convert.ToInt32(Keys.Add), grd.get_ColIndex("ID_Proveedores"), grd.get_ColIndex("Precio"));
