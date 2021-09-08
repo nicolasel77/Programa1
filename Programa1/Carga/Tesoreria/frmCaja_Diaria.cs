@@ -268,13 +268,13 @@ namespace Programa1.Carga.Tesoreria
             Formato_Entradas();
             grdEntradas.Visible = true;
 
+            Crear_Menu_Gastos(filtro);
             if(filtroTipoG != 0) { filtro = $"ID_TipoGastos={filtroTipoG} AND {filtro}"; }
 
             grdSalidas.MostrarDatos(cGastos.Datos_Vista(filtro), true);
             grdSalidas.ActivarCelda(grdSalidas.Rows - 1, s_Caja);
             Formato_Salidas();
 
-            Crear_Menu_Gastos(filtro);
 
             Totales();
             Cargar_Cajas();
@@ -285,10 +285,16 @@ namespace Programa1.Carga.Tesoreria
         {
             mnuGastos.Items.Clear();
 
+            ToolStripMenuItem t = new ToolStripMenuItem();
+            t.Text = "Todos";
+            t.Name = "Todos";
+            t.Click += new EventHandler(onClick);
+            mnuGastos.Items.Add(t);
+
             DataTable dt = cGastos.Tipos_Rango(filtro);
             foreach(DataRow dr in dt.Rows)
             {
-                ToolStripMenuItem t = new ToolStripMenuItem();
+                t = new ToolStripMenuItem();
                 t.Text = $"{dr[0]}. {dr[1]}";
                 t.Name = dr[0].ToString();
                 t.Click += new EventHandler(onClick);
@@ -297,17 +303,25 @@ namespace Programa1.Carga.Tesoreria
         }
         private void onClick(object sender, EventArgs e)
         {
-            Herramientas.Herramientas h = new Herramientas.Herramientas();
-            int n = h.Codigo_Seleccionado(sender.ToString());
-            if(n != filtroTipoG)
+            if (sender.ToString() == "Todos")
             {
-                filtroTipoG = n;
+                filtroTipoG = 0;
                 Cargar_Datos();
             }
             else
             {
-                filtroTipoG = 0;
-                Cargar_Datos();
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+                int n = h.Codigo_Seleccionado(sender.ToString());
+                if (n != filtroTipoG)
+                {
+                    filtroTipoG = n;
+                    Cargar_Datos();
+                }
+                else
+                {
+                    filtroTipoG = 0;
+                    Cargar_Datos();
+                } 
             }
         }
 
