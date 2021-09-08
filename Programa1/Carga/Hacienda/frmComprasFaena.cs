@@ -171,6 +171,7 @@
             hc.Faena.nBoleta = hc.nBoletas;
             grdFaena.MostrarDatos(hc.Faena.Datos_Vista("NBoleta=" + hc.nBoletas.ID), false);
             grdFaena.AutosizeAll();
+            grdFaena.set_ColW(0, 0);
 
             grdRomaneos.MostrarDatos(hc.Faena.Romaneos(), true, true);
             grdRomaneos.SumarCol(2, true);

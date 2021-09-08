@@ -19,11 +19,8 @@ namespace Programa1.Carga.Tesoreria
         int Tipo = 0;
         int SubTipo = 0;
         int Detalle = 0;
-
-
-        Gastos Gastos = new Gastos();
-
-        Herramientas.Herramientas h = new Herramientas.Herramientas();
+        readonly Gastos Gastos = new Gastos();
+        readonly Herramientas.Herramientas h = new Herramientas.Herramientas();
 
         public frmResumen_Gastos()
         {
@@ -38,7 +35,6 @@ namespace Programa1.Carga.Tesoreria
         private void cFechas1_Cambio_Seleccion(object sender, EventArgs e)
         {
             Cargar_List();
-
             Cargar_Grilla();
             if (lst.Items.Count > 0) { lst.SelectedIndex = 0; }
         }
@@ -50,8 +46,7 @@ namespace Programa1.Carga.Tesoreria
             lst.Items.Clear();
             DataTable dt = new DataTable();
 
-            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0}) AND");
-            if (grupo.Length != 0) { grupo += " AND"; }
+            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0})");            
 
             switch (Orden)
             {
@@ -69,7 +64,9 @@ namespace Programa1.Carga.Tesoreria
                 case e_Orden.SubTipo:
                     if (Tipo > 0)
                     {
-                        dt = Gastos.SubTipos_Rango($"{grupo} Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}");
+                        grupo = h.Unir(grupo, cFechas1.Cadena());
+                        grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                        dt = Gastos.SubTipos_Rango(grupo);
                     }
                     else
                     {
@@ -88,18 +85,25 @@ namespace Programa1.Carga.Tesoreria
                     {
                         if (SubTipo > 0)
                         {
-                            dt = Gastos.Detalles_Rango($"{grupo} Id_TipoGastos={Tipo} AND Id_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}");
+                            grupo = h.Unir(grupo, cFechas1.Cadena());
+                            grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                            grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");                            
+                            dt = Gastos.Detalles_Rango(grupo);
                         }
                         else
                         {
-                            dt = Gastos.Detalles_Rango($"{grupo} Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}");
+                            grupo = h.Unir(grupo, cFechas1.Cadena());
+                            grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                            dt = Gastos.Detalles_Rango(grupo);
                         }
                     }
                     else
                     {
                         if (SubTipo > 0)
                         {
-                            dt = Gastos.Detalles_Rango($"{grupo} Id_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}");
+                            grupo = h.Unir(grupo, cFechas1.Cadena());
+                            grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");
+                            dt = Gastos.Detalles_Rango(grupo);
                         }
                         else
                         {
@@ -123,8 +127,7 @@ namespace Programa1.Carga.Tesoreria
         {
             this.Cursor = Cursors.WaitCursor;
 
-            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0}) AND");
-            if (grupo.Length != 0) { grupo += " AND"; }
+            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0})");
 
             switch (Orden)
             {
@@ -137,13 +140,15 @@ namespace Programa1.Carga.Tesoreria
                     grdGastos.set_ColW(grdGastos.get_ColIndex("Descripcion"), 400);
                     break;
                 case e_Orden.SubTipo:
+                    grupo = h.Unir(grupo, cFechas1.Cadena());
                     if (Tipo > 0)
                     {
-                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo($"{grupo} Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}"), true, true);
+                        grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo), true, true);
                     }
                     else
                     {
-                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND")))), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo), true, true);
                     }
                     grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                     grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N1";
@@ -151,19 +156,22 @@ namespace Programa1.Carga.Tesoreria
                     grdGastos.set_ColW(grdGastos.get_ColIndex("Descripcion"), 400);
                     break;
                 case e_Orden.Detalle:
-                    string cadena = cFechas1.Cadena();
-
                     if (Tipo > 0)
                     {
                         if (SubTipo > 0)
                         {
                             if (Detalle > 0)
                             {
-                                cadena = $"{grupo} Id_TipoGastos={Tipo} AND ID_SubTipoGastos={SubTipo} AND ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                                grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");
+                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");
                             }
                             else
                             {
-                                cadena = $"{grupo} Id_TipoGastos={Tipo} AND ID_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}";
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                                grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");
                             }
 
                         }
@@ -171,11 +179,14 @@ namespace Programa1.Carga.Tesoreria
                         {
                             if (Detalle > 0)
                             {
-                                cadena = $"{grupo} Id_TipoGastos={Tipo} AND ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");                                
                             }
                             else
                             {
-                                cadena = $"{grupo} Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}";
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");                                
                             }
                         }
                     }
@@ -185,11 +196,14 @@ namespace Programa1.Carga.Tesoreria
                         {
                             if (Detalle > 0)
                             {
-                                cadena = $"{grupo} ID_SubTipoGastos={SubTipo} AND ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");
+                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");                                
                             }
                             else
                             {
-                                cadena = $"{grupo} ID_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}";
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");                                
                             }
 
                         }
@@ -197,15 +211,12 @@ namespace Programa1.Carga.Tesoreria
                         {
                             if (Detalle > 0)
                             {
-                                cadena = $"{grupo} ID_DetalleGastos={Detalle} AND {cFechas1.Cadena()}";
-                            }
-                            else
-                            {
-                                cadena = h.Unir(cFechas1.Cadena(), grupo.Substring(0, grupo.IndexOf(" AND")));
-                            }
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");                                
+                            }                            
                         }
                     }
-                    grdGastos.MostrarDatos(Gastos.TotalPorDetalle(cadena), true, true);
+                    grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo), true, true);
                     grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N1";
                     grdGastos.AutosizeAll();
                     grdGastos.set_ColW(grdGastos.get_ColIndex("Descripcion"), 400);
@@ -224,6 +235,9 @@ namespace Programa1.Carga.Tesoreria
         private void lst_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0})");
+            grupo  = h.Unir(grupo, cFechas1.Cadena());
+
             switch (Orden)
             {
                 case e_Orden.Tipo:
@@ -231,7 +245,8 @@ namespace Programa1.Carga.Tesoreria
                     if (lst.SelectedIndex > 0)
                     {
                         Tipo = h.Codigo_Seleccionado(lblTipo.Text);
-                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo($"Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}"), true, true);
+                        grupo = h.Unir($"Id_TipoGastos={Tipo}", grupo);
+                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo), true, true);
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
                         grdGastos.AutosizeAll();
@@ -242,7 +257,8 @@ namespace Programa1.Carga.Tesoreria
                         Tipo = 0;
                         SubTipo = 0;
                         Detalle = 0;
-                        grdGastos.MostrarDatos(Gastos.TotalPorTipo(cFechas1.Cadena()), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorTipo(grupo), true, true);
+
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
                         grdGastos.AutosizeAll();
@@ -254,7 +270,10 @@ namespace Programa1.Carga.Tesoreria
                     if (lst.SelectedIndex > 0)
                     {
                         SubTipo = h.Codigo_Seleccionado(lblSubTipo.Text);
-                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle($"Id_TipoGastos={Tipo} AND ID_SubTipoGastos={SubTipo} AND {cFechas1.Cadena()}"), true, true);
+                        if (Tipo != 0) { grupo = h.Unir($"Id_TipoGastos={Tipo}", grupo); }
+                        grupo = h.Unir($"Id_SubTipoGastos={SubTipo}", grupo);
+
+                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo), true, true);
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
                         grdGastos.AutosizeAll();
@@ -263,7 +282,9 @@ namespace Programa1.Carga.Tesoreria
                     else
                     {
                         SubTipo = 0;
-                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo($"Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}"), true, true);
+                        if (Tipo != 0) { grupo = h.Unir($"Id_TipoGastos={Tipo}", grupo); }
+
+                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo), true, true);
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
                         grdGastos.AutosizeAll();
@@ -274,13 +295,14 @@ namespace Programa1.Carga.Tesoreria
                     if (lst.SelectedIndex > 0)
                     {
                         Detalle = h.Codigo_Seleccionado(lst.Text);
+                        grupo = h.Unir($"Id_TipoGastos={Tipo}", grupo);
+                        grupo = h.Unir($"ID_DetalleGastos={ Detalle }", grupo);
+                        
+                        if (SubTipo > 0) { grupo = h.Unir($"Id_SubTipoGastos={SubTipo}", grupo); }
 
-                        string cadena = $"Id_TipoGastos={ Tipo} AND ID_DetalleGastos={ Detalle } AND {cFechas1.Cadena()} ";
 
-                        if (SubTipo > 0) { cadena = $"Id_TipoGastos={ Tipo} AND ID_SubTipoGastos={ SubTipo } AND ID_DetalleGastos={ Detalle } AND {cFechas1.Cadena()} "; }
+                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo, true), true, true);
 
-
-                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(cadena, true), true, true);
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
                         grdGastos.AutosizeAll();
@@ -289,12 +311,12 @@ namespace Programa1.Carga.Tesoreria
                     else
                     {
                         Detalle = 0;
+                        if (Tipo != 0) { grupo = h.Unir($"Id_TipoGastos={Tipo}", grupo); }
+                        
+                        if (SubTipo > 0) { grupo = h.Unir($"Id_SubTipoGastos={SubTipo}", grupo); }
 
-                        string cadena = $"Id_TipoGastos={Tipo} AND {cFechas1.Cadena()}";
+                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo, true), true, true);
 
-                        if (SubTipo > 0) { cadena = $"Id_TipoGastos={ Tipo} AND ID_SubTipoGastos={ SubTipo } AND {cFechas1.Cadena()} "; }
-
-                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(cadena, true), true, true);
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
                         grdGastos.AutosizeAll();
@@ -313,7 +335,11 @@ namespace Programa1.Carga.Tesoreria
 
         private void lstGrupos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cFechas1_Cambio_Seleccion(null, null);
+            if (cFechas1.Cadena() != "")
+            {
+                Cargar_List();
+                Cargar_Grilla(); 
+            }
         }
 
         private void frmResumen_Gastos_KeyDown(object sender, KeyEventArgs e)
@@ -345,40 +371,40 @@ namespace Programa1.Carga.Tesoreria
 
                     case Keys.Left:
                         e.Handled = true;
-                            switch (Orden)
-                            {
-                                case e_Orden.Detalle:
-                                    Orden = e_Orden.SubTipo;
-                                    Cargar_List();
-                                    Cargar_Grilla();
-                                    break;
-                                case e_Orden.SubTipo:
-                                    Orden = e_Orden.Tipo;
-                                    Cargar_List();
-                                    Cargar_Grilla();
-                                    break;
+                        switch (Orden)
+                        {
+                            case e_Orden.Detalle:
+                                Orden = e_Orden.SubTipo;
+                                Cargar_List();
+                                Cargar_Grilla();
+                                break;
+                            case e_Orden.SubTipo:
+                                Orden = e_Orden.Tipo;
+                                Cargar_List();
+                                Cargar_Grilla();
+                                break;
 
-                            }
-                            // Activar el último seleccionado
-                            for (int i = 0; i <= lst.Items.Count - 1; i++)
+                        }
+                        // Activar el último seleccionado
+                        for (int i = 0; i <= lst.Items.Count - 1; i++)
+                        {
+                            if (Orden == e_Orden.SubTipo)
                             {
-                                if (Orden == e_Orden.SubTipo)
+                                if (SubTipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
                                 {
-                                    if (SubTipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
-                                    {
-                                        lst.SelectedIndex = i;
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    if (Tipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
-                                    {
-                                        lst.SelectedIndex = i;
-                                        break;
-                                    }
+                                    lst.SelectedIndex = i;
+                                    break;
                                 }
                             }
+                            else
+                            {
+                                if (Tipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
+                                {
+                                    lst.SelectedIndex = i;
+                                    break;
+                                }
+                            }
+                        }
                         break;
                 }
             }
