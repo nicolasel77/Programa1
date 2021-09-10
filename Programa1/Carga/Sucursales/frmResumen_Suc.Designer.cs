@@ -494,7 +494,6 @@
             this.cmdCarne.Size = new System.Drawing.Size(233, 25);
             this.cmdCarne.TabIndex = 0;
             this.cmdCarne.Text = "Stock Carne";
-            this.cmdCarne.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cmdCarne.UseVisualStyleBackColor = true;
             this.cmdCarne.Click += new System.EventHandler(this.cmdStock_Carne_Click);
             // 
@@ -508,7 +507,7 @@
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(233, 25);
             this.lblBalance.TabIndex = 3;
-            this.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblSuc
             // 
@@ -810,49 +809,49 @@
             this.clientesToolStripMenuItem,
             this.todosToolStripMenuItem});
             this.mnuFiltroEstadisticas.Name = "mnuFiltroEstadisticas";
-            this.mnuFiltroEstadisticas.Size = new System.Drawing.Size(181, 142);
+            this.mnuFiltroEstadisticas.Size = new System.Drawing.Size(130, 120);
             // 
             // unaToolStripMenuItem
             // 
             this.unaToolStripMenuItem.Checked = true;
             this.unaToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.unaToolStripMenuItem.Name = "unaToolStripMenuItem";
-            this.unaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.unaToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.unaToolStripMenuItem.Text = "Una";
             this.unaToolStripMenuItem.Click += new System.EventHandler(this.todasToolStripMenuItem_Click);
             // 
             // todasToolStripMenuItem
             // 
             this.todasToolStripMenuItem.Name = "todasToolStripMenuItem";
-            this.todasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.todasToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.todasToolStripMenuItem.Text = "Todas";
             this.todasToolStripMenuItem.Click += new System.EventHandler(this.todasToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(126, 6);
             // 
             // sucursalesToolStripMenuItem
             // 
             this.sucursalesToolStripMenuItem.Checked = true;
             this.sucursalesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.sucursalesToolStripMenuItem.Name = "sucursalesToolStripMenuItem";
-            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.sucursalesToolStripMenuItem.Text = "Sucursales";
             this.sucursalesToolStripMenuItem.Click += new System.EventHandler(this.sucursalesToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // todosToolStripMenuItem
             // 
             this.todosToolStripMenuItem.Name = "todosToolStripMenuItem";
-            this.todosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.todosToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.todosToolStripMenuItem.Text = "Todos";
             // 
             // nuTop

@@ -448,7 +448,7 @@
                 File.Copy(AppContext.BaseDirectory + "Sebo.xlsm", v);
 
                 Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
-                Microsoft.Office.Interop.Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(v + "Sebo.xlsm");
+                Microsoft.Office.Interop.Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(v);
                 xlApp.Run("Cargar", cFecha.fecha_Actual, cFecha.fecha_Fin);
                 xlApp.Visible = true;
             }

@@ -3,7 +3,7 @@
     using System;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Windows.Forms;
+    //using System.Windows.Forms;
 
     public class c_Base
     {
@@ -52,7 +52,7 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
+                
             }
         }
         public void Actualizar(string Campo, object valor)
@@ -75,7 +75,6 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
             }
         }
 
@@ -100,7 +99,6 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
             }
         }
         /// <summary>
@@ -132,7 +130,6 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
             }
         }
         /// <summary>
@@ -160,7 +157,6 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
             }
         }
 
@@ -184,7 +180,6 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
             }
         }
         /// <summary>
@@ -208,7 +203,6 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
             }
         }
         public void Borrar(string tabla, string where)
@@ -228,7 +222,6 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
             }
         }
         #endregion
@@ -543,7 +536,6 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
                 return false;
             }
 
@@ -577,7 +569,6 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
                 return false;
             }
 
@@ -613,7 +604,6 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
                 return false;
             }
 
@@ -666,7 +656,6 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
             }
         }
 

@@ -228,14 +228,26 @@
             lblCant.Text = $"Cantidad: {cFaena:N0}";
             lblKilos.Text = $"Kilos: {kFaena:N2}";
             lblTotal.Text = $"Recupero: {tRecupero:C2}";
-            lblCostoFaena.Text = $"Costo Faena: {tCompra / kFaena:C3}";
-            lblCostoFinal.Text = $"Costo Carne: {(tCompra / kFaena) - (tRecupero / kFaena):C3}";
+            if (kFaena != 0)
+            {
+                lblCostoFaena.Text = $"Costo Faena: {tCompra / kFaena:C3}";
+                lblCostoFinal.Text = $"Costo Carne: {(tCompra / kFaena) - (tRecupero / kFaena):C3}";
 
-            hc.nBoletas.Actualizar("Costo", tCompra / kCompra);
-            hc.nBoletas.Actualizar("Costo_Faena", tCompra / kFaena);
-            hc.nBoletas.Actualizar("Costo_Final", (tCompra / kFaena) - (tRecupero / kFaena));
+                hc.nBoletas.Actualizar("Costo", tCompra / kCompra);
+                hc.nBoletas.Actualizar("Costo_Faena", tCompra / kFaena);
+                hc.nBoletas.Actualizar("Costo_Final", (tCompra / kFaena) - (tRecupero / kFaena)); 
+            }
+            else
+            {
+                lblCostoFaena.Text = $"Costo Faena: 0";
+                lblCostoFinal.Text = $"Costo Carne: 0";
+
+                hc.nBoletas.Actualizar("Costo", tCompra / kCompra);
+                hc.nBoletas.Actualizar("Costo_Faena", 0);
+                hc.nBoletas.Actualizar("Costo_Final", 0);
+            }
             hc.nBoletas.Actualizar("Kilos_Compra", kCompra);
-            hc.nBoletas.Actualizar("Kilos_Faena", kFaena);
+            hc.nBoletas.Actualizar("Kilos_Faena", 0);
 
 
             if (kCompra != 0)
