@@ -1,6 +1,6 @@
 ﻿namespace Programa1.Carga
 {
-    partial class frmCMVentas
+    partial class frmCMCompras
     {
         /// <summary>
         /// Required designer variable.
@@ -28,30 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCMVentas));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCMCompras));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtCantidad = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.chCantidad = new MaterialSkin.Controls.MaterialCheckBox();
             this.cmbCamion = new System.Windows.Forms.ComboBox();
             this.chCamion = new MaterialSkin.Controls.MaterialCheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtCostoVenta = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.rdManualVenta = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdAutoVenta = new MaterialSkin.Controls.MaterialRadioButton();
-            this.chCostoVenta = new MaterialSkin.Controls.MaterialCheckBox();
+            this.txtCosto = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.rdManual = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdAuto = new MaterialSkin.Controls.MaterialRadioButton();
+            this.chCosto = new MaterialSkin.Controls.MaterialCheckBox();
             this.cmdGuardar = new System.Windows.Forms.Button();
             this.txtKilos = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtDescripcion = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.txtCostoCompra = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.rdManual = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdAutoCompra = new MaterialSkin.Controls.MaterialRadioButton();
             this.cmbProds = new System.Windows.Forms.ComboBox();
-            this.cmbSucursal = new System.Windows.Forms.ComboBox();
             this.cmbProveedor = new System.Windows.Forms.ComboBox();
             this.dtFecha = new System.Windows.Forms.DateTimePicker();
             this.chKilos = new MaterialSkin.Controls.MaterialCheckBox();
-            this.chCostoCompra = new MaterialSkin.Controls.MaterialCheckBox();
             this.chDescripcion = new MaterialSkin.Controls.MaterialCheckBox();
             this.chProd = new MaterialSkin.Controls.MaterialCheckBox();
-            this.chSucursal = new MaterialSkin.Controls.MaterialCheckBox();
             this.chProveedor = new MaterialSkin.Controls.MaterialCheckBox();
             this.chFecha = new MaterialSkin.Controls.MaterialCheckBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -61,8 +57,6 @@
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.lblTotalR = new System.Windows.Forms.ToolStripStatusLabel();
             this.grdResultado = new Grilla2.SpeedGrilla();
-            this.txtCantidad = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.chCantidad = new MaterialSkin.Controls.MaterialCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -95,18 +89,12 @@
             this.splitContainer1.Panel1.Controls.Add(this.cmdGuardar);
             this.splitContainer1.Panel1.Controls.Add(this.txtKilos);
             this.splitContainer1.Panel1.Controls.Add(this.txtDescripcion);
-            this.splitContainer1.Panel1.Controls.Add(this.txtCostoCompra);
-            this.splitContainer1.Panel1.Controls.Add(this.rdManual);
-            this.splitContainer1.Panel1.Controls.Add(this.rdAutoCompra);
             this.splitContainer1.Panel1.Controls.Add(this.cmbProds);
-            this.splitContainer1.Panel1.Controls.Add(this.cmbSucursal);
             this.splitContainer1.Panel1.Controls.Add(this.cmbProveedor);
             this.splitContainer1.Panel1.Controls.Add(this.dtFecha);
             this.splitContainer1.Panel1.Controls.Add(this.chKilos);
-            this.splitContainer1.Panel1.Controls.Add(this.chCostoCompra);
             this.splitContainer1.Panel1.Controls.Add(this.chDescripcion);
             this.splitContainer1.Panel1.Controls.Add(this.chProd);
-            this.splitContainer1.Panel1.Controls.Add(this.chSucursal);
             this.splitContainer1.Panel1.Controls.Add(this.chProveedor);
             this.splitContainer1.Panel1.Controls.Add(this.chFecha);
             // 
@@ -118,17 +106,54 @@
             this.splitContainer1.SplitterDistance = 143;
             this.splitContainer1.TabIndex = 1;
             // 
+            // txtCantidad
+            // 
+            this.txtCantidad.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtCantidad.Depth = 0;
+            this.txtCantidad.Enabled = false;
+            this.txtCantidad.Hint = "Cantidad";
+            this.txtCantidad.Location = new System.Drawing.Point(977, 110);
+            this.txtCantidad.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.PasswordChar = '\0';
+            this.txtCantidad.SelectedText = "";
+            this.txtCantidad.SelectionLength = 0;
+            this.txtCantidad.SelectionStart = 0;
+            this.txtCantidad.Size = new System.Drawing.Size(110, 23);
+            this.txtCantidad.TabIndex = 10;
+            this.txtCantidad.UseSystemPasswordChar = false;
+            this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
+            // 
+            // chCantidad
+            // 
+            this.chCantidad.AutoSize = true;
+            this.chCantidad.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chCantidad.Depth = 0;
+            this.chCantidad.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.chCantidad.Location = new System.Drawing.Point(971, 74);
+            this.chCantidad.Margin = new System.Windows.Forms.Padding(0);
+            this.chCantidad.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chCantidad.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chCantidad.Name = "chCantidad";
+            this.chCantidad.Ripple = true;
+            this.chCantidad.Size = new System.Drawing.Size(85, 30);
+            this.chCantidad.TabIndex = 9;
+            this.chCantidad.Text = "Cantidad";
+            this.chCantidad.UseVisualStyleBackColor = true;
+            this.chCantidad.CheckedChanged += new System.EventHandler(this.chCantidad_CheckedChanged);
+            // 
             // cmbCamion
             // 
             this.cmbCamion.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cmbCamion.Enabled = false;
             this.cmbCamion.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.cmbCamion.FormattingEnabled = true;
-            this.cmbCamion.Location = new System.Drawing.Point(331, 107);
+            this.cmbCamion.Location = new System.Drawing.Point(139, 107);
             this.cmbCamion.Name = "cmbCamion";
             this.cmbCamion.Size = new System.Drawing.Size(175, 26);
             this.cmbCamion.TabIndex = 8;
             this.cmbCamion.Text = "Seleccionar";
+            this.cmbCamion.SelectedIndexChanged += new System.EventHandler(this.cmbCamion_SelectedIndexChanged);
             // 
             // chCamion
             // 
@@ -136,7 +161,7 @@
             this.chCamion.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chCamion.Depth = 0;
             this.chCamion.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.chCamion.Location = new System.Drawing.Point(326, 74);
+            this.chCamion.Location = new System.Drawing.Point(134, 74);
             this.chCamion.Margin = new System.Windows.Forms.Padding(0);
             this.chCamion.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chCamion.MouseState = MaterialSkin.MouseState.HOVER;
@@ -146,90 +171,91 @@
             this.chCamion.TabIndex = 7;
             this.chCamion.Text = "Camión";
             this.chCamion.UseVisualStyleBackColor = true;
+            this.chCamion.CheckedChanged += new System.EventHandler(this.chCamion_CheckedChanged);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.txtCostoVenta);
-            this.panel1.Controls.Add(this.rdManualVenta);
-            this.panel1.Controls.Add(this.rdAutoVenta);
-            this.panel1.Controls.Add(this.chCostoVenta);
-            this.panel1.Location = new System.Drawing.Point(673, 74);
+            this.panel1.Controls.Add(this.txtCosto);
+            this.panel1.Controls.Add(this.rdManual);
+            this.panel1.Controls.Add(this.rdAuto);
+            this.panel1.Controls.Add(this.chCosto);
+            this.panel1.Location = new System.Drawing.Point(677, 9);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(291, 74);
             this.panel1.TabIndex = 6;
             // 
-            // txtCostoVenta
+            // txtCosto
             // 
-            this.txtCostoVenta.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtCostoVenta.Depth = 0;
-            this.txtCostoVenta.Enabled = false;
-            this.txtCostoVenta.Hint = " Costo nuevo";
-            this.txtCostoVenta.Location = new System.Drawing.Point(145, 36);
-            this.txtCostoVenta.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtCostoVenta.Name = "txtCostoVenta";
-            this.txtCostoVenta.PasswordChar = '\0';
-            this.txtCostoVenta.SelectedText = "";
-            this.txtCostoVenta.SelectionLength = 0;
-            this.txtCostoVenta.SelectionStart = 0;
-            this.txtCostoVenta.Size = new System.Drawing.Size(108, 23);
-            this.txtCostoVenta.TabIndex = 4;
-            this.txtCostoVenta.UseSystemPasswordChar = false;
-            this.txtCostoVenta.TextChanged += new System.EventHandler(this.TxtCosto_TextChanged);
+            this.txtCosto.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtCosto.Depth = 0;
+            this.txtCosto.Enabled = false;
+            this.txtCosto.Hint = " Costo nuevo";
+            this.txtCosto.Location = new System.Drawing.Point(145, 36);
+            this.txtCosto.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtCosto.Name = "txtCosto";
+            this.txtCosto.PasswordChar = '\0';
+            this.txtCosto.SelectedText = "";
+            this.txtCosto.SelectionLength = 0;
+            this.txtCosto.SelectionStart = 0;
+            this.txtCosto.Size = new System.Drawing.Size(108, 23);
+            this.txtCosto.TabIndex = 4;
+            this.txtCosto.UseSystemPasswordChar = false;
+            this.txtCosto.TextChanged += new System.EventHandler(this.TxtCosto_TextChanged);
             // 
-            // rdManualVenta
+            // rdManual
             // 
-            this.rdManualVenta.AutoSize = true;
-            this.rdManualVenta.Checked = true;
-            this.rdManualVenta.Depth = 0;
-            this.rdManualVenta.Enabled = false;
-            this.rdManualVenta.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdManualVenta.Location = new System.Drawing.Point(64, 33);
-            this.rdManualVenta.Margin = new System.Windows.Forms.Padding(0);
-            this.rdManualVenta.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdManualVenta.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdManualVenta.Name = "rdManualVenta";
-            this.rdManualVenta.Ripple = true;
-            this.rdManualVenta.Size = new System.Drawing.Size(78, 30);
-            this.rdManualVenta.TabIndex = 3;
-            this.rdManualVenta.TabStop = true;
-            this.rdManualVenta.Text = "Manual:";
-            this.rdManualVenta.UseVisualStyleBackColor = true;
+            this.rdManual.AutoSize = true;
+            this.rdManual.Checked = true;
+            this.rdManual.Depth = 0;
+            this.rdManual.Enabled = false;
+            this.rdManual.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdManual.Location = new System.Drawing.Point(64, 33);
+            this.rdManual.Margin = new System.Windows.Forms.Padding(0);
+            this.rdManual.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdManual.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdManual.Name = "rdManual";
+            this.rdManual.Ripple = true;
+            this.rdManual.Size = new System.Drawing.Size(78, 30);
+            this.rdManual.TabIndex = 3;
+            this.rdManual.TabStop = true;
+            this.rdManual.Text = "Manual:";
+            this.rdManual.UseVisualStyleBackColor = true;
             // 
-            // rdAutoVenta
+            // rdAuto
             // 
-            this.rdAutoVenta.AutoSize = true;
-            this.rdAutoVenta.Depth = 0;
-            this.rdAutoVenta.Enabled = false;
-            this.rdAutoVenta.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdAutoVenta.Location = new System.Drawing.Point(2, 33);
-            this.rdAutoVenta.Margin = new System.Windows.Forms.Padding(0);
-            this.rdAutoVenta.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdAutoVenta.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdAutoVenta.Name = "rdAutoVenta";
-            this.rdAutoVenta.Ripple = true;
-            this.rdAutoVenta.Size = new System.Drawing.Size(58, 30);
-            this.rdAutoVenta.TabIndex = 3;
-            this.rdAutoVenta.Text = "Auto";
-            this.rdAutoVenta.UseVisualStyleBackColor = true;
-            this.rdAutoVenta.CheckedChanged += new System.EventHandler(this.RdAuto_CheckedChanged);
+            this.rdAuto.AutoSize = true;
+            this.rdAuto.Depth = 0;
+            this.rdAuto.Enabled = false;
+            this.rdAuto.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdAuto.Location = new System.Drawing.Point(2, 33);
+            this.rdAuto.Margin = new System.Windows.Forms.Padding(0);
+            this.rdAuto.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdAuto.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdAuto.Name = "rdAuto";
+            this.rdAuto.Ripple = true;
+            this.rdAuto.Size = new System.Drawing.Size(58, 30);
+            this.rdAuto.TabIndex = 3;
+            this.rdAuto.Text = "Auto";
+            this.rdAuto.UseVisualStyleBackColor = true;
+            this.rdAuto.CheckedChanged += new System.EventHandler(this.RdAuto_CheckedChanged);
             // 
-            // chCostoVenta
+            // chCosto
             // 
-            this.chCostoVenta.AutoSize = true;
-            this.chCostoVenta.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chCostoVenta.Depth = 0;
-            this.chCostoVenta.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.chCostoVenta.Location = new System.Drawing.Point(1, 0);
-            this.chCostoVenta.Margin = new System.Windows.Forms.Padding(0);
-            this.chCostoVenta.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chCostoVenta.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chCostoVenta.Name = "chCostoVenta";
-            this.chCostoVenta.Ripple = true;
-            this.chCostoVenta.Size = new System.Drawing.Size(106, 30);
-            this.chCostoVenta.TabIndex = 0;
-            this.chCostoVenta.Text = "Costo Venta";
-            this.chCostoVenta.UseVisualStyleBackColor = true;
-            this.chCostoVenta.CheckedChanged += new System.EventHandler(this.ChCostoVenta_CheckedChanged);
+            this.chCosto.AutoSize = true;
+            this.chCosto.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chCosto.Depth = 0;
+            this.chCosto.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.chCosto.Location = new System.Drawing.Point(1, 0);
+            this.chCosto.Margin = new System.Windows.Forms.Padding(0);
+            this.chCosto.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chCosto.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chCosto.Name = "chCosto";
+            this.chCosto.Ripple = true;
+            this.chCosto.Size = new System.Drawing.Size(125, 30);
+            this.chCosto.TabIndex = 0;
+            this.chCosto.Text = "Costo Compras";
+            this.chCosto.UseVisualStyleBackColor = true;
+            this.chCosto.CheckedChanged += new System.EventHandler(this.chCosto_CheckedChanged_1);
             // 
             // cmdGuardar
             // 
@@ -280,61 +306,6 @@
             this.txtDescripcion.UseSystemPasswordChar = false;
             this.txtDescripcion.TextChanged += new System.EventHandler(this.TxtDescripcion_TextChanged);
             // 
-            // txtCostoCompra
-            // 
-            this.txtCostoCompra.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtCostoCompra.Depth = 0;
-            this.txtCostoCompra.Enabled = false;
-            this.txtCostoCompra.Hint = " Costo nuevo";
-            this.txtCostoCompra.Location = new System.Drawing.Point(817, 45);
-            this.txtCostoCompra.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtCostoCompra.Name = "txtCostoCompra";
-            this.txtCostoCompra.PasswordChar = '\0';
-            this.txtCostoCompra.SelectedText = "";
-            this.txtCostoCompra.SelectionLength = 0;
-            this.txtCostoCompra.SelectionStart = 0;
-            this.txtCostoCompra.Size = new System.Drawing.Size(108, 23);
-            this.txtCostoCompra.TabIndex = 4;
-            this.txtCostoCompra.UseSystemPasswordChar = false;
-            this.txtCostoCompra.TextChanged += new System.EventHandler(this.TxtCosto_TextChanged);
-            // 
-            // rdManual
-            // 
-            this.rdManual.AutoSize = true;
-            this.rdManual.Checked = true;
-            this.rdManual.Depth = 0;
-            this.rdManual.Enabled = false;
-            this.rdManual.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdManual.Location = new System.Drawing.Point(736, 42);
-            this.rdManual.Margin = new System.Windows.Forms.Padding(0);
-            this.rdManual.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdManual.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdManual.Name = "rdManual";
-            this.rdManual.Ripple = true;
-            this.rdManual.Size = new System.Drawing.Size(78, 30);
-            this.rdManual.TabIndex = 3;
-            this.rdManual.TabStop = true;
-            this.rdManual.Text = "Manual:";
-            this.rdManual.UseVisualStyleBackColor = true;
-            // 
-            // rdAutoCompra
-            // 
-            this.rdAutoCompra.AutoSize = true;
-            this.rdAutoCompra.Depth = 0;
-            this.rdAutoCompra.Enabled = false;
-            this.rdAutoCompra.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdAutoCompra.Location = new System.Drawing.Point(674, 42);
-            this.rdAutoCompra.Margin = new System.Windows.Forms.Padding(0);
-            this.rdAutoCompra.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdAutoCompra.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdAutoCompra.Name = "rdAutoCompra";
-            this.rdAutoCompra.Ripple = true;
-            this.rdAutoCompra.Size = new System.Drawing.Size(58, 30);
-            this.rdAutoCompra.TabIndex = 3;
-            this.rdAutoCompra.Text = "Auto";
-            this.rdAutoCompra.UseVisualStyleBackColor = true;
-            this.rdAutoCompra.CheckedChanged += new System.EventHandler(this.RdAuto_CheckedChanged);
-            // 
             // cmbProds
             // 
             this.cmbProds.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -347,19 +318,6 @@
             this.cmbProds.TabIndex = 2;
             this.cmbProds.Text = "Seleccionar";
             this.cmbProds.SelectedIndexChanged += new System.EventHandler(this.CmbProds_SelectedIndexChanged);
-            // 
-            // cmbSucursal
-            // 
-            this.cmbSucursal.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cmbSucursal.Enabled = false;
-            this.cmbSucursal.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.cmbSucursal.FormattingEnabled = true;
-            this.cmbSucursal.Location = new System.Drawing.Point(139, 107);
-            this.cmbSucursal.Name = "cmbSucursal";
-            this.cmbSucursal.Size = new System.Drawing.Size(175, 26);
-            this.cmbSucursal.TabIndex = 2;
-            this.cmbSucursal.Text = "Seleccionar";
-            this.cmbSucursal.SelectedIndexChanged += new System.EventHandler(this.CmbSucursal_SelectedIndexChanged);
             // 
             // cmbProveedor
             // 
@@ -404,24 +362,6 @@
             this.chKilos.UseVisualStyleBackColor = true;
             this.chKilos.CheckedChanged += new System.EventHandler(this.ChKilos_CheckedChanged);
             // 
-            // chCostoCompra
-            // 
-            this.chCostoCompra.AutoSize = true;
-            this.chCostoCompra.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chCostoCompra.Depth = 0;
-            this.chCostoCompra.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.chCostoCompra.Location = new System.Drawing.Point(673, 9);
-            this.chCostoCompra.Margin = new System.Windows.Forms.Padding(0);
-            this.chCostoCompra.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chCostoCompra.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chCostoCompra.Name = "chCostoCompra";
-            this.chCostoCompra.Ripple = true;
-            this.chCostoCompra.Size = new System.Drawing.Size(118, 30);
-            this.chCostoCompra.TabIndex = 0;
-            this.chCostoCompra.Text = "Costo Compra";
-            this.chCostoCompra.UseVisualStyleBackColor = true;
-            this.chCostoCompra.CheckedChanged += new System.EventHandler(this.ChCosto_CheckedChanged);
-            // 
             // chDescripcion
             // 
             this.chDescripcion.AutoSize = true;
@@ -457,24 +397,6 @@
             this.chProd.Text = "Producto";
             this.chProd.UseVisualStyleBackColor = true;
             this.chProd.CheckedChanged += new System.EventHandler(this.ChProd_CheckedChanged);
-            // 
-            // chSucursal
-            // 
-            this.chSucursal.AutoSize = true;
-            this.chSucursal.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chSucursal.Depth = 0;
-            this.chSucursal.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.chSucursal.Location = new System.Drawing.Point(134, 74);
-            this.chSucursal.Margin = new System.Windows.Forms.Padding(0);
-            this.chSucursal.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chSucursal.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chSucursal.Name = "chSucursal";
-            this.chSucursal.Ripple = true;
-            this.chSucursal.Size = new System.Drawing.Size(84, 30);
-            this.chSucursal.TabIndex = 0;
-            this.chSucursal.Text = "Sucursal";
-            this.chSucursal.UseVisualStyleBackColor = true;
-            this.chSucursal.CheckedChanged += new System.EventHandler(this.ChSucursal_CheckedChanged);
             // 
             // chProveedor
             // 
@@ -532,14 +454,14 @@
             this.splitContainer2.Panel2.Controls.Add(this.statusStrip2);
             this.splitContainer2.Panel2.Controls.Add(this.grdResultado);
             this.splitContainer2.Size = new System.Drawing.Size(1222, 492);
-            this.splitContainer2.SplitterDistance = 225;
+            this.splitContainer2.SplitterDistance = 218;
             this.splitContainer2.TabIndex = 2;
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblTotalO});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 203);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 196);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1222, 22);
             this.statusStrip1.TabIndex = 1;
@@ -579,14 +501,14 @@
             this.grdOriginal.Redraw = true;
             this.grdOriginal.Row = 0;
             this.grdOriginal.Rows = 50;
-            this.grdOriginal.Size = new System.Drawing.Size(1222, 225);
+            this.grdOriginal.Size = new System.Drawing.Size(1222, 218);
             this.grdOriginal.TabIndex = 0;
             // 
             // statusStrip2
             // 
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblTotalR});
-            this.statusStrip2.Location = new System.Drawing.Point(0, 241);
+            this.statusStrip2.Location = new System.Drawing.Point(0, 248);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.Size = new System.Drawing.Size(1222, 22);
             this.statusStrip2.TabIndex = 2;
@@ -626,54 +548,18 @@
             this.grdResultado.Redraw = true;
             this.grdResultado.Row = 0;
             this.grdResultado.Rows = 50;
-            this.grdResultado.Size = new System.Drawing.Size(1222, 263);
+            this.grdResultado.Size = new System.Drawing.Size(1222, 270);
             this.grdResultado.TabIndex = 1;
             // 
-            // txtCantidad
-            // 
-            this.txtCantidad.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtCantidad.Depth = 0;
-            this.txtCantidad.Enabled = false;
-            this.txtCantidad.Hint = "Cantidad";
-            this.txtCantidad.Location = new System.Drawing.Point(977, 110);
-            this.txtCantidad.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.PasswordChar = '\0';
-            this.txtCantidad.SelectedText = "";
-            this.txtCantidad.SelectionLength = 0;
-            this.txtCantidad.SelectionStart = 0;
-            this.txtCantidad.Size = new System.Drawing.Size(110, 23);
-            this.txtCantidad.TabIndex = 12;
-            this.txtCantidad.UseSystemPasswordChar = false;
-            this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
-            // 
-            // chCantidad
-            // 
-            this.chCantidad.AutoSize = true;
-            this.chCantidad.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chCantidad.Depth = 0;
-            this.chCantidad.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.chCantidad.Location = new System.Drawing.Point(971, 74);
-            this.chCantidad.Margin = new System.Windows.Forms.Padding(0);
-            this.chCantidad.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chCantidad.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chCantidad.Name = "chCantidad";
-            this.chCantidad.Ripple = true;
-            this.chCantidad.Size = new System.Drawing.Size(85, 30);
-            this.chCantidad.TabIndex = 11;
-            this.chCantidad.Text = "Cantidad";
-            this.chCantidad.UseVisualStyleBackColor = true;
-            this.chCantidad.CheckedChanged += new System.EventHandler(this.chCantidad_CheckedChanged);
-            // 
-            // frmCMVentas
+            // frmCMCompras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1222, 639);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "frmCMVentas";
+            this.Name = "frmCMCompras";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cambio Masivo Ventas";
+            this.Text = "Cambio Masivo Compras";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -707,12 +593,8 @@
         private MaterialSkin.Controls.MaterialCheckBox chFecha;
         private System.Windows.Forms.DateTimePicker dtFecha;
         private MaterialSkin.Controls.MaterialCheckBox chProveedor;
-        private MaterialSkin.Controls.MaterialSingleLineTextField txtCostoCompra;
-        private MaterialSkin.Controls.MaterialRadioButton rdManual;
-        private MaterialSkin.Controls.MaterialRadioButton rdAutoCompra;
         private System.Windows.Forms.ComboBox cmbProds;
         private System.Windows.Forms.ComboBox cmbProveedor;
-        private MaterialSkin.Controls.MaterialCheckBox chCostoCompra;
         private MaterialSkin.Controls.MaterialCheckBox chProd;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtKilos;
         private MaterialSkin.Controls.MaterialCheckBox chKilos;
@@ -720,12 +602,10 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField txtDescripcion;
         private MaterialSkin.Controls.MaterialCheckBox chDescripcion;
         private System.Windows.Forms.Panel panel1;
-        private MaterialSkin.Controls.MaterialSingleLineTextField txtCostoVenta;
-        private MaterialSkin.Controls.MaterialRadioButton rdManualVenta;
-        private MaterialSkin.Controls.MaterialRadioButton rdAutoVenta;
-        private MaterialSkin.Controls.MaterialCheckBox chCostoVenta;
-        private System.Windows.Forms.ComboBox cmbSucursal;
-        private MaterialSkin.Controls.MaterialCheckBox chSucursal;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtCosto;
+        private MaterialSkin.Controls.MaterialRadioButton rdManual;
+        private MaterialSkin.Controls.MaterialRadioButton rdAuto;
+        private MaterialSkin.Controls.MaterialCheckBox chCosto;
         private System.Windows.Forms.ComboBox cmbCamion;
         private MaterialSkin.Controls.MaterialCheckBox chCamion;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtCantidad;

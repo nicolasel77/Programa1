@@ -28,6 +28,8 @@ namespace Programa1.Carga
         private Byte c_Promedio;
         #endregion
 
+        int vi = 4;
+
         public frmTraslados()
         {
             InitializeComponent();
@@ -273,8 +275,11 @@ namespace Programa1.Carga
                         {
                             Traslados.precios.Sucursal = Traslados.sucS;
 
+                            Traslados.CostoS = Traslados.precios.Buscar();
+
                             grdTraslados.set_Texto(f, c, a);
                             grdTraslados.set_Texto(f, c + 1, Traslados.sucS.Nombre);
+                            grdTraslados.set_Texto(f, c_CostoS, Traslados.CostoS);
 
                             if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
                             else { grdTraslados.ActivarCelda(f, c + 2); }
@@ -292,8 +297,11 @@ namespace Programa1.Carga
                         {
                             Traslados.precios.Sucursal = Traslados.sucE;
 
+                            Traslados.CostoE = Traslados.precios.Buscar();
+
                             grdTraslados.set_Texto(f, c, a);
                             grdTraslados.set_Texto(f, c + 1, Traslados.sucE.Nombre);
+                            grdTraslados.set_Texto(f, c_CostoS, Traslados.CostoE);
 
                             if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
                             else { grdTraslados.ActivarCelda(f, c + 2); }
@@ -403,12 +411,9 @@ namespace Programa1.Carga
                             grdTraslados.AgregarFila();
                             //Rellenar nueva fila
 
-                            grdTraslados.set_Texto(f + 1, c_Fecha, Traslados.Fecha);
-                            grdTraslados.set_Texto(f + 1, c_IdSucS, Traslados.sucS.ID);
-                            grdTraslados.set_Texto(f + 1, c_IdSucS + 1, Traslados.sucS.Nombre);
+                            Rellenar_nueva_Fila(f);
 
                             Traslados.Kilos = 0;
-                            grdTraslados.ActivarCelda(f + 1, c_IdSucE);
                         }
                         else
                         {
@@ -423,6 +428,73 @@ namespace Programa1.Carga
             else
             {
                 Mensaje("La fecha esta cerrada.");
+            }
+        }
+        
+        private void Rellenar_nueva_Fila(short Fila)
+        {
+            switch (vi)
+            {
+                //Fecha
+                case 1:
+                    Traslados.Fecha = Traslados.Fecha.AddDays(1);
+
+                    Traslados.precios.Fecha = Traslados.Fecha;
+
+                    Traslados.precios.Sucursal = Traslados.sucE;
+                    Traslados.CostoE = Traslados.precios.Buscar();
+
+                    Traslados.precios.Sucursal = Traslados.sucS;
+                    Traslados.CostoS = Traslados.precios.Buscar();
+                    break;
+                //Suc_S
+                case 2:
+                    Traslados.sucS.Siguiente();
+
+                    Traslados.precios.Sucursal = Traslados.sucS;
+                    Traslados.CostoS = Traslados.precios.Buscar();
+                    break;
+                    //Suc_E
+                case 3:
+                    Traslados.sucE.Siguiente();
+
+                    Traslados.precios.Sucursal = Traslados.sucE;
+                    Traslados.CostoE = Traslados.precios.Buscar();
+                    break;
+                //Producto
+                case 4:
+                    Traslados.Producto.ID = Traslados.Producto_Siguiente();
+
+                    Traslados.precios.Producto = Traslados.Producto;
+                    Traslados.Descripcion = Traslados.Producto.Nombre;
+
+                    Traslados.precios.Sucursal = Traslados.sucS;
+                    Traslados.CostoS = Traslados.precios.Buscar();
+
+                    Traslados.precios.Sucursal = Traslados.sucE;
+                    Traslados.CostoE = Traslados.precios.Buscar();
+
+                    break;
+            }
+            grdTraslados.set_Texto(Fila + 1, c_Fecha, Traslados.Fecha);
+            grdTraslados.set_Texto(Fila + 1, c_IdSucS, Traslados.sucS.ID);
+            grdTraslados.set_Texto(Fila + 1, c_IdSucS + 1, Traslados.sucS.Nombre);
+            grdTraslados.set_Texto(Fila + 1, c_IdSucE, Traslados.sucE.ID);
+            grdTraslados.set_Texto(Fila + 1, c_IdSucE + 1, Traslados.sucE.Nombre);
+            grdTraslados.set_Texto(Fila + 1, c_IdProd, Traslados.Producto.ID);
+            grdTraslados.set_Texto(Fila + 1, c_Descripcion, Traslados.Descripcion);
+            grdTraslados.set_Texto(Fila + 1, c_CostoS, Traslados.CostoS);
+            grdTraslados.set_Texto(Fila + 1, c_CostoE, Traslados.CostoE);
+            grdTraslados.set_Texto(Fila + 1, c_TotalS, 0);
+            grdTraslados.set_Texto(Fila + 1, c_TotalE, 0);
+
+            if (chCantidades.Checked == true)
+            {
+                grdTraslados.ActivarCelda(Fila + 1, c_Cantidad);
+            }
+            else
+            {
+                grdTraslados.ActivarCelda(Fila + 1, grdTraslados.Col);
             }
         }
 
@@ -456,28 +528,90 @@ namespace Programa1.Carga
         {
             if (e == 13)
             {
-                if (Traslados.ID == 0)
+                if (grdTraslados.Col == c_Kilos)
                 {
 
-                    if (grdTraslados.Col == c_Kilos)
+                    if (Traslados.ID == 0)
                     {
-                        Traslados.Producto.Siguiente();
-                        Traslados.precios.Producto = Traslados.Producto;
+                        switch (vi)
+                        {
+                            //Fecha
+                            case 1:
+                                Traslados.Fecha = Traslados.Fecha.AddDays(1);
 
-                        Traslados.Descripcion = Traslados.Producto.Nombre;
+                                Traslados.precios.Fecha = Traslados.Fecha;
 
-                        grdTraslados.set_Texto(grdTraslados.Row, c_IdProd, Traslados.Producto.ID);
-                        grdTraslados.set_Texto(grdTraslados.Row, c_Descripcion, Traslados.Descripcion);
+                                Traslados.precios.Sucursal = Traslados.sucE;
+                                Traslados.CostoE = Traslados.precios.Buscar();
 
-                        Traslados.precios.Sucursal = Traslados.sucS;
-                        Traslados.CostoS = Traslados.precios.Buscar();
-                        grdTraslados.set_Texto(grdTraslados.Row, c_CostoS, Traslados.CostoS);
-                        grdTraslados.set_Texto(grdTraslados.Row, c_TotalS, 0);
+                                Traslados.precios.Sucursal = Traslados.sucS;
+                                Traslados.CostoS = Traslados.precios.Buscar();
 
-                        Traslados.precios.Sucursal = Traslados.sucE;
-                        Traslados.CostoE = Traslados.precios.Buscar();
-                        grdTraslados.set_Texto(grdTraslados.Row, c_CostoE, Traslados.CostoE);
-                        grdTraslados.set_Texto(grdTraslados.Row, c_TotalE, 0);
+                                grdTraslados.set_Texto(grdTraslados.Row, c_Fecha, Traslados.Fecha);
+                                grdTraslados.set_Texto(grdTraslados.Row, c_CostoE, Traslados.CostoE);
+                                grdTraslados.set_Texto(grdTraslados.Row, c_CostoS, Traslados.CostoS);
+                                break;
+                            //Suc_S
+                            case 2:
+                                Traslados.sucS.Siguiente();
+
+                                Traslados.precios.Sucursal = Traslados.sucS;
+                                Traslados.CostoS = Traslados.precios.Buscar();
+
+                                grdTraslados.set_Texto(grdTraslados.Row, c_IdSucS, Traslados.sucS.ID);
+                                grdTraslados.set_Texto(grdTraslados.Row, c_IdSucS + 1, Traslados.sucS.Nombre);
+                                grdTraslados.set_Texto(grdTraslados.Row, c_CostoS, Traslados.CostoS);
+                                break;
+                            //Suc_E
+                            case 3:
+                                Traslados.sucE.Siguiente();
+
+                                Traslados.precios.Sucursal = Traslados.sucE;
+                                Traslados.CostoE = Traslados.precios.Buscar();
+
+                                grdTraslados.set_Texto(grdTraslados.Row, c_IdSucE, Traslados.sucE.ID);
+                                grdTraslados.set_Texto(grdTraslados.Row, c_IdSucE+1, Traslados.sucE.Nombre);
+                                grdTraslados.set_Texto(grdTraslados.Row, c_CostoE, Traslados.CostoE);
+                                break;
+                            //Producto
+                            case 4:
+                                Traslados.Producto.ID = Traslados.Producto_Siguiente();
+
+                                Traslados.precios.Producto = Traslados.Producto;
+                                Traslados.Descripcion = Traslados.Producto.Nombre;
+
+                                Traslados.precios.Sucursal = Traslados.sucS;
+                                Traslados.CostoS = Traslados.precios.Buscar();
+
+                                Traslados.precios.Sucursal = Traslados.sucE;
+                                Traslados.CostoE = Traslados.precios.Buscar();
+
+                                grdTraslados.set_Texto(grdTraslados.Row, c_IdProd, Traslados.Producto.ID);
+                                grdTraslados.set_Texto(grdTraslados.Row, c_Descripcion, Traslados.Descripcion);
+                                grdTraslados.set_Texto(grdTraslados.Row, c_CostoE, Traslados.CostoE);
+                                grdTraslados.set_Texto(grdTraslados.Row, c_CostoS, Traslados.CostoS);
+
+                                break;
+                        }
+
+
+                        //Traslados.Producto.Siguiente();
+                        //Traslados.precios.Producto = Traslados.Producto;
+
+                        //Traslados.Descripcion = Traslados.Producto.Nombre;
+
+                        //grdTraslados.set_Texto(grdTraslados.Row, c_IdProd, Traslados.Producto.ID);
+                        //grdTraslados.set_Texto(grdTraslados.Row, c_Descripcion, Traslados.Descripcion);
+
+                        //Traslados.precios.Sucursal = Traslados.sucS;
+                        //Traslados.CostoS = Traslados.precios.Buscar();
+                        //grdTraslados.set_Texto(grdTraslados.Row, c_CostoS, Traslados.CostoS);
+                        //grdTraslados.set_Texto(grdTraslados.Row, c_TotalS, 0);
+
+                        //Traslados.precios.Sucursal = Traslados.sucE;
+                        //Traslados.CostoE = Traslados.precios.Buscar();
+                        //grdTraslados.set_Texto(grdTraslados.Row, c_CostoE, Traslados.CostoE);
+                        //grdTraslados.set_Texto(grdTraslados.Row, c_TotalE, 0);
                     }
                 }
             }
@@ -583,6 +717,39 @@ namespace Programa1.Carga
                 grdTraslados.Columnas[c_Cantidad].Visible = false;
                 grdTraslados.Columnas[c_Promedio].Visible = false;
             }
+        }
+
+        private void cmdHerramientas_Click(object sender, EventArgs e)
+        {
+            panel5.Visible = true;
+        }
+
+        private void rdFecha_CheckedChanged(object sender, EventArgs e)
+        {
+            vi = 1;
+        }
+
+        private void rdSucS_CheckedChanged(object sender, EventArgs e)
+        {
+            vi = 2;
+        }
+    
+        private void rdSucE_CheckedChanged(object sender, EventArgs e)
+        {
+            vi = 3;
+        }
+        
+        private void rdProd_CheckedChanged(object sender, EventArgs e)
+        {
+            vi = 4;
+        }
+        private void rdNada_CheckedChanged(object sender, EventArgs e)
+        {
+            vi = 5;
+        }
+        private void grdTraslados_Click()
+        {
+            panel5.Visible = false;
         }
     }
 }

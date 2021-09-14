@@ -4,7 +4,7 @@
     using System;
     using System.Drawing;
     using System.Windows.Forms;
-
+    using System.Collections.Generic;
     public partial class frmCompras : Form
     {
         private Compras Compras;
@@ -525,23 +525,23 @@
         {
             if (grdCompras.Rows > 2)
             {
-                //frmCMCompras cm = new frmCMCompras();
-                //List<int> n = new List<int>();
+                frmCMCompras cm = new frmCMCompras();
+                List<int> n = new List<int>();
 
-                //int d = grdCompras.Selection.r1;
-                //int h = grdCompras.Selection.r2;
-                //if (d == -1)
-                //{
-                //    d = 1;
-                //    h = grdCompras.Rows - 2;
-                //}
-                //for (int i = d; i <= h; i++)
-                //{
-                //    n.Add(Convert.ToInt32(grdCompras.get_Texto(i, c_Id)));
-                //}
-                //cm.Ids = n;
-                //cm.ShowDialog();
-                //cmdMostrar.PerformClick();
+                int d = grdCompras.Selection.r1;
+                int h = grdCompras.Selection.r2;
+                if (d == -1)
+                {
+                    d = 1;
+                    h = grdCompras.Rows - 2;
+                }
+                for (int i = d; i <= h; i++)
+                {
+                    n.Add(Convert.ToInt32(grdCompras.get_Texto(i, c_Id)));
+                }
+                cm.Ids = n;
+                cm.ShowDialog();
+                cmdMostrar.PerformClick();
             }
         }
 
