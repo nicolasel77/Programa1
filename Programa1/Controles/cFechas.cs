@@ -240,19 +240,11 @@
             }
         }
 
-        private void MntDias_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            if (mntDias.SelectionStart.Date != fecha_Actual)
-            {
-                fechaDia();
-            }
-        }
-
         private void fechaDia()
         {
             if (cCambio == false)
             {
-                if (mntDias.SelectionStart.Date != fecha_Actual)
+                if (mntDias.SelectionStart.Date != fecha_Actual.Date)
                 {
                     fecha_Actual = mntDias.SelectionStart.Date;
                     fecha_Fin = fecha_Actual;
@@ -261,9 +253,17 @@
             }
         }
 
+        private void MntDias_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            if (mntDias.SelectionStart.Date != fecha_Actual.Date)
+            {
+                fechaDia();
+            }
+        }
+
         private void DtDesde_ValueChanged(object sender, EventArgs e)
         {
-            if (dtDesde.Value.Date != fecha_Actual | fecha_Fin != dtHasta.Value.Date)
+            if (dtDesde.Value.Date != fecha_Actual.Date | fecha_Fin.Date != dtHasta.Value.Date)
             {
                 fecha_Actual = dtDesde.Value;
                 fecha_Fin = dtHasta.Value;

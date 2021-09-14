@@ -1286,7 +1286,10 @@ Public Class SpeedGrilla
             If e.NewRange.c1 = e.NewRange.c2 Then
                 If e.NewRange.r1 <> e.NewRange.r2 Then
                     Dim t As Double
-                    For i As Integer = e.NewRange.r1 To e.NewRange.r2
+                    Dim st As Int16 = 1
+                    If e.NewRange.r1 > e.NewRange.r2 Then st = -1
+
+                    For i As Integer = e.NewRange.r1 To e.NewRange.r2 Step st
                         If IsNumeric(Texto(i, e.NewRange.c1)) Then
                             t += Texto(i, e.NewRange.c1)
                         End If

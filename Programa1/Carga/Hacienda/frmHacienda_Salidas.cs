@@ -31,7 +31,13 @@
         {
             InitializeComponent();
 
-            cFecha.Fecha_Maxima = Salidas.Max_Fecha();
+            DateTime fecha = Salidas.Max_Fecha();
+            cFecha.Fecha_Maxima = fecha;
+            cFecha.fecha_Actual = fecha;
+
+            cSucursal.Filtro_In = $" SELECT DISTINCT Id_Sucursales FROM Hacienda_Salidas WHERE Fecha='{fecha:MM/dd/yy}'";
+            cProds.Filtro_In = $" SELECT DISTINCT Id_Productos FROM vw_Hacienda_Salidas WHERE Fecha='{fecha:MM/dd/yy}'";
+
 
             DataTable dt = Salidas.Tropas_Salidas("YEAR(Fecha)=" + DateTime.Now.Year);
 

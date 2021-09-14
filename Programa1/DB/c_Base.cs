@@ -391,6 +391,29 @@
 
             return d;
         }
+        public object Dato_Generico(string consulta)
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            object d = null;
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(consulta, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                cnn.Open();
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                d = cmd.ExecuteScalar();
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+            }
+
+            return d;
+        }
 
         public DataTable Datos_Genericos(string consulta)
         {

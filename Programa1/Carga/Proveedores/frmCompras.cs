@@ -147,14 +147,14 @@
             grdCompras.set_ColW(c_Fecha, 60);
             grdCompras.set_ColW(c_IdCamion, 30);
             grdCompras.set_ColW(c_IdProv, 30);
-            grdCompras.set_ColW(c_IdProv + 1, 100);
+            grdCompras.set_ColW(c_IdProv + 1, 200);
             grdCompras.set_ColW(c_IdProd, 30);
-            grdCompras.set_ColW(c_Descripcion, 150);
+            grdCompras.set_ColW(c_Descripcion, 350);
             grdCompras.set_ColW(c_Cantidad, 60);
-            grdCompras.set_ColW(c_Costo, 60);
-            grdCompras.set_ColW(c_Kilos, 60);
-            grdCompras.set_ColW(c_Total, 80);
-            grdCompras.set_ColW(c_Promedio, 60);
+            grdCompras.set_ColW(c_Costo, 70);
+            grdCompras.set_ColW(c_Kilos, 80);
+            grdCompras.set_ColW(c_Total, 90);
+            grdCompras.set_ColW(c_Promedio, 70);
 
             if (chCantidad.Checked == true)
             {

@@ -30,8 +30,8 @@ namespace Programa1.Carga.Tesoreria
         private void InitializeComponent()
         {
             this.lst = new System.Windows.Forms.ListBox();
-            this.cmdCancelar = new Programa1.Controles.cBoton();
-            this.cmdAceptar = new Programa1.Controles.cBoton();
+            this.cmdCancelar = new System.Windows.Forms.Button();
+            this.cmdAceptar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lst
@@ -52,31 +52,39 @@ namespace Programa1.Carga.Tesoreria
             // cmdCancelar
             // 
             this.cmdCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdCancelar.Location = new System.Drawing.Point(161, 284);
+            this.cmdCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cmdCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdCancelar.Location = new System.Drawing.Point(185, 285);
             this.cmdCancelar.Name = "cmdCancelar";
-            this.cmdCancelar.Size = new System.Drawing.Size(99, 40);
-            this.cmdCancelar.TabIndex = 2;
-            this.cmdCancelar.Texto = "Cancelar";
+            this.cmdCancelar.Size = new System.Drawing.Size(75, 23);
+            this.cmdCancelar.TabIndex = 1;
+            this.cmdCancelar.Text = "Cancelar";
+            this.cmdCancelar.UseVisualStyleBackColor = true;
             this.cmdCancelar.Click += new System.EventHandler(this.cmdCancelar_Click);
             // 
             // cmdAceptar
             // 
             this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdAceptar.Location = new System.Drawing.Point(56, 284);
+            this.cmdAceptar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cmdAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdAceptar.Location = new System.Drawing.Point(104, 285);
             this.cmdAceptar.Name = "cmdAceptar";
-            this.cmdAceptar.Size = new System.Drawing.Size(99, 40);
+            this.cmdAceptar.Size = new System.Drawing.Size(75, 23);
             this.cmdAceptar.TabIndex = 1;
-            this.cmdAceptar.Texto = "Aceptar";
+            this.cmdAceptar.Text = "Aceptar";
+            this.cmdAceptar.UseVisualStyleBackColor = true;
             this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
             // 
             // frmNARendir
             // 
+            this.AcceptButton = this.cmdAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 332);
-            this.Controls.Add(this.lst);
-            this.Controls.Add(this.cmdCancelar);
+            this.CancelButton = this.cmdCancelar;
+            this.ClientSize = new System.Drawing.Size(272, 320);
             this.Controls.Add(this.cmdAceptar);
+            this.Controls.Add(this.cmdCancelar);
+            this.Controls.Add(this.lst);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmNARendir";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -86,9 +94,8 @@ namespace Programa1.Carga.Tesoreria
         }
 
         #endregion
-
-        private Controles.cBoton cmdAceptar;
-        private Controles.cBoton cmdCancelar;
         private System.Windows.Forms.ListBox lst;
+        private System.Windows.Forms.Button cmdCancelar;
+        private System.Windows.Forms.Button cmdAceptar;
     }
 }
