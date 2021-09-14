@@ -156,6 +156,12 @@
             grdCompras.set_ColW(c_Total, 90);
             grdCompras.set_ColW(c_Promedio, 70);
 
+            grdCompras.AutosizeCol(c_IdProv + 1);
+            grdCompras.AutosizeCol(c_Descripcion);
+            grdCompras.AutosizeCol(c_Kilos);
+            grdCompras.AutosizeCol(c_Total);
+
+
             if (chCantidad.Checked == true)
             {
                 grdCompras.Columnas[c_Cantidad].Visible = true;

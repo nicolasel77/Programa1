@@ -299,6 +299,10 @@
                             grdVenta.set_Texto(f, c, a);
                             grdVenta.set_Texto(f, c + 1, Venta.Proveedor.Nombre);
 
+                            Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+                            grdVenta.set_Texto(f, c_CostoCompra, Venta.CostoCompra);
+                            grdVenta.set_Texto(f, c_TotalCompra, Venta.Kilos * Venta.CostoCompra);
+
                             if (id != 0) { Venta.Actualizar(); grdVenta.ActivarCelda(f + 1, c); }
                             else { grdVenta.ActivarCelda(f, c + 2); }
                         }
@@ -313,6 +317,10 @@
                         if (Venta.Sucursal.Existe() == true)
                         {
                             Venta.precios.Sucursal = Venta.Sucursal;
+
+                            Venta.CostoVenta = Venta.precios.Buscar();
+                            grdVenta.set_Texto(f, c_CostoVenta, Venta.CostoVenta);
+                            grdVenta.set_Texto(f, c_TotalVenta, Venta.Kilos * Venta.CostoVenta);
 
                             grdVenta.set_Texto(f, c, a);
                             grdVenta.set_Texto(f, c + 1, Venta.Sucursal.Nombre);
