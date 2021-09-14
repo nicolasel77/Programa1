@@ -34,12 +34,19 @@ namespace Programa1.Carga.Hacienda
             {
                 cmdBase.Text = "";
             }
-            Cargar_Boletas();
+            Cargar_Listados_Boletas();
 
-            mDesde.SetDate(DateTime.Today.AddDays(-10));
+            string f = datos.Dato_Generico("SELECT MAX(Fecha) FROM Hacienda_Salidas").ToString();
+            DateTime d = DateTime.Today;
+
+            if (DateTime.TryParse(f, out d) == true)
+            {
+                mDesde.Value = d;
+            }
+            mHasta.Value = d.AddDays(5);
         }
 
-        private void Cargar_Boletas()
+        private void Cargar_Listados_Boletas()
         {
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
@@ -50,6 +57,7 @@ namespace Programa1.Carga.Hacienda
             clsAccess.Base_Access = cmdBase.Text;
 
             h.Llenar_List(lstBoletas, clsAccess.Datos_Vista("", "TOP 100 NBoleta", "NBoleta DESC"));
+            h.Llenar_List(lstSistema, datos.Datos_Genericos("SELECT TOP 100 NBoleta FROM NBoletas ORDER BY NBoleta DESC"));
         }
 
         private void cmdSincronizar_Click(object sender, System.EventArgs e)
@@ -207,6 +215,8 @@ namespace Programa1.Carga.Hacienda
             hacienda.compra.Borrar("NBoleta=" + nb);
             hacienda.compra.Matricula.Cargar_Por_Nombre(matricula.ToString());
 
+            lstActualizacion.Items.Add($"Actualizando Compras {nb}");
+
             foreach (DataRow drAccess in acCompras.Rows)
             {
                 hacienda.compra.ID = Convert.ToInt32(drAccess["ID_Compra"]);
@@ -257,6 +267,8 @@ namespace Programa1.Carga.Hacienda
 
             hacienda.Agregados.Borrar("NBoleta=" + nb);
 
+            lstActualizacion.Items.Add($"Actualizando Agregados {nb}");
+
             foreach (DataRow drAccess in acCompras.Rows)
             {
                 hacienda.Agregados.ID = Convert.ToInt32(drAccess["ID_Agregados"]);
@@ -301,6 +313,8 @@ namespace Programa1.Carga.Hacienda
             clsAccess.Vista = "vw_Faena";
             DataTable acFaena = clsAccess.Datos_Vista("NBoleta=" + nb, "ID_Faena, NBoleta, Fecha, ID_Categorias, NRomaneo, Tropa, ID_Productos, ID_Frigorifico, 0.0 AS Recupero, Kilos", "ID_Faena");
 
+            lstActualizacion.Items.Add($"Actualizando Faena {nb}");
+
             foreach (DataRow dr in acFaena.Rows)
             {
                 hacienda.Faena.Agregar_NoID("ID", Convert.ToInt32(dr["ID_Faena"]));
@@ -318,25 +332,25 @@ namespace Programa1.Carga.Hacienda
                 Recupero recu = new Recupero();
 
                 hacienda.Faena.Actualizar("Recupero", recu.Buscar(Convert.ToDateTime(dr["Fecha"]), Convert.ToInt32(dr["ID_Productos"]), Convert.ToInt32(dr["ID_Frigorifico"]), hacienda.nBoletas.Directo));
-
             }
+
             hacienda.nBoletas.Actualizar_CostoFinal(nb);
         }
 
         private void Cargar_Salida()
         {
             Hacienda_Salidas salidas_sistema = new Hacienda_Salidas("Hacienda_Salidas", "vw_Hacienda_Salidas");
-            salidas_sistema.Borrar($"Fecha BETWEEN '{mDesde.SelectionStart:MM/dd/yy}' AND '{mHasta.SelectionStart:MM/dd/yy}'");
+            salidas_sistema.Borrar($"Fecha BETWEEN '{mDesde.Value:MM/dd/yy}' AND '{mHasta.Value:MM/dd/yy}'");
 
             c_Base_Access clsAccess = new c_Base_Access("Salidas", "vw_Salidas");
             clsAccess.Campo_ID = "ID_Salidas";
             clsAccess.Base_Access = cmdBase.Text;
 
-            DataTable dtFechas = clsAccess.Datos_Vista($"Fecha BETWEEN #{mDesde.SelectionStart:MM/dd/yy}# AND #{mHasta.SelectionStart:MM/dd/yy}#", "Fecha", "Fecha", "Fecha");
+            DataTable dtFechas = clsAccess.Datos_Vista($"Fecha BETWEEN #{mDesde.Value:MM/dd/yy}# AND #{mHasta.Value:MM/dd/yy}#", "Fecha", "Fecha", "Fecha");
 
             if (dtFechas != null)
             {
-                foreach (DataRow drF in dtFechas.Rows)               
+                foreach (DataRow drF in dtFechas.Rows)
                 {
                     lstActualizacion.Items.Insert(0, $"Salida: {Convert.ToDateTime(drF["Fecha"]):dd/MM}");
                     Application.DoEvents();
@@ -392,7 +406,7 @@ namespace Programa1.Carga.Hacienda
                 {
                     hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldoBoleta {dr["ID_Consignatarios"]}, {nb}");
                     lstActualizacion.Items.Add($"Actualizando saldo NB {nb} Consig {dr["ID_Consignatarios"]}");
-                    
+
                 }
             }
         }
@@ -402,35 +416,13 @@ namespace Programa1.Carga.Hacienda
             Cargar_Salida();
         }
 
-        private void cmdSaldos_Click(object sender, EventArgs e)
-        {
-            if (chSaldo.Checked == true)
-            {
-                if (lstBoletas.SelectedIndex > -1)
-                {
-                    this.Cursor = Cursors.WaitCursor;
-                    DB.Hacienda hacienda = new DB.Hacienda();
 
-                    int nb = Convert.ToInt32(lstBoletas.Text);
-
-                    DataTable dt = hacienda.compra.Datos_Vista("NBoleta>=" + nb, "ID_Consignatarios, Nombre, NBoleta", "NBoleta", "NBoleta, ID_Consignatarios, Nombre");
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        cmdSaldos.Text = $"{dr["Nombre"]} NBoleta {dr["NBoleta"]}";
-                        Application.DoEvents();
-                        hacienda.compra.Ejecutar_Comando($"EXEC sp_ActualizarSaldoBoleta {dr["ID_Consignatarios"]}, {dr["NBoleta"]}");
-                        lstActualizacion.Items.Add($"Actualizando saldo NB {nb} Consig {dr["ID_Consignatarios"]}");
-                    }
-                    this.Cursor = Cursors.Default;
-                }
-            }
-        }
 
         private void lstBoletas_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle)
             {
-                Cargar_Boletas();
+                Cargar_Listados_Boletas();
             }
         }
 
@@ -475,37 +467,39 @@ namespace Programa1.Carga.Hacienda
 
         private void txtBoleta_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((short)e.KeyChar == 13)
-            {
-                e.Handled = true;
-                if (txtBoleta.TextLength != 0)
-                {
-                    if (txtHasta.Text == "")
-                    {
-                        Cargar(Convert.ToInt32(txtBoleta.Text));
-                    }
-                    else
-                    {
-                        for (int i = Convert.ToInt32(txtBoleta.Text); i <= Convert.ToInt32(txtHasta.Text); i++)
-                        {
-                            lstActualizacion.Items.Insert(0, $"Actualizando {i}");
-                            Application.DoEvents();
-                            Cargar(i);
-                        }
-                    }
-                }
-            }
+            txtHasta.Focus();
         }
 
         private void cmdCostos_Salida_Click(object sender, EventArgs e)
         {
             Hacienda_Salidas hs = new Hacienda_Salidas();
-            DateTime f1 = mDesde.SelectionStart;
-            DateTime f2 = mHasta.SelectionStart;
+            DateTime f1 = mDesde.Value;
+            DateTime f2 = mHasta.Value;
             lstActualizacion.Items.Insert(0, $"Salidas desde {f1:d} - hasta {f2:d}");
             Application.DoEvents();
             hs.Actualizar_Costos(f1, f2);
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (txtBoleta.TextLength != 0)
+            {
+                if (txtHasta.Text == "")
+                {
+                    Cargar(Convert.ToInt32(txtBoleta.Text));
+                }
+                else
+                {
+                    for (int i = Convert.ToInt32(txtBoleta.Text); i <= Convert.ToInt32(txtHasta.Text); i++)
+                    {
+                        lstActualizacion.Items.Insert(0, $"Actualizando {i}");
+                        Application.DoEvents();
+                        Cargar(i);
+                    }
+                }
+            }
+        }
     }
 }
+

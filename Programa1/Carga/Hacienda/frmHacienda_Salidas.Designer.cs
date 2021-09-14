@@ -25,21 +25,21 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdSalida = new Grilla2.SpeedGrilla();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.cFecha = new Programa1.Controles.cFechas();
-            this.cSucursal = new Programa1.Controles.cSucursales();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.chMediasUsadas = new MaterialSkin.Controls.MaterialCheckBox();
             this.grdResumen = new Grilla2.SpeedGrilla();
-            this.txtNRomaneo = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lstBoletas = new System.Windows.Forms.ListBox();
             this.lstTropas = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.cProds = new Programa1.Controles.cProductos();
             this.cmdLimpiar = new System.Windows.Forms.Button();
             this.cmdMostrar = new System.Windows.Forms.Button();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
+            this.cFecha = new Programa1.Controles.cFechas();
+            this.cSucursal = new Programa1.Controles.cSucursales();
+            this.cProds = new Programa1.Controles.cProductos();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -53,6 +53,10 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -182,8 +186,7 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer3.Panel1.Controls.Add(this.cFecha);
-            this.splitContainer3.Panel1.Controls.Add(this.cSucursal);
+            this.splitContainer3.Panel1.Controls.Add(this.splitContainer2);
             // 
             // splitContainer3.Panel2
             // 
@@ -192,38 +195,6 @@
             this.splitContainer3.Size = new System.Drawing.Size(552, 687);
             this.splitContainer3.SplitterDistance = 278;
             this.splitContainer3.TabIndex = 0;
-            // 
-            // cFecha
-            // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(3, 493);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Mostrar = 1;
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(279, 191);
-            this.cFecha.TabIndex = 3;
-            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
-            // 
-            // cSucursal
-            // 
-            this.cSucursal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cSucursal.BackColor = System.Drawing.Color.Gainsboro;
-            this.cSucursal.Filtro_In = "";
-            this.cSucursal.Location = new System.Drawing.Point(3, 3);
-            this.cSucursal.Mostrar_Botones = true;
-            this.cSucursal.Mostrar_Tipo = true;
-            this.cSucursal.Name = "cSucursal";
-            this.cSucursal.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.cSucursal.Size = new System.Drawing.Size(272, 484);
-            this.cSucursal.TabIndex = 3;
-            this.cSucursal.Titulo = "Sucursales";
-            this.cSucursal.Valor_Actual = -1;
-            this.cSucursal.Cambio_Seleccion += new System.EventHandler(this.Csuc_Cambio_Seleccion);
             // 
             // splitContainer5
             // 
@@ -236,7 +207,6 @@
             // 
             this.splitContainer5.Panel1.Controls.Add(this.chMediasUsadas);
             this.splitContainer5.Panel1.Controls.Add(this.grdResumen);
-            this.splitContainer5.Panel1.Controls.Add(this.txtNRomaneo);
             this.splitContainer5.Panel1.Controls.Add(this.label1);
             this.splitContainer5.Panel1.Controls.Add(this.label2);
             this.splitContainer5.Panel1.Controls.Add(this.lstBoletas);
@@ -255,8 +225,8 @@
             // 
             this.chMediasUsadas.AutoSize = true;
             this.chMediasUsadas.Depth = 0;
-            this.chMediasUsadas.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chMediasUsadas.Location = new System.Drawing.Point(0, 132);
+            this.chMediasUsadas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chMediasUsadas.Location = new System.Drawing.Point(5, 151);
             this.chMediasUsadas.Margin = new System.Windows.Forms.Padding(0);
             this.chMediasUsadas.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chMediasUsadas.MouseState = MaterialSkin.MouseState.HOVER;
@@ -298,25 +268,8 @@
             this.grdResumen.Redraw = true;
             this.grdResumen.Row = 0;
             this.grdResumen.Rows = 50;
-            this.grdResumen.Size = new System.Drawing.Size(263, 326);
+            this.grdResumen.Size = new System.Drawing.Size(263, 334);
             this.grdResumen.TabIndex = 6;
-            // 
-            // txtNRomaneo
-            // 
-            this.txtNRomaneo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNRomaneo.Depth = 0;
-            this.txtNRomaneo.Hint = "Buscar Romaneo";
-            this.txtNRomaneo.Location = new System.Drawing.Point(7, 165);
-            this.txtNRomaneo.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtNRomaneo.Name = "txtNRomaneo";
-            this.txtNRomaneo.PasswordChar = '\0';
-            this.txtNRomaneo.SelectedText = "";
-            this.txtNRomaneo.SelectionLength = 0;
-            this.txtNRomaneo.SelectionStart = 0;
-            this.txtNRomaneo.Size = new System.Drawing.Size(268, 23);
-            this.txtNRomaneo.TabIndex = 2;
-            this.txtNRomaneo.UseSystemPasswordChar = false;
             // 
             // label1
             // 
@@ -349,7 +302,7 @@
             this.lstBoletas.ItemHeight = 18;
             this.lstBoletas.Location = new System.Drawing.Point(5, 21);
             this.lstBoletas.Name = "lstBoletas";
-            this.lstBoletas.Size = new System.Drawing.Size(70, 108);
+            this.lstBoletas.Size = new System.Drawing.Size(70, 126);
             this.lstBoletas.TabIndex = 0;
             this.lstBoletas.SelectedIndexChanged += new System.EventHandler(this.LstBoletas_SelectedIndexChanged);
             this.lstBoletas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LstBoletas_MouseUp);
@@ -363,14 +316,12 @@
             this.lstTropas.ItemHeight = 18;
             this.lstTropas.Location = new System.Drawing.Point(81, 21);
             this.lstTropas.Name = "lstTropas";
-            this.lstTropas.Size = new System.Drawing.Size(70, 108);
+            this.lstTropas.Size = new System.Drawing.Size(70, 126);
             this.lstTropas.TabIndex = 0;
             this.lstTropas.SelectedIndexChanged += new System.EventHandler(this.LstBoletas_SelectedIndexChanged);
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.label3.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
@@ -380,26 +331,10 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "Resumen";
             // 
-            // cProds
-            // 
-            this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cProds.BackColor = System.Drawing.Color.Gainsboro;
-            this.cProds.Filtrar_Ver = false;
-            this.cProds.Filtro_In = "";
-            this.cProds.Location = new System.Drawing.Point(0, 3);
-            this.cProds.Mostrar_Tipo = false;
-            this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(267, 112);
-            this.cProds.TabIndex = 0;
-            this.cProds.Titulo = "Productos";
-            this.cProds.Valor_Actual = -1;
-            this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
-            // 
             // cmdLimpiar
             // 
             this.cmdLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmdLimpiar.Location = new System.Drawing.Point(1224, 690);
             this.cmdLimpiar.Name = "cmdLimpiar";
             this.cmdLimpiar.Size = new System.Drawing.Size(100, 23);
@@ -411,6 +346,7 @@
             // cmdMostrar
             // 
             this.cmdMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdMostrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmdMostrar.Location = new System.Drawing.Point(1330, 690);
             this.cmdMostrar.Name = "cmdMostrar";
             this.cmdMostrar.Size = new System.Drawing.Size(100, 23);
@@ -424,6 +360,68 @@
             this.tiMensaje.Enabled = true;
             this.tiMensaje.Interval = 8000;
             this.tiMensaje.Tick += new System.EventHandler(this.TiMensaje_Tick);
+            // 
+            // cFecha
+            // 
+            this.cFecha.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(0, 0);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 1;
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(278, 196);
+            this.cFecha.TabIndex = 3;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
+            // 
+            // cSucursal
+            // 
+            this.cSucursal.BackColor = System.Drawing.Color.Gainsboro;
+            this.cSucursal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cSucursal.Filtro_In = "";
+            this.cSucursal.Location = new System.Drawing.Point(0, 0);
+            this.cSucursal.Mostrar_Botones = true;
+            this.cSucursal.Mostrar_Tipo = false;
+            this.cSucursal.Name = "cSucursal";
+            this.cSucursal.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.cSucursal.Size = new System.Drawing.Size(278, 487);
+            this.cSucursal.TabIndex = 3;
+            this.cSucursal.Titulo = "Sucursales";
+            this.cSucursal.Valor_Actual = -1;
+            this.cSucursal.Cambio_Seleccion += new System.EventHandler(this.Csuc_Cambio_Seleccion);
+            // 
+            // cProds
+            // 
+            this.cProds.BackColor = System.Drawing.Color.Gainsboro;
+            this.cProds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cProds.Filtrar_Ver = false;
+            this.cProds.Filtro_In = "";
+            this.cProds.Location = new System.Drawing.Point(0, 0);
+            this.cProds.Mostrar_Tipo = false;
+            this.cProds.Name = "cProds";
+            this.cProds.Size = new System.Drawing.Size(270, 133);
+            this.cProds.TabIndex = 0;
+            this.cProds.Titulo = "Productos";
+            this.cProds.Valor_Actual = -1;
+            this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.cSucursal);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.cFecha);
+            this.splitContainer2.Size = new System.Drawing.Size(278, 687);
+            this.splitContainer2.SplitterDistance = 487;
+            this.splitContainer2.TabIndex = 4;
             // 
             // frmHacienda_Salidas
             // 
@@ -453,6 +451,10 @@
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -480,9 +482,9 @@
         private System.Windows.Forms.ListBox lstBoletas;
         private Controles.cProductos cProds;
         private MaterialSkin.Controls.MaterialCheckBox chMediasUsadas;
-        private MaterialSkin.Controls.MaterialSingleLineTextField txtNRomaneo;
         private Grilla2.SpeedGrilla grdResumen;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.SplitContainer splitContainer5;
+        private System.Windows.Forms.SplitContainer splitContainer2;
     }
 }

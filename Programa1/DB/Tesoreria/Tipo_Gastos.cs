@@ -69,7 +69,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Tipos_Salidas " + filtro, conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Tipos_Salidas {filtro}", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -102,6 +102,8 @@
                 if (filtro.Length != 0) { filtro = "WHERE " + filtro; }
 
                 string s = $"SELECT  {grupoS.Campo_Id}, {grupoS.Campo_Nombre} FROM {grupoS.Tabla} {filtro}";
+                // por si quedó algo viejo
+                s = s.Replace("{grupoS.Campo_Id}", grupoS.Campo_Id);
                 try
                 {
                     SqlCommand comandoSql = new SqlCommand(s, conexionSql);

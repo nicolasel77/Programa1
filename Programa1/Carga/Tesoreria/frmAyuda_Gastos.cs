@@ -72,13 +72,21 @@ namespace Programa1.Carga.Tesoreria
         {
             DataTable dt = new DataTable();
             string sf = "";
-
+            int n = 0;
             lst.Items.Clear();
 
             switch (Opcion)
             {
                 case TOpcion.gCaja:
-                    if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'"; }
+
+                    if (txtBuscar.Text.Length != 0)
+                    {
+                        sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
+                        if (int.TryParse(txtBuscar.Text, out n) == true)
+                        {
+                            sf = $"{sf} OR CONVERT(varchar, ID) LIKE '%{n}%'";
+                        }
+                    }
 
                     dt = gCajas.Datos(sf);
 
@@ -88,7 +96,14 @@ namespace Programa1.Carga.Tesoreria
                     }
                     break;
                 case TOpcion.gTipo:
-                    if (txtBuscar.Text.Length != 0) { sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'"; }
+                    if (txtBuscar.Text.Length != 0) 
+                    { 
+                        sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
+                        if (int.TryParse(txtBuscar.Text, out n) == true)
+                        {
+                            sf = $"{sf} OR CONVERT(varchar, Id_Tipo) LIKE '%{n}%'";
+                        }
+                    }
 
                     dt = TGastos.Datos(sf);
                     foreach (DataRow dr in dt.Rows)
@@ -107,6 +122,10 @@ namespace Programa1.Carga.Tesoreria
                         else
                         {
                             sf = $"{TGastos.grupoS.Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
+                        }
+                        if (int.TryParse(txtBuscar.Text, out n) == true)
+                        {
+                            sf = $"{sf} OR CONVERT(varchar, {"{grupoS.Campo_Id}"}) LIKE '%{n}%'";
                         }
                     }
                     else
@@ -129,6 +148,10 @@ namespace Programa1.Carga.Tesoreria
                         if (Filtro_Tipo.Length > 0)
                         {
                             sf = $"{Filtro_Tipo} AND Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
+                        }
+                        if (int.TryParse(txtBuscar.Text, out n) == true)
+                        {
+                            sf = $"{sf} OR CONVERT(varchar, ID_Detalle) LIKE '%{n}%'";
                         }
                     }
                     else
@@ -213,13 +236,13 @@ namespace Programa1.Carga.Tesoreria
             if (e.KeyChar == Convert.ToChar(13))
             {
                 e.Handled = true;
-                if (lst.Items.Count == 1) 
+                if (lst.Items.Count == 1)
                 {
                     Valor = lst.Items[0].ToString();
                 }
                 else
                 {
-                    Valor = lst.Text; 
+                    Valor = lst.Text;
                 }
                 this.Hide();
             }
