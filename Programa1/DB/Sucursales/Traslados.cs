@@ -8,7 +8,7 @@ namespace Programa1.DB
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    public class Traslados: c_Base
+    public class Traslados : c_Base
     {
         public Traslados()
         {
@@ -81,6 +81,12 @@ namespace Programa1.DB
             {
                 MessageBox.Show(e.Message, "Error");
             }
+        }
+
+        public int Producto_Siguiente()
+        {
+            Producto.Siguiente(" ver = 1 ");
+            return Producto.ID;
         }
 
         public void Cargar_Fila(int id)

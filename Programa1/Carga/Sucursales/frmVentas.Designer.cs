@@ -30,12 +30,12 @@
             this.rdSuc = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdNada = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdFecha = new MaterialSkin.Controls.MaterialRadioButton();
-            this.grdVenta = new Grilla2.SpeedGrilla();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.cSucursal = new Programa1.Controles.cSucursales();
             this.cProds = new Programa1.Controles.cProductos();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.chCamiones = new MaterialSkin.Controls.MaterialCheckBox();
             this.chCantidades = new MaterialSkin.Controls.MaterialCheckBox();
             this.lstCamiones = new System.Windows.Forms.ListBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
@@ -56,7 +56,7 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
-            this.chCamiones = new MaterialSkin.Controls.MaterialCheckBox();
+            this.grdVenta = new Grilla2.SpeedGrilla();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -276,47 +276,6 @@
             this.rdFecha.UseVisualStyleBackColor = true;
             this.rdFecha.CheckedChanged += new System.EventHandler(this.rdFecha_CheckedChanged);
             // 
-            // grdVenta
-            // 
-            this.grdVenta.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdVenta.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdVenta.AutoResize = false;
-            this.grdVenta.bColor = System.Drawing.SystemColors.Window;
-            this.grdVenta.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.grdVenta.bFColor = System.Drawing.SystemColors.WindowText;
-            this.grdVenta.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdVenta.Col = 0;
-            this.grdVenta.Cols = 10;
-            this.grdVenta.DataMember = "";
-            this.grdVenta.DataSource = null;
-            this.grdVenta.EnableEdicion = true;
-            this.grdVenta.Encabezado = "";
-            this.grdVenta.fColor = System.Drawing.SystemColors.Control;
-            this.grdVenta.FixCols = 0;
-            this.grdVenta.FixRows = 0;
-            this.grdVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grdVenta.FuenteEncabezado = null;
-            this.grdVenta.FuentePieDePagina = null;
-            this.grdVenta.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdVenta.Location = new System.Drawing.Point(3, 3);
-            this.grdVenta.Name = "grdVenta";
-            this.grdVenta.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdVenta.PintarFilaSel = true;
-            this.grdVenta.Redraw = true;
-            this.grdVenta.Row = 0;
-            this.grdVenta.Rows = 50;
-            this.grdVenta.Size = new System.Drawing.Size(925, 631);
-            this.grdVenta.TabIndex = 0;
-            this.grdVenta.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdVenta_Editado);
-            this.grdVenta.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdVenta_CambioFila);
-            this.grdVenta.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdVenta_KeyUp);
-            this.grdVenta.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.GrdVenta_KeyPress);
-            this.grdVenta.SeleccionCambio += new Grilla2.SpeedGrilla.SeleccionCambioEventHandler(this.grdVenta_SeleccionCambio);
-            this.grdVenta.Click += new Grilla2.SpeedGrilla.ClickEventHandler(this.grdVenta_Click);
-            // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -361,7 +320,7 @@
             this.cSucursal.Filtro_In = "";
             this.cSucursal.Location = new System.Drawing.Point(3, 3);
             this.cSucursal.Mostrar_Botones = true;
-            this.cSucursal.Mostrar_Tipo = false;
+            this.cSucursal.Mostrar_Tipo = true;
             this.cSucursal.Name = "cSucursal";
             this.cSucursal.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucursal.Size = new System.Drawing.Size(284, 319);
@@ -407,6 +366,24 @@
             this.splitContainer4.Size = new System.Drawing.Size(587, 311);
             this.splitContainer4.SplitterDistance = 253;
             this.splitContainer4.TabIndex = 4;
+            // 
+            // chCamiones
+            // 
+            this.chCamiones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chCamiones.AutoSize = true;
+            this.chCamiones.Depth = 0;
+            this.chCamiones.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chCamiones.Location = new System.Drawing.Point(140, 249);
+            this.chCamiones.Margin = new System.Windows.Forms.Padding(0);
+            this.chCamiones.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chCamiones.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chCamiones.Name = "chCamiones";
+            this.chCamiones.Ripple = true;
+            this.chCamiones.Size = new System.Drawing.Size(92, 30);
+            this.chCamiones.TabIndex = 9;
+            this.chCamiones.Text = "Camiones";
+            this.chCamiones.UseVisualStyleBackColor = true;
+            this.chCamiones.CheckedChanged += new System.EventHandler(this.chCamiones_CheckedChanged);
             // 
             // chCantidades
             // 
@@ -479,7 +456,7 @@
             this.cProveedores.BackColor = System.Drawing.Color.Gainsboro;
             this.cProveedores.Filtro_In = "";
             this.cProveedores.Location = new System.Drawing.Point(0, 0);
-            this.cProveedores.Mostrar_Tipo = false;
+            this.cProveedores.Mostrar_Tipo = true;
             this.cProveedores.Name = "cProveedores";
             this.cProveedores.Size = new System.Drawing.Size(327, 311);
             this.cProveedores.TabIndex = 2;
@@ -678,23 +655,46 @@
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
             // 
-            // chCamiones
+            // grdVenta
             // 
-            this.chCamiones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chCamiones.AutoSize = true;
-            this.chCamiones.Depth = 0;
-            this.chCamiones.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chCamiones.Location = new System.Drawing.Point(140, 249);
-            this.chCamiones.Margin = new System.Windows.Forms.Padding(0);
-            this.chCamiones.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chCamiones.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chCamiones.Name = "chCamiones";
-            this.chCamiones.Ripple = true;
-            this.chCamiones.Size = new System.Drawing.Size(92, 30);
-            this.chCamiones.TabIndex = 9;
-            this.chCamiones.Text = "Camiones";
-            this.chCamiones.UseVisualStyleBackColor = true;
-            this.chCamiones.CheckedChanged += new System.EventHandler(this.chCamiones_CheckedChanged);
+            this.grdVenta.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdVenta.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdVenta.AutoResize = false;
+            this.grdVenta.bColor = System.Drawing.SystemColors.Window;
+            this.grdVenta.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdVenta.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdVenta.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdVenta.Col = 0;
+            this.grdVenta.Cols = 10;
+            this.grdVenta.DataMember = "";
+            this.grdVenta.DataSource = null;
+            this.grdVenta.EnableEdicion = true;
+            this.grdVenta.Encabezado = "";
+            this.grdVenta.fColor = System.Drawing.SystemColors.Control;
+            this.grdVenta.FixCols = 0;
+            this.grdVenta.FixRows = 0;
+            this.grdVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdVenta.FuenteEncabezado = null;
+            this.grdVenta.FuentePieDePagina = null;
+            this.grdVenta.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdVenta.Location = new System.Drawing.Point(3, 3);
+            this.grdVenta.Name = "grdVenta";
+            this.grdVenta.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdVenta.PintarFilaSel = true;
+            this.grdVenta.Redraw = true;
+            this.grdVenta.Row = 0;
+            this.grdVenta.Rows = 50;
+            this.grdVenta.Size = new System.Drawing.Size(925, 631);
+            this.grdVenta.TabIndex = 0;
+            this.grdVenta.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdVenta_Editado);
+            this.grdVenta.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdVenta_CambioFila);
+            this.grdVenta.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdVenta_KeyUp);
+            this.grdVenta.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.GrdVenta_KeyPress);
+            this.grdVenta.SeleccionCambio += new Grilla2.SpeedGrilla.SeleccionCambioEventHandler(this.grdVenta_SeleccionCambio);
+            this.grdVenta.Click += new Grilla2.SpeedGrilla.ClickEventHandler(this.grdVenta_Click);
             // 
             // frmVentas
             // 
@@ -751,7 +751,6 @@
 
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private Grilla2.SpeedGrilla grdVenta;
         private Controles.cProductos cProds;
         private System.Windows.Forms.Timer tiMensaje;
         private System.Windows.Forms.ToolStripStatusLabel lblMensaje;
@@ -791,5 +790,6 @@
         private MaterialSkin.Controls.MaterialFlatButton cmdHerramientas;
         private MaterialSkin.Controls.MaterialCheckBox chCantidades;
         private MaterialSkin.Controls.MaterialCheckBox chCamiones;
+        private Grilla2.SpeedGrilla grdVenta;
     }
 }

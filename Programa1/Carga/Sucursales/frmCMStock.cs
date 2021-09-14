@@ -59,6 +59,7 @@
             grdOriginal.set_ColW(grdOriginal.get_ColIndex("Costo"), 60);
             grdOriginal.set_ColW(grdOriginal.get_ColIndex("Kilos"), 60);
             grdOriginal.set_ColW(grdOriginal.get_ColIndex("Total"), 80);
+            grdOriginal.set_ColW(grdOriginal.get_ColIndex("Id_Tipo"), 0);
 
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Costo")].Format = "C2";
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Kilos")].Format = "N2";
@@ -78,6 +79,7 @@
             grdResultado.set_ColW(grdResultado.get_ColIndex("Costo"), 60);
             grdResultado.set_ColW(grdResultado.get_ColIndex("Kilos"), 60);
             grdResultado.set_ColW(grdResultado.get_ColIndex("Total"), 80);
+            grdResultado.set_ColW(grdResultado.get_ColIndex("Id_Tipo"), 0);
 
             grdResultado.Columnas[grdResultado.get_ColIndex("Costo")].Format = "C2";
             grdResultado.Columnas[grdResultado.get_ColIndex("Kilos")].Format = "N2";

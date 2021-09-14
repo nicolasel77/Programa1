@@ -2,8 +2,8 @@
 {
     using Programa1.DB;
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
-    using System.Threading;
     using System.Windows.Forms;
 
     public partial class frmOfertas : Form
@@ -487,23 +487,23 @@
         {
             if (grdOfertas.Rows > 2)
             {
-                //frmCMOfertas cm = new frmCMOfertas();
-                //List<int> n = new List<int>();
+                frmCMOfertas cm = new frmCMOfertas();
+                List<int> n = new List<int>();
 
-                //int d = grdOfertas.Selection.r1;
-                //int h = grdOfertas.Selection.r2;
-                //if (d == -1)
-                //{
-                //    d = 1;
-                //    h = grdOfertas.Rows - 2;
-                //}
-                //for (int i = d; i <= h; i++)
-                //{
-                //    n.Add(Convert.ToInt32(grdOfertas.get_Texto(i, c_Id)));
-                //}
-                //cm.Ids = n;
-                //cm.ShowDialog();
-                //cmdMostrar.PerformClick();
+                int d = grdOfertas.Selection.r1;
+                int h = grdOfertas.Selection.r2;
+                if (d == -1)
+                {
+                    d = 1;
+                    h = grdOfertas.Rows - 2;
+                }
+                for (int i = d; i <= h; i++)
+                {
+                    n.Add(Convert.ToInt32(grdOfertas.get_Texto(i, c_Id)));
+                }
+                cm.Ids = n;
+                cm.ShowDialog();
+                cmdMostrar.PerformClick();
             }
         }
 

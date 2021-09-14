@@ -30,6 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCMTraslados));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.txtCostoEntrada = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.rdManualEntrada = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdAutoEntrada = new MaterialSkin.Controls.MaterialRadioButton();
+            this.chCostoEntrada = new MaterialSkin.Controls.MaterialCheckBox();
             this.cmdGuardar = new System.Windows.Forms.Button();
             this.txtKilos = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtDescripcion = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -37,12 +42,14 @@
             this.rdManual = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdAuto = new MaterialSkin.Controls.MaterialRadioButton();
             this.cmbProds = new System.Windows.Forms.ComboBox();
+            this.cmbSucEntrada = new System.Windows.Forms.ComboBox();
             this.cmbSucSalida = new System.Windows.Forms.ComboBox();
             this.dtFecha = new System.Windows.Forms.DateTimePicker();
             this.chKilos = new MaterialSkin.Controls.MaterialCheckBox();
             this.chCostoSalida = new MaterialSkin.Controls.MaterialCheckBox();
             this.chDescripcion = new MaterialSkin.Controls.MaterialCheckBox();
             this.chProd = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chSucEntrada = new MaterialSkin.Controls.MaterialCheckBox();
             this.chSucSalida = new MaterialSkin.Controls.MaterialCheckBox();
             this.chFecha = new MaterialSkin.Controls.MaterialCheckBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -52,24 +59,19 @@
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.lblTotalR = new System.Windows.Forms.ToolStripStatusLabel();
             this.grdResultado = new Grilla2.SpeedGrilla();
-            this.chCostoEntrada = new MaterialSkin.Controls.MaterialCheckBox();
-            this.rdAutoEntrada = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdManualEntrada = new MaterialSkin.Controls.MaterialRadioButton();
-            this.txtCostoEntrada = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.chSucEntrada = new MaterialSkin.Controls.MaterialCheckBox();
-            this.cmbSucEntrada = new System.Windows.Forms.ComboBox();
+            this.txtCantidad = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.chCantidad = new MaterialSkin.Controls.MaterialCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.statusStrip2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -83,6 +85,8 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.txtCantidad);
+            this.splitContainer1.Panel1.Controls.Add(this.chCantidad);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             this.splitContainer1.Panel1.Controls.Add(this.cmdGuardar);
             this.splitContainer1.Panel1.Controls.Add(this.txtKilos);
@@ -109,6 +113,90 @@
             this.splitContainer1.Size = new System.Drawing.Size(1222, 639);
             this.splitContainer1.SplitterDistance = 143;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.txtCostoEntrada);
+            this.panel1.Controls.Add(this.rdManualEntrada);
+            this.panel1.Controls.Add(this.rdAutoEntrada);
+            this.panel1.Controls.Add(this.chCostoEntrada);
+            this.panel1.Location = new System.Drawing.Point(673, 74);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(291, 74);
+            this.panel1.TabIndex = 6;
+            // 
+            // txtCostoEntrada
+            // 
+            this.txtCostoEntrada.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtCostoEntrada.Depth = 0;
+            this.txtCostoEntrada.Enabled = false;
+            this.txtCostoEntrada.Hint = " Costo nuevo";
+            this.txtCostoEntrada.Location = new System.Drawing.Point(145, 36);
+            this.txtCostoEntrada.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtCostoEntrada.Name = "txtCostoEntrada";
+            this.txtCostoEntrada.PasswordChar = '\0';
+            this.txtCostoEntrada.SelectedText = "";
+            this.txtCostoEntrada.SelectionLength = 0;
+            this.txtCostoEntrada.SelectionStart = 0;
+            this.txtCostoEntrada.Size = new System.Drawing.Size(108, 23);
+            this.txtCostoEntrada.TabIndex = 4;
+            this.txtCostoEntrada.UseSystemPasswordChar = false;
+            this.txtCostoEntrada.TextChanged += new System.EventHandler(this.TxtCosto_TextChanged);
+            // 
+            // rdManualEntrada
+            // 
+            this.rdManualEntrada.AutoSize = true;
+            this.rdManualEntrada.Checked = true;
+            this.rdManualEntrada.Depth = 0;
+            this.rdManualEntrada.Enabled = false;
+            this.rdManualEntrada.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdManualEntrada.Location = new System.Drawing.Point(64, 33);
+            this.rdManualEntrada.Margin = new System.Windows.Forms.Padding(0);
+            this.rdManualEntrada.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdManualEntrada.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdManualEntrada.Name = "rdManualEntrada";
+            this.rdManualEntrada.Ripple = true;
+            this.rdManualEntrada.Size = new System.Drawing.Size(78, 30);
+            this.rdManualEntrada.TabIndex = 3;
+            this.rdManualEntrada.TabStop = true;
+            this.rdManualEntrada.Text = "Manual:";
+            this.rdManualEntrada.UseVisualStyleBackColor = true;
+            // 
+            // rdAutoEntrada
+            // 
+            this.rdAutoEntrada.AutoSize = true;
+            this.rdAutoEntrada.Depth = 0;
+            this.rdAutoEntrada.Enabled = false;
+            this.rdAutoEntrada.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdAutoEntrada.Location = new System.Drawing.Point(2, 33);
+            this.rdAutoEntrada.Margin = new System.Windows.Forms.Padding(0);
+            this.rdAutoEntrada.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdAutoEntrada.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdAutoEntrada.Name = "rdAutoEntrada";
+            this.rdAutoEntrada.Ripple = true;
+            this.rdAutoEntrada.Size = new System.Drawing.Size(58, 30);
+            this.rdAutoEntrada.TabIndex = 3;
+            this.rdAutoEntrada.Text = "Auto";
+            this.rdAutoEntrada.UseVisualStyleBackColor = true;
+            this.rdAutoEntrada.CheckedChanged += new System.EventHandler(this.RdAuto_CheckedChanged);
+            // 
+            // chCostoEntrada
+            // 
+            this.chCostoEntrada.AutoSize = true;
+            this.chCostoEntrada.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chCostoEntrada.Depth = 0;
+            this.chCostoEntrada.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.chCostoEntrada.Location = new System.Drawing.Point(1, 0);
+            this.chCostoEntrada.Margin = new System.Windows.Forms.Padding(0);
+            this.chCostoEntrada.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chCostoEntrada.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chCostoEntrada.Name = "chCostoEntrada";
+            this.chCostoEntrada.Ripple = true;
+            this.chCostoEntrada.Size = new System.Drawing.Size(117, 30);
+            this.chCostoEntrada.TabIndex = 0;
+            this.chCostoEntrada.Text = "Costo Entrada";
+            this.chCostoEntrada.UseVisualStyleBackColor = true;
+            this.chCostoEntrada.CheckedChanged += new System.EventHandler(this.ChCostoEntrada_CheckedChanged);
             // 
             // cmdGuardar
             // 
@@ -227,6 +315,19 @@
             this.cmbProds.Text = "Seleccionar";
             this.cmbProds.SelectedIndexChanged += new System.EventHandler(this.CmbProds_SelectedIndexChanged);
             // 
+            // cmbSucEntrada
+            // 
+            this.cmbSucEntrada.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cmbSucEntrada.Enabled = false;
+            this.cmbSucEntrada.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.cmbSucEntrada.FormattingEnabled = true;
+            this.cmbSucEntrada.Location = new System.Drawing.Point(139, 107);
+            this.cmbSucEntrada.Name = "cmbSucEntrada";
+            this.cmbSucEntrada.Size = new System.Drawing.Size(175, 26);
+            this.cmbSucEntrada.TabIndex = 2;
+            this.cmbSucEntrada.Text = "Seleccionar";
+            this.cmbSucEntrada.SelectedIndexChanged += new System.EventHandler(this.CmbSucs_SelectedIndexChanged);
+            // 
             // cmbSucSalida
             // 
             this.cmbSucSalida.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -323,6 +424,24 @@
             this.chProd.Text = "Producto";
             this.chProd.UseVisualStyleBackColor = true;
             this.chProd.CheckedChanged += new System.EventHandler(this.ChProd_CheckedChanged);
+            // 
+            // chSucEntrada
+            // 
+            this.chSucEntrada.AutoSize = true;
+            this.chSucEntrada.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chSucEntrada.Depth = 0;
+            this.chSucEntrada.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.chSucEntrada.Location = new System.Drawing.Point(134, 74);
+            this.chSucEntrada.Margin = new System.Windows.Forms.Padding(0);
+            this.chSucEntrada.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chSucEntrada.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chSucEntrada.Name = "chSucEntrada";
+            this.chSucEntrada.Ripple = true;
+            this.chSucEntrada.Size = new System.Drawing.Size(134, 30);
+            this.chSucEntrada.TabIndex = 0;
+            this.chSucEntrada.Text = "Sucursal Entrada";
+            this.chSucEntrada.UseVisualStyleBackColor = true;
+            this.chSucEntrada.CheckedChanged += new System.EventHandler(this.ChSucursalEntrada_CheckedChanged);
             // 
             // chSucSalida
             // 
@@ -477,120 +596,41 @@
             this.grdResultado.Size = new System.Drawing.Size(1222, 286);
             this.grdResultado.TabIndex = 1;
             // 
-            // chCostoEntrada
+            // txtCantidad
             // 
-            this.chCostoEntrada.AutoSize = true;
-            this.chCostoEntrada.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chCostoEntrada.Depth = 0;
-            this.chCostoEntrada.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.chCostoEntrada.Location = new System.Drawing.Point(1, 0);
-            this.chCostoEntrada.Margin = new System.Windows.Forms.Padding(0);
-            this.chCostoEntrada.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chCostoEntrada.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chCostoEntrada.Name = "chCostoEntrada";
-            this.chCostoEntrada.Ripple = true;
-            this.chCostoEntrada.Size = new System.Drawing.Size(117, 30);
-            this.chCostoEntrada.TabIndex = 0;
-            this.chCostoEntrada.Text = "Costo Entrada";
-            this.chCostoEntrada.UseVisualStyleBackColor = true;
-            this.chCostoEntrada.CheckedChanged += new System.EventHandler(this.ChCostoEntrada_CheckedChanged);
+            this.txtCantidad.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtCantidad.Depth = 0;
+            this.txtCantidad.Enabled = false;
+            this.txtCantidad.Hint = "Cantidad";
+            this.txtCantidad.Location = new System.Drawing.Point(977, 110);
+            this.txtCantidad.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.PasswordChar = '\0';
+            this.txtCantidad.SelectedText = "";
+            this.txtCantidad.SelectionLength = 0;
+            this.txtCantidad.SelectionStart = 0;
+            this.txtCantidad.Size = new System.Drawing.Size(110, 23);
+            this.txtCantidad.TabIndex = 12;
+            this.txtCantidad.UseSystemPasswordChar = false;
+            this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
             // 
-            // rdAutoEntrada
+            // chCantidad
             // 
-            this.rdAutoEntrada.AutoSize = true;
-            this.rdAutoEntrada.Depth = 0;
-            this.rdAutoEntrada.Enabled = false;
-            this.rdAutoEntrada.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdAutoEntrada.Location = new System.Drawing.Point(2, 33);
-            this.rdAutoEntrada.Margin = new System.Windows.Forms.Padding(0);
-            this.rdAutoEntrada.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdAutoEntrada.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdAutoEntrada.Name = "rdAutoEntrada";
-            this.rdAutoEntrada.Ripple = true;
-            this.rdAutoEntrada.Size = new System.Drawing.Size(58, 30);
-            this.rdAutoEntrada.TabIndex = 3;
-            this.rdAutoEntrada.Text = "Auto";
-            this.rdAutoEntrada.UseVisualStyleBackColor = true;
-            this.rdAutoEntrada.CheckedChanged += new System.EventHandler(this.RdAuto_CheckedChanged);
-            // 
-            // rdManualEntrada
-            // 
-            this.rdManualEntrada.AutoSize = true;
-            this.rdManualEntrada.Checked = true;
-            this.rdManualEntrada.Depth = 0;
-            this.rdManualEntrada.Enabled = false;
-            this.rdManualEntrada.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdManualEntrada.Location = new System.Drawing.Point(64, 33);
-            this.rdManualEntrada.Margin = new System.Windows.Forms.Padding(0);
-            this.rdManualEntrada.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdManualEntrada.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdManualEntrada.Name = "rdManualEntrada";
-            this.rdManualEntrada.Ripple = true;
-            this.rdManualEntrada.Size = new System.Drawing.Size(78, 30);
-            this.rdManualEntrada.TabIndex = 3;
-            this.rdManualEntrada.TabStop = true;
-            this.rdManualEntrada.Text = "Manual:";
-            this.rdManualEntrada.UseVisualStyleBackColor = true;
-            // 
-            // txtCostoEntrada
-            // 
-            this.txtCostoEntrada.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtCostoEntrada.Depth = 0;
-            this.txtCostoEntrada.Enabled = false;
-            this.txtCostoEntrada.Hint = " Costo nuevo";
-            this.txtCostoEntrada.Location = new System.Drawing.Point(145, 36);
-            this.txtCostoEntrada.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtCostoEntrada.Name = "txtCostoEntrada";
-            this.txtCostoEntrada.PasswordChar = '\0';
-            this.txtCostoEntrada.SelectedText = "";
-            this.txtCostoEntrada.SelectionLength = 0;
-            this.txtCostoEntrada.SelectionStart = 0;
-            this.txtCostoEntrada.Size = new System.Drawing.Size(108, 23);
-            this.txtCostoEntrada.TabIndex = 4;
-            this.txtCostoEntrada.UseSystemPasswordChar = false;
-            this.txtCostoEntrada.TextChanged += new System.EventHandler(this.TxtCosto_TextChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.txtCostoEntrada);
-            this.panel1.Controls.Add(this.rdManualEntrada);
-            this.panel1.Controls.Add(this.rdAutoEntrada);
-            this.panel1.Controls.Add(this.chCostoEntrada);
-            this.panel1.Location = new System.Drawing.Point(673, 74);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(291, 74);
-            this.panel1.TabIndex = 6;
-            // 
-            // chSucEntrada
-            // 
-            this.chSucEntrada.AutoSize = true;
-            this.chSucEntrada.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chSucEntrada.Depth = 0;
-            this.chSucEntrada.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.chSucEntrada.Location = new System.Drawing.Point(134, 74);
-            this.chSucEntrada.Margin = new System.Windows.Forms.Padding(0);
-            this.chSucEntrada.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chSucEntrada.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chSucEntrada.Name = "chSucEntrada";
-            this.chSucEntrada.Ripple = true;
-            this.chSucEntrada.Size = new System.Drawing.Size(134, 30);
-            this.chSucEntrada.TabIndex = 0;
-            this.chSucEntrada.Text = "Sucursal Entrada";
-            this.chSucEntrada.UseVisualStyleBackColor = true;
-            this.chSucEntrada.CheckedChanged += new System.EventHandler(this.ChSucursalEntrada_CheckedChanged);
-            // 
-            // cmbSucEntrada
-            // 
-            this.cmbSucEntrada.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cmbSucEntrada.Enabled = false;
-            this.cmbSucEntrada.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.cmbSucEntrada.FormattingEnabled = true;
-            this.cmbSucEntrada.Location = new System.Drawing.Point(139, 107);
-            this.cmbSucEntrada.Name = "cmbSucEntrada";
-            this.cmbSucEntrada.Size = new System.Drawing.Size(175, 26);
-            this.cmbSucEntrada.TabIndex = 2;
-            this.cmbSucEntrada.Text = "Seleccionar";
-            this.cmbSucEntrada.SelectedIndexChanged += new System.EventHandler(this.CmbSucs_SelectedIndexChanged);
+            this.chCantidad.AutoSize = true;
+            this.chCantidad.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chCantidad.Depth = 0;
+            this.chCantidad.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.chCantidad.Location = new System.Drawing.Point(971, 74);
+            this.chCantidad.Margin = new System.Windows.Forms.Padding(0);
+            this.chCantidad.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chCantidad.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chCantidad.Name = "chCantidad";
+            this.chCantidad.Ripple = true;
+            this.chCantidad.Size = new System.Drawing.Size(85, 30);
+            this.chCantidad.TabIndex = 11;
+            this.chCantidad.Text = "Cantidad";
+            this.chCantidad.UseVisualStyleBackColor = true;
+            this.chCantidad.CheckedChanged += new System.EventHandler(this.chCantidad_CheckedChanged);
             // 
             // frmCMTraslados
             // 
@@ -606,6 +646,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -616,8 +658,6 @@
             this.statusStrip1.PerformLayout();
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -653,5 +693,7 @@
         private MaterialSkin.Controls.MaterialCheckBox chCostoEntrada;
         private System.Windows.Forms.ComboBox cmbSucEntrada;
         private MaterialSkin.Controls.MaterialCheckBox chSucEntrada;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtCantidad;
+        private MaterialSkin.Controls.MaterialCheckBox chCantidad;
     }
 }

@@ -239,6 +239,12 @@
     <Compile Include="Carga\Proveedores\frmAjustes.Designer.cs">
       <DependentUpon>frmAjustes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Proveedores\frmCMCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Proveedores\frmCMCompras.Designer.cs">
+      <DependentUpon>frmCMCompras.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Proveedores\frmDetalle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -274,6 +280,12 @@
     </Compile>
     <Compile Include="Carga\Sucursales\frmCMApicada.Designer.cs">
       <DependentUpon>frmCMApicada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmCMOfertas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmCMOfertas.Designer.cs">
+      <DependentUpon>frmCMOfertas.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Sucursales\frmCMStock.cs">
       <SubType>Form</SubType>
@@ -849,6 +861,9 @@
     <EmbeddedResource Include="Carga\Proveedores\frmAjustes.resx">
       <DependentUpon>frmAjustes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Proveedores\frmCMCompras.resx">
+      <DependentUpon>frmCMCompras.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmDetalle.resx">
       <DependentUpon>frmDetalle.cs</DependentUpon>
     </EmbeddedResource>
@@ -866,6 +881,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmCMApicada.resx">
       <DependentUpon>frmCMApicada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sucursales\frmCMOfertas.resx">
+      <DependentUpon>frmCMOfertas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmCMStock.resx">
       <DependentUpon>frmCMStock.cs</DependentUpon>

@@ -38,6 +38,13 @@
             this.lblTotalE = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblDiferencia = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.rdSucE = new MaterialSkin.Controls.MaterialRadioButton();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.rdProd = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdSucS = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdNada = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdFecha = new MaterialSkin.Controls.MaterialRadioButton();
             this.grdTraslados = new Grilla2.SpeedGrilla();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -49,6 +56,8 @@
             this.cProds = new Programa1.Controles.cProductos();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.cmdHerramientas = new MaterialSkin.Controls.MaterialFlatButton();
             this.paCambio = new System.Windows.Forms.Panel();
             this.cmdCambio = new MaterialSkin.Controls.MaterialFlatButton();
             this.paMostrar = new System.Windows.Forms.Panel();
@@ -60,6 +69,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -73,6 +83,7 @@
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.paCambio.SuspendLayout();
             this.paMostrar.SuspendLayout();
             this.paLimpiar.SuspendLayout();
@@ -150,6 +161,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.panel5);
             this.splitContainer1.Panel1.Controls.Add(this.grdTraslados);
             // 
             // splitContainer1.Panel2
@@ -160,6 +172,121 @@
             this.splitContainer1.SplitterDistance = 831;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.Controls.Add(this.rdSucE);
+            this.panel5.Controls.Add(this.materialLabel2);
+            this.panel5.Controls.Add(this.rdProd);
+            this.panel5.Controls.Add(this.rdSucS);
+            this.panel5.Controls.Add(this.rdNada);
+            this.panel5.Controls.Add(this.rdFecha);
+            this.panel5.Location = new System.Drawing.Point(600, 599);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(228, 85);
+            this.panel5.TabIndex = 7;
+            this.panel5.Visible = false;
+            // 
+            // rdSucE
+            // 
+            this.rdSucE.AutoSize = true;
+            this.rdSucE.Depth = 0;
+            this.rdSucE.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdSucE.Location = new System.Drawing.Point(73, 48);
+            this.rdSucE.Margin = new System.Windows.Forms.Padding(0);
+            this.rdSucE.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdSucE.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdSucE.Name = "rdSucE";
+            this.rdSucE.Ripple = true;
+            this.rdSucE.Size = new System.Drawing.Size(66, 30);
+            this.rdSucE.TabIndex = 13;
+            this.rdSucE.Text = "Suc_E";
+            this.rdSucE.UseVisualStyleBackColor = true;
+            this.rdSucE.CheckedChanged += new System.EventHandler(this.rdSucE_CheckedChanged);
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel2.Location = new System.Drawing.Point(3, 0);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(93, 19);
+            this.materialLabel2.TabIndex = 12;
+            this.materialLabel2.Text = "Incrementar:";
+            // 
+            // rdProd
+            // 
+            this.rdProd.AutoSize = true;
+            this.rdProd.Checked = true;
+            this.rdProd.Depth = 0;
+            this.rdProd.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdProd.Location = new System.Drawing.Point(139, 19);
+            this.rdProd.Margin = new System.Windows.Forms.Padding(0);
+            this.rdProd.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdProd.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdProd.Name = "rdProd";
+            this.rdProd.Ripple = true;
+            this.rdProd.Size = new System.Drawing.Size(85, 30);
+            this.rdProd.TabIndex = 11;
+            this.rdProd.TabStop = true;
+            this.rdProd.Text = "Producto";
+            this.rdProd.UseVisualStyleBackColor = true;
+            this.rdProd.CheckedChanged += new System.EventHandler(this.rdProd_CheckedChanged);
+            // 
+            // rdSucS
+            // 
+            this.rdSucS.AutoSize = true;
+            this.rdSucS.Depth = 0;
+            this.rdSucS.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdSucS.Location = new System.Drawing.Point(73, 19);
+            this.rdSucS.Margin = new System.Windows.Forms.Padding(0);
+            this.rdSucS.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdSucS.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdSucS.Name = "rdSucS";
+            this.rdSucS.Ripple = true;
+            this.rdSucS.Size = new System.Drawing.Size(67, 30);
+            this.rdSucS.TabIndex = 9;
+            this.rdSucS.Text = "Suc_S";
+            this.rdSucS.UseVisualStyleBackColor = true;
+            this.rdSucS.CheckedChanged += new System.EventHandler(this.rdSucS_CheckedChanged);
+            // 
+            // rdNada
+            // 
+            this.rdNada.AutoSize = true;
+            this.rdNada.Depth = 0;
+            this.rdNada.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdNada.Location = new System.Drawing.Point(7, 48);
+            this.rdNada.Margin = new System.Windows.Forms.Padding(0);
+            this.rdNada.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdNada.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdNada.Name = "rdNada";
+            this.rdNada.Ripple = true;
+            this.rdNada.Size = new System.Drawing.Size(61, 30);
+            this.rdNada.TabIndex = 8;
+            this.rdNada.Text = "Nada";
+            this.rdNada.UseVisualStyleBackColor = true;
+            this.rdNada.CheckedChanged += new System.EventHandler(this.rdNada_CheckedChanged);
+            // 
+            // rdFecha
+            // 
+            this.rdFecha.AutoSize = true;
+            this.rdFecha.Depth = 0;
+            this.rdFecha.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdFecha.Location = new System.Drawing.Point(7, 19);
+            this.rdFecha.Margin = new System.Windows.Forms.Padding(0);
+            this.rdFecha.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdFecha.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdFecha.Name = "rdFecha";
+            this.rdFecha.Ripple = true;
+            this.rdFecha.Size = new System.Drawing.Size(66, 30);
+            this.rdFecha.TabIndex = 7;
+            this.rdFecha.Text = "Fecha";
+            this.rdFecha.UseVisualStyleBackColor = true;
+            this.rdFecha.CheckedChanged += new System.EventHandler(this.rdFecha_CheckedChanged);
             // 
             // grdTraslados
             // 
@@ -200,6 +327,7 @@
             this.grdTraslados.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.GrdTraslados_KeyUp);
             this.grdTraslados.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.GrdTraslados_KeyPress);
             this.grdTraslados.SeleccionCambio += new Grilla2.SpeedGrilla.SeleccionCambioEventHandler(this.grdTraslados_SeleccionCambio);
+            this.grdTraslados.Click += new Grilla2.SpeedGrilla.ClickEventHandler(this.grdTraslados_Click);
             // 
             // splitContainer2
             // 
@@ -245,7 +373,7 @@
             this.cSucSalida.Filtro_In = "";
             this.cSucSalida.Location = new System.Drawing.Point(3, 3);
             this.cSucSalida.Mostrar_Botones = true;
-            this.cSucSalida.Mostrar_Tipo = false;
+            this.cSucSalida.Mostrar_Tipo = true;
             this.cSucSalida.Name = "cSucSalida";
             this.cSucSalida.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucSalida.Size = new System.Drawing.Size(253, 392);
@@ -263,7 +391,7 @@
             this.cSucEntrada.Filtro_In = "";
             this.cSucEntrada.Location = new System.Drawing.Point(0, 3);
             this.cSucEntrada.Mostrar_Botones = true;
-            this.cSucEntrada.Mostrar_Tipo = false;
+            this.cSucEntrada.Mostrar_Tipo = true;
             this.cSucEntrada.Name = "cSucEntrada";
             this.cSucEntrada.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucEntrada.Size = new System.Drawing.Size(260, 392);
@@ -335,7 +463,7 @@
             this.cProds.Location = new System.Drawing.Point(3, 0);
             this.cProds.Mostrar_Tipo = true;
             this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(270, 288);
+            this.cProds.Size = new System.Drawing.Size(258, 288);
             this.cProds.TabIndex = 1;
             this.cProds.Titulo = "Productos";
             this.cProds.Valor_Actual = -1;
@@ -350,19 +478,46 @@
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.paCambio);
             this.panel1.Controls.Add(this.paMostrar);
             this.panel1.Controls.Add(this.paLimpiar);
-            this.panel1.Location = new System.Drawing.Point(770, 688);
+            this.panel1.Location = new System.Drawing.Point(656, 688);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(592, 27);
+            this.panel1.Size = new System.Drawing.Size(706, 27);
             this.panel1.TabIndex = 8;
+            // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.Controls.Add(this.cmdHerramientas);
+            this.panel6.Location = new System.Drawing.Point(31, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(121, 25);
+            this.panel6.TabIndex = 8;
+            // 
+            // cmdHerramientas
+            // 
+            this.cmdHerramientas.AutoSize = true;
+            this.cmdHerramientas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdHerramientas.Depth = 0;
+            this.cmdHerramientas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdHerramientas.Location = new System.Drawing.Point(0, 0);
+            this.cmdHerramientas.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdHerramientas.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdHerramientas.Name = "cmdHerramientas";
+            this.cmdHerramientas.Primary = false;
+            this.cmdHerramientas.Size = new System.Drawing.Size(121, 25);
+            this.cmdHerramientas.TabIndex = 0;
+            this.cmdHerramientas.Text = "Herramientas";
+            this.cmdHerramientas.UseVisualStyleBackColor = true;
+            this.cmdHerramientas.Click += new System.EventHandler(this.cmdHerramientas_Click);
             // 
             // paCambio
             // 
             this.paCambio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.paCambio.Controls.Add(this.cmdCambio);
-            this.paCambio.Location = new System.Drawing.Point(44, 2);
+            this.paCambio.Location = new System.Drawing.Point(158, 2);
             this.paCambio.Name = "paCambio";
             this.paCambio.Size = new System.Drawing.Size(177, 25);
             this.paCambio.TabIndex = 5;
@@ -388,7 +543,7 @@
             // 
             this.paMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.paMostrar.Controls.Add(this.cmdMostrar);
-            this.paMostrar.Location = new System.Drawing.Point(412, 2);
+            this.paMostrar.Location = new System.Drawing.Point(526, 2);
             this.paMostrar.Name = "paMostrar";
             this.paMostrar.Size = new System.Drawing.Size(177, 25);
             this.paMostrar.TabIndex = 5;
@@ -414,7 +569,7 @@
             // 
             this.paLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.paLimpiar.Controls.Add(this.cmdLimpiar);
-            this.paLimpiar.Location = new System.Drawing.Point(228, 2);
+            this.paLimpiar.Location = new System.Drawing.Point(342, 2);
             this.paLimpiar.Name = "paLimpiar";
             this.paLimpiar.Size = new System.Drawing.Size(177, 25);
             this.paLimpiar.TabIndex = 5;
@@ -454,6 +609,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
@@ -468,6 +625,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.paCambio.ResumeLayout(false);
             this.paCambio.PerformLayout();
             this.paMostrar.ResumeLayout(false);
@@ -505,5 +664,14 @@
         private System.Windows.Forms.Panel paLimpiar;
         private MaterialSkin.Controls.MaterialFlatButton cmdLimpiar;
         private MaterialSkin.Controls.MaterialCheckBox chCantidades;
+        private System.Windows.Forms.Panel panel6;
+        private MaterialSkin.Controls.MaterialFlatButton cmdHerramientas;
+        private System.Windows.Forms.Panel panel5;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialRadioButton rdProd;
+        private MaterialSkin.Controls.MaterialRadioButton rdSucS;
+        private MaterialSkin.Controls.MaterialRadioButton rdNada;
+        private MaterialSkin.Controls.MaterialRadioButton rdFecha;
+        private MaterialSkin.Controls.MaterialRadioButton rdSucE;
     }
 }

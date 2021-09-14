@@ -71,15 +71,18 @@
             grdOriginal.set_ColW(grdOriginal.get_ColIndex("Descripcion"), 100);
             grdOriginal.set_ColW(grdOriginal.get_ColIndex("Costo_Compra"), 60);
             grdOriginal.set_ColW(grdOriginal.get_ColIndex("Costo_Venta"), 60);
+            grdOriginal.set_ColW(grdOriginal.get_ColIndex("Cantidad"), 60);
             grdOriginal.set_ColW(grdOriginal.get_ColIndex("Kilos"), 60);
             grdOriginal.set_ColW(grdOriginal.get_ColIndex("Total_Compra"), 80);
             grdOriginal.set_ColW(grdOriginal.get_ColIndex("Total_Venta"), 80);
+            grdOriginal.set_ColW(grdOriginal.get_ColIndex("Promedio"), 60);
 
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Costo_Compra")].Format = "C2";
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Costo_Venta")].Format = "C2";
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Kilos")].Format = "N2";
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Total_Compra")].Format = "C2";
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Total_Venta")].Format = "C2";
+            grdOriginal.Columnas[grdOriginal.get_ColIndex("Promedio")].Format = "N2";
 
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Kilos")].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
@@ -97,15 +100,18 @@
             grdResultado.set_ColW(grdResultado.get_ColIndex("Descripcion"), 100);
             grdResultado.set_ColW(grdResultado.get_ColIndex("Costo_Compra"), 60);
             grdResultado.set_ColW(grdResultado.get_ColIndex("Costo_Venta"), 60);
+            grdResultado.set_ColW(grdResultado.get_ColIndex("Cantidad"), 60);
             grdResultado.set_ColW(grdResultado.get_ColIndex("Kilos"), 60);
             grdResultado.set_ColW(grdResultado.get_ColIndex("Total_Compra"), 80);
             grdResultado.set_ColW(grdResultado.get_ColIndex("Total_Venta"), 80);
+            grdResultado.set_ColW(grdResultado.get_ColIndex("Promedio"), 60);
 
             grdResultado.Columnas[grdResultado.get_ColIndex("Costo_Compra")].Format = "C2";
             grdResultado.Columnas[grdResultado.get_ColIndex("Costo_Venta")].Format = "C2";
             grdResultado.Columnas[grdResultado.get_ColIndex("Kilos")].Format = "N2";
             grdResultado.Columnas[grdResultado.get_ColIndex("Total_Compra")].Format = "C2";
             grdResultado.Columnas[grdResultado.get_ColIndex("Total_Venta")].Format = "C2";
+            grdResultado.Columnas[grdResultado.get_ColIndex("Promedio")].Format = "N2";
 
             grdResultado.Columnas[grdResultado.get_ColIndex("Kilos")].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
@@ -278,6 +284,11 @@
                     }
 
                     grdResultado.set_Texto(f, grdResultado.get_ColIndex("Kilos"), Ventas.Kilos);
+                
+                    if (Ventas.Kilos > 0 & Ventas.Cantidad > 0)
+                    { grdResultado.set_Texto(f, grdResultado.get_ColIndex("Promedio"), Ventas.Kilos / Ventas.Cantidad); }
+                    else
+                    { grdResultado.set_Texto(f, grdResultado.get_ColIndex("Promedio"), 0); }
                 }
                 grdResultado.set_Texto(f, grdResultado.get_ColIndex("Total_Compra"), Ventas.CostoCompra * Ventas.Kilos);
                 grdResultado.set_Texto(f, grdResultado.get_ColIndex("Total_Venta"), Ventas.CostoVenta * Ventas.Kilos);
@@ -292,6 +303,27 @@
                         grdResultado.set_Texto(f, grdResultado.get_ColIndex("ID_Camion"), Ventas.Camion.ID);
                     }
                 }
+
+                if (chCantidad.Checked)
+                {
+                    int c = 0;
+
+                    if (int.TryParse(txtCantidad.Text, out c))
+                    {
+                        Ventas.Cantidad = c;
+                    }
+                    else
+                    {
+                        Ventas.Cantidad = 0;
+                    }
+
+                    grdResultado.set_Texto(f, grdResultado.get_ColIndex("Cantidad"), Ventas.Cantidad);
+                    if (Ventas.Kilos > 0 & Ventas.Cantidad > 0)
+                    { grdResultado.set_Texto(f, grdResultado.get_ColIndex("Promedio"), Ventas.Kilos / Ventas.Cantidad); }
+                    else
+                    { grdResultado.set_Texto(f, grdResultado.get_ColIndex("Promedio"), 0); }
+                }
+
             }
             Totales();
         }
@@ -310,6 +342,7 @@
                 Ventas.Descripcion = Convert.ToString(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Descripcion")));
                 Ventas.CostoCompra = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Compra")));
                 Ventas.CostoVenta = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Venta")));
+                Ventas.Cantidad = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Cantidad")));
                 Ventas.Kilos = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Kilos")));
                 Ventas.Camion.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("ID_Camion")));
                 Ventas.Actualizar();
@@ -392,6 +425,15 @@
             Resultado();
         }
 
+        private void chCantidad_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCantidad.Enabled = chCantidad.Checked;
+        }
 
+        private void txtCantidad_TextChanged(object sender, EventArgs e)
+        {
+            Resultado();
+        }
+       
     }
 }
