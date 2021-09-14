@@ -464,7 +464,7 @@
                         grdCompras.ActivarCelda(grdCompras.Row, grdCompras.Col + 1);
                     }
 
-                    if (grdCompras.Col == c_Kilos)
+                    if (grdCompras.Col == c_Kilos || grdCompras.Col == c_Cantidad)
                     {
                         Compras.Producto.Siguiente();
                         Compras.precios.Producto = Compras.Producto;

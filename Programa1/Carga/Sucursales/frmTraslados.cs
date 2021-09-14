@@ -528,7 +528,7 @@ namespace Programa1.Carga
         {
             if (e == 13)
             {
-                if (grdTraslados.Col == c_Kilos)
+                if (grdTraslados.Col == c_Kilos || grdTraslados.Col == c_Cantidad )
                 {
 
                     if (Traslados.ID == 0)

@@ -557,7 +557,7 @@
                     if (Venta.ID == 0)
                     {
 
-                        if (grdVenta.Col == c_Kilos)
+                        if (grdVenta.Col == c_Kilos || grdVenta.Col == c_Cantidad)
                         {
                             switch (vi)
                             {
