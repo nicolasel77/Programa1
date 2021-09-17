@@ -14,6 +14,17 @@
         public DateTime fecha_Actual;
         public DateTime fecha_Fin;
 
+        public enum e_MostrarSolo : byte
+        {
+            Todos = 0,
+            Semana = 1,
+            Dia = 2,
+            Mes = 3,
+            Año = 4,
+            Desde_Hasta = 5
+        }
+        public e_MostrarSolo o_MostrarSolo;
+
         public event EventHandler Cambio_Seleccion;
 
         public cFechas()
@@ -24,6 +35,41 @@
         }
         public DateTime Fecha_Maxima { get => mntDias.MaxDate; set { mntDias.MaxDate = value; } }
         public int Mostrar { get => tabControl1.SelectedIndex; set { tabControl1.SelectedIndex = value; } }
+        public e_MostrarSolo Mostrar_Solo 
+        {
+            get { return o_MostrarSolo; }
+            set 
+            {
+                o_MostrarSolo = value;
+                if (o_MostrarSolo == e_MostrarSolo.Todos)
+                {
+                    lblMostrarSolo.Visible = false;
+                }
+                else
+                {
+                    lblMostrarSolo.Visible = true;
+                    switch (o_MostrarSolo)
+                    {
+                        case e_MostrarSolo.Semana:
+                            lblMostrarSolo.Text = "Semana";
+                            break;
+                        case e_MostrarSolo.Dia:
+                            lblMostrarSolo.Text = "Dia";
+                            break;
+                        case e_MostrarSolo.Mes:
+                            lblMostrarSolo.Text = "Mes";
+                            break;
+                        case e_MostrarSolo.Año:
+                            lblMostrarSolo.Text = "Año";
+                            break;
+                        case e_MostrarSolo.Desde_Hasta:
+                            lblMostrarSolo.Text = "Desde - Hasta";
+                            break;
+                    }
+                }
+            }
+        }
+
 
         public DateTime Ultima_Fecha
         {

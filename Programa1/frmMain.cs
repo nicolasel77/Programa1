@@ -2327,7 +2327,20 @@
 
         private void stockCorralesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            frmHacienda_Corrales fr = new frmHacienda_Corrales();
+            fr.ShowDialog();
+        }
 
+        private void editarARendirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmEditar_ARendir fr = new frmEditar_ARendir();
+            fr.ShowDialog();
+        }
+
+        private void editarCajasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmEditar_Cajas fr = new frmEditar_Cajas();
+            fr.ShowDialog();
         }
     }
 }

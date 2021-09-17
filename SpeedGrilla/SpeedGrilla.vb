@@ -22,6 +22,7 @@ Public Class SpeedGrilla
     Friend WithEvents ttGenenral As ToolTip
     Private PintarFilas As Boolean = True
 
+    Private Estilo_Anterior As C1.Win.C1FlexGrid.CellStyle
 
 #Region " Código generado por el Diseñador de Windows Forms "
 
@@ -33,47 +34,25 @@ Public Class SpeedGrilla
 
         'Agregar cualquier inicialización después de la llamada a InitializeComponent()
         txt = New clstxt(Grd)
+        Estilo_Anterior = Grd.Styles.Add("nn")
+        Estilo_Anterior.BackColor = Color.White
     End Sub
 
-    'UserControl1 reemplaza a Dispose para limpiar la lista de componentes.
-    Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
-        If disposing Then
-            If Not (components Is Nothing) Then
-                components.Dispose()
-            End If
-        End If
-        MyBase.Dispose(disposing)
-    End Sub
 
     'Requerido por el Diseñador de Windows Forms
     Private components As System.ComponentModel.IContainer
-    Friend WithEvents OpenExcel As OpenFileDialog
-    Friend WithEvents SaveExcel As SaveFileDialog
     Public WithEvents Grd As C1.Win.C1FlexGrid.C1FlexGrid
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SpeedGrilla))
-        Me.OpenExcel = New System.Windows.Forms.OpenFileDialog()
-        Me.SaveExcel = New System.Windows.Forms.SaveFileDialog()
         Me.Grd = New C1.Win.C1FlexGrid.C1FlexGrid()
         Me.ttGenenral = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.Grd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'OpenExcel
-        '
-        Me.OpenExcel.Filter = "Archivos de Excel (*.xls)|*.xls"
-        Me.OpenExcel.Title = "Abrir Archivo de excel"
-        '
-        'SaveExcel
-        '
-        Me.SaveExcel.DefaultExt = "xls"
-        Me.SaveExcel.FileName = "Datos"
-        Me.SaveExcel.Filter = "Archivos de Excel (*.xls)|*.xls"
-        Me.SaveExcel.Title = "Guardar Datos de la grilla..."
-        '
         'Grd
         '
+        Me.Grd.BorderStyle = C1.Win.C1FlexGrid.Util.BaseControls.BorderStyleEnum.Light3D
         Me.Grd.ColumnInfo = "10,0,0,0,0,100,Columns:"
         Me.Grd.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Grd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -87,7 +66,6 @@ Public Class SpeedGrilla
         Me.Grd.Size = New System.Drawing.Size(714, 456)
         Me.Grd.StyleInfo = resources.GetString("Grd.StyleInfo")
         Me.Grd.TabIndex = 0
-        Me.Grd.UseCompatibleTextRendering = False
         '
         'SpeedGrilla
         '
@@ -100,15 +78,9 @@ Public Class SpeedGrilla
     End Sub
 
 #End Region
-#Region "Delegado"
-    Private Delegate Sub DelTotal(ByVal col As Int32)
-    Private Delegate Sub DelTotales(ByVal col1 As Int32, ByVal col2 As Integer)
-#End Region
+
 #Region "Procedimientos Publicos"
-    Private Sub Grilla2_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.SizeChanged
-        Grd.Height = Me.Height
-        Grd.Width = Me.Width
-    End Sub
+
     Public Sub ErrorEnTxt()
         Dim s As String
         Beep()
@@ -116,14 +88,7 @@ Public Class SpeedGrilla
         RaiseEvent DatoNoValido(s)
         Grd.StartEditing()
     End Sub
-    Public Property TipoCampo() As DataTable
-        Get
-            Return lc
-        End Get
-        Set(ByVal Value As DataTable)
-            lc = Value
-        End Set
-    End Property
+
     Public Sub MostrarDatos(ByVal ls As DataTable, Optional ByVal AplicarFormato As Boolean = False, Optional ByVal CalTotal As Int32 = -1)
         Dim i As Int32
         Grd.Redraw = False
@@ -316,8 +281,10 @@ Public Class SpeedGrilla
         Dim i, j As Int32
         Grd.Redraw = False
         Try
+            Estilo_Anterior = Nothing
             For i = 0 To ls.Rows.Count - 1
                 Grd.Rows.Add()
+
                 For j = 0 To ls.Columns.Count - 1
                     Grd(i + 1, j) = ls.Rows(i).Item(j)
 
@@ -329,30 +296,6 @@ Public Class SpeedGrilla
         End Try
     End Sub
 
-    Public Sub TotalCol(ByVal Columna As Int32)
-        Dim i As Int32
-        vtotal = 0
-        For i = 0 To Grd.Rows.Count - 1
-            If IsNumeric(Grd.Item(i, Columna)) Then
-                vtotal += Grd.Item(i, Columna)
-            End If
-        Next
-        Grd.Item(Grd.Rows.Count - 1, Columna) = vtotal
-        RaiseEvent CalculoFinalizado(Columna, vtotal)
-    End Sub
-    Public Sub ThrTotalCol(ByVal columna As Int32)
-        Dim handler As New DelTotal(AddressOf TotalCol)
-        handler.BeginInvoke(columna, Nothing, Nothing)
-    End Sub
-    Public Sub thrTotales(ByVal col1 As Integer, ByVal col2 As Integer)
-        Dim handler As New DelTotales(AddressOf Totales)
-        handler.BeginInvoke(col1, col2, Nothing, Nothing)
-    End Sub
-
-    Public Sub SumTotal(ByVal Columna As Int32, Optional ByVal Etiqueta As String = "")
-        If Etiqueta = "" Then Etiqueta = "Total"
-        Grd.Subtotal(C1.Win.C1FlexGrid.AggregateEnum.Sum, Columna, Columna, Columna, Columna, Etiqueta)
-    End Sub
     Public Sub ActivarCelda(Optional ByVal Fila As Int32 = -1, Optional ByVal Columna As Int32 = -1)
         If Fila = -1 Then Fila = Grd.Row
         If Fila >= Grd.Rows.Count Then Fila = Grd.Rows.Count - 1
@@ -360,6 +303,7 @@ Public Class SpeedGrilla
         If Columna >= Grd.Cols.Count Then Columna = Grd.Cols.Count - 1
         Grd.Select(Fila, Columna)
     End Sub
+
     Public Sub AgregarFila(Optional ByVal Valor As String = "", Optional ByVal Fila As Int32 = -1)
         Grd.Rows.Add()
         'Try
@@ -384,112 +328,17 @@ Public Class SpeedGrilla
     Public Sub AutosizeCol(ByVal Columna As Int32)
         If Columna <> -1 Then Grd.AutoSizeCol(Columna)
     End Sub
-    Public Sub AutosizeCol(ByVal Columna As Int32())
-        For i As Int32 = 0 To Columna.Length - 1
-            If Not Columna(i) >= Grd.Cols.Count - 1 Then Grd.AutoSizeCol(Columna(i))
-        Next
-    End Sub
+
     Public Sub AutosizeAll()
         For i As Integer = 0 To Grd.Cols.Count - 1
             Grd.AutoSizeCol(i)
         Next
     End Sub
 
-
-    Public Sub GuardarEnExcel(ByVal NombreArch As String)
-        Grd.SaveExcel(NombreArch, "", C1.Win.C1FlexGrid.FileFlags.IncludeFixedCells Or C1.Win.C1FlexGrid.FileFlags.VisibleOnly)
-    End Sub
-    Public Sub CargarDesdeExcel(ByVal NombreArch As String, Optional ByVal Hoja As String = "")
-        Grd.LoadExcel(NombreArch, Hoja, C1.Win.C1FlexGrid.FileFlags.AsDisplayed)
-    End Sub
-    Public Sub CargarDesdeExcel()
-        Grd.LoadExcel(Archivo)
-    End Sub
-    Public Sub Imprimir()
-        Grd.PrintGrid("Grilla", C1.Win.C1FlexGrid.PrintGridFlags.ShowPreviewDialog Or C1.Win.C1FlexGrid.PrintGridFlags.ShowPrintDialog Or C1.Win.C1FlexGrid.PrintGridFlags.ShowPageSetupDialog)
-    End Sub
-    Public Sub Limpiar()
-        Dim est As Boolean = Grd.Redraw
-        If est Then Grd.Redraw = False
-        If Grd.Rows.Count > 1 Then Grd.Rows.RemoveRange(1, Grd.Rows.Count - 1)
-        Grd.Redraw = est
-    End Sub
-
-    Public Sub CrearCombo(ByVal Columna As Int32, ByVal dt As DataTable)
-        Dim Hash As New Hashtable
-        Dim i As Int32
-        For i = 0 To dt.Rows.Count - 1
-            Hash.Add(dt.Rows(i).Item(0), dt.Rows(i).Item(1))
-        Next
-        Grd.Cols(Columna).DataMap = Hash
-    End Sub
     Public Sub CrearArbol(ByVal funcion As C1.Win.C1FlexGrid.AggregateEnum, ByVal AgruparPor As Int32, ByVal TotalEn As Int32, Optional ByVal Etiqueta As String = "", Optional ByVal Nivel As Int32 = 0)
         Grd.Subtotal(funcion, Nivel, AgruparPor, AgruparPor, TotalEn, Etiqueta)
     End Sub
-    Public Sub PrimerLetraMayuscula()
-        Dim inicio As Char
-        Dim Cad As String
-        Dim columna As C1.Win.C1FlexGrid.Column
-        For Each columna In Grd.Cols
-            inicio = columna.Caption.Chars(0)
-            Cad = columna.Caption.Remove(0, 1)
-            Cad = Cad.Insert(0, Char.ToUpper(inicio))
-            columna.Caption = Cad
-        Next
-    End Sub
-    Public Sub Totales(ByVal col1 As Integer, ByVal col2 As Integer)
-        Dim i As Integer
-        Dim ac As Single
-        For i = 0 To Grd.Rows.Count - 1
-            If IsNumeric(Grd.Item(i, col1)) And IsNumeric(Grd.Item(i, col2)) Then
-                ac += Grd.Item(i, col1) * Grd.Item(i, col2)
-            End If
-        Next
-        RaiseEvent CalculoFinalizado(col1, ac)
-    End Sub
 
-    Public Sub RepetirUltimaFila(ByVal CampoExepcion() As String)
-        With Grd
-            If .Rows.Count > 2 Then
-                Dim b As Boolean
-                For i As Integer = 0 To .Cols.Count - 1
-                    b = False
-                    For n As Integer = 0 To CampoExepcion.Length - 1
-                        If .Cols(i).Name.ToLower = CampoExepcion(n).ToLower Then
-                            b = True
-                        End If
-                    Next
-                    If Not b Then
-                        .SetData(.Rows.Count - 1, i, .GetData(.Rows.Count - 2, i))
-                    End If
-                Next
-            End If
-        End With
-    End Sub
-
-    Public Sub Siguiente_Fila()
-        With Grd
-            If .Rows.Count > 2 Then
-                If .Row = .Rows.Count - 1 Then
-                    ActivarCelda(1, .Col)
-                Else
-                    ActivarCelda(.Row + 1, .Col)
-                End If
-            End If
-        End With
-    End Sub
-
-    Public Sub Anterior_Fila()
-        With Grd
-            If .Rows.Count > 2 Then
-                If .Row < 2 Then
-                    ActivarCelda(.Rows.Count - 1, .Col)
-                Else
-                    ActivarCelda(.Row - 1, .Col)
-                End If
-            End If
-        End With
-    End Sub
 #End Region
 
 #Region "Propiedades de las Celdas"
@@ -580,11 +429,7 @@ Public Class SpeedGrilla
             End Try
         End Set
     End Property
-    Public ReadOnly Property TipoCol(ByVal Columna As Int32) As System.Type
-        Get
-            Return Grd.Cols.Item(Columna).DataType
-        End Get
-    End Property
+
     Public ReadOnly Property ColIndex(ByVal NombreColumna As String) As Int32
         Get
             Return Grd.Cols.IndexOf(NombreColumna)
@@ -1257,16 +1102,28 @@ Public Class SpeedGrilla
                         If r < 0 Then Exit Sub
                         RaiseEvent CambioFila(r)
                         If PintarFilas And FilaSeleccionada <> r And r > 0 Then
+
                             'despintar EX Fila Seleccionada
                             If Grd.Rows.Count > FilaSeleccionada Then
                                 Dim rg As C1.Win.C1FlexGrid.Row = Grd.Rows(FilaSeleccionada)
-                                If Not rg.IsNode Then rg.StyleNew.BackColor = Color.White
+                                'If Not rg.IsNode Then rg.StyleNew.BackColor = Color.White
+
+                                If Not rg.IsNode Then
+                                    rg.Style = Estilo_Anterior
+                                End If
                             End If
+
                             'pintar la Fila Seleccionada
                             Dim rg2 As C1.Win.C1FlexGrid.Row = Grd.Rows(r)
-                            If Not rg2.IsNode Then rg2.StyleNew.BackColor = Color.LightBlue
+                            Estilo_Anterior = rg2.Style
+                            If Not rg2.IsNode Then
+                                rg2.Style = Nothing
+                                rg2.StyleNew.BackColor = Color.LightBlue
+                            End If
                             FilaSeleccionada = r
                         End If
+                    Else
+                        Estilo_Anterior = Grd.Rows(FilaSeleccionada).Style
                     End If
                 End If
             Catch ex As OverflowException
@@ -1316,40 +1173,6 @@ Public Class SpeedGrilla
     End Sub
 
 
-#End Region
-#Region "Menu Contextual"
-    Private Sub Editar_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Grd.Select()
-        SendKeys.Send("{F2}")
-    End Sub
-    Private Sub Imprimir_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim ts As New Threading.ThreadStart(AddressOf Imprimir)
-        Dim th As New Threading.Thread(ts)
-        th.Start()
-    End Sub
-    Private Sub Excel_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        If SaveExcel.ShowDialog() = DialogResult.OK Then
-            Archivo = SaveExcel.FileName
-            GuardarEnExcel(Archivo)
-        End If
-    End Sub
-    Private Sub AutosizeCol_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        AutosizeCol(Grd.Col)
-    End Sub
-    Private Sub CargarDesdeExcel_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim ts As New Threading.ThreadStart(AddressOf CargarDesdeExcel)
-        Dim th As New Threading.Thread(ts)
-        If MsgBox("Cuidado! Se perderá toda la informacion no guardada! Desea continuar?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-            If OpenExcel.ShowDialog() = DialogResult.OK Then
-                Grd.DataSource = Nothing
-                Archivo = OpenExcel.FileName
-                th.Start()
-            End If
-        End If
-    End Sub
-    Private Sub MnuOcultar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If Grd.Col <> -1 Then Grd.Cols(Grd.Col).Visible = False
-    End Sub
 #End Region
 
 #Region "Custom Comparer"

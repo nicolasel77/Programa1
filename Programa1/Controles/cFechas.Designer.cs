@@ -30,29 +30,30 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabSemana = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.lstSemanas = new System.Windows.Forms.ListBox();
             this.tabDia = new System.Windows.Forms.TabPage();
             this.mntDias = new System.Windows.Forms.MonthCalendar();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabMes = new System.Windows.Forms.TabPage();
             this.lstMesAño = new System.Windows.Forms.ListBox();
             this.lstMes = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabAño = new System.Windows.Forms.TabPage();
             this.lstAños = new System.Windows.Forms.ListBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabDH = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.dtHasta = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.dtDesde = new System.Windows.Forms.DateTimePicker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblMostrarSolo = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabSemana.SuspendLayout();
             this.tabDia.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tabMes.SuspendLayout();
+            this.tabAño.SuspendLayout();
+            this.tabDH.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -61,14 +62,13 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabSemana);
             this.tabControl1.Controls.Add(this.tabDia);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabMes);
+            this.tabControl1.Controls.Add(this.tabAño);
+            this.tabControl1.Controls.Add(this.tabDH);
             this.tabControl1.HotTrack = true;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.ShowToolTips = true;
@@ -76,18 +76,18 @@
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
-            // tabPage1
+            // tabSemana
             // 
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.lstSemanas);
-            this.tabPage1.Location = new System.Drawing.Point(4, 4);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(358, 239);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Sem";
-            this.toolTip1.SetToolTip(this.tabPage1, "Semana");
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabSemana.Controls.Add(this.label4);
+            this.tabSemana.Controls.Add(this.lstSemanas);
+            this.tabSemana.Location = new System.Drawing.Point(4, 4);
+            this.tabSemana.Name = "tabSemana";
+            this.tabSemana.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSemana.Size = new System.Drawing.Size(358, 239);
+            this.tabSemana.TabIndex = 0;
+            this.tabSemana.Text = "Sem";
+            this.toolTip1.SetToolTip(this.tabSemana, "Semana");
+            this.tabSemana.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -132,19 +132,19 @@
             this.mntDias.TabIndex = 0;
             this.mntDias.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MntDias_DateChanged);
             // 
-            // tabPage2
+            // tabMes
             // 
-            this.tabPage2.Controls.Add(this.lstMesAño);
-            this.tabPage2.Controls.Add(this.lstMes);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(358, 239);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Mes";
-            this.toolTip1.SetToolTip(this.tabPage2, "Mes");
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabMes.Controls.Add(this.lstMesAño);
+            this.tabMes.Controls.Add(this.lstMes);
+            this.tabMes.Controls.Add(this.label3);
+            this.tabMes.Location = new System.Drawing.Point(4, 4);
+            this.tabMes.Name = "tabMes";
+            this.tabMes.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMes.Size = new System.Drawing.Size(358, 239);
+            this.tabMes.TabIndex = 1;
+            this.tabMes.Text = "Mes";
+            this.toolTip1.SetToolTip(this.tabMes, "Mes");
+            this.tabMes.UseVisualStyleBackColor = true;
             // 
             // lstMesAño
             // 
@@ -203,16 +203,16 @@
             this.label3.Size = new System.Drawing.Size(38, 233);
             this.label3.TabIndex = 3;
             // 
-            // tabPage3
+            // tabAño
             // 
-            this.tabPage3.Controls.Add(this.lstAños);
-            this.tabPage3.Location = new System.Drawing.Point(4, 4);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(358, 239);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Año";
-            this.toolTip1.SetToolTip(this.tabPage3, "Año");
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabAño.Controls.Add(this.lstAños);
+            this.tabAño.Location = new System.Drawing.Point(4, 4);
+            this.tabAño.Name = "tabAño";
+            this.tabAño.Size = new System.Drawing.Size(358, 239);
+            this.tabAño.TabIndex = 2;
+            this.tabAño.Text = "Año";
+            this.toolTip1.SetToolTip(this.tabAño, "Año");
+            this.tabAño.UseVisualStyleBackColor = true;
             // 
             // lstAños
             // 
@@ -233,19 +233,19 @@
             this.lstAños.TabIndex = 3;
             this.lstAños.SelectedIndexChanged += new System.EventHandler(this.LstAños_SelectedIndexChanged);
             // 
-            // tabPage4
+            // tabDH
             // 
-            this.tabPage4.Controls.Add(this.label2);
-            this.tabPage4.Controls.Add(this.dtHasta);
-            this.tabPage4.Controls.Add(this.label1);
-            this.tabPage4.Controls.Add(this.dtDesde);
-            this.tabPage4.Location = new System.Drawing.Point(4, 4);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(358, 239);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "DH";
-            this.toolTip1.SetToolTip(this.tabPage4, "Desde - Hasta");
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabDH.Controls.Add(this.label2);
+            this.tabDH.Controls.Add(this.dtHasta);
+            this.tabDH.Controls.Add(this.label1);
+            this.tabDH.Controls.Add(this.dtDesde);
+            this.tabDH.Location = new System.Drawing.Point(4, 4);
+            this.tabDH.Name = "tabDH";
+            this.tabDH.Size = new System.Drawing.Size(358, 239);
+            this.tabDH.TabIndex = 3;
+            this.tabDH.Text = "DH";
+            this.toolTip1.SetToolTip(this.tabDH, "Desde - Hasta");
+            this.tabDH.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -288,21 +288,33 @@
             this.dtDesde.TabIndex = 0;
             this.dtDesde.ValueChanged += new System.EventHandler(this.DtDesde_ValueChanged);
             // 
+            // lblMostrarSolo
+            // 
+            this.lblMostrarSolo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblMostrarSolo.Location = new System.Drawing.Point(0, 243);
+            this.lblMostrarSolo.Name = "lblMostrarSolo";
+            this.lblMostrarSolo.Size = new System.Drawing.Size(369, 22);
+            this.lblMostrarSolo.TabIndex = 2;
+            this.lblMostrarSolo.Text = "Semana";
+            this.lblMostrarSolo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMostrarSolo.Visible = false;
+            // 
             // cFechas
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.lblMostrarSolo);
             this.Controls.Add(this.tabControl1);
             this.MinimumSize = new System.Drawing.Size(0, 184);
             this.Name = "cFechas";
             this.Size = new System.Drawing.Size(369, 265);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabSemana.ResumeLayout(false);
+            this.tabSemana.PerformLayout();
             this.tabDia.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
+            this.tabMes.ResumeLayout(false);
+            this.tabAño.ResumeLayout(false);
+            this.tabDH.ResumeLayout(false);
+            this.tabDH.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -310,10 +322,10 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabSemana;
+        private System.Windows.Forms.TabPage tabMes;
+        private System.Windows.Forms.TabPage tabAño;
+        private System.Windows.Forms.TabPage tabDH;
         private System.Windows.Forms.ListBox lstSemanas;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ListBox lstMesAño;
@@ -326,6 +338,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabPage tabDia;
         private System.Windows.Forms.MonthCalendar mntDias;
+        private System.Windows.Forms.Label lblMostrarSolo;
         private System.Windows.Forms.Label label4;
     }
 }

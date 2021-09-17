@@ -34,7 +34,7 @@ namespace Programa1.Carga.Hacienda
             {
                 cmdBase.Text = "";
             }
-            Cargar_Listados_Boletas();
+            Cargar_Listados();
 
             string f = datos.Dato_Generico("SELECT MAX(Fecha) FROM Hacienda_Salidas").ToString();
             DateTime d = DateTime.Today;
@@ -46,7 +46,7 @@ namespace Programa1.Carga.Hacienda
             mHasta.Value = d.AddDays(5);
         }
 
-        private void Cargar_Listados_Boletas()
+        private void Cargar_Listados()
         {
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
@@ -58,6 +58,10 @@ namespace Programa1.Carga.Hacienda
 
             h.Llenar_List(lstBoletas, clsAccess.Datos_Vista("", "TOP 100 NBoleta", "NBoleta DESC"));
             h.Llenar_List(lstSistema, datos.Datos_Genericos("SELECT TOP 100 NBoleta FROM NBoletas ORDER BY NBoleta DESC"));
+
+            clsAccess.Vista = "Salidas";
+            h.Llenar_List(lstFechasAcc, clsAccess.Datos_Vista("", "TOP 50 Fecha", "Fecha DESC", "Fecha"), "dd/MM");
+            h.Llenar_List(lstFechasSis, datos.Datos_Genericos("SELECT TOP 100 Fecha FROM Hacienda_Salidas GROUP BY Fecha ORDER BY Fecha DESC"), "dd/MM");
         }
 
         private void cmdSincronizar_Click(object sender, System.EventArgs e)
@@ -422,7 +426,7 @@ namespace Programa1.Carga.Hacienda
         {
             if (e.Button == MouseButtons.Middle)
             {
-                Cargar_Listados_Boletas();
+                Cargar_Listados();
             }
         }
 
@@ -499,6 +503,23 @@ namespace Programa1.Carga.Hacienda
                     }
                 }
             }
+        }
+
+        private void frmSincronizarAccess_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstFechasAcc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mDesde.Value = DateTime.Parse(lstFechasAcc.Text);
+        }
+
+        private void lstFechasAcc_DoubleClick(object sender, EventArgs e)
+        {
+            mDesde.Value = DateTime.Parse(lstFechasAcc.Text);
+            mHasta.Value = mDesde.Value;
+            cmdSincSalidas.PerformClick();
         }
     }
 }

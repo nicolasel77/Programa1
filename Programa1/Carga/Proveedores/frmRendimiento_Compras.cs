@@ -113,8 +113,8 @@
             double kven = grdRendimiento_Compras.SumarCol(3, true);
             double tcomp = grdRendimiento_Compras.SumarCol(4, true);
             double tven = grdRendimiento_Compras.SumarCol(5, true);
-            double tdif = grdRendimiento_Compras.SumarCol(6, true);
-            double kdif = grdRendimiento_Compras.SumarCol(8, true);
+            grdRendimiento_Compras.SumarCol(6, true);
+            grdRendimiento_Compras.SumarCol(8, true);
             int c = grdRendimiento_Compras.Rows - 2;
             lblCant.Text = $"Registros: {c:N0}";
             lblKilosC.Text = $"Kilos Compra: {kcomp:N2}";

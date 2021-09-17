@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTraslados));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
@@ -373,7 +372,7 @@
             this.cSucSalida.Filtro_In = "";
             this.cSucSalida.Location = new System.Drawing.Point(3, 3);
             this.cSucSalida.Mostrar_Botones = true;
-            this.cSucSalida.Mostrar_Tipo = true;
+            this.cSucSalida.Mostrar_Tipo = false;
             this.cSucSalida.Name = "cSucSalida";
             this.cSucSalida.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucSalida.Size = new System.Drawing.Size(253, 392);
@@ -391,7 +390,7 @@
             this.cSucEntrada.Filtro_In = "";
             this.cSucEntrada.Location = new System.Drawing.Point(0, 3);
             this.cSucEntrada.Mostrar_Botones = true;
-            this.cSucEntrada.Mostrar_Tipo = true;
+            this.cSucEntrada.Mostrar_Tipo = false;
             this.cSucEntrada.Name = "cSucEntrada";
             this.cSucEntrada.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucEntrada.Size = new System.Drawing.Size(260, 392);
@@ -446,6 +445,7 @@
             this.cFecha.Location = new System.Drawing.Point(3, 0);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(212, 255);
             this.cFecha.TabIndex = 3;
@@ -454,16 +454,14 @@
             // 
             // cProds
             // 
-            this.cProds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cProds.BackColor = System.Drawing.Color.Gainsboro;
+            this.cProds.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cProds.Filtrar_Ver = true;
             this.cProds.Filtro_In = "";
-            this.cProds.Location = new System.Drawing.Point(3, 0);
+            this.cProds.Location = new System.Drawing.Point(0, 0);
             this.cProds.Mostrar_Tipo = true;
             this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(258, 288);
+            this.cProds.Size = new System.Drawing.Size(297, 288);
             this.cProds.TabIndex = 1;
             this.cProds.Titulo = "Productos";
             this.cProds.Valor_Actual = -1;

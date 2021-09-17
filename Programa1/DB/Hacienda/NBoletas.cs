@@ -18,7 +18,7 @@
         public DateTime Fecha { get; set; }
         public int Reparto { get; set; }
         public float Costo { get; set; }
-        public float Costo_Faena { get; set; }
+        public float Costo_Faena { get; set; }                
         public bool Directo { get; set; }
         public float Costo_Final { get; internal set; }
         public double Kilos_Compra { get; internal set; }
@@ -197,6 +197,15 @@
             }
 
             return dt;
+        }
+
+        internal DataTable Stock_Corrales(DateTime fecha_Inicio, DateTime fecha_Fin)
+        {
+            string cadena = $"SELECT F.NBoleta, B.Fecha Compra, F.Fecha Faenado, SUM(F.Kilos*F.Costo_Final) Total_Compra FROM vw_Faena F INNER JOIN NBoletas B ON B.NBoleta = F.NBoleta " +
+                $"WHERE DATEPART(WEEK, F.Fecha) > DATEPART(WEEK, B.Fecha) AND B.Fecha BETWEEN '{fecha_Inicio:MM/dd/yy}' AND '{fecha_Fin:MM/dd/yy}'" +
+                $"GROUP BY F.NBoleta, B.Fecha, F.Fecha";
+            return Datos_Genericos(cadena);
+
         }
     }
 }

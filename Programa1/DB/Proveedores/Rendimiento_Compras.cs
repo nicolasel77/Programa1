@@ -35,15 +35,15 @@
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
                 SqlDat.Fill(dt);
 
-                dt.Columns.Add("DifKilos", typeof(Single), "KVentas-KCompras");
-                dt.Columns.Add("Rend", typeof(Single), "(KVentas/KCompras*100)-100");
-                dt.Columns.Add("Diferencia", typeof(Single), "TVentas-TCompras");
+                dt.Columns.Add("DifKilos", typeof(float), "KVentas-KCompras");
+                dt.Columns.Add("Rend", typeof(float), "(KVentas/KCompras*100)-100");
+                dt.Columns.Add("Diferencia", typeof(float), "TVentas-TCompras");
 
                 if (ocultar_ceros == true)
                 {
                     for (int i = dt.Rows.Count - 1; i >= 0; i--)
                     {
-                        if (Convert.ToSingle(dt.Rows[i]["DifKilos"]) == 0)
+                        if (Math.Round(Convert.ToSingle(dt.Rows[i]["Diferencia"]), 0) == 0)
                         {
                             dt.Rows.RemoveAt(i);
                         }

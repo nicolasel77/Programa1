@@ -45,7 +45,7 @@
                         grd.Columnas["k_Sal"].Format = "N1";
                         grd.Columnas["t_Faena"].Format = "N1";
                         grd.Columnas["t_Sal"].Format = "N1";
-                        grd.Columnas["Dif_Medias"].Format = "N1";
+                        grd.Columnas["Dif_Medias"].Format = "N";
                         grd.Columnas["Dif_Kg"].Format = "N1";
                         grd.Columnas["Diferencia"].Format = "N1";
 
