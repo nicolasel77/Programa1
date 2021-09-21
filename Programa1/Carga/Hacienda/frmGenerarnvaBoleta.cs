@@ -134,7 +134,6 @@
                     grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cDescr, grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Descr")));
                     grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cImporte, Convert.ToDouble(grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Saldo"))) * -1);
                     grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cID, Convert.ToInt32(grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Id_Comprafrigo"))));
-
                     grdnvaBoleta.Ordenar(cNombre);
                     grdnvaBoleta.Ordenar(cFecha);
 

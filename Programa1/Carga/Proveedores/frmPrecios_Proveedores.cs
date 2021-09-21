@@ -131,7 +131,7 @@ namespace Programa1.Carga.Proveedores
                             else
                             {
                                 Precios.Actualizar();
-                            } 
+                            }
                         }
 
                         grd.ActivarCelda(f + 1, c);
@@ -166,7 +166,18 @@ namespace Programa1.Carga.Proveedores
                         Precios.Borrar();
                         grd.BorrarFila(grd.Row);
                     }
-
+                }
+            }
+            if (e == 13)
+            {
+                if (Precios.Id == 0)
+                {
+                    if (grd.Col == grd.get_ColIndex("Precio"))
+                    {
+                        Precios.Producto.Siguiente();
+                        grd.set_Texto(grd.Row, grd.get_ColIndex("Id_Productos"), Precios.Producto.ID);
+                        grd.set_Texto(grd.Row, grd.get_ColIndex("Id_Productos") + 1, Precios.Producto.Nombre);
+                    }
                 }
             }
         }

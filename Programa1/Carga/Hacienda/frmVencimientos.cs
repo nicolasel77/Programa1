@@ -241,7 +241,7 @@
         private void cmbnvaBoleta_Click(object sender, EventArgs e)
         {
             frmGenerarnvaBoleta fr = new frmGenerarnvaBoleta();
-            fr.dt = saldos.Vencimientos();
+            fr.dt = saldos.Vencimientos(" Saldo <> 0 ");
             fr.Cargar();
             fr.Show();
         }
