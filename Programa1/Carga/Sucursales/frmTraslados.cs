@@ -155,7 +155,6 @@ namespace Programa1.Carga
             grdTraslados.set_ColW(c_IdSucS + 1, 100);
             grdTraslados.set_ColW(c_IdSucE, 35);
             grdTraslados.set_ColW(c_IdSucE + 1, 100);
-            grdTraslados.set_ColW(c_IdProd, 30);
             grdTraslados.set_ColW(c_Descripcion, 200);
             grdTraslados.set_ColW(c_CostoS, 60);
             grdTraslados.set_ColW(c_CostoE, 60);
@@ -166,6 +165,9 @@ namespace Programa1.Carga
             grdTraslados.set_ColW(c_TotalE + 2, 0);
             grdTraslados.set_ColW(c_TotalE + 3, 0);
             grdTraslados.set_ColW(c_Promedio, 60);
+
+            grdTraslados.set_Texto(0, c_IdProd, "Prod");
+            grdTraslados.AutosizeCol(c_IdProd);
 
             grdTraslados.Columnas[c_CostoS].Format = "C2";
             grdTraslados.Columnas[c_CostoE].Format = "C2";
@@ -193,7 +195,6 @@ namespace Programa1.Carga
 
             grdTraslados.set_Texto(0, c_IdSucS, "Suc S");
             grdTraslados.set_Texto(0, c_IdSucE, "Suc E");
-            grdTraslados.set_Texto(0, c_IdProd, "Prod");
         }
 
         private void Totales()
@@ -255,7 +256,6 @@ namespace Programa1.Carga
                                 grdTraslados.set_Texto(f, c, a);
 
                                 if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
-                                else { grdTraslados.ActivarCelda(f, c + 1); }
                             }
                             else
                             {
@@ -282,7 +282,6 @@ namespace Programa1.Carga
                             grdTraslados.set_Texto(f, c_CostoS, Traslados.CostoS);
 
                             if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
-                            else { grdTraslados.ActivarCelda(f, c + 2); }
                         }
                         else
                         {
@@ -304,7 +303,6 @@ namespace Programa1.Carga
                             grdTraslados.set_Texto(f, c_CostoS, Traslados.CostoE);
 
                             if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
-                            else { grdTraslados.ActivarCelda(f, c + 2); }
 
                         }
                         else
@@ -336,13 +334,6 @@ namespace Programa1.Carga
                             grdTraslados.set_Texto(f, c_TotalE, Traslados.Kilos * Traslados.CostoE);
 
                             if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
-                            else
-                            {
-                                if (chCantidades.Checked == true)
-                                { grdTraslados.ActivarCelda(f, c_Cantidad); }
-                                else
-                                { grdTraslados.ActivarCelda(f, c_Kilos); }
-                            }
 
                             Totales();
                         }
@@ -358,7 +349,6 @@ namespace Programa1.Carga
                         grdTraslados.set_Texto(f, c, a);
 
                         if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
-                        else { grdTraslados.ActivarCelda(f, c + 1); }
                         break;
                     case 8:
                         //Costo_Salida
@@ -367,7 +357,6 @@ namespace Programa1.Carga
                         grdTraslados.set_Texto(f, c_TotalS, Traslados.CostoS * Traslados.Kilos);
 
                         if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
-                        else { grdTraslados.ActivarCelda(f, c_Kilos); }
 
                         Totales();
                         break;
@@ -378,7 +367,6 @@ namespace Programa1.Carga
                         grdTraslados.set_Texto(f, c_TotalE, Traslados.CostoE * Traslados.Kilos);
 
                         if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
-                        else { grdTraslados.ActivarCelda(f, c_Kilos); }
 
                         Totales();
                         break;
@@ -391,7 +379,6 @@ namespace Programa1.Carga
                         else { grdTraslados.set_Texto(f, c_Promedio, 0); }
 
                         if (id != 0) { Traslados.Actualizar(); grdTraslados.ActivarCelda(f + 1, c); }
-                        else { grdTraslados.ActivarCelda(f, c_Kilos); }
                         Totales();
                         break;
 
@@ -429,8 +416,20 @@ namespace Programa1.Carga
             {
                 Mensaje("La fecha esta cerrada.");
             }
+            int i;
+            string txtcel = "";
+
+            for (i = c; i < grdTraslados.Cols - 2; i++)
+            {
+                txtcel = grdTraslados.get_Texto(f, i).ToString();
+                if (txtcel.Length <= 1 & txtcel == "0" & grdTraslados.Columnas[i].Visible == true)
+                {
+                    grdTraslados.ActivarCelda(f, i);
+                    i = grdTraslados.Cols - 1;
+                }
+            }
         }
-        
+
         private void Rellenar_nueva_Fila(short Fila)
         {
             switch (vi)
@@ -454,7 +453,7 @@ namespace Programa1.Carga
                     Traslados.precios.Sucursal = Traslados.sucS;
                     Traslados.CostoS = Traslados.precios.Buscar();
                     break;
-                    //Suc_E
+                //Suc_E
                 case 3:
                     Traslados.sucE.Siguiente();
 
@@ -476,25 +475,47 @@ namespace Programa1.Carga
 
                     break;
             }
-            grdTraslados.set_Texto(Fila + 1, c_Fecha, Traslados.Fecha);
-            grdTraslados.set_Texto(Fila + 1, c_IdSucS, Traslados.sucS.ID);
-            grdTraslados.set_Texto(Fila + 1, c_IdSucS + 1, Traslados.sucS.Nombre);
-            grdTraslados.set_Texto(Fila + 1, c_IdSucE, Traslados.sucE.ID);
-            grdTraslados.set_Texto(Fila + 1, c_IdSucE + 1, Traslados.sucE.Nombre);
-            grdTraslados.set_Texto(Fila + 1, c_IdProd, Traslados.Producto.ID);
-            grdTraslados.set_Texto(Fila + 1, c_Descripcion, Traslados.Descripcion);
-            grdTraslados.set_Texto(Fila + 1, c_CostoS, Traslados.CostoS);
-            grdTraslados.set_Texto(Fila + 1, c_CostoE, Traslados.CostoE);
-            grdTraslados.set_Texto(Fila + 1, c_TotalS, 0);
-            grdTraslados.set_Texto(Fila + 1, c_TotalE, 0);
 
-            if (chCantidades.Checked == true)
+            if (chFecha.Checked == true) { grdTraslados.set_Texto(Fila + 1, c_Fecha, Traslados.Fecha); }
+
+            if (chSucs.Checked == true)
             {
-                grdTraslados.ActivarCelda(Fila + 1, c_Cantidad);
+                grdTraslados.set_Texto(Fila + 1, c_IdSucS, Traslados.sucS.ID);
+                grdTraslados.set_Texto(Fila + 1, c_IdSucS + 1, Traslados.sucS.Nombre);
             }
-            else
+
+            if (chSucE.Checked == true)
             {
-                grdTraslados.ActivarCelda(Fila + 1, grdTraslados.Col);
+                grdTraslados.set_Texto(Fila + 1, c_IdSucE, Traslados.sucE.ID);
+                grdTraslados.set_Texto(Fila + 1, c_IdSucE + 1, Traslados.sucE.Nombre);
+            }
+
+            if (chProducto.Checked == true)
+            {
+                grdTraslados.set_Texto(Fila + 1, c_IdProd, Traslados.Producto.ID);
+                grdTraslados.set_Texto(Fila + 1, c_Descripcion, Traslados.Descripcion);
+
+                if (chSucs.Checked == true)
+                {
+                    grdTraslados.set_Texto(Fila + 1, c_CostoE, Traslados.CostoE);
+                    grdTraslados.set_Texto(Fila + 1, c_TotalE, 0);
+                }
+                if (chSucE.Checked == true)
+                {
+                    grdTraslados.set_Texto(Fila + 1, c_CostoS, Traslados.CostoS);
+                    grdTraslados.set_Texto(Fila + 1, c_TotalS, 0);
+                }
+            }
+            int i;
+            string txtcel = "";
+            for (i = 1; i < grdTraslados.Cols - 2; i++)
+            {
+                txtcel = grdTraslados.get_Texto(Fila + 1, i).ToString();
+                if (txtcel.Length <= 1 & txtcel == "0" & grdTraslados.Columnas[i].Visible == true)
+                {
+                    grdTraslados.ActivarCelda(Fila + 1, i);
+                    i = grdTraslados.Cols - 1;
+                }
             }
         }
 
@@ -528,7 +549,7 @@ namespace Programa1.Carga
         {
             if (e == 13)
             {
-                if (grdTraslados.Col == c_Kilos || grdTraslados.Col == c_Cantidad )
+                if (grdTraslados.Col == c_Kilos || grdTraslados.Col == c_Cantidad)
                 {
 
                     if (Traslados.ID == 0)
@@ -570,7 +591,7 @@ namespace Programa1.Carga
                                 Traslados.CostoE = Traslados.precios.Buscar();
 
                                 grdTraslados.set_Texto(grdTraslados.Row, c_IdSucE, Traslados.sucE.ID);
-                                grdTraslados.set_Texto(grdTraslados.Row, c_IdSucE+1, Traslados.sucE.Nombre);
+                                grdTraslados.set_Texto(grdTraslados.Row, c_IdSucE + 1, Traslados.sucE.Nombre);
                                 grdTraslados.set_Texto(grdTraslados.Row, c_CostoE, Traslados.CostoE);
                                 break;
                             //Producto
@@ -722,6 +743,7 @@ namespace Programa1.Carga
         private void cmdHerramientas_Click(object sender, EventArgs e)
         {
             panel5.Visible = true;
+            panel3.Visible = false;
         }
 
         private void rdFecha_CheckedChanged(object sender, EventArgs e)
@@ -733,12 +755,12 @@ namespace Programa1.Carga
         {
             vi = 2;
         }
-    
+
         private void rdSucE_CheckedChanged(object sender, EventArgs e)
         {
             vi = 3;
         }
-        
+
         private void rdProd_CheckedChanged(object sender, EventArgs e)
         {
             vi = 4;
@@ -749,6 +771,13 @@ namespace Programa1.Carga
         }
         private void grdTraslados_Click()
         {
+            panel3.Visible = false;
+            panel5.Visible = false;
+        }
+
+        private void cmdRepetir_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = true;
             panel5.Visible = false;
         }
     }

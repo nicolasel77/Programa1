@@ -148,7 +148,6 @@
             grdCompras.set_ColW(c_IdCamion, 30);
             grdCompras.set_ColW(c_IdProv, 30);
             grdCompras.set_ColW(c_IdProv + 1, 200);
-            grdCompras.set_ColW(c_IdProd, 30);
             grdCompras.set_ColW(c_Descripcion, 350);
             grdCompras.set_ColW(c_Cantidad, 60);
             grdCompras.set_ColW(c_Costo, 70);
@@ -156,6 +155,10 @@
             grdCompras.set_ColW(c_Total, 90);
             grdCompras.set_ColW(c_Promedio, 70);
 
+            grdCompras.set_Texto(0, c_IdProv, "Prov");
+            grdCompras.set_Texto(0, c_IdProd, "Prod");
+
+            grdCompras.AutosizeCol(c_IdProd);
             grdCompras.AutosizeCol(c_IdProv + 1);
             grdCompras.AutosizeCol(c_Descripcion);
             grdCompras.AutosizeCol(c_Kilos);
@@ -190,8 +193,7 @@
             grdCompras.Columnas[c_IdProv + 1].Style.ForeColor = Color.DimGray;
             grdCompras.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
-            grdCompras.set_Texto(0, c_IdProv, "Prov");
-            grdCompras.set_Texto(0, c_IdProd, "Prod");
+
         }
 
         private void Totales()

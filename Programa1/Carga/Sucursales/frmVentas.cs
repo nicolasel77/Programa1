@@ -153,7 +153,6 @@
             grdVenta.set_ColW(c_IdProv + 1, 100);
             grdVenta.set_ColW(c_IdSuc, 35);
             grdVenta.set_ColW(c_IdSuc + 1, 100);
-            grdVenta.set_ColW(c_IdProd, 30);
             grdVenta.set_ColW(c_Descripcion, 160);
             grdVenta.set_ColW(c_Cantidad, 60);
             grdVenta.set_ColW(c_CostoVenta, 60);
@@ -162,6 +161,9 @@
             grdVenta.set_ColW(c_TotalCompra, 80);
             grdVenta.set_ColW(c_TotalVenta, 80);
             grdVenta.set_ColW(c_Promedio, 60);
+
+            grdVenta.set_Texto(0, c_IdProd, "Prod");
+            grdVenta.AutosizeCol(c_IdProd);
 
             if (chCantidades.Checked == true)
             {
@@ -197,7 +199,6 @@
 
             grdVenta.set_Texto(0, c_IdSuc, "Suc");
             grdVenta.set_Texto(0, c_IdProv, "Prov");
-            grdVenta.set_Texto(0, c_IdProd, "Prod");
         }
 
         private void Totales()

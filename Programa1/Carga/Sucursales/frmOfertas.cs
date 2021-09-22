@@ -140,12 +140,14 @@
             grdOfertas.set_ColW(c_Fecha, 60);
             grdOfertas.set_ColW(c_IdSuc, 30);
             grdOfertas.set_ColW(c_IdSuc + 1, 60);
-            grdOfertas.set_ColW(c_IdProd, 30);
             grdOfertas.set_ColW(c_Descripcion, 200);
             grdOfertas.set_ColW(c_CostoOriginal, 60);
             grdOfertas.set_ColW(c_CostoOferta, 60);
             grdOfertas.set_ColW(c_Kilos, 60);
             grdOfertas.set_ColW(c_Reintegro, 80);
+
+            grdOfertas.set_Texto(0, c_IdProd, "Prod");
+            grdOfertas.AutosizeCol(c_IdProd);
 
             grdOfertas.Columnas[c_CostoOriginal].Format = "C2";
             grdOfertas.Columnas[c_CostoOferta].Format = "C2";
@@ -157,7 +159,6 @@
             grdOfertas.Columnas[c_Kilos].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
 
             grdOfertas.set_Texto(0, c_IdSuc, "Suc");
-            grdOfertas.set_Texto(0, c_IdProd, "Prod");
         }
 
         private void Totales()
