@@ -369,6 +369,19 @@
             {
                 case 0:
                     //Semana
+                    fecha_Actual = DateTime.Parse(lstSemanas.Text);
+                    fecha_Fin = fecha_Actual.AddDays(6);
+                    if (cCambio == false)
+                    {
+                        try
+                        {
+                            Cambio_Seleccion(null, null);
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                    }
                     break;
                 case 1:
                     //Mes
