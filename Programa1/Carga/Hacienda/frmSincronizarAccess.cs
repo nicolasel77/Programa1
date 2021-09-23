@@ -56,9 +56,19 @@ namespace Programa1.Carga.Hacienda
             clsAccess.Campo_ID = "NBoleta";
             clsAccess.Base_Access = cmdBase.Text;
 
-            h.Llenar_List(lstBoletas, clsAccess.Datos_Vista("", "TOP 100 NBoleta", "NBoleta DESC"));
-            h.Llenar_List(lstSistema, datos.Datos_Genericos("SELECT TOP 100 NBoleta FROM NBoletas ORDER BY NBoleta DESC"));
-
+            DataTable dt = clsAccess.Datos_Vista("", "TOP 100 NBoleta, (SELECT COUNT(Fecha) FROM Faena WHERE Faena.NBoleta=NBoletas.NBoleta) AS Medias", "NBoleta DESC");
+            lstBoletas.Items.Clear();
+            foreach (DataRow dr in dt.Rows)
+            {
+                lstBoletas.Items.Add($"{dr[0]}  {(Convert.ToInt32(dr[1]) == 0 ? "0 medias" : "")}");
+            }
+            dt = datos.Datos_Genericos("SELECT TOP 100 NBoleta, ISNULL((SELECT COUNT(*) FROM Faena WHERE Faena.NBoleta=NBoletas.NBoleta), 0) AS Medias FROM NBoletas ORDER BY NBoleta DESC");
+            lstSistema.Items.Clear();
+            foreach (DataRow dr in dt.Rows)
+            {
+                lstSistema.Items.Add($"{dr[0]}  {(Convert.ToInt32(dr[1]) == 0 ? "0 medias" : "")}");
+            }
+            
             clsAccess.Vista = "Salidas";
             h.Llenar_List(lstFechasAcc, clsAccess.Datos_Vista("", "TOP 50 Fecha", "Fecha DESC", "Fecha"), "dd/MM");
             h.Llenar_List(lstFechasSis, datos.Datos_Genericos("SELECT TOP 100 Fecha FROM Hacienda_Salidas GROUP BY Fecha ORDER BY Fecha DESC"), "dd/MM");
@@ -520,6 +530,11 @@ namespace Programa1.Carga.Hacienda
             mDesde.Value = DateTime.Parse(lstFechasAcc.Text);
             mHasta.Value = mDesde.Value;
             cmdSincSalidas.PerformClick();
+        }
+
+        private void cmdListados_Click(object sender, EventArgs e)
+        {
+            Cargar_Listados();
         }
     }
 }

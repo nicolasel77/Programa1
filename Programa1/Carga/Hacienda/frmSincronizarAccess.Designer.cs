@@ -55,6 +55,7 @@ namespace Programa1.Carga.Hacienda
             this.lstSistema = new System.Windows.Forms.ListBox();
             this.lstFechasAcc = new System.Windows.Forms.ListBox();
             this.lstFechasSis = new System.Windows.Forms.ListBox();
+            this.cmdListados = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdBase
@@ -94,7 +95,7 @@ namespace Programa1.Carga.Hacienda
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label4.Location = new System.Drawing.Point(221, 101);
+            this.label4.Location = new System.Drawing.Point(314, 106);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 20);
             this.label4.TabIndex = 1;
@@ -104,7 +105,7 @@ namespace Programa1.Carga.Hacienda
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label5.Location = new System.Drawing.Point(221, 130);
+            this.label5.Location = new System.Drawing.Point(314, 135);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 20);
             this.label5.TabIndex = 1;
@@ -149,7 +150,7 @@ namespace Programa1.Carga.Hacienda
             this.lstBoletas.ItemHeight = 20;
             this.lstBoletas.Location = new System.Drawing.Point(23, 292);
             this.lstBoletas.Name = "lstBoletas";
-            this.lstBoletas.Size = new System.Drawing.Size(89, 240);
+            this.lstBoletas.Size = new System.Drawing.Size(130, 240);
             this.lstBoletas.TabIndex = 5;
             this.lstBoletas.DoubleClick += new System.EventHandler(this.lstBoletas_DoubleClick);
             this.lstBoletas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstBoletas_MouseUp);
@@ -161,7 +162,7 @@ namespace Programa1.Carga.Hacienda
             this.chCompra.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chCompra.Depth = 0;
             this.chCompra.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chCompra.Location = new System.Drawing.Point(222, 326);
+            this.chCompra.Location = new System.Drawing.Point(315, 331);
             this.chCompra.Margin = new System.Windows.Forms.Padding(0);
             this.chCompra.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chCompra.MouseState = MaterialSkin.MouseState.HOVER;
@@ -179,7 +180,7 @@ namespace Programa1.Carga.Hacienda
             this.chFaena.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chFaena.Depth = 0;
             this.chFaena.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chFaena.Location = new System.Drawing.Point(222, 356);
+            this.chFaena.Location = new System.Drawing.Point(315, 361);
             this.chFaena.Margin = new System.Windows.Forms.Padding(0);
             this.chFaena.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chFaena.MouseState = MaterialSkin.MouseState.HOVER;
@@ -193,7 +194,7 @@ namespace Programa1.Carga.Hacienda
             // cmdSincSalidas
             // 
             this.cmdSincSalidas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdSincSalidas.Location = new System.Drawing.Point(225, 179);
+            this.cmdSincSalidas.Location = new System.Drawing.Point(318, 184);
             this.cmdSincSalidas.Name = "cmdSincSalidas";
             this.cmdSincSalidas.Size = new System.Drawing.Size(167, 28);
             this.cmdSincSalidas.TabIndex = 3;
@@ -208,7 +209,7 @@ namespace Programa1.Carga.Hacienda
             this.chSaldo.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chSaldo.Depth = 0;
             this.chSaldo.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chSaldo.Location = new System.Drawing.Point(222, 386);
+            this.chSaldo.Location = new System.Drawing.Point(315, 391);
             this.chSaldo.Margin = new System.Windows.Forms.Padding(0);
             this.chSaldo.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chSaldo.MouseState = MaterialSkin.MouseState.HOVER;
@@ -226,7 +227,7 @@ namespace Programa1.Carga.Hacienda
             this.chBoleta.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoleta.Depth = 0;
             this.chBoleta.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chBoleta.Location = new System.Drawing.Point(222, 291);
+            this.chBoleta.Location = new System.Drawing.Point(315, 296);
             this.chBoleta.Margin = new System.Windows.Forms.Padding(0);
             this.chBoleta.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chBoleta.MouseState = MaterialSkin.MouseState.HOVER;
@@ -240,9 +241,9 @@ namespace Programa1.Carga.Hacienda
             // cmdAdelante
             // 
             this.cmdAdelante.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdAdelante.Location = new System.Drawing.Point(225, 419);
+            this.cmdAdelante.Location = new System.Drawing.Point(318, 424);
             this.cmdAdelante.Name = "cmdAdelante";
-            this.cmdAdelante.Size = new System.Drawing.Size(156, 28);
+            this.cmdAdelante.Size = new System.Drawing.Size(167, 28);
             this.cmdAdelante.TabIndex = 10;
             this.cmdAdelante.Text = "Hacia Adelante";
             this.cmdAdelante.UseVisualStyleBackColor = true;
@@ -273,7 +274,7 @@ namespace Programa1.Carga.Hacienda
             // cmdCostos_Salida
             // 
             this.cmdCostos_Salida.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdCostos_Salida.Location = new System.Drawing.Point(225, 213);
+            this.cmdCostos_Salida.Location = new System.Drawing.Point(318, 218);
             this.cmdCostos_Salida.Name = "cmdCostos_Salida";
             this.cmdCostos_Salida.Size = new System.Drawing.Size(167, 28);
             this.cmdCostos_Salida.TabIndex = 4;
@@ -284,7 +285,7 @@ namespace Programa1.Carga.Hacienda
             // mDesde
             // 
             this.mDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.mDesde.Location = new System.Drawing.Point(290, 101);
+            this.mDesde.Location = new System.Drawing.Point(383, 106);
             this.mDesde.Name = "mDesde";
             this.mDesde.Size = new System.Drawing.Size(97, 20);
             this.mDesde.TabIndex = 1;
@@ -292,7 +293,7 @@ namespace Programa1.Carga.Hacienda
             // mHasta
             // 
             this.mHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.mHasta.Location = new System.Drawing.Point(290, 130);
+            this.mHasta.Location = new System.Drawing.Point(383, 135);
             this.mHasta.Name = "mHasta";
             this.mHasta.Size = new System.Drawing.Size(97, 20);
             this.mHasta.TabIndex = 2;
@@ -340,10 +341,10 @@ namespace Programa1.Carga.Hacienda
             this.lstSistema.ForeColor = System.Drawing.Color.DimGray;
             this.lstSistema.FormattingEnabled = true;
             this.lstSistema.ItemHeight = 20;
-            this.lstSistema.Location = new System.Drawing.Point(118, 292);
+            this.lstSistema.Location = new System.Drawing.Point(159, 292);
             this.lstSistema.Name = "lstSistema";
             this.lstSistema.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.lstSistema.Size = new System.Drawing.Size(89, 240);
+            this.lstSistema.Size = new System.Drawing.Size(130, 240);
             this.lstSistema.TabIndex = 5;
             this.lstSistema.DoubleClick += new System.EventHandler(this.lstBoletas_DoubleClick);
             this.lstSistema.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstBoletas_MouseUp);
@@ -377,6 +378,17 @@ namespace Programa1.Carga.Hacienda
             this.lstFechasSis.DoubleClick += new System.EventHandler(this.lstBoletas_DoubleClick);
             this.lstFechasSis.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstBoletas_MouseUp);
             // 
+            // cmdListados
+            // 
+            this.cmdListados.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdListados.Location = new System.Drawing.Point(318, 604);
+            this.cmdListados.Name = "cmdListados";
+            this.cmdListados.Size = new System.Drawing.Size(167, 28);
+            this.cmdListados.TabIndex = 10;
+            this.cmdListados.Text = "Cargar Listados";
+            this.cmdListados.UseVisualStyleBackColor = true;
+            this.cmdListados.Click += new System.EventHandler(this.cmdListados_Click);
+            // 
             // frmSincronizarAccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -391,6 +403,7 @@ namespace Programa1.Carga.Hacienda
             this.Controls.Add(this.txtBoleta);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.cmdListados);
             this.Controls.Add(this.cmdAdelante);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmdCostos_Salida);
@@ -444,5 +457,6 @@ namespace Programa1.Carga.Hacienda
         private System.Windows.Forms.ListBox lstSistema;
         private System.Windows.Forms.ListBox lstFechasAcc;
         private System.Windows.Forms.ListBox lstFechasSis;
+        private System.Windows.Forms.Button cmdListados;
     }
 }
