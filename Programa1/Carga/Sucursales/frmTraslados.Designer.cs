@@ -37,6 +37,12 @@
             this.lblTotalE = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblDiferencia = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.chProducto = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chSucE = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chSucs = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chFecha = new MaterialSkin.Controls.MaterialCheckBox();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.rdSucE = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
@@ -45,6 +51,11 @@
             this.rdNada = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdFecha = new MaterialSkin.Controls.MaterialRadioButton();
             this.grdTraslados = new Grilla2.SpeedGrilla();
+            this.mnuActivarCelda = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Costo_SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Costo_EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.KilosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.cSucSalida = new Programa1.Controles.cSucursales();
@@ -55,6 +66,8 @@
             this.cProds = new Programa1.Controles.cProductos();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cmdRepetir = new MaterialSkin.Controls.MaterialFlatButton();
             this.panel6 = new System.Windows.Forms.Panel();
             this.cmdHerramientas = new MaterialSkin.Controls.MaterialFlatButton();
             this.paCambio = new System.Windows.Forms.Panel();
@@ -63,20 +76,14 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.cmdRepetir = new MaterialSkin.Controls.MaterialFlatButton();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.chFecha = new MaterialSkin.Controls.MaterialCheckBox();
-            this.chSucs = new MaterialSkin.Controls.MaterialCheckBox();
-            this.chSucE = new MaterialSkin.Controls.MaterialCheckBox();
-            this.chProducto = new MaterialSkin.Controls.MaterialCheckBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.mnuActivarCelda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -90,12 +97,11 @@
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
             this.paCambio.SuspendLayout();
             this.paMostrar.SuspendLayout();
             this.paLimpiar.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -182,6 +188,105 @@
             this.splitContainer1.SplitterDistance = 831;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.chProducto);
+            this.panel3.Controls.Add(this.chSucE);
+            this.panel3.Controls.Add(this.chSucs);
+            this.panel3.Controls.Add(this.chFecha);
+            this.panel3.Controls.Add(this.materialLabel1);
+            this.panel3.Location = new System.Drawing.Point(696, 533);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(132, 151);
+            this.panel3.TabIndex = 14;
+            this.panel3.Visible = false;
+            // 
+            // chProducto
+            // 
+            this.chProducto.AutoSize = true;
+            this.chProducto.Checked = true;
+            this.chProducto.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chProducto.Depth = 0;
+            this.chProducto.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chProducto.Location = new System.Drawing.Point(7, 109);
+            this.chProducto.Margin = new System.Windows.Forms.Padding(0);
+            this.chProducto.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chProducto.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chProducto.Name = "chProducto";
+            this.chProducto.Ripple = true;
+            this.chProducto.Size = new System.Drawing.Size(86, 30);
+            this.chProducto.TabIndex = 16;
+            this.chProducto.Text = "Producto";
+            this.chProducto.UseVisualStyleBackColor = true;
+            // 
+            // chSucE
+            // 
+            this.chSucE.AutoSize = true;
+            this.chSucE.Checked = true;
+            this.chSucE.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chSucE.Depth = 0;
+            this.chSucE.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chSucE.Location = new System.Drawing.Point(7, 79);
+            this.chSucE.Margin = new System.Windows.Forms.Padding(0);
+            this.chSucE.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chSucE.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chSucE.Name = "chSucE";
+            this.chSucE.Ripple = true;
+            this.chSucE.Size = new System.Drawing.Size(64, 30);
+            this.chSucE.TabIndex = 15;
+            this.chSucE.Text = "Suc E";
+            this.chSucE.UseVisualStyleBackColor = true;
+            // 
+            // chSucs
+            // 
+            this.chSucs.AutoSize = true;
+            this.chSucs.Checked = true;
+            this.chSucs.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chSucs.Depth = 0;
+            this.chSucs.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chSucs.Location = new System.Drawing.Point(7, 49);
+            this.chSucs.Margin = new System.Windows.Forms.Padding(0);
+            this.chSucs.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chSucs.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chSucs.Name = "chSucs";
+            this.chSucs.Ripple = true;
+            this.chSucs.Size = new System.Drawing.Size(65, 30);
+            this.chSucs.TabIndex = 14;
+            this.chSucs.Text = "Suc S";
+            this.chSucs.UseVisualStyleBackColor = true;
+            // 
+            // chFecha
+            // 
+            this.chFecha.AutoSize = true;
+            this.chFecha.Checked = true;
+            this.chFecha.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chFecha.Depth = 0;
+            this.chFecha.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chFecha.Location = new System.Drawing.Point(7, 19);
+            this.chFecha.Margin = new System.Windows.Forms.Padding(0);
+            this.chFecha.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chFecha.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chFecha.Name = "chFecha";
+            this.chFecha.Ripple = true;
+            this.chFecha.Size = new System.Drawing.Size(67, 30);
+            this.chFecha.TabIndex = 13;
+            this.chFecha.Text = "Fecha";
+            this.chFecha.UseVisualStyleBackColor = true;
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(3, 0);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(60, 19);
+            this.materialLabel1.TabIndex = 12;
+            this.materialLabel1.Text = "Repetir:";
             // 
             // panel5
             // 
@@ -312,6 +417,7 @@
             this.grdTraslados.bFColorSel = System.Drawing.SystemColors.HighlightText;
             this.grdTraslados.Col = 0;
             this.grdTraslados.Cols = 10;
+            this.grdTraslados.ContextMenuStrip = this.mnuActivarCelda;
             this.grdTraslados.DataMember = "";
             this.grdTraslados.DataSource = null;
             this.grdTraslados.EnableEdicion = true;
@@ -338,6 +444,45 @@
             this.grdTraslados.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.GrdTraslados_KeyPress);
             this.grdTraslados.SeleccionCambio += new Grilla2.SpeedGrilla.SeleccionCambioEventHandler(this.grdTraslados_SeleccionCambio);
             this.grdTraslados.Click += new Grilla2.SpeedGrilla.ClickEventHandler(this.grdTraslados_Click);
+            // 
+            // mnuActivarCelda
+            // 
+            this.mnuActivarCelda.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Costo_SToolStripMenuItem,
+            this.Costo_EToolStripMenuItem,
+            this.KilosToolStripMenuItem,
+            this.toolStripMenuItem1});
+            this.mnuActivarCelda.Name = "mnuFiltroEstadisticas";
+            this.mnuActivarCelda.Size = new System.Drawing.Size(117, 76);
+            this.mnuActivarCelda.Text = "Activar Celda";
+            // 
+            // Costo_SToolStripMenuItem
+            // 
+            this.Costo_SToolStripMenuItem.Name = "Costo_SToolStripMenuItem";
+            this.Costo_SToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.Costo_SToolStripMenuItem.Text = "Costo_S";
+            this.Costo_SToolStripMenuItem.Click += new System.EventHandler(this.Costo_SToolStripMenuItem_Click);
+            // 
+            // Costo_EToolStripMenuItem
+            // 
+            this.Costo_EToolStripMenuItem.Name = "Costo_EToolStripMenuItem";
+            this.Costo_EToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.Costo_EToolStripMenuItem.Text = "Costo_E";
+            this.Costo_EToolStripMenuItem.Click += new System.EventHandler(this.Costo_EToolStripMenuItem_Click);
+            // 
+            // KilosToolStripMenuItem
+            // 
+            this.KilosToolStripMenuItem.Checked = true;
+            this.KilosToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.KilosToolStripMenuItem.Name = "KilosToolStripMenuItem";
+            this.KilosToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.KilosToolStripMenuItem.Text = "Kilos";
+            this.KilosToolStripMenuItem.Click += new System.EventHandler(this.KilosToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(113, 6);
             // 
             // splitContainer2
             // 
@@ -497,6 +642,32 @@
             this.panel1.Size = new System.Drawing.Size(813, 27);
             this.panel1.TabIndex = 8;
             // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.cmdRepetir);
+            this.panel2.Location = new System.Drawing.Point(11, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(121, 25);
+            this.panel2.TabIndex = 9;
+            // 
+            // cmdRepetir
+            // 
+            this.cmdRepetir.AutoSize = true;
+            this.cmdRepetir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdRepetir.Depth = 0;
+            this.cmdRepetir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdRepetir.Location = new System.Drawing.Point(0, 0);
+            this.cmdRepetir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdRepetir.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdRepetir.Name = "cmdRepetir";
+            this.cmdRepetir.Primary = false;
+            this.cmdRepetir.Size = new System.Drawing.Size(121, 25);
+            this.cmdRepetir.TabIndex = 0;
+            this.cmdRepetir.Text = "Repetir";
+            this.cmdRepetir.UseVisualStyleBackColor = true;
+            this.cmdRepetir.Click += new System.EventHandler(this.cmdRepetir_Click);
+            // 
             // panel6
             // 
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -601,131 +772,6 @@
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
             // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.cmdRepetir);
-            this.panel2.Location = new System.Drawing.Point(11, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(121, 25);
-            this.panel2.TabIndex = 9;
-            // 
-            // cmdRepetir
-            // 
-            this.cmdRepetir.AutoSize = true;
-            this.cmdRepetir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cmdRepetir.Depth = 0;
-            this.cmdRepetir.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmdRepetir.Location = new System.Drawing.Point(0, 0);
-            this.cmdRepetir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cmdRepetir.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cmdRepetir.Name = "cmdRepetir";
-            this.cmdRepetir.Primary = false;
-            this.cmdRepetir.Size = new System.Drawing.Size(121, 25);
-            this.cmdRepetir.TabIndex = 0;
-            this.cmdRepetir.Text = "Repetir";
-            this.cmdRepetir.UseVisualStyleBackColor = true;
-            this.cmdRepetir.Click += new System.EventHandler(this.cmdRepetir_Click);
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.chProducto);
-            this.panel3.Controls.Add(this.chSucE);
-            this.panel3.Controls.Add(this.chSucs);
-            this.panel3.Controls.Add(this.chFecha);
-            this.panel3.Controls.Add(this.materialLabel1);
-            this.panel3.Location = new System.Drawing.Point(696, 533);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(132, 151);
-            this.panel3.TabIndex = 14;
-            this.panel3.Visible = false;
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(3, 0);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(60, 19);
-            this.materialLabel1.TabIndex = 12;
-            this.materialLabel1.Text = "Repetir:";
-            // 
-            // chFecha
-            // 
-            this.chFecha.AutoSize = true;
-            this.chFecha.Checked = true;
-            this.chFecha.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chFecha.Depth = 0;
-            this.chFecha.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chFecha.Location = new System.Drawing.Point(7, 19);
-            this.chFecha.Margin = new System.Windows.Forms.Padding(0);
-            this.chFecha.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chFecha.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chFecha.Name = "chFecha";
-            this.chFecha.Ripple = true;
-            this.chFecha.Size = new System.Drawing.Size(67, 30);
-            this.chFecha.TabIndex = 13;
-            this.chFecha.Text = "Fecha";
-            this.chFecha.UseVisualStyleBackColor = true;
-            // 
-            // chSucs
-            // 
-            this.chSucs.AutoSize = true;
-            this.chSucs.Checked = true;
-            this.chSucs.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chSucs.Depth = 0;
-            this.chSucs.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chSucs.Location = new System.Drawing.Point(7, 49);
-            this.chSucs.Margin = new System.Windows.Forms.Padding(0);
-            this.chSucs.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chSucs.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chSucs.Name = "chSucs";
-            this.chSucs.Ripple = true;
-            this.chSucs.Size = new System.Drawing.Size(65, 30);
-            this.chSucs.TabIndex = 14;
-            this.chSucs.Text = "Suc S";
-            this.chSucs.UseVisualStyleBackColor = true;
-            // 
-            // chSucE
-            // 
-            this.chSucE.AutoSize = true;
-            this.chSucE.Checked = true;
-            this.chSucE.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chSucE.Depth = 0;
-            this.chSucE.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chSucE.Location = new System.Drawing.Point(7, 79);
-            this.chSucE.Margin = new System.Windows.Forms.Padding(0);
-            this.chSucE.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chSucE.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chSucE.Name = "chSucE";
-            this.chSucE.Ripple = true;
-            this.chSucE.Size = new System.Drawing.Size(64, 30);
-            this.chSucE.TabIndex = 15;
-            this.chSucE.Text = "Suc E";
-            this.chSucE.UseVisualStyleBackColor = true;
-            // 
-            // chProducto
-            // 
-            this.chProducto.AutoSize = true;
-            this.chProducto.Checked = true;
-            this.chProducto.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chProducto.Depth = 0;
-            this.chProducto.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chProducto.Location = new System.Drawing.Point(7, 109);
-            this.chProducto.Margin = new System.Windows.Forms.Padding(0);
-            this.chProducto.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chProducto.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chProducto.Name = "chProducto";
-            this.chProducto.Ripple = true;
-            this.chProducto.Size = new System.Drawing.Size(86, 30);
-            this.chProducto.TabIndex = 16;
-            this.chProducto.Text = "Producto";
-            this.chProducto.UseVisualStyleBackColor = true;
-            // 
             // frmTraslados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -744,8 +790,11 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.mnuActivarCelda.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
@@ -760,6 +809,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.paCambio.ResumeLayout(false);
@@ -768,10 +819,6 @@
             this.paMostrar.PerformLayout();
             this.paLimpiar.ResumeLayout(false);
             this.paLimpiar.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -820,5 +867,10 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.Panel panel2;
         private MaterialSkin.Controls.MaterialFlatButton cmdRepetir;
+        private System.Windows.Forms.ContextMenuStrip mnuActivarCelda;
+        private System.Windows.Forms.ToolStripMenuItem Costo_SToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Costo_EToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem KilosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }

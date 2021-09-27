@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmResumen_Suc));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
@@ -289,12 +288,12 @@
             this.carneToolStripMenuItem,
             this.trasladosToolStripMenuItem1});
             this.mnuFiltroEntradas.Name = "mnuFiltroEntradas";
-            this.mnuFiltroEntradas.Size = new System.Drawing.Size(123, 70);
+            this.mnuFiltroEntradas.Size = new System.Drawing.Size(181, 92);
             // 
             // ventaToolStripMenuItem
             // 
             this.ventaToolStripMenuItem.Name = "ventaToolStripMenuItem";
-            this.ventaToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.ventaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ventaToolStripMenuItem.Tag = "1";
             this.ventaToolStripMenuItem.Text = "Venta";
             this.ventaToolStripMenuItem.Click += new System.EventHandler(this.Menu_EntradasClick);
@@ -302,7 +301,7 @@
             // carneToolStripMenuItem
             // 
             this.carneToolStripMenuItem.Name = "carneToolStripMenuItem";
-            this.carneToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.carneToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.carneToolStripMenuItem.Tag = "2";
             this.carneToolStripMenuItem.Text = "Carne";
             this.carneToolStripMenuItem.Click += new System.EventHandler(this.Menu_EntradasClick);
@@ -310,7 +309,7 @@
             // trasladosToolStripMenuItem1
             // 
             this.trasladosToolStripMenuItem1.Name = "trasladosToolStripMenuItem1";
-            this.trasladosToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
+            this.trasladosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.trasladosToolStripMenuItem1.Tag = "3";
             this.trasladosToolStripMenuItem1.Text = "Traslados";
             this.trasladosToolStripMenuItem1.Click += new System.EventHandler(this.Menu_EntradasClick);
@@ -643,6 +642,7 @@
             this.cFechas1.Location = new System.Drawing.Point(0, 0);
             this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFechas1.Mostrar = 0;
+            this.cFechas1.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFechas1.Name = "cFechas1";
             this.cFechas1.Size = new System.Drawing.Size(228, 184);
             this.cFechas1.TabIndex = 0;
