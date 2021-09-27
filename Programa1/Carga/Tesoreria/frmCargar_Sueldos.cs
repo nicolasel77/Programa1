@@ -39,13 +39,13 @@
                 {
                     if (rdAdelanto.Checked == true)
                     {
-                        grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, dbEmpleados.dbo.f_Adelanto(ID, DATEADD(MONTH, 1, DATEADD(DAY, DAY(GETDATE()) * -1, GETDATE()))) AS Adelanto, CONVERT(BIT, 1) Sel"), true, true);
+                        grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, dbEmpleados.dbo.f_Adelanto(ID, DATEADD(MONTH, 1, DATEADD(DAY, DAY(GETDATE()) * -1, GETDATE()))) AS Adelanto, CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
                     }
                     else
                     {
                         // devuelve el primer día del mes anterior                        
 
-                        grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, dbEmpleados.dbo.f_Saldo(ID, DATEADD(MONTH, -1, DATEADD(DAY, DAY(GETDATE()) * -1 + 1, GETDATE())), '1/1/1900', '1/1/1900') AS Saldo, CONVERT(BIT, 1) Sel"), true, true);
+                        grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, dbEmpleados.dbo.f_Saldo(ID, DATEADD(MONTH, -1, DATEADD(DAY, DAY(GETDATE()) * -1 + 1, GETDATE())), '1/1/1900', '1/1/1900') AS Saldo, CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
                     }
                 }
                 else

@@ -84,7 +84,7 @@ namespace Programa1.Carga.Hacienda
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label3.Location = new System.Drawing.Point(23, 79);
+            this.label3.Location = new System.Drawing.Point(19, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(159, 20);
             this.label3.TabIndex = 1;
@@ -136,9 +136,9 @@ namespace Programa1.Carga.Hacienda
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.label6.Location = new System.Drawing.Point(19, 269);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(198, 20);
+            this.label6.Size = new System.Drawing.Size(211, 20);
             this.label6.TabIndex = 1;
-            this.label6.Text = "Boletas en access/sistema";
+            this.label6.Text = "Boletas en Access / Sistema";
             // 
             // lstBoletas
             // 
@@ -357,7 +357,7 @@ namespace Programa1.Carga.Hacienda
             this.lstFechasAcc.ItemHeight = 20;
             this.lstFechasAcc.Location = new System.Drawing.Point(23, 102);
             this.lstFechasAcc.Name = "lstFechasAcc";
-            this.lstFechasAcc.Size = new System.Drawing.Size(89, 140);
+            this.lstFechasAcc.Size = new System.Drawing.Size(130, 140);
             this.lstFechasAcc.TabIndex = 5;
             this.lstFechasAcc.SelectedIndexChanged += new System.EventHandler(this.lstFechasAcc_SelectedIndexChanged);
             this.lstFechasAcc.DoubleClick += new System.EventHandler(this.lstFechasAcc_DoubleClick);
@@ -370,16 +370,17 @@ namespace Programa1.Carga.Hacienda
             this.lstFechasSis.ForeColor = System.Drawing.Color.DimGray;
             this.lstFechasSis.FormattingEnabled = true;
             this.lstFechasSis.ItemHeight = 20;
-            this.lstFechasSis.Location = new System.Drawing.Point(118, 102);
+            this.lstFechasSis.Location = new System.Drawing.Point(159, 102);
             this.lstFechasSis.Name = "lstFechasSis";
             this.lstFechasSis.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.lstFechasSis.Size = new System.Drawing.Size(89, 140);
+            this.lstFechasSis.Size = new System.Drawing.Size(130, 140);
             this.lstFechasSis.TabIndex = 5;
             this.lstFechasSis.DoubleClick += new System.EventHandler(this.lstBoletas_DoubleClick);
             this.lstFechasSis.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstBoletas_MouseUp);
             // 
             // cmdListados
             // 
+            this.cmdListados.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmdListados.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmdListados.Location = new System.Drawing.Point(318, 604);
             this.cmdListados.Name = "cmdListados";
