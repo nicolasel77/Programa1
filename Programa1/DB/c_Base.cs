@@ -518,6 +518,28 @@
 
             return dt;
         }
+        public DataTable sp_Datos(string sp, SqlParameter parameter)
+        {
+            var dt = new DataTable("Datos");
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand(sp, cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(parameter);
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                daAdapt.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
 
         public int Max_ID()
         {
