@@ -138,6 +138,12 @@
     <Compile Include="Carga\Hacienda\frmControl_Carne.Designer.cs">
       <DependentUpon>frmControl_Carne.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Hacienda\frmDeuda_Hacienda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Hacienda\frmDeuda_Hacienda.Designer.cs">
+      <DependentUpon>frmDeuda_Hacienda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Hacienda\frmFrigorificosABM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -834,6 +840,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmControl_Carne.resx">
       <DependentUpon>frmControl_Carne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Hacienda\frmDeuda_Hacienda.resx">
+      <DependentUpon>frmDeuda_Hacienda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmFrigorificosABM.resx">
       <DependentUpon>frmFrigorificosABM.cs</DependentUpon>

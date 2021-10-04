@@ -2342,5 +2342,53 @@
             frmEditar_Cajas fr = new frmEditar_Cajas();
             fr.ShowDialog();
         }
+
+        private void deudaHaciendaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmDeuda_Hacienda")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmDeuda_Hacienda");
+                t.Text = "Deuda_Hacienda";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmDeuda_Hacienda = new Carga.Hacienda.frmDeuda_Hacienda();
+                frmDeuda_Hacienda.MdiParent = this;
+                frmDeuda_Hacienda.Disposed += FrmDeuda_Hacienda_Disposed;
+                forms.Add(frmDeuda_Hacienda);
+                frmDeuda_Hacienda.Show();
+                frmDeuda_Hacienda.WindowState = FormWindowState.Minimized;
+                frmDeuda_Hacienda.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmDeuda_Hacienda_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Deuda_Hacienda")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmDeuda_Hacienda")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

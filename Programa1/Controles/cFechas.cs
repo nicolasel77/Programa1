@@ -3,7 +3,6 @@
     using Programa1.DB;
     using System;
     using System.Data;
-    using System.Media;
     using System.Windows.Forms;
 
     public partial class cFechas : UserControl
@@ -35,10 +34,10 @@
         }
         public DateTime Fecha_Maxima { get => mntDias.MaxDate; set { mntDias.MaxDate = value; } }
         public int Mostrar { get => tabControl1.SelectedIndex; set { tabControl1.SelectedIndex = value; } }
-        public e_MostrarSolo Mostrar_Solo 
+        public e_MostrarSolo Mostrar_Solo
         {
             get { return o_MostrarSolo; }
-            set 
+            set
             {
                 o_MostrarSolo = value;
                 if (o_MostrarSolo == e_MostrarSolo.Todos)
@@ -358,7 +357,7 @@
                 }
                 catch (Exception)
                 {
-                    
+
                 }
             }
         }
@@ -369,17 +368,20 @@
             {
                 case 0:
                     //Semana
-                    fecha_Actual = DateTime.Parse(lstSemanas.Text);
-                    fecha_Fin = fecha_Actual.AddDays(6);
-                    if (cCambio == false)
+                    if (lstSemanas.SelectedIndex != -1)
                     {
-                        try
+                        fecha_Actual = DateTime.Parse(lstSemanas.Text);
+                        fecha_Fin = fecha_Actual.AddDays(6);
+                        if (cCambio == false)
                         {
-                            Cambio_Seleccion(null, null);
-                        }
-                        catch (Exception)
-                        {
+                            try
+                            {
+                                Cambio_Seleccion(null, null);
+                            }
+                            catch (Exception)
+                            {
 
+                            }
                         }
                     }
                     break;

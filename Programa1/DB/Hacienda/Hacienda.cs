@@ -71,5 +71,29 @@ namespace Programa1.DB
 
             nBoletas.Costo = Convert.ToSingle(t);
         }
+
+        public DataTable Deuda_Hacienda(DateTime fecha)
+        {
+            SqlParameter p = new SqlParameter("Fecha", fecha);
+            DataTable dt = nBoletas.sp_Datos("dbo.sp_DeudaHacienda", p);
+
+            if (dt != null)
+            {
+                DataColumn dc1 = new DataColumn("Diferencia", typeof(double), "Compra+Agregados-Pagos_Compra-Pagos_Agregados");
+                DataColumn dc2 = new DataColumn("Saldo", typeof(double));
+                dt.Columns.Add(dc1);
+                dt.Columns.Add(dc2);
+                double t = 0;
+                for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                {
+                    t += Convert.ToDouble(dt.Rows[i]["Compra"]);
+                    t += Convert.ToDouble(dt.Rows[i]["Agregados"]);
+                    t -= Convert.ToDouble(dt.Rows[i]["Pagos_Compra"]);
+                    t -= Convert.ToDouble(dt.Rows[i]["Pagos_Agregados"]);
+                    dt.Rows[i]["Saldo"] = t;
+                }
+            }
+            return dt;
+        }
     }
 }
