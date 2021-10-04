@@ -49,14 +49,14 @@ namespace Programa1.DB
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             string GroupBy = "";
-            string Camposuma = ", Kilos, Total_compra Total";
+            string Camposuma = ", Cantidad, Kilos,  Total_compra Total";
             if (filtro.Length > 0)
             {
                 filtro = " WHERE " + filtro;
             }
             if (Agrupar == true)
             {
-                Camposuma = ", SUM(Kilos) Kilos, SUM(Total_Compra) Total ";
+                Camposuma = ", SUM(Cantidad) Cantidad, SUM(Kilos) Kilos, SUM(Total_Compra) Total ";
                 GroupBy = " GROUP BY Fecha, ID_Camion, Id_Proveedores, Nombre_Proveedor, Id_Productos, Descripcion, Costo_Compra ";
             }
 
@@ -88,7 +88,7 @@ namespace Programa1.DB
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             string GroupBy = "";
-            string Camposuma = ", Kilos, Total_Compra Total_Salida, Total_Venta Total_Entrada ";
+            string Camposuma = ", Cantidad, Kilos,  Total_Compra Total_Salida, Total_Venta Total_Entrada ";
 
             if (filtro.Length > 0)
             {
@@ -96,7 +96,7 @@ namespace Programa1.DB
             }
             if (Agrupar == true)
             {
-                Camposuma = ", SUM(Kilos) Kilos , SUM(Total_Compra) Total_Salida, SUM(Total_Venta) Total_Entrada ";
+                Camposuma = ", SUM(Cantidad) Cantidad, SUM(Kilos) Kilos,  SUM(Total_Compra) Total_Salida, SUM(Total_Venta) Total_Entrada ";
                 GroupBy = " GROUP BY Fecha, Id_Sucursales, Nombre, Id_Productos, Descripcion, Costo_Compra, Costo_Venta ";
             }
             try

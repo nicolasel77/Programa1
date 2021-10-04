@@ -288,12 +288,12 @@
             this.carneToolStripMenuItem,
             this.trasladosToolStripMenuItem1});
             this.mnuFiltroEntradas.Name = "mnuFiltroEntradas";
-            this.mnuFiltroEntradas.Size = new System.Drawing.Size(181, 92);
+            this.mnuFiltroEntradas.Size = new System.Drawing.Size(123, 70);
             // 
             // ventaToolStripMenuItem
             // 
             this.ventaToolStripMenuItem.Name = "ventaToolStripMenuItem";
-            this.ventaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ventaToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.ventaToolStripMenuItem.Tag = "1";
             this.ventaToolStripMenuItem.Text = "Venta";
             this.ventaToolStripMenuItem.Click += new System.EventHandler(this.Menu_EntradasClick);
@@ -301,7 +301,7 @@
             // carneToolStripMenuItem
             // 
             this.carneToolStripMenuItem.Name = "carneToolStripMenuItem";
-            this.carneToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.carneToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.carneToolStripMenuItem.Tag = "2";
             this.carneToolStripMenuItem.Text = "Carne";
             this.carneToolStripMenuItem.Click += new System.EventHandler(this.Menu_EntradasClick);
@@ -309,7 +309,7 @@
             // trasladosToolStripMenuItem1
             // 
             this.trasladosToolStripMenuItem1.Name = "trasladosToolStripMenuItem1";
-            this.trasladosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.trasladosToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.trasladosToolStripMenuItem1.Tag = "3";
             this.trasladosToolStripMenuItem1.Text = "Traslados";
             this.trasladosToolStripMenuItem1.Click += new System.EventHandler(this.Menu_EntradasClick);

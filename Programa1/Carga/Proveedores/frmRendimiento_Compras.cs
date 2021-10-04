@@ -32,7 +32,8 @@
 
             cellStyle = grdRendimiento_Compras.Styles.Add("Rojo");
             cellStyle.BackColor = Color.MistyRose;
-            
+            grdRendimiento_Compras.Columnas[grdRendimiento_Compras.get_ColIndex("DifKilos")].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+
             Ventas v = new Ventas();
             h.Llenar_List(lstCamiones, v.Camion.Datos());
         }

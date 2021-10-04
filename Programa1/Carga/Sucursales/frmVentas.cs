@@ -752,6 +752,7 @@
                         compras.Producto.ID = Convert.ToInt16(dr["Id_Productos"]);
                         compras.Descripcion = dr["Descripcion"].ToString();
                         compras.Costo = Convert.ToSingle(dr["Costo"]);
+                        compras.Cantidad = Convert.ToInt32(dr["Cantidad"]);
                         compras.Kilos = Convert.ToSingle(dr["Kilos"]);
                         compras.Agregar();
                     }
@@ -801,6 +802,7 @@
                         traslados.Descripcion = dr["Descripcion"].ToString();
                         traslados.CostoS = Convert.ToSingle(dr["Costo_Salida"]);
                         traslados.CostoE = Convert.ToSingle(dr["Costo_Entrada"]);
+                        traslados.Cantidad = Convert.ToInt32(dr["Cantidad"]);
                         traslados.Kilos = Convert.ToSingle(dr["Kilos"]);
                         traslados.Agregar();
                     }

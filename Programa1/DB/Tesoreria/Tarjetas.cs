@@ -11,10 +11,11 @@
         public Tarjetas()
         {
             ID_Automatico = true;
-            Tabla = "vw_Tarjetas";
-            Vista = "vw_Tarjetas";
+            Tabla = "dbGastos.dbo.vw_EntradasTarjeta";
+            Vista = "dbGastos.dbo.vw_EntradasTarjeta";
         }
 
+        public int ID { get; set; }
         public string Fecha { get; set; }
         public string sucs { get; set; }
         public string Tipos { get; set; }
@@ -25,17 +26,38 @@
         public Boolean OrdenxSuc { get; set; }
         public bool aAcreditados { get; set; }
 
+        public int sucO { get; set; }
+        public int sucD { get; set; }
+        public DateTime fechai { get; set; }
+
+        private Sucursales.Sucursales sucursales = new Sucursales.Sucursales();
+        public Tipos_Tarjeta tipos_Tarjeta = new Tipos_Tarjeta();
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro);
+            return Datos(filtro);
+        }
+
+        public DataTable datos_lotes(string Filtro)
+        {
+            return Datos_Vista($"{Filtro} AND Suc = {sucO}", "DISTINCT Lote", "Lote");
+        }
+
+        public DataTable sucdatos()
+        {
+            return sucursales.Datos();
+        }
+
+        public DataTable Datos_Vista(string filtro = "")
+        {
+            return Datos_Vista(filtro, "Id, Fecha, Id_Tipo, Nombre, Importe, Lote, Tarjeta, Comprobante", "Fecha, Id_tipo, lote, Importe");
         }
 
         public DataTable Datos_Resumen()
         {
             if (Fecha.Length > 0)
             {
-                string s = "";
-                string campos = "*";
+                string s;
+                string campos;
                 string OrderBy = "";
                 Herramientas h = new Herramientas();
                 s = h.Unir(Fecha, sucs);
@@ -86,5 +108,11 @@
             }
             return t;
         }
+        
+        public void Actualizar()
+        {
+            Actualizar("Suc", sucD);
+        }
+
     }
 }

@@ -424,7 +424,7 @@ namespace Programa1.Carga
 
             if (f == grdTraslados.Rows - 1)
             {
-                for (i = c; i < grdTraslados.Cols-2; i++)
+                for (i = c; i < grdTraslados.Cols - 2; i++)
                 {
                     txtcel = grdTraslados.get_Texto(f, i).ToString();
 
@@ -437,7 +437,7 @@ namespace Programa1.Carga
                     {
                         if (cambiof == 1 || c >= c_CostoS)
                         {
-                            if (grdTraslados.Columnas[c_Cantidad].Visible == false || grdTraslados.get_Texto(f, c_Cantidad).ToString() != "0" )
+                            if (grdTraslados.Columnas[c_Cantidad].Visible == false || grdTraslados.get_Texto(f, c_Cantidad).ToString() != "0")
                             { grdTraslados.ActivarCelda(f, c_Kilos); }
                             else
                             { grdTraslados.ActivarCelda(f, c_Cantidad); }
@@ -652,27 +652,60 @@ namespace Programa1.Carga
 
                                 break;
                         }
-
-
-                        //Traslados.Producto.Siguiente();
-                        //Traslados.precios.Producto = Traslados.Producto;
-
-                        //Traslados.Descripcion = Traslados.Producto.Nombre;
-
-                        //grdTraslados.set_Texto(grdTraslados.Row, c_IdProd, Traslados.Producto.ID);
-                        //grdTraslados.set_Texto(grdTraslados.Row, c_Descripcion, Traslados.Descripcion);
-
-                        //Traslados.precios.Sucursal = Traslados.sucS;
-                        //Traslados.CostoS = Traslados.precios.Buscar();
-                        //grdTraslados.set_Texto(grdTraslados.Row, c_CostoS, Traslados.CostoS);
-                        //grdTraslados.set_Texto(grdTraslados.Row, c_TotalS, 0);
-
-                        //Traslados.precios.Sucursal = Traslados.sucE;
-                        //Traslados.CostoE = Traslados.precios.Buscar();
-                        //grdTraslados.set_Texto(grdTraslados.Row, c_CostoE, Traslados.CostoE);
-                        //grdTraslados.set_Texto(grdTraslados.Row, c_TotalE, 0);
                     }
                 }
+                else
+                {
+                    string txtcel;
+                    if (grdTraslados.Row == grdTraslados.Rows - 1)
+                    {
+                        int f = grdTraslados.Row;
+                        for (int i = grdTraslados.Col; i < grdTraslados.Cols - 2; i++)
+                        {
+                            txtcel = grdTraslados.get_Texto(f, i).ToString();
+
+                            if (txtcel.Length <= 1 & txtcel == "0" & grdTraslados.Columnas[i].Visible == true)
+                            {
+                                grdTraslados.ActivarCelda(f, i);
+                                i = grdTraslados.Cols - 1;
+                            }
+                            if (i >= c_Descripcion & i < grdTraslados.Cols - 1)
+                            {
+                                if (cambiof == 1 || grdTraslados.Col >= c_CostoS)
+                                {
+                                    if (grdTraslados.Columnas[c_Cantidad].Visible == false || grdTraslados.get_Texto(f, c_Cantidad).ToString() != "0")
+                                    { grdTraslados.ActivarCelda(f, c_Kilos); }
+                                    else
+                                    { grdTraslados.ActivarCelda(f, c_Cantidad); }
+                                }
+                                else
+                                {
+                                    grdTraslados.ActivarCelda(f, cambiof);
+                                }
+                                i = grdTraslados.Cols - 2;
+                            }
+                        }
+                    }
+                }
+
+
+                    //Traslados.Producto.Siguiente();
+                    //Traslados.precios.Producto = Traslados.Producto;
+
+                    //Traslados.Descripcion = Traslados.Producto.Nombre;
+
+                    //grdTraslados.set_Texto(grdTraslados.Row, c_IdProd, Traslados.Producto.ID);
+                    //grdTraslados.set_Texto(grdTraslados.Row, c_Descripcion, Traslados.Descripcion);
+
+                    //Traslados.precios.Sucursal = Traslados.sucS;
+                    //Traslados.CostoS = Traslados.precios.Buscar();
+                    //grdTraslados.set_Texto(grdTraslados.Row, c_CostoS, Traslados.CostoS);
+                    //grdTraslados.set_Texto(grdTraslados.Row, c_TotalS, 0);
+
+                    //Traslados.precios.Sucursal = Traslados.sucE;
+                    //Traslados.CostoE = Traslados.precios.Buscar();
+                    //grdTraslados.set_Texto(grdTraslados.Row, c_CostoE, Traslados.CostoE);
+                    //grdTraslados.set_Texto(grdTraslados.Row, c_TotalE, 0);
             }
         }
 

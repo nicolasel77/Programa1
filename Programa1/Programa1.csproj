@@ -534,6 +534,12 @@
     <Compile Include="Carga\Tesoreria\frmEditar_ARendir.Designer.cs">
       <DependentUpon>frmEditar_ARendir.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmModificar_Tarjetas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmModificar_Tarjetas.Designer.cs">
+      <DependentUpon>frmModificar_Tarjetas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmNARendir.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1020,6 +1026,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmEditar_ARendir.resx">
       <DependentUpon>frmEditar_ARendir.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmModificar_Tarjetas.resx">
+      <DependentUpon>frmModificar_Tarjetas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmNARendir.resx">
       <DependentUpon>frmNARendir.cs</DependentUpon>
