@@ -32,6 +32,7 @@
 
             Cargar();
         }
+
         public DateTime Fecha_Maxima { get => mntDias.MaxDate; set { mntDias.MaxDate = value; } }
         public int Mostrar { get => tabControl1.SelectedIndex; set { tabControl1.SelectedIndex = value; } }
         public e_MostrarSolo Mostrar_Solo
@@ -275,7 +276,7 @@
                 {
                     try
                     {
-                        Cambio_Seleccion(null, null);
+                        if(chFiltrar.Checked) { Cambio_Seleccion(null, null);}
                     }
                     catch (Exception)
                     {
@@ -293,14 +294,14 @@
                 {
                     fecha_Actual = mntDias.SelectionStart.Date;
                     fecha_Fin = fecha_Actual;
-                    Cambio_Seleccion(null, null);
+                    if(chFiltrar.Checked) Cambio_Seleccion(null, null);
                 }
             }
         }
 
         private void MntDias_DateChanged(object sender, DateRangeEventArgs e)
         {
-            if (mntDias.SelectionStart.Date != fecha_Actual.Date)
+            if (mntDias.SelectionStart.Date.Day != fecha_Actual.Day | mntDias.SelectionStart.Date.Month != fecha_Actual.Month | mntDias.SelectionStart.Date.Year != fecha_Actual.Year)
             {
                 fechaDia();
             }
@@ -308,11 +309,11 @@
 
         private void DtDesde_ValueChanged(object sender, EventArgs e)
         {
-            if (dtDesde.Value.Date != fecha_Actual.Date | fecha_Fin.Date != dtHasta.Value.Date)
+            if (dtDesde.Value.Day != fecha_Actual.Day | dtDesde.Value.Month != fecha_Actual.Month | dtDesde.Value.Year != fecha_Actual.Year)
             {
                 fecha_Actual = dtDesde.Value;
                 fecha_Fin = dtHasta.Value;
-                Cambio_Seleccion(null, null);
+                if(chFiltrar.Checked) { Cambio_Seleccion(null, null);}
             }
         }
 
@@ -337,7 +338,7 @@
                 }
                 fecha_Actual = Convert.ToDateTime($"1/{(lstMes.SelectedIndex + 1).ToString()}/{a}");
                 fecha_Fin = fecha_Actual.AddMonths(1).AddDays(-1);
-                Cambio_Seleccion(null, null);
+                if(chFiltrar.Checked) { Cambio_Seleccion(null, null);}
             }
         }
 
@@ -353,7 +354,7 @@
                 fecha_Fin = fecha_Actual.AddYears(1).AddDays(-1);
                 try
                 {
-                    Cambio_Seleccion(null, null);
+                    if(chFiltrar.Checked) { Cambio_Seleccion(null, null);}
                 }
                 catch (Exception)
                 {
@@ -376,7 +377,7 @@
                         {
                             try
                             {
-                                Cambio_Seleccion(null, null);
+                                if(chFiltrar.Checked) { Cambio_Seleccion(null, null);}
                             }
                             catch (Exception)
                             {
