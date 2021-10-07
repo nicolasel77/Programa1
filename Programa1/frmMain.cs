@@ -2390,5 +2390,101 @@
                 }
             }
         }
+
+        private void leerTarjetasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmLeer_Tarjetas")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmLeer_Tarjetas");
+                t.Text = "Leer_Tarjetas";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmLeer_Tarjetas = new Carga.Tesoreria.frmLeer_Tarjetas();
+                frmLeer_Tarjetas.MdiParent = this;
+                frmLeer_Tarjetas.Disposed += frmLeer_Tarjetas_Disposed;
+                forms.Add(frmLeer_Tarjetas);
+                frmLeer_Tarjetas.Show();
+                frmLeer_Tarjetas.WindowState = FormWindowState.Minimized;
+                frmLeer_Tarjetas.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void frmLeer_Tarjetas_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Leer_Tarjetas")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmLeer_Tarjetas")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void modificarTarjetasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmModificar_Tarjetas")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmModificar_Tarjetas");
+                t.Text = "Modificar_Tarjetas";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmModificar_Tarjetas = new Carga.Tesoreria.frmModificar_Tarjetas();
+                frmModificar_Tarjetas.MdiParent = this;
+                frmModificar_Tarjetas.Disposed += frmModificar_Tarjetas_Disposed;
+                forms.Add(frmModificar_Tarjetas);
+                frmModificar_Tarjetas.Show();
+                frmModificar_Tarjetas.WindowState = FormWindowState.Minimized;
+                frmModificar_Tarjetas.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void frmModificar_Tarjetas_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Modificar_Tarjetas")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmModificar_Tarjetas")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

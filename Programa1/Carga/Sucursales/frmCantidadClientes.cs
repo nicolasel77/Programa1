@@ -166,12 +166,20 @@
                         {
                             if (Cantidad_Clientes.Fecha_Cerrada(df) == false)
                             {
-                                Cantidad_Clientes.Fecha = df;
+                                if (Cantidad_Clientes.Sucursal.ID == 0 || Cantidad_Clientes.Dato($"Fecha = '{df.ToString("MM/dd/yyy")}' AND Id_Sucursales = {Cantidad_Clientes.Sucursal.ID}") == null)
+                                {
+                                    Cantidad_Clientes.Fecha = df;
 
-                                if (id != 0) { Cantidad_Clientes.Actualizar(); }
+                                    if (id != 0) { Cantidad_Clientes.Actualizar(); }
 
-                                grdCantidad_Clientes.set_Texto(f, c, a);
-                                grdCantidad_Clientes.ActivarCelda(f, c + 1);
+                                    grdCantidad_Clientes.set_Texto(f, c, a);
+                                    grdCantidad_Clientes.ActivarCelda(f, c + 1);
+                                }
+                                else
+                                {
+                                    Mensaje("La fecha ingresada ya está cargada.");
+                                    grdCantidad_Clientes.ErrorEnTxt();
+                                }
                             }
                             else
                             {
@@ -189,12 +197,24 @@
                         Cantidad_Clientes.Sucursal.ID = Convert.ToInt32(a);
                         if (Cantidad_Clientes.Sucursal.Existe() == true)
                         {
-                            if (id != 0) { Cantidad_Clientes.Actualizar(); }
+                            if (Cantidad_Clientes.Sucursal.ID == 0 || Cantidad_Clientes.Dato($"Fecha = '{Cantidad_Clientes.Fecha.ToString("MM/dd/yyy")}' AND Id_Sucursales = {Cantidad_Clientes.Sucursal.ID}") == null)
+                            {
+                                if (id != 0) { Cantidad_Clientes.Actualizar(); }
 
                             grdCantidad_Clientes.set_Texto(f, c, a);
                             grdCantidad_Clientes.set_Texto(f, c + 1, Cantidad_Clientes.Sucursal.Nombre);
 
                             grdCantidad_Clientes.ActivarCelda(f, c + 2);
+                            }
+                            else
+                            {
+                                Mensaje("La fecha ingresada ya está cargada.");
+                                grdCantidad_Clientes.set_Texto(f, c, a);
+                                grdCantidad_Clientes.set_Texto(f, c + 1, Cantidad_Clientes.Sucursal.Nombre);
+
+                                grdCantidad_Clientes.ActivarCelda(f, c_Fecha);
+                                grdCantidad_Clientes.ErrorEnTxt();
+                            }
                         }
                         else
                         {

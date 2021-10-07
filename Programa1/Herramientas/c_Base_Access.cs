@@ -10,7 +10,7 @@
 
     public class c_Base_Access
     {
-        string conn_string = Programa1.Properties.Settings.Default.dbDatosConnectionString;
+        string conn_string = "Provider=Microsoft.ACE.OLEDB.12.0;" + Programa1.Properties.Settings.Default.dbDatosConnectionString;
 
         public c_Base_Access() { }
 
@@ -28,7 +28,7 @@
                 {
                     conn_string = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={value};Jet OLEDB:Database Password=**Oficina02;";
                 }
-                
+
             }
         }
 

@@ -26,8 +26,7 @@ namespace Programa1.Carga.Hacienda
                 }
                 else
                 {
-                    cmdBase.Text = "No se encontro el archivo.";
-                    cmdBase.Text = "F:\\Proyectos\\Sistemas\\dbStock.accdb";
+                    cmdBase.Text = @"D:\GDrive\dbStock.accdb";
                 }
             }
             else
@@ -48,9 +47,8 @@ namespace Programa1.Carga.Hacienda
 
         private void Cargar_Listados()
         {
-            Cargar_ListadosBoletas();
-
             Cargar_ListadoSalidas();
+            Cargar_ListadosBoletas();
         }
 
         private void Cargar_ListadosBoletas()
@@ -79,6 +77,7 @@ namespace Programa1.Carga.Hacienda
         private void Cargar_ListadoSalidas()
         {
             c_Base_Access clsAccess = new c_Base_Access("NBoletas", "NBoletas");
+            clsAccess.Base_Access = cmdBase.Text;
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
             clsAccess.Vista = "Salidas";
