@@ -1,5 +1,6 @@
 ﻿namespace Programa1.Carga.Varios
 {
+    using Programa1.DB;
     using Programa1.DB.Varios;
     using System;
     using System.Windows.Forms;
@@ -45,6 +46,28 @@
         private void lstSemanas_DoubleClick(object sender, EventArgs e)
         {
             cmdGuardar.PerformClick();
+        }
+
+        private void cmdDesbloquear_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            this.Enabled = false;
+            for (int i = lstSemanas.Items.Count - 1; i > -1; i--)
+            {
+
+                if (lstSemanas.GetSelected(i) == true)
+                {
+                    string n = lstSemanas.Items[i].ToString();
+
+                    cmdGuardar.Text = $"Desbloqueando {n:dd/MM/yy}";
+                    Application.DoEvents();
+                  
+                    estadisticas.semanas.Bloquear(DateTime.Parse(n), false); 
+                    Application.DoEvents();
+                }
+            }
+            Close();
+            this.Cursor = Cursors.Default;
         }
     }
 }

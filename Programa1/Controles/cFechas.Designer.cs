@@ -48,6 +48,7 @@
             this.dtDesde = new System.Windows.Forms.DateTimePicker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblMostrarSolo = new System.Windows.Forms.Label();
+            this.chFiltrar = new MaterialSkin.Controls.MaterialCheckBox();
             this.tabControl1.SuspendLayout();
             this.tabSemana.SuspendLayout();
             this.tabDia.SuspendLayout();
@@ -100,6 +101,7 @@
             this.label4.Size = new System.Drawing.Size(49, 18);
             this.label4.TabIndex = 1;
             this.label4.Text = "Fecha";
+            this.label4.Visible = false;
             // 
             // lstSemanas
             // 
@@ -299,9 +301,29 @@
             this.lblMostrarSolo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblMostrarSolo.Visible = false;
             // 
+            // chFiltrar
+            // 
+            this.chFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chFiltrar.AutoSize = true;
+            this.chFiltrar.Checked = true;
+            this.chFiltrar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chFiltrar.Depth = 0;
+            this.chFiltrar.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chFiltrar.Location = new System.Drawing.Point(274, 7);
+            this.chFiltrar.Margin = new System.Windows.Forms.Padding(0);
+            this.chFiltrar.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chFiltrar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chFiltrar.Name = "chFiltrar";
+            this.chFiltrar.Ripple = true;
+            this.chFiltrar.Size = new System.Drawing.Size(67, 30);
+            this.chFiltrar.TabIndex = 3;
+            this.chFiltrar.Text = "Fecha";
+            this.chFiltrar.UseVisualStyleBackColor = true;
+            // 
             // cFechas
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.chFiltrar);
             this.Controls.Add(this.lblMostrarSolo);
             this.Controls.Add(this.tabControl1);
             this.MinimumSize = new System.Drawing.Size(0, 184);
@@ -316,6 +338,7 @@
             this.tabDH.ResumeLayout(false);
             this.tabDH.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -340,5 +363,6 @@
         private System.Windows.Forms.MonthCalendar mntDias;
         private System.Windows.Forms.Label lblMostrarSolo;
         private System.Windows.Forms.Label label4;
+        private MaterialSkin.Controls.MaterialCheckBox chFiltrar;
     }
 }

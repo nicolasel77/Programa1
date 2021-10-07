@@ -20,11 +20,17 @@
         private void Cargar(DateTime f)
         {
             this.Cursor = Cursors.WaitCursor;
+            
             grdStock.MostrarDatos(faena.Stock_Faena(f), true, false);
+            
             grdStock.Grd.SubtotalPosition = C1.Win.C1FlexGrid.SubtotalPositionEnum.BelowData;
             grdStock.CrearArbol(C1.Win.C1FlexGrid.AggregateEnum.Sum, 0, 4);
             grdStock.CrearArbol(C1.Win.C1FlexGrid.AggregateEnum.Sum, 0, 5);
             
+            grdStock.Columnas[grdStock.get_ColIndex("Kilos")].Format = "N0";
+            grdStock.Columnas[grdStock.get_ColIndex("Total")].Format = "N0";
+            grdStock.Columnas[grdStock.get_ColIndex("Total_Final")].Format = "N0";
+
             grdStock.AutosizeAll();
 
             grdTipo.MostrarDatos(faena.Stock_Tipo(f), true, true);

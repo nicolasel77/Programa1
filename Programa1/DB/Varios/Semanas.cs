@@ -45,6 +45,10 @@
         {
             Ejecutar_Comando($"UPDATE Semanas SET Cerrada=1 WHERE Semana='{semana:MM/dd/yy}'");
         }
+        internal void Bloquear(DateTime semana, bool Valor) 
+        {
+            Ejecutar_Comando($"UPDATE Semanas SET Cerrada={(Valor ? "1" : "0")} WHERE Semana='{semana:MM/dd/yy}'");
+        }
 
         public DateTime Semana { get; set; } = new DateTime(1900, 1, 1);
         public bool Guardada { get; set; }

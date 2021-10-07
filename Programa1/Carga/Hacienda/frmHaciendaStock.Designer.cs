@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHaciendaStock));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdCategorias = new Grilla2.SpeedGrilla();
             this.grdTipo = new Grilla2.SpeedGrilla();
@@ -64,7 +63,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.grdDetalle);
-            this.splitContainer1.Size = new System.Drawing.Size(922, 651);
+            this.splitContainer1.Size = new System.Drawing.Size(1147, 651);
             this.splitContainer1.SplitterDistance = 425;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -91,7 +90,7 @@
             this.grdCategorias.FuenteEncabezado = null;
             this.grdCategorias.FuentePieDePagina = null;
             this.grdCategorias.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdCategorias.Location = new System.Drawing.Point(693, 0);
+            this.grdCategorias.Location = new System.Drawing.Point(918, 0);
             this.grdCategorias.Name = "grdCategorias";
             this.grdCategorias.PieDePagina = "\t\tPage {0} of {1}";
             this.grdCategorias.PintarFilaSel = true;
@@ -124,14 +123,14 @@
             this.grdTipo.FuenteEncabezado = null;
             this.grdTipo.FuentePieDePagina = null;
             this.grdTipo.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdTipo.Location = new System.Drawing.Point(481, 0);
+            this.grdTipo.Location = new System.Drawing.Point(625, 0);
             this.grdTipo.Name = "grdTipo";
             this.grdTipo.PieDePagina = "\t\tPage {0} of {1}";
             this.grdTipo.PintarFilaSel = true;
             this.grdTipo.Redraw = true;
             this.grdTipo.Row = 0;
             this.grdTipo.Rows = 50;
-            this.grdTipo.Size = new System.Drawing.Size(206, 425);
+            this.grdTipo.Size = new System.Drawing.Size(287, 425);
             this.grdTipo.TabIndex = 1;
             // 
             // grdStock
@@ -165,7 +164,7 @@
             this.grdStock.Redraw = true;
             this.grdStock.Row = 0;
             this.grdStock.Rows = 50;
-            this.grdStock.Size = new System.Drawing.Size(475, 425);
+            this.grdStock.Size = new System.Drawing.Size(616, 425);
             this.grdStock.TabIndex = 0;
             this.grdStock.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdStock_CambioFila);
             // 
@@ -198,7 +197,7 @@
             this.grdDetalle.Redraw = true;
             this.grdDetalle.Row = 1;
             this.grdDetalle.Rows = 2;
-            this.grdDetalle.Size = new System.Drawing.Size(922, 222);
+            this.grdDetalle.Size = new System.Drawing.Size(1147, 222);
             this.grdDetalle.TabIndex = 1;
             // 
             // splitContainer2
@@ -219,8 +218,8 @@
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.cmdMostrar);
             this.splitContainer2.Panel2.Controls.Add(this.calFecha);
-            this.splitContainer2.Size = new System.Drawing.Size(1180, 651);
-            this.splitContainer2.SplitterDistance = 922;
+            this.splitContainer2.Size = new System.Drawing.Size(1468, 651);
+            this.splitContainer2.SplitterDistance = 1147;
             this.splitContainer2.TabIndex = 3;
             // 
             // cmdMostrar
@@ -243,7 +242,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1204, 675);
+            this.ClientSize = new System.Drawing.Size(1492, 675);
             this.Controls.Add(this.splitContainer2);
             this.Name = "frmHaciendaStock";
             this.Text = "Stock";

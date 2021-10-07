@@ -34,6 +34,7 @@
             this.chVentaPorProducto = new MaterialSkin.Controls.MaterialCheckBox();
             this.chBloquear = new MaterialSkin.Controls.MaterialCheckBox();
             this.cmdGuardar = new System.Windows.Forms.Button();
+            this.cmdDesbloquear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstSemanas
@@ -48,7 +49,7 @@
             this.lstSemanas.Location = new System.Drawing.Point(12, 12);
             this.lstSemanas.Name = "lstSemanas";
             this.lstSemanas.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstSemanas.Size = new System.Drawing.Size(237, 340);
+            this.lstSemanas.Size = new System.Drawing.Size(376, 400);
             this.lstSemanas.TabIndex = 0;
             this.lstSemanas.DoubleClick += new System.EventHandler(this.lstSemanas_DoubleClick);
             // 
@@ -60,7 +61,7 @@
             this.chSemana.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chSemana.Depth = 0;
             this.chSemana.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chSemana.Location = new System.Drawing.Point(12, 362);
+            this.chSemana.Location = new System.Drawing.Point(12, 422);
             this.chSemana.Margin = new System.Windows.Forms.Padding(0);
             this.chSemana.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chSemana.MouseState = MaterialSkin.MouseState.HOVER;
@@ -79,7 +80,7 @@
             this.chVentaPorProducto.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chVentaPorProducto.Depth = 0;
             this.chVentaPorProducto.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chVentaPorProducto.Location = new System.Drawing.Point(91, 362);
+            this.chVentaPorProducto.Location = new System.Drawing.Point(91, 422);
             this.chVentaPorProducto.Margin = new System.Windows.Forms.Padding(0);
             this.chVentaPorProducto.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chVentaPorProducto.MouseState = MaterialSkin.MouseState.HOVER;
@@ -96,7 +97,7 @@
             this.chBloquear.AutoSize = true;
             this.chBloquear.Depth = 0;
             this.chBloquear.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chBloquear.Location = new System.Drawing.Point(157, 362);
+            this.chBloquear.Location = new System.Drawing.Point(157, 422);
             this.chBloquear.Margin = new System.Windows.Forms.Padding(0);
             this.chBloquear.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chBloquear.MouseState = MaterialSkin.MouseState.HOVER;
@@ -113,19 +114,34 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmdGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdGuardar.Location = new System.Drawing.Point(16, 395);
+            this.cmdGuardar.Location = new System.Drawing.Point(16, 455);
             this.cmdGuardar.Name = "cmdGuardar";
-            this.cmdGuardar.Size = new System.Drawing.Size(233, 43);
+            this.cmdGuardar.Size = new System.Drawing.Size(372, 43);
             this.cmdGuardar.TabIndex = 3;
             this.cmdGuardar.Text = "Guardar";
             this.cmdGuardar.UseVisualStyleBackColor = true;
             this.cmdGuardar.Click += new System.EventHandler(this.cmdGuardar_Click);
             // 
+            // cmdDesbloquear
+            // 
+            this.cmdDesbloquear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdDesbloquear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdDesbloquear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdDesbloquear.Location = new System.Drawing.Point(265, 422);
+            this.cmdDesbloquear.Name = "cmdDesbloquear";
+            this.cmdDesbloquear.Size = new System.Drawing.Size(123, 30);
+            this.cmdDesbloquear.TabIndex = 3;
+            this.cmdDesbloquear.Text = "Desbloquear";
+            this.cmdDesbloquear.UseVisualStyleBackColor = true;
+            this.cmdDesbloquear.Click += new System.EventHandler(this.cmdDesbloquear_Click);
+            // 
             // frmGuardar_Semana
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(261, 450);
+            this.ClientSize = new System.Drawing.Size(400, 510);
+            this.Controls.Add(this.cmdDesbloquear);
             this.Controls.Add(this.cmdGuardar);
             this.Controls.Add(this.chBloquear);
             this.Controls.Add(this.chVentaPorProducto);
@@ -147,5 +163,6 @@
         private MaterialSkin.Controls.MaterialCheckBox chVentaPorProducto;
         private MaterialSkin.Controls.MaterialCheckBox chBloquear;
         private System.Windows.Forms.Button cmdGuardar;
+        private System.Windows.Forms.Button cmdDesbloquear;
     }
 }

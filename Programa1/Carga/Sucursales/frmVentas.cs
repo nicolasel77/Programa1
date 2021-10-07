@@ -114,15 +114,19 @@
         private void CmdMostrar_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            Cargar_Datos();
 
+            this.Cursor = Cursors.Default;
+        }
+
+        private void Cargar_Datos()
+        {
             string s = Armar_Cadena();
             grdVenta.MostrarDatos(Venta.Datos(s), true);
             formato_Grilla();
             Totales();
             grdVenta.ActivarCelda(grdVenta.Rows - 1, c_Fecha);
             grdVenta.Focus();
-
-            this.Cursor = Cursors.Default;
         }
 
         private string Armar_Cadena()
@@ -223,12 +227,12 @@
 
         private void CProds_Cambio_Seleccion(object sender, EventArgs e)
         {
-            cmdMostrar.PerformClick();
+            Cargar_Datos();
         }
 
         private void Csuc_Cambio_Seleccion(object sender, EventArgs e)
         {
-            cmdMostrar.PerformClick();
+            Cargar_Datos();
         }
 
         private void CFecha_Cambio_Seleccion(object sender, EventArgs e)
@@ -237,7 +241,7 @@
             cProds.Filtro_In = $" (SELECT DISTINCT Id_Productos FROM Ventas WHERE {vFecha})";
             cSucursal.Filtro_In = $" (SELECT DISTINCT Id_Sucursales FROM Ventas WHERE {vFecha})";
             cProveedores.Filtro_In = $" (SELECT DISTINCT Id_Proveedores FROM Ventas WHERE {vFecha})";
-            cmdMostrar.PerformClick();
+            Cargar_Datos();
         }
 
         private void GrdVenta_Editado(short f, short c, object a)
@@ -713,7 +717,7 @@
                 }
                 cm.Ids = n;
                 cm.ShowDialog();
-                cmdMostrar.PerformClick();
+                Cargar_Datos();
             }
         }
 
@@ -759,7 +763,7 @@
                     if (cp.BorrarOri == true)
                     {
                         Venta.Borrar(f);
-                        cmdMostrar.PerformClick();
+                        Cargar_Datos();
                     }
                 }
             }
@@ -809,7 +813,7 @@
                     if (cp.BorrarOri == true)
                     {
                         Venta.Borrar(f);
-                        cmdMostrar.PerformClick();
+                        Cargar_Datos();
                     }
                 }
             }
@@ -822,7 +826,7 @@
 
         private void lstCamiones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmdMostrar.PerformClick();
+            Cargar_Datos();
         }
 
         private void cmbListas_SelectedIndexChanged(object sender, EventArgs e)

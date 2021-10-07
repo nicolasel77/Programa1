@@ -79,7 +79,7 @@ namespace Programa1.DB
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT Reparto, Tropa, Nombre_Producto Prod, Nombre_Categoria Cat, COUNT(Kilos) Cant, SUM(Kilos) Kilos, Costo, Costo_Final, Fecha, NBoleta " +
+                SqlCommand comandoSql = new SqlCommand($"SELECT Reparto, Tropa, Nombre_Producto Prod, Nombre_Categoria Cat, COUNT(Kilos) Cant, SUM(Kilos) Kilos, Costo, Costo_Final, SUM(Kilos*Costo) Total, SUM(Kilos*Costo_Final) Total_Final, Fecha, NBoleta " +
                     $"FROM vw_Faena WHERE Fecha <='{f:MM/dd/yy}' AND Id NOT IN(SELECT Id_Faena FROM Hacienda_Salidas WHERE Fecha<='{f:MM/dd/yy}') " +
                     $"GROUP BY Reparto, Tropa, Nombre_Producto, Nombre_Categoria, Costo, Costo_Final, Fecha, NBoleta " +
                     $"ORDER BY Reparto, Fecha", conexionSql);

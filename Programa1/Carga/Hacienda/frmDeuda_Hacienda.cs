@@ -13,6 +13,7 @@
         private void cFechas1_Cambio_Seleccion(object sender, EventArgs e)
         {
             Hacienda h = new Hacienda();
+            this.Cursor = Cursors.WaitCursor;
             grd.MostrarDatos(h.Deuda_Hacienda(cFechas1.fecha_Fin), true, true);
             for (int i = 1; i < grd.Cols - 1; i++)
             {
@@ -21,6 +22,7 @@
             }
             grd.Columnas[grd.Cols - 1].Format = "N1";
             grd.AutosizeAll();
+            this.Cursor = Cursors.Default;
         }
     }
 }

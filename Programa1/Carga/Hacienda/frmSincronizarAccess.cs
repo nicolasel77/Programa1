@@ -48,7 +48,13 @@ namespace Programa1.Carga.Hacienda
 
         private void Cargar_Listados()
         {
+            Cargar_ListadosBoletas();
 
+            Cargar_ListadoSalidas();
+        }
+
+        private void Cargar_ListadosBoletas()
+        {
             Herramientas.Herramientas h = new Herramientas.Herramientas();
             lstBoletas.Items.Clear();
 
@@ -68,7 +74,13 @@ namespace Programa1.Carga.Hacienda
             {
                 lstSistema.Items.Add($"{dr[0]}  {(Convert.ToInt32(dr[1]) == 0 ? "0 medias" : "")}");
             }
-            
+        }
+
+        private void Cargar_ListadoSalidas()
+        {
+            c_Base_Access clsAccess = new c_Base_Access("NBoletas", "NBoletas");
+
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
             clsAccess.Vista = "Salidas";
             h.Llenar_List(lstFechasAcc, clsAccess.Datos_Vista("", "TOP 50 Fecha", "Fecha DESC", "Fecha"), "dd/MM");
             h.Llenar_List(lstFechasSis, datos.Datos_Genericos("SELECT TOP 100 Fecha FROM Hacienda_Salidas GROUP BY Fecha ORDER BY Fecha DESC"), "dd/MM");
@@ -383,6 +395,7 @@ namespace Programa1.Carga.Hacienda
                     }
                 }
             }
+            Cargar_ListadoSalidas();
         }
 
         private void cmdBase_Click(object sender, System.EventArgs e)
@@ -423,6 +436,7 @@ namespace Programa1.Carga.Hacienda
 
                 }
             }
+            Cargar_ListadosBoletas();
         }
 
         private void mdSincSalidas_Click(object sender, EventArgs e)
@@ -530,12 +544,15 @@ namespace Programa1.Carga.Hacienda
             mDesde.Value = DateTime.Parse(lstFechasAcc.Text);
             mHasta.Value = mDesde.Value;
             cmdSincSalidas.PerformClick();
+            Cargar_ListadoSalidas();
         }
 
         private void cmdListados_Click(object sender, EventArgs e)
         {
             Cargar_Listados();
         }
+
+  
     }
 }
 
