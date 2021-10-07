@@ -49,6 +49,8 @@
                 DataTable dt = tarjetas.Datos_Vista(f);
                 dt.Columns.Add("Cambio", typeof(bool));
                 grdOrigen.MostrarDatos(dt, true, false);
+                if (cmbSucO.Text.Length > 0)
+                { grdResumenOri.MostrarDatos(tarjetas.Datos_Resumen_modi_tar(f), true, false); }
                 Formato_Grilla();
             }
         }
@@ -61,6 +63,8 @@
                 if (lstTipos_t.SelectedIndex >= 0)
                 { f = h.Unir(f, "Id_Tipo IN " + h.Codigos_Seleccionados(lstTipos_t)); }
                 grd_Destino.MostrarDatos(tarjetas.Datos_Vista(f), true, false);
+                if (cmbSucD.Text.Length > 0)
+                { grdResumenDest.MostrarDatos(tarjetas.Datos_Resumen_modi_tar(f), true, false); }
                 Formato_Grilla();
             }
         }
@@ -75,6 +79,12 @@
                 grdOrigen.Columnas[grdOrigen.get_ColIndex("Importe")].Style.Format = "#,###.#";
                 grdOrigen.Columnas[grdOrigen.get_ColIndex("Importe")].Style.Font = new Font(grdOrigen.Font, FontStyle.Bold);
             }
+            grdResumenOri.AutosizeAll();
+            if (grdResumenOri.Rows > 1)
+            {
+                grdResumenOri.Columnas[grdResumenOri.get_ColIndex("Importe")].Style.Format = "#,###.#";
+                grdResumenOri.Columnas[grdResumenOri.get_ColIndex("Importe")].Style.Font = new Font(grdResumenOri.Font, FontStyle.Bold);
+            }
 
             grd_Destino.AutosizeAll();
             grd_Destino.set_ColW(0, 0);
@@ -82,6 +92,12 @@
             {
                 grd_Destino.Columnas[grd_Destino.get_ColIndex("Importe")].Style.Format = "#,###.#";
                 grd_Destino.Columnas[grd_Destino.get_ColIndex("Importe")].Style.Font = new Font(grd_Destino.Font, FontStyle.Bold);
+            }
+            grdResumenDest.AutosizeAll();
+            if (grdResumenDest.Rows > 1)
+            {
+                grdResumenDest.Columnas[grdResumenDest.get_ColIndex("Importe")].Style.Format = "#,###.#";
+                grdResumenDest.Columnas[grdResumenDest.get_ColIndex("Importe")].Style.Font = new Font(grdResumenDest.Font, FontStyle.Bold);
             }
         }
 
@@ -119,17 +135,24 @@
 
         private void cmdAceptar_Click(object sender, EventArgs e)
         {
-            int c_cambio = grdOrigen.get_ColIndex("Cambio");
-            for (int i = 1; i <= grdOrigen.Rows - 1; i++)
+            if (tarjetas.sucD > 0)
             {
-                if (Convert.ToBoolean(grdOrigen.get_Texto(i, c_cambio)) == true)
+                int c_cambio = grdOrigen.get_ColIndex("Cambio");
+                for (int i = 1; i <= grdOrigen.Rows - 1; i++)
                 {
-                    tarjetas.ID = Convert.ToInt32(grdOrigen.get_Texto(i, 0));
-                    tarjetas.Actualizar(); 
+                    if (Convert.ToBoolean(grdOrigen.get_Texto(i, c_cambio)) == true)
+                    {
+                        tarjetas.ID = Convert.ToInt32(grdOrigen.get_Texto(i, 0));
+                        tarjetas.Actualizar();
+                    }
                 }
+                Cargar_grdori();
+                Cargar_grdD();
             }
-            Cargar_grdori();
-            Cargar_grdD();
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Sucursal de Destino para modificar los registros", "Seleccione una Sucursal");
+            }
         }
     }
 }

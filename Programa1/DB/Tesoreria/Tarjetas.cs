@@ -67,18 +67,29 @@
                 if (Agrupar == true)
                 {
                     campos = "";
-                    if (aFecha == true) { campos = h.Unir(campos, "Fecha", ","); } 
+                    if (aFecha == true) { campos = h.Unir(campos, "Fecha", ","); }
                     if (aSucs == true) { campos = h.Unir(campos, "Suc, Sucursal", ","); }
                     if (aTipo == true) { campos = h.Unir(campos, "Id_Tipo, Nombre", ","); }
                     s = s + " GROUP BY " + campos;
                     if (OrdenxSuc == false) { OrderBy = campos; } else { if (campos.IndexOf(", Suc") > -1) { OrderBy = "Suc ," + campos.Replace(", Suc, Sucursal", ", Sucursal"); } }
-                    campos = h.Unir(campos , " SUM(Importe) as Importe ", ",");
+                    campos = h.Unir(campos, " SUM(Importe) as Importe ", ",");
                 }
                 else
                 {
-                OrderBy = OrdenxSuc == false ? "Fecha, Suc" : "suc, Fecha";
+                    OrderBy = OrdenxSuc == false ? "Fecha, Suc" : "suc, Fecha";
                 }
                 return Datos_Vista(s, campos, OrderBy);
+            }
+            return null;
+        }
+
+        public DataTable Datos_Resumen_modi_tar(string f = "")
+        {
+            if (f.Length > 0)
+            {
+                string campos;
+                campos = "Fecha, SUM(Importe) as Importe";
+                return Datos_Vista(f + " GROUP BY Fecha ", campos, "Fecha");
             }
             return null;
         }
@@ -108,8 +119,8 @@
             }
             return t;
         }
-        
-        public void Actualizar()
+
+        public new void Actualizar()
         {
             Actualizar("Suc", sucD);
         }

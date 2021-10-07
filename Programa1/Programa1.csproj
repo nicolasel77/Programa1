@@ -540,6 +540,12 @@
     <Compile Include="Carga\Tesoreria\frmEditar_ARendir.Designer.cs">
       <DependentUpon>frmEditar_ARendir.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmLeer_Tarjetas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmLeer_Tarjetas.Designer.cs">
+      <DependentUpon>frmLeer_Tarjetas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmModificar_Tarjetas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -733,6 +739,7 @@
     <Compile Include="DB\Sucursales\Estadisticas_Sucursales.cs" />
     <Compile Include="DB\Sucursales\Promedios.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />
+    <Compile Include="DB\Sucursales\Suc_Cuentas.cs" />
     <Compile Include="DB\Tesoreria\A_Rendir.cs" />
     <Compile Include="DB\Tesoreria\Bancos.cs" />
     <Compile Include="DB\Tesoreria\Cajas.cs" />
@@ -746,6 +753,7 @@
     <Compile Include="DB\Tesoreria\Gastos.cs" />
     <Compile Include="DB\Tesoreria\Grupo_Entradas.cs" />
     <Compile Include="DB\Tesoreria\Grupo_Gastos.cs" />
+    <Compile Include="DB\Tesoreria\Leer_Tarjetas.cs" />
     <Compile Include="DB\Tesoreria\Nombres_ARendir.cs" />
     <Compile Include="DB\Tesoreria\SubTipo_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Tarjetas.cs" />
@@ -1035,6 +1043,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmEditar_ARendir.resx">
       <DependentUpon>frmEditar_ARendir.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmLeer_Tarjetas.resx">
+      <DependentUpon>frmLeer_Tarjetas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmModificar_Tarjetas.resx">
       <DependentUpon>frmModificar_Tarjetas.cs</DependentUpon>
