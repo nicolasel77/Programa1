@@ -134,11 +134,11 @@
             // 
             this.lblSucursal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSucursal.AutoSize = true;
-            this.lblSucursal.Location = new System.Drawing.Point(687, 55);
+            this.lblSucursal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSucursal.Location = new System.Drawing.Point(688, 53);
             this.lblSucursal.Name = "lblSucursal";
-            this.lblSucursal.Size = new System.Drawing.Size(48, 13);
+            this.lblSucursal.Size = new System.Drawing.Size(0, 16);
             this.lblSucursal.TabIndex = 8;
-            this.lblSucursal.Text = "Sucursal";
             // 
             // Label2
             // 
@@ -154,7 +154,7 @@
             // 
             this.Label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(688, 104);
+            this.Label1.Location = new System.Drawing.Point(688, 100);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(28, 13);
             this.Label1.TabIndex = 10;
@@ -167,10 +167,11 @@
             this.lstTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstTipo.FormattingEnabled = true;
             this.lstTipo.ItemHeight = 20;
-            this.lstTipo.Location = new System.Drawing.Point(691, 120);
+            this.lstTipo.Location = new System.Drawing.Point(691, 116);
             this.lstTipo.Name = "lstTipo";
-            this.lstTipo.Size = new System.Drawing.Size(166, 180);
+            this.lstTipo.Size = new System.Drawing.Size(166, 160);
             this.lstTipo.TabIndex = 7;
+            this.lstTipo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstTipo_MouseUp);
             // 
             // Label4
             // 
@@ -279,7 +280,7 @@
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.cmdEscribir);
-            this.panel4.Location = new System.Drawing.Point(688, 71);
+            this.panel4.Location = new System.Drawing.Point(689, 69);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(78, 28);
             this.panel4.TabIndex = 21;
@@ -381,9 +382,10 @@
             // 
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(688, 302);
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Location = new System.Drawing.Point(688, 279);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(0, 13);
+            this.lblTotal.Size = new System.Drawing.Size(0, 16);
             this.lblTotal.TabIndex = 24;
             // 
             // panel6

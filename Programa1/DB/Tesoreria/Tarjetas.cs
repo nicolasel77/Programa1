@@ -11,11 +11,10 @@
         public Tarjetas()
         {
             ID_Automatico = true;
-            Tabla = "dbGastos.dbo.vw_EntradasTarjeta";
+            Tabla = "dbGastos.dbo.Entradas_Tarjeta";
             Vista = "dbGastos.dbo.vw_EntradasTarjeta";
         }
 
-        public int ID { get; set; }
         public string Fecha { get; set; }
         public string sucs { get; set; }
         public string Tipos { get; set; }

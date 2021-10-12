@@ -39,12 +39,20 @@
             this.cmbSucD = new System.Windows.Forms.ComboBox();
             this.lstTipos_t = new System.Windows.Forms.ListBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.cFecha = new Programa1.Controles.cFechas();
             this.grdResumenOri = new Grilla2.SpeedGrilla();
             this.grdResumenDest = new Grilla2.SpeedGrilla();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cFecha = new Programa1.Controles.cFechas();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdOrigen
@@ -113,24 +121,25 @@
             this.grd_Destino.Redraw = true;
             this.grd_Destino.Row = 0;
             this.grd_Destino.Rows = 1;
-            this.grd_Destino.Size = new System.Drawing.Size(480, 609);
+            this.grd_Destino.Size = new System.Drawing.Size(485, 609);
             this.grd_Destino.TabIndex = 1;
             // 
             // cmdAceptar
             // 
-            this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdAceptar.AutoSize = true;
             this.cmdAceptar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdAceptar.BackColor = System.Drawing.SystemColors.Control;
             this.cmdAceptar.Depth = 0;
-            this.cmdAceptar.Location = new System.Drawing.Point(1495, 655);
+            this.cmdAceptar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdAceptar.Location = new System.Drawing.Point(0, 0);
             this.cmdAceptar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.cmdAceptar.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdAceptar.Name = "cmdAceptar";
             this.cmdAceptar.Primary = false;
-            this.cmdAceptar.Size = new System.Drawing.Size(72, 36);
+            this.cmdAceptar.Size = new System.Drawing.Size(215, 32);
             this.cmdAceptar.TabIndex = 2;
             this.cmdAceptar.Text = "Cambiar";
-            this.cmdAceptar.UseVisualStyleBackColor = true;
+            this.cmdAceptar.UseVisualStyleBackColor = false;
             this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
             // 
             // materialDivider1
@@ -162,12 +171,12 @@
             // 
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel2.Location = new System.Drawing.Point(617, 42);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(130, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(127, 18);
             this.materialLabel2.TabIndex = 12;
             this.materialLabel2.Text = "Seleccionar Lotes";
             // 
@@ -193,50 +202,37 @@
             // 
             // lstTipos_t
             // 
-            this.lstTipos_t.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstTipos_t.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstTipos_t.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstTipos_t.FormattingEnabled = true;
             this.lstTipos_t.ItemHeight = 16;
-            this.lstTipos_t.Location = new System.Drawing.Point(621, 305);
+            this.lstTipos_t.Location = new System.Drawing.Point(3, 21);
             this.lstTipos_t.Name = "lstTipos_t";
             this.lstTipos_t.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstTipos_t.Size = new System.Drawing.Size(217, 148);
+            this.lstTipos_t.Size = new System.Drawing.Size(213, 132);
             this.lstTipos_t.TabIndex = 16;
             this.lstTipos_t.SelectedIndexChanged += new System.EventHandler(this.lstTipos_t_SelectedIndexChanged);
             // 
             // materialLabel1
             // 
-            this.materialLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(617, 283);
+            this.materialLabel1.Location = new System.Drawing.Point(3, -1);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(56, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(53, 18);
             this.materialLabel1.TabIndex = 17;
             this.materialLabel1.Text = "Tarjeta";
-            // 
-            // cFecha
-            // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(620, 459);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Mostrar = 0;
-            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(223, 192);
-            this.cFecha.TabIndex = 15;
-            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
             // 
             // grdResumenOri
             // 
             this.grdResumenOri.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
             this.grdResumenOri.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdResumenOri.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.grdResumenOri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grdResumenOri.AutoResize = false;
             this.grdResumenOri.bColor = System.Drawing.SystemColors.Window;
             this.grdResumenOri.bColorSel = System.Drawing.SystemColors.Highlight;
@@ -255,21 +251,22 @@
             this.grdResumenOri.FuenteEncabezado = null;
             this.grdResumenOri.FuentePieDePagina = null;
             this.grdResumenOri.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdResumenOri.Location = new System.Drawing.Point(620, 71);
+            this.grdResumenOri.Location = new System.Drawing.Point(1, 26);
             this.grdResumenOri.Name = "grdResumenOri";
             this.grdResumenOri.PieDePagina = "\t\tPage {0} of {1}";
             this.grdResumenOri.PintarFilaSel = true;
             this.grdResumenOri.Redraw = true;
             this.grdResumenOri.Row = 0;
             this.grdResumenOri.Rows = 1;
-            this.grdResumenOri.Size = new System.Drawing.Size(218, 209);
+            this.grdResumenOri.Size = new System.Drawing.Size(212, 209);
             this.grdResumenOri.TabIndex = 18;
             // 
             // grdResumenDest
             // 
             this.grdResumenDest.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
             this.grdResumenDest.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdResumenDest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdResumenDest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grdResumenDest.AutoResize = false;
             this.grdResumenDest.bColor = System.Drawing.SystemColors.Window;
             this.grdResumenDest.bColorSel = System.Drawing.SystemColors.Highlight;
@@ -288,23 +285,23 @@
             this.grdResumenDest.FuenteEncabezado = null;
             this.grdResumenDest.FuentePieDePagina = null;
             this.grdResumenDest.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdResumenDest.Location = new System.Drawing.Point(1350, 63);
+            this.grdResumenDest.Location = new System.Drawing.Point(0, 22);
             this.grdResumenDest.Name = "grdResumenDest";
             this.grdResumenDest.PieDePagina = "\t\tPage {0} of {1}";
             this.grdResumenDest.PintarFilaSel = true;
             this.grdResumenDest.Redraw = true;
             this.grdResumenDest.Row = 0;
             this.grdResumenDest.Rows = 1;
-            this.grdResumenDest.Size = new System.Drawing.Size(215, 245);
+            this.grdResumenDest.Size = new System.Drawing.Size(217, 213);
             this.grdResumenDest.TabIndex = 19;
             // 
             // materialLabel3
             // 
             this.materialLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel3.Location = new System.Drawing.Point(705, 631);
+            this.materialLabel3.Location = new System.Drawing.Point(705, 386);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
             this.materialLabel3.Size = new System.Drawing.Size(133, 19);
@@ -312,56 +309,114 @@
             // 
             // materialLabel4
             // 
-            this.materialLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.materialLabel4.AutoSize = true;
             this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel4.Location = new System.Drawing.Point(620, 49);
+            this.materialLabel4.Location = new System.Drawing.Point(3, 1);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(71, 19);
+            this.materialLabel4.Size = new System.Drawing.Size(72, 18);
             this.materialLabel4.TabIndex = 24;
             this.materialLabel4.Text = "Resumen";
             // 
             // materialLabel5
             // 
-            this.materialLabel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
-            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel5.Location = new System.Drawing.Point(1346, 42);
+            this.materialLabel5.Location = new System.Drawing.Point(6, 2);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(71, 19);
+            this.materialLabel5.Size = new System.Drawing.Size(72, 18);
             this.materialLabel5.TabIndex = 25;
             this.materialLabel5.Text = "Resumen";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cmdAceptar);
+            this.panel1.Location = new System.Drawing.Point(1351, 657);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(217, 34);
+            this.panel1.TabIndex = 26;
+            // 
+            // cFecha
+            // 
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(620, 222);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(223, 184);
+            this.cFecha.TabIndex = 15;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel2.Controls.Add(this.lstTipos_t);
+            this.panel2.Controls.Add(this.materialLabel1);
+            this.panel2.Location = new System.Drawing.Point(618, 55);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(218, 153);
+            this.panel2.TabIndex = 27;
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel3.Controls.Add(this.grdResumenOri);
+            this.panel3.Controls.Add(this.materialLabel4);
+            this.panel3.Location = new System.Drawing.Point(623, 416);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(215, 235);
+            this.panel3.TabIndex = 28;
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.grdResumenDest);
+            this.panel4.Controls.Add(this.materialLabel5);
+            this.panel4.Location = new System.Drawing.Point(1351, 416);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(217, 233);
+            this.panel4.TabIndex = 29;
             // 
             // frmModificar_Tarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1580, 692);
-            this.Controls.Add(this.materialLabel5);
-            this.Controls.Add(this.materialLabel4);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.materialLabel3);
-            this.Controls.Add(this.grdResumenDest);
-            this.Controls.Add(this.grdResumenOri);
-            this.Controls.Add(this.materialLabel1);
-            this.Controls.Add(this.lstTipos_t);
             this.Controls.Add(this.cFecha);
             this.Controls.Add(this.cmbSucD);
             this.Controls.Add(this.cmbSucO);
             this.Controls.Add(this.materialLabel2);
             this.Controls.Add(this.lstLotes);
             this.Controls.Add(this.materialDivider1);
-            this.Controls.Add(this.cmdAceptar);
             this.Controls.Add(this.grd_Destino);
             this.Controls.Add(this.grdOrigen);
             this.Name = "frmModificar_Tarjetas";
             this.Text = "Modificar Tarjetas";
             this.Load += new System.EventHandler(this.frmModificar_Tarjetas_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -385,5 +440,9 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
     }
 }

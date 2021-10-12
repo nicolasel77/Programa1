@@ -40,7 +40,7 @@
 
             grdCuentas.TeclasManejadas = new int[] { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
 
-            dtFecha.Value = DateTime.Today.AddDays(( ((int)DateTime.Today.DayOfWeek) + 6) * -1);
+            dtFecha.Value = DateTime.Today.AddDays((((int)DateTime.Today.DayOfWeek) + 6) * -1);
             dtMaxima.Value = dtFecha.Value.AddDays(6);
         }
 
@@ -62,10 +62,13 @@
                 lblArchivo.Text = s;
                 string n = s.Substring(s.LastIndexOf(@"\") + 1);
                 leer.Sucursal.ID = Convert.ToInt32(n.Substring(0, n.LastIndexOf(" ")));
-                lblSucursal.Text = leer.Sucursal.Nombre;
+                if (leer.Sucursal.Existe() == true)
+                {
+                    lblSucursal.Text = leer.Sucursal.Nombre;
 
-                if (lstTipo.SelectedIndex > -1)
-                { cmdEscribir.PerformClick(); }
+                    if (lstTipo.SelectedIndex > -1)
+                    { cmdEscribir.PerformClick(); }
+                }
             }
         }
 
@@ -85,7 +88,7 @@
                     n += i + ex;
                     i += 1;
                 }
-                cmdGuardar.Text = "Guardado: " + n;
+                cmdRuta.Text = "Guardado: " + n;
                 lblArchivo.Text = "";
 
                 if (File.Exists(s)) { }
@@ -156,15 +159,18 @@
                         {
                             DataRow nrow = dt.NewRow();
                             nrow["Fecha"] = leer.vFecha;
-                            nrow["Lote"] = leer.vlote;
-                            nrow["Fecha_Pago"] = leer.vpago;
-                            nrow["Importe"] = leer.vimporte;
-                            nrow["Comprobante"] = leer.vcomprobante;
-                            nrow["Tarjeta"] = leer.vtarjeta;
-                            nrow["Id_Tipo"] = leer.vtipo;
-                            nrow["Suc"] = leer.Sucursal.ID;
-                            nrow["Acreditado"] = true;
-                            dt.Rows.Add(nrow);
+                            if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                            {
+                                nrow["Lote"] = leer.vlote;
+                                nrow["Fecha_Pago"] = leer.vpago;
+                                nrow["Importe"] = leer.vimporte;
+                                nrow["Comprobante"] = leer.vcomprobante;
+                                nrow["Tarjeta"] = leer.vtarjeta;
+                                nrow["Id_Tipo"] = leer.vtipo;
+                                nrow["Suc"] = leer.Sucursal.ID;
+                                nrow["Acreditado"] = true;
+                                dt.Rows.Add(nrow);
+                            }
                         }
                     }
                     grdDatos.MostrarDatos(dt, true, false);
@@ -245,19 +251,25 @@
         private void grdCuentas_KeyUp(object sender, short e)
         {
             if (e == Convert.ToInt32(Keys.Delete))
-            {grdCuentas.BorrarFila(grdCuentas.Row);}
+            { grdCuentas.BorrarFila(grdCuentas.Row); }
         }
 
         private void grdCuentas_Editado(short f, short c, object a)
         {
             if (Convert.ToBoolean(grdCuentas.get_Texto(f, grdCuentas.get_ColIndex("Carga"))) == true)
-            {grdCuentas.BorrarFila(grdCuentas.Row);}
+            { grdCuentas.BorrarFila(grdCuentas.Row); }
         }
 
         private void cmdRecargar_Click(object sender, EventArgs e)
         {
             grdCuentas.MostrarDatos(leer.suc_cuentas.Datos_Vista(), true, false);
             grdCuentas.AutosizeAll();
+        }
+
+        private void lstTipo_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            { lstTipo.SelectedIndex = -1; }
         }
     }
 }
