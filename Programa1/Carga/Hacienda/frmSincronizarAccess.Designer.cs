@@ -196,7 +196,7 @@ namespace Programa1.Carga.Hacienda
             // cmdSincSalidas
             // 
             this.cmdSincSalidas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdSincSalidas.Location = new System.Drawing.Point(318, 184);
+            this.cmdSincSalidas.Location = new System.Drawing.Point(318, 177);
             this.cmdSincSalidas.Name = "cmdSincSalidas";
             this.cmdSincSalidas.Size = new System.Drawing.Size(167, 28);
             this.cmdSincSalidas.TabIndex = 3;
@@ -276,7 +276,7 @@ namespace Programa1.Carga.Hacienda
             // cmdCostos_Salida
             // 
             this.cmdCostos_Salida.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdCostos_Salida.Location = new System.Drawing.Point(318, 218);
+            this.cmdCostos_Salida.Location = new System.Drawing.Point(318, 211);
             this.cmdCostos_Salida.Name = "cmdCostos_Salida";
             this.cmdCostos_Salida.Size = new System.Drawing.Size(167, 28);
             this.cmdCostos_Salida.TabIndex = 4;

@@ -49,6 +49,7 @@ namespace Programa1.Carga.Hacienda
         {
             Cargar_ListadoSalidas();
             Cargar_ListadosBoletas();
+            lstActualizacion.Items.Clear();
         }
 
         private void Cargar_ListadosBoletas()
