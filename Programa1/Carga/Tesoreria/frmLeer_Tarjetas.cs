@@ -3,6 +3,7 @@
     using DB.Tesoreria;
     using System;
     using System.Data;
+    using System.Drawing;
     using System.IO;
     using System.Windows.Forms;
     using Excel = Microsoft.Office.Interop.Excel;
@@ -29,8 +30,8 @@
 
             cmdCarpeta.Text = "Carpeta: " + fcarpeta;
 
-            grdCuentas.MostrarDatos(leer.suc_cuentas.Datos_Vista(), true, false);
-            grdCuentas.AutosizeAll();
+            cargar_cuentas();
+
             h.Llenar_List(lstTipo, leer.tipos_tarjeta.Datos_Vista());
 
             dt = leer.Datos_Vista("Id = 0");
@@ -155,22 +156,19 @@
 
                         leer.vimporte = Convert.ToSingle(nn.Replace(".", ","));
 
-                        if (leer.vtarjeta > 0)
+                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
                         {
                             DataRow nrow = dt.NewRow();
                             nrow["Fecha"] = leer.vFecha;
-                            if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
-                            {
-                                nrow["Lote"] = leer.vlote;
-                                nrow["Fecha_Pago"] = leer.vpago;
-                                nrow["Importe"] = leer.vimporte;
-                                nrow["Comprobante"] = leer.vcomprobante;
-                                nrow["Tarjeta"] = leer.vtarjeta;
-                                nrow["Id_Tipo"] = leer.vtipo;
-                                nrow["Suc"] = leer.Sucursal.ID;
-                                nrow["Acreditado"] = true;
-                                dt.Rows.Add(nrow);
-                            }
+                            nrow["Lote"] = leer.vlote;
+                            nrow["Fecha_Pago"] = leer.vpago;
+                            nrow["Importe"] = leer.vimporte;
+                            nrow["Comprobante"] = leer.vcomprobante;
+                            nrow["Tarjeta"] = leer.vtarjeta;
+                            nrow["Id_Tipo"] = leer.vtipo;
+                            nrow["Suc"] = leer.Sucursal.ID;
+                            nrow["Acreditado"] = true;
+                            dt.Rows.Add(nrow);
                         }
                     }
                     grdDatos.MostrarDatos(dt, true, false);
@@ -198,25 +196,32 @@
 
         private void cmdGuardar_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i <= grdDatos.Rows - 1; i++)
+            if (leer.Fecha_Cerrada(dtFecha.Value) == false & leer.Fecha_Cerrada(dtMaxima.Value) == false)
             {
-                leer.vFecha = Convert.ToDateTime(grdDatos.get_Texto(i, 1));
-                leer.vtipo = Convert.ToInt32(grdDatos.get_Texto(i, 2));
-                leer.vimporte = Convert.ToSingle(grdDatos.get_Texto(i, 3));
-                leer.Sucursal.ID = Convert.ToInt32(grdDatos.get_Texto(i, 5));
-                leer.vpago = Convert.ToDateTime(grdDatos.get_Texto(i, 6));
-                leer.vlote = Convert.ToInt32(grdDatos.get_Texto(i, 7));
-                leer.vcomprobante = Convert.ToInt32(grdDatos.get_Texto(i, 8));
-                leer.vtarjeta = Convert.ToInt32(grdDatos.get_Texto(i, 9));
-                leer.actualizar_Registros();
+                for (int i = 1; i <= grdDatos.Rows - 1; i++)
+                {
+                    leer.vFecha = Convert.ToDateTime(grdDatos.get_Texto(i, 1));
+                    leer.vtipo = Convert.ToInt32(grdDatos.get_Texto(i, 2));
+                    leer.vimporte = Convert.ToSingle(grdDatos.get_Texto(i, 3));
+                    leer.Sucursal.ID = Convert.ToInt32(grdDatos.get_Texto(i, 5));
+                    leer.vpago = Convert.ToDateTime(grdDatos.get_Texto(i, 6));
+                    leer.vlote = Convert.ToInt32(grdDatos.get_Texto(i, 7));
+                    leer.vcomprobante = Convert.ToInt32(grdDatos.get_Texto(i, 8));
+                    leer.vtarjeta = Convert.ToInt32(grdDatos.get_Texto(i, 9));
+                    leer.actualizar_Registros();
+                }
+                grdDatos.Rows = 1;
+
+                lblSucursal.Text = $"{ grdDatos.get_Texto(1, grdDatos.get_ColIndex("Suc"))}  -  { grdDatos.get_Texto(1, grdDatos.get_ColIndex("Id_Tipo"))}";
+                lblTotal.Text = "";
+                Mover_Archivo();
+
+                Cursor = Cursors.Default;
             }
-            grdDatos.Rows = 1;
-
-            lblSucursal.Text = $"{ grdDatos.get_Texto(1, grdDatos.get_ColIndex("Suc"))}  -  { grdDatos.get_Texto(1, grdDatos.get_ColIndex("Id_Tipo"))}";
-            lblTotal.Text = "";
-            Mover_Archivo();
-
-            Cursor = Cursors.Default;
+            else
+            {
+                MessageBox.Show("La fecha se encuentra cerrada", "Borrar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void tiAuto_Tick(object sender, EventArgs e)
@@ -262,8 +267,21 @@
 
         private void cmdRecargar_Click(object sender, EventArgs e)
         {
+            cargar_cuentas();
+        }
+
+        private void cargar_cuentas()
+        {
             grdCuentas.MostrarDatos(leer.suc_cuentas.Datos_Vista(), true, false);
             grdCuentas.AutosizeAll();
+            for (int i = 1; i <= grdCuentas.Rows - 1; i++)
+            {
+                if (leer.suc_cuentas.Cuentas_Compartidas(Convert.ToInt32(grdCuentas.get_Texto(i, 1))) == true)
+                {
+                    for (int c = 0; c <= grdCuentas.Cols - 1; c++)
+                    { grdCuentas.set_ColorLetraCelda(i, c, Color.Red); }
+                }
+            }
         }
 
         private void lstTipo_MouseUp(object sender, MouseEventArgs e)

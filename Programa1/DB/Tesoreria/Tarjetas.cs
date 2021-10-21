@@ -43,7 +43,7 @@
 
         public DataTable sucdatos()
         {
-            return sucursales.Datos();
+            return sucursales.Datos("Ver = 1 AND Propio = 1");
         }
 
         public DataTable Datos_Vista(string filtro = "")

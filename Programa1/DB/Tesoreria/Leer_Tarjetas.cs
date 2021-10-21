@@ -29,7 +29,7 @@
 
         public void actualizar_Registros()
         {
-            String vBorrar = $"[Fecha]='{vFecha.ToString("MM/dd/yyy")}' AND [Importe]={vimporte.ToString().Replace(",", ".")} AND [Suc]={Sucursal.ID} AND Lote={vlote} AND Comprobante={vcomprobante} AND Tarjeta={vtarjeta}";
+            String vBorrar = $"[Fecha]='{vFecha.ToString("MM/dd/yyy")}' AND [Importe]={vimporte.ToString().Replace(",", ".")} AND Lote={vlote} AND Comprobante={vcomprobante} AND Tarjeta={vtarjeta}";
             Borrar(vBorrar);
 
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);

@@ -342,11 +342,23 @@
     <Compile Include="Carga\Sucursales\frmDetalle_Resumen.Designer.cs">
       <DependentUpon>frmDetalle_Resumen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Sucursales\frmEditar_Suc_Ofertas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmEditar_Suc_Ofertas.Designer.cs">
+      <DependentUpon>frmEditar_Suc_Ofertas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Sucursales\frmGastos_Sucursales.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Carga\Sucursales\frmGastos_Sucursales.Designer.cs">
       <DependentUpon>frmGastos_Sucursales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmImprimir_Ofertas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmImprimir_Ofertas.Designer.cs">
+      <DependentUpon>frmImprimir_Ofertas.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Sucursales\frmListas_Carga.cs">
       <SubType>Form</SubType>
@@ -737,6 +749,9 @@
     <Compile Include="DB\Sebero\Precios_Sebo.cs" />
     <Compile Include="DB\Sucursales\Cambio_Precios_Stock.cs" />
     <Compile Include="DB\Sucursales\Estadisticas_Sucursales.cs" />
+    <Compile Include="DB\Sucursales\Listas_Ofertas.cs" />
+    <Compile Include="DB\Sucursales\Lugares_imp.cs" />
+    <Compile Include="DB\Sucursales\Nombre_Listas_ofertas.cs" />
     <Compile Include="DB\Sucursales\Promedios.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />
     <Compile Include="DB\Sucursales\Suc_Cuentas.cs" />
@@ -951,8 +966,14 @@
     <EmbeddedResource Include="Carga\Sucursales\frmDetalle_Resumen.resx">
       <DependentUpon>frmDetalle_Resumen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sucursales\frmEditar_Suc_Ofertas.resx">
+      <DependentUpon>frmEditar_Suc_Ofertas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmGastos_Sucursales.resx">
       <DependentUpon>frmGastos_Sucursales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sucursales\frmImprimir_Ofertas.resx">
+      <DependentUpon>frmImprimir_Ofertas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmListas_Carga.resx">
       <DependentUpon>frmListas_Carga.cs</DependentUpon>

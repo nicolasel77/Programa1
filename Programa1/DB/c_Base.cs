@@ -567,6 +567,32 @@
             return d;
         }
 
+        public int Min_ID()
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            int d = 0;
+
+            try
+            {
+                string Cadena = $"SELECT MIN({Campo_ID}) FROM {Tabla}";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                cnn.Open();
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                d = (int)cmd.ExecuteScalar();
+
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+            }
+
+            return d;
+        }
+
         public bool Existe()
         {
 

@@ -98,6 +98,7 @@
             ID = Convert.ToInt32(dr["Id"]);
             Nombre = dr["Nombre"].ToString();
             Tipo.ID = Convert.ToInt32(dr["Id_Tipo"]);
+            Tipo.Nombre = dr["Descripcion"].ToString();
             Ver = Convert.ToBoolean(dr["Ver"]);
             Imprimir = Convert.ToBoolean(dr["Imprimir"]);
             Pesable = Convert.ToBoolean(dr["Pesable"]);

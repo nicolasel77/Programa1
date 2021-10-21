@@ -20,5 +20,12 @@
             return Datos_Vista("", "Carga, Suc, Nombre, RIGHT(N_Cuenta, 4) NCuenta, Tipo, RTRIM(Descripcion) Descripcion, Alias, Titular ", " Titular, Suc, Tipo");
         }
 
+        public bool Cuentas_Compartidas(int suc)
+        {
+            if (Datos_Vista($"RIGHT(N_Cuenta, 4) IN (SELECT RIGHT(N_Cuenta, 4) FROM dbGastos.dbo.vw_SucCuentas WHERE suc = {suc})", "Suc", "Suc").Rows.Count > 1)
+            { return true; }
+            else
+            { return false; }
+        }
     }
 }

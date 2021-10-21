@@ -89,7 +89,6 @@
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
-
             try
             {
                 SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Ofertas WHERE Id=" + id, conexionSql);
@@ -108,7 +107,6 @@
                 Costo_Original = Convert.ToSingle(dr["Costo_Original"]);
                 Costo_Oferta = Convert.ToSingle(dr["Costo_Oferta"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
-
             }
             catch (Exception)
             {
@@ -127,7 +125,7 @@
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-            double kv = 0;
+            double kv;
 
             try
             {

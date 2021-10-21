@@ -9,7 +9,6 @@
     {
         private Tarjetas tarjetas;
         private Herramientas.Herramientas h;
-
         public frmModificar_Tarjetas()
         {
             InitializeComponent();
@@ -27,45 +26,43 @@
         private void cmbSucO_SelectedIndexChanged(object sender, EventArgs e)
         {
             tarjetas.sucO = h.Codigo_Seleccionado(cmbSucO.Text);
-            Cargar_grdori();
+            Cargar_grillas();
         }
 
         private void cFecha_Cambio_Seleccion(object sender, EventArgs e)
         {
-            Cargar_grdori();
-            Cargar_grdD();
+            Cargar_grillas();
         }
-
-        private void Cargar_grdori()
+        private void Cargar_grillas()
         {
-            if (cFecha.fecha_Fin > Convert.ToDateTime("1/1/1910"))
+            if (tarjetas.Fecha_Cerrada(cFecha.fecha_Actual) == false & tarjetas.Fecha_Cerrada(cFecha.fecha_Fin) == false)
             {
-                h.Llenar_List(lstLotes, tarjetas.datos_lotes(cFecha.Cadena()));
-                string f = h.Unir(cFecha.Cadena(), $"Suc= {tarjetas.sucO}");
-                if (lstTipos_t.SelectedIndex >= 0)
+                if (cFecha.fecha_Fin > Convert.ToDateTime("1/1/1910"))
                 {
-                    f = h.Unir(f, "Id_Tipo IN " + h.Codigos_Seleccionados(lstTipos_t));
-                }
-                DataTable dt = tarjetas.Datos_Vista(f);
-                dt.Columns.Add("Cambio", typeof(bool));
-                grdOrigen.MostrarDatos(dt, true, false);
-                if (cmbSucO.Text.Length > 0)
-                { grdResumenOri.MostrarDatos(tarjetas.Datos_Resumen_modi_tar(f), true, false); }
-                Formato_Grilla();
-            }
-        }
+                    h.Llenar_List(lstLotes, tarjetas.datos_lotes(cFecha.Cadena()));
+                    string f = h.Unir(cFecha.Cadena(), $"Suc= {tarjetas.sucO}");
+                    if (lstTipos_t.SelectedIndex >= 0)
+                    {
+                        f = h.Unir(f, "Id_Tipo IN " + h.Codigos_Seleccionados(lstTipos_t));
+                    }
+                    DataTable dt = tarjetas.Datos_Vista(f);
+                    dt.Columns.Add("Cambio", typeof(bool));
+                    grdOrigen.MostrarDatos(dt, true, false);
+                    if (cmbSucO.Text.Length > 0)
+                    { grdResumenOri.MostrarDatos(tarjetas.Datos_Resumen_modi_tar(f), true, false); }
 
-        private void Cargar_grdD()
-        {
-            if (cFecha.fecha_Fin > Convert.ToDateTime("1/1/1910"))
+                    f = h.Unir(cFecha.Cadena(), $"Suc= {tarjetas.sucD}");
+                    if (lstTipos_t.SelectedIndex >= 0)
+                    { f = h.Unir(f, "Id_Tipo IN " + h.Codigos_Seleccionados(lstTipos_t)); }
+                    grd_Destino.MostrarDatos(tarjetas.Datos_Vista(f), true, false);
+                    if (cmbSucD.Text.Length > 0)
+                    { grdResumenDest.MostrarDatos(tarjetas.Datos_Resumen_modi_tar(f), true, false); }
+                    Formato_Grilla();
+                }
+            }
+            else
             {
-                string f = h.Unir(cFecha.Cadena(), $"Suc= {tarjetas.sucD}");
-                if (lstTipos_t.SelectedIndex >= 0)
-                { f = h.Unir(f, "Id_Tipo IN " + h.Codigos_Seleccionados(lstTipos_t)); }
-                grd_Destino.MostrarDatos(tarjetas.Datos_Vista(f), true, false);
-                if (cmbSucD.Text.Length > 0)
-                { grdResumenDest.MostrarDatos(tarjetas.Datos_Resumen_modi_tar(f), true, false); }
-                Formato_Grilla();
+                    MessageBox.Show("La fecha se encuentra cerrada", "Borrar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -103,8 +100,7 @@
 
         private void lstTipos_t_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Cargar_grdori();
-            Cargar_grdD();
+            Cargar_grillas();
         }
 
         private void lstLotes_SelectedIndexChanged(object sender, EventArgs e)
@@ -130,7 +126,7 @@
         private void cmbSucD_SelectedIndexChanged(object sender, EventArgs e)
         {
             tarjetas.sucD = h.Codigo_Seleccionado(cmbSucD.Text);
-            Cargar_grdD();
+            Cargar_grillas();
         }
 
         private void cmdAceptar_Click(object sender, EventArgs e)
@@ -146,8 +142,7 @@
                         tarjetas.Actualizar();
                     }
                 }
-                Cargar_grdori();
-                Cargar_grdD();
+                Cargar_grillas();
             }
             else
             {
