@@ -13,11 +13,12 @@
         public Pagos_Autorizados pagos = new Pagos_Autorizados();
         public frmSeleccionar_PagosAutorizados()
         {
+
             InitializeComponent();
             vEstilo = grd.Styles.Add("n");
             vEstilo.BackColor = Color.MistyRose;
 
-            grd.TeclasManejadas = new int[] { Convert.ToInt32(Keys.Escape), Convert.ToInt32(Keys.Enter) };
+            grd.TeclasManejadas = new int[] { Convert.ToInt32(Keys.Escape), 13 };
         }
 
         public void Cargar(int Proveedor)
@@ -42,11 +43,11 @@
                     grd.Filas[f].Style = null;
                 }
                 double t = 0;
-                for (int i = 1; i < grd.Rows - 1; i++)
+                for (int i = 1; i < grd.Rows; i++)
                 {
                     if (Convert.ToBoolean(grd.get_Texto(i, c)) == true)
                     {
-                        t += Convert.ToDouble(grd.get_Texto(i, grd.get_ColIndex("Saldo")));
+                        t += Convert.ToDouble(grd.get_Texto(i, grd.get_ColIndex("Saldo"))) * -1;
                     }
                 }
                 lblTotal.Text = $"Total: {t:N1}";

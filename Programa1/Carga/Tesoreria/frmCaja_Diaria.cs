@@ -188,8 +188,28 @@ namespace Programa1.Carga.Tesoreria
             if (rdDetalle.Checked) { o_Repetir = t_Repetir.Detalle; }
             if (rdNinguno.Checked) { o_Repetir = t_Repetir.Ninguno; }
         }
+             
+        private void rdCajas_CheckedChanged(object sender, EventArgs e)
+        {
+            Cargar_Cajas();
+        }
 
-        private void cmdTransferencia_Click(object sender, EventArgs e)
+        private void aRendirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmResumenARendir fr = new frmResumenARendir();
+            fr.ShowDialog();
+
+        }
+       
+        private void chequesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCheques fr = new frmCheques();
+            fr.Nuevo_Cheque = true;
+            fr.Cargar();
+            fr.ShowDialog();
+        }
+
+        private void transferenciaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTransferencia fr = new frmTransferencia();
             fr.ShowDialog();
@@ -234,27 +254,9 @@ namespace Programa1.Carga.Tesoreria
                 Cargar_Datos();
             }
         }
-
-        private void rdCajas_CheckedChanged(object sender, EventArgs e)
-        {
-            Cargar_Cajas();
-        }
-
-        private void aRendirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmResumenARendir fr = new frmResumenARendir();
-            fr.ShowDialog();
-
-        }
-
-        private void cmdCheques_Click(object sender, EventArgs e)
-        {
-            frmCheques fr = new frmCheques();
-            fr.Nuevo_Cheque = true;
-            fr.Cargar();
-            fr.ShowDialog();
-        }
         #endregion
+
+
 
         #region " SUBS "
         private void Cargar_Datos()
@@ -1391,6 +1393,6 @@ namespace Programa1.Carga.Tesoreria
 
         #endregion
 
-
+       
     }
 }
