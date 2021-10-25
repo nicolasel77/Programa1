@@ -37,7 +37,7 @@
         public DataTable Autorizados_Proveedor(int p)
         {
             Ejecutar_sp("sp_PagosAutorizadosProveedor", "p", p);
-            return Autorizados_Prov.Datos_Vista("", "Sel, Fecha, Total, Pagos, Saldo", "Fecha");
+            return Autorizados_Prov.Datos_Vista("", "Fecha, Descripcion, Total, Pagos, Saldo, 0.0 Nuevo", "Fecha");
         }
     }
 }

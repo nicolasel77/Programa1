@@ -630,6 +630,12 @@
     <Compile Include="Carga\Tesoreria\frmTransferencia.Designer.cs">
       <DependentUpon>frmTransferencia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Varios\frmAyuda_Generico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Varios\frmAyuda_Generico.Designer.cs">
+      <DependentUpon>frmAyuda_Generico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Varios\frmCapitalDeTrabajo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1088,6 +1094,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmTransferencia.resx">
       <DependentUpon>frmTransferencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Varios\frmAyuda_Generico.resx">
+      <DependentUpon>frmAyuda_Generico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Varios\frmCapitalDeTrabajo.resx">
       <DependentUpon>frmCapitalDeTrabajo.cs</DependentUpon>

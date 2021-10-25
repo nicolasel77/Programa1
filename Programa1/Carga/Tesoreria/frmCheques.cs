@@ -14,12 +14,13 @@ namespace Programa1.Carga.Tesoreria
 
         const byte Id = 0;
         const byte Numero = 1;
-        const byte Banco = 2;
-        const byte Nombre = 3;
-        const byte Fecha_Entrada = 4;
-        const byte Fecha_Acreditacion = 5;
-        const byte Importe = 6;
-        const byte Seleccionado = 9;
+        const byte eCheq = 2;
+        const byte Banco = 3;
+        const byte Nombre = 4;
+        const byte Fecha_Entrada = 5;
+        const byte Fecha_Acreditacion = 6;
+        const byte Importe = 7;
+        const byte Seleccionado = 10;
 
         /// <summary>
         /// Para avisar que hay nuevo
@@ -29,7 +30,7 @@ namespace Programa1.Carga.Tesoreria
         public frmCheques()
         {
             InitializeComponent();
-            grd.TeclasManejadas = new int[] { 13 };
+            grd.TeclasManejadas = new int[] { 13, (int)Keys.F1 };
         }
 
         public void Cargar(bool selec = false)
@@ -70,10 +71,23 @@ namespace Programa1.Carga.Tesoreria
                     {
                         ch.Actualizar();
                     }
-                    grd.set_Texto(f, Numero, a);
+                    grd.set_Texto(f, c, a);
 
-                    grd.ActivarCelda(f, Banco);
+                    grd.ActivarCelda(f, eCheq);
 
+                    break;
+                case eCheq:
+                    if (i == 0)
+                    {
+                        SystemSounds.Beep.Play();
+                        grd.ActivarCelda(f, Numero);
+                    }
+                    else
+                    {
+                        ch.E_Cheq = Convert.ToBoolean(a);
+                        ch.Actualizar();
+                        grd.ActivarCelda(f, Banco);
+                    }
                     break;
                 case Banco:
                     if (i == 0)
@@ -145,7 +159,7 @@ namespace Programa1.Carga.Tesoreria
                     double t = 0;
                     for (int n = 1; n <= grd.Rows - 1; n++)
                     {
-                        if (Convert.ToBoolean(grd.get_Texto(n, Seleccionado)) == true) 
+                        if (Convert.ToBoolean(grd.get_Texto(n, Seleccionado)) == true)
                         {
                             t += Convert.ToDouble(grd.get_Texto(n, Importe));
                             Cheques cn = new Cheques();
@@ -187,6 +201,13 @@ namespace Programa1.Carga.Tesoreria
                         grd.ActivarCelda(f, Numero);
                     }
                 }
+                else
+                {
+                    if(e.KeyCode == Keys.F1)
+                    {
+
+                    }
+                }
             }
 
         }
@@ -197,6 +218,13 @@ namespace Programa1.Carga.Tesoreria
             {
                 this.Hide();
             }
+        }
+
+        private void grd_CambioFila(short Fila)
+        {
+            ch.Numero = Convert.ToInt32(grd.get_Texto(Fila, Numero));
+            ch.Buscar_Cheque();
+
         }
     }
 }

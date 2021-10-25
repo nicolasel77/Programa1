@@ -24,7 +24,7 @@
         public DateTime Fecha_Entrada { get; set; }
         public DateTime Fecha_Acreditacion { get; set; }
         public double Importe { get; set; }
-
+        public bool E_Cheq { get; set; }
 
         #region " Editar Datos "
         public void Cargar_Nuevo()
@@ -40,6 +40,7 @@
                 Fecha_Entrada = fr.ch.Fecha_Entrada;
                 Fecha_Acreditacion = fr.ch.Fecha_Acreditacion;
                 Importe = fr.ch.Importe;
+                E_Cheq = fr.ch.E_Cheq;
             }
             else
             {
@@ -49,6 +50,7 @@
                 Fecha_Entrada = new DateTime(1900, 1, 1);
                 Fecha_Acreditacion = new DateTime(1900, 1, 1);
                 Importe = 0;
+                E_Cheq = false;
             }
         }
 
@@ -72,6 +74,7 @@
                 Fecha_Entrada = new DateTime(1900, 1, 1);
                 Fecha_Acreditacion = new DateTime(1900, 1, 1);
                 Importe = 0;
+                E_Cheq = false;
             }
             else
             {
@@ -81,16 +84,19 @@
                 Fecha_Entrada = Convert.ToDateTime(dt.Rows[0]["Fecha_Entrada"]);
                 Fecha_Acreditacion = Convert.ToDateTime(dt.Rows[0]["Fecha_Acreditacion"]);
                 Importe = Convert.ToInt32(dt.Rows[0]["Importe"]);
+                E_Cheq = Convert.ToBoolean(dt.Rows[0]["eCheq"]);
             }
         }
 
         public new void Agregar()
         {
             Agregar_NoID("Numero", Numero);
+            ID = Max_ID();
             Actualizar("ID_Banco", Banco.ID);
             Actualizar("Fecha_Entrada", Fecha_Entrada);
             Actualizar("Fecha_Acreditacion", Fecha_Acreditacion);
             Actualizar("Importe", Importe);
+            Actualizar("eCheq", E_Cheq);
         }
         public new void Actualizar()
         {
@@ -100,6 +106,7 @@
             Actualizar("Fecha_Entrada", Fecha_Entrada);
             Actualizar("Fecha_Acreditacion", Fecha_Acreditacion);
             Actualizar("Importe", Importe);
+            Actualizar("eCheq", E_Cheq);
         }
 
 

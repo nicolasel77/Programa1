@@ -1,4 +1,5 @@
-﻿using Programa1.DB.Tesoreria;
+﻿using Programa1.Clases;
+using Programa1.DB;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -7,21 +8,9 @@ namespace Programa1.Carga.Tesoreria
 {
     public partial class frmAyuda_Gastos : Form
     {
-        private Cajas gCajas;
-        private Tipo_Gastos TGastos;
-        private Detalle_Gastos DTgastos;
+        private c_Base cb;
 
-        private enum TOpcion : byte
-        {
-            gCaja = 0,
-            gTipo = 1,
-            gSubTipo = 2,
-            gDetalle = 3
-        }
-        private TOpcion Opcion;
-        public string Valor = "";
-        private string Filtro_Tipo = "";
-
+        
         public frmAyuda_Gastos()
         {
             InitializeComponent();
@@ -36,38 +25,7 @@ namespace Programa1.Carga.Tesoreria
         {
             this.Close();
         }
-
-        public void Cargar_Cajas()
-        {
-            gCajas = new Cajas();
-            Cargar();
-        }
-        public void Cargar_TiposGastos(int Tipo)
-        {
-            TGastos = new Tipo_Gastos();
-            TGastos.Id_Tipo = Tipo;
-            Opcion = TOpcion.gTipo;
-            Cargar();
-        }
-        public void Cargar_SubTiposGastos(int Tipo)
-        {
-            TGastos = new Tipo_Gastos();
-            TGastos.Id_Tipo = Tipo;
-            //if (TGastos.grupoS.Campo_Filtro.Length > 0) { Filtro_Tipo = $"{TGastos.grupoS.Campo_Filtro}={Tipo}"; }
-            Opcion = TOpcion.gSubTipo;
-
-            Cargar();
-        }
-        public void Cargar_Detalles(int Tipo)
-        {
-            DTgastos = new Detalle_Gastos();
-            DTgastos.Id_Tipo = Tipo;
-            Opcion = TOpcion.gDetalle;
-            Filtro_Tipo = $"ID_Tipo={Tipo}";
-
-            Cargar();
-        }
-
+                        
         private void Cargar()
         {
             DataTable dt = new DataTable();
@@ -75,96 +33,20 @@ namespace Programa1.Carga.Tesoreria
             int n = 0;
             lst.Items.Clear();
 
-            switch (Opcion)
+            if (txtBuscar.Text.Length != 0)
             {
-                case TOpcion.gCaja:
+                sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
+                if (int.TryParse(txtBuscar.Text, out n) == true)
+                {
+                    sf = $"{sf} OR CONVERT(varchar, ID) LIKE '%{n}%'";
+                }
+            }
 
-                    if (txtBuscar.Text.Length != 0)
-                    {
-                        sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
-                        if (int.TryParse(txtBuscar.Text, out n) == true)
-                        {
-                            sf = $"{sf} OR CONVERT(varchar, ID) LIKE '%{n}%'";
-                        }
-                    }
+            dt = cb.Datos(sf);
 
-                    dt = gCajas.Datos(sf);
-
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        lst.Items.Add($"{dr[0]}. {dr[1]}");
-                    }
-                    break;
-                case TOpcion.gTipo:
-                    if (txtBuscar.Text.Length != 0) 
-                    { 
-                        sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
-                        if (int.TryParse(txtBuscar.Text, out n) == true)
-                        {
-                            sf = $"{sf} OR CONVERT(varchar, Id_Tipo) LIKE '%{n}%'";
-                        }
-                    }
-
-                    dt = TGastos.Datos(sf);
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        lst.Items.Add($"{dr[0]}. {dr[1]}");
-                    }
-                    break;
-                case TOpcion.gSubTipo:
-                    if (txtBuscar.Text.Length != 0)
-                    {
-                        //if (TGastos.grupoS.Campo_Filtro.Length > 0) { Filtro_Tipo = $"{TGastos.grupoS.Campo_Filtro}={TGastos.Id_Tipo}"; }
-                        if (Filtro_Tipo.Length > 0)
-                        {
-                            sf = $"{Filtro_Tipo} AND {TGastos.grupoS.Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
-                        }
-                        else
-                        {
-                            sf = $"{TGastos.grupoS.Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
-                        }
-                        if (int.TryParse(txtBuscar.Text, out n) == true)
-                        {
-                            sf = $"{sf} OR CONVERT(varchar, {"{grupoS.Campo_Id}"}) LIKE '%{n}%'";
-                        }
-                    }
-                    else
-                    {
-                        sf = Filtro_Tipo;
-                    }
-
-                    dt = TGastos.SubTipos(sf);
-                    if (dt != null)
-                    {
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            lst.Items.Add($"{dr[0]}. {dr[1]}");
-                        }
-                    }
-                    break;
-                case TOpcion.gDetalle:
-                    if (txtBuscar.Text.Length != 0)
-                    {
-                        if (Filtro_Tipo.Length > 0)
-                        {
-                            sf = $"{Filtro_Tipo} AND Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
-                        }
-                        if (int.TryParse(txtBuscar.Text, out n) == true)
-                        {
-                            sf = $"{sf} OR CONVERT(varchar, ID_Detalle) LIKE '%{n}%'";
-                        }
-                    }
-                    else
-                    {
-                        sf = Filtro_Tipo;
-                    }
-
-                    dt = DTgastos.Datos(sf);
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        lst.Items.Add($"{dr["ID_Detalle"]}. {dr["Nombre"]}");
-                    }
-                    break;
+            foreach (DataRow dr in dt.Rows)
+            {
+                lst.Items.Add($"{dr[0]}. {dr[1]}");
             }
 
             txtBuscar.Focus();

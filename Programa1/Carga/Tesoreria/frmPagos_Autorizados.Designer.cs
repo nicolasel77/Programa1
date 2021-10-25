@@ -29,7 +29,6 @@ namespace Programa1.Carga.Tesoreria
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPagos_Autorizados));
             this.grdAutorizados = new Grilla2.SpeedGrilla();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.lstFiltros = new System.Windows.Forms.ListBox();
@@ -64,7 +63,7 @@ namespace Programa1.Carga.Tesoreria
             this.grdAutorizados.Location = new System.Drawing.Point(12, 31);
             this.grdAutorizados.Name = "grdAutorizados";
             this.grdAutorizados.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdAutorizados.PintarFilaSel = false;
+            this.grdAutorizados.PintarFilaSel = true;
             this.grdAutorizados.Redraw = true;
             this.grdAutorizados.Row = 0;
             this.grdAutorizados.Rows = 1;
@@ -75,12 +74,12 @@ namespace Programa1.Carga.Tesoreria
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(12, 9);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(134, 18);
+            this.materialLabel1.Size = new System.Drawing.Size(136, 19);
             this.materialLabel1.TabIndex = 1;
             this.materialLabel1.Text = "Pagos Autorizados";
             // 

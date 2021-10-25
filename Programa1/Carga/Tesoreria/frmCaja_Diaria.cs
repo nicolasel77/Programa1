@@ -1133,11 +1133,17 @@ namespace Programa1.Carga.Tesoreria
                         Herramientas.Herramientas h = new Herramientas.Herramientas();
                         for (int i = 1; i < fr.grd.Rows; i++)
                         {
-                            if (Convert.ToBoolean(fr.grd.get_Texto(i, 0)) == true)
+                            double npago = Convert.ToDouble(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Nuevo")));
+
+                            if (npago != 0)
                             {
-                                cGastos.Descripcion = $"Compra:  {Convert.ToDateTime(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Fecha"))):yyyy-MM-dd}";
-                                cGastos.Importe = Convert.ToDouble(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Saldo"))) * -1;
-                                //cGastos.Fecha_Acreditacion = 
+                                DateTime fecha = Convert.ToDateTime(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Fecha")));
+                                double vSaldo = Convert.ToDouble(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Saldo")));
+                                string tpago = (vSaldo < -1 || vSaldo > 1) ? "Parcial" : "Total";
+
+                                cGastos.Descripcion = $"[{tpago}] Compra: {fecha:dddd dd/MM/yy}  ({fr.grd.get_Texto(i, fr.grd.get_ColIndex("Descripcion"))})";
+                                cGastos.Importe = npago;
+                                cGastos.Fecha_Acreditacion = fecha;
 
                                 // Esto es por si se esta editando un registro existente
                                 if (cGastos.ID > 0)

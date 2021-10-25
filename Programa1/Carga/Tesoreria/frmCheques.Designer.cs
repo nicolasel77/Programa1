@@ -29,7 +29,6 @@ namespace Programa1.Carga.Tesoreria
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCheques));
             this.grd = new Grilla2.SpeedGrilla();
             this.lblTotal = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -65,9 +64,10 @@ namespace Programa1.Carga.Tesoreria
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(828, 673);
+            this.grd.Size = new System.Drawing.Size(1034, 673);
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
+            this.grd.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grd_CambioFila);
             this.grd.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grd_KeyPress);
             // 
             // lblTotal
@@ -85,7 +85,7 @@ namespace Programa1.Carga.Tesoreria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(852, 728);
+            this.ClientSize = new System.Drawing.Size(1058, 728);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.grd);
             this.KeyPreview = true;
