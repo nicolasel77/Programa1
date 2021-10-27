@@ -25,6 +25,7 @@
         public DateTime Fecha_Acreditacion { get; set; }
         public double Importe { get; set; }
         public bool E_Cheq { get; set; }
+        public int ID_Caja { get; set; }
 
         #region " Editar Datos "
         public void Cargar_Nuevo()
@@ -41,6 +42,7 @@
                 Fecha_Acreditacion = fr.ch.Fecha_Acreditacion;
                 Importe = fr.ch.Importe;
                 E_Cheq = fr.ch.E_Cheq;
+                ID_Caja = fr.ch.ID_Caja;
             }
             else
             {
@@ -51,6 +53,7 @@
                 Fecha_Acreditacion = new DateTime(1900, 1, 1);
                 Importe = 0;
                 E_Cheq = false;
+                ID_Caja = 0;
             }
         }
 
@@ -75,10 +78,12 @@
                 Fecha_Acreditacion = new DateTime(1900, 1, 1);
                 Importe = 0;
                 E_Cheq = false;
+                ID_Caja = 0;
             }
             else
             {
                 ID = Convert.ToInt32( dt.Rows[0]["ID"]);
+                ID_Caja = Convert.ToInt32(dt.Rows[0]["ID_Caja"]);
                 Banco.ID = Convert.ToInt32(dt.Rows[0]["ID_Banco"]);
                 Numero = Convert.ToInt32(dt.Rows[0]["Numero"]);
                 Fecha_Entrada = Convert.ToDateTime(dt.Rows[0]["Fecha_Entrada"]);
@@ -92,29 +97,21 @@
         {
             Agregar_NoID("Numero", Numero);
             ID = Max_ID();
-            Actualizar("ID_Banco", Banco.ID);
-            Actualizar("Fecha_Entrada", Fecha_Entrada);
-            Actualizar("Fecha_Acreditacion", Fecha_Acreditacion);
-            Actualizar("Importe", Importe);
-            Actualizar("eCheq", E_Cheq);
+            Actualizar();            
         }
         public new void Actualizar()
         {
-
             Actualizar("Numero", Numero);
             Actualizar("ID_Banco", Banco.ID);
             Actualizar("Fecha_Entrada", Fecha_Entrada);
             Actualizar("Fecha_Acreditacion", Fecha_Acreditacion);
             Actualizar("Importe", Importe);
             Actualizar("eCheq", E_Cheq);
+            Actualizar("ID_Caja", ID_Caja);
         }
 
-
-
         #endregion
 
-        #region " Devolver Datos "
-
-        #endregion
+        
     }
 }

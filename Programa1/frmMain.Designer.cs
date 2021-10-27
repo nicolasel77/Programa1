@@ -62,6 +62,8 @@
             this.resumenEntradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pagosAutorizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detallesPagosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.leerTarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificarTarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripSeparator();
             this.bancosCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,8 +114,7 @@
             this.mnuPrueba = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGuardar = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
-            this.leerTarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modificarTarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -338,6 +339,7 @@
             this.cajaDiariaToolStripMenuItem,
             this.resumenGastosToolStripMenuItem,
             this.resumenEntradasToolStripMenuItem,
+            this.chequesToolStripMenuItem,
             this.pagosAutorizadosToolStripMenuItem,
             this.detallesPagosToolStripMenuItem,
             this.leerTarjetasToolStripMenuItem,
@@ -379,7 +381,6 @@
             // 
             // pagosAutorizadosToolStripMenuItem
             // 
-            this.pagosAutorizadosToolStripMenuItem.BackColor = System.Drawing.Color.LightBlue;
             this.pagosAutorizadosToolStripMenuItem.Name = "pagosAutorizadosToolStripMenuItem";
             this.pagosAutorizadosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.pagosAutorizadosToolStripMenuItem.Text = "&Pagos Autorizados";
@@ -391,6 +392,20 @@
             this.detallesPagosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.detallesPagosToolStripMenuItem.Text = "Detalles Pagos";
             this.detallesPagosToolStripMenuItem.Click += new System.EventHandler(this.detallesPagosToolStripMenuItem_Click);
+            // 
+            // leerTarjetasToolStripMenuItem
+            // 
+            this.leerTarjetasToolStripMenuItem.Name = "leerTarjetasToolStripMenuItem";
+            this.leerTarjetasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.leerTarjetasToolStripMenuItem.Text = "Leer Tarjetas";
+            this.leerTarjetasToolStripMenuItem.Click += new System.EventHandler(this.leerTarjetasToolStripMenuItem_Click);
+            // 
+            // modificarTarjetasToolStripMenuItem
+            // 
+            this.modificarTarjetasToolStripMenuItem.Name = "modificarTarjetasToolStripMenuItem";
+            this.modificarTarjetasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.modificarTarjetasToolStripMenuItem.Text = "Modificar Tarjetas";
+            this.modificarTarjetasToolStripMenuItem.Click += new System.EventHandler(this.modificarTarjetasToolStripMenuItem_Click);
             // 
             // tarjetasToolStripMenuItem
             // 
@@ -776,19 +791,12 @@
             this.tstMenu.ItemAdded += new System.Windows.Forms.ToolStripItemEventHandler(this.tstMenu_ItemAdded);
             this.tstMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tstMenu_ItemClicked);
             // 
-            // leerTarjetasToolStripMenuItem
+            // chequesToolStripMenuItem
             // 
-            this.leerTarjetasToolStripMenuItem.Name = "leerTarjetasToolStripMenuItem";
-            this.leerTarjetasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.leerTarjetasToolStripMenuItem.Text = "Leer Tarjetas";
-            this.leerTarjetasToolStripMenuItem.Click += new System.EventHandler(this.leerTarjetasToolStripMenuItem_Click);
-            // 
-            // modificarTarjetasToolStripMenuItem
-            // 
-            this.modificarTarjetasToolStripMenuItem.Name = "modificarTarjetasToolStripMenuItem";
-            this.modificarTarjetasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.modificarTarjetasToolStripMenuItem.Text = "Modificar Tarjetas";
-            this.modificarTarjetasToolStripMenuItem.Click += new System.EventHandler(this.modificarTarjetasToolStripMenuItem_Click);
+            this.chequesToolStripMenuItem.Name = "chequesToolStripMenuItem";
+            this.chequesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.chequesToolStripMenuItem.Text = "Cheques";
+            this.chequesToolStripMenuItem.Click += new System.EventHandler(this.chequesToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -898,6 +906,7 @@
         private System.Windows.Forms.ToolStripMenuItem editarCajasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem leerTarjetasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificarTarjetasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chequesToolStripMenuItem;
     }
 }
 

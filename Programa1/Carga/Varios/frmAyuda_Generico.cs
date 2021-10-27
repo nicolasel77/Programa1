@@ -1,4 +1,4 @@
-﻿using Programa1.DB.Tesoreria;
+﻿using Programa1.Clases;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -7,20 +7,34 @@ namespace Programa1.Carga.Varios
 {
     public partial class frmAyuda_Generico : Form
     {
-        private Cajas gCajas;
-        private Tipo_Gastos TGastos;
-        private Detalle_Gastos DTgastos;
+        private c_Base cb = new c_Base();
 
-        private enum TOpcion : byte
+        public int ID_Seleccionado = 0;
+        public string Nombre_Seleccionado = "";
+
+        public string Campo_Nombre = "Nombre";
+        public string Campo_ID = "ID";
+
+        public string Tabla
         {
-            gCaja = 0,
-            gTipo = 1,
-            gSubTipo = 2,
-            gDetalle = 3
+            set
+            {
+                cb.Tabla = value;
+                cb.Campo_ID = Campo_ID;
+                cb.Campo_Nombre = Campo_Nombre;
+                Cargar();
+            }
         }
-        private TOpcion Opcion;
-        public string Valor = "";
-        private string Filtro_Tipo = "";
+        public string Vista 
+        {
+            set
+            {
+                cb.Vista = value;
+                cb.Campo_ID = Campo_ID;
+                cb.Campo_Nombre = Campo_Nombre;
+                Cargar_Vista();
+            }
+        }
 
         public frmAyuda_Generico()
         {
@@ -37,139 +51,64 @@ namespace Programa1.Carga.Varios
             this.Close();
         }
 
-        public void Cargar_Cajas()
-        {
-            gCajas = new Cajas();
-            Cargar();
-        }
-        public void Cargar_TiposGastos(int Tipo)
-        {
-            TGastos = new Tipo_Gastos();
-            TGastos.Id_Tipo = Tipo;
-            Opcion = TOpcion.gTipo;
-            Cargar();
-        }
-        public void Cargar_SubTiposGastos(int Tipo)
-        {
-            TGastos = new Tipo_Gastos();
-            TGastos.Id_Tipo = Tipo;
-            //if (TGastos.grupoS.Campo_Filtro.Length > 0) { Filtro_Tipo = $"{TGastos.grupoS.Campo_Filtro}={Tipo}"; }
-            Opcion = TOpcion.gSubTipo;
-
-            Cargar();
-        }
-        public void Cargar_Detalles(int Tipo)
-        {
-            DTgastos = new Detalle_Gastos();
-            DTgastos.Id_Tipo = Tipo;
-            Opcion = TOpcion.gDetalle;
-            Filtro_Tipo = $"ID_Tipo={Tipo}";
-
-            Cargar();
-        }
 
         private void Cargar()
         {
             DataTable dt = new DataTable();
             string sf = "";
             int n = 0;
+
             lst.Items.Clear();
 
-            switch (Opcion)
+            if (txtBuscar.Text.Length != 0)
             {
-                case TOpcion.gCaja:
-
-                    if (txtBuscar.Text.Length != 0)
-                    {
-                        sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
-                        if (int.TryParse(txtBuscar.Text, out n) == true)
-                        {
-                            sf = $"{sf} OR CONVERT(varchar, ID) LIKE '%{n}%'";
-                        }
-                    }
-
-                    dt = gCajas.Datos(sf);
-
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        lst.Items.Add($"{dr[0]}. {dr[1]}");
-                    }
-                    break;
-                case TOpcion.gTipo:
-                    if (txtBuscar.Text.Length != 0) 
-                    { 
-                        sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
-                        if (int.TryParse(txtBuscar.Text, out n) == true)
-                        {
-                            sf = $"{sf} OR CONVERT(varchar, Id_Tipo) LIKE '%{n}%'";
-                        }
-                    }
-
-                    dt = TGastos.Datos(sf);
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        lst.Items.Add($"{dr[0]}. {dr[1]}");
-                    }
-                    break;
-                case TOpcion.gSubTipo:
-                    if (txtBuscar.Text.Length != 0)
-                    {
-                        //if (TGastos.grupoS.Campo_Filtro.Length > 0) { Filtro_Tipo = $"{TGastos.grupoS.Campo_Filtro}={TGastos.Id_Tipo}"; }
-                        if (Filtro_Tipo.Length > 0)
-                        {
-                            sf = $"{Filtro_Tipo} AND {TGastos.grupoS.Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
-                        }
-                        else
-                        {
-                            sf = $"{TGastos.grupoS.Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
-                        }
-                        if (int.TryParse(txtBuscar.Text, out n) == true)
-                        {
-                            sf = $"{sf} OR CONVERT(varchar, {"{grupoS.Campo_Id}"}) LIKE '%{n}%'";
-                        }
-                    }
-                    else
-                    {
-                        sf = Filtro_Tipo;
-                    }
-
-                    dt = TGastos.SubTipos(sf);
-                    if (dt != null)
-                    {
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            lst.Items.Add($"{dr[0]}. {dr[1]}");
-                        }
-                    }
-                    break;
-                case TOpcion.gDetalle:
-                    if (txtBuscar.Text.Length != 0)
-                    {
-                        if (Filtro_Tipo.Length > 0)
-                        {
-                            sf = $"{Filtro_Tipo} AND Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
-                        }
-                        if (int.TryParse(txtBuscar.Text, out n) == true)
-                        {
-                            sf = $"{sf} OR CONVERT(varchar, ID_Detalle) LIKE '%{n}%'";
-                        }
-                    }
-                    else
-                    {
-                        sf = Filtro_Tipo;
-                    }
-
-                    dt = DTgastos.Datos(sf);
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        lst.Items.Add($"{dr["ID_Detalle"]}. {dr["Nombre"]}");
-                    }
-                    break;
+                sf = $"{Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
+                if (int.TryParse(txtBuscar.Text, out n) == true)
+                {
+                    sf = $"{sf} OR CONVERT(varchar, {Campo_ID}) LIKE '%{n}%'";
+                }
             }
+
+            dt = cb.Datos(sf);
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    lst.Items.Add($"{dr[0]}. {dr[1]}");
+                } 
+            }
+
 
             txtBuscar.Focus();
         }
+        private void Cargar_Vista()
+        {
+            DataTable dt = new DataTable();
+            string sf = "";
+            int n = 0;
 
+            lst.Items.Clear();
+
+            if (txtBuscar.Text.Length != 0)
+            {
+                sf = $"{Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
+                if (int.TryParse(txtBuscar.Text, out n) == true)
+                {
+                    sf = $"{sf} OR CONVERT(varchar, {Campo_ID}) LIKE '%{n}%'";
+                }
+            }
+
+            dt = cb.Datos_Vista(sf);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                lst.Items.Add($"{dr[0]}. {dr[1]}");
+            }
+
+
+            txtBuscar.Focus();
+        }
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             Cargar();
@@ -235,14 +174,18 @@ namespace Programa1.Carga.Varios
         {
             if (e.KeyChar == Convert.ToChar(13))
             {
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+
                 e.Handled = true;
                 if (lst.Items.Count == 1)
                 {
-                    Valor = lst.Items[0].ToString();
+                    ID_Seleccionado = h.Codigo_Seleccionado(lst.Items[0].ToString());
+                    Nombre_Seleccionado = h.Nombre_Seleccionado(lst.Items[0].ToString());
                 }
                 else
                 {
-                    Valor = lst.Text;
+                    ID_Seleccionado = h.Codigo_Seleccionado(lst.Text);
+                    Nombre_Seleccionado = h.Nombre_Seleccionado(lst.Text);
                 }
                 this.Hide();
             }
@@ -250,7 +193,13 @@ namespace Programa1.Carga.Varios
 
         private void cmdAceptar_Click(object sender, EventArgs e)
         {
-            Valor = lst.Text;
+            if(lst.SelectedIndex != -1)
+            {
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+                ID_Seleccionado = h.Codigo_Seleccionado(lst.Text);
+                Nombre_Seleccionado = h.Nombre_Seleccionado(lst.Text);
+            }
             this.Hide();
         }
 

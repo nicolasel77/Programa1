@@ -814,13 +814,7 @@
             this.aRendirToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.aRendirToolStripMenuItem.Text = "A Rendir";
             this.aRendirToolStripMenuItem.Click += new System.EventHandler(this.aRendirToolStripMenuItem_Click);
-            // 
-            // chequesToolStripMenuItem
-            // 
-            this.chequesToolStripMenuItem.Name = "chequesToolStripMenuItem";
-            this.chequesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.chequesToolStripMenuItem.Text = "Cheques";
-            this.chequesToolStripMenuItem.Click += new System.EventHandler(this.chequesToolStripMenuItem_Click);
+            
             // 
             // transferenciaToolStripMenuItem
             // 

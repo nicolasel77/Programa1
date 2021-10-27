@@ -200,15 +200,7 @@ namespace Programa1.Carga.Tesoreria
             fr.ShowDialog();
 
         }
-       
-        private void chequesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmCheques fr = new frmCheques();
-            fr.Nuevo_Cheque = true;
-            fr.Cargar();
-            fr.ShowDialog();
-        }
-
+              
         private void transferenciaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTransferencia fr = new frmTransferencia();
@@ -227,15 +219,27 @@ namespace Programa1.Carga.Tesoreria
                 cGastos.Id_SubTipoGastos = cHacia;
                 cGastos.Desc_SubTipo = h.Nombre_Seleccionado(fr.lstHacia.Text);
                 cGastos.Importe = Convert.ToDouble(fr.txtImporte.Text);
+
                 if (cHacia == 12)
                 {
+                    //A Rendir
                     cGastos.Id_DetalleGastos = cARendir;
-                    cGastos.Descripcion = h.Nombre_Seleccionado(fr.lstARendir.Text); ;
+                    cGastos.Descripcion = h.Nombre_Seleccionado(fr.lstARendir.Text);
                 }
                 else
                 {
-                    cGastos.Id_DetalleGastos = 0;
-                    cGastos.Descripcion = "Transferencia";
+                    if(cHacia == 11)
+                    {
+                        //CHEQUES
+                        frmCheques frc = new frmCheques();
+                        frc.ShowDialog();
+
+                    }
+                    else
+                    {
+                        cGastos.Id_DetalleGastos = 0;
+                        cGastos.Descripcion = "Transferencia";
+                    }
                 }
 
                 cGastos.Usuario = usuario;

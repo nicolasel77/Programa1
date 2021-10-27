@@ -1,4 +1,5 @@
-﻿using Programa1.DB.Tesoreria;
+﻿using Programa1.Carga.Varios;
+using Programa1.DB.Tesoreria;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,6 +21,8 @@ namespace Programa1.Carga.Tesoreria
         const byte Fecha_Entrada = 5;
         const byte Fecha_Acreditacion = 6;
         const byte Importe = 7;
+        const byte Origen = 8;
+        const byte Destino = 9;
         const byte Seleccionado = 10;
 
         /// <summary>
@@ -31,6 +34,7 @@ namespace Programa1.Carga.Tesoreria
         {
             InitializeComponent();
             grd.TeclasManejadas = new int[] { 13, (int)Keys.F1 };
+            Cargar();
         }
 
         public void Cargar(bool selec = false)
@@ -47,7 +51,10 @@ namespace Programa1.Carga.Tesoreria
             }
             grd.MostrarDatos(dt, true, !selec);
             grd.set_ColW(Id, 0);
+            grd.set_ColW(Origen, 200);
+            grd.set_ColW(Destino, 200);
             grd.Columnas[Importe].Format = "N1";
+
             if (selec == false) { grd.ActivarCelda(grd.Rows - 1, Numero); } else { grd.ActivarCelda(1, Seleccionado); }
             double t = grd.SumarCol(Importe, false);
             if (selec == false) { lblTotal.Text = $"Total: {t:C1}"; } else { lblTotal.Text = "Total"; }
@@ -61,19 +68,29 @@ namespace Programa1.Carga.Tesoreria
             {
                 case Numero:
                     ch.Numero = Convert.ToInt32(a);
+
                     if (i == 0)
                     {
-                        ch.Agregar();
-                        Nuevo_Cheque = true;
-                        grd.set_Texto(f, Id, ch.ID);
+                        if (ch.Existe("Numero", ch.Numero) == false)
+                        {
+                            ch.Agregar();
+                            Nuevo_Cheque = true;
+                            grd.set_Texto(f, Id, ch.ID);
+                            grd.set_Texto(f, c, a);
+                            grd.ActivarCelda(f, eCheq);
+                        }
+                        else
+                        {
+                            MessageBox.Show("El número ingresado ya existe");
+                            grd.ErrorEnTxt();
+                        }
                     }
                     else
                     {
                         ch.Actualizar();
+                        grd.set_Texto(f, c, a);
+                        grd.ActivarCelda(f, eCheq);
                     }
-                    grd.set_Texto(f, c, a);
-
-                    grd.ActivarCelda(f, eCheq);
 
                     break;
                 case eCheq:
@@ -151,7 +168,7 @@ namespace Programa1.Carga.Tesoreria
                     {
                         ch.Importe = Convert.ToDouble(a);
                         ch.Actualizar();
-                        this.Hide();
+                        grd.ActivarCelda(f, Origen);
                     }
                     break;
                 case Seleccionado:
@@ -183,30 +200,133 @@ namespace Programa1.Carga.Tesoreria
 
         private void frmCheques_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+
+            int f = grd.Row;
+            int i = Convert.ToInt32(grd.get_Texto(f, Id));
+            if (e.KeyCode == Keys.Delete)
             {
-                this.Hide();
+                if (i != 0)
+                {
+                    ch.ID = i;
+                    ch.Borrar();
+                    grd.BorrarFila();
+                    grd.ActivarCelda(f, Numero);
+                }
             }
             else
             {
-                if (e.KeyCode == Keys.Delete)
+                if (e.KeyCode == Keys.F1)
                 {
-                    int f = grd.Row;
-                    int i = Convert.ToInt32(grd.get_Texto(f, Id));
-                    if (i != 0)
+                    int c = grd.Col;
+                    frmAyuda_Generico fr = new frmAyuda_Generico();
+                    switch (c)
                     {
-                        ch.ID = i;
-                        ch.Borrar();
-                        grd.BorrarFila();
-                        grd.ActivarCelda(f, Numero);
-                    }
-                }
-                else
-                {
-                    if(e.KeyCode == Keys.F1)
-                    {
+                        case Banco:
+                            fr.Tabla = "Bancos";
+                            fr.ShowDialog();
+                            if (fr.ID_Seleccionado != 0)
+                            {
+                                ch.Banco.ID = fr.ID_Seleccionado;
+                                ch.Actualizar();
 
+                                grd.set_Texto(f, c, fr.ID_Seleccionado);
+                                grd.set_Texto(f, c + 1, fr.Nombre_Seleccionado);
+
+                                grd.ActivarCelda(f, Fecha_Entrada);
+                            }
+
+                            break;
+                        case Origen:
+                            fr.Tabla = "Cajas";
+                            fr.ShowDialog();
+                            if (fr.ID_Seleccionado != 0)
+                            {
+                                ch.ID_Caja = fr.ID_Seleccionado;                                
+                                ch.Actualizar();
+
+                                ///
+                                //Cargar la ENTRADA
+                                //
+                                Entradas en = new Entradas();
+
+                                en.caja.ID = 11;
+                                en.Fecha = ch.Fecha_Entrada;                                                                
+                                en.TE.Id_Tipo = 20; //Tipo 20 = Entrada Cheques
+                                en.Id_SubTipoEntrada = ch.ID_Caja;
+                                en.Descripcion = $"{fr.Nombre_Seleccionado}  - Cheque Nº {ch.Numero}";
+                                en.Cheque = ch.Numero;
+                                en.Importe = ch.Importe;
+
+                                en.Agregar();
+
+                                ///
+                                //Cargar la TRANSFERENCIA
+                                //
+                                Gastos g = new Gastos();
+                                g.Fecha = ch.Fecha_Entrada;
+                                g.caja.ID = ch.ID_Caja;
+                                g.TG.Id_Tipo = 100;
+                                g.Id_SubTipoGastos = 11;
+                                g.Desc_SubTipo = "Cheques";
+                                g.Id_DetalleGastos = 1;
+                                g.Descripcion = "Varios";
+                                g.Importe = ch.Importe;
+                                g.Fecha_Autorizado = DateTime.Now;
+                                //g.Usuario = Usuario
+
+                                ///
+                                grd.set_Texto(f, c, fr.Nombre_Seleccionado);
+
+                                grd.ActivarCelda(f, Destino);
+                            }
+                            break;
+                        case Destino:
+                            fr.Campo_ID = "ID_Tipo";
+                            fr.Tabla = "Tipos_Salidas";
+                            fr.ShowDialog();
+
+                            if (fr.ID_Seleccionado != 0)
+                            {
+                                Gastos g = new Gastos();
+                                g.Fecha = ch.Fecha_Acreditacion;
+                                g.caja.ID = 11;
+                                g.TG.Id_Tipo = fr.ID_Seleccionado;
+
+                                frmAyuda_Gastos fayuda = new frmAyuda_Gastos();
+                                Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+                                fayuda.Cargar_SubTiposGastos(g.TG.Id_Tipo);
+                                fayuda.ShowDialog();
+
+                                if (fayuda.Valor != "")
+                                {
+                                    g.Id_SubTipoGastos = h.Codigo_Seleccionado(fayuda.Valor);
+                                    g.Desc_SubTipo = h.Nombre_Seleccionado(fayuda.Valor);
+
+                                    fayuda.Cargar_Detalles(g.TG.Id_Tipo);
+                                    fayuda.ShowDialog();
+
+                                    if (fayuda.Valor != "")
+                                    {
+                                        grd.set_Texto(f, c, fayuda.Valor);
+                                    }
+                                }
+
+
+                                //Cargar la TRANSFERENCIA
+                                //
+                                //ch.Banco.ID = fr.ID_Seleccionado;
+                                //ch.Actualizar();
+
+                                //grd.set_Texto(f, c, fr.ID_Seleccionado);
+
+                                if (grd.EsUltimaFila() == true) { grd.AgregarFila(); }
+                                grd.ActivarCelda(f + 1, Numero);
+                            }
+                            break;
                     }
+                    Focus();
+                    grd.Focus();
                 }
             }
 
@@ -214,9 +334,9 @@ namespace Programa1.Carga.Tesoreria
 
         private void grd_KeyPress(object sender, short e)
         {
-            if (e == 13)
+            if (e == 27)
             {
-                this.Hide();
+                //this.Hide();
             }
         }
 

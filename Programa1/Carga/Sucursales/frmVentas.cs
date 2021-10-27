@@ -93,6 +93,9 @@
                         }
                     }
                     break;
+                case Keys.F9:
+                    cmdCambio.PerformClick();
+                    break;
             }
         }
 
@@ -605,7 +608,9 @@
                                     break;
                                 //Nada
                                 case 3:
-
+                                    short f = (short)grdVenta.Row;
+                                    short c = (short)grdVenta.Col;
+                                    GrdVenta_Editado(f, c, grdVenta.get_Texto(f - 1, c));
                                     break;
                                 //Proveedor
                                 //case 4:

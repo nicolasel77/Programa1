@@ -63,9 +63,12 @@ namespace Programa1.Carga.Hacienda
 
             DataTable dt = clsAccess.Datos_Vista("", "TOP 100 NBoleta, (SELECT COUNT(Fecha) FROM Faena WHERE Faena.NBoleta=NBoletas.NBoleta) AS Medias", "NBoleta DESC");
             lstBoletas.Items.Clear();
-            foreach (DataRow dr in dt.Rows)
+            if (dt != null)
             {
-                lstBoletas.Items.Add($"{dr[0]}  {(Convert.ToInt32(dr[1]) == 0 ? "0 medias" : "")}");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    lstBoletas.Items.Add($"{dr[0]}  {(Convert.ToInt32(dr[1]) == 0 ? "0 medias" : "")}");
+                }
             }
             dt = datos.Datos_Genericos("SELECT TOP 100 NBoleta, ISNULL((SELECT COUNT(*) FROM Faena WHERE Faena.NBoleta=NBoletas.NBoleta), 0) AS Medias FROM NBoletas ORDER BY NBoleta DESC");
             lstSistema.Items.Clear();
@@ -495,7 +498,10 @@ namespace Programa1.Carga.Hacienda
 
         private void txtBoleta_KeyPress(object sender, KeyPressEventArgs e)
         {
-            txtHasta.Focus();
+            if ((short)e.KeyChar == 13)
+            {
+                txtHasta.Focus();
+            }
         }
 
         private void cmdCostos_Salida_Click(object sender, EventArgs e)
@@ -552,7 +558,15 @@ namespace Programa1.Carga.Hacienda
             Cargar_Listados();
         }
 
-  
+        private void chSaldo_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                chBoleta.Checked = false;
+                chCompra.Checked = false;
+                chFaena.Checked = false;
+            }
+        }
     }
 }
 
