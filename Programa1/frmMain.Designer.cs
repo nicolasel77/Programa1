@@ -115,8 +115,7 @@
             this.mnuPrueba = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGuardar = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
-            this.imprimirOfertasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imprimirOfertasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();            
             this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripSeparator();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
