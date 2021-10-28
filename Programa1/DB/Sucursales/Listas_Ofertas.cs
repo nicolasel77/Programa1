@@ -4,6 +4,7 @@
     using System;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Media;
     using System.Windows.Forms;
 
     class Listas_Ofertas : c_Base
@@ -19,7 +20,8 @@
         public int Tipos { get; set; }
         public int Orden { get; set; }
         public string descripcion { get; set; }
-        public int cantidad { get; set; }
+        public string Detalle { get; set; }
+        public bool Pintar { get; set; }
         public double costo { get; set; }
 
         public Productos productos = new Productos();
@@ -27,7 +29,7 @@
         public TipoProductos tipo = new TipoProductos();
         public Lugares_imp lugares_Imp = new Lugares_imp();
         public Nombre_Listas_ofertas lista = new Nombre_Listas_ofertas();
-
+        public Titulos titulos = new Titulos();
         public DataTable sucdatos()
         {
             return lugares_Imp.Datos_Vista("id < 0 UNION ALL SELECT Id, nombre FROM Sucursales WHERE ver = 1 AND Propio = 1", "Id, Nombre");
@@ -67,9 +69,10 @@
             int n = Max_ID();
             try
             {
+                string printar = Pintar ? "1" : "0";
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Lista_Ofertas (Orden, id_prod, Descripcion, Cantidad, costo, Id_Lista) " +
-                        $"VALUES({Orden}, {productos.ID}, '{descripcion}', {cantidad}, {costo.ToString().Replace(",", ".")}, {lista.ID})", sql);
+                    new SqlCommand($"INSERT INTO Lista_Ofertas (Orden, id_prod, Descripcion, Detalle, Pintar, costo, Id_Lista) " +
+                        $"VALUES({Orden}, {productos.ID}, '{descripcion}', '{Detalle}', { printar}, {costo.ToString().Replace(",", ".")}, {lista.ID})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -118,7 +121,8 @@
                 Orden = Convert.ToInt32(dr["Orden"]);
                 productos.ID = Convert.ToInt32(dr["Id_Prod"]);
                 descripcion = dr["Descripcion"].ToString();
-                cantidad = Convert.ToInt32(dr["Cantidad"]);
+                Detalle = dr["Detalle"].ToString();
+                Pintar = Convert.ToBoolean(dr["Pintar"]);
                 costo = Convert.ToSingle(dr["Costo"]);
             }
             catch (Exception)
@@ -127,7 +131,7 @@
                 Orden = 0;
                 productos.ID = 0;
                 descripcion = "";
-                cantidad = 0;
+                Pintar = false;
                 costo = 0;
             }
         }
@@ -137,10 +141,10 @@
             Actualizar("Orden", Orden);
             Actualizar("Id_Prod", productos.ID);
             Actualizar("Descripcion", descripcion);
-            Actualizar("Cantidad", cantidad);
+            Actualizar("Detalle", Detalle);
+            Actualizar("Pintar", Pintar);
             Actualizar("Costo", costo);
         }
-
 
         public void Agregar_sucs_a_Lista(string Nombre_suc, int id_suc)
         {
@@ -188,6 +192,78 @@
             {
                 MessageBox.Show(e.Message, "Error");
             }
+        }
+        public int Max_Orden()
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            int d = 0;
+
+            try
+            {
+                string Cadena = $"SELECT MAX(Orden) FROM {Tabla} WHERE Id_Lista = {lista.ID}";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                cnn.Open();
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                d = (int)cmd.ExecuteScalar();
+
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+            }
+
+            return d;
+        }
+
+        public int FilasdeImpresion()
+        {
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            int d = 0;
+
+            try
+            {
+                string Cadena = $"SELECT (SELECT (COUNT(DISTINCT tipo)*2) -1 FROM {Vista} WHERE Id_Lista = {lista.ID}) + (SELECT COUNT(Id_Prod) FROM {Vista} WHERE Id_Lista = {lista.ID})";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                cnn.Open();
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                d = (int)cmd.ExecuteScalar();
+
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+            }
+            return d;
+        }
+        public DataTable sucs_imp()
+        {
+            var dt = new DataTable("Datos");
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                string Cadena = $"SELECT Id_Suc, Suc FROM Listas_Suc_Ofertas WHERE Id_Lista = {lista.ID} Order By Id_Suc";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                daAdapt.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
         }
 
     }

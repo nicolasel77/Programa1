@@ -2486,5 +2486,53 @@
                 }
             }
         }
-    }
+
+        private void imprimirOfertasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+                bool found = false;
+                foreach (Form f in forms)
+                {
+                    if (f.Name == "frmImprimir_Ofertas")
+                    {
+                        f.BringToFront();
+                        found = true;
+                        break;
+                    }
+                }
+                if (found == false)
+                {
+                    ToolStripMenuItem t = new ToolStripMenuItem("frmImprimir_Ofertas");
+                    t.Text = "Imprimir_Ofertas";
+                    t.Click += new EventHandler(Mostrar);
+                    this.tstMenu.Items.Add(t);
+
+                    Form frmImprimir_Ofertas = new Carga.Sucursales.frmImprimir_Ofertas();
+                    frmImprimir_Ofertas.MdiParent = this;
+                    frmImprimir_Ofertas.Disposed += frmImprimir_Ofertas_Disposed;
+                    forms.Add(frmImprimir_Ofertas);
+                    frmImprimir_Ofertas.Show();
+                    frmImprimir_Ofertas.WindowState = FormWindowState.Minimized;
+                    frmImprimir_Ofertas.WindowState = FormWindowState.Maximized;
+                }
+            }
+            private void frmImprimir_Ofertas_Disposed(object sender, EventArgs e)
+            {
+                foreach (ToolStripMenuItem t in tstMenu.Items)
+                {
+                    if (t.Text == "Imprimir_Ofertas")
+                    {
+                        tstMenu.Items.Remove(t);
+                        break;
+                    }
+                }
+                foreach (Form f in forms)
+                {
+                    if (f.Name == "frmImprimir_Ofertas")
+                    {
+                        forms.Remove(f);
+                        break;
+                    }
+                }
+            }
+        }
 }

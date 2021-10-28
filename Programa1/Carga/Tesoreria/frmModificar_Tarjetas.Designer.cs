@@ -45,14 +45,16 @@
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cFecha = new Programa1.Controles.cFechas();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.cFecha = new Programa1.Controles.cFechas();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdOrigen
@@ -157,13 +159,14 @@
             // 
             // lstLotes
             // 
+            this.lstLotes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstLotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstLotes.FormattingEnabled = true;
             this.lstLotes.ItemHeight = 18;
-            this.lstLotes.Location = new System.Drawing.Point(620, 63);
+            this.lstLotes.Location = new System.Drawing.Point(0, 0);
             this.lstLotes.Name = "lstLotes";
             this.lstLotes.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstLotes.Size = new System.Drawing.Size(99, 256);
+            this.lstLotes.Size = new System.Drawing.Size(111, 264);
             this.lstLotes.TabIndex = 6;
             this.lstLotes.SelectedIndexChanged += new System.EventHandler(this.lstLotes_SelectedIndexChanged);
             // 
@@ -344,26 +347,12 @@
             this.panel1.Size = new System.Drawing.Size(217, 34);
             this.panel1.TabIndex = 26;
             // 
-            // cFecha
-            // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(620, 222);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Mostrar = 0;
-            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(223, 184);
-            this.cFecha.TabIndex = 15;
-            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
-            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.Controls.Add(this.lstTipos_t);
             this.panel2.Controls.Add(this.materialLabel1);
-            this.panel2.Location = new System.Drawing.Point(618, 55);
+            this.panel2.Location = new System.Drawing.Point(618, 63);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(218, 153);
             this.panel2.TabIndex = 27;
@@ -388,11 +377,34 @@
             this.panel4.Size = new System.Drawing.Size(217, 233);
             this.panel4.TabIndex = 29;
             // 
+            // cFecha
+            // 
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(620, 222);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(223, 184);
+            this.cFecha.TabIndex = 15;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.lstLotes);
+            this.panel5.Location = new System.Drawing.Point(620, 63);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(111, 264);
+            this.panel5.TabIndex = 30;
+            // 
             // frmModificar_Tarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1580, 692);
+            this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -402,7 +414,6 @@
             this.Controls.Add(this.cmbSucD);
             this.Controls.Add(this.cmbSucO);
             this.Controls.Add(this.materialLabel2);
-            this.Controls.Add(this.lstLotes);
             this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.grd_Destino);
             this.Controls.Add(this.grdOrigen);
@@ -417,6 +428,7 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -444,5 +456,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
     }
 }
