@@ -22,6 +22,7 @@ namespace Programa1.Carga.Varios
                 cb.Tabla = value;
                 cb.Campo_ID = Campo_ID;
                 cb.Campo_Nombre = Campo_Nombre;
+                txtBuscar.Text = "";
                 Cargar();
             }
         }
@@ -29,6 +30,7 @@ namespace Programa1.Carga.Varios
         {
             set
             {
+                txtBuscar.Text = "";
                 cb.Vista = value;
                 cb.Campo_ID = Campo_ID;
                 cb.Campo_Nombre = Campo_Nombre;
@@ -58,7 +60,7 @@ namespace Programa1.Carga.Varios
             string sf = "";
             int n = 0;
 
-            lst.Items.Clear();
+            lst.Items.Clear();            
 
             if (txtBuscar.Text.Length != 0)
             {
@@ -88,8 +90,8 @@ namespace Programa1.Carga.Varios
             string sf = "";
             int n = 0;
 
-            lst.Items.Clear();
-
+            lst.Items.Clear();            
+            
             if (txtBuscar.Text.Length != 0)
             {
                 sf = $"{Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";

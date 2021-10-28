@@ -15,12 +15,12 @@ namespace Programa1.Carga.Tesoreria
 
         const byte Id = 0;
         const byte Numero = 1;
-        const byte eCheq = 2;
-        const byte Banco = 3;
-        const byte Nombre = 4;
-        const byte Fecha_Entrada = 5;
-        const byte Fecha_Acreditacion = 6;
-        const byte Importe = 7;
+        const byte Importe = 2;
+        const byte eCheq = 3;
+        const byte Banco = 4;
+        const byte Nombre = 5;
+        const byte Fecha_Entrada = 6;
+        const byte Fecha_Acreditacion = 7;
         const byte Origen = 8;
         const byte Destino = 9;
         const byte Seleccionado = 10;
@@ -77,7 +77,8 @@ namespace Programa1.Carga.Tesoreria
                             Nuevo_Cheque = true;
                             grd.set_Texto(f, Id, ch.ID);
                             grd.set_Texto(f, c, a);
-                            grd.ActivarCelda(f, eCheq);
+                            grd.ActivarCelda(f, Importe);
+                            grd.AgregarFila();
                         }
                         else
                         {
@@ -89,10 +90,27 @@ namespace Programa1.Carga.Tesoreria
                     {
                         ch.Actualizar();
                         grd.set_Texto(f, c, a);
-                        grd.ActivarCelda(f, eCheq);
+                        grd.ActivarCelda(f, Importe);
                     }
 
                     break;
+
+                case Importe:
+                    if (i == 0)
+                    {
+                        SystemSounds.Beep.Play();
+                        grd.ActivarCelda(f, Numero);
+                    }
+                    else
+                    {
+                        ch.Importe = Convert.ToDouble(a);
+                        ch.Actualizar();
+
+                        grd.set_Texto(f, c, a);
+                        grd.ActivarCelda(f, eCheq);
+                    }
+                    break;
+
                 case eCheq:
                     if (i == 0)
                     {
@@ -154,11 +172,12 @@ namespace Programa1.Carga.Tesoreria
                         ch.Fecha_Acreditacion = Convert.ToDateTime(a);
                         ch.Actualizar();
                         grd.set_Texto(f, c, a);
-                        grd.ActivarCelda(f, Importe);
+                        
+                        grd.ActivarCelda(f, Origen);
                     }
                     break;
-
-                case Importe:
+                case Origen:
+                case Destino:
                     if (i == 0)
                     {
                         SystemSounds.Beep.Play();
@@ -166,11 +185,11 @@ namespace Programa1.Carga.Tesoreria
                     }
                     else
                     {
-                        ch.Importe = Convert.ToDouble(a);
-                        ch.Actualizar();
-                        grd.ActivarCelda(f, Origen);
+                        MessageBox.Show("Origen y Destino no son editables. Use F1 para cargar los datos.");
                     }
                     break;
+
+                
                 case Seleccionado:
                     cheques_seleccionados.Clear();
                     double t = 0;
@@ -263,20 +282,23 @@ namespace Programa1.Carga.Tesoreria
                                 //Cargar la TRANSFERENCIA
                                 //
                                 Gastos g = new Gastos();
+
                                 g.Fecha = ch.Fecha_Entrada;
                                 g.caja.ID = ch.ID_Caja;
                                 g.TG.Id_Tipo = 100;
                                 g.Id_SubTipoGastos = 11;
-                                g.Desc_SubTipo = "Cheques";
+                                g.Desc_SubTipo = "Salida a Cheques";
                                 g.Id_DetalleGastos = 1;
-                                g.Descripcion = "Varios";
+                                g.Descripcion = $"Cheque Nº {ch.Numero}";
                                 g.Importe = ch.Importe;
                                 g.Fecha_Autorizado = DateTime.Now;
-                                //g.Usuario = Usuario
-
-                                ///
+                                
+                                frmMain frParent = (frmMain)this.ParentForm;
+                                g.Usuario.ID = frParent.usuario.ID;
+                                
+                                g.Agregar();                                                                
+                                
                                 grd.set_Texto(f, c, fr.Nombre_Seleccionado);
-
                                 grd.ActivarCelda(f, Destino);
                             }
                             break;
@@ -291,7 +313,7 @@ namespace Programa1.Carga.Tesoreria
                                 g.Fecha = ch.Fecha_Acreditacion;
                                 g.caja.ID = 11;
                                 g.TG.Id_Tipo = fr.ID_Seleccionado;
-
+                                
                                 frmAyuda_Gastos fayuda = new frmAyuda_Gastos();
                                 Herramientas.Herramientas h = new Herramientas.Herramientas();
 
@@ -308,19 +330,27 @@ namespace Programa1.Carga.Tesoreria
 
                                     if (fayuda.Valor != "")
                                     {
+                                        g.Id_DetalleGastos = h.Codigo_Seleccionado(fayuda.Valor);
+                                        g.Descripcion = h.Nombre_Seleccionado(fayuda.Valor);
+
+                                        //Cargar el GASTO futuro
+                                        //
+                                        
+                                        frmMain frParent = (frmMain)this.ParentForm;
+                                        g.Usuario.ID = frParent.usuario.ID;
+                                        g.Importe = ch.Importe;
+                                        g.Fecha_Acreditacion = ch.Fecha_Acreditacion;
+                                        g.Fecha_Autorizado = DateTime.Now;
+                                        g.Cheque = ch.Numero;
+
+                                        //g.BorrarPagosCheque(ch.Numero);
+
+                                        g.Agregar();
+
                                         grd.set_Texto(f, c, fayuda.Valor);
                                     }
-                                }
-
-
-                                //Cargar la TRANSFERENCIA
-                                //
-                                //ch.Banco.ID = fr.ID_Seleccionado;
-                                //ch.Actualizar();
-
-                                //grd.set_Texto(f, c, fr.ID_Seleccionado);
-
-                                if (grd.EsUltimaFila() == true) { grd.AgregarFila(); }
+                                }                                
+                                
                                 grd.ActivarCelda(f + 1, Numero);
                             }
                             break;

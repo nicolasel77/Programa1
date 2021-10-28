@@ -739,6 +739,7 @@
     <Compile Include="DB\Hacienda\Categorias.cs" />
     <Compile Include="DB\Hacienda\Compras.cs" />
     <Compile Include="DB\Hacienda\Consignatarios.cs" />
+    <Compile Include="DB\Hacienda\Cortes.cs" />
     <Compile Include="DB\Hacienda\Faena.cs" />
     <Compile Include="DB\Hacienda\Frigorificos.cs" />
     <Compile Include="DB\Hacienda\Generar_Boleta.cs" />
