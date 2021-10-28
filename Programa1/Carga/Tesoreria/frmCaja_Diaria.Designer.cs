@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCaja_Diaria));
             this.splPrincipal = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.lblEntradas = new MaterialSkin.Controls.MaterialLabel();
@@ -53,8 +52,6 @@
             this.txtInsert = new System.Windows.Forms.TextBox();
             this.rdARendir = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdCajas = new MaterialSkin.Controls.MaterialRadioButton();
-            this.cmdCheques = new Programa1.Controles.cBoton();
-            this.cmdTransferencia = new Programa1.Controles.cBoton();
             this.lblUltimo = new MaterialSkin.Controls.MaterialLabel();
             this.grdCajas = new Grilla2.SpeedGrilla();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -80,6 +77,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.verTransferenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aRendirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transferenciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splPrincipal)).BeginInit();
             this.splPrincipal.Panel1.SuspendLayout();
             this.splPrincipal.Panel2.SuspendLayout();
@@ -447,8 +446,6 @@
             this.panel1.Controls.Add(this.txtInsert);
             this.panel1.Controls.Add(this.rdARendir);
             this.panel1.Controls.Add(this.rdCajas);
-            this.panel1.Controls.Add(this.cmdCheques);
-            this.panel1.Controls.Add(this.cmdTransferencia);
             this.panel1.Controls.Add(this.lblUltimo);
             this.panel1.Controls.Add(this.grdCajas);
             this.panel1.Controls.Add(this.lblTotal);
@@ -469,9 +466,9 @@
             this.panel1.Controls.Add(this.materialLabel5);
             this.panel1.Controls.Add(this.cmdCerrar_Fecha);
             this.panel1.Controls.Add(this.materialLabel2);
-            this.panel1.Location = new System.Drawing.Point(8, 204);
+            this.panel1.Location = new System.Drawing.Point(8, 190);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(261, 507);
+            this.panel1.Size = new System.Drawing.Size(261, 521);
             this.panel1.TabIndex = 4;
             // 
             // txtInsert
@@ -481,7 +478,7 @@
             this.txtInsert.BackColor = System.Drawing.Color.Gainsboro;
             this.txtInsert.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtInsert.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInsert.Location = new System.Drawing.Point(0, 371);
+            this.txtInsert.Location = new System.Drawing.Point(0, 461);
             this.txtInsert.Name = "txtInsert";
             this.txtInsert.Size = new System.Drawing.Size(261, 15);
             this.txtInsert.TabIndex = 12;
@@ -493,7 +490,7 @@
             this.rdARendir.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rdARendir.Depth = 0;
             this.rdARendir.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdARendir.Location = new System.Drawing.Point(72, 162);
+            this.rdARendir.Location = new System.Drawing.Point(72, 149);
             this.rdARendir.Margin = new System.Windows.Forms.Padding(0);
             this.rdARendir.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rdARendir.MouseState = MaterialSkin.MouseState.HOVER;
@@ -511,7 +508,7 @@
             this.rdCajas.Checked = true;
             this.rdCajas.Depth = 0;
             this.rdCajas.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdCajas.Location = new System.Drawing.Point(0, 162);
+            this.rdCajas.Location = new System.Drawing.Point(0, 149);
             this.rdCajas.Margin = new System.Windows.Forms.Padding(0);
             this.rdCajas.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rdCajas.MouseState = MaterialSkin.MouseState.HOVER;
@@ -524,28 +521,6 @@
             this.rdCajas.UseVisualStyleBackColor = true;
             this.rdCajas.CheckedChanged += new System.EventHandler(this.rdCajas_CheckedChanged);
             // 
-            // cmdCheques
-            // 
-            this.cmdCheques.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdCheques.Location = new System.Drawing.Point(0, 392);
-            this.cmdCheques.Name = "cmdCheques";
-            this.cmdCheques.Size = new System.Drawing.Size(261, 36);
-            this.cmdCheques.TabIndex = 0;
-            this.cmdCheques.Texto = "Cheques";
-            this.cmdCheques.Click += new System.EventHandler(this.cmdCheques_Click);
-            // 
-            // cmdTransferencia
-            // 
-            this.cmdTransferencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdTransferencia.Location = new System.Drawing.Point(0, 434);
-            this.cmdTransferencia.Name = "cmdTransferencia";
-            this.cmdTransferencia.Size = new System.Drawing.Size(261, 36);
-            this.cmdTransferencia.TabIndex = 1;
-            this.cmdTransferencia.Texto = "Transferencia";
-            this.cmdTransferencia.Click += new System.EventHandler(this.cmdTransferencia_Click);
-            // 
             // lblUltimo
             // 
             this.lblUltimo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -553,7 +528,7 @@
             this.lblUltimo.Depth = 0;
             this.lblUltimo.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblUltimo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblUltimo.Location = new System.Drawing.Point(3, 412);
+            this.lblUltimo.Location = new System.Drawing.Point(3, 426);
             this.lblUltimo.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblUltimo.Name = "lblUltimo";
             this.lblUltimo.Size = new System.Drawing.Size(258, 19);
@@ -584,14 +559,14 @@
             this.grdCajas.FuenteEncabezado = null;
             this.grdCajas.FuentePieDePagina = null;
             this.grdCajas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdCajas.Location = new System.Drawing.Point(6, 203);
+            this.grdCajas.Location = new System.Drawing.Point(6, 189);
             this.grdCajas.Name = "grdCajas";
             this.grdCajas.PieDePagina = "\t\tPage {0} of {1}";
             this.grdCajas.PintarFilaSel = true;
             this.grdCajas.Redraw = true;
             this.grdCajas.Row = 0;
             this.grdCajas.Rows = 50;
-            this.grdCajas.Size = new System.Drawing.Size(248, 162);
+            this.grdCajas.Size = new System.Drawing.Size(248, 266);
             this.grdCajas.TabIndex = 7;
             // 
             // lblTotal
@@ -699,7 +674,7 @@
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel6.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel6.Location = new System.Drawing.Point(3, 195);
+            this.panel6.Location = new System.Drawing.Point(3, 181);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(307, 2);
             this.panel6.TabIndex = 5;
@@ -729,7 +704,7 @@
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel4.Location = new System.Drawing.Point(0, 157);
+            this.panel4.Location = new System.Drawing.Point(0, 144);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(321, 2);
             this.panel4.TabIndex = 5;
@@ -763,7 +738,7 @@
             this.cmdCerrar_Fecha.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.cmdCerrar_Fecha.Depth = 0;
             this.cmdCerrar_Fecha.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cmdCerrar_Fecha.Location = new System.Drawing.Point(0, 471);
+            this.cmdCerrar_Fecha.Location = new System.Drawing.Point(0, 485);
             this.cmdCerrar_Fecha.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.cmdCerrar_Fecha.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdCerrar_Fecha.Name = "cmdCerrar_Fecha";
@@ -818,7 +793,9 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.verTransferenciasToolStripMenuItem,
-            this.aRendirToolStripMenuItem});
+            this.aRendirToolStripMenuItem,
+            this.chequesToolStripMenuItem,
+            this.transferenciaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1517, 24);
@@ -837,6 +814,14 @@
             this.aRendirToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.aRendirToolStripMenuItem.Text = "A Rendir";
             this.aRendirToolStripMenuItem.Click += new System.EventHandler(this.aRendirToolStripMenuItem_Click);
+            
+            // 
+            // transferenciaToolStripMenuItem
+            // 
+            this.transferenciaToolStripMenuItem.Name = "transferenciaToolStripMenuItem";
+            this.transferenciaToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.transferenciaToolStripMenuItem.Text = "Transferencia";
+            this.transferenciaToolStripMenuItem.Click += new System.EventHandler(this.transferenciaToolStripMenuItem_Click);
             // 
             // frmCaja_Diaria
             // 
@@ -915,14 +900,14 @@
         private MaterialSkin.Controls.MaterialRadioButton rdSubtipo;
         private MaterialSkin.Controls.MaterialRadioButton rdTipo;
         private MaterialSkin.Controls.MaterialRadioButton rdCaja;
-        private Controles.cBoton cmdTransferencia;
         private MaterialSkin.Controls.MaterialRadioButton rdARendir;
         private MaterialSkin.Controls.MaterialRadioButton rdCajas;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem verTransferenciasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aRendirToolStripMenuItem;
-        private Controles.cBoton cmdCheques;
         private System.Windows.Forms.TextBox txtInsert;
         private MaterialSkin.Controls.MaterialContextMenuStrip mnuGastos;
+        private System.Windows.Forms.ToolStripMenuItem chequesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transferenciaToolStripMenuItem;
     }
 }

@@ -220,7 +220,8 @@ namespace Programa1.Carga.Hacienda
             this.chSaldo.Size = new System.Drawing.Size(65, 30);
             this.chSaldo.TabIndex = 9;
             this.chSaldo.Text = "Saldo";
-            this.chSaldo.UseVisualStyleBackColor = true;
+            this.chSaldo.UseVisualStyleBackColor = true;            
+            this.chSaldo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.chSaldo_MouseUp);
             // 
             // chBoleta
             // 

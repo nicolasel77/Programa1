@@ -115,6 +115,7 @@
             this.mnuGuardar = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
             this.imprimirOfertasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -340,6 +341,7 @@
             this.cajaDiariaToolStripMenuItem,
             this.resumenGastosToolStripMenuItem,
             this.resumenEntradasToolStripMenuItem,
+            this.chequesToolStripMenuItem,
             this.pagosAutorizadosToolStripMenuItem,
             this.detallesPagosToolStripMenuItem,
             this.leerTarjetasToolStripMenuItem,
@@ -381,7 +383,6 @@
             // 
             // pagosAutorizadosToolStripMenuItem
             // 
-            this.pagosAutorizadosToolStripMenuItem.BackColor = System.Drawing.Color.LightBlue;
             this.pagosAutorizadosToolStripMenuItem.Name = "pagosAutorizadosToolStripMenuItem";
             this.pagosAutorizadosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.pagosAutorizadosToolStripMenuItem.Text = "&Pagos Autorizados";
@@ -792,12 +793,17 @@
             this.tstMenu.ItemAdded += new System.Windows.Forms.ToolStripItemEventHandler(this.tstMenu_ItemAdded);
             this.tstMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tstMenu_ItemClicked);
             // 
-            // imprimirOfertasToolStripMenuItem
             // 
             this.imprimirOfertasToolStripMenuItem.Name = "imprimirOfertasToolStripMenuItem";
             this.imprimirOfertasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.imprimirOfertasToolStripMenuItem.Text = "Imprimir Ofertas";
             this.imprimirOfertasToolStripMenuItem.Click += new System.EventHandler(this.imprimirOfertasToolStripMenuItem_Click);
+            // chequesToolStripMenuItem
+            // 
+            this.chequesToolStripMenuItem.Name = "chequesToolStripMenuItem";
+            this.chequesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.chequesToolStripMenuItem.Text = "Cheques";
+            this.chequesToolStripMenuItem.Click += new System.EventHandler(this.chequesToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -908,6 +914,7 @@
         private System.Windows.Forms.ToolStripMenuItem leerTarjetasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificarTarjetasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imprimirOfertasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chequesToolStripMenuItem;
     }
 }
 

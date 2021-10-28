@@ -44,6 +44,7 @@
         public new void Agregar()
         {
             Agregar_NoID("Fecha", Fecha);
+            ID = Max_ID();
             Actualizar("Id_Proveedor", Proveedor.Id);
             Actualizar("Estado", (byte) Estado);
             Actualizar("Observacion", Observacion);

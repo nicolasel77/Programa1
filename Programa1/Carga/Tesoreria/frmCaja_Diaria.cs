@@ -188,8 +188,20 @@ namespace Programa1.Carga.Tesoreria
             if (rdDetalle.Checked) { o_Repetir = t_Repetir.Detalle; }
             if (rdNinguno.Checked) { o_Repetir = t_Repetir.Ninguno; }
         }
+             
+        private void rdCajas_CheckedChanged(object sender, EventArgs e)
+        {
+            Cargar_Cajas();
+        }
 
-        private void cmdTransferencia_Click(object sender, EventArgs e)
+        private void aRendirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmResumenARendir fr = new frmResumenARendir();
+            fr.ShowDialog();
+
+        }
+              
+        private void transferenciaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTransferencia fr = new frmTransferencia();
             fr.ShowDialog();
@@ -207,15 +219,27 @@ namespace Programa1.Carga.Tesoreria
                 cGastos.Id_SubTipoGastos = cHacia;
                 cGastos.Desc_SubTipo = h.Nombre_Seleccionado(fr.lstHacia.Text);
                 cGastos.Importe = Convert.ToDouble(fr.txtImporte.Text);
+
                 if (cHacia == 12)
                 {
+                    //A Rendir
                     cGastos.Id_DetalleGastos = cARendir;
-                    cGastos.Descripcion = h.Nombre_Seleccionado(fr.lstARendir.Text); ;
+                    cGastos.Descripcion = h.Nombre_Seleccionado(fr.lstARendir.Text);
                 }
                 else
                 {
-                    cGastos.Id_DetalleGastos = 0;
-                    cGastos.Descripcion = "Transferencia";
+                    if(cHacia == 11)
+                    {
+                        //CHEQUES
+                        frmCheques frc = new frmCheques();
+                        frc.ShowDialog();
+
+                    }
+                    else
+                    {
+                        cGastos.Id_DetalleGastos = 0;
+                        cGastos.Descripcion = "Transferencia";
+                    }
                 }
 
                 cGastos.Usuario = usuario;
@@ -234,27 +258,9 @@ namespace Programa1.Carga.Tesoreria
                 Cargar_Datos();
             }
         }
-
-        private void rdCajas_CheckedChanged(object sender, EventArgs e)
-        {
-            Cargar_Cajas();
-        }
-
-        private void aRendirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmResumenARendir fr = new frmResumenARendir();
-            fr.ShowDialog();
-
-        }
-
-        private void cmdCheques_Click(object sender, EventArgs e)
-        {
-            frmCheques fr = new frmCheques();
-            fr.Nuevo_Cheque = true;
-            fr.Cargar();
-            fr.ShowDialog();
-        }
         #endregion
+
+
 
         #region " SUBS "
         private void Cargar_Datos()
@@ -1131,11 +1137,17 @@ namespace Programa1.Carga.Tesoreria
                         Herramientas.Herramientas h = new Herramientas.Herramientas();
                         for (int i = 1; i < fr.grd.Rows; i++)
                         {
-                            if (Convert.ToBoolean(fr.grd.get_Texto(i, 0)) == true)
+                            double npago = Convert.ToDouble(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Nuevo")));
+
+                            if (npago != 0)
                             {
-                                cGastos.Descripcion = $"Compra:  {Convert.ToDateTime(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Fecha"))):yyyy-MM-dd}";
-                                cGastos.Importe = Convert.ToDouble(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Saldo"))) * -1;
-                                //cGastos.Fecha_Acreditacion = 
+                                DateTime fecha = Convert.ToDateTime(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Fecha")));
+                                double vSaldo = Convert.ToDouble(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Saldo")));
+                                string tpago = (vSaldo < -1 || vSaldo > 1) ? "Parcial" : "Total";
+
+                                cGastos.Descripcion = $"[{tpago}] Compra: {fecha:dddd dd/MM/yy}  ({fr.grd.get_Texto(i, fr.grd.get_ColIndex("Descripcion"))})";
+                                cGastos.Importe = npago;
+                                cGastos.Fecha_Acreditacion = fecha;
 
                                 // Esto es por si se esta editando un registro existente
                                 if (cGastos.ID > 0)
@@ -1391,6 +1403,6 @@ namespace Programa1.Carga.Tesoreria
 
         #endregion
 
-
+       
     }
 }

@@ -2534,5 +2534,52 @@
                     }
                 }
             }
+        private void chequesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCheques")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmCheques");
+                t.Text = "Cheques";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmCheques = new Carga.Tesoreria.frmCheques();
+                frmCheques.MdiParent = this;
+                frmCheques.Disposed += FrmCheques_Disposed;
+                forms.Add(frmCheques);
+                frmCheques.Show();
+                frmCheques.WindowState = FormWindowState.Minimized;
+                frmCheques.WindowState = FormWindowState.Maximized;
+            }
         }
+        private void FrmCheques_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Cheques")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCheques")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+    }
 }

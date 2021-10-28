@@ -8,16 +8,17 @@
     public partial class frmSeleccionar_PagosAutorizados : Form
     {
         public bool Aceptado = false;
-        C1.Win.C1FlexGrid.CellStyle vEstilo;
+        readonly C1.Win.C1FlexGrid.CellStyle vEstilo;
 
         public Pagos_Autorizados pagos = new Pagos_Autorizados();
         public frmSeleccionar_PagosAutorizados()
         {
+
             InitializeComponent();
             vEstilo = grd.Styles.Add("n");
             vEstilo.BackColor = Color.MistyRose;
 
-            grd.TeclasManejadas = new int[] { Convert.ToInt32(Keys.Escape), Convert.ToInt32(Keys.Enter) };
+            grd.TeclasManejadas = new int[] { 13, Convert.ToInt32(Keys.Escape), 43 };
         }
 
         public void Cargar(int Proveedor)
@@ -27,28 +28,26 @@
             grd.Columnas[grd.get_ColIndex("Total")].Style.Format = "N1";
             grd.Columnas[grd.get_ColIndex("Pagos")].Style.Format = "N1";
             grd.Columnas[grd.get_ColIndex("Saldo")].Style.Format = "N1";
+            grd.Columnas[grd.get_ColIndex("Nuevo")].Style.Format = "N1";
+            grd.ActivarCelda(1, grd.get_ColIndex("Nuevo"));
         }
 
         private void grd_Editado(short f, short c, object a)
         {
-            if (c == 0)
+            if (c == grd.get_ColIndex("Nuevo"))
             {
-                if (Convert.ToBoolean(a) == true)
-                {
-                    grd.Filas[f].Style = vEstilo;
-                }
-                else
-                {
-                    grd.Filas[f].Style = null;
-                }
-                double t = 0;
-                for (int i = 1; i < grd.Rows - 1; i++)
-                {
-                    if (Convert.ToBoolean(grd.get_Texto(i, c)) == true)
-                    {
-                        t += Convert.ToDouble(grd.get_Texto(i, grd.get_ColIndex("Saldo")));
-                    }
-                }
+                double npago = Convert.ToDouble(a);
+                double vTotal = Convert.ToDouble(grd.get_Texto(grd.Row, grd.get_ColIndex("Total")));
+                double vPagos = Convert.ToDouble(grd.get_Texto(grd.Row, grd.get_ColIndex("Pagos")));
+                
+
+                grd.set_Texto(f, c, npago);
+                grd.set_Texto(f, grd.get_ColIndex("Saldo"), vPagos + npago - vTotal);
+
+                grd.ActivarCelda((f == grd.Rows - 1) ? f + 1 : 1, c);
+
+                double t = grd.SumarCol("Nuevo");
+
                 lblTotal.Text = $"Total: {t:N1}";
             }
         }
@@ -65,6 +64,14 @@
                 if (e == 27)
                 {
                     this.Hide();
+                }
+                else
+                {
+                    if (e == 43)
+                    {
+                        double v = Convert.ToDouble(grd.get_Texto(grd.Row, grd.get_ColIndex("Saldo")));
+                        grd_Editado((Int16)grd.Row, (Int16)grd.Col, v * -1);
+                    }
                 }
             }
         }

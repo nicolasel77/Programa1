@@ -306,7 +306,7 @@
             catch (Exception er)
             {
                 dt = null;
-                MessageBox.Show(er.Message);
+                //MessageBox.Show(er.Message);
             }
 
             return dt;

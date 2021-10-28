@@ -1,4 +1,6 @@
-﻿using Programa1.DB.Tesoreria;
+﻿using Programa1.Clases;
+using Programa1.DB;
+using Programa1.DB.Tesoreria;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -96,8 +98,8 @@ namespace Programa1.Carga.Tesoreria
                     }
                     break;
                 case TOpcion.gTipo:
-                    if (txtBuscar.Text.Length != 0) 
-                    { 
+                    if (txtBuscar.Text.Length != 0)
+                    {
                         sf = $"Nombre LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
                         if (int.TryParse(txtBuscar.Text, out n) == true)
                         {
