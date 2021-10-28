@@ -312,9 +312,9 @@
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(1066, 401);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 15);
+            this.label2.Size = new System.Drawing.Size(103, 15);
             this.label2.TabIndex = 28;
-            this.label2.Text = "Formato Fecha";
+            this.label2.Text = "Formato de fecha";
             // 
             // frmImprimir_Ofertas
             // 
