@@ -49,8 +49,10 @@
             this.lblVariasHojas = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstSucs
@@ -115,8 +117,10 @@
             // 
             // mtcFecha
             // 
-            this.mtcFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.mtcFecha.Location = new System.Drawing.Point(1069, 551);
+            this.mtcFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mtcFecha.Location = new System.Drawing.Point(1, 0);
             this.mtcFecha.Name = "mtcFecha";
             this.mtcFecha.TabIndex = 17;
             // 
@@ -316,11 +320,21 @@
             this.label2.TabIndex = 28;
             this.label2.Text = "Formato de fecha";
             // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.mtcFecha);
+            this.panel3.Location = new System.Drawing.Point(1069, 545);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(249, 162);
+            this.panel3.TabIndex = 29;
+            // 
             // frmImprimir_Ofertas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1281, 670);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.cmbTitulos);
             this.Controls.Add(this.cmbTipofecha);
             this.Controls.Add(this.label2);
@@ -329,7 +343,6 @@
             this.Controls.Add(this.cmdImprimir);
             this.Controls.Add(this.txtCopias);
             this.Controls.Add(this.txtTitulos);
-            this.Controls.Add(this.mtcFecha);
             this.Controls.Add(this.cmdGuardar);
             this.Controls.Add(this.cmdVistaPrevia);
             this.Controls.Add(this.cmdEditar);
@@ -343,6 +356,7 @@
             this.Text = "Imprimir_Ofertas";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -370,5 +384,6 @@
         private System.Windows.Forms.Label lblVariasHojas;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel3;
     }
 }

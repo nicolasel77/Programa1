@@ -35,7 +35,7 @@
         {
             InitializeComponent();
 
-            int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
+            int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 113, 123 };
             grdVenta.TeclasManejadas = n;
 
             Venta = new Ventas();
@@ -687,6 +687,17 @@
                         {
                             Mensaje("La fecha esta cerrada.");
                         }
+                    }
+                    break;
+                case 113:
+                    if (Venta.ID > 0)
+                    {
+                        frmDetalle_Venta fr = new frmDetalle_Venta();
+                        fr.Id_Venta = Venta.ID;
+                        fr.cargar_id_Venta();
+                        fr.ShowDialog();
+                        grdVenta.Focus();
+                        grdVenta.ActivarCelda(grdVenta.Row + 1, grdVenta.Col);
                     }
                     break;
             }

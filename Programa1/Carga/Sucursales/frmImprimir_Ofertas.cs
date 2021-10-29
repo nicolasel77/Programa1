@@ -369,7 +369,7 @@
         private void Prueba_hilos(int la_listapaa, int copias, string tipofecha, DateTime fecha, string Titulo, bool vista_previa = false)
         {
             Listas_Ofertas cofimp = new Listas_Ofertas();
-            string fileTest = @"D:\Repositorio\Programa1\Programa1\bin\Debug\Listas_Ofertas.xlsm";
+            string fileTest = @"D:\Sistema\P1\Listas_Ofertas.xlsm";
 
             int c_producto = 1;
             int c_descripcion = 2;
@@ -449,7 +449,6 @@
             }
             //ejecutar macro
             xlApp.Run("Dar_Formato");
-            Thread.Sleep(10000);
             if (vista_previa == false)
             {
                 dt = cofimp.sucs_imp();
@@ -462,10 +461,8 @@
             }
             else
             {
-                string impresora_actual = xlApp.ActivePrinter;
-                xlApp.ActivePrinter = "Microsoft Print to PDF en Ne02:";
+                xlWorksheet.Cells[1, 6] = "OFICINA";
                 xlWorksheet.PrintOutEx(Copies: 1, Preview: false, To: hojas);
-                xlApp.ActivePrinter = impresora_actual;
             }
             xlWorkbook.Close(false);
             xlApp.Quit();
