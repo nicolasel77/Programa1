@@ -188,7 +188,7 @@ namespace Programa1.Carga.Hacienda
 
             DataTable dtBoleta_Access = clsAccess.Datos_Vista("NBoleta=" + nb);
 
-            DB.Hacienda hacienda = new DB.Hacienda();
+            DB.Hacienda.Hacienda hacienda = new DB.Hacienda.Hacienda();
             hacienda.nBoletas.ID = nb;
             hacienda.nBoletas.Borrar();
 
@@ -230,7 +230,7 @@ namespace Programa1.Carga.Hacienda
 
         private void Cargar_CompraYAgregados(int nb)
         {
-            DB.Hacienda hacienda = new DB.Hacienda();
+            DB.Hacienda.Hacienda hacienda = new DB.Hacienda.Hacienda();
             c_Base_Access clsAccess = new c_Base_Access("vw_Compras", "vw_Compras");
 
             clsAccess.Base_Access = cmdBase.Text;
@@ -331,7 +331,7 @@ namespace Programa1.Carga.Hacienda
 
         private void Cargar_Faena(int nb)
         {
-            DB.Hacienda hacienda = new DB.Hacienda();
+            DB.Hacienda.Hacienda hacienda = new DB.Hacienda.Hacienda();
             c_Base_Access clsAccess = new c_Base_Access("NBoletas", "NBoletas");
             clsAccess.Base_Access = cmdBase.Text;
 
@@ -428,7 +428,7 @@ namespace Programa1.Carga.Hacienda
             if (chFaena.Checked == true) { Cargar_Faena(nb); }
             if (chSaldo.Checked == true)
             {
-                DB.Hacienda hacienda = new DB.Hacienda();
+                DB.Hacienda.Hacienda hacienda = new DB.Hacienda.Hacienda();
 
                 DataTable dt = hacienda.compra.Consignatarios_En_Boleta(nb);
 
@@ -463,7 +463,7 @@ namespace Programa1.Carga.Hacienda
             {
                 this.Cursor = Cursors.WaitCursor;
 
-                DB.Hacienda hacienda = new DB.Hacienda();
+                DB.Hacienda.Hacienda hacienda = new DB.Hacienda.Hacienda();
 
                 for (int i = lstBoletas.SelectedIndex; i >= 0; i--)
                 {

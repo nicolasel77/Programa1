@@ -66,7 +66,7 @@ namespace Programa1.Carga.Tesoreria
             DTgastos.Id_Tipo = Tipo;
             Opcion = TOpcion.gDetalle;
             Filtro_Tipo = $"ID_Tipo={Tipo}";
-
+            txtBuscar.Text = "";
             Cargar();
         }
 

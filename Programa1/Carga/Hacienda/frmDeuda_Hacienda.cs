@@ -1,6 +1,6 @@
 ﻿namespace Programa1.Carga.Hacienda
 {
-    using DB;
+    using DB.Hacienda;
     using System;
     using System.Windows.Forms;
     public partial class frmDeuda_Hacienda : Form

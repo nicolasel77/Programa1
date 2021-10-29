@@ -54,45 +54,51 @@ namespace Programa1.DB.Varios
                     ID = 0;
                 }
 
-                ID = Convert.ToInt32(dt.Rows[0]["ID"]);
-                vNombre = Convert.ToString(dt.Rows[0]["Usuario"]);
-                //Contraseña por ahora no, se usa la de sistema para iniciar sesion.
-                switch (Convert.ToByte(dt.Rows[0]["Permiso"]))
+                if (dt != null)
                 {
-                    case 1:
-                        Permiso = e_Permiso.Operador;
-                        break;
-                    case 2:
-                        Permiso = e_Permiso.Supervisor;
-                        break;
-                    case 3:
-                        Permiso = e_Permiso.Administrador;
-                        break;
-                }
+                    if (dt.Rows.Count != 0)
+                    {
+                        ID = Convert.ToInt32(dt.Rows[0]["ID"]);
+                        vNombre = Convert.ToString(dt.Rows[0]["Usuario"]);
+                        //Contraseña por ahora no, se usa la de sistema para iniciar sesion.
+                        switch (Convert.ToByte(dt.Rows[0]["Permiso"]))
+                        {
+                            case 1:
+                                Permiso = e_Permiso.Operador;
+                                break;
+                            case 2:
+                                Permiso = e_Permiso.Supervisor;
+                                break;
+                            case 3:
+                                Permiso = e_Permiso.Administrador;
+                                break;
+                        }
 
-                switch (Convert.ToByte(dt.Rows[0]["TipoUsuario"]))
-                {
-                    case 0:
-                        Tipo = e_TipoUsuario.Operadores;
-                        break;
-                    case 1:
-                        Tipo = e_TipoUsuario.Tesoreria;
-                        break;
-                    case 2:
-                        Tipo = e_TipoUsuario.Administrador;
-                        break;
-                    case 3:
-                        Tipo = e_TipoUsuario.Supervisor;
-                        break;
-                    case 4:
-                        Tipo = e_TipoUsuario.RRHH;
-                        break;
-                    case 5:
-                        Tipo = e_TipoUsuario.Sistemas;
-                        break;
-                    case 6:
-                        Tipo = e_TipoUsuario.Hacienda;
-                        break;
+                        switch (Convert.ToByte(dt.Rows[0]["TipoUsuario"]))
+                        {
+                            case 0:
+                                Tipo = e_TipoUsuario.Operadores;
+                                break;
+                            case 1:
+                                Tipo = e_TipoUsuario.Tesoreria;
+                                break;
+                            case 2:
+                                Tipo = e_TipoUsuario.Administrador;
+                                break;
+                            case 3:
+                                Tipo = e_TipoUsuario.Supervisor;
+                                break;
+                            case 4:
+                                Tipo = e_TipoUsuario.RRHH;
+                                break;
+                            case 5:
+                                Tipo = e_TipoUsuario.Sistemas;
+                                break;
+                            case 6:
+                                Tipo = e_TipoUsuario.Hacienda;
+                                break;
+                        }  
+                    }
                 }
             }
         }

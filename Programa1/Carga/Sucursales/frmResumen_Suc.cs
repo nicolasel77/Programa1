@@ -203,12 +203,21 @@
             grdEntradas.set_ColW(grdEntradas.get_ColIndex("SQL"), 0);
 
             grdEntradas.Columnas[grdEntradas.get_ColIndex("Kilos")].Style.Format = "#,###.#";
-            grdEntradas.Columnas[grdEntradas.get_ColIndex("Costo")].Style.Format = "#,###.#";
-            grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "#,###.#";
             grdEntradas.Columnas[grdEntradas.get_ColIndex("Kilos")].Style.Font = new Font(grdEntradas.Font, FontStyle.Bold);
 
-            double T = grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), false);
-            lblTotalEntradas.Text = "Total: " + T.ToString("C1");
+            if (userr.Permiso == Usuarios.e_Permiso.Supervisor)
+            {
+                grdEntradas.Columnas[grdEntradas.get_ColIndex("Costo")].Width = 0;
+                grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Width = 0;
+            }
+            else
+            {
+                grdEntradas.Columnas[grdEntradas.get_ColIndex("Costo")].Style.Format = "#,###.#";
+                grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "#,###.#";
+                double T = grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), false);
+                lblTotalEntradas.Text = "Total: " + T.ToString("C1");
+            }
+
         }
         private void Salidas()
         {
@@ -221,12 +230,20 @@
             grdSalidas.set_ColW(grdSalidas.get_ColIndex("SQL"), 0);
 
             grdSalidas.Columnas[grdSalidas.get_ColIndex("Kilos")].Style.Format = "#,###.#";
-            grdSalidas.Columnas[grdSalidas.get_ColIndex("Costo")].Style.Format = "#,###.#";
-            grdSalidas.Columnas[grdSalidas.get_ColIndex("Total")].Style.Format = "#,###.#";
             grdSalidas.Columnas[grdSalidas.get_ColIndex("Kilos")].Style.Font = new Font(grdSalidas.Font, FontStyle.Bold);
+            if (userr.Permiso == Usuarios.e_Permiso.Supervisor)
+            {
+                grdSalidas.Columnas[grdSalidas.get_ColIndex("Costo")].Width = 0;
+                grdSalidas.Columnas[grdSalidas.get_ColIndex("Total")].Width = 0;
+            }
+            else
+            {
+                grdSalidas.Columnas[grdSalidas.get_ColIndex("Costo")].Style.Format = "#,###.#";
+                grdSalidas.Columnas[grdSalidas.get_ColIndex("Total")].Style.Format = "#,###.#";
 
-            double T = grdSalidas.SumarCol(grdSalidas.get_ColIndex("Total"), false);
-            lblTotalSalidas.Text = "Total: " + T.ToString("C1");
+                double T = grdSalidas.SumarCol(grdSalidas.get_ColIndex("Total"), false);
+                lblTotalSalidas.Text = "Total: " + T.ToString("C1");
+            }
         }
         private void Cuentas()
         {

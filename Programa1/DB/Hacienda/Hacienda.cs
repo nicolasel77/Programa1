@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Programa1.DB
+namespace Programa1.DB.Hacienda
 {
     public class Hacienda
     {

@@ -1,6 +1,6 @@
 ﻿namespace Programa1.Carga.Hacienda
 {
-    using Programa1.DB;
+    using Programa1.DB.Hacienda;
     using System;
     using System.Drawing;
     using System.Windows.Forms;
