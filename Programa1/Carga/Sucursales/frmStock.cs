@@ -1,6 +1,7 @@
 ﻿namespace Programa1.Carga
 {
     using Programa1.DB;
+    using Programa1.DB.Varios;
     using System;
     using System.Collections.Generic;
     using System.Drawing;
@@ -9,7 +10,7 @@
     public partial class frmStock : Form
     {
         private readonly Stock stock;
-
+        public Usuarios n_usuario;
 
         #region " Columnas "
         private readonly Byte c_Id;
@@ -21,9 +22,11 @@
         private readonly Byte c_Kilos;
         private readonly Byte c_Total;
         #endregion
-        public frmStock()
+        public frmStock(Usuarios usuario)
         {
             InitializeComponent();
+
+            n_usuario = usuario;
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdStock.TeclasManejadas = n;
@@ -140,10 +143,22 @@
             grdStock.set_ColW(c_IdSuc + 1, 200);
             grdStock.set_ColW(c_IdProd, 30);
             grdStock.set_ColW(c_Descripcion, 250);
-            grdStock.set_ColW(c_Costo, 60);
             grdStock.set_ColW(c_Kilos, 60);
-            grdStock.set_ColW(c_Total, 80);
             grdStock.set_ColW(c_Total + 1, 0);
+            
+                        
+            if (n_usuario.Permiso == Usuarios.e_Permiso.Supervisor)
+            {
+                grdStock.set_ColW(c_Costo, 0);
+                grdStock.set_ColW(c_Total, 0);
+                lblTotal.Visible = false;
+                cmdCambio.Enabled = false;
+            }
+            else
+            {
+                grdStock.set_ColW(c_Costo, 60);
+                grdStock.set_ColW(c_Total, 80);
+            }
 
             grdStock.Columnas[c_Costo].Format = "C2";
             grdStock.Columnas[c_Kilos].Format = "N2";
@@ -602,7 +617,7 @@
                 int c = FilaFin - FilaInicio + 1;
                 lblCant.Text = $"Registros: {c:N0}";
                 lblKilos.Text = $"Kilos: {k:N2}";
-                lblTotal.Text = $"Total Salida: {t:C2}";                
+                lblTotal.Text = $"Total Salida: {t:C2}";
             }
         }
     }

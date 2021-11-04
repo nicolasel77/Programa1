@@ -413,7 +413,21 @@
             {
                 frmDetalle_Resumen fr = new frmDetalle_Resumen();
                 Datos_Genericos dg = new Datos_Genericos();
-                fr.grd.MostrarDatos(dg.Datos(s), true, false);
+                DataTable dt = dg.Datos(s);
+
+                if (userr.Permiso == Usuarios.e_Permiso.Supervisor)
+                {
+                    for (int i = dt.Columns.Count - 1; i >= 0; i--)
+                    {
+                        DataColumn dc = dt.Columns[i];
+                        if (dc.ColumnName.Contains("Total") || dc.ColumnName.Contains("Costo") || dc.ColumnName.Contains("Precio") || dc.ColumnName.Contains("Importe"))
+                        {
+                            dt.Columns.Remove(dc);
+                        }
+                    }
+                }
+
+                fr.grd.MostrarDatos(dt, true, false);
                 fr.grd.AutosizeAll();
                 fr.ShowDialog();
                 this.Focus();
@@ -450,7 +464,17 @@
             {
                 frmDetalle_Resumen fr = new frmDetalle_Resumen();
                 Datos_Genericos dg = new Datos_Genericos();
-                fr.grd.MostrarDatos(dg.Datos(s), true, false);
+                DataTable dt = dg.Datos(s);
+
+                for(int i = dt.Columns.Count - 1; i >= 0; i--)
+                {
+                    DataColumn dc = dt.Columns[i];
+                    if (dc.ColumnName.Contains("Total") || dc.ColumnName.Contains("Costo") || dc.ColumnName.Contains("Precio") || dc.ColumnName.Contains("Importe"))
+                    {
+                        dt.Columns.Remove(dc);
+                    }
+                }
+                fr.grd.MostrarDatos(dt, true, false);
                 fr.grd.AutosizeAll();
                 fr.ShowDialog();
                 Focus();

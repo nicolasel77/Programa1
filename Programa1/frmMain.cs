@@ -335,7 +335,7 @@
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
-                Form frmStock = new Programa1.Carga.frmStock();
+                Form frmStock = new Programa1.Carga.frmStock(usuario);
                 frmStock.MdiParent = this;
                 frmStock.Disposed += FrmStock_Disposed;
                 forms.Add(frmStock);
@@ -2677,5 +2677,35 @@
                 }
             }
         }
+
+        private void stocksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmStock")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmStock");
+                t.Text = "Stock";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);                
+                frmStock frmStock = new Programa1.Carga.frmStock(this.usuario);
+                
+                frmStock.MdiParent = this;
+                frmStock.Disposed += FrmStock_Disposed;
+                forms.Add(frmStock);
+                frmStock.Show();
+                frmStock.WindowState = FormWindowState.Minimized;
+                frmStock.WindowState = FormWindowState.Maximized;
+            }
+        }
+        
     }
 }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDetalle_Resumen));
             this.grd = new Grilla2.SpeedGrilla();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmdCerrar = new System.Windows.Forms.Button();
@@ -66,7 +65,7 @@
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(953, 466);
+            this.grd.Size = new System.Drawing.Size(1047, 466);
             this.grd.TabIndex = 0;
             // 
             // panel1
@@ -78,7 +77,7 @@
             this.panel1.Controls.Add(this.grd);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(959, 472);
+            this.panel1.Size = new System.Drawing.Size(1053, 472);
             this.panel1.TabIndex = 1;
             // 
             // cmdCerrar
@@ -86,7 +85,7 @@
             this.cmdCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cmdCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdCerrar.Location = new System.Drawing.Point(882, 491);
+            this.cmdCerrar.Location = new System.Drawing.Point(976, 491);
             this.cmdCerrar.Name = "cmdCerrar";
             this.cmdCerrar.Size = new System.Drawing.Size(89, 23);
             this.cmdCerrar.TabIndex = 2;
@@ -99,7 +98,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCerrar;
-            this.ClientSize = new System.Drawing.Size(983, 526);
+            this.ClientSize = new System.Drawing.Size(1077, 526);
             this.Controls.Add(this.cmdCerrar);
             this.Controls.Add(this.panel1);
             this.Name = "frmDetalle_Resumen";

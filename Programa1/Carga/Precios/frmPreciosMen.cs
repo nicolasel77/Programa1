@@ -173,6 +173,7 @@ namespace Programa1.Carga.Precios
         {
             Cargar_Lista();
             if (Suc.Cantidad_Seleccionada() > 0) { h.Llenar_List(lstFechas, precios.Fechas(h.Codigo_Seleccionado(lstTipos.Text)), "dd/MM/yyyy"); }
+            Text = lstTipos.Text;
         }
     }
 }

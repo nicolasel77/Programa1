@@ -166,7 +166,7 @@
                         {
                             if (Cantidad_Clientes.Fecha_Cerrada(df) == false)
                             {
-                                if (Cantidad_Clientes.Sucursal.ID == 0 || Cantidad_Clientes.Dato($"Fecha = '{df.ToString("MM/dd/yyy")}' AND Id_Sucursales = {Cantidad_Clientes.Sucursal.ID}") == null)
+                                if (Cantidad_Clientes.Sucursal.ID == 0 || Cantidad_Clientes.Dato($"Fecha = '{df:MM/dd/yyy}' AND Id_Sucursales = {Cantidad_Clientes.Sucursal.ID}") == null)
                                 {
                                     Cantidad_Clientes.Fecha = df;
 

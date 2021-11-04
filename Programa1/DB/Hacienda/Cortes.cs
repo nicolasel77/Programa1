@@ -6,20 +6,21 @@ namespace Programa1.DB.Hacienda
     {
         public Cortes()
         {
-            Limpiar();
+            
         }
 
-        public void Limpiar()
-        {
-            Fecha = DateTime.Now;
-            Cantidad = 0;
-            Importe = 0;
-            Id = 0;
-        }
+#region Entradas
+     
+#endregion
 
-        public int Id { get; set; }
-        public DateTime Fecha { get; set; }
-        public int Cantidad { get; set; }
-        public double Importe { get; set; }
+#region Gastos
+
+#endregion
+
+#region Salidas
+public Productos Producto
+ { get; set; }
+#endregion
+        
     }
 }
