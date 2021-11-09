@@ -9,8 +9,14 @@
 
     public class c_Base
     {
-
-        public c_Base() { }
+        public readonly string cadCN = "Data Source=192.168.1.11;Initial Catalog=dbDatos;User Id=Nikorasu;Password=Oficina02";
+        public c_Base() 
+        {
+            if (System.Environment.UserName == "Nicolas")
+            {
+                cadCN = "Data Source=192.168.1.11;Initial Catalog=dbDatos_Prueba;User Id=Nikorasu;Password=Oficina02";
+            }
+        }
         public c_Base(string tabla, string vista)
         {
             Tabla = tabla;
@@ -39,7 +45,7 @@
         #region " Editar Datos "
         public void Actualizar()
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             try
             {
@@ -59,7 +65,7 @@
         }
         public void Actualizar(string Campo, object valor)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             Herramientas h = new Herramientas();
             valor = h.Formato_SQL(valor);
@@ -84,7 +90,7 @@
 
         public void Agregar()
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             try
             {
@@ -112,7 +118,7 @@
         /// <param name="valor">Valor tipo objet. Se formatea en el mismo procedimiento.</param>
         public void Agregar(string Campo, object valor)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             Herramientas h = new Herramientas();
             valor = h.Formato_SQL(valor);
@@ -144,7 +150,7 @@
         /// <param name="valor">Valor tipo objet. Se formatea en el mismo procedimiento.</param>
         public void Agregar_NoID(string Campo, object valor)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             Herramientas h = new Herramientas();
             valor = h.Formato_SQL(valor);
@@ -169,7 +175,7 @@
 
         public void Borrar()
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             try
             {
@@ -195,7 +201,7 @@
         /// <param name="where">sin la palabra where</param>
         public void Borrar(string where)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             try
             {
@@ -215,7 +221,7 @@
         }
         public void Borrar(string tabla, string where)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             try
             {
@@ -240,7 +246,7 @@
         public DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
 
@@ -272,7 +278,7 @@
         public DataTable Datos_Vista(string filtro = "", string Campos = "*", string Orden = "ORDER BY ")
         {
             var dt = new DataTable("Datos");
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
             if (Campos == "") { Campos = "*"; }
@@ -298,7 +304,7 @@
         public DataTable Datos_Vista(string filtro, string Campos, string Orden, string GroupBy)
         {
             var dt = new DataTable("Datos");
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
             if (Campos == "") { Campos = "*"; }
@@ -331,7 +337,7 @@
         /// <returns></returns>
         public object Dato(string filtro = "", string Campos = "*", string Orden = "ORDER BY ")
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             object d = null;
 
             if (Vista == null) { Vista = Tabla; }
@@ -368,7 +374,7 @@
         /// <returns></returns>
         public object Dato_Generico(string tabla, string filtro, string Campo)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             object d = null;
 
             try
@@ -393,7 +399,7 @@
         }
         public object Dato_Generico(string consulta)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             object d = null;
 
             try
@@ -417,7 +423,7 @@
 
         public DataTable Datos_Genericos(string consulta)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             DataTable d = new DataTable("Datos");
 
             try
@@ -444,7 +450,7 @@
         /// <returns></returns>
         public double Dato_Sumado(string filtro, string Campo)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             object d;
 
             try
@@ -471,7 +477,7 @@
 
         public double Dato_Sumado(string tabla, string filtro, string Campo)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             object d;
 
             try
@@ -499,7 +505,7 @@
         public DataTable sp_Datos(string sp, SqlParameter[] parameter)
         {
             var dt = new DataTable("Datos");
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             try
             {
@@ -521,7 +527,7 @@
         public DataTable sp_Datos(string sp, SqlParameter parameter)
         {
             var dt = new DataTable("Datos");
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             try
             {
@@ -543,7 +549,7 @@
 
         public int Max_ID()
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             int d = 0;
 
             try
@@ -569,7 +575,7 @@
 
         public int Min_ID()
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             int d = 0;
 
             try
@@ -596,7 +602,7 @@
         public bool Existe()
         {
 
-            SqlConnection cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection cnn = new SqlConnection(cadCN);
             var dt = new DataTable("Datos");
 
             try
@@ -628,7 +634,7 @@
         }
         public bool Existe(int value)
         {
-            SqlConnection cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection cnn = new SqlConnection(cadCN);
             var dt = new DataTable("Datos");
 
             try
@@ -662,7 +668,7 @@
         }
         public bool Existe(string campo, object value)
         {
-            SqlConnection cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection cnn = new SqlConnection(cadCN);
             var dt = new DataTable("Datos");
             Herramientas h = new Herramientas();
             value = h.Formato_SQL(value);
@@ -699,7 +705,7 @@
 
         public bool Fecha_Cerrada(DateTime f)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             object n = null;
 
             try
@@ -729,7 +735,7 @@
         #region " Subs "
         public void Ejecutar_Comando(string comando)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             try
             {
@@ -751,7 +757,7 @@
 
         public void Ejecutar_sp(string sp)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             try
             {
                 cnn.Open();
@@ -767,7 +773,7 @@
         }
         public void Ejecutar_sp(string sp, SqlParameter[] parameter)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             try
             {
                 cnn.Open();
@@ -784,7 +790,7 @@
         }
         public void Ejecutar_sp(string sp, string nombreParametro, int n)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             try
             {
                 SqlParameter sqlP = new SqlParameter(nombreParametro, SqlDbType.Int);
@@ -802,9 +808,10 @@
             }
 
         }
+
         public void Ejecutar_sp(string sp, string nombreParametro, string n)
         {
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
             try
             {
                 SqlParameter sqlP = new SqlParameter(nombreParametro, SqlDbType.Text);

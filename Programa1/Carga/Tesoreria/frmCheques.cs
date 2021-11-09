@@ -23,7 +23,7 @@ namespace Programa1.Carga.Tesoreria
         const byte Fecha_Acreditacion = 7;
         const byte Origen = 8;
         const byte Destino = 9;
-        const byte Seleccionado = 10;
+        const byte Seleccionado = 11;
 
         /// <summary>
         /// Para avisar que hay nuevo
@@ -43,7 +43,10 @@ namespace Programa1.Carga.Tesoreria
             if (selec == true)
             {
                 dt = ch.Datos_Vista("Destino=''");
-                dt.Columns.Add("Sel", typeof(bool));
+                if (dt != null)
+                {
+                    dt.Columns.Add("Sel", typeof(bool)); 
+                }
             }
             else
             {
@@ -219,23 +222,25 @@ namespace Programa1.Carga.Tesoreria
 
         private void frmCheques_KeyUp(object sender, KeyEventArgs e)
         {
-
-            int f = grd.Row;
-            int i = Convert.ToInt32(grd.get_Texto(f, Id));
+                        
             if (e.KeyCode == Keys.Delete)
             {
+                int i = Convert.ToInt32(grd.get_Texto(grd.Row, Id));
                 if (i != 0)
                 {
                     ch.ID = i;
                     ch.Borrar();
                     grd.BorrarFila();
-                    grd.ActivarCelda(f, Numero);
+                    grd.ActivarCelda(grd.Row, Numero);
                 }
             }
             else
             {
+                int f = grd.Row;
+                
                 if (e.KeyCode == Keys.F1)
                 {
+                    int i = Convert.ToInt32(grd.get_Texto(f, Id));
                     int c = grd.Col;
                     frmAyuda_Generico fr = new frmAyuda_Generico();
                     switch (c)
@@ -375,6 +380,12 @@ namespace Programa1.Carga.Tesoreria
             ch.Numero = Convert.ToInt32(grd.get_Texto(Fila, Numero));
             ch.Buscar_Cheque();
 
+        }
+
+        private void cmdAceptar_Click(object sender, EventArgs e)
+        {
+            
+            this.Close();
         }
     }
 }

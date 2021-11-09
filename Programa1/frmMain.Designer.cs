@@ -33,6 +33,7 @@
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.stockCarneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.stocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCarga = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
@@ -120,7 +121,6 @@
             this.mnuPrueba = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGuardar = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
-            this.stocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -159,16 +159,23 @@
             // resumenToolStripMenuItem1
             // 
             this.resumenToolStripMenuItem1.Name = "resumenToolStripMenuItem1";
-            this.resumenToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.resumenToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
             this.resumenToolStripMenuItem1.Text = "Resumen";
             this.resumenToolStripMenuItem1.Click += new System.EventHandler(this.resumenToolStripMenuItem1_Click);
             // 
             // stockCarneToolStripMenuItem1
             // 
             this.stockCarneToolStripMenuItem1.Name = "stockCarneToolStripMenuItem1";
-            this.stockCarneToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.stockCarneToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
             this.stockCarneToolStripMenuItem1.Text = "Stock Carne";
             this.stockCarneToolStripMenuItem1.Click += new System.EventHandler(this.stockCarneToolStripMenuItem1_Click);
+            // 
+            // stocksToolStripMenuItem
+            // 
+            this.stocksToolStripMenuItem.Name = "stocksToolStripMenuItem";
+            this.stocksToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.stocksToolStripMenuItem.Text = "Stocks";
+            this.stocksToolStripMenuItem.Click += new System.EventHandler(this.stocksToolStripMenuItem_Click);
             // 
             // mnuCarga
             // 
@@ -729,6 +736,7 @@
             this.analisisToolStripMenuItem.Name = "analisisToolStripMenuItem";
             this.analisisToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.analisisToolStripMenuItem.Text = "&Analisis";
+            this.analisisToolStripMenuItem.Click += new System.EventHandler(this.analisisToolStripMenuItem_Click);
             // 
             // mnuSebo
             // 
@@ -844,13 +852,6 @@
             this.tstMenu.Text = "toolStrip1";
             this.tstMenu.ItemAdded += new System.Windows.Forms.ToolStripItemEventHandler(this.tstMenu_ItemAdded);
             this.tstMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tstMenu_ItemClicked);
-            // 
-            // stocksToolStripMenuItem
-            // 
-            this.stocksToolStripMenuItem.Name = "stocksToolStripMenuItem";
-            this.stocksToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.stocksToolStripMenuItem.Text = "Stocks";
-            this.stocksToolStripMenuItem.Click += new System.EventHandler(this.stocksToolStripMenuItem_Click);
             // 
             // frmMain
             // 

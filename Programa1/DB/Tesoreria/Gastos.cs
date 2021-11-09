@@ -63,7 +63,7 @@
 
         public new void Agregar()
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var sql = new SqlConnection(cadCN);
             int n = Max_ID();
 
             try
@@ -107,7 +107,7 @@
 
         public new void Borrar()
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var sql = new SqlConnection(cadCN);
 
             try
             {
@@ -166,7 +166,7 @@
         public DataTable Tipos_Rango(string filtro = "")
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var conexionSql = new SqlConnection(cadCN);
 
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
@@ -197,7 +197,7 @@
         public DataTable SubTipos_Rango(string filtro = "")
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var conexionSql = new SqlConnection(cadCN);
 
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
@@ -228,7 +228,7 @@
         public DataTable Detalles_Rango(string filtro = "")
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var conexionSql = new SqlConnection(cadCN);
 
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
@@ -259,7 +259,7 @@
         public DataTable TotalPorTipo(string filtro = "")
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var conexionSql = new SqlConnection(cadCN);
 
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
@@ -290,7 +290,7 @@
         public DataTable TotalPorSubTipo(string filtro = "")
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var conexionSql = new SqlConnection(cadCN);
 
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
@@ -321,7 +321,7 @@
         public DataTable TotalPorDetalle(string filtro = "", bool Mostrar_Fecha = false)
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var conexionSql = new SqlConnection(cadCN);
 
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
@@ -357,7 +357,7 @@
         public Double Total_AFecha(DateTime f)
         {
             Double t = 0;
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var conexionSql = new SqlConnection(cadCN);
             object d = null;
 
             try
@@ -385,7 +385,7 @@
             string s = "";
             if (TG.Id_Tipo != 0)
             {
-                var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+                var conexionSql = new SqlConnection(cadCN);
                 object d = null;
 
                 if (TG.grupoS.Campo_Filtro.Length > 0) { s = $"{TG.grupoS.Campo_Filtro}={TG.Id_Tipo} AND "; }
@@ -434,7 +434,7 @@
         {
             var dt = new DataTable("Datos");
 
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var conexionSql = new SqlConnection(cadCN);
 
             try
             {
@@ -459,7 +459,7 @@
         public DataTable Datos_DetalleP(string filtro = "")
         {
             var dt = new DataTable("Datos");
-            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var cnn = new SqlConnection(cadCN);
 
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
 

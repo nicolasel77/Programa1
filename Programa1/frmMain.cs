@@ -2706,6 +2706,53 @@
                 frmStock.WindowState = FormWindowState.Maximized;
             }
         }
-        
+
+        private void analisisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmAnalisis")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmAnalisis");
+                t.Text = "Analisis";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmAnalisis = new Carga.Varios.frmAnalisis();
+                frmAnalisis.MdiParent = this;
+                frmAnalisis.Disposed += FrmAnalisis_Disposed;
+                forms.Add(frmAnalisis);
+                frmAnalisis.Show();
+                frmAnalisis.WindowState = FormWindowState.Minimized;
+                frmAnalisis.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmAnalisis_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Analisis")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmAnalisis")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

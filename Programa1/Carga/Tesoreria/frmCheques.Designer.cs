@@ -31,6 +31,7 @@ namespace Programa1.Carga.Tesoreria
         {
             this.grd = new Grilla2.SpeedGrilla();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.cmdAceptar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // grd
@@ -64,7 +65,7 @@ namespace Programa1.Carga.Tesoreria
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(1034, 673);
+            this.grd.Size = new System.Drawing.Size(1427, 673);
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
             this.grd.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grd_CambioFila);
@@ -81,11 +82,24 @@ namespace Programa1.Carga.Tesoreria
             this.lblTotal.TabIndex = 1;
             this.lblTotal.Text = "Total";
             // 
+            // cmdAceptar
+            // 
+            this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdAceptar.Location = new System.Drawing.Point(1289, 699);
+            this.cmdAceptar.Name = "cmdAceptar";
+            this.cmdAceptar.Size = new System.Drawing.Size(150, 23);
+            this.cmdAceptar.TabIndex = 2;
+            this.cmdAceptar.Text = "Aceptar";
+            this.cmdAceptar.UseVisualStyleBackColor = true;
+            this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
+            // 
             // frmCheques
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1058, 728);
+            this.ClientSize = new System.Drawing.Size(1451, 728);
+            this.Controls.Add(this.cmdAceptar);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.grd);
             this.KeyPreview = true;
@@ -102,5 +116,6 @@ namespace Programa1.Carga.Tesoreria
 
         private Grilla2.SpeedGrilla grd;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Button cmdAceptar;
     }
 }

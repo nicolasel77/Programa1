@@ -49,7 +49,7 @@
         public new void Agregar()
         {
 
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var sql = new SqlConnection(cadCN);
             int n = Max_ID();
             try
             {
@@ -88,7 +88,7 @@
         public void Cargar_Fila(int id)
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            var conexionSql = new SqlConnection(cadCN);
 
 
             try
