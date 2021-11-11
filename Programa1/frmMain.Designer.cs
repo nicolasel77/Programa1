@@ -68,6 +68,7 @@
             this.chequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pagosAutorizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detallesPagosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.prestamosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripSeparator();
             this.leerTarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarTarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -159,21 +160,21 @@
             // resumenToolStripMenuItem1
             // 
             this.resumenToolStripMenuItem1.Name = "resumenToolStripMenuItem1";
-            this.resumenToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
+            this.resumenToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.resumenToolStripMenuItem1.Text = "Resumen";
             this.resumenToolStripMenuItem1.Click += new System.EventHandler(this.resumenToolStripMenuItem1_Click);
             // 
             // stockCarneToolStripMenuItem1
             // 
             this.stockCarneToolStripMenuItem1.Name = "stockCarneToolStripMenuItem1";
-            this.stockCarneToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
+            this.stockCarneToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.stockCarneToolStripMenuItem1.Text = "Stock Carne";
             this.stockCarneToolStripMenuItem1.Click += new System.EventHandler(this.stockCarneToolStripMenuItem1_Click);
             // 
             // stocksToolStripMenuItem
             // 
             this.stocksToolStripMenuItem.Name = "stocksToolStripMenuItem";
-            this.stocksToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.stocksToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.stocksToolStripMenuItem.Text = "Stocks";
             this.stocksToolStripMenuItem.Click += new System.EventHandler(this.stocksToolStripMenuItem_Click);
             // 
@@ -390,6 +391,7 @@
             this.chequesToolStripMenuItem,
             this.pagosAutorizadosToolStripMenuItem,
             this.detallesPagosToolStripMenuItem,
+            this.prestamosToolStripMenuItem,
             this.toolStripMenuItem14,
             this.leerTarjetasToolStripMenuItem,
             this.modificarTarjetasToolStripMenuItem,
@@ -448,6 +450,13 @@
             this.detallesPagosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.detallesPagosToolStripMenuItem.Text = "Detalles Pagos";
             this.detallesPagosToolStripMenuItem.Click += new System.EventHandler(this.detallesPagosToolStripMenuItem_Click);
+            // 
+            // prestamosToolStripMenuItem
+            // 
+            this.prestamosToolStripMenuItem.Name = "prestamosToolStripMenuItem";
+            this.prestamosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.prestamosToolStripMenuItem.Text = "Prestamos";
+            this.prestamosToolStripMenuItem.Click += new System.EventHandler(this.prestamosToolStripMenuItem_Click);
             // 
             // toolStripMenuItem14
             // 
@@ -838,7 +847,7 @@
             // 
             this.mnuGuardar.Name = "mnuGuardar";
             this.mnuGuardar.Size = new System.Drawing.Size(106, 20);
-            this.mnuGuardar.Tag = "administrador, sistemas";
+            this.mnuGuardar.Tag = "administrador, sistemas, supervisor";
             this.mnuGuardar.Text = "&Guardar Semana";
             this.mnuGuardar.Visible = false;
             this.mnuGuardar.Click += new System.EventHandler(this.mnuGuardar_Click);
@@ -968,6 +977,7 @@
         private System.Windows.Forms.ToolStripMenuItem resumenToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem stockCarneToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem stocksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem prestamosToolStripMenuItem;
     }
 }
 

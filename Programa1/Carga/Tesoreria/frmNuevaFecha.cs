@@ -11,6 +11,7 @@
         public frmNuevaFecha()
         {
             InitializeComponent();
+            nuAño.Value = DateTime.Today.Year;
         }
 
         private void cmdAceptar_Click(object sender, EventArgs e)
@@ -22,6 +23,11 @@
         private void cmdCancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void nuAño_ValueChanged(object sender, EventArgs e)
+        {
+            mntFecha.SetDate(new DateTime((int)nuAño.Value, mntFecha.SelectionStart.Month, mntFecha.SelectionStart.Day));
         }
     }
 }

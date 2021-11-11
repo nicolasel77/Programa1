@@ -870,7 +870,7 @@
             this.nuTop.TabIndex = 5;
             this.nuTop.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nuTop.Value = new decimal(new int[] {
-            50,
+            5,
             0,
             0,
             0});

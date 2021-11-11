@@ -2489,51 +2489,51 @@
 
         private void imprimirOfertasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                bool found = false;
-                foreach (Form f in forms)
-                {
-                    if (f.Name == "frmImprimir_Ofertas")
-                    {
-                        f.BringToFront();
-                        found = true;
-                        break;
-                    }
-                }
-                if (found == false)
-                {
-                    ToolStripMenuItem t = new ToolStripMenuItem("frmImprimir_Ofertas");
-                    t.Text = "Imprimir_Ofertas";
-                    t.Click += new EventHandler(Mostrar);
-                    this.tstMenu.Items.Add(t);
-
-                    Form frmImprimir_Ofertas = new Carga.Sucursales.frmImprimir_Ofertas();
-                    frmImprimir_Ofertas.MdiParent = this;
-                    frmImprimir_Ofertas.Disposed += frmImprimir_Ofertas_Disposed;
-                    forms.Add(frmImprimir_Ofertas);
-                    frmImprimir_Ofertas.Show();
-                    frmImprimir_Ofertas.WindowState = FormWindowState.Minimized;
-                    frmImprimir_Ofertas.WindowState = FormWindowState.Maximized;
-                }
-            }
-            private void frmImprimir_Ofertas_Disposed(object sender, EventArgs e)
+            bool found = false;
+            foreach (Form f in forms)
             {
-                foreach (ToolStripMenuItem t in tstMenu.Items)
+                if (f.Name == "frmImprimir_Ofertas")
                 {
-                    if (t.Text == "Imprimir_Ofertas")
-                    {
-                        tstMenu.Items.Remove(t);
-                        break;
-                    }
-                }
-                foreach (Form f in forms)
-                {
-                    if (f.Name == "frmImprimir_Ofertas")
-                    {
-                        forms.Remove(f);
-                        break;
-                    }
+                    f.BringToFront();
+                    found = true;
+                    break;
                 }
             }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmImprimir_Ofertas");
+                t.Text = "Imprimir_Ofertas";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmImprimir_Ofertas = new Carga.Sucursales.frmImprimir_Ofertas();
+                frmImprimir_Ofertas.MdiParent = this;
+                frmImprimir_Ofertas.Disposed += frmImprimir_Ofertas_Disposed;
+                forms.Add(frmImprimir_Ofertas);
+                frmImprimir_Ofertas.Show();
+                frmImprimir_Ofertas.WindowState = FormWindowState.Minimized;
+                frmImprimir_Ofertas.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void frmImprimir_Ofertas_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Imprimir_Ofertas")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmImprimir_Ofertas")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
         private void chequesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -2695,9 +2695,9 @@
                 ToolStripMenuItem t = new ToolStripMenuItem("frmStock");
                 t.Text = "Stock";
                 t.Click += new EventHandler(Mostrar);
-                this.tstMenu.Items.Add(t);                
+                this.tstMenu.Items.Add(t);
                 frmStock frmStock = new Programa1.Carga.frmStock(this.usuario);
-                
+
                 frmStock.MdiParent = this;
                 frmStock.Disposed += FrmStock_Disposed;
                 forms.Add(frmStock);
@@ -2748,6 +2748,54 @@
             foreach (Form f in forms)
             {
                 if (f.Name == "frmAnalisis")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void prestamosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPrestamos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmPrestamos");
+                t.Text = "Prestamos";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmPrestamos = new Carga.Tesoreria.frmPrestamos();
+                frmPrestamos.MdiParent = this;
+                frmPrestamos.Disposed += FrmPrestamos_Disposed;
+                forms.Add(frmPrestamos);
+                frmPrestamos.Show();
+                frmPrestamos.WindowState = FormWindowState.Minimized;
+                frmPrestamos.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmPrestamos_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Prestamos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPrestamos")
                 {
                     forms.Remove(f);
                     break;

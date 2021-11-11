@@ -15,7 +15,7 @@ namespace Programa1.Carga.Tesoreria
         public string campo_ID = "";
         public string campo_Nombre = "";
         public DataTable names;
-        private string Filtro_Tipo = "";
+        //private string Filtro_Tipo = "";
 
         public frmAyudaGrupos_E()
         {

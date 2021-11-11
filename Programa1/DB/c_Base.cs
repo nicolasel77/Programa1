@@ -14,7 +14,7 @@
         {
             if (System.Environment.UserName == "Nicolas")
             {
-                cadCN = "Data Source=192.168.1.11;Initial Catalog=dbDatos_Prueba;User Id=Nikorasu;Password=Oficina02";
+                //cadCN = "Data Source=192.168.1.11;Initial Catalog=dbDatos_Prueba;User Id=Nikorasu;Password=Oficina02";
             }
         }
         public c_Base(string tabla, string vista)

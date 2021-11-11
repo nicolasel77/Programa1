@@ -447,12 +447,12 @@ namespace Programa1.Carga.Tesoreria
         #region " Grilla Entradas "
         private void grdEntradas_Editado(short f, short c, object a)
         {
-            if (mntFecha.SelectionStart.Date >= CD.Fecha)
+            if (mntFecha.SelectionStart.Date >= CD.Fecha | usuario.Permiso == Usuarios.e_Permiso.Administrador)
             {
                 cEntradas.ID = Convert.ToInt32(grdEntradas.get_Texto(f, e_Id));
                 cEntradas.Fecha = mntFecha.SelectionStart.Date;
 
-                if (cEntradas.Fecha_Cerrada() == false)
+                if (cEntradas.Fecha_Cerrada() == false | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                 {
                     switch (c)
                     {
@@ -639,7 +639,7 @@ namespace Programa1.Carga.Tesoreria
             {
                 if (mntFecha.SelectionStart.Date >= CD.Fecha)
                 {
-                    if (cEntradas.Fecha_Cerrada() == false)
+                    if (cEntradas.Fecha_Cerrada() == false | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                     {
                         if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                         {
@@ -727,7 +727,7 @@ namespace Programa1.Carga.Tesoreria
                 {
                     cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(f, s_Id));
                     cGastos.Fecha = mntFecha.SelectionStart.Date;
-                    if (cGastos.Fecha_Cerrada() == false)
+                    if (cGastos.Fecha_Cerrada() == false | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                     {
                         switch (c)
                         {
@@ -1089,7 +1089,7 @@ namespace Programa1.Carga.Tesoreria
                 {
                     if (mntFecha.SelectionStart.Date >= CD.Fecha | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                     {
-                        if (cGastos.Fecha_Cerrada() == false)
+                        if (cGastos.Fecha_Cerrada() == false | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                         {
                             if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                             {

@@ -53,7 +53,8 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
+    <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -616,6 +617,12 @@
     <Compile Include="Carga\Tesoreria\frmPartidos.Designer.cs">
       <DependentUpon>frmPartidos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmPrestamos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmPrestamos.Designer.cs">
+      <DependentUpon>frmPrestamos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmResumenARendir.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1129,6 +1136,9 @@
     <EmbeddedResource Include="Carga\Tesoreria\frmPartidos.resx">
       <DependentUpon>frmPartidos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmPrestamos.resx">
+      <DependentUpon>frmPrestamos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmResumenARendir.resx">
       <DependentUpon>frmResumenARendir.cs</DependentUpon>
     </EmbeddedResource>
@@ -1319,6 +1329,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
     <Compile Include="DB\Hacienda\Corte.cs" />
     <Compile Include="DB\Varios\Analisis.cs" />
+    <Compile Include="DB\Tesoreria\Prestamos.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
