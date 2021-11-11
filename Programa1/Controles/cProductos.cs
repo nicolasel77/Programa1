@@ -181,6 +181,8 @@
                             lst.SetSelected(i, true);
                             break;
                         }
+                        if (i == lst.Items.Count - 1 & items[n].ToString() != lst.Items[i].ToString())
+                        { lst.Items.Add(items[n]); lst.SetSelected(lst.Items.Count - 1, true); break;}
                     }
                 }
             }
