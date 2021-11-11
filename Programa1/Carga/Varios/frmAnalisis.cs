@@ -15,25 +15,8 @@
         private void cFechas1_Cambio_Seleccion(object sender, System.EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            c_Base c = new c_Base();
-            //Herramientas.Herramientas h = new Herramientas.Herramientas();
-            int colww = 0;
-            if (cSuc.Valor_Actual > 0) colww = 40;
+            c_Base c = new c_Base();            
 
-            //string filtro = $"Semana<='{cFecha.fecha_Actual:MM/dd/yy}'";
-            //string fSuc = cSuc.Cadena("Suc");
-
-            //if (string.IsNullOrEmpty(fSuc))
-            //{
-            //    filtro = $"SELECT * FROM vw_Analisis WHERE Semana='{cFecha.fecha_Actual:MM/dd/yy}' ORDER BY Suc";
-            //    colww = 40;
-            //}
-            //else
-            //{
-            //    filtro = h.Unir(filtro, fSuc);
-
-            //    filtro = $"SELECT TOP {nuCant.Value} * FROM vw_Analisis WHERE {filtro} ORDER BY Semana DESC, Suc";
-            //}
             SqlParameter p1 = new SqlParameter();
             p1.ParameterName = "Suc";
             if (cSuc.Valor_Actual <= 0)

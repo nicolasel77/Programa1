@@ -111,7 +111,7 @@
             this.nuCant.TabIndex = 2;
             this.nuCant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nuCant.Value = new decimal(new int[] {
-            10,
+            9,
             0,
             0,
             0});
