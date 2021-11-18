@@ -18,9 +18,9 @@ namespace Programa1.Controles
             {
                 if (this.Click != null) { this.Click(sender, e); }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
         }
 

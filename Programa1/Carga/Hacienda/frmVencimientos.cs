@@ -1,10 +1,13 @@
 ﻿namespace Programa1.Carga.Hacienda
 {
+    using Formatear_Excel;
     using Programa1.DB;
     using Programa1.DB.Tesoreria;
     using System;
     using System.Drawing;
     using System.Windows.Forms;
+    using Excel = Microsoft.Office.Interop.Excel;
+
     public partial class frmVencimientos : Form
     {
         public Saldos_Consignatarios saldos = new Saldos_Consignatarios();
@@ -350,5 +353,44 @@
             Compras_P1();
             Compras_P2();
         }
+
+        private void cmdImprimir_Click(object sender, EventArgs e)
+        {
+            //Crear un excel para imprimir
+            Excel.Application xlApp;
+            Excel.Workbook xlWorkBook;
+            Excel.Worksheet xlWorkSheet;
+            
+            xlApp = new Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Add();
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+            //Agregar los datos
+            for(int i = 0; i <= grd.Rows - 1; i++)
+            {
+                for(int j = 0; j <= grd.Cols - 1; j++)
+                {
+                    xlWorkSheet.Cells[i + 1, j + 1] = grd.get_Texto(i, j);
+                }                
+            }
+
+            Formatear fm = new Formatear();
+            fm.Hoja = xlWorkSheet;
+            fm.Formatear_E_Imprimir();
+            xlWorkSheet = fm.Hoja;
+
+            //Mostrar los datos
+            xlApp.Visible = true;
+
+            //Imprimir            
+            xlWorkBook.PrintPreview();
+
+            //Liberar
+            xlWorkBook.Close(true, null, null);
+            xlApp.Quit();
+            fm.Hoja = null;
+        }
+
+        
     }
 }

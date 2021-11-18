@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVencimientos));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -45,6 +44,7 @@
             this.cmdActualizar = new Programa1.Controles.cBoton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmbnvaBoleta = new Programa1.Controles.cBoton();
+            this.cmdImprimir = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -78,6 +78,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.cmdImprimir);
             this.splitContainer1.Panel2.Controls.Add(this.grdDetalle);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
@@ -261,6 +262,7 @@
             this.cFecha.Location = new System.Drawing.Point(5, 3);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(100, 243);
             this.cFecha.TabIndex = 5;
@@ -359,6 +361,17 @@
             this.cmbnvaBoleta.Texto = "Generar Boleta";
             this.cmbnvaBoleta.Click += new System.EventHandler(this.cmbnvaBoleta_Click);
             // 
+            // cmdImprimir
+            // 
+            this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdImprimir.Location = new System.Drawing.Point(1073, 3);
+            this.cmdImprimir.Name = "cmdImprimir";
+            this.cmdImprimir.Size = new System.Drawing.Size(187, 79);
+            this.cmdImprimir.TabIndex = 1;
+            this.cmdImprimir.Texto = "Imprimir";
+            this.cmdImprimir.Click += new System.EventHandler(this.cmdImprimir_Click);
+            // 
             // frmVencimientos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -407,5 +420,6 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Panel panel3;
         private MaterialSkin.Controls.MaterialCheckBox chFecha;
+        private Controles.cBoton cmdImprimir;
     }
 }

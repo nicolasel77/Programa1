@@ -298,6 +298,16 @@
 
             return dt;
         }
+
+        public DataTable Consulta_Precios(int tipo)
+        {
+            var dt = new DataTable("Datos");
+            
+            SqlParameter parametro = new SqlParameter("@Tipo", tipo);
+            dt = sp_Datos("sp_ConsultaPrecios", parametro);
+
+            return dt;
+        }
         #endregion
 
         #region " Editar Datos "

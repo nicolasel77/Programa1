@@ -27,7 +27,6 @@
 
         [MaxLength(50, ErrorMessage = "El {0} no puede ser mayor a {1} caracteres")]
         [Required]
-        public string Nombre { get; set; }
 
         public int Id_Frigorifico { get; set; }
 
@@ -36,7 +35,7 @@
         public bool Ordern_XId { get; set; } = true;
 
 
-        public DataTable Datos(string filtro = "")
+        public new DataTable Datos(string filtro = "")
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);

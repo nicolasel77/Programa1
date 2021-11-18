@@ -2802,5 +2802,53 @@
                 }
             }
         }
+
+        private void consultaPreciosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)            {
+
+                if (f.Name == "frmConsulta_Precios")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmConsulta_Precios");
+                t.Text = "Consulta_Precios";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmConsulta_Precios = new Carga.Precios.frmConsulta_Precios();
+                frmConsulta_Precios.MdiParent = this;
+                frmConsulta_Precios.Disposed += FrmConsulta_Precios_Disposed;
+                forms.Add(frmConsulta_Precios);
+                frmConsulta_Precios.Show();
+                frmConsulta_Precios.WindowState = FormWindowState.Minimized;
+                frmConsulta_Precios.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmConsulta_Precios_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Consulta_Precios")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmConsulta_Precios")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

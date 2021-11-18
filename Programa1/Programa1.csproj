@@ -70,12 +70,9 @@
     <Reference Include="C1.Common">
       <HintPath>..\SpeedGrilla\C1.Common.dll</HintPath>
     </Reference>
-    <Reference Include="C1.Win.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04" />
-    <Reference Include="C1.Win.C1Command.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=e808566f358766d8, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1FlexGrid.4">
       <HintPath>..\SpeedGrilla\C1.Win.C1FlexGrid.4.dll</HintPath>
     </Reference>
-    <Reference Include="C1.Win.C1Input.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL" />
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
     </Reference>
@@ -226,6 +223,12 @@
     </Compile>
     <Compile Include="Carga\Precios\frmBorrar_Carne.Designer.cs">
       <DependentUpon>frmBorrar_Carne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Precios\frmConsulta_Precios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Precios\frmConsulta_Precios.Designer.cs">
+      <DependentUpon>frmConsulta_Precios.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Precios\frmDiseñoImpresion.cs">
       <SubType>Form</SubType>
@@ -947,6 +950,9 @@
     <EmbeddedResource Include="Carga\Precios\frmBorrar_Carne.resx">
       <DependentUpon>frmBorrar_Carne.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Precios\frmConsulta_Precios.resx">
+      <DependentUpon>frmConsulta_Precios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Carga\Precios\frmDiseñoImpresion.resx">
       <DependentUpon>frmDiseñoImpresion.cs</DependentUpon>
     </EmbeddedResource>
@@ -1261,6 +1267,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Formatear_Excel\Formatear_Excel.vbproj">
+      <Project>{cc913e3c-fd5a-4021-ade6-6b7c4933485a}</Project>
+      <Name>Formatear_Excel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sistema_Clases\Sistema_Clases.csproj">
       <Project>{4ead2d2f-4e6b-4482-9414-439756870e04}</Project>
       <Name>Sistema_Clases</Name>
