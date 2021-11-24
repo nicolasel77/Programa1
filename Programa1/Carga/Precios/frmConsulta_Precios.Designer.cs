@@ -31,9 +31,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grd = new Grilla2.SpeedGrilla();
-            this.cmdLimpiar = new Programa1.Controles.cBoton();
             this.lstTipos = new System.Windows.Forms.ListBox();
-            this.lstListas = new System.Windows.Forms.ListBox();
+            this.cmdImprimir = new Programa1.Controles.cBoton();
+            this.cmdLimpiar = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,11 +55,11 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.cmdImprimir);
             this.splitContainer1.Panel2.Controls.Add(this.cmdLimpiar);
             this.splitContainer1.Panel2.Controls.Add(this.lstTipos);
-            this.splitContainer1.Panel2.Controls.Add(this.lstListas);
             this.splitContainer1.Size = new System.Drawing.Size(1116, 726);
-            this.splitContainer1.SplitterDistance = 787;
+            this.splitContainer1.SplitterDistance = 869;
             this.splitContainer1.TabIndex = 1;
             // 
             // panel1
@@ -71,7 +71,7 @@
             this.panel1.Controls.Add(this.grd);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(781, 720);
+            this.panel1.Size = new System.Drawing.Size(863, 720);
             this.panel1.TabIndex = 1;
             // 
             // grd
@@ -105,18 +105,10 @@
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(775, 714);
+            this.grd.Size = new System.Drawing.Size(857, 714);
             this.grd.TabIndex = 0;
-            // 
-            // cmdLimpiar
-            // 
-            this.cmdLimpiar.BackColor = System.Drawing.Color.Gainsboro;
-            this.cmdLimpiar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cmdLimpiar.Location = new System.Drawing.Point(0, 686);
-            this.cmdLimpiar.Name = "cmdLimpiar";
-            this.cmdLimpiar.Size = new System.Drawing.Size(325, 40);
-            this.cmdLimpiar.TabIndex = 3;
-            this.cmdLimpiar.Texto = "Limpiar";
+            this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
+            this.grd.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grd_KeyPress);
             // 
             // lstTipos
             // 
@@ -130,23 +122,30 @@
             this.lstTipos.ItemHeight = 18;
             this.lstTipos.Location = new System.Drawing.Point(3, 3);
             this.lstTipos.Name = "lstTipos";
-            this.lstTipos.Size = new System.Drawing.Size(155, 684);
+            this.lstTipos.Size = new System.Drawing.Size(237, 630);
             this.lstTipos.TabIndex = 2;
             this.lstTipos.SelectedIndexChanged += new System.EventHandler(this.lstTipos_SelectedIndexChanged);
             // 
-            // lstListas
+            // cmdImprimir
             // 
-            this.lstListas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstListas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstListas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lstListas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lstListas.FormattingEnabled = true;
-            this.lstListas.ItemHeight = 18;
-            this.lstListas.Location = new System.Drawing.Point(164, 3);
-            this.lstListas.Name = "lstListas";
-            this.lstListas.Size = new System.Drawing.Size(154, 684);
-            this.lstListas.TabIndex = 2;
+            this.cmdImprimir.BackColor = System.Drawing.Color.Gainsboro;
+            this.cmdImprimir.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cmdImprimir.Location = new System.Drawing.Point(0, 646);
+            this.cmdImprimir.Name = "cmdImprimir";
+            this.cmdImprimir.Size = new System.Drawing.Size(243, 40);
+            this.cmdImprimir.TabIndex = 4;
+            this.cmdImprimir.Texto = "Imprimir";
+            this.cmdImprimir.Click += new System.EventHandler(this.cmdImprimir_Click);
+            // 
+            // cmdLimpiar
+            // 
+            this.cmdLimpiar.BackColor = System.Drawing.Color.Gainsboro;
+            this.cmdLimpiar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cmdLimpiar.Location = new System.Drawing.Point(0, 686);
+            this.cmdLimpiar.Name = "cmdLimpiar";
+            this.cmdLimpiar.Size = new System.Drawing.Size(243, 40);
+            this.cmdLimpiar.TabIndex = 3;
+            this.cmdLimpiar.Texto = "Limpiar";
             // 
             // frmConsulta_Precios
             // 
@@ -172,6 +171,6 @@
         private Grilla2.SpeedGrilla grd;
         private Controles.cBoton cmdLimpiar;
         private System.Windows.Forms.ListBox lstTipos;
-        private System.Windows.Forms.ListBox lstListas;
+        private Controles.cBoton cmdImprimir;
     }
 }

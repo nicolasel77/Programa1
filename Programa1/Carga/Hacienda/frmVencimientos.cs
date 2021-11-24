@@ -376,7 +376,7 @@
 
             Formatear fm = new Formatear();
             fm.Hoja = xlWorkSheet;
-            fm.Formatear_E_Imprimir();
+            fm.Vencimientos_P1();
             xlWorkSheet = fm.Hoja;
 
             //Mostrar los datos
@@ -385,12 +385,19 @@
             //Imprimir            
             xlWorkBook.PrintPreview();
 
+
             //Liberar
-            xlWorkBook.Close(true, null, null);
-            xlApp.Quit();
-            fm.Hoja = null;
+            //xlWorkBook.Close(true, null, null);
+            //xlApp.Quit();
+            //fm.Hoja = null;
+
+            System.Data.DataTable dt = saldos.Vencimientos_Agr(armarCadena());
+            dt.Columns.RemoveAt(0);
+            dt.Columns.Remove("Saldo");
+
+            fm.Formato_Automatico(dt);
         }
 
-        
+     
     }
 }

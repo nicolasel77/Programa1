@@ -39,12 +39,12 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.cFecha = new Programa1.Controles.cFechas();
             this.chConSaldo = new MaterialSkin.Controls.MaterialCheckBox();
+            this.cmdImprimir = new Programa1.Controles.cBoton();
             this.grdDetalle = new Grilla2.SpeedGrilla();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cmdActualizar = new Programa1.Controles.cBoton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmbnvaBoleta = new Programa1.Controles.cBoton();
-            this.cmdImprimir = new Programa1.Controles.cBoton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -288,6 +288,17 @@
             this.chConSaldo.UseVisualStyleBackColor = true;
             this.chConSaldo.CheckedChanged += new System.EventHandler(this.chConSaldo_CheckedChanged);
             // 
+            // cmdImprimir
+            // 
+            this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdImprimir.Location = new System.Drawing.Point(1073, 3);
+            this.cmdImprimir.Name = "cmdImprimir";
+            this.cmdImprimir.Size = new System.Drawing.Size(187, 79);
+            this.cmdImprimir.TabIndex = 1;
+            this.cmdImprimir.Texto = "Imprimir";
+            this.cmdImprimir.Click += new System.EventHandler(this.cmdImprimir_Click);
+            // 
             // grdDetalle
             // 
             this.grdDetalle.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
@@ -360,17 +371,6 @@
             this.cmbnvaBoleta.TabIndex = 1;
             this.cmbnvaBoleta.Texto = "Generar Boleta";
             this.cmbnvaBoleta.Click += new System.EventHandler(this.cmbnvaBoleta_Click);
-            // 
-            // cmdImprimir
-            // 
-            this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdImprimir.Location = new System.Drawing.Point(1073, 3);
-            this.cmdImprimir.Name = "cmdImprimir";
-            this.cmdImprimir.Size = new System.Drawing.Size(187, 79);
-            this.cmdImprimir.TabIndex = 1;
-            this.cmdImprimir.Texto = "Imprimir";
-            this.cmdImprimir.Click += new System.EventHandler(this.cmdImprimir_Click);
             // 
             // frmVencimientos
             // 

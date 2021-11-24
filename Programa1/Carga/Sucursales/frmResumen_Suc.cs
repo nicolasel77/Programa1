@@ -466,13 +466,16 @@
                 Datos_Genericos dg = new Datos_Genericos();
                 DataTable dt = dg.Datos(s);
 
-                for(int i = dt.Columns.Count - 1; i >= 0; i--)
+                if (userr.Permiso == Usuarios.e_Permiso.Supervisor)
                 {
-                    DataColumn dc = dt.Columns[i];
-                    if (dc.ColumnName.Contains("Total") || dc.ColumnName.Contains("Costo") || dc.ColumnName.Contains("Precio") || dc.ColumnName.Contains("Importe"))
+                    for (int i = dt.Columns.Count - 1; i >= 0; i--)
                     {
-                        dt.Columns.Remove(dc);
-                    }
+                        DataColumn dc = dt.Columns[i];
+                        if (dc.ColumnName.Contains("Total") || dc.ColumnName.Contains("Costo") || dc.ColumnName.Contains("Precio") || dc.ColumnName.Contains("Importe"))
+                        {
+                            dt.Columns.Remove(dc);
+                        }
+                    } 
                 }
                 fr.grd.MostrarDatos(dt, true, false);
                 fr.grd.AutosizeAll();
