@@ -79,6 +79,9 @@
             this.aRendirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transferenciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.soloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.todosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splPrincipal)).BeginInit();
             this.splPrincipal.Panel1.SuspendLayout();
             this.splPrincipal.Panel2.SuspendLayout();
@@ -139,6 +142,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.grdSalidas);
             this.splitContainer2.Size = new System.Drawing.Size(1220, 719);
             this.splitContainer2.SplitterDistance = 464;
+            this.splitContainer2.SplitterWidth = 8;
             this.splitContainer2.TabIndex = 0;
             // 
             // lblEntradas
@@ -253,7 +257,7 @@
             this.panel7.Controls.Add(this.rdCaja);
             this.panel7.Controls.Add(this.rdNinguno);
             this.panel7.Controls.Add(this.label5);
-            this.panel7.Location = new System.Drawing.Point(333, 693);
+            this.panel7.Location = new System.Drawing.Point(329, 693);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(419, 24);
             this.panel7.TabIndex = 3;
@@ -371,7 +375,7 @@
             this.materialLabel3.Location = new System.Drawing.Point(3, 3);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(749, 20);
+            this.materialLabel3.Size = new System.Drawing.Size(745, 20);
             this.materialLabel3.TabIndex = 1;
             this.materialLabel3.Text = "Gastos";
             this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -387,7 +391,7 @@
             this.lblTotalGrillaGastos.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaGastos.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalGrillaGastos.Name = "lblTotalGrillaGastos";
-            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(324, 24);
+            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(320, 24);
             this.lblTotalGrillaGastos.TabIndex = 2;
             this.lblTotalGrillaGastos.Text = "Total Salida";
             this.lblTotalGrillaGastos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -424,7 +428,7 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 50;
-            this.grdSalidas.Size = new System.Drawing.Size(749, 660);
+            this.grdSalidas.Size = new System.Drawing.Size(745, 660);
             this.grdSalidas.TabIndex = 0;
             this.grdSalidas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSalidas_Editado);
             this.grdSalidas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSalidas_CambioFila);
@@ -795,7 +799,8 @@
             this.verTransferenciasToolStripMenuItem,
             this.aRendirToolStripMenuItem,
             this.chequesToolStripMenuItem,
-            this.transferenciaToolStripMenuItem});
+            this.transferenciaToolStripMenuItem,
+            this.verToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1517, 24);
@@ -826,6 +831,31 @@
             this.transferenciaToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
             this.transferenciaToolStripMenuItem.Text = "Transferencia";
             this.transferenciaToolStripMenuItem.Click += new System.EventHandler(this.transferenciaToolStripMenuItem_Click);
+            // 
+            // verToolStripMenuItem
+            // 
+            this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.soloToolStripMenuItem,
+            this.todosToolStripMenuItem});
+            this.verToolStripMenuItem.Name = "verToolStripMenuItem";
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.verToolStripMenuItem.Text = "Ver";
+            // 
+            // soloToolStripMenuItem
+            // 
+            this.soloToolStripMenuItem.Checked = true;
+            this.soloToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.soloToolStripMenuItem.Name = "soloToolStripMenuItem";
+            this.soloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.soloToolStripMenuItem.Text = "Solo";
+            this.soloToolStripMenuItem.Click += new System.EventHandler(this.soloToolStripMenuItem_Click);
+            // 
+            // todosToolStripMenuItem
+            // 
+            this.todosToolStripMenuItem.Name = "todosToolStripMenuItem";
+            this.todosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.todosToolStripMenuItem.Text = "Todos";
+            this.todosToolStripMenuItem.Click += new System.EventHandler(this.todosToolStripMenuItem_Click);
             // 
             // frmCaja_Diaria
             // 
@@ -913,5 +943,8 @@
         private MaterialSkin.Controls.MaterialContextMenuStrip mnuGastos;
         private System.Windows.Forms.ToolStripMenuItem chequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transferenciaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem soloToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem todosToolStripMenuItem;
     }
 }

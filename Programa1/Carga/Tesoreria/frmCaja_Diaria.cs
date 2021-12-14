@@ -24,6 +24,8 @@ namespace Programa1.Carga.Tesoreria
         }
         private t_Repetir o_Repetir;
         private DateTime fdd;
+        private bool Ver_Solo = true;
+
         /// <summary>
         /// Caja Diaria
         /// </summary>
@@ -71,7 +73,7 @@ namespace Programa1.Carga.Tesoreria
 
         private readonly Gastos cGastos = new Gastos();
         private readonly Detalle_Gastos dg = new Detalle_Gastos();
-        
+
         private int filtroTipoG = 0;
 
         #region " FORM "
@@ -80,12 +82,15 @@ namespace Programa1.Carga.Tesoreria
         {
             usuario = user;
             cGastos.Usuario.ID = user.ID;
+
             InitializeComponent();
         }
 
         private void frmCaja_Diaria_Load(object sender, EventArgs e)
         {
             CD.Usuario = usuario.ID;
+            soloToolStripMenuItem.Text = "Solo " + usuario.Nombre;
+
             mntFecha.SetDate(CD.Fecha);
 
             string f = $"{CD.Fecha:MMMM}";
@@ -174,7 +179,6 @@ namespace Programa1.Carga.Tesoreria
             {
                 CD.Fecha = fr.mntFecha.SelectionStart.Date;
                 CD.Actualizar();
-                mntFecha.MaxDate = CD.Fecha;
                 mntFecha.SetDate(fr.mntFecha.SelectionStart.Date);
                 Cargar_Datos();
             }
@@ -188,7 +192,7 @@ namespace Programa1.Carga.Tesoreria
             if (rdDetalle.Checked) { o_Repetir = t_Repetir.Detalle; }
             if (rdNinguno.Checked) { o_Repetir = t_Repetir.Ninguno; }
         }
-             
+
         private void rdCajas_CheckedChanged(object sender, EventArgs e)
         {
             Cargar_Cajas();
@@ -200,7 +204,7 @@ namespace Programa1.Carga.Tesoreria
             fr.ShowDialog();
 
         }
-              
+
         private void transferenciaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTransferencia fr = new frmTransferencia();
@@ -228,7 +232,7 @@ namespace Programa1.Carga.Tesoreria
                 }
                 else
                 {
-                    if(cHacia == 11)
+                    if (cHacia == 11)
                     {
                         //CHEQUES
                         frmCheques frc = new frmCheques();
@@ -258,6 +262,22 @@ namespace Programa1.Carga.Tesoreria
                 Cargar_Datos();
             }
         }
+
+        private void soloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ver_Solo = true;
+            soloToolStripMenuItem.Checked = true;
+            todosToolStripMenuItem.Checked = false;
+            Cargar_Datos();
+        }
+
+        private void todosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ver_Solo = false;
+            soloToolStripMenuItem.Checked = false;
+            todosToolStripMenuItem.Checked = true;
+            Cargar_Datos();
+        }
         #endregion
 
 
@@ -274,8 +294,13 @@ namespace Programa1.Carga.Tesoreria
             Formato_Entradas();
             grdEntradas.Visible = true;
 
+            if (Ver_Solo == true)
+            {
+                filtro = filtro + " AND Usuario=" + usuario.ID;
+            }
             Crear_Menu_Gastos(filtro);
-            if(filtroTipoG != 0) { filtro = $"ID_TipoGastos={filtroTipoG} AND {filtro}"; }
+
+            if (filtroTipoG != 0) { filtro = $"ID_TipoGastos={filtroTipoG} AND {filtro}"; }
 
             grdSalidas.MostrarDatos(cGastos.Datos_Vista(filtro), true);
             grdSalidas.ActivarCelda(grdSalidas.Rows - 1, s_Caja);
@@ -298,7 +323,7 @@ namespace Programa1.Carga.Tesoreria
             mnuGastos.Items.Add(t);
 
             DataTable dt = cGastos.Tipos_Rango(filtro);
-            foreach(DataRow dr in dt.Rows)
+            foreach (DataRow dr in dt.Rows)
             {
                 t = new ToolStripMenuItem();
                 t.Text = $"{dr[0]}. {dr[1]}";
@@ -327,7 +352,7 @@ namespace Programa1.Carga.Tesoreria
                 {
                     filtroTipoG = 0;
                     Cargar_Datos();
-                } 
+                }
             }
         }
 
@@ -721,7 +746,7 @@ namespace Programa1.Carga.Tesoreria
         #region " Grilla Salidas "
         private void grdSalidas_Editado(short f, short c, object a)
         {
-            if (cGastos.Usuario.ID == 0 | usuario.ID == cGastos.Usuario.ID | usuario.Permiso == Usuarios.e_Permiso.Administrador)
+            if (usuario.ID == cGastos.Usuario.ID | usuario.Permiso == Usuarios.e_Permiso.Administrador | cGastos.ID == 0)
             {
                 if (mntFecha.SelectionStart.Date >= CD.Fecha | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                 {
@@ -944,7 +969,7 @@ namespace Programa1.Carga.Tesoreria
 
                                     cGastos.Actualizar("Autorizado", cGastos.Autorizado);
                                     cGastos.Actualizar("Fecha_Autorizado", DateTime.Now);
-                                    cGastos.Actualizar("Usuario", cGastos.Usuario.ID);
+                                    cGastos.Actualizar("Usuario", usuario.ID);
 
                                     grdSalidas.set_Texto(f, s_Autorizado, a);
                                     grdSalidas.set_Texto(f, s_Autorizado + 1, DateTime.Now);
@@ -1273,6 +1298,7 @@ namespace Programa1.Carga.Tesoreria
         {
             // Sueldos
             frmCargar_Sueldos fr = new frmCargar_Sueldos();
+            cGastos.Usuario = usuario;
             fr.gastos = cGastos;
             fr.ShowDialog();
             if (fr.Aceptado == true)
@@ -1313,18 +1339,21 @@ namespace Programa1.Carga.Tesoreria
 
         private void Cargar_FilaSalida(int Fila)
         {
-            cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Id));
-            cGastos.Fecha = mntFecha.SelectionStart.Date;
-            cGastos.caja.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Caja));
-            cGastos.TG.Id_Tipo = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Tipo));
-            cGastos.Id_SubTipoGastos = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_SubTipo));
-            cGastos.Desc_SubTipo = Convert.ToString(grdSalidas.get_Texto(Fila, s_SubTipo + 1));
-            cGastos.Id_DetalleGastos = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_IDDetalle));
-            cGastos.Descripcion = Convert.ToString(grdSalidas.get_Texto(Fila, s_Descripcion));
-            cGastos.Importe = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Importe));
-            cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Usuario));
-            cGastos.Autorizado = Convert.ToBoolean(grdSalidas.get_Texto(Fila, s_Autorizado));
-            cGastos.Fecha_Autorizado = Convert.ToDateTime(grdSalidas.get_Texto(Fila, s_Fecha_Autorizado));
+            if (Fila > 0)
+            {
+                cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Id));
+                cGastos.Fecha = mntFecha.SelectionStart.Date;
+                cGastos.caja.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Caja));
+                cGastos.TG.Id_Tipo = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Tipo));
+                cGastos.Id_SubTipoGastos = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_SubTipo));
+                cGastos.Desc_SubTipo = Convert.ToString(grdSalidas.get_Texto(Fila, s_SubTipo + 1));
+                cGastos.Id_DetalleGastos = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_IDDetalle));
+                cGastos.Descripcion = Convert.ToString(grdSalidas.get_Texto(Fila, s_Descripcion));
+                cGastos.Importe = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Importe));
+                cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Usuario));
+                cGastos.Autorizado = Convert.ToBoolean(grdSalidas.get_Texto(Fila, s_Autorizado));
+                cGastos.Fecha_Autorizado = Convert.ToDateTime(grdSalidas.get_Texto(Fila, s_Fecha_Autorizado));
+            }
         }
 
         private void Repetir_FilaG()
@@ -1401,8 +1430,9 @@ namespace Programa1.Carga.Tesoreria
         }
 
 
+
         #endregion
 
-       
+        
     }
 }

@@ -77,6 +77,9 @@
             grd.set_ColW(cSep2, 30);
             grd.Columnas[cSep1].StyleNew.BackColor = System.Drawing.Color.Gainsboro;
             grd.Columnas[cSep2].StyleNew.BackColor = System.Drawing.Color.Gainsboro;
+
+            grd.Columnas[cCosto].StyleNew.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grd.Columnas[cVenta].StyleNew.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
         }
 
         private void grd_Editado(short f, short c, object a)

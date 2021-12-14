@@ -23,6 +23,7 @@ namespace Programa1.Carga.Tesoreria
         const byte Fecha_Acreditacion = 7;
         const byte Origen = 8;
         const byte Destino = 9;
+        const byte Caja = 10;
         const byte Seleccionado = 11;
 
         /// <summary>
@@ -56,6 +57,7 @@ namespace Programa1.Carga.Tesoreria
             grd.set_ColW(Id, 0);
             grd.set_ColW(Origen, 200);
             grd.set_ColW(Destino, 200);
+            grd.set_ColW(Caja, 0);
             grd.Columnas[Importe].Format = "N1";
 
             if (selec == false) { grd.ActivarCelda(grd.Rows - 1, Numero); } else { grd.ActivarCelda(1, Seleccionado); }

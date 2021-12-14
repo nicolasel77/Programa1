@@ -35,6 +35,10 @@
                 Herramientas.Herramientas h = new Herramientas.Herramientas();
 
                 string s = h.Codigos_Seleccionados(lstSucs, "Suc IN({0})");
+                if (chBajas.Checked)
+                {
+                    s = s + " AND LEFT(Nombre, 4) NOT LIKE 'baja'";
+                }
                 if (rdNinguno.Checked == false)
                 {
                     if (rdAdelanto.Checked == true)
@@ -43,9 +47,22 @@
                     }
                     else
                     {
-                        // devuelve el primer día del mes anterior                        
+                        if (rdAguinaldo.Checked == true)
+                        {
 
-                        grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, dbEmpleados.dbo.f_Saldo(ID, DATEADD(MONTH, -1, DATEADD(DAY, DAY(GETDATE()) * -1 + 1, GETDATE())), '1/1/1900', '1/1/1900') AS Saldo, CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
+                        }
+                        else
+                        {
+                            if (rdVacaciones.Checked == true)
+                            {
+
+                            }
+                            else
+                            {
+                                // devuelve el primer día del mes anterior                        
+                                grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, dbEmpleados.dbo.f_Saldo(ID, DATEADD(MONTH, -1, DATEADD(DAY, DAY(GETDATE()) * -1 + 1, GETDATE())), '1/1/1900', '1/1/1900') AS Saldo, CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
+                            }
+                        }
                     }
                 }
                 else
@@ -122,7 +139,7 @@
                 if (Convert.ToBoolean(grd.get_Texto(i, 4)) == true)
                 {
                     gastos.Id_SubTipoGastos = Convert.ToInt32(grd.get_Texto(i, 1));
-                    gastos.Desc_SubTipo = Convert.ToString(grd.get_Texto(i, 2));                   
+                    gastos.Desc_SubTipo = Convert.ToString(grd.get_Texto(i, 2));
                     gastos.Importe = Convert.ToDouble(grd.get_Texto(i, 3));
                     gastos.Agregar();
                 }
@@ -133,6 +150,21 @@
         private void cmdCancelar_Click(object sender, EventArgs e)
         {
             Hide();
+        }
+
+        private void rdVacaciones_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdNinguno.Checked == true) { Cargar_Datos(); }
+        }
+
+        private void rdAguinaldo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdNinguno.Checked == true) { Cargar_Datos(); }
+        }
+
+        private void chBajas_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdNinguno.Checked == true) { Cargar_Datos(); }
         }
     }
 }

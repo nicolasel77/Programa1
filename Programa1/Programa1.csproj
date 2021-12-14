@@ -883,6 +883,7 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Herramientas\c_Base_Access.cs" />
+    <Compile Include="Herramientas\Expresiones_Regulares.cs" />
     <Compile Include="Herramientas\Herramientas.cs" />
     <Compile Include="Mail\frmMail.cs">
       <SubType>Form</SubType>
