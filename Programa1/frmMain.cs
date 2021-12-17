@@ -2865,5 +2865,15 @@
         {
             usuario.Nombre = "Nicolas";
         }
+
+        private void promediosCarneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void importarExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
