@@ -243,8 +243,8 @@
 
         private void cmbnvaBoleta_Click(object sender, EventArgs e)
         {
-            frmGenerarnvaBoleta fr = new frmGenerarnvaBoleta();
-            fr.dt = saldos.Vencimientos(" (Dif < -1 OR Dif > 1)");
+            frmGenerarNuevaBoleta fr = new frmGenerarNuevaBoleta();
+            fr.dt = saldos.Vencimientos(" (Dif < -1 OR Dif > 1) AND Estado=1");
             fr.Cargar();
             fr.Show();
         }

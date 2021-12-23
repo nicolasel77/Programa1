@@ -49,7 +49,7 @@
                     {
                         if (rdAguinaldo.Checked == true)
                         {
-
+                            grd.MostrarDatos(empleados.Datos_Vista(s, $"Suc, ID, Nombre, dbEmpleados.dbo.f_SaldoAguinaldo(DATEADD(MONTH, 1, DATEADD(DAY, DAY(GETDATE()) * -1, GETDATE())), ID)/{nuDivisor.Value} AS Aguinaldo, CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
                         }
                         else
                         {
@@ -131,8 +131,8 @@
         {
             Aceptado = true;
 
-            gastos.Id_DetalleGastos = 1;
-            gastos.Descripcion = rdResto.Checked ? "Resto sueldo" : "Adelanto Sueldo";
+            gastos.Id_DetalleGastos = rdAguinaldo.Checked ? 2 : 1;
+            gastos.Descripcion = rdAguinaldo.Checked ? "Aguinaldo 1/2" : rdResto.Checked ? "Resto sueldo" : "Adelanto Sueldo";
 
             for (int i = 1; i <= grd.Rows - 2; i++)
             {
@@ -165,6 +165,11 @@
         private void chBajas_CheckedChanged(object sender, EventArgs e)
         {
             if (rdNinguno.Checked == true) { Cargar_Datos(); }
+        }
+
+        private void nuDivisor_ValueChanged(object sender, EventArgs e)
+        {
+            Cargar_Datos();
         }
     }
 }

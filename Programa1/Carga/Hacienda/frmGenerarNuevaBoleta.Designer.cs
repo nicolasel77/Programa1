@@ -1,7 +1,7 @@
 ﻿namespace Programa1.Carga.Hacienda
 {
 
-    partial class frmGenerarnvaBoleta
+    partial class frmGenerarNuevaBoleta
     {
         /// <summary>
         /// Required designer variable.
@@ -29,35 +29,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGenerarnvaBoleta));
-            this.chCargarPagos = new MaterialSkin.Controls.MaterialCheckBox();
             this.cmbImprimir = new MaterialSkin.Controls.MaterialFlatButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdOriginal = new Grilla2.SpeedGrilla();
             this.grdnvaBoleta = new Grilla2.SpeedGrilla();
+            this.cmdGuardar = new MaterialSkin.Controls.MaterialFlatButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtPresupuesto = new System.Windows.Forms.TextBox();
+            this.lblDif = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtFecha = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // chCargarPagos
-            // 
-            this.chCargarPagos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chCargarPagos.AutoSize = true;
-            this.chCargarPagos.Depth = 0;
-            this.chCargarPagos.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chCargarPagos.Location = new System.Drawing.Point(12, 642);
-            this.chCargarPagos.Margin = new System.Windows.Forms.Padding(0);
-            this.chCargarPagos.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chCargarPagos.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chCargarPagos.Name = "chCargarPagos";
-            this.chCargarPagos.Ripple = true;
-            this.chCargarPagos.Size = new System.Drawing.Size(114, 30);
-            this.chCargarPagos.TabIndex = 2;
-            this.chCargarPagos.Text = "Cargar Pagos";
-            this.chCargarPagos.UseVisualStyleBackColor = true;
-            this.chCargarPagos.Visible = false;
             // 
             // cmbImprimir
             // 
@@ -162,15 +148,92 @@
             this.grdnvaBoleta.TabIndex = 0;
             this.grdnvaBoleta.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdnvaBoleta_Editado);
             // 
-            // frmGenerarnvaBoleta
+            // cmdGuardar
+            // 
+            this.cmdGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGuardar.AutoSize = true;
+            this.cmdGuardar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdGuardar.Depth = 0;
+            this.cmdGuardar.Location = new System.Drawing.Point(1285, 638);
+            this.cmdGuardar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdGuardar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdGuardar.Name = "cmdGuardar";
+            this.cmdGuardar.Primary = false;
+            this.cmdGuardar.Size = new System.Drawing.Size(60, 36);
+            this.cmdGuardar.TabIndex = 5;
+            this.cmdGuardar.Text = "Enviar";
+            this.cmdGuardar.UseVisualStyleBackColor = true;
+            this.cmdGuardar.Click += new System.EventHandler(this.cmdGuardar_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(8, 647);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Presupuesto:";
+            // 
+            // txtPresupuesto
+            // 
+            this.txtPresupuesto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtPresupuesto.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPresupuesto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPresupuesto.Location = new System.Drawing.Point(117, 647);
+            this.txtPresupuesto.Name = "txtPresupuesto";
+            this.txtPresupuesto.Size = new System.Drawing.Size(142, 19);
+            this.txtPresupuesto.TabIndex = 7;
+            this.txtPresupuesto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPresupuesto.TextChanged += new System.EventHandler(this.txtPresupuesto_TextChanged);
+            this.txtPresupuesto.Leave += new System.EventHandler(this.txtPresupuesto_Leave);
+            // 
+            // lblDif
+            // 
+            this.lblDif.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblDif.AutoSize = true;
+            this.lblDif.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDif.Location = new System.Drawing.Point(356, 647);
+            this.lblDif.Name = "lblDif";
+            this.lblDif.Size = new System.Drawing.Size(14, 20);
+            this.lblDif.TabIndex = 8;
+            this.lblDif.Text = "-";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(265, 647);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Diferencia:";
+            // 
+            // dtFecha
+            // 
+            this.dtFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtFecha.Location = new System.Drawing.Point(1352, 647);
+            this.dtFecha.Name = "dtFecha";
+            this.dtFecha.Size = new System.Drawing.Size(86, 20);
+            this.dtFecha.TabIndex = 10;
+            // 
+            // frmGenerarNuevaBoleta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1531, 676);
+            this.Controls.Add(this.dtFecha);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblDif);
+            this.Controls.Add(this.txtPresupuesto);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cmdGuardar);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.cmbImprimir);
-            this.Controls.Add(this.chCargarPagos);
-            this.Name = "frmGenerarnvaBoleta";
+            this.Name = "frmGenerarNuevaBoleta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nueva Boleta";
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -186,8 +249,13 @@
 
         private Grilla2.SpeedGrilla grdnvaBoleta;
         private Grilla2.SpeedGrilla grdOriginal;
-        private MaterialSkin.Controls.MaterialCheckBox chCargarPagos;
         private MaterialSkin.Controls.MaterialFlatButton cmbImprimir;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private MaterialSkin.Controls.MaterialFlatButton cmdGuardar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtPresupuesto;
+        private System.Windows.Forms.Label lblDif;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dtFecha;
     }
 }
