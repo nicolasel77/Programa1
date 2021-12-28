@@ -310,7 +310,7 @@ namespace Programa1.Herramientas
             int i = t.IndexOf("*");
 
             //Por las dudas, permite cualquier formato
-            t = t.Replace(".", ",");
+            //t = t.Replace(".", ",");
 
             string vNum = "0123456789,";
 

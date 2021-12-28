@@ -29,21 +29,25 @@ namespace Programa1.Carga.Tesoreria
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCargar_Sueldos));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.nuDivisor = new System.Windows.Forms.NumericUpDown();
+            this.chBajas = new MaterialSkin.Controls.MaterialCheckBox();
+            this.rdNinguno = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdVacaciones = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdAguinaldo = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdAdelanto = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdResto = new MaterialSkin.Controls.MaterialRadioButton();
             this.lstSucs = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.grd = new Grilla2.SpeedGrilla();
-            this.label2 = new System.Windows.Forms.Label();
-            this.rdResto = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdAdelanto = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdNinguno = new MaterialSkin.Controls.MaterialRadioButton();
             this.cmdCancelar = new Programa1.Controles.cBoton();
             this.cmdAceptar = new Programa1.Controles.cBoton();
+            this.grd = new Grilla2.SpeedGrilla();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuDivisor)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -56,7 +60,11 @@ namespace Programa1.Carga.Tesoreria
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.nuDivisor);
+            this.splitContainer1.Panel1.Controls.Add(this.chBajas);
             this.splitContainer1.Panel1.Controls.Add(this.rdNinguno);
+            this.splitContainer1.Panel1.Controls.Add(this.rdVacaciones);
+            this.splitContainer1.Panel1.Controls.Add(this.rdAguinaldo);
             this.splitContainer1.Panel1.Controls.Add(this.rdAdelanto);
             this.splitContainer1.Panel1.Controls.Add(this.rdResto);
             this.splitContainer1.Panel1.Controls.Add(this.lstSucs);
@@ -70,8 +78,149 @@ namespace Programa1.Carga.Tesoreria
             this.splitContainer1.Panel2.Controls.Add(this.grd);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Size = new System.Drawing.Size(845, 697);
-            this.splitContainer1.SplitterDistance = 380;
+            this.splitContainer1.SplitterDistance = 377;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // nuDivisor
+            // 
+            this.nuDivisor.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nuDivisor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nuDivisor.Location = new System.Drawing.Point(185, 559);
+            this.nuDivisor.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nuDivisor.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nuDivisor.Name = "nuDivisor";
+            this.nuDivisor.Size = new System.Drawing.Size(38, 22);
+            this.nuDivisor.TabIndex = 3;
+            this.nuDivisor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nuDivisor.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nuDivisor.ValueChanged += new System.EventHandler(this.nuDivisor_ValueChanged);
+            // 
+            // chBajas
+            // 
+            this.chBajas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chBajas.AutoSize = true;
+            this.chBajas.Checked = true;
+            this.chBajas.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chBajas.Depth = 0;
+            this.chBajas.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chBajas.Location = new System.Drawing.Point(14, 657);
+            this.chBajas.Margin = new System.Windows.Forms.Padding(0);
+            this.chBajas.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chBajas.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chBajas.Name = "chBajas";
+            this.chBajas.Ripple = true;
+            this.chBajas.Size = new System.Drawing.Size(112, 30);
+            this.chBajas.TabIndex = 2;
+            this.chBajas.Text = "Ocultar Bajas";
+            this.chBajas.UseVisualStyleBackColor = true;
+            this.chBajas.CheckedChanged += new System.EventHandler(this.chBajas_CheckedChanged);
+            // 
+            // rdNinguno
+            // 
+            this.rdNinguno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rdNinguno.AutoSize = true;
+            this.rdNinguno.Depth = 0;
+            this.rdNinguno.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdNinguno.Location = new System.Drawing.Point(14, 614);
+            this.rdNinguno.Margin = new System.Windows.Forms.Padding(0);
+            this.rdNinguno.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdNinguno.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdNinguno.Name = "rdNinguno";
+            this.rdNinguno.Ripple = true;
+            this.rdNinguno.Size = new System.Drawing.Size(81, 30);
+            this.rdNinguno.TabIndex = 1;
+            this.rdNinguno.TabStop = true;
+            this.rdNinguno.Text = "Ninguno";
+            this.rdNinguno.UseVisualStyleBackColor = true;
+            this.rdNinguno.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
+            // 
+            // rdVacaciones
+            // 
+            this.rdVacaciones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rdVacaciones.AutoSize = true;
+            this.rdVacaciones.Depth = 0;
+            this.rdVacaciones.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdVacaciones.Location = new System.Drawing.Point(14, 584);
+            this.rdVacaciones.Margin = new System.Windows.Forms.Padding(0);
+            this.rdVacaciones.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdVacaciones.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdVacaciones.Name = "rdVacaciones";
+            this.rdVacaciones.Ripple = true;
+            this.rdVacaciones.Size = new System.Drawing.Size(100, 30);
+            this.rdVacaciones.TabIndex = 1;
+            this.rdVacaciones.TabStop = true;
+            this.rdVacaciones.Text = "Vacaciones";
+            this.rdVacaciones.UseVisualStyleBackColor = true;
+            this.rdVacaciones.CheckedChanged += new System.EventHandler(this.rdVacaciones_CheckedChanged);
+            // 
+            // rdAguinaldo
+            // 
+            this.rdAguinaldo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rdAguinaldo.AutoSize = true;
+            this.rdAguinaldo.Depth = 0;
+            this.rdAguinaldo.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdAguinaldo.Location = new System.Drawing.Point(14, 554);
+            this.rdAguinaldo.Margin = new System.Windows.Forms.Padding(0);
+            this.rdAguinaldo.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdAguinaldo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdAguinaldo.Name = "rdAguinaldo";
+            this.rdAguinaldo.Ripple = true;
+            this.rdAguinaldo.Size = new System.Drawing.Size(168, 30);
+            this.rdAguinaldo.TabIndex = 1;
+            this.rdAguinaldo.TabStop = true;
+            this.rdAguinaldo.Text = "Aguinaldo   Dividir por:";
+            this.rdAguinaldo.UseVisualStyleBackColor = true;
+            this.rdAguinaldo.CheckedChanged += new System.EventHandler(this.rdAguinaldo_CheckedChanged);
+            // 
+            // rdAdelanto
+            // 
+            this.rdAdelanto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rdAdelanto.AutoSize = true;
+            this.rdAdelanto.Depth = 0;
+            this.rdAdelanto.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdAdelanto.Location = new System.Drawing.Point(14, 524);
+            this.rdAdelanto.Margin = new System.Windows.Forms.Padding(0);
+            this.rdAdelanto.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdAdelanto.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdAdelanto.Name = "rdAdelanto";
+            this.rdAdelanto.Ripple = true;
+            this.rdAdelanto.Size = new System.Drawing.Size(84, 30);
+            this.rdAdelanto.TabIndex = 1;
+            this.rdAdelanto.TabStop = true;
+            this.rdAdelanto.Text = "Adelanto";
+            this.rdAdelanto.UseVisualStyleBackColor = true;
+            this.rdAdelanto.CheckedChanged += new System.EventHandler(this.rdAdelanto_CheckedChanged);
+            // 
+            // rdResto
+            // 
+            this.rdResto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rdResto.AutoSize = true;
+            this.rdResto.Depth = 0;
+            this.rdResto.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdResto.Location = new System.Drawing.Point(14, 494);
+            this.rdResto.Margin = new System.Windows.Forms.Padding(0);
+            this.rdResto.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdResto.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdResto.Name = "rdResto";
+            this.rdResto.Ripple = true;
+            this.rdResto.Size = new System.Drawing.Size(113, 30);
+            this.rdResto.TabIndex = 1;
+            this.rdResto.TabStop = true;
+            this.rdResto.Text = "Resto de Mes";
+            this.rdResto.UseVisualStyleBackColor = true;
+            this.rdResto.CheckedChanged += new System.EventHandler(this.rdResto_CheckedChanged);
             // 
             // lstSucs
             // 
@@ -85,7 +234,7 @@ namespace Programa1.Carga.Tesoreria
             this.lstSucs.Location = new System.Drawing.Point(12, 34);
             this.lstSucs.Name = "lstSucs";
             this.lstSucs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstSucs.Size = new System.Drawing.Size(358, 400);
+            this.lstSucs.Size = new System.Drawing.Size(353, 440);
             this.lstSucs.TabIndex = 0;
             this.lstSucs.SelectedIndexChanged += new System.EventHandler(this.lstSucs_SelectedIndexChanged);
             // 
@@ -98,6 +247,26 @@ namespace Programa1.Carga.Tesoreria
             this.label1.Size = new System.Drawing.Size(71, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Sucursal";
+            // 
+            // cmdCancelar
+            // 
+            this.cmdCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdCancelar.Location = new System.Drawing.Point(277, 665);
+            this.cmdCancelar.Name = "cmdCancelar";
+            this.cmdCancelar.Size = new System.Drawing.Size(166, 22);
+            this.cmdCancelar.TabIndex = 1;
+            this.cmdCancelar.Texto = "Cancelar";
+            this.cmdCancelar.Click += new System.EventHandler(this.cmdCancelar_Click);
+            // 
+            // cmdAceptar
+            // 
+            this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdAceptar.Location = new System.Drawing.Point(105, 665);
+            this.cmdAceptar.Name = "cmdAceptar";
+            this.cmdAceptar.Size = new System.Drawing.Size(166, 22);
+            this.cmdAceptar.TabIndex = 1;
+            this.cmdAceptar.Texto = "Aceptar";
+            this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
             // 
             // grd
             // 
@@ -130,7 +299,7 @@ namespace Programa1.Carga.Tesoreria
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(443, 623);
+            this.grd.Size = new System.Drawing.Size(446, 625);
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
             // 
@@ -144,86 +313,13 @@ namespace Programa1.Carga.Tesoreria
             this.label2.TabIndex = 0;
             this.label2.Text = "Empeados";
             // 
-            // rdResto
-            // 
-            this.rdResto.AutoSize = true;
-            this.rdResto.Depth = 0;
-            this.rdResto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.rdResto.Location = new System.Drawing.Point(14, 447);
-            this.rdResto.Margin = new System.Windows.Forms.Padding(0);
-            this.rdResto.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdResto.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdResto.Name = "rdResto";
-            this.rdResto.Ripple = true;
-            this.rdResto.Size = new System.Drawing.Size(113, 30);
-            this.rdResto.TabIndex = 1;
-            this.rdResto.TabStop = true;
-            this.rdResto.Text = "Resto de Mes";
-            this.rdResto.UseVisualStyleBackColor = true;
-            this.rdResto.CheckedChanged += new System.EventHandler(this.rdResto_CheckedChanged);
-            // 
-            // rdAdelanto
-            // 
-            this.rdAdelanto.AutoSize = true;
-            this.rdAdelanto.Depth = 0;
-            this.rdAdelanto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.rdAdelanto.Location = new System.Drawing.Point(14, 477);
-            this.rdAdelanto.Margin = new System.Windows.Forms.Padding(0);
-            this.rdAdelanto.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdAdelanto.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdAdelanto.Name = "rdAdelanto";
-            this.rdAdelanto.Ripple = true;
-            this.rdAdelanto.Size = new System.Drawing.Size(84, 30);
-            this.rdAdelanto.TabIndex = 1;
-            this.rdAdelanto.TabStop = true;
-            this.rdAdelanto.Text = "Adelanto";
-            this.rdAdelanto.UseVisualStyleBackColor = true;
-            this.rdAdelanto.CheckedChanged += new System.EventHandler(this.rdAdelanto_CheckedChanged);
-            // 
-            // rdNinguno
-            // 
-            this.rdNinguno.AutoSize = true;
-            this.rdNinguno.Depth = 0;
-            this.rdNinguno.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.rdNinguno.Location = new System.Drawing.Point(14, 507);
-            this.rdNinguno.Margin = new System.Windows.Forms.Padding(0);
-            this.rdNinguno.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdNinguno.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdNinguno.Name = "rdNinguno";
-            this.rdNinguno.Ripple = true;
-            this.rdNinguno.Size = new System.Drawing.Size(81, 30);
-            this.rdNinguno.TabIndex = 1;
-            this.rdNinguno.TabStop = true;
-            this.rdNinguno.Text = "Ninguno";
-            this.rdNinguno.UseVisualStyleBackColor = true;
-            this.rdNinguno.CheckedChanged += new System.EventHandler(this.rdNinguno_CheckedChanged);
-            // 
-            // cmdCancelar
-            // 
-            this.cmdCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdCancelar.Location = new System.Drawing.Point(283, 663);
-            this.cmdCancelar.Name = "cmdCancelar";
-            this.cmdCancelar.Size = new System.Drawing.Size(166, 22);
-            this.cmdCancelar.TabIndex = 1;
-            this.cmdCancelar.Texto = "Cancelar";
-            this.cmdCancelar.Click += new System.EventHandler(this.cmdCancelar_Click);
-            // 
-            // cmdAceptar
-            // 
-            this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdAceptar.Location = new System.Drawing.Point(111, 663);
-            this.cmdAceptar.Name = "cmdAceptar";
-            this.cmdAceptar.Size = new System.Drawing.Size(166, 22);
-            this.cmdAceptar.TabIndex = 1;
-            this.cmdAceptar.Texto = "Aceptar";
-            this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
-            // 
             // frmCargar_Sueldos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(845, 697);
             this.Controls.Add(this.splitContainer1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmCargar_Sueldos";
@@ -235,6 +331,7 @@ namespace Programa1.Carga.Tesoreria
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nuDivisor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -251,5 +348,9 @@ namespace Programa1.Carga.Tesoreria
         private MaterialSkin.Controls.MaterialRadioButton rdResto;
         private Controles.cBoton cmdCancelar;
         private Controles.cBoton cmdAceptar;
+        private MaterialSkin.Controls.MaterialRadioButton rdVacaciones;
+        private MaterialSkin.Controls.MaterialRadioButton rdAguinaldo;
+        private MaterialSkin.Controls.MaterialCheckBox chBajas;
+        private System.Windows.Forms.NumericUpDown nuDivisor;
     }
 }

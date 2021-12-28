@@ -172,11 +172,11 @@
     <Compile Include="Carga\Hacienda\frmFrigorificosABM.Designer.cs">
       <DependentUpon>frmFrigorificosABM.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\Hacienda\frmGenerarnvaBoleta.cs">
+    <Compile Include="Carga\Hacienda\frmGenerarNuevaBoleta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Carga\Hacienda\frmGenerarnvaBoleta.Designer.cs">
-      <DependentUpon>frmGenerarnvaBoleta.cs</DependentUpon>
+    <Compile Include="Carga\Hacienda\frmGenerarNuevaBoleta.Designer.cs">
+      <DependentUpon>frmGenerarNuevaBoleta.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Hacienda\frmHacienda_Corrales.cs">
       <SubType>Form</SubType>
@@ -592,6 +592,12 @@
     <Compile Include="Carga\Tesoreria\frmEditar_ARendir.Designer.cs">
       <DependentUpon>frmEditar_ARendir.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmImportar_Excel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmImportar_Excel.Designer.cs">
+      <DependentUpon>frmImportar_Excel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmLeer_Tarjetas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -892,6 +898,7 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Herramientas\c_Base_Access.cs" />
+    <Compile Include="Herramientas\Expresiones_Regulares.cs" />
     <Compile Include="Herramientas\Herramientas.cs" />
     <Compile Include="Mail\frmMail.cs">
       <SubType>Form</SubType>
@@ -932,8 +939,8 @@
     <EmbeddedResource Include="Carga\Hacienda\frmFrigorificosABM.resx">
       <DependentUpon>frmFrigorificosABM.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Carga\Hacienda\frmGenerarnvaBoleta.resx">
-      <DependentUpon>frmGenerarnvaBoleta.cs</DependentUpon>
+    <EmbeddedResource Include="Carga\Hacienda\frmGenerarNuevaBoleta.resx">
+      <DependentUpon>frmGenerarNuevaBoleta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Hacienda\frmHacienda_Corrales.resx">
       <DependentUpon>frmHacienda_Corrales.cs</DependentUpon>
@@ -1135,6 +1142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmEditar_ARendir.resx">
       <DependentUpon>frmEditar_ARendir.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmImportar_Excel.resx">
+      <DependentUpon>frmImportar_Excel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmLeer_Tarjetas.resx">
       <DependentUpon>frmLeer_Tarjetas.cs</DependentUpon>

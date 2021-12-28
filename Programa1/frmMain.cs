@@ -2899,5 +2899,24 @@
                 }
             }
         }
+        private void supervisorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            usuario.Nombre = "Edi";
+        }
+
+        private void cargaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            usuario.Nombre = "Caro";
+        }
+
+        private void administradorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            usuario.Nombre = "Nicolas";
+        }
+
+        private void importarExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
