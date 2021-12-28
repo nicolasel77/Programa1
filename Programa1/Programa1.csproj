@@ -70,9 +70,11 @@
     <Reference Include="C1.Common">
       <HintPath>..\SpeedGrilla\C1.Common.dll</HintPath>
     </Reference>
+    <Reference Include="C1.Win.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04" />
     <Reference Include="C1.Win.C1FlexGrid.4">
       <HintPath>..\SpeedGrilla\C1.Win.C1FlexGrid.4.dll</HintPath>
     </Reference>
+    <Reference Include="C1.Win.C1SplitContainer.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
     </Reference>
@@ -271,6 +273,12 @@
     </Compile>
     <Compile Include="Carga\Precios\frmPromedios.Designer.cs">
       <DependentUpon>frmPromedios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Carga\Precios\frmPromedios_Carne.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Precios\frmPromedios_Carne.Designer.cs">
+      <DependentUpon>frmPromedios_Carne.cs</DependentUpon>
     </Compile>
     <Compile Include="Carga\Proveedores\frmAjustes.cs">
       <SubType>Form</SubType>
@@ -805,6 +813,7 @@
     <Compile Include="DB\Sucursales\Lugares_imp.cs" />
     <Compile Include="DB\Sucursales\Nombre_Listas_ofertas.cs" />
     <Compile Include="DB\Sucursales\Promedios.cs" />
+    <Compile Include="DB\Sucursales\Promedios_Carne.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />
     <Compile Include="DB\Sucursales\Suc_Cuentas.cs" />
     <Compile Include="DB\Sucursales\Titulos.cs" />
@@ -973,6 +982,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Precios\frmPromedios.resx">
       <DependentUpon>frmPromedios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Precios\frmPromedios_Carne.resx">
+      <DependentUpon>frmPromedios_Carne.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Proveedores\frmAjustes.resx">
       <DependentUpon>frmAjustes.cs</DependentUpon>

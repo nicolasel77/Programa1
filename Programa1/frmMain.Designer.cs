@@ -102,6 +102,7 @@
             this.menudenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripSeparator();
             this.promediosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaPreciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHerramientas = new System.Windows.Forms.ToolStripMenuItem();
             this.capitalDeTrabajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
@@ -122,7 +123,7 @@
             this.mnuPrueba = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuGuardar = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
-            this.consultaPreciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.promediosCarneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -662,7 +663,8 @@
             this.menudenciasToolStripMenuItem,
             this.toolStripMenuItem15,
             this.promediosToolStripMenuItem,
-            this.consultaPreciosToolStripMenuItem});
+            this.consultaPreciosToolStripMenuItem,
+            this.promediosCarneToolStripMenuItem});
             this.mnuPrecios.Name = "mnuPrecios";
             this.mnuPrecios.Size = new System.Drawing.Size(57, 20);
             this.mnuPrecios.Tag = "administrador, sistemas, supervisor, datos, operadores";
@@ -701,6 +703,13 @@
             this.promediosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.promediosToolStripMenuItem.Text = "&Promedios";
             this.promediosToolStripMenuItem.Click += new System.EventHandler(this.promediosToolStripMenuItem_Click);
+            // 
+            // consultaPreciosToolStripMenuItem
+            // 
+            this.consultaPreciosToolStripMenuItem.Name = "consultaPreciosToolStripMenuItem";
+            this.consultaPreciosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.consultaPreciosToolStripMenuItem.Text = "Consulta Precios";
+            this.consultaPreciosToolStripMenuItem.Click += new System.EventHandler(this.consultaPreciosToolStripMenuItem_Click);
             // 
             // mnuHerramientas
             // 
@@ -812,28 +821,28 @@
             // sucursalesToolStripMenuItem
             // 
             this.sucursalesToolStripMenuItem.Name = "sucursalesToolStripMenuItem";
-            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sucursalesToolStripMenuItem.Text = "&Sucursales";
             this.sucursalesToolStripMenuItem.Click += new System.EventHandler(this.SucursalesToolStripMenuItem_Click);
             // 
             // proveedoresToolStripMenuItem
             // 
             this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
-            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.proveedoresToolStripMenuItem.Text = "Pr&oveedores";
             this.proveedoresToolStripMenuItem.Click += new System.EventHandler(this.ProveedoresToolStripMenuItem_Click);
             // 
             // productosToolStripMenuItem
             // 
             this.productosToolStripMenuItem.Name = "productosToolStripMenuItem";
-            this.productosToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.productosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.productosToolStripMenuItem.Text = "Productos";
             this.productosToolStripMenuItem.Click += new System.EventHandler(this.ProductosToolStripMenuItem_Click);
             // 
             // SeberosToolStripMenuItem1
             // 
             this.SeberosToolStripMenuItem1.Name = "SeberosToolStripMenuItem1";
-            this.SeberosToolStripMenuItem1.Size = new System.Drawing.Size(139, 22);
+            this.SeberosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.SeberosToolStripMenuItem1.Text = "&Seberos";
             // 
             // mnuPrueba
@@ -864,12 +873,12 @@
             this.tstMenu.ItemAdded += new System.Windows.Forms.ToolStripItemEventHandler(this.tstMenu_ItemAdded);
             this.tstMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tstMenu_ItemClicked);
             // 
-            // consultaPreciosToolStripMenuItem
+            // promediosCarneToolStripMenuItem
             // 
-            this.consultaPreciosToolStripMenuItem.Name = "consultaPreciosToolStripMenuItem";
-            this.consultaPreciosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.consultaPreciosToolStripMenuItem.Text = "Consulta Precios";
-            this.consultaPreciosToolStripMenuItem.Click += new System.EventHandler(this.consultaPreciosToolStripMenuItem_Click);
+            this.promediosCarneToolStripMenuItem.Name = "promediosCarneToolStripMenuItem";
+            this.promediosCarneToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.promediosCarneToolStripMenuItem.Text = "Promedios Carne";
+            this.promediosCarneToolStripMenuItem.Click += new System.EventHandler(this.promediosCarneToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -988,6 +997,7 @@
         private System.Windows.Forms.ToolStripMenuItem stocksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem prestamosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultaPreciosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem promediosCarneToolStripMenuItem;
     }
 }
 

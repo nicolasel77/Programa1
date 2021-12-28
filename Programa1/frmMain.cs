@@ -2850,5 +2850,54 @@
                 }
             }
         }
+
+        private void promediosCarneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+
+                if (f.Name == "frmPromedios_Carne")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmPromedios_Carne");
+                t.Text = "Promedios_Carne";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmPromedios_Carne = new Carga.Precios.frmPromedios_Carne();
+                frmPromedios_Carne.MdiParent = this;
+                frmPromedios_Carne.Disposed += frmPromedios_Carne_Disposed;
+                forms.Add(frmPromedios_Carne);
+                frmPromedios_Carne.Show();
+                frmPromedios_Carne.WindowState = FormWindowState.Minimized;
+                frmPromedios_Carne.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void frmPromedios_Carne_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Promedios_Carne")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPromedios_Carne")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

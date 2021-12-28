@@ -143,6 +143,73 @@ Public Class SpeedGrilla
         End If
         Grd.Redraw = True
     End Sub
+
+    Public Sub MostrarDatos_acostado(ByVal ls As DataTable, Optional ByVal AplicarFormato As Boolean = False, Optional ByVal CalTotal As Int32 = -1)
+        Dim i As Int32
+        Grd.Redraw = False
+        Grd.Col = -1
+        If AplicarFormato = True Then
+            If ls.Rows.Count = 0 Then ' si no hay nada, reaplico el formato anterior
+                Encabezados(ls)
+            Else 'aplico el nuevo formato
+                lc = ls.Copy
+                Encabezados(lc)
+                CargarDatosGrillaAcostado(ls)
+                If CalTotal <> -1 Then
+                    vtotal = SumarCol(CalTotal, True)
+                End If
+            End If
+            For i = 0 To ls.Columns.Count - 1
+                Select Case ls.Columns(i).DataType.ToString
+                    Case "System.String"
+                        Grd.Cols(i).TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.LeftCenter
+                    Case "System.Boolean"
+                        Grd.Cols(i).TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.CenterCenter
+                    Case "System.DateTime"
+                        Grd.Cols(i).TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.CenterCenter
+                    Case "System.Single", "System.Double", "System.Decimal"
+                        Grd.Cols(i).Format = "#.00#"
+                        Grd.Cols(i).TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.RightCenter
+                    Case "System.Integer", "System.Int16", "System.Int32", "System.Int64"
+                        Grd.Cols(i).Format = "#"
+                        Grd.Cols(i).TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.RightCenter
+                    Case Else
+                        Grd.Cols(i).TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.RightCenter
+                End Select
+            Next
+        Else
+            Grd.Rows.Fixed = 1
+            CargarDatosGrillaAcostado(ls)
+        End If
+        Grd.Redraw = True
+    End Sub
+
+    Private Sub CargarDatosGrillaAcostado(ByVal ls As DataTable)
+        Dim i, j, c As Int32
+        Grd.Redraw = False
+        Try
+            Estilo_Anterior = Nothing
+            If (ls.Rows.Count > 1) Then
+                Grd.Cols.Add()
+            End If
+            c = Grd.Cols.Count - 1
+            i = 1
+            For j = 0 To ls.Rows.Count - 1
+                If (i = Grd.Rows.Count - 1) Then
+                    Grd.Cols.Add()
+                    c = c + 1
+                    i = 1
+                End If
+
+                Grd(i, c) = ls.Rows(j).Item(1)
+                i = i + 1
+            Next
+
+        Catch ex As Exception
+            Beep()
+        End Try
+    End Sub
+
     Public Sub MostrarDatos(ByVal ls As DataTable, ByVal AplicarFormato As Boolean, ByVal AgregarUltimaFila As Boolean)
         Dim i As Int32
         Grd.Redraw = False
@@ -303,7 +370,8 @@ Public Class SpeedGrilla
         Grd.Select(Fila, Columna)
     End Sub
 
-    Public Sub AgregarFila(Optional ByVal Valor As String = "", Optional ByVal Fila As Int32 = -1)
+    'Public Sub AgregarFila(Optional ByVal Valor As String = "", Optional ByVal Fila As Int32 = -1)
+    Public Sub AgregarFila()
         Grd.Rows.Add()
         'Try
         '    If Fila = -1 Then
@@ -323,7 +391,16 @@ Public Class SpeedGrilla
         'Catch er As Exception
         'End Try
     End Sub
-
+    Public Sub AgregarCol(Optional ByVal Cantidad As Int32 = -1)
+        Try
+            If Cantidad = -1 Then
+                Grd.Cols.Add()
+            Else
+                Grd.Cols.Add(Cantidad)
+            End If
+        Catch er As Exception
+        End Try
+    End Sub
     Public Sub AutosizeCol(ByVal Columna As Int32)
         If Columna <> -1 Then Grd.AutoSizeCol(Columna)
     End Sub
@@ -1282,7 +1359,7 @@ Public Class SpeedGrilla
             Return MyBase.ProcessDialogKey(keyData)
         End Function
 
-        
+
     End Class
 #End Region
 
