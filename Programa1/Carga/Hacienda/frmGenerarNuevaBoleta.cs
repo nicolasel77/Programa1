@@ -173,19 +173,17 @@
         private void grdnvaBoleta_Editado(short f, short c, object a)
         {
             grdnvaBoleta.set_Texto(f, c, a);
+
             grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cImporte, 0);
-            grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 2, cImporte, 0);
             
             double tImporte = grdnvaBoleta.SumarCol("Importe");
-            grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 2, cImporte, tImporte);
+            grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cImporte, tImporte);
             //grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cImporte, grdnvaBoleta.SumarCol(cImporte));
 
 
             if (txtPresupuesto.TextLength != 0)
             {
-                tImporte = Convert.ToDouble(txtPresupuesto.Text) - tImporte;                
-                grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cDescr, "Presupuesto: ");
-                grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cImporte, tImporte);
+                lblDif.Text = (Convert.ToDouble(txtPresupuesto.Text) - tImporte).ToString("N2");                                
             }
         }
 
