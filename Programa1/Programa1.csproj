@@ -592,12 +592,6 @@
     <Compile Include="Carga\Tesoreria\frmEditar_ARendir.Designer.cs">
       <DependentUpon>frmEditar_ARendir.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carga\Tesoreria\frmImportar_Excel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Carga\Tesoreria\frmImportar_Excel.Designer.cs">
-      <DependentUpon>frmImportar_Excel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Carga\Tesoreria\frmLeer_Tarjetas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -898,7 +892,6 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Herramientas\c_Base_Access.cs" />
-    <Compile Include="Herramientas\Expresiones_Regulares.cs" />
     <Compile Include="Herramientas\Herramientas.cs" />
     <Compile Include="Mail\frmMail.cs">
       <SubType>Form</SubType>
@@ -1142,9 +1135,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmEditar_ARendir.resx">
       <DependentUpon>frmEditar_ARendir.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Carga\Tesoreria\frmImportar_Excel.resx">
-      <DependentUpon>frmImportar_Excel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmLeer_Tarjetas.resx">
       <DependentUpon>frmLeer_Tarjetas.cs</DependentUpon>
