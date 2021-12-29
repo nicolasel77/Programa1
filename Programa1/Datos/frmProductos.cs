@@ -31,7 +31,7 @@
         {
             //Tipo Producto
             //Datos
-            dt = prods.Tipo.Datos_Vista();
+            dt = prods.Tipo.Datos_Vista("","Id, Nombre, ResumirPorVenta, Tiene_Estadistica");
             grdTipo.MostrarDatos(dt, true);
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdTipo.TeclasManejadas = n;
