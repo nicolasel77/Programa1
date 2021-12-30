@@ -34,11 +34,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.cmdCargarPrecios = new MaterialSkin.Controls.MaterialFlatButton();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.Csucs = new Programa1.Controles.cSucursales();
-            this.Cfecha = new Programa1.Controles.cFechas();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.grdProme = new Grilla2.SpeedGrilla();
+            this.Csucs = new Programa1.Controles.cSucursales();
+            this.Cfecha = new Programa1.Controles.cFechas();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -102,39 +102,11 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.Controls.Add(this.Csucs);
             this.panel3.Controls.Add(this.Cfecha);
-            this.panel3.Location = new System.Drawing.Point(511, 85);
+            this.panel3.Location = new System.Drawing.Point(555, 85);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(373, 438);
+            this.panel3.Size = new System.Drawing.Size(329, 438);
             this.panel3.TabIndex = 5;
             this.panel3.Visible = false;
-            // 
-            // Csucs
-            // 
-            this.Csucs.BackColor = System.Drawing.Color.Gainsboro;
-            this.Csucs.Filtro_In = "";
-            this.Csucs.Location = new System.Drawing.Point(176, 0);
-            this.Csucs.Mostrar_Botones = false;
-            this.Csucs.Mostrar_Tipo = true;
-            this.Csucs.Name = "Csucs";
-            this.Csucs.selectionMode = System.Windows.Forms.SelectionMode.One;
-            this.Csucs.Size = new System.Drawing.Size(201, 441);
-            this.Csucs.TabIndex = 0;
-            this.Csucs.Titulo = "Sucursales";
-            this.Csucs.Valor_Actual = -1;
-            this.Csucs.Cambio_Seleccion += new System.EventHandler(this.Csucs_Cambio_Seleccion);
-            // 
-            // Cfecha
-            // 
-            this.Cfecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.Cfecha.Location = new System.Drawing.Point(0, 0);
-            this.Cfecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.Cfecha.Mostrar = 0;
-            this.Cfecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
-            this.Cfecha.Name = "Cfecha";
-            this.Cfecha.Size = new System.Drawing.Size(369, 438);
-            this.Cfecha.TabIndex = 1;
-            this.Cfecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.Cfecha.Cambio_Seleccion += new System.EventHandler(this.Cfecha_Cambio_Seleccion);
             // 
             // panel4
             // 
@@ -192,6 +164,34 @@
             this.grdProme.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdProme_CambioFila);
             this.grdProme.Click += new Grilla2.SpeedGrilla.ClickEventHandler(this.grdProme_Click);
             this.grdProme.CambioColumna += new Grilla2.SpeedGrilla.CambioColumnaEventHandler(this.grdProme_CambioColumna);
+            // 
+            // Csucs
+            // 
+            this.Csucs.BackColor = System.Drawing.Color.Gainsboro;
+            this.Csucs.Filtro_In = "";
+            this.Csucs.Location = new System.Drawing.Point(176, 0);
+            this.Csucs.Mostrar_Botones = false;
+            this.Csucs.Mostrar_Tipo = true;
+            this.Csucs.Name = "Csucs";
+            this.Csucs.selectionMode = System.Windows.Forms.SelectionMode.One;
+            this.Csucs.Size = new System.Drawing.Size(201, 441);
+            this.Csucs.TabIndex = 0;
+            this.Csucs.Titulo = "Sucursales";
+            this.Csucs.Valor_Actual = -1;
+            this.Csucs.Cambio_Seleccion += new System.EventHandler(this.Csucs_Cambio_Seleccion);
+            // 
+            // Cfecha
+            // 
+            this.Cfecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.Cfecha.Location = new System.Drawing.Point(0, 0);
+            this.Cfecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.Cfecha.Mostrar = 0;
+            this.Cfecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
+            this.Cfecha.Name = "Cfecha";
+            this.Cfecha.Size = new System.Drawing.Size(369, 438);
+            this.Cfecha.TabIndex = 1;
+            this.Cfecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.Cfecha.Cambio_Seleccion += new System.EventHandler(this.Cfecha_Cambio_Seleccion);
             // 
             // frmPromedios_Carne
             // 
