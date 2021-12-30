@@ -30,6 +30,7 @@ namespace Programa1.Carga.Tesoreria
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.nuDivisor = new System.Windows.Forms.NumericUpDown();
             this.chBajas = new MaterialSkin.Controls.MaterialCheckBox();
             this.rdNinguno = new MaterialSkin.Controls.MaterialRadioButton();
@@ -60,6 +61,7 @@ namespace Programa1.Carga.Tesoreria
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.txtDescripcion);
             this.splitContainer1.Panel1.Controls.Add(this.nuDivisor);
             this.splitContainer1.Panel1.Controls.Add(this.chBajas);
             this.splitContainer1.Panel1.Controls.Add(this.rdNinguno);
@@ -80,6 +82,16 @@ namespace Programa1.Carga.Tesoreria
             this.splitContainer1.Size = new System.Drawing.Size(845, 697);
             this.splitContainer1.SplitterDistance = 377;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescripcion.Location = new System.Drawing.Point(171, 664);
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(194, 19);
+            this.txtDescripcion.TabIndex = 4;
             // 
             // nuDivisor
             // 
@@ -352,5 +364,6 @@ namespace Programa1.Carga.Tesoreria
         private MaterialSkin.Controls.MaterialRadioButton rdAguinaldo;
         private MaterialSkin.Controls.MaterialCheckBox chBajas;
         private System.Windows.Forms.NumericUpDown nuDivisor;
+        private System.Windows.Forms.TextBox txtDescripcion;
     }
 }

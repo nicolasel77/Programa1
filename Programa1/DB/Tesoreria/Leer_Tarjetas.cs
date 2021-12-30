@@ -74,7 +74,7 @@
                     new SqlCommand("DELETE FROM Varios.dbo.Varios WHERE Dato LIKE 'fCarpeta'", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
-                sql.Open();
+                if (sql.State == ConnectionState.Closed) { sql.Open(); }
 
                 var d = command.ExecuteNonQuery();
 

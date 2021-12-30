@@ -105,17 +105,27 @@
 
         private void rdResto_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (rdResto.Checked == true) { Cargar_Datos(); }
+            if (rdResto.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Resto sueldo"; }
         }
 
         private void rdAdelanto_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (rdAdelanto.Checked == true) { Cargar_Datos(); }
+            if (rdAdelanto.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Adelanto sueldo"; }
+        }
+
+        private void rdVacaciones_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdVacaciones.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Vacaciones"; }
+        }
+
+        private void rdAguinaldo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdAguinaldo.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Aguinaldo"; }
         }
 
         private void rdNinguno_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (rdNinguno.Checked == true) { Cargar_Datos(); }
+            if (rdNinguno.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Descripcion"; }
         }
 
         private void grd_Editado(short f, short c, object a)
@@ -129,22 +139,30 @@
 
         private void cmdAceptar_Click(object sender, EventArgs e)
         {
-            Aceptado = true;
-
-            gastos.Id_DetalleGastos = rdAguinaldo.Checked ? 2 : 1;
-            gastos.Descripcion = rdAguinaldo.Checked ? "Aguinaldo 1/2" : rdResto.Checked ? "Resto sueldo" : "Adelanto Sueldo";
-
-            for (int i = 1; i <= grd.Rows - 2; i++)
+            if (String.IsNullOrWhiteSpace(txtDescripcion.Text) == false)
             {
-                if (Convert.ToBoolean(grd.get_Texto(i, 4)) == true)
+                Aceptado = true;
+
+                gastos.Id_DetalleGastos = rdAguinaldo.Checked ? 2 : 1;
+                gastos.Descripcion = txtDescripcion.Text;
+
+                for (int i = 1; i <= grd.Rows - 2; i++)
                 {
-                    gastos.Id_SubTipoGastos = Convert.ToInt32(grd.get_Texto(i, 1));
-                    gastos.Desc_SubTipo = Convert.ToString(grd.get_Texto(i, 2));
-                    gastos.Importe = Convert.ToDouble(grd.get_Texto(i, 3));
-                    gastos.Agregar();
+                    if (Convert.ToBoolean(grd.get_Texto(i, 4)) == true)
+                    {
+                        gastos.Id_SubTipoGastos = Convert.ToInt32(grd.get_Texto(i, 1));
+                        gastos.Desc_SubTipo = Convert.ToString(grd.get_Texto(i, 2));
+                        gastos.Importe = Convert.ToDouble(grd.get_Texto(i, 3));
+                        gastos.Agregar();
+                    }
                 }
+                Hide(); 
             }
-            Hide();
+            else
+            {
+                MessageBox.Show("Debe ingresar una descripción.");
+                txtDescripcion.Focus();
+            }
         }
 
         private void cmdCancelar_Click(object sender, EventArgs e)
@@ -152,15 +170,6 @@
             Hide();
         }
 
-        private void rdVacaciones_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdNinguno.Checked == true) { Cargar_Datos(); }
-        }
-
-        private void rdAguinaldo_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdNinguno.Checked == true) { Cargar_Datos(); }
-        }
 
         private void chBajas_CheckedChanged(object sender, EventArgs e)
         {

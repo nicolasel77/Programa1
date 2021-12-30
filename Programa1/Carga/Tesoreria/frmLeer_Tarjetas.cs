@@ -93,7 +93,14 @@
                 lblArchivo.Text = "";
 
                 if (File.Exists(s)) { }
-                File.Move(s, n);
+                try
+                {
+                    File.Move(s, n);
+                }
+                catch (Exception er)
+                {
+                    MessageBox.Show(er.Message);
+                }
             }
         }
 
