@@ -24,16 +24,21 @@
 
             if (seleccionar_archivo.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if(seleccionar_archivo.FileName.EndsWith(".csv") == true)
+                if (seleccionar_archivo.FileName.EndsWith(".csv") == true)
                 {
                     //Convertir a excel
                     Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+
                     Microsoft.Office.Interop.Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(seleccionar_archivo.FileName, false, true);
-                    xlWorkbook.SaveAs(seleccionar_archivo.FileName.Replace(".csv", ".xlsx"), Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook);
+
+                    seleccionar_archivo.FileName = seleccionar_archivo.FileName.Replace(".csv", ".xlsx");
+
+                    xlWorkbook.SaveAs(seleccionar_archivo.FileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlExcel8);
+
                     xlWorkbook.Close();
                     xlApp.Quit();
                 }
-                cmdSeleccionar.Text = seleccionar_archivo.FileName.Replace(".csv", ".xlsx");
+                cmdSeleccionar.Text = seleccionar_archivo.FileName;
             }
         }
 
@@ -93,60 +98,68 @@
                 grd.Columnas[j - 1].Name = Convert.ToString(xlRange.Cells[1, j].Value2);
             }
 
-            grd.Columnas[0].DataType = typeof(DateTime);
-            grd.Columnas[3].DataType = typeof(double);
-            grd.Columnas[4].DataType = typeof(double);
-            grd.Columnas[5].DataType = typeof(double);
-
-            grd.Columnas[0].Style.Format = "dd/MM/yy";
-            grd.Columnas[3].Style.Format = "N2";
-            grd.Columnas[4].Style.Format = "N2";
-            grd.Columnas[5].Style.Format = "N2";
-
-            for (int i = 2; i <= rowCount; i++)
+            try
             {
-                for (int j = 1; j <= colCount; j++)
+                grd.Columnas[0].DataType = typeof(DateTime);
+                grd.Columnas[3].DataType = typeof(double);
+                grd.Columnas[4].DataType = typeof(double);
+                grd.Columnas[5].DataType = typeof(double);
+
+                grd.Columnas[0].Style.Format = "dd/MM/yy";
+                grd.Columnas[3].Style.Format = "N2";
+                grd.Columnas[4].Style.Format = "N2";
+                grd.Columnas[5].Style.Format = "N2";
+
+                for (int i = 2; i <= rowCount; i++)
                 {
-                    if (j > 1)
+                    for (int j = 1; j <= colCount; j++)
                     {
-                        grd.set_Texto(i - 1, j - 1, xlRange.Cells[i, j].Value2);
-                    }
-                    else
-                    {
-                        string nn = Convert.ToString(xlRange.Cells[i, j].Value2);
-                        if (nn != null)
+                        if (j > 1)
                         {
-                            DateTime f;
-
-                            if (nn.All(char.IsNumber) == true)
-                            {
-                                f = DateTime.FromOADate(xlRange.Cells[i, j].Value2);
-                            }
-                            else
-                            {
-                                f = DateTime.Parse(nn);
-                            }
-                            grd.set_Texto(i - 1, j - 1, f); 
+                            grd.set_Texto(i - 1, j - 1, xlRange.Cells[i, j].Value2);
                         }
+                        else
+                        {
+                            string nn = Convert.ToString(xlRange.Cells[i, j].Value2);
+                            if (nn != null)
+                            {
+                                DateTime f;
+
+                                if (nn.All(char.IsNumber) == true)
+                                {
+                                    f = DateTime.FromOADate(xlRange.Cells[i, j].Value2);
+                                }
+                                else
+                                {
+                                    f = DateTime.Parse(nn);
+                                }
+                                grd.set_Texto(i - 1, j - 1, f);
+                            }
+                        }
+
+                        lblContador.Text = $"Cargando {i - 1} de {rowCount} filas.";
+                        Application.DoEvents();
                     }
-
-                    lblContador.Text = $"Cargando {i - 1} de {rowCount} filas.";
-                    Application.DoEvents();
                 }
+                grd.AutosizeAll();
+
+                lblContador.Text = $"{rowCount} filas leídas.";
+
+                Generar_Creditos();
+                Generar_Debitos();
             }
-            grd.AutosizeAll();
+            catch (Exception er)
+            {
+                lblContador.Text = er.Message;
+            }
+            finally
+            {
+                xlWorkbook.Close();
+                xlApp.Quit();
 
-            lblContador.Text = $"{rowCount} filas leídas.";
-
-            Generar_Creditos();
-            Generar_Debitos();
-
-
-            xlWorkbook.Close();
-            xlApp.Quit();
-
-            //Liberar
-            GC.Collect();
+                //Liberar
+                GC.Collect();
+            }
         }
 
         private void Generar_Creditos()
