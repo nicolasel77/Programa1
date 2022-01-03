@@ -133,12 +133,11 @@
             this.cmbTipo.FormattingEnabled = true;
             this.cmbTipo.Items.AddRange(new object[] {
             "Molleda - Galicia",
-            "Alonso   - Galicia"});
+            "Alonso   - BBVA"});
             this.cmbTipo.Location = new System.Drawing.Point(839, 13);
             this.cmbTipo.Name = "cmbTipo";
             this.cmbTipo.Size = new System.Drawing.Size(280, 28);
-            this.cmbTipo.TabIndex = 4;
-            this.cmbTipo.SelectedIndexChanged += new System.EventHandler(this.cmbTipo_SelectedIndexChanged);
+            this.cmbTipo.TabIndex = 4;            
             // 
             // button1
             // 
@@ -223,7 +222,7 @@
             this.grdSalida.Redraw = true;
             this.grdSalida.Row = 0;
             this.grdSalida.Rows = 50;
-            this.grdSalida.Size = new System.Drawing.Size(308, 625);
+            this.grdSalida.Size = new System.Drawing.Size(304, 625);
             this.grdSalida.TabIndex = 0;
             // 
             // label2
@@ -302,7 +301,7 @@
             this.grdDebitos.Redraw = true;
             this.grdDebitos.Row = 0;
             this.grdDebitos.Rows = 50;
-            this.grdDebitos.Size = new System.Drawing.Size(488, 625);
+            this.grdDebitos.Size = new System.Drawing.Size(484, 625);
             this.grdDebitos.TabIndex = 4;
             // 
             // label3

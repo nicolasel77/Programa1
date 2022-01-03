@@ -293,7 +293,7 @@ namespace Programa1.Carga.Tesoreria
             grdEntradas.ActivarCelda(grdEntradas.Rows - 1, e_Caja);
             Formato_Entradas();
             grdEntradas.Visible = true;
-
+            
             if (Ver_Solo == true)
             {
                 filtro = filtro + " AND Usuario=" + usuario.ID;
