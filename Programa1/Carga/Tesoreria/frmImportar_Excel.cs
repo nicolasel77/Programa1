@@ -24,23 +24,10 @@
 
             if (seleccionar_archivo.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (seleccionar_archivo.FileName.EndsWith(".csv") == true)
-                {
-                    //Convertir a excel
-                    Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
-
-                    Microsoft.Office.Interop.Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(seleccionar_archivo.FileName, false, true);
-
-                    seleccionar_archivo.FileName = seleccionar_archivo.FileName.Replace(".csv", ".xlsx");
-
-                    xlWorkbook.SaveAs(seleccionar_archivo.FileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlExcel8);
-
-                    xlWorkbook.Close();
-                    xlApp.Quit();
-                }
                 cmdSeleccionar.Text = seleccionar_archivo.FileName;
             }
         }
+
 
         private void cmdSalir_Click(object sender, EventArgs e)
         {
@@ -59,7 +46,15 @@
                     switch (cmbTipo.SelectedIndex)
                     {
                         case 0:
-                            Molleda_Galicia();
+                            if (cmdSeleccionar.Text.EndsWith(".csv") == true)
+                            {
+
+                                Cargar_CSVMolleda(cmdSeleccionar.Text);
+                            }
+                            else
+                            {
+                                Molleda_Galicia();
+                            }
                             break;
                         case 1:
                             Alonso_BBVA();
@@ -73,6 +68,67 @@
         }
 
         #region  Molleda Galicia 
+        private void Cargar_CSVMolleda(string seleccionar_archivo)
+        {
+            //Leer un archivo CSV
+            string[] lines = File.ReadAllLines(seleccionar_archivo);
+
+            grd.Rows = lines.Count();
+            grd.FixRows = 1;
+
+            grd.Cols = 6;
+
+            grd.Columnas[0].DataType = typeof(DateTime);
+            grd.Columnas[3].DataType = typeof(double);
+            grd.Columnas[4].DataType = typeof(double);
+            grd.Columnas[5].DataType = typeof(double);
+
+            grd.Columnas[0].Style.Format = "dd/MM/yy";
+            grd.Columnas[3].Style.Format = "N2";
+            grd.Columnas[4].Style.Format = "N2";
+            grd.Columnas[5].Style.Format = "N2";
+
+
+            int f = 0;
+            foreach (string linea in lines)
+            {
+                lblContador.Text = $"Cargando {f + 1} de {lines.Count()} filas.";
+                Application.DoEvents();
+
+                int c = 0;
+                int n = linea.IndexOf(";");
+                string nlinea = linea;
+
+                do
+                {
+                    string nTexto = nlinea.Substring(0, n);
+                    grd.set_Texto(f, c, nTexto);
+
+                    nlinea = nlinea.Remove(0, n + 1);
+                    n = nlinea.IndexOf(";");
+
+                    c++;
+                } while (n != -1);
+
+                if (f > 0)
+                {
+                    if (Convert.ToDateTime(grd.get_Texto(f, 0)).Year < 2020)
+                    {
+                        grd.set_Texto(f, 0, null);
+                    } 
+                }
+
+                f++;
+            }
+            grd.AutosizeAll();
+
+            lblContador.Text = $"{lines.Count()} filas leídas.";
+            Application.DoEvents();
+
+            Generar_Creditos();
+            Generar_Debitos();
+
+        }
         private void Molleda_Galicia()
         {
             //Abrir el archivo excel
@@ -144,6 +200,7 @@
                 grd.AutosizeAll();
 
                 lblContador.Text = $"{rowCount} filas leídas.";
+                Application.DoEvents();
 
                 Generar_Creditos();
                 Generar_Debitos();
@@ -164,9 +221,7 @@
 
         private void Generar_Creditos()
         {
-            //Creamos la tabla temporal
             c_Base _Base = new c_Base();
-            //_Base.Ejecutar_Comando("CREATE TABLE Temp_n(Fecha date, ID int, Descripcion varchar(100), Debito float, Credito float)");
 
             _Base.Ejecutar_Comando("DELETE FROM Temp_n");
 
@@ -184,9 +239,9 @@
                 try
                 {
                     importe = Convert.ToDouble(grd.get_Texto(i, 4));
-                    if (grd.get_Texto(i, grd.get_ColIndex("Descripción")) != null)
+                    if (grd.get_Texto(i, 1) != null)
                     {
-                        descripcion = grd.get_Texto(i, grd.get_ColIndex("Descripción")).ToString();
+                        descripcion = grd.get_Texto(i, 1).ToString();
                     }
 
                     bool nono = false;
@@ -200,7 +255,7 @@
                     {
                         nop = nop * -1;
                         nop = ++nop;
-                        fecha = Convert.ToDateTime(grd.get_Texto(i, grd.get_ColIndex("Fecha")));
+                        fecha = Convert.ToDateTime(grd.get_Texto(i, 0));
                     }
                     else
                     {
@@ -220,18 +275,34 @@
 
             }
 
-            grdSalida.MostrarDatos(_Base.Datos_Genericos("SELECT Fecha, Descripcion, SUM(Credito) Importe FROM Temp_n GROUP BY Fecha, Descripcion ORDER BY Fecha, Descripcion"), true, 2);
+            grdSalida.MostrarDatos(_Base.Datos_Genericos("SELECT Fecha, Descripcion, SUM(Credito) Importe" +
+                ", 4 IDC, 'CCte Molleda' Caja, 15 Tipo, '' Nombre, 0 SubTipo, '' Desc_ST " +
+                "FROM Temp_n GROUP BY Fecha, Descripcion ORDER BY Fecha, Descripcion, IDC, Caja, Tipo, Nombre, SubTipo, Desc_ST"), true, 2);
             grdSalida.Columnas[2].Format = "N2";
             grdSalida.AutosizeAll();
-            //_Base.Ejecutar_Comando("DROP TABLE Temp_n");
 
+            string buscar = "est.:";
+            for (int i = 1; i < grdSalida.Rows - 1; i++)
+            {
+                string entrada = "";
+                if (grdSalida.get_Texto(i, 1) != null) { entrada = grdSalida.get_Texto(i, 1).ToString(); }
+                int st = 0;
+                int indess = entrada.ToLower().IndexOf(buscar);
+
+                st = indess > -1 ? Convert.ToInt32(entrada.Substring(indess + 5)) : 0;
+                
+                grdSalida.set_Texto(i, grdSalida.get_ColIndex("Nombre"), $"Acreditación Prisma EST: {st}");
+
+                st = Convert.ToInt32(_Base.Dato_Generico($"SELECT TOP 1 ISNULL(Suc, 1000) FROM dbGastos.dbo.Suc_Cuentas WHERE N_Cuenta = {st}"));
+
+                grdSalida.set_Texto(i, grdSalida.get_ColIndex("SubTipo"), st);
+                grdSalida.set_Texto(i, grdSalida.get_ColIndex("Desc_ST"), _Base.Dato_Generico($"SELECT ISNULL(Nombre, 'Empresa' FROM Sucursales WHERE ID ={st}"));
+            }
         }
 
         private void Generar_Debitos()
         {
-            //Creamos la tabla temporal
             c_Base _Base = new c_Base();
-            //_Base.Ejecutar_Comando("CREATE TABLE Temp_n(Fecha date, ID int, Descripcion varchar(100), Debito float, Credito float)");
 
             _Base.Ejecutar_Comando("DELETE FROM Temp_n");
 
@@ -247,9 +318,9 @@
             for (int i = 1; i < grd.Rows; i++)
             {
                 importe = Convert.ToDouble(grd.get_Texto(i, 3));
-                if (grd.get_Texto(i, grd.get_ColIndex("Descripción")) != null)
+                if (grd.get_Texto(i, 1) != null)
                 {
-                    descripcion = grd.get_Texto(i, grd.get_ColIndex("Descripción")).ToString();
+                    descripcion = grd.get_Texto(i, 1).ToString();
                 }
 
                 bool nono = false;
@@ -264,7 +335,7 @@
                     if (nop < 0) { nop = nop * -1; }
 
                     nop = ++nop;
-                    fecha = Convert.ToDateTime(grd.get_Texto(i, grd.get_ColIndex("Fecha")));
+                    fecha = Convert.ToDateTime(grd.get_Texto(i, 0));
                 }
                 else
                 {
@@ -282,7 +353,6 @@
             grdDebitos.MostrarDatos(_Base.Datos_Genericos("SELECT Fecha, Descripcion, SUM(Debito) Importe FROM Temp_n GROUP BY Fecha, Descripcion ORDER BY Fecha, Descripcion"), true, 2);
             grdDebitos.Columnas[2].Format = "N2";
             grdDebitos.AutosizeAll();
-            //_Base.Ejecutar_Comando("DROP TABLE Temp_n");
 
             lblContador.Text = "Listo.";
         }
