@@ -2917,7 +2917,8 @@
         private void importarExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmImportar_Excel fr = new frmImportar_Excel();
-            fr.ShowDialog();
+            fr.Owner = this;   
+            fr.Show();
         }
     }
 }

@@ -31,7 +31,7 @@
             this.cmdSeleccionar = new System.Windows.Forms.Button();
             this.grd = new Grilla2.SpeedGrilla();
             this.cmdSalir = new System.Windows.Forms.Button();
-            this.cmdGuardar = new System.Windows.Forms.Button();
+            this.cmdGuardar_Creditos = new System.Windows.Forms.Button();
             this.cmbTipo = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lblContador = new System.Windows.Forms.Label();
@@ -43,6 +43,10 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.grdDebitos = new Grilla2.SpeedGrilla();
             this.label3 = new System.Windows.Forms.Label();
+            this.chCreditos = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chDebitos = new MaterialSkin.Controls.MaterialCheckBox();
+            this.cmdGuardar_Debitos = new System.Windows.Forms.Button();
+            this.materialCheckBox1 = new MaterialSkin.Controls.MaterialCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -80,8 +84,8 @@
             this.grd.bColorSel = System.Drawing.SystemColors.Highlight;
             this.grd.bFColor = System.Drawing.SystemColors.WindowText;
             this.grd.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grd.Col = 0;
-            this.grd.Cols = 10;
+            this.grd.Col = -2;
+            this.grd.Cols = 0;
             this.grd.DataMember = "";
             this.grd.DataSource = null;
             this.grd.EnableEdicion = true;
@@ -99,7 +103,7 @@
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(423, 625);
+            this.grd.Size = new System.Drawing.Size(423, 596);
             this.grd.TabIndex = 1;
             // 
             // cmdSalir
@@ -114,16 +118,17 @@
             this.cmdSalir.UseVisualStyleBackColor = true;
             this.cmdSalir.Click += new System.EventHandler(this.cmdSalir_Click);
             // 
-            // cmdGuardar
+            // cmdGuardar_Creditos
             // 
-            this.cmdGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdGuardar.Location = new System.Drawing.Point(1097, 702);
-            this.cmdGuardar.Name = "cmdGuardar";
-            this.cmdGuardar.Size = new System.Drawing.Size(75, 23);
-            this.cmdGuardar.TabIndex = 3;
-            this.cmdGuardar.Text = "Guardar";
-            this.cmdGuardar.UseVisualStyleBackColor = true;
+            this.cmdGuardar_Creditos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGuardar_Creditos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdGuardar_Creditos.Location = new System.Drawing.Point(225, 594);
+            this.cmdGuardar_Creditos.Name = "cmdGuardar_Creditos";
+            this.cmdGuardar_Creditos.Size = new System.Drawing.Size(75, 23);
+            this.cmdGuardar_Creditos.TabIndex = 3;
+            this.cmdGuardar_Creditos.Text = "Guardar";
+            this.cmdGuardar_Creditos.UseVisualStyleBackColor = true;
+            this.cmdGuardar_Creditos.Click += new System.EventHandler(this.cmdGuardar_Creditos_Click);
             // 
             // cmbTipo
             // 
@@ -137,7 +142,7 @@
             this.cmbTipo.Location = new System.Drawing.Point(839, 13);
             this.cmbTipo.Name = "cmbTipo";
             this.cmbTipo.Size = new System.Drawing.Size(280, 28);
-            this.cmbTipo.TabIndex = 4;            
+            this.cmbTipo.TabIndex = 4;
             // 
             // button1
             // 
@@ -174,7 +179,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.grdSalida);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
-            this.splitContainer1.Size = new System.Drawing.Size(745, 649);
+            this.splitContainer1.Panel2.Controls.Add(this.cmdGuardar_Creditos);
+            this.splitContainer1.Size = new System.Drawing.Size(745, 620);
             this.splitContainer1.SplitterDistance = 426;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 7;
@@ -203,8 +209,8 @@
             this.grdSalida.bColorSel = System.Drawing.SystemColors.Highlight;
             this.grdSalida.bFColor = System.Drawing.SystemColors.WindowText;
             this.grdSalida.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdSalida.Col = 0;
-            this.grdSalida.Cols = 10;
+            this.grdSalida.Col = -2;
+            this.grdSalida.Cols = 0;
             this.grdSalida.DataMember = "";
             this.grdSalida.DataSource = null;
             this.grdSalida.EnableEdicion = true;
@@ -222,8 +228,10 @@
             this.grdSalida.Redraw = true;
             this.grdSalida.Row = 0;
             this.grdSalida.Rows = 50;
-            this.grdSalida.Size = new System.Drawing.Size(304, 625);
+            this.grdSalida.Size = new System.Drawing.Size(300, 564);
             this.grdSalida.TabIndex = 0;
+            this.grdSalida.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSalida_Editado);
+            this.grdSalida.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdSalida_KeyUp);
             // 
             // label2
             // 
@@ -254,7 +262,8 @@
             this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer2.Location = new System.Drawing.Point(12, 47);
+            this.splitContainer2.BackColor = System.Drawing.Color.Gainsboro;
+            this.splitContainer2.Location = new System.Drawing.Point(12, 76);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -265,7 +274,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.grdDebitos);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Size = new System.Drawing.Size(1241, 649);
+            this.splitContainer2.Panel2.Controls.Add(this.cmdGuardar_Debitos);
+            this.splitContainer2.Size = new System.Drawing.Size(1241, 620);
             this.splitContainer2.SplitterDistance = 745;
             this.splitContainer2.SplitterWidth = 8;
             this.splitContainer2.TabIndex = 8;
@@ -282,8 +292,8 @@
             this.grdDebitos.bColorSel = System.Drawing.SystemColors.Highlight;
             this.grdDebitos.bFColor = System.Drawing.SystemColors.WindowText;
             this.grdDebitos.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdDebitos.Col = 0;
-            this.grdDebitos.Cols = 10;
+            this.grdDebitos.Col = -2;
+            this.grdDebitos.Cols = 0;
             this.grdDebitos.DataMember = "";
             this.grdDebitos.DataSource = null;
             this.grdDebitos.EnableEdicion = true;
@@ -301,7 +311,7 @@
             this.grdDebitos.Redraw = true;
             this.grdDebitos.Row = 0;
             this.grdDebitos.Rows = 50;
-            this.grdDebitos.Size = new System.Drawing.Size(484, 625);
+            this.grdDebitos.Size = new System.Drawing.Size(480, 564);
             this.grdDebitos.TabIndex = 4;
             // 
             // label3
@@ -316,17 +326,87 @@
             this.label3.Text = "Debitos";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // chCreditos
+            // 
+            this.chCreditos.Checked = true;
+            this.chCreditos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chCreditos.Depth = 0;
+            this.chCreditos.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chCreditos.Location = new System.Drawing.Point(113, 43);
+            this.chCreditos.Margin = new System.Windows.Forms.Padding(0);
+            this.chCreditos.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chCreditos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chCreditos.Name = "chCreditos";
+            this.chCreditos.Ripple = true;
+            this.chCreditos.Size = new System.Drawing.Size(104, 30);
+            this.chCreditos.TabIndex = 9;
+            this.chCreditos.Text = "Creditos";
+            this.chCreditos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chCreditos.UseVisualStyleBackColor = true;
+            this.chCreditos.CheckedChanged += new System.EventHandler(this.chCreditos_CheckedChanged);
+            // 
+            // chDebitos
+            // 
+            this.chDebitos.Checked = true;
+            this.chDebitos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chDebitos.Depth = 0;
+            this.chDebitos.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chDebitos.Location = new System.Drawing.Point(217, 43);
+            this.chDebitos.Margin = new System.Windows.Forms.Padding(0);
+            this.chDebitos.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chDebitos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chDebitos.Name = "chDebitos";
+            this.chDebitos.Ripple = true;
+            this.chDebitos.Size = new System.Drawing.Size(104, 30);
+            this.chDebitos.TabIndex = 9;
+            this.chDebitos.Text = "Debitos";
+            this.chDebitos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chDebitos.UseVisualStyleBackColor = true;
+            this.chDebitos.CheckedChanged += new System.EventHandler(this.chDebitos_CheckedChanged);
+            // 
+            // cmdGuardar_Debitos
+            // 
+            this.cmdGuardar_Debitos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGuardar_Debitos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdGuardar_Debitos.Location = new System.Drawing.Point(405, 594);
+            this.cmdGuardar_Debitos.Name = "cmdGuardar_Debitos";
+            this.cmdGuardar_Debitos.Size = new System.Drawing.Size(75, 23);
+            this.cmdGuardar_Debitos.TabIndex = 3;
+            this.cmdGuardar_Debitos.Text = "Guardar";
+            this.cmdGuardar_Debitos.UseVisualStyleBackColor = true;
+            // 
+            // materialCheckBox1
+            // 
+            this.materialCheckBox1.Checked = true;
+            this.materialCheckBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.materialCheckBox1.Depth = 0;
+            this.materialCheckBox1.Font = new System.Drawing.Font("Roboto", 10F);
+            this.materialCheckBox1.Location = new System.Drawing.Point(9, 43);
+            this.materialCheckBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.materialCheckBox1.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialCheckBox1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCheckBox1.Name = "materialCheckBox1";
+            this.materialCheckBox1.Ripple = true;
+            this.materialCheckBox1.Size = new System.Drawing.Size(104, 30);
+            this.materialCheckBox1.TabIndex = 9;
+            this.materialCheckBox1.Text = "Entrada";
+            this.materialCheckBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.materialCheckBox1.UseVisualStyleBackColor = true;
+            this.materialCheckBox1.CheckedChanged += new System.EventHandler(this.materialCheckBox1_CheckedChanged);
+            // 
             // frmImportar_Excel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 737);
+            this.Controls.Add(this.chDebitos);
+            this.Controls.Add(this.materialCheckBox1);
+            this.Controls.Add(this.chCreditos);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.lblContador);
             this.Controls.Add(this.cmdCargar);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.cmbTipo);
-            this.Controls.Add(this.cmdGuardar);
             this.Controls.Add(this.cmdSalir);
             this.Controls.Add(this.cmdSeleccionar);
             this.Name = "frmImportar_Excel";
@@ -351,7 +431,7 @@
         private System.Windows.Forms.Button cmdSeleccionar;
         private Grilla2.SpeedGrilla grd;
         private System.Windows.Forms.Button cmdSalir;
-        private System.Windows.Forms.Button cmdGuardar;
+        private System.Windows.Forms.Button cmdGuardar_Creditos;
         private System.Windows.Forms.ComboBox cmbTipo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblContador;
@@ -363,5 +443,9 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private Grilla2.SpeedGrilla grdDebitos;
         private System.Windows.Forms.Label label3;
+        private MaterialSkin.Controls.MaterialCheckBox chCreditos;
+        private MaterialSkin.Controls.MaterialCheckBox chDebitos;
+        private System.Windows.Forms.Button cmdGuardar_Debitos;
+        private MaterialSkin.Controls.MaterialCheckBox materialCheckBox1;
     }
 }
