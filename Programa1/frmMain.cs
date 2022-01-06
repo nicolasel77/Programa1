@@ -2920,5 +2920,15 @@
             fr.Owner = this;   
             fr.Show();
         }
+
+        private void tesoreriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            usuario.Nombre = "Ale";
+        }
+
+        private void tMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            usuario.Nombre = "Lorena";
+        }
     }
 }

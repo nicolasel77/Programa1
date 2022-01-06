@@ -85,8 +85,8 @@ namespace Programa1.Carga.Hacienda
 
             Herramientas.Herramientas h = new Herramientas.Herramientas();
             clsAccess.Vista = "Salidas";
-            h.Llenar_List(lstFechasAcc, clsAccess.Datos_Vista("", "TOP 50 Fecha", "Fecha DESC", "Fecha"), "dd/MM");
-            h.Llenar_List(lstFechasSis, datos.Datos_Genericos("SELECT TOP 100 Fecha FROM Hacienda_Salidas GROUP BY Fecha ORDER BY Fecha DESC"), "dd/MM");
+            h.Llenar_List(lstFechasAcc, clsAccess.Datos_Vista("", "TOP 50 Fecha", "Fecha DESC", "Fecha"), "dd/MM/yy");
+            h.Llenar_List(lstFechasSis, datos.Datos_Genericos("SELECT TOP 100 Fecha FROM Hacienda_Salidas GROUP BY Fecha ORDER BY Fecha DESC"), "dd/MM/yy");
         }
 
         private void cmdSincronizar_Click(object sender, System.EventArgs e)

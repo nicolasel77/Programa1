@@ -10,9 +10,10 @@ namespace Programa1.Carga.Tesoreria
     {
         enum e_Orden
         {
-            Tipo = 0,
-            SubTipo = 1,
-            Detalle = 2
+            Caja = 0,
+            Tipo = 1,
+            SubTipo = 2,
+            Detalle = 3
         }
         private e_Orden Orden;
 
@@ -50,6 +51,9 @@ namespace Programa1.Carga.Tesoreria
 
             switch (Orden)
             {
+                case e_Orden.Caja:
+
+                    break;
                 case e_Orden.Tipo:
                     dt = Gastos.Tipos_Rango(h.Unir(cFechas1.Cadena(), grupo));
                     if (dt != null)

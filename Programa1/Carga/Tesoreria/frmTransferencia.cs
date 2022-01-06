@@ -58,7 +58,7 @@
                 //El noEval (no evaluar) es porque cuando modifico el texto mas abajo, entra y borra demás
                 noEval = true;
                 string f = "";
-                if (txtImporte.Text.EndsWith(".") | txtImporte.Text.EndsWith(".")) { f = ","; }
+                if (txtImporte.Text.EndsWith(".") | txtImporte.Text.EndsWith(",")) { f = ","; }
                 int vlen = txtImporte.TextLength;
                 if (vlen != 0)
                 {
@@ -95,6 +95,11 @@
                 e.Handled = true;
                 cmdAcpetar.cmd.PerformClick();
             }
+        }
+
+        private void cmdAcpetar_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

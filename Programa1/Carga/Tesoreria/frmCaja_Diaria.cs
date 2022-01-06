@@ -216,6 +216,7 @@ namespace Programa1.Carga.Tesoreria
                 int cHacia = h.Codigo_Seleccionado(fr.lstHacia.Text);
                 int cARendir = h.Codigo_Seleccionado(fr.lstARendir.Text);
 
+                cGastos.Usuario = usuario;
                 cGastos.ID = 0;
                 cGastos.Fecha = mntFecha.SelectionStart.Date;
                 cGastos.caja.ID = cDesde;

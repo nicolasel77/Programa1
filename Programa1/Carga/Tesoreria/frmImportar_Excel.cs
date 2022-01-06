@@ -500,6 +500,7 @@
                             nop = ++nop;
                             DateTime fecha = Convert.ToDateTime(grd.get_Texto(i, grd.get_ColIndex("Fecha")));
                             string descripcion = grd.get_Texto(i, 1).ToString();
+                            descripcion = descripcion.Substring(0, descripcion.IndexOf(" Nro"));
                             _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nop}, '{descripcion}', {importe.ToString().Replace(",", ".")})");
                         }
                     }
@@ -511,7 +512,7 @@
                 }
 
                 grdSalida.MostrarDatos(_Base.Datos_Genericos("SELECT Fecha, Descripcion, SUM(Credito) Importe" +
-                    ", 4 IDC, 'CCte Molleda' Caja, 14 Tipo, '' Nombre, 0 SubTipo, '' Desc_ST " +
+                    ", 5 IDC, 'CCte Alonso' Caja, 14 Tipo, '' Nombre, 0 SubTipo, '' Desc_ST " +
                     "FROM Temp_n GROUP BY Fecha, Descripcion ORDER BY Fecha, Descripcion, IDC, Caja, Tipo, Nombre, SubTipo, Desc_ST"), true, 2);
                 grdSalida.Columnas[2].Format = "N2";
 
@@ -525,8 +526,7 @@
                     if (indess > -1)
                     {
                         //Leemos el establecimiento
-                        int finEst = entrada.IndexOf(" Nro");
-                        int esst = Convert.ToInt32(entrada.Substring(indess + buscar.Length, finEst - indess - buscar.Length));
+                        int esst = Convert.ToInt32(entrada.Substring(indess + buscar.Length));
 
                         //Buscamos que sucursal es
                         int codSuc = Convert.ToInt32(_Base.Dato_Generico($"SELECT TOP 1 ISNULL(Suc, 1000) FROM dbGastos.dbo.Suc_Cuentas WHERE N_Cuenta = {esst} ORDER BY Suc"));
