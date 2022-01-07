@@ -105,6 +105,7 @@ namespace Programa1.Carga.Tesoreria
             this.cmdAcpetar.TabIndex = 3;
             this.cmdAcpetar.Texto = "Aceptar";
             this.cmdAcpetar.Click += new System.EventHandler(this.cmdAcpetar_Click);
+            this.cmdAcpetar.Load += new System.EventHandler(this.cmdAcpetar_Load);
             // 
             // cmdCancelar
             // 

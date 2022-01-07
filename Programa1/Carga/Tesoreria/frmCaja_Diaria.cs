@@ -216,6 +216,7 @@ namespace Programa1.Carga.Tesoreria
                 int cHacia = h.Codigo_Seleccionado(fr.lstHacia.Text);
                 int cARendir = h.Codigo_Seleccionado(fr.lstARendir.Text);
 
+                cGastos.Usuario = usuario;
                 cGastos.ID = 0;
                 cGastos.Fecha = mntFecha.SelectionStart.Date;
                 cGastos.caja.ID = cDesde;
@@ -293,7 +294,7 @@ namespace Programa1.Carga.Tesoreria
             grdEntradas.ActivarCelda(grdEntradas.Rows - 1, e_Caja);
             Formato_Entradas();
             grdEntradas.Visible = true;
-
+            
             if (Ver_Solo == true)
             {
                 filtro = filtro + " AND Usuario=" + usuario.ID;

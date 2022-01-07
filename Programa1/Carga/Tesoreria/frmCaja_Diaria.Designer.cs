@@ -257,7 +257,7 @@
             this.panel7.Controls.Add(this.rdCaja);
             this.panel7.Controls.Add(this.rdNinguno);
             this.panel7.Controls.Add(this.label5);
-            this.panel7.Location = new System.Drawing.Point(329, 693);
+            this.panel7.Location = new System.Drawing.Point(325, 693);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(419, 24);
             this.panel7.TabIndex = 3;
@@ -375,7 +375,7 @@
             this.materialLabel3.Location = new System.Drawing.Point(3, 3);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(745, 20);
+            this.materialLabel3.Size = new System.Drawing.Size(741, 20);
             this.materialLabel3.TabIndex = 1;
             this.materialLabel3.Text = "Gastos";
             this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -391,7 +391,7 @@
             this.lblTotalGrillaGastos.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaGastos.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalGrillaGastos.Name = "lblTotalGrillaGastos";
-            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(320, 24);
+            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(316, 24);
             this.lblTotalGrillaGastos.TabIndex = 2;
             this.lblTotalGrillaGastos.Text = "Total Salida";
             this.lblTotalGrillaGastos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -428,7 +428,7 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 50;
-            this.grdSalidas.Size = new System.Drawing.Size(745, 660);
+            this.grdSalidas.Size = new System.Drawing.Size(741, 660);
             this.grdSalidas.TabIndex = 0;
             this.grdSalidas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSalidas_Editado);
             this.grdSalidas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSalidas_CambioFila);
@@ -789,7 +789,6 @@
             this.mntFecha.Location = new System.Drawing.Point(52, 26);
             this.mntFecha.MaxSelectionCount = 1;
             this.mntFecha.Name = "mntFecha";
-            this.mntFecha.ShowToday = false;
             this.mntFecha.TabIndex = 0;
             this.mntFecha.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.mntFecha_DateSelected);
             // 
@@ -846,14 +845,14 @@
             this.soloToolStripMenuItem.Checked = true;
             this.soloToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.soloToolStripMenuItem.Name = "soloToolStripMenuItem";
-            this.soloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.soloToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.soloToolStripMenuItem.Text = "Solo";
             this.soloToolStripMenuItem.Click += new System.EventHandler(this.soloToolStripMenuItem_Click);
             // 
             // todosToolStripMenuItem
             // 
             this.todosToolStripMenuItem.Name = "todosToolStripMenuItem";
-            this.todosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.todosToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.todosToolStripMenuItem.Text = "Todos";
             this.todosToolStripMenuItem.Click += new System.EventHandler(this.todosToolStripMenuItem_Click);
             // 
