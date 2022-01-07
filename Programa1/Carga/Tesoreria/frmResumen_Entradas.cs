@@ -31,12 +31,13 @@ namespace Programa1.Carga.Tesoreria
         {
             DataTable dt = Entradas.TE.grupoE.Datos();
             h.Llenar_List(lstGrupos, dt);
+            dt = Entradas.caja.Datos();
+            h.Llenar_List(lstCajas, dt);
         }
 
         private void cFechas1_Cambio_Seleccion(object sender, EventArgs e)
         {
             Cargar_Lst();
-
             Cargar_Grilla();
         }
 
@@ -47,8 +48,11 @@ namespace Programa1.Carga.Tesoreria
             lst.Items.Clear();
             DataTable dt = new DataTable();
 
-            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0}) AND");
-            if (grupo.Length != 0) { grupo += " AND"; }
+            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0})");
+            string cajas = h.Codigos_Seleccionados(lstCajas, "IDC IN ({0}) ");
+
+            grupo = h.Unir(grupo, cajas);
+                                   
 
             switch (Orden)
             {
@@ -66,7 +70,7 @@ namespace Programa1.Carga.Tesoreria
                 case e_Orden.SubTipo:
                     if (Tipo > 0)
                     {
-                        dt = Entradas.SubTipos_Rango($"{grupo} Id_TipoEntrada={Tipo} AND {cFechas1.Cadena()}");
+                        dt = Entradas.SubTipos_Rango($"{(grupo.Length != 0 ? grupo + " AND " : "")} Id_TipoEntrada={Tipo} AND {cFechas1.Cadena()}");
                     }
                     else
                     {
@@ -89,8 +93,10 @@ namespace Programa1.Carga.Tesoreria
         {
             this.Cursor = Cursors.WaitCursor;
 
-            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0}) AND");
-            if (grupo.Length != 0) { grupo += " AND"; }
+            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0})");
+            string cajas = h.Codigos_Seleccionados(lstCajas, "IDC IN ({0}) ");
+
+            grupo = h.Unir(grupo, cajas);
 
             switch (Orden)
             {
@@ -105,11 +111,11 @@ namespace Programa1.Carga.Tesoreria
                 case e_Orden.SubTipo:
                     if (Tipo > 0)
                     {
-                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo($"{grupo} Id_TipoEntrada={Tipo} AND {cFechas1.Cadena()}"), true, true);
+                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo($"{(grupo.Length != 0 ? grupo + " AND " : "")} Id_TipoEntrada={Tipo} AND {cFechas1.Cadena()}"), true, true);
                     }
                     else
                     {
-                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), grupo != "" ? grupo.Substring(0, grupo.IndexOf(" AND")) : "")), true, true);
+                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), grupo)), true, true);
                     }
                     grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
                     grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";

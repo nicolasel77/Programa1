@@ -158,6 +158,32 @@
         #endregion
 
         #region " Devolver Datos "
+        public DataTable Cajas_Rango(string filtro = "")
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(cadCN);
+
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+
+            try
+            {
+                SqlCommand comandoSql = new SqlCommand($"SELECT IDC, Caja FROM vw_Gastos" +
+                    $" {filtro}  GROUP BY IDC, Caja ORDER BY IDC", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
         /// <summary>
         /// Devuelve un dt con el resumen de Tipos, Nombre en un rango de fechas.
         /// </summary>
@@ -175,6 +201,34 @@
             {
                 SqlCommand comandoSql = new SqlCommand($"SELECT ID_TipoGastos, Desc_Tipo FROM vw_Gastos" +
                     $" {filtro}  GROUP BY ID_TipoGastos, Desc_Tipo ORDER BY ID_TipoGastos", conexionSql);
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        public DataTable Tipos_Rango(string filtro = "", bool mostrar_Cajas = true)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(cadCN);
+
+
+            if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
+
+            try
+            {
+                string cmdText = mostrar_Cajas ? $"SELECT IDC, Caja, ID_TipoGastos, Desc_Tipo FROM vw_Gastos" +
+                                    $" {filtro}  GROUP BY IDC, Caja, ID_TipoGastos, Desc_Tipo ORDER BY ID_TipoGastos" :
+                                    $"SELECT ID_TipoGastos, Desc_Tipo FROM vw_Gastos" +
+                                    $" {filtro}  GROUP BY ID_TipoGastos, Desc_Tipo ORDER BY ID_TipoGastos";
+                SqlCommand comandoSql = new SqlCommand(cmdText, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

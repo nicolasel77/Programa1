@@ -2930,5 +2930,53 @@
         {
             usuario.Nombre = "Lorena";
         }
+
+        private void resumenCajasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmResumen_Cajas")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmResumen_Cajas");
+                t.Text = "Resumen_Cajas";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmResumen_Cajas = new Carga.Tesoreria.frmResumen_Cajas();
+                frmResumen_Cajas.MdiParent = this;
+                frmResumen_Cajas.Disposed += FrmResumen_Cajas_Disposed;
+                forms.Add(frmResumen_Cajas);
+                frmResumen_Cajas.Show();
+                frmResumen_Cajas.WindowState = FormWindowState.Minimized;
+                frmResumen_Cajas.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmResumen_Cajas_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Resumen_Cajas")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmResumen_Cajas")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

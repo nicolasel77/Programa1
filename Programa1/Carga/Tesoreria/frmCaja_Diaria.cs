@@ -13,7 +13,7 @@ namespace Programa1.Carga.Tesoreria
 
     public partial class frmCaja_Diaria : Form
     {
-        readonly Usuarios usuario;
+        private Usuarios usuario;
         private enum t_Repetir : int
         {
             Ninguno = 0,
@@ -81,14 +81,14 @@ namespace Programa1.Carga.Tesoreria
         public frmCaja_Diaria(Usuarios user)
         {
             usuario = user;
-            cGastos.Usuario.ID = user.ID;
+            cGastos.Usuario = usuario;
 
             InitializeComponent();
         }
 
         private void frmCaja_Diaria_Load(object sender, EventArgs e)
         {
-            CD.Usuario = usuario.ID;
+            //CD.Usuario = usuario.ID;
             soloToolStripMenuItem.Text = "Solo " + usuario.Nombre;
 
             mntFecha.SetDate(CD.Fecha);
@@ -294,7 +294,7 @@ namespace Programa1.Carga.Tesoreria
             grdEntradas.ActivarCelda(grdEntradas.Rows - 1, e_Caja);
             Formato_Entradas();
             grdEntradas.Visible = true;
-            
+
             if (Ver_Solo == true)
             {
                 filtro = filtro + " AND Usuario=" + usuario.ID;
@@ -911,6 +911,7 @@ namespace Programa1.Carga.Tesoreria
                                 }
                                 break;
                             case s_Importe:
+                                cGastos.Usuario = usuario;
                                 if (cGastos.TG.EsHacienda == false && cGastos.TG.EsAgregados == false)
                                 {
                                     if (cGastos.TG.Id_Tipo != 0 && cGastos.Id_SubTipoGastos != 0)
@@ -923,7 +924,6 @@ namespace Programa1.Carga.Tesoreria
 
                                         if (grdSalidas.EsUltimaFila() == true)
                                         {
-                                            cGastos.Usuario = usuario;
                                             cGastos.Agregar();
                                             grdSalidas.set_Texto(f, s_Id, Convert.ToInt32(cGastos.ID));
                                             grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
@@ -1174,6 +1174,7 @@ namespace Programa1.Carga.Tesoreria
                                 cGastos.Descripcion = $"[{tpago}] Compra: {fecha:dddd dd/MM/yy}  ({fr.grd.get_Texto(i, fr.grd.get_ColIndex("Descripcion"))})";
                                 cGastos.Importe = npago;
                                 cGastos.Fecha_Acreditacion = fecha;
+                                cGastos.Usuario = usuario;
 
                                 // Esto es por si se esta editando un registro existente
                                 if (cGastos.ID > 0)
@@ -1182,7 +1183,6 @@ namespace Programa1.Carga.Tesoreria
                                 }
                                 else
                                 {
-                                    cGastos.Usuario = usuario;
                                     cGastos.Agregar();
                                 }
                                 // Luego ya se agregan nuevos registros
@@ -1351,7 +1351,15 @@ namespace Programa1.Carga.Tesoreria
                 cGastos.Id_DetalleGastos = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_IDDetalle));
                 cGastos.Descripcion = Convert.ToString(grdSalidas.get_Texto(Fila, s_Descripcion));
                 cGastos.Importe = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Importe));
-                cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Usuario));
+                if (Fila < grdSalidas.Rows - 1) 
+                { 
+                    cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Usuario)); 
+                }
+                else
+                {
+                    usuario.Nombre = usuario.Nombre;
+                    cGastos.Usuario = usuario;
+                }
                 cGastos.Autorizado = Convert.ToBoolean(grdSalidas.get_Texto(Fila, s_Autorizado));
                 cGastos.Fecha_Autorizado = Convert.ToDateTime(grdSalidas.get_Texto(Fila, s_Fecha_Autorizado));
             }
@@ -1434,6 +1442,6 @@ namespace Programa1.Carga.Tesoreria
 
         #endregion
 
-        
+
     }
 }

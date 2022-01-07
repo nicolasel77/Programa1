@@ -10,10 +10,9 @@ namespace Programa1.Carga.Tesoreria
     {
         enum e_Orden
         {
-            Caja = 0,
-            Tipo = 1,
-            SubTipo = 2,
-            Detalle = 3
+            Tipo = 0,
+            SubTipo = 1,
+            Detalle = 2
         }
         private e_Orden Orden;
 
@@ -31,10 +30,14 @@ namespace Programa1.Carga.Tesoreria
         {
             DataTable dt = Gastos.TG.grupoS.Datos();
             h.Llenar_List(lstGrupos, dt);
+
+            dt = Gastos.caja.Datos();
+            h.Llenar_List(lstCajas, dt);
         }
 
         private void cFechas1_Cambio_Seleccion(object sender, EventArgs e)
         {
+
             Cargar_List();
             Cargar_Grilla();
             if (lst.Items.Count > 0) { lst.SelectedIndex = 0; }
@@ -47,13 +50,13 @@ namespace Programa1.Carga.Tesoreria
             lst.Items.Clear();
             DataTable dt = new DataTable();
 
-            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0})");            
+            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0})");
+            string cajas = h.Codigos_Seleccionados(lstCajas, "IDC IN ({0})");
+
+            grupo = h.Unir(grupo, cajas);
 
             switch (Orden)
             {
-                case e_Orden.Caja:
-
-                    break;
                 case e_Orden.Tipo:
                     dt = Gastos.Tipos_Rango(h.Unir(cFechas1.Cadena(), grupo));
                     if (dt != null)
@@ -91,7 +94,7 @@ namespace Programa1.Carga.Tesoreria
                         {
                             grupo = h.Unir(grupo, cFechas1.Cadena());
                             grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
-                            grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");                            
+                            grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");
                             dt = Gastos.Detalles_Rango(grupo);
                         }
                         else
@@ -122,6 +125,7 @@ namespace Programa1.Carga.Tesoreria
                         }
                     }
                     break;
+
             }
             if (lst.Items.Count > 0) { lst.Items.Insert(0, "Todos"); }
             this.Cursor = Cursors.Default;
@@ -132,6 +136,9 @@ namespace Programa1.Carga.Tesoreria
             this.Cursor = Cursors.WaitCursor;
 
             string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0})");
+            string cajas = h.Codigos_Seleccionados(lstCajas, "IDC IN ({0})");
+
+            grupo = h.Unir(grupo, cajas);
 
             switch (Orden)
             {
@@ -185,12 +192,12 @@ namespace Programa1.Carga.Tesoreria
                             {
                                 grupo = h.Unir(grupo, cFechas1.Cadena());
                                 grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
-                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");                                
+                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");
                             }
                             else
                             {
                                 grupo = h.Unir(grupo, cFechas1.Cadena());
-                                grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");                                
+                                grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
                             }
                         }
                     }
@@ -202,12 +209,12 @@ namespace Programa1.Carga.Tesoreria
                             {
                                 grupo = h.Unir(grupo, cFechas1.Cadena());
                                 grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");
-                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");                                
+                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");
                             }
                             else
                             {
                                 grupo = h.Unir(grupo, cFechas1.Cadena());
-                                grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");                                
+                                grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");
                             }
 
                         }
@@ -216,8 +223,8 @@ namespace Programa1.Carga.Tesoreria
                             if (Detalle > 0)
                             {
                                 grupo = h.Unir(grupo, cFechas1.Cadena());
-                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");                                
-                            }                            
+                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");
+                            }
                         }
                     }
                     grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo), true, true);
@@ -240,7 +247,7 @@ namespace Programa1.Carga.Tesoreria
         {
             this.Cursor = Cursors.WaitCursor;
             string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0})");
-            grupo  = h.Unir(grupo, cFechas1.Cadena());
+            grupo = h.Unir(grupo, cFechas1.Cadena());
 
             switch (Orden)
             {
@@ -301,7 +308,7 @@ namespace Programa1.Carga.Tesoreria
                         Detalle = h.Codigo_Seleccionado(lst.Text);
                         grupo = h.Unir($"Id_TipoGastos={Tipo}", grupo);
                         grupo = h.Unir($"ID_DetalleGastos={ Detalle }", grupo);
-                        
+
                         if (SubTipo > 0) { grupo = h.Unir($"Id_SubTipoGastos={SubTipo}", grupo); }
 
 
@@ -316,7 +323,7 @@ namespace Programa1.Carga.Tesoreria
                     {
                         Detalle = 0;
                         if (Tipo != 0) { grupo = h.Unir($"Id_TipoGastos={Tipo}", grupo); }
-                        
+
                         if (SubTipo > 0) { grupo = h.Unir($"Id_SubTipoGastos={SubTipo}", grupo); }
 
                         grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo, true), true, true);
@@ -331,18 +338,13 @@ namespace Programa1.Carga.Tesoreria
             Totales();
             this.Cursor = Cursors.Default;
         }
-
-        private void cmdGrupos_Click(object sender, EventArgs e)
-        {
-            lstGrupos.Visible = !lstGrupos.Visible;
-        }
-
+               
         private void lstGrupos_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cFechas1.Cadena() != "")
             {
                 Cargar_List();
-                Cargar_Grilla(); 
+                Cargar_Grilla();
             }
         }
 
@@ -414,5 +416,6 @@ namespace Programa1.Carga.Tesoreria
             }
         }
 
+       
     }
 }
