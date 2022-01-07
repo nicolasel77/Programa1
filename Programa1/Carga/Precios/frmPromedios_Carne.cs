@@ -25,15 +25,16 @@
             grdProme.MostrarDatos_acostado(promedios.Datos_prom());
             Formato_Grilla();
 
-            for (int i = 1; i <= grdProme.Rows - 2; i++)
-            {
-                grdProme.set_Texto(i, 7, (Convert.ToDouble(grdProme.get_Texto(i, 5)) * Convert.ToDouble(grdProme.get_Texto(i, 8))).ToString("$#,##0.00"));
-            }
-            grdProme.set_Texto(grdProme.Rows - 1, 7, grdProme.SumarCol(7, true, 2).ToString("$#,##0.00"));
+            lstFechas.Items.Clear();
+            DataTable dt = promedios.Fechas();
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            h.Llenar_List(lstFechas, dt, "dd/MM/yyy");
+
+        grdProme.set_Texto(grdProme.Rows - 1, 7, grdProme.SumarCol(7, true, 2).ToString("$#,##0.00"));
 
             if (grdProme.Cols > 9)
             {
-                DataTable dt = promedios.Nombres_list();
+                dt = promedios.Nombres_list();
                 int j = 0;
                 for (int i = 10; i <= grdProme.Cols - 1; i++)
                 {
@@ -56,6 +57,7 @@
             grdProme.Columnas[5].Format = "C2";
             grdProme.Columnas[6].Format = "C2";
             grdProme.Columnas[7].Format = "C2";
+
             grdProme.Columnas[8].Format = "N3";
 
             for (int i = 10; i < grdProme.Cols; i++)
@@ -83,9 +85,9 @@
                         if (Convert.ToDouble(grdProme.get_Texto(1, c)) > 0)
                         {
                             grdProme.set_Texto(f, c, a);
-                            grdProme.set_Texto(f, c + 1, (Convert.ToDouble(a) * 100 / Convert.ToDouble(grdProme.get_Texto(1, c))).ToString("0.## '%'"));
+                            grdProme.set_Texto(f, c + 1, (Convert.ToDouble(a) * 100 / Convert.ToDouble(grdProme.get_Texto(1, c))).ToString("0.00 '%'"));
                             grdProme.set_Texto(f, c + 2, Convert.ToDouble(grdProme.get_Texto(f, c)) * 100 / Convert.ToDouble(grdProme.get_Texto(1, c)));
-                            grdProme.set_Texto(f, c + 4, Convert.ToDouble(grdProme.get_Texto(f, c + 3)) * Convert.ToDouble(grdProme.get_Texto(f, c + 2)));
+                            grdProme.set_Texto(f, c + 4, Math.Round(Convert.ToDouble(grdProme.get_Texto(f, c + 3)),3) * Math.Round(Convert.ToDouble(grdProme.get_Texto(f, c + 2)),3));
 
                             grdProme.set_Texto(grdProme.Rows - 1, c, 0);
                             grdProme.set_Texto(grdProme.Rows - 1, c, grdProme.SumarCol(2, true, 2));
@@ -101,9 +103,9 @@
 
                         for (int i = 2; i <= grdProme.Rows - 2; i++)
                         {
-                            grdProme.set_Texto(i, c + 1, (Convert.ToDouble(grdProme.get_Texto(i, c)) * 100 / Convert.ToDouble(grdProme.get_Texto(1, c))).ToString("0.## '%'"));
+                            grdProme.set_Texto(i, c + 1, (Convert.ToDouble(grdProme.get_Texto(i, c)) * 100 / Convert.ToDouble(grdProme.get_Texto(1, c))).ToString("0.00 '%'"));
                             grdProme.set_Texto(i, c + 2, Convert.ToDouble(grdProme.get_Texto(i, c)) * 100 / Convert.ToDouble(a));
-                            grdProme.set_Texto(i, c + 4, Convert.ToDouble(grdProme.get_Texto(i, c + 3)) * Convert.ToDouble(grdProme.get_Texto(i, c + 2)));
+                            grdProme.set_Texto(i, c + 4, Math.Round(Convert.ToDouble(grdProme.get_Texto(i, c + 3)),3) * Math.Round(Convert.ToDouble(grdProme.get_Texto(i, c + 2)),3));
                             grdProme.set_Texto(i, 7, (Convert.ToDouble(grdProme.get_Texto(i, 5)) * Convert.ToDouble(grdProme.get_Texto(i, 8))).ToString("$#,##0.00"));
                         }
                         grdProme.set_Texto(grdProme.Rows - 1, 4, 0);
@@ -141,14 +143,13 @@
             { grdProme.EnableEdicion = false; }
         }
 
-        private void cmdGuardar_Click(object sender, EventArgs e)
+        private void cmdGuardar_Click_1(object sender, EventArgs e)
         {
             Guardar();
         }
 
         private void Guardar()
         {
-            panel4.Visible = true;
             txtNombre.Focus();
 
             if (txtNombre.Text.Length > 0)
@@ -167,23 +168,23 @@
                 grdProme.set_Texto(1, 4, 100);
                 grdProme.Cols = 9;
 
-                DataTable dt = promedios.Datos_Totales();
+                //DataTable dt = promedios.Datos_Totales();
 
                 for (int i = 1; i <= grdProme.Rows - 2; i++)
                 {
                     grdProme.set_Texto(i, 2, 0);
-                    grdProme.set_Texto(i, 3, (0).ToString("0.## '%'"));
+                    grdProme.set_Texto(i, 3, (0).ToString("0.00 '%'"));
                     grdProme.set_Texto(i, 4, 0);
                     grdProme.set_Texto(i, 6, 0);
-                    grdProme.set_Texto(i, 8, dt.Rows[i - 1][2]);
-                    grdProme.set_Texto(i, 7, (Convert.ToDouble(grdProme.get_Texto(i, 5)) * Convert.ToDouble(grdProme.get_Texto(i, 8))).ToString("$#,##0.00"));
+                    //grdProme.set_Texto(i, 8, dt.Rows[i - 1][2]);
+                    //grdProme.set_Texto(i, 7, (Convert.ToDouble(grdProme.get_Texto(i, 5)) * Convert.ToDouble(grdProme.get_Texto(i, 8))).ToString("$#,##0.00"));
                 }
-                grdProme.set_Texto(grdProme.Rows - 1, 7, grdProme.SumarCol(7, true, 2).ToString("$#,##0.00"));
+                //grdProme.set_Texto(grdProme.Rows - 1, 7, grdProme.SumarCol(7, true, 2).ToString("$#,##0.00"));
 
                 grdProme.AgregarCol();
                 grdProme.MostrarDatos_acostado(promedios.Datos_prom());
                 Formato_Grilla();
-
+                DataTable dt;
                 if (grdProme.Cols > 9)
                 {
                     dt = promedios.Nombres_list();
@@ -195,29 +196,28 @@
                     }
                 }
 
-                panel4.Visible = false;
                 txtNombre.Text = "";
             }
         }
 
         private void cmdCargarPrecios_Click(object sender, EventArgs e)
         {
-            panel3.Visible = true;
+            //panel3.Visible = true;
         }
 
         private void grdProme_Click()
         {
-            panel3.Visible = false;
-            panel4.Visible = false;
+            //panel3.Visible = false;
+            //panel4.Visible = false;
         }
 
         private void Csucs_Cambio_Seleccion(object sender, EventArgs e)
         {
-            if (Cfecha.fecha_Actual > Convert.ToDateTime("1/1/1910"))
+            if (lstFechas.SelectedIndex > 0)
             { cargar_Precios(); }
         }
 
-        private void Cfecha_Cambio_Seleccion(object sender, EventArgs e)
+        private void lstFechas_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Csucs.Valor_Actual > 0)
             { cargar_Precios(); }
@@ -226,7 +226,7 @@
         private void cargar_Precios()
 
         {
-            DataTable dt = promedios.lista_precios(Csucs.Cadena("Id_Sucursales"), Cfecha.fecha_Fin);
+            DataTable dt = promedios.lista_precios(Csucs.Cadena("Id_Sucursales"), Convert.ToDateTime(lstFechas.SelectedItem));
             double precio;
             for (int i = 1; i < dt.Rows.Count; i++)
             {
@@ -246,7 +246,7 @@
 
         private void frmPromedios_Carne_Click(object sender, EventArgs e)
         {
-            panel3.Visible = false;
+            //panel3.Visible = false;
         }
 
         private void grdProme_CambioFila(short Fila)
