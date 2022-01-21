@@ -309,7 +309,7 @@
             this.chFiltrar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chFiltrar.Depth = 0;
             this.chFiltrar.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chFiltrar.Location = new System.Drawing.Point(274, 7);
+            this.chFiltrar.Location = new System.Drawing.Point(292, 4);
             this.chFiltrar.Margin = new System.Windows.Forms.Padding(0);
             this.chFiltrar.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chFiltrar.MouseState = MaterialSkin.MouseState.HOVER;

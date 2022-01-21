@@ -42,6 +42,7 @@
             this.lstGrupos = new System.Windows.Forms.ListBox();
             this.cFechas1 = new Programa1.Controles.cFechas();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -51,6 +52,10 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdGastos
@@ -85,7 +90,7 @@
             this.grdGastos.Redraw = true;
             this.grdGastos.Row = 0;
             this.grdGastos.Rows = 1;
-            this.grdGastos.Size = new System.Drawing.Size(705, 634);
+            this.grdGastos.Size = new System.Drawing.Size(863, 634);
             this.grdGastos.TabIndex = 0;
             // 
             // lblTipo
@@ -132,8 +137,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1048, 664);
-            this.splitContainer1.SplitterDistance = 708;
+            this.splitContainer1.Size = new System.Drawing.Size(1471, 664);
+            this.splitContainer1.SplitterDistance = 866;
             this.splitContainer1.TabIndex = 4;
             // 
             // lblTotal
@@ -170,7 +175,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.lblSubTipo);
             this.splitContainer2.Panel2.Controls.Add(this.cFechas1);
             this.splitContainer2.Panel2.Controls.Add(this.lblTipo);
-            this.splitContainer2.Size = new System.Drawing.Size(336, 664);
+            this.splitContainer2.Size = new System.Drawing.Size(601, 664);
             this.splitContainer2.SplitterDistance = 425;
             this.splitContainer2.SplitterWidth = 8;
             this.splitContainer2.TabIndex = 4;
@@ -184,7 +189,7 @@
             this.lst.ItemHeight = 20;
             this.lst.Location = new System.Drawing.Point(0, 0);
             this.lst.Name = "lst";
-            this.lst.Size = new System.Drawing.Size(336, 425);
+            this.lst.Size = new System.Drawing.Size(601, 425);
             this.lst.TabIndex = 0;
             this.lst.SelectedIndexChanged += new System.EventHandler(this.lst_SelectedIndexChanged);
             // 
@@ -192,13 +197,10 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.lblCaja);
-            this.panel2.Controls.Add(this.lstCajas);
-            this.panel2.Controls.Add(this.materialLabel1);
-            this.panel2.Controls.Add(this.lstGrupos);
-            this.panel2.Location = new System.Drawing.Point(231, 3);
+            this.panel2.Controls.Add(this.splitContainer3);
+            this.panel2.Location = new System.Drawing.Point(354, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(174, 220);
+            this.panel2.Size = new System.Drawing.Size(244, 225);
             this.panel2.TabIndex = 6;
             // 
             // lblCaja
@@ -207,7 +209,7 @@
             this.lblCaja.Depth = 0;
             this.lblCaja.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblCaja.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblCaja.Location = new System.Drawing.Point(4, 2);
+            this.lblCaja.Location = new System.Drawing.Point(3, 0);
             this.lblCaja.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblCaja.Name = "lblCaja";
             this.lblCaja.Size = new System.Drawing.Size(49, 19);
@@ -223,10 +225,10 @@
             this.lstCajas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lstCajas.FormattingEnabled = true;
             this.lstCajas.ItemHeight = 18;
-            this.lstCajas.Location = new System.Drawing.Point(3, 159);
+            this.lstCajas.Location = new System.Drawing.Point(2, 21);
             this.lstCajas.Name = "lstCajas";
             this.lstCajas.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstCajas.Size = new System.Drawing.Size(168, 36);
+            this.lstCajas.Size = new System.Drawing.Size(238, 90);
             this.lstCajas.TabIndex = 5;
             this.lstCajas.SelectedIndexChanged += new System.EventHandler(this.lstGrupos_SelectedIndexChanged);
             // 
@@ -236,7 +238,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(4, 138);
+            this.materialLabel1.Location = new System.Drawing.Point(3, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(39, 19);
@@ -245,16 +247,17 @@
             // 
             // lstGrupos
             // 
-            this.lstGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lstGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lstGrupos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lstGrupos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lstGrupos.FormattingEnabled = true;
             this.lstGrupos.ItemHeight = 18;
-            this.lstGrupos.Location = new System.Drawing.Point(3, 24);
+            this.lstGrupos.Location = new System.Drawing.Point(2, 22);
             this.lstGrupos.Name = "lstGrupos";
             this.lstGrupos.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstGrupos.Size = new System.Drawing.Size(168, 108);
+            this.lstGrupos.Size = new System.Drawing.Size(239, 90);
             this.lstGrupos.TabIndex = 5;
             this.lstGrupos.SelectedIndexChanged += new System.EventHandler(this.lstGrupos_SelectedIndexChanged);
             // 
@@ -269,7 +272,7 @@
             this.cFechas1.Mostrar = 0;
             this.cFechas1.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFechas1.Name = "cFechas1";
-            this.cFechas1.Size = new System.Drawing.Size(228, 184);
+            this.cFechas1.Size = new System.Drawing.Size(348, 184);
             this.cFechas1.TabIndex = 1;
             this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
@@ -282,14 +285,34 @@
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.Location = new System.Drawing.Point(6, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1061, 679);
+            this.panel1.Size = new System.Drawing.Size(1484, 679);
             this.panel1.TabIndex = 5;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.lblCaja);
+            this.splitContainer3.Panel1.Controls.Add(this.lstGrupos);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.lstCajas);
+            this.splitContainer3.Panel2.Controls.Add(this.materialLabel1);
+            this.splitContainer3.Size = new System.Drawing.Size(244, 225);
+            this.splitContainer3.SplitterDistance = 112;
+            this.splitContainer3.TabIndex = 6;
             // 
             // frmResumen_Gastos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1072, 688);
+            this.ClientSize = new System.Drawing.Size(1495, 688);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.KeyPreview = true;
@@ -308,7 +331,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -329,5 +357,6 @@
         private System.Windows.Forms.ListBox lstCajas;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.SplitContainer splitContainer3;
     }
 }

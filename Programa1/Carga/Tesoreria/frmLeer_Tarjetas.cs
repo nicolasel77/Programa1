@@ -125,69 +125,82 @@
                     Excel.Application xApp = new Excel.Application();
                     Excel.Workbook xLibros = xApp.Workbooks.Open(s);
                     Excel.Workbook xLibro = xApp.ActiveWorkbook;
-
-                    xApp.Workbooks.Open(s);
-                    xApp.Worksheets.Item[1].activate();
-
-                    leer.vtipo = h.Codigo_Seleccionado(lstTipo.Text);
-                    if (Tipo.Length > 0) { leer.vtipo = Convert.ToInt32(Tipo); }
-
-                    dt.Rows.Clear();
-                    for (int i = 2; i <= 500000; i++)
+                    try
                     {
-                        string nn = xApp.Range["A" + i].Text;
 
-                        if (nn == "") { break; }
+                        xApp.Workbooks.Open(s);
+                        xApp.Worksheets.Item[1].activate();
 
-                        nn = nn.Substring(nn.IndexOf(";") + 1);
+                        leer.vtipo = h.Codigo_Seleccionado(lstTipo.Text);
+                        if (Tipo.Length > 0) { leer.vtipo = Convert.ToInt32(Tipo); }
 
-                        leer.vlote = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
-                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                        leer.vpago = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
-                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-
-                        leer.vFecha = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
-                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                        leer.vcomprobante = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
-                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                        leer.vtarjeta = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
-                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                        leer.vimporte = Convert.ToSingle(nn.Replace(".", ","));
-
-                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                        dt.Rows.Clear();
+                        for (int i = 2; i <= 500000; i++)
                         {
-                            DataRow nrow = dt.NewRow();
-                            nrow["Fecha"] = leer.vFecha;
-                            nrow["Lote"] = leer.vlote;
-                            nrow["Fecha_Pago"] = leer.vpago;
-                            nrow["Importe"] = leer.vimporte;
-                            nrow["Comprobante"] = leer.vcomprobante;
-                            nrow["Tarjeta"] = leer.vtarjeta;
-                            nrow["Id_Tipo"] = leer.vtipo;
-                            nrow["Suc"] = leer.Sucursal.ID;
-                            nrow["Acreditado"] = true;
-                            dt.Rows.Add(nrow);
-                        }
-                    }
-                    grdDatos.MostrarDatos(dt, true, false);
-                    grdDatos.AutosizeAll();
-                    grdDatos.set_ColW(0, 0);
-                    double t = grdDatos.SumarCol(grdDatos.get_ColIndex("Importe"), false);
-                    lblTotal.Text = "Total: " + t.ToString("C1");
+                            string nn = xApp.Range["A" + i].Text;
 
-                    xApp.Quit();
-                    xLibro = null;
-                    xLibros = null;
-                    xApp = null;
+                            if (nn == "") { break; }
+
+                            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            leer.vlote = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+                            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            leer.vpago = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
+                            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+
+                            leer.vFecha = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
+                            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            leer.vcomprobante = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+                            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            leer.vtarjeta = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+                            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            leer.vimporte = Convert.ToSingle(nn.Replace(".", ","));
+
+                            if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                            {
+                                DataRow nrow = dt.NewRow();
+                                nrow["Fecha"] = leer.vFecha;
+                                nrow["Lote"] = leer.vlote;
+                                nrow["Fecha_Pago"] = leer.vpago;
+                                nrow["Importe"] = leer.vimporte;
+                                nrow["Comprobante"] = leer.vcomprobante;
+                                nrow["Tarjeta"] = leer.vtarjeta;
+                                nrow["Id_Tipo"] = leer.vtipo;
+                                nrow["Suc"] = leer.Sucursal.ID;
+                                nrow["Acreditado"] = true;
+                                dt.Rows.Add(nrow);
+                            }
+                        }
+                        grdDatos.MostrarDatos(dt, true, false);
+                        grdDatos.AutosizeAll();
+                        grdDatos.set_ColW(0, 0);
+                        double t = grdDatos.SumarCol(grdDatos.get_ColIndex("Importe"), false);
+                        lblTotal.Text = "Total: " + t.ToString("C1");
+                    }
+                    catch (Exception er)
+                    {
+                        lblTotal.Text = er.Message;
+                    }
+                    finally
+                    {
+                        xApp.Quit();
+                        xLibro = null;
+                        xLibros = null;
+                        xApp = null;
+
+                        GC.Collect();
+                    }
+
+
 
                     //Application.DoEvents()
                     if (chAuto.Checked == true)

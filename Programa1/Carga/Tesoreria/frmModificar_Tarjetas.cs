@@ -35,7 +35,7 @@
         }
         private void Cargar_grillas()
         {
-            if (tarjetas.Fecha_Cerrada(cFecha.fecha_Actual) == false & tarjetas.Fecha_Cerrada(cFecha.fecha_Fin) == false)
+            if (tarjetas.Fecha_Cerrada(cFecha.fecha_Actual) == false)
             {
                 if (cFecha.fecha_Fin > Convert.ToDateTime("1/1/1910"))
                 {
