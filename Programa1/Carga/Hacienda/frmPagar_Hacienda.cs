@@ -3,6 +3,7 @@
     using Programa1.DB;
     using Programa1.DB.Tesoreria;
     using System;
+    using System.Data;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
@@ -42,8 +43,11 @@
 
             grd.TeclasManejadas = new int[] { 13, 43 };
 
-            grd.MostrarDatos(saldos.Datos(), true, false);
+            DataTable dt = saldos.Datos();
+            //dt.Columns.Add("Sel", typeof(Button));
 
+            grd.MostrarDatos(dt, true, false);
+            
             double valor = 0;
             for (int i = 1; i <= grd.Rows - 1; i++)
             {

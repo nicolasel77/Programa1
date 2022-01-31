@@ -32,6 +32,7 @@ namespace Programa1.Carga.Tesoreria
             this.grd = new Grilla2.SpeedGrilla();
             this.lblTotal = new System.Windows.Forms.Label();
             this.cmdAceptar = new System.Windows.Forms.Button();
+            this.cmdRecargar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // grd
@@ -65,7 +66,7 @@ namespace Programa1.Carga.Tesoreria
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(1427, 673);
+            this.grd.Size = new System.Drawing.Size(1077, 479);
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
             this.grd.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grd_CambioFila);
@@ -76,7 +77,7 @@ namespace Programa1.Carga.Tesoreria
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(12, 699);
+            this.lblTotal.Location = new System.Drawing.Point(12, 505);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(44, 20);
             this.lblTotal.TabIndex = 1;
@@ -86,7 +87,7 @@ namespace Programa1.Carga.Tesoreria
             // 
             this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdAceptar.Location = new System.Drawing.Point(1289, 699);
+            this.cmdAceptar.Location = new System.Drawing.Point(939, 505);
             this.cmdAceptar.Name = "cmdAceptar";
             this.cmdAceptar.Size = new System.Drawing.Size(150, 23);
             this.cmdAceptar.TabIndex = 2;
@@ -94,11 +95,24 @@ namespace Programa1.Carga.Tesoreria
             this.cmdAceptar.UseVisualStyleBackColor = true;
             this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
             // 
+            // cmdRecargar
+            // 
+            this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdRecargar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdRecargar.Location = new System.Drawing.Point(783, 505);
+            this.cmdRecargar.Name = "cmdRecargar";
+            this.cmdRecargar.Size = new System.Drawing.Size(150, 23);
+            this.cmdRecargar.TabIndex = 2;
+            this.cmdRecargar.Text = "Recargar";
+            this.cmdRecargar.UseVisualStyleBackColor = true;
+            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
+            // 
             // frmCheques
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1451, 728);
+            this.ClientSize = new System.Drawing.Size(1101, 534);
+            this.Controls.Add(this.cmdRecargar);
             this.Controls.Add(this.cmdAceptar);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.grd);
@@ -117,5 +131,6 @@ namespace Programa1.Carga.Tesoreria
         private Grilla2.SpeedGrilla grd;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Button cmdAceptar;
+        private System.Windows.Forms.Button cmdRecargar;
     }
 }

@@ -46,7 +46,7 @@ namespace Programa1.Carga.Tesoreria
                 dt = ch.Datos_Vista("Destino=''");
                 if (dt != null)
                 {
-                    dt.Columns.Add("Sel", typeof(bool)); 
+                    dt.Columns.Add("Sel", typeof(bool));                    
                 }
             }
             else
@@ -388,6 +388,11 @@ namespace Programa1.Carga.Tesoreria
         {
             
             this.Close();
+        }
+
+        private void cmdRecargar_Click(object sender, EventArgs e)
+        {
+            Cargar();
         }
     }
 }

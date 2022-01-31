@@ -39,25 +39,20 @@
             this.cmbSucD = new System.Windows.Forms.ComboBox();
             this.lstTipos_t = new System.Windows.Forms.ListBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.grdResumenOri = new Grilla2.SpeedGrilla();
             this.grdResumenDest = new Grilla2.SpeedGrilla();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.cFecha = new Programa1.Controles.cFechas();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.cFechas1 = new Programa1.Controles.cFechas();
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.speedGrilla1 = new Grilla2.SpeedGrilla();
+            this.grdResumenOri = new Grilla2.SpeedGrilla();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -240,40 +235,6 @@
             this.materialLabel1.TabIndex = 17;
             this.materialLabel1.Text = "Tarjeta";
             // 
-            // grdResumenOri
-            // 
-            this.grdResumenOri.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdResumenOri.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdResumenOri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdResumenOri.AutoResize = false;
-            this.grdResumenOri.bColor = System.Drawing.SystemColors.Window;
-            this.grdResumenOri.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.grdResumenOri.bFColor = System.Drawing.SystemColors.WindowText;
-            this.grdResumenOri.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdResumenOri.Col = 0;
-            this.grdResumenOri.Cols = 10;
-            this.grdResumenOri.DataMember = "";
-            this.grdResumenOri.DataSource = null;
-            this.grdResumenOri.EnableEdicion = true;
-            this.grdResumenOri.Encabezado = "";
-            this.grdResumenOri.fColor = System.Drawing.Color.Silver;
-            this.grdResumenOri.FixCols = 0;
-            this.grdResumenOri.FixRows = 0;
-            this.grdResumenOri.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grdResumenOri.FuenteEncabezado = null;
-            this.grdResumenOri.FuentePieDePagina = null;
-            this.grdResumenOri.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdResumenOri.Location = new System.Drawing.Point(1, 26);
-            this.grdResumenOri.Name = "grdResumenOri";
-            this.grdResumenOri.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdResumenOri.PintarFilaSel = true;
-            this.grdResumenOri.Redraw = true;
-            this.grdResumenOri.Row = 0;
-            this.grdResumenOri.Rows = 1;
-            this.grdResumenOri.Size = new System.Drawing.Size(212, 209);
-            this.grdResumenOri.TabIndex = 18;
-            // 
             // grdResumenDest
             // 
             this.grdResumenDest.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
@@ -320,19 +281,6 @@
             this.materialLabel3.Size = new System.Drawing.Size(133, 19);
             this.materialLabel3.TabIndex = 23;
             // 
-            // materialLabel4
-            // 
-            this.materialLabel4.AutoSize = true;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel4.Location = new System.Drawing.Point(3, 1);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(71, 19);
-            this.materialLabel4.TabIndex = 24;
-            this.materialLabel4.Text = "Resumen";
-            // 
             // materialLabel5
             // 
             this.materialLabel5.AutoSize = true;
@@ -366,16 +314,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(218, 153);
             this.panel2.TabIndex = 27;
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel3.Controls.Add(this.grdResumenOri);
-            this.panel3.Controls.Add(this.materialLabel4);
-            this.panel3.Location = new System.Drawing.Point(623, 552);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(215, 235);
-            this.panel3.TabIndex = 28;
             // 
             // panel4
             // 
@@ -411,20 +349,6 @@
             this.panel5.Size = new System.Drawing.Size(111, 130);
             this.panel5.TabIndex = 30;
             // 
-            // cFechas1
-            // 
-            this.cFechas1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFechas1.Location = new System.Drawing.Point(620, 358);
-            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFechas1.Mostrar = 0;
-            this.cFechas1.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
-            this.cFechas1.Name = "cFechas1";
-            this.cFechas1.Size = new System.Drawing.Size(223, 184);
-            this.cFechas1.TabIndex = 15;
-            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
-            // 
             // materialLabel6
             // 
             this.materialLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -440,46 +364,46 @@
             // panel7
             // 
             this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel7.Controls.Add(this.speedGrilla1);
+            this.panel7.Controls.Add(this.grdResumenOri);
             this.panel7.Controls.Add(this.materialLabel8);
             this.panel7.Location = new System.Drawing.Point(623, 552);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(215, 235);
             this.panel7.TabIndex = 28;
             // 
-            // speedGrilla1
+            // grdResumenOri
             // 
-            this.speedGrilla1.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.speedGrilla1.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.speedGrilla1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.grdResumenOri.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdResumenOri.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdResumenOri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.speedGrilla1.AutoResize = false;
-            this.speedGrilla1.bColor = System.Drawing.SystemColors.Window;
-            this.speedGrilla1.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.speedGrilla1.bFColor = System.Drawing.SystemColors.WindowText;
-            this.speedGrilla1.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.speedGrilla1.Col = 0;
-            this.speedGrilla1.Cols = 10;
-            this.speedGrilla1.DataMember = "";
-            this.speedGrilla1.DataSource = null;
-            this.speedGrilla1.EnableEdicion = true;
-            this.speedGrilla1.Encabezado = "";
-            this.speedGrilla1.fColor = System.Drawing.Color.Silver;
-            this.speedGrilla1.FixCols = 0;
-            this.speedGrilla1.FixRows = 0;
-            this.speedGrilla1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.speedGrilla1.FuenteEncabezado = null;
-            this.speedGrilla1.FuentePieDePagina = null;
-            this.speedGrilla1.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.speedGrilla1.Location = new System.Drawing.Point(1, 26);
-            this.speedGrilla1.Name = "speedGrilla1";
-            this.speedGrilla1.PieDePagina = "\t\tPage {0} of {1}";
-            this.speedGrilla1.PintarFilaSel = true;
-            this.speedGrilla1.Redraw = true;
-            this.speedGrilla1.Row = 0;
-            this.speedGrilla1.Rows = 1;
-            this.speedGrilla1.Size = new System.Drawing.Size(212, 209);
-            this.speedGrilla1.TabIndex = 18;
+            this.grdResumenOri.AutoResize = false;
+            this.grdResumenOri.bColor = System.Drawing.SystemColors.Window;
+            this.grdResumenOri.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdResumenOri.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdResumenOri.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdResumenOri.Col = 0;
+            this.grdResumenOri.Cols = 10;
+            this.grdResumenOri.DataMember = "";
+            this.grdResumenOri.DataSource = null;
+            this.grdResumenOri.EnableEdicion = true;
+            this.grdResumenOri.Encabezado = "";
+            this.grdResumenOri.fColor = System.Drawing.Color.Silver;
+            this.grdResumenOri.FixCols = 0;
+            this.grdResumenOri.FixRows = 0;
+            this.grdResumenOri.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdResumenOri.FuenteEncabezado = null;
+            this.grdResumenOri.FuentePieDePagina = null;
+            this.grdResumenOri.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdResumenOri.Location = new System.Drawing.Point(1, 26);
+            this.grdResumenOri.Name = "grdResumenOri";
+            this.grdResumenOri.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdResumenOri.PintarFilaSel = true;
+            this.grdResumenOri.Redraw = true;
+            this.grdResumenOri.Row = 0;
+            this.grdResumenOri.Rows = 1;
+            this.grdResumenOri.Size = new System.Drawing.Size(212, 209);
+            this.grdResumenOri.TabIndex = 18;
             // 
             // materialLabel8
             // 
@@ -502,11 +426,9 @@
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.materialLabel6);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.cFechas1);
             this.Controls.Add(this.materialLabel3);
             this.Controls.Add(this.cFecha);
             this.Controls.Add(this.cmbSucD);
@@ -522,8 +444,6 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -547,20 +467,16 @@
         private Controles.cFechas cFecha;
         private System.Windows.Forms.ListBox lstTipos_t;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private Grilla2.SpeedGrilla grdResumenOri;
         private Grilla2.SpeedGrilla grdResumenDest;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
-        private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
-        private Controles.cFechas cFechas1;
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
         private System.Windows.Forms.Panel panel7;
-        private Grilla2.SpeedGrilla speedGrilla1;
+        private Grilla2.SpeedGrilla grdResumenOri;
         private MaterialSkin.Controls.MaterialLabel materialLabel8;
     }
 }

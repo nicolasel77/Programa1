@@ -140,6 +140,11 @@ namespace Programa1.Carga.Tesoreria
             style.TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.CenterBottom;
             grdSalidas.set_AlineamientoCelda(0, s_Importe, style);
             Totales();
+
+            if(usuario.Nombre == "Lorena")
+            {
+                entradasToolStripMenuItem.PerformClick();
+            }
         }
         private void frmCaja_Diaria_Resize(object sender, EventArgs e)
         {
@@ -1440,8 +1445,13 @@ namespace Programa1.Carga.Tesoreria
 
 
 
+
         #endregion
 
-
+        private void entradasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            entradasToolStripMenuItem.Checked = !entradasToolStripMenuItem.Checked; 
+            splitContainer2.Panel1Collapsed = !entradasToolStripMenuItem.Checked;
+        }
     }
 }

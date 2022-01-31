@@ -17,7 +17,7 @@
         {
             InitializeComponent();
             leer = new Leer_Tarjetas();
-            dt = leer.Datos();
+            //dt = leer.Datos();
         }
 
         private void frmLeer_Tarjetas_Load(object sender, EventArgs e)
@@ -28,7 +28,7 @@
             else
             { fcarpeta = s; }
 
-            cmdCarpeta.Text = "Carpeta: " + fcarpeta;
+            cmdCarpeta.Text = fcarpeta;
 
             cargar_cuentas();
 

@@ -43,9 +43,9 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.grdDebitos = new Grilla2.SpeedGrilla();
             this.label3 = new System.Windows.Forms.Label();
+            this.cmdGuardar_Debitos = new System.Windows.Forms.Button();
             this.chCreditos = new MaterialSkin.Controls.MaterialCheckBox();
             this.chDebitos = new MaterialSkin.Controls.MaterialCheckBox();
-            this.cmdGuardar_Debitos = new System.Windows.Forms.Button();
             this.materialCheckBox1 = new MaterialSkin.Controls.MaterialCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -65,7 +65,7 @@
             this.cmdSeleccionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdSeleccionar.Location = new System.Drawing.Point(12, 12);
             this.cmdSeleccionar.Name = "cmdSeleccionar";
-            this.cmdSeleccionar.Size = new System.Drawing.Size(821, 28);
+            this.cmdSeleccionar.Size = new System.Drawing.Size(727, 28);
             this.cmdSeleccionar.TabIndex = 0;
             this.cmdSeleccionar.Text = "Seleccionar archivo";
             this.cmdSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -103,14 +103,14 @@
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(423, 596);
+            this.grd.Size = new System.Drawing.Size(390, 493);
             this.grd.TabIndex = 1;
             // 
             // cmdSalir
             // 
             this.cmdSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdSalir.Location = new System.Drawing.Point(1178, 702);
+            this.cmdSalir.Location = new System.Drawing.Point(1084, 599);
             this.cmdSalir.Name = "cmdSalir";
             this.cmdSalir.Size = new System.Drawing.Size(75, 23);
             this.cmdSalir.TabIndex = 2;
@@ -122,7 +122,7 @@
             // 
             this.cmdGuardar_Creditos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdGuardar_Creditos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdGuardar_Creditos.Location = new System.Drawing.Point(225, 594);
+            this.cmdGuardar_Creditos.Location = new System.Drawing.Point(197, 491);
             this.cmdGuardar_Creditos.Name = "cmdGuardar_Creditos";
             this.cmdGuardar_Creditos.Size = new System.Drawing.Size(75, 23);
             this.cmdGuardar_Creditos.TabIndex = 3;
@@ -139,7 +139,7 @@
             this.cmbTipo.Items.AddRange(new object[] {
             "Molleda - Galicia",
             "Alonso   - BBVA"});
-            this.cmbTipo.Location = new System.Drawing.Point(839, 13);
+            this.cmbTipo.Location = new System.Drawing.Point(745, 13);
             this.cmbTipo.Name = "cmbTipo";
             this.cmbTipo.Size = new System.Drawing.Size(280, 28);
             this.cmbTipo.TabIndex = 4;
@@ -148,7 +148,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(1204, 12);
+            this.button1.Location = new System.Drawing.Point(1110, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(49, 28);
             this.button1.TabIndex = 5;
@@ -159,7 +159,7 @@
             // 
             this.lblContador.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblContador.AutoSize = true;
-            this.lblContador.Location = new System.Drawing.Point(9, 712);
+            this.lblContador.Location = new System.Drawing.Point(9, 609);
             this.lblContador.Name = "lblContador";
             this.lblContador.Size = new System.Drawing.Size(0, 13);
             this.lblContador.TabIndex = 6;
@@ -180,8 +180,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.grdSalida);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.cmdGuardar_Creditos);
-            this.splitContainer1.Size = new System.Drawing.Size(745, 620);
-            this.splitContainer1.SplitterDistance = 426;
+            this.splitContainer1.Size = new System.Drawing.Size(688, 517);
+            this.splitContainer1.SplitterDistance = 393;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 7;
             // 
@@ -192,7 +192,7 @@
             this.label1.ForeColor = System.Drawing.Color.DimGray;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(426, 23);
+            this.label1.Size = new System.Drawing.Size(393, 23);
             this.label1.TabIndex = 2;
             this.label1.Text = "Entrada";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -228,7 +228,7 @@
             this.grdSalida.Redraw = true;
             this.grdSalida.Row = 0;
             this.grdSalida.Rows = 50;
-            this.grdSalida.Size = new System.Drawing.Size(300, 564);
+            this.grdSalida.Size = new System.Drawing.Size(272, 461);
             this.grdSalida.TabIndex = 0;
             this.grdSalida.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSalida_Editado);
             this.grdSalida.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdSalida_KeyUp);
@@ -240,7 +240,7 @@
             this.label2.ForeColor = System.Drawing.Color.DimGray;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(311, 23);
+            this.label2.Size = new System.Drawing.Size(287, 23);
             this.label2.TabIndex = 3;
             this.label2.Text = "Creditos";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -249,7 +249,7 @@
             // 
             this.cmdCargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdCargar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdCargar.Location = new System.Drawing.Point(1125, 12);
+            this.cmdCargar.Location = new System.Drawing.Point(1031, 12);
             this.cmdCargar.Name = "cmdCargar";
             this.cmdCargar.Size = new System.Drawing.Size(73, 28);
             this.cmdCargar.TabIndex = 5;
@@ -275,8 +275,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.grdDebitos);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Controls.Add(this.cmdGuardar_Debitos);
-            this.splitContainer2.Size = new System.Drawing.Size(1241, 620);
-            this.splitContainer2.SplitterDistance = 745;
+            this.splitContainer2.Size = new System.Drawing.Size(1147, 517);
+            this.splitContainer2.SplitterDistance = 688;
             this.splitContainer2.SplitterWidth = 8;
             this.splitContainer2.TabIndex = 8;
             // 
@@ -311,7 +311,7 @@
             this.grdDebitos.Redraw = true;
             this.grdDebitos.Row = 0;
             this.grdDebitos.Rows = 50;
-            this.grdDebitos.Size = new System.Drawing.Size(480, 564);
+            this.grdDebitos.Size = new System.Drawing.Size(439, 461);
             this.grdDebitos.TabIndex = 4;
             // 
             // label3
@@ -321,10 +321,23 @@
             this.label3.ForeColor = System.Drawing.Color.DimGray;
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(488, 23);
+            this.label3.Size = new System.Drawing.Size(451, 23);
             this.label3.TabIndex = 5;
             this.label3.Text = "Debitos";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmdGuardar_Debitos
+            // 
+            this.cmdGuardar_Debitos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGuardar_Debitos.Enabled = false;
+            this.cmdGuardar_Debitos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdGuardar_Debitos.Location = new System.Drawing.Point(364, 491);
+            this.cmdGuardar_Debitos.Name = "cmdGuardar_Debitos";
+            this.cmdGuardar_Debitos.Size = new System.Drawing.Size(75, 23);
+            this.cmdGuardar_Debitos.TabIndex = 3;
+            this.cmdGuardar_Debitos.Text = "Guardar";
+            this.cmdGuardar_Debitos.UseVisualStyleBackColor = true;
+            this.cmdGuardar_Debitos.Click += new System.EventHandler(this.cmdGuardar_Debitos_Click);
             // 
             // chCreditos
             // 
@@ -364,17 +377,6 @@
             this.chDebitos.UseVisualStyleBackColor = true;
             this.chDebitos.CheckedChanged += new System.EventHandler(this.chDebitos_CheckedChanged);
             // 
-            // cmdGuardar_Debitos
-            // 
-            this.cmdGuardar_Debitos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdGuardar_Debitos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdGuardar_Debitos.Location = new System.Drawing.Point(405, 594);
-            this.cmdGuardar_Debitos.Name = "cmdGuardar_Debitos";
-            this.cmdGuardar_Debitos.Size = new System.Drawing.Size(75, 23);
-            this.cmdGuardar_Debitos.TabIndex = 3;
-            this.cmdGuardar_Debitos.Text = "Guardar";
-            this.cmdGuardar_Debitos.UseVisualStyleBackColor = true;
-            // 
             // materialCheckBox1
             // 
             this.materialCheckBox1.Checked = true;
@@ -398,7 +400,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1265, 737);
+            this.ClientSize = new System.Drawing.Size(1171, 634);
             this.Controls.Add(this.chDebitos);
             this.Controls.Add(this.materialCheckBox1);
             this.Controls.Add(this.chCreditos);

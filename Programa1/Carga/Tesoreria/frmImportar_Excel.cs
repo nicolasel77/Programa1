@@ -622,7 +622,7 @@
             this.Enabled = false;
             Entradas en = new Entradas();
 
-            for (int f = 1; f < grdSalida.Rows - 2; f++)
+            for (int f = 1; f < grdSalida.Rows - 1; f++)
             {
                 double importe = 0;
                 if (grdSalida.get_Texto(f, grdSalida.get_ColIndex("Importe")) != null)
@@ -644,8 +644,12 @@
             }
 
             this.Cursor = Cursors.Default;
-            this.Enabled = true;
+            this.Enabled = true;            
         }
 
+        private void cmdGuardar_Debitos_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

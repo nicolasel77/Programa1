@@ -77,7 +77,7 @@
             this.cmdRuta.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdRuta.Name = "cmdRuta";
             this.cmdRuta.Primary = false;
-            this.cmdRuta.Size = new System.Drawing.Size(389, 25);
+            this.cmdRuta.Size = new System.Drawing.Size(405, 25);
             this.cmdRuta.TabIndex = 2;
             this.cmdRuta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.cmdRuta.UseVisualStyleBackColor = false;
@@ -94,7 +94,7 @@
             this.cmdCarpeta.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdCarpeta.Name = "cmdCarpeta";
             this.cmdCarpeta.Primary = false;
-            this.cmdCarpeta.Size = new System.Drawing.Size(90, 39);
+            this.cmdCarpeta.Size = new System.Drawing.Size(215, 25);
             this.cmdCarpeta.TabIndex = 3;
             this.cmdCarpeta.Text = "Carpeta";
             this.cmdCarpeta.UseVisualStyleBackColor = true;
@@ -111,7 +111,7 @@
             this.cmdGuardar.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdGuardar.Name = "cmdGuardar";
             this.cmdGuardar.Primary = false;
-            this.cmdGuardar.Size = new System.Drawing.Size(90, 23);
+            this.cmdGuardar.Size = new System.Drawing.Size(90, 25);
             this.cmdGuardar.TabIndex = 4;
             this.cmdGuardar.Text = "Guardar";
             this.cmdGuardar.UseVisualStyleBackColor = true;
@@ -177,7 +177,7 @@
             // 
             this.Label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Label4.AutoSize = true;
-            this.Label4.Location = new System.Drawing.Point(905, 304);
+            this.Label4.Location = new System.Drawing.Point(908, 317);
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(120, 13);
             this.Label4.TabIndex = 14;
@@ -187,7 +187,7 @@
             // 
             this.Label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(783, 304);
+            this.Label3.Location = new System.Drawing.Point(786, 317);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(119, 13);
             this.Label3.TabIndex = 15;
@@ -197,7 +197,7 @@
             // 
             this.dtMaxima.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtMaxima.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtMaxima.Location = new System.Drawing.Point(908, 323);
+            this.dtMaxima.Location = new System.Drawing.Point(911, 336);
             this.dtMaxima.Name = "dtMaxima";
             this.dtMaxima.Size = new System.Drawing.Size(116, 20);
             this.dtMaxima.TabIndex = 12;
@@ -206,7 +206,7 @@
             // 
             this.dtFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFecha.Location = new System.Drawing.Point(786, 323);
+            this.dtFecha.Location = new System.Drawing.Point(789, 336);
             this.dtFecha.Name = "dtFecha";
             this.dtFecha.Size = new System.Drawing.Size(116, 20);
             this.dtFecha.TabIndex = 13;
@@ -250,9 +250,9 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.cmdGuardar);
-            this.panel1.Location = new System.Drawing.Point(688, 318);
+            this.panel1.Location = new System.Drawing.Point(688, 330);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(92, 25);
+            this.panel1.Size = new System.Drawing.Size(92, 27);
             this.panel1.TabIndex = 18;
             // 
             // panel2
@@ -260,9 +260,9 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.cmdCarpeta);
-            this.panel2.Location = new System.Drawing.Point(688, 349);
+            this.panel2.Location = new System.Drawing.Point(688, 363);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(92, 41);
+            this.panel2.Size = new System.Drawing.Size(217, 27);
             this.panel2.TabIndex = 19;
             // 
             // panel3
@@ -295,9 +295,9 @@
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.cmdRuta);
-            this.panel5.Location = new System.Drawing.Point(786, 363);
+            this.panel5.Location = new System.Drawing.Point(911, 363);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(391, 27);
+            this.panel5.Size = new System.Drawing.Size(407, 27);
             this.panel5.TabIndex = 22;
             // 
             // lblArchivo
