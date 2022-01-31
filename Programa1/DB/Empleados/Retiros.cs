@@ -1,15 +1,17 @@
 ﻿namespace Programa1.DB
 {
+    using Programa1.Clases;
     using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
 
-    public class Retiros
+    public class Retiros : c_Base
     {
         public Retiros()
         {
-
+            Tabla = "dbEmpleados.dbo.Retiros";
+            Vista = "dbEmpleados.dbo.vw_Retiros";
         }
 
         public Retiros(int id, DateTime fecha, Empleados empleado, Sucursales.Sucursales sucursal, TipoRetiros tipo, float importe, int dias_Vacas, int dias_Pagados)
@@ -32,33 +34,6 @@
         public Single Importe { get; set; }
         public int Dias_Vacas { get; set; }
         public int Dias_Pagados { get; set; }
-
-
-        public DataTable Datos(string filtro = "")
-        {
-            var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
-            if (filtro.Length > 0)
-            {
-                filtro = " WHERE " + filtro;
-            }
-
-            try
-            {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros {filtro} ORDER BY Id", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
-                SqlDat.Fill(dt);
-            }
-            catch (Exception)
-            {
-                dt = null;
-            }
-
-            return dt;
-        }
 
         public DataTable Datos_Mes(DateTime mes, int suc)
         {

@@ -11,7 +11,9 @@
         public Gastos gastos;
         readonly Sucursales sucs = new Sucursales();
         readonly Empleados empleados = new Empleados();
+        readonly Retiros retiros = new Retiros();
         public bool Aceptado = false;
+        public string fecha;
 
         public frmCargar_Sueldos()
         {
@@ -39,6 +41,16 @@
                 {
                     s = s + " AND LEFT(Nombre, 4) NOT LIKE 'baja'";
                 }
+                if (rdVacaciones.Checked == true)
+                {
+                    s = s + $" AND Tipo = 5 AND Semana = {fecha}";
+                }
+                else
+                {
+                    s = s + $" AND id NOT IN (SELECT Empleado FROM dbEmpleados.dbo.Retiros WHERE Tipo = 5 AND {h.Codigos_Seleccionados(lstSucs, "Suc IN({0})")} AND Semana BETWEEN DATEADD(DAY,-35, {fecha})"+ 
+                        $" AND DATEADD(DAY,35, {fecha}) AND DATEADD(DAY, Dias, Semana) >= {fecha} AND Semana < {fecha})";
+                }
+
                 if (rdNinguno.Checked == false)
                 {
                     if (rdAdelanto.Checked == true)
@@ -55,7 +67,7 @@
                         {
                             if (rdVacaciones.Checked == true)
                             {
-
+                                grd.MostrarDatos(retiros.Datos_Vista(s, "suc, Empleado as Id, Nombre, Importe, CONVERT(BIT, 1) Sel", "Suc, Empleado"), true, true);
                             }
                             else
                             {

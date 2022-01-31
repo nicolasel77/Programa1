@@ -1306,6 +1306,7 @@ namespace Programa1.Carga.Tesoreria
             frmCargar_Sueldos fr = new frmCargar_Sueldos();
             cGastos.Usuario = usuario;
             fr.gastos = cGastos;
+            fr.fecha = $"'{mntFecha.SelectionStart.Date.ToString("MM/dd/yyyy")}'";
             fr.ShowDialog();
             if (fr.Aceptado == true)
             {
