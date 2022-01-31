@@ -30,36 +30,59 @@
             if (lstCajas.SelectedIndex != -1)
             {
                 this.Cursor = Cursors.WaitCursor;
-                
+
 
                 Herramientas.Herramientas h = new Herramientas.Herramientas();
 
                 string c = $"IDC= {h.Codigo_Seleccionado(lstCajas.Text)}";
 
+                int colTotalE;
+
                 //Entradas
-                grdEntradas.MostrarDatos(entradas.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), c)), true, true);
+                if (chEDetalle.Checked == true)
+                {
+                    grdEntradas.MostrarDatos(entradas.Datos_Vista(h.Unir(cFechas1.Cadena(), c), "Fecha, ID_TipoEntrada IDT, Nombre Tipo, ID_SubTipoEntrada IDST, Descripcion, Importe"), true, true);
+                    colTotalE = grdEntradas.get_ColIndex("Importe");
+                }
+                else
+                {
+                    grdEntradas.MostrarDatos(entradas.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), c)), true, true);
+                    colTotalE = grdEntradas.get_ColIndex("Total");
+                }
 
-                grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
-                grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";
+                grdEntradas.SumarCol(colTotalE, true);
+                grdEntradas.Columnas[colTotalE].Style.Format = "N2";
 
-                double e = grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
+                double e = grdEntradas.SumarCol(colTotalE, true);
 
                 grdEntradas.AutosizeAll();
-                
+
                 lblTotal.Text = $"Entradas: {e:C1}";
 
                 //Salidas
                 Gastos gastos = new Gastos();
-                grdSalidas.MostrarDatos(gastos.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), c)), true, true);
 
-                grdSalidas.SumarCol(grdSalidas.get_ColIndex("Total"), true);
-                grdSalidas.Columnas[grdSalidas.get_ColIndex("Total")].Style.Format = "N2";
+                int colTotalS;
 
-                double g = grdSalidas.SumarCol(grdSalidas.get_ColIndex("Total"), true);
+                if (chSDetalle.Checked == true)
+                {
+                    grdSalidas.MostrarDatos(gastos.Datos_Vista(h.Unir(cFechas1.Cadena(), c), "Fecha, ID_TipoGastos IDT, Desc_Tipo Tipo, ID_SubTipoGastos IDST, Desc_SubTipo SubTipo, ID_DetalleGastos IDD, Descripcion, Importe"), true, true);
+                    colTotalS = grdSalidas.get_ColIndex("Importe");
+                }
+                else
+                {
+                    grdSalidas.MostrarDatos(gastos.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), c)), true, true);
+                    colTotalS = grdSalidas.get_ColIndex("Total");
+                }
+
+                grdSalidas.SumarCol(colTotalS, true);
+                grdSalidas.Columnas[colTotalS].Style.Format = "N2";
+
+                double g = grdSalidas.SumarCol(colTotalS, true);
 
                 grdSalidas.AutosizeAll();
 
-                lblTotal.Text = $"{lblTotal.Text} Salidas: {g:C1}  Diferencia: {e-g:C1}";
+                lblTotal.Text = $"{lblTotal.Text} Salidas: {g:C1}  Diferencia: {e - g:C1}";
 
                 this.Cursor = Cursors.Default;
             }
@@ -68,6 +91,22 @@
         private void lstCajas_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cargar_Datos();
+        }
+
+        private void chEDetalle_CheckedChanged(object sender, EventArgs e)
+        {
+            if(lstCajas.SelectedIndex != -1)
+            {
+                Cargar_Datos();
+            }
+        }
+
+        private void chSDetalle_CheckedChanged(object sender, EventArgs e)
+        {
+            if (lstCajas.SelectedIndex != -1)
+            {
+                Cargar_Datos();
+            }
         }
     }
 }
