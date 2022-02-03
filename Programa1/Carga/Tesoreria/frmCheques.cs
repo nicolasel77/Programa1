@@ -53,6 +53,7 @@ namespace Programa1.Carga.Tesoreria
             {
                 dt = ch.Datos_Vista();
             }
+
             grd.MostrarDatos(dt, true, !selec);
             grd.set_ColW(Id, 0);
             grd.set_ColW(Origen, 200);
@@ -385,8 +386,7 @@ namespace Programa1.Carga.Tesoreria
         }
 
         private void cmdAceptar_Click(object sender, EventArgs e)
-        {
-            
+        {            
             this.Close();
         }
 

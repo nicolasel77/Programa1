@@ -9,11 +9,12 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Programa1</RootNamespace>
     <AssemblyName>Programa1</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,7 +51,7 @@
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Optimize>false</Optimize>
@@ -62,7 +63,7 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -580,6 +581,12 @@
     <Compile Include="Carga\Tesoreria\frmDetalles_Pagos.Designer.cs">
       <DependentUpon>frmDetalles_Pagos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmDiarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmDiarios.Designer.cs">
+      <DependentUpon>frmDiarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmEditar_Cajas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -838,6 +845,7 @@
     <Compile Include="DB\Tesoreria\Detalles_Pagos.cs" />
     <Compile Include="DB\Tesoreria\Detalle_Entregas.cs" />
     <Compile Include="DB\Tesoreria\Detalle_Gastos.cs" />
+    <Compile Include="DB\Tesoreria\Diarios.cs" />
     <Compile Include="DB\Tesoreria\Entradas.cs" />
     <Compile Include="DB\Tesoreria\Gastos.cs" />
     <Compile Include="DB\Tesoreria\Grupo_Entradas.cs" />
@@ -1141,6 +1149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmDetalles_Pagos.resx">
       <DependentUpon>frmDetalles_Pagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmDiarios.resx">
+      <DependentUpon>frmDiarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmEditar_Cajas.resx">
       <DependentUpon>frmEditar_Cajas.cs</DependentUpon>

@@ -2978,5 +2978,11 @@
                 }
             }
         }
+
+        private void editarDiariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDiarios fr = new frmDiarios();
+            fr.ShowDialog();
+        }
     }
 }

@@ -58,7 +58,7 @@
             Actualizar("Cheque", Cheque);
             Actualizar("Autorizado", Autorizado);
             Actualizar("Fecha_Autorizado", Fecha_Autorizado);
-            Actualizar("Usuario", Usuario.ID);            
+            Actualizar("Usuario", Usuario.ID);
         }
 
         public new void Agregar()
@@ -88,7 +88,7 @@
                 else
                 {
                     ID = n2;
-                                        
+
                     if (caja.EsARendir == true)
                     {
                         if (caja.nombre_ARendir.ID == 0) { caja.Seleccionar_Nombre(); }
@@ -131,7 +131,7 @@
                     Compra_Hacienda c = new Compra_Hacienda();
                     c.Consignatario.ID = Id_SubTipoGastos;
                     int n = Id_DetalleGastos;
-                    n = Convert.ToInt32( c.Dato("ID_CompraFrigo=" + n, "NBoleta", ""));
+                    n = Convert.ToInt32(c.Dato("ID_CompraFrigo=" + n, "NBoleta", ""));
                     c.NBoleta.ID = n;
 
                     c.Calcular_Saldo();
@@ -478,7 +478,7 @@
             }
             return s;
         }
-               
+
 
         /// <summary>
         /// Devuelve el último valor que se cargo con los datos actuales.
@@ -537,8 +537,26 @@
 
         public bool Fecha_Cerrada()
         {
-            if ( Usuario.Permiso == Usuarios.e_Permiso.Administrador) { return false; }
+            if (Usuario.Permiso == Usuarios.e_Permiso.Administrador) { return false; }
             return Fecha_Cerrada(Fecha);
+        }
+
+        internal void Agregar_Diarios(DateTime fecha)
+        {
+            DataTable dt = Datos_Genericos("SELECT * FROM Diarios");
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                Fecha = fecha;
+                caja.ID = Convert.ToInt32(dr[0]);
+                TG.Id_Tipo = Convert.ToInt32(dr[1]);
+                Id_SubTipoGastos = Convert.ToInt32(dr[2]);
+                Desc_SubTipo = dr[3].ToString();
+                Id_DetalleGastos = Convert.ToInt32(dr[4]);
+                Descripcion = dr[5].ToString();
+                Importe = Convert.ToDouble(dr[6]);
+                Agregar();
+            }
         }
         #endregion
 

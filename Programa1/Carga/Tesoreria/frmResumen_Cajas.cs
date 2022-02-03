@@ -41,7 +41,7 @@
                 //Entradas
                 if (chEDetalle.Checked == true)
                 {
-                    grdEntradas.MostrarDatos(entradas.Datos_Vista(h.Unir(cFechas1.Cadena(), c), "Fecha, ID_TipoEntrada IDT, Nombre Tipo, ID_SubTipoEntrada IDST, Descripcion, Importe"), true, true);
+                    grdEntradas.MostrarDatos(entradas.Datos_Vista(h.Unir(cFechas1.Cadena(), c), "Fecha, ID_TipoEntrada IDT, Nombre Tipo, ID_SubTipoEntrada IDST, Descripcion, Importe", "Fecha"), true, true);
                     colTotalE = grdEntradas.get_ColIndex("Importe");
                 }
                 else
@@ -66,7 +66,7 @@
 
                 if (chSDetalle.Checked == true)
                 {
-                    grdSalidas.MostrarDatos(gastos.Datos_Vista(h.Unir(cFechas1.Cadena(), c), "Fecha, ID_TipoGastos IDT, Desc_Tipo Tipo, ID_SubTipoGastos IDST, Desc_SubTipo SubTipo, ID_DetalleGastos IDD, Descripcion, Importe"), true, true);
+                    grdSalidas.MostrarDatos(gastos.Datos_Vista(h.Unir(cFechas1.Cadena(), c), "Fecha, ID_TipoGastos IDT, Desc_Tipo Tipo, ID_SubTipoGastos IDST, Desc_SubTipo SubTipo, ID_DetalleGastos IDD, Descripcion, Importe", "Fecha"), true, true);
                     colTotalS = grdSalidas.get_ColIndex("Importe");
                 }
                 else

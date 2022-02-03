@@ -65,6 +65,7 @@
             this.cajaDiariaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenGastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenEntradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resumenCajasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pagosAutorizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detallesPagosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,7 +132,7 @@
             this.tesoreriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
-            this.resumenCajasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarDiariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -415,7 +416,8 @@
             this.editarTiposToolStripMenuItem,
             this.editarTiposGastosToolStripMenuItem,
             this.editarARendirToolStripMenuItem,
-            this.editarCajasToolStripMenuItem});
+            this.editarCajasToolStripMenuItem,
+            this.editarDiariosToolStripMenuItem});
             this.mnuTesoreria.Name = "mnuTesoreria";
             this.mnuTesoreria.Size = new System.Drawing.Size(65, 20);
             this.mnuTesoreria.Tag = "administrador, sistemas, tesoreria";
@@ -442,6 +444,13 @@
             this.resumenEntradasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.resumenEntradasToolStripMenuItem.Text = "Resumen &Entradas";
             this.resumenEntradasToolStripMenuItem.Click += new System.EventHandler(this.resumenEntradasToolStripMenuItem_Click);
+            // 
+            // resumenCajasToolStripMenuItem
+            // 
+            this.resumenCajasToolStripMenuItem.Name = "resumenCajasToolStripMenuItem";
+            this.resumenCajasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.resumenCajasToolStripMenuItem.Text = "Resumen Cajas";
+            this.resumenCajasToolStripMenuItem.Click += new System.EventHandler(this.resumenCajasToolStripMenuItem_Click);
             // 
             // chequesToolStripMenuItem
             // 
@@ -947,12 +956,12 @@
             this.tstMenu.ItemAdded += new System.Windows.Forms.ToolStripItemEventHandler(this.tstMenu_ItemAdded);
             this.tstMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tstMenu_ItemClicked);
             // 
-            // resumenCajasToolStripMenuItem
+            // editarDiariosToolStripMenuItem
             // 
-            this.resumenCajasToolStripMenuItem.Name = "resumenCajasToolStripMenuItem";
-            this.resumenCajasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.resumenCajasToolStripMenuItem.Text = "Resumen Cajas";
-            this.resumenCajasToolStripMenuItem.Click += new System.EventHandler(this.resumenCajasToolStripMenuItem_Click);
+            this.editarDiariosToolStripMenuItem.Name = "editarDiariosToolStripMenuItem";
+            this.editarDiariosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.editarDiariosToolStripMenuItem.Text = "Editar Diarios";
+            this.editarDiariosToolStripMenuItem.Click += new System.EventHandler(this.editarDiariosToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -1080,6 +1089,7 @@
         private System.Windows.Forms.ToolStripMenuItem tesoreriaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resumenCajasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editarDiariosToolStripMenuItem;
     }
 }
 

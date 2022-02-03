@@ -18,6 +18,7 @@
             try
             {
                 string t = "";
+                
                 if (permiso != Usuarios.e_Permiso.Administrador)
                 {
                     t = $"SELECT Id, Nombre, 0 AS Balance FROM Sucursales WHERE Ver=1 AND Propio={(esSuc ? "1" : "0")} ORDER BY Id";

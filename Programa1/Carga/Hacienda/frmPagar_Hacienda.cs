@@ -191,6 +191,9 @@
 
                     if (saldos.gastos.caja.EsCheque == false)
                     {
+                        // Esta línea es porque queda en memoria
+                        saldos.gastos.Cheque = 0;
+
                         saldos.gastos.Importe = n;
                         saldos.gastos.Agregar();
                     }
