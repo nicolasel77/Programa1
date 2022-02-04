@@ -835,6 +835,7 @@
     <Compile Include="DB\Sucursales\Promedios_Carne.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />
     <Compile Include="DB\Sucursales\Suc_Cuentas.cs" />
+    <Compile Include="DB\Sucursales\Supervisores.cs" />
     <Compile Include="DB\Sucursales\Titulos.cs" />
     <Compile Include="DB\Tesoreria\A_Rendir.cs" />
     <Compile Include="DB\Tesoreria\Bancos.cs" />

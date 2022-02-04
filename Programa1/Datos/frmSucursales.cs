@@ -25,6 +25,7 @@ namespace Programa1.Datos
         private const Byte c_Id_Localidad = 9;
         private const Byte c_Balanza = 10;
         private const Byte c_CUIT = 11;
+        private const Byte c_Supervisor = 12;
 
         #endregion
 
@@ -563,7 +564,21 @@ namespace Programa1.Datos
                         grdSucursales.ActivarCelda(f + 1, 0);
                     }
                     break;
-
+                case c_Supervisor: // Supervisor
+                    if (i == 0)
+                    {
+                        Mensaje("Debe ingresar el Id primero");
+                        grdSucursales.ActivarCelda(f, 0);
+                    }
+                    else
+                    {
+                        Sucs.ID = i;
+                        grdSucursales.set_Texto(f, c, a);
+                        Sucs.ID_Supervisor = Convert.ToInt32(a);
+                        Sucs.Actualizar();
+                        grdSucursales.ActivarCelda(f + 1, 0);
+                    }
+                    break;
             }
         }
 
@@ -614,6 +629,7 @@ namespace Programa1.Datos
             Sucs.Localidad.Id = Convert.ToInt32(grdSucursales.get_Texto(Fila, c_Id_Localidad));
             Sucs.Balanza = grdSucursales.get_Texto(Fila, c_Balanza).ToString();
             Sucs.CUIT = grdSucursales.get_Texto(Fila, c_CUIT).ToString();
+            Sucs.ID_Supervisor = Convert.ToInt32(grdSucursales.get_Texto(Fila, c_Supervisor));
 
         }
 

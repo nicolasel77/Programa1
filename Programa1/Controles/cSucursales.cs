@@ -10,6 +10,7 @@
     public partial class cSucursales : UserControl
     {
         private Sucursales Sucs;
+        private Supervisores supervisores = new Supervisores();
         private Herramientas herramientas = new Herramientas();
 
         private bool cCancel = false;
@@ -85,6 +86,8 @@
                     lstTipos.Items.Add($"{dr["Id"]}. {dr["Nombre"]}");
                 }
             }
+
+            herramientas.Llenar_List(lstSupervisores, supervisores.Datos());
 
             Cargar();
         }
@@ -181,7 +184,12 @@
                         s = $"(Tipo IN ({s.Substring(2)}))";
                     }
                 }
-
+                if (lstSupervisores.SelectedItems.Count != 0)
+                {
+                    string fsup = herramientas.Codigos_Seleccionados(lstSupervisores);
+                    fsup = $" ID_Supervisor IN {fsup}";
+                    s = herramientas.Unir(s,fsup);
+                }
                 if (vFiltroIn.Length > 0)
                 {
                     if (s.Length > 0)
@@ -289,6 +297,11 @@
             Cargar();
         }
 
+        private void lstSupervisores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cargar();
+        }
+
         private void Lst_MouseUp(object sender, MouseEventArgs e)
         {
             switch (e.Button)
@@ -391,6 +404,9 @@
             Mostrar_Tipo = !MostrarTipo;
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            lstSupervisores.SelectedIndex = -1;
+        }
     }
 }

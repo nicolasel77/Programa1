@@ -35,6 +35,7 @@ namespace Programa1.DB.Sucursales
 
         public string Balanza { get; set; }
 
+        public int ID_Supervisor { get; set; }
 
         public Filtrar_SucsClientes Filtro_SucCliente { get; set; }
 
@@ -120,6 +121,7 @@ namespace Programa1.DB.Sucursales
             CUIT = dr["CUIT"].ToString();
             Balanza = dr["Balanza"].ToString();
             Localidad.Id = Convert.ToInt32(dr["Id_Localidad"]);
+            ID_Supervisor = Convert.ToInt32(dr["Id_Supervisor"]);
         }
 
         public new void Actualizar()
@@ -130,7 +132,7 @@ namespace Programa1.DB.Sucursales
             {
                 SqlCommand command =
                     new SqlCommand($"UPDATE Sucursales SET Nombre='{Nombre}', Tipo={Tipo.ID}, Ver={(Ver ? "1" : "0")}, Propio={(Propio ? "1" : "0")}, Titular='{Titular}', CUIT='{CUIT}', Direccion='{Direccion}'" +
-                    $",Alias='{Alias}',Id_Localidad={Localidad.Id}, Balanza='{Balanza}' WHERE Id={ID}", sql);
+                    $",Alias='{Alias}',Id_Localidad={Localidad.Id}, Balanza='{Balanza}', ID_Supervisor = {ID_Supervisor} WHERE Id={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -155,8 +157,8 @@ namespace Programa1.DB.Sucursales
                 string vpropio = Propio ? "1" : "0";
 
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Sucursales (Id, Nombre, Tipo, Ver, Propio, Titular, CUIT, Direccion, Id_Localidad, Alias, Balanza) VALUES({ID}, '{Nombre}', {Tipo.ID}, {vver}, " +
-                    $"{vpropio}, '{Titular}', '{CUIT}', '{Direccion}', {Localidad.Id}, '{Alias}', '{Balanza}')", sql);
+                    new SqlCommand($"INSERT INTO Sucursales (Id, Nombre, Tipo, Ver, Propio, Titular, CUIT, Direccion, Id_Localidad, Alias, Balanza, ID_Supervisor) VALUES({ID}, '{Nombre}', {Tipo.ID}, {vver}, " +
+                    $"{vpropio}, '{Titular}', '{CUIT}', '{Direccion}', {Localidad.Id}, '{Alias}', '{Balanza}', {ID_Supervisor})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
