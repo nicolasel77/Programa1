@@ -158,5 +158,10 @@
                     SendKeys.Send("{ENTER}");
             }
         }
+
+        private void grdEntregas_KeyPress(object sender, short e)
+        {
+
+        }
     }
 }

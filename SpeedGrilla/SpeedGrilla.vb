@@ -144,8 +144,11 @@ Public Class SpeedGrilla
         Grd.Redraw = True
     End Sub
 
-    Public Sub MostrarDatos_acostado(ByVal ls As DataTable, Optional ByVal AplicarFormato As Boolean = False, Optional ByVal CalTotal As Int32 = -1)
+    Public Sub MostrarDatos_acostado(ByVal ls As DataTable, Optional ByVal AplicarFormato As Boolean = False, Optional ByVal CalTotal As Int32 = -1, Optional ByVal Ultimaf As Int16 = -1)
         Dim i As Int32
+        If Ultimaf < 0 Then
+            Ultimaf = Grd.Rows.Count - 1
+        End If
         Grd.Redraw = False
         Grd.Col = -1
         If AplicarFormato = True Then
@@ -154,7 +157,7 @@ Public Class SpeedGrilla
             Else 'aplico el nuevo formato
                 lc = ls.Copy
                 Encabezados(lc)
-                CargarDatosGrillaAcostado(ls)
+                CargarDatosGrillaAcostado(ls, Ultimaf)
                 If CalTotal <> -1 Then
                     vtotal = SumarCol(CalTotal, True)
                 End If
@@ -179,12 +182,12 @@ Public Class SpeedGrilla
             Next
         Else
             Grd.Rows.Fixed = 1
-            CargarDatosGrillaAcostado(ls)
+            CargarDatosGrillaAcostado(ls, Ultimaf)
         End If
         Grd.Redraw = True
     End Sub
 
-    Private Sub CargarDatosGrillaAcostado(ByVal ls As DataTable)
+    Private Sub CargarDatosGrillaAcostado(ByVal ls As DataTable, ByVal Fin As Int16)
         Dim i, j, c As Int32
         Grd.Redraw = False
         Try
@@ -195,7 +198,7 @@ Public Class SpeedGrilla
             c = Grd.Cols.Count - 1
             i = 1
             For j = 0 To ls.Rows.Count - 1
-                If (i = Grd.Rows.Count - 1) Then
+                If (i = Fin) Then
                     Grd.Cols.Add()
                     c = c + 1
                     i = 1
@@ -1001,6 +1004,33 @@ Public Class SpeedGrilla
                 If Escribir Then
                     If t Then
                         .Item(.Rows.Count - 1, colsum) = t
+                    End If
+                End If
+                Return t
+            End With
+        Catch er As System.Exception
+        End Try
+    End Function
+
+    Public Function SumarCol(ByVal Col As Integer, ByVal Escribir As Boolean, Optional ByVal Inicio As Int16 = 1, Optional ByVal Final As Int16 = -1) As Double
+        Dim i As Int16
+        Dim a As String
+
+        If Final > Grd.Rows.Count - 1 Or Final < 0 Then
+            Final = Grd.Rows.Count - 1
+        End If
+        Try
+            With Grd
+                Dim t As Double
+                For i = Inicio To Final
+                    If Not .Rows(i).IsNode AndAlso IsNumeric(.GetDataDisplay(i, Col)) Then
+                        a = .Item(i, Col)
+                        t += CDbl(a)
+                    End If
+                Next
+                If Escribir Then
+                    If t Then
+                        .Item(.Rows.Count - 1, Col) = t
                     End If
                 End If
                 Return t

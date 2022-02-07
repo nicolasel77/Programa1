@@ -2,9 +2,9 @@
 {
     using Programa1.DB;
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Windows.Forms;
-    using System.Collections.Generic;
     public partial class frmCompras : Form
     {
         private Compras Compras;
@@ -112,14 +112,15 @@
         private void CmdMostrar_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-
-            string s = Armar_Cadena();
-            grdCompras.MostrarDatos(Compras.Datos(s), true);
-            formato_Grilla();
-            Totales();
-            grdCompras.ActivarCelda(grdCompras.Rows - 1, c_Fecha);
-            grdCompras.Focus();
-
+            if (cFecha.fecha_Actual > Convert.ToDateTime("1/1/1900"))
+            {
+                string s = Armar_Cadena();
+                grdCompras.MostrarDatos(Compras.Datos(s), true);
+                formato_Grilla();
+                Totales();
+                grdCompras.ActivarCelda(grdCompras.Rows - 1, c_Fecha);
+                grdCompras.Focus();
+            }
             this.Cursor = Cursors.Default;
         }
 

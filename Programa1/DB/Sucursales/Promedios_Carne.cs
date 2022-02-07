@@ -138,5 +138,12 @@
             return pr.Fechas(1);
         }
 
+        public void Actualizar_promedios_fijos(int id_prod, double kg)
+        {
+            if (id_prod > 0)
+            { 
+            Ejecutar_Comando($"UPDATE Promedios_Carne_fijos SET kg = {kg} WHERE Id_Prod = {id_prod}");
+            }
+        }
     }
 }

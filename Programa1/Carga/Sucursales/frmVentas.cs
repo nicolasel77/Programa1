@@ -117,7 +117,10 @@
         private void CmdMostrar_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            Cargar_Datos();
+            if (cFecha.fecha_Actual > Convert.ToDateTime("1/1/1900"))
+            {
+                Cargar_Datos();
+            }
 
             this.Cursor = Cursors.Default;
         }

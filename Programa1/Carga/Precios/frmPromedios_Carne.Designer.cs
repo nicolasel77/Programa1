@@ -97,7 +97,7 @@
             // grdProme
             // 
             this.grdProme.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdProme.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdProme.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.None;
             this.grdProme.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
