@@ -24,12 +24,30 @@ namespace Programa1.DB.Varios
         }
 
         string vNombre = "";
+        private int iD;
 
         public Usuarios()
         {
         }
 
-        public int ID { get; set; }
+        public int ID
+        {
+            get
+            {
+                return iD;
+            }
+            set
+            {
+                iD = value;
+                if (iD == 0)
+                {
+                    if (!string.IsNullOrEmpty(vNombre))
+                    {
+                        Nombre = vNombre;
+                    }
+                }
+            }
+        }
         public string Nombre
         {
             get { return vNombre; }
@@ -97,7 +115,7 @@ namespace Programa1.DB.Varios
                             case 6:
                                 Tipo = e_TipoUsuario.Hacienda;
                                 break;
-                        }  
+                        }
                     }
                 }
             }

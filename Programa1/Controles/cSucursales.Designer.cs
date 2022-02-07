@@ -38,6 +38,9 @@
             this.cmdTodos = new System.Windows.Forms.Button();
             this.cmdNinguno = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.lstSupervisores = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.rdTodas = new System.Windows.Forms.RadioButton();
@@ -87,7 +90,7 @@
             this.lstTipos.Location = new System.Drawing.Point(3, 21);
             this.lstTipos.Name = "lstTipos";
             this.lstTipos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstTipos.Size = new System.Drawing.Size(93, 156);
+            this.lstTipos.Size = new System.Drawing.Size(93, 117);
             this.lstTipos.TabIndex = 4;
             this.lstTipos.SelectedIndexChanged += new System.EventHandler(this.LstTipos_SelectedIndexChanged);
             // 
@@ -111,6 +114,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.lstSupervisores);
+            this.splitContainer1.Panel2.Controls.Add(this.button1);
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.lstTipos);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
@@ -198,6 +204,43 @@
             this.lblTitulo.Size = new System.Drawing.Size(82, 18);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "Sucursales";
+            // 
+            // lstSupervisores
+            // 
+            this.lstSupervisores.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstSupervisores.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstSupervisores.FormattingEnabled = true;
+            this.lstSupervisores.Location = new System.Drawing.Point(3, 184);
+            this.lstSupervisores.Name = "lstSupervisores";
+            this.lstSupervisores.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstSupervisores.Size = new System.Drawing.Size(93, 78);
+            this.lstSupervisores.TabIndex = 11;
+            this.lstSupervisores.SelectedIndexChanged += new System.EventHandler(this.lstSupervisores_SelectedIndexChanged);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Location = new System.Drawing.Point(65, 266);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(31, 19);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "N";
+            this.toolTip1.SetToolTip(this.button1, "Borra selección");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.label1.Location = new System.Drawing.Point(0, 163);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(95, 18);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Supervisores";
             // 
             // panel2
             // 
@@ -309,7 +352,7 @@
             // 
             this.cmdTodosTipos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdTodosTipos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdTodosTipos.Location = new System.Drawing.Point(65, 183);
+            this.cmdTodosTipos.Location = new System.Drawing.Point(65, 144);
             this.cmdTodosTipos.Name = "cmdTodosTipos";
             this.cmdTodosTipos.Size = new System.Drawing.Size(31, 19);
             this.cmdTodosTipos.TabIndex = 5;
@@ -399,5 +442,8 @@
         private System.Windows.Forms.RadioButton rdSucs;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel paBotones;
+        private System.Windows.Forms.ListBox lstSupervisores;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
     }
 }

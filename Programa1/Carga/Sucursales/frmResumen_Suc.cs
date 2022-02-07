@@ -150,10 +150,23 @@
                     if (Convert.ToInt32(grdSucursales.get_Texto(i, 0)) == Suc) { grdSucursales.ActivarCelda(i, 0); }
                 }
                 grdSucursales.Columnas[2].Style.Format = "#,###.#";
+
+                if (verBalancesToolStripMenuItem.Checked == false)
+                {
+                    grdSucursales.set_ColW(2, 0);
+                }
             }
             else
             {
                 grdSucursales.set_ColW(2, 0);
+            }
+            if (verSoloNegativosToolStripMenuItem.Checked == true)
+            {
+                for(int i = grdSucursales.Rows - 1; i >= 1; i--)
+                {
+                    double b = Convert.ToDouble(grdSucursales.get_Texto(i, 2));
+                    if (b > 0) { grdSucursales.Filas.Remove(i); }
+                }
             }
         }
 
@@ -273,6 +286,7 @@
                 if (k > 0) { lblTBalancesClientes.ForeColor = Color.SteelBlue; } else { lblTBalancesClientes.ForeColor = Color.Red; }
 
             }
+
             k = Est.Carne_Kilos(true);
             lblKilos.Text = $"Kilos Carne: {k:N0}";
         }
@@ -367,6 +381,11 @@
                         grdEstadistica.Columnas["IntCompra"].Width = 0;
                         grdEstadistica.Columnas["DifInt"].Width = 0;
                     }
+
+                    if(verBalancesToolStripMenuItem.Checked == false)
+                    {
+                        grdEstadistica.Columnas["Balance"].Width = 0;
+                    }
                 }
             }
 
@@ -416,7 +435,6 @@
                 DataTable dt = dg.Datos(s);
 
                 if (userr.Permiso == Usuarios.e_Permiso.Supervisor)
-                {
                     for (int i = dt.Columns.Count - 1; i >= 0; i--)
                     {
                         DataColumn dc = dt.Columns[i];
@@ -425,9 +443,20 @@
                             dt.Columns.Remove(dc);
                         }
                     }
+                {
                 }
 
                 fr.grd.MostrarDatos(dt, true, false);
+                for (int i = fr.grd.Cols - 1; i >= 0; i--)
+                {
+                    string n = fr.grd.Columnas[i].Name;
+
+                    if (n.Contains("Total") || n.Contains("Costo") || n.Contains("Precio") || n.Contains("Importe"))
+                    {
+                        fr.grd.Columnas[i].Format = "N1";
+                    }
+                }
+
                 fr.grd.AutosizeAll();
                 fr.ShowDialog();
                 this.Focus();
@@ -617,6 +646,21 @@
             Estadisticas();
         }
 
+        private void verBalancesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            verBalancesToolStripMenuItem.Checked = !verBalancesToolStripMenuItem.Checked;
+            lblTBalancesSuc.Visible = verBalancesToolStripMenuItem.Checked;
+            lblBalance.Visible = verBalancesToolStripMenuItem.Checked;
 
+            Cargar_Listado(cFechas1.fecha_Actual);
+            Cargar_Datos();
+        }
+
+        private void verSoloNegativosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            verSoloNegativosToolStripMenuItem.Checked = !verSoloNegativosToolStripMenuItem.Checked;
+            Cargar_Listado(cFechas1.fecha_Actual);
+            Cargar_Datos();
+        }
     }
 }

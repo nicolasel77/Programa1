@@ -82,6 +82,9 @@
             this.sucursalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.todosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.verBalancesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verSoloNegativosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuTop = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.lblKilos = new System.Windows.Forms.Label();
@@ -807,52 +810,76 @@
             this.toolStripMenuItem1,
             this.sucursalesToolStripMenuItem,
             this.clientesToolStripMenuItem,
-            this.todosToolStripMenuItem});
+            this.todosToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.verBalancesToolStripMenuItem,
+            this.verSoloNegativosToolStripMenuItem});
             this.mnuFiltroEstadisticas.Name = "mnuFiltroEstadisticas";
-            this.mnuFiltroEstadisticas.Size = new System.Drawing.Size(130, 120);
+            this.mnuFiltroEstadisticas.Size = new System.Drawing.Size(173, 170);
             // 
             // unaToolStripMenuItem
             // 
             this.unaToolStripMenuItem.Checked = true;
             this.unaToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.unaToolStripMenuItem.Name = "unaToolStripMenuItem";
-            this.unaToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.unaToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.unaToolStripMenuItem.Text = "Una";
             this.unaToolStripMenuItem.Click += new System.EventHandler(this.todasToolStripMenuItem_Click);
             // 
             // todasToolStripMenuItem
             // 
             this.todasToolStripMenuItem.Name = "todasToolStripMenuItem";
-            this.todasToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.todasToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.todasToolStripMenuItem.Text = "Todas";
             this.todasToolStripMenuItem.Click += new System.EventHandler(this.todasToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(126, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(169, 6);
             // 
             // sucursalesToolStripMenuItem
             // 
             this.sucursalesToolStripMenuItem.Checked = true;
             this.sucursalesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.sucursalesToolStripMenuItem.Name = "sucursalesToolStripMenuItem";
-            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.sucursalesToolStripMenuItem.Text = "Sucursales";
             this.sucursalesToolStripMenuItem.Click += new System.EventHandler(this.sucursalesToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // todosToolStripMenuItem
             // 
             this.todosToolStripMenuItem.Name = "todosToolStripMenuItem";
-            this.todosToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.todosToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.todosToolStripMenuItem.Text = "Todos";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(169, 6);
+            // 
+            // verBalancesToolStripMenuItem
+            // 
+            this.verBalancesToolStripMenuItem.Checked = true;
+            this.verBalancesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.verBalancesToolStripMenuItem.Name = "verBalancesToolStripMenuItem";
+            this.verBalancesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.verBalancesToolStripMenuItem.Text = "Ver Balances";
+            this.verBalancesToolStripMenuItem.Click += new System.EventHandler(this.verBalancesToolStripMenuItem_Click);
+            // 
+            // verSoloNegativosToolStripMenuItem
+            // 
+            this.verSoloNegativosToolStripMenuItem.Name = "verSoloNegativosToolStripMenuItem";
+            this.verSoloNegativosToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.verSoloNegativosToolStripMenuItem.Text = "Ver Solo Negativos";
+            this.verSoloNegativosToolStripMenuItem.Click += new System.EventHandler(this.verSoloNegativosToolStripMenuItem_Click);
             // 
             // nuTop
             // 
@@ -1065,5 +1092,8 @@
         private System.Windows.Forms.Label lbl4;
         private System.Windows.Forms.Timer tiOcultar;
         private System.Windows.Forms.Label lblKilos;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem verBalancesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verSoloNegativosToolStripMenuItem;
     }
 }

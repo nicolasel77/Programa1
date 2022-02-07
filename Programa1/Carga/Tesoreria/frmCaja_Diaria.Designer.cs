@@ -30,8 +30,8 @@
         {
             this.splPrincipal = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.lblEntradas = new MaterialSkin.Controls.MaterialLabel();
-            this.lblTotalGrillaEntrada = new MaterialSkin.Controls.MaterialLabel();
+            this.lblEntradas = new System.Windows.Forms.Label();
+            this.lblTotalGrillaEntrada = new System.Windows.Forms.Label();
             this.grdEntradas = new Grilla2.SpeedGrilla();
             this.mnuEntradas = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.borrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,15 +44,15 @@
             this.rdCaja = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdNinguno = new MaterialSkin.Controls.MaterialRadioButton();
             this.label5 = new System.Windows.Forms.Label();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
-            this.lblTotalGrillaGastos = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel3 = new System.Windows.Forms.Label();
+            this.lblTotalGrillaGastos = new System.Windows.Forms.Label();
             this.grdSalidas = new Grilla2.SpeedGrilla();
             this.mnuGastos = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtInsert = new System.Windows.Forms.TextBox();
             this.rdARendir = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdCajas = new MaterialSkin.Controls.MaterialRadioButton();
-            this.lblUltimo = new MaterialSkin.Controls.MaterialLabel();
+            this.lblUltimo = new System.Windows.Forms.Label();
             this.grdCajas = new Grilla2.SpeedGrilla();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblSTotalEntradas = new System.Windows.Forms.Label();
@@ -69,10 +69,10 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel5 = new System.Windows.Forms.Label();
             this.cmdCerrar_Fecha = new MaterialSkin.Controls.MaterialFlatButton();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new System.Windows.Forms.Label();
+            this.materialLabel4 = new System.Windows.Forms.Label();
             this.mntFecha = new System.Windows.Forms.MonthCalendar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.verTransferenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,6 +84,7 @@
             this.todosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.entradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splPrincipal)).BeginInit();
             this.splPrincipal.Panel1.SuspendLayout();
             this.splPrincipal.Panel2.SuspendLayout();
@@ -152,11 +153,9 @@
             this.lblEntradas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEntradas.BackColor = System.Drawing.SystemColors.Control;
-            this.lblEntradas.Depth = 0;
-            this.lblEntradas.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblEntradas.Font = new System.Drawing.Font("Arial", 11F);
             this.lblEntradas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblEntradas.Location = new System.Drawing.Point(3, 3);
-            this.lblEntradas.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblEntradas.Name = "lblEntradas";
             this.lblEntradas.Size = new System.Drawing.Size(458, 20);
             this.lblEntradas.TabIndex = 1;
@@ -168,11 +167,9 @@
             this.lblTotalGrillaEntrada.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalGrillaEntrada.BackColor = System.Drawing.SystemColors.Control;
-            this.lblTotalGrillaEntrada.Depth = 0;
-            this.lblTotalGrillaEntrada.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblTotalGrillaEntrada.Font = new System.Drawing.Font("Arial", 11F);
             this.lblTotalGrillaEntrada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalGrillaEntrada.Location = new System.Drawing.Point(3, 693);
-            this.lblTotalGrillaEntrada.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalGrillaEntrada.Name = "lblTotalGrillaEntrada";
             this.lblTotalGrillaEntrada.Size = new System.Drawing.Size(458, 24);
             this.lblTotalGrillaEntrada.TabIndex = 1;
@@ -259,7 +256,7 @@
             this.panel7.Controls.Add(this.rdCaja);
             this.panel7.Controls.Add(this.rdNinguno);
             this.panel7.Controls.Add(this.label5);
-            this.panel7.Location = new System.Drawing.Point(321, 693);
+            this.panel7.Location = new System.Drawing.Point(317, 693);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(419, 24);
             this.panel7.TabIndex = 3;
@@ -371,13 +368,11 @@
             this.materialLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.materialLabel3.BackColor = System.Drawing.SystemColors.Control;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.Font = new System.Drawing.Font("Arial", 11F);
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel3.Location = new System.Drawing.Point(3, 3);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(737, 20);
+            this.materialLabel3.Size = new System.Drawing.Size(733, 20);
             this.materialLabel3.TabIndex = 1;
             this.materialLabel3.Text = "Gastos";
             this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -387,13 +382,11 @@
             this.lblTotalGrillaGastos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalGrillaGastos.BackColor = System.Drawing.SystemColors.Control;
-            this.lblTotalGrillaGastos.Depth = 0;
-            this.lblTotalGrillaGastos.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblTotalGrillaGastos.Font = new System.Drawing.Font("Arial", 11F);
             this.lblTotalGrillaGastos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalGrillaGastos.Location = new System.Drawing.Point(3, 693);
-            this.lblTotalGrillaGastos.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalGrillaGastos.Name = "lblTotalGrillaGastos";
-            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(312, 24);
+            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(308, 24);
             this.lblTotalGrillaGastos.TabIndex = 2;
             this.lblTotalGrillaGastos.Text = "Total Salida";
             this.lblTotalGrillaGastos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -430,7 +423,7 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 50;
-            this.grdSalidas.Size = new System.Drawing.Size(737, 660);
+            this.grdSalidas.Size = new System.Drawing.Size(733, 660);
             this.grdSalidas.TabIndex = 0;
             this.grdSalidas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSalidas_Editado);
             this.grdSalidas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSalidas_CambioFila);
@@ -531,11 +524,9 @@
             // 
             this.lblUltimo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUltimo.Depth = 0;
-            this.lblUltimo.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblUltimo.Font = new System.Drawing.Font("Arial", 11F);
             this.lblUltimo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblUltimo.Location = new System.Drawing.Point(3, 426);
-            this.lblUltimo.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblUltimo.Name = "lblUltimo";
             this.lblUltimo.Size = new System.Drawing.Size(277, 19);
             this.lblUltimo.TabIndex = 8;
@@ -728,13 +719,11 @@
             // materialLabel5
             // 
             this.materialLabel5.AutoSize = true;
-            this.materialLabel5.Depth = 0;
-            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel5.Font = new System.Drawing.Font("Arial", 11F);
             this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel5.Location = new System.Drawing.Point(0, 81);
-            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(58, 19);
+            this.materialLabel5.Size = new System.Drawing.Size(56, 17);
             this.materialLabel5.TabIndex = 4;
             this.materialLabel5.Text = "Salidas";
             // 
@@ -758,13 +747,11 @@
             // materialLabel2
             // 
             this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.Font = new System.Drawing.Font("Arial", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel2.Location = new System.Drawing.Point(0, 0);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(68, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(67, 17);
             this.materialLabel2.TabIndex = 4;
             this.materialLabel2.Text = "Entradas";
             // 
@@ -773,11 +760,9 @@
             this.materialLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.materialLabel4.BackColor = System.Drawing.SystemColors.Control;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel4.Font = new System.Drawing.Font("Arial", 11F);
             this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel4.Location = new System.Drawing.Point(8, 3);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
             this.materialLabel4.Size = new System.Drawing.Size(292, 20);
             this.materialLabel4.TabIndex = 2;
@@ -801,7 +786,8 @@
             this.aRendirToolStripMenuItem,
             this.chequesToolStripMenuItem,
             this.transferenciaToolStripMenuItem,
-            this.verToolStripMenuItem});
+            this.verToolStripMenuItem,
+            this.diariosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1517, 24);
@@ -849,30 +835,38 @@
             this.soloToolStripMenuItem.Checked = true;
             this.soloToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.soloToolStripMenuItem.Name = "soloToolStripMenuItem";
-            this.soloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.soloToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.soloToolStripMenuItem.Text = "Solo";
             this.soloToolStripMenuItem.Click += new System.EventHandler(this.soloToolStripMenuItem_Click);
             // 
             // todosToolStripMenuItem
             // 
             this.todosToolStripMenuItem.Name = "todosToolStripMenuItem";
-            this.todosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.todosToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.todosToolStripMenuItem.Text = "Todos";
             this.todosToolStripMenuItem.Click += new System.EventHandler(this.todosToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(116, 6);
             // 
             // entradasToolStripMenuItem
             // 
             this.entradasToolStripMenuItem.Checked = true;
             this.entradasToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.entradasToolStripMenuItem.Name = "entradasToolStripMenuItem";
-            this.entradasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.entradasToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.entradasToolStripMenuItem.Text = "Entradas";
             this.entradasToolStripMenuItem.Click += new System.EventHandler(this.entradasToolStripMenuItem_Click);
+            // 
+            // diariosToolStripMenuItem
+            // 
+            this.diariosToolStripMenuItem.Name = "diariosToolStripMenuItem";
+            this.diariosToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
+            this.diariosToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.diariosToolStripMenuItem.Text = "Diarios F10";
+            this.diariosToolStripMenuItem.Click += new System.EventHandler(this.diariosToolStripMenuItem_Click);
             // 
             // frmCaja_Diaria
             // 
@@ -911,13 +905,13 @@
         #endregion
         private System.Windows.Forms.SplitContainer splPrincipal;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private MaterialSkin.Controls.MaterialLabel lblTotalGrillaEntrada;
+        private System.Windows.Forms.Label lblTotalGrillaEntrada;
         private Grilla2.SpeedGrilla grdEntradas;
         private Grilla2.SpeedGrilla grdSalidas;
-        private MaterialSkin.Controls.MaterialLabel lblEntradas;
-        private MaterialSkin.Controls.MaterialLabel materialLabel3;
-        private MaterialSkin.Controls.MaterialLabel lblTotalGrillaGastos;
-        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private System.Windows.Forms.Label lblEntradas;
+        private System.Windows.Forms.Label materialLabel3;
+        private System.Windows.Forms.Label lblTotalGrillaGastos;
+        private System.Windows.Forms.Label materialLabel4;
         private System.Windows.Forms.MonthCalendar mntFecha;
         private MaterialSkin.Controls.MaterialFlatButton cmdCerrar_Fecha;
         private System.Windows.Forms.Panel panel1;
@@ -925,7 +919,7 @@
         private System.Windows.Forms.ToolStripMenuItem borrarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cambiarFechaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imprimirToolStripMenuItem;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private System.Windows.Forms.Label materialLabel2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblSTotalEntradas;
@@ -940,10 +934,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
-        private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private System.Windows.Forms.Label materialLabel5;
         private Grilla2.SpeedGrilla grdCajas;
         private System.Windows.Forms.Panel panel6;
-        private MaterialSkin.Controls.MaterialLabel lblUltimo;
+        private System.Windows.Forms.Label lblUltimo;
         private System.Windows.Forms.Panel panel7;
         private MaterialSkin.Controls.MaterialRadioButton rdNinguno;
         private System.Windows.Forms.Label label5;
@@ -965,5 +959,6 @@
         private System.Windows.Forms.ToolStripMenuItem todosToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem entradasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem diariosToolStripMenuItem;
     }
 }

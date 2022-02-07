@@ -244,7 +244,7 @@
 
                 _Base.Ejecutar_Comando("DELETE FROM Temp_n");
 
-                int nop = 0;
+                int nOperacion = 0;
                 DateTime fecha = DateTime.Today;
                 string descripcion = "";
                 double importe = 0;
@@ -267,25 +267,25 @@
 
                         if (Convert.ToDouble(grd.get_Texto(i, 3)) > 0)
                         {
-                            if (nop > 0) { nop = nop * -1; }
+                            if (nOperacion > 0) { nOperacion = nOperacion * -1; }
                         }
 
                         if (importe != 0)
                         {
-                            nop = nop * -1;
-                            nop = ++nop;
+                            //nOperacion = nOperacion * -1;
+                            ++nOperacion;
                             fecha = Convert.ToDateTime(grd.get_Texto(i, 0));
                         }
                         else
                         {
-                            if (nop > 0)
+                            if (nOperacion > 0)
                             {
-                                _Base.Ejecutar_Comando($"UPDATE Temp_n SET Descripcion=CONVERT(VARCHAR, (SELECT Top 1 Descripcion FROM Temp_n WHERE ID={nop})) + ' {descripcion}'  WHERE ID={nop}");
+                                _Base.Ejecutar_Comando($"UPDATE Temp_n SET Descripcion=CONVERT(VARCHAR, (SELECT Top 1 Descripcion FROM Temp_n WHERE ID={nOperacion})) + ' {descripcion}'  WHERE ID={nOperacion}");
                                 nono = true;
                             }
                         }
 
-                        if (nop > 0 && nono == false) { _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nop}, '{descripcion}', {importe.ToString().Replace(",", ".")})"); }
+                        if (nOperacion > 0 && nono == false) { _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nOperacion}, '{descripcion}', {importe.ToString().Replace(",", ".")})"); }
                     }
                     catch (Exception er)
                     {

@@ -284,6 +284,18 @@ namespace Programa1.Carga.Tesoreria
             todosToolStripMenuItem.Checked = true;
             Cargar_Datos();
         }
+
+        private void entradasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            entradasToolStripMenuItem.Checked = !entradasToolStripMenuItem.Checked;
+            splitContainer2.Panel1Collapsed = !entradasToolStripMenuItem.Checked;
+        }
+
+        private void diariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cGastos.Agregar_Diarios(mntFecha.SelectionStart.Date);
+            Cargar_Datos();
+        }
         #endregion
 
 
@@ -932,6 +944,7 @@ namespace Programa1.Carga.Tesoreria
                                             cGastos.Agregar();
                                             grdSalidas.set_Texto(f, s_Id, Convert.ToInt32(cGastos.ID));
                                             grdSalidas.set_Texto(f, s_Fecha, Convert.ToDateTime(cGastos.Fecha));
+                                            grdSalidas.set_Texto(f, s_Usuario, cGastos.Usuario.ID);
 
                                             grdSalidas.AgregarFila();
                                             Repetir_FilaG();
@@ -1360,6 +1373,11 @@ namespace Programa1.Carga.Tesoreria
                 if (Fila < grdSalidas.Rows - 1) 
                 { 
                     cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Usuario)); 
+                    if (cGastos.Usuario.ID == 0)
+                    {
+                        usuario.Nombre = usuario.Nombre;
+                        cGastos.Usuario = usuario;
+                    }
                 }
                 else
                 {
@@ -1445,14 +1463,8 @@ namespace Programa1.Carga.Tesoreria
         }
 
 
-
-
         #endregion
 
-        private void entradasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            entradasToolStripMenuItem.Checked = !entradasToolStripMenuItem.Checked; 
-            splitContainer2.Panel1Collapsed = !entradasToolStripMenuItem.Checked;
-        }
+        
     }
 }
