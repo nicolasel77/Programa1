@@ -1370,6 +1370,7 @@ namespace Programa1.Carga.Tesoreria
                 cGastos.Id_DetalleGastos = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_IDDetalle));
                 cGastos.Descripcion = Convert.ToString(grdSalidas.get_Texto(Fila, s_Descripcion));
                 cGastos.Importe = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Importe));
+                cGastos.Cheque = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Cheque));
                 if (Fila < grdSalidas.Rows - 1) 
                 { 
                     cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Usuario)); 

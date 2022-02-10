@@ -49,6 +49,7 @@
         {
             if (cmdSeleccionar.Text != "Seleccionar archivo")
             {
+                grd.Rows = 0;
                 this.Cursor = Cursors.WaitCursor;
                 this.Enabled = false;
                 try
@@ -272,7 +273,7 @@
 
                         if (importe != 0)
                         {
-                            //nOperacion = nOperacion * -1;
+                            nOperacion = nOperacion * -1;
                             ++nOperacion;
                             fecha = Convert.ToDateTime(grd.get_Texto(i, 0));
                         }
