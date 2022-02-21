@@ -128,7 +128,6 @@
             this.grdEntregas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdEntregas_Editado);
             this.grdEntregas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdEntregas_CambioFila);
             this.grdEntregas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdEntregas_KeyUp);
-            this.grdEntregas.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grdEntregas_KeyPress);
             // 
             // label1
             // 

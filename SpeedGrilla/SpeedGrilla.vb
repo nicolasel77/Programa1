@@ -74,7 +74,6 @@ Public Class SpeedGrilla
         Me.Size = New System.Drawing.Size(714, 456)
         CType(Me.Grd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-
     End Sub
 
 #End Region
@@ -439,6 +438,7 @@ Public Class SpeedGrilla
             End If
         End Set
     End Property
+
     Public Property ColorLetraCelda(Optional ByVal Fila As Int32 = -1, Optional ByVal Columna As Int32 = -1) As Color
         Get
             If Fila = -1 Then Fila = Grd.Row
@@ -477,6 +477,14 @@ Public Class SpeedGrilla
         End Get
         Set(ByVal Value As Int32)
             Grd.Cols.Fixed = Value
+        End Set
+    End Property
+    Public Property Frozen() As Int32
+        Get
+            Return Grd.Cols.Frozen
+        End Get
+        Set(ByVal Value As Int32)
+            Grd.Cols.Frozen = Value
         End Set
     End Property
     Public Property Cols() As Int32
