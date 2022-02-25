@@ -133,7 +133,7 @@ namespace Programa1.Carga
 
             C1.Win.C1FlexGrid.CellStyle cKilos;
             cKilos = grdEntradas.Styles.Add("Kilos");
-            cKilos.Font = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
+            cKilos.Font = new Font("Arial", 8, FontStyle.Bold);
             cKilos.Format = "#,###.#";
 
             grdEntradas.Columnas[grdEntradas.get_ColIndex("Kilos")].Style = cKilos;
@@ -147,7 +147,7 @@ namespace Programa1.Carga
 
             grdEntradas.set_ColW(c_IDEstado, 0);
             grdEntradas.set_ColW(c_Estado, 0);
-            grdEntradas.set_ColW(c_Observacion, 120);
+            grdEntradas.set_ColW(c_Observacion, 200);
 
             C1.Win.C1FlexGrid.CellStyle ch = grdEntradas.Styles.Add("ch");
             C1.Win.C1FlexGrid.CellStyle er = grdEntradas.Styles.Add("er");
@@ -238,29 +238,32 @@ namespace Programa1.Carga
         {
             if (e == 32)
             {
-                int i = grdEntradas.Row;
-                Estados_Compra es = new Estados_Compra();
-                es.Fecha = Convert.ToDateTime(grdEntradas.get_Texto(i, grdEntradas.get_ColIndex("Fecha")));
-                es.Proveedor.Id = Prov;
-                es.ID = Convert.ToInt32(grdEntradas.get_Texto(i, c_IDEstado));
-                int n = Convert.ToInt32(grdEntradas.get_Texto(i, c_Estado));
-                if (n == 0) { es.Estado = Estados_Compra.e_Estado.Sin_Chequear; }
-                if (n == 1) { es.Estado = Estados_Compra.e_Estado.Chequeado; }
-                if (n == 2) { es.Estado = Estados_Compra.e_Estado.Error; }
+                if (rdAgrupado.Checked == true)
+                {
+                    int i = grdEntradas.Row;
+                    Estados_Compra es = new Estados_Compra();
+                    es.Fecha = Convert.ToDateTime(grdEntradas.get_Texto(i, grdEntradas.get_ColIndex("Fecha")));
+                    es.Proveedor.Id = Prov;
+                    es.ID = Convert.ToInt32(grdEntradas.get_Texto(i, c_IDEstado));
+                    int n = Convert.ToInt32(grdEntradas.get_Texto(i, c_Estado));
+                    if (n == 0) { es.Estado = Estados_Compra.e_Estado.Sin_Chequear; }
+                    if (n == 1) { es.Estado = Estados_Compra.e_Estado.Chequeado; }
+                    if (n == 2) { es.Estado = Estados_Compra.e_Estado.Error; }
 
-                es.Siguiente();
+                    es.Siguiente();
 
-                C1.Win.C1FlexGrid.CellStyle ch = grdEntradas.Styles.Add("ch");
-                C1.Win.C1FlexGrid.CellStyle er = grdEntradas.Styles.Add("er");
-                ch.BackColor = Color.LightBlue;
-                er.BackColor = Color.MistyRose;
+                    C1.Win.C1FlexGrid.CellStyle ch = grdEntradas.Styles.Add("ch");
+                    C1.Win.C1FlexGrid.CellStyle er = grdEntradas.Styles.Add("er");
+                    ch.BackColor = Color.LightBlue;
+                    er.BackColor = Color.MistyRose;
 
-                grdEntradas.set_Texto(i, c_Estado, es.Estado);
-                grdEntradas.set_Texto(i, c_IDEstado, es.ID);
+                    grdEntradas.set_Texto(i, c_Estado, es.Estado);
+                    grdEntradas.set_Texto(i, c_IDEstado, es.ID);
 
-                if (es.Estado == Estados_Compra.e_Estado.Chequeado) { grdEntradas.Filas[i].Style = ch; }
-                if (es.Estado == Estados_Compra.e_Estado.Error) { grdEntradas.Filas[i].Style = er; }
-                if (es.Estado == Estados_Compra.e_Estado.Sin_Chequear) { grdEntradas.Filas[i].Style = null; }
+                    if (es.Estado == Estados_Compra.e_Estado.Chequeado) { grdEntradas.Filas[i].Style = ch; }
+                    if (es.Estado == Estados_Compra.e_Estado.Error) { grdEntradas.Filas[i].Style = er; }
+                    if (es.Estado == Estados_Compra.e_Estado.Sin_Chequear) { grdEntradas.Filas[i].Style = null; grdEntradas.set_Texto(i, c_Observacion, ""); } 
+                }
 
             }
         }
