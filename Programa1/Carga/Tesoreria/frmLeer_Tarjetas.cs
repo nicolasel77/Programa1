@@ -180,6 +180,40 @@
                                 dt.Rows.Add(nrow);
                             }
                         }
+                        // Solución para saber Cual es el Último registro de la semana anterior:
+                        // 1: Buscar si hay más de un número de lote
+                        // 2: Buscar si uno de esos Números es 1
+                        // 3: Siempre sería el Último a no ser que el otro Número sea 2 (en ese caso tomar desde el 2)
+                        // Aclaración: Esto Podría fallar únicamente en caso de que el Número de lote sea 2 y ese mismo día se resetee el Número de lote (Toda caso distinto a ese estaría bien)
+                        //if (chSeparar.Checked == true)
+                        //{
+                        //    DataTable dtcc = leer.suc_cuentas.nccc(leer.Sucursal.ID);
+                        //    int[] succcc = new int[leer.suc_cuentas.N_Cuentas_Compartidas(leer.Sucursal.ID)];
+                        //    for (int i = 0; i < succcc.Length; i++)
+                        //    {
+                        //        succcc[i] = Convert.ToInt32(dtcc.Rows[i][0]);
+                        //    }
+
+                        //    for (int j = 0; j < succcc.Length; j ++)
+                        //    {
+                        //        if (succcc[j] != leer.Sucursal.ID)
+                        //        {
+                        //            DateTime fecha_us = dtFecha.Value.AddDays(-1);
+                        //            int Lote_us
+                        //            int Comprobante_us
+
+                        //            for (int i = 1; i < dt.Rows.Count; i++)
+                        //            {
+                        //                if (dt.Rows[i][lote])
+                        //                {
+
+                        //                    dt.Rows[i]["suc"] = succcc[j]
+                        //                }
+                        //            }
+                        //        }
+                        //    }
+                        //}
+
                         grdDatos.MostrarDatos(dt, true, false);
                         grdDatos.AutosizeAll();
                         grdDatos.set_ColW(0, 0);

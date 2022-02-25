@@ -81,11 +81,17 @@
             grdProme.set_ColW(8, 65);
             grdProme.set_Texto(0, 7, "Promedio");
             grdProme.set_Texto(0, 8, "Sistema");
-            
-            int j = 0;
+
             for (int i = 9; i <= grdProme.Cols - 1; i++)
             {
                 grdProme.AutosizeCol(i);
+            }
+            
+            grdProme.Frozen = 9;
+
+            for (int i = 1; i <= 9; i++)
+            {
+                grdProme.Columnas[i].Style.BackColor = grdProme.Columnas[10].Style.BackColor;
             }
         }
 

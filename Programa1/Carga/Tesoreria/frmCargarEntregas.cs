@@ -69,6 +69,12 @@
             }
             else
             {
+                if (Convert.ToDouble(a) <= 0)
+                {
+                    grdEntregas.ActivarCelda(f, c);
+                    return;
+                }
+
                 detalle_Entregas.Importe = Convert.ToDouble(a);
 
                 grdEntregas.set_Texto(f, c, a);
@@ -152,16 +158,11 @@
 
         private void frmCargarEntregas_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == Convert.ToChar(43))
+            if (e.KeyChar == Convert.ToChar(43) & grdEntregas.Col == d_Importe)
             {
                     SendKeys.Send("000");
                     SendKeys.Send("{ENTER}");
             }
-        }
-
-        private void grdEntregas_KeyPress(object sender, short e)
-        {
-
         }
     }
 }

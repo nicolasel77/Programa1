@@ -27,5 +27,16 @@
             else
             { return false; }
         }
+
+        //public int N_Cuentas_Compartidas(int suc)
+        //{
+        //    return Convert.ToInt32(Dato_Generico($"SELECT COUNT(Suc) FROM {Vista} WHERE Tipo = 1 AND N_Cuenta = (SELECT TOP 1 N_Cuenta FROM Suc_Cuentas WHERE Suc = {suc})"));
+        //}
+
+        //public DataTable nccc(int suc)
+        //{ 
+        //return Datos_Genericos($"SELECT Suc FROM {Vista} WHERE Tipo = 1 AND N_Cuenta = (SELECT TOP 1 N_Cuenta FROM Suc_Cuentas WHERE Suc = {suc})");
+        //}
+
     }
 }

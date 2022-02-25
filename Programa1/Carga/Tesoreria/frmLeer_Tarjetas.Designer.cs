@@ -329,6 +329,7 @@
             this.grdCuentas.fColor = System.Drawing.Color.Silver;
             this.grdCuentas.FixCols = 0;
             this.grdCuentas.FixRows = 0;
+            this.grdCuentas.Frozen = 0;
             this.grdCuentas.FuenteEncabezado = null;
             this.grdCuentas.FuentePieDePagina = null;
             this.grdCuentas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -365,6 +366,7 @@
             this.grdDatos.fColor = System.Drawing.Color.Silver;
             this.grdDatos.FixCols = 0;
             this.grdDatos.FixRows = 0;
+            this.grdDatos.Frozen = 0;
             this.grdDatos.FuenteEncabezado = null;
             this.grdDatos.FuentePieDePagina = null;
             this.grdDatos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
