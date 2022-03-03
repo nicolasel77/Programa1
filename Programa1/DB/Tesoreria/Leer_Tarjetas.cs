@@ -23,6 +23,7 @@
         public int vtipo;
         public Single vimporte;
         public DateTime vpago;
+
         public Sucursales Sucursal { get; set; } = new Sucursales();
         public Suc_Cuentas suc_cuentas { get; set; } = new Suc_Cuentas();
         public Tipos_Tarjeta tipos_tarjeta { get; set; } = new Tipos_Tarjeta();
@@ -84,12 +85,11 @@
                     new SqlCommand($"INSERT INTO Varios.dbo.Varios (Dato, Valor) VALUES ('fCarpeta', '{carpeta}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
-                sql.Open();
 
                 d = command.ExecuteNonQuery();
 
                 sql.Close();
-                
+
             }
             catch (Exception e)
             {
@@ -116,6 +116,14 @@
                 d = "";
             }
             return d;
+        }
+
+        public void Exportardt(DataTable dt)
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlBulkCopy sqlbulkcopy = new SqlBulkCopy(sql);
+            sqlbulkcopy.DestinationTableName = "dbGastos.Entradas_Tarjeta";
+            sqlbulkcopy.WriteToServer(dt);
         }
 
     }

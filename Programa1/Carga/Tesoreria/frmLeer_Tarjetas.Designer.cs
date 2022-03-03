@@ -56,6 +56,8 @@
             this.lblTotal = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.cmdRecargar = new MaterialSkin.Controls.MaterialFlatButton();
+            this.pbLeer = new System.Windows.Forms.ProgressBar();
+            this.lblpb = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -417,11 +419,34 @@
             this.cmdRecargar.UseVisualStyleBackColor = true;
             this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
             // 
+            // pbLeer
+            // 
+            this.pbLeer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbLeer.Location = new System.Drawing.Point(1037, 333);
+            this.pbLeer.Name = "pbLeer";
+            this.pbLeer.Size = new System.Drawing.Size(275, 23);
+            this.pbLeer.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pbLeer.TabIndex = 25;
+            this.pbLeer.Visible = false;
+            // 
+            // lblpb
+            // 
+            this.lblpb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblpb.AutoSize = true;
+            this.lblpb.Location = new System.Drawing.Point(1034, 317);
+            this.lblpb.Name = "lblpb";
+            this.lblpb.Size = new System.Drawing.Size(52, 13);
+            this.lblpb.TabIndex = 26;
+            this.lblpb.Text = "Progreso:";
+            this.lblpb.Visible = false;
+            // 
             // frmLeer_Tarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1428, 643);
+            this.Controls.Add(this.lblpb);
+            this.Controls.Add(this.pbLeer);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.lblArchivo);
@@ -489,5 +514,7 @@
         internal System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Panel panel6;
         private MaterialSkin.Controls.MaterialFlatButton cmdRecargar;
+        private System.Windows.Forms.ProgressBar pbLeer;
+        internal System.Windows.Forms.Label lblpb;
     }
 }

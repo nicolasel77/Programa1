@@ -12,6 +12,7 @@
     {
         public Suc_Cuentas()
         {
+            Tabla = "dbGastos.dbo.Suc_Cuentas";
             Vista = "dbGastos.dbo.vw_SucCuentas";
         }
 
@@ -37,6 +38,19 @@
         //{ 
         //return Datos_Genericos($"SELECT Suc FROM {Vista} WHERE Tipo = 1 AND N_Cuenta = (SELECT TOP 1 N_Cuenta FROM Suc_Cuentas WHERE Suc = {suc})");
         //}
+
+        public int buscar_suc(int establecimiento)
+        {
+            int suc = 0;
+            try
+            {
+                suc = Convert.ToInt32(Dato_Generico(Tabla, $" N_Cuenta = {establecimiento} ORDER BY Suc", "Suc"));
+            }
+            catch
+            { 
+            }
+            return suc;
+        }
 
     }
 }

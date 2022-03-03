@@ -112,15 +112,18 @@
         private void Escribir(string Tipo = "")
         {
             Cursor = Cursors.WaitCursor;
-
+            tiAuto.Stop();
             lblTotal.Text = "";
             if (lblArchivo.Text.Length > 0)
             {
                 if (lstTipo.SelectedIndex > -1 || Tipo.Length > 0)
                 {
+                    pbLeer.Visible = true;
+                    lblpb.Visible = true;
+
                     String s = lblArchivo.Text;
                     String Suc = s.Substring(s.LastIndexOf(@"\") + 1);
-                    Suc = Suc.Substring(0, Suc.LastIndexOf(" "));
+                    //Suc = Suc.Substring(0, Suc.LastIndexOf(" "));
 
                     Excel.Application xApp = new Excel.Application();
                     Excel.Workbook xLibros = xApp.Workbooks.Open(s);
@@ -134,51 +137,56 @@
                         leer.vtipo = h.Codigo_Seleccionado(lstTipo.Text);
                         if (Tipo.Length > 0) { leer.vtipo = Convert.ToInt32(Tipo); }
 
+                        lblpb.Text = "Cargando:";
+                        int max = xApp.ActiveSheet.Range("A1").End(Excel.XlDirection.xlDown).Row - 1;
+                        pbLeer.Maximum = max;
+
                         dt.Rows.Clear();
-                        for (int i = 2; i <= 500000; i++)
+                        for (int i = 3; i <= max; i++)
                         {
                             string nn = xApp.Range["A" + i].Text;
 
                             if (nn == "") { break; }
 
-                            nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                            leer.vlote = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
-                            nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                            leer.vpago = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
-                            nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                            nn = nn.Substring(nn.IndexOf(";") + 1);
-
-
                             leer.vFecha = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
-                            nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                            leer.vcomprobante = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
-                            nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                            leer.vtarjeta = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
-                            nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                            nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                            leer.vimporte = Convert.ToSingle(nn.Replace(".", ","));
-
                             if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
                             {
                                 DataRow nrow = dt.NewRow();
                                 nrow["Fecha"] = leer.vFecha;
-                                nrow["Lote"] = leer.vlote;
-                                nrow["Fecha_Pago"] = leer.vpago;
-                                nrow["Importe"] = leer.vimporte;
-                                nrow["Comprobante"] = leer.vcomprobante;
-                                nrow["Tarjeta"] = leer.vtarjeta;
+                               
+                                
+                                nn = nn.Substring(nn.IndexOf(";") + 1);
+                                nn = nn.Substring(nn.IndexOf(";") + 1);
+                                nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                nrow["Lote"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+                                nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                nrow["Comprobante"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+                                nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(nn.Substring(0, nn.IndexOf(";"))));
+                                nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                nrow["Fecha_Pago"] = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
+                                nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                nrow["Importe"] = Convert.ToSingle(nn.Substring(0, nn.IndexOf(";")).Replace(".", ","));
+                                nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                nn = nn.Substring(nn.LastIndexOf("*") + 1);
+
+                                nrow["Tarjeta"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+
                                 nrow["Id_Tipo"] = leer.vtipo;
-                                nrow["Suc"] = leer.Sucursal.ID;
                                 nrow["Acreditado"] = true;
+
                                 dt.Rows.Add(nrow);
                             }
+                            pbLeer.Value = i;
+                            Application.DoEvents();
                         }
                         // Solución para saber Cual es el Último registro de la semana anterior:
                         // 1: Buscar si hay más de un número de lote
@@ -219,6 +227,8 @@
                         grdDatos.set_ColW(0, 0);
                         double t = grdDatos.SumarCol(grdDatos.get_ColIndex("Importe"), false);
                         lblTotal.Text = "Total: " + t.ToString("C1");
+                        pbLeer.Visible = false;
+                        lblpb.Visible = false;
                     }
                     catch (Exception er)
                     {
@@ -234,9 +244,7 @@
                         GC.Collect();
                     }
 
-
-
-                    //Application.DoEvents()
+                    Application.DoEvents();
                     if (chAuto.Checked == true)
                     { cmdGuardar.PerformClick(); }
                 }
@@ -252,6 +260,12 @@
         {
             if (leer.Fecha_Cerrada(dtFecha.Value) == false & leer.Fecha_Cerrada(dtMaxima.Value) == false)
             {
+                lblpb.Visible = true;
+                pbLeer.Visible = true;
+
+                lblpb.Text = "Guardando";
+                pbLeer.Maximum = grdDatos.Rows - 1;
+
                 for (int i = 1; i <= grdDatos.Rows - 1; i++)
                 {
                     leer.vFecha = Convert.ToDateTime(grdDatos.get_Texto(i, 1));
@@ -263,13 +277,20 @@
                     leer.vcomprobante = Convert.ToInt32(grdDatos.get_Texto(i, 8));
                     leer.vtarjeta = Convert.ToInt32(grdDatos.get_Texto(i, 9));
                     leer.actualizar_Registros();
+                    pbLeer.Value = i;
                 }
                 grdDatos.Rows = 1;
+
+                lblpb.Visible = false;
+                pbLeer.Visible = false;
 
                 lblSucursal.Text = $"{ grdDatos.get_Texto(1, grdDatos.get_ColIndex("Suc"))}  -  { grdDatos.get_Texto(1, grdDatos.get_ColIndex("Id_Tipo"))}";
                 lblTotal.Text = "";
                 Mover_Archivo();
-
+                if (chAuto.Checked == true)
+                {
+                    tiAuto.Start();
+                }
                 Cursor = Cursors.Default;
             }
             else
@@ -286,12 +307,11 @@
                 {
                     lblArchivo.Text = s;
                     String n = s.Substring(s.LastIndexOf(@"\") + 1);
-                    String t = s.Substring(s.LastIndexOf(" ") + 1);
-                    t = t.Substring(0, t.IndexOf("."));
+                    n = n.Substring(0, n.IndexOf("."));
 
-                    leer.Sucursal.ID = Convert.ToInt32(n.Substring(0, n.LastIndexOf(" ")));
-                    lblSucursal.Text = leer.Sucursal.Nombre;
-                    Escribir(t);
+                    //leer.Sucursal.ID = Convert.ToInt32(n.Substring(0, n.LastIndexOf(" ")));
+                    //lblSucursal.Text = leer.Sucursal.Nombre;
+                    Escribir(n);
                 }
             }
         }
