@@ -1383,6 +1383,7 @@
     <Compile Include="DB\Varios\Analisis.cs" />
     <Compile Include="DB\Tesoreria\Prestamos.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

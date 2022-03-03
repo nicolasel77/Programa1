@@ -256,7 +256,7 @@
             this.panel7.Controls.Add(this.rdCaja);
             this.panel7.Controls.Add(this.rdNinguno);
             this.panel7.Controls.Add(this.label5);
-            this.panel7.Location = new System.Drawing.Point(317, 693);
+            this.panel7.Location = new System.Drawing.Point(313, 693);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(419, 24);
             this.panel7.TabIndex = 3;
@@ -372,7 +372,7 @@
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel3.Location = new System.Drawing.Point(3, 3);
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(733, 20);
+            this.materialLabel3.Size = new System.Drawing.Size(729, 20);
             this.materialLabel3.TabIndex = 1;
             this.materialLabel3.Text = "Gastos";
             this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -386,7 +386,7 @@
             this.lblTotalGrillaGastos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalGrillaGastos.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaGastos.Name = "lblTotalGrillaGastos";
-            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(308, 24);
+            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(304, 24);
             this.lblTotalGrillaGastos.TabIndex = 2;
             this.lblTotalGrillaGastos.Text = "Total Salida";
             this.lblTotalGrillaGastos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -423,7 +423,7 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 50;
-            this.grdSalidas.Size = new System.Drawing.Size(733, 660);
+            this.grdSalidas.Size = new System.Drawing.Size(729, 660);
             this.grdSalidas.TabIndex = 0;
             this.grdSalidas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSalidas_Editado);
             this.grdSalidas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSalidas_CambioFila);
@@ -863,9 +863,9 @@
             // diariosToolStripMenuItem
             // 
             this.diariosToolStripMenuItem.Name = "diariosToolStripMenuItem";
-            this.diariosToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
-            this.diariosToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
-            this.diariosToolStripMenuItem.Text = "Diarios F10";
+            this.diariosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F10)));
+            this.diariosToolStripMenuItem.Size = new System.Drawing.Size(135, 20);
+            this.diariosToolStripMenuItem.Text = "Diarios  [Control+F10]";
             this.diariosToolStripMenuItem.Click += new System.EventHandler(this.diariosToolStripMenuItem_Click);
             // 
             // frmCaja_Diaria
