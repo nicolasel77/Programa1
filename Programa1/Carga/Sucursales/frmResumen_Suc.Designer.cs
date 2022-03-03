@@ -269,6 +269,7 @@
             this.grdEntradas.fColor = System.Drawing.SystemColors.Control;
             this.grdEntradas.FixCols = 0;
             this.grdEntradas.FixRows = 0;
+            this.grdEntradas.Frozen = 0;
             this.grdEntradas.FuenteEncabezado = null;
             this.grdEntradas.FuentePieDePagina = null;
             this.grdEntradas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -369,6 +370,7 @@
             this.grdSalidas.fColor = System.Drawing.SystemColors.Control;
             this.grdSalidas.FixCols = 0;
             this.grdSalidas.FixRows = 0;
+            this.grdSalidas.Frozen = 0;
             this.grdSalidas.FuenteEncabezado = null;
             this.grdSalidas.FuentePieDePagina = null;
             this.grdSalidas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -546,6 +548,7 @@
             this.grdVentas.fColor = System.Drawing.SystemColors.Control;
             this.grdVentas.FixCols = 0;
             this.grdVentas.FixRows = 1;
+            this.grdVentas.Frozen = 0;
             this.grdVentas.FuenteEncabezado = null;
             this.grdVentas.FuentePieDePagina = null;
             this.grdVentas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -600,6 +603,7 @@
             this.grdSucursales.fColor = System.Drawing.SystemColors.Control;
             this.grdSucursales.FixCols = 0;
             this.grdSucursales.FixRows = 0;
+            this.grdSucursales.Frozen = 0;
             this.grdSucursales.FuenteEncabezado = null;
             this.grdSucursales.FuentePieDePagina = null;
             this.grdSucursales.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -789,6 +793,7 @@
             this.grdEstadistica.fColor = System.Drawing.SystemColors.Control;
             this.grdEstadistica.FixCols = 0;
             this.grdEstadistica.FixRows = 0;
+            this.grdEstadistica.Frozen = 0;
             this.grdEstadistica.FuenteEncabezado = null;
             this.grdEstadistica.FuentePieDePagina = null;
             this.grdEstadistica.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
