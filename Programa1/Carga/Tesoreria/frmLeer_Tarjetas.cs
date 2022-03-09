@@ -138,7 +138,7 @@
                         if (Tipo.Length > 0) { leer.vtipo = Convert.ToInt32(Tipo); }
 
                         lblpb.Text = "Cargando:";
-                        int max = xApp.ActiveSheet.Range("A1").End(Excel.XlDirection.xlDown).Row - 1;
+                        int max = xApp.ActiveSheet.Range("A1").End(Excel.XlDirection.xlDown).Row;
                         pbLeer.Maximum = max;
 
                         dt.Rows.Clear();
