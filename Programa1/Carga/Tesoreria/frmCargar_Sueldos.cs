@@ -37,19 +37,35 @@
                 Herramientas.Herramientas h = new Herramientas.Herramientas();
 
                 string s = h.Codigos_Seleccionados(lstSucs, "Suc IN({0})");
-                if (chBajas.Checked)
-                {
-                    s = s + " AND LEFT(Nombre, 4) NOT LIKE 'baja'";
-                }
+
+                int tamaño_array = 0;
+
                 if (rdVacaciones.Checked == true)
                 {
                     s = s + $" AND Tipo = 5 AND Semana = {fecha}";
                 }
                 else
                 {
-                    s = s + $" AND id NOT IN (SELECT Empleado FROM dbEmpleados.dbo.Retiros WHERE Tipo = 5 AND {h.Codigos_Seleccionados(lstSucs, "Suc IN({0})")} AND Semana BETWEEN DATEADD(DAY,-35, {fecha})"+ 
-                        $" AND DATEADD(DAY,35, {fecha}) AND DATEADD(DAY, Dias, Semana) >= {fecha} AND Semana < {fecha})";
+                    tamaño_array = Convert.ToInt16(empleados.Dato_Generico($"SELECT COUNT(Empleado) FROM dbEmpleados.dbo.Retiros WHERE Tipo = 5 AND {s} AND" +
+                $"{fecha} BETWEEN Semana AND DATEADD(DAY, Dias - 1, Semana)"));
                 }
+
+                if (chBajas.Checked)
+                {
+                    s = s + " AND LEFT(Nombre, 4) NOT LIKE 'baja'";
+                }
+
+
+                int[] emp_de_vacas = new int[tamaño_array];
+
+                int emp = 0;
+                for (int i = 0; i < emp_de_vacas.Length; i++)
+                {
+                    emp = Convert.ToInt16(empleados.Dato_Generico($"SELECT TOP 1 Empleado FROM dbEmpleados.dbo.Retiros WHERE Tipo = 5 AND {h.Codigos_Seleccionados(lstSucs, "Suc IN({0})")} AND Empleado > {emp} AND " +
+                $"{fecha} BETWEEN Semana AND DATEADD(DAY, Dias - 1, Semana) ORDER BY Empleado"));
+                    emp_de_vacas.SetValue(emp, i);
+                }
+
 
                 if (rdNinguno.Checked == false)
                 {
@@ -81,6 +97,23 @@
                 {
                     grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, 0.0 AS Importe, CONVERT(BIT, 1) Sel"), true, true);
                 }
+
+                for (int i = 0; i < emp_de_vacas.Length; i++)
+                {
+                    emp = (int)emp_de_vacas.GetValue(i);
+                    for (int f = 1; f < grd.Rows - 1; f++)
+                    {
+                        if (Convert.ToInt16(grd.get_Texto(f, 1)) == emp)
+                        {
+                            grd.set_ColorLetraCelda(f, 0, System.Drawing.Color.Red);
+                            grd.set_ColorLetraCelda(f, 1, System.Drawing.Color.Red);
+                            grd.set_ColorLetraCelda(f, 2, System.Drawing.Color.Red);
+                            grd.set_ColorLetraCelda(f, 3, System.Drawing.Color.Red);
+                            grd.set_Texto(f, 4, false);
+                        }
+                    }
+                }
+
                 grd.Columnas[3].Format = "N1";
                 grd.set_ColW(0, 40);
                 grd.set_ColW(1, 40);
@@ -168,7 +201,7 @@
                         gastos.Agregar();
                     }
                 }
-                Hide(); 
+                Hide();
             }
             else
             {
