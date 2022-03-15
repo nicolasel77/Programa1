@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.grdAgr = new Grilla2.SpeedGrilla();
             this.label2 = new System.Windows.Forms.Label();
+            this.lst_Cons = new System.Windows.Forms.ListBox();
             this.chFecha = new MaterialSkin.Controls.MaterialCheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.cFecha = new Programa1.Controles.cFechas();
@@ -45,6 +46,8 @@
             this.cmdActualizar = new Programa1.Controles.cBoton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmbnvaBoleta = new Programa1.Controles.cBoton();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,6 +63,7 @@
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -100,6 +104,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer3.Panel2.Controls.Add(this.panel4);
+            this.splitContainer3.Panel2.Controls.Add(this.materialLabel1);
             this.splitContainer3.Panel2.Controls.Add(this.chFecha);
             this.splitContainer3.Panel2.Controls.Add(this.panel3);
             this.splitContainer3.Panel2.Controls.Add(this.chConSaldo);
@@ -150,6 +156,7 @@
             this.grd.fColor = System.Drawing.SystemColors.Control;
             this.grd.FixCols = 0;
             this.grd.FixRows = 0;
+            this.grd.Frozen = 0;
             this.grd.FuenteEncabezado = null;
             this.grd.FuentePieDePagina = null;
             this.grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -198,6 +205,7 @@
             this.grdAgr.FixCols = 0;
             this.grdAgr.FixRows = 0;
             this.grdAgr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdAgr.Frozen = 0;
             this.grdAgr.FuenteEncabezado = null;
             this.grdAgr.FuentePieDePagina = null;
             this.grdAgr.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -223,6 +231,21 @@
             this.label2.Size = new System.Drawing.Size(96, 20);
             this.label2.TabIndex = 0;
             this.label2.Text = "Compras P2";
+            // 
+            // lst_Cons
+            // 
+            this.lst_Cons.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lst_Cons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lst_Cons.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.lst_Cons.FormattingEnabled = true;
+            this.lst_Cons.ItemHeight = 16;
+            this.lst_Cons.Location = new System.Drawing.Point(0, 0);
+            this.lst_Cons.Name = "lst_Cons";
+            this.lst_Cons.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lst_Cons.Size = new System.Drawing.Size(99, 326);
+            this.lst_Cons.TabIndex = 9;
+            this.lst_Cons.SelectedIndexChanged += new System.EventHandler(this.lst_Cons_SelectedIndexChanged);
+            this.lst_Cons.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lst_Cons_MouseUp);
             // 
             // chFecha
             // 
@@ -319,6 +342,7 @@
             this.grdDetalle.fColor = System.Drawing.SystemColors.Control;
             this.grdDetalle.FixCols = 0;
             this.grdDetalle.FixRows = 0;
+            this.grdDetalle.Frozen = 0;
             this.grdDetalle.FuenteEncabezado = null;
             this.grdDetalle.FuentePieDePagina = null;
             this.grdDetalle.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -372,6 +396,30 @@
             this.cmbnvaBoleta.Texto = "Generar Boleta";
             this.cmbnvaBoleta.Click += new System.EventHandler(this.cmbnvaBoleta_Click);
             // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(3, 339);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(111, 19);
+            this.materialLabel1.TabIndex = 10;
+            this.materialLabel1.Text = "Consignatarios";
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.lst_Cons);
+            this.panel4.Location = new System.Drawing.Point(6, 361);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(99, 326);
+            this.panel4.TabIndex = 5;
+            // 
             // frmVencimientos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -398,6 +446,7 @@
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -421,5 +470,8 @@
         private System.Windows.Forms.Panel panel3;
         private MaterialSkin.Controls.MaterialCheckBox chFecha;
         private Controles.cBoton cmdImprimir;
+        private System.Windows.Forms.ListBox lst_Cons;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private System.Windows.Forms.Panel panel4;
     }
 }

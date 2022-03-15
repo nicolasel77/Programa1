@@ -88,6 +88,10 @@
                 return Datos_Vista(filtro, $" Id_Agregados_Frigo, Fecha, Plazo, NBoleta, Nombre, Descripcion, Importe, Pagos, (Pagos-Importe) Dif, Saldo, Estado, ID_Matr, Matricula", "NBoleta DESC, ID_Consignatarios");
             }
         }
-                
+        public DataTable consignatarios(string filtro)
+        {
+           return Datos_Genericos($"SELECT Id_Consignatarios, Nombre FROM vw_Hacienda_Agregados WHERE {filtro} UNION SELECT Id_Consignatarios, Nombre FROM vw_Hacienda_Saldos WHERE {filtro} ORDER BY Id_Consignatarios");
+        }
+
     }
 }

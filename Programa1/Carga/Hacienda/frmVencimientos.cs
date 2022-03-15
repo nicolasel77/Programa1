@@ -48,6 +48,8 @@
         int FilaanteriorP1 = -1;
         int FilaanteriorP2 = -1;
 
+        bool c_cancel = false;
+
         public frmVencimientos()
         {
             InitializeComponent();
@@ -73,6 +75,8 @@
         public void Cargar()
         {
             this.Cursor = Cursors.WaitCursor;
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            h.Llenar_List(lst_Cons, saldos.consignatarios(armarCadena_id_cons()));
             Compras_P1();
             Compras_P2();
             this.Cursor = Cursors.Default;
@@ -326,15 +330,26 @@
                 grdDetalle.Rows = 1;
             }
         }
-
+        private void lst_Cons_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (c_cancel == false)
+            {
+                Compras_P1();
+                Compras_P2();
+            }
+        }
         private void chConSaldo_CheckedChanged(object sender, EventArgs e)
         {
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            h.Llenar_List(lst_Cons, saldos.consignatarios(armarCadena_id_cons()));
             Compras_P1();
             Compras_P2();
         }
 
         private void cFecha_Cambio_Seleccion(object sender, EventArgs e)
         {
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            h.Llenar_List(lst_Cons, saldos.consignatarios(armarCadena_id_cons()));
             Compras_P1();
             Compras_P2();
         }
@@ -346,10 +361,27 @@
             if (chConSaldo.Checked == true) { s = "Saldo<-10"; }
             Herramientas.Herramientas h = new Herramientas.Herramientas();
             s = h.Unir(s, f);
+            f = h.Codigos_Seleccionados(lst_Cons, "Id_Consignatarios IN ({0})");
+            s = h.Unir(s, f);
             return s;
         }
+
+        string armarCadena_id_cons()
+        {
+            string s = "";
+            string f = "";
+            if (chFecha.Checked == true) { f = cFecha.Cadena(); }
+            if (chConSaldo.Checked == true) { s = "Saldo<-10"; }
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            s = h.Unir(s, f);
+            s = h.Unir(s, f);
+            return s;
+        }
+
         private void chFecha_CheckedChanged(object sender, EventArgs e)
         {
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            h.Llenar_List(lst_Cons, saldos.consignatarios(armarCadena_id_cons()));
             Compras_P1();
             Compras_P2();
         }
@@ -360,18 +392,18 @@
             Excel.Application xlApp;
             Excel.Workbook xlWorkBook;
             Excel.Worksheet xlWorkSheet;
-            
+
             xlApp = new Excel.Application();
             xlWorkBook = xlApp.Workbooks.Add();
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
             //Agregar los datos
-            for(int i = 0; i <= grd.Rows - 1; i++)
+            for (int i = 0; i <= grd.Rows - 1; i++)
             {
-                for(int j = 0; j <= grd.Cols - 1; j++)
+                for (int j = 0; j <= grd.Cols - 1; j++)
                 {
                     xlWorkSheet.Cells[i + 1, j + 1] = grd.get_Texto(i, j);
-                }                
+                }
             }
 
             Formatear fm = new Formatear();
@@ -398,6 +430,25 @@
             fm.Formato_Automatico(dt);
         }
 
-     
+        private void lst_Cons_MouseUp(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButtons.Middle:
+                    lst_Cons.SelectedIndex = -1;
+                    break;
+
+                case MouseButtons.Right:
+                    c_cancel = true; 
+                    for (int i = 0; i < lst_Cons.Items.Count; i++)
+                    {
+                        lst_Cons.SetSelected(i, !lst_Cons.GetSelected(i));
+                    }
+                    c_cancel = false;
+                    Compras_P1();
+                    Compras_P2();
+                    break;
+            }
+        }
     }
 }
