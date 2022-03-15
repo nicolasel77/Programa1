@@ -36,6 +36,13 @@
             {
                 Herramientas.Herramientas h = new Herramientas.Herramientas();
 
+                float importe  = 0;
+                if (txtImporte.Text.Length > 0)
+                {
+                    float.TryParse(txtImporte.Text, out importe);
+                    txtImporte.Text = importe.ToString("N1");
+                }
+
                 string s = h.Codigos_Seleccionados(lstSucs, "Suc IN({0})");
 
                 int tamaño_array = 0;
@@ -71,7 +78,11 @@
                 {
                     if (rdAdelanto.Checked == true)
                     {
-                        grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, dbEmpleados.dbo.f_Adelanto(ID, DATEADD(MONTH, 1, DATEADD(DAY, DAY(GETDATE()) * -1, GETDATE()))) AS Adelanto, CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
+                        //grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, dbEmpleados.dbo.f_Adelanto(ID, DATEADD(MONTH, 1, DATEADD(DAY, DAY(GETDATE()) * -1, GETDATE()))) AS Adelanto, CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
+                        grd.MostrarDatos(empleados.Datos_Vista(s, $"Suc, ID, Nombre" +
+                                    $", ISNULL((SELECT SUM(ISNULL(Importe, 0)) FROM dbEmpleados.dbo.Retiros WHERE Semana='{gastos.Fecha:MM/dd/yy}' AND Empleado=vw_Empleados.ID AND Tipo=1), 0) AS Adelanto" +
+                                    $", CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
+
                     }
                     else
                     {
@@ -87,15 +98,22 @@
                             }
                             else
                             {
+                                //Resto
                                 // devuelve el primer día del mes anterior                        
-                                grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, dbEmpleados.dbo.f_Saldo(ID, DATEADD(MONTH, -1, DATEADD(DAY, DAY(GETDATE()) * -1 + 1, GETDATE())), '1/1/1900', '1/1/1900') AS Saldo, CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
+                                //grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, dbEmpleados.dbo.f_Saldo(ID, DATEADD(MONTH, -1, DATEADD(DAY, DAY(GETDATE()) * -1 + 1, GETDATE())), '1/1/1900', '1/1/1900') AS Saldo, CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
+                                //grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, dbEmpleados.dbo.f_Saldo(ID, DATEADD(MONTH, -1, DATEADD(DAY, DAY(GETDATE()) * -1 + 1, GETDATE())), '1/1/1900', '1/1/1900') AS Saldo, CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
+                                grd.MostrarDatos(empleados.Datos_Vista(s, $"Suc, ID, Nombre" +
+                                    $", ISNULL((SELECT SUM(ISNULL(Importe, 0)) FROM dbEmpleados.dbo.Retiros WHERE Semana='{gastos.Fecha:MM/dd/yy}' AND Empleado=vw_Empleados.ID AND Tipo=1), 0) AS Resto" +
+                                    $", CONVERT(BIT, 1) Sel", "Suc, ID"), true, true);
                             }
                         }
                     }
                 }
                 else
                 {
-                    grd.MostrarDatos(empleados.Datos_Vista(s, "Suc, ID, Nombre, 0.0 AS Importe, CONVERT(BIT, 1) Sel"), true, true);
+                    string stimporte = importe.ToString();
+                    stimporte = stimporte.Replace(",", ".");
+                    grd.MostrarDatos(empleados.Datos_Vista(s, $"Suc, ID, Nombre, {stimporte} AS Importe, CONVERT(BIT, 1) Sel"), true, true);
                 }
 
                 for (int i = 0; i < emp_de_vacas.Length; i++)
@@ -150,22 +168,22 @@
 
         private void rdResto_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (rdResto.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Resto sueldo"; }
+            if (rdResto.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Resto sueldo"; txtCodigo.Text = "1"; }
         }
 
         private void rdAdelanto_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (rdAdelanto.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Adelanto sueldo"; }
+            if (rdAdelanto.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Adelanto sueldo"; txtCodigo.Text = "1"; }
         }
 
         private void rdVacaciones_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdVacaciones.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Vacaciones"; }
+            if (rdVacaciones.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Vacaciones"; txtCodigo.Text = "5"; }
         }
 
         private void rdAguinaldo_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdAguinaldo.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Aguinaldo"; }
+            if (rdAguinaldo.Checked == true) { Cargar_Datos(); txtDescripcion.Text = "Aguinaldo"; txtCodigo.Text = "4"; }
         }
 
         private void rdNinguno_CheckedChanged(object sender, System.EventArgs e)
@@ -188,7 +206,13 @@
             {
                 Aceptado = true;
 
-                gastos.Id_DetalleGastos = rdAguinaldo.Checked ? 2 : 1;
+                int codigo = 1;
+                if(txtCodigo.Text.Length > 0)
+                {
+                    int.TryParse(txtCodigo.Text, out codigo);
+                }
+
+                gastos.Id_DetalleGastos = codigo;
                 gastos.Descripcion = txtDescripcion.Text;
 
                 for (int i = 1; i <= grd.Rows - 2; i++)

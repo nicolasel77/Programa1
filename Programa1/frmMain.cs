@@ -2984,5 +2984,53 @@
             frmDiarios fr = new frmDiarios();
             fr.ShowDialog();
         }
+
+        private void vencimientosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmVencimientos_Proveedores")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmVencimientos_Proveedores");
+                t.Text = "Vencimientos_Proveedores";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmVencimientos_Proveedores = new Carga.Proveedores.frmVencimientos_Proveedores();
+                frmVencimientos_Proveedores.MdiParent = this;
+                frmVencimientos_Proveedores.Disposed += FrmVencimientos_Proveedores_Disposed;
+                forms.Add(frmVencimientos_Proveedores);
+                frmVencimientos_Proveedores.Show();
+                frmVencimientos_Proveedores.WindowState = FormWindowState.Minimized;
+                frmVencimientos_Proveedores.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmVencimientos_Proveedores_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Vencimientos_Proveedores")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmVencimientos_Proveedores")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }
