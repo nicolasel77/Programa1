@@ -32,7 +32,7 @@
             this.cmbImprimir = new MaterialSkin.Controls.MaterialFlatButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdOriginal = new Grilla2.SpeedGrilla();
-            this.grdnvaBoleta = new Grilla2.SpeedGrilla();
+            this.grdNB = new Grilla2.SpeedGrilla();
             this.cmdGuardar = new MaterialSkin.Controls.MaterialFlatButton();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPresupuesto = new System.Windows.Forms.TextBox();
@@ -77,7 +77,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.grdnvaBoleta);
+            this.splitContainer1.Panel2.Controls.Add(this.grdNB);
             this.splitContainer1.Size = new System.Drawing.Size(1507, 629);
             this.splitContainer1.SplitterDistance = 953;
             this.splitContainer1.TabIndex = 4;
@@ -101,6 +101,7 @@
             this.grdOriginal.fColor = System.Drawing.SystemColors.Control;
             this.grdOriginal.FixCols = 0;
             this.grdOriginal.FixRows = 0;
+            this.grdOriginal.Frozen = 0;
             this.grdOriginal.FuenteEncabezado = null;
             this.grdOriginal.FuentePieDePagina = null;
             this.grdOriginal.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -115,38 +116,39 @@
             this.grdOriginal.TabIndex = 1;
             this.grdOriginal.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdOriginal_Editado);
             // 
-            // grdnvaBoleta
+            // grdNB
             // 
-            this.grdnvaBoleta.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdnvaBoleta.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdnvaBoleta.AutoResize = false;
-            this.grdnvaBoleta.bColor = System.Drawing.SystemColors.Window;
-            this.grdnvaBoleta.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.grdnvaBoleta.bFColor = System.Drawing.SystemColors.WindowText;
-            this.grdnvaBoleta.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdnvaBoleta.Col = 0;
-            this.grdnvaBoleta.Cols = 9;
-            this.grdnvaBoleta.DataMember = "";
-            this.grdnvaBoleta.DataSource = null;
-            this.grdnvaBoleta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdnvaBoleta.EnableEdicion = true;
-            this.grdnvaBoleta.Encabezado = "";
-            this.grdnvaBoleta.fColor = System.Drawing.SystemColors.Control;
-            this.grdnvaBoleta.FixCols = 0;
-            this.grdnvaBoleta.FixRows = 0;
-            this.grdnvaBoleta.FuenteEncabezado = null;
-            this.grdnvaBoleta.FuentePieDePagina = null;
-            this.grdnvaBoleta.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdnvaBoleta.Location = new System.Drawing.Point(0, 0);
-            this.grdnvaBoleta.Name = "grdnvaBoleta";
-            this.grdnvaBoleta.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdnvaBoleta.PintarFilaSel = true;
-            this.grdnvaBoleta.Redraw = true;
-            this.grdnvaBoleta.Row = 0;
-            this.grdnvaBoleta.Rows = 3;
-            this.grdnvaBoleta.Size = new System.Drawing.Size(550, 629);
-            this.grdnvaBoleta.TabIndex = 0;
-            this.grdnvaBoleta.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdnvaBoleta_Editado);
+            this.grdNB.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdNB.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdNB.AutoResize = false;
+            this.grdNB.bColor = System.Drawing.SystemColors.Window;
+            this.grdNB.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdNB.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdNB.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdNB.Col = 0;
+            this.grdNB.Cols = 9;
+            this.grdNB.DataMember = "";
+            this.grdNB.DataSource = null;
+            this.grdNB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdNB.EnableEdicion = true;
+            this.grdNB.Encabezado = "";
+            this.grdNB.fColor = System.Drawing.SystemColors.Control;
+            this.grdNB.FixCols = 0;
+            this.grdNB.FixRows = 0;
+            this.grdNB.Frozen = 0;
+            this.grdNB.FuenteEncabezado = null;
+            this.grdNB.FuentePieDePagina = null;
+            this.grdNB.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdNB.Location = new System.Drawing.Point(0, 0);
+            this.grdNB.Name = "grdNB";
+            this.grdNB.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdNB.PintarFilaSel = false;
+            this.grdNB.Redraw = true;
+            this.grdNB.Row = 0;
+            this.grdNB.Rows = 3;
+            this.grdNB.Size = new System.Drawing.Size(550, 629);
+            this.grdNB.TabIndex = 0;
+            this.grdNB.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdnvaBoleta_Editado);
             // 
             // cmdGuardar
             // 
@@ -236,6 +238,7 @@
             this.Name = "frmGenerarNuevaBoleta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nueva Boleta";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -247,7 +250,7 @@
 
         #endregion
 
-        private Grilla2.SpeedGrilla grdnvaBoleta;
+        private Grilla2.SpeedGrilla grdNB;
         private Grilla2.SpeedGrilla grdOriginal;
         private MaterialSkin.Controls.MaterialFlatButton cmbImprimir;
         private System.Windows.Forms.SplitContainer splitContainer1;

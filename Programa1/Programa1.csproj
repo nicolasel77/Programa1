@@ -1322,10 +1322,6 @@
       <Project>{cc913e3c-fd5a-4021-ade6-6b7c4933485a}</Project>
       <Name>Formatear_Excel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sistema_Clases\Sistema_Clases.csproj">
-      <Project>{4ead2d2f-4e6b-4482-9414-439756870e04}</Project>
-      <Name>Sistema_Clases</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SpeedGrilla\SpeedGrilla.vbproj">
       <Project>{64f92811-4680-4543-a345-0f68983286e2}</Project>
       <Name>SpeedGrilla</Name>
