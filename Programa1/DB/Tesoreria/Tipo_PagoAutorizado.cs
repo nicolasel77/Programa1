@@ -8,9 +8,5 @@
         {
             Tabla = "Tipo_PagoAutorizado";
         }
-
-
-
-
     }
 }

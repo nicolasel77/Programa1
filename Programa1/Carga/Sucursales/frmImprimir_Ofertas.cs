@@ -38,6 +38,8 @@
             h.Llenar_List(lstSucs, listas.sucdatos());
             h.Llenar_List(lstListas, listas.lista.Datos());
             h.Llenar_List(cmbTitulos, listas.titulos.Datos());
+            h.Llenar_List(lstSupervisores, listas.supervisores.Datos());
+
             grdLista.MostrarDatos(listas.Datos_Vista("ID=0"), true);
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
@@ -146,8 +148,19 @@
                             grdLista.ActivarCelda(f + 1, c);
                         }
                         else
-                        { grdLista.ActivarCelda(f, c_Descripcion); }
+                        { grdLista.ActivarCelda(f, c_Nombre); }
                     }
+                    break;
+                case 3: //Nombre
+                    grdLista.set_Texto(f, c, a);
+                    listas.Nombre = a.ToString();
+                    if (listas.ID > 0)
+                    {
+                        listas.Actualizar();
+                        grdLista.ActivarCelda(f + 1, c);
+                    }
+                    else
+                    { grdLista.ActivarCelda(f, c_Descripcion); }
                     break;
                 case 6://Descripcion
                     grdLista.set_Texto(f, c, a);
@@ -247,6 +260,7 @@
                 listas.costo = Convert.ToSingle(grdLista.get_Texto(Fila, c_Costo));
                 listas.Detalle = grdLista.get_Texto(Fila, c_Detalle).ToString();
                 listas.Pintar = Convert.ToBoolean(grdLista.get_Texto(Fila, c_Pintar));
+                listas.Nombre = grdLista.get_Texto(Fila, c_Nombre).ToString();
             }
         }
 
@@ -366,7 +380,7 @@
             { txtAgregar.Text = "Agregar"; }
         }
 
-        private void Prueba_hilos(int la_listapaa, int copias, string tipofecha, DateTime fecha, string Titulo, bool vista_previa = false)
+        private void Prueba_hilos(int la_listapaa, int copias, string tipofecha, DateTime fecha, string Titulo, bool vista_previa = false, string f_supervisores = "")
         {
             Listas_Ofertas cofimp = new Listas_Ofertas();
             string fileTest = @"D:\Sistema\P1\Listas_Ofertas.xlsm";
@@ -451,7 +465,14 @@
             xlApp.Run("Dar_Formato");
             if (vista_previa == false)
             {
-                dt = cofimp.sucs_imp();
+
+                if (f_supervisores.Length > 0)
+                {
+                    dt = cofimp.sucs_imp_supervisores($" ID_Supervisor IN {f_supervisores}");
+                }
+                else
+                { dt = cofimp.sucs_imp(); }
+
                 for (int i = 0; i <= dt.Rows.Count - 1; i++)
                 {
                     xlWorksheet.Cells[1, 6] = dt.Rows[i][1];
@@ -500,11 +521,16 @@
             string tipofecha = cmbTipofecha.Text;
             DateTime fecha = mtcFecha.SelectionStart;
             string titulos = cmbTitulos.Text;
+            string f_supervisores = "";
+            if (lstSupervisores.SelectedIndex > -1)
+            {
+                f_supervisores = h.Codigos_Seleccionados(lstSupervisores);
+            }
             if (int.TryParse(txtCopias.Text, out copias) == true)
             { copias = Convert.ToInt32(txtCopias.Text); }
             else
             { copias = 1; }
-            Thread Hilo_prueba = new Thread(() => Prueba_hilos(listas.lista.ID, copias, tipofecha, fecha, titulos));
+            Thread Hilo_prueba = new Thread(() => Prueba_hilos(listas.lista.ID, copias, tipofecha, fecha, titulos, false, f_supervisores));
             Hilo_prueba.Start();
         }
     }

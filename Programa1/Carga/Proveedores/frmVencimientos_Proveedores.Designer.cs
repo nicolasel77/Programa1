@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.chConSaldo = new MaterialSkin.Controls.MaterialCheckBox();
             this.grd = new Grilla2.SpeedGrilla();
-            this.Proveedores = new Programa1.Controles.cProveedores();
-            this.Fecha = new Programa1.Controles.cFechas();
+            this.chConSaldo = new MaterialSkin.Controls.MaterialCheckBox();
+            this.cProveedores = new Programa1.Controles.cProveedores();
+            this.cFecha = new Programa1.Controles.cFechas();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -52,30 +52,11 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.chConSaldo);
-            this.splitContainer1.Panel2.Controls.Add(this.Proveedores);
-            this.splitContainer1.Panel2.Controls.Add(this.Fecha);
+            this.splitContainer1.Panel2.Controls.Add(this.cProveedores);
+            this.splitContainer1.Panel2.Controls.Add(this.cFecha);
             this.splitContainer1.Size = new System.Drawing.Size(1171, 776);
             this.splitContainer1.SplitterDistance = 955;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // chConSaldo
-            // 
-            this.chConSaldo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chConSaldo.AutoSize = true;
-            this.chConSaldo.Checked = true;
-            this.chConSaldo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chConSaldo.Depth = 0;
-            this.chConSaldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.chConSaldo.Location = new System.Drawing.Point(6, 737);
-            this.chConSaldo.Margin = new System.Windows.Forms.Padding(0);
-            this.chConSaldo.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chConSaldo.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chConSaldo.Name = "chConSaldo";
-            this.chConSaldo.Ripple = true;
-            this.chConSaldo.Size = new System.Drawing.Size(91, 30);
-            this.chConSaldo.TabIndex = 7;
-            this.chConSaldo.Text = "Con saldo";
-            this.chConSaldo.UseVisualStyleBackColor = true;
             // 
             // grd
             // 
@@ -112,34 +93,56 @@
             this.grd.Size = new System.Drawing.Size(940, 752);
             this.grd.TabIndex = 0;
             // 
-            // Proveedores
+            // chConSaldo
             // 
-            this.Proveedores.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.chConSaldo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chConSaldo.AutoSize = true;
+            this.chConSaldo.Checked = true;
+            this.chConSaldo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chConSaldo.Depth = 0;
+            this.chConSaldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chConSaldo.Location = new System.Drawing.Point(6, 737);
+            this.chConSaldo.Margin = new System.Windows.Forms.Padding(0);
+            this.chConSaldo.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chConSaldo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chConSaldo.Name = "chConSaldo";
+            this.chConSaldo.Ripple = true;
+            this.chConSaldo.Size = new System.Drawing.Size(91, 30);
+            this.chConSaldo.TabIndex = 7;
+            this.chConSaldo.Text = "Con saldo";
+            this.chConSaldo.UseVisualStyleBackColor = true;
+            this.chConSaldo.CheckedChanged += new System.EventHandler(this.chConSaldo_CheckedChanged);
+            // 
+            // cProveedores
+            // 
+            this.cProveedores.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Proveedores.BackColor = System.Drawing.Color.Gainsboro;
-            this.Proveedores.Filtro_In = "";
-            this.Proveedores.Location = new System.Drawing.Point(6, 295);
-            this.Proveedores.Mostrar_Tipo = true;
-            this.Proveedores.Name = "Proveedores";
-            this.Proveedores.Size = new System.Drawing.Size(203, 439);
-            this.Proveedores.TabIndex = 1;
-            this.Proveedores.Titulo = "Proveedores";
-            this.Proveedores.Valor_Actual = -1;
+            this.cProveedores.BackColor = System.Drawing.Color.Gainsboro;
+            this.cProveedores.Filtro_In = "";
+            this.cProveedores.Location = new System.Drawing.Point(6, 295);
+            this.cProveedores.Mostrar_Tipo = true;
+            this.cProveedores.Name = "cProveedores";
+            this.cProveedores.Size = new System.Drawing.Size(203, 439);
+            this.cProveedores.TabIndex = 1;
+            this.cProveedores.Titulo = "Proveedores";
+            this.cProveedores.Valor_Actual = -1;
+            this.cProveedores.Cambio_Seleccion += new System.EventHandler(this.Proveedores_Cambio_Seleccion);
             // 
-            // Fecha
+            // cFecha
             // 
-            this.Fecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Fecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.Fecha.Location = new System.Drawing.Point(3, 12);
-            this.Fecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.Fecha.Mostrar = 0;
-            this.Fecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
-            this.Fecha.Name = "Fecha";
-            this.Fecha.Size = new System.Drawing.Size(206, 277);
-            this.Fecha.TabIndex = 0;
-            this.Fecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(3, 12);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(206, 277);
+            this.cFecha.TabIndex = 0;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.Fecha_Cambio_Seleccion);
             // 
             // frmVencimientos_Proveedores
             // 
@@ -149,6 +152,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmVencimientos_Proveedores";
             this.Text = "frmVencimientos_Proveedores";
+            this.Load += new System.EventHandler(this.frmVencimientos_Proveedores_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
@@ -161,8 +165,8 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private Controles.cProveedores Proveedores;
-        private Controles.cFechas Fecha;
+        private Controles.cProveedores cProveedores;
+        private Controles.cFechas cFecha;
         private Grilla2.SpeedGrilla grd;
         private MaterialSkin.Controls.MaterialCheckBox chConSaldo;
     }

@@ -19,6 +19,7 @@
         public DateTime Fecha { get; set; }
         public int Tipos { get; set; }
         public int Orden { get; set; }
+        public new string Nombre { get; set; }
         public string descripcion { get; set; }
         public string Detalle { get; set; }
         public bool Pintar { get; set; }
@@ -28,6 +29,7 @@
 
         public TipoProductos tipo = new TipoProductos();
         public Lugares_imp lugares_Imp = new Lugares_imp();
+        public Supervisores supervisores = new Supervisores();
         public Nombre_Listas_ofertas lista = new Nombre_Listas_ofertas();
         public Titulos titulos = new Titulos();
         public DataTable sucdatos()
@@ -71,8 +73,8 @@
             {
                 string printar = Pintar ? "1" : "0";
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Lista_Ofertas (Orden, id_prod, Descripcion, Detalle, Pintar, costo, Id_Lista) " +
-                        $"VALUES({Orden}, {productos.ID}, '{descripcion}', '{Detalle}', { printar}, {costo.ToString().Replace(",", ".")}, {lista.ID})", sql);
+                    new SqlCommand($"INSERT INTO Lista_Ofertas (Orden, id_prod, Descripcion, Detalle, Pintar, costo, Id_Lista, Nombre) " +
+                        $"VALUES({Orden}, {productos.ID}, '{descripcion}', '{Detalle}', { printar}, {costo.ToString().Replace(",", ".")}, {lista.ID}, '{Nombre}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -124,6 +126,7 @@
                 Detalle = dr["Detalle"].ToString();
                 Pintar = Convert.ToBoolean(dr["Pintar"]);
                 costo = Convert.ToSingle(dr["Costo"]);
+                Nombre = dr["Nombre"].ToString();
             }
             catch (Exception)
             {
@@ -133,6 +136,7 @@
                 descripcion = "";
                 Pintar = false;
                 costo = 0;
+                Nombre = "";
             }
         }
 
@@ -144,6 +148,7 @@
             Actualizar("Detalle", Detalle);
             Actualizar("Pintar", Pintar);
             Actualizar("Costo", costo);
+            Actualizar("Nombre", Nombre);
         }
 
         public void Agregar_sucs_a_Lista(string Nombre_suc, int id_suc)
@@ -251,6 +256,29 @@
             try
             {
                 string Cadena = $"SELECT Id_Suc, Suc FROM Listas_Suc_Ofertas WHERE Id_Lista = {lista.ID} Order By Id_Suc";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                daAdapt.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        public DataTable sucs_imp_supervisores(string Filtro)
+        {
+            var dt = new DataTable("Datos");
+            var cnn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+
+            try
+            {
+                string Cadena = $"SELECT Id as Id_Suc, Nombre AS Suc FROM Sucursales WHERE {Filtro} Order By ID_Supervisor, Id";
 
                 SqlCommand cmd = new SqlCommand(Cadena, cnn);
                 cmd.CommandType = CommandType.Text;
