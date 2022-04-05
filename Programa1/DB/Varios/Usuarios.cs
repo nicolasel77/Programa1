@@ -58,7 +58,7 @@ namespace Programa1.DB.Varios
 
                 try
                 {
-                    string Cadena = $"SELECT * FROM dbGastos.dbo.Usuarios WHERE Usuario = '{value}'";
+                    string Cadena = $"SELECT * FROM dbGastos.dbo.Usuarios WHERE Usuario like '{value}%'";
 
                     SqlCommand comandoSql = new SqlCommand(Cadena, conexionSql);
                     comandoSql.CommandType = CommandType.Text;

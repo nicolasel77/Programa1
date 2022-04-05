@@ -15,7 +15,11 @@
         const int cCab = 3;
         const int cDescr = 4;
         const int cImporte = 5;
-        const int cID = 6;
+        const int cImporteOriginal = 6;
+        const int cEfectivo = 7;
+        const int cMolleda = 8;
+        const int cAlonso = 9;
+        const int cID = 10;
         #endregion
 
         #region Columnas grd Ori
@@ -31,6 +35,7 @@
         const int cMatricula = 17;
         #endregion
 
+        private C1.Win.C1FlexGrid.CellStyle vEstilo;
         public DataTable dt = null;
 
 
@@ -74,27 +79,52 @@
             dt.Columns.Add("Cab", typeof(int));
             dt.Columns.Add("Descr", typeof(string));
             dt.Columns.Add("Importe", typeof(double));
+            dt.Columns.Add("ImporteOriginal", typeof(double));
+            dt.Columns.Add("Efectivo", typeof(double));
+            dt.Columns.Add("Echeq Molleda", typeof(double));
+            dt.Columns.Add("Echeq Alonso", typeof(double));
             dt.Columns.Add("Id", typeof(int));
 
-            grdnvaBoleta.MostrarDatos(dt, true, false);
-            grdnvaBoleta.AgregarFila();
-            //grdnvaBoleta.AgregarFila();
+            grdNB.MostrarDatos(dt, true, false);
+            grdNB.AgregarFila();
+            
 
-            grdnvaBoleta.Columnas[cImporte].Style.Format = "N1";
-            grdnvaBoleta.Columnas[cImporte].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grdNB.Columnas[cImporte].Style.Format = "N1";
+            grdNB.Columnas[cEfectivo].Style.Format = "N1";
+            grdNB.Columnas[cMolleda].Style.Format = "N1";
+            grdNB.Columnas[cAlonso].Style.Format = "N1";
+
+            grdNB.Columnas[cEfectivo].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grdNB.Columnas[cMolleda].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grdNB.Columnas[cAlonso].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+                        
+            grdNB.set_Texto(0, cImporte, "Saldo A Pagar");
 
             //grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cNombre, "Total:");
             //Compras_P2();
             this.Cursor = Cursors.Default;
 
 
-            grdnvaBoleta.set_ColW(cBoleta, 60);
-            grdnvaBoleta.set_ColW(cFecha, 70);
-            grdnvaBoleta.set_ColW(cNombre, 120);
-            grdnvaBoleta.set_ColW(cCab, 40);
-            grdnvaBoleta.set_ColW(cDescr, 60);
-            grdnvaBoleta.set_ColW(cImporte, 120);
-            grdnvaBoleta.set_ColW(cID, 0);
+            grdNB.set_ColW(cBoleta, 60);
+            grdNB.set_ColW(cFecha, 70);
+            grdNB.set_ColW(cNombre, 120);
+            grdNB.set_ColW(cCab, 40);
+            grdNB.set_ColW(cDescr, 60);
+            grdNB.set_ColW(cImporte, 120);
+            grdNB.set_ColW(cImporte + 1, 0);
+            grdNB.set_ColW(cImporte + 2, 120);
+            grdNB.set_ColW(cImporte + 3, 120);
+            grdNB.set_ColW(cImporte + 4, 120);
+
+            grdNB.Columnas[cID].Visible = false;
+            grdNB.Columnas[cImporte + 1].Visible = false;
+
+            grdNB.FixCols = cImporte + 1;
+
+            splitContainer1.SplitterDistance = 750;
+
+            vEstilo = grdNB.Styles.Add("Total");
+            vEstilo.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
 
         }
 
@@ -104,32 +134,34 @@
             {
                 if (Convert.ToInt32(a) == 1)
                 {
-                    grdnvaBoleta.BorrarFila(grdnvaBoleta.Rows - 1);
-                    grdnvaBoleta.AgregarFila();
-                    int f1 = grdnvaBoleta.Rows - 1;
-                    grdnvaBoleta.set_Texto(f1, cBoleta, grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("NBoleta")));
-                    grdnvaBoleta.set_Texto(f1, cFecha, grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Fecha")));
-                    grdnvaBoleta.set_Texto(f1, cNombre, grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Nombre")));
-                    grdnvaBoleta.set_Texto(f1, cCab, grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Cab")));
-                    grdnvaBoleta.set_Texto(f1, cDescr, grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Descr")));
-                    grdnvaBoleta.set_Texto(f1, cImporte, Convert.ToDouble(grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Saldo"))) * -1);
-                    grdnvaBoleta.set_Texto(f1, cID, Convert.ToInt32(grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Id_Comprafrigo"))));
-                    grdnvaBoleta.Ordenar(cFecha);
-                    grdnvaBoleta.Ordenar(cNombre);
-                                        
-                    
-                    grdnvaBoleta.AgregarFila();
-                    grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cDescr, "Total: ");
+                    grdNB.BorrarFila(grdNB.Rows - 1);
+                    grdNB.AgregarFila();
+                    int f1 = grdNB.Rows - 1;
+                    grdNB.set_Texto(f1, cBoleta, grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("NBoleta")));
+                    grdNB.set_Texto(f1, cFecha, grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Fecha")));
+                    grdNB.set_Texto(f1, cNombre, grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Nombre")));
+                    grdNB.set_Texto(f1, cCab, grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Cab")));
+                    grdNB.set_Texto(f1, cDescr, grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Descr")));
+                    grdNB.set_Texto(f1, cImporte, Convert.ToDouble(grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Saldo"))));
+                    grdNB.set_Texto(f1, cImporteOriginal, Convert.ToDouble(grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Saldo"))));
+                    grdNB.set_Texto(f1, cID, Convert.ToInt32(grdOriginal.get_Texto(f, grdOriginal.get_ColIndex("Id_Comprafrigo"))));
+                    grdNB.Ordenar(cFecha);
+                    grdNB.Ordenar(cNombre);
 
-                    double tImporte = grdnvaBoleta.SumarCol("Importe");
-                    grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cImporte, tImporte);
+
+                    grdNB.AgregarFila();
+                    grdNB.set_Texto(grdNB.Rows - 1, cDescr, "Total: ");
+
+                    double tImporte = grdNB.SumarCol("Importe");
+                    grdNB.set_Texto(grdNB.Rows - 1, cImporte, tImporte);
+
+                    grdNB.Filas[grdNB.Rows - 1].Style = vEstilo;
 
                     if (txtPresupuesto.TextLength != 0)
                     {
                         tImporte = Convert.ToDouble(txtPresupuesto.Text) - tImporte;
-                        lblDif.Text = tImporte.ToString("C1");                        
+                        lblDif.Text = tImporte.ToString("C1");
                     }
-
                 }
                 else
                 {
@@ -137,17 +169,19 @@
                     for (int io = grdOriginal.Row; io <= grdOriginal.Selection.r2; io++)
                     {
                         idOriginal = Convert.ToInt32(grdOriginal.get_Texto(io, grdOriginal.get_ColIndex("Id_Comprafrigo")));
-                        for (int i = 1; i <= grdnvaBoleta.Rows - 2; i++)
+                        for (int i = 1; i <= grdNB.Rows - 2; i++)
                         {
-                            if (Convert.ToInt32(grdnvaBoleta.get_Texto(i, cID)) == idOriginal)
-                            { 
-                                grdnvaBoleta.BorrarFila(i); 
+                            if (Convert.ToInt32(grdNB.get_Texto(i, cID)) == idOriginal)
+                            {
+                                grdNB.BorrarFila(i);
                             }
                         }
                     }
-                                        
-                    double tImporte = grdnvaBoleta.SumarCol("Importe");
-                    grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cImporte, tImporte);
+
+                    double tImporte = grdNB.SumarCol("Importe");
+                    grdNB.set_Texto(grdNB.Rows - 1, cImporte, tImporte);
+
+                    grdNB.Filas[grdNB.Rows - 1].Style = vEstilo;
 
                     if (txtPresupuesto.TextLength != 0)
                     {
@@ -157,8 +191,10 @@
                 }
 
             }
-
-
+            grdNB.AutosizeAll();
+            grdNB.set_ColW(cImporte + 2, 120);
+            grdNB.set_ColW(cImporte + 3, 120);
+            grdNB.set_ColW(cImporte + 4, 120);
 
             //if (c == grdOriginal.get_ColIndex("Boleta"))
             //{
@@ -172,18 +208,31 @@
 
         private void grdnvaBoleta_Editado(short f, short c, object a)
         {
-            grdnvaBoleta.set_Texto(f, c, a);
-
-            grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cImporte, 0);
-            
-            double tImporte = grdnvaBoleta.SumarCol("Importe");
-            grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cImporte, tImporte);
-            //grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cImporte, grdnvaBoleta.SumarCol(cImporte));
-
-
-            if (txtPresupuesto.TextLength != 0)
+            if (c >= cImporte)
             {
-                lblDif.Text = (Convert.ToDouble(txtPresupuesto.Text) - tImporte).ToString("N2");                                
+                grdNB.set_Texto(f, c, a);
+
+                double impOriginal = Convert.ToDouble(grdNB.get_Texto(f, cImporteOriginal));
+                double efectivo = Convert.ToDouble(grdNB.get_Texto(f, cEfectivo));
+                double molleda = Convert.ToDouble(grdNB.get_Texto(f, cMolleda));
+                double alonso = Convert.ToDouble(grdNB.get_Texto(f, cAlonso));
+
+                grdNB.set_Texto(f, cImporte, impOriginal + efectivo + molleda + alonso);
+
+                grdNB.set_Texto(grdNB.Rows - 1, c, 0);
+
+                grdNB.SumarCol(c, true);
+
+                double tImporte = grdNB.SumarCol(cImporte, true);
+
+                if (txtPresupuesto.TextLength != 0)
+                {
+                    lblDif.Text = (Convert.ToDouble(txtPresupuesto.Text) - tImporte).ToString("N2");
+                }
+                grdNB.AutosizeAll();
+                grdNB.set_ColW(cImporte + 2, 120);
+                grdNB.set_ColW(cImporte + 3, 120);
+                grdNB.set_ColW(cImporte + 4, 120);
             }
         }
 
@@ -194,16 +243,16 @@
             nvaBoleta nbol = new nvaBoleta();
             nbol.Limpiar_Tabla();
 
-            for (int i = 1; i <= grdnvaBoleta.Rows - 1; i++)
+            for (int i = 1; i <= grdNB.Rows - 1; i++)
             {
-                if (Convert.ToInt32(grdnvaBoleta.get_Texto(i, cID)) > 0)
+                if (Convert.ToInt32(grdNB.get_Texto(i, cID)) > 0)
                 {
-                    nbol.Boleta = Convert.ToInt32(grdnvaBoleta.get_Texto(i, cBoleta));
-                    nbol.Fecha = Convert.ToDateTime(grdnvaBoleta.get_Texto(i, cFecha));
-                    nbol.Nombre = grdnvaBoleta.get_Texto(i, cNombre).ToString();
-                    nbol.Cab = Convert.ToInt32(grdnvaBoleta.get_Texto(i, cCab));
-                    nbol.Descr = grdnvaBoleta.get_Texto(i, cDescr).ToString();
-                    nbol.Importe = Convert.ToDouble(grdnvaBoleta.get_Texto(i, cImporte));
+                    nbol.Boleta = Convert.ToInt32(grdNB.get_Texto(i, cBoleta));
+                    nbol.Fecha = Convert.ToDateTime(grdNB.get_Texto(i, cFecha));
+                    nbol.Nombre = grdNB.get_Texto(i, cNombre).ToString();
+                    nbol.Cab = Convert.ToInt32(grdNB.get_Texto(i, cCab));
+                    nbol.Descr = grdNB.get_Texto(i, cDescr).ToString();
+                    nbol.Importe = Convert.ToDouble(grdNB.get_Texto(i, cImporte));
 
                     nbol.Agregar();
                 }

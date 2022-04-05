@@ -100,7 +100,7 @@
             this.chConSaldo.Checked = true;
             this.chConSaldo.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chConSaldo.Depth = 0;
-            this.chConSaldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chConSaldo.Font = new System.Drawing.Font("Roboto", 10F);
             this.chConSaldo.Location = new System.Drawing.Point(6, 737);
             this.chConSaldo.Margin = new System.Windows.Forms.Padding(0);
             this.chConSaldo.MouseLocation = new System.Drawing.Point(-1, -1);
