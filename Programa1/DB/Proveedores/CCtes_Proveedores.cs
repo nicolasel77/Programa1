@@ -36,6 +36,7 @@
             return p.Autorizados_Proveedor(gastos.Id_SubTipoGastos);
 
         }
+
         public DataTable Detalle_Compras(string filtro = "", bool Agrupado = false)
         {
             DataTable dt;
@@ -188,7 +189,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT  dbo.f_GananciaProveedor({prov}, '{fecha1:MM/dd/yy}', '{fecha2:MM/dd/yy}')", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT dbo.f_GananciaProveedor({prov}, '{fecha1:MM/dd/yy}', '{fecha2:MM/dd/yy}')", conexionSql);
 
                 conexionSql.Open();
 
