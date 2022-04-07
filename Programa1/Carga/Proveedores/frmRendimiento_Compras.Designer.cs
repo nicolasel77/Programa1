@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRendimiento_Compras));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
@@ -43,11 +42,15 @@
             this.lstCamiones = new System.Windows.Forms.ListBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.chOcultar = new MaterialSkin.Controls.MaterialCheckBox();
+            this.cmdMostrar = new System.Windows.Forms.Button();
+            this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.cProds = new Programa1.Controles.cProductos();
             this.cFecha = new Programa1.Controles.cFechas();
             this.cProvs = new Programa1.Controles.cProveedores();
-            this.cmdMostrar = new System.Windows.Forms.Button();
-            this.tiMensaje = new System.Windows.Forms.Timer(this.components);
+            this.chKCompra = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chTVenta = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chTCompra = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chKVenta = new MaterialSkin.Controls.MaterialCheckBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -132,6 +135,10 @@
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel1.Controls.Add(this.grdRendimiento_Compras);
+            this.splitContainer1.Panel1.Controls.Add(this.chKVenta);
+            this.splitContainer1.Panel1.Controls.Add(this.chTCompra);
+            this.splitContainer1.Panel1.Controls.Add(this.chTVenta);
+            this.splitContainer1.Panel1.Controls.Add(this.chKCompra);
             // 
             // splitContainer1.Panel2
             // 
@@ -163,6 +170,7 @@
             this.grdRendimiento_Compras.fColor = System.Drawing.SystemColors.Control;
             this.grdRendimiento_Compras.FixCols = 0;
             this.grdRendimiento_Compras.FixRows = 0;
+            this.grdRendimiento_Compras.Frozen = 0;
             this.grdRendimiento_Compras.FuenteEncabezado = null;
             this.grdRendimiento_Compras.FuentePieDePagina = null;
             this.grdRendimiento_Compras.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
@@ -173,7 +181,7 @@
             this.grdRendimiento_Compras.Redraw = true;
             this.grdRendimiento_Compras.Row = 0;
             this.grdRendimiento_Compras.Rows = 50;
-            this.grdRendimiento_Compras.Size = new System.Drawing.Size(825, 681);
+            this.grdRendimiento_Compras.Size = new System.Drawing.Size(825, 648);
             this.grdRendimiento_Compras.TabIndex = 0;
             // 
             // splitContainer3
@@ -216,12 +224,12 @@
             this.materialLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(3, 558);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(77, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(76, 18);
             this.materialLabel1.TabIndex = 6;
             this.materialLabel1.Text = "Camiones";
             // 
@@ -232,7 +240,7 @@
             this.chOcultar.Checked = true;
             this.chOcultar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chOcultar.Depth = 0;
-            this.chOcultar.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chOcultar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chOcultar.Location = new System.Drawing.Point(3, 654);
             this.chOcultar.Margin = new System.Windows.Forms.Padding(0);
             this.chOcultar.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -244,6 +252,23 @@
             this.chOcultar.Text = "Ocultar diferencia 0";
             this.chOcultar.UseVisualStyleBackColor = true;
             this.chOcultar.CheckedChanged += new System.EventHandler(this.ChOcultar_CheckedChanged);
+            // 
+            // cmdMostrar
+            // 
+            this.cmdMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdMostrar.Location = new System.Drawing.Point(1257, 689);
+            this.cmdMostrar.Name = "cmdMostrar";
+            this.cmdMostrar.Size = new System.Drawing.Size(102, 23);
+            this.cmdMostrar.TabIndex = 4;
+            this.cmdMostrar.Text = "Mostrar";
+            this.cmdMostrar.UseVisualStyleBackColor = true;
+            this.cmdMostrar.Click += new System.EventHandler(this.CmdMostrar_Click);
+            // 
+            // tiMensaje
+            // 
+            this.tiMensaje.Enabled = true;
+            this.tiMensaje.Interval = 8000;
+            this.tiMensaje.Tick += new System.EventHandler(this.TiMensaje_Tick);
             // 
             // cProds
             // 
@@ -270,6 +295,7 @@
             this.cFecha.Location = new System.Drawing.Point(3, 475);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(257, 209);
             this.cFecha.TabIndex = 3;
@@ -292,22 +318,85 @@
             this.cProvs.Valor_Actual = -1;
             this.cProvs.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
             // 
-            // cmdMostrar
+            // chKCompra
             // 
-            this.cmdMostrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdMostrar.Location = new System.Drawing.Point(1257, 689);
-            this.cmdMostrar.Name = "cmdMostrar";
-            this.cmdMostrar.Size = new System.Drawing.Size(102, 23);
-            this.cmdMostrar.TabIndex = 4;
-            this.cmdMostrar.Text = "Mostrar";
-            this.cmdMostrar.UseVisualStyleBackColor = true;
-            this.cmdMostrar.Click += new System.EventHandler(this.CmdMostrar_Click);
+            this.chKCompra.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chKCompra.AutoSize = true;
+            this.chKCompra.Checked = true;
+            this.chKCompra.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chKCompra.Depth = 0;
+            this.chKCompra.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chKCompra.Location = new System.Drawing.Point(3, 654);
+            this.chKCompra.Margin = new System.Windows.Forms.Padding(0);
+            this.chKCompra.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chKCompra.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chKCompra.Name = "chKCompra";
+            this.chKCompra.Ripple = true;
+            this.chKCompra.Size = new System.Drawing.Size(87, 30);
+            this.chKCompra.TabIndex = 1;
+            this.chKCompra.Text = "KCompra";
+            this.chKCompra.UseVisualStyleBackColor = true;
+            this.chKCompra.CheckedChanged += new System.EventHandler(this.chKCompra_CheckedChanged);
             // 
-            // tiMensaje
+            // chTVenta
             // 
-            this.tiMensaje.Enabled = true;
-            this.tiMensaje.Interval = 8000;
-            this.tiMensaje.Tick += new System.EventHandler(this.TiMensaje_Tick);
+            this.chTVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chTVenta.AutoSize = true;
+            this.chTVenta.Checked = true;
+            this.chTVenta.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chTVenta.Depth = 0;
+            this.chTVenta.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chTVenta.Location = new System.Drawing.Point(263, 654);
+            this.chTVenta.Margin = new System.Windows.Forms.Padding(0);
+            this.chTVenta.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chTVenta.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chTVenta.Name = "chTVenta";
+            this.chTVenta.Ripple = true;
+            this.chTVenta.Size = new System.Drawing.Size(74, 30);
+            this.chTVenta.TabIndex = 1;
+            this.chTVenta.Text = "TVenta";
+            this.chTVenta.UseVisualStyleBackColor = true;
+            this.chTVenta.CheckedChanged += new System.EventHandler(this.chTVenta_CheckedChanged);
+            // 
+            // chTCompra
+            // 
+            this.chTCompra.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chTCompra.AutoSize = true;
+            this.chTCompra.Checked = true;
+            this.chTCompra.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chTCompra.Depth = 0;
+            this.chTCompra.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chTCompra.Location = new System.Drawing.Point(172, 654);
+            this.chTCompra.Margin = new System.Windows.Forms.Padding(0);
+            this.chTCompra.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chTCompra.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chTCompra.Name = "chTCompra";
+            this.chTCompra.Ripple = true;
+            this.chTCompra.Size = new System.Drawing.Size(87, 30);
+            this.chTCompra.TabIndex = 1;
+            this.chTCompra.Text = "TCompra";
+            this.chTCompra.UseVisualStyleBackColor = true;
+            this.chTCompra.CheckedChanged += new System.EventHandler(this.chTCompra_CheckedChanged);
+            // 
+            // chKVenta
+            // 
+            this.chKVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chKVenta.AutoSize = true;
+            this.chKVenta.Checked = true;
+            this.chKVenta.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chKVenta.Depth = 0;
+            this.chKVenta.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chKVenta.Location = new System.Drawing.Point(94, 654);
+            this.chKVenta.Margin = new System.Windows.Forms.Padding(0);
+            this.chKVenta.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chKVenta.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chKVenta.Name = "chKVenta";
+            this.chKVenta.Ripple = true;
+            this.chKVenta.Size = new System.Drawing.Size(74, 30);
+            this.chKVenta.TabIndex = 1;
+            this.chKVenta.Text = "KVenta";
+            this.chKVenta.UseVisualStyleBackColor = true;
+            this.chKVenta.CheckedChanged += new System.EventHandler(this.chKVenta_CheckedChanged);
             // 
             // frmRendimiento_Compras
             // 
@@ -324,6 +413,7 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -356,5 +446,9 @@
         private MaterialSkin.Controls.MaterialCheckBox chOcultar;
         private System.Windows.Forms.ListBox lstCamiones;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialCheckBox chKCompra;
+        private MaterialSkin.Controls.MaterialCheckBox chKVenta;
+        private MaterialSkin.Controls.MaterialCheckBox chTCompra;
+        private MaterialSkin.Controls.MaterialCheckBox chTVenta;
     }
 }

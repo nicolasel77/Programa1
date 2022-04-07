@@ -11,7 +11,7 @@
     public class CCtes_Proveedores
     {
         public Compras Compras = new Compras();
-        public Gastos gastos { get; set; }
+        public Gastos gastos { get; set; } = new Gastos();
         public bool Aceptado;
 
         public CCtes_Proveedores()
@@ -34,6 +34,7 @@
         {
             Pagos_Autorizados p = new Pagos_Autorizados();
             return p.Autorizados_Proveedor(gastos.Id_SubTipoGastos);
+
         }
         public DataTable Detalle_Compras(string filtro = "", bool Agrupado = false)
         {

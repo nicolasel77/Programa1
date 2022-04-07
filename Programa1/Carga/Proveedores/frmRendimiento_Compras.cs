@@ -28,7 +28,7 @@
             {
                 grdRendimiento_Compras.set_ColW(i, 80);
                 grdRendimiento_Compras.Columnas[i].Format = "N1";
-            }
+            }                      
 
             cellStyle = grdRendimiento_Compras.Styles.Add("Rojo");
             cellStyle.BackColor = Color.MistyRose;
@@ -130,6 +130,11 @@
                     grdRendimiento_Compras.Filas[i].Style = cellStyle;
                 }
             }
+
+            if (chKCompra.Checked == false) { grdRendimiento_Compras.set_ColW(grdRendimiento_Compras.get_ColIndex("KCompras"), 0);} else { grdRendimiento_Compras.set_ColW(grdRendimiento_Compras.get_ColIndex("KCompras"), 80); }
+            if (chKVenta.Checked == false) { grdRendimiento_Compras.set_ColW(grdRendimiento_Compras.get_ColIndex("KVentas"), 0); } else { grdRendimiento_Compras.set_ColW(grdRendimiento_Compras.get_ColIndex("KVentas"), 80); }
+            if (chTCompra.Checked == false) { grdRendimiento_Compras.set_ColW(grdRendimiento_Compras.get_ColIndex("TCompras"), 0); } else { grdRendimiento_Compras.set_ColW(grdRendimiento_Compras.get_ColIndex("TCompras"), 80); }
+            if (chTVenta.Checked == false) { grdRendimiento_Compras.set_ColW(grdRendimiento_Compras.get_ColIndex("TVentas"), 0); } else { grdRendimiento_Compras.set_ColW(grdRendimiento_Compras.get_ColIndex("TVentas"), 80); }
         }
 
 
@@ -167,6 +172,26 @@
         }
 
         private void ChOcultar_CheckedChanged(object sender, EventArgs e)
+        {
+            cmdMostrar.PerformClick();
+        }
+
+        private void chKCompra_CheckedChanged(object sender, EventArgs e)
+        {
+            cmdMostrar.PerformClick();
+        }
+
+        private void chTCompra_CheckedChanged(object sender, EventArgs e)
+        {
+            cmdMostrar.PerformClick();
+        }
+
+        private void chTVenta_CheckedChanged(object sender, EventArgs e)
+        {
+            cmdMostrar.PerformClick();
+        }
+
+        private void chKVenta_CheckedChanged(object sender, EventArgs e)
         {
             cmdMostrar.PerformClick();
         }

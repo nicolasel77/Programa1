@@ -119,13 +119,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Proveedores.BackColor = System.Drawing.Color.Gainsboro;
             this.Proveedores.Filtro_In = "";
-            this.Proveedores.Location = new System.Drawing.Point(6, 295);
+            this.Proveedores.Location = new System.Drawing.Point(6, 12);
             this.Proveedores.Mostrar_Tipo = false;
             this.Proveedores.Name = "Proveedores";
-            this.Proveedores.Size = new System.Drawing.Size(203, 439);
+            this.Proveedores.Size = new System.Drawing.Size(203, 722);
             this.Proveedores.TabIndex = 1;
             this.Proveedores.Titulo = "Proveedores";
             this.Proveedores.Valor_Actual = -1;
+            this.Proveedores.Cambio_Seleccion += new System.EventHandler(this.Proveedores_Cambio_Seleccion);
             // 
             // Fecha
             // 
@@ -140,6 +141,8 @@
             this.Fecha.Size = new System.Drawing.Size(206, 277);
             this.Fecha.TabIndex = 0;
             this.Fecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.Fecha.Visible = false;
+            this.Fecha.Cambio_Seleccion += new System.EventHandler(this.Fecha_Cambio_Seleccion);
             // 
             // frmVencimientos_Proveedores
             // 

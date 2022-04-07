@@ -1188,8 +1188,11 @@ namespace Programa1.Carga.Tesoreria
                                 DateTime fecha = Convert.ToDateTime(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Fecha")));
                                 double vSaldo = Convert.ToDouble(fr.grd.get_Texto(i, fr.grd.get_ColIndex("Saldo")));
                                 string tpago = (vSaldo < -1 || vSaldo > 1) ? "Parcial" : "Total";
+                                string vdescripcion = fr.grd.get_Texto(i, fr.grd.get_ColIndex("Descripcion")).ToString();
 
-                                cGastos.Descripcion = $"[{tpago}] Compra: {fecha:dddd dd/MM/yy}  ({fr.grd.get_Texto(i, fr.grd.get_ColIndex("Descripcion"))})";
+                                if (!string.IsNullOrEmpty(vdescripcion)) { vdescripcion = $" ({vdescripcion})"; }
+
+                                cGastos.Descripcion = $"[{tpago}] Compra: {fecha:dddd dd/MM/yy}{vdescripcion}";
                                 cGastos.Importe = npago;
                                 cGastos.Fecha_Acreditacion = fecha;
                                 cGastos.Usuario = usuario;

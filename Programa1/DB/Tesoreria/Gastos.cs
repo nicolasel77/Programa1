@@ -25,7 +25,7 @@
         /// Tipo Gastos
         /// </summary>
         public Tipo_Gastos TG { get; set; } = new Tipo_Gastos();
-        public int Id_SubTipoGastos { get; set; }
+        public int Id_SubTipoGastos { get; set; } = 0;
         public int Id_DetalleGastos { get; set; }
         public string Desc_SubTipo { get; set; }
 

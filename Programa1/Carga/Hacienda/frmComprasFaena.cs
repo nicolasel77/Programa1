@@ -221,10 +221,14 @@
 
             for (int i = 1; i < grdFaena.Rows - 1; i++)
             {
-                tRecupero += Convert.ToSingle(grdFaena.get_Texto(i, F_Recu)) * Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
+                if (hc.nBoletas.ID < 8377)
+                {
+                    tRecupero += Convert.ToSingle(grdFaena.get_Texto(i, F_Recu)) * Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
+                }
                 kFaena += Convert.ToSingle(grdFaena.get_Texto(i, F_Kilos));
                 cFaena++;
             }
+
             lblCant.Text = $"Cantidad: {cFaena:N0}";
             lblKilos.Text = $"Kilos: {kFaena:N2}";
             lblTotal.Text = $"Recupero: {tRecupero:C2}";
@@ -235,7 +239,7 @@
 
                 hc.nBoletas.Actualizar("Costo", tCompra / kCompra);
                 hc.nBoletas.Actualizar("Costo_Faena", tCompra / kFaena);
-                hc.nBoletas.Actualizar("Costo_Final", (tCompra / kFaena) - (tRecupero / kFaena)); 
+                hc.nBoletas.Actualizar("Costo_Final", (tCompra / kFaena) - (tRecupero / kFaena));
             }
             else
             {
@@ -406,7 +410,7 @@
 
             if (grdFaena.Rows > 2)
             {
-                Totales();                
+                Totales();
             }
             MessageBox.Show("Falta el calculo de Pago en Mano");
         }
