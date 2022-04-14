@@ -118,31 +118,29 @@
             this.cProveedores.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cProveedores.BackColor = System.Drawing.Color.Gainsboro;
-            this.cProveedores.Filtro_In = "";
-            this.cProveedores.Location = new System.Drawing.Point(6, 295);
-            this.cProveedores.Mostrar_Tipo = true;
-            this.cProveedores.Name = "cProveedores";
-            this.cProveedores.Size = new System.Drawing.Size(203, 439);
-            this.cProveedores.TabIndex = 1;
-            this.cProveedores.Titulo = "Proveedores";
-            this.cProveedores.Valor_Actual = -1;
-            this.cProveedores.Cambio_Seleccion += new System.EventHandler(this.Proveedores_Cambio_Seleccion);
+            this.Proveedores.BackColor = System.Drawing.Color.Gainsboro;
+            this.Proveedores.Filtro_In = "";
+            this.Proveedores.Location = new System.Drawing.Point(6, 295);
+            this.Proveedores.Mostrar_Tipo = false;
+            this.Proveedores.Name = "Proveedores";
+            this.Proveedores.Size = new System.Drawing.Size(203, 439);
+            this.Proveedores.TabIndex = 1;
+            this.Proveedores.Titulo = "Proveedores";
+            this.Proveedores.Valor_Actual = -1;
             // 
             // cFecha
             // 
             this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(3, 12);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Mostrar = 0;
-            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(206, 277);
-            this.cFecha.TabIndex = 0;
-            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.Fecha_Cambio_Seleccion);
+            this.Fecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.Fecha.Location = new System.Drawing.Point(3, 12);
+            this.Fecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.Fecha.Mostrar = 0;
+            this.Fecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
+            this.Fecha.Name = "Fecha";
+            this.Fecha.Size = new System.Drawing.Size(206, 277);
+            this.Fecha.TabIndex = 0;
+            this.Fecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // frmVencimientos_Proveedores
             // 

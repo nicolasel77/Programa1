@@ -46,7 +46,7 @@
 
                 grd.ActivarCelda((f == grd.Rows - 1) ? f + 1 : 1, c);
 
-                double t = grd.SumarCol("Nuevo");
+                double t = grd.SumarCol("Nuevo", false);
 
                 lblTotal.Text = $"Total: {t:N1}";
             }

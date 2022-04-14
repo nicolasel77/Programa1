@@ -277,7 +277,7 @@
                 {
                     try
                     {
-                        if(chFiltrar.Checked) { Cambio_Seleccion(null, null);}
+                        if(chFiltrar.Checked) { if (Cambio_Seleccion != null) Cambio_Seleccion(this, null);}
                     }
                     catch (Exception)
                     {
