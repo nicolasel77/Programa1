@@ -53,6 +53,7 @@
             this.lstSupervisores = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.cmdKgVend = new Programa1.Controles.cBoton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -66,7 +67,7 @@
             this.lstSucs.Location = new System.Drawing.Point(0, 0);
             this.lstSucs.Name = "lstSucs";
             this.lstSucs.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstSucs.Size = new System.Drawing.Size(175, 508);
+            this.lstSucs.Size = new System.Drawing.Size(175, 462);
             this.lstSucs.TabIndex = 0;
             // 
             // panel1
@@ -76,7 +77,7 @@
             this.panel1.Controls.Add(this.lstSucs);
             this.panel1.Location = new System.Drawing.Point(879, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(175, 508);
+            this.panel1.Size = new System.Drawing.Size(175, 462);
             this.panel1.TabIndex = 1;
             // 
             // panel2
@@ -242,7 +243,7 @@
             this.cmdGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdGuardar.Location = new System.Drawing.Point(879, 618);
             this.cmdGuardar.Name = "cmdGuardar";
-            this.cmdGuardar.Size = new System.Drawing.Size(200, 40);
+            this.cmdGuardar.Size = new System.Drawing.Size(175, 40);
             this.cmdGuardar.TabIndex = 16;
             this.cmdGuardar.Texto = "Guardar";
             this.cmdGuardar.Click += new System.EventHandler(this.cmdGuardar_Click);
@@ -252,7 +253,7 @@
             this.cmdVistaPrevia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdVistaPrevia.Location = new System.Drawing.Point(879, 526);
             this.cmdVistaPrevia.Name = "cmdVistaPrevia";
-            this.cmdVistaPrevia.Size = new System.Drawing.Size(200, 40);
+            this.cmdVistaPrevia.Size = new System.Drawing.Size(175, 40);
             this.cmdVistaPrevia.TabIndex = 15;
             this.cmdVistaPrevia.Texto = "Vista Previa";
             this.cmdVistaPrevia.Click += new System.EventHandler(this.cmdVistaPrevia_Click);
@@ -262,7 +263,7 @@
             this.cmdEditar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdEditar.Location = new System.Drawing.Point(879, 572);
             this.cmdEditar.Name = "cmdEditar";
-            this.cmdEditar.Size = new System.Drawing.Size(200, 40);
+            this.cmdEditar.Size = new System.Drawing.Size(175, 40);
             this.cmdEditar.TabIndex = 14;
             this.cmdEditar.Texto = "Editar sucs";
             this.cmdEditar.Click += new System.EventHandler(this.cmdEditar_Click);
@@ -365,11 +366,22 @@
             this.panel4.Size = new System.Drawing.Size(200, 100);
             this.panel4.TabIndex = 33;
             // 
+            // cmdKgVend
+            // 
+            this.cmdKgVend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdKgVend.Location = new System.Drawing.Point(879, 480);
+            this.cmdKgVend.Name = "cmdKgVend";
+            this.cmdKgVend.Size = new System.Drawing.Size(175, 40);
+            this.cmdKgVend.TabIndex = 34;
+            this.cmdKgVend.Texto = "Kilos Vendidos";
+            this.cmdKgVend.Click += new System.EventHandler(this.cmdKgVend_Click);
+            // 
             // frmImprimir_Ofertas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1281, 670);
+            this.Controls.Add(this.cmdKgVend);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.label3);
@@ -427,5 +439,6 @@
         private System.Windows.Forms.ListBox lstSupervisores;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel4;
+        private Controles.cBoton cmdKgVend;
     }
 }
