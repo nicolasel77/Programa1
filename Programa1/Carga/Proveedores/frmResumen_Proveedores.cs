@@ -1,6 +1,5 @@
 ﻿using Programa1.Carga.Proveedores;
 using Programa1.DB.Proveedores;
-using Proveedores;
 using System;
 using System.Data;
 using System.Drawing;
@@ -262,7 +261,7 @@ namespace Programa1.Carga
 
                     if (es.Estado == Estados_Compra.e_Estado.Chequeado) { grdEntradas.Filas[i].Style = ch; }
                     if (es.Estado == Estados_Compra.e_Estado.Error) { grdEntradas.Filas[i].Style = er; }
-                    if (es.Estado == Estados_Compra.e_Estado.Sin_Chequear) { grdEntradas.Filas[i].Style = null; grdEntradas.set_Texto(i, c_Observacion, ""); } 
+                    if (es.Estado == Estados_Compra.e_Estado.Sin_Chequear) { grdEntradas.Filas[i].Style = null; grdEntradas.set_Texto(i, c_Observacion, ""); }
                 }
 
             }

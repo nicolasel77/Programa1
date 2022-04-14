@@ -1,4 +1,4 @@
-﻿namespace Proveedores
+﻿namespace Programa1.DB.Proveedores
 {
     using Programa1.Carga.Proveedores;
     using Programa1.DB;

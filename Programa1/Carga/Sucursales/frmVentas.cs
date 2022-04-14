@@ -241,14 +241,21 @@
             Cargar_Datos();
         }
 
+        private void cProveedores_Cambio_Seleccion(object sender, EventArgs e)
+        {
+            Cargar_Datos();
+        }
+
         private void CFecha_Cambio_Seleccion(object sender, EventArgs e)
         {
+            Text = "Fue fecha";
             string vFecha = cFecha.Cadena();
             cProds.Filtro_In = $" (SELECT DISTINCT Id_Productos FROM Ventas WHERE {vFecha})";
             cSucursal.Filtro_In = $" (SELECT DISTINCT Id_Sucursales FROM Ventas WHERE {vFecha})";
             cProveedores.Filtro_In = $" (SELECT DISTINCT Id_Proveedores FROM Ventas WHERE {vFecha})";
             Cargar_Datos();
         }
+
 
         private void GrdVenta_Editado(short f, short c, object a)
         {
@@ -979,6 +986,16 @@
             else
             {
                 grdVenta.Columnas[c_IdCamion].Visible = false;
+            }
+        }
+
+        private void grdVenta_AntesDeOrdenar()
+        {
+            int row = grdVenta.Row;
+            if (row != -1)
+            {
+                int i = Convert.ToInt32(grdVenta.get_Texto(row, c_Id));
+                grdVenta.Filas[row].Style = null;
             }
         }
     }

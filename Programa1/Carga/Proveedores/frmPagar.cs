@@ -1,10 +1,9 @@
 ﻿namespace Programa1.Carga.Proveedores
 {
-    using global::Proveedores;
     using Programa1.DB;
+    using Programa1.DB.Proveedores;
     using Programa1.DB.Tesoreria;
     using System;
-    using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     public partial class frmPagar : Form
@@ -181,6 +180,6 @@
             }
         }
 
-     
+
     }
 }

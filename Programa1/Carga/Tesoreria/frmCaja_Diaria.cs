@@ -1,8 +1,8 @@
 ﻿
 namespace Programa1.Carga.Tesoreria
 {
-    using global::Proveedores;
     using Programa1.DB;
+    using Programa1.DB.Proveedores;
     using Programa1.DB.Tesoreria;
     using Programa1.DB.Varios;
     using System;
@@ -141,7 +141,7 @@ namespace Programa1.Carga.Tesoreria
             grdSalidas.set_AlineamientoCelda(0, s_Importe, style);
             Totales();
 
-            if(usuario.Nombre == "Lorena")
+            if (usuario.Nombre == "Lorena")
             {
                 entradasToolStripMenuItem.PerformClick();
             }
@@ -1374,9 +1374,9 @@ namespace Programa1.Carga.Tesoreria
                 cGastos.Descripcion = Convert.ToString(grdSalidas.get_Texto(Fila, s_Descripcion));
                 cGastos.Importe = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Importe));
                 cGastos.Cheque = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Cheque));
-                if (Fila < grdSalidas.Rows - 1) 
-                { 
-                    cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Usuario)); 
+                if (Fila < grdSalidas.Rows - 1)
+                {
+                    cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Usuario));
                     if (cGastos.Usuario.ID == 0)
                     {
                         usuario.Nombre = usuario.Nombre;
@@ -1469,6 +1469,6 @@ namespace Programa1.Carga.Tesoreria
 
         #endregion
 
-        
+
     }
 }
