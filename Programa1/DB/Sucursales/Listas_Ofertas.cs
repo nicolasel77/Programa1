@@ -21,6 +21,7 @@
         public int Orden { get; set; }
         public new string Nombre { get; set; }
         public string descripcion { get; set; }
+        public string desc_venta { get; set; }
         public string Detalle { get; set; }
         public bool Pintar { get; set; }
         public double costo { get; set; }
@@ -32,6 +33,14 @@
         public Supervisores supervisores = new Supervisores();
         public Nombre_Listas_ofertas lista = new Nombre_Listas_ofertas();
         public Titulos titulos = new Titulos();
+
+        public DataTable Datos_Vista(string Filtro)
+        {
+            DataTable dt = new DataTable();
+            dt = Datos_Vista(Filtro, "Id, Orden, Id_Prod, Nombre, Id_Tipo, Tipo, Descripcion, Desc_Venta, Costo, Detalle, Pintar, Id_Lista");
+            return dt;
+        }
+
         public DataTable sucdatos()
         {
             return lugares_Imp.Datos_Vista("id < 0 UNION ALL SELECT Id, nombre FROM Sucursales WHERE ver = 1 AND Propio = 1", "Id, Nombre");
@@ -73,8 +82,8 @@
             {
                 string printar = Pintar ? "1" : "0";
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Lista_Ofertas (Orden, id_prod, Descripcion, Detalle, Pintar, costo, Id_Lista, Nombre) " +
-                        $"VALUES({Orden}, {productos.ID}, '{descripcion}', '{Detalle}', { printar}, {costo.ToString().Replace(",", ".")}, {lista.ID}, '{Nombre}')", sql);
+                    new SqlCommand($"INSERT INTO Lista_Ofertas (Orden, id_prod, Descripcion, Detalle, Pintar, costo, Id_Lista, Nombre, Desc_Venta) " +
+                        $"VALUES({Orden}, {productos.ID}, '{descripcion}', '{Detalle}', { printar}, {costo.ToString().Replace(",", ".")}, {lista.ID}, '{Nombre}', '{desc_venta}')", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -123,6 +132,7 @@
                 Orden = Convert.ToInt32(dr["Orden"]);
                 productos.ID = Convert.ToInt32(dr["Id_Prod"]);
                 descripcion = dr["Descripcion"].ToString();
+                desc_venta = dr["Desc_Venta"].ToString();
                 Detalle = dr["Detalle"].ToString();
                 Pintar = Convert.ToBoolean(dr["Pintar"]);
                 costo = Convert.ToSingle(dr["Costo"]);
@@ -134,6 +144,7 @@
                 Orden = 0;
                 productos.ID = 0;
                 descripcion = "";
+                desc_venta = "";
                 Pintar = false;
                 costo = 0;
                 Nombre = "";
@@ -145,6 +156,7 @@
             Actualizar("Orden", Orden);
             Actualizar("Id_Prod", productos.ID);
             Actualizar("Descripcion", descripcion);
+            Actualizar("Desc_Venta", desc_venta);
             Actualizar("Detalle", Detalle);
             Actualizar("Pintar", Pintar);
             Actualizar("Costo", costo);

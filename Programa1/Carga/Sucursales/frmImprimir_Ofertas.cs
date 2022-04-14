@@ -23,6 +23,7 @@
         private readonly Byte c_Descripcion;
         private readonly Byte c_Costo;
         private readonly Byte c_Detalle;
+        private readonly Byte c_Desc_Venta;
         private readonly Byte c_Pintar;
         private readonly Byte c_Id_lista;
         #endregion
@@ -53,6 +54,7 @@
             c_Tipo = Convert.ToByte(grdLista.get_ColIndex("Tipo"));
             c_Descripcion = Convert.ToByte(grdLista.get_ColIndex("Descripcion"));
             c_Detalle = Convert.ToByte(grdLista.get_ColIndex("Detalle"));
+            c_Desc_Venta = Convert.ToByte(grdLista.get_ColIndex("Desc_Venta"));
             c_Pintar = Convert.ToByte(grdLista.get_ColIndex("Pintar"));
             c_Costo = Convert.ToByte(grdLista.get_ColIndex("Costo"));
             c_Id_lista = Convert.ToByte(grdLista.get_ColIndex("Id_Lista"));
@@ -162,6 +164,7 @@
                     else
                     { grdLista.ActivarCelda(f, c_Descripcion); }
                     break;
+
                 case 6://Descripcion
                     grdLista.set_Texto(f, c, a);
                     listas.descripcion = a.ToString();
@@ -171,9 +174,22 @@
                         grdLista.ActivarCelda(f + 1, c);
                     }
                     else
+                    { grdLista.ActivarCelda(f, c_Desc_Venta); }
+                    break;
+
+                case 7://Desc_Venta
+                    grdLista.set_Texto(f, c, a);
+                    listas.desc_venta = a.ToString();
+                    if (listas.ID > 0)
+                    {
+                        listas.Actualizar();
+                        grdLista.ActivarCelda(f + 1, c);
+                    }
+                    else
                     { grdLista.ActivarCelda(f, c_Costo); }
                     break;
-                case 7://Costo
+
+                case 8://Costo
 
                     if (listas.ID > 0)
                     {
@@ -202,7 +218,7 @@
                     }
                     break;
 
-                case 8://Detalle
+                case 9://Detalle
                     if (a.ToString().Length < 6)
                     {
                         grdLista.set_Texto(f, c, a);
@@ -219,7 +235,7 @@
                     { MessageBox.Show($"El limite de caracteres del detalle es de 5", "Demasiados caracteres", MessageBoxButtons.OK, MessageBoxIcon.Information); }
                     break;
 
-                case 9://Pintar
+                case 10://Pintar
                     grdLista_CambioFila(f);
                     if (listas.ID > 0)
                     {
@@ -257,6 +273,7 @@
                 listas.Orden = Convert.ToInt32(grdLista.get_Texto(Fila, c_Orden));
                 listas.productos.ID = Convert.ToInt32(grdLista.get_Texto(Fila, c_IdProd));
                 listas.descripcion = grdLista.get_Texto(Fila, c_Descripcion).ToString();
+                listas.desc_venta = grdLista.get_Texto(Fila, c_Desc_Venta).ToString();
                 listas.costo = Convert.ToSingle(grdLista.get_Texto(Fila, c_Costo));
                 listas.Detalle = grdLista.get_Texto(Fila, c_Detalle).ToString();
                 listas.Pintar = Convert.ToBoolean(grdLista.get_Texto(Fila, c_Pintar));
@@ -380,17 +397,27 @@
             { txtAgregar.Text = "Agregar"; }
         }
 
-        private void Prueba_hilos(int la_listapaa, int copias, string tipofecha, DateTime fecha, string Titulo, bool vista_previa = false, string f_supervisores = "")
+        private void Prueba_hilos(int la_listapaa, int copias, string tipofecha, DateTime fecha, string Titulo, bool vista_previa = false, string f_supervisores = "", bool kg_Ven = false)
         {
             Listas_Ofertas cofimp = new Listas_Ofertas();
-            string fileTest = @"D:\Sistema\P1\Listas_Ofertas.xlsm";
+            string fileTest;
+            if (kg_Ven == false)
+            { fileTest = @"D:\Sistema\P1\Listas_Ofertas.xlsm"; }
+            else
+            { fileTest = @"D:\Sistema\P1\Listas_Ofertas_KgVend.xlsm"; }
 
             int c_producto = 1;
             int c_descripcion = 2;
             int c_costo = 3;
             int c_detalle = 4;
             cofimp.lista.ID = la_listapaa;
-            DataTable dt = cofimp.Datos_Vista($"Id_Lista = {cofimp.lista.ID}", "*", "Id_Tipo, Orden, Id_Prod, Costo");
+            DataTable dt;
+            if (kg_Ven == false)
+            { dt = cofimp.Datos_Vista($"Id_Lista = {cofimp.lista.ID}", "Id, Orden, Id_Prod, Nombre, Id_Tipo, Tipo, Descripcion, Costo, Detalle, Pintar, Id_Lista", "Id_Tipo, Orden, Id_Prod, Costo"); }
+            else
+            { dt = cofimp.Datos_Vista($"Id_Lista = {cofimp.lista.ID}", "Id, Orden, Id_Prod, Nombre, Id_Tipo, Tipo, Descripcion, Desc_Venta as Costo, '' as Detalle, Pintar, Id_Lista", "Id_Tipo, Orden, Id_Prod, Costo"); }
+
+
 
             Excel.Application xlApp = new Excel.Application();
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(fileTest);
@@ -487,6 +514,7 @@
             }
             xlWorkbook.Close(false);
             xlApp.Quit();
+
         }
 
         private void cmdVistaPrevia_Click(object sender, EventArgs e)
@@ -531,6 +559,25 @@
             else
             { copias = 1; }
             Thread Hilo_prueba = new Thread(() => Prueba_hilos(listas.lista.ID, copias, tipofecha, fecha, titulos, false, f_supervisores));
+            Hilo_prueba.Start();
+        }
+
+        private void cmdKgVend_Click(object sender, EventArgs e)
+        {
+            int copias;
+            string tipofecha = cmbTipofecha.Text;
+            DateTime fecha = mtcFecha.SelectionStart;
+            string titulos = cmbTitulos.Text;
+            string f_supervisores = "";
+            if (lstSupervisores.SelectedIndex > -1)
+            {
+                f_supervisores = h.Codigos_Seleccionados(lstSupervisores);
+            }
+            if (int.TryParse(txtCopias.Text, out copias) == true)
+            { copias = Convert.ToInt32(txtCopias.Text); }
+            else
+            { copias = 1; }
+            Thread Hilo_prueba = new Thread(() => Prueba_hilos(listas.lista.ID, copias, tipofecha, fecha, titulos, false, f_supervisores, true));
             Hilo_prueba.Start();
         }
     }
