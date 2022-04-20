@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOfertas));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
@@ -153,9 +152,11 @@
             this.grdOfertas.fColor = System.Drawing.SystemColors.Control;
             this.grdOfertas.FixCols = 0;
             this.grdOfertas.FixRows = 0;
+            this.grdOfertas.Frozen = 0;
             this.grdOfertas.FuenteEncabezado = null;
             this.grdOfertas.FuentePieDePagina = null;
             this.grdOfertas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdOfertas.LimpiarEstilosAntesDeOrdenar = true;
             this.grdOfertas.Location = new System.Drawing.Point(3, 3);
             this.grdOfertas.Name = "grdOfertas";
             this.grdOfertas.PieDePagina = "\t\tPage {0} of {1}";
@@ -214,6 +215,7 @@
             this.cFecha.Location = new System.Drawing.Point(3, 470);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(286, 184);
             this.cFecha.TabIndex = 3;
@@ -229,7 +231,7 @@
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(2, 3);
             this.cSucs.Mostrar_Botones = true;
-            this.cSucs.Mostrar_Tipo = false;
+            this.cSucs.Mostrar_Tipo = true;
             this.cSucs.Name = "cSucs";
             this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucs.Size = new System.Drawing.Size(287, 461);

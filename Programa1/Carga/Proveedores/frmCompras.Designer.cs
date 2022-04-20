@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCompras));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
@@ -40,6 +39,7 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.cProds = new Programa1.Controles.cProductos();
+            this.chCamiones = new MaterialSkin.Controls.MaterialCheckBox();
             this.chCantidad = new MaterialSkin.Controls.MaterialCheckBox();
             this.lstCamiones = new System.Windows.Forms.ListBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
@@ -53,7 +53,6 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
-            this.chCamiones = new MaterialSkin.Controls.MaterialCheckBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -159,9 +158,11 @@
             this.grdCompras.fColor = System.Drawing.SystemColors.Control;
             this.grdCompras.FixCols = 0;
             this.grdCompras.FixRows = 0;
+            this.grdCompras.Frozen = 0;
             this.grdCompras.FuenteEncabezado = null;
             this.grdCompras.FuentePieDePagina = null;
             this.grdCompras.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdCompras.LimpiarEstilosAntesDeOrdenar = true;
             this.grdCompras.Location = new System.Drawing.Point(3, 3);
             this.grdCompras.Name = "grdCompras";
             this.grdCompras.PieDePagina = "\t\tPage {0} of {1}";
@@ -233,6 +234,24 @@
             this.cProds.Valor_Actual = -1;
             this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
             // 
+            // chCamiones
+            // 
+            this.chCamiones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chCamiones.AutoSize = true;
+            this.chCamiones.Depth = 0;
+            this.chCamiones.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chCamiones.Location = new System.Drawing.Point(140, 66);
+            this.chCamiones.Margin = new System.Windows.Forms.Padding(0);
+            this.chCamiones.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chCamiones.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chCamiones.Name = "chCamiones";
+            this.chCamiones.Ripple = true;
+            this.chCamiones.Size = new System.Drawing.Size(92, 30);
+            this.chCamiones.TabIndex = 8;
+            this.chCamiones.Text = "Camiones";
+            this.chCamiones.UseVisualStyleBackColor = true;
+            this.chCamiones.CheckedChanged += new System.EventHandler(this.chCamiones_CheckedChanged);
+            // 
             // chCantidad
             // 
             this.chCantidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -289,6 +308,7 @@
             this.cFecha.Location = new System.Drawing.Point(3, 381);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(249, 303);
             this.cFecha.TabIndex = 3;
@@ -303,7 +323,7 @@
             this.cProvs.BackColor = System.Drawing.Color.Gainsboro;
             this.cProvs.Filtro_In = "";
             this.cProvs.Location = new System.Drawing.Point(2, 3);
-            this.cProvs.Mostrar_Tipo = true;
+            this.cProvs.Mostrar_Tipo = false;
             this.cProvs.Name = "cProvs";
             this.cProvs.Size = new System.Drawing.Size(258, 372);
             this.cProvs.TabIndex = 2;
@@ -405,24 +425,6 @@
             this.cmdLimpiar.Text = "Limpiar";
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
-            // 
-            // chCamiones
-            // 
-            this.chCamiones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chCamiones.AutoSize = true;
-            this.chCamiones.Depth = 0;
-            this.chCamiones.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chCamiones.Location = new System.Drawing.Point(140, 66);
-            this.chCamiones.Margin = new System.Windows.Forms.Padding(0);
-            this.chCamiones.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chCamiones.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chCamiones.Name = "chCamiones";
-            this.chCamiones.Ripple = true;
-            this.chCamiones.Size = new System.Drawing.Size(92, 30);
-            this.chCamiones.TabIndex = 8;
-            this.chCamiones.Text = "Camiones";
-            this.chCamiones.UseVisualStyleBackColor = true;
-            this.chCamiones.CheckedChanged += new System.EventHandler(this.chCamiones_CheckedChanged);
             // 
             // frmCompras
             // 

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReintegros));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
@@ -142,9 +141,11 @@
             this.grdReintegros.fColor = System.Drawing.SystemColors.Control;
             this.grdReintegros.FixCols = 0;
             this.grdReintegros.FixRows = 0;
+            this.grdReintegros.Frozen = 0;
             this.grdReintegros.FuenteEncabezado = null;
             this.grdReintegros.FuentePieDePagina = null;
             this.grdReintegros.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdReintegros.LimpiarEstilosAntesDeOrdenar = true;
             this.grdReintegros.Location = new System.Drawing.Point(3, 7);
             this.grdReintegros.Name = "grdReintegros";
             this.grdReintegros.PieDePagina = "\t\tPage {0} of {1}";
@@ -187,7 +188,7 @@
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(3, 3);
             this.cSucs.Mostrar_Botones = true;
-            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Mostrar_Tipo = false;
             this.cSucs.Name = "cSucs";
             this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucs.Size = new System.Drawing.Size(338, 785);
@@ -204,7 +205,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(254, 344);
+            this.panel1.Size = new System.Drawing.Size(253, 344);
             this.panel1.TabIndex = 5;
             // 
             // panel2
@@ -215,7 +216,7 @@
             this.panel2.Controls.Add(this.lstTipo);
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(247, 337);
+            this.panel2.Size = new System.Drawing.Size(246, 337);
             this.panel2.TabIndex = 5;
             // 
             // lstTipo
@@ -229,7 +230,7 @@
             this.lstTipo.Location = new System.Drawing.Point(0, 0);
             this.lstTipo.Name = "lstTipo";
             this.lstTipo.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstTipo.Size = new System.Drawing.Size(247, 337);
+            this.lstTipo.Size = new System.Drawing.Size(246, 337);
             this.lstTipo.TabIndex = 4;
             // 
             // cFecha
@@ -241,8 +242,9 @@
             this.cFecha.Location = new System.Drawing.Point(3, 354);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 212);
             this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(254, 434);
+            this.cFecha.Size = new System.Drawing.Size(253, 434);
             this.cFecha.TabIndex = 3;
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);

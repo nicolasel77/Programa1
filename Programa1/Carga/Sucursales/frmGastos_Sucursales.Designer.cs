@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGastos_Sucursales));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
@@ -143,9 +142,11 @@
             this.grdGastos.fColor = System.Drawing.SystemColors.Control;
             this.grdGastos.FixCols = 0;
             this.grdGastos.FixRows = 0;
+            this.grdGastos.Frozen = 0;
             this.grdGastos.FuenteEncabezado = null;
             this.grdGastos.FuentePieDePagina = null;
             this.grdGastos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdGastos.LimpiarEstilosAntesDeOrdenar = true;
             this.grdGastos.Location = new System.Drawing.Point(3, 7);
             this.grdGastos.Name = "grdGastos";
             this.grdGastos.PieDePagina = "\t\tPage {0} of {1}";
@@ -186,7 +187,7 @@
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(0, 0);
             this.cSucs.Mostrar_Botones = true;
-            this.cSucs.Mostrar_Tipo = true;
+            this.cSucs.Mostrar_Tipo = false;
             this.cSucs.Name = "cSucs";
             this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucs.Size = new System.Drawing.Size(248, 671);
@@ -235,6 +236,7 @@
             this.cFecha.Location = new System.Drawing.Point(0, 0);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 212);
             this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(258, 237);
             this.cFecha.TabIndex = 3;

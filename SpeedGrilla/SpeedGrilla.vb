@@ -752,6 +752,16 @@ Public Class SpeedGrilla
             PintarFilas = value
         End Set
     End Property
+
+    Private _LimpiarEstilosAntesDeOrdenar As Boolean
+    Public Property LimpiarEstilosAntesDeOrdenar() As Boolean
+        Get
+            Return _LimpiarEstilosAntesDeOrdenar
+        End Get
+        Set(ByVal value As Boolean)
+            _LimpiarEstilosAntesDeOrdenar = value
+        End Set
+    End Property
 #End Region
 
 #Region "Propiedades de la impresion"
@@ -1260,6 +1270,12 @@ Public Class SpeedGrilla
     Private Sub Grd_BeforeSort(ByVal sender As System.Object, ByVal e As C1.Win.C1FlexGrid.SortColEventArgs) Handles Grd.BeforeSort
         RaiseEvent AntesDeOrdenar()
         e.Handled = True
+        If LimpiarEstilosAntesDeOrdenar = True Then
+            Dim Row As Integer = Grd.Row
+            If Row <> -1 Then
+                Grd.Rows(Row).Style = Nothing
+            End If
+        End If
         Grd.Sort(New Comparador(e))
         RaiseEvent Ordenado()
     End Sub

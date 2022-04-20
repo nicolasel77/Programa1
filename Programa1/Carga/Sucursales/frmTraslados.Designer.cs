@@ -426,9 +426,11 @@
             this.grdTraslados.FixCols = 0;
             this.grdTraslados.FixRows = 0;
             this.grdTraslados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdTraslados.Frozen = 0;
             this.grdTraslados.FuenteEncabezado = null;
             this.grdTraslados.FuentePieDePagina = null;
             this.grdTraslados.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdTraslados.LimpiarEstilosAntesDeOrdenar = true;
             this.grdTraslados.Location = new System.Drawing.Point(3, 3);
             this.grdTraslados.Name = "grdTraslados";
             this.grdTraslados.PieDePagina = "\t\tPage {0} of {1}";
@@ -528,7 +530,7 @@
             this.cSucSalida.Filtro_In = "";
             this.cSucSalida.Location = new System.Drawing.Point(3, 3);
             this.cSucSalida.Mostrar_Botones = true;
-            this.cSucSalida.Mostrar_Tipo = true;
+            this.cSucSalida.Mostrar_Tipo = false;
             this.cSucSalida.Name = "cSucSalida";
             this.cSucSalida.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucSalida.Size = new System.Drawing.Size(253, 392);
@@ -546,7 +548,7 @@
             this.cSucEntrada.Filtro_In = "";
             this.cSucEntrada.Location = new System.Drawing.Point(0, 3);
             this.cSucEntrada.Mostrar_Botones = true;
-            this.cSucEntrada.Mostrar_Tipo = true;
+            this.cSucEntrada.Mostrar_Tipo = false;
             this.cSucEntrada.Name = "cSucEntrada";
             this.cSucEntrada.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucEntrada.Size = new System.Drawing.Size(260, 392);

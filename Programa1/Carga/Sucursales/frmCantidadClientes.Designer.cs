@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCantidad_Clientes));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
@@ -137,9 +136,11 @@
             this.grdCantidad_Clientes.FixCols = 0;
             this.grdCantidad_Clientes.FixRows = 0;
             this.grdCantidad_Clientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdCantidad_Clientes.Frozen = 0;
             this.grdCantidad_Clientes.FuenteEncabezado = null;
             this.grdCantidad_Clientes.FuentePieDePagina = null;
             this.grdCantidad_Clientes.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdCantidad_Clientes.LimpiarEstilosAntesDeOrdenar = true;
             this.grdCantidad_Clientes.Location = new System.Drawing.Point(3, 3);
             this.grdCantidad_Clientes.Name = "grdCantidad_Clientes";
             this.grdCantidad_Clientes.PieDePagina = "\t\tPage {0} of {1}";
@@ -181,7 +182,7 @@
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(3, 3);
             this.cSucs.Mostrar_Botones = true;
-            this.cSucs.Mostrar_Tipo = false;
+            this.cSucs.Mostrar_Tipo = true;
             this.cSucs.Name = "cSucs";
             this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucs.Size = new System.Drawing.Size(250, 681);
@@ -199,6 +200,7 @@
             this.cFecha.Location = new System.Drawing.Point(3, 3);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(260, 681);
             this.cFecha.TabIndex = 3;

@@ -989,14 +989,6 @@
             }
         }
 
-        private void grdVenta_AntesDeOrdenar()
-        {
-            int row = grdVenta.Row;
-            if (row != -1)
-            {
-                int i = Convert.ToInt32(grdVenta.get_Texto(row, c_Id));
-                grdVenta.Filas[row].Style = null;
-            }
-        }
+       
     }
 }

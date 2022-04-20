@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAPicada));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCant = new System.Windows.Forms.ToolStripStatusLabel();
@@ -192,9 +191,11 @@
             this.grdAPicada.FixCols = 0;
             this.grdAPicada.FixRows = 0;
             this.grdAPicada.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdAPicada.Frozen = 0;
             this.grdAPicada.FuenteEncabezado = null;
             this.grdAPicada.FuentePieDePagina = null;
             this.grdAPicada.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdAPicada.LimpiarEstilosAntesDeOrdenar = true;
             this.grdAPicada.Location = new System.Drawing.Point(3, 3);
             this.grdAPicada.Name = "grdAPicada";
             this.grdAPicada.PieDePagina = "\t\tPage {0} of {1}";
@@ -307,7 +308,7 @@
             this.cSucs.Filtro_In = "";
             this.cSucs.Location = new System.Drawing.Point(0, 0);
             this.cSucs.Mostrar_Botones = true;
-            this.cSucs.Mostrar_Tipo = false;
+            this.cSucs.Mostrar_Tipo = true;
             this.cSucs.Name = "cSucs";
             this.cSucs.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSucs.Size = new System.Drawing.Size(202, 528);
@@ -323,6 +324,7 @@
             this.cFecha.Location = new System.Drawing.Point(0, 0);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(202, 184);
             this.cFecha.TabIndex = 3;
