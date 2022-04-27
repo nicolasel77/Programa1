@@ -1254,15 +1254,18 @@ Public Class SpeedGrilla
             If e.NewRange.c1 = e.NewRange.c2 Then
                 If e.NewRange.r1 <> e.NewRange.r2 Then
                     Dim t As Double
+                    Dim cant As Integer
+
                     Dim st As Int16 = 1
                     If e.NewRange.r1 > e.NewRange.r2 Then st = -1
 
                     For i As Integer = e.NewRange.r1 To e.NewRange.r2 Step st
                         If IsNumeric(Texto(i, e.NewRange.c1)) Then
                             t += Texto(i, e.NewRange.c1)
+                            cant += 1
                         End If
                     Next
-                    ttGenenral.SetToolTip(Grd, FormatNumber(t, 2))
+                    ttGenenral.SetToolTip(Grd, $"Cant: {cant} Suma: {t:N1}")
                 End If
             End If
         End With

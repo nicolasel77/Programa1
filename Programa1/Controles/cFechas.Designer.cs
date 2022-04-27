@@ -305,6 +305,7 @@
             // 
             this.chFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chFiltrar.AutoSize = true;
+            this.chFiltrar.BackColor = System.Drawing.Color.Transparent;
             this.chFiltrar.Checked = true;
             this.chFiltrar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chFiltrar.Depth = 0;
@@ -318,7 +319,8 @@
             this.chFiltrar.Size = new System.Drawing.Size(67, 30);
             this.chFiltrar.TabIndex = 3;
             this.chFiltrar.Text = "Fecha";
-            this.chFiltrar.UseVisualStyleBackColor = true;
+            this.chFiltrar.UseVisualStyleBackColor = false;
+            this.chFiltrar.Visible = false;
             // 
             // cFechas
             // 
