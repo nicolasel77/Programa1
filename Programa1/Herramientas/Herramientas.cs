@@ -312,7 +312,7 @@ namespace Programa1.Herramientas
             //Por las dudas, permite cualquier formato
             //t = t.Replace(".", ",");
 
-            string vNum = "0123456789,";
+            string vNum = "0123456789,.";
 
             while (i > -1)
             {
@@ -365,7 +365,7 @@ namespace Programa1.Herramientas
             //'Por las dudas, permite cualquier formato
             t = t.Replace(".", ",");
 
-            string vNum = "0123456789,";
+            string vNum = "0123456789,.";
 
             while (i > -1)
             {

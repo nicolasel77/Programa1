@@ -51,13 +51,13 @@
             grdOriginal.MostrarDatos(dt, true, false);
             grdOriginal.AutosizeAll();
 
-            grdOriginal.Columnas[grdOriginal.get_ColIndex("Kilos")].Style.Format = "N1";
-            grdOriginal.Columnas[grdOriginal.get_ColIndex("Costo")].Style.Format = "N1";
-            grdOriginal.Columnas[grdOriginal.get_ColIndex("Total")].Style.Format = "N1";
+            grdOriginal.Columnas[grdOriginal.get_ColIndex("Kilos")].Style.Format = "N2";
+            grdOriginal.Columnas[grdOriginal.get_ColIndex("Costo")].Style.Format = "N2";
+            grdOriginal.Columnas[grdOriginal.get_ColIndex("Total")].Style.Format = "N2";
             grdOriginal.Columnas[grdOriginal.get_ColIndex("Total")].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
-            grdOriginal.Columnas[grdOriginal.get_ColIndex("Pago")].Style.Format = "N1";
-            grdOriginal.Columnas[grdOriginal.get_ColIndex("Dif")].Style.Format = "N1";
-            grdOriginal.Columnas[cSaldo].Style.Format = "N1";
+            grdOriginal.Columnas[grdOriginal.get_ColIndex("Pago")].Style.Format = "N2";
+            grdOriginal.Columnas[grdOriginal.get_ColIndex("Dif")].Style.Format = "N2";
+            grdOriginal.Columnas[cSaldo].Style.Format = "N2";
 
 
             grdOriginal.AutosizeAll();
@@ -89,10 +89,10 @@
             grdNB.AgregarFila();
             
 
-            grdNB.Columnas[cImporte].Style.Format = "N1";
-            grdNB.Columnas[cEfectivo].Style.Format = "N1";
-            grdNB.Columnas[cMolleda].Style.Format = "N1";
-            grdNB.Columnas[cAlonso].Style.Format = "N1";
+            grdNB.Columnas[cImporte].Style.Format = "N2";
+            grdNB.Columnas[cEfectivo].Style.Format = "N2";
+            grdNB.Columnas[cMolleda].Style.Format = "N2";
+            grdNB.Columnas[cAlonso].Style.Format = "N2";
 
             grdNB.Columnas[cEfectivo].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
             grdNB.Columnas[cMolleda].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
