@@ -252,7 +252,8 @@ namespace Programa1.Carga.Precios
                 string testoAReemp = cadena.Substring(n + 1, (f - n) - 1);
                 Single nPrecio = Buscar_PrecioEnGrilla(Convert.ToInt32(testoAReemp));
 
-                cadena = cadena.Replace(cadena.Substring(n, f - n + 1), nPrecio.ToString("N3"));
+
+                cadena = cadena.Replace(cadena.Substring(n, f - n + 1), nPrecio.ToString());
 
                 n = cadena.IndexOf("[", n + 1);
             }

@@ -567,6 +567,26 @@ namespace Programa1.Carga.Hacienda
                 chFaena.Checked = false;
             }
         }
+
+        private void tiActualizar_Tick(object sender, EventArgs e)
+        {
+            //recargar listado de fechas
+            if(lstFechasAcc.Items.Count != 0)
+            {
+                DateTime f1 = DateTime.Parse(lstFechasAcc.Items[0].ToString());
+                
+                Cargar_ListadoSalidas();
+
+                DateTime fn1 = DateTime.Parse(lstFechasAcc.Items[0].ToString());
+                
+                if(f1 != fn1)
+                {
+                    mDesde.Value = f1;
+                    mHasta.Value = fn1;
+                    cmdSincSalidas.PerformClick();
+                }
+            }
+        }
     }
 }
 

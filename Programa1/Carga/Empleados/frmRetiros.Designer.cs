@@ -29,22 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRetiros));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grdRetiros = new Grilla2.SpeedGrilla();
             this.cntMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darDeBajaEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.cSuc = new Programa1.Controles.cSucursales();
+            this.txtBuscar = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.dtResto = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.cmdImprimir = new System.Windows.Forms.Button();
             this.cmdAgregar = new System.Windows.Forms.Button();
             this.cmdExcel = new System.Windows.Forms.Button();
             this.lstMes = new System.Windows.Forms.ListBox();
-            this.txtBuscar = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.cSuc = new Programa1.Controles.cSucursales();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -69,8 +68,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1556, 724);
-            this.splitContainer1.SplitterDistance = 1270;
+            this.splitContainer1.Size = new System.Drawing.Size(1370, 724);
+            this.splitContainer1.SplitterDistance = 1118;
             this.splitContainer1.TabIndex = 0;
             // 
             // grdRetiros
@@ -95,9 +94,11 @@
             this.grdRetiros.fColor = System.Drawing.SystemColors.Control;
             this.grdRetiros.FixCols = 0;
             this.grdRetiros.FixRows = 0;
+            this.grdRetiros.Frozen = 0;
             this.grdRetiros.FuenteEncabezado = null;
             this.grdRetiros.FuentePieDePagina = null;
             this.grdRetiros.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdRetiros.LimpiarEstilosAntesDeOrdenar = false;
             this.grdRetiros.Location = new System.Drawing.Point(12, 12);
             this.grdRetiros.Name = "grdRetiros";
             this.grdRetiros.PieDePagina = "\t\tPage {0} of {1}";
@@ -105,7 +106,7 @@
             this.grdRetiros.Redraw = true;
             this.grdRetiros.Row = 0;
             this.grdRetiros.Rows = 50;
-            this.grdRetiros.Size = new System.Drawing.Size(1255, 700);
+            this.grdRetiros.Size = new System.Drawing.Size(1103, 700);
             this.grdRetiros.TabIndex = 0;
             this.grdRetiros.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.GrdRetiros_Editado);
             this.grdRetiros.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.GrdRetiros_CambioFila);
@@ -152,9 +153,46 @@
             this.splitContainer2.Panel2.Controls.Add(this.cmdAgregar);
             this.splitContainer2.Panel2.Controls.Add(this.cmdExcel);
             this.splitContainer2.Panel2.Controls.Add(this.lstMes);
-            this.splitContainer2.Size = new System.Drawing.Size(282, 724);
+            this.splitContainer2.Size = new System.Drawing.Size(248, 724);
             this.splitContainer2.SplitterDistance = 552;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // cSuc
+            // 
+            this.cSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cSuc.BackColor = System.Drawing.Color.Gainsboro;
+            this.cSuc.Filtro_In = "";
+            this.cSuc.Location = new System.Drawing.Point(-1, 12);
+            this.cSuc.Mostrar_Botones = true;
+            this.cSuc.Mostrar_Tipo = true;
+            this.cSuc.Name = "cSuc";
+            this.cSuc.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.cSuc.Size = new System.Drawing.Size(246, 537);
+            this.cSuc.TabIndex = 0;
+            this.cSuc.Titulo = "Sucursales";
+            this.cSuc.Valor_Actual = -1;
+            this.cSuc.Cambio_Seleccion += new System.EventHandler(this.CSuc_Cambio_Seleccion);
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBuscar.Depth = 0;
+            this.txtBuscar.Hint = "Buscar por nombre";
+            this.txtBuscar.Location = new System.Drawing.Point(96, 52);
+            this.txtBuscar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PasswordChar = '\0';
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.SelectionLength = 0;
+            this.txtBuscar.SelectionStart = 0;
+            this.txtBuscar.Size = new System.Drawing.Size(140, 23);
+            this.txtBuscar.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.txtBuscar, "Presione la tecla Enter para buscar.");
+            this.txtBuscar.UseSystemPasswordChar = false;
+            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
             // 
             // dtResto
             // 
@@ -179,7 +217,7 @@
             // 
             this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdImprimir.Location = new System.Drawing.Point(149, 141);
+            this.cmdImprimir.Location = new System.Drawing.Point(115, 141);
             this.cmdImprimir.Name = "cmdImprimir";
             this.cmdImprimir.Size = new System.Drawing.Size(131, 24);
             this.cmdImprimir.TabIndex = 1;
@@ -190,7 +228,7 @@
             // 
             this.cmdAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdAgregar.Location = new System.Drawing.Point(149, 81);
+            this.cmdAgregar.Location = new System.Drawing.Point(115, 81);
             this.cmdAgregar.Name = "cmdAgregar";
             this.cmdAgregar.Size = new System.Drawing.Size(131, 24);
             this.cmdAgregar.TabIndex = 1;
@@ -202,7 +240,7 @@
             // 
             this.cmdExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdExcel.Location = new System.Drawing.Point(149, 111);
+            this.cmdExcel.Location = new System.Drawing.Point(115, 111);
             this.cmdExcel.Name = "cmdExcel";
             this.cmdExcel.Size = new System.Drawing.Size(131, 24);
             this.cmdExcel.TabIndex = 1;
@@ -225,46 +263,11 @@
             this.lstMes.TabIndex = 0;
             this.lstMes.SelectedIndexChanged += new System.EventHandler(this.LstMes_SelectedIndexChanged);
             // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBuscar.Depth = 0;
-            this.txtBuscar.Hint = "Buscar por nombre";
-            this.txtBuscar.Location = new System.Drawing.Point(96, 52);
-            this.txtBuscar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.PasswordChar = '\0';
-            this.txtBuscar.SelectedText = "";
-            this.txtBuscar.SelectionLength = 0;
-            this.txtBuscar.SelectionStart = 0;
-            this.txtBuscar.Size = new System.Drawing.Size(174, 23);
-            this.txtBuscar.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.txtBuscar, "Presione la tecla Enter para buscar.");
-            this.txtBuscar.UseSystemPasswordChar = false;
-            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
-            // 
-            // cSuc
-            // 
-            this.cSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cSuc.BackColor = System.Drawing.Color.Gainsboro;
-            this.cSuc.Filtro_In = "";
-            this.cSuc.Location = new System.Drawing.Point(-1, 12);
-            this.cSuc.Mostrar_Tipo = false;
-            this.cSuc.Name = "cSuc";
-            this.cSuc.Size = new System.Drawing.Size(280, 537);
-            this.cSuc.TabIndex = 0;
-            this.cSuc.Titulo = "Sucursales";
-            this.cSuc.Valor_Actual = -1;
-            this.cSuc.Cambio_Seleccion += new System.EventHandler(this.CSuc_Cambio_Seleccion);
-            // 
             // frmRetiros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1556, 724);
+            this.ClientSize = new System.Drawing.Size(1370, 724);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmRetiros";
             this.Text = "Retiros";

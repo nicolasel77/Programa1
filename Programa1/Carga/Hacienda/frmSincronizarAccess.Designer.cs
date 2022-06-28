@@ -29,6 +29,7 @@ namespace Programa1.Carga.Hacienda
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.cmdBase = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -58,6 +59,7 @@ namespace Programa1.Carga.Hacienda
             this.cmdListados = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.tiActualizar = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // cmdBase
@@ -220,7 +222,7 @@ namespace Programa1.Carga.Hacienda
             this.chSaldo.Size = new System.Drawing.Size(65, 30);
             this.chSaldo.TabIndex = 9;
             this.chSaldo.Text = "Saldo";
-            this.chSaldo.UseVisualStyleBackColor = true;            
+            this.chSaldo.UseVisualStyleBackColor = true;
             this.chSaldo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.chSaldo_MouseUp);
             // 
             // chBoleta
@@ -413,6 +415,12 @@ namespace Programa1.Carga.Hacienda
             this.label9.TabIndex = 1;
             this.label9.Text = "Boletas";
             // 
+            // tiActualizar
+            // 
+            this.tiActualizar.Enabled = true;
+            this.tiActualizar.Interval = 3600000;
+            this.tiActualizar.Tick += new System.EventHandler(this.tiActualizar_Tick);
+            // 
             // frmSincronizarAccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,5 +494,6 @@ namespace Programa1.Carga.Hacienda
         private System.Windows.Forms.Button cmdListados;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Timer tiActualizar;
     }
 }

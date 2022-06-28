@@ -247,6 +247,7 @@ namespace Programa1.Herramientas
             int vOp = 1;
 
             //'Por las dudas, permite cualquier formato
+            //if (t.IndexOf(".") <> -1 & t.IndexOf(",") <> -1)
             t = t.Replace(".", ",");
 
             for (int i = 0; i <= t.Length - 1; i++)
