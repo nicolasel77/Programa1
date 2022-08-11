@@ -231,6 +231,10 @@ namespace Programa1.Carga.Hacienda
         private void Cargar_CompraYAgregados(int nb)
         {
             DB.Hacienda.Hacienda hacienda = new DB.Hacienda.Hacienda();
+
+            hacienda.nBoletas.ID = nb;
+            
+
             c_Base_Access clsAccess = new c_Base_Access("vw_Compras", "vw_Compras");
 
             clsAccess.Base_Access = cmdBase.Text;

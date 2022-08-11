@@ -116,12 +116,12 @@
             }
 
             grd.Columnas[cKilos].Style.Format = "N1";
-            grd.Columnas[cCosto].Style.Format = "N1";
-            grd.Columnas[cTotal].Style.Format = "N1";
+            grd.Columnas[cCosto].Style.Format = "N3";
+            grd.Columnas[cTotal].Style.Format = "N2";
             grd.Columnas[cTotal].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
-            grd.Columnas[cPago].Style.Format = "N1";
-            grd.Columnas[cDif].Style.Format = "N1";
-            grd.Columnas[cSaldo].Style.Format = "N1";
+            grd.Columnas[cPago].Style.Format = "N2";
+            grd.Columnas[cDif].Style.Format = "N2";
+            grd.Columnas[cSaldo].Style.Format = "N2";
 
             grd.AutosizeAll();
             grd.set_ColW(cID, 0);

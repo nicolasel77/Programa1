@@ -29,12 +29,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmResumen_Recupero));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.grd = new Grilla2.SpeedGrilla();
+            this.nuCant = new System.Windows.Forms.NumericUpDown();
             this.lstFechas = new System.Windows.Forms.ListBox();
             this.lstFrigorificos = new System.Windows.Forms.ListBox();
-            this.nuCant = new System.Windows.Forms.NumericUpDown();
-            this.grd = new Grilla2.SpeedGrilla();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,47 +60,6 @@
             this.splitContainer1.SplitterDistance = 725;
             this.splitContainer1.TabIndex = 0;
             // 
-            // lstFechas
-            // 
-            this.lstFechas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstFechas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstFechas.FormattingEnabled = true;
-            this.lstFechas.ItemHeight = 20;
-            this.lstFechas.Location = new System.Drawing.Point(229, 12);
-            this.lstFechas.Name = "lstFechas";
-            this.lstFechas.Size = new System.Drawing.Size(111, 280);
-            this.lstFechas.TabIndex = 1;
-            // 
-            // lstFrigorificos
-            // 
-            this.lstFrigorificos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstFrigorificos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstFrigorificos.FormattingEnabled = true;
-            this.lstFrigorificos.ItemHeight = 20;
-            this.lstFrigorificos.Location = new System.Drawing.Point(14, 12);
-            this.lstFrigorificos.Name = "lstFrigorificos";
-            this.lstFrigorificos.Size = new System.Drawing.Size(209, 280);
-            this.lstFrigorificos.TabIndex = 2;
-            this.lstFrigorificos.SelectedIndexChanged += new System.EventHandler(this.lstFrigorificos_SelectedIndexChanged);
-            // 
-            // nuCant
-            // 
-            this.nuCant.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nuCant.Location = new System.Drawing.Point(14, 298);
-            this.nuCant.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nuCant.Name = "nuCant";
-            this.nuCant.Size = new System.Drawing.Size(85, 31);
-            this.nuCant.TabIndex = 3;
-            this.nuCant.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
             // grd
             // 
             this.grd.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
@@ -124,9 +82,11 @@
             this.grd.FixCols = 0;
             this.grd.FixRows = 0;
             this.grd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grd.Frozen = 0;
             this.grd.FuenteEncabezado = null;
             this.grd.FuentePieDePagina = null;
             this.grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grd.LimpiarEstilosAntesDeOrdenar = false;
             this.grd.Location = new System.Drawing.Point(12, 12);
             this.grd.Name = "grd";
             this.grd.PieDePagina = "\t\tPage {0} of {1}";
@@ -136,6 +96,47 @@
             this.grd.Rows = 0;
             this.grd.Size = new System.Drawing.Size(701, 777);
             this.grd.TabIndex = 0;
+            // 
+            // nuCant
+            // 
+            this.nuCant.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nuCant.Location = new System.Drawing.Point(14, 298);
+            this.nuCant.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nuCant.Name = "nuCant";
+            this.nuCant.Size = new System.Drawing.Size(85, 31);
+            this.nuCant.TabIndex = 3;
+            this.nuCant.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
+            // lstFechas
+            // 
+            this.lstFechas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstFechas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstFechas.FormattingEnabled = true;
+            this.lstFechas.ItemHeight = 20;
+            this.lstFechas.Location = new System.Drawing.Point(229, 12);
+            this.lstFechas.Name = "lstFechas";
+            this.lstFechas.Size = new System.Drawing.Size(111, 280);
+            this.lstFechas.TabIndex = 1;
+            // 
+            // lstFrigorificos
+            // 
+            this.lstFrigorificos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstFrigorificos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstFrigorificos.FormattingEnabled = true;
+            this.lstFrigorificos.ItemHeight = 20;
+            this.lstFrigorificos.Location = new System.Drawing.Point(14, 12);
+            this.lstFrigorificos.Name = "lstFrigorificos";
+            this.lstFrigorificos.Size = new System.Drawing.Size(209, 280);
+            this.lstFrigorificos.TabIndex = 2;
+            this.lstFrigorificos.SelectedIndexChanged += new System.EventHandler(this.lstFrigorificos_SelectedIndexChanged);
             // 
             // frmResumen_Recupero
             // 

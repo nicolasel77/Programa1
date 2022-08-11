@@ -33,6 +33,7 @@
                 recu.Fecha = DateTime.Today;
             }
             grd.MostrarDatos(recu.Resumen((int)nuCant.Value), true, false);
+            grd.Columnas["Kilos"].Format = "N1";
             grd.Columnas["Recupero"].Format = "N1";
             grd.Columnas["Pago_Nuestro"].Format = "N1";
             grd.Columnas["Pago_Frigo"].Format = "N1";

@@ -76,12 +76,12 @@
             grdCompras.set_ColW(c_Plazo, 40);
 
             grdCompras.Columnas[c_Kilos].Format = "N2";
-            grdCompras.Columnas[c_Costo].Format = "C2";
-            grdCompras.Columnas[c_Costo2].Format = "C2";
-            grdCompras.Columnas[c_SubT].Format = "C2";
-            grdCompras.Columnas[c_IVA].Format = "C2";
-            grdCompras.Columnas[c_Perc].Format = "C2";
-            grdCompras.Columnas[c_Total].Format = "C2";
+            grdCompras.Columnas[c_Costo].Format = "C3";
+            grdCompras.Columnas[c_Costo2].Format = "C3";
+            grdCompras.Columnas[c_SubT].Format = "C3";
+            grdCompras.Columnas[c_IVA].Format = "C3";
+            grdCompras.Columnas[c_Perc].Format = "C3";
+            grdCompras.Columnas[c_Total].Format = "C3";
 
             grdCompras.Filas[0].TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.CenterCenter;
 

@@ -282,7 +282,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(ISNULL(Importe, 0)) FROM CD_Entradas WHERE Fecha<='{f:MM/dd/yy}'", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(ISNULL(Importe, 0)) FROM CD_Entradas WHERE ID_TipoEntrada NOT IN(13) AND Fecha<='{f:MM/dd/yy}'", conexionSql);
 
                 conexionSql.Open();
 
