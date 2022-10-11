@@ -91,6 +91,7 @@
             this.cmdImprimir.TabIndex = 1;
             this.cmdImprimir.Texto = "Imprimir";
             this.cmdImprimir.Click += new System.EventHandler(this.cmdImprimir_Click);
+            this.cmdImprimir.Load += new System.EventHandler(this.cmdImprimir_Load);
             // 
             // mntFecha
             // 

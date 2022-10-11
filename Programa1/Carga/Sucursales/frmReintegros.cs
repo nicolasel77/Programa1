@@ -273,7 +273,10 @@
                     case 6:
                         //Importe
                         Reintegros.Importe = Convert.ToSingle(a);
-                        grdReintegros.set_Texto(f, c, a);
+
+                        if (chNegativo.Checked == true) { Reintegros.Importe = Reintegros.Importe * -1; }
+
+                        grdReintegros.set_Texto(f, c, Reintegros.Importe);
 
                         if (grdReintegros.Row == grdReintegros.Rows - 1)
                         {
@@ -282,10 +285,17 @@
                             grdReintegros.AgregarFila();
                             //Rellenar nueva fila
 
-                            grdReintegros.set_Texto(f + 1, c_Fecha, Reintegros.Fecha);
+                            Reintegros.Sucursal.Siguiente();
+
+                            grdReintegros.set_Texto(f + 1, c_Fecha, Reintegros.Fecha);                                  
+                            grdReintegros.set_Texto(f + 1, c_IdSuc, Reintegros.Sucursal.ID);
+                            grdReintegros.set_Texto(f + 1, c_IdSuc + 1, Reintegros.Sucursal.Nombre);
+                            grdReintegros.set_Texto(f + 1, c_IdTipo, Reintegros.Tipo.ID);
+                            grdReintegros.set_Texto(f + 1, c_Descripcion, Reintegros.Tipo.Nombre);
 
                             Reintegros.Importe = 0;
-                            grdReintegros.ActivarCelda(f + 1, c_IdSuc);
+                            Reintegros.ID = 0;
+                            grdReintegros.ActivarCelda(f + 1, c_Importe);
                         }
                         else
                         {

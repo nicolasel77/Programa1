@@ -401,5 +401,13 @@
                     break;
             }
         }
+
+        private void lstSemanas_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                Cargar();
+            }
+        }
     }
 }

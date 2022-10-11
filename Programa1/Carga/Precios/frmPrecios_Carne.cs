@@ -1,5 +1,6 @@
 ﻿using C1.Win.C1FlexGrid;
 using Programa1.DB;
+using Programa1.DB.Varios;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,6 +23,13 @@ namespace Programa1.Carga.Precios
 
         private void frmPrecios_Carne_Load(object sender, EventArgs e)
         {
+            Configuraciones cn = new Configuraciones();
+            string n = cn.Leer("Decimales en Precios Granja");
+            if (n.Length != 0)
+            {
+                nuDecimales.Value = Convert.ToInt32(n);
+            }
+
             DataTable dt = pr.Precios_CarneListaKilos();
             dt.Columns.Add("Precio", Type.GetType("System.Single"));
             dt.Columns.Add("Total", Type.GetType("System.Single"));
@@ -33,13 +41,13 @@ namespace Programa1.Carga.Precios
             grdProductos.set_ColW(grdProductos.get_ColIndex("ID_Productos"), 30);
             grdProductos.set_ColW(grdProductos.get_ColIndex("Nombre"), 150);
             grdProductos.set_ColW(grdProductos.get_ColIndex("Kilos"), 60);
-            grdProductos.set_ColW(grdProductos.get_ColIndex("Precio"), 60);
-            grdProductos.set_ColW(grdProductos.get_ColIndex("Total"), 70);
+            grdProductos.set_ColW(grdProductos.get_ColIndex("Precio"), 70);
+            grdProductos.set_ColW(grdProductos.get_ColIndex("Total"), 90);
             grdProductos.set_ColW(grdProductos.get_ColIndex("%"), 50);
 
             grdProductos.Columnas[grdProductos.get_ColIndex("Kilos")].Style.Format = "N1";
-            grdProductos.Columnas[grdProductos.get_ColIndex("Precio")].Style.Format = "N1";
-            grdProductos.Columnas[grdProductos.get_ColIndex("Total")].Style.Format = "N1";
+            grdProductos.Columnas[grdProductos.get_ColIndex("Precio")].Style.Format = $"N{nuDecimales.Value}";
+            grdProductos.Columnas[grdProductos.get_ColIndex("Total")].Style.Format = $"N{nuDecimales.Value}";
             grdProductos.Columnas[grdProductos.get_ColIndex("%")].Style.Format = "N2";
 
             //13: Enter
@@ -378,6 +386,17 @@ namespace Programa1.Carga.Precios
             frmBorrar_Carne fr = new frmBorrar_Carne();
             fr.ShowDialog();
             Cargar_Fechas();
+        }
+
+        private void nuDecimales_ValueChanged(object sender, EventArgs e)
+        {
+            Configuraciones cn = new Configuraciones();
+            cn.Escribir("Decimales en Precios Carne", nuDecimales.Value.ToString());
+
+            grdProductos.Columnas[grdProductos.get_ColIndex("Precio")].Style.Format = $"N{nuDecimales.Value}";
+            grdProductos.Columnas[grdProductos.get_ColIndex("Total")].Style.Format = $"N{nuDecimales.Value}";
+
+            Cargar_Precios();
         }
     }
 }

@@ -563,6 +563,12 @@
     <Compile Include="Carga\Sebero\frmResumenSebero.Designer.cs">
       <DependentUpon>frmResumenSebero.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Sucursales\frmReintegro_Cambio_Precios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmReintegro_Cambio_Precios.Designer.cs">
+      <DependentUpon>frmReintegro_Cambio_Precios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmAyudaGrupos_E.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -864,6 +870,7 @@
     <Compile Include="DB\Sucursales\Nombre_Listas_ofertas.cs" />
     <Compile Include="DB\Sucursales\Promedios.cs" />
     <Compile Include="DB\Sucursales\Promedios_Carne.cs" />
+    <Compile Include="DB\Sucursales\Reintegro_Cambio_Precios.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />
     <Compile Include="DB\Sucursales\Suc_Cuentas.cs" />
     <Compile Include="DB\Sucursales\Supervisores.cs" />
@@ -893,6 +900,7 @@
     <Compile Include="DB\Tesoreria\Tipo_PagoAutorizado.cs" />
     <Compile Include="DB\Varios\Camiones.cs" />
     <Compile Include="DB\Varios\Capital_Trabajo.cs" />
+    <Compile Include="DB\Varios\Configuraciones.cs" />
     <Compile Include="DB\Varios\Datos_Genericos.cs" />
     <Compile Include="DB\Varios\Empresas.cs" />
     <Compile Include="DB\Varios\Estadisticas.cs" />
@@ -1157,6 +1165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sebero\frmSeberos.resx">
       <DependentUpon>frmSeberos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sucursales\frmReintegro_Cambio_Precios.resx">
+      <DependentUpon>frmReintegro_Cambio_Precios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmAyuda_Entradas.resx">
       <DependentUpon>frmAyuda_Entradas.cs</DependentUpon>

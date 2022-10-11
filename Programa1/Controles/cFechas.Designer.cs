@@ -115,6 +115,7 @@
             this.lstSemanas.Size = new System.Drawing.Size(352, 233);
             this.lstSemanas.TabIndex = 0;
             this.lstSemanas.SelectedIndexChanged += new System.EventHandler(this.LstSemanas_SelectedIndexChanged);
+            this.lstSemanas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstSemanas_MouseUp);
             // 
             // tabDia
             // 

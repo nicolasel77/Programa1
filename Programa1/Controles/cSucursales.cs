@@ -307,7 +307,7 @@
             switch (e.Button)
             {
                 case MouseButtons.Middle:
-                    cmdNinguno.PerformClick();
+                    lst.SelectedIndex = -1;
                     break;
                 case MouseButtons.Right:
                     cmdInvertir.PerformClick();

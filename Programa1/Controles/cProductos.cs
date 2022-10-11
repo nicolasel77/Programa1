@@ -12,7 +12,7 @@
         private Productos prods = new Productos();
         private Herramientas herramientas = new Herramientas();
 
-        
+
         private bool cCancel = false;
         private bool MostrarTipo = true;
         private string vFiltroIn = "";
@@ -29,8 +29,8 @@
             }
             set
             {
-                    vFiltroIn = value;
-                    Cargar();
+                vFiltroIn = value;
+                Cargar();
             }
         }
         public bool Mostrar_Tipo
@@ -182,7 +182,7 @@
                             break;
                         }
                         if (i == lst.Items.Count - 1 & items[n].ToString() != lst.Items[i].ToString())
-                        { lst.Items.Add(items[n]); lst.SetSelected(lst.Items.Count - 1, true); break;}
+                        { lst.Items.Add(items[n]); lst.SetSelected(lst.Items.Count - 1, true); break; }
                     }
                 }
             }
@@ -245,7 +245,13 @@
         {
             if (cCancel == false)
             {
-                Cambio_Seleccion(this, e);
+                try
+                {
+                    Cambio_Seleccion(this, e);
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 

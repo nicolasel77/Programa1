@@ -56,9 +56,11 @@ namespace Programa1.Carga.Tesoreria
             this.grd.fColor = System.Drawing.SystemColors.Control;
             this.grd.FixCols = 0;
             this.grd.FixRows = 0;
+            this.grd.Frozen = 0;
             this.grd.FuenteEncabezado = null;
             this.grd.FuentePieDePagina = null;
             this.grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grd.LimpiarEstilosAntesDeOrdenar = false;
             this.grd.Location = new System.Drawing.Point(12, 12);
             this.grd.Name = "grd";
             this.grd.PieDePagina = "\t\tPage {0} of {1}";
@@ -66,7 +68,7 @@ namespace Programa1.Carga.Tesoreria
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(1077, 479);
+            this.grd.Size = new System.Drawing.Size(1184, 479);
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
             this.grd.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grd_CambioFila);
@@ -87,7 +89,7 @@ namespace Programa1.Carga.Tesoreria
             // 
             this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdAceptar.Location = new System.Drawing.Point(939, 505);
+            this.cmdAceptar.Location = new System.Drawing.Point(1046, 505);
             this.cmdAceptar.Name = "cmdAceptar";
             this.cmdAceptar.Size = new System.Drawing.Size(150, 23);
             this.cmdAceptar.TabIndex = 2;
@@ -99,7 +101,7 @@ namespace Programa1.Carga.Tesoreria
             // 
             this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdRecargar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdRecargar.Location = new System.Drawing.Point(783, 505);
+            this.cmdRecargar.Location = new System.Drawing.Point(890, 505);
             this.cmdRecargar.Name = "cmdRecargar";
             this.cmdRecargar.Size = new System.Drawing.Size(150, 23);
             this.cmdRecargar.TabIndex = 2;
@@ -111,7 +113,7 @@ namespace Programa1.Carga.Tesoreria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1101, 534);
+            this.ClientSize = new System.Drawing.Size(1208, 534);
             this.Controls.Add(this.cmdRecargar);
             this.Controls.Add(this.cmdAceptar);
             this.Controls.Add(this.lblTotal);

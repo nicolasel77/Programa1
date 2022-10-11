@@ -115,5 +115,10 @@ namespace Programa1.Carga.Precios
         {
             mntFecha.SetDate(Convert.ToDateTime(lstListas.Text));
         }
+
+        private void cmdImprimir_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

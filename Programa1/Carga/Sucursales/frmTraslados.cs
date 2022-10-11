@@ -2,6 +2,7 @@
 namespace Programa1.Carga
 {
     using Programa1.DB;
+using Programa1.DB.Varios;
     using System;
     using System.Collections.Generic;
     using System.Drawing;
@@ -10,7 +11,7 @@ namespace Programa1.Carga
     public partial class frmTraslados : Form
     {
         private Traslados Traslados;
-
+        public Usuarios n_usuario;
 
         #region " Columnas "
         private Byte c_Id;
@@ -31,9 +32,11 @@ namespace Programa1.Carga
         int vi = 4;
         int cambiof = 1;
 
-        public frmTraslados()
+        public frmTraslados(Usuarios usuario)
         {
             InitializeComponent();
+            
+            n_usuario = usuario;
 
             int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
             grdTraslados.TeclasManejadas = n;
@@ -176,6 +179,21 @@ namespace Programa1.Carga
             grdTraslados.Columnas[c_TotalS].Format = "C2";
             grdTraslados.Columnas[c_TotalE].Format = "C2";
             grdTraslados.Columnas[c_Promedio].Format = "N2";
+            
+            if (n_usuario.Permiso == Usuarios.e_Permiso.Supervisor)
+            {
+                grdTraslados.set_ColW(c_CostoE, 0);
+                grdTraslados.set_ColW(c_CostoS, 0);
+                grdTraslados.set_ColW(c_TotalE, 0);
+                grdTraslados.set_ColW(c_TotalS, 0);
+                lblTotalE.Visible = false;
+                lblTotalS.Visible = false;
+                lblDiferencia.Visible = false;
+
+                cmdCambio.Enabled = false;
+                grdTraslados.EnableEdicion = false;
+            }
+            
 
             if (chCantidades.Checked == true)
             {

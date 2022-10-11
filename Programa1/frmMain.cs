@@ -433,7 +433,7 @@
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
-                Form frmTraslados = new frmTraslados();
+                Form frmTraslados = new frmTraslados(usuario);
                 frmTraslados.MdiParent = this;
                 frmTraslados.Disposed += FrmTraslados_Disposed;
                 forms.Add(frmTraslados);
@@ -3026,6 +3026,54 @@
             foreach (Form f in forms)
             {
                 if (f.Name == "frmVencimientos_Proveedores")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void reintXCambioDePreciosXdiaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmReintegro_Cambio_Precios")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmReintegro_Cambio_Precios");
+                t.Text = "Reintegro_Cambio_Precios";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmReintegro_Cambio_Precios = new Carga.Sucursales.frmReintegro_Cambio_Precios();
+                frmReintegro_Cambio_Precios.MdiParent = this;
+                frmReintegro_Cambio_Precios.Disposed += FrmReintegro_Cambio_Precios_Disposed;
+                forms.Add(frmReintegro_Cambio_Precios);
+                frmReintegro_Cambio_Precios.Show();
+                frmReintegro_Cambio_Precios.WindowState = FormWindowState.Minimized;
+                frmReintegro_Cambio_Precios.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmReintegro_Cambio_Precios_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Reintegro_Cambio_Precios")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmReintegro_Cambio_Precios")
                 {
                     forms.Remove(f);
                     break;

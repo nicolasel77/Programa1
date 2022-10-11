@@ -233,8 +233,9 @@ namespace Programa1.Carga.Tesoreria
                 {
                     ch.ID = i;
                     ch.Borrar();
-                    ch.Ejecutar_Comando("DELETE FROM CD_Entradas WHERE Cheque=" + Numero);
-                    ch.Ejecutar_Comando("DELETE FROM CD_Gastos   WHERE Cheque=" + Numero);
+                    ch.Ejecutar_Comando(" DELETE FROM CD_Entradas WHERE Cheque=" + ch.Numero);
+                    ch.Ejecutar_Comando(" DELETE FROM CD_Gastos   WHERE Cheque=" + ch.Numero);
+                    ch.Ejecutar_Comando($"DELETE FROM CD_Gastos   WHERE Descripcion = 'Cheque Nº {ch.Numero}'");
                     grd.BorrarFila();
                     grd.ActivarCelda(grd.Row, Numero);
                 }

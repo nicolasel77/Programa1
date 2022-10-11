@@ -94,7 +94,7 @@
             grd.Rows = lines.Count();
             grd.FixRows = 1;
 
-            grd.Cols = 6;
+            grd.Cols = 16;
 
             grd.Columnas[0].DataType = typeof(DateTime);
             grd.Columnas[3].DataType = typeof(double);
@@ -261,7 +261,7 @@
                         importe = Convert.ToDouble(grd.get_Texto(i, 4));
                         if (grd.get_Texto(i, 1) != null)
                         {
-                            descripcion = grd.get_Texto(i, 1).ToString();
+                            descripcion = String.Format("{0} {1}", grd.get_Texto(i, 1).ToString(), grd.get_Texto(i, 10).ToString());
                         }
 
                         bool nono = false;
@@ -501,7 +501,15 @@
                             nop = ++nop;
                             DateTime fecha = Convert.ToDateTime(grd.get_Texto(i, grd.get_ColIndex("Fecha")));
                             string descripcion = grd.get_Texto(i, 1).ToString();
-                            descripcion = descripcion.Substring(0, descripcion.IndexOf(" Nro"));
+                            
+                            //Variable para ver si esta el texto ese del toor o no
+                            int vhayNro = descripcion.IndexOf(" Nro");
+
+                            if(vhayNro > 0)
+                            {
+                                descripcion = descripcion.Substring(0, vhayNro);
+                            }
+                            
                             _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nop}, '{descripcion}', {importe.ToString().Replace(",", ".")})");
                         }
                     }

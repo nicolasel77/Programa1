@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrecios_Carne));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblPromedio = new System.Windows.Forms.ToolStripStatusLabel();
@@ -38,10 +37,10 @@
             this.grdProductos = new Grilla2.SpeedGrilla();
             this.splFormulas = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.lstFechas = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblSuc = new MaterialSkin.Controls.MaterialLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.lstFechas = new System.Windows.Forms.ListBox();
             this.cmdBorrar = new Programa1.Controles.cBoton();
             this.cmdGuardar = new Programa1.Controles.cBoton();
             this.cmdImprimir = new Programa1.Controles.cBoton();
@@ -51,6 +50,8 @@
             this.cmdCalcular = new Programa1.Controles.cBoton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grdFormulas = new Grilla2.SpeedGrilla();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nuDecimales = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -68,6 +69,7 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuDecimales)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -155,9 +157,11 @@
             this.grdProductos.fColor = System.Drawing.SystemColors.Control;
             this.grdProductos.FixCols = 0;
             this.grdProductos.FixRows = 0;
+            this.grdProductos.Frozen = 0;
             this.grdProductos.FuenteEncabezado = null;
             this.grdProductos.FuentePieDePagina = null;
             this.grdProductos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdProductos.LimpiarEstilosAntesDeOrdenar = false;
             this.grdProductos.Location = new System.Drawing.Point(3, 3);
             this.grdProductos.Name = "grdProductos";
             this.grdProductos.PieDePagina = "\t\tPage {0} of {1}";
@@ -203,6 +207,8 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer3.Panel1.Controls.Add(this.label2);
+            this.splitContainer3.Panel1.Controls.Add(this.nuDecimales);
             this.splitContainer3.Panel1.Controls.Add(this.lstFechas);
             this.splitContainer3.Panel1.Controls.Add(this.panel4);
             this.splitContainer3.Panel1.Controls.Add(this.label1);
@@ -218,6 +224,21 @@
             this.splitContainer3.Size = new System.Drawing.Size(592, 692);
             this.splitContainer3.SplitterDistance = 109;
             this.splitContainer3.TabIndex = 1;
+            // 
+            // lstFechas
+            // 
+            this.lstFechas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstFechas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstFechas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstFechas.FormattingEnabled = true;
+            this.lstFechas.ItemHeight = 20;
+            this.lstFechas.Location = new System.Drawing.Point(5, 19);
+            this.lstFechas.Name = "lstFechas";
+            this.lstFechas.Size = new System.Drawing.Size(100, 420);
+            this.lstFechas.TabIndex = 1;
+            this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
             // 
             // panel4
             // 
@@ -253,21 +274,6 @@
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Fechas";
-            // 
-            // lstFechas
-            // 
-            this.lstFechas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstFechas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstFechas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstFechas.FormattingEnabled = true;
-            this.lstFechas.ItemHeight = 20;
-            this.lstFechas.Location = new System.Drawing.Point(5, 19);
-            this.lstFechas.Name = "lstFechas";
-            this.lstFechas.Size = new System.Drawing.Size(100, 460);
-            this.lstFechas.TabIndex = 1;
-            this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
             // 
             // cmdBorrar
             // 
@@ -348,9 +354,11 @@
             this.grdSucursales.fColor = System.Drawing.SystemColors.Control;
             this.grdSucursales.FixCols = 0;
             this.grdSucursales.FixRows = 0;
+            this.grdSucursales.Frozen = 0;
             this.grdSucursales.FuenteEncabezado = null;
             this.grdSucursales.FuentePieDePagina = null;
             this.grdSucursales.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdSucursales.LimpiarEstilosAntesDeOrdenar = false;
             this.grdSucursales.Location = new System.Drawing.Point(3, 3);
             this.grdSucursales.Name = "grdSucursales";
             this.grdSucursales.PieDePagina = "\t\tPage {0} of {1}";
@@ -404,9 +412,11 @@
             this.grdFormulas.fColor = System.Drawing.SystemColors.Control;
             this.grdFormulas.FixCols = 0;
             this.grdFormulas.FixRows = 0;
+            this.grdFormulas.Frozen = 0;
             this.grdFormulas.FuenteEncabezado = null;
             this.grdFormulas.FuentePieDePagina = null;
             this.grdFormulas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdFormulas.LimpiarEstilosAntesDeOrdenar = false;
             this.grdFormulas.Location = new System.Drawing.Point(3, 3);
             this.grdFormulas.Name = "grdFormulas";
             this.grdFormulas.PieDePagina = "\t\tPage {0} of {1}";
@@ -416,6 +426,35 @@
             this.grdFormulas.Rows = 50;
             this.grdFormulas.Size = new System.Drawing.Size(580, 126);
             this.grdFormulas.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.DimGray;
+            this.label2.Location = new System.Drawing.Point(1, 457);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 20);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Dec:";
+            // 
+            // nuDecimales
+            // 
+            this.nuDecimales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nuDecimales.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nuDecimales.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nuDecimales.ForeColor = System.Drawing.Color.DimGray;
+            this.nuDecimales.Location = new System.Drawing.Point(49, 458);
+            this.nuDecimales.Name = "nuDecimales";
+            this.nuDecimales.Size = new System.Drawing.Size(37, 22);
+            this.nuDecimales.TabIndex = 11;
+            this.nuDecimales.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nuDecimales.ValueChanged += new System.EventHandler(this.nuDecimales_ValueChanged);
             // 
             // frmPrecios_Carne
             // 
@@ -446,6 +485,7 @@
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nuDecimales)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -474,5 +514,7 @@
         private System.Windows.Forms.Panel panel4;
         private MaterialSkin.Controls.MaterialLabel lblSuc;
         private Controles.cBoton cmdBorrar;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown nuDecimales;
     }
 }

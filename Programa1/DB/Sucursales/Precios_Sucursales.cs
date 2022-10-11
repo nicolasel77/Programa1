@@ -103,7 +103,7 @@
 
             return dt;
         }
-        public DataTable Precios(byte tipo)
+        public DataTable Precios(byte tipo, bool mostrar_cambiado = false)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -111,11 +111,18 @@
             try
             {
                 string fecha = Dato_Generico("vw_PreciosSucursales", "Id_Tipo=" + tipo, "MAX(Fecha)").ToString();
-
                 if (Fecha != null) { fecha = $"'{Fecha:MM/dd/yy}'"; }
+
+                string cmdText = $"SELECT Id, Nombre, dbo.f_Precio({fecha}, {Sucursal.ID}, Id) Precio FROM Productos WHERE Id_Tipo={tipo} AND Ver=1 ORDER BY Id";
+                
+                if (mostrar_cambiado == true)
+                {
+                    cmdText = $"SELECT Id, Nombre, dbo.f_Precio({fecha}, {Sucursal.ID}, Id) Precio, dbo.f_PrecioAnterior({fecha}, {Sucursal.ID}, Id) Anterior FROM Productos WHERE Id_Tipo={tipo} AND Ver=1 ORDER BY Id";
+                }
+
                 if(Sucursal.ID != 0)
                 {
-                    SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, dbo.f_Precio({fecha}, {Sucursal.ID}, Id) Precio FROM Productos WHERE Id_Tipo={tipo} AND Ver=1 ORDER BY Id", conexionSql);
+                    SqlCommand comandoSql = new SqlCommand(cmdText, conexionSql);
                     comandoSql.CommandType = CommandType.Text;
 
                     SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

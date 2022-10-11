@@ -98,6 +98,13 @@ namespace Programa1.Carga.Tesoreria
 
             txtInsert.Text = $"({f} /{CD.Fecha:yyyy})";
 
+            if(usuario.Tipo == Usuarios.e_TipoUsuario.Administrador || usuario.Tipo == Usuarios.e_TipoUsuario.Sistemas)
+            {
+                soloToolStripMenuItem.Checked = false;
+                todosToolStripMenuItem.Checked = true;
+                Ver_Solo = false;
+            }
+
             Cargar_Datos();
 
             //*****************************
@@ -741,21 +748,24 @@ namespace Programa1.Carga.Tesoreria
         {
             if (cEntradas.ID > 0)
             {
-                SendKeys.Send("{ESC}");
-                Application.DoEvents();
-                cEntradas.Cargar();
-                frmCargarEntregas fr = new frmCargarEntregas();
-                fr.Detalle_Entregas.ID_Entradas = cEntradas.ID;
-                fr.lblSuc.Text = cEntradas.Descripcion;
-                fr.Cargar();
-                fr.ShowDialog();
-                cEntradas.Importe = fr.Detalle_Entregas.Total_IDEntradas(cEntradas.ID);
-                cEntradas.Actualizar();
+                if (cEntradas.TE.Id_Tipo == 1)
+                {
+                    SendKeys.Send("{ESC}");
+                    Application.DoEvents();
+                    cEntradas.Cargar();
+                    frmCargarEntregas fr = new frmCargarEntregas();
+                    fr.Detalle_Entregas.ID_Entradas = cEntradas.ID;
+                    fr.lblSuc.Text = cEntradas.Descripcion;
+                    fr.Cargar();
+                    fr.ShowDialog();
+                    cEntradas.Importe = fr.Detalle_Entregas.Total_IDEntradas(cEntradas.ID);
+                    cEntradas.Actualizar();
 
-                grdEntradas.set_Texto(grdEntradas.Row, e_Importe, cEntradas.Importe);
-                Totales();
-                this.Focus();
-                grdEntradas.Focus();
+                    grdEntradas.set_Texto(grdEntradas.Row, e_Importe, cEntradas.Importe);
+                    Totales();
+                    this.Focus();
+                    grdEntradas.Focus(); 
+                }
             }
         }
 

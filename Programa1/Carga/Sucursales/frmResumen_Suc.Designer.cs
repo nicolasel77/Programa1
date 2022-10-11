@@ -273,6 +273,7 @@
             this.grdEntradas.FuenteEncabezado = null;
             this.grdEntradas.FuentePieDePagina = null;
             this.grdEntradas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdEntradas.LimpiarEstilosAntesDeOrdenar = false;
             this.grdEntradas.Location = new System.Drawing.Point(3, 24);
             this.grdEntradas.Name = "grdEntradas";
             this.grdEntradas.PieDePagina = "\t\tPage {0} of {1}";
@@ -325,7 +326,7 @@
             this.lblEntradas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.lblEntradas.Location = new System.Drawing.Point(3, 3);
             this.lblEntradas.Name = "lblEntradas";
-            this.lblEntradas.Size = new System.Drawing.Size(67, 18);
+            this.lblEntradas.Size = new System.Drawing.Size(74, 20);
             this.lblEntradas.TabIndex = 0;
             this.lblEntradas.Text = "Entradas";
             // 
@@ -374,6 +375,7 @@
             this.grdSalidas.FuenteEncabezado = null;
             this.grdSalidas.FuentePieDePagina = null;
             this.grdSalidas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdSalidas.LimpiarEstilosAntesDeOrdenar = false;
             this.grdSalidas.Location = new System.Drawing.Point(3, 24);
             this.grdSalidas.Name = "grdSalidas";
             this.grdSalidas.PieDePagina = "\t\tPage {0} of {1}";
@@ -471,7 +473,7 @@
             this.label1.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 18);
+            this.label1.Size = new System.Drawing.Size(61, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Salidas";
             // 
@@ -552,6 +554,7 @@
             this.grdVentas.FuenteEncabezado = null;
             this.grdVentas.FuentePieDePagina = null;
             this.grdVentas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdVentas.LimpiarEstilosAntesDeOrdenar = false;
             this.grdVentas.Location = new System.Drawing.Point(251, 3);
             this.grdVentas.Name = "grdVentas";
             this.grdVentas.PieDePagina = "\t\tPage {0} of {1}";
@@ -607,6 +610,7 @@
             this.grdSucursales.FuenteEncabezado = null;
             this.grdSucursales.FuentePieDePagina = null;
             this.grdSucursales.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdSucursales.LimpiarEstilosAntesDeOrdenar = false;
             this.grdSucursales.Location = new System.Drawing.Point(0, 0);
             this.grdSucursales.Name = "grdSucursales";
             this.grdSucursales.PieDePagina = "\t\tPage {0} of {1}";
@@ -683,7 +687,7 @@
             this.panel3.Controls.Add(this.lbl6);
             this.panel3.Controls.Add(this.lbl5);
             this.panel3.Controls.Add(this.lbl4);
-            this.panel3.Location = new System.Drawing.Point(792, 662);
+            this.panel3.Location = new System.Drawing.Point(836, 663);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(157, 32);
             this.panel3.TabIndex = 8;
@@ -797,6 +801,7 @@
             this.grdEstadistica.FuenteEncabezado = null;
             this.grdEstadistica.FuentePieDePagina = null;
             this.grdEstadistica.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdEstadistica.LimpiarEstilosAntesDeOrdenar = false;
             this.grdEstadistica.Location = new System.Drawing.Point(16, 22);
             this.grdEstadistica.Name = "grdEstadistica";
             this.grdEstadistica.PieDePagina = "\t\tPage {0} of {1}";
@@ -913,9 +918,9 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.label3.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.label3.Location = new System.Drawing.Point(955, 667);
+            this.label3.Location = new System.Drawing.Point(784, 667);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 25);
+            this.label3.Size = new System.Drawing.Size(46, 25);
             this.label3.TabIndex = 4;
             this.label3.Text = "Cant";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -975,7 +980,7 @@
             this.label2.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.label2.Location = new System.Drawing.Point(13, 1);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 18);
+            this.label2.Size = new System.Drawing.Size(95, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Estadísticas";
             // 

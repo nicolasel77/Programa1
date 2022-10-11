@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="lblTitulos" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">Microsoft Sans Serif, 11pt</Value>
+      <Value Profile="(Default)">Microsoft Sans Serif, 12pt</Value>
     </Setting>
     <Setting Name="dbDatosConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;

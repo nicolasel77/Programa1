@@ -28,22 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPreciosMen));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grd = new Grilla2.SpeedGrilla();
+            this.chValoresCero = new MaterialSkin.Controls.MaterialCheckBox();
             this.cmdGuardar = new Programa1.Controles.cBoton();
             this.cmdImprimir = new Programa1.Controles.cBoton();
             this.cmdBorrar = new Programa1.Controles.cBoton();
             this.lstTipos = new System.Windows.Forms.ListBox();
             this.lstFechas = new System.Windows.Forms.ListBox();
             this.Suc = new Programa1.Controles.cSucursales();
-            this.chValoresCero = new MaterialSkin.Controls.MaterialCheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nuDecimales = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuDecimales)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -60,6 +62,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
+            this.splitContainer1.Panel2.Controls.Add(this.nuDecimales);
             this.splitContainer1.Panel2.Controls.Add(this.chValoresCero);
             this.splitContainer1.Panel2.Controls.Add(this.cmdGuardar);
             this.splitContainer1.Panel2.Controls.Add(this.cmdImprimir);
@@ -104,9 +108,11 @@
             this.grd.fColor = System.Drawing.SystemColors.Control;
             this.grd.FixCols = 0;
             this.grd.FixRows = 0;
+            this.grd.Frozen = 0;
             this.grd.FuenteEncabezado = null;
             this.grd.FuentePieDePagina = null;
             this.grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grd.LimpiarEstilosAntesDeOrdenar = false;
             this.grd.Location = new System.Drawing.Point(3, 3);
             this.grd.Name = "grd";
             this.grd.PieDePagina = "\t\tPage {0} of {1}";
@@ -117,6 +123,23 @@
             this.grd.Size = new System.Drawing.Size(406, 661);
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
+            // 
+            // chValoresCero
+            // 
+            this.chValoresCero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chValoresCero.AutoSize = true;
+            this.chValoresCero.Depth = 0;
+            this.chValoresCero.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chValoresCero.Location = new System.Drawing.Point(509, 636);
+            this.chValoresCero.Margin = new System.Windows.Forms.Padding(0);
+            this.chValoresCero.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chValoresCero.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chValoresCero.Name = "chValoresCero";
+            this.chValoresCero.Ripple = true;
+            this.chValoresCero.Size = new System.Drawing.Size(162, 30);
+            this.chValoresCero.TabIndex = 5;
+            this.chValoresCero.Text = "Guardar Valores Cero";
+            this.chValoresCero.UseVisualStyleBackColor = true;
             // 
             // cmdGuardar
             // 
@@ -156,10 +179,10 @@
             this.lstTipos.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lstTipos.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.lstTipos.FormattingEnabled = true;
-            this.lstTipos.ItemHeight = 18;
-            this.lstTipos.Location = new System.Drawing.Point(509, 3);
+            this.lstTipos.ItemHeight = 20;
+            this.lstTipos.Location = new System.Drawing.Point(348, 6);
             this.lstTipos.Name = "lstTipos";
-            this.lstTipos.Size = new System.Drawing.Size(155, 162);
+            this.lstTipos.Size = new System.Drawing.Size(155, 160);
             this.lstTipos.TabIndex = 2;
             this.lstTipos.SelectedIndexChanged += new System.EventHandler(this.lstTipos_SelectedIndexChanged);
             // 
@@ -171,10 +194,10 @@
             this.lstFechas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lstFechas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
             this.lstFechas.FormattingEnabled = true;
-            this.lstFechas.ItemHeight = 18;
-            this.lstFechas.Location = new System.Drawing.Point(349, 3);
+            this.lstFechas.ItemHeight = 20;
+            this.lstFechas.Location = new System.Drawing.Point(509, 6);
             this.lstFechas.Name = "lstFechas";
-            this.lstFechas.Size = new System.Drawing.Size(154, 504);
+            this.lstFechas.Size = new System.Drawing.Size(154, 500);
             this.lstFechas.TabIndex = 2;
             this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
             // 
@@ -195,22 +218,34 @@
             this.Suc.Valor_Actual = -1;
             this.Suc.Cambio_Seleccion += new System.EventHandler(this.Suc_Cambio_Seleccion);
             // 
-            // chValoresCero
+            // label1
             // 
-            this.chValoresCero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chValoresCero.AutoSize = true;
-            this.chValoresCero.Depth = 0;
-            this.chValoresCero.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chValoresCero.Location = new System.Drawing.Point(509, 636);
-            this.chValoresCero.Margin = new System.Windows.Forms.Padding(0);
-            this.chValoresCero.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chValoresCero.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chValoresCero.Name = "chValoresCero";
-            this.chValoresCero.Ripple = true;
-            this.chValoresCero.Size = new System.Drawing.Size(162, 30);
-            this.chValoresCero.TabIndex = 5;
-            this.chValoresCero.Text = "Guardar Valores Cero";
-            this.chValoresCero.UseVisualStyleBackColor = true;
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DimGray;
+            this.label1.Location = new System.Drawing.Point(509, 616);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 20);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Decimales:";
+            // 
+            // nuDecimales
+            // 
+            this.nuDecimales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nuDecimales.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nuDecimales.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nuDecimales.ForeColor = System.Drawing.Color.DimGray;
+            this.nuDecimales.Location = new System.Drawing.Point(602, 617);
+            this.nuDecimales.Name = "nuDecimales";
+            this.nuDecimales.Size = new System.Drawing.Size(37, 22);
+            this.nuDecimales.TabIndex = 11;
+            this.nuDecimales.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nuDecimales.ValueChanged += new System.EventHandler(this.nuDecimales_ValueChanged);
             // 
             // frmPreciosMen
             // 
@@ -227,6 +262,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nuDecimales)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -243,5 +279,7 @@
         private Controles.cBoton cmdBorrar;
         private System.Windows.Forms.ListBox lstTipos;
         private MaterialSkin.Controls.MaterialCheckBox chValoresCero;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nuDecimales;
     }
 }

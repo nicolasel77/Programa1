@@ -1,4 +1,5 @@
 ﻿using Programa1.DB;
+using Programa1.DB.Varios;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -19,6 +20,13 @@ namespace Programa1.Carga.Precios
 
         private void FrmPrecios_Granja_Load(object sender, EventArgs e)
         {
+            Configuraciones cn = new Configuraciones();
+            string n = cn.Leer("Decimales en Precios Granja");
+            if(n.Length != 0)
+            {
+                nuDecimales.Value = Convert.ToInt32(n);
+            }
+
             Cargar_Lista();
 
             foreach (DataRow dr in precios.Fechas_Granja().Rows)
@@ -57,13 +65,16 @@ namespace Programa1.Carga.Precios
             precios.Sucursal.ID = Suc.Valor_Actual;
 
 
-            DataTable dt = precios.Precios("Id_Tipo IN (4,6)");
+            if (precios.Sucursal.ID > 0)
+            {
+                DataTable dt = precios.Precios("Id_Tipo IN (4,6)");
 
 
-            grd.MostrarDatos(dt, true, false);
-            grd.set_ColW(0, 60);
-            grd.set_ColW(1, 300);
-            grd.Columnas[2].Format = "N3";
+                grd.MostrarDatos(dt, true, false);
+                grd.set_ColW(0, 60);
+                grd.set_ColW(1, 300);
+                grd.Columnas[2].Format = $"N{nuDecimales.Value}"; 
+            }
             this.Cursor = Cursors.Default;
         }
 
@@ -170,6 +181,13 @@ namespace Programa1.Carga.Precios
         private void cmdLimpiar_Click(object sender, EventArgs e)
         {
             Cargar_Lista();
+        }
+
+        private void nuDecimales_ValueChanged(object sender, EventArgs e)
+        {
+            Configuraciones cn = new Configuraciones();
+            cn.Escribir("Decimales en Precios Granja", nuDecimales.Value.ToString());
+            Cargar_Precios();
         }
     }
 }
