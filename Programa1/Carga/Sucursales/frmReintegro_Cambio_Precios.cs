@@ -14,7 +14,7 @@
         {
             InitializeComponent();
 
-            DataTable dt = rcp.Datos(fecha, 99, 1);
+            DataTable dt = rcp.Datos(fecha, 99);
             grd.MostrarDatos(dt, true, false);
             for (int i = 2; i < dt.Columns.Count; i++)
             {
@@ -40,7 +40,13 @@
 
             if (prod > 0)
             {
-                DataTable dt = rcp.Datos(fecha, prod, (int)nuSemanas.Value);
+                float np = 0;
+                if (!string.IsNullOrWhiteSpace(txtPrecio.Text))
+                {
+                    float.TryParse(txtPrecio.Text, out np);
+                }
+
+                DataTable dt = rcp.Datos(fecha, prod, np);
                 grd.MostrarDatos(dt, true, false);
                 for (int i = 2; i < dt.Columns.Count; i++)
                 {
@@ -93,6 +99,13 @@
         private void grd_Editado(short f, short c, object a)
         {
             grd.set_Texto(f, c, a);
+            Calcular_Fila(f);
+        }
+
+        private void Calcular_Fila(short f)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            double a;
             //"((Venta+Traslados_E-Traslados_S+Stock)-(Venta_Promedio / 8 * Dias)) * (Precio_Nuevo-Precio_Ant)"
             double venta = Convert.ToDouble(grd.get_Texto(f, grd.get_ColIndex("Venta")));
             venta += Convert.ToDouble(grd.get_Texto(f, grd.get_ColIndex("Traslados_E")));
@@ -108,6 +121,20 @@
             a = (venta - venta_prom) * dif_precio;
 
             grd.set_Texto(f, grd.get_ColIndex("Reintegro"), a);
+            this.Cursor = Cursors.Default;
+
+        }
+
+        private void txtPrecio_TextChanged(object sender, EventArgs e)
+        {
+            tiCarga.Stop();
+            tiCarga.Start();            
+        }
+
+        private void tiCarga_Tick(object sender, EventArgs e)
+        {
+            tiCarga.Stop();
+            Cargar();
         }
     }
 }

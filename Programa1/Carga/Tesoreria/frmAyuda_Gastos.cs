@@ -1,6 +1,4 @@
-﻿using Programa1.Clases;
-using Programa1.DB;
-using Programa1.DB.Tesoreria;
+﻿using Programa1.DB.Tesoreria;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -55,7 +53,6 @@ namespace Programa1.Carga.Tesoreria
         {
             TGastos = new Tipo_Gastos();
             TGastos.Id_Tipo = Tipo;
-            //if (TGastos.grupoS.Campo_Filtro.Length > 0) { Filtro_Tipo = $"{TGastos.grupoS.Campo_Filtro}={Tipo}"; }
             Opcion = TOpcion.gSubTipo;
 
             Cargar();

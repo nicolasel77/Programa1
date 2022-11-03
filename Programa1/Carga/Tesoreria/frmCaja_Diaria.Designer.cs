@@ -85,6 +85,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.entradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buscarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splPrincipal)).BeginInit();
             this.splPrincipal.Panel1.SuspendLayout();
             this.splPrincipal.Panel2.SuspendLayout();
@@ -198,9 +199,11 @@
             this.grdEntradas.fColor = System.Drawing.SystemColors.Control;
             this.grdEntradas.FixCols = 0;
             this.grdEntradas.FixRows = 0;
+            this.grdEntradas.Frozen = 0;
             this.grdEntradas.FuenteEncabezado = null;
             this.grdEntradas.FuentePieDePagina = null;
             this.grdEntradas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdEntradas.LimpiarEstilosAntesDeOrdenar = false;
             this.grdEntradas.Location = new System.Drawing.Point(3, 26);
             this.grdEntradas.Name = "grdEntradas";
             this.grdEntradas.PieDePagina = "\t\tPage {0} of {1}";
@@ -256,7 +259,7 @@
             this.panel7.Controls.Add(this.rdCaja);
             this.panel7.Controls.Add(this.rdNinguno);
             this.panel7.Controls.Add(this.label5);
-            this.panel7.Location = new System.Drawing.Point(313, 693);
+            this.panel7.Location = new System.Drawing.Point(309, 693);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(419, 24);
             this.panel7.TabIndex = 3;
@@ -372,7 +375,7 @@
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel3.Location = new System.Drawing.Point(3, 3);
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(729, 20);
+            this.materialLabel3.Size = new System.Drawing.Size(725, 20);
             this.materialLabel3.TabIndex = 1;
             this.materialLabel3.Text = "Gastos";
             this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -386,7 +389,7 @@
             this.lblTotalGrillaGastos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalGrillaGastos.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaGastos.Name = "lblTotalGrillaGastos";
-            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(304, 24);
+            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(300, 24);
             this.lblTotalGrillaGastos.TabIndex = 2;
             this.lblTotalGrillaGastos.Text = "Total Salida";
             this.lblTotalGrillaGastos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -413,9 +416,11 @@
             this.grdSalidas.fColor = System.Drawing.SystemColors.Control;
             this.grdSalidas.FixCols = 0;
             this.grdSalidas.FixRows = 0;
+            this.grdSalidas.Frozen = 0;
             this.grdSalidas.FuenteEncabezado = null;
             this.grdSalidas.FuentePieDePagina = null;
             this.grdSalidas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdSalidas.LimpiarEstilosAntesDeOrdenar = false;
             this.grdSalidas.Location = new System.Drawing.Point(3, 26);
             this.grdSalidas.Name = "grdSalidas";
             this.grdSalidas.PieDePagina = "\t\tPage {0} of {1}";
@@ -423,7 +428,7 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 50;
-            this.grdSalidas.Size = new System.Drawing.Size(729, 660);
+            this.grdSalidas.Size = new System.Drawing.Size(725, 660);
             this.grdSalidas.TabIndex = 0;
             this.grdSalidas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSalidas_Editado);
             this.grdSalidas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSalidas_CambioFila);
@@ -553,9 +558,11 @@
             this.grdCajas.fColor = System.Drawing.SystemColors.Control;
             this.grdCajas.FixCols = 0;
             this.grdCajas.FixRows = 0;
+            this.grdCajas.Frozen = 0;
             this.grdCajas.FuenteEncabezado = null;
             this.grdCajas.FuentePieDePagina = null;
             this.grdCajas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdCajas.LimpiarEstilosAntesDeOrdenar = false;
             this.grdCajas.Location = new System.Drawing.Point(0, 189);
             this.grdCajas.Name = "grdCajas";
             this.grdCajas.PieDePagina = "\t\tPage {0} of {1}";
@@ -787,7 +794,8 @@
             this.chequesToolStripMenuItem,
             this.transferenciaToolStripMenuItem,
             this.verToolStripMenuItem,
-            this.diariosToolStripMenuItem});
+            this.diariosToolStripMenuItem,
+            this.buscarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1517, 24);
@@ -867,6 +875,14 @@
             this.diariosToolStripMenuItem.Size = new System.Drawing.Size(135, 20);
             this.diariosToolStripMenuItem.Text = "Diarios  [Control+F10]";
             this.diariosToolStripMenuItem.Click += new System.EventHandler(this.diariosToolStripMenuItem_Click);
+            // 
+            // buscarToolStripMenuItem
+            // 
+            this.buscarToolStripMenuItem.Name = "buscarToolStripMenuItem";
+            this.buscarToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.buscarToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.buscarToolStripMenuItem.Text = "Buscar [F3]";
+            this.buscarToolStripMenuItem.Click += new System.EventHandler(this.buscarToolStripMenuItem_Click);
             // 
             // frmCaja_Diaria
             // 
@@ -960,5 +976,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem entradasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem buscarToolStripMenuItem;
     }
 }

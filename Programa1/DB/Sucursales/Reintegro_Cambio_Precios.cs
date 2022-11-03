@@ -13,15 +13,15 @@
 
         }
 
-        public DataTable Datos(DateTime fecha, int producto, int cantidad)
+        public DataTable Datos(DateTime fecha, int producto, float np = 0)
         {
             SqlParameter f = new SqlParameter("F", fecha);
             SqlParameter prod = new SqlParameter("prod", producto);
-            SqlParameter cant= new SqlParameter("cantPromedio", cantidad);
+            SqlParameter precio = new SqlParameter("precio", np);
 
-            DataTable dt = sp_Datos("sp_CambioPrecios", new SqlParameter[] { f, prod, cant });
+            DataTable dt = sp_Datos("sp_CambioPrecios", new SqlParameter[] { f, prod, precio });
 
-            dt.Columns.Add("Reintegro", typeof(double), "((Venta+Traslados_E-Traslados_S+Stock)-(Venta_Promedio / 8 * Dias)) * (Precio_Nuevo-Precio_Ant)");
+            dt.Columns.Add("Reintegro", typeof(double), "((Entrada+Traslados_E-Traslados_S+Stock)-(Venta / 8 * Dias)) * (Precio_Nuevo-Precio_Ant)");
 
             return dt;
         }

@@ -28,7 +28,12 @@
         public DateTime Fecha { get; set; }
 
         public Double Importe { get; set; }
-        
+
+        /// <summary>
+        /// Se usa para saber cuando es faltante o sobrante
+        /// </summary>
+        public bool Es_Diferencia { get; set; }
+
         public DataTable Datos(String filtro = "")
         {
             var dt = new DataTable("Datos");
@@ -126,8 +131,9 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"UPDATE Fecha_Entregas SET ID_Entradas={ID_Entradas}, Fecha='{Fecha:MM/dd/yy}'" +
-                    $", Importe={Importe.ToString().Replace(",", ".")} WHERE Id={Id}", sql);
+                string cmdText = $"UPDATE Fecha_Entregas SET ID_Entradas={ID_Entradas}, Fecha='{Fecha:MM/dd/yy}'" +
+                                    $", Importe={Importe.ToString().Replace(",", ".")}, Es_Diferencia={(Es_Diferencia ? 1 : 0)} WHERE Id={Id}";
+                SqlCommand command = new SqlCommand(cmdText, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -148,8 +154,9 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO Fecha_Entregas (Id_Entradas, Fecha, Importe) " +
-                    $"VALUES({ID_Entradas}, '{Fecha:MM/dd/yy}', {Importe.ToString().Replace(",", ".")})", sql);
+                string cmdText = $"INSERT INTO Fecha_Entregas (Id_Entradas, Fecha, Importe, Es_Diferencia) " +
+                                    $"VALUES({ID_Entradas}, '{Fecha:MM/dd/yy}', {Importe.ToString().Replace(",", ".")}, {(Es_Diferencia ? 1 : 0)})";
+                SqlCommand command = new SqlCommand(cmdText, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();

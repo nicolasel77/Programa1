@@ -123,11 +123,9 @@
             grd.Columnas[cDif].Style.Format = "N2";
             grd.Columnas[cSaldo].Style.Format = "N2";
 
-            grd.AutosizeAll();
+            grd.AutosizeAll();            
             grd.set_ColW(cID, 0);
-            grd.set_ColW(cTotal, 80);
             grd.set_ColW(cPago, 80);
-            grd.set_ColW(cDif, 90);
             grd.set_ColW(cSaldo, 0);
             grd.set_ColW(cEstado, 0);
             grd.set_ColW(cIDMat, 0);

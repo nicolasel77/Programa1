@@ -587,6 +587,12 @@
     <Compile Include="Carga\Tesoreria\frmAyuda_Gastos.Designer.cs">
       <DependentUpon>frmAyuda_Gastos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmBuscarGasto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmBuscarGasto.Designer.cs">
+      <DependentUpon>frmBuscarGasto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmCaja_Diaria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1174,6 +1180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmAyuda_Gastos.resx">
       <DependentUpon>frmAyuda_Gastos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmBuscarGasto.resx">
+      <DependentUpon>frmBuscarGasto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmCaja_Diaria.resx">
       <DependentUpon>frmCaja_Diaria.cs</DependentUpon>

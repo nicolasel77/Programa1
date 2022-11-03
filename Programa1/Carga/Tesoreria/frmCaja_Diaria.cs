@@ -98,7 +98,7 @@ namespace Programa1.Carga.Tesoreria
 
             txtInsert.Text = $"({f} /{CD.Fecha:yyyy})";
 
-            if(usuario.Tipo == Usuarios.e_TipoUsuario.Administrador || usuario.Tipo == Usuarios.e_TipoUsuario.Sistemas)
+            if (usuario.Tipo == Usuarios.e_TipoUsuario.Administrador || usuario.Tipo == Usuarios.e_TipoUsuario.Sistemas)
             {
                 soloToolStripMenuItem.Checked = false;
                 todosToolStripMenuItem.Checked = true;
@@ -164,6 +164,25 @@ namespace Programa1.Carga.Tesoreria
             grdSalidas.ActivarCelda();
         }
 
+        private void buscarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cGastos.Fecha = CD.Fecha;
+            frmBuscarGasto fr = new frmBuscarGasto(cGastos);
+            fr.ShowDialog();
+            if (fr.IR == true)
+            {
+                mntFecha.SetDate(cGastos.Fecha);
+                Cargar_Datos();
+            }
+            else
+            {
+                if (fr.COPIAR == true)
+                {
+                    Cargar_Datos();
+                }
+            }
+        }
+
         #endregion
 
         #region " VARIOS "
@@ -175,7 +194,6 @@ namespace Programa1.Carga.Tesoreria
             txtInsert.Text = $"({f} /{CD.Fecha:yyyy})";
             Cargar_Datos();
         }
-
 
         private void splPrincipal_Panel2_Resize(object sender, EventArgs e)
         {
@@ -304,8 +322,6 @@ namespace Programa1.Carga.Tesoreria
             Cargar_Datos();
         }
         #endregion
-
-
 
         #region " SUBS "
         private void Cargar_Datos()
@@ -764,7 +780,7 @@ namespace Programa1.Carga.Tesoreria
                     grdEntradas.set_Texto(grdEntradas.Row, e_Importe, cEntradas.Importe);
                     Totales();
                     this.Focus();
-                    grdEntradas.Focus(); 
+                    grdEntradas.Focus();
                 }
             }
         }
@@ -1475,6 +1491,7 @@ namespace Programa1.Carga.Tesoreria
                 Cargar_Datos();
             }
         }
+
 
 
         #endregion

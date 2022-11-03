@@ -76,7 +76,7 @@
             this.cmdCerrar.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdCerrar.Name = "cmdCerrar";
             this.cmdCerrar.Primary = false;
-            this.cmdCerrar.Size = new System.Drawing.Size(109, 39);
+            this.cmdCerrar.Size = new System.Drawing.Size(186, 39);
             this.cmdCerrar.TabIndex = 3;
             this.cmdCerrar.Text = "Cerrar";
             this.cmdCerrar.UseVisualStyleBackColor = true;
@@ -89,7 +89,7 @@
             this.panel1.Controls.Add(this.cmdCerrar);
             this.panel1.Location = new System.Drawing.Point(173, 237);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(109, 39);
+            this.panel1.Size = new System.Drawing.Size(186, 39);
             this.panel1.TabIndex = 4;
             // 
             // grdEntregas
@@ -113,9 +113,11 @@
             this.grdEntregas.fColor = System.Drawing.SystemColors.Control;
             this.grdEntregas.FixCols = 0;
             this.grdEntregas.FixRows = 0;
+            this.grdEntregas.Frozen = 0;
             this.grdEntregas.FuenteEncabezado = null;
             this.grdEntregas.FuentePieDePagina = null;
             this.grdEntregas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdEntregas.LimpiarEstilosAntesDeOrdenar = false;
             this.grdEntregas.Location = new System.Drawing.Point(16, 31);
             this.grdEntregas.Name = "grdEntregas";
             this.grdEntregas.PieDePagina = "\t\tPage {0} of {1}";
@@ -123,7 +125,7 @@
             this.grdEntregas.Redraw = true;
             this.grdEntregas.Row = 0;
             this.grdEntregas.Rows = 50;
-            this.grdEntregas.Size = new System.Drawing.Size(266, 203);
+            this.grdEntregas.Size = new System.Drawing.Size(343, 203);
             this.grdEntregas.TabIndex = 1;
             this.grdEntregas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdEntregas_Editado);
             this.grdEntregas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdEntregas_CambioFila);
@@ -146,7 +148,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCerrar;
-            this.ClientSize = new System.Drawing.Size(294, 284);
+            this.ClientSize = new System.Drawing.Size(371, 284);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblTotal);
@@ -160,6 +162,7 @@
             this.Text = "Entregas";
             this.Load += new System.EventHandler(this.frmCargarEntregas_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmCargarEntregas_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmCargarEntregas_KeyUp);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

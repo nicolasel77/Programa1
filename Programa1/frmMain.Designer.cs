@@ -137,6 +137,7 @@
             this.tesoreriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
+            this.diferenciasEfectivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -424,6 +425,7 @@
             // 
             this.mnuTesoreria.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cajaDiariaToolStripMenuItem,
+            this.diferenciasEfectivoToolStripMenuItem,
             this.resumenGastosToolStripMenuItem,
             this.resumenEntradasToolStripMenuItem,
             this.resumenCajasToolStripMenuItem,
@@ -997,6 +999,13 @@
             this.tstMenu.ItemAdded += new System.Windows.Forms.ToolStripItemEventHandler(this.tstMenu_ItemAdded);
             this.tstMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tstMenu_ItemClicked);
             // 
+            // diferenciasEfectivoToolStripMenuItem
+            // 
+            this.diferenciasEfectivoToolStripMenuItem.Name = "diferenciasEfectivoToolStripMenuItem";
+            this.diferenciasEfectivoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.diferenciasEfectivoToolStripMenuItem.Text = "Diferencias Efectivo";
+            this.diferenciasEfectivoToolStripMenuItem.Click += new System.EventHandler(this.diferenciasEfectivoToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1128,6 +1137,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem17;
         private System.Windows.Forms.ToolStripMenuItem trasladosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem reintXCambioDePreciosXdiaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem diferenciasEfectivoToolStripMenuItem;
     }
 }
 

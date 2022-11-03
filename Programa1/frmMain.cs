@@ -3080,5 +3080,10 @@
                 }
             }
         }
+
+        private void diferenciasEfectivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
