@@ -21,7 +21,7 @@
 
             DataTable dt = sp_Datos("sp_CambioPrecios", new SqlParameter[] { f, prod, precio });
 
-            dt.Columns.Add("Reintegro", typeof(double), "((Entrada+Traslados_E-Traslados_S+Stock)-(Venta / 8 * Dias)) * (Precio_Nuevo-Precio_Ant)");
+            dt.Columns.Add("Reintegro", typeof(double), "(((Entrada+Traslados_E-Traslados_S+Stock)-(Venta / 8 * Dias)) * (Precio_Nuevo-Precio_Ant))*-1");
 
             return dt;
         }

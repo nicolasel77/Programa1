@@ -132,11 +132,11 @@ namespace Programa1.Herramientas
                     case "System.Boolean":
                         s = Convert.ToBoolean(valor) ? "1" : "0";
                         break;
-                } 
+                }
             }
             else
             {
-                 s = "''"; 
+                s = "''";
             }
             return s;
         }
@@ -161,7 +161,15 @@ namespace Programa1.Herramientas
                         {
                             if (dt.Columns[0].DataType == typeof(DateTime))
                             {
-                                DateTime d = Convert.ToDateTime(dr[0]);
+                                DateTime d = DateTime.Today;
+                                if (dr[0] == DBNull.Value)
+                                {
+
+                                }
+                                else
+                                {
+                                    Convert.ToDateTime(dr[0]);
+                                }
                                 ls.Items.Add(d.ToString(formato));
                             }
                             else

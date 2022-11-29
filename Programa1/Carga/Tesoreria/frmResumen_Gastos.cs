@@ -128,6 +128,7 @@ namespace Programa1.Carga.Tesoreria
 
             }
             if (lst.Items.Count > 0) { lst.Items.Insert(0, "Todos"); }
+            if (lst.SelectedIndex == -1) { lst.SelectedIndex = 0; }
             this.Cursor = Cursors.Default;
         }
 
@@ -356,66 +357,95 @@ namespace Programa1.Carga.Tesoreria
                 {
                     case Keys.Right:
                         e.Handled = true;
-                        if (lst.SelectedIndex > -1)
-                        {
-                            switch (Orden)
-                            {
-                                case e_Orden.Tipo:
-                                    Orden = e_Orden.SubTipo;
-                                    Cargar_List();
-                                    Cargar_Grilla();
-                                    break;
-                                case e_Orden.SubTipo:
-                                    Orden = e_Orden.Detalle;
-                                    Cargar_List();
-                                    Cargar_Grilla();
-                                    break;
-
-                            }
-                        }
+                        Derecha();
                         break;
 
                     case Keys.Left:
                         e.Handled = true;
-                        switch (Orden)
-                        {
-                            case e_Orden.Detalle:
-                                Orden = e_Orden.SubTipo;
-                                Cargar_List();
-                                Cargar_Grilla();
-                                break;
-                            case e_Orden.SubTipo:
-                                Orden = e_Orden.Tipo;
-                                Cargar_List();
-                                Cargar_Grilla();
-                                break;
-
-                        }
-                        // Activar el último seleccionado
-                        for (int i = 0; i <= lst.Items.Count - 1; i++)
-                        {
-                            if (Orden == e_Orden.SubTipo)
-                            {
-                                if (SubTipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
-                                {
-                                    lst.SelectedIndex = i;
-                                    break;
-                                }
-                            }
-                            else
-                            {
-                                if (Tipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
-                                {
-                                    lst.SelectedIndex = i;
-                                    break;
-                                }
-                            }
-                        }
+                        Izquierda();
                         break;
                 }
             }
         }
 
-       
+        private void Izquierda()
+        {
+            switch (Orden)
+            {
+                case e_Orden.Detalle:
+                    Orden = e_Orden.SubTipo;
+                    Cargar_List();
+                    Cargar_Grilla();
+                    break;
+                case e_Orden.SubTipo:
+                    Orden = e_Orden.Tipo;
+                    Cargar_List();
+                    Cargar_Grilla();
+                    break;
+
+            }
+            // Activar el último seleccionado
+            for (int i = 0; i <= lst.Items.Count - 1; i++)
+            {
+                if (Orden == e_Orden.SubTipo)
+                {
+                    if (SubTipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
+                    {
+                        lst.SelectedIndex = i;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (Tipo == h.Codigo_Seleccionado(lst.Items[i].ToString()))
+                    {
+                        lst.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void Derecha()
+        {
+            if (lst.SelectedIndex > -1)
+            {
+                switch (Orden)
+                {
+                    case e_Orden.Tipo:
+                        Orden = e_Orden.SubTipo;
+                        Cargar_List();
+                        Cargar_Grilla();
+                        break;
+                    case e_Orden.SubTipo:
+                        Orden = e_Orden.Detalle;
+                        Cargar_List();
+                        Cargar_Grilla();
+                        break;
+
+                }
+            }
+        }
+
+        private void cmdIzquierda_Click(object sender, EventArgs e)
+        {
+            Izquierda();
+        }
+
+        private void cmdDerecha_Click(object sender, EventArgs e)
+        {
+            Derecha();
+        }
+
+        private void lst_DoubleClick(object sender, EventArgs e)
+        {
+            if(lst.SelectedIndex > -1)
+            {
+                if(Orden< e_Orden.Detalle)
+                {
+                    Derecha();
+                }
+            }
+        }
     }
 }
