@@ -168,7 +168,7 @@ namespace Programa1.Herramientas
                                 }
                                 else
                                 {
-                                    Convert.ToDateTime(dr[0]);
+                                    d = Convert.ToDateTime(dr[0]);
                                 }
                                 ls.Items.Add(d.ToString(formato));
                             }
