@@ -58,6 +58,7 @@
             this.cmdRecargar = new MaterialSkin.Controls.MaterialFlatButton();
             this.pbLeer = new System.Windows.Forms.ProgressBar();
             this.lblpb = new System.Windows.Forms.Label();
+            this.chclover = new MaterialSkin.Controls.MaterialCheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -335,6 +336,7 @@
             this.grdCuentas.FuenteEncabezado = null;
             this.grdCuentas.FuentePieDePagina = null;
             this.grdCuentas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdCuentas.LimpiarEstilosAntesDeOrdenar = false;
             this.grdCuentas.Location = new System.Drawing.Point(688, 410);
             this.grdCuentas.Name = "grdCuentas";
             this.grdCuentas.PieDePagina = "\t\tPage {0} of {1}";
@@ -372,6 +374,7 @@
             this.grdDatos.FuenteEncabezado = null;
             this.grdDatos.FuentePieDePagina = null;
             this.grdDatos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdDatos.LimpiarEstilosAntesDeOrdenar = false;
             this.grdDatos.Location = new System.Drawing.Point(12, 12);
             this.grdDatos.Name = "grdDatos";
             this.grdDatos.PieDePagina = "\t\tPage {0} of {1}";
@@ -440,11 +443,29 @@
             this.lblpb.Text = "Progreso:";
             this.lblpb.Visible = false;
             // 
+            // chclover
+            // 
+            this.chclover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chclover.AutoSize = true;
+            this.chclover.Depth = 0;
+            this.chclover.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chclover.Location = new System.Drawing.Point(1324, 329);
+            this.chclover.Margin = new System.Windows.Forms.Padding(0);
+            this.chclover.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chclover.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chclover.Name = "chclover";
+            this.chclover.Ripple = true;
+            this.chclover.Size = new System.Drawing.Size(69, 30);
+            this.chclover.TabIndex = 27;
+            this.chclover.Text = "Clover";
+            this.chclover.UseVisualStyleBackColor = true;
+            // 
             // frmLeer_Tarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1428, 643);
+            this.Controls.Add(this.chclover);
             this.Controls.Add(this.lblpb);
             this.Controls.Add(this.pbLeer);
             this.Controls.Add(this.panel6);
@@ -516,5 +537,6 @@
         private MaterialSkin.Controls.MaterialFlatButton cmdRecargar;
         private System.Windows.Forms.ProgressBar pbLeer;
         internal System.Windows.Forms.Label lblpb;
+        private MaterialSkin.Controls.MaterialCheckBox chclover;
     }
 }
