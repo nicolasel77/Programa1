@@ -107,12 +107,12 @@
             this.Cursor = Cursors.WaitCursor;
             double a;
             //"((Venta+Traslados_E-Traslados_S+Stock)-(Venta_Promedio / 8 * Dias)) * (Precio_Nuevo-Precio_Ant)"
-            double venta = Convert.ToDouble(grd.get_Texto(f, grd.get_ColIndex("Venta")));
+            double venta = Convert.ToDouble(grd.get_Texto(f, grd.get_ColIndex("Entrada")));
             venta += Convert.ToDouble(grd.get_Texto(f, grd.get_ColIndex("Traslados_E")));
             venta -= Convert.ToDouble(grd.get_Texto(f, grd.get_ColIndex("Traslados_S")));
             venta += Convert.ToDouble(grd.get_Texto(f, grd.get_ColIndex("Stock")));
 
-            double venta_prom = Convert.ToDouble(grd.get_Texto(f, grd.get_ColIndex("Venta_Promedio")));
+            double venta_prom = Convert.ToDouble(grd.get_Texto(f, grd.get_ColIndex("Venta")));
             venta_prom = venta_prom / 8 * (int)grd.get_Texto(f, grd.get_ColIndex("Dias"));
 
             double dif_precio = Convert.ToDouble(grd.get_Texto(f, grd.get_ColIndex("Precio_Nuevo")));

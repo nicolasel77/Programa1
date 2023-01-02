@@ -523,15 +523,18 @@ namespace Programa1.Carga.Tesoreria
                     switch (c)
                     {
                         case e_Caja:
-                            cEntradas.caja.ID = Convert.ToInt32(a);
-                            if (cEntradas.caja.Existe() == true)
+                            if (usuario.CajaAutorizada(Convert.ToInt32(a)) == true)
                             {
-                                grdEntradas.set_Texto(f, c, a);
-                                grdEntradas.set_Texto(f, c + 1, cEntradas.caja.Nombre);
-                                grdEntradas.ActivarCelda(f, e_Tipo);
-                                if (cEntradas.ID > 0)
+                                cEntradas.caja.ID = Convert.ToInt32(a);
+                                if (cEntradas.caja.Existe() == true)
                                 {
-                                    cEntradas.Actualizar();
+                                    grdEntradas.set_Texto(f, c, a);
+                                    grdEntradas.set_Texto(f, c + 1, cEntradas.caja.Nombre);
+                                    grdEntradas.ActivarCelda(f, e_Tipo);
+                                    if (cEntradas.ID > 0)
+                                    {
+                                        cEntradas.Actualizar();
+                                    }
                                 }
                             }
                             break;
@@ -801,18 +804,21 @@ namespace Programa1.Carga.Tesoreria
                         switch (c)
                         {
                             case s_Caja:
-                                cGastos.caja.ID = Convert.ToInt32(a);
-                                if (cGastos.caja.Existe() == true)
+                                if (usuario.CajaAutorizada(Convert.ToInt32(a)) == true)
                                 {
-                                    grdSalidas.set_Texto(f, c, a);
-                                    grdSalidas.set_Texto(f, c + 1, cGastos.caja.Nombre);
+                                    cGastos.caja.ID = Convert.ToInt32(a);
+                                    if (cGastos.caja.Existe() == true)
+                                    {
+                                        grdSalidas.set_Texto(f, c, a);
+                                        grdSalidas.set_Texto(f, c + 1, cGastos.caja.Nombre);
 
-                                    if (cGastos.caja.EsARendir == true) { cGastos.caja.Seleccionar_Nombre(); }
+                                        if (cGastos.caja.EsARendir == true) { cGastos.caja.Seleccionar_Nombre(); }
 
-                                    if (cGastos.ID != 0) { cGastos.Actualizar("ID_Caja", cGastos.caja.ID); Cargar_Cajas(); }
+                                        if (cGastos.ID != 0) { cGastos.Actualizar("ID_Caja", cGastos.caja.ID); Cargar_Cajas(); }
 
-                                    grdSalidas.ActivarCelda(f, e_Tipo);
+                                        grdSalidas.ActivarCelda(f, e_Tipo);
 
+                                    } 
                                 }
                                 break;
                             case s_Tipo:

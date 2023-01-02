@@ -3085,5 +3085,63 @@
         {
 
         }
+
+        private void analisisDeVentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmAnalisis_Venta")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmAnalisis_Venta");
+                t.Text = "Analisis_Venta";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmAnalisis_Venta = new Carga.Varios.frmAnalisis_Venta();
+                frmAnalisis_Venta.MdiParent = this;
+                frmAnalisis_Venta.Disposed += FrmAnalisis_Venta_Disposed;
+                forms.Add(frmAnalisis_Venta);
+                frmAnalisis_Venta.Show();
+                frmAnalisis_Venta.WindowState = FormWindowState.Minimized;
+                frmAnalisis_Venta.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmAnalisis_Venta_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Analisis_Venta")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmAnalisis_Venta")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void haciendaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            usuario.Nombre = "Hacienda";
+        }
+
+        private void lorenaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            usuario.Nombre = "Lorena";
+        }
     }
 }

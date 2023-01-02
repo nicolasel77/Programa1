@@ -59,6 +59,7 @@ namespace Programa1.DB
             
             DataTable dt = sp_Datos("dbo.sp_ResumenSaldoRecupero", new SqlParameter[] { p1, p2, p3 });
             dt.Columns.Add("Diferencia", typeof(float));
+            dt.Columns.Add("Saldo", typeof(float));
 
             return dt;
         }
@@ -79,6 +80,12 @@ namespace Programa1.DB
             {
                 nb.Actualizar_CostoFinal(Convert.ToInt32(dr["NBoleta"]));
             }
+        }
+
+        internal double Saldo(DateTime f)
+        {
+            object s = Dato_Generico($"SELECT dbo.f_SaldoRecupero({Frigorifico.ID}, '{f:MM/dd/yy}')");
+            return Convert.ToDouble(s);
         }
     }
 }

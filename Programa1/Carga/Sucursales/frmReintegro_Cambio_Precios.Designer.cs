@@ -32,13 +32,14 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grd = new Grilla2.SpeedGrilla();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.mFecha = new System.Windows.Forms.MonthCalendar();
-            this.txtPrecio = new System.Windows.Forms.TextBox();
             this.cmdAceptar = new Programa1.Controles.cBoton();
+            this.txtPrecio = new System.Windows.Forms.TextBox();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.Sucursales = new Programa1.Controles.cSucursales();
             this.Productos = new Programa1.Controles.cProductos();
+            this.mFecha = new System.Windows.Forms.MonthCalendar();
             this.tiCarga = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,6 +61,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.cmdAceptar);
             this.splitContainer1.Panel2.Controls.Add(this.txtPrecio);
@@ -120,6 +122,31 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Fecha";
             // 
+            // cmdAceptar
+            // 
+            this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdAceptar.BackColor = System.Drawing.Color.Gainsboro;
+            this.cmdAceptar.Location = new System.Drawing.Point(9, 687);
+            this.cmdAceptar.Name = "cmdAceptar";
+            this.cmdAceptar.Size = new System.Drawing.Size(512, 40);
+            this.cmdAceptar.TabIndex = 5;
+            this.cmdAceptar.Texto = "Guardar";
+            this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
+            // 
+            // txtPrecio
+            // 
+            this.txtPrecio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtPrecio.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecio.ForeColor = System.Drawing.Color.DimGray;
+            this.txtPrecio.Location = new System.Drawing.Point(108, 634);
+            this.txtPrecio.Name = "txtPrecio";
+            this.txtPrecio.Size = new System.Drawing.Size(149, 19);
+            this.txtPrecio.TabIndex = 4;
+            this.txtPrecio.TextChanged += new System.EventHandler(this.txtPrecio_TextChanged);
+            // 
             // txtDescripcion
             // 
             this.txtDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -130,42 +157,9 @@
             this.txtDescripcion.ForeColor = System.Drawing.Color.DimGray;
             this.txtDescripcion.Location = new System.Drawing.Point(9, 662);
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(516, 19);
+            this.txtDescripcion.Size = new System.Drawing.Size(512, 19);
             this.txtDescripcion.TabIndex = 4;
             this.txtDescripcion.Text = "Reintegros por cambio de precios";
-            // 
-            // mFecha
-            // 
-            this.mFecha.Location = new System.Drawing.Point(9, 40);
-            this.mFecha.Name = "mFecha";
-            this.mFecha.TabIndex = 0;
-            this.mFecha.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mFecha_DateChanged);
-            // 
-            // txtPrecio
-            // 
-            this.txtPrecio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtPrecio.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecio.ForeColor = System.Drawing.Color.DimGray;
-            this.txtPrecio.Location = new System.Drawing.Point(9, 634);
-            this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(248, 19);
-            this.txtPrecio.TabIndex = 4;
-            this.txtPrecio.Text = "Cargar Precio";
-            this.txtPrecio.TextChanged += new System.EventHandler(this.txtPrecio_TextChanged);
-            // 
-            // cmdAceptar
-            // 
-            this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdAceptar.BackColor = System.Drawing.Color.Gainsboro;
-            this.cmdAceptar.Location = new System.Drawing.Point(9, 687);
-            this.cmdAceptar.Name = "cmdAceptar";
-            this.cmdAceptar.Size = new System.Drawing.Size(516, 40);
-            this.cmdAceptar.TabIndex = 5;
-            this.cmdAceptar.Texto = "Guardar";
-            this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
             // 
             // Sucursales
             // 
@@ -175,7 +169,7 @@
             this.Sucursales.Filtro_In = "";
             this.Sucursales.Location = new System.Drawing.Point(9, 205);
             this.Sucursales.Mostrar_Botones = false;
-            this.Sucursales.Mostrar_Tipo = false;
+            this.Sucursales.Mostrar_Tipo = true;
             this.Sucursales.Name = "Sucursales";
             this.Sucursales.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.Sucursales.Size = new System.Drawing.Size(248, 423);
@@ -194,16 +188,35 @@
             this.Productos.Location = new System.Drawing.Point(269, 12);
             this.Productos.Mostrar_Tipo = true;
             this.Productos.Name = "Productos";
-            this.Productos.Size = new System.Drawing.Size(256, 641);
+            this.Productos.Size = new System.Drawing.Size(252, 641);
             this.Productos.TabIndex = 2;
             this.Productos.Titulo = "Productos";
             this.Productos.Valor_Actual = -1;
             this.Productos.Cambio_Seleccion += new System.EventHandler(this.Productos_Cambio_Seleccion);
             // 
+            // mFecha
+            // 
+            this.mFecha.Location = new System.Drawing.Point(9, 40);
+            this.mFecha.Name = "mFecha";
+            this.mFecha.TabIndex = 0;
+            this.mFecha.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mFecha_DateChanged);
+            // 
             // tiCarga
             // 
             this.tiCarga.Interval = 1000;
             this.tiCarga.Tick += new System.EventHandler(this.tiCarga_Tick);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DimGray;
+            this.label1.Location = new System.Drawing.Point(9, 637);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 16);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Cargar Precio:";
             // 
             // frmReintegro_Cambio_Precios
             // 
@@ -233,5 +246,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Timer tiCarga;
+        private System.Windows.Forms.Label label1;
     }
 }

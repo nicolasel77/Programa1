@@ -32,7 +32,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grd = new Grilla2.SpeedGrilla();
             this.nuCant = new System.Windows.Forms.NumericUpDown();
-            this.lstFechas = new System.Windows.Forms.ListBox();
             this.lstFrigorificos = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -54,10 +53,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.nuCant);
-            this.splitContainer1.Panel2.Controls.Add(this.lstFechas);
             this.splitContainer1.Panel2.Controls.Add(this.lstFrigorificos);
-            this.splitContainer1.Size = new System.Drawing.Size(1081, 801);
-            this.splitContainer1.SplitterDistance = 725;
+            this.splitContainer1.Size = new System.Drawing.Size(936, 801);
+            this.splitContainer1.SplitterDistance = 696;
             this.splitContainer1.TabIndex = 0;
             // 
             // grd
@@ -94,7 +92,7 @@
             this.grd.Redraw = true;
             this.grd.Row = -2;
             this.grd.Rows = 0;
-            this.grd.Size = new System.Drawing.Size(701, 777);
+            this.grd.Size = new System.Drawing.Size(672, 777);
             this.grd.TabIndex = 0;
             // 
             // nuCant
@@ -115,17 +113,6 @@
             0,
             0});
             // 
-            // lstFechas
-            // 
-            this.lstFechas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstFechas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstFechas.FormattingEnabled = true;
-            this.lstFechas.ItemHeight = 20;
-            this.lstFechas.Location = new System.Drawing.Point(229, 12);
-            this.lstFechas.Name = "lstFechas";
-            this.lstFechas.Size = new System.Drawing.Size(111, 280);
-            this.lstFechas.TabIndex = 1;
-            // 
             // lstFrigorificos
             // 
             this.lstFrigorificos.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -142,7 +129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1081, 801);
+            this.ClientSize = new System.Drawing.Size(936, 801);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmResumen_Recupero";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -159,7 +146,6 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ListBox lstFechas;
         private System.Windows.Forms.ListBox lstFrigorificos;
         private Grilla2.SpeedGrilla grd;
         private System.Windows.Forms.NumericUpDown nuCant;

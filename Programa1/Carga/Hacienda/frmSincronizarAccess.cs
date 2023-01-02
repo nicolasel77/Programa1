@@ -419,7 +419,11 @@ namespace Programa1.Carga.Hacienda
             this.Cursor = Cursors.WaitCursor;
             if (lstBoletas.SelectedIndex > -1)
             {
-                Cargar(Convert.ToInt32(lstBoletas.Text));
+                string nb = lstBoletas.Text;
+                
+                if(nb.IndexOf(" ") > -1) { nb = nb.Substring(0, nb.IndexOf(" ")); }
+
+                Cargar(Convert.ToInt32(nb));
             }
             this.Cursor = Cursors.Default;
 

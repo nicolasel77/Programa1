@@ -123,5 +123,23 @@ namespace Programa1.DB.Varios
         public string Clave { get; set; }
         public e_Permiso Permiso { get; set; }
         public e_TipoUsuario Tipo { get; set; }
+
+        internal bool CajaAutorizada(int caja)
+        {
+            if (Permiso == e_Permiso.Administrador)
+            {
+                return true;
+            }
+
+            bool a;
+
+            string Cadena = $"SELECT COUNT(*) FROM Cajas_Autorizadas WHERE Usuario={iD} and Caja={caja}";
+
+            Datos_Genericos datos = new Datos_Genericos();
+
+            a = Convert.ToBoolean(datos.Dato_Generico(Cadena));
+
+            return a;
+        }
     }
 }

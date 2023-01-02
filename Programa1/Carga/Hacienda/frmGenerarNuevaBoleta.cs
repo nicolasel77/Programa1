@@ -19,7 +19,8 @@
         const int cEfectivo = 7;
         const int cMolleda = 8;
         const int cAlonso = 9;
-        const int cID = 10;
+        const int cMeat = 10;
+        const int cID = 11;
         #endregion
 
         #region Columnas grd Ori
@@ -83,6 +84,7 @@
             dt.Columns.Add("Efectivo", typeof(double));
             dt.Columns.Add("Echeq Molleda", typeof(double));
             dt.Columns.Add("Echeq Alonso", typeof(double));
+            dt.Columns.Add("Meat Store", typeof(double));
             dt.Columns.Add("Id", typeof(int));
 
             grdNB.MostrarDatos(dt, true, false);
@@ -93,10 +95,12 @@
             grdNB.Columnas[cEfectivo].Style.Format = "N2";
             grdNB.Columnas[cMolleda].Style.Format = "N2";
             grdNB.Columnas[cAlonso].Style.Format = "N2";
+            grdNB.Columnas[cMeat].Style.Format = "N2";
 
             grdNB.Columnas[cEfectivo].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
             grdNB.Columnas[cMolleda].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
             grdNB.Columnas[cAlonso].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+            grdNB.Columnas[cMeat].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
                         
             grdNB.set_Texto(0, cImporte, "Saldo A Pagar");
 
@@ -115,6 +119,7 @@
             grdNB.set_ColW(cImporte + 2, 120);
             grdNB.set_ColW(cImporte + 3, 120);
             grdNB.set_ColW(cImporte + 4, 120);
+            grdNB.set_ColW(cImporte + 5, 120);
 
             grdNB.Columnas[cID].Visible = false;
             grdNB.Columnas[cImporte + 1].Visible = false;
@@ -195,6 +200,7 @@
             grdNB.set_ColW(cImporte + 2, 120);
             grdNB.set_ColW(cImporte + 3, 120);
             grdNB.set_ColW(cImporte + 4, 120);
+            grdNB.set_ColW(cImporte + 5, 120);
 
             //if (c == grdOriginal.get_ColIndex("Boleta"))
             //{
@@ -216,8 +222,9 @@
                 double efectivo = Convert.ToDouble(grdNB.get_Texto(f, cEfectivo));
                 double molleda = Convert.ToDouble(grdNB.get_Texto(f, cMolleda));
                 double alonso = Convert.ToDouble(grdNB.get_Texto(f, cAlonso));
+                double meat = Convert.ToDouble(grdNB.get_Texto(f, cMeat));
 
-                grdNB.set_Texto(f, cImporte, impOriginal + efectivo + molleda + alonso);
+                grdNB.set_Texto(f, cImporte, impOriginal + efectivo + molleda + alonso + meat);
 
                 grdNB.set_Texto(grdNB.Rows - 1, c, 0);
 
@@ -233,6 +240,7 @@
                 grdNB.set_ColW(cImporte + 2, 120);
                 grdNB.set_ColW(cImporte + 3, 120);
                 grdNB.set_ColW(cImporte + 4, 120);
+                grdNB.set_ColW(cImporte + 5, 120);
             }
         }
 
