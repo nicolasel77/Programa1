@@ -26,7 +26,7 @@ namespace Programa1.Carga.Varios
                 Cargar();
             }
         }
-        public string Vista 
+        public string Vista
         {
             set
             {
@@ -37,6 +37,8 @@ namespace Programa1.Carga.Varios
                 Cargar_Vista();
             }
         }
+
+        public string Filtro { get; set; } = "";
 
         public frmAyuda_Generico()
         {
@@ -57,14 +59,19 @@ namespace Programa1.Carga.Varios
         private void Cargar()
         {
             DataTable dt = new DataTable();
-            string sf = "";
+            string sf = Filtro;
             int n = 0;
 
-            lst.Items.Clear();            
+            lst.Items.Clear();
+
 
             if (txtBuscar.Text.Length != 0)
             {
-                sf = $"{Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
+                if (sf.Length > 0)
+                {
+                    sf = $"{sf} AND ";
+                }
+                sf = $"{sf}{Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
                 if (int.TryParse(txtBuscar.Text, out n) == true)
                 {
                     sf = $"{sf} OR CONVERT(varchar, {Campo_ID}) LIKE '%{n}%'";
@@ -78,7 +85,7 @@ namespace Programa1.Carga.Varios
                 foreach (DataRow dr in dt.Rows)
                 {
                     lst.Items.Add($"{dr[0]}. {dr[1]}");
-                } 
+                }
             }
 
 
@@ -90,8 +97,8 @@ namespace Programa1.Carga.Varios
             string sf = "";
             int n = 0;
 
-            lst.Items.Clear();            
-            
+            lst.Items.Clear();
+
             if (txtBuscar.Text.Length != 0)
             {
                 sf = $"{Campo_Nombre} LIKE '%{txtBuscar.Text.Replace(" ", "%")}%'";
@@ -195,7 +202,7 @@ namespace Programa1.Carga.Varios
 
         private void cmdAceptar_Click(object sender, EventArgs e)
         {
-            if(lst.SelectedIndex != -1)
+            if (lst.SelectedIndex != -1)
             {
                 Herramientas.Herramientas h = new Herramientas.Herramientas();
 

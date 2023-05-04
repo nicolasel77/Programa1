@@ -86,6 +86,8 @@
             this.entradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buscarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imprimirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.importarEntregasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splPrincipal)).BeginInit();
             this.splPrincipal.Panel1.SuspendLayout();
             this.splPrincipal.Panel2.SuspendLayout();
@@ -121,7 +123,8 @@
             this.splPrincipal.Panel2.Resize += new System.EventHandler(this.splPrincipal_Panel2_Resize);
             this.splPrincipal.Panel2MinSize = 250;
             this.splPrincipal.Size = new System.Drawing.Size(1486, 719);
-            this.splPrincipal.SplitterDistance = 1195;
+            this.splPrincipal.SplitterDistance = 1186;
+            this.splPrincipal.SplitterWidth = 8;
             this.splPrincipal.TabIndex = 1;
             // 
             // splitContainer2
@@ -144,8 +147,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.materialLabel3);
             this.splitContainer2.Panel2.Controls.Add(this.lblTotalGrillaGastos);
             this.splitContainer2.Panel2.Controls.Add(this.grdSalidas);
-            this.splitContainer2.Size = new System.Drawing.Size(1195, 719);
-            this.splitContainer2.SplitterDistance = 454;
+            this.splitContainer2.Size = new System.Drawing.Size(1186, 719);
+            this.splitContainer2.SplitterDistance = 450;
             this.splitContainer2.SplitterWidth = 8;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -158,7 +161,7 @@
             this.lblEntradas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblEntradas.Location = new System.Drawing.Point(3, 3);
             this.lblEntradas.Name = "lblEntradas";
-            this.lblEntradas.Size = new System.Drawing.Size(448, 20);
+            this.lblEntradas.Size = new System.Drawing.Size(444, 20);
             this.lblEntradas.TabIndex = 1;
             this.lblEntradas.Text = "Entradas";
             this.lblEntradas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -172,7 +175,7 @@
             this.lblTotalGrillaEntrada.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalGrillaEntrada.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaEntrada.Name = "lblTotalGrillaEntrada";
-            this.lblTotalGrillaEntrada.Size = new System.Drawing.Size(448, 24);
+            this.lblTotalGrillaEntrada.Size = new System.Drawing.Size(444, 24);
             this.lblTotalGrillaEntrada.TabIndex = 1;
             this.lblTotalGrillaEntrada.Text = "Total Entrada";
             this.lblTotalGrillaEntrada.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -211,7 +214,7 @@
             this.grdEntradas.Redraw = true;
             this.grdEntradas.Row = 0;
             this.grdEntradas.Rows = 50;
-            this.grdEntradas.Size = new System.Drawing.Size(448, 660);
+            this.grdEntradas.Size = new System.Drawing.Size(444, 660);
             this.grdEntradas.TabIndex = 0;
             this.grdEntradas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdEntradas_Editado);
             this.grdEntradas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdEntradas_CambioFila);
@@ -259,7 +262,7 @@
             this.panel7.Controls.Add(this.rdCaja);
             this.panel7.Controls.Add(this.rdNinguno);
             this.panel7.Controls.Add(this.label5);
-            this.panel7.Location = new System.Drawing.Point(290, 693);
+            this.panel7.Location = new System.Drawing.Point(302, 693);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(419, 24);
             this.panel7.TabIndex = 3;
@@ -375,7 +378,7 @@
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel3.Location = new System.Drawing.Point(3, 3);
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(706, 20);
+            this.materialLabel3.Size = new System.Drawing.Size(681, 20);
             this.materialLabel3.TabIndex = 1;
             this.materialLabel3.Text = "Gastos";
             this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -389,7 +392,7 @@
             this.lblTotalGrillaGastos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalGrillaGastos.Location = new System.Drawing.Point(3, 693);
             this.lblTotalGrillaGastos.Name = "lblTotalGrillaGastos";
-            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(281, 24);
+            this.lblTotalGrillaGastos.Size = new System.Drawing.Size(296, 24);
             this.lblTotalGrillaGastos.TabIndex = 2;
             this.lblTotalGrillaGastos.Text = "Total Salida";
             this.lblTotalGrillaGastos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -428,7 +431,7 @@
             this.grdSalidas.Redraw = true;
             this.grdSalidas.Row = 0;
             this.grdSalidas.Rows = 50;
-            this.grdSalidas.Size = new System.Drawing.Size(706, 660);
+            this.grdSalidas.Size = new System.Drawing.Size(718, 660);
             this.grdSalidas.TabIndex = 0;
             this.grdSalidas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSalidas_Editado);
             this.grdSalidas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSalidas_CambioFila);
@@ -472,7 +475,7 @@
             this.panel1.Controls.Add(this.materialLabel2);
             this.panel1.Location = new System.Drawing.Point(8, 190);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(274, 521);
+            this.panel1.Size = new System.Drawing.Size(267, 521);
             this.panel1.TabIndex = 4;
             // 
             // txtInsert
@@ -484,7 +487,7 @@
             this.txtInsert.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInsert.Location = new System.Drawing.Point(0, 461);
             this.txtInsert.Name = "txtInsert";
-            this.txtInsert.Size = new System.Drawing.Size(274, 15);
+            this.txtInsert.Size = new System.Drawing.Size(267, 15);
             this.txtInsert.TabIndex = 12;
             this.txtInsert.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -533,7 +536,7 @@
             this.lblUltimo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblUltimo.Location = new System.Drawing.Point(3, 426);
             this.lblUltimo.Name = "lblUltimo";
-            this.lblUltimo.Size = new System.Drawing.Size(271, 19);
+            this.lblUltimo.Size = new System.Drawing.Size(264, 19);
             this.lblUltimo.TabIndex = 8;
             this.lblUltimo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -570,8 +573,9 @@
             this.grdCajas.Redraw = true;
             this.grdCajas.Row = 0;
             this.grdCajas.Rows = 50;
-            this.grdCajas.Size = new System.Drawing.Size(274, 266);
+            this.grdCajas.Size = new System.Drawing.Size(267, 266);
             this.grdCajas.TabIndex = 7;
+            this.grdCajas.DobleClick += new Grilla2.SpeedGrilla.DobleClickEventHandler(this.grdCajas_DobleClick);
             // 
             // lblTotal
             // 
@@ -579,7 +583,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotal.Location = new System.Drawing.Point(98, 123);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(173, 16);
+            this.lblTotal.Size = new System.Drawing.Size(166, 16);
             this.lblTotal.TabIndex = 6;
             this.lblTotal.Text = "$ 0,0";
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -590,7 +594,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSTotalEntradas.Location = new System.Drawing.Point(98, 57);
             this.lblSTotalEntradas.Name = "lblSTotalEntradas";
-            this.lblSTotalEntradas.Size = new System.Drawing.Size(173, 16);
+            this.lblSTotalEntradas.Size = new System.Drawing.Size(166, 16);
             this.lblSTotalEntradas.TabIndex = 6;
             this.lblSTotalEntradas.Text = "$ 0,0";
             this.lblSTotalEntradas.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -619,7 +623,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblGastos.Location = new System.Drawing.Point(98, 107);
             this.lblGastos.Name = "lblGastos";
-            this.lblGastos.Size = new System.Drawing.Size(173, 16);
+            this.lblGastos.Size = new System.Drawing.Size(166, 16);
             this.lblGastos.TabIndex = 6;
             this.lblGastos.Text = "$ 0,0";
             this.lblGastos.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -630,7 +634,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalEntradas.Location = new System.Drawing.Point(98, 41);
             this.lblTotalEntradas.Name = "lblTotalEntradas";
-            this.lblTotalEntradas.Size = new System.Drawing.Size(173, 16);
+            this.lblTotalEntradas.Size = new System.Drawing.Size(166, 16);
             this.lblTotalEntradas.TabIndex = 6;
             this.lblTotalEntradas.Text = "$ 0,0";
             this.lblTotalEntradas.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -659,7 +663,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSaldoAnterior.Location = new System.Drawing.Point(98, 25);
             this.lblSaldoAnterior.Name = "lblSaldoAnterior";
-            this.lblSaldoAnterior.Size = new System.Drawing.Size(173, 16);
+            this.lblSaldoAnterior.Size = new System.Drawing.Size(166, 16);
             this.lblSaldoAnterior.TabIndex = 6;
             this.lblSaldoAnterior.Text = "$ 0,0";
             this.lblSaldoAnterior.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -680,7 +684,7 @@
             this.panel6.BackColor = System.Drawing.Color.Gainsboro;
             this.panel6.Location = new System.Drawing.Point(3, 181);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(320, 2);
+            this.panel6.Size = new System.Drawing.Size(313, 2);
             this.panel6.TabIndex = 5;
             // 
             // panel5
@@ -690,7 +694,7 @@
             this.panel5.BackColor = System.Drawing.Color.Gainsboro;
             this.panel5.Location = new System.Drawing.Point(-17, 101);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(320, 2);
+            this.panel5.Size = new System.Drawing.Size(313, 2);
             this.panel5.TabIndex = 5;
             // 
             // panel2
@@ -700,7 +704,7 @@
             this.panel2.BackColor = System.Drawing.Color.Gainsboro;
             this.panel2.Location = new System.Drawing.Point(-17, 20);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(320, 2);
+            this.panel2.Size = new System.Drawing.Size(313, 2);
             this.panel2.TabIndex = 5;
             // 
             // panel4
@@ -710,7 +714,7 @@
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
             this.panel4.Location = new System.Drawing.Point(0, 144);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(334, 2);
+            this.panel4.Size = new System.Drawing.Size(327, 2);
             this.panel4.TabIndex = 5;
             // 
             // panel3
@@ -720,7 +724,7 @@
             this.panel3.BackColor = System.Drawing.Color.Gainsboro;
             this.panel3.Location = new System.Drawing.Point(0, 76);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(334, 2);
+            this.panel3.Size = new System.Drawing.Size(327, 2);
             this.panel3.TabIndex = 5;
             // 
             // materialLabel5
@@ -745,7 +749,7 @@
             this.cmdCerrar_Fecha.MouseState = MaterialSkin.MouseState.HOVER;
             this.cmdCerrar_Fecha.Name = "cmdCerrar_Fecha";
             this.cmdCerrar_Fecha.Primary = false;
-            this.cmdCerrar_Fecha.Size = new System.Drawing.Size(274, 36);
+            this.cmdCerrar_Fecha.Size = new System.Drawing.Size(267, 36);
             this.cmdCerrar_Fecha.TabIndex = 2;
             this.cmdCerrar_Fecha.Text = "Cambiar Fecha";
             this.cmdCerrar_Fecha.UseVisualStyleBackColor = true;
@@ -771,7 +775,7 @@
             this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel4.Location = new System.Drawing.Point(8, 3);
             this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(286, 20);
+            this.materialLabel4.Size = new System.Drawing.Size(279, 20);
             this.materialLabel4.TabIndex = 2;
             this.materialLabel4.Text = "Fecha";
             this.materialLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -780,7 +784,7 @@
             // 
             this.mntFecha.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.mntFecha.BackColor = System.Drawing.Color.White;
-            this.mntFecha.Location = new System.Drawing.Point(49, 26);
+            this.mntFecha.Location = new System.Drawing.Point(46, 26);
             this.mntFecha.MaxSelectionCount = 1;
             this.mntFecha.Name = "mntFecha";
             this.mntFecha.TabIndex = 0;
@@ -795,7 +799,9 @@
             this.transferenciaToolStripMenuItem,
             this.verToolStripMenuItem,
             this.diariosToolStripMenuItem,
-            this.buscarToolStripMenuItem});
+            this.buscarToolStripMenuItem,
+            this.imprimirToolStripMenuItem1,
+            this.importarEntregasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1486, 24);
@@ -883,6 +889,20 @@
             this.buscarToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.buscarToolStripMenuItem.Text = "Buscar [F3]";
             this.buscarToolStripMenuItem.Click += new System.EventHandler(this.buscarToolStripMenuItem_Click);
+            // 
+            // imprimirToolStripMenuItem1
+            // 
+            this.imprimirToolStripMenuItem1.Name = "imprimirToolStripMenuItem1";
+            this.imprimirToolStripMenuItem1.Size = new System.Drawing.Size(65, 20);
+            this.imprimirToolStripMenuItem1.Text = "Imprimir";
+            this.imprimirToolStripMenuItem1.Click += new System.EventHandler(this.imprimirToolStripMenuItem1_Click);
+            // 
+            // importarEntregasToolStripMenuItem
+            // 
+            this.importarEntregasToolStripMenuItem.Name = "importarEntregasToolStripMenuItem";
+            this.importarEntregasToolStripMenuItem.Size = new System.Drawing.Size(113, 20);
+            this.importarEntregasToolStripMenuItem.Text = "Importar Entregas";
+            this.importarEntregasToolStripMenuItem.Click += new System.EventHandler(this.importarEntregasToolStripMenuItem_Click);
             // 
             // frmCaja_Diaria
             // 
@@ -977,5 +997,7 @@
         private System.Windows.Forms.ToolStripMenuItem entradasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buscarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imprimirToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem importarEntregasToolStripMenuItem;
     }
 }

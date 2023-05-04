@@ -37,6 +37,8 @@
             this.grdProductos = new Grilla2.SpeedGrilla();
             this.splFormulas = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nuDecimales = new System.Windows.Forms.NumericUpDown();
             this.lstFechas = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblSuc = new MaterialSkin.Controls.MaterialLabel();
@@ -50,8 +52,7 @@
             this.cmdCalcular = new Programa1.Controles.cBoton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grdFormulas = new Grilla2.SpeedGrilla();
-            this.label2 = new System.Windows.Forms.Label();
-            this.nuDecimales = new System.Windows.Forms.NumericUpDown();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -66,10 +67,10 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuDecimales)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nuDecimales)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -98,6 +99,7 @@
             this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblPromedio,
+            this.toolStripStatusLabel1,
             this.lblIntegracion,
             this.lblBifes});
             this.statusStrip1.Location = new System.Drawing.Point(0, 666);
@@ -115,8 +117,8 @@
             // lblIntegracion
             // 
             this.lblIntegracion.Name = "lblIntegracion";
-            this.lblIntegracion.Size = new System.Drawing.Size(118, 21);
-            this.lblIntegracion.Text = "Costo Int: 0,000";
+            this.lblIntegracion.Size = new System.Drawing.Size(49, 21);
+            this.lblIntegracion.Text = "0,000";
             // 
             // lblBifes
             // 
@@ -224,6 +226,35 @@
             this.splitContainer3.Size = new System.Drawing.Size(592, 692);
             this.splitContainer3.SplitterDistance = 109;
             this.splitContainer3.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.DimGray;
+            this.label2.Location = new System.Drawing.Point(1, 457);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 20);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Dec:";
+            // 
+            // nuDecimales
+            // 
+            this.nuDecimales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nuDecimales.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nuDecimales.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nuDecimales.ForeColor = System.Drawing.Color.DimGray;
+            this.nuDecimales.Location = new System.Drawing.Point(49, 458);
+            this.nuDecimales.Name = "nuDecimales";
+            this.nuDecimales.Size = new System.Drawing.Size(37, 22);
+            this.nuDecimales.TabIndex = 11;
+            this.nuDecimales.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nuDecimales.ValueChanged += new System.EventHandler(this.nuDecimales_ValueChanged);
             // 
             // lstFechas
             // 
@@ -427,34 +458,11 @@
             this.grdFormulas.Size = new System.Drawing.Size(580, 126);
             this.grdFormulas.TabIndex = 0;
             // 
-            // label2
+            // toolStripStatusLabel1
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(1, 457);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 20);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Dec:";
-            // 
-            // nuDecimales
-            // 
-            this.nuDecimales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nuDecimales.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.nuDecimales.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nuDecimales.ForeColor = System.Drawing.Color.DimGray;
-            this.nuDecimales.Location = new System.Drawing.Point(49, 458);
-            this.nuDecimales.Name = "nuDecimales";
-            this.nuDecimales.Size = new System.Drawing.Size(37, 22);
-            this.nuDecimales.TabIndex = 11;
-            this.nuDecimales.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nuDecimales.ValueChanged += new System.EventHandler(this.nuDecimales_ValueChanged);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(79, 21);
+            this.toolStripStatusLabel1.Text = "Costo Int: ";
             // 
             // frmPrecios_Carne
             // 
@@ -482,10 +490,10 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nuDecimales)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nuDecimales)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -516,5 +524,6 @@
         private Controles.cBoton cmdBorrar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown nuDecimales;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

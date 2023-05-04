@@ -337,6 +337,14 @@
         {
             return Fecha_Cerrada(Fecha);
         }
+
+        public DataTable Entregas_AImportar()
+        {
+            DataTable dt = Datos_Genericos("SELECT ID, Fecha, Suc, Importe FROM Fecha_Entregas WHERE ID_Entradas IS NULL AND Suc<>0 ORDER BY Suc, Fecha");
+            dt.Columns.Add("Sel", typeof(Boolean));
+
+            return dt;
+        }
         #endregion
     }
 }

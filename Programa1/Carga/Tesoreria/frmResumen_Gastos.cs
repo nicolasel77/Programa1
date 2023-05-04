@@ -1,4 +1,5 @@
 ﻿using Programa1.DB.Tesoreria;
+using Programa1.DB.Varios;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -127,8 +128,12 @@ namespace Programa1.Carga.Tesoreria
                     break;
 
             }
-            if (lst.Items.Count > 0) { lst.Items.Insert(0, "Todos"); }
-            if (lst.SelectedIndex == -1) { lst.SelectedIndex = 0; }
+            if (lst.Items.Count > 0) 
+            { 
+                lst.Items.Insert(0, "Todos");
+                if (lst.SelectedIndex == -1) { lst.SelectedIndex = 0; }
+            }
+            
             this.Cursor = Cursors.Default;
         }
 
@@ -446,6 +451,121 @@ namespace Programa1.Carga.Tesoreria
                     Derecha();
                 }
             }
+        }
+
+        private void cmdImprimir_Click(object sender, EventArgs e)
+        {
+            Formatear_Excel.Formatear fe = new Formatear_Excel.Formatear();
+
+            Cursor = Cursors.WaitCursor;
+
+            string grupo = h.Codigos_Seleccionados(lstGrupos, "Grupo IN ({0})");
+            string cajas = h.Codigos_Seleccionados(lstCajas, "IDC IN ({0})");
+
+            grupo = h.Unir(grupo, cajas);
+            
+            DataTable dt = new DataTable();
+
+            switch (Orden)
+            {
+                case e_Orden.Tipo:
+                    string s = h.Unir(cFechas1.Cadena(), grupo);
+                    dt = Gastos.TotalPorTipo(s);
+                    
+                    break;
+                case e_Orden.SubTipo:
+                    grupo = h.Unir(grupo, cFechas1.Cadena());
+                    if (Tipo > 0)
+                    {
+                        grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                        dt = Gastos.TotalPorSubTipo(grupo);
+                    }
+                    else
+                    {
+                        dt = Gastos.TotalPorSubTipo(grupo);
+                    }
+
+                    break;
+                case e_Orden.Detalle:
+                    if (Tipo > 0)
+                    {
+                        if (SubTipo > 0)
+                        {
+                            if (Detalle > 0)
+                            {
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                                grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");
+                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");
+                            }
+                            else
+                            {
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                                grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");
+                            }
+
+                        }
+                        else
+                        {
+                            if (Detalle > 0)
+                            {
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");
+                            }
+                            else
+                            {
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (SubTipo > 0)
+                        {
+                            if (Detalle > 0)
+                            {
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");
+                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");
+                            }
+                            else
+                            {
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"ID_SubTipoGastos={SubTipo}");
+                            }
+
+                        }
+                        else
+                        {
+                            if (Detalle > 0)
+                            {
+                                grupo = h.Unir(grupo, cFechas1.Cadena());
+                                grupo = h.Unir(grupo, $"ID_DetalleGastos={Detalle}");
+                            }
+                        }
+                    }
+                    dt = Gastos.TotalPorDetalle(grupo, true);
+                    break;
+            }
+
+
+
+            //dt.Columns[dt.Columns.IndexOf("ID_TipoGastos")].ColumnName = "TG";
+            //dt.Columns[dt.Columns.IndexOf("ID_SubTipoGastos")].ColumnName = "STG";
+            //dt.Columns[dt.Columns.IndexOf("ID_DetalleGastos")].ColumnName = "DTG";
+
+            //dt.Columns.RemoveAt(dt.Columns.IndexOf("ID"));
+            //dt.Columns.RemoveAt(dt.Columns.IndexOf("Cheque"));
+            //dt.Columns.RemoveAt(dt.Columns.IndexOf("Grupo"));
+            //dt.Columns.RemoveAt(dt.Columns.IndexOf("Autorizado"));
+            //dt.Columns.RemoveAt(dt.Columns.IndexOf("Fecha_Autorizado"));
+            //dt.Columns.RemoveAt(dt.Columns.IndexOf("Usuario"));
+            fe.Formato_Automatico(dt, false, false);
+
+            Cursor = Cursors.Default;
         }
     }
 }

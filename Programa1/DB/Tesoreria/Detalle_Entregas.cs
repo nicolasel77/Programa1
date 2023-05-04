@@ -34,6 +34,9 @@
         /// </summary>
         public bool Es_Diferencia { get; set; }
 
+        public int Suc { get; set; }
+
+
         public DataTable Datos(String filtro = "")
         {
             var dt = new DataTable("Datos");
@@ -132,7 +135,7 @@
             try
             {
                 string cmdText = $"UPDATE Fecha_Entregas SET ID_Entradas={ID_Entradas}, Fecha='{Fecha:MM/dd/yy}'" +
-                                    $", Importe={Importe.ToString().Replace(",", ".")}, Es_Diferencia={(Es_Diferencia ? 1 : 0)} WHERE Id={Id}";
+                                    $", Importe={Importe.ToString().Replace(",", ".")}, Es_Diferencia={(Es_Diferencia ? 1 : 0)}, Suc={Suc} WHERE Id={Id}";
                 SqlCommand command = new SqlCommand(cmdText, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
@@ -154,8 +157,8 @@
 
             try
             {
-                string cmdText = $"INSERT INTO Fecha_Entregas (Id_Entradas, Fecha, Importe, Es_Diferencia) " +
-                                    $"VALUES({ID_Entradas}, '{Fecha:MM/dd/yy}', {Importe.ToString().Replace(",", ".")}, {(Es_Diferencia ? 1 : 0)})";
+                string cmdText = $"INSERT INTO Fecha_Entregas (Id_Entradas, Fecha, Importe, Es_Diferencia, Suc) " +
+                                    $"VALUES({ID_Entradas}, '{Fecha:MM/dd/yy}', {Importe.ToString().Replace(",", ".")}, {(Es_Diferencia ? 1 : 0)}, {Suc})";
                 SqlCommand command = new SqlCommand(cmdText, sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;

@@ -36,7 +36,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT ID, Nombre, dbo.f_SaldoCaja('{fecha:MM/dd/yy}', ID) AS Saldo  FROM Cajas", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT ID, Nombre, dbo.f_SaldoCaja('{fecha:MM/dd/yy}', ID) AS Disponible, dbo.f_SaldoBanco('{fecha:MM/dd/yy}', ID) AS Saldo_Banco   FROM Cajas", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
