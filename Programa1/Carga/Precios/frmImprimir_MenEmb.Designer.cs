@@ -33,6 +33,10 @@
             this.chUltima = new MaterialSkin.Controls.MaterialCheckBox();
             this.cmdImprimir = new Programa1.Controles.cBoton();
             this.mntFecha = new System.Windows.Forms.MonthCalendar();
+            this.nuCant = new System.Windows.Forms.NumericUpDown();
+            this.lblNinguna = new MaterialSkin.Controls.MaterialLabel();
+            this.lblTodas = new MaterialSkin.Controls.MaterialLabel();
+            ((System.ComponentModel.ISupportInitialize)(this.nuCant)).BeginInit();
             this.SuspendLayout();
             // 
             // lstSucursales
@@ -47,7 +51,7 @@
             this.lstSucursales.Location = new System.Drawing.Point(12, 12);
             this.lstSucursales.Name = "lstSucursales";
             this.lstSucursales.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstSucursales.Size = new System.Drawing.Size(310, 624);
+            this.lstSucursales.Size = new System.Drawing.Size(310, 608);
             this.lstSucursales.TabIndex = 0;
             // 
             // lstListas
@@ -87,11 +91,10 @@
             this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdImprimir.Location = new System.Drawing.Point(334, 601);
             this.cmdImprimir.Name = "cmdImprimir";
-            this.cmdImprimir.Size = new System.Drawing.Size(192, 40);
+            this.cmdImprimir.Size = new System.Drawing.Size(132, 40);
             this.cmdImprimir.TabIndex = 1;
             this.cmdImprimir.Texto = "Imprimir";
             this.cmdImprimir.Click += new System.EventHandler(this.cmdImprimir_Click);
-            this.cmdImprimir.Load += new System.EventHandler(this.cmdImprimir_Load);
             // 
             // mntFecha
             // 
@@ -100,11 +103,60 @@
             this.mntFecha.Name = "mntFecha";
             this.mntFecha.TabIndex = 4;
             // 
+            // nuCant
+            // 
+            this.nuCant.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nuCant.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nuCant.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nuCant.Location = new System.Drawing.Point(472, 609);
+            this.nuCant.Name = "nuCant";
+            this.nuCant.Size = new System.Drawing.Size(54, 27);
+            this.nuCant.TabIndex = 5;
+            this.nuCant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nuCant.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // lblNinguna
+            // 
+            this.lblNinguna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblNinguna.AutoSize = true;
+            this.lblNinguna.Depth = 0;
+            this.lblNinguna.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblNinguna.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblNinguna.Location = new System.Drawing.Point(69, 625);
+            this.lblNinguna.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblNinguna.Name = "lblNinguna";
+            this.lblNinguna.Size = new System.Drawing.Size(64, 19);
+            this.lblNinguna.TabIndex = 8;
+            this.lblNinguna.Text = "Ninguna";
+            this.lblNinguna.Click += new System.EventHandler(this.lblNinguna_Click);
+            // 
+            // lblTodas
+            // 
+            this.lblTodas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTodas.AutoSize = true;
+            this.lblTodas.Depth = 0;
+            this.lblTodas.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblTodas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblTodas.Location = new System.Drawing.Point(12, 625);
+            this.lblTodas.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblTodas.Name = "lblTodas";
+            this.lblTodas.Size = new System.Drawing.Size(51, 19);
+            this.lblTodas.TabIndex = 9;
+            this.lblTodas.Text = "Todas";
+            this.lblTodas.Click += new System.EventHandler(this.lblTodas_Click);
+            // 
             // frmImprimir_MenEmb
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 653);
+            this.Controls.Add(this.lblNinguna);
+            this.Controls.Add(this.lblTodas);
+            this.Controls.Add(this.nuCant);
             this.Controls.Add(this.mntFecha);
             this.Controls.Add(this.chUltima);
             this.Controls.Add(this.cmdImprimir);
@@ -114,6 +166,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Imprimir";
             this.Load += new System.EventHandler(this.frmImprimir_MenEmb_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.nuCant)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,5 +178,8 @@
         public System.Windows.Forms.ListBox lstSucursales;
         private MaterialSkin.Controls.MaterialCheckBox chUltima;
         private System.Windows.Forms.MonthCalendar mntFecha;
+        private System.Windows.Forms.NumericUpDown nuCant;
+        private MaterialSkin.Controls.MaterialLabel lblNinguna;
+        private MaterialSkin.Controls.MaterialLabel lblTodas;
     }
 }

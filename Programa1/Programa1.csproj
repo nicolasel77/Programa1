@@ -749,6 +749,12 @@
     <Compile Include="Carga\Tesoreria\frmTransferencia.Designer.cs">
       <DependentUpon>frmTransferencia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmImportar_Entregas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmImportar_Entregas.Designer.cs">
+      <DependentUpon>frmImportar_Entregas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Varios\frmAnalisis_Venta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1267,6 +1273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmTransferencia.resx">
       <DependentUpon>frmTransferencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmImportar_Entregas.resx">
+      <DependentUpon>frmImportar_Entregas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Varios\frmAnalisis_Venta.resx">
       <DependentUpon>frmAnalisis_Venta.cs</DependentUpon>

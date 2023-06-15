@@ -155,7 +155,7 @@ namespace Programa1.Carga.Tesoreria
         }
         private void frmCaja_Diaria_Resize(object sender, EventArgs e)
         {
-            if (splPrincipal.Width != 0 & splPrincipal.Width > 212) { splPrincipal.SplitterDistance = (splPrincipal.Width - 212); }
+            //if (splPrincipal.Width != 0 & splPrincipal.Width > 212) { splPrincipal.SplitterDistance = (splPrincipal.Width - 212); }
         }
 
         private void frmCaja_Diaria_Activated(object sender, EventArgs e)
@@ -183,6 +183,40 @@ namespace Programa1.Carga.Tesoreria
             }
         }
 
+        private void imprimirToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Formatear_Excel.Formatear fe = new Formatear_Excel.Formatear();
+
+            Cursor = Cursors.WaitCursor;
+
+
+            string filtro = $"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}' AND  IDC IN(SELECT Caja FROM Cajas_Autorizadas WHERE Usuario={usuario.ID})";
+            DataTable dt = cEntradas.Datos(filtro);
+            dt.Columns.RemoveAt(0);
+            dt.Columns.RemoveAt(dt.Columns.IndexOf("Grupo"));
+            dt.Columns.RemoveAt(dt.Columns.IndexOf("Es_Entrega"));
+            dt.Columns.RemoveAt(dt.Columns.IndexOf("Tabla"));
+            dt.Columns.RemoveAt(dt.Columns.IndexOf("Cheque"));
+
+
+            fe.Formato_Automatico(dt, true, true);
+
+            dt = cGastos.Datos_Vista(filtro);
+
+            dt.Columns[dt.Columns.IndexOf("ID_TipoGastos")].ColumnName = "TG";
+            dt.Columns[dt.Columns.IndexOf("ID_SubTipoGastos")].ColumnName = "STG";
+            dt.Columns[dt.Columns.IndexOf("ID_DetalleGastos")].ColumnName = "DTG";
+
+            dt.Columns.RemoveAt(dt.Columns.IndexOf("ID"));
+            dt.Columns.RemoveAt(dt.Columns.IndexOf("Cheque"));
+            dt.Columns.RemoveAt(dt.Columns.IndexOf("Grupo"));
+            dt.Columns.RemoveAt(dt.Columns.IndexOf("Autorizado"));
+            dt.Columns.RemoveAt(dt.Columns.IndexOf("Fecha_Autorizado"));
+            dt.Columns.RemoveAt(dt.Columns.IndexOf("Usuario"));
+            fe.Formato_Automatico(dt, true, true);
+
+            Cursor = Cursors.Default;
+        }
         #endregion
 
         #region " VARIOS "
@@ -267,6 +301,7 @@ namespace Programa1.Carga.Tesoreria
                     {
                         //CHEQUES
                         frmCheques frc = new frmCheques();
+                        frc.usuario = usuario;
                         frc.ShowDialog();
 
                     }
@@ -329,7 +364,7 @@ namespace Programa1.Carga.Tesoreria
             Cursor = Cursors.WaitCursor;
 
             grdEntradas.Visible = false;
-            string filtro = $"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}'";
+            string filtro = $"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}' AND IDC IN(SELECT Caja FROM Cajas_Autorizadas WHERE Usuario={usuario.ID})";
             grdEntradas.MostrarDatos(cEntradas.Datos(filtro), true);
             grdEntradas.ActivarCelda(grdEntradas.Rows - 1, e_Caja);
             Formato_Entradas();
@@ -337,7 +372,11 @@ namespace Programa1.Carga.Tesoreria
 
             if (Ver_Solo == true)
             {
-                filtro = filtro + " AND Usuario=" + usuario.ID;
+                filtro = $"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}' AND IDC IN(SELECT Caja FROM Cajas_Autorizadas WHERE Usuario={usuario.ID}) AND Usuario={usuario.ID}";
+            }
+            else
+            {
+                filtro = $"Fecha='{mntFecha.SelectionRange.Start:MM/dd/yy}'";
             }
             Crear_Menu_Gastos(filtro);
 
@@ -403,11 +442,13 @@ namespace Programa1.Carga.Tesoreria
             {
                 grdCajas.MostrarDatos(CD.Saldos(mntFecha.SelectionStart.Date), true, 2);
                 grdCajas.Columnas[2].Style.Format = "N1";
+                grdCajas.Columnas[3].Style.Format = "N1";
             }
             else
             {
                 grdCajas.MostrarDatos(CD.Saldos_ARendir(mntFecha.SelectionStart.Date), true, 2);
                 grdCajas.Columnas[2].Style.Format = "N1";
+                grdCajas.Columnas[3].Style.Format = "N1";
             }
             grdCajas.AutosizeAll();
         }
@@ -818,7 +859,7 @@ namespace Programa1.Carga.Tesoreria
 
                                         grdSalidas.ActivarCelda(f, e_Tipo);
 
-                                    } 
+                                    }
                                 }
                                 break;
                             case s_Tipo:
@@ -1500,8 +1541,44 @@ namespace Programa1.Carga.Tesoreria
 
 
 
+
         #endregion
 
+        
 
+        private void grdCajas_DobleClick(object sender, EventArgs e)
+        {
+            if (grdCajas.Col == grdCajas.get_ColIndex("Saldo_Banco"))
+            {
+                Cheques ch = new Cheques();
+                DataTable dt = ch.Datos_Vista("Fecha_Acreditacion='1-1-1900' AND ID_Caja=" + grdCajas.get_Texto(grdCajas.Row, 0));
+
+                string s = "";
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (!string.IsNullOrEmpty(s)) { s = s + "\r\n"; }
+
+                    s = $"{s}Fecha: {dr["Fecha_Entrada"]:dd/MM/yy} - Nº {dr["Numero"]} - Importe: {dr["Importe"]:C1}";
+                }
+                if (string.IsNullOrEmpty(s))
+                {
+                    s = "No hay cheques sin acreditar.";
+                }
+
+                MessageBox.Show(s, "Cheques");
+            }
+        }
+
+        private void importarEntregasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmImportar_Entregas fr = new frmImportar_Entregas();
+            cEntradas.Fecha = mntFecha.SelectionRange.Start;
+            cEntradas.caja.ID = 1;
+            cEntradas.TE.Id_Tipo = 1;
+
+            fr.entradas = cEntradas;
+            fr.ShowDialog();
+            Cargar_Datos();
+        }
     }
 }

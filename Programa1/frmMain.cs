@@ -2553,7 +2553,8 @@
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
-                Form frmCheques = new Carga.Tesoreria.frmCheques();
+                frmCheques frmCheques = new frmCheques();
+                frmCheques.usuario = usuario;
                 frmCheques.MdiParent = this;
                 frmCheques.Disposed += FrmCheques_Disposed;
                 forms.Add(frmCheques);

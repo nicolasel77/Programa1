@@ -35,7 +35,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.grdAgr = new Grilla2.SpeedGrilla();
             this.label2 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.lst_Cons = new System.Windows.Forms.ListBox();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.chFecha = new MaterialSkin.Controls.MaterialCheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.cFecha = new Programa1.Controles.cFechas();
@@ -46,8 +48,6 @@
             this.cmdActualizar = new Programa1.Controles.cBoton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmbnvaBoleta = new Programa1.Controles.cBoton();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,10 +60,10 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -110,7 +110,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.panel3);
             this.splitContainer3.Panel2.Controls.Add(this.chConSaldo);
             this.splitContainer3.Size = new System.Drawing.Size(1456, 690);
-            this.splitContainer3.SplitterDistance = 1344;
+            this.splitContainer3.SplitterDistance = 1301;
             this.splitContainer3.TabIndex = 1;
             // 
             // splitContainer2
@@ -131,8 +131,8 @@
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.grdAgr);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(1344, 690);
-            this.splitContainer2.SplitterDistance = 752;
+            this.splitContainer2.Size = new System.Drawing.Size(1301, 690);
+            this.splitContainer2.SplitterDistance = 727;
             this.splitContainer2.TabIndex = 0;
             // 
             // grd
@@ -160,6 +160,7 @@
             this.grd.FuenteEncabezado = null;
             this.grd.FuentePieDePagina = null;
             this.grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grd.LimpiarEstilosAntesDeOrdenar = false;
             this.grd.Location = new System.Drawing.Point(3, 31);
             this.grd.Name = "grd";
             this.grd.PieDePagina = "\t\tPage {0} of {1}";
@@ -167,7 +168,7 @@
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(746, 656);
+            this.grd.Size = new System.Drawing.Size(721, 656);
             this.grd.TabIndex = 1;
             this.grd.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grd_CambioFila);
             this.grd.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grd_KeyPress);
@@ -209,6 +210,7 @@
             this.grdAgr.FuenteEncabezado = null;
             this.grdAgr.FuentePieDePagina = null;
             this.grdAgr.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdAgr.LimpiarEstilosAntesDeOrdenar = false;
             this.grdAgr.Location = new System.Drawing.Point(3, 31);
             this.grdAgr.Name = "grdAgr";
             this.grdAgr.PieDePagina = "\t\tPage {0} of {1}";
@@ -216,7 +218,7 @@
             this.grdAgr.Redraw = true;
             this.grdAgr.Row = 0;
             this.grdAgr.Rows = 50;
-            this.grdAgr.Size = new System.Drawing.Size(582, 656);
+            this.grdAgr.Size = new System.Drawing.Size(564, 656);
             this.grdAgr.TabIndex = 1;
             this.grdAgr.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdAgr_CambioFila);
             this.grdAgr.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grdAgr_KeyPress);
@@ -232,6 +234,17 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Compras P2";
             // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.lst_Cons);
+            this.panel4.Location = new System.Drawing.Point(6, 361);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(142, 326);
+            this.panel4.TabIndex = 5;
+            // 
             // lst_Cons
             // 
             this.lst_Cons.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -242,10 +255,23 @@
             this.lst_Cons.Location = new System.Drawing.Point(0, 0);
             this.lst_Cons.Name = "lst_Cons";
             this.lst_Cons.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lst_Cons.Size = new System.Drawing.Size(99, 326);
+            this.lst_Cons.Size = new System.Drawing.Size(142, 326);
             this.lst_Cons.TabIndex = 9;
             this.lst_Cons.SelectedIndexChanged += new System.EventHandler(this.lst_Cons_SelectedIndexChanged);
             this.lst_Cons.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lst_Cons_MouseUp);
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(3, 339);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(111, 19);
+            this.materialLabel1.TabIndex = 10;
+            this.materialLabel1.Text = "Consignatarios";
             // 
             // chFecha
             // 
@@ -273,7 +299,7 @@
             this.panel3.Controls.Add(this.cFecha);
             this.panel3.Location = new System.Drawing.Point(1, 27);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(106, 249);
+            this.panel3.Size = new System.Drawing.Size(149, 249);
             this.panel3.TabIndex = 7;
             // 
             // cFecha
@@ -287,7 +313,7 @@
             this.cFecha.Mostrar = 0;
             this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(100, 243);
+            this.cFecha.Size = new System.Drawing.Size(143, 243);
             this.cFecha.TabIndex = 5;
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
@@ -321,6 +347,7 @@
             this.cmdImprimir.TabIndex = 1;
             this.cmdImprimir.Texto = "Imprimir";
             this.cmdImprimir.Click += new System.EventHandler(this.cmdImprimir_Click);
+            this.cmdImprimir.Load += new System.EventHandler(this.cmdImprimir_Load);
             // 
             // grdDetalle
             // 
@@ -346,6 +373,7 @@
             this.grdDetalle.FuenteEncabezado = null;
             this.grdDetalle.FuentePieDePagina = null;
             this.grdDetalle.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdDetalle.LimpiarEstilosAntesDeOrdenar = false;
             this.grdDetalle.Location = new System.Drawing.Point(188, 6);
             this.grdDetalle.Name = "grdDetalle";
             this.grdDetalle.PieDePagina = "\t\tPage {0} of {1}";
@@ -396,30 +424,6 @@
             this.cmbnvaBoleta.Texto = "Generar Boleta";
             this.cmbnvaBoleta.Click += new System.EventHandler(this.cmbnvaBoleta_Click);
             // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(3, 339);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(111, 19);
-            this.materialLabel1.TabIndex = 10;
-            this.materialLabel1.Text = "Consignatarios";
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.Controls.Add(this.lst_Cons);
-            this.panel4.Location = new System.Drawing.Point(6, 361);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(99, 326);
-            this.panel4.TabIndex = 5;
-            // 
             // frmVencimientos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,10 +447,10 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

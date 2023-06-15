@@ -209,7 +209,7 @@ namespace Programa1.Carga.Precios
             tKilos -= iKilos;
             tTotal -= iTotal;
             lblPromedio.Text = "Promedio: " + ((tTotal / iKilos) - iInt).ToString("N3");
-            lblIntegracion.Text = "Int: " + (tTotal / iKilos).ToString("N3");
+            lblIntegracion.Text = (tTotal / iKilos).ToString("N3");
 
             Calcular_Formulas();
         }
@@ -249,7 +249,8 @@ namespace Programa1.Carga.Precios
 
         private string Reemplazar_Precio(string cadena)
         {
-            cadena = cadena.Replace("[1]", lblIntegracion.Text.Substring(5));
+            float integracion = Convert.ToSingle(lblIntegracion.Text);
+            cadena = cadena.Replace("[1]", integracion.ToString());
 
             int n = cadena.IndexOf("[");
 
@@ -328,7 +329,7 @@ namespace Programa1.Carga.Precios
 
                 pr.Fecha = fr.mntFecha.SelectionStart.Date;                
 
-                integracion = Convert.ToSingle(lblIntegracion.Text.Substring(5));
+                integracion = Convert.ToSingle(lblIntegracion.Text);
 
                 foreach (string suc in fr.lstSucursales.SelectedItems)
                 {

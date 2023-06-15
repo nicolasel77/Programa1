@@ -104,7 +104,7 @@ namespace Programa1.Carga.Precios
                             for (int i = 0; i <= lstSucursales.Items.Count - 1; i++)
                             {
                                 pr.Sucursal.ID = Convert.ToInt32(h.Codigo_Seleccionado(lstSucursales.Items[i].ToString()));
-                                xlApp.Run("Imprimir_Carne", pr.Sucursal.ID, pr.Fecha, chIntegracion.Checked, false);
+                                xlApp.Run("Imprimir_Carne", pr.Sucursal.ID, pr.Fecha, chIntegracion.Checked, false, nuCant.Value);
                             }
                         }
                     }
@@ -119,7 +119,7 @@ namespace Programa1.Carga.Precios
                     foreach (string suc in lstSucursales.SelectedItems)
                     {
                         pr.Sucursal.ID = Convert.ToInt32(h.Codigo_Seleccionado(suc));
-                        xlApp.Run("Imprimir_Carne", pr.Sucursal.ID, pr.Fecha, chIntegracion.Checked, true);
+                        xlApp.Run("Imprimir_Carne", pr.Sucursal.ID, pr.Fecha, chIntegracion.Checked, true, nuCant.Value);
                     }
                 }
                 else
@@ -127,7 +127,7 @@ namespace Programa1.Carga.Precios
                     for (int i = 0; i <= lstSucursales.Items.Count - 1; i++)
                     {
                         pr.Sucursal.ID = Convert.ToInt32(h.Codigo_Seleccionado(lstSucursales.Items[i].ToString()));
-                        xlApp.Run("Imprimir_Carne", pr.Sucursal.ID, pr.Fecha, chIntegracion.Checked, true);
+                        xlApp.Run("Imprimir_Carne", pr.Sucursal.ID, pr.Fecha, chIntegracion.Checked, true, nuCant.Value);
                     }
                 }
             }
@@ -141,6 +141,19 @@ namespace Programa1.Carga.Precios
         private void chUltima_CheckedChanged(object sender, EventArgs e)
         {
             mntFecha.Enabled = chUltima.Checked;
+        }
+
+        private void lblTodas_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i <= lstSucursales.Items.Count-1;  i++)
+            {
+                lstSucursales.SetSelected(i, true);
+            }
+        }
+
+        private void lblNinguna_Click(object sender, EventArgs e)
+        {
+            lstSucursales.SelectedIndex = -1;
         }
     }
 }

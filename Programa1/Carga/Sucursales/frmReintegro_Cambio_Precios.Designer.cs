@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grd = new Grilla2.SpeedGrilla();
+            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmdAceptar = new Programa1.Controles.cBoton();
             this.txtPrecio = new System.Windows.Forms.TextBox();
@@ -39,7 +40,6 @@
             this.Productos = new Programa1.Controles.cProductos();
             this.mFecha = new System.Windows.Forms.MonthCalendar();
             this.tiCarga = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -110,6 +110,19 @@
             this.grd.Size = new System.Drawing.Size(805, 717);
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
+            this.grd.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grd_KeyUp);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DimGray;
+            this.label1.Location = new System.Drawing.Point(9, 637);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 16);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Cargar Precio:";
             // 
             // label2
             // 
@@ -129,7 +142,7 @@
             this.cmdAceptar.BackColor = System.Drawing.Color.Gainsboro;
             this.cmdAceptar.Location = new System.Drawing.Point(9, 687);
             this.cmdAceptar.Name = "cmdAceptar";
-            this.cmdAceptar.Size = new System.Drawing.Size(512, 40);
+            this.cmdAceptar.Size = new System.Drawing.Size(508, 40);
             this.cmdAceptar.TabIndex = 5;
             this.cmdAceptar.Texto = "Guardar";
             this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
@@ -157,7 +170,7 @@
             this.txtDescripcion.ForeColor = System.Drawing.Color.DimGray;
             this.txtDescripcion.Location = new System.Drawing.Point(9, 662);
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(512, 19);
+            this.txtDescripcion.Size = new System.Drawing.Size(508, 19);
             this.txtDescripcion.TabIndex = 4;
             this.txtDescripcion.Text = "Reintegros por cambio de precios";
             // 
@@ -169,7 +182,7 @@
             this.Sucursales.Filtro_In = "";
             this.Sucursales.Location = new System.Drawing.Point(9, 205);
             this.Sucursales.Mostrar_Botones = false;
-            this.Sucursales.Mostrar_Tipo = true;
+            this.Sucursales.Mostrar_Tipo = false;
             this.Sucursales.Name = "Sucursales";
             this.Sucursales.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.Sucursales.Size = new System.Drawing.Size(248, 423);
@@ -188,7 +201,7 @@
             this.Productos.Location = new System.Drawing.Point(269, 12);
             this.Productos.Mostrar_Tipo = true;
             this.Productos.Name = "Productos";
-            this.Productos.Size = new System.Drawing.Size(252, 641);
+            this.Productos.Size = new System.Drawing.Size(248, 641);
             this.Productos.TabIndex = 2;
             this.Productos.Titulo = "Productos";
             this.Productos.Valor_Actual = -1;
@@ -205,18 +218,6 @@
             // 
             this.tiCarga.Interval = 1000;
             this.tiCarga.Tick += new System.EventHandler(this.tiCarga_Tick);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(9, 637);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 16);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Cargar Precio:";
             // 
             // frmReintegro_Cambio_Precios
             // 

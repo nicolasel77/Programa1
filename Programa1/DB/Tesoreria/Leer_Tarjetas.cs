@@ -18,8 +18,8 @@
 
         public DateTime vFecha;
         public int vlote;
-        public int vcomprobante;
-        public int vtarjeta;
+        public long vcomprobante;
+        public long vtarjeta;
         public int vtipo;
         public Single vimporte;
         public DateTime vpago;

@@ -415,6 +415,7 @@
             //Imprimir            
             xlWorkBook.PrintPreview();
 
+            xlWorkBook.Activate();
 
             //Liberar
             //xlWorkBook.Close(true, null, null);
@@ -447,6 +448,11 @@
                     Compras_P2();
                     break;
             }
+        }
+
+        private void cmdImprimir_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

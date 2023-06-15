@@ -1,5 +1,6 @@
 ﻿namespace Programa1.Carga.Sucursales
 {
+    using Programa1.DB;
     using Programa1.DB.Sucursales;
     using System;
     using System.Data;
@@ -13,6 +14,9 @@
         public frmReintegro_Cambio_Precios()
         {
             InitializeComponent();
+
+            int[] n = { 13, 32, 42, 43, 45, 46, 47, 112, 123 };
+            grd.TeclasManejadas = n;
 
             DataTable dt = rcp.Datos(fecha, 99);
             grd.MostrarDatos(dt, true, false);
@@ -128,13 +132,24 @@
         private void txtPrecio_TextChanged(object sender, EventArgs e)
         {
             tiCarga.Stop();
-            tiCarga.Start();            
+            tiCarga.Start();
         }
 
         private void tiCarga_Tick(object sender, EventArgs e)
         {
             tiCarga.Stop();
             Cargar();
+        }
+
+        private void grd_KeyUp(object sender, short e)
+        {
+            switch (Convert.ToInt32(e))
+            {
+                case 46: //Delete
+                    grd.BorrarFila(grd.Row);
+
+                    break;
+            }
         }
     }
 }

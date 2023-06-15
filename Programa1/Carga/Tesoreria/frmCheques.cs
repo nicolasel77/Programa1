@@ -1,5 +1,6 @@
 ﻿using Programa1.Carga.Varios;
 using Programa1.DB.Tesoreria;
+using Programa1.DB.Varios;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,8 +11,9 @@ namespace Programa1.Carga.Tesoreria
 {
     public partial class frmCheques : Form
     {
-        public Cheques ch = new Cheques();
+        public Cheques ch;
         public List<Cheques> cheques_seleccionados = new List<Cheques>();
+        public Usuarios usuario;
 
         const byte Id = 0;
         const byte Numero = 1;
@@ -35,6 +37,8 @@ namespace Programa1.Carga.Tesoreria
         {
             InitializeComponent();
             grd.TeclasManejadas = new int[] { 13, (int)Keys.F1 };
+
+            ch = new Cheques();
             Cargar();
         }
 
@@ -270,6 +274,7 @@ namespace Programa1.Carga.Tesoreria
 
                             break;
                         case Origen:
+                            fr.Filtro = $" Id IN(SELECT Caja FROM Cajas_Autorizadas WHERE Usuario={usuario.ID})";
                             fr.Tabla = "Cajas";
                             fr.ShowDialog();
                             if (fr.ID_Seleccionado != 0)

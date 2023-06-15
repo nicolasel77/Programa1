@@ -51,12 +51,12 @@ namespace Programa1.Carga.Tesoreria
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(15, 9);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(179, 18);
+            this.materialLabel1.Size = new System.Drawing.Size(183, 19);
             this.materialLabel1.TabIndex = 1;
             this.materialLabel1.Text = "Seleccione la nueva fecha";
             // 
@@ -90,7 +90,7 @@ namespace Programa1.Carga.Tesoreria
             // cmdAceptar
             // 
             this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdAceptar.Location = new System.Drawing.Point(214, 210);
+            this.cmdAceptar.Location = new System.Drawing.Point(309, 210);
             this.cmdAceptar.Name = "cmdAceptar";
             this.cmdAceptar.Size = new System.Drawing.Size(86, 40);
             this.cmdAceptar.TabIndex = 2;
@@ -100,7 +100,7 @@ namespace Programa1.Carga.Tesoreria
             // cmdCancelar
             // 
             this.cmdCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdCancelar.Location = new System.Drawing.Point(320, 210);
+            this.cmdCancelar.Location = new System.Drawing.Point(415, 210);
             this.cmdCancelar.Name = "cmdCancelar";
             this.cmdCancelar.Size = new System.Drawing.Size(86, 40);
             this.cmdCancelar.TabIndex = 2;
@@ -111,7 +111,7 @@ namespace Programa1.Carga.Tesoreria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 265);
+            this.ClientSize = new System.Drawing.Size(522, 265);
             this.Controls.Add(this.nuAño);
             this.Controls.Add(this.cmdAceptar);
             this.Controls.Add(this.cmdCancelar);

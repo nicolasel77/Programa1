@@ -82,7 +82,13 @@ Public Class Formatear
         Hoja.Range("G" & fila_final).Value = "Totales"
     End Sub
 
-    Public Sub Formato_Automatico(ByVal dt As Data.DataTable)
+    ''' <summary>
+    ''' Crea un excel nuevo
+    ''' </summary>
+    ''' <param name="dt">Datos para leer</param>
+    ''' <param name="CerraloNomas">Indica si se cierra solo. Por ejemplo: después de imprimir.</param>
+    ''' <param name="Imprimile">Si imprime directamente o no.</param>
+    Public Sub Formato_Automatico(ByVal dt As Data.DataTable, Optional CerraloNomas As Boolean = True, Optional ByVal Imprimile As Boolean = False)
         'Crear un excel para imprimir
         Dim xlApp As Excel.Application
         Dim xlWorkBook As Excel.Workbook
@@ -178,17 +184,24 @@ Public Class Formatear
             .FirstPage.RightFooter.Text = ""
         End With
 
-        xlApp.Visible = True
 
         'Imprimir            
-        xlWorkBook.PrintPreview()
+        If Imprimile = True Then
+            xlWorkBook.PrintOutEx()
+        Else
+            xlApp.Visible = True
+            xlWorkBook.PrintPreview()
+        End If
 
-        'Liberar
-        xlWorkBook.Close(True, Nothing, Nothing)
-        xlApp.Quit()
+        If CerraloNomas Then
+            xlApp.DisplayAlerts = False
+            'Liberar
+            'xlWorkBook.Close(True, Nothing, Nothing)
+            xlApp.Quit()
 
-        xlWorkBook = Nothing
-        xlApp = Nothing
-        h = Nothing
+            xlWorkBook = Nothing
+            xlApp = Nothing
+            h = Nothing
+        End If
     End Sub
 End Class
