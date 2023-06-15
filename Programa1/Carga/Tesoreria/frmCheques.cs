@@ -231,13 +231,16 @@ namespace Programa1.Carga.Tesoreria
                 int i = Convert.ToInt32(grd.get_Texto(grd.Row, Id));
                 if (i != 0)
                 {
-                    ch.ID = i;
-                    ch.Borrar();
-                    ch.Ejecutar_Comando(" DELETE FROM CD_Entradas WHERE Cheque=" + ch.Numero);
-                    ch.Ejecutar_Comando(" DELETE FROM CD_Gastos   WHERE Cheque=" + ch.Numero);
-                    ch.Ejecutar_Comando($"DELETE FROM CD_Gastos   WHERE Descripcion = 'Cheque Nº {ch.Numero}'");
-                    grd.BorrarFila();
-                    grd.ActivarCelda(grd.Row, Numero);
+                    if (ch.Numero > 0)
+                    { 
+                        ch.ID = i;
+                        ch.Borrar();
+                        ch.Ejecutar_Comando(" DELETE FROM CD_Entradas WHERE Cheque=" + ch.Numero);
+                        ch.Ejecutar_Comando(" DELETE FROM CD_Gastos   WHERE Cheque=" + ch.Numero);
+                        ch.Ejecutar_Comando($"DELETE FROM CD_Gastos   WHERE Descripcion = 'Cheque Nº {ch.Numero}'");
+                        grd.BorrarFila();
+                        grd.ActivarCelda(grd.Row, Numero);
+                    }
                 }
             }
             else
