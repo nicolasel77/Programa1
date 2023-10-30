@@ -196,27 +196,55 @@
                             }
                             else
                             {
-                                for (int i = 2; i <= max; i++)
+                                if (leer.vtipo != 12)
                                 {
-                                    DataRow nrow = dt.NewRow();
-                                    leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
-
-                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                    for (int i = 2; i <= max; i++)
                                     {
-                                        nrow["Fecha"] = leer.vFecha;
-                                        nrow["Fecha_Pago"] = xApp.Cells[i, 3].Text;
-                                        nrow["Comprobante"] = xApp.Cells[i, 4].Text;
-                                        nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 5].Text));
-                                        nrow["Tarjeta"] = Convert.ToInt32(xApp.Cells[i, 6].Text);
-                                        nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 8].Text);
-                                        nrow["Lote"] = Convert.ToInt32(xApp.Cells[i, 14].Text);
-                                        nrow["Id_Tipo"] = leer.vtipo;
-                                        nrow["Acreditado"] = true;
+                                        DataRow nrow = dt.NewRow();
+                                        leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
 
-                                        dt.Rows.Add(nrow);
+                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                        {
+                                            nrow["Fecha"] = leer.vFecha;
+                                            nrow["Fecha_Pago"] = xApp.Cells[i, 3].Text;
+                                            nrow["Comprobante"] = xApp.Cells[i, 4].Text;
+                                            nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 5].Text));
+                                            nrow["Tarjeta"] = Convert.ToInt32(xApp.Cells[i, 6].Text);
+                                            nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 8].Text);
+                                            nrow["Lote"] = Convert.ToInt32(xApp.Cells[i, 14].Text);
+                                            nrow["Id_Tipo"] = leer.vtipo;
+                                            nrow["Acreditado"] = true;
+
+                                            dt.Rows.Add(nrow);
+                                        }
+                                        pbLeer.Value = i;
+                                        Application.DoEvents();
                                     }
-                                    pbLeer.Value = i;
-                                    Application.DoEvents();
+                                }
+                                else
+                                {
+                                    for (int i = 2; i <= max; i++)
+                                    {
+                                        DataRow nrow = dt.NewRow();
+                                        leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
+
+                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                        {
+                                            nrow["Fecha"] = leer.vFecha;
+                                            nrow["Fecha_Pago"] = leer.vFecha;
+                                            nrow["Comprobante"] = xApp.Cells[i, 4].Text;
+                                            nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 2].Text));
+                                            nrow["Tarjeta"] = 1;
+                                            nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 3].Text);
+                                            nrow["Lote"] = 1;
+                                            nrow["Id_Tipo"] = leer.vtipo;
+                                            nrow["Acreditado"] = true;
+
+                                            dt.Rows.Add(nrow);
+                                        }
+                                        pbLeer.Value = i;
+                                        Application.DoEvents();
+                                    }
                                 }
                             }
                         }

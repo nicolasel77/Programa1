@@ -54,6 +54,8 @@
             this.aPicadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.empleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.qRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cuentaDniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.cmdCarne = new System.Windows.Forms.Button();
@@ -398,9 +400,11 @@
             this.ofertasToolStripMenuItem,
             this.aPicadaToolStripMenuItem,
             this.empleadosToolStripMenuItem,
-            this.gastosToolStripMenuItem});
+            this.gastosToolStripMenuItem,
+            this.qRToolStripMenuItem,
+            this.cuentaDniToolStripMenuItem});
             this.mnuFiltroSalidas.Name = "mnuFiltroSalidas";
-            this.mnuFiltroSalidas.Size = new System.Drawing.Size(133, 180);
+            this.mnuFiltroSalidas.Size = new System.Drawing.Size(133, 224);
             // 
             // efectivoToolStripMenuItem
             // 
@@ -465,6 +469,22 @@
             this.gastosToolStripMenuItem.Tag = "8";
             this.gastosToolStripMenuItem.Text = "Gastos";
             this.gastosToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
+            // 
+            // qRToolStripMenuItem
+            // 
+            this.qRToolStripMenuItem.Name = "qRToolStripMenuItem";
+            this.qRToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.qRToolStripMenuItem.Tag = "9";
+            this.qRToolStripMenuItem.Text = "QR";
+            this.qRToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
+            // 
+            // cuentaDniToolStripMenuItem
+            // 
+            this.cuentaDniToolStripMenuItem.Name = "cuentaDniToolStripMenuItem";
+            this.cuentaDniToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.cuentaDniToolStripMenuItem.Tag = "10";
+            this.cuentaDniToolStripMenuItem.Text = "Cuenta dni";
+            this.cuentaDniToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
             // 
             // label1
             // 
@@ -1105,5 +1125,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem verBalancesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verSoloNegativosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cuentaDniToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem qRToolStripMenuItem;
     }
 }

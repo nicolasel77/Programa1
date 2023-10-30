@@ -558,6 +558,54 @@
             }
         }
 
+        private void stockGalponToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmStock_Galpon")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("FrmStock_Galpon");
+                t.Text = "Galpon";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmStock_Galpon = new frmStock_Galpon();
+                frmStock_Galpon.MdiParent = this;
+                frmStock_Galpon.Disposed += FrmStock_Galpon_Disposed;
+                forms.Add(frmStock_Galpon);
+                frmStock_Galpon.Show();
+                frmStock_Galpon.WindowState = FormWindowState.Minimized;
+                frmStock_Galpon.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmStock_Galpon_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Galpon")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmStock_Galpon")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
         private void CompraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;

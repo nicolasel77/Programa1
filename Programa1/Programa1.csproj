@@ -497,6 +497,12 @@
     <Compile Include="Carga\Sucursales\frmStock_Carne.Designer.cs">
       <DependentUpon>frmStock_Carne.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Sucursales\frmStock_Galpon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmStock_Galpon.Designer.cs">
+      <DependentUpon>frmStock_Galpon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Sucursales\frmTraslados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -890,6 +896,7 @@
     <Compile Include="DB\Sucursales\Promedios_Carne.cs" />
     <Compile Include="DB\Sucursales\Reintegro_Cambio_Precios.cs" />
     <Compile Include="DB\Sucursales\Resumen_Sucursales.cs" />
+    <Compile Include="DB\Sucursales\Stock_Galpon.cs" />
     <Compile Include="DB\Sucursales\Suc_Cuentas.cs" />
     <Compile Include="DB\Sucursales\Supervisores.cs" />
     <Compile Include="DB\Sucursales\Titulos.cs" />
@@ -1153,6 +1160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmStock_Carne.resx">
       <DependentUpon>frmStock_Carne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sucursales\frmStock_Galpon.resx">
+      <DependentUpon>frmStock_Galpon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmTraslados.resx">
       <DependentUpon>frmTraslados.cs</DependentUpon>
