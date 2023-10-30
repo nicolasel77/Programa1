@@ -62,7 +62,8 @@
             {
                 lblArchivo.Text = s;
                 string n = s.Substring(s.LastIndexOf(@"\") + 1);
-                leer.Sucursal.ID = Convert.ToInt32(n.Substring(0, n.LastIndexOf(" ")));
+                leer.Sucursal.ID = Convert.ToInt32(n.Substring(0, n.LastIndexOf(".")));
+                //leer.Sucursal.ID = Convert.ToInt32(n);
                 if (leer.Sucursal.Existe() == true)
                 {
                     lblSucursal.Text = leer.Sucursal.Nombre;
@@ -123,7 +124,6 @@
 
                     String s = lblArchivo.Text;
                     String Suc = s.Substring(s.LastIndexOf(@"\") + 1);
-                    //Suc = Suc.Substring(0, Suc.LastIndexOf(" "));
 
                     Excel.Application xApp = new Excel.Application();
                     Excel.Workbook xLibros = xApp.Workbooks.Open(s);
@@ -139,7 +139,7 @@
 
                         lblpb.Text = "Cargando:";
 
-                        int max = xApp.ActiveSheet.Range("A1").End(Excel.XlDirection.xlDown).Row;
+                        int max = xApp.ActiveSheet.Range("A10000").End(Excel.XlDirection.xlUp).Row;
                         pbLeer.Maximum = max;
 
                         dt.Rows.Clear();
@@ -200,25 +200,30 @@
                                 {
                                     for (int i = 2; i <= max; i++)
                                     {
-                                        DataRow nrow = dt.NewRow();
-                                        leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
+                                        leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
 
                                         if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
                                         {
-                                            nrow["Fecha"] = leer.vFecha;
-                                            nrow["Fecha_Pago"] = xApp.Cells[i, 3].Text;
-                                            nrow["Comprobante"] = xApp.Cells[i, 4].Text;
-                                            nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 5].Text));
-                                            nrow["Tarjeta"] = Convert.ToInt32(xApp.Cells[i, 6].Text);
-                                            nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 8].Text);
-                                            nrow["Lote"] = Convert.ToInt32(xApp.Cells[i, 14].Text);
-                                            nrow["Id_Tipo"] = leer.vtipo;
-                                            nrow["Acreditado"] = true;
+                                            DataRow nrow = dt.NewRow();
+                                            leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
 
-                                            dt.Rows.Add(nrow);
+                                            if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                            {
+                                                nrow["Fecha"] = leer.vFecha;
+                                                nrow["Fecha_Pago"] = xApp.Cells[i, 3].Text;
+                                                nrow["Comprobante"] = xApp.Cells[i, 4].Text;
+                                                nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 5].Text));
+                                                nrow["Tarjeta"] = Convert.ToInt32(xApp.Cells[i, 6].Text);
+                                                nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 8].Text);
+                                                nrow["Lote"] = Convert.ToInt32(xApp.Cells[i, 14].Text);
+                                                nrow["Id_Tipo"] = leer.vtipo;
+                                                nrow["Acreditado"] = true;
+
+                                                dt.Rows.Add(nrow);
+                                            }
+                                            pbLeer.Value = i;
+                                            Application.DoEvents();
                                         }
-                                        pbLeer.Value = i;
-                                        Application.DoEvents();
                                     }
                                 }
                                 else
@@ -252,10 +257,10 @@
                         {
                             //  QR
                             max = xApp.ActiveSheet.Range("D10000").End(Excel.XlDirection.xlUp).Row;
-                            
+
                             pbLeer.Maximum = max;
 
-                            Suc = Suc.Substring(0, Suc.LastIndexOf(" "));
+                            Suc = Suc.Substring(0, Suc.LastIndexOf("."));
 
                             int ini = xApp.ActiveSheet.Range("G1").End(Excel.XlDirection.xlDown).Row;
                             ini++;
@@ -269,7 +274,7 @@
 
                                 if (xApp.Cells[i, 1].Text == "Total")
                                 {
-                                    i = max; 
+                                    i = max;
                                     break;
                                 }
                                 else
@@ -300,7 +305,7 @@
                                             dt.Rows.Add(nrow);
                                         }
                                     }
-                                }                                
+                                }
                             }
                         }
 
@@ -420,7 +425,9 @@
             if (Directory.Exists(fcarpeta))
             {
                 string t_extencion;
-                if (chclover.Checked)
+                int tipo = h.Codigo_Seleccionado(lstTipo.Text);
+
+                if (chclover.Checked || tipo == 9)
                 { t_extencion = "*.xlsx"; }
                 else { t_extencion = "*.csv"; }
 
@@ -430,9 +437,9 @@
                     String n = s.Substring(s.LastIndexOf(@"\") + 1);
                     n = n.Substring(0, n.IndexOf("."));
 
-                    //leer.Sucursal.ID = Convert.ToInt32(n.Substring(0, n.LastIndexOf(" ")));
-                    //lblSucursal.Text = leer.Sucursal.Nombre;
-                    Escribir(n);
+                    leer.Sucursal.ID = Convert.ToInt32(n);
+                    lblSucursal.Text = leer.Sucursal.Nombre;
+                    Escribir(tipo.ToString());
                 }
             }
         }

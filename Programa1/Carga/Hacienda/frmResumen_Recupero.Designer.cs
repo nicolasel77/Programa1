@@ -33,6 +33,14 @@
             this.grd = new Grilla2.SpeedGrilla();
             this.nuCant = new System.Windows.Forms.NumericUpDown();
             this.lstFrigorificos = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblRecu = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblPagos = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblNuestro = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblSaldo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -52,6 +60,14 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lblSaldo);
+            this.splitContainer1.Panel2.Controls.Add(this.lblNuestro);
+            this.splitContainer1.Panel2.Controls.Add(this.lblPagos);
+            this.splitContainer1.Panel2.Controls.Add(this.lblRecu);
+            this.splitContainer1.Panel2.Controls.Add(this.label6);
+            this.splitContainer1.Panel2.Controls.Add(this.label4);
+            this.splitContainer1.Panel2.Controls.Add(this.label2);
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.nuCant);
             this.splitContainer1.Panel2.Controls.Add(this.lstFrigorificos);
             this.splitContainer1.Size = new System.Drawing.Size(936, 801);
@@ -125,6 +141,86 @@
             this.lstFrigorificos.TabIndex = 2;
             this.lstFrigorificos.SelectedIndexChanged += new System.EventHandler(this.lstFrigorificos_SelectedIndexChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(10, 341);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(120, 23);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Total Recupero:";
+            // 
+            // lblRecu
+            // 
+            this.lblRecu.AutoSize = true;
+            this.lblRecu.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRecu.Location = new System.Drawing.Point(136, 341);
+            this.lblRecu.Name = "lblRecu";
+            this.lblRecu.Size = new System.Drawing.Size(19, 23);
+            this.lblRecu.TabIndex = 4;
+            this.lblRecu.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(34, 364);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 23);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Total Pagos:";
+            // 
+            // lblPagos
+            // 
+            this.lblPagos.AutoSize = true;
+            this.lblPagos.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPagos.Location = new System.Drawing.Point(136, 364);
+            this.lblPagos.Name = "lblPagos";
+            this.lblPagos.Size = new System.Drawing.Size(19, 23);
+            this.lblPagos.TabIndex = 4;
+            this.lblPagos.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(5, 387);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(125, 23);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Pagos Nuestros:";
+            // 
+            // lblNuestro
+            // 
+            this.lblNuestro.AutoSize = true;
+            this.lblNuestro.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNuestro.Location = new System.Drawing.Point(136, 387);
+            this.lblNuestro.Name = "lblNuestro";
+            this.lblNuestro.Size = new System.Drawing.Size(19, 23);
+            this.lblNuestro.TabIndex = 4;
+            this.lblNuestro.Text = "0";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(76, 410);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(54, 23);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Saldo:";
+            // 
+            // lblSaldo
+            // 
+            this.lblSaldo.AutoSize = true;
+            this.lblSaldo.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSaldo.Location = new System.Drawing.Point(136, 410);
+            this.lblSaldo.Name = "lblSaldo";
+            this.lblSaldo.Size = new System.Drawing.Size(19, 23);
+            this.lblSaldo.TabIndex = 4;
+            this.lblSaldo.Text = "0";
+            // 
             // frmResumen_Recupero
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,6 +232,7 @@
             this.Text = "Resumen Recupero";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nuCant)).EndInit();
@@ -149,5 +246,13 @@
         private System.Windows.Forms.ListBox lstFrigorificos;
         private Grilla2.SpeedGrilla grd;
         private System.Windows.Forms.NumericUpDown nuCant;
+        private System.Windows.Forms.Label lblSaldo;
+        private System.Windows.Forms.Label lblNuestro;
+        private System.Windows.Forms.Label lblPagos;
+        private System.Windows.Forms.Label lblRecu;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

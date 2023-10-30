@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.mnuPrincipal = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -142,6 +143,7 @@
             this.haciendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lorenaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1043,6 +1045,9 @@
             this.tstMenu.ItemAdded += new System.Windows.Forms.ToolStripItemEventHandler(this.tstMenu_ItemAdded);
             this.tstMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tstMenu_ItemClicked);
             // 
+
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1179,6 +1184,7 @@
         private System.Windows.Forms.ToolStripMenuItem haciendaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lorenaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockGalponToolStripMenuItem;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

@@ -113,11 +113,11 @@
                 string fecha = Dato_Generico("vw_PreciosSucursales", "Id_Tipo=" + tipo, "MAX(Fecha)").ToString();
                 if (Fecha != null) { fecha = $"'{Fecha:MM/dd/yy}'"; }
 
-                string cmdText = $"SELECT Id, Nombre, dbo.f_Precio({fecha}, {Sucursal.ID}, Id) Precio FROM Productos WHERE Id_Tipo={tipo} AND Ver=1 ORDER BY Id";
+                string cmdText = $"SELECT Id, Nombre, (SELECT P.Precio FROM Precios_Sucursales P WHERE P.Id_Productos=Productos.Id AND P.Fecha={fecha} AND P.Id_Sucursales={Sucursal.ID}) Precio FROM Productos WHERE Id_Tipo={tipo} AND Ver=1 ORDER BY Id";
                 
                 if (mostrar_cambiado == true)
                 {
-                    cmdText = $"SELECT Id, Nombre, dbo.f_Precio({fecha}, {Sucursal.ID}, Id) Precio, dbo.f_PrecioAnterior({fecha}, {Sucursal.ID}, Id) Anterior FROM Productos WHERE Id_Tipo={tipo} AND Ver=1 ORDER BY Id";
+                    cmdText = $"SELECT Id, Nombre, (SELECT P.Precio FROM Precios_Sucursales P WHERE P.Id_Productos=Productos.Id AND P.Fecha={fecha} AND P.Id_Sucursales={Sucursal.ID}) Precio, (SELECT TOP 1 P.Precio FROM Precios_Sucursales P WHERE P.Id_Productos=Productos.Id AND P.Fecha<{fecha} AND P.Id_Sucursales={Sucursal.ID} ORDER BY P.Fecha DESC) Anterior FROM Productos WHERE Id_Tipo={tipo} AND Ver=1 ORDER BY Id";
                 }
 
                 if(Sucursal.ID != 0)

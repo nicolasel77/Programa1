@@ -118,7 +118,6 @@
             // mntFecha
             // 
             this.mntFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.mntFecha.Enabled = false;
             this.mntFecha.Location = new System.Drawing.Point(301, 397);
             this.mntFecha.Name = "mntFecha";
             this.mntFecha.TabIndex = 4;
@@ -145,7 +144,7 @@
             this.lblTodas.AutoSize = true;
             this.lblTodas.Depth = 0;
             this.lblTodas.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblTodas.ForeColor = System.Drawing.Color.Gray;
+            this.lblTodas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTodas.Location = new System.Drawing.Point(12, 621);
             this.lblTodas.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTodas.Name = "lblTodas";
@@ -160,7 +159,7 @@
             this.lblNinguna.AutoSize = true;
             this.lblNinguna.Depth = 0;
             this.lblNinguna.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblNinguna.ForeColor = System.Drawing.Color.Gray;
+            this.lblNinguna.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblNinguna.Location = new System.Drawing.Point(69, 621);
             this.lblNinguna.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNinguna.Name = "lblNinguna";

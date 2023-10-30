@@ -1,14 +1,17 @@
 ﻿namespace Programa1.Carga.Tesoreria
 {
     using Herramientas;
+
     using Programa1.DB.Tesoreria;
     using System;
+    using System.Data;
     using System.Windows.Forms;
+
     public partial class frmTarjetas : Form
     {
         public Tarjetas tarjetas = new Tarjetas();
         public Tipos_Tarjeta t_tarjetas = new Tipos_Tarjeta();
-
+        public Cuentas cuentas = new Cuentas();
         public frmTarjetas()
         {
             InitializeComponent();
@@ -18,7 +21,7 @@
         {
             Herramientas h = new Herramientas();
             h.Llenar_List(lstTipos, t_tarjetas.Datos());
-
+            h.Llenar_List(lstCuentas, cuentas.Datos_Genericos("SELECT Titular FROM dbGastos.dbo.vw_SucCuentas GROUP BY Titular ORDER BY Titular"));
             //Esto es para que la primera vez que se filtre no tire filas vacias
             chTipo.Checked = true;
         }
@@ -125,6 +128,24 @@
         private void grdTarjetas_Load(object sender, EventArgs e)
         {
             grdTarjetas.BorrarFila();
+        }
+
+        private void lstCuentas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstCuentas.SelectedIndex == -1)
+            {
+                cSuc.Filtro_In = "";
+            }
+            else
+            {
+                string n = "";
+                DataTable dt = cuentas.Datos_Genericos($"SELECT Suc FROM dbGastos.dbo.Suc_Cuentas WHERE Titular LIKE '{lstCuentas.Text}' GROUP BY Suc ORDER BY Suc");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    n = $"{n}, {dr[0]}";
+                }
+                cSuc.Filtro_In = n.Substring(2);
+            }
         }
     }
 }
