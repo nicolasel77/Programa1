@@ -147,7 +147,7 @@
             // 
             this.Label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(685, 393);
+            this.Label2.Location = new System.Drawing.Point(686, 424);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(46, 13);
             this.Label2.TabIndex = 9;
@@ -172,7 +172,7 @@
             this.lstTipo.ItemHeight = 20;
             this.lstTipo.Location = new System.Drawing.Point(691, 116);
             this.lstTipo.Name = "lstTipo";
-            this.lstTipo.Size = new System.Drawing.Size(166, 160);
+            this.lstTipo.Size = new System.Drawing.Size(166, 200);
             this.lstTipo.TabIndex = 7;
             this.lstTipo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstTipo_MouseUp);
             // 
@@ -180,7 +180,7 @@
             // 
             this.Label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Label4.AutoSize = true;
-            this.Label4.Location = new System.Drawing.Point(908, 317);
+            this.Label4.Location = new System.Drawing.Point(909, 348);
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(120, 13);
             this.Label4.TabIndex = 14;
@@ -190,7 +190,7 @@
             // 
             this.Label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(786, 317);
+            this.Label3.Location = new System.Drawing.Point(787, 348);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(119, 13);
             this.Label3.TabIndex = 15;
@@ -200,7 +200,7 @@
             // 
             this.dtMaxima.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtMaxima.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtMaxima.Location = new System.Drawing.Point(911, 336);
+            this.dtMaxima.Location = new System.Drawing.Point(912, 367);
             this.dtMaxima.Name = "dtMaxima";
             this.dtMaxima.Size = new System.Drawing.Size(116, 20);
             this.dtMaxima.TabIndex = 12;
@@ -209,7 +209,7 @@
             // 
             this.dtFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFecha.Location = new System.Drawing.Point(789, 336);
+            this.dtFecha.Location = new System.Drawing.Point(790, 367);
             this.dtFecha.Name = "dtFecha";
             this.dtFecha.Size = new System.Drawing.Size(116, 20);
             this.dtFecha.TabIndex = 13;
@@ -253,7 +253,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.cmdGuardar);
-            this.panel1.Location = new System.Drawing.Point(688, 330);
+            this.panel1.Location = new System.Drawing.Point(689, 361);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(92, 27);
             this.panel1.TabIndex = 18;
@@ -263,7 +263,7 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.cmdCarpeta);
-            this.panel2.Location = new System.Drawing.Point(688, 363);
+            this.panel2.Location = new System.Drawing.Point(689, 394);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(217, 27);
             this.panel2.TabIndex = 19;
@@ -298,7 +298,7 @@
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.cmdRuta);
-            this.panel5.Location = new System.Drawing.Point(911, 363);
+            this.panel5.Location = new System.Drawing.Point(912, 394);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(407, 27);
             this.panel5.TabIndex = 22;
@@ -337,14 +337,14 @@
             this.grdCuentas.FuentePieDePagina = null;
             this.grdCuentas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdCuentas.LimpiarEstilosAntesDeOrdenar = false;
-            this.grdCuentas.Location = new System.Drawing.Point(688, 410);
+            this.grdCuentas.Location = new System.Drawing.Point(688, 445);
             this.grdCuentas.Name = "grdCuentas";
             this.grdCuentas.PieDePagina = "\t\tPage {0} of {1}";
             this.grdCuentas.PintarFilaSel = true;
             this.grdCuentas.Redraw = true;
             this.grdCuentas.Row = 0;
             this.grdCuentas.Rows = 50;
-            this.grdCuentas.Size = new System.Drawing.Size(728, 221);
+            this.grdCuentas.Size = new System.Drawing.Size(728, 186);
             this.grdCuentas.TabIndex = 1;
             this.grdCuentas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdCuentas_Editado);
             this.grdCuentas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdCuentas_KeyUp);
@@ -390,7 +390,7 @@
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(688, 279);
+            this.lblTotal.Location = new System.Drawing.Point(688, 330);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(0, 16);
             this.lblTotal.TabIndex = 24;
@@ -400,7 +400,7 @@
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.cmdRecargar);
-            this.panel6.Location = new System.Drawing.Point(1324, 363);
+            this.panel6.Location = new System.Drawing.Point(1325, 394);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(92, 27);
             this.panel6.TabIndex = 19;
@@ -425,7 +425,7 @@
             // pbLeer
             // 
             this.pbLeer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbLeer.Location = new System.Drawing.Point(1037, 333);
+            this.pbLeer.Location = new System.Drawing.Point(1038, 364);
             this.pbLeer.Name = "pbLeer";
             this.pbLeer.Size = new System.Drawing.Size(275, 23);
             this.pbLeer.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
@@ -436,7 +436,7 @@
             // 
             this.lblpb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblpb.AutoSize = true;
-            this.lblpb.Location = new System.Drawing.Point(1034, 317);
+            this.lblpb.Location = new System.Drawing.Point(1035, 348);
             this.lblpb.Name = "lblpb";
             this.lblpb.Size = new System.Drawing.Size(52, 13);
             this.lblpb.TabIndex = 26;
@@ -449,7 +449,7 @@
             this.chclover.AutoSize = true;
             this.chclover.Depth = 0;
             this.chclover.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chclover.Location = new System.Drawing.Point(1324, 329);
+            this.chclover.Location = new System.Drawing.Point(1325, 360);
             this.chclover.Margin = new System.Windows.Forms.Padding(0);
             this.chclover.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chclover.MouseState = MaterialSkin.MouseState.HOVER;

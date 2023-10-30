@@ -58,6 +58,8 @@
             }
 
             grd.AutosizeAll();
+                        
+
             this.Cursor = Cursors.Default;
 
 

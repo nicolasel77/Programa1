@@ -1,5 +1,4 @@
 ﻿using Programa1.DB;
-using Programa1.Properties;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -83,7 +82,7 @@ namespace Programa1.Carga.Precios
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(AppContext.BaseDirectory + "\\Imprimir_Precios.xlsm");
             // Ejecutar la macro
             // Imprimir_Carne(ByVal Suc As Integer, ByVal Fecha As Date, ByVal Imp_Integracion As Boolean)
-            
+
             if (!chUltima.Checked)
             {
                 if (lstListas.SelectedIndex > -1)
@@ -96,7 +95,7 @@ namespace Programa1.Carga.Precios
                             foreach (string suc in lstSucursales.SelectedItems)
                             {
                                 pr.Sucursal.ID = Convert.ToInt32(h.Codigo_Seleccionado(suc));
-                                xlApp.Run("Imprimir_Carne", pr.Sucursal.ID, pr.Fecha, chIntegracion.Checked, false);
+                                xlApp.Run("Imprimir_Carne", pr.Sucursal.ID, pr.Fecha, chIntegracion.Checked, false, nuCant.Value);
                             }
                         }
                         else
@@ -112,7 +111,7 @@ namespace Programa1.Carga.Precios
             }
             else
             {
-                pr.Fecha =mntFecha.SelectionStart.Date;
+                pr.Fecha = mntFecha.SelectionStart.Date;
 
                 if (lstSucursales.SelectedIndex != -1)
                 {
@@ -140,12 +139,12 @@ namespace Programa1.Carga.Precios
 
         private void chUltima_CheckedChanged(object sender, EventArgs e)
         {
-            mntFecha.Enabled = chUltima.Checked;
+            mntFecha.Enabled = !chUltima.Checked;
         }
 
         private void lblTodas_Click(object sender, EventArgs e)
         {
-            for(int i = 0; i <= lstSucursales.Items.Count-1;  i++)
+            for (int i = 0; i <= lstSucursales.Items.Count - 1; i++)
             {
                 lstSucursales.SetSelected(i, true);
             }

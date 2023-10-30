@@ -898,6 +898,7 @@
     <Compile Include="DB\Tesoreria\Cajas.cs" />
     <Compile Include="DB\Tesoreria\Caja_Diaria.cs" />
     <Compile Include="DB\Tesoreria\Cheques.cs" />
+    <Compile Include="DB\Tesoreria\Cuentas.cs" />
     <Compile Include="DB\Tesoreria\Cuentas_Bancos.cs" />
     <Compile Include="DB\Tesoreria\Detalles_Pagos.cs" />
     <Compile Include="DB\Tesoreria\Detalle_Entregas.cs" />

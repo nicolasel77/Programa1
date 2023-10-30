@@ -11,11 +11,14 @@
     {
         //public readonly string cadCN = "Data Source=192.168.1.11;Initial Catalog=dbDatos2;User Id=Nikorasu;Password=Oficina02";
         public readonly string cadCN = Programa1.Properties.Settings.Default.dbDatosConnectionString;
-        public c_Base() 
+        public c_Base(string cadena = "") 
         {
-            if (System.Environment.UserName == "Nicolas")
+            if (System.Environment.UserName.ToLower().StartsWith("nicol"))
             {
-                //cadCN = "Data Source=192.168.1.11;Initial Catalog=dbDatos_Prueba;User Id=Nikorasu;Password=Oficina02";
+                if (cadena.Length != 0)
+                {
+                    cadCN = cadena; 
+                }
             }
         }
         public c_Base(string tabla, string vista)

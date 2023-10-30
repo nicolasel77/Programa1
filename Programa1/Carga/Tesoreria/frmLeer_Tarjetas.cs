@@ -62,7 +62,8 @@
             {
                 lblArchivo.Text = s;
                 string n = s.Substring(s.LastIndexOf(@"\") + 1);
-                leer.Sucursal.ID = Convert.ToInt32(n.Substring(0, n.LastIndexOf(" ")));
+                leer.Sucursal.ID = Convert.ToInt32(n.Substring(0, n.LastIndexOf(".")));
+                //leer.Sucursal.ID = Convert.ToInt32(n);
                 if (leer.Sucursal.Existe() == true)
                 {
                     lblSucursal.Text = leer.Sucursal.Nombre;
@@ -122,8 +123,7 @@
                     lblpb.Visible = true;
 
                     String s = lblArchivo.Text;
-                    String Suc = s.Substring(s.LastIndexOf(@"\") + 1);
-                    //Suc = Suc.Substring(0, Suc.LastIndexOf(" "));
+                    String Suc = s.Substring(s.LastIndexOf(@"\") + 1);                    
 
                     Excel.Application xApp = new Excel.Application();
                     Excel.Workbook xLibros = xApp.Workbooks.Open(s);
@@ -139,7 +139,7 @@
 
                         lblpb.Text = "Cargando:";
 
-                        int max = xApp.ActiveSheet.Range("A1").End(Excel.XlDirection.xlDown).Row;
+                        int max = xApp.ActiveSheet.Range("A10000").End(Excel.XlDirection.xlUp).Row;
                         pbLeer.Maximum = max;
 
                         dt.Rows.Clear();
@@ -199,7 +199,7 @@
                                 for (int i = 2; i <= max; i++)
                                 {
                                     DataRow nrow = dt.NewRow();
-                                    leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
+                                    leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
 
                                     if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
                                     {
@@ -224,10 +224,10 @@
                         {
                             //  QR
                             max = xApp.ActiveSheet.Range("D10000").End(Excel.XlDirection.xlUp).Row;
-                            
+
                             pbLeer.Maximum = max;
 
-                            Suc = Suc.Substring(0, Suc.LastIndexOf(" "));
+                            Suc = Suc.Substring(0, Suc.LastIndexOf("."));
 
                             int ini = xApp.ActiveSheet.Range("G1").End(Excel.XlDirection.xlDown).Row;
                             ini++;
@@ -241,7 +241,7 @@
 
                                 if (xApp.Cells[i, 1].Text == "Total")
                                 {
-                                    i = max; 
+                                    i = max;
                                     break;
                                 }
                                 else
@@ -272,7 +272,7 @@
                                             dt.Rows.Add(nrow);
                                         }
                                     }
-                                }                                
+                                }
                             }
                         }
 
@@ -392,8 +392,10 @@
             if (Directory.Exists(fcarpeta))
             {
                 string t_extencion;
-                if (chclover.Checked)
-                { t_extencion = "*.xlsx"; }
+                int tipo = h.Codigo_Seleccionado(lstTipo.Text);
+
+                if (chclover.Checked || tipo == 9)
+                    { t_extencion = "*.xlsx"; }
                 else { t_extencion = "*.csv"; }
 
                 foreach (string s in Directory.GetFiles(fcarpeta, t_extencion, SearchOption.TopDirectoryOnly))
@@ -402,9 +404,9 @@
                     String n = s.Substring(s.LastIndexOf(@"\") + 1);
                     n = n.Substring(0, n.IndexOf("."));
 
-                    //leer.Sucursal.ID = Convert.ToInt32(n.Substring(0, n.LastIndexOf(" ")));
-                    //lblSucursal.Text = leer.Sucursal.Nombre;
-                    Escribir(n);
+                    leer.Sucursal.ID = Convert.ToInt32(n);
+                    lblSucursal.Text = leer.Sucursal.Nombre;
+                    Escribir(tipo.ToString());
                 }
             }
         }

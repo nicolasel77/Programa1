@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.mnuPrincipal = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,9 +139,10 @@
             this.cargaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tesoreriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tstMenu = new System.Windows.Forms.ToolStrip();
             this.haciendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lorenaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tstMenu = new System.Windows.Forms.ToolStrip();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -977,37 +979,51 @@
             // administradorToolStripMenuItem
             // 
             this.administradorToolStripMenuItem.Name = "administradorToolStripMenuItem";
-            this.administradorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.administradorToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.administradorToolStripMenuItem.Text = "Administrador";
             this.administradorToolStripMenuItem.Click += new System.EventHandler(this.administradorToolStripMenuItem_Click);
             // 
             // supervisorToolStripMenuItem
             // 
             this.supervisorToolStripMenuItem.Name = "supervisorToolStripMenuItem";
-            this.supervisorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.supervisorToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.supervisorToolStripMenuItem.Text = "Supervisor";
             this.supervisorToolStripMenuItem.Click += new System.EventHandler(this.supervisorToolStripMenuItem_Click);
             // 
             // cargaToolStripMenuItem
             // 
             this.cargaToolStripMenuItem.Name = "cargaToolStripMenuItem";
-            this.cargaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cargaToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.cargaToolStripMenuItem.Text = "Carga";
             this.cargaToolStripMenuItem.Click += new System.EventHandler(this.cargaToolStripMenuItem_Click);
             // 
             // tesoreriaToolStripMenuItem
             // 
             this.tesoreriaToolStripMenuItem.Name = "tesoreriaToolStripMenuItem";
-            this.tesoreriaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tesoreriaToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.tesoreriaToolStripMenuItem.Text = "Tesoreria";
             this.tesoreriaToolStripMenuItem.Click += new System.EventHandler(this.tesoreriaToolStripMenuItem_Click);
             // 
             // tMToolStripMenuItem
             // 
             this.tMToolStripMenuItem.Name = "tMToolStripMenuItem";
-            this.tMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tMToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.tMToolStripMenuItem.Text = "TM";
             this.tMToolStripMenuItem.Click += new System.EventHandler(this.tMToolStripMenuItem_Click);
+            // 
+            // haciendaToolStripMenuItem
+            // 
+            this.haciendaToolStripMenuItem.Name = "haciendaToolStripMenuItem";
+            this.haciendaToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.haciendaToolStripMenuItem.Text = "Hacienda";
+            this.haciendaToolStripMenuItem.Click += new System.EventHandler(this.haciendaToolStripMenuItem_Click);
+            // 
+            // lorenaToolStripMenuItem
+            // 
+            this.lorenaToolStripMenuItem.Name = "lorenaToolStripMenuItem";
+            this.lorenaToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.lorenaToolStripMenuItem.Text = "Lorena";
+            this.lorenaToolStripMenuItem.Click += new System.EventHandler(this.lorenaToolStripMenuItem_Click);
             // 
             // tstMenu
             // 
@@ -1019,19 +1035,10 @@
             this.tstMenu.ItemAdded += new System.Windows.Forms.ToolStripItemEventHandler(this.tstMenu_ItemAdded);
             this.tstMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tstMenu_ItemClicked);
             // 
-            // haciendaToolStripMenuItem
+            // timer1
             // 
-            this.haciendaToolStripMenuItem.Name = "haciendaToolStripMenuItem";
-            this.haciendaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.haciendaToolStripMenuItem.Text = "Hacienda";
-            this.haciendaToolStripMenuItem.Click += new System.EventHandler(this.haciendaToolStripMenuItem_Click);
-            // 
-            // lorenaToolStripMenuItem
-            // 
-            this.lorenaToolStripMenuItem.Name = "lorenaToolStripMenuItem";
-            this.lorenaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.lorenaToolStripMenuItem.Text = "Lorena";
-            this.lorenaToolStripMenuItem.Click += new System.EventHandler(this.lorenaToolStripMenuItem_Click);
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmMain
             // 
@@ -1168,6 +1175,7 @@
         private System.Windows.Forms.ToolStripMenuItem analisisDeVentasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem haciendaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lorenaToolStripMenuItem;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

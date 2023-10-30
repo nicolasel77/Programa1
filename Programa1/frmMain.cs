@@ -6,6 +6,7 @@
     using Programa1.Carga.Sebero;
     using Programa1.Carga.Tesoreria;
     using Programa1.Carga.Varios;
+    using Programa1.Clases;
     using Programa1.DB.Varios;
     using System;
     using System.Collections.Generic;
@@ -3143,6 +3144,17 @@
         private void lorenaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             usuario.Nombre = "Lorena";
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //c_Base b = new c_Base("Data Source=192.168.10.132;Initial Catalog=dbEmpleados;User Id=Nikorasu;Password=Oficina02");
+            //var s = b.Dato_Generico("SELECT COUNT(*) FROM Sueldos WHERE Fecha>='8/1/23'");
+            //if (s.ToString() != "5452") 
+            //{ 
+            //    MessageBox.Show("Yesss");
+            //    this.Close();
+            //}
         }
     }
 }

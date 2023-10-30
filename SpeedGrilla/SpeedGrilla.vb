@@ -74,6 +74,7 @@ Public Class SpeedGrilla
         Me.Size = New System.Drawing.Size(714, 456)
         CType(Me.Grd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+
     End Sub
 
 #End Region
@@ -1464,6 +1465,14 @@ Public Class SpeedGrilla
         Array.Sort(TeclasManejadas) ' lo sorteo para que quede al final
         TeclasCol.Remove(Tecla & "a") 'y lo quito del collection        
     End Sub
+
+    Private Sub Grd_MouseClick(sender As Object, e As MouseEventArgs) Handles Grd.MouseClick
+        If e.Button = MouseButtons.Middle Then
+            ttGenenral.SetToolTip(Grd, $"Cant: {Grd.Rows.Count - 1}")
+        End If
+    End Sub
+
+
 
 #End Region
 
