@@ -96,6 +96,7 @@
                 if (File.Exists(s)) { }
                 try
                 {
+
                     File.Move(s, n);
                 }
                 catch (Exception er)
@@ -256,92 +257,133 @@
                         else
                         {
                             //  QR
-                            max = xApp.ActiveSheet.Range("D10000").End(Excel.XlDirection.xlUp).Row;
 
-                            pbLeer.Maximum = max;
 
-                            Suc = Suc.Substring(0, Suc.LastIndexOf("."));
-
-                            int ini = xApp.ActiveSheet.Range("G1").End(Excel.XlDirection.xlDown).Row;
-                            ini++;
-
-                            for (int i = ini; i <= max; i++)
+                            for (int i = 3; i <= max; i++)
                             {
+                                string nn = xApp.Range["A" + i].Text;
+
+                                if (nn == "") { break; }
+
+                                leer.vFecha = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
+                                if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                {
+                                    DataRow nrow = dt.NewRow();
+                                    
+                                    nrow["Fecha"] = leer.vFecha;
+                                    nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                    nrow["Comprobante"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+                                    nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                    nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(nn.Substring(0, nn.IndexOf(";"))));
+                                    nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                    nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                    nrow["Importe"] = Convert.ToSingle(nn.Substring(0, nn.IndexOf(";")).Replace(".", ","));
+                                    nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                    nrow["Lote"] = 1;
+
+                                    nrow["Fecha_Pago"] = leer.vFecha;
+
+                                    nrow["Tarjeta"] = 1;
+
+                                    nrow["Id_Tipo"] = leer.vtipo;
+                                    nrow["Acreditado"] = true;
+
+                                    dt.Rows.Add(nrow);
+                                }
                                 pbLeer.Value = i;
                                 Application.DoEvents();
 
-                                DataRow nrow = dt.NewRow();
+                                //max = xApp.ActiveSheet.Range("D10000").End(Excel.XlDirection.xlUp).Row;
 
-                                if (xApp.Cells[i, 1].Text == "Total")
-                                {
-                                    i = max;
-                                    break;
-                                }
-                                else
-                                {
-                                    leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
+                                //pbLeer.Maximum = max;
 
-                                    if (xApp.Cells[i, 8].Text == "Confirmado")
-                                    {
-                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
-                                        {
-                                            nrow["Fecha"] = leer.vFecha;
-                                            nrow["Fecha_Pago"] = leer.vFecha;
-                                            nrow["Comprobante"] = xApp.Cells[i, 3].Text;
-                                            nrow["Suc"] = Convert.ToInt32(Suc);
-                                            string n = xApp.Cells[i, 7].Text;
-                                            long nt = 0;
-                                            long.TryParse(n, out nt);
+                                //Suc = Suc.Substring(0, Suc.LastIndexOf("."));
 
-                                            nrow["Tarjeta"] = nt;
+                                //int ini = xApp.ActiveSheet.Range("G1").End(Excel.XlDirection.xlDown).Row;
+                                //ini++;
 
-                                            n = xApp.Cells[i, 4].Text;
-                                            n = n.Replace("$", "");
-                                            nrow["Importe"] = Convert.ToSingle(n);
-                                            nrow["Lote"] = 0;
-                                            nrow["Id_Tipo"] = 9;
-                                            nrow["Acreditado"] = true;
+                                //for (int i = ini; i <= max; i++)
+                                //{
+                                //    pbLeer.Value = i;
+                                //    Application.DoEvents();
 
-                                            dt.Rows.Add(nrow);
-                                        }
-                                    }
-                                }
+                                //    DataRow nrow = dt.NewRow();
+
+                                //    if (xApp.Cells[i, 1].Text == "Total")
+                                //    {
+                                //        i = max;
+                                //        break;
+                                //    }
+                                //    else
+                                //    {
+                                //        leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
+
+                                //        if (xApp.Cells[i, 8].Text == "Confirmado")
+                                //        {
+                                //            if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                //            {
+                                //                nrow["Fecha"] = leer.vFecha;
+                                //                nrow["Fecha_Pago"] = leer.vFecha;
+                                //                nrow["Comprobante"] = xApp.Cells[i, 3].Text;
+                                //                nrow["Suc"] = Convert.ToInt32(Suc);
+                                //                string n = xApp.Cells[i, 7].Text;
+                                //                long nt = 0;
+                                //                long.TryParse(n, out nt);
+
+                                //                nrow["Tarjeta"] = nt;
+
+                                //                n = xApp.Cells[i, 4].Text;
+                                //                n = n.Replace("$", "");
+                                //                nrow["Importe"] = Convert.ToSingle(n);
+                                //                nrow["Lote"] = 0;
+                                //                nrow["Id_Tipo"] = 9;
+                                //                nrow["Acreditado"] = true;
+
+                                //                dt.Rows.Add(nrow);
+                                //            }
+                                //        }
+                                //    }
+                                //}
                             }
+
+                            // Solución para saber Cual es el Último registro de la semana anterior:
+                            // 1: Buscar si hay más de un número de lote
+                            // 2: Buscar si uno de esos Números es 1
+                            // 3: Siempre sería el Último a no ser que el otro Número sea 2 (en ese caso tomar desde el 2)
+                            // Aclaración: Esto Podría fallar únicamente en caso de que el Número de lote sea 2 y ese mismo día se resetee el Número de lote (Toda caso distinto a ese estaría bien)
+                            //if (chSeparar.Checked == true)
+                            //{
+                            //    DataTable dtcc = leer.suc_cuentas.nccc(leer.Sucursal.ID);
+                            //    int[] succcc = new int[leer.suc_cuentas.N_Cuentas_Compartidas(leer.Sucursal.ID)];
+                            //    for (int i = 0; i < succcc.Length; i++)
+                            //    {
+                            //        succcc[i] = Convert.ToInt32(dtcc.Rows[i][0]);
+                            //    }
+
+                            //    for (int j = 0; j < succcc.Length; j ++)
+                            //    {
+                            //        if (succcc[j] != leer.Sucursal.ID)
+                            //        {
+                            //            DateTime fecha_us = dtFecha.Value.AddDays(-1);
+                            //            int Lote_us
+                            //            int Comprobante_us
+
+                            //            for (int i = 1; i < dt.Rows.Count; i++)
+                            //            {
+                            //                if (dt.Rows[i][lote])
+                            //                {
+
+                            //                    dt.Rows[i]["suc"] = succcc[j]
+                            //                }
+                            //            }
+                            //        }
+                            //    }
                         }
-
-                        // Solución para saber Cual es el Último registro de la semana anterior:
-                        // 1: Buscar si hay más de un número de lote
-                        // 2: Buscar si uno de esos Números es 1
-                        // 3: Siempre sería el Último a no ser que el otro Número sea 2 (en ese caso tomar desde el 2)
-                        // Aclaración: Esto Podría fallar únicamente en caso de que el Número de lote sea 2 y ese mismo día se resetee el Número de lote (Toda caso distinto a ese estaría bien)
-                        //if (chSeparar.Checked == true)
-                        //{
-                        //    DataTable dtcc = leer.suc_cuentas.nccc(leer.Sucursal.ID);
-                        //    int[] succcc = new int[leer.suc_cuentas.N_Cuentas_Compartidas(leer.Sucursal.ID)];
-                        //    for (int i = 0; i < succcc.Length; i++)
-                        //    {
-                        //        succcc[i] = Convert.ToInt32(dtcc.Rows[i][0]);
-                        //    }
-
-                        //    for (int j = 0; j < succcc.Length; j ++)
-                        //    {
-                        //        if (succcc[j] != leer.Sucursal.ID)
-                        //        {
-                        //            DateTime fecha_us = dtFecha.Value.AddDays(-1);
-                        //            int Lote_us
-                        //            int Comprobante_us
-
-                        //            for (int i = 1; i < dt.Rows.Count; i++)
-                        //            {
-                        //                if (dt.Rows[i][lote])
-                        //                {
-
-                        //                    dt.Rows[i]["suc"] = succcc[j]
-                        //                }
-                        //            }
-                        //        }
-                        //    }
-                        //}
 
                         grdDatos.MostrarDatos(dt, true, false);
                         grdDatos.AutosizeAll();
@@ -425,9 +467,7 @@
             if (Directory.Exists(fcarpeta))
             {
                 string t_extencion;
-                int tipo = h.Codigo_Seleccionado(lstTipo.Text);
-
-                if (chclover.Checked || tipo == 9)
+                if (chclover.Checked)
                 { t_extencion = "*.xlsx"; }
                 else { t_extencion = "*.csv"; }
 
@@ -437,9 +477,9 @@
                     String n = s.Substring(s.LastIndexOf(@"\") + 1);
                     n = n.Substring(0, n.IndexOf("."));
 
-                    leer.Sucursal.ID = Convert.ToInt32(n);
-                    lblSucursal.Text = leer.Sucursal.Nombre;
-                    Escribir(tipo.ToString());
+                    //leer.Sucursal.ID = Convert.ToInt32(n.Substring(0, n.LastIndexOf(" ")));
+                    //lblSucursal.Text = leer.Sucursal.Nombre;
+                    Escribir(n);
                 }
             }
         }
