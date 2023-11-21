@@ -238,7 +238,7 @@
                                         {
                                             nrow["Fecha"] = leer.vFecha;
                                             nrow["Fecha_Pago"] = leer.vFecha;
-                                            nrow["Comprobante"] = xApp.Cells[i, 4].Text;
+                                            nrow["Comprobante"] = xApp.Cells[i, 4].Text.Substring(0,17);
                                             nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 2].Text));
                                             nrow["Tarjeta"] = 1;
                                             nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 3].Text);
@@ -258,45 +258,78 @@
                         {
                             //  QR
 
-
-                            for (int i = 3; i <= max; i++)
+                            if (chclover.Checked)
                             {
-                                string nn = xApp.Range["A" + i].Text;
-
-                                if (nn == "") { break; }
-
-                                leer.vFecha = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
-                                if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                for (int i = 2; i <= max; i++)
                                 {
-                                    DataRow nrow = dt.NewRow();
-                                    
-                                    nrow["Fecha"] = leer.vFecha;
-                                    nn = nn.Substring(nn.IndexOf(";") + 1);
+                                    leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
 
-                                    nrow["Comprobante"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
-                                    nn = nn.Substring(nn.IndexOf(";") + 1);
+                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                    {
+                                        DataRow nrow = dt.NewRow();
+                                        leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
 
-                                    nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(nn.Substring(0, nn.IndexOf(";"))));
-                                    nn = nn.Substring(nn.IndexOf(";") + 1);
+                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 7].Text == "Aprobada")
+                                        {
+                                            nrow["Fecha"] = leer.vFecha;
+                                            nrow["Fecha_Pago"] = leer.vFecha;
+                                            nrow["Comprobante"] = xApp.Cells[i, 4].Text.Substring(0, 17);
+                                            nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 2].Text));
+                                            nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 3].Text);
+                                            nrow["Id_Tipo"] = leer.vtipo;
 
-                                    nn = nn.Substring(nn.IndexOf(";") + 1);
+                                            nrow["Tarjeta"] = 1;
+                                            nrow["Lote"] = 1;
+                                            nrow["Acreditado"] = true;
 
-                                    nrow["Importe"] = Convert.ToSingle(nn.Substring(0, nn.IndexOf(";")).Replace(".", ","));
-                                    nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                                    nrow["Lote"] = 1;
-
-                                    nrow["Fecha_Pago"] = leer.vFecha;
-
-                                    nrow["Tarjeta"] = 1;
-
-                                    nrow["Id_Tipo"] = leer.vtipo;
-                                    nrow["Acreditado"] = true;
-
-                                    dt.Rows.Add(nrow);
+                                            dt.Rows.Add(nrow);
+                                        }
+                                        pbLeer.Value = i;
+                                        Application.DoEvents();
+                                    }
                                 }
-                                pbLeer.Value = i;
-                                Application.DoEvents();
+                            }
+                            else
+                            {
+                                for (int i = 3; i <= max; i++)
+                                {
+                                    string nn = xApp.Range["A" + i].Text;
+
+                                    if (nn == "") { break; }
+
+                                    leer.vFecha = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
+                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                    {
+                                        DataRow nrow = dt.NewRow();
+
+                                        nrow["Fecha"] = leer.vFecha;
+                                        nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                        nrow["Comprobante"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+                                        nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                        nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(nn.Substring(0, nn.IndexOf(";"))));
+                                        nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                        nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                        nrow["Importe"] = Convert.ToSingle(nn.Substring(0, nn.IndexOf(";")).Replace(".", ","));
+                                        nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                                        nrow["Lote"] = 1;
+
+                                        nrow["Fecha_Pago"] = leer.vFecha;
+
+                                        nrow["Tarjeta"] = 1;
+
+                                        nrow["Id_Tipo"] = leer.vtipo;
+                                        nrow["Acreditado"] = true;
+
+                                        dt.Rows.Add(nrow);
+                                    }
+                                    pbLeer.Value = i;
+                                    Application.DoEvents();
+                                }
 
                                 //max = xApp.ActiveSheet.Range("D10000").End(Excel.XlDirection.xlUp).Row;
 
