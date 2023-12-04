@@ -139,5 +139,68 @@
                 MessageBox.Show("Debe seleccionar una Sucursal de Destino para modificar los registros", "Seleccione una Sucursal");
             }
         }
+
+        private void txtvalor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            { e.Handled = true; }
+        }
+        private void txtvalor_KeyUp(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == Keys.Enter) && (txtvalor.Text.Length > 0))
+            {
+                int c_cambio = grdOrigen.get_ColIndex("Cambio");
+                int c_importe = grdOrigen.get_ColIndex("Importe");
+                double importe = Convert.ToDouble (txtvalor.Text);
+                int fo = grdOrigen.Row;
+                if (fo == grdOrigen.Rows || fo == -1) { fo = 0; }
+                for (int f = fo + 1; f != fo; f++)
+                {
+                    if (Convert.ToDouble(grdOrigen.get_Texto(f, c_importe)) == importe && Convert.ToBoolean(grdOrigen.get_Texto(f, c_cambio)) == false)
+                    {
+                        grdOrigen.set_Texto(f, c_cambio, 1);
+                        grdOrigen.ActivarCelda(f, c_cambio);
+                        txtvalor.Text = "";
+                        f = fo-1;
+                    }
+                    else if (f >= grdOrigen.Rows - 1)
+                    { 
+                        f = 0;
+                        if (fo == 0) { f = -1; }
+                    }
+                    else if (f == fo - 1)
+                    { txtvalor.Text = ""; }
+                }
+            }
+        }
+
+        private void lstTipos_t_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                lstTipos_t.SelectedIndexChanged -= lstTipos_t_SelectedIndexChanged;
+
+                for (int i = 0; i < lstTipos_t.Items.Count; i++)
+                {
+                    if (lstTipos_t.GetSelected(i) == true)
+                    { lstTipos_t.SetSelected(i, false); }
+                    else { lstTipos_t.SetSelected(i, true); }
+                    if (i == lstTipos_t.Items.Count - 2)
+                    { lstTipos_t.SelectedIndexChanged += lstTipos_t_SelectedIndexChanged; }
+                }
+
+            }
+            else if (e.Button == MouseButtons.Middle)
+            {
+                lstTipos_t.SelectedIndexChanged -= lstTipos_t_SelectedIndexChanged;
+               
+                for (int i = 0; i < lstTipos_t.Items.Count; i++)
+                {
+                    lstTipos_t.SetSelected(i, false);
+                    if (i == lstTipos_t.Items.Count - 2)
+                    { lstTipos_t.SelectedIndexChanged += lstTipos_t_SelectedIndexChanged; }
+                }
+            }
+        }
     }
 }

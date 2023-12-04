@@ -45,17 +45,22 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.cFecha = new Programa1.Controles.cFechas();
             this.panel5 = new System.Windows.Forms.Panel();
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.grdResumenOri = new Grilla2.SpeedGrilla();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
+            this.materialContextMenuStrip2 = new MaterialSkin.Controls.MaterialContextMenuStrip();
+            this.txtvalor = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.cFecha = new Programa1.Controles.cFechas();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdOrigen
@@ -79,17 +84,19 @@
             this.grdOrigen.FixCols = 0;
             this.grdOrigen.FixRows = 0;
             this.grdOrigen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdOrigen.Frozen = 0;
             this.grdOrigen.FuenteEncabezado = null;
             this.grdOrigen.FuentePieDePagina = null;
             this.grdOrigen.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdOrigen.Location = new System.Drawing.Point(12, 42);
+            this.grdOrigen.LimpiarEstilosAntesDeOrdenar = false;
+            this.grdOrigen.Location = new System.Drawing.Point(17, 49);
             this.grdOrigen.Name = "grdOrigen";
             this.grdOrigen.PieDePagina = "\t\tPage {0} of {1}";
             this.grdOrigen.PintarFilaSel = true;
             this.grdOrigen.Redraw = true;
             this.grdOrigen.Row = 0;
             this.grdOrigen.Rows = 1;
-            this.grdOrigen.Size = new System.Drawing.Size(599, 745);
+            this.grdOrigen.Size = new System.Drawing.Size(589, 762);
             this.grdOrigen.TabIndex = 0;
             // 
             // grd_Destino
@@ -114,9 +121,11 @@
             this.grd_Destino.FixCols = 0;
             this.grd_Destino.FixRows = 0;
             this.grd_Destino.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grd_Destino.Frozen = 0;
             this.grd_Destino.FuenteEncabezado = null;
             this.grd_Destino.FuentePieDePagina = null;
             this.grd_Destino.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grd_Destino.LimpiarEstilosAntesDeOrdenar = false;
             this.grd_Destino.Location = new System.Drawing.Point(860, 42);
             this.grd_Destino.Name = "grd_Destino";
             this.grd_Destino.PieDePagina = "\t\tPage {0} of {1}";
@@ -168,7 +177,7 @@
             this.lstLotes.Location = new System.Drawing.Point(0, 0);
             this.lstLotes.Name = "lstLotes";
             this.lstLotes.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstLotes.Size = new System.Drawing.Size(111, 130);
+            this.lstLotes.Size = new System.Drawing.Size(111, 109);
             this.lstLotes.TabIndex = 6;
             this.lstLotes.SelectedIndexChanged += new System.EventHandler(this.lstLotes_SelectedIndexChanged);
             // 
@@ -221,6 +230,7 @@
             this.lstTipos_t.Size = new System.Drawing.Size(213, 128);
             this.lstTipos_t.TabIndex = 16;
             this.lstTipos_t.SelectedIndexChanged += new System.EventHandler(this.lstTipos_t_SelectedIndexChanged);
+            this.lstTipos_t.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstTipos_t_MouseUp);
             // 
             // materialLabel1
             // 
@@ -256,9 +266,11 @@
             this.grdResumenDest.FixCols = 0;
             this.grdResumenDest.FixRows = 0;
             this.grdResumenDest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdResumenDest.Frozen = 0;
             this.grdResumenDest.FuenteEncabezado = null;
             this.grdResumenDest.FuentePieDePagina = null;
             this.grdResumenDest.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdResumenDest.LimpiarEstilosAntesDeOrdenar = false;
             this.grdResumenDest.Location = new System.Drawing.Point(0, 22);
             this.grdResumenDest.Name = "grdResumenDest";
             this.grdResumenDest.PieDePagina = "\t\tPage {0} of {1}";
@@ -325,20 +337,6 @@
             this.panel4.Size = new System.Drawing.Size(217, 233);
             this.panel4.TabIndex = 29;
             // 
-            // cFecha
-            // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(620, 358);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Mostrar = 0;
-            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(223, 184);
-            this.cFecha.TabIndex = 15;
-            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
-            // 
             // panel5
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -346,7 +344,7 @@
             this.panel5.Controls.Add(this.lstLotes);
             this.panel5.Location = new System.Drawing.Point(617, 65);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(111, 130);
+            this.panel5.Size = new System.Drawing.Size(111, 109);
             this.panel5.TabIndex = 30;
             // 
             // materialLabel6
@@ -392,9 +390,11 @@
             this.grdResumenOri.FixCols = 0;
             this.grdResumenOri.FixRows = 0;
             this.grdResumenOri.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdResumenOri.Frozen = 0;
             this.grdResumenOri.FuenteEncabezado = null;
             this.grdResumenOri.FuentePieDePagina = null;
             this.grdResumenOri.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdResumenOri.LimpiarEstilosAntesDeOrdenar = false;
             this.grdResumenOri.Location = new System.Drawing.Point(1, 26);
             this.grdResumenOri.Name = "grdResumenOri";
             this.grdResumenOri.PieDePagina = "\t\tPage {0} of {1}";
@@ -418,11 +418,71 @@
             this.materialLabel8.TabIndex = 24;
             this.materialLabel8.Text = "Resumen";
             // 
+            // materialContextMenuStrip1
+            // 
+            this.materialContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialContextMenuStrip1.Depth = 0;
+            this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
+            this.materialContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // materialContextMenuStrip2
+            // 
+            this.materialContextMenuStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialContextMenuStrip2.Depth = 0;
+            this.materialContextMenuStrip2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialContextMenuStrip2.Name = "materialContextMenuStrip2";
+            this.materialContextMenuStrip2.Size = new System.Drawing.Size(61, 4);
+            // 
+            // txtvalor
+            // 
+            this.txtvalor.Depth = 0;
+            this.txtvalor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtvalor.Hint = "Buscar Importe";
+            this.txtvalor.Location = new System.Drawing.Point(0, 0);
+            this.txtvalor.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtvalor.Name = "txtvalor";
+            this.txtvalor.PasswordChar = '\0';
+            this.txtvalor.SelectedText = "";
+            this.txtvalor.SelectionLength = 0;
+            this.txtvalor.SelectionStart = 0;
+            this.txtvalor.Size = new System.Drawing.Size(90, 23);
+            this.txtvalor.TabIndex = 33;
+            this.txtvalor.UseSystemPasswordChar = false;
+            this.txtvalor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtvalor_KeyPress);
+            this.txtvalor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtvalor_KeyUp);
+            // 
+            // cFecha
+            // 
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(620, 358);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(223, 184);
+            this.cFecha.TabIndex = 15;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.txtvalor);
+            this.panel3.Location = new System.Drawing.Point(619, 172);
+            this.panel3.MaximumSize = new System.Drawing.Size(200, 40);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(90, 23);
+            this.panel3.TabIndex = 34;
+            // 
             // frmModificar_Tarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1573, 828);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel4);
@@ -449,6 +509,7 @@
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -478,5 +539,9 @@
         private System.Windows.Forms.Panel panel7;
         private Grilla2.SpeedGrilla grdResumenOri;
         private MaterialSkin.Controls.MaterialLabel materialLabel8;
+        private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip1;
+        private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip2;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtvalor;
+        private System.Windows.Forms.Panel panel3;
     }
 }

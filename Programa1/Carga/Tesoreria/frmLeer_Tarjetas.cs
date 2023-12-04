@@ -234,7 +234,7 @@
                                         DataRow nrow = dt.NewRow();
                                         leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
 
-                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 7].Text == "Aprobada")
                                         {
                                             nrow["Fecha"] = leer.vFecha;
                                             nrow["Fecha_Pago"] = leer.vFecha;
