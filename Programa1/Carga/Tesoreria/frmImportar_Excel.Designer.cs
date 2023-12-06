@@ -93,9 +93,11 @@
             this.grd.fColor = System.Drawing.Color.Silver;
             this.grd.FixCols = 0;
             this.grd.FixRows = 0;
+            this.grd.Frozen = 0;
             this.grd.FuenteEncabezado = null;
             this.grd.FuentePieDePagina = null;
             this.grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grd.LimpiarEstilosAntesDeOrdenar = false;
             this.grd.Location = new System.Drawing.Point(0, 24);
             this.grd.Name = "grd";
             this.grd.PieDePagina = "\t\tPage {0} of {1}";
@@ -122,7 +124,7 @@
             // 
             this.cmdGuardar_Creditos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdGuardar_Creditos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdGuardar_Creditos.Location = new System.Drawing.Point(197, 491);
+            this.cmdGuardar_Creditos.Location = new System.Drawing.Point(185, 491);
             this.cmdGuardar_Creditos.Name = "cmdGuardar_Creditos";
             this.cmdGuardar_Creditos.Size = new System.Drawing.Size(75, 23);
             this.cmdGuardar_Creditos.TabIndex = 3;
@@ -138,7 +140,9 @@
             this.cmbTipo.FormattingEnabled = true;
             this.cmbTipo.Items.AddRange(new object[] {
             "Molleda - Galicia",
-            "Alonso   - BBVA"});
+            "Molleda - Provincia",
+            "Alonso   - BBVA",
+            "Meat - Provincia"});
             this.cmbTipo.Location = new System.Drawing.Point(745, 13);
             this.cmbTipo.Name = "cmbTipo";
             this.cmbTipo.Size = new System.Drawing.Size(280, 28);
@@ -218,9 +222,11 @@
             this.grdSalida.fColor = System.Drawing.Color.Silver;
             this.grdSalida.FixCols = 0;
             this.grdSalida.FixRows = 0;
+            this.grdSalida.Frozen = 0;
             this.grdSalida.FuenteEncabezado = null;
             this.grdSalida.FuentePieDePagina = null;
             this.grdSalida.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdSalida.LimpiarEstilosAntesDeOrdenar = false;
             this.grdSalida.Location = new System.Drawing.Point(0, 24);
             this.grdSalida.Name = "grdSalida";
             this.grdSalida.PieDePagina = "\t\tPage {0} of {1}";
@@ -228,7 +234,7 @@
             this.grdSalida.Redraw = true;
             this.grdSalida.Row = 0;
             this.grdSalida.Rows = 50;
-            this.grdSalida.Size = new System.Drawing.Size(272, 461);
+            this.grdSalida.Size = new System.Drawing.Size(260, 461);
             this.grdSalida.TabIndex = 0;
             this.grdSalida.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSalida_Editado);
             this.grdSalida.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdSalida_KeyUp);
@@ -301,9 +307,11 @@
             this.grdDebitos.fColor = System.Drawing.Color.Silver;
             this.grdDebitos.FixCols = 0;
             this.grdDebitos.FixRows = 0;
+            this.grdDebitos.Frozen = 0;
             this.grdDebitos.FuenteEncabezado = null;
             this.grdDebitos.FuentePieDePagina = null;
             this.grdDebitos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdDebitos.LimpiarEstilosAntesDeOrdenar = false;
             this.grdDebitos.Location = new System.Drawing.Point(0, 24);
             this.grdDebitos.Name = "grdDebitos";
             this.grdDebitos.PieDePagina = "\t\tPage {0} of {1}";
@@ -311,7 +319,7 @@
             this.grdDebitos.Redraw = true;
             this.grdDebitos.Row = 0;
             this.grdDebitos.Rows = 50;
-            this.grdDebitos.Size = new System.Drawing.Size(439, 461);
+            this.grdDebitos.Size = new System.Drawing.Size(427, 461);
             this.grdDebitos.TabIndex = 4;
             // 
             // label3
@@ -331,12 +339,13 @@
             this.cmdGuardar_Debitos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdGuardar_Debitos.Enabled = false;
             this.cmdGuardar_Debitos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdGuardar_Debitos.Location = new System.Drawing.Point(364, 491);
+            this.cmdGuardar_Debitos.Location = new System.Drawing.Point(352, 491);
             this.cmdGuardar_Debitos.Name = "cmdGuardar_Debitos";
             this.cmdGuardar_Debitos.Size = new System.Drawing.Size(75, 23);
             this.cmdGuardar_Debitos.TabIndex = 3;
             this.cmdGuardar_Debitos.Text = "Guardar";
             this.cmdGuardar_Debitos.UseVisualStyleBackColor = true;
+            this.cmdGuardar_Debitos.Visible = false;
             this.cmdGuardar_Debitos.Click += new System.EventHandler(this.cmdGuardar_Debitos_Click);
             // 
             // chCreditos
