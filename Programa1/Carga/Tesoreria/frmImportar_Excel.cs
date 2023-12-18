@@ -20,8 +20,8 @@
         private void cmdSeleccionar_Click(object sender, EventArgs e)
         {
             OpenFileDialog seleccionar_archivo = new OpenFileDialog();
-            seleccionar_archivo.Filter = "Excel Files|*.xlsx;*.xls;*.xlsm;*.csv";
-            seleccionar_archivo.Title = "Select a Excel File";
+            seleccionar_archivo.Filter = "Todos los archivos (*.*)|*.*|All files (*.*)|*.*";
+            seleccionar_archivo.Title = "Seleccionar el archivo";
 
             if (seleccionar_archivo.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -33,7 +33,7 @@
                 }
                 if (fileName.ToLower().Contains("alonso") == true)
                 {
-                    cmbTipo.SelectedIndex = 1;
+                    cmbTipo.SelectedIndex = 2;
                 }
             }
         }
@@ -70,7 +70,13 @@
                                 }
                                 break;
                             case 1:
+                                Molleda_Provincia();
+                                break;
+                            case 2:
                                 Alonso_BBVA();
+                                break;
+                            case 3:
+                                Cargar_txtMeat(cmdSeleccionar.Text);
                                 break;
                         }
                     }
@@ -85,7 +91,366 @@
             }
         }
 
-        #region  Molleda Galicia 
+        #region " Molleda Provincia "
+        private void Molleda_Provincia()
+        {
+            //Abrir el archivo excel
+            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(cmdSeleccionar.Text, false, true);
+            Microsoft.Office.Interop.Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+            Microsoft.Office.Interop.Excel.Range xlRange = xlWorksheet.UsedRange;
+
+            xlApp.DisplayAlerts = false;
+
+            //Cargar los datos
+            int rowCount = xlRange.Rows.Count;
+            int colCount = 5;
+
+            grd.Rows = 0;
+            grd.Rows = rowCount - 9;
+            grd.Cols = colCount;
+
+            grd.FixRows = 1;
+
+            grd.set_Texto(0, 0, "Fecha");
+            grd.set_Texto(0, 1, "Concepto");
+            grd.set_Texto(0, 2, "Debe");
+            grd.set_Texto(0, 3, "Haber");
+            grd.set_Texto(0, 4, "Saldo");
+
+            grd.Columnas[0].DataType = typeof(DateTime);
+            grd.Columnas[2].DataType = typeof(double);
+            grd.Columnas[3].DataType = typeof(double);
+            grd.Columnas[4].DataType = typeof(double);
+
+            grd.Columnas[0].Style.Format = "dd/MM/yy";
+            grd.Columnas[2].Style.Format = "N2";
+            grd.Columnas[3].Style.Format = "N2";
+            grd.Columnas[4].Style.Format = "N2";
+
+            for (int i = 8; i <= rowCount; i++)
+            {
+                int fila = i - 7;
+                //Fecha
+                var nn = xlRange.Cells[i, 2].text;
+                if (nn != null)
+                {
+                    DateTime f;
+
+                    if (DateTime.TryParse(nn, out f) == false)
+                    {
+                        break;
+                    }
+                    grd.set_Texto(fila, 0, f);
+                }
+                //Concepto
+                grd.set_Texto(fila, 1, xlRange.Cells[i, 3].Value2);
+
+                Double vimporte = Convert.ToDouble(xlRange.Cells[i, 4].Value2);
+                if (vimporte > 0)
+                {
+                    //Credito                    
+                    grd.set_Texto(fila, 3, vimporte);
+                }
+                else
+                {
+                    //Debito
+                    grd.set_Texto(fila, 2, vimporte * -1);
+                }
+
+                //Saldo
+                grd.set_Texto(fila, 4, xlRange.Cells[i, 5].Value2);
+
+                lblContador.Text = $"Cargando {i - 1} de {rowCount} filas.";
+                Application.DoEvents();
+
+            }
+            grd.AutosizeAll();
+
+            lblContador.Text = $"{rowCount} filas leídas.";
+
+            Generar_Creditos_Provincia();
+            Generar_Debitos_Provincia();
+
+            lblContador.Text = $"{rowCount} filas cargadas.";
+
+            xlWorkbook.Close();
+            xlApp.Quit();
+
+            //Liberar
+            GC.Collect();
+        }
+        private void Generar_Creditos_Provincia()
+        {
+            if (chCreditos.Checked == true)
+            {
+                c_Base _Base = new c_Base();
+
+                _Base.Ejecutar_Comando("DELETE FROM Temp_n");
+
+                int nop = 0;
+
+                lblContador.Text = $"{lblContador.Text} Generando Creditos...";
+                Application.DoEvents();
+
+                //Primero los Créditos
+                for (int i = 1; i < grd.Rows; i++)
+                {
+                    try
+                    {
+                        double importe = Convert.ToDouble(grd.get_Texto(i, 3));
+                        if (importe != 0)
+                        {
+                            nop = ++nop;
+                            DateTime fecha = Convert.ToDateTime(grd.get_Texto(i, grd.get_ColIndex("Fecha")));
+                            string descripcion = grd.get_Texto(i, 1).ToString();
+                            int cfin = descripcion.IndexOf("CDNI");
+                            if (cfin != -1) { _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nop}, '{descripcion.Substring(0, cfin + 4)}', {importe.ToString().Replace(",", ".")})"); }
+                            else
+                            {
+                                cfin = descripcion.IndexOf("VISA");
+                                if (cfin != -1) { _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nop}, '{descripcion.Substring(0, cfin + 4)}', {importe.ToString().Replace(",", ".")})"); }
+
+                                else
+                                {
+                                    cfin = descripcion.IndexOf("MASTERCARD");
+                                    if (cfin != -1) { _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nop}, '{descripcion.Substring(0, cfin + 10)}', {importe.ToString().Replace(",", ".")})"); }
+
+                                    else
+                                    {
+                                        cfin = 10;
+                                        if (cfin != -1) { _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nop}, '{descripcion.Substring(0, cfin)}', {importe.ToString().Replace(",", ".")})"); }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception er)
+                    {
+                        lblContador.Text = er.Message;
+                    }
+
+                }
+                grdSalida.MostrarDatos(_Base.Datos_Genericos("SELECT Fecha, 19 IDC, 'Molleda - B. Provincia' Caja, 13 Tipo, 'Entradas Provincia' Nombre, 203 SubTipo, Descripcion, SUM(Credito) Importe" +
+                    " FROM Temp_n GROUP BY Fecha, Descripcion ORDER BY Fecha, Descripcion"), true, 7);
+
+                grdSalida.Columnas[7].Format = "N2";
+
+                grdSalida.AutosizeAll();
+            }
+
+        }
+        private void Generar_Debitos_Provincia()
+        {
+            if (chDebitos.Checked == true)
+            {
+                c_Base _Base = new c_Base();
+
+                _Base.Ejecutar_Comando("DELETE FROM Temp_n");
+
+                int nop = 100000;
+                DateTime fecha = DateTime.Today;
+                string descripcion = "";
+                double importe = 0;
+
+                lblContador.Text = $"{lblContador.Text} Generando Debitos...";
+                Application.DoEvents();
+
+
+                for (int i = 1; i < grd.Rows; i++)
+                {
+                    importe = Convert.ToDouble(grd.get_Texto(i, 2));
+                    if (grd.get_Texto(i, 1) != null)
+                    {
+                        descripcion = grd.get_Texto(i, 1).ToString();
+                    }
+
+                    bool nono = false;
+
+                    if (Convert.ToDouble(grd.get_Texto(i, 3)) > 0)
+                    {
+                        if (nop > 0) { nop = nop * -1; }
+                    }
+
+                    if (importe != 0)
+                    {
+                        if (nop < 0) { nop = nop * -1; }
+
+                        nop = ++nop;
+                        fecha = Convert.ToDateTime(grd.get_Texto(i, 0));
+                    }
+                    else
+                    {
+                        if (nop > 0)
+                        {
+                            _Base.Ejecutar_Comando($"UPDATE Temp_n SET Descripcion=CONVERT(VARCHAR, (SELECT Top 1 Descripcion FROM Temp_n WHERE ID={nop})) + ' {descripcion}'  WHERE ID={nop}");
+                            nono = true;
+                        }
+                    }
+
+                    if (nop > 0 && nono == false) { _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Debito) VALUES('{fecha:MM/dd/yyy}', {nop}, '{descripcion}', {importe.ToString().Replace(",", ".")})"); }
+
+                }
+
+                grdDebitos.MostrarDatos(_Base.Datos_Genericos("SELECT Fecha, Descripcion, SUM(Debito) Importe FROM Temp_n GROUP BY Fecha, Descripcion ORDER BY Fecha, Descripcion"), true, 2);
+                grdDebitos.Columnas[2].Format = "N2";
+                grdDebitos.AutosizeAll();
+
+            }
+        }
+
+        #endregion
+
+        #region " Provincia Meat "
+
+        private void Cargar_txtMeat(string seleccionar_archivo)
+        {
+            //Leer un archivo txt
+            string[] lines = File.ReadAllLines(seleccionar_archivo);
+
+            grd.Rows = lines.Count();
+            grd.FixRows = 0;
+
+            grd.Cols = 16;
+
+            //Fecha
+            grd.Columnas[4].DataType = typeof(DateTime);
+            grd.Columnas[6].DataType = typeof(DateTime);
+            //importe
+            grd.Columnas[5].DataType = typeof(double);
+            //Saldo
+            grd.Columnas[7].DataType = typeof(double);
+
+            grd.Columnas[4].Style.Format = "dd/MM/yy";
+            grd.Columnas[6].Style.Format = "dd/MM/yy";
+            grd.Columnas[5].Style.Format = "N2";
+            grd.Columnas[7].Style.Format = "N2";
+
+
+
+            int f = 0;
+            foreach (string linea in lines)
+            {
+                lblContador.Text = $"Cargando {f + 1} de {lines.Count()} filas.";
+                Application.DoEvents();
+
+                int c = 0;
+                int n = linea.IndexOf(";");
+                string nlinea = linea;
+
+                do
+                {
+                    string nTexto = nlinea.Substring(0, n);
+                    grd.set_Texto(f, c, nTexto);
+
+                    nlinea = nlinea.Remove(0, n + 1);
+                    n = nlinea.IndexOf(";");
+
+                    c++;
+                } while (n != -1);
+
+                f++;
+            }
+            grd.AutosizeAll();
+
+            lblContador.Text = $"{lines.Count()} filas leídas.";
+            Application.DoEvents();
+
+            Generar_Creditos_Meat();
+            Generar_Debitos_Meat();
+
+        }
+
+        private void Generar_Debitos_Meat()
+        {
+            if (chDebitos.Checked == true)
+            {
+                c_Base _Base = new c_Base();
+
+                _Base.Ejecutar_Comando("DELETE FROM Temp_n");
+                                
+                DateTime fecha = DateTime.Today;
+                string descripcion = "";
+                double importe = 0;
+
+                lblContador.Text = $"{lblContador.Text} Generando Debitos...";
+                Application.DoEvents();
+
+
+                for (int i = 0; i <= grd.Rows; i++)
+                {
+                    importe = Convert.ToDouble(grd.get_Texto(i, 5));
+                    if (importe < 0)
+                    {
+                        if (grd.get_Texto(i, 9) != null)
+                        {
+                            descripcion = grd.get_Texto(i, 9).ToString();
+                        }
+
+                        _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Debito) VALUES('{fecha:MM/dd/yyy}', 0, '{descripcion}', {importe.ToString().Replace(",", ".")})");
+                    }
+                }                
+
+                grdDebitos.MostrarDatos(_Base.Datos_Genericos("SELECT Fecha, Descripcion, SUM(Debito) Importe FROM Temp_n GROUP BY Fecha, Descripcion ORDER BY Fecha, Descripcion"), true, 2);
+                grdDebitos.Columnas[2].Format = "N2";
+                grdDebitos.AutosizeAll();
+
+            }
+            lblContador.Text = "Listo.";
+        }
+
+
+        private void Generar_Creditos_Meat()
+        {
+            if (chCreditos.Checked == true)
+            {
+                c_Base _Base = new c_Base();
+
+                _Base.Ejecutar_Comando("DELETE FROM Temp_n");
+
+                int nop = 0;
+
+                lblContador.Text = $"{lblContador.Text} Generando Creditos...";
+                Application.DoEvents();
+
+                //Primero los Créditos
+                for (int i = 0; i <= grd.Rows; i++)
+                {
+                    try
+                    {
+                        double importe = Convert.ToDouble(grd.get_Texto(i, 5));
+                        if (importe > 0)
+                        {
+                            nop = ++nop;
+                            DateTime fecha = Convert.ToDateTime(grd.get_Texto(i, 4));
+                            string descripcion = grd.get_Texto(i, 9).ToString();
+
+                            _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nop}, '{descripcion}', {importe.ToString().Replace(",", ".")})");
+                        }
+                    }
+                    catch (Exception er)
+                    {
+                        lblContador.Text = er.Message;
+                    }
+
+                }
+
+                grdSalida.MostrarDatos(_Base.Datos_Genericos("SELECT Fecha, Descripcion, SUM(Credito) Importe" +
+                    ", 17 IDC, 'Meat Provincia' Caja, 14 Tipo, '' Nombre, 0 SubTipo, '' Desc_ST " +
+                    "FROM Temp_n GROUP BY Fecha, Descripcion ORDER BY Fecha, Descripcion, IDC, Caja, Tipo, Nombre, SubTipo, Desc_ST"), true, 2);
+                grdSalida.Columnas[2].Format = "N2";
+                                
+
+                grdSalida.AutosizeAll();
+            }
+
+        }
+
+
+
+        #endregion
+
+        #region  " Molleda Galicia "
         private void Cargar_CSVMolleda(string seleccionar_archivo)
         {
             //Leer un archivo CSV
@@ -258,35 +623,24 @@
                 {
                     try
                     {
+                        //si hay importe en credito
                         importe = Convert.ToDouble(grd.get_Texto(i, 4));
                         if (grd.get_Texto(i, 1) != null)
                         {
                             descripcion = String.Format("{0} {1}", grd.get_Texto(i, 1).ToString(), grd.get_Texto(i, 10).ToString());
-                        }
-
-                        bool nono = false;
-
-                        if (Convert.ToDouble(grd.get_Texto(i, 3)) > 0)
-                        {
-                            if (nOperacion > 0) { nOperacion = nOperacion * -1; }
+                            if (descripcion.ToLower().StartsWith("transferencia pei"))
+                            {
+                                descripcion = "Transferencia QR";
+                            }
                         }
 
                         if (importe != 0)
                         {
-                            nOperacion = nOperacion * -1;
                             ++nOperacion;
                             fecha = Convert.ToDateTime(grd.get_Texto(i, 0));
-                        }
-                        else
-                        {
-                            if (nOperacion > 0)
-                            {
-                                _Base.Ejecutar_Comando($"UPDATE Temp_n SET Descripcion=CONVERT(VARCHAR, (SELECT Top 1 Descripcion FROM Temp_n WHERE ID={nOperacion})) + ' {descripcion}'  WHERE ID={nOperacion}");
-                                nono = true;
-                            }
+                            _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nOperacion}, '{descripcion}', {importe.ToString().Replace(",", ".")})");
                         }
 
-                        if (nOperacion > 0 && nono == false) { _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nOperacion}, '{descripcion}', {importe.ToString().Replace(",", ".")})"); }
                     }
                     catch (Exception er)
                     {
@@ -392,7 +746,7 @@
         }
         #endregion
 
-        #region  Alonso BBVA
+        #region  " Alonso BBVA "
         private void Alonso_BBVA()
         {
             //Abrir el archivo excel
@@ -501,15 +855,15 @@
                             nop = ++nop;
                             DateTime fecha = Convert.ToDateTime(grd.get_Texto(i, grd.get_ColIndex("Fecha")));
                             string descripcion = grd.get_Texto(i, 1).ToString();
-                            
+
                             //Variable para ver si esta el texto ese del toor o no
                             int vhayNro = descripcion.IndexOf(" Nro");
 
-                            if(vhayNro > 0)
+                            if (vhayNro > 0)
                             {
                                 descripcion = descripcion.Substring(0, vhayNro);
                             }
-                            
+
                             _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Credito) VALUES('{fecha:MM/dd/yyy}', {nop}, '{descripcion}', {importe.ToString().Replace(",", ".")})");
                         }
                     }
@@ -595,6 +949,7 @@
             lblContador.Text = "Listo.";
         }
         #endregion
+
         private void cmdCargar_Click(object sender, EventArgs e)
         {
             Cargar_Datos();
@@ -642,7 +997,7 @@
                         en.caja.ID = Convert.ToInt32(grdSalida.get_Texto(f, grdSalida.get_ColIndex("IDC")));
                         en.TE.Id_Tipo = Convert.ToInt32(grdSalida.get_Texto(f, grdSalida.get_ColIndex("Tipo")));
                         en.Id_SubTipoEntrada = Convert.ToInt32(grdSalida.get_Texto(f, grdSalida.get_ColIndex("SubTipo")));
-                        en.Descripcion = Convert.ToString(grdSalida.get_Texto(f, grdSalida.get_ColIndex("Desc_ST")));
+                        en.Descripcion = Convert.ToString(grdSalida.get_Texto(f, grdSalida.get_ColIndex("SubTipo") + 1));
                         en.Importe = importe;
 
                         en.Agregar();
@@ -653,7 +1008,7 @@
             }
 
             this.Cursor = Cursors.Default;
-            this.Enabled = true;            
+            this.Enabled = true;
         }
 
         private void cmdGuardar_Debitos_Click(object sender, EventArgs e)
