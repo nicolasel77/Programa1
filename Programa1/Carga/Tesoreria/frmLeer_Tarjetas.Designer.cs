@@ -449,15 +449,15 @@
             this.chclover.AutoSize = true;
             this.chclover.Depth = 0;
             this.chclover.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chclover.Location = new System.Drawing.Point(1325, 360);
+            this.chclover.Location = new System.Drawing.Point(1327, 360);
             this.chclover.Margin = new System.Windows.Forms.Padding(0);
             this.chclover.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chclover.MouseState = MaterialSkin.MouseState.HOVER;
             this.chclover.Name = "chclover";
             this.chclover.Ripple = true;
-            this.chclover.Size = new System.Drawing.Size(69, 30);
+            this.chclover.Size = new System.Drawing.Size(67, 30);
             this.chclover.TabIndex = 27;
-            this.chclover.Text = "Clover";
+            this.chclover.Text = "Fiserv";
             this.chclover.UseVisualStyleBackColor = true;
             // 
             // frmLeer_Tarjetas

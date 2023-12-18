@@ -438,7 +438,7 @@
             // 
             this.txtvalor.Depth = 0;
             this.txtvalor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtvalor.Hint = "Buscar Importe";
+            this.txtvalor.Hint = "";
             this.txtvalor.Location = new System.Drawing.Point(0, 0);
             this.txtvalor.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtvalor.Name = "txtvalor";
