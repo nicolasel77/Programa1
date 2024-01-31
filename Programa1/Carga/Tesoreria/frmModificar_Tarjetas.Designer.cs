@@ -29,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.grdOrigen = new Grilla2.SpeedGrilla();
             this.grd_Destino = new Grilla2.SpeedGrilla();
             this.cmdAceptar = new MaterialSkin.Controls.MaterialFlatButton();
@@ -53,14 +54,21 @@
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.materialContextMenuStrip2 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.txtvalor = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.cFecha = new Programa1.Controles.cFechas();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.cmdInvertir = new MaterialSkin.Controls.MaterialFlatButton();
+            this.Ayuda = new System.Windows.Forms.ToolTip(this.components);
+            this.cFecha = new Programa1.Controles.cFechas();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.cmdRevertir = new MaterialSkin.Controls.MaterialFlatButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdOrigen
@@ -151,6 +159,7 @@
             this.cmdAceptar.Size = new System.Drawing.Size(215, 32);
             this.cmdAceptar.TabIndex = 2;
             this.cmdAceptar.Text = "Cambiar";
+            this.Ayuda.SetToolTip(this.cmdAceptar, "Cambia a la sucursal de destino los registros seleccionados.");
             this.cmdAceptar.UseVisualStyleBackColor = false;
             this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
             // 
@@ -179,18 +188,20 @@
             this.lstLotes.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lstLotes.Size = new System.Drawing.Size(111, 109);
             this.lstLotes.TabIndex = 6;
+            this.Ayuda.SetToolTip(this.lstLotes, "Selecciona automáticamente todos los registros con el número de lote electo para " +
+        "el cambio.");
             this.lstLotes.SelectedIndexChanged += new System.EventHandler(this.lstLotes_SelectedIndexChanged);
             // 
             // materialLabel2
             // 
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel2.Location = new System.Drawing.Point(617, 42);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(130, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(127, 18);
             this.materialLabel2.TabIndex = 12;
             this.materialLabel2.Text = "Seleccionar Lotes";
             // 
@@ -203,6 +214,7 @@
             this.cmbSucO.Name = "cmbSucO";
             this.cmbSucO.Size = new System.Drawing.Size(599, 24);
             this.cmbSucO.TabIndex = 13;
+            this.Ayuda.SetToolTip(this.cmbSucO, "Seleccione la sucursal de origen.");
             this.cmbSucO.SelectedIndexChanged += new System.EventHandler(this.cmbSucO_SelectedIndexChanged);
             // 
             // cmbSucD
@@ -214,6 +226,7 @@
             this.cmbSucD.Name = "cmbSucD";
             this.cmbSucD.Size = new System.Drawing.Size(478, 24);
             this.cmbSucD.TabIndex = 14;
+            this.Ayuda.SetToolTip(this.cmbSucD, "Seleccione la sucursal de destino.");
             this.cmbSucD.SelectedIndexChanged += new System.EventHandler(this.cmbSucD_SelectedIndexChanged);
             // 
             // lstTipos_t
@@ -229,6 +242,8 @@
             this.lstTipos_t.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lstTipos_t.Size = new System.Drawing.Size(213, 128);
             this.lstTipos_t.TabIndex = 16;
+            this.Ayuda.SetToolTip(this.lstTipos_t, "Filtre por tipo de tarjeta.\r\n\r\n*Click izquierdo: marca o desmarca el item\r\n*Click" +
+        " derecho: invierte el filtro\r\n*Click central: borra los filtros");
             this.lstTipos_t.SelectedIndexChanged += new System.EventHandler(this.lstTipos_t_SelectedIndexChanged);
             this.lstTipos_t.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstTipos_t_MouseUp);
             // 
@@ -236,12 +251,12 @@
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(3, -1);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(56, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(53, 18);
             this.materialLabel1.TabIndex = 17;
             this.materialLabel1.Text = "Tarjeta";
             // 
@@ -285,7 +300,7 @@
             // 
             this.materialLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel3.Location = new System.Drawing.Point(705, 522);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
@@ -297,12 +312,12 @@
             // 
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
-            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel5.Location = new System.Drawing.Point(6, 2);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(71, 19);
+            this.materialLabel5.Size = new System.Drawing.Size(72, 18);
             this.materialLabel5.TabIndex = 25;
             this.materialLabel5.Text = "Resumen";
             // 
@@ -351,7 +366,7 @@
             // 
             this.materialLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.materialLabel6.Depth = 0;
-            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel6.Location = new System.Drawing.Point(705, 522);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
@@ -409,12 +424,12 @@
             // 
             this.materialLabel8.AutoSize = true;
             this.materialLabel8.Depth = 0;
-            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel8.Location = new System.Drawing.Point(3, 1);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
-            this.materialLabel8.Size = new System.Drawing.Size(71, 19);
+            this.materialLabel8.Size = new System.Drawing.Size(72, 18);
             this.materialLabel8.TabIndex = 24;
             this.materialLabel8.Text = "Resumen";
             // 
@@ -448,9 +463,52 @@
             this.txtvalor.SelectionStart = 0;
             this.txtvalor.Size = new System.Drawing.Size(90, 23);
             this.txtvalor.TabIndex = 33;
+            this.Ayuda.SetToolTip(this.txtvalor, "Busca y selecciona el importe ingresado");
             this.txtvalor.UseSystemPasswordChar = false;
             this.txtvalor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtvalor_KeyPress);
             this.txtvalor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtvalor_KeyUp);
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.txtvalor);
+            this.panel3.Location = new System.Drawing.Point(619, 172);
+            this.panel3.MaximumSize = new System.Drawing.Size(200, 40);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(90, 23);
+            this.panel3.TabIndex = 34;
+            this.Ayuda.SetToolTip(this.panel3, "Busca y selecciona el importe ingresado");
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.cmdInvertir);
+            this.panel6.Location = new System.Drawing.Point(801, 12);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(37, 37);
+            this.panel6.TabIndex = 27;
+            // 
+            // cmdInvertir
+            // 
+            this.cmdInvertir.AutoSize = true;
+            this.cmdInvertir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdInvertir.BackColor = System.Drawing.SystemColors.Control;
+            this.cmdInvertir.Depth = 0;
+            this.cmdInvertir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdInvertir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdInvertir.Location = new System.Drawing.Point(0, 0);
+            this.cmdInvertir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdInvertir.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdInvertir.Name = "cmdInvertir";
+            this.cmdInvertir.Primary = false;
+            this.cmdInvertir.Size = new System.Drawing.Size(35, 35);
+            this.cmdInvertir.TabIndex = 2;
+            this.cmdInvertir.Text = "↔";
+            this.Ayuda.SetToolTip(this.cmdInvertir, "Intercambia la sucursal de origen con la de destino.");
+            this.cmdInvertir.UseVisualStyleBackColor = false;
+            this.cmdInvertir.Click += new System.EventHandler(this.cmdInvertir_Click);
             // 
             // cFecha
             // 
@@ -463,25 +521,47 @@
             this.cFecha.Name = "cFecha";
             this.cFecha.Size = new System.Drawing.Size(223, 184);
             this.cFecha.TabIndex = 15;
+            this.Ayuda.SetToolTip(this.cFecha, "Filtrar por fecha");
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFecha_Cambio_Seleccion);
             // 
-            // panel3
+            // panel8
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.txtvalor);
-            this.panel3.Location = new System.Drawing.Point(619, 172);
-            this.panel3.MaximumSize = new System.Drawing.Size(200, 40);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(90, 23);
-            this.panel3.TabIndex = 34;
+            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel8.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.cmdRevertir);
+            this.panel8.Location = new System.Drawing.Point(1343, 42);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(217, 34);
+            this.panel8.TabIndex = 27;
+            // 
+            // cmdRevertir
+            // 
+            this.cmdRevertir.AutoSize = true;
+            this.cmdRevertir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdRevertir.BackColor = System.Drawing.SystemColors.Control;
+            this.cmdRevertir.Depth = 0;
+            this.cmdRevertir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdRevertir.Location = new System.Drawing.Point(0, 0);
+            this.cmdRevertir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdRevertir.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdRevertir.Name = "cmdRevertir";
+            this.cmdRevertir.Primary = false;
+            this.cmdRevertir.Size = new System.Drawing.Size(215, 32);
+            this.cmdRevertir.TabIndex = 2;
+            this.cmdRevertir.Text = "Revertir";
+            this.Ayuda.SetToolTip(this.cmdRevertir, "Revierte el último cambio realizado.");
+            this.cmdRevertir.UseVisualStyleBackColor = false;
+            this.cmdRevertir.Click += new System.EventHandler(this.cmdRevertir_Click);
             // 
             // frmModificar_Tarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1573, 828);
+            this.Controls.Add(this.panel8);
+            this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel7);
@@ -510,6 +590,10 @@
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -543,5 +627,10 @@
         private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip2;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtvalor;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel6;
+        private MaterialSkin.Controls.MaterialFlatButton cmdInvertir;
+        private System.Windows.Forms.ToolTip Ayuda;
+        private System.Windows.Forms.Panel panel8;
+        private MaterialSkin.Controls.MaterialFlatButton cmdRevertir;
     }
 }
