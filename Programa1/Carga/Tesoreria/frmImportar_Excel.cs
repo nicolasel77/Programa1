@@ -106,8 +106,7 @@
             int rowCount = xlRange.Rows.Count;
             int colCount = 5;
 
-            grd.Rows = 0;
-            grd.Rows = rowCount - 9;
+            grd.Rows = 1;
             grd.Cols = colCount;
 
             grd.FixRows = 1;
@@ -130,14 +129,17 @@
 
             for (int i = 8; i <= rowCount; i++)
             {
+                grd.Rows++;
                 int fila = i - 7;
                 //Fecha
-                var nn = xlRange.Cells[i, 2].text;
+                var nn = xlRange.Cells[i, 2].value;
                 if (nn != null)
                 {
                     DateTime f;
 
-                    if (DateTime.TryParse(nn, out f) == false)
+                    string s = $"{nn}";
+
+                    if (DateTime.TryParse(s, out f) == false)
                     {
                         break;
                     }
