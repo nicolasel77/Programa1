@@ -2507,7 +2507,7 @@
                 t.Click += new EventHandler(Mostrar);
                 this.tstMenu.Items.Add(t);
 
-                Form frmModificar_Tarjetas = new Carga.Tesoreria.frmModificar_Tarjetas();
+                Form frmModificar_Tarjetas = new Carga.Tesoreria.frmModificar_Tarjetas(usuario);
                 frmModificar_Tarjetas.MdiParent = this;
                 frmModificar_Tarjetas.Disposed += frmModificar_Tarjetas_Disposed;
                 forms.Add(frmModificar_Tarjetas);

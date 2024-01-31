@@ -5,6 +5,8 @@
     using System;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Windows.Forms;
+
     public class Tarjetas : c_Base
     {
 
@@ -31,6 +33,8 @@
 
         private Sucursales.Sucursales sucursales = new Sucursales.Sucursales();
         public Tipos_Tarjeta tipos_Tarjeta = new Tipos_Tarjeta();
+
+
         public new DataTable Datos(string filtro = "")
         {
             return Datos(filtro);
@@ -122,6 +126,82 @@
         public new void Actualizar()
         {
             Actualizar("Suc", sucD);
+        }
+
+        public void Backup_cambios(string cambios, int usuario)
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            try
+            {
+                //Borrar direccion de carpeta
+                SqlCommand command =
+                    new SqlCommand($"DELETE FROM dbGastos.dbo.Revertir_Tarjetas WHERE Usuario = {usuario}", sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+                if (sql.State == ConnectionState.Closed) { sql.Open(); }
+
+                var d = command.ExecuteNonQuery();
+
+                //Agregar nueva direccion de carpeta
+
+                command =
+                    new SqlCommand($"INSERT INTO dbGastos.dbo.Revertir_Tarjetas (Registros, Origen, Usuario) VALUES ('{cambios}', {sucO}, {usuario})", sql);
+                command.CommandType = CommandType.Text;
+                command.Connection = sql;
+
+                d = command.ExecuteNonQuery();
+
+                sql.Close();
+
+            }
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message, "Error");
+            }
+        }
+
+        public void Revertir_cambios(int usuario) 
+        {
+            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            try
+            {
+                //Obtener los cambios
+                int id_revertir = Convert.ToInt32(Dato_Generico($"SELECT Id FROM dbGastos.dbo.Revertir_Tarjetas WHERE Usuario = {usuario}"));
+                int origen = Convert.ToInt32(Dato_Generico($"SELECT Origen FROM dbGastos.dbo.Revertir_Tarjetas WHERE Id = {id_revertir}"));
+                string registros = Dato_Generico($"SELECT ISNULL((SELECT Registros FROM dbGastos.dbo.Revertir_Tarjetas WHERE Id ={id_revertir}), '')").ToString();
+
+                //Deshacer los cambios
+                if (registros.Length > 1)
+                {
+                    SqlCommand command =
+                        new SqlCommand($"UPDATE dbGastos.dbo.entradas_tarjeta SET Suc = {origen} WHERE Id IN ({registros})", sql);
+                    command.CommandType = CommandType.Text;
+                    command.Connection = sql;
+                    if (sql.State == ConnectionState.Closed) { sql.Open(); }
+
+                    var d = command.ExecuteNonQuery();
+
+                    //Borrar el registro
+
+                    command =
+                      new SqlCommand($"DELETE FROM dbGastos.dbo.Revertir_Tarjetas WHERE Id = {id_revertir}", sql);
+                    command.CommandType = CommandType.Text;
+                    command.Connection = sql;
+
+                    d = command.ExecuteNonQuery();
+                }
+                else
+                {
+                    Exception e;
+                    MessageBox.Show(null,"No hay cambios que revertir","Cuidado Pau!");
+                }
+                sql.Close();
+
+            }
+            catch (Exception e)
+            {
+               // MessageBox.Show(e.Message, "Error");
+            }
         }
 
     }

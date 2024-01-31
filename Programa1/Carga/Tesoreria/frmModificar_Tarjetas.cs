@@ -1,6 +1,7 @@
 ﻿namespace Programa1.Carga.Tesoreria
 {
     using DB.Tesoreria;
+    using Programa1.DB.Varios;
     using System;
     using System.Data;
     using System.Drawing;
@@ -9,8 +10,12 @@
     {
         private Tarjetas tarjetas;
         private Herramientas.Herramientas h;
-        public frmModificar_Tarjetas()
+        private Usuarios usuario;
+
+        public frmModificar_Tarjetas(Usuarios user)
         {
+            usuario = user;
+
             InitializeComponent();
             tarjetas = new Tarjetas();
             h = new Herramientas.Herramientas();
@@ -44,15 +49,14 @@
             DataTable dt = tarjetas.Datos_Vista(f);
             dt.Columns.Add("Cambio", typeof(bool));
             grdOrigen.MostrarDatos(dt, true, false);
-            if (cmbSucO.Text.Length > 0)
-            { grdResumenOri.MostrarDatos(tarjetas.Datos_Resumen_modi_tar(f), true, false); }
+            grdResumenOri.MostrarDatos(tarjetas.Datos_Resumen_modi_tar(f), true, false); 
 
             f = h.Unir(cFecha.Cadena(), $"Suc= {tarjetas.sucD}");
             if (lstTipos_t.SelectedIndex >= 0)
             { f = h.Unir(f, "Id_Tipo IN " + h.Codigos_Seleccionados(lstTipos_t)); }
             grd_Destino.MostrarDatos(tarjetas.Datos_Vista(f), true, false);
-            if (cmbSucD.Text.Length > 0)
-            { grdResumenDest.MostrarDatos(tarjetas.Datos_Resumen_modi_tar(f), true, false); }
+            
+            grdResumenDest.MostrarDatos(tarjetas.Datos_Resumen_modi_tar(f), true, false);
             Formato_Grilla();
         }
 
@@ -124,14 +128,18 @@
             if (tarjetas.sucD > 0)
             {
                 int c_cambio = grdOrigen.get_ColIndex("Cambio");
+                string cambios = "";
                 for (int i = 1; i <= grdOrigen.Rows - 1; i++)
                 {
                     if (Convert.ToBoolean(grdOrigen.get_Texto(i, c_cambio)) == true)
                     {
                         tarjetas.ID = Convert.ToInt32(grdOrigen.get_Texto(i, 0));
+                        cambios = $"{cambios} {tarjetas.ID},";
                         tarjetas.Actualizar();
                     }
                 }
+                cambios = cambios.Substring(0, cambios.Length - 1);
+                tarjetas.Backup_cambios(cambios, usuario.ID);
                 Cargar_grillas();
             }
             else
@@ -145,6 +153,7 @@
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             { e.Handled = true; }
         }
+
         private void txtvalor_KeyUp(object sender, KeyEventArgs e)
         {
             if ((e.KeyCode == Keys.Enter) && (txtvalor.Text.Length > 0))
@@ -201,6 +210,27 @@
                     { lstTipos_t.SelectedIndexChanged += lstTipos_t_SelectedIndexChanged; }
                 }
             }
+        }
+
+        private void cmdInvertir_Click(object sender, EventArgs e)
+        {
+            string suc_1 = cmbSucO.Text;
+            string suc_2 = cmbSucD.Text;
+
+            cmbSucO.Text = suc_2;
+            cmbSucD.Text = suc_1;
+
+            if (h.Codigo_Seleccionado(suc_1) == 0)
+            { tarjetas.sucD = 0; }
+            else if (h.Codigo_Seleccionado(suc_2) == 0)
+            { tarjetas.sucO = 0; }
+
+            Cargar_grillas();
+        }
+
+        private void cmdRevertir_Click(object sender, EventArgs e)
+        {
+            tarjetas.Revertir_cambios(usuario.ID);
         }
     }
 }
