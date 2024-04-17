@@ -177,8 +177,8 @@
                         f = 0;
                         if (fo == 0) { f = -1; }
                     }
-                    else if (f == fo - 1)
-                    { txtvalor.Text = ""; }
+                    //else if (f == fo - 1)
+                    //{ txtvalor.Text = ""; }
                 }
             }
         }
@@ -231,6 +231,7 @@
         private void cmdRevertir_Click(object sender, EventArgs e)
         {
             tarjetas.Revertir_cambios(usuario.ID);
+            Cargar_grillas();
         }
     }
 }
