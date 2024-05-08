@@ -242,7 +242,7 @@
                                     for (int i = 22; i <= max - 3; i++)
                                     {
                                         leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
-
+                                        leer.vFecha = leer.vFecha.AddHours(leer.vFecha.Hour * -1).AddMinutes(leer.vFecha.Minute * -1);
                                         if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
                                         {
                                             DataRow nrow = dt.NewRow();
@@ -252,18 +252,18 @@
                                             {
                                                 nrow["Fecha"] = leer.vFecha;
 
-                                                if (xApp.Cells[i, 13].Text == "Por acreditar") { nrow["Fecha_Pago"] = leer.vFecha.Date.AddDays(1); }
+                                                if (xApp.Cells[i, 15].Text == "Por acreditar") { nrow["Fecha_Pago"] = leer.vFecha.Date.AddDays(1); }
                                                 else { nrow["Fecha_Pago"] = xApp.Cells[i, 2].Text; }
                                                 
                                                 nrow["Comprobante"] = xApp.Cells[i, 3].Text;
 
-                                                suc_temp = xApp.Cells[i, 4].Text;
+                                                suc_temp = xApp.Cells[i, 5].Text;
 
                                                 nrow["Suc"] = Convert.ToInt32(suc_temp.Substring(suc_temp.IndexOf("SUC") + 4));
 
                                                 nrow["Tarjeta"] = 1;
 
-                                                suc_temp = xApp.Cells[i, 8].Text;
+                                                suc_temp = xApp.Cells[i, 10].Text;
                                                 nrow["Importe"] = Convert.ToSingle(suc_temp.Substring(1));
                                                 nrow["Lote"] = 1;
                                                 nrow["Id_Tipo"] = leer.vtipo;

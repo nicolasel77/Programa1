@@ -2259,6 +2259,58 @@
                 }
             }
         }
+        /////////////////////////
+
+        private void reclamosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmReclamos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmReclamos");
+                t.Text = "Reclamos";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmReclamos = new Carga.Tesoreria.frmReclamos();
+                frmReclamos.MdiParent = this;
+                frmReclamos.Disposed += frmReclamos_Disposed;
+                forms.Add(frmReclamos);
+                frmReclamos.Show();
+                frmReclamos.WindowState = FormWindowState.Minimized;
+                frmReclamos.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void frmReclamos_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Reclamos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmReclamos")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+
+        /////////////////////////
 
         private void frigorificosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -3204,5 +3256,6 @@
             //    this.Close();
             //}
         }
+
     }
 }
