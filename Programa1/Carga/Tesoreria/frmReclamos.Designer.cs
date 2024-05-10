@@ -47,6 +47,7 @@
             this.cmdCarpeta = new MaterialSkin.Controls.MaterialFlatButton();
             this.lblDesarrollo = new MaterialSkin.Controls.MaterialLabel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.cbEntidades = new System.Windows.Forms.ComboBox();
             this.txtTitulo = new System.Windows.Forms.TextBox();
             this.lblTitulo = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
@@ -58,10 +59,10 @@
             this.lblDescripcion = new MaterialSkin.Controls.MaterialLabel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.cmdEditar = new MaterialSkin.Controls.MaterialFlatButton();
             this.lblArrastre = new MaterialSkin.Controls.MaterialLabel();
-            this.cbEntidades = new System.Windows.Forms.ComboBox();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -71,7 +72,6 @@
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel8.SuspendLayout();
-            this.panel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialDivider1
@@ -165,6 +165,7 @@
             this.lstEntidad.Size = new System.Drawing.Size(121, 329);
             this.lstEntidad.TabIndex = 0;
             this.lstEntidad.SelectedIndexChanged += new System.EventHandler(this.lstEntidad_SelectedIndexChanged);
+            this.lstEntidad.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstEntidad_MouseUp);
             // 
             // lblEntidad
             // 
@@ -183,6 +184,7 @@
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.materialLabel5);
             this.panel3.Controls.Add(this.txtResolucion);
             this.panel3.Controls.Add(this.lblResolucion);
             this.panel3.Location = new System.Drawing.Point(0, 507);
@@ -195,10 +197,10 @@
             this.txtResolucion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtResolucion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResolucion.Location = new System.Drawing.Point(3, 3);
+            this.txtResolucion.Location = new System.Drawing.Point(3, 26);
             this.txtResolucion.Multiline = true;
             this.txtResolucion.Name = "txtResolucion";
-            this.txtResolucion.Size = new System.Drawing.Size(984, 91);
+            this.txtResolucion.Size = new System.Drawing.Size(984, 68);
             this.txtResolucion.TabIndex = 12;
             // 
             // lblResolucion
@@ -219,6 +221,7 @@
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.materialLabel4);
             this.panel4.Controls.Add(this.panel9);
             this.panel4.Controls.Add(this.txtDesarrollo);
             this.panel4.Controls.Add(this.panel7);
@@ -263,10 +266,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDesarrollo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDesarrollo.Location = new System.Drawing.Point(3, 3);
+            this.txtDesarrollo.Location = new System.Drawing.Point(3, 24);
             this.txtDesarrollo.Multiline = true;
             this.txtDesarrollo.Name = "txtDesarrollo";
-            this.txtDesarrollo.Size = new System.Drawing.Size(984, 303);
+            this.txtDesarrollo.Size = new System.Drawing.Size(984, 282);
             this.txtDesarrollo.TabIndex = 10;
             this.txtDesarrollo.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtDesarrollo_DragDrop);
             this.txtDesarrollo.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtDescripcion_DragEnter_1);
@@ -328,6 +331,16 @@
             this.panel5.Size = new System.Drawing.Size(990, 31);
             this.panel5.TabIndex = 6;
             // 
+            // cbEntidades
+            // 
+            this.cbEntidades.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbEntidades.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbEntidades.FormattingEnabled = true;
+            this.cbEntidades.Location = new System.Drawing.Point(526, 6);
+            this.cbEntidades.Name = "cbEntidades";
+            this.cbEntidades.Size = new System.Drawing.Size(146, 21);
+            this.cbEntidades.TabIndex = 13;
+            // 
             // txtTitulo
             // 
             this.txtTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -336,7 +349,7 @@
             this.txtTitulo.Location = new System.Drawing.Point(3, 3);
             this.txtTitulo.Multiline = true;
             this.txtTitulo.Name = "txtTitulo";
-            this.txtTitulo.Size = new System.Drawing.Size(154, 25);
+            this.txtTitulo.Size = new System.Drawing.Size(81, 25);
             this.txtTitulo.TabIndex = 12;
             // 
             // lblTitulo
@@ -392,7 +405,7 @@
             // 
             this.dtpInicio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpInicio.Location = new System.Drawing.Point(734, 8);
+            this.dtpInicio.Location = new System.Drawing.Point(734, 6);
             this.dtpInicio.Name = "dtpInicio";
             this.dtpInicio.Size = new System.Drawing.Size(98, 20);
             this.dtpInicio.TabIndex = 1;
@@ -413,6 +426,7 @@
             this.cmdNuevoCaso.TabIndex = 7;
             this.cmdNuevoCaso.Text = "Nuevo caso";
             this.cmdNuevoCaso.UseVisualStyleBackColor = true;
+            this.cmdNuevoCaso.Click += new System.EventHandler(this.cmdNuevoCaso_Click);
             // 
             // panel6
             // 
@@ -440,6 +454,7 @@
             this.panel8.AllowDrop = true;
             this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel8.Controls.Add(this.materialLabel3);
             this.panel8.Controls.Add(this.txtDescripcion);
             this.panel8.Controls.Add(this.lblDescripcion);
             this.panel8.Location = new System.Drawing.Point(0, 37);
@@ -453,42 +468,15 @@
             this.txtDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcion.Location = new System.Drawing.Point(3, 3);
+            this.txtDescripcion.Location = new System.Drawing.Point(3, 25);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(984, 86);
+            this.txtDescripcion.Size = new System.Drawing.Size(984, 64);
             this.txtDescripcion.TabIndex = 11;
             this.txtDescripcion.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtDesarrollo_DragDrop);
             this.txtDescripcion.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtDescripcion_DragEnter_1);
             this.txtDescripcion.DragOver += new System.Windows.Forms.DragEventHandler(this.txtDescripcion_DragOver);
             this.txtDescripcion.DragLeave += new System.EventHandler(this.txtDescripcion_DragLeave);
-            // 
-            // panel10
-            // 
-            this.panel10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel10.Controls.Add(this.cmdEditar);
-            this.panel10.Location = new System.Drawing.Point(1003, 454);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(253, 66);
-            this.panel10.TabIndex = 9;
-            // 
-            // cmdEditar
-            // 
-            this.cmdEditar.AutoSize = true;
-            this.cmdEditar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cmdEditar.Depth = 0;
-            this.cmdEditar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmdEditar.Enabled = false;
-            this.cmdEditar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdEditar.Location = new System.Drawing.Point(0, 0);
-            this.cmdEditar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cmdEditar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cmdEditar.Name = "cmdEditar";
-            this.cmdEditar.Primary = false;
-            this.cmdEditar.Size = new System.Drawing.Size(253, 66);
-            this.cmdEditar.TabIndex = 7;
-            this.cmdEditar.Text = "Editar";
-            this.cmdEditar.UseVisualStyleBackColor = true;
             // 
             // lblArrastre
             // 
@@ -497,30 +485,59 @@
             this.lblArrastre.AutoSize = true;
             this.lblArrastre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblArrastre.Depth = 0;
-            this.lblArrastre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblArrastre.ForeColor = System.Drawing.Color.Gray;
+            this.lblArrastre.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblArrastre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblArrastre.Location = new System.Drawing.Point(568, 295);
             this.lblArrastre.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblArrastre.Name = "lblArrastre";
-            this.lblArrastre.Size = new System.Drawing.Size(186, 20);
+            this.lblArrastre.Size = new System.Drawing.Size(182, 19);
             this.lblArrastre.TabIndex = 10;
             this.lblArrastre.Text = "Arrastre los archivos aquí";
             // 
-            // cbEntidades
+            // materialLabel3
             // 
-            this.cbEntidades.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbEntidades.FormattingEnabled = true;
-            this.cbEntidades.Location = new System.Drawing.Point(526, 6);
-            this.cbEntidades.Name = "cbEntidades";
-            this.cbEntidades.Size = new System.Drawing.Size(146, 21);
-            this.cbEntidades.TabIndex = 13;
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel3.Location = new System.Drawing.Point(5, 1);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(89, 19);
+            this.materialLabel3.TabIndex = 14;
+            this.materialLabel3.Text = "Descripción";
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel4.Location = new System.Drawing.Point(5, 0);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(79, 19);
+            this.materialLabel4.TabIndex = 15;
+            this.materialLabel4.Text = "Desarrollo";
+            // 
+            // materialLabel5
+            // 
+            this.materialLabel5.AutoSize = true;
+            this.materialLabel5.Depth = 0;
+            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel5.Location = new System.Drawing.Point(5, 2);
+            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel5.Name = "materialLabel5";
+            this.materialLabel5.Size = new System.Drawing.Size(84, 19);
+            this.materialLabel5.TabIndex = 16;
+            this.materialLabel5.Text = "Resolución";
             // 
             // frmReclamos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1268, 604);
-            this.Controls.Add(this.panel10);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
@@ -550,8 +567,6 @@
             this.panel6.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -589,9 +604,10 @@
         private System.Windows.Forms.TextBox txtDesarrollo;
         private System.Windows.Forms.TextBox txtTitulo;
         private System.Windows.Forms.TextBox txtDescripcion;
-        private System.Windows.Forms.Panel panel10;
-        private MaterialSkin.Controls.MaterialFlatButton cmdEditar;
         private MaterialSkin.Controls.MaterialLabel lblArrastre;
         private System.Windows.Forms.ComboBox cbEntidades;
+        private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
     }
 }

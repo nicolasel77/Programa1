@@ -16,6 +16,8 @@
             InitializeComponent();
             reclamos = new Reclamos();
             h = new Herramientas();
+            h.Llenar_List(cbEntidades, reclamos.Entidades());
+            h.Llenar_List(lstEntidad, reclamos.Entidades());
             Cargar_listados();
         }
 
@@ -24,12 +26,10 @@
         {
             string filtro = "";
 
-            h.Llenar_List(lstEntidad, reclamos.Entidades());
-
             if (chResueltos.Checked)
             { filtro = "Resuelto = 0"; }
             if (lstEntidad.SelectedIndex > -1)
-            { h.Unir(filtro, $"Entidad = {h.Codigo_Seleccionado(lstCasos.Items[lstCasos.SelectedIndex].ToString())} "); }
+            { filtro = h.Unir(filtro, $"Entidad = {h.Codigo_Seleccionado(lstEntidad.Items[lstEntidad.SelectedIndex].ToString())} "); }
 
             h.Llenar_List(lstCasos, reclamos.Casos(filtro));
         }
@@ -38,12 +38,32 @@
         {
             DataTable dt = reclamos.Datos();
 
-            txtTitulo.Text = dt.Rows[0][1].ToString();
-            txtDescripcion.Text = dt.Rows[0][2].ToString(); ;
-            txtDesarrollo.Text = dt.Rows[0][3].ToString(); ;
-            txtResolucion.Text = dt.Rows[0][4].ToString(); ;
-            dtpInicio.Value = Convert.ToDateTime(dt.Rows[0][5]);
-            dtpFinal.Value = Convert.ToDateTime(dt.Rows[0][6]);
+            if (dt != null)
+            {
+                txtTitulo.Text = dt.Rows[0][1].ToString();
+                txtDescripcion.Text = dt.Rows[0][2].ToString();
+                txtDesarrollo.Text = dt.Rows[0][3].ToString();
+                txtResolucion.Text = dt.Rows[0][4].ToString();
+                dtpInicio.Value = Convert.ToDateTime(dt.Rows[0][5]);
+                dtpFinal.Value = Convert.ToDateTime(dt.Rows[0][6]);
+            } else
+            {
+                txtTitulo.Text = "";
+                txtDescripcion.Text = "";
+                txtDesarrollo.Text = "";
+                txtResolucion.Text = "";
+                dtpInicio.Value = Convert.ToDateTime("1/1/1900");
+                dtpFinal.Value = Convert.ToDateTime("1/1/1900");
+
+                reclamos.vTitulo = "";
+                reclamos.vDescripcion = "";
+                reclamos.vDesarrollo = "";
+                reclamos.vResolucion = "";
+                reclamos.vFecha_ini = Convert.ToDateTime("1/1/1900");
+                reclamos.vFecha_fin = Convert.ToDateTime("1/1/1900");
+                reclamos.vResuelto = 0;
+            }
+            
         }
 
 
@@ -62,7 +82,7 @@
                 if (reclamos.vResolucion.Length > 5)
                 { reclamos.vResuelto = 1; }
                 else { reclamos.vResuelto = 0; }
-                reclamos.vEntidad = 0;
+                reclamos.vEntidad = h.Codigo_Seleccionado(cbEntidades.Text);
 
                 reclamos.Actualizar();
             }
@@ -123,7 +143,8 @@
 
         private void lstCasos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            reclamos.ID = h.Codigo_Seleccionado(lstCasos.Items[lstCasos.SelectedIndex].ToString());
+            if (lstCasos.SelectedIndex > -1) { reclamos.ID = h.Codigo_Seleccionado(lstCasos.Items[lstCasos.SelectedIndex].ToString()); }
+            else { reclamos.ID = 0; }
             Cargar();
         }
 
@@ -148,6 +169,19 @@
             materialDivider1.BringToFront();
             lblArrastre.BringToFront();
             e.Effect = DragDropEffects.All;
+        }
+
+        private void cmdNuevoCaso_Click(object sender, EventArgs e)
+        {
+            lstCasos.SelectedIndex = -1;
+        }
+
+        private void lstEntidad_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                lstEntidad.SelectedIndex = -1;
+            }
         }
 
     }

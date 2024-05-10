@@ -57,12 +57,9 @@
                 vResolucion = dt.Rows[0][4].ToString(); ;
                 vFecha_ini = Convert.ToDateTime(dt.Rows[0][5]);
                 vFecha_fin = Convert.ToDateTime(dt.Rows[0][6]);
-                if (vResolucion.Length > 0)
-                { vResuelto = 1; }
-                else { vResuelto = 0; }
-                
-                vEntidad = 0;
-
+                vResuelto = Convert.ToByte(dt.Rows[0][7]);
+                vEntidad = Convert.ToInt16(dt.Rows[0][8]);
+            
             }
             catch (Exception)
             {
