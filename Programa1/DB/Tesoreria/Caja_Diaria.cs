@@ -26,7 +26,7 @@
 
         public Caja_Diaria()
         {
-            Cargar();
+            //Cargar();
 
         }
 
@@ -35,7 +35,7 @@
             SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
 
-            string s = "SELECT ISNULL(Fecha, '1/1/1900') FROM CD_Fecha WHERE Usuario=" + Usuario;
+            string s = "SELECT ISNULL(MAX(Fecha), GETDATE()) FROM CD_Gastos WHERE Usuario=" + Usuario;
 
             SqlCommand command = new SqlCommand(s, sql);
             command.CommandType = CommandType.Text;

@@ -60,6 +60,7 @@ namespace Programa1.Carga.Hacienda
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tiActualizar = new System.Windows.Forms.Timer(this.components);
+            this.lblFechaAct = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmdBase
@@ -421,12 +422,22 @@ namespace Programa1.Carga.Hacienda
             this.tiActualizar.Interval = 3600000;
             this.tiActualizar.Tick += new System.EventHandler(this.tiActualizar_Tick);
             // 
+            // lblFechaAct
+            // 
+            this.lblFechaAct.AutoSize = true;
+            this.lblFechaAct.Location = new System.Drawing.Point(6, 53);
+            this.lblFechaAct.Name = "lblFechaAct";
+            this.lblFechaAct.Size = new System.Drawing.Size(96, 13);
+            this.lblFechaAct.TabIndex = 17;
+            this.lblFechaAct.Text = "Subida de archivo:";
+            // 
             // frmSincronizarAccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(976, 644);
+            this.Controls.Add(this.lblFechaAct);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.mHasta);
@@ -495,5 +506,6 @@ namespace Programa1.Carga.Hacienda
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Timer tiActualizar;
+        private System.Windows.Forms.Label lblFechaAct;
     }
 }

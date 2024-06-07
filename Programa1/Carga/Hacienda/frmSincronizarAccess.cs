@@ -47,6 +47,12 @@ namespace Programa1.Carga.Hacienda
 
         private void Cargar_Listados()
         {
+            if (cmdBase.Text.Length > 0)
+            {
+                DateTime d = File.GetLastWriteTime(cmdBase.Text);
+                lblFechaAct.Text = "Subida en gdrive: " + d; 
+            }
+
             Cargar_ListadoSalidas();
             Cargar_ListadosBoletas();
             lstActualizacion.Items.Clear();

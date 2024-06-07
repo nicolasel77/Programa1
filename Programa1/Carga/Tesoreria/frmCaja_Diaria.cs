@@ -29,7 +29,7 @@ namespace Programa1.Carga.Tesoreria
         /// <summary>
         /// Caja Diaria
         /// </summary>
-        private readonly Caja_Diaria CD = new Caja_Diaria();
+        private readonly Caja_Diaria CD;
 
         #region " Columnas Entradas "
         private const Byte e_Id = 0;
@@ -82,6 +82,9 @@ namespace Programa1.Carga.Tesoreria
         {
             usuario = user;
             cGastos.Usuario = usuario;
+            
+            CD = new Caja_Diaria();
+            CD.Usuario = user.ID;
 
             InitializeComponent();
         }

@@ -110,6 +110,7 @@
             grd.Cols = colCount;
 
             grd.FixRows = 1;
+            int colOffset = 0;
 
             grd.set_Texto(0, 0, "Fecha");
             grd.set_Texto(0, 1, "Concepto");
@@ -132,7 +133,7 @@
                 grd.Rows++;
                 int fila = i - 7;
                 //Fecha
-                var nn = xlRange.Cells[i, 2].value;
+                var nn = xlRange.Cells[i, 1 + colOffset].value;
                 if (nn != null)
                 {
                     DateTime f;
@@ -146,9 +147,9 @@
                     grd.set_Texto(fila, 0, f);
                 }
                 //Concepto
-                grd.set_Texto(fila, 1, xlRange.Cells[i, 3].Value2);
+                grd.set_Texto(fila, 1, xlRange.Cells[i, 2 + colOffset].Value2);
 
-                Double vimporte = Convert.ToDouble(xlRange.Cells[i, 4].Value2);
+                Double vimporte = Convert.ToDouble(xlRange.Cells[i, 3 + colOffset].Value2);
                 if (vimporte > 0)
                 {
                     //Credito                    
@@ -161,7 +162,7 @@
                 }
 
                 //Saldo
-                grd.set_Texto(fila, 4, xlRange.Cells[i, 5].Value2);
+                grd.set_Texto(fila, 4, xlRange.Cells[i, 4 + colOffset].Value2);
 
                 lblContador.Text = $"Cargando {i - 1} de {rowCount} filas.";
                 Application.DoEvents();
