@@ -58,7 +58,9 @@
             this.cmdRecargar = new MaterialSkin.Controls.MaterialFlatButton();
             this.pbLeer = new System.Windows.Forms.ProgressBar();
             this.lblpb = new System.Windows.Forms.Label();
-            this.chclover = new MaterialSkin.Controls.MaterialCheckBox();
+            this.rdNave = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdFiserv = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdPayway = new MaterialSkin.Controls.MaterialRadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -443,29 +445,67 @@
             this.lblpb.Text = "Progreso:";
             this.lblpb.Visible = false;
             // 
-            // chclover
+            // rdNave
             // 
-            this.chclover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chclover.AutoSize = true;
-            this.chclover.Depth = 0;
-            this.chclover.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chclover.Location = new System.Drawing.Point(1327, 360);
-            this.chclover.Margin = new System.Windows.Forms.Padding(0);
-            this.chclover.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chclover.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chclover.Name = "chclover";
-            this.chclover.Ripple = true;
-            this.chclover.Size = new System.Drawing.Size(67, 30);
-            this.chclover.TabIndex = 27;
-            this.chclover.Text = "Fiserv";
-            this.chclover.UseVisualStyleBackColor = true;
+            this.rdNave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdNave.AutoSize = true;
+            this.rdNave.Depth = 0;
+            this.rdNave.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdNave.Location = new System.Drawing.Point(1325, 298);
+            this.rdNave.Margin = new System.Windows.Forms.Padding(0);
+            this.rdNave.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdNave.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdNave.Name = "rdNave";
+            this.rdNave.Ripple = true;
+            this.rdNave.Size = new System.Drawing.Size(60, 30);
+            this.rdNave.TabIndex = 29;
+            this.rdNave.Text = "Nave";
+            this.rdNave.UseVisualStyleBackColor = true;
+            // 
+            // rdFiserv
+            // 
+            this.rdFiserv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdFiserv.AutoSize = true;
+            this.rdFiserv.Depth = 0;
+            this.rdFiserv.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdFiserv.Location = new System.Drawing.Point(1325, 328);
+            this.rdFiserv.Margin = new System.Windows.Forms.Padding(0);
+            this.rdFiserv.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdFiserv.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdFiserv.Name = "rdFiserv";
+            this.rdFiserv.Ripple = true;
+            this.rdFiserv.Size = new System.Drawing.Size(66, 30);
+            this.rdFiserv.TabIndex = 30;
+            this.rdFiserv.Text = "Fiserv";
+            this.rdFiserv.UseVisualStyleBackColor = true;
+            // 
+            // rdPayway
+            // 
+            this.rdPayway.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdPayway.AutoSize = true;
+            this.rdPayway.Checked = true;
+            this.rdPayway.Depth = 0;
+            this.rdPayway.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdPayway.Location = new System.Drawing.Point(1325, 358);
+            this.rdPayway.Margin = new System.Windows.Forms.Padding(0);
+            this.rdPayway.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdPayway.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdPayway.Name = "rdPayway";
+            this.rdPayway.Ripple = true;
+            this.rdPayway.Size = new System.Drawing.Size(76, 30);
+            this.rdPayway.TabIndex = 31;
+            this.rdPayway.TabStop = true;
+            this.rdPayway.Text = "Payway";
+            this.rdPayway.UseVisualStyleBackColor = true;
             // 
             // frmLeer_Tarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1428, 643);
-            this.Controls.Add(this.chclover);
+            this.Controls.Add(this.rdPayway);
+            this.Controls.Add(this.rdFiserv);
+            this.Controls.Add(this.rdNave);
             this.Controls.Add(this.lblpb);
             this.Controls.Add(this.pbLeer);
             this.Controls.Add(this.panel6);
@@ -537,6 +577,8 @@
         private MaterialSkin.Controls.MaterialFlatButton cmdRecargar;
         private System.Windows.Forms.ProgressBar pbLeer;
         internal System.Windows.Forms.Label lblpb;
-        private MaterialSkin.Controls.MaterialCheckBox chclover;
+        private MaterialSkin.Controls.MaterialRadioButton rdNave;
+        private MaterialSkin.Controls.MaterialRadioButton rdFiserv;
+        private MaterialSkin.Controls.MaterialRadioButton rdPayway;
     }
 }

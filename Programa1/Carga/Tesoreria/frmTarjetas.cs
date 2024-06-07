@@ -134,7 +134,13 @@
         {
             if (lstCuentas.SelectedIndex == -1)
             {
-                cSuc.Filtro_In = "";
+                string n = "";
+                DataTable dt = cuentas.Datos_Genericos($"SELECT Suc FROM dbGastos.dbo.Suc_Cuentas GROUP BY Suc ORDER BY Suc");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    n = $"{n}, {dr[0]}";
+                }
+                cSuc.Filtro_In = n.Substring(2); 
             }
             else
             {

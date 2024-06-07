@@ -94,9 +94,12 @@
     <Reference Include="C1.Win.C1FlexGrid.4">
       <HintPath>..\SpeedGrilla\C1.Win.C1FlexGrid.4.dll</HintPath>
     </Reference>
+    <Reference Include="C1.Win.C1Input.4, Version=4.0.20201.416, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a" />
+    <Reference Include="C1.Win.C1InputPanel.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1SplitContainer.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1SuperTooltip.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1SuperTooltip.4, Version=4.0.20201.416, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.Calendar.4, Version=4.0.20201.416, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -701,6 +704,12 @@
     <Compile Include="Carga\Tesoreria\frmPrestamos.Designer.cs">
       <DependentUpon>frmPrestamos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmReclamos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmReclamos.Designer.cs">
+      <DependentUpon>frmReclamos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmResumenARendir.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -923,6 +932,7 @@
     <Compile Include="DB\Tesoreria\Grupo_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Leer_Tarjetas.cs" />
     <Compile Include="DB\Tesoreria\Nombres_ARendir.cs" />
+    <Compile Include="DB\Tesoreria\Reclamos.cs" />
     <Compile Include="DB\Tesoreria\SubTipo_Gastos.cs" />
     <Compile Include="DB\Tesoreria\Tarjetas.cs" />
     <Compile Include="DB\Tesoreria\Tipos_Tarjeta.cs" />
@@ -1260,6 +1270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmPrestamos.resx">
       <DependentUpon>frmPrestamos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmReclamos.resx">
+      <DependentUpon>frmReclamos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmResumenARendir.resx">
       <DependentUpon>frmResumenARendir.cs</DependentUpon>

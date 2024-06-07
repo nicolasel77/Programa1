@@ -146,8 +146,9 @@
                         dt.Rows.Clear();
                         if (leer.vtipo != 9)
                         {
-                            if (!chclover.Checked)
+                            if (rdPayway.Checked)
                             {
+                                // Payway Tarjetas
                                 for (int i = 3; i <= max; i++)
                                 {
                                     string nn = xApp.Range["A" + i].Text;
@@ -197,7 +198,8 @@
                             }
                             else
                             {
-                                if (leer.vtipo != 12)
+                                // Fiserv Tarjetas
+                                if (leer.vtipo != 12 & leer.vtipo != 13)
                                 {
                                     for (int i = 2; i <= max; i++)
                                     {
@@ -211,7 +213,12 @@
                                             if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
                                             {
                                                 nrow["Fecha"] = leer.vFecha;
-                                                nrow["Fecha_Pago"] = xApp.Cells[i, 3].Text;
+
+                                                if (xApp.Cells[i, 3].Text.Length > 0)
+                                                { nrow["Fecha_Pago"] = xApp.Cells[i, 3].Text; }
+                                                else
+                                                { nrow["Fecha_Pago"] = leer.vFecha; }
+
                                                 nrow["Comprobante"] = xApp.Cells[i, 4].Text;
                                                 nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 5].Text));
                                                 nrow["Tarjeta"] = Convert.ToInt32(xApp.Cells[i, 6].Text);
@@ -227,8 +234,51 @@
                                         }
                                     }
                                 }
-                                else
+                                else if (leer.vtipo == 13)
                                 {
+                                    // Nave
+
+                                    string suc_temp = "";
+                                    for (int i = 22; i <= max - 3; i++)
+                                    {
+                                        leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
+                                        leer.vFecha = leer.vFecha.AddHours(leer.vFecha.Hour * -1).AddMinutes(leer.vFecha.Minute * -1);
+                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                        {
+                                            DataRow nrow = dt.NewRow();
+                                            leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
+
+                                            if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value) // & xApp.Cells[i, 13].Text == "Acreditado")
+                                            {
+                                                nrow["Fecha"] = leer.vFecha;
+
+                                                if (xApp.Cells[i, 15].Text == "Por acreditar") { nrow["Fecha_Pago"] = leer.vFecha.Date.AddDays(1); }
+                                                else { nrow["Fecha_Pago"] = xApp.Cells[i, 2].Text; }
+                                                
+                                                nrow["Comprobante"] = xApp.Cells[i, 3].Text;
+
+                                                suc_temp = xApp.Cells[i, 5].Text;
+
+                                                nrow["Suc"] = Convert.ToInt32(suc_temp.Substring(suc_temp.IndexOf("SUC") + 4));
+
+                                                nrow["Tarjeta"] = 1;
+
+                                                suc_temp = xApp.Cells[i, 10].Text;
+                                                nrow["Importe"] = Convert.ToSingle(suc_temp.Substring(1));
+                                                nrow["Lote"] = 1;
+                                                nrow["Id_Tipo"] = leer.vtipo;
+                                                nrow["Acreditado"] = true;
+
+                                                dt.Rows.Add(nrow);
+                                            }
+                                            pbLeer.Value = i;
+                                            Application.DoEvents();
+                                        }
+                                    }
+                                }
+                                else if (leer.vtipo == 12)
+                                {
+                                    // Fiserv CDNI
                                     for (int i = 2; i <= max; i++)
                                     {
                                         DataRow nrow = dt.NewRow();
@@ -258,8 +308,9 @@
                         {
                             //  QR
 
-                            if (chclover.Checked)
+                            if (rdFiserv.Checked)
                             {
+                                // QR Fiserv
                                 for (int i = 2; i <= max; i++)
                                 {
                                     leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
@@ -289,8 +340,9 @@
                                     }
                                 }
                             }
-                            else
+                            else if (rdPayway.Checked)
                             {
+                                // QR Payway
                                 for (int i = 3; i <= max; i++)
                                 {
                                     string nn = xApp.Range["A" + i].Text;
@@ -385,7 +437,7 @@
                             }
 
                             // Solución para saber Cual es el Último registro de la semana anterior:
-                            // 1: Buscar si hay más de un número de lote
+                            // 1: Buscar si hay más de un número de lote y comprobante y establecer un rango que reconozca que pueden ser +- 
                             // 2: Buscar si uno de esos Números es 1
                             // 3: Siempre sería el Último a no ser que el otro Número sea 2 (en ese caso tomar desde el 2)
                             // Aclaración: Esto Podría fallar únicamente en caso de que el Número de lote sea 2 y ese mismo día se resetee el Número de lote (Toda caso distinto a ese estaría bien)
@@ -500,7 +552,7 @@
             if (Directory.Exists(fcarpeta))
             {
                 string t_extencion;
-                if (chclover.Checked)
+                if (!rdPayway.Checked)
                 { t_extencion = "*.xlsx"; }
                 else { t_extencion = "*.csv"; }
 
