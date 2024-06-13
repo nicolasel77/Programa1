@@ -3248,14 +3248,36 @@
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //c_Base b = new c_Base("Data Source=192.168.10.132;Initial Catalog=dbEmpleados;User Id=Nikorasu;Password=Oficina02");
-            //var s = b.Dato_Generico("SELECT COUNT(*) FROM Sueldos WHERE Fecha>='8/1/23'");
-            //if (s.ToString() != "5452") 
-            //{ 
-            //    MessageBox.Show("Yesss");
-            //    this.Close();
-            //}
+            if (usuario.Nombre == "Paula")
+            { 
+                c_Base b = new c_Base("Data Source=192.168.1.1;Initial Catalog=dbDatos;User Id=Nikorasu;Password=Oficina02");
+
+                string[] nro = new string[15] { "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰", "¹¹", "¹²", "¹³", "¹⁴", "¹⁵" };
+
+                int s = Convert.ToInt16(b.Dato_Generico($"SELECT COUNT(*) FROM Reclamos WHERE Final<='{DateTime.Today.ToString("MM/dd/yyy")}' AND Resuelto = 0"));
+                if (s > 0)
+                {
+                    tlReclamos.Text = "!" + nro[s-1];
+                    tlReclamos.ForeColor = Color.Red;
+                } 
+                else
+                {
+                    tlReclamos.Text = "!";
+                    tlReclamos.ForeColor = Color.Black;
+                }
+
+                timer1.Interval = 30000;
+            }
+            else
+            {
+                tlReclamos.Visible = false;
+                timer1.Enabled = false;
+            }
         }
 
+        private void tlReclamos_Click(object sender, EventArgs e)
+        {
+            reclamosToolStripMenuItem.PerformClick();
+        }
     }
 }

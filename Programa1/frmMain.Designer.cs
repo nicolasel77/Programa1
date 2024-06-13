@@ -81,6 +81,7 @@
             this.leerTarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarTarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reclamosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripSeparator();
             this.bancosCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripSeparator();
@@ -142,9 +143,9 @@
             this.tMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.haciendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lorenaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlReclamos = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.reclamosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -162,7 +163,8 @@
             this.mnuDatos,
             this.mnuPrueba,
             this.mnuGuardar,
-            this.usuariosToolStripMenuItem});
+            this.usuariosToolStripMenuItem,
+            this.tlReclamos});
             this.mnuPrincipal.Location = new System.Drawing.Point(0, 0);
             this.mnuPrincipal.Name = "mnuPrincipal";
             this.mnuPrincipal.Size = new System.Drawing.Size(1339, 24);
@@ -564,6 +566,13 @@
             this.tarjetasToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.tarjetasToolStripMenuItem.Text = "Tarjetas";
             this.tarjetasToolStripMenuItem.Click += new System.EventHandler(this.tarjetasToolStripMenuItem_Click);
+            // 
+            // reclamosToolStripMenuItem
+            // 
+            this.reclamosToolStripMenuItem.Name = "reclamosToolStripMenuItem";
+            this.reclamosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.reclamosToolStripMenuItem.Text = "Reclamos";
+            this.reclamosToolStripMenuItem.Click += new System.EventHandler(this.reclamosToolStripMenuItem_Click);
             // 
             // toolStripMenuItem16
             // 
@@ -1037,6 +1046,15 @@
             this.lorenaToolStripMenuItem.Text = "Lorena";
             this.lorenaToolStripMenuItem.Click += new System.EventHandler(this.lorenaToolStripMenuItem_Click);
             // 
+            // tlReclamos
+            // 
+            this.tlReclamos.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tlReclamos.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlReclamos.Name = "tlReclamos";
+            this.tlReclamos.Size = new System.Drawing.Size(23, 20);
+            this.tlReclamos.Text = "!";
+            this.tlReclamos.Click += new System.EventHandler(this.tlReclamos_Click);
+            // 
             // tstMenu
             // 
             this.tstMenu.Location = new System.Drawing.Point(0, 24);
@@ -1049,15 +1067,9 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 3000;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // reclamosToolStripMenuItem
-            // 
-            this.reclamosToolStripMenuItem.Name = "reclamosToolStripMenuItem";
-            this.reclamosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.reclamosToolStripMenuItem.Text = "Reclamos";
-            this.reclamosToolStripMenuItem.Click += new System.EventHandler(this.reclamosToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -1197,6 +1209,7 @@
         private System.Windows.Forms.ToolStripMenuItem stockGalponToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem reclamosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tlReclamos;
     }
 }
 
