@@ -30,6 +30,13 @@ namespace Programa1.Carga.Tesoreria
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtImporte = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.nuDivisor = new System.Windows.Forms.NumericUpDown();
             this.chBajas = new MaterialSkin.Controls.MaterialCheckBox();
@@ -40,15 +47,10 @@ namespace Programa1.Carga.Tesoreria
             this.rdResto = new MaterialSkin.Controls.MaterialRadioButton();
             this.lstSucs = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.grd = new Grilla2.SpeedGrilla();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtImporte = new System.Windows.Forms.TextBox();
             this.cmdCancelar = new Programa1.Controles.cBoton();
             this.cmdAceptar = new Programa1.Controles.cBoton();
+            this.grd = new Grilla2.SpeedGrilla();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -85,13 +87,87 @@ namespace Programa1.Carga.Tesoreria
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.label6);
             this.splitContainer1.Panel2.Controls.Add(this.cmdCancelar);
+            this.splitContainer1.Panel2.Controls.Add(this.txtBuscar);
             this.splitContainer1.Panel2.Controls.Add(this.cmdAceptar);
             this.splitContainer1.Panel2.Controls.Add(this.grd);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Size = new System.Drawing.Size(845, 749);
             this.splitContainer1.SplitterDistance = 377;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(4, 709);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Buscar Empleado";
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscar.Location = new System.Drawing.Point(7, 725);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(147, 19);
+            this.txtBuscar.TabIndex = 8;
+            this.txtBuscar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyDown);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(215, 697);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Importe";
+            // 
+            // txtImporte
+            // 
+            this.txtImporte.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtImporte.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtImporte.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtImporte.Location = new System.Drawing.Point(218, 715);
+            this.txtImporte.Name = "txtImporte";
+            this.txtImporte.Size = new System.Drawing.Size(147, 19);
+            this.txtImporte.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(50, 697);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(63, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Descripcion";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 697);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(26, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Cod";
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCodigo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCodigo.Location = new System.Drawing.Point(14, 715);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(33, 19);
+            this.txtCodigo.TabIndex = 4;
+            this.txtCodigo.Text = "1";
             // 
             // txtDescripcion
             // 
@@ -137,7 +213,7 @@ namespace Programa1.Carga.Tesoreria
             this.chBajas.Checked = true;
             this.chBajas.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBajas.Depth = 0;
-            this.chBajas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chBajas.Font = new System.Drawing.Font("Roboto", 10F);
             this.chBajas.Location = new System.Drawing.Point(14, 660);
             this.chBajas.Margin = new System.Windows.Forms.Padding(0);
             this.chBajas.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -155,7 +231,7 @@ namespace Programa1.Carga.Tesoreria
             this.rdNinguno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rdNinguno.AutoSize = true;
             this.rdNinguno.Depth = 0;
-            this.rdNinguno.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdNinguno.Font = new System.Drawing.Font("Roboto", 10F);
             this.rdNinguno.Location = new System.Drawing.Point(14, 617);
             this.rdNinguno.Margin = new System.Windows.Forms.Padding(0);
             this.rdNinguno.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -174,7 +250,7 @@ namespace Programa1.Carga.Tesoreria
             this.rdVacaciones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rdVacaciones.AutoSize = true;
             this.rdVacaciones.Depth = 0;
-            this.rdVacaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdVacaciones.Font = new System.Drawing.Font("Roboto", 10F);
             this.rdVacaciones.Location = new System.Drawing.Point(14, 587);
             this.rdVacaciones.Margin = new System.Windows.Forms.Padding(0);
             this.rdVacaciones.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -193,7 +269,7 @@ namespace Programa1.Carga.Tesoreria
             this.rdAguinaldo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rdAguinaldo.AutoSize = true;
             this.rdAguinaldo.Depth = 0;
-            this.rdAguinaldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdAguinaldo.Font = new System.Drawing.Font("Roboto", 10F);
             this.rdAguinaldo.Location = new System.Drawing.Point(14, 557);
             this.rdAguinaldo.Margin = new System.Windows.Forms.Padding(0);
             this.rdAguinaldo.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -212,7 +288,7 @@ namespace Programa1.Carga.Tesoreria
             this.rdAdelanto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rdAdelanto.AutoSize = true;
             this.rdAdelanto.Depth = 0;
-            this.rdAdelanto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdAdelanto.Font = new System.Drawing.Font("Roboto", 10F);
             this.rdAdelanto.Location = new System.Drawing.Point(14, 527);
             this.rdAdelanto.Margin = new System.Windows.Forms.Padding(0);
             this.rdAdelanto.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -231,7 +307,7 @@ namespace Programa1.Carga.Tesoreria
             this.rdResto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rdResto.AutoSize = true;
             this.rdResto.Depth = 0;
-            this.rdResto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rdResto.Font = new System.Drawing.Font("Roboto", 10F);
             this.rdResto.Location = new System.Drawing.Point(14, 497);
             this.rdResto.Margin = new System.Windows.Forms.Padding(0);
             this.rdResto.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -271,6 +347,26 @@ namespace Programa1.Carga.Tesoreria
             this.label1.TabIndex = 0;
             this.label1.Text = "Sucursal";
             // 
+            // cmdCancelar
+            // 
+            this.cmdCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdCancelar.Location = new System.Drawing.Point(316, 716);
+            this.cmdCancelar.Name = "cmdCancelar";
+            this.cmdCancelar.Size = new System.Drawing.Size(136, 28);
+            this.cmdCancelar.TabIndex = 1;
+            this.cmdCancelar.Texto = "Cancelar";
+            this.cmdCancelar.Click += new System.EventHandler(this.cmdCancelar_Click);
+            // 
+            // cmdAceptar
+            // 
+            this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdAceptar.Location = new System.Drawing.Point(160, 716);
+            this.cmdAceptar.Name = "cmdAceptar";
+            this.cmdAceptar.Size = new System.Drawing.Size(150, 30);
+            this.cmdAceptar.TabIndex = 1;
+            this.cmdAceptar.Texto = "Aceptar";
+            this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
+            // 
             // grd
             // 
             this.grd.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
@@ -296,6 +392,7 @@ namespace Programa1.Carga.Tesoreria
             this.grd.FuenteEncabezado = null;
             this.grd.FuentePieDePagina = null;
             this.grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grd.LimpiarEstilosAntesDeOrdenar = false;
             this.grd.Location = new System.Drawing.Point(6, 34);
             this.grd.Name = "grd";
             this.grd.PieDePagina = "\t\tPage {0} of {1}";
@@ -316,77 +413,6 @@ namespace Programa1.Carga.Tesoreria
             this.label2.Size = new System.Drawing.Size(86, 20);
             this.label2.TabIndex = 0;
             this.label2.Text = "Empeados";
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCodigo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCodigo.Location = new System.Drawing.Point(14, 715);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(33, 19);
-            this.txtCodigo.TabIndex = 4;
-            this.txtCodigo.Text = "1";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 697);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Cod";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(50, 697);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Descripcion";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(215, 697);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Importe";
-            // 
-            // txtImporte
-            // 
-            this.txtImporte.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtImporte.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtImporte.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtImporte.Location = new System.Drawing.Point(218, 715);
-            this.txtImporte.Name = "txtImporte";
-            this.txtImporte.Size = new System.Drawing.Size(147, 19);
-            this.txtImporte.TabIndex = 6;
-            // 
-            // cmdCancelar
-            // 
-            this.cmdCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdCancelar.Location = new System.Drawing.Point(286, 715);
-            this.cmdCancelar.Name = "cmdCancelar";
-            this.cmdCancelar.Size = new System.Drawing.Size(166, 22);
-            this.cmdCancelar.TabIndex = 1;
-            this.cmdCancelar.Texto = "Cancelar";
-            this.cmdCancelar.Click += new System.EventHandler(this.cmdCancelar_Click);
-            // 
-            // cmdAceptar
-            // 
-            this.cmdAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdAceptar.Location = new System.Drawing.Point(114, 715);
-            this.cmdAceptar.Name = "cmdAceptar";
-            this.cmdAceptar.Size = new System.Drawing.Size(166, 22);
-            this.cmdAceptar.TabIndex = 1;
-            this.cmdAceptar.Texto = "Aceptar";
-            this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
             // 
             // frmCargar_Sueldos
             // 
@@ -433,5 +459,7 @@ namespace Programa1.Carga.Tesoreria
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtImporte;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtBuscar;
     }
 }

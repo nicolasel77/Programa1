@@ -19,7 +19,7 @@
         {
             InitializeComponent();
             Herramientas.Herramientas h = new Herramientas.Herramientas();
-            h.Llenar_List(lstSucs, sucs.Datos_Vista("ID>4999", "ID, Nombre", "ID"));
+            h.Llenar_List(lstSucs, sucs.Datos_Vista("(ID < 504 AND ver = 1 AND Propio = 1) OR ID = 100 OR ID>4999", "ID, Nombre", "ID"));
             if (DateTime.Today.Day > 12)
             {
                 rdAdelanto.Checked = true;
@@ -36,7 +36,7 @@
             {
                 Herramientas.Herramientas h = new Herramientas.Herramientas();
 
-                float importe  = 0;
+                float importe = 0;
                 if (txtImporte.Text.Length > 0)
                 {
                     float.TryParse(txtImporte.Text, out importe);
@@ -54,12 +54,12 @@
                 else
                 {
                     tamaño_array = Convert.ToInt16(empleados.Dato_Generico($"SELECT COUNT(Empleado) FROM dbEmpleados.dbo.Retiros WHERE Tipo = 5 AND {s} AND" +
-                $"{fecha} BETWEEN Semana AND DATEADD(DAY, Dias - 1, Semana)"));
+                $"{fecha} BETWEEN Semana AND DATEADD(DAY, Dias - 1, Semana) AND baja <"));
                 }
 
                 if (chBajas.Checked)
                 {
-                    s = s + " AND LEFT(Nombre, 4) NOT LIKE 'baja'";
+                    s = s + $" AND LEFT(Nombre, 4) NOT LIKE 'baja' AND ISNULL(Baja, '1/1/2050') > {fecha}";
                 }
 
 
@@ -207,7 +207,7 @@
                 Aceptado = true;
 
                 int codigo = 1;
-                if(txtCodigo.Text.Length > 0)
+                if (txtCodigo.Text.Length > 0)
                 {
                     int.TryParse(txtCodigo.Text, out codigo);
                 }
@@ -248,6 +248,35 @@
         private void nuDivisor_ValueChanged(object sender, EventArgs e)
         {
             Cargar_Datos();
+        }
+
+        private void txtBuscar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && (txtBuscar.Text.Length > 0))
+            {
+                e.SuppressKeyPress = true;
+
+                int c_Nombre = grd.get_ColIndex("Nombre");
+                string Nombre = txtBuscar.Text.ToLower();
+
+                int fo = grd.Row;
+                if (fo == grd.Rows || fo == -1) { fo = 0; }
+                for (int f = fo + 1; f != fo; f++)
+                {
+                    if (Convert.ToString(grd.get_Texto(f, c_Nombre)).ToLower().IndexOf(Nombre) > -1)
+                    {
+                        grd.ActivarCelda(f, 3);
+                        f = fo - 1;
+                    }
+                    else if (f >= grd.Rows - 1)
+                    {
+                        f = 0;
+                        if (fo == 0) { f = -1; }
+                    }
+                    //else if (f == fo - 1)
+                    //{ txtvalor.Text = ""; }
+                }
+            }
         }
     }
 }

@@ -121,7 +121,6 @@
             }
             materialDivider1.SendToBack();
             lblArrastre.SendToBack();
-
         }
 
         //  Eventos
@@ -174,6 +173,8 @@
         private void cmdNuevoCaso_Click(object sender, EventArgs e)
         {
             lstCasos.SelectedIndex = -1;
+            reclamos.ID = 0;
+            Cargar();
         }
 
         private void lstEntidad_MouseUp(object sender, MouseEventArgs e)
@@ -184,5 +185,18 @@
             }
         }
 
+        private void cmdCarpeta_Click(object sender, EventArgs e)
+        {
+            if (reclamos.ID > 0)
+            {
+                string ruta = $@"D:\Reclamos\{reclamos.vTitulo}";
+
+                if (!Directory.Exists(ruta))
+                {
+                    Directory.CreateDirectory(ruta);
+                    System.Diagnostics.Process.Start(ruta);
+                } else { System.Diagnostics.Process.Start(ruta); }
+             }
+        }
     }
 }
