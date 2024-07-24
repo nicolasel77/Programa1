@@ -166,20 +166,22 @@
                         {
                             if (Cantidad_Clientes.Fecha_Cerrada(df) == false)
                             {
-                                if (Cantidad_Clientes.Sucursal.ID == 0 || Cantidad_Clientes.Dato($"Fecha = '{df:MM/dd/yyy}' AND Id_Sucursales = {Cantidad_Clientes.Sucursal.ID}") == null)
+                                Cantidad_Clientes.Fecha = df;
+                                if (id != 0 && Cantidad_Clientes.Existe_Dato() == true)
                                 {
-                                    Cantidad_Clientes.Fecha = df;
+                                    Mensaje("La fecha y sucursal ya se han cargado.");
+                                    grdCantidad_Clientes.ErrorEnTxt();
 
+                                }
+                                else
+                                {
                                     if (id != 0) { Cantidad_Clientes.Actualizar(); }
 
                                     grdCantidad_Clientes.set_Texto(f, c, a);
                                     grdCantidad_Clientes.ActivarCelda(f, c + 1);
+
                                 }
-                                else
-                                {
-                                    Mensaje("La fecha ingresada ya está cargada.");
-                                    grdCantidad_Clientes.ErrorEnTxt();
-                                }
+
                             }
                             else
                             {
@@ -197,23 +199,20 @@
                         Cantidad_Clientes.Sucursal.ID = Convert.ToInt32(a);
                         if (Cantidad_Clientes.Sucursal.Existe() == true)
                         {
-                            if (Cantidad_Clientes.Sucursal.ID == 0 || Cantidad_Clientes.Dato($"Fecha = '{Cantidad_Clientes.Fecha.ToString("MM/dd/yyy")}' AND Id_Sucursales = {Cantidad_Clientes.Sucursal.ID}") == null)
+                            if (id != 0 && Cantidad_Clientes.Existe_Dato() == true)
                             {
-                                if (id != 0) { Cantidad_Clientes.Actualizar(); }
+                                Mensaje("La fecha y sucursal ya se han cargado.");
+                                grdCantidad_Clientes.ErrorEnTxt();
 
-                            grdCantidad_Clientes.set_Texto(f, c, a);
-                            grdCantidad_Clientes.set_Texto(f, c + 1, Cantidad_Clientes.Sucursal.Nombre);
-
-                            grdCantidad_Clientes.ActivarCelda(f, c + 2);
                             }
                             else
                             {
-                                Mensaje("La fecha ingresada ya está cargada.");
+                                if (id != 0) { Cantidad_Clientes.Actualizar(); }
+
                                 grdCantidad_Clientes.set_Texto(f, c, a);
                                 grdCantidad_Clientes.set_Texto(f, c + 1, Cantidad_Clientes.Sucursal.Nombre);
 
-                                grdCantidad_Clientes.ActivarCelda(f, c_Fecha);
-                                grdCantidad_Clientes.ErrorEnTxt();
+                                grdCantidad_Clientes.ActivarCelda(f, c + 2);
                             }
                         }
                         else
@@ -221,35 +220,51 @@
                             Mensaje("No se encontró la sucursal " + a.ToString());
                             grdCantidad_Clientes.ErrorEnTxt();
                         }
+
                         break;
 
                     case 4:
                         //Cantidad
                         Cantidad_Clientes.Cantidad = Convert.ToInt32(a);
-                        grdCantidad_Clientes.set_Texto(f, c, a);
 
                         if (grdCantidad_Clientes.Row == grdCantidad_Clientes.Rows - 1)
                         {
-                            Cantidad_Clientes.Agregar();
-                            grdCantidad_Clientes.set_Texto(f, c_Id, Cantidad_Clientes.ID);
-                            grdCantidad_Clientes.AgregarFila();
-                            //Rellenar nueva fila
+                            if (Cantidad_Clientes.Existe_Dato() == true)
+                            {
+                                Mensaje("La fecha y sucursal ya se han cargado.");
+                                grdCantidad_Clientes.ActivarCelda(f, 0);
 
-                            Cantidad_Clientes.Fecha = Cantidad_Clientes.Fecha.AddDays(1);
+                            }
+                            else
+                            {
+                                grdCantidad_Clientes.set_Texto(f, c, a);
+                                Cantidad_Clientes.Agregar();
+                                grdCantidad_Clientes.set_Texto(f, c_Id, Cantidad_Clientes.ID);
+                                grdCantidad_Clientes.AgregarFila();
+                                //Rellenar nueva fila
 
-                            grdCantidad_Clientes.set_Texto(f + 1, c_Fecha, Cantidad_Clientes.Fecha);
-                            grdCantidad_Clientes.set_Texto(f + 1, c_IdSuc, Cantidad_Clientes.Sucursal.ID);
-                            grdCantidad_Clientes.set_Texto(f + 1, c_IdSuc + 1, Cantidad_Clientes.Sucursal.Nombre);
+                                Cantidad_Clientes.Fecha = Cantidad_Clientes.Fecha.AddDays(1);
 
-                            Cantidad_Clientes.Cantidad = 0;
+                                grdCantidad_Clientes.set_Texto(f + 1, c_Fecha, Cantidad_Clientes.Fecha);
+                                grdCantidad_Clientes.set_Texto(f + 1, c_IdSuc, Cantidad_Clientes.Sucursal.ID);
+                                grdCantidad_Clientes.set_Texto(f + 1, c_IdSuc + 1, Cantidad_Clientes.Sucursal.Nombre);
+
+                                grdCantidad_Clientes.ActivarCelda(f + 1, c_Cantidad);
+
+                                Totales();
+
+                                Cantidad_Clientes.Cantidad = 0;
+                            }
                         }
                         else
                         {
+                            grdCantidad_Clientes.set_Texto(f, c, a);
                             Cantidad_Clientes.Actualizar();
-                        }
-                        grdCantidad_Clientes.ActivarCelda(f + 1, c_Cantidad);
+                            grdCantidad_Clientes.ActivarCelda(f + 1, c_Cantidad);
 
-                        Totales();
+                            Totales();
+                        }
+                        
                         break;
                 }
             }
@@ -263,13 +278,13 @@
         {
             int i = Convert.ToInt32(grdCantidad_Clientes.get_Texto(Fila, c_Id));
             if (i > 0)
-            { 
-            Cantidad_Clientes.Cargar_Fila(i);
+            {
+                Cantidad_Clientes.Cargar_Fila(i);
             }
             else
             {
                 Cantidad_Clientes.ID = 0;
-                Cantidad_Clientes.Fecha = Convert.ToDateTime(grdCantidad_Clientes.get_Texto(Fila,c_Fecha));
+                Cantidad_Clientes.Fecha = Convert.ToDateTime(grdCantidad_Clientes.get_Texto(Fila, c_Fecha));
                 Cantidad_Clientes.Sucursal.ID = Convert.ToInt32(grdCantidad_Clientes.get_Texto(Fila, c_IdSuc));
                 Cantidad_Clientes.Cantidad = Convert.ToInt32(grdCantidad_Clientes.get_Texto(Fila, c_Cantidad));
             }
@@ -309,7 +324,7 @@
                                 grdCantidad_Clientes.BorrarFila(grdCantidad_Clientes.Row);
                                 GrdCantidad_Clientes_CambioFila(Convert.ToByte(grdCantidad_Clientes.Row));
                                 Totales();
-                            } 
+                            }
                         }
                         else
                         {
@@ -368,11 +383,11 @@
                 for (int i = FilaInicio; i <= FilaFin; i++)
                 {
                     t += Convert.ToSingle(grdCantidad_Clientes.get_Texto(i, c_Cantidad));
-                    
+
                 }
 
                 int c = FilaFin - FilaInicio + 1;
-                lblCant.Text = $"Registros: {c:N0}";                
+                lblCant.Text = $"Registros: {c:N0}";
                 lblTotal.Text = $"Total: {t:C2}";
             }
         }

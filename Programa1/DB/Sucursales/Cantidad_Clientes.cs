@@ -4,6 +4,7 @@
     using System;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Media;
     using System.Windows.Forms;
 
     public class Cantidad_Clientes : c_Base
@@ -96,5 +97,31 @@
 
 
         }
+
+        public bool Existe_Dato()
+        {
+            var cnn = new SqlConnection(cadCN);
+            int d = 0;
+
+            try
+            {
+                string Cadena = $"SELECT COUNT(*) FROM Cantidad_Clientes WHERE Fecha='{Fecha:MM/dd/yy}' AND ID_Sucursales={Sucursal.ID}";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                cnn.Open();
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                d = (int)cmd.ExecuteScalar();
+
+                cnn.Close();
+            }
+            catch (Exception)
+            {
+                SystemSounds.Beep.Play();
+            }
+            return (d >= 1);
+        }
+        
     }
 }

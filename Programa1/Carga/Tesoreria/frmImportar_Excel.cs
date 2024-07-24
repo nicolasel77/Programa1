@@ -628,9 +628,12 @@
                     {
                         //si hay importe en credito
                         importe = Convert.ToDouble(grd.get_Texto(i, 4));
+
+                        descripcion = String.Format(txtFormato.Text, grd.get_Texto(i, 1).ToString(), grd.get_Texto(i, 2).ToString(), grd.get_Texto(i, 3).ToString(), grd.get_Texto(i, 4).ToString(), grd.get_Texto(i, 5).ToString(), grd.get_Texto(i, 6).ToString(), grd.get_Texto(i, 7).ToString(), grd.get_Texto(i, 8).ToString(), grd.get_Texto(i, 9).ToString(), grd.get_Texto(i, 10).ToString());
+
+                         //descripcion = String.Format(txtFormato.Text, grd.get_Texto(i, 1).ToString());
                         if (grd.get_Texto(i, 1) != null)
                         {
-                            descripcion = String.Format("{0} {1}", grd.get_Texto(i, 1).ToString(), grd.get_Texto(i, 10).ToString());
                             if (descripcion.ToLower().StartsWith("transferencia pei"))
                             {
                                 descripcion = "Transferencia QR";
@@ -1018,5 +1021,20 @@
         {
 
         }
+
+        private void frmImportar_Excel_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            c_Base _Base = new c_Base();
+            string s; 
+            s = _Base.Dato_Generico($"SELECT TOP 1 ISNULL(Valor, '') FROM Configuraciones WHERE Dato like 'formato_{cmbTipo.Text}'").ToString();
+            txtFormato.Text = s;
+
+        }
     }
 }
+
