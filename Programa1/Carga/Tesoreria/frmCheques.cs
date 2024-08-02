@@ -55,10 +55,10 @@ namespace Programa1.Carga.Tesoreria
             }
             else
             {
-                dt = ch.Datos_Vista();
+                dt = ch.Datos_Vista("", "TOP 100 *", "Id", false);
             }
 
-            grd.MostrarDatos(dt, true, !selec);
+            grd.MostrarDatos(dt, true, false);
             grd.set_ColW(Id, 0);
             grd.set_ColW(Origen, 200);
             grd.set_ColW(Destino, 200);
@@ -68,7 +68,10 @@ namespace Programa1.Carga.Tesoreria
             if (selec == false) { grd.ActivarCelda(grd.Rows - 1, Numero); } else { grd.ActivarCelda(1, Seleccionado); }
             double t = grd.SumarCol(Importe, false);
             if (selec == false) { lblTotal.Text = $"Total: {t:C1}"; } else { lblTotal.Text = "Total"; }
-
+            
+            grd.Ordenar(0);
+            grd.AgregarFila();
+            grd.ActivarCelda(grd.Rows - 1, 0);
         }
 
         private void grd_Editado(short f, short c, object a)

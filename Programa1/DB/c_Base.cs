@@ -11,13 +11,13 @@
     {
         //public readonly string cadCN = "Data Source=192.168.1.11;Initial Catalog=dbDatos2;User Id=Nikorasu;Password=Oficina02";
         public readonly string cadCN = Programa1.Properties.Settings.Default.dbDatosConnectionString;
-        public c_Base(string cadena = "") 
+        public c_Base(string cadena = "")
         {
             if (System.Environment.UserName.ToLower().StartsWith("nicol"))
             {
                 if (cadena.Length != 0)
                 {
-                    cadCN = cadena; 
+                    cadCN = cadena;
                 }
             }
         }
@@ -279,14 +279,34 @@
         /// <param name="Campos">Filtro de campos a devolver</param>
         /// <param name="Orden">Por defecto es por Id</param>
         /// <returns>Datatable</returns>
-        public DataTable Datos_Vista(string filtro = "", string Campos = "*", string Orden = "ORDER BY ")
+        public DataTable Datos_Vista(string filtro = "", string Campos = "*", string Orden = "ORDER BY ", bool Ascendiente = true)
         {
             var dt = new DataTable("Datos");
             var cnn = new SqlConnection(cadCN);
 
+
             if (filtro.Length > 0) { filtro = " WHERE " + filtro; }
             if (Campos == "") { Campos = "*"; }
-            if (Orden != "") { Orden = (Orden != "ORDER BY ") ? " ORDER BY " + Orden : " ORDER BY " + Campo_ID; }
+            if (Orden != "")
+            {
+                if (Orden != "ORDER BY ")
+                {
+                    if (Ascendiente)
+                    {
+                    Orden = " ORDER BY " + Orden;
+
+                    }
+                    else
+                    {
+                        Orden = " ORDER BY " + Orden + " DESC";
+                    }
+                }
+                else
+                {
+                    Orden = " ORDER BY " + Campo_ID;
+                }
+            }
+
 
             try
             {
@@ -516,7 +536,7 @@
                 cnn.Open();
                 SqlCommand cmd = new SqlCommand(sp, cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddRange(parameter);                
+                cmd.Parameters.AddRange(parameter);
 
                 SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
                 daAdapt.Fill(dt);

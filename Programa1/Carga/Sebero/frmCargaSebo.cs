@@ -44,8 +44,8 @@
 
             //El intercambio de columnas para estas teclas
             grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Subtract), c_IdProd, c_Kilos);
-            grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSuc, c_Kilos);
-            grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Multiply), c_IdSebero, c_Kilos);
+            grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Multiply), c_IdSuc, c_Kilos);
+            grdVenta.AgregarTeclas(Convert.ToInt32(Keys.Add), c_IdSebero, c_Kilos);
 
             Totales();
         }
