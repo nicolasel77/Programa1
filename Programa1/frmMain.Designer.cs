@@ -144,6 +144,7 @@
             this.haciendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lorenaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlReclamos = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPrueba_mp = new System.Windows.Forms.ToolStripMenuItem();
             this.tstMenu = new System.Windows.Forms.ToolStrip();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.mnuPrincipal.SuspendLayout();
@@ -164,7 +165,8 @@
             this.mnuPrueba,
             this.mnuGuardar,
             this.usuariosToolStripMenuItem,
-            this.tlReclamos});
+            this.tlReclamos,
+            this.mnuPrueba_mp});
             this.mnuPrincipal.Location = new System.Drawing.Point(0, 0);
             this.mnuPrincipal.Name = "mnuPrincipal";
             this.mnuPrincipal.Size = new System.Drawing.Size(1339, 24);
@@ -1055,6 +1057,14 @@
             this.tlReclamos.Text = "!";
             this.tlReclamos.Click += new System.EventHandler(this.tlReclamos_Click);
             // 
+            // mnuPrueba_mp
+            // 
+            this.mnuPrueba_mp.Name = "mnuPrueba_mp";
+            this.mnuPrueba_mp.Size = new System.Drawing.Size(79, 20);
+            this.mnuPrueba_mp.Text = "Prueba_mp";
+            this.mnuPrueba_mp.Visible = false;
+            this.mnuPrueba_mp.Click += new System.EventHandler(this.mnuPrueba_mp_Click);
+            // 
             // tstMenu
             // 
             this.tstMenu.Location = new System.Drawing.Point(0, 24);
@@ -1210,6 +1220,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem reclamosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tlReclamos;
+        private System.Windows.Forms.ToolStripMenuItem mnuPrueba_mp;
     }
 }
 

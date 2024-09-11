@@ -1,10 +1,13 @@
 ﻿namespace Programa1.Carga.Tesoreria
 {
     using DB.Tesoreria;
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Data;
     using System.Drawing;
     using System.IO;
+    using System.Net.Http;
+    using System.Text;
     using System.Windows.Forms;
     using Excel = Microsoft.Office.Interop.Excel;
     public partial class frmLeer_Tarjetas : Form
@@ -13,10 +16,13 @@
         private Herramientas.Herramientas h = new Herramientas.Herramientas();
         string fcarpeta = @"E:\Tarjetas";
         DataTable dt = null;
+
         public frmLeer_Tarjetas()
         {
             InitializeComponent();
             leer = new Leer_Tarjetas();
+            h.Llenar_List(cmbTitulares, leer.titulares());
+            cmbTitulares.SelectedIndex = 0;
             //dt = leer.Datos();
         }
 
@@ -146,152 +152,125 @@
                         dt.Rows.Clear();
                         if (leer.vtipo != 9)
                         {
-                            if (rdPayway.Checked)
+                            //if (rdPayway.Checked)
+                            //{
+                            //    // Payway Tarjetas
+                            //    for (int i = 3; i <= max; i++)
+                            //    {
+                            //        string nn = xApp.Range["A" + i].Text;
+
+                            //        if (nn == "") { break; }
+
+                            //        leer.vFecha = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
+                            //        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                            //        {
+                            //            DataRow nrow = dt.NewRow();
+                            //            nrow["Fecha"] = leer.vFecha;
+
+
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            //            nrow["Lote"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            //            nrow["Comprobante"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            //            nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(nn.Substring(0, nn.IndexOf(";"))));
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            //            nrow["Fecha_Pago"] = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            //            nrow["Importe"] = Convert.ToSingle(nn.Substring(0, nn.IndexOf(";")).Replace(".", ","));
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
+
+                            //            nn = nn.Substring(nn.LastIndexOf("*") + 1);
+
+                            //            nrow["Tarjeta"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+
+                            //            nrow["Id_Tipo"] = leer.vtipo;
+                            //            nrow["Acreditado"] = true;
+
+                            //            dt.Rows.Add(nrow);
+                            //        }
+                            //        pbLeer.Value = i;
+                            //        Application.DoEvents();
+                            //    }
+                            //}
+
+                            // Fiserv Tarjetas
+                            if (leer.vtipo != 12 & leer.vtipo != 13)
                             {
-                                // Payway Tarjetas
-                                for (int i = 3; i <= max; i++)
+                                for (int i = 2; i <= max; i++)
                                 {
-                                    string nn = xApp.Range["A" + i].Text;
+                                    leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
 
-                                    if (nn == "") { break; }
-
-                                    leer.vFecha = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
                                     if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
-                                    {
-                                        DataRow nrow = dt.NewRow();
-                                        nrow["Fecha"] = leer.vFecha;
-
-
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                                        nrow["Lote"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                                        nrow["Comprobante"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                                        nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(nn.Substring(0, nn.IndexOf(";"))));
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                                        nrow["Fecha_Pago"] = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                                        nrow["Importe"] = Convert.ToSingle(nn.Substring(0, nn.IndexOf(";")).Replace(".", ","));
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
-
-                                        nn = nn.Substring(nn.LastIndexOf("*") + 1);
-
-                                        nrow["Tarjeta"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
-
-                                        nrow["Id_Tipo"] = leer.vtipo;
-                                        nrow["Acreditado"] = true;
-
-                                        dt.Rows.Add(nrow);
-                                    }
-                                    pbLeer.Value = i;
-                                    Application.DoEvents();
-                                }
-                            }
-                            else
-                            {
-                                // Fiserv Tarjetas
-                                if (leer.vtipo != 12 & leer.vtipo != 13)
-                                {
-                                    for (int i = 2; i <= max; i++)
-                                    {
-                                        leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
-
-                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
-                                        {
-                                            DataRow nrow = dt.NewRow();
-                                            leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
-
-                                            if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
-                                            {
-                                                nrow["Fecha"] = leer.vFecha;
-
-                                                if (xApp.Cells[i, 3].Text.Length > 0)
-                                                { nrow["Fecha_Pago"] = xApp.Cells[i, 3].Text; }
-                                                else
-                                                { nrow["Fecha_Pago"] = leer.vFecha; }
-
-                                                nrow["Comprobante"] = xApp.Cells[i, 4].Text;
-                                                nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 5].Text));
-                                                nrow["Tarjeta"] = Convert.ToInt32(xApp.Cells[i, 6].Text);
-                                                nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 8].Text);
-                                                nrow["Lote"] = Convert.ToInt32(xApp.Cells[i, 14].Text);
-                                                nrow["Id_Tipo"] = leer.vtipo;
-                                                nrow["Acreditado"] = true;
-
-                                                dt.Rows.Add(nrow);
-                                            }
-                                            pbLeer.Value = i;
-                                            Application.DoEvents();
-                                        }
-                                    }
-                                }
-                                else if (leer.vtipo == 13)
-                                {
-                                    // Nave
-
-                                    string suc_temp = "";
-                                    for (int i = 22; i <= max - 3; i++)
-                                    {
-                                        leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
-                                        leer.vFecha = leer.vFecha.AddHours(leer.vFecha.Hour * -1).AddMinutes(leer.vFecha.Minute * -1);
-                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
-                                        {
-                                            DataRow nrow = dt.NewRow();
-                                            leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
-
-                                            if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value) // & xApp.Cells[i, 13].Text == "Acreditado")
-                                            {
-                                                nrow["Fecha"] = leer.vFecha;
-
-                                                if (xApp.Cells[i, 15].Text == "Por acreditar") { nrow["Fecha_Pago"] = leer.vFecha.Date.AddDays(1); }
-                                                else { nrow["Fecha_Pago"] = xApp.Cells[i, 2].Text; }
-                                                
-                                                nrow["Comprobante"] = xApp.Cells[i, 3].Text;
-
-                                                suc_temp = xApp.Cells[i, 5].Text;
-
-                                                nrow["Suc"] = Convert.ToInt32(suc_temp.Substring(suc_temp.IndexOf("SUC") + 4));
-
-                                                nrow["Tarjeta"] = 1;
-
-                                                suc_temp = xApp.Cells[i, 10].Text;
-                                                nrow["Importe"] = Convert.ToSingle(suc_temp.Substring(1));
-                                                nrow["Lote"] = 1;
-                                                nrow["Id_Tipo"] = leer.vtipo;
-                                                nrow["Acreditado"] = true;
-
-                                                dt.Rows.Add(nrow);
-                                            }
-                                            pbLeer.Value = i;
-                                            Application.DoEvents();
-                                        }
-                                    }
-                                }
-                                else if (leer.vtipo == 12)
-                                {
-                                    // Fiserv CDNI
-                                    for (int i = 2; i <= max; i++)
                                     {
                                         DataRow nrow = dt.NewRow();
                                         leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
 
-                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 7].Text == "Aprobada")
+                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
                                         {
                                             nrow["Fecha"] = leer.vFecha;
-                                            nrow["Fecha_Pago"] = leer.vFecha;
-                                            nrow["Comprobante"] = xApp.Cells[i, 4].Text.Substring(0,17);
-                                            nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 2].Text));
+                                            if (xApp.Cells[i, 3].Text.Length > 0)
+                                            { nrow["Fecha_Pago"] = xApp.Cells[i, 3].Text; }
+                                            else
+                                            { nrow["Fecha_Pago"] = leer.vFecha; }
+
+                                            nrow["Comprobante"] = xApp.Cells[i, 4].Text;
+                                            nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 5].Text));
+                                            nrow["Tarjeta"] = Convert.ToInt32(xApp.Cells[i, 6].Text);
+                                            nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 8].Text);
+                                            nrow["Lote"] = Convert.ToInt32(xApp.Cells[i, 14].Text);
+                                            nrow["Id_Tipo"] = leer.vtipo;
+                                            nrow["Acreditado"] = true;
+
+                                            dt.Rows.Add(nrow);
+                                        }
+                                        pbLeer.Value = i;
+                                        Application.DoEvents();
+                                    }
+                                }
+                            }
+                            else if (leer.vtipo == 13)
+                            {
+                                // Nave
+
+                                string suc_temp = "";
+                                for (int i = 24; i <= max - 3; i++)
+                                {
+                                    leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
+                                    leer.vFecha = leer.vFecha.AddHours(leer.vFecha.Hour * -1).AddMinutes(leer.vFecha.Minute * -1);
+                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                                    {
+                                        DataRow nrow = dt.NewRow();
+
+                                        leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
+                                        leer.vFecha = leer.vFecha.AddHours(leer.vFecha.Hour * -1).AddMinutes(leer.vFecha.Minute * -1);
+
+                                        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value) // & xApp.Cells[i, 13].Text == "Acreditado")
+                                        {
+                                            nrow["Fecha"] = leer.vFecha;
+                                            if (xApp.Cells[i, 15].Text == " Por acreditar\n") { nrow["Fecha_Pago"] = leer.vFecha.Date.AddDays(1); }
+                                            else { nrow["Fecha_Pago"] = xApp.Cells[i, 2].Text; }
+
+                                            nrow["Comprobante"] = xApp.Cells[i, 3].Text;
+
+                                            suc_temp = xApp.Cells[i, 4].Text;
+
+                                            nrow["Suc"] = Convert.ToInt32(suc_temp.Substring(suc_temp.IndexOf("SUC") + 4));
+
                                             nrow["Tarjeta"] = 1;
-                                            nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 3].Text);
+
+                                            suc_temp = xApp.Cells[i, 10].Text;
+                                            nrow["Importe"] = Convert.ToSingle(suc_temp);
+                                            //nrow["Importe"] = Convert.ToSingle(suc_temp.Substring(1, suc_temp.Length - 3));
                                             nrow["Lote"] = 1;
                                             nrow["Id_Tipo"] = leer.vtipo;
                                             nrow["Acreditado"] = true;
@@ -301,6 +280,32 @@
                                         pbLeer.Value = i;
                                         Application.DoEvents();
                                     }
+                                }
+                            }
+                            else if (leer.vtipo == 12)
+                            {
+                                // Fiserv CDNI
+                                for (int i = 2; i <= max; i++)
+                                {
+                                    DataRow nrow = dt.NewRow();
+                                    leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
+
+                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 7].Text == "Aprobada")
+                                    {
+                                        nrow["Fecha"] = leer.vFecha;
+                                        nrow["Fecha_Pago"] = leer.vFecha;
+                                        nrow["Comprobante"] = xApp.Cells[i, 4].Text.Substring(0, 17);
+                                        nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 2].Text));
+                                        nrow["Tarjeta"] = 1;
+                                        nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 3].Text);
+                                        nrow["Lote"] = 1;
+                                        nrow["Id_Tipo"] = leer.vtipo;
+                                        nrow["Acreditado"] = true;
+
+                                        dt.Rows.Add(nrow);
+                                    }
+                                    pbLeer.Value = i;
+                                    Application.DoEvents();
                                 }
                             }
                         }
@@ -340,101 +345,101 @@
                                     }
                                 }
                             }
-                            else if (rdPayway.Checked)
-                            {
-                                // QR Payway
-                                for (int i = 3; i <= max; i++)
-                                {
-                                    string nn = xApp.Range["A" + i].Text;
+                            //else if (rdPayway.Checked)
+                            //{
+                            //    // QR Payway
+                            //    for (int i = 3; i <= max; i++)
+                            //    {
+                            //        string nn = xApp.Range["A" + i].Text;
 
-                                    if (nn == "") { break; }
+                            //        if (nn == "") { break; }
 
-                                    leer.vFecha = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
-                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
-                                    {
-                                        DataRow nrow = dt.NewRow();
+                            //        leer.vFecha = Convert.ToDateTime(nn.Substring(0, nn.IndexOf(";")));
+                            //        if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                            //        {
+                            //            DataRow nrow = dt.NewRow();
 
-                                        nrow["Fecha"] = leer.vFecha;
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
+                            //            nrow["Fecha"] = leer.vFecha;
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
 
-                                        nrow["Comprobante"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
+                            //            nrow["Comprobante"] = Convert.ToInt32(nn.Substring(0, nn.IndexOf(";")));
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
 
-                                        nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(nn.Substring(0, nn.IndexOf(";"))));
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
+                            //            nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(nn.Substring(0, nn.IndexOf(";"))));
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
 
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
 
-                                        nrow["Importe"] = Convert.ToSingle(nn.Substring(0, nn.IndexOf(";")).Replace(".", ","));
-                                        nn = nn.Substring(nn.IndexOf(";") + 1);
+                            //            nrow["Importe"] = Convert.ToSingle(nn.Substring(0, nn.IndexOf(";")).Replace(".", ","));
+                            //            nn = nn.Substring(nn.IndexOf(";") + 1);
 
-                                        nrow["Lote"] = 1;
+                            //            nrow["Lote"] = 1;
 
-                                        nrow["Fecha_Pago"] = leer.vFecha;
+                            //            nrow["Fecha_Pago"] = leer.vFecha;
 
-                                        nrow["Tarjeta"] = 1;
+                            //            nrow["Tarjeta"] = 1;
 
-                                        nrow["Id_Tipo"] = leer.vtipo;
-                                        nrow["Acreditado"] = true;
+                            //            nrow["Id_Tipo"] = leer.vtipo;
+                            //            nrow["Acreditado"] = true;
 
-                                        dt.Rows.Add(nrow);
-                                    }
-                                    pbLeer.Value = i;
-                                    Application.DoEvents();
-                                }
+                            //            dt.Rows.Add(nrow);
+                            //        }
+                            //        pbLeer.Value = i;
+                            //        Application.DoEvents();
+                            //    }
 
-                                //max = xApp.ActiveSheet.Range("D10000").End(Excel.XlDirection.xlUp).Row;
+                            //    //max = xApp.ActiveSheet.Range("D10000").End(Excel.XlDirection.xlUp).Row;
 
-                                //pbLeer.Maximum = max;
+                            //    //pbLeer.Maximum = max;
 
-                                //Suc = Suc.Substring(0, Suc.LastIndexOf("."));
+                            //    //Suc = Suc.Substring(0, Suc.LastIndexOf("."));
 
-                                //int ini = xApp.ActiveSheet.Range("G1").End(Excel.XlDirection.xlDown).Row;
-                                //ini++;
+                            //    //int ini = xApp.ActiveSheet.Range("G1").End(Excel.XlDirection.xlDown).Row;
+                            //    //ini++;
 
-                                //for (int i = ini; i <= max; i++)
-                                //{
-                                //    pbLeer.Value = i;
-                                //    Application.DoEvents();
+                            //    //for (int i = ini; i <= max; i++)
+                            //    //{
+                            //    //    pbLeer.Value = i;
+                            //    //    Application.DoEvents();
 
-                                //    DataRow nrow = dt.NewRow();
+                            //    //    DataRow nrow = dt.NewRow();
 
-                                //    if (xApp.Cells[i, 1].Text == "Total")
-                                //    {
-                                //        i = max;
-                                //        break;
-                                //    }
-                                //    else
-                                //    {
-                                //        leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
+                            //    //    if (xApp.Cells[i, 1].Text == "Total")
+                            //    //    {
+                            //    //        i = max;
+                            //    //        break;
+                            //    //    }
+                            //    //    else
+                            //    //    {
+                            //    //        leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
 
-                                //        if (xApp.Cells[i, 8].Text == "Confirmado")
-                                //        {
-                                //            if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
-                                //            {
-                                //                nrow["Fecha"] = leer.vFecha;
-                                //                nrow["Fecha_Pago"] = leer.vFecha;
-                                //                nrow["Comprobante"] = xApp.Cells[i, 3].Text;
-                                //                nrow["Suc"] = Convert.ToInt32(Suc);
-                                //                string n = xApp.Cells[i, 7].Text;
-                                //                long nt = 0;
-                                //                long.TryParse(n, out nt);
+                            //    //        if (xApp.Cells[i, 8].Text == "Confirmado")
+                            //    //        {
+                            //    //            if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value)
+                            //    //            {
+                            //    //                nrow["Fecha"] = leer.vFecha;
+                            //    //                nrow["Fecha_Pago"] = leer.vFecha;
+                            //    //                nrow["Comprobante"] = xApp.Cells[i, 3].Text;
+                            //    //                nrow["Suc"] = Convert.ToInt32(Suc);
+                            //    //                string n = xApp.Cells[i, 7].Text;
+                            //    //                long nt = 0;
+                            //    //                long.TryParse(n, out nt);
 
-                                //                nrow["Tarjeta"] = nt;
+                            //    //                nrow["Tarjeta"] = nt;
 
-                                //                n = xApp.Cells[i, 4].Text;
-                                //                n = n.Replace("$", "");
-                                //                nrow["Importe"] = Convert.ToSingle(n);
-                                //                nrow["Lote"] = 0;
-                                //                nrow["Id_Tipo"] = 9;
-                                //                nrow["Acreditado"] = true;
+                            //    //                n = xApp.Cells[i, 4].Text;
+                            //    //                n = n.Replace("$", "");
+                            //    //                nrow["Importe"] = Convert.ToSingle(n);
+                            //    //                nrow["Lote"] = 0;
+                            //    //                nrow["Id_Tipo"] = 9;
+                            //    //                nrow["Acreditado"] = true;
 
-                                //                dt.Rows.Add(nrow);
-                                //            }
-                                //        }
-                                //    }
-                                //}
-                            }
+                            //    //                dt.Rows.Add(nrow);
+                            //    //            }
+                            //    //        }
+                            //    //    }
+                            //    //}
+                            //}
 
                             // Solución para saber Cual es el Último registro de la semana anterior:
                             // 1: Buscar si hay más de un número de lote y comprobante y establecer un rango que reconozca que pueden ser +- 
@@ -551,10 +556,10 @@
         {
             if (Directory.Exists(fcarpeta))
             {
-                string t_extencion;
-                if (!rdPayway.Checked)
-                { t_extencion = "*.xlsx"; }
-                else { t_extencion = "*.csv"; }
+                string t_extencion = "*.xlsx";
+                //if (!rdPayway.Checked) 
+                //{ t_extencion = "*.xlsx"; }
+                //else { t_extencion = "*.csv"; }
 
                 foreach (string s in Directory.GetFiles(fcarpeta, t_extencion, SearchOption.TopDirectoryOnly))
                 {
@@ -588,13 +593,78 @@
 
         private void grdCuentas_Editado(short f, short c, object a)
         {
-            if (Convert.ToBoolean(grdCuentas.get_Texto(f, grdCuentas.get_ColIndex("Carga"))) == true)
-            { grdCuentas.BorrarFila(grdCuentas.Row); }
+            //if (Convert.ToBoolean(grdCuentas.get_Texto(f, grdCuentas.get_ColIndex("Carga"))) == true)
+            //{ grdCuentas.BorrarFila(grdCuentas.Row); }
+
+            string col = grdCuentas.get_Texto(0, c).ToString();
+
+            if (grdCuentas.EsUltimaFila())
+            {
+                if (c == grdCuentas.get_ColIndex("Suc")) 
+                { 
+                    grdCuentas.set_Texto(f, c, a); 
+                } else if (c == grdCuentas.get_ColIndex("N_Cuenta"))
+                {
+
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case "Suc":
+                        grdCuentas.set_Texto(f, c, a);
+                        leer.Sucursal.ID = Convert.ToInt32(a);
+                        grdCuentas.set_Texto(f, grdCuentas.get_ColIndex("Nombre"), leer.Sucursal.Nombre);
+
+                        leer.suc_cuentas.suc = Convert.ToInt32(a);
+
+                        leer.suc_cuentas.Actualizar("Suc", a);
+                        break;
+
+                    case "N_Cuenta":
+                        leer.suc_cuentas.N_Cuenta = Convert.ToInt32(a);
+                        grdCuentas.set_Texto(f, c, a);
+
+                        leer.suc_cuentas.Actualizar("N_Cuenta", a);
+                        break;
+
+                    case "Tipo":
+                        leer.suc_cuentas.Tipo = Convert.ToInt32(a);
+                        grdCuentas.set_Texto(f, c, a);
+                        leer.tipos_tarjeta.ID = Convert.ToInt32(a);
+                        grdCuentas.set_Texto(f, grdCuentas.get_ColIndex("Nombre"), leer.tipos_tarjeta.Nombre);
+
+                        leer.suc_cuentas.Tipo = Convert.ToInt32(a);
+
+                        leer.suc_cuentas.Actualizar("Tipo", a);
+                        break;
+
+                    case "Titular":
+                        leer.suc_cuentas.Titular = a.ToString();
+                        grdCuentas.set_Texto(f, c, a);
+
+                        leer.suc_cuentas.Titular = a.ToString();
+
+                        leer.suc_cuentas.Actualizar("Titular", a);
+                        break;
+                }
+                grdCuentas.ActivarCelda(f + 1, c);
+            }
+
+
+
         }
 
-        private void cmdRecargar_Click(object sender, EventArgs e)
+        private void grdCuentas_CambioFila(short Fila)
         {
-            cargar_cuentas();
+            if (Fila < grdCuentas.Rows - 1)
+            {
+                leer.suc_cuentas.suc = Convert.ToInt32(grdCuentas.get_Texto(Fila, grdCuentas.get_ColIndex("Suc")));
+                leer.suc_cuentas.N_Cuenta = Convert.ToInt32(grdCuentas.get_Texto(Fila, grdCuentas.get_ColIndex("N_Cuenta")));
+                leer.suc_cuentas.Tipo = Convert.ToInt32(grdCuentas.get_Texto(Fila, grdCuentas.get_ColIndex("Tipo")));
+                leer.suc_cuentas.Titular = grdCuentas.get_Texto(Fila, grdCuentas.get_ColIndex("Titular")).ToString();
+            }
         }
 
         private void cargar_cuentas()
@@ -603,7 +673,7 @@
             grdCuentas.AutosizeAll();
             for (int i = 1; i <= grdCuentas.Rows - 1; i++)
             {
-                if (leer.suc_cuentas.Cuentas_Compartidas(Convert.ToInt32(grdCuentas.get_Texto(i, 1))) == true)
+                if (leer.suc_cuentas.Cuentas_Compartidas(Convert.ToInt32(grdCuentas.get_Texto(i, 2))) == true)
                 {
                     for (int c = 0; c <= grdCuentas.Cols - 1; c++)
                     { grdCuentas.set_ColorLetraCelda(i, c, Color.Red); }
@@ -611,10 +681,108 @@
             }
         }
 
+        private void grdCuentas_CambioColumna(int col)
+        {
+            if (col == 1 | col == 4)
+            { grdCuentas.EnableEdicion = false; }
+            else { grdCuentas.EnableEdicion = true; }
+        }
+
         private void lstTipo_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle)
             { lstTipo.SelectedIndex = -1; }
+        }
+
+        private void cmdRecargar_Click(object sender, EventArgs e)
+        {
+            cargar_cuentas();
+        }
+
+        private async void cmdMP_Click(object sender, EventArgs e)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string AccessToken = leer.bearer(h.Codigo_Seleccionado(cmbTitulares.Text));
+
+
+                dt.Rows.Clear();
+                string beginDate = dtFecha.Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                string endDate = dtMaxima.Value.AddDays(1).AddSeconds(-1).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                int offset = 0;
+                int total = 0;
+
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AccessToken);
+                HttpResponseMessage response;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    response = await client.GetAsync($"https://api.mercadopago.com/v1/payments/search?begin_date={beginDate}&end_date={endDate}&status=approved,pending,in_process&limit=50&offset={offset}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseData = await response.Content.ReadAsStringAsync();
+                        JObject ventas = JObject.Parse(responseData);
+                        StringBuilder sb = new StringBuilder();
+
+                        var paging = ventas["paging"];
+                        if (total < Convert.ToInt32(paging["total"])) { total = Convert.ToInt32(paging["total"]); }
+                    }
+                }
+
+
+                for (int i = 0; offset < total; i++)
+                {
+                    offset = i * 50;
+
+                    response = await client.GetAsync($"https://api.mercadopago.com/v1/payments/search?begin_date={beginDate}&end_date={endDate}&status=approved,pending,in_process&limit=50&offset={offset}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseData = await response.Content.ReadAsStringAsync();
+                        JObject ventas = JObject.Parse(responseData);
+                        StringBuilder sb = new StringBuilder();
+
+                        var paging = ventas["paging"];
+                        if (total > Convert.ToInt32(paging["total"])) { i += -1; continue; }
+
+
+                        foreach (var venta in ventas["results"])
+                        {
+                            DataRow nrow = dt.NewRow();
+
+                            nrow["Comprobante"] = venta["id"]?.ToString();
+
+                            var poi = venta["point_of_interaction"];
+                            var device = poi["device"];
+
+                            nrow["Fecha"] = Convert.ToDateTime(venta["date_created"]?.ToString());
+                            nrow["Fecha_Pago"] = Convert.ToDateTime(venta["date_created"]?.ToString());
+                            nrow["Importe"] = Convert.ToSingle(venta["transaction_amount"]?.ToString().Replace(".", ","));
+
+                            if (device == null)
+                            { nrow["Suc"] = 0; }
+                            else { nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(device["serial_number"]?.ToString().Substring(8) ?? "N/A")); }
+
+                            nrow["id_Tipo"] = 14;
+                            nrow["Tarjeta"] = 1;
+                            nrow["Lote"] = 1;
+
+                            dt.Rows.Add(nrow);
+                        }
+                    }
+                    else { i += -1; continue; }
+                }
+                grdDatos.MostrarDatos(dt, true, false);
+                grdDatos.AutosizeAll();
+                grdDatos.set_ColW(0, 0);
+                double t = grdDatos.SumarCol(grdDatos.get_ColIndex("Importe"), false);
+                lblTotal.Text = "Total: " + t.ToString("C1");
+                pbLeer.Visible = false;
+                lblpb.Visible = false;
+                Application.DoEvents();
+                if (grdDatos.Rows > 0)
+                { cmdGuardar.PerformClick(); }
+            }
         }
     }
 }

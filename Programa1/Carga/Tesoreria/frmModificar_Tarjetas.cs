@@ -138,8 +138,8 @@
                         tarjetas.Actualizar();
                     }
                 }
-                cambios = cambios.Substring(0, cambios.Length - 1);
-                tarjetas.Backup_cambios(cambios, usuario.ID);
+                //cambios = cambios.Substring(0, cambios.Length - 1);
+                //tarjetas.Backup_cambios(cambios, usuario.ID);
                 Cargar_grillas();
             }
             else

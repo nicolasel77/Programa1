@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -16,14 +17,20 @@
             Vista = "dbGastos.dbo.vw_SucCuentas";
         }
 
+        public int suc;
+        public int N_Cuenta;
+        public int Tipo;
+        public string Titular;
+        public Sucursales Sucursal { get; set; } = new Sucursales();
+
         public DataTable Datos_Vista()
         {
-            return Datos_Vista("Tipo = 1", "Carga, Suc, Nombre, RIGHT(N_Cuenta, 4) NCuenta, Tipo, RTRIM(Descripcion) Descripcion, Alias, Titular ", " Titular, Suc, Tipo");
+            return Datos_Vista("", "Suc, Nombre, N_Cuenta, Tipo, Descripcion, Titular ", " Suc, Tipo");
         }
 
-        public bool Cuentas_Compartidas(int suc)
+        public bool Cuentas_Compartidas(int cta)
         {
-            if (Datos_Vista($"RIGHT(N_Cuenta, 4) IN (SELECT RIGHT(N_Cuenta, 4) FROM dbGastos.dbo.vw_SucCuentas WHERE suc = {suc} AND Tipo = 1)", "Suc", "Suc").Rows.Count > 1)
+            if (Datos_Vista($"N_Cuenta IN (SELECT N_Cuenta FROM dbGastos.dbo.vw_SucCuentas WHERE N_cuenta = {cta})", "Suc", "Suc").Rows.Count > 1)
             { return true; }
             else
             { return false; }
@@ -52,5 +59,30 @@
             return suc;
         }
 
+        public void Actualizar(string campo_editado, object valor)
+        {
+            var cnn = new SqlConnection(cadCN);
+
+            try
+            {
+                string otros_Campos = $"Suc = {suc} AND N_Cuenta = {N_Cuenta} AND Tipo = {Tipo} AND Titular = '{Titular}'";
+
+                if (campo_editado != "Titular")
+                { otros_Campos.Remove(otros_Campos.IndexOf(campo_editado), campo_editado.Length + valor.ToString().Length + 8); }
+                else { otros_Campos.Remove(campo_editado.IndexOf(" AND Titular")); }
+
+                SqlCommand command = new SqlCommand($"UPDATE {Tabla} SET {campo_editado}={valor} WHERE {otros_Campos}", cnn);
+                command.CommandType = CommandType.Text;
+                command.Connection = cnn;
+                cnn.Open();
+
+                var d = command.ExecuteNonQuery();
+
+                cnn.Close();
+            }
+            catch (Exception e)
+            {
+            }
+        }
     }
 }

@@ -118,6 +118,32 @@
             return d;
         }
 
+        public DataTable titulares()
+        {
+            var dt = new DataTable("Datos");
+            var cnn = new SqlConnection(cadCN);
+
+            try
+            {
+                string Cadena = $"SELECT Id, Titular FROM dbGastos.dbo.Credenciales_API ORDER BY Id";
+
+                SqlCommand cmd = new SqlCommand(Cadena, cnn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter daAdapt = new SqlDataAdapter(cmd);
+                daAdapt.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+
+        public string bearer(int titular_id) 
+        { return Dato_Generico($"SELECT Bearer FROM dbGastos.dbo.Credenciales_API WHERE Id = {titular_id}").ToString(); }
+
         public void Exportardt(DataTable dt)
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);

@@ -66,7 +66,6 @@
             this.mnuListado = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sucursalesListado = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cFechas1 = new Programa1.Controles.cFechas();
             this.paEst = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lbl10 = new System.Windows.Forms.Label();
@@ -74,7 +73,6 @@
             this.lbl5 = new System.Windows.Forms.Label();
             this.lbl4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cmdRecargar = new Programa1.Controles.cBoton();
             this.grdEstadistica = new Grilla2.SpeedGrilla();
             this.mnuFiltroEstadisticas = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.unaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,6 +92,9 @@
             this.lblTBalancesSuc = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tiOcultar = new System.Windows.Forms.Timer(this.components);
+            this.tarjetasCDNIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmdRecargar = new Programa1.Controles.cBoton();
+            this.cFechas1 = new Programa1.Controles.cFechas();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -216,7 +217,7 @@
             this.rdAgrupado.AutoSize = true;
             this.rdAgrupado.Checked = true;
             this.rdAgrupado.Depth = 0;
-            this.rdAgrupado.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdAgrupado.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdAgrupado.Location = new System.Drawing.Point(271, 0);
             this.rdAgrupado.Margin = new System.Windows.Forms.Padding(0);
             this.rdAgrupado.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -235,7 +236,7 @@
             this.rdDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdDetalle.AutoSize = true;
             this.rdDetalle.Depth = 0;
-            this.rdDetalle.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdDetalle.Location = new System.Drawing.Point(360, 0);
             this.rdDetalle.Margin = new System.Windows.Forms.Padding(0);
             this.rdDetalle.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -400,14 +401,15 @@
             this.aPicadaToolStripMenuItem,
             this.empleadosToolStripMenuItem,
             this.gastosToolStripMenuItem,
-            this.qRToolStripMenuItem});
+            this.qRToolStripMenuItem,
+            this.tarjetasCDNIToolStripMenuItem});
             this.mnuFiltroSalidas.Name = "mnuFiltroSalidas";
-            this.mnuFiltroSalidas.Size = new System.Drawing.Size(136, 202);
+            this.mnuFiltroSalidas.Size = new System.Drawing.Size(181, 246);
             // 
             // efectivoToolStripMenuItem
             // 
             this.efectivoToolStripMenuItem.Name = "efectivoToolStripMenuItem";
-            this.efectivoToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.efectivoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.efectivoToolStripMenuItem.Tag = "1";
             this.efectivoToolStripMenuItem.Text = "Efectivo";
             this.efectivoToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
@@ -415,7 +417,7 @@
             // tarjetasToolStripMenuItem
             // 
             this.tarjetasToolStripMenuItem.Name = "tarjetasToolStripMenuItem";
-            this.tarjetasToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.tarjetasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.tarjetasToolStripMenuItem.Tag = "2";
             this.tarjetasToolStripMenuItem.Text = "Tarjetas";
             this.tarjetasToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
@@ -423,7 +425,7 @@
             // trasladosToolStripMenuItem
             // 
             this.trasladosToolStripMenuItem.Name = "trasladosToolStripMenuItem";
-            this.trasladosToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.trasladosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.trasladosToolStripMenuItem.Tag = "3";
             this.trasladosToolStripMenuItem.Text = "Traslados";
             this.trasladosToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
@@ -431,7 +433,7 @@
             // reintegrosToolStripMenuItem
             // 
             this.reintegrosToolStripMenuItem.Name = "reintegrosToolStripMenuItem";
-            this.reintegrosToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.reintegrosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reintegrosToolStripMenuItem.Tag = "4";
             this.reintegrosToolStripMenuItem.Text = "Reintegros";
             this.reintegrosToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
@@ -439,7 +441,7 @@
             // ofertasToolStripMenuItem
             // 
             this.ofertasToolStripMenuItem.Name = "ofertasToolStripMenuItem";
-            this.ofertasToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.ofertasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ofertasToolStripMenuItem.Tag = "5";
             this.ofertasToolStripMenuItem.Text = "Ofertas";
             this.ofertasToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
@@ -447,7 +449,7 @@
             // aPicadaToolStripMenuItem
             // 
             this.aPicadaToolStripMenuItem.Name = "aPicadaToolStripMenuItem";
-            this.aPicadaToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.aPicadaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aPicadaToolStripMenuItem.Tag = "6";
             this.aPicadaToolStripMenuItem.Text = "A Picada";
             this.aPicadaToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
@@ -455,7 +457,7 @@
             // empleadosToolStripMenuItem
             // 
             this.empleadosToolStripMenuItem.Name = "empleadosToolStripMenuItem";
-            this.empleadosToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.empleadosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.empleadosToolStripMenuItem.Tag = "7";
             this.empleadosToolStripMenuItem.Text = "Empleados";
             this.empleadosToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
@@ -463,7 +465,7 @@
             // gastosToolStripMenuItem
             // 
             this.gastosToolStripMenuItem.Name = "gastosToolStripMenuItem";
-            this.gastosToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.gastosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gastosToolStripMenuItem.Tag = "8";
             this.gastosToolStripMenuItem.Text = "Gastos";
             this.gastosToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
@@ -471,7 +473,7 @@
             // qRToolStripMenuItem
             // 
             this.qRToolStripMenuItem.Name = "qRToolStripMenuItem";
-            this.qRToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.qRToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.qRToolStripMenuItem.Tag = "9";
             this.qRToolStripMenuItem.Text = "Cuenta DNI";
             this.qRToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
@@ -656,20 +658,6 @@
             this.clientesToolStripMenuItem1.Text = "Clientes";
             this.clientesToolStripMenuItem1.Click += new System.EventHandler(this.clientesToolStripMenuItem1_Click);
             // 
-            // cFechas1
-            // 
-            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFechas1.Location = new System.Drawing.Point(0, 0);
-            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFechas1.Mostrar = 0;
-            this.cFechas1.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
-            this.cFechas1.Name = "cFechas1";
-            this.cFechas1.Size = new System.Drawing.Size(228, 184);
-            this.cFechas1.TabIndex = 0;
-            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
-            // 
             // paEst
             // 
             this.paEst.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -774,16 +762,6 @@
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
-            // 
-            // cmdRecargar
-            // 
-            this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdRecargar.Location = new System.Drawing.Point(1056, 671);
-            this.cmdRecargar.Name = "cmdRecargar";
-            this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
-            this.cmdRecargar.TabIndex = 6;
-            this.cmdRecargar.Texto = "R";
-            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
             // 
             // grdEstadistica
             // 
@@ -1000,6 +978,38 @@
             this.tiOcultar.Interval = 300;
             this.tiOcultar.Tick += new System.EventHandler(this.tiOcultar_Tick);
             // 
+            // tarjetasCDNIToolStripMenuItem
+            // 
+            this.tarjetasCDNIToolStripMenuItem.Name = "tarjetasCDNIToolStripMenuItem";
+            this.tarjetasCDNIToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tarjetasCDNIToolStripMenuItem.Tag = "10";
+            this.tarjetasCDNIToolStripMenuItem.Text = "Tarjetas + CDNI";
+            this.tarjetasCDNIToolStripMenuItem.Click += new System.EventHandler(this.Menu_SalidasClick);
+            // 
+            // cmdRecargar
+            // 
+            this.cmdRecargar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdRecargar.Location = new System.Drawing.Point(1056, 671);
+            this.cmdRecargar.Name = "cmdRecargar";
+            this.cmdRecargar.Size = new System.Drawing.Size(29, 23);
+            this.cmdRecargar.TabIndex = 6;
+            this.cmdRecargar.Texto = "R";
+            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
+            // 
+            // cFechas1
+            // 
+            this.cFechas1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cFechas1.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFechas1.Location = new System.Drawing.Point(0, 0);
+            this.cFechas1.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFechas1.Mostrar = 0;
+            this.cFechas1.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
+            this.cFechas1.Name = "cFechas1";
+            this.cFechas1.Size = new System.Drawing.Size(228, 184);
+            this.cFechas1.TabIndex = 0;
+            this.cFechas1.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFechas1.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
+            // 
             // frmResumen_Suc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1116,5 +1126,6 @@
         private System.Windows.Forms.ToolStripMenuItem verBalancesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verSoloNegativosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem qRToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tarjetasCDNIToolStripMenuItem;
     }
 }

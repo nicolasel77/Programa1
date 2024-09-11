@@ -3032,7 +3032,53 @@
         {
             usuario.Nombre = "Lorena";
         }
+        private void mnuPrueba_mp_Click(object sender, EventArgs e)
+        {
+                bool found = false;
+                foreach (Form f in forms)
+                {
+                    if (f.Name == "Prueba_MP")
+                    {
+                        f.BringToFront();
+                        found = true;
+                        break;
+                    }
+                }
+                if (found == false)
+                {
+                    ToolStripMenuItem t = new ToolStripMenuItem("Prueba_MP");
+                    t.Text = "Prueba_mp";
+                    t.Click += new EventHandler(Mostrar);
+                    this.tstMenu.Items.Add(t);
 
+                    Form Prueba_MP = new Carga.Tesoreria.Prueba_MP();
+                    Prueba_MP.MdiParent = this;
+                    Prueba_MP.Disposed += Prueba_MP_Disposed;
+                    forms.Add(Prueba_MP);
+                    Prueba_MP.Show();
+                    Prueba_MP.WindowState = FormWindowState.Minimized;
+                    Prueba_MP.WindowState = FormWindowState.Maximized;
+                }
+            }
+            private void Prueba_MP_Disposed(object sender, EventArgs e)
+            {
+                foreach (ToolStripMenuItem t in tstMenu.Items)
+                {
+                    if (t.Text == "Prueba_mp")
+                    {
+                        tstMenu.Items.Remove(t);
+                        break;
+                    }
+                }
+                foreach (Form f in forms)
+                {
+                    if (f.Name == "Prueba_mp")
+                    {
+                        forms.Remove(f);
+                        break;
+                    }
+                }
+            }
         private void resumenCajasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -3279,5 +3325,6 @@
         {
             reclamosToolStripMenuItem.PerformClick();
         }
+
     }
 }
