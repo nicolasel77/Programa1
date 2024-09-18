@@ -59,7 +59,7 @@
             return suc;
         }
 
-        public void Actualizar(string campo_editado, object valor)
+        public new void Actualizar(string campo_editado, object valor)
         {
             var cnn = new SqlConnection(cadCN);
 
@@ -69,7 +69,7 @@
 
                 if (campo_editado != "Titular")
                 { otros_Campos.Remove(otros_Campos.IndexOf(campo_editado), campo_editado.Length + valor.ToString().Length + 8); }
-                else { otros_Campos.Remove(campo_editado.IndexOf(" AND Titular")); }
+                else { otros_Campos.Remove(otros_Campos.IndexOf(" AND Titular")); valor = $"'{valor}'"; }
 
                 SqlCommand command = new SqlCommand($"UPDATE {Tabla} SET {campo_editado}={valor} WHERE {otros_Campos}", cnn);
                 command.CommandType = CommandType.Text;

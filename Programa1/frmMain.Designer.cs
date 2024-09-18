@@ -1062,7 +1062,6 @@
             this.mnuPrueba_mp.Name = "mnuPrueba_mp";
             this.mnuPrueba_mp.Size = new System.Drawing.Size(79, 20);
             this.mnuPrueba_mp.Text = "Prueba_mp";
-            this.mnuPrueba_mp.Visible = false;
             this.mnuPrueba_mp.Click += new System.EventHandler(this.mnuPrueba_mp_Click);
             // 
             // tstMenu

@@ -63,11 +63,11 @@
             this.cmdMP = new MaterialSkin.Controls.MaterialFlatButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.label6 = new System.Windows.Forms.Label();
             this.cmbSuc = new System.Windows.Forms.ComboBox();
             this.cmbTitulares = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -189,7 +189,7 @@
             this.lstTipo.ItemHeight = 20;
             this.lstTipo.Location = new System.Drawing.Point(0, 0);
             this.lstTipo.Name = "lstTipo";
-            this.lstTipo.Size = new System.Drawing.Size(157, 100);
+            this.lstTipo.Size = new System.Drawing.Size(157, 96);
             this.lstTipo.TabIndex = 7;
             this.lstTipo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstTipo_MouseUp);
             // 
@@ -316,14 +316,14 @@
             this.panel5.Controls.Add(this.cmdRuta);
             this.panel5.Location = new System.Drawing.Point(231, 243);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(325, 27);
+            this.panel5.Size = new System.Drawing.Size(332, 27);
             this.panel5.TabIndex = 22;
             // 
             // lblArchivo
             // 
             this.lblArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblArchivo.AutoSize = true;
-            this.lblArchivo.Location = new System.Drawing.Point(6, 194);
+            this.lblArchivo.Location = new System.Drawing.Point(6, 193);
             this.lblArchivo.Name = "lblArchivo";
             this.lblArchivo.Size = new System.Drawing.Size(0, 13);
             this.lblArchivo.TabIndex = 23;
@@ -573,15 +573,27 @@
             this.splitContainer2.SplitterDistance = 274;
             this.splitContainer2.TabIndex = 0;
             // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(354, 81);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "Filtrar suc";
+            // 
             // cmbSuc
             // 
+            this.cmbSuc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbSuc.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbSuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSuc.FormattingEnabled = true;
-            this.cmbSuc.Location = new System.Drawing.Point(380, 103);
+            this.cmbSuc.Location = new System.Drawing.Point(357, 99);
             this.cmbSuc.Name = "cmbSuc";
-            this.cmbSuc.Size = new System.Drawing.Size(161, 24);
+            this.cmbSuc.Size = new System.Drawing.Size(184, 24);
             this.cmbSuc.TabIndex = 37;
+            this.cmbSuc.SelectedIndexChanged += new System.EventHandler(this.cmbSuc_SelectedIndexChanged);
             // 
             // cmbTitulares
             // 
@@ -589,16 +601,16 @@
             this.cmbTitulares.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbTitulares.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTitulares.FormattingEnabled = true;
-            this.cmbTitulares.Location = new System.Drawing.Point(380, 147);
+            this.cmbTitulares.Location = new System.Drawing.Point(357, 147);
             this.cmbTitulares.Name = "cmbTitulares";
-            this.cmbTitulares.Size = new System.Drawing.Size(161, 24);
+            this.cmbTitulares.Size = new System.Drawing.Size(184, 24);
             this.cmbTitulares.TabIndex = 36;
             // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(377, 130);
+            this.label5.Location = new System.Drawing.Point(354, 129);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(36, 13);
             this.label5.TabIndex = 35;
@@ -611,18 +623,8 @@
             this.panel7.Controls.Add(this.lstTipo);
             this.panel7.Location = new System.Drawing.Point(5, 94);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(157, 100);
+            this.panel7.Size = new System.Drawing.Size(157, 96);
             this.panel7.TabIndex = 33;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(377, 87);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(26, 13);
-            this.label6.TabIndex = 38;
-            this.label6.Text = "Suc";
             // 
             // frmLeer_Tarjetas
             // 

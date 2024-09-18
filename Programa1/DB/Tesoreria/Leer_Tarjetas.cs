@@ -141,14 +141,20 @@
             return dt;
         }
 
+        public int titular(int suc_titular)
+        { return Convert.ToInt32(Dato_Generico($"SELECT Id FROM dbGastos.dbo.Credenciales_API WHERE Titular = (SELECT Titular FROM dbGastos.dbo.Suc_Cuentas WHERE Tipo = 14 AND Suc = {suc_titular})")); }
+
+        public DataTable sucdatos()
+        { return Sucursal.Datos("Ver = 1 AND Propio = 1"); }
         public string bearer(int titular_id) 
         { return Dato_Generico($"SELECT Bearer FROM dbGastos.dbo.Credenciales_API WHERE Id = {titular_id}").ToString(); }
-
+        public int terminalMP(int terminal)
+        { return Convert.ToInt32(Dato_Generico($"SELECT Terminal FROM dbGastos.dbo.Terminales_MP WHERE Suc = {terminal}")); }
         public void Exportardt(DataTable dt)
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             SqlBulkCopy sqlbulkcopy = new SqlBulkCopy(sql);
-            sqlbulkcopy.DestinationTableName = "dbGastos.Entradas_Tarjeta";
+            sqlbulkcopy.DestinationTableName = "dbGastos.dbo.Entradas_Tarjeta";
             sqlbulkcopy.WriteToServer(dt);
         }
 
