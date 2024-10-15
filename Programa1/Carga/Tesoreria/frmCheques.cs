@@ -77,6 +77,7 @@ namespace Programa1.Carga.Tesoreria
         private void grd_Editado(short f, short c, object a)
         {
             int i = Convert.ToInt32(grd.get_Texto(f, Id));
+            ch.ID= i;
             switch (c)
             {
                 case Numero:
@@ -183,7 +184,7 @@ namespace Programa1.Carga.Tesoreria
                     else
                     {
                         ch.Fecha_Acreditacion = Convert.ToDateTime(a);
-                        ch.Actualizar();
+                        ch.Actualizar("Fecha_Acreditacion", ch.Fecha_Acreditacion);
                         grd.set_Texto(f, c, a);
                         
                         grd.ActivarCelda(f, Origen);
@@ -395,7 +396,7 @@ namespace Programa1.Carga.Tesoreria
         private void grd_CambioFila(short Fila)
         {
             ch.Numero = Convert.ToInt32(grd.get_Texto(Fila, Numero));
-            ch.Buscar_Cheque();
+            //ch.Buscar_Cheque();
 
         }
 
