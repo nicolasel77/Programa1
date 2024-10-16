@@ -323,7 +323,7 @@
             // 
             this.lblArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblArchivo.AutoSize = true;
-            this.lblArchivo.Location = new System.Drawing.Point(6, 193);
+            this.lblArchivo.Location = new System.Drawing.Point(6, 192);
             this.lblArchivo.Name = "lblArchivo";
             this.lblArchivo.Size = new System.Drawing.Size(0, 13);
             this.lblArchivo.TabIndex = 23;
@@ -404,10 +404,10 @@
             // 
             // lblTotal
             // 
-            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(-58, 313);
+            this.lblTotal.Location = new System.Drawing.Point(6, 194);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(0, 16);
             this.lblTotal.TabIndex = 24;
@@ -605,6 +605,7 @@
             this.cmbTitulares.Name = "cmbTitulares";
             this.cmbTitulares.Size = new System.Drawing.Size(184, 24);
             this.cmbTitulares.TabIndex = 36;
+            this.cmbTitulares.SelectedIndexChanged += new System.EventHandler(this.cmbTitulares_SelectedIndexChanged);
             // 
             // label5
             // 

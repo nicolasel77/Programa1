@@ -30,13 +30,13 @@
         {
             string s = leer.Carpeta_guardada();
             if (s.Length == 0)
-            { leer.actualizar_carpeta(fcarpeta); }
+            { leer.Actualizar_carpeta(fcarpeta); }
             else
             { fcarpeta = s; }
 
             cmdCarpeta.Text = fcarpeta;
 
-            cargar_cuentas();
+            Cargar_cuentas();
 
             h.Llenar_List(lstTipo, leer.tipos_tarjeta.Datos_Vista());
 
@@ -197,6 +197,7 @@
                                 {
                                     leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
                                     leer.vFecha = leer.vFecha.AddHours(leer.vFecha.Hour * -1).AddMinutes(leer.vFecha.Minute * -1);
+                                    suc_temp = xApp.Cells[i, 4].Text;
                                     suc = Convert.ToInt32(suc_temp.Substring(suc_temp.IndexOf("SUC") + 4));
 
                                     if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & (f_suc == 0 || f_suc == suc))
@@ -204,12 +205,10 @@
                                         DataRow nrow = dt.NewRow();
 
                                         nrow["Fecha"] = leer.vFecha;
-                                        if (xApp.Cells[i, 15].Text == " Por acreditar\n") { nrow["Fecha_Pago"] = leer.vFecha.Date.AddDays(1); }
+                                        if (xApp.Cells[i, 21].Text == " Por acreditar\n") { nrow["Fecha_Pago"] = leer.vFecha.Date.AddDays(1); }
                                         else { nrow["Fecha_Pago"] = xApp.Cells[i, 2].Text; }
 
                                         nrow["Comprobante"] = xApp.Cells[i, 3].Text;
-
-                                        suc_temp = xApp.Cells[i, 4].Text;
 
                                         nrow["Suc"] = suc;
 
@@ -345,7 +344,7 @@
                     leer.vlote = Convert.ToInt32(grdDatos.get_Texto(i, 7));
                     leer.vcomprobante = Convert.ToInt64(grdDatos.get_Texto(i, 8));
                     leer.vtarjeta = Convert.ToInt64(grdDatos.get_Texto(i, 9));
-                    leer.actualizar_Registros();
+                    leer.Actualizar_Registros();
                     pbLeer.Value = i;
                 }
                 grdDatos.Rows = 1;
@@ -392,7 +391,7 @@
             {
                 fcarpeta = fc.SelectedPath;
                 cmdCarpeta.Text = "Carpeta: " + fcarpeta;
-                leer.actualizar_carpeta(fcarpeta);
+                leer.Actualizar_carpeta(fcarpeta);
             }
         }
 
@@ -469,7 +468,7 @@
             }
         }
 
-        private void cargar_cuentas()
+        private void Cargar_cuentas()
         {
             grdCuentas.MostrarDatos(leer.suc_cuentas.Datos_Vista(), true, false);
             grdCuentas.AutosizeAll();
@@ -498,17 +497,25 @@
 
         private void cmdRecargar_Click(object sender, EventArgs e)
         {
-            cargar_cuentas();
+            Cargar_cuentas();
         }
         private void cmbSuc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbSuc.SelectedIndex > -1) { cmbTitulares.SelectedIndex = leer.titular(h.Codigo_Seleccionado(cmbSuc.Text)) - 1; }
+            if (cmbSuc.SelectedIndex > -1) { cmbTitulares.SelectedIndexChanged -= cmbTitulares_SelectedIndexChanged; cmbTitulares.SelectedIndex = leer.titular(h.Codigo_Seleccionado(cmbSuc.Text)) - 1; cmbTitulares.SelectedIndexChanged += cmbTitulares_SelectedIndexChanged; }
         }
+
+        private void cmbTitulares_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbSuc.SelectedIndexChanged -= cmbSuc_SelectedIndexChanged;
+            cmbSuc.SelectedIndex = -1;
+            cmbSuc.SelectedIndexChanged += cmbSuc_SelectedIndexChanged;
+        }
+
         private async void cmdMP_Click(object sender, EventArgs e)
         {
             using (HttpClient client = new HttpClient())
             {
-                string AccessToken = leer.bearer(h.Codigo_Seleccionado(cmbTitulares.Text));
+                string AccessToken = leer.Bearer(h.Codigo_Seleccionado(cmbTitulares.Text));
 
                 dt.Rows.Clear();
                 string beginDate = dtFecha.Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
