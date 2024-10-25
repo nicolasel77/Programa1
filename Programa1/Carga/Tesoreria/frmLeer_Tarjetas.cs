@@ -2,6 +2,7 @@
 {
     using DB.Tesoreria;
     using Newtonsoft.Json.Linq;
+    using OfficeOpenXml;
     using System;
     using System.Data;
     using System.Drawing;
@@ -10,6 +11,7 @@
     using System.Text;
     using System.Windows.Forms;
     using Excel = Microsoft.Office.Interop.Excel;
+
     public partial class frmLeer_Tarjetas : Form
     {
         private Leer_Tarjetas leer;
@@ -21,9 +23,9 @@
         {
             InitializeComponent();
             leer = new Leer_Tarjetas();
-            h.Llenar_List(cmbTitulares, leer.titulares());
+            h.Llenar_List(lstTitulares, leer.titulares());
             h.Llenar_List(cmbSuc, leer.sucdatos());
-            cmbTitulares.SelectedIndex = 0;
+            lstTitulares.SelectedIndex = 0;
         }
 
         private void frmLeer_Tarjetas_Load(object sender, EventArgs e)
@@ -54,30 +56,6 @@
         private void chAuto_CheckedChanged(object sender, EventArgs e)
         {
             tiAuto.Enabled = chAuto.Checked;
-        }
-
-        private void cmdCargar_archivo_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog f = new OpenFileDialog();
-
-            f.InitialDirectory = fcarpeta;
-            f.ShowDialog();
-            string s = f.FileName;
-
-            if (s.Length > 0)
-            {
-                lblArchivo.Text = s;
-                string n = s.Substring(s.LastIndexOf(@"\") + 1);
-                leer.Sucursal.ID = Convert.ToInt32(n.Substring(0, n.LastIndexOf(".")));
-                //leer.Sucursal.ID = Convert.ToInt32(n);
-                if (leer.Sucursal.Existe() == true)
-                {
-                    lblSucursal.Text = leer.Sucursal.Nombre;
-
-                    if (lstTipo.SelectedIndex > -1)
-                    { cmdEscribir.PerformClick(); }
-                }
-            }
         }
 
         private void Mover_Archivo()
@@ -258,34 +236,31 @@
                         }
                         else
                         {
-                            if (rdFiserv.Checked)
+                            // QR Fiserv
+
+                            for (int i = 2; i <= max; i++)
                             {
-                                // QR Fiserv
+                                leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
+                                suc = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 2].Text));
 
-                                for (int i = 2; i <= max; i++)
+                                if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 7].Text == "Aprobada" & (f_suc == 0 || f_suc == suc))
                                 {
-                                    leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
-                                    suc = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 2].Text));
+                                    DataRow nrow = dt.NewRow();
 
-                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 7].Text == "Aprobada" & (f_suc == 0 || f_suc == suc))
-                                    {
-                                        DataRow nrow = dt.NewRow();
+                                    nrow["Fecha"] = leer.vFecha;
+                                    nrow["Fecha_Pago"] = leer.vFecha;
+                                    nrow["Comprobante"] = xApp.Cells[i, 4].Text.Substring(0, 17);
+                                    nrow["Suc"] = suc;
+                                    nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 3].Text);
+                                    nrow["Id_Tipo"] = leer.vtipo;
 
-                                        nrow["Fecha"] = leer.vFecha;
-                                        nrow["Fecha_Pago"] = leer.vFecha;
-                                        nrow["Comprobante"] = xApp.Cells[i, 4].Text.Substring(0, 17);
-                                        nrow["Suc"] = suc;
-                                        nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 3].Text);
-                                        nrow["Id_Tipo"] = leer.vtipo;
+                                    nrow["Tarjeta"] = 1;
+                                    nrow["Lote"] = 1;
+                                    nrow["Acreditado"] = true;
 
-                                        nrow["Tarjeta"] = 1;
-                                        nrow["Lote"] = 1;
-                                        nrow["Acreditado"] = true;
-
-                                        dt.Rows.Add(nrow);
-                                        pbLeer.Value = i;
-                                        Application.DoEvents();
-                                    }
+                                    dt.Rows.Add(nrow);
+                                    pbLeer.Value = i;
+                                    Application.DoEvents();
                                 }
                             }
                         }
@@ -314,7 +289,7 @@
 
                     Application.DoEvents();
                     if (chAuto.Checked == true)
-                    { cmdGuardar.PerformClick(); }
+                    { Guardar(); }
                 }
                 else
                 {
@@ -324,7 +299,7 @@
             Cursor = Cursors.Default;
         }
 
-        private void cmdGuardar_Click(object sender, EventArgs e)
+        private void Guardar()
         {
             if (leer.Fecha_Cerrada(dtFecha.Value) == false & leer.Fecha_Cerrada(dtMaxima.Value) == false)
             {
@@ -366,13 +341,38 @@
                 MessageBox.Show("La fecha se encuentra cerrada", "Borrar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         private void tiAuto_Tick(object sender, EventArgs e)
         {
             if (Directory.Exists(fcarpeta))
             {
-                string t_extencion = "*.xlsx";
+                string t_extencion = "*.csv";
+                //Convertir .csv a .xlsx
+                foreach (string s in Directory.GetFiles(fcarpeta, t_extencion, SearchOption.TopDirectoryOnly))
+                {
+                    var lines = File.ReadAllLines(s);
+                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
+                    using (ExcelPackage excel = new ExcelPackage())
+                    {
+                        ExcelWorksheet worksheet = excel.Workbook.Worksheets.Add("Sheet1");
+
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            var values = lines[i].Split(';');
+                            for (int j = 0; j < values.Length; j++)
+                            {
+                                worksheet.Cells[i + 1, j + 1].Value = values[j];
+                            }
+                        }
+
+                        FileInfo excelFile = new FileInfo(s.Replace(".csv", ".xlsx"));
+                        excel.SaveAs(excelFile);
+                        File.Delete(s);
+                    }
+                }
+
+                t_extencion = "*.xlsx";
+                //Leer los excel
                 foreach (string s in Directory.GetFiles(fcarpeta, t_extencion, SearchOption.TopDirectoryOnly))
                 {
                     lblArchivo.Text = s;
@@ -501,10 +501,9 @@
         }
         private void cmbSuc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbSuc.SelectedIndex > -1) { cmbTitulares.SelectedIndexChanged -= cmbTitulares_SelectedIndexChanged; cmbTitulares.SelectedIndex = leer.titular(h.Codigo_Seleccionado(cmbSuc.Text)) - 1; cmbTitulares.SelectedIndexChanged += cmbTitulares_SelectedIndexChanged; }
+            if (cmbSuc.SelectedIndex > -1) { lstTitulares.SelectedIndexChanged -= lstTitulares_SelectedIndexChanged; lstTitulares.SelectedIndex = leer.titular(h.Codigo_Seleccionado(cmbSuc.Text)) - 1; lstTitulares.SelectedIndexChanged += lstTitulares_SelectedIndexChanged; }
         }
-
-        private void cmbTitulares_SelectedIndexChanged(object sender, EventArgs e)
+        private void lstTitulares_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbSuc.SelectedIndexChanged -= cmbSuc_SelectedIndexChanged;
             cmbSuc.SelectedIndex = -1;
@@ -513,9 +512,10 @@
 
         private async void cmdMP_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
             using (HttpClient client = new HttpClient())
             {
-                string AccessToken = leer.Bearer(h.Codigo_Seleccionado(cmbTitulares.Text));
+                string AccessToken = leer.Bearer(h.Codigo_Seleccionado(lstTitulares.Text));
 
                 dt.Rows.Clear();
                 string beginDate = dtFecha.Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
@@ -593,9 +593,13 @@
                 pbLeer.Visible = false;
                 lblpb.Visible = false;
                 Application.DoEvents();
+
+                Cursor = Cursors.Default;
+
                 if (grdDatos.Rows > 0)
-                { cmdGuardar.PerformClick(); }
+                { Guardar(); }
             }
         }
+       
     }
 }
