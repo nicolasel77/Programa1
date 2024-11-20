@@ -212,17 +212,17 @@
                                 for (int i = 2; i <= max; i++)
                                 {
                                     DataRow nrow = dt.NewRow();
-                                    leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 1].Text);
-                                    suc = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 2].Text));
+                                    leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 2].Text);
+                                    suc = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 13].Text));
 
-                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 7].Text == "Aprobada" & (f_suc == 0 || f_suc == suc))
+                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 8].Text == "Aprobado" & (f_suc == 0 || f_suc == suc))
                                     {
                                         nrow["Fecha"] = leer.vFecha;
                                         nrow["Fecha_Pago"] = leer.vFecha;
-                                        nrow["Comprobante"] = xApp.Cells[i, 4].Text.Substring(0, 17);
+                                        nrow["Comprobante"] = xApp.Cells[i, 22].text;
                                         nrow["Suc"] = suc;
                                         nrow["Tarjeta"] = 1;
-                                        nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 3].Text);
+                                        nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 11].Text);
                                         nrow["Lote"] = 1;
                                         nrow["Id_Tipo"] = leer.vtipo;
                                         nrow["Acreditado"] = true;
