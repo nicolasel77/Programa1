@@ -29,7 +29,7 @@
 
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro);
+            return Datos_Vista(filtro, "*", "Fecha, Id_Sucursales, Orden, Id_Productos");
         }
 
         public Double Stock_Kilos(string filtro)

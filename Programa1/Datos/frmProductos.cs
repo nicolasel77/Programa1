@@ -21,6 +21,7 @@
         private const byte cMultiplicador = 7;
         private const byte cResumirPorVenta = 2;
         private const byte cTiene_Estadistica = 3;
+        private const byte cOrden= 8;
 
         public frmProductos()
         {
@@ -302,21 +303,36 @@
                         grdProductos.ActivarCelda(f + 1, 0);
                     }
                     break;
-                //case cResumirPorVenta: // ResumirPorVenta
-                //    if (i == 0)
-                //    {
-                //        Mensaje("Debe ingresar el Id primero");
-                //        grdProductos.ActivarCelda(f, 0);
-                //    }
-                //    else
-                //    {
-                //        prods.ID = i;
-                //        prods.Multiplicador = Convert.ToInt32(a);
-                //        grdProductos.set_Texto(f, c, a);
-                //        prods.Actualizar();
-                //        grdProductos.ActivarCelda(f + 1, 0);
-                //    }
-                //    break;
+                case cOrden: // Orden
+                    if (i == 0)
+                    {
+                        Mensaje("Debe ingresar el Id primero");
+                        grdProductos.ActivarCelda(f, 0);
+                    }
+                    else
+                    {
+                        prods.ID = i;
+                        prods.Orden = Convert.ToInt32(a);
+                        grdProductos.set_Texto(f, c, a);
+                        prods.Actualizar();
+                        grdProductos.ActivarCelda(f + 1, 0);
+                    }
+                    break;
+                    //case cResumirPorVenta: // ResumirPorVenta
+                    //    if (i == 0)
+                    //    {
+                    //        Mensaje("Debe ingresar el Id primero");
+                    //        grdProductos.ActivarCelda(f, 0);
+                    //    }
+                    //    else
+                    //    {
+                    //        prods.ID = i;
+                    //        prods.Multiplicador = Convert.ToInt32(a);
+                    //        grdProductos.set_Texto(f, c, a);
+                    //        prods.Actualizar();
+                    //        grdProductos.ActivarCelda(f + 1, 0);
+                    //    }
+                    //    break;
             }
         }
 
@@ -348,6 +364,7 @@
             // 5 bool Imprimir
             // 6 bool Pesable
             // 7 int Multiplicador
+            // 8 int Orden
             prods.ID = Convert.ToInt32(grdProductos.get_Texto(Fila, 0));
             prods.Tipo.ID = Convert.ToInt32(grdProductos.get_Texto(Fila, 1));
             prods.Nombre = grdProductos.get_Texto(Fila, 3).ToString();
@@ -355,6 +372,7 @@
             prods.Imprimir = bool.Parse(grdProductos.get_Texto(Fila, 5).ToString());
             prods.Pesable = bool.Parse(grdProductos.get_Texto(Fila, 6).ToString());
             prods.Multiplicador = Convert.ToInt32(grdProductos.get_Texto(Fila, 7));
+            prods.Orden = Convert.ToInt32(grdProductos.get_Texto(Fila, 8));
         }
 
         private void TxtBuscar_TextChanged(object sender, EventArgs e)

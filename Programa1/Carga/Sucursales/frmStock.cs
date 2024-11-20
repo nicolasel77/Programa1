@@ -145,6 +145,7 @@
             grdStock.set_ColW(c_Descripcion, 250);
             grdStock.set_ColW(c_Kilos, 60);
             grdStock.set_ColW(c_Total + 1, 0);
+            grdStock.set_ColW(c_Total + 2, 0);
             
                         
             if (n_usuario.Permiso == Usuarios.e_Permiso.Supervisor)
