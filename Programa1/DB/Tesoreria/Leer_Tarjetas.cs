@@ -28,7 +28,7 @@
         public Suc_Cuentas suc_cuentas { get; set; } = new Suc_Cuentas();
         public Tipos_Tarjeta tipos_tarjeta { get; set; } = new Tipos_Tarjeta();
 
-        public void actualizar_Registros()
+        public void Actualizar_Registros()
         {
             String vBorrar = $"[Fecha]='{vFecha.ToString("MM/dd/yyy")}' AND [Importe]={vimporte.ToString().Replace(",", ".")} AND Lote={vlote} AND Comprobante={vcomprobante} AND Tarjeta={vtarjeta}";
             Borrar(vBorrar);
@@ -65,7 +65,7 @@
             }
         }
 
-        public void actualizar_carpeta(string carpeta)
+        public void Actualizar_carpeta(string carpeta)
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             try
@@ -146,7 +146,7 @@
 
         public DataTable sucdatos()
         { return Sucursal.Datos("Ver = 1 AND Propio = 1"); }
-        public string bearer(int titular_id) 
+        public string Bearer(int titular_id) 
         { return Dato_Generico($"SELECT Bearer FROM dbGastos.dbo.Credenciales_API WHERE Id = {titular_id}").ToString(); }
         public int terminalMP(int terminal)
         { return Convert.ToInt32(Dato_Generico($"SELECT Terminal FROM dbGastos.dbo.Terminales_MP WHERE Suc = {terminal}")); }
@@ -157,6 +157,5 @@
             sqlbulkcopy.DestinationTableName = "dbGastos.dbo.Entradas_Tarjeta";
             sqlbulkcopy.WriteToServer(dt);
         }
-
     }
 }
