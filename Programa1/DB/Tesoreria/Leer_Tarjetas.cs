@@ -142,7 +142,7 @@
         }
 
         public int titular(int suc_titular)
-        { return Convert.ToInt32(Dato_Generico($"SELECT Id FROM dbGastos.dbo.Credenciales_API WHERE Titular = (SELECT Titular FROM dbGastos.dbo.Suc_Cuentas WHERE Tipo = 14 AND Suc = {suc_titular})")); }
+        { return Convert.ToInt32(Dato_Generico($"SELECT Id FROM dbGastos.dbo.Credenciales_API WHERE Titular = (SELECT TOP 1 Titular FROM dbGastos.dbo.Suc_Cuentas WHERE Tipo = 14 AND Suc = {suc_titular})")); }
         public int caja_titular(int Id_Titular)
         { return Convert.ToInt32(Dato_Generico($"SELECT Caja FROM dbGastos.dbo.Credenciales_API WHERE Id = {Id_Titular}")); }
         public DataTable sucdatos()
