@@ -601,6 +601,11 @@ namespace Programa1.Carga.Hacienda
                 }
             }
         }
+
+        private void lstBoletas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

@@ -157,6 +157,7 @@ namespace Programa1.Carga.Hacienda
             this.lstBoletas.Name = "lstBoletas";
             this.lstBoletas.Size = new System.Drawing.Size(130, 240);
             this.lstBoletas.TabIndex = 5;
+            this.lstBoletas.SelectedIndexChanged += new System.EventHandler(this.lstBoletas_SelectedIndexChanged);
             this.lstBoletas.DoubleClick += new System.EventHandler(this.lstBoletas_DoubleClick);
             this.lstBoletas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstBoletas_MouseUp);
             // 
