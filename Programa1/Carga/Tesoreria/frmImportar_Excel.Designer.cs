@@ -48,6 +48,11 @@
             this.chDebitos = new MaterialSkin.Controls.MaterialCheckBox();
             this.materialCheckBox1 = new MaterialSkin.Controls.MaterialCheckBox();
             this.txtFormato = new System.Windows.Forms.TextBox();
+            this.dtMaxima = new System.Windows.Forms.DateTimePicker();
+            this.dtFecha = new System.Windows.Forms.DateTimePicker();
+            this.cmdCargar_prueba = new System.Windows.Forms.Button();
+            this.cmbTitulares = new System.Windows.Forms.ComboBox();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -125,7 +130,7 @@
             // 
             this.cmdGuardar_Creditos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdGuardar_Creditos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdGuardar_Creditos.Location = new System.Drawing.Point(181, 491);
+            this.cmdGuardar_Creditos.Location = new System.Drawing.Point(173, 491);
             this.cmdGuardar_Creditos.Name = "cmdGuardar_Creditos";
             this.cmdGuardar_Creditos.Size = new System.Drawing.Size(75, 23);
             this.cmdGuardar_Creditos.TabIndex = 3;
@@ -236,7 +241,7 @@
             this.grdSalida.Redraw = true;
             this.grdSalida.Row = 0;
             this.grdSalida.Rows = 50;
-            this.grdSalida.Size = new System.Drawing.Size(256, 461);
+            this.grdSalida.Size = new System.Drawing.Size(248, 461);
             this.grdSalida.TabIndex = 0;
             this.grdSalida.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdSalida_Editado);
             this.grdSalida.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdSalida_KeyUp);
@@ -321,7 +326,7 @@
             this.grdDebitos.Redraw = true;
             this.grdDebitos.Row = 0;
             this.grdDebitos.Rows = 50;
-            this.grdDebitos.Size = new System.Drawing.Size(423, 461);
+            this.grdDebitos.Size = new System.Drawing.Size(415, 461);
             this.grdDebitos.TabIndex = 4;
             // 
             // label3
@@ -341,7 +346,7 @@
             this.cmdGuardar_Debitos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdGuardar_Debitos.Enabled = false;
             this.cmdGuardar_Debitos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmdGuardar_Debitos.Location = new System.Drawing.Point(348, 491);
+            this.cmdGuardar_Debitos.Location = new System.Drawing.Point(340, 491);
             this.cmdGuardar_Debitos.Name = "cmdGuardar_Debitos";
             this.cmdGuardar_Debitos.Size = new System.Drawing.Size(75, 23);
             this.cmdGuardar_Debitos.TabIndex = 3;
@@ -415,12 +420,73 @@
             this.txtFormato.Name = "txtFormato";
             this.txtFormato.Size = new System.Drawing.Size(100, 13);
             this.txtFormato.TabIndex = 10;
+            this.txtFormato.Visible = false;
+            // 
+            // dtMaxima
+            // 
+            this.dtMaxima.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtMaxima.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtMaxima.Location = new System.Drawing.Point(634, 50);
+            this.dtMaxima.Name = "dtMaxima";
+            this.dtMaxima.Size = new System.Drawing.Size(105, 20);
+            this.dtMaxima.TabIndex = 16;
+            // 
+            // dtFecha
+            // 
+            this.dtFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtFecha.Location = new System.Drawing.Point(522, 50);
+            this.dtFecha.Name = "dtFecha";
+            this.dtFecha.Size = new System.Drawing.Size(106, 20);
+            this.dtFecha.TabIndex = 17;
+            // 
+            // cmdCargar_prueba
+            // 
+            this.cmdCargar_prueba.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdCargar_prueba.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdCargar_prueba.Location = new System.Drawing.Point(1031, 43);
+            this.cmdCargar_prueba.Name = "cmdCargar_prueba";
+            this.cmdCargar_prueba.Size = new System.Drawing.Size(128, 27);
+            this.cmdCargar_prueba.TabIndex = 19;
+            this.cmdCargar_prueba.Text = "Entradas MP";
+            this.cmdCargar_prueba.UseVisualStyleBackColor = true;
+            this.cmdCargar_prueba.Click += new System.EventHandler(this.cmdCargar_prueba_Click);
+            // 
+            // cmbTitulares
+            // 
+            this.cmbTitulares.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbTitulares.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmbTitulares.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbTitulares.FormattingEnabled = true;
+            this.cmbTitulares.Location = new System.Drawing.Point(745, 46);
+            this.cmbTitulares.Name = "cmbTitulares";
+            this.cmbTitulares.Size = new System.Drawing.Size(280, 24);
+            this.cmbTitulares.TabIndex = 38;
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(378, 50);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(138, 19);
+            this.materialLabel1.TabIndex = 39;
+            this.materialLabel1.Text = "Cargar desde-hasta";
             // 
             // frmImportar_Excel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1171, 634);
+            this.Controls.Add(this.materialLabel1);
+            this.Controls.Add(this.cmbTitulares);
+            this.Controls.Add(this.cmdCargar_prueba);
+            this.Controls.Add(this.dtMaxima);
+            this.Controls.Add(this.dtFecha);
             this.Controls.Add(this.txtFormato);
             this.Controls.Add(this.chDebitos);
             this.Controls.Add(this.materialCheckBox1);
@@ -472,5 +538,10 @@
         private System.Windows.Forms.Button cmdGuardar_Debitos;
         private MaterialSkin.Controls.MaterialCheckBox materialCheckBox1;
         private System.Windows.Forms.TextBox txtFormato;
+        internal System.Windows.Forms.DateTimePicker dtMaxima;
+        internal System.Windows.Forms.DateTimePicker dtFecha;
+        private System.Windows.Forms.Button cmdCargar_prueba;
+        private System.Windows.Forms.ComboBox cmbTitulares;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
 }

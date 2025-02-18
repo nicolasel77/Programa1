@@ -1,10 +1,14 @@
 ﻿namespace Programa1.Carga.Tesoreria
 {
+    using Newtonsoft.Json.Linq;
     using Programa1.Clases;
     using Programa1.DB.Tesoreria;
     using System;
+    using System.Data;
     using System.IO;
     using System.Linq;
+    using System.Net.Http;
+    using System.Text;
     using System.Windows.Forms;
 
     public partial class frmImportar_Excel : Form
@@ -371,7 +375,7 @@
                 c_Base _Base = new c_Base();
 
                 _Base.Ejecutar_Comando("DELETE FROM Temp_n");
-                                
+
                 DateTime fecha = DateTime.Today;
                 string descripcion = "";
                 double importe = 0;
@@ -392,7 +396,7 @@
 
                         _Base.Ejecutar_Comando($"INSERT INTO Temp_n(Fecha, ID, Descripcion, Debito) VALUES('{fecha:MM/dd/yyy}', 0, '{descripcion}', {importe.ToString().Replace(",", ".")})");
                     }
-                }                
+                }
 
                 grdDebitos.MostrarDatos(_Base.Datos_Genericos("SELECT Fecha, Descripcion, SUM(Debito) Importe FROM Temp_n GROUP BY Fecha, Descripcion ORDER BY Fecha, Descripcion"), true, 2);
                 grdDebitos.Columnas[2].Format = "N2";
@@ -442,7 +446,7 @@
                     ", 17 IDC, 'Meat Provincia' Caja, 14 Tipo, '' Nombre, 0 SubTipo, '' Desc_ST " +
                     "FROM Temp_n GROUP BY Fecha, Descripcion ORDER BY Fecha, Descripcion, IDC, Caja, Tipo, Nombre, SubTipo, Desc_ST"), true, 2);
                 grdSalida.Columnas[2].Format = "N2";
-                                
+
 
                 grdSalida.AutosizeAll();
             }
@@ -631,7 +635,7 @@
 
                         descripcion = String.Format(txtFormato.Text, grd.get_Texto(i, 1).ToString(), grd.get_Texto(i, 2).ToString(), grd.get_Texto(i, 3).ToString(), grd.get_Texto(i, 4).ToString(), grd.get_Texto(i, 5).ToString(), grd.get_Texto(i, 6).ToString(), grd.get_Texto(i, 7).ToString(), grd.get_Texto(i, 8).ToString(), grd.get_Texto(i, 9).ToString(), grd.get_Texto(i, 10).ToString());
 
-                         //descripcion = String.Format(txtFormato.Text, grd.get_Texto(i, 1).ToString());
+                        //descripcion = String.Format(txtFormato.Text, grd.get_Texto(i, 1).ToString());
                         if (grd.get_Texto(i, 1) != null)
                         {
                             if (descripcion.ToLower().StartsWith("transferencia pei"))
@@ -1013,28 +1017,194 @@
 
             }
 
+            grd.Rows = 0;
+            grdSalida.Rows = 0;
+
             this.Cursor = Cursors.Default;
             this.Enabled = true;
         }
 
         private void cmdGuardar_Debitos_Click(object sender, EventArgs e)
         {
+            //this.Cursor = Cursors.WaitCursor;
+            //this.Enabled = false;
+            //Entradas en = new Entradas();
 
+            //for (int f = 1; f < grdSalida.Rows - 1; f++)
+            //{
+            //    double importe = 0;
+            //    if (grdSalida.get_Texto(f, grdSalida.get_ColIndex("Importe")) != null)
+            //    {
+            //        if (double.TryParse(grdSalida.get_Texto(f, grdSalida.get_ColIndex("Importe")).ToString(), out importe) == true)
+            //        {
+            //            en.Fecha = Convert.ToDateTime(grdSalida.get_Texto(f, grdSalida.get_ColIndex("Fecha")));
+            //            en.caja.ID = Convert.ToInt32(grdSalida.get_Texto(f, grdSalida.get_ColIndex("IDC")));
+            //            en.TE.Id_Tipo = Convert.ToInt32(grdSalida.get_Texto(f, grdSalida.get_ColIndex("Tipo")));
+            //            en.Id_SubTipoEntrada = Convert.ToInt32(grdSalida.get_Texto(f, grdSalida.get_ColIndex("SubTipo")));
+            //            en.Descripcion = Convert.ToString(grdSalida.get_Texto(f, grdSalida.get_ColIndex("SubTipo") + 1));
+            //            en.Importe = importe;
+
+            //            en.Agregar();
+
+            //        }
+            //    }
+
+            //}
+
+            //this.Cursor = Cursors.Default;
+            //this.Enabled = true;
         }
 
         private void frmImportar_Excel_Load(object sender, EventArgs e)
         {
-
+            Leer_Tarjetas leer = new Leer_Tarjetas();
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+            h.Llenar_List(cmbTitulares, leer.titulares());
+            cmbTitulares.SelectedIndex = 0;
         }
 
         private void cmbTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
             c_Base _Base = new c_Base();
-            string s; 
+            string s;
             s = _Base.Dato_Generico($"SELECT TOP 1 ISNULL(Valor, '') FROM Configuraciones WHERE Dato like 'formato_{cmbTipo.Text}'").ToString();
             txtFormato.Text = s;
 
         }
+
+        private async void cmdCargar_prueba_Click(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+
+            Leer_Tarjetas leer = new Leer_Tarjetas();
+            DataTable dt = new DataTable();
+
+            c_Base _Base = new c_Base();
+            dt = _Base.Datos_Genericos("SELECT TOP 0 Fecha, ID_TipoEntrada, ID_SubTipoEntrada, Descripcion, Importe, Importe as Neto, ID_Caja FROM CD_Entradas ");
+
+            Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+            Cursor = Cursors.WaitCursor;
+
+            int caja = leer.caja_titular(h.Codigo_Seleccionado(cmbTitulares.Text));
+
+            using (HttpClient client = new HttpClient())
+            {
+                string AccessToken = leer.Bearer(h.Codigo_Seleccionado(cmbTitulares.Text));
+
+                dt.Rows.Clear();
+                string beginDate = dtFecha.Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                string endDate = dtMaxima.Value.AddDays(1).AddSeconds(-1).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                int offset = 0;
+                int total = 0;
+
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AccessToken);
+                HttpResponseMessage response;
+
+                //Esto es porque se hace a veces MP solo envía una parte de las ventas
+
+                for (int i = 0; i < 5; i++)
+                {
+                    response = await client.GetAsync($"https://api.mercadopago.com/v1/payments/search?begin_date={beginDate}&end_date={endDate}&status=approved,pending,in_process&limit=50&offset={offset}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseData = await response.Content.ReadAsStringAsync();
+                        JObject ventas = JObject.Parse(responseData);
+                        StringBuilder sb = new StringBuilder();
+
+                        var paging = ventas["paging"];
+                        if (total < Convert.ToInt32(paging["total"])) { total = Convert.ToInt32(paging["total"]); }
+                    }
+                }
+
+                for (int i = 0; offset < total; i++)
+                {
+                    offset = i * 50;
+
+                    response = await client.GetAsync($"https://api.mercadopago.com/v1/payments/search?begin_date={beginDate}&end_date={endDate}&status=approved,pending,in_process&limit=50&offset={offset}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseData = await response.Content.ReadAsStringAsync();
+                        JObject ventas = JObject.Parse(responseData);
+                        StringBuilder sb = new StringBuilder();
+
+                        var paging = ventas["paging"];
+                        if (total > Convert.ToInt32(paging["total"])) { i += -1; continue; }
+
+                        foreach (var venta in ventas["results"])
+                        {
+                            DataRow nrow = dt.NewRow();
+
+                            //var poi = venta["point_of_interaction"];
+                            //var device = poi["device"];
+
+                            nrow["Fecha"] = Convert.ToDateTime(venta["money_release_date"]?.ToString().Substring(0, 10));
+                            nrow["Importe"] = Convert.ToSingle(venta["transaction_amount"]?.ToString().Replace(".", ","));
+                            var details = venta["transaction_details"];
+                            nrow["Neto"] = Convert.ToSingle(details["net_received_amount"]?.ToString().Replace(".", ","));
+
+                            nrow["Descripcion"] = "Suc Varias";
+                            nrow["ID_TipoEntrada"] = 23;
+                            nrow["ID_SubTipoEntrada"] = 203;
+                            nrow["ID_Caja"] = caja;
+
+                            //if (device == null)
+                            //{ nrow["Suc"] = 0; }
+                            //else { nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(device["serial_number"]?.ToString().Substring(8) ?? "N/A")); }
+
+                            dt.Rows.Add(nrow);
+                        }
+                    }
+                    else { i += -1; continue; }
+                }
+                grd.MostrarDatos(dt, true, false);
+                grd.AutosizeAll();
+
+                double tb = grd.SumarCol(grd.get_ColIndex("Importe"), false);
+                double tn = grd.SumarCol(grd.get_ColIndex("Neto"), false);
+
+                var groupedData = dt.AsEnumerable().GroupBy(row => row.Field<DateTime>("Fecha")).Select(group => new { Fecha = group.Key, TotalImporte = group.Sum(row => row.Field<Double>("Importe")), TotalNeto = group.Sum(row => row.Field<Double>("Neto")) });
+
+                // Crear un nuevo DataTable con los datos agrupados
+                DataTable resultTable = _Base.Datos_Genericos("SELECT TOP 0 Fecha, ID_Caja as IDC, ID_TipoEntrada As Tipo, ID_SubTipoEntrada As SubTipo, Descripcion, Importe FROM CD_Entradas ");
+                DataTable resultTable_desc = _Base.Datos_Genericos("SELECT TOP 0 Fecha, Descripcion, Importe FROM CD_Entradas ");
+
+                foreach (var group in groupedData)
+                {
+                    DataRow nrow = resultTable.NewRow();
+                    DataRow nrow_desc = resultTable_desc.NewRow();
+
+                    nrow["Fecha"] = group.Fecha;
+                    nrow["IDC"] = caja;
+                    nrow["Tipo"] = 23;
+                    nrow["SubTipo"] = 203;
+                    nrow["Descripcion"] = "Suc Varias";
+                    nrow["Importe"] = group.TotalImporte;
+
+                    nrow_desc["Fecha"] = group.Fecha;
+                    nrow_desc["Descripcion"] = "Descuentos MP y Banco";
+                    nrow_desc["Importe"] = group.TotalImporte - group.TotalNeto;
+
+                    resultTable.Rows.Add(nrow);
+                    resultTable_desc.Rows.Add(nrow_desc);
+                }
+
+                grdSalida.MostrarDatos(resultTable, true, false);
+                grdSalida.Columnas[grdSalida.get_ColIndex("Importe")].Style.Format = "N2";
+                grdSalida.AutosizeAll();
+
+                grdDebitos.MostrarDatos(resultTable_desc, true, false);
+                grdDebitos.Columnas[grdDebitos.get_ColIndex("Importe")].Style.Format = "N2";
+                grdDebitos.AutosizeAll();
+
+                Application.DoEvents();
+
+                Cursor = Cursors.Default;
+
+                //if (grdDatos.Rows > 0)
+                //{ Guardar(); }
+            }
+        }
     }
 }
-

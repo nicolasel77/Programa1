@@ -58,12 +58,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.cSucSalida = new Programa1.Controles.cSucursales();
-            this.cSucEntrada = new Programa1.Controles.cSucursales();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.chCantidades = new MaterialSkin.Controls.MaterialCheckBox();
-            this.cFecha = new Programa1.Controles.cFechas();
-            this.cProds = new Programa1.Controles.cProductos();
             this.tiMensaje = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -76,6 +72,10 @@
             this.cmdMostrar = new MaterialSkin.Controls.MaterialFlatButton();
             this.paLimpiar = new System.Windows.Forms.Panel();
             this.cmdLimpiar = new MaterialSkin.Controls.MaterialFlatButton();
+            this.cSucSalida = new Programa1.Controles.cSucursales();
+            this.cSucEntrada = new Programa1.Controles.cSucursales();
+            this.cFecha = new Programa1.Controles.cFechas();
+            this.cProds = new Programa1.Controles.cProductos();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -209,7 +209,7 @@
             this.chProducto.Checked = true;
             this.chProducto.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chProducto.Depth = 0;
-            this.chProducto.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chProducto.Location = new System.Drawing.Point(7, 109);
             this.chProducto.Margin = new System.Windows.Forms.Padding(0);
             this.chProducto.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -227,7 +227,7 @@
             this.chSucE.Checked = true;
             this.chSucE.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chSucE.Depth = 0;
-            this.chSucE.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chSucE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chSucE.Location = new System.Drawing.Point(7, 79);
             this.chSucE.Margin = new System.Windows.Forms.Padding(0);
             this.chSucE.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -245,7 +245,7 @@
             this.chSucs.Checked = true;
             this.chSucs.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chSucs.Depth = 0;
-            this.chSucs.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chSucs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chSucs.Location = new System.Drawing.Point(7, 49);
             this.chSucs.Margin = new System.Windows.Forms.Padding(0);
             this.chSucs.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -263,7 +263,7 @@
             this.chFecha.Checked = true;
             this.chFecha.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chFecha.Depth = 0;
-            this.chFecha.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chFecha.Location = new System.Drawing.Point(7, 19);
             this.chFecha.Margin = new System.Windows.Forms.Padding(0);
             this.chFecha.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -279,12 +279,12 @@
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(3, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(60, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(59, 18);
             this.materialLabel1.TabIndex = 12;
             this.materialLabel1.Text = "Repetir:";
             // 
@@ -307,7 +307,7 @@
             // 
             this.rdSucE.AutoSize = true;
             this.rdSucE.Depth = 0;
-            this.rdSucE.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdSucE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdSucE.Location = new System.Drawing.Point(73, 48);
             this.rdSucE.Margin = new System.Windows.Forms.Padding(0);
             this.rdSucE.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -324,12 +324,12 @@
             // 
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel2.Location = new System.Drawing.Point(3, 0);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(93, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(90, 18);
             this.materialLabel2.TabIndex = 12;
             this.materialLabel2.Text = "Incrementar:";
             // 
@@ -338,7 +338,7 @@
             this.rdProd.AutoSize = true;
             this.rdProd.Checked = true;
             this.rdProd.Depth = 0;
-            this.rdProd.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdProd.Location = new System.Drawing.Point(139, 19);
             this.rdProd.Margin = new System.Windows.Forms.Padding(0);
             this.rdProd.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -356,7 +356,7 @@
             // 
             this.rdSucS.AutoSize = true;
             this.rdSucS.Depth = 0;
-            this.rdSucS.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdSucS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdSucS.Location = new System.Drawing.Point(73, 19);
             this.rdSucS.Margin = new System.Windows.Forms.Padding(0);
             this.rdSucS.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -373,7 +373,7 @@
             // 
             this.rdNada.AutoSize = true;
             this.rdNada.Depth = 0;
-            this.rdNada.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdNada.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdNada.Location = new System.Drawing.Point(7, 48);
             this.rdNada.Margin = new System.Windows.Forms.Padding(0);
             this.rdNada.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -390,7 +390,7 @@
             // 
             this.rdFecha.AutoSize = true;
             this.rdFecha.Depth = 0;
-            this.rdFecha.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.rdFecha.Location = new System.Drawing.Point(7, 19);
             this.rdFecha.Margin = new System.Windows.Forms.Padding(0);
             this.rdFecha.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -521,42 +521,6 @@
             this.splitContainer3.SplitterDistance = 256;
             this.splitContainer3.TabIndex = 0;
             // 
-            // cSucSalida
-            // 
-            this.cSucSalida.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cSucSalida.BackColor = System.Drawing.Color.Gainsboro;
-            this.cSucSalida.Filtro_In = "";
-            this.cSucSalida.Location = new System.Drawing.Point(3, 3);
-            this.cSucSalida.Mostrar_Botones = true;
-            this.cSucSalida.Mostrar_Tipo = false;
-            this.cSucSalida.Name = "cSucSalida";
-            this.cSucSalida.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.cSucSalida.Size = new System.Drawing.Size(253, 392);
-            this.cSucSalida.TabIndex = 3;
-            this.cSucSalida.Titulo = "Sucursales Salida";
-            this.cSucSalida.Valor_Actual = -1;
-            this.cSucSalida.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
-            // 
-            // cSucEntrada
-            // 
-            this.cSucEntrada.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cSucEntrada.BackColor = System.Drawing.Color.Gainsboro;
-            this.cSucEntrada.Filtro_In = "";
-            this.cSucEntrada.Location = new System.Drawing.Point(0, 3);
-            this.cSucEntrada.Mostrar_Botones = true;
-            this.cSucEntrada.Mostrar_Tipo = false;
-            this.cSucEntrada.Name = "cSucEntrada";
-            this.cSucEntrada.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.cSucEntrada.Size = new System.Drawing.Size(260, 392);
-            this.cSucEntrada.TabIndex = 2;
-            this.cSucEntrada.Titulo = "Sucursales Entrada";
-            this.cSucEntrada.Valor_Actual = -1;
-            this.cSucEntrada.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
-            // 
             // splitContainer4
             // 
             this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -581,7 +545,7 @@
             this.chCantidades.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chCantidades.AutoSize = true;
             this.chCantidades.Depth = 0;
-            this.chCantidades.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chCantidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chCantidades.Location = new System.Drawing.Point(3, 255);
             this.chCantidades.Margin = new System.Windows.Forms.Padding(0);
             this.chCantidades.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -593,37 +557,6 @@
             this.chCantidades.Text = "Cantidades";
             this.chCantidades.UseVisualStyleBackColor = true;
             this.chCantidades.CheckedChanged += new System.EventHandler(this.chMenudencias_CheckedChanged);
-            // 
-            // cFecha
-            // 
-            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(3, 0);
-            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
-            this.cFecha.Mostrar = 0;
-            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
-            this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(212, 255);
-            this.cFecha.TabIndex = 3;
-            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
-            // 
-            // cProds
-            // 
-            this.cProds.BackColor = System.Drawing.Color.Gainsboro;
-            this.cProds.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cProds.Filtrar_Ver = true;
-            this.cProds.Filtro_In = "";
-            this.cProds.Location = new System.Drawing.Point(0, 0);
-            this.cProds.Mostrar_Tipo = true;
-            this.cProds.Name = "cProds";
-            this.cProds.Size = new System.Drawing.Size(297, 288);
-            this.cProds.TabIndex = 1;
-            this.cProds.Titulo = "Productos";
-            this.cProds.Valor_Actual = -1;
-            this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
             // 
             // tiMensaje
             // 
@@ -773,6 +706,73 @@
             this.cmdLimpiar.Text = "Limpiar";
             this.cmdLimpiar.UseVisualStyleBackColor = true;
             this.cmdLimpiar.Click += new System.EventHandler(this.CmdLimpiar_Click);
+            // 
+            // cSucSalida
+            // 
+            this.cSucSalida.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cSucSalida.BackColor = System.Drawing.Color.Gainsboro;
+            this.cSucSalida.Filtro_In = "";
+            this.cSucSalida.Location = new System.Drawing.Point(0, 0);
+            this.cSucSalida.Mostrar_Botones = true;
+            this.cSucSalida.Mostrar_Tipo = true;
+            this.cSucSalida.Name = "cSucSalida";
+            this.cSucSalida.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.cSucSalida.Size = new System.Drawing.Size(256, 395);
+            this.cSucSalida.TabIndex = 3;
+            this.cSucSalida.Titulo = "Sucursales Salida";
+            this.cSucSalida.Valor_Actual = -1;
+            this.cSucSalida.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
+            // 
+            // cSucEntrada
+            // 
+            this.cSucEntrada.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cSucEntrada.BackColor = System.Drawing.Color.Gainsboro;
+            this.cSucEntrada.Filtro_In = "";
+            this.cSucEntrada.Location = new System.Drawing.Point(0, 0);
+            this.cSucEntrada.Mostrar_Botones = true;
+            this.cSucEntrada.Mostrar_Tipo = true;
+            this.cSucEntrada.Name = "cSucEntrada";
+            this.cSucEntrada.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.cSucEntrada.Size = new System.Drawing.Size(263, 395);
+            this.cSucEntrada.TabIndex = 2;
+            this.cSucEntrada.Titulo = "Sucursales Entrada";
+            this.cSucEntrada.Valor_Actual = -1;
+            this.cSucEntrada.Cambio_Seleccion += new System.EventHandler(this.CSucs_Cambio_Seleccion);
+            // 
+            // cFecha
+            // 
+            this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.cFecha.Location = new System.Drawing.Point(3, 0);
+            this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
+            this.cFecha.Mostrar = 0;
+            this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
+            this.cFecha.Name = "cFecha";
+            this.cFecha.Size = new System.Drawing.Size(212, 255);
+            this.cFecha.TabIndex = 3;
+            this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.cFecha.Cambio_Seleccion += new System.EventHandler(this.CFecha_Cambio_Seleccion);
+            // 
+            // cProds
+            // 
+            this.cProds.BackColor = System.Drawing.Color.Gainsboro;
+            this.cProds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cProds.Filtrar_Ver = true;
+            this.cProds.Filtro_In = "";
+            this.cProds.Location = new System.Drawing.Point(0, 0);
+            this.cProds.Mostrar_Tipo = true;
+            this.cProds.Name = "cProds";
+            this.cProds.Size = new System.Drawing.Size(297, 288);
+            this.cProds.TabIndex = 1;
+            this.cProds.Titulo = "Productos";
+            this.cProds.Valor_Actual = -1;
+            this.cProds.Cambio_Seleccion += new System.EventHandler(this.CProds_Cambio_Seleccion);
             // 
             // frmTraslados
             // 
