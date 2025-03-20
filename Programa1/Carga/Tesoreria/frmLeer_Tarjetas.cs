@@ -213,16 +213,16 @@
                                 {
                                     DataRow nrow = dt.NewRow();
                                     leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 2].Text);
-                                    suc = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 13].Text));
+                                    suc = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 14].Text));
 
-                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 7].Text == "Aprobado" & (f_suc == 0 || f_suc == suc))
+                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 9].Text == "Aprobado" & (f_suc == 0 || f_suc == suc))
                                     {
                                         nrow["Fecha"] = leer.vFecha;
                                         nrow["Fecha_Pago"] = leer.vFecha;
-                                        nrow["Comprobante"] = xApp.Cells[i, 21].text;
+                                        nrow["Comprobante"] = xApp.Cells[i, 23].text;
                                         nrow["Suc"] = suc;
                                         nrow["Tarjeta"] = 1;
-                                        nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 10].Text);
+                                        nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 12].Text);
                                         nrow["Lote"] = 1;
                                         nrow["Id_Tipo"] = leer.vtipo;
                                         nrow["Acreditado"] = true;
