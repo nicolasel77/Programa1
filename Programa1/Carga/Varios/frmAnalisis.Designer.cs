@@ -34,6 +34,7 @@
             this.nuCant = new System.Windows.Forms.NumericUpDown();
             this.cSuc = new Programa1.Controles.cSucursales();
             this.cFecha = new Programa1.Controles.cFechas();
+            this.lblGastoEmpresa = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -53,11 +54,12 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lblGastoEmpresa);
             this.splitContainer1.Panel2.Controls.Add(this.nuCant);
             this.splitContainer1.Panel2.Controls.Add(this.cSuc);
             this.splitContainer1.Panel2.Controls.Add(this.cFecha);
             this.splitContainer1.Size = new System.Drawing.Size(1316, 689);
-            this.splitContainer1.SplitterDistance = 920;
+            this.splitContainer1.SplitterDistance = 889;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -82,9 +84,11 @@
             this.grd.fColor = System.Drawing.Color.Silver;
             this.grd.FixCols = 0;
             this.grd.FixRows = 0;
+            this.grd.Frozen = 0;
             this.grd.FuenteEncabezado = null;
             this.grd.FuentePieDePagina = null;
             this.grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grd.LimpiarEstilosAntesDeOrdenar = false;
             this.grd.Location = new System.Drawing.Point(12, 12);
             this.grd.Name = "grd";
             this.grd.PieDePagina = "\t\tPage {0} of {1}";
@@ -92,7 +96,7 @@
             this.grd.Redraw = true;
             this.grd.Row = 0;
             this.grd.Rows = 50;
-            this.grd.Size = new System.Drawing.Size(905, 665);
+            this.grd.Size = new System.Drawing.Size(846, 655);
             this.grd.TabIndex = 0;
             // 
             // nuCant
@@ -100,7 +104,7 @@
             this.nuCant.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nuCant.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nuCant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nuCant.Location = new System.Drawing.Point(8, 655);
+            this.nuCant.Location = new System.Drawing.Point(18, 655);
             this.nuCant.Minimum = new decimal(new int[] {
             1,
             0,
@@ -125,10 +129,10 @@
             this.cSuc.Filtro_In = "";
             this.cSuc.Location = new System.Drawing.Point(8, 8);
             this.cSuc.Mostrar_Botones = true;
-            this.cSuc.Mostrar_Tipo = true;
+            this.cSuc.Mostrar_Tipo = false;
             this.cSuc.Name = "cSuc";
             this.cSuc.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.cSuc.Size = new System.Drawing.Size(369, 441);
+            this.cSuc.Size = new System.Drawing.Size(399, 431);
             this.cSuc.TabIndex = 1;
             this.cSuc.Titulo = "Sucursales";
             this.cSuc.Valor_Actual = -1;
@@ -138,15 +142,26 @@
             this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cFecha.Fecha_Maxima = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.cFecha.Location = new System.Drawing.Point(8, 455);
+            this.cFecha.Location = new System.Drawing.Point(8, 445);
             this.cFecha.MinimumSize = new System.Drawing.Size(0, 184);
             this.cFecha.Mostrar = 0;
             this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(369, 184);
+            this.cFecha.Size = new System.Drawing.Size(399, 204);
             this.cFecha.TabIndex = 0;
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
+            // 
+            // lblGastoEmpresa
+            // 
+            this.lblGastoEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblGastoEmpresa.AutoSize = true;
+            this.lblGastoEmpresa.Location = new System.Drawing.Point(97, 659);
+            this.lblGastoEmpresa.Name = "lblGastoEmpresa";
+            this.lblGastoEmpresa.Size = new System.Drawing.Size(79, 13);
+            this.lblGastoEmpresa.TabIndex = 3;
+            this.lblGastoEmpresa.Text = "Gasto Empresa";
+            this.lblGastoEmpresa.Click += new System.EventHandler(this.lblGastoEmpresa_Click);
             // 
             // frmAnalisis
             // 
@@ -158,6 +173,7 @@
             this.Text = "Analisis";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nuCant)).EndInit();
@@ -172,5 +188,6 @@
         private Controles.cSucursales cSuc;
         private Controles.cFechas cFecha;
         private System.Windows.Forms.NumericUpDown nuCant;
+        private System.Windows.Forms.Label lblGastoEmpresa;
     }
 }

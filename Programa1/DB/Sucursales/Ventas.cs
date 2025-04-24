@@ -24,7 +24,7 @@ namespace Programa1.DB
         [MaxLength(100, ErrorMessage = "La {0} no puede ser mayor a {1} caracteres")]
         public string Descripcion { get; set; }
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
-        public int Cantidad { get; set; }
+        public Single Cantidad { get; set; }
         public Single CostoVenta { get; set; }
         public Proveedores.Proveedores Proveedor { get; set; } = new Proveedores.Proveedores();
         public Single CostoCompra { get; set; }

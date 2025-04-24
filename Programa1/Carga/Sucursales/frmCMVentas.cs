@@ -306,9 +306,9 @@
 
                 if (chCantidad.Checked)
                 {
-                    int c = 0;
+                    Single c = 0;
 
-                    if (int.TryParse(txtCantidad.Text, out c))
+                    if (Single.TryParse(txtCantidad.Text, out c))
                     {
                         Ventas.Cantidad = c;
                     }
@@ -342,7 +342,7 @@
                 Ventas.Descripcion = Convert.ToString(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Descripcion")));
                 Ventas.CostoCompra = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Compra")));
                 Ventas.CostoVenta = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Costo_Venta")));
-                Ventas.Cantidad = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Cantidad")));
+                Ventas.Cantidad = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Cantidad")));
                 Ventas.Kilos = Convert.ToSingle(grdResultado.get_Texto(f, grdResultado.get_ColIndex("Kilos")));
                 Ventas.Camion.ID = Convert.ToInt16(grdResultado.get_Texto(f, grdResultado.get_ColIndex("ID_Camion")));
                 Ventas.Actualizar();

@@ -45,7 +45,14 @@
             }
             grd.AutosizeAll();
 
+            double total = c.Dato_Sumado("CD_Gastos", $"Fecha between '{cFecha.fecha_Actual:MM/dd/yy}'  and '{cFecha.fecha_Fin:MM/dd/yy}' and ID_TipoGastos=1", "Importe");
+            lblGastoEmpresa.Text = $"Gastos Empresa: {total.ToString("C2")}";
             this.Cursor = Cursors.Default;
+
+        }
+
+        private void lblGastoEmpresa_Click(object sender, System.EventArgs e)
+        {
 
         }
     }
