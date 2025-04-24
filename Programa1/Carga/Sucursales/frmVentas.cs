@@ -407,7 +407,7 @@
                         break;
 
                     case c_Cantidad:
-                        Venta.Cantidad = Convert.ToInt32(a);
+                        Venta.Cantidad = Convert.ToSingle(a);
                         grdVenta.set_Texto(f, c, a);
                         if (Venta.Kilos > 0 & Convert.ToInt32(a) > 0) { grdVenta.set_Texto(f, c_Promedio, Venta.Kilos / Venta.Cantidad); }
                         else { grdVenta.set_Texto(f, c_Promedio, 0); }
