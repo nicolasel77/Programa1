@@ -779,6 +779,12 @@
     <Compile Include="Carga\Tesoreria\frmSeleccionar_PagosAutorizados.Designer.cs">
       <DependentUpon>frmSeleccionar_PagosAutorizados.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmSubir_Ajustes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\frmSubir_Ajustes.Designer.cs">
+      <DependentUpon>frmSubir_Ajustes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Tesoreria\frmTarjetas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1330,6 +1336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmSeleccionar_PagosAutorizados.resx">
       <DependentUpon>frmSeleccionar_PagosAutorizados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Tesoreria\frmSubir_Ajustes.resx">
+      <DependentUpon>frmSubir_Ajustes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Tesoreria\frmTarjetas.resx">
       <DependentUpon>frmTarjetas.cs</DependentUpon>

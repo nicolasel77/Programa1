@@ -44,6 +44,12 @@
         {
             return Datos_Vista($"{Filtro} AND Suc = {sucO}", "DISTINCT Lote", "Lote");
         }
+        
+        public new DataTable Datos_ajustes(string filtro = "")
+        {
+            Datos_Genericos($"SELECT id, Fecha, Suc, Importe FROM Entradas_Tarjeta WHERE Fecha BETWEEN '{Fecha}' AND DATEADD(DAY, 6, '{Fecha}') AND Comprobante = 1 AND Lote = 1 AND Tarjeta = 1 AND Id_Tipo = 12");
+            return Datos(filtro);
+        }
 
         public DataTable sucdatos()
         {

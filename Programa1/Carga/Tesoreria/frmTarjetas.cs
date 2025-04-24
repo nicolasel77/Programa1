@@ -1,7 +1,6 @@
 ﻿namespace Programa1.Carga.Tesoreria
 {
     using Herramientas;
-
     using Programa1.DB.Tesoreria;
     using System;
     using System.Data;
@@ -152,6 +151,16 @@
                 }
                 cSuc.Filtro_In = n.Substring(2);
             }
+        }
+
+        private void cmdAjustes_Click(object sender, EventArgs e)
+        {
+            //    if ()
+            //    {
+            //    frmSubir_Ajustes fr = new frmSubir_Ajustes();
+            //    fr.Semana = cFecha.fecha_Actual;
+            //    fr.ShowDialog();
+            //    }
         }
     }
 }

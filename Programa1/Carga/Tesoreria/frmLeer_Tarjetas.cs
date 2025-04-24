@@ -213,8 +213,8 @@
                                 {
                                     DataRow nrow = dt.NewRow();
                                     leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 2].Text);
-                                    suc = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 14].Text));
-
+                                    suc = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 15].Text));
+                                    
                                     if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 9].Text == "Aprobado" & (f_suc == 0 || f_suc == suc))
                                     {
                                         nrow["Fecha"] = leer.vFecha;

@@ -2,6 +2,8 @@
 {
     using Newtonsoft.Json.Linq;
     using Programa1.Clases;
+    using Programa1.Controles;
+    using Programa1.DB;
     using Programa1.DB.Tesoreria;
     using System;
     using System.Data;
@@ -10,6 +12,7 @@
     using System.Net.Http;
     using System.Text;
     using System.Windows.Forms;
+    using static System.ComponentModel.Design.ObjectSelectorEditor;
 
     public partial class frmImportar_Excel : Form
     {
@@ -996,7 +999,7 @@
             this.Enabled = false;
             Entradas en = new Entradas();
 
-            for (int f = 1; f < grdSalida.Rows - 1; f++)
+            for (int f = 1; f <= grdSalida.Rows - 1; f++)
             {
                 double importe = 0;
                 if (grdSalida.get_Texto(f, grdSalida.get_ColIndex("Importe")) != null)
@@ -1009,14 +1012,14 @@
                         en.Id_SubTipoEntrada = Convert.ToInt32(grdSalida.get_Texto(f, grdSalida.get_ColIndex("SubTipo")));
                         en.Descripcion = Convert.ToString(grdSalida.get_Texto(f, grdSalida.get_ColIndex("SubTipo") + 1));
                         en.Importe = importe;
-
                         en.Agregar();
-
                     }
                 }
-
             }
-
+            //SELECT Id, Nombre, Suc, 
+//            ISNULL((SELECT TOP 1 dispositivo FROM Registros_Asistencias WHERE Fecha = '4/19/2025' AND Empleado = Id ORDER BY Hora), 
+//ISNULL((SELECT TOP 1 dispositivo FROM Registros_Asistencias WHERE Fecha = '4/20/2025' AND Empleado = Id ORDER BY Hora), Suc)) Fichado
+//FROM Empleados WHERE ISNULL(Baja, '1/1/2032') > '4/21/2025' AND Alta< '4/21/2025' AND Suc BETWEEN 1 AND 503 ORDER BY Fichado
             grd.Rows = 0;
             grdSalida.Rows = 0;
 

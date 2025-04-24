@@ -45,6 +45,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.lstCuentas = new System.Windows.Forms.ListBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cmdAjustes = new MaterialSkin.Controls.MaterialFlatButton();
             this.cFecha = new Programa1.Controles.cFechas();
             this.cSuc = new Programa1.Controles.cSucursales();
             this.panel2.SuspendLayout();
@@ -56,6 +58,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdTarjetas
@@ -340,6 +343,33 @@
             this.lstCuentas.TabIndex = 2;
             this.lstCuentas.SelectedIndexChanged += new System.EventHandler(this.lstCuentas_SelectedIndexChanged);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.cmdAjustes);
+            this.panel1.Location = new System.Drawing.Point(1194, 727);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(196, 36);
+            this.panel1.TabIndex = 21;
+            this.panel1.Visible = false;
+            // 
+            // cmdAjustes
+            // 
+            this.cmdAjustes.AutoSize = true;
+            this.cmdAjustes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdAjustes.Depth = 0;
+            this.cmdAjustes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdAjustes.Location = new System.Drawing.Point(0, 0);
+            this.cmdAjustes.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdAjustes.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdAjustes.Name = "cmdAjustes";
+            this.cmdAjustes.Primary = false;
+            this.cmdAjustes.Size = new System.Drawing.Size(196, 36);
+            this.cmdAjustes.TabIndex = 0;
+            this.cmdAjustes.Text = "Subir Ajustes";
+            this.cmdAjustes.UseVisualStyleBackColor = true;
+            this.cmdAjustes.Visible = false;
+            this.cmdAjustes.Click += new System.EventHandler(this.cmdAjustes_Click);
+            // 
             // cFecha
             // 
             this.cFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -377,6 +407,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1402, 761);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel2);
             this.Name = "frmTarjetas";
@@ -394,6 +425,8 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -418,5 +451,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ListBox lstCuentas;
+        private System.Windows.Forms.Panel panel1;
+        private MaterialSkin.Controls.MaterialFlatButton cmdAjustes;
     }
 }
