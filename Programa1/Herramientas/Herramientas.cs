@@ -115,6 +115,7 @@ namespace Programa1.Herramientas
                         break;
                     case "System.Single":
                     case "System.Double":
+                    case "System.Float":
                     case "System.Decimal":
                         s = Convert.ToDouble(valor).ToString();
                         s = s.Replace(",", ".");

@@ -121,13 +121,13 @@ namespace Programa1.DB
 
         public new void Actualizar()
         {
+            Actualizar("Cantidad", Cantidad);
             Actualizar("Fecha", Fecha);
             Actualizar("ID_Sucursales", Sucursal.ID);
             Actualizar("ID_Camion", Camion.ID);
             Actualizar("Id_Proveedores", Proveedor.Id);
             Actualizar("ID_Productos", Producto.ID);
             Actualizar("Descripcion", Descripcion);
-            Actualizar("Cantidad", Cantidad);
             Actualizar("Costo_Compra", CostoCompra);
             Actualizar("Costo_Venta", CostoVenta);
             Actualizar("Kilos", Kilos);
@@ -141,7 +141,7 @@ namespace Programa1.DB
             {
                 SqlCommand command =
                     new SqlCommand($"INSERT INTO  Ventas (Fecha, Id_Sucursales, ID_Camion, Id_Proveedores, Id_Productos, Descripcion, Cantidad, Costo_Venta, Costo_Compra, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {Cantidad}, {CostoVenta.ToString().Replace(",", ".")}, {CostoCompra.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {Cantidad.ToString().Replace(",", ".")}, {CostoVenta.ToString().Replace(",", ".")}, {CostoCompra.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -191,7 +191,7 @@ namespace Programa1.DB
                 Descripcion = dr["Descripcion"].ToString();
                 Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Proveedor.Id = Convert.ToInt32(dr["Id_Proveedores"]);
-                Cantidad = Convert.ToInt32(dr["Cantidad"]);
+                Cantidad = Convert.ToSingle(dr["Cantidad"]);
                 CostoVenta = Convert.ToSingle(dr["Costo_Venta"]);
                 CostoCompra = Convert.ToSingle(dr["Costo_Compra"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);

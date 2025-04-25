@@ -38,7 +38,7 @@
 
             grd.MostrarDatos(c.sp_Datos("dbo.sp_Analisis", new SqlParameter[] { p1, p2, p3 }), true);
 
-            for (int i = grd.get_ColIndex("Balance"); i <= grd.Cols - 2; i++)
+            for (int i = grd.get_ColIndex("Balance"); i <= grd.Cols - 1; i++)
             {
                 grd.SumarCol(i, true);
                 grd.Columnas[i].Format = "N1";
