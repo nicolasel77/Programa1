@@ -209,13 +209,15 @@
                             {
                                 // Fiserv CDNI
 
+                                DateTime ffin = dtMaxima.Value.AddDays(1);
+
                                 for (int i = 2; i <= max; i++)
                                 {
                                     DataRow nrow = dt.NewRow();
                                     leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 2].Text);
                                     suc = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 15].Text));
                                     
-                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & xApp.Cells[i, 9].Text == "Aprobado" & (f_suc == 0 || f_suc == suc))
+                                    if (leer.vFecha >= dtFecha.Value & leer.vFecha < ffin & xApp.Cells[i, 9].Text == "Aprobado" & (f_suc == 0 || f_suc == suc))
                                     {
                                         nrow["Fecha"] = leer.vFecha;
                                         nrow["Fecha_Pago"] = leer.vFecha;
@@ -223,7 +225,7 @@
                                         nrow["Suc"] = suc;
                                         nrow["Tarjeta"] = 1;
                                         nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 12].Text);
-                                        nrow["Lote"] = 1;
+                                        nrow["Lote"] = xApp.Cells[i, 24].text;
                                         nrow["Id_Tipo"] = leer.vtipo;
                                         nrow["Acreditado"] = true;
 
