@@ -175,8 +175,16 @@
                                 {
                                     leer.vFecha = Convert.ToDateTime(xApp.ActiveSheet.Range("A" + i).Text);
                                     leer.vFecha = leer.vFecha.AddHours(leer.vFecha.Hour * -1).AddMinutes(leer.vFecha.Minute * -1);
+
                                     suc_temp = xApp.Cells[i, 4].Text;
-                                    suc = Convert.ToInt32(suc_temp.Substring(suc_temp.IndexOf("SUC") + 4));
+                                    try
+                                    { suc = Convert.ToInt32(suc_temp.Substring(suc_temp.IndexOf("SUC") + 4)); }
+                                    catch
+                                    {
+                                        MessageBox.Show("No se pudo obtener la sucursal de: " + suc_temp, "Problema al leer", MessageBoxButtons.OK);
+                                        break;
+                                    }
+
 
                                     if (leer.vFecha >= dtFecha.Value & leer.vFecha <= dtMaxima.Value & (f_suc == 0 || f_suc == suc))
                                     {
@@ -210,18 +218,19 @@
                                 // Fiserv CDNI
 
                                 DateTime ffin = dtMaxima.Value.AddDays(1);
-
+                                string comprobante_temp;
                                 for (int i = 2; i <= max; i++)
                                 {
                                     DataRow nrow = dt.NewRow();
                                     leer.vFecha = Convert.ToDateTime(xApp.Cells[i, 2].Text);
                                     suc = leer.suc_cuentas.buscar_suc(Convert.ToInt32(xApp.Cells[i, 15].Text));
-                                    
+
                                     if (leer.vFecha >= dtFecha.Value & leer.vFecha < ffin & xApp.Cells[i, 9].Text == "Aprobado" & (f_suc == 0 || f_suc == suc))
                                     {
                                         nrow["Fecha"] = leer.vFecha;
                                         nrow["Fecha_Pago"] = leer.vFecha;
-                                        nrow["Comprobante"] = xApp.Cells[i, 23].text;
+                                        comprobante_temp = xApp.Cells[i, 1].text;
+                                        nrow["Comprobante"] = comprobante_temp.Substring(comprobante_temp.Length - 8, 8);
                                         nrow["Suc"] = suc;
                                         nrow["Tarjeta"] = 1;
                                         nrow["Importe"] = Convert.ToSingle(xApp.Cells[i, 12].Text);
@@ -406,57 +415,88 @@
         private void grdCuentas_Editado(short f, short c, object a)
         {
             string col = grdCuentas.get_Texto(0, c).ToString();
-
-            if (grdCuentas.EsUltimaFila())
+            if (rdCuentas.Checked)
             {
-                if (c == grdCuentas.get_ColIndex("Suc"))
-                { grdCuentas.set_Texto(f, c, a); }
-                else if (c == grdCuentas.get_ColIndex("N_Cuenta"))
+                if (grdCuentas.EsUltimaFila())
                 {
+                    if (c == grdCuentas.get_ColIndex("Suc"))
+                    {
+                        leer.Sucursal.ID = Convert.ToInt32(a);
+                        leer.Sucursal.Existe();
+                        leer.suc_cuentas.suc = Convert.ToInt32(a);
+                        grdCuentas.set_Texto(f, c, a);
+                        grdCuentas.set_Texto(f, grdCuentas.get_ColIndex("Nombre"), leer.Sucursal.Nombre);
+                        grdCuentas.ActivarCelda(f, grdCuentas.get_ColIndex("N_Cuenta"));
+                    }
+                    else if (c == grdCuentas.get_ColIndex("N_Cuenta"))
+                    {
+                        if (grdCuentas.get_Texto(f, 0).ToString() != "0")
+                        {
+                            grdCuentas.set_Texto(f, c, a);
+                            leer.suc_cuentas.Agregar();
+                        }
+                    }
+                }
+                else
+                {
+                    switch (col)
+                    {
+                        case "Suc":
+                            leer.suc_cuentas.Actualizar("Suc", a);
 
+                            leer.Sucursal.ID = Convert.ToInt32(a);
+                            leer.Sucursal.Existe();
+                            leer.suc_cuentas.suc = Convert.ToInt32(a);
+                            grdCuentas.set_Texto(f, c, a);
+                            grdCuentas.set_Texto(f, grdCuentas.get_ColIndex("Nombre"), leer.Sucursal.Nombre);
+                            break;
+
+                        case "N_Cuenta":
+                            grdCuentas.set_Texto(f, c, a);
+
+                            leer.suc_cuentas.Actualizar("N_Cuenta", a);
+                            leer.suc_cuentas.N_Cuenta = Convert.ToInt32(a);
+                            break;
+
+                        case "Tipo":
+                            leer.suc_cuentas.Actualizar("Tipo", a);
+
+                            leer.tipos_tarjeta.ID = Convert.ToInt32(a);
+                            leer.suc_cuentas.Tipo = Convert.ToInt32(a);
+                            leer.tipos_tarjeta.Existe();
+
+                            grdCuentas.set_Texto(f, c, a);
+                            grdCuentas.set_Texto(f, grdCuentas.get_ColIndex("Descripcion"), leer.tipos_tarjeta.Nombre);
+                            break;
+
+                        case "Titular":
+                            grdCuentas.set_Texto(f, c, a);
+
+                            leer.suc_cuentas.Actualizar("Titular", a);
+                            leer.suc_cuentas.Titular = a.ToString();
+                            break;
+                    }
                 }
             }
             else
             {
-                switch (col)
+                if (col == "Suc")
                 {
-                    case "Suc":
-                        leer.suc_cuentas.Actualizar("Suc", a);
+                    if (a.ToString() != "0")
+                    {
+                        if (grdCuentas.get_Texto(f, c).ToString() == "0")
+                        { leer.suc_cuentas.Agregar_terminalesMP(a, grdCuentas.get_Texto(f, 2)); }
+                        else { leer.suc_cuentas.Actualizar_terminalesMP(a, grdCuentas.get_Texto(f, 2)); }
 
                         leer.Sucursal.ID = Convert.ToInt32(a);
                         leer.Sucursal.Existe();
                         leer.suc_cuentas.suc = Convert.ToInt32(a);
                         grdCuentas.set_Texto(f, c, a);
                         grdCuentas.set_Texto(f, grdCuentas.get_ColIndex("Nombre"), leer.Sucursal.Nombre);
-                        break;
-
-                    case "N_Cuenta":
-                        grdCuentas.set_Texto(f, c, a);
-
-                        leer.suc_cuentas.Actualizar("N_Cuenta", a);
-                        leer.suc_cuentas.N_Cuenta = Convert.ToInt32(a);
-                        break;
-
-                    case "Tipo":
-                        leer.suc_cuentas.Actualizar("Tipo", a);
-
-                        leer.tipos_tarjeta.ID = Convert.ToInt32(a);
-                        leer.suc_cuentas.Tipo = Convert.ToInt32(a);
-                        leer.tipos_tarjeta.Existe();
-
-                        grdCuentas.set_Texto(f, c, a);
-                        grdCuentas.set_Texto(f, grdCuentas.get_ColIndex("Descripcion"), leer.tipos_tarjeta.Nombre);
-                        break;
-
-                    case "Titular":
-                        grdCuentas.set_Texto(f, c, a);
-
-                        leer.suc_cuentas.Actualizar("Titular", a);
-                        leer.suc_cuentas.Titular = a.ToString();
-                        break;
+                    }
                 }
-                grdCuentas.ActivarCelda(f + 1, c);
             }
+            grdCuentas.ActivarCelda(f + 1, c);
         }
 
         private void grdCuentas_CambioFila(short Fila)
@@ -470,16 +510,75 @@
             }
         }
 
-        private void Cargar_cuentas()
+        private async void Cargar_cuentas()
         {
-            grdCuentas.MostrarDatos(leer.suc_cuentas.Datos_Vista(), true, false);
-            grdCuentas.AutosizeAll();
-            for (int i = 1; i <= grdCuentas.Rows - 1; i++)
+            if (rdCuentas.Checked)
             {
-                if (leer.suc_cuentas.Cuentas_Compartidas(Convert.ToInt32(grdCuentas.get_Texto(i, 2))) == true)
+                lblCuentas.Text = "Cuentas";
+                grdCuentas.MostrarDatos(leer.suc_cuentas.Datos_Vista(), true, true);
+                grdCuentas.AutosizeAll();
+                for (int i = 1; i <= grdCuentas.Rows - 1; i++)
                 {
-                    for (int c = 0; c <= grdCuentas.Cols - 1; c++)
-                    { grdCuentas.set_ColorLetraCelda(i, c, Color.Red); }
+                    if (leer.suc_cuentas.Cuentas_Compartidas(Convert.ToInt32(grdCuentas.get_Texto(i, 2))) == true)
+                    {
+                        for (int c = 0; c <= grdCuentas.Cols - 1; c++)
+                        { grdCuentas.set_ColorLetraCelda(i, c, Color.Red); }
+                    }
+                }
+            }
+            else
+            {
+                lblCuentas.Text = "Terminales MP de " + lstTitulares.Text.Substring(lstTitulares.Text.IndexOf(".") + 1);
+                Cursor = Cursors.WaitCursor;
+                using (HttpClient client = new HttpClient())
+                {
+                    string AccessToken = leer.Bearer(h.Codigo_Seleccionado(lstTitulares.Text));
+                    dt = leer.suc_cuentas.Id_TerminalesMP();
+                    dt.Rows.Clear();
+
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AccessToken);
+                    HttpResponseMessage response;
+
+
+                    response = await client.GetAsync($"https://api.mercadopago.com/point/integration-api/devices?offset=0&limit=50");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseData = await response.Content.ReadAsStringAsync();
+                        JObject ventas = JObject.Parse(responseData);
+                        StringBuilder sb = new StringBuilder();
+
+                        foreach (var venta in ventas["devices"])
+                        {
+                            if (venta["pos_id"]?.ToString().Length > 2)
+                            {
+                                DataRow nrow = dt.NewRow();
+
+                                //nrow["Posnet_id"] = Convert.ToInt32(venta["pos_id"]?.ToString());
+                                nrow["Id_Terminal"] = venta["pos_id"]?.ToString();
+
+                                leer.Sucursal.ID = leer.suc_cuentas.buscar_terminalMP(Convert.ToInt32(venta["pos_id"]?.ToString()));
+
+                                nrow["Suc"] = leer.Sucursal.ID;
+                                nrow["Nombre"] = leer.suc_cuentas.buscar_nombreterminalMP(leer.Sucursal.ID);
+
+                                nrow["Terminal_Ticket"] = venta["id"]?.ToString().Substring((int)venta["id"]?.ToString().IndexOf("POS") + 3);
+
+                                dt.Rows.Add(nrow);
+                            }
+                        }
+                    }
+                    else { MessageBox.Show("No se pudieron cargar las terminales.", default, MessageBoxButtons.OK); }
+
+                    grdCuentas.MostrarDatos(dt, true, false);
+                    grdCuentas.AutosizeAll();
+                    grdCuentas.Ordenar(0);
+
+                    dt = leer.Datos_Vista("Id = 0");
+
+                    Application.DoEvents();
+
+                    Cursor = Cursors.Default;
                 }
             }
         }
@@ -510,6 +609,8 @@
             cmbSuc.SelectedIndexChanged -= cmbSuc_SelectedIndexChanged;
             cmbSuc.SelectedIndex = -1;
             cmbSuc.SelectedIndexChanged += cmbSuc_SelectedIndexChanged;
+
+            if (!rdCuentas.Checked) { Cargar_cuentas(); }
         }
 
         private async void cmdMP_Click(object sender, EventArgs e)
@@ -602,6 +703,10 @@
                 { Guardar(); }
             }
         }
-       
+
+        private void rdTerminalesMP_CheckedChanged(object sender, EventArgs e)
+        {
+            Cargar_cuentas();
+        }
     }
 }

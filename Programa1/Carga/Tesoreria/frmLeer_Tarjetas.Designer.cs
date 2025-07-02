@@ -33,7 +33,7 @@
             this.cmdRuta = new MaterialSkin.Controls.MaterialFlatButton();
             this.cmdCarpeta = new MaterialSkin.Controls.MaterialFlatButton();
             this.lblSucursal = new System.Windows.Forms.Label();
-            this.Label2 = new System.Windows.Forms.Label();
+            this.lblCuentas = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.lstTipo = new System.Windows.Forms.ListBox();
             this.Label3 = new System.Windows.Forms.Label();
@@ -61,6 +61,8 @@
             this.cmbSuc = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.rdTerminalesMP = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdCuentas = new MaterialSkin.Controls.MaterialRadioButton();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -124,14 +126,14 @@
             this.lblSucursal.Size = new System.Drawing.Size(0, 16);
             this.lblSucursal.TabIndex = 8;
             // 
-            // Label2
+            // lblCuentas
             // 
-            this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(2, 2);
-            this.Label2.Name = "Label2";
-            this.Label2.Size = new System.Drawing.Size(46, 13);
-            this.Label2.TabIndex = 9;
-            this.Label2.Text = "Cuentas";
+            this.lblCuentas.AutoSize = true;
+            this.lblCuentas.Location = new System.Drawing.Point(2, 2);
+            this.lblCuentas.Name = "lblCuentas";
+            this.lblCuentas.Size = new System.Drawing.Size(46, 13);
+            this.lblCuentas.TabIndex = 9;
+            this.lblCuentas.Text = "Cuentas";
             // 
             // Label1
             // 
@@ -392,6 +394,8 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.rdCuentas);
+            this.splitContainer2.Panel1.Controls.Add(this.rdTerminalesMP);
             this.splitContainer2.Panel1.Controls.Add(this.chAuto);
             this.splitContainer2.Panel1.Controls.Add(this.panel1);
             this.splitContainer2.Panel1.Controls.Add(this.panel8);
@@ -414,7 +418,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.grdCuentas);
-            this.splitContainer2.Panel2.Controls.Add(this.Label2);
+            this.splitContainer2.Panel2.Controls.Add(this.lblCuentas);
             this.splitContainer2.Size = new System.Drawing.Size(670, 643);
             this.splitContainer2.SplitterDistance = 293;
             this.splitContainer2.TabIndex = 0;
@@ -509,6 +513,43 @@
             this.panel7.Size = new System.Drawing.Size(157, 154);
             this.panel7.TabIndex = 33;
             // 
+            // rdTerminalesMP
+            // 
+            this.rdTerminalesMP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdTerminalesMP.AutoSize = true;
+            this.rdTerminalesMP.Depth = 0;
+            this.rdTerminalesMP.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdTerminalesMP.Location = new System.Drawing.Point(544, 190);
+            this.rdTerminalesMP.Margin = new System.Windows.Forms.Padding(0);
+            this.rdTerminalesMP.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdTerminalesMP.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdTerminalesMP.Name = "rdTerminalesMP";
+            this.rdTerminalesMP.Ripple = true;
+            this.rdTerminalesMP.Size = new System.Drawing.Size(122, 30);
+            this.rdTerminalesMP.TabIndex = 41;
+            this.rdTerminalesMP.Text = "Terminales MP";
+            this.rdTerminalesMP.UseVisualStyleBackColor = true;
+            this.rdTerminalesMP.CheckedChanged += new System.EventHandler(this.rdTerminalesMP_CheckedChanged);
+            // 
+            // rdCuentas
+            // 
+            this.rdCuentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdCuentas.AutoSize = true;
+            this.rdCuentas.Checked = true;
+            this.rdCuentas.Depth = 0;
+            this.rdCuentas.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdCuentas.Location = new System.Drawing.Point(464, 190);
+            this.rdCuentas.Margin = new System.Windows.Forms.Padding(0);
+            this.rdCuentas.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdCuentas.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdCuentas.Name = "rdCuentas";
+            this.rdCuentas.Ripple = true;
+            this.rdCuentas.Size = new System.Drawing.Size(80, 30);
+            this.rdCuentas.TabIndex = 42;
+            this.rdCuentas.TabStop = true;
+            this.rdCuentas.Text = "Cuentas";
+            this.rdCuentas.UseVisualStyleBackColor = true;
+            // 
             // frmLeer_Tarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -551,7 +592,7 @@
         private MaterialSkin.Controls.MaterialFlatButton cmdRuta;
         private MaterialSkin.Controls.MaterialFlatButton cmdCarpeta;
         internal System.Windows.Forms.Label lblSucursal;
-        internal System.Windows.Forms.Label Label2;
+        internal System.Windows.Forms.Label lblCuentas;
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.ListBox lstTipo;
         internal System.Windows.Forms.Label Label3;
@@ -577,5 +618,7 @@
         internal System.Windows.Forms.ListBox lstTitulares;
         private System.Windows.Forms.Panel panel1;
         private MaterialSkin.Controls.MaterialCheckBox chAuto;
+        private MaterialSkin.Controls.MaterialRadioButton rdTerminalesMP;
+        private MaterialSkin.Controls.MaterialRadioButton rdCuentas;
     }
 }
