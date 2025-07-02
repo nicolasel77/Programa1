@@ -31,10 +31,11 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grd = new Grilla2.SpeedGrilla();
+            this.lblGastoEmpresa = new System.Windows.Forms.Label();
             this.nuCant = new System.Windows.Forms.NumericUpDown();
             this.cSuc = new Programa1.Controles.cSucursales();
             this.cFecha = new Programa1.Controles.cFechas();
-            this.lblGastoEmpresa = new System.Windows.Forms.Label();
+            this.chAgrupar = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -54,6 +55,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.chAgrupar);
             this.splitContainer1.Panel2.Controls.Add(this.lblGastoEmpresa);
             this.splitContainer1.Panel2.Controls.Add(this.nuCant);
             this.splitContainer1.Panel2.Controls.Add(this.cSuc);
@@ -99,6 +101,17 @@
             this.grd.Size = new System.Drawing.Size(846, 655);
             this.grd.TabIndex = 0;
             // 
+            // lblGastoEmpresa
+            // 
+            this.lblGastoEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblGastoEmpresa.AutoSize = true;
+            this.lblGastoEmpresa.Location = new System.Drawing.Point(97, 659);
+            this.lblGastoEmpresa.Name = "lblGastoEmpresa";
+            this.lblGastoEmpresa.Size = new System.Drawing.Size(79, 13);
+            this.lblGastoEmpresa.TabIndex = 3;
+            this.lblGastoEmpresa.Text = "Gasto Empresa";
+            this.lblGastoEmpresa.Click += new System.EventHandler(this.lblGastoEmpresa_Click);
+            // 
             // nuCant
             // 
             this.nuCant.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -129,10 +142,10 @@
             this.cSuc.Filtro_In = "";
             this.cSuc.Location = new System.Drawing.Point(8, 8);
             this.cSuc.Mostrar_Botones = true;
-            this.cSuc.Mostrar_Tipo = false;
+            this.cSuc.Mostrar_Tipo = true;
             this.cSuc.Name = "cSuc";
             this.cSuc.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.cSuc.Size = new System.Drawing.Size(399, 431);
+            this.cSuc.Size = new System.Drawing.Size(395, 431);
             this.cSuc.TabIndex = 1;
             this.cSuc.Titulo = "Sucursales";
             this.cSuc.Valor_Actual = -1;
@@ -147,21 +160,21 @@
             this.cFecha.Mostrar = 0;
             this.cFecha.Mostrar_Solo = Programa1.Controles.cFechas.e_MostrarSolo.Todos;
             this.cFecha.Name = "cFecha";
-            this.cFecha.Size = new System.Drawing.Size(399, 204);
+            this.cFecha.Size = new System.Drawing.Size(395, 204);
             this.cFecha.TabIndex = 0;
             this.cFecha.Ultima_Fecha = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.cFecha.Cambio_Seleccion += new System.EventHandler(this.cFechas1_Cambio_Seleccion);
             // 
-            // lblGastoEmpresa
+            // chAgrupar
             // 
-            this.lblGastoEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblGastoEmpresa.AutoSize = true;
-            this.lblGastoEmpresa.Location = new System.Drawing.Point(97, 659);
-            this.lblGastoEmpresa.Name = "lblGastoEmpresa";
-            this.lblGastoEmpresa.Size = new System.Drawing.Size(79, 13);
-            this.lblGastoEmpresa.TabIndex = 3;
-            this.lblGastoEmpresa.Text = "Gasto Empresa";
-            this.lblGastoEmpresa.Click += new System.EventHandler(this.lblGastoEmpresa_Click);
+            this.chAgrupar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chAgrupar.AutoSize = true;
+            this.chAgrupar.Location = new System.Drawing.Point(344, 660);
+            this.chAgrupar.Name = "chAgrupar";
+            this.chAgrupar.Size = new System.Drawing.Size(63, 17);
+            this.chAgrupar.TabIndex = 4;
+            this.chAgrupar.Text = "Agrupar";
+            this.chAgrupar.UseVisualStyleBackColor = true;
             // 
             // frmAnalisis
             // 
@@ -189,5 +202,6 @@
         private Controles.cFechas cFecha;
         private System.Windows.Forms.NumericUpDown nuCant;
         private System.Windows.Forms.Label lblGastoEmpresa;
+        private System.Windows.Forms.CheckBox chAgrupar;
     }
 }

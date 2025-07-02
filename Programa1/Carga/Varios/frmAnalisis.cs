@@ -36,7 +36,11 @@
             p3.ParameterName = "Cant";
             p3.Value = nuCant.Value;
 
-            grd.MostrarDatos(c.sp_Datos("dbo.sp_Analisis", new SqlParameter[] { p1, p2, p3 }), true);
+            SqlParameter p4 = new SqlParameter();
+            p4.ParameterName = "Agrupar";
+            p4.Value = chAgrupar.Checked;
+
+            grd.MostrarDatos(c.sp_Datos("dbo.sp_Analisis", new SqlParameter[] { p1, p2, p3, p4 }), true);
 
             for (int i = grd.get_ColIndex("Balance"); i <= grd.Cols - 1; i++)
             {
@@ -45,7 +49,7 @@
             }
             grd.AutosizeAll();
 
-            double total = c.Dato_Sumado("CD_Gastos", $"Fecha between '{cFecha.fecha_Actual:MM/dd/yy}'  and '{cFecha.fecha_Fin:MM/dd/yy}' and ID_TipoGastos=1", "Importe");
+            double total = c.Dato_Sumado("vw_Gastos", $"Fecha between '{cFecha.fecha_Actual:MM/dd/yy}'  and '{cFecha.fecha_Fin:MM/dd/yy}' and ID_TipoGastos IN (2, 3, 4, 8, 14, 15, 28, 32, 35)", "Importe");
             lblGastoEmpresa.Text = $"Gastos Empresa: {total.ToString("C2")}";
             this.Cursor = Cursors.Default;
 

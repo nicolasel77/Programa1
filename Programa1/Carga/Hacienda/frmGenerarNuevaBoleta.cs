@@ -19,7 +19,8 @@
         const int cEfectivo = 7;
         const int cMolleda = 8;
         const int cEMeat = 9;
-        const int cID = 10;
+        const int cLhomar = 10;
+        const int cID = 11;
         #endregion
 
         #region Columnas grd Ori
@@ -83,6 +84,7 @@
             dt.Columns.Add("Efectivo", typeof(double));
             dt.Columns.Add("Echeq Molleda", typeof(double));
             dt.Columns.Add("Echeq Meat", typeof(double));
+            dt.Columns.Add("Echeq Lhomar", typeof(double));
             dt.Columns.Add("Id", typeof(int));
 
             grdNB.MostrarDatos(dt, true, false);
@@ -93,11 +95,13 @@
             grdNB.Columnas[cEfectivo].Style.Format = "N2";
             grdNB.Columnas[cMolleda].Style.Format = "N2";
             grdNB.Columnas[cEMeat].Style.Format = "N2";
+            grdNB.Columnas[cLhomar].Style.Format = "N2";
 
             grdNB.Columnas[cEfectivo].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
             grdNB.Columnas[cMolleda].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
             grdNB.Columnas[cEMeat].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
-                        
+            grdNB.Columnas[cLhomar].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
+
             grdNB.set_Texto(0, cImporte, "Saldo A Pagar");
 
             //grdnvaBoleta.set_Texto(grdnvaBoleta.Rows - 1, cNombre, "Total:");
@@ -115,7 +119,8 @@
             grdNB.set_ColW(cImporte + 2, 120);
             grdNB.set_ColW(cImporte + 3, 120);
             grdNB.set_ColW(cImporte + 4, 120);
-            
+            grdNB.set_ColW(cImporte + 5, 120);
+
             grdNB.Columnas[cID].Visible = false;
             grdNB.Columnas[cImporte + 1].Visible = false;
 
@@ -195,7 +200,8 @@
             grdNB.set_ColW(cImporte + 2, 120);
             grdNB.set_ColW(cImporte + 3, 120);
             grdNB.set_ColW(cImporte + 4, 120);
-            
+            grdNB.set_ColW(cImporte + 5, 120);
+
             //if (c == grdOriginal.get_ColIndex("Boleta"))
             //{
             //    foreach (int a in grdnvaBoleta)
@@ -216,8 +222,9 @@
                 double efectivo = Convert.ToDouble(grdNB.get_Texto(f, cEfectivo));
                 double molleda = Convert.ToDouble(grdNB.get_Texto(f, cMolleda));
                 double meatg = Convert.ToDouble(grdNB.get_Texto(f, cEMeat));
+                double lhomar = Convert.ToDouble(grdNB.get_Texto(f, cLhomar));
 
-                grdNB.set_Texto(f, cImporte, impOriginal + efectivo + molleda + meatg);
+                grdNB.set_Texto(f, cImporte, impOriginal + efectivo + molleda + meatg + lhomar);
 
                 grdNB.set_Texto(grdNB.Rows - 1, c, 0);
 
@@ -233,6 +240,7 @@
                 grdNB.set_ColW(cImporte + 2, 120);
                 grdNB.set_ColW(cImporte + 3, 120);
                 grdNB.set_ColW(cImporte + 4, 120);
+                grdNB.set_ColW(cImporte + 5, 120);
                 
             }
         }

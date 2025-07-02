@@ -10,9 +10,10 @@
         {
             Usuarios usuario = new Usuarios();
             usuario.Nombre = System.Environment.UserName;
-            //usuario.Nombre = "Lorena";
+            //usuario.Nombre = "Brichu";
             //usuario.Nombre = "Ale";
             //usuario.Nombre = "Edi";
+            //usuario.Nombre = "Matias";
             //usuario.Nombre = "Administrador"; //System.Environment.UserName;
 
             frmMain fr = new frmMain();
