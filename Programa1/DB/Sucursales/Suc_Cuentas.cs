@@ -59,6 +59,57 @@
             }
             return suc;
         }
+        public DataTable Id_TerminalesMP()
+        {
+            return Datos_Genericos("SELECT TOP 0 Suc, Nombre, Id_Terminal, Terminal_Ticket FROM dbGastos.dbo.vw_TerminalesMp");
+        }
+        public int buscar_terminalMP(int nro_terminal)
+        {
+            int suc = 0;
+            try
+            {
+                suc = Convert.ToInt32(Dato_Generico("dbGastos.dbo.Terminales_MP", $" Terminal = {nro_terminal} ORDER BY Suc", "Suc"));
+            }
+            catch
+            {
+
+            }
+            return suc;
+        }
+        public string buscar_nombreterminalMP(int suc)
+        {
+            string nombre = "";
+            try
+            {
+                nombre = Dato_Generico("dbGastos.dbo.vw_TerminalesMP", $" Suc = {suc} ORDER BY Suc", "Nombre").ToString();
+            }
+            catch
+            {
+                
+            }
+            return nombre;
+        }
+
+        public new void Agregar(object valor, object term)
+        {
+            //Agrega la nueva cuenta con la suc gordito
+            var cnn = new SqlConnection(cadCN);
+
+            try
+            {
+                SqlCommand command = new SqlCommand($"UPDATE dbGastos.dbo.Terminales_MP SET Suc={valor} WHERE Terminal = {term}", cnn);
+                command.CommandType = CommandType.Text;
+                command.Connection = cnn;
+                cnn.Open();
+
+                var d = command.ExecuteNonQuery();
+
+                cnn.Close();
+            }
+            catch (Exception e)
+            {
+            }
+        }
 
         public new void Actualizar(string campo_editado, object valor)
         {
@@ -73,6 +124,45 @@
                 else { otros_Campos.Remove(otros_Campos.IndexOf(" AND Titular")); valor = $"'{valor}'"; }
 
                 SqlCommand command = new SqlCommand($"UPDATE {Tabla} SET {campo_editado}={valor} WHERE {otros_Campos}", cnn);
+                command.CommandType = CommandType.Text;
+                command.Connection = cnn;
+                cnn.Open();
+
+                var d = command.ExecuteNonQuery();
+
+                cnn.Close();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+        public void Agregar_terminalesMP(object valor, object term)
+        {
+            var cnn = new SqlConnection(cadCN);
+
+            try
+            {
+                SqlCommand command = new SqlCommand($"INSERT INTO dbGastos.dbo.Terminales_MP (Suc, Terminal) VALUES ({valor}, {term})", cnn);
+                command.CommandType = CommandType.Text;
+                command.Connection = cnn;
+                cnn.Open();
+
+                var d = command.ExecuteNonQuery();
+
+                cnn.Close();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        public void Actualizar_terminalesMP(object valor, object term)
+        {
+            var cnn = new SqlConnection(cadCN);
+
+            try
+            {
+                SqlCommand command = new SqlCommand($"UPDATE dbGastos.dbo.Terminales_MP SET Suc={valor} WHERE Terminal = {term}", cnn);
                 command.CommandType = CommandType.Text;
                 command.Connection = cnn;
                 cnn.Open();
