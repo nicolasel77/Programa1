@@ -155,12 +155,12 @@
 
         private void cmdAjustes_Click(object sender, EventArgs e)
         {
-            //    if ()
-            //    {
-            //    frmSubir_Ajustes fr = new frmSubir_Ajustes();
-            //    fr.Semana = cFecha.fecha_Actual;
-            //    fr.ShowDialog();
-            //    }
+            if (cFecha.fecha_Actual > DateTime.Now.AddDays(-21))
+            {
+                tarjetas.Ejecutar_Comando($"DELETE FROM dbgastos.dbo.Entradas_Tarjeta WHERE suc = 0 AND {cFecha.Cadena()}");
+                Cargar();
+            } else
+            { MessageBox.Show("No se pueden borrar registros tan viejos!", "No permitido", MessageBoxButtons.OK); }    
         }
     }
 }

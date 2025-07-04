@@ -136,18 +136,21 @@
             {
             }
         }
-        public void Agregar_terminalesMP(object valor, object term)
+        public void Agregar_terminalesMP(object term)
         {
             var cnn = new SqlConnection(cadCN);
 
             try
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO dbGastos.dbo.Terminales_MP (Suc, Terminal) VALUES ({valor}, {term})", cnn);
+                SqlCommand command = new SqlCommand($"INSERT INTO dbGastos.dbo.Terminales_MP (Suc, Terminal) VALUES ({suc}, {term})", cnn);
                 command.CommandType = CommandType.Text;
                 command.Connection = cnn;
                 cnn.Open();
 
                 var d = command.ExecuteNonQuery();
+
+                command = new SqlCommand($"INSERT INTO dbGastos.dbo.Suc_Cuentas (suc, N_Cuenta, Tipo, Alias, Titular) VALUES ({suc}, {N_Cuenta}, 14, '', '{Titular}')", cnn);
+                d = command.ExecuteNonQuery();
 
                 cnn.Close();
             }
@@ -166,8 +169,11 @@
                 command.CommandType = CommandType.Text;
                 command.Connection = cnn;
                 cnn.Open();
-
+                
                 var d = command.ExecuteNonQuery();
+
+                command = new SqlCommand($"UPDATE dbGastos.dbo.Suc_Cuentas SET Suc={valor} WHERE N_Cuenta = {term}", cnn);
+                d = command.ExecuteNonQuery();
 
                 cnn.Close();
             }

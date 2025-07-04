@@ -46,7 +46,7 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.lstCuentas = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cmdAjustes = new MaterialSkin.Controls.MaterialFlatButton();
+            this.cmdBorrar0 = new MaterialSkin.Controls.MaterialFlatButton();
             this.cFecha = new Programa1.Controles.cFechas();
             this.cSuc = new Programa1.Controles.cSucursales();
             this.panel2.SuspendLayout();
@@ -345,30 +345,29 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.cmdAjustes);
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.cmdBorrar0);
             this.panel1.Location = new System.Drawing.Point(1194, 727);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(196, 36);
             this.panel1.TabIndex = 21;
-            this.panel1.Visible = false;
             // 
-            // cmdAjustes
+            // cmdBorrar0
             // 
-            this.cmdAjustes.AutoSize = true;
-            this.cmdAjustes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cmdAjustes.Depth = 0;
-            this.cmdAjustes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmdAjustes.Location = new System.Drawing.Point(0, 0);
-            this.cmdAjustes.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cmdAjustes.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cmdAjustes.Name = "cmdAjustes";
-            this.cmdAjustes.Primary = false;
-            this.cmdAjustes.Size = new System.Drawing.Size(196, 36);
-            this.cmdAjustes.TabIndex = 0;
-            this.cmdAjustes.Text = "Subir Ajustes";
-            this.cmdAjustes.UseVisualStyleBackColor = true;
-            this.cmdAjustes.Visible = false;
-            this.cmdAjustes.Click += new System.EventHandler(this.cmdAjustes_Click);
+            this.cmdBorrar0.AutoSize = true;
+            this.cmdBorrar0.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdBorrar0.Depth = 0;
+            this.cmdBorrar0.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdBorrar0.Location = new System.Drawing.Point(0, 0);
+            this.cmdBorrar0.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdBorrar0.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdBorrar0.Name = "cmdBorrar0";
+            this.cmdBorrar0.Primary = false;
+            this.cmdBorrar0.Size = new System.Drawing.Size(196, 36);
+            this.cmdBorrar0.TabIndex = 0;
+            this.cmdBorrar0.Text = "Borrar suc 0";
+            this.cmdBorrar0.UseVisualStyleBackColor = true;
+            this.cmdBorrar0.Click += new System.EventHandler(this.cmdAjustes_Click);
             // 
             // cFecha
             // 
@@ -393,7 +392,7 @@
             this.cSuc.Filtro_In = "";
             this.cSuc.Location = new System.Drawing.Point(0, 0);
             this.cSuc.Mostrar_Botones = true;
-            this.cSuc.Mostrar_Tipo = false;
+            this.cSuc.Mostrar_Tipo = true;
             this.cSuc.Name = "cSuc";
             this.cSuc.selectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.cSuc.Size = new System.Drawing.Size(320, 715);
@@ -452,6 +451,6 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ListBox lstCuentas;
         private System.Windows.Forms.Panel panel1;
-        private MaterialSkin.Controls.MaterialFlatButton cmdAjustes;
+        private MaterialSkin.Controls.MaterialFlatButton cmdBorrar0;
     }
 }

@@ -484,13 +484,17 @@
                 {
                     if (a.ToString() != "0")
                     {
-                        if (grdCuentas.get_Texto(f, c).ToString() == "0")
-                        { leer.suc_cuentas.Agregar_terminalesMP(a, grdCuentas.get_Texto(f, 2)); }
-                        else { leer.suc_cuentas.Actualizar_terminalesMP(a, grdCuentas.get_Texto(f, 2)); }
-
                         leer.Sucursal.ID = Convert.ToInt32(a);
                         leer.Sucursal.Existe();
                         leer.suc_cuentas.suc = Convert.ToInt32(a);
+                        leer.suc_cuentas.Titular = h.Nombre_Seleccionado(lstTitulares.Text);
+                        leer.suc_cuentas.N_Cuenta = Convert.ToInt32(grdCuentas.get_Texto(f, grdCuentas.get_ColIndex("Terminal_Ticket")));
+
+                        if (grdCuentas.get_Texto(f, c).ToString() == "0")
+                        { leer.suc_cuentas.Agregar_terminalesMP(grdCuentas.get_Texto(f, grdCuentas.get_ColIndex("Id_Terminal"))); }
+                        else { leer.suc_cuentas.Actualizar_terminalesMP(a, grdCuentas.get_Texto(f, grdCuentas.get_ColIndex("Id_Terminal"))); }
+
+                        
                         grdCuentas.set_Texto(f, c, a);
                         grdCuentas.set_Texto(f, grdCuentas.get_ColIndex("Nombre"), leer.Sucursal.Nombre);
                     }
