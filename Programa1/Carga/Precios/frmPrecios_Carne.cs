@@ -1,5 +1,7 @@
 ﻿using C1.Win.C1FlexGrid;
+using Grilla2;
 using Programa1.DB;
+using Programa1.DB.Sucursales;
 using Programa1.DB.Varios;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,7 @@ namespace Programa1.Carga.Precios
     public partial class frmPrecios_Carne : Form
     {
         Precios_Sucursales pr = new Precios_Sucursales();
+        Precios_Franquicia prf = new Precios_Franquicia();
 
         private List<CellStyle> Colores = new List<CellStyle>();
 
@@ -23,6 +26,11 @@ namespace Programa1.Carga.Precios
 
         private void frmPrecios_Carne_Load(object sender, EventArgs e)
         {
+            int[] t = { 43 };
+            grdFranquicia.TeclasManejadas = t;
+
+            prf.Tabla = "Precios_Franquicia";
+
             Configuraciones cn = new Configuraciones();
             string n = cn.Leer("Decimales en Precios Granja");
             if (n.Length != 0)
@@ -35,7 +43,7 @@ namespace Programa1.Carga.Precios
             dt.Columns.Add("Total", Type.GetType("System.Single"));
             dt.Columns.Add("%", Type.GetType("System.Single"));
 
-            grdProductos.MostrarDatos(dt, true, true);
+            grdProductos.MostrarDatos(dt, true, false);
             grdProductos.set_Texto(0, 0, "Prod");
 
             grdProductos.set_ColW(grdProductos.get_ColIndex("ID_Productos"), 30);
@@ -50,16 +58,47 @@ namespace Programa1.Carga.Precios
             grdProductos.Columnas[grdProductos.get_ColIndex("Total")].Style.Format = $"N{nuDecimales.Value}";
             grdProductos.Columnas[grdProductos.get_ColIndex("%")].Style.Format = "N2";
 
+
+            dt.Columns.Remove("Kilos");
+            dt.Columns.Remove("Total");
+
+            dt.Columns.Add("% Au", Type.GetType("System.Single"));
+
+            grdFranquicia.MostrarDatos(dt, true, false);
+            grdFranquicia.set_Texto(0, 0, "Prod");
+
+            grdFranquicia.set_ColW(grdFranquicia.get_ColIndex("ID_Productos"), 30);
+            grdFranquicia.set_ColW(grdFranquicia.get_ColIndex("Nombre"), 150);
+            grdFranquicia.set_ColW(grdFranquicia.get_ColIndex("%"), 50);
+            grdFranquicia.set_ColW(grdFranquicia.get_ColIndex("% Au"), 50);
+
+            grdFranquicia.Columnas[grdFranquicia.get_ColIndex("Precio")].Style.Format = $"N{nuDecimales.Value}";
+            grdFranquicia.Columnas[grdFranquicia.get_ColIndex("% Au")].Style.Format = "N2";
+
+            // Buscar los Porcentajes_Precios para los productos de franquicia
+            for (int i = 1; i <= grdFranquicia.Rows - 1; i++)
+            {
+                int vProd = Convert.ToInt32(grdFranquicia.get_Texto(i, grdFranquicia.get_ColIndex("ID_Productos")));
+                if (vProd != 0)
+                {
+                    prf.Producto = vProd;
+                    Single por = prf.Buscar_Porcentaje();
+                    grdFranquicia.set_Texto(i, grdFranquicia.get_ColIndex("% Au"), por);
+                }
+            }
+
+
             //13: Enter
             //43: +
             //46: Delete
             grdProductos.TeclasManejadas = new int[] { 13, 43, 46, 107 };
 
             dt = pr.Precios_Formulas();
-            grdFormulas.MostrarDatos(dt, true, true);
+            grdFormulas.MostrarDatos(dt, true, false);
             grdFormulas.set_Texto(0, 0, "ID");
             grdFormulas.AutosizeAll();
             grdFormulas.set_ColW(grdFormulas.get_ColIndex("Precio"), 80);
+            grdFormulas.set_ColW(grdFormulas.get_ColIndex("PrecioFr"), 80);
 
             Cargar_Fechas();
 
@@ -85,7 +124,6 @@ namespace Programa1.Carga.Precios
 
         }
 
-
         private void cmdFormulas_Click(object sender, EventArgs e)
         {
             splFormulas.Panel2Collapsed = !splFormulas.Panel2Collapsed;
@@ -94,7 +132,7 @@ namespace Programa1.Carga.Precios
         private void lstFechas_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            
+
             Cargar_Sucursales();
 
             this.Cursor = Cursors.Default;
@@ -170,16 +208,20 @@ namespace Programa1.Carga.Precios
                             grdProductos.set_Texto(i, grdProductos.get_ColIndex("Precio"), precio);
                             grdProductos.set_Texto(i, grdProductos.get_ColIndex("Total"), precio * kilos);
 
+                            precio = pr.Buscar(true);
+                            grdFranquicia.set_Texto(i, grdFranquicia.get_ColIndex("Precio"), precio);
                         }
                     }
 
                     Calcular_Precios();
+
                     cmdGuardar.Enabled = true;
                     cmdBorrar.Enabled = true;
                 }
             }
             this.Cursor = Cursors.Default;
         }
+
 
         private void Calcular_Precios()
         {
@@ -221,19 +263,23 @@ namespace Programa1.Carga.Precios
             //lblProm.Text = FormatNumber(PrecioBifes * 0.70215, 2) '[(b/ancho+b/angosto)/2]*40.43/100+[(b/ancho+b/angosto)/2]
             lblBifes.Text = "Bifes Desh: " + h.Calcular_Texto(Reemplazar_Precio("(([28]+[29])*0,70215)")).ToString("N3");
 
-            for (int i = 1; i <= grdProductos.Rows - 1; i++)
+            for (int i = 1; i <= grdFormulas.Rows - 1; i++)
             {
                 int vProd = Convert.ToInt32(grdFormulas.get_Texto(i, grdFormulas.get_ColIndex("ID_Productos")));
                 string cadena = Convert.ToString(grdFormulas.get_Texto(i, grdFormulas.get_ColIndex("Formula")));
+                string cadenafr = cadena;
                 Single precio = 0;
+                Single preciofr = 0;
 
                 if (vProd != 0 & cadena.Length > 0)
                 {
                     //Reemplazo la integracion por la calculada.
                     cadena = Reemplazar_Precio(cadena);
+                    cadenafr = Reemplazar_Precio(cadenafr, true);
                     try
                     {
                         precio = Convert.ToSingle(h.Calcular_Texto(cadena));
+                        preciofr = Convert.ToSingle(h.Calcular_Texto(cadenafr));
                     }
                     catch (Exception ex)
                     {
@@ -244,12 +290,17 @@ namespace Programa1.Carga.Precios
                 }
 
                 grdFormulas.set_Texto(i, grdFormulas.get_ColIndex("Precio"), precio);
+                grdFormulas.set_Texto(i, grdFormulas.get_ColIndex("PrecioFR"), preciofr);
             }
+
         }
 
-        private string Reemplazar_Precio(string cadena)
+        private string Reemplazar_Precio(string cadena, bool fr = false)
         {
             float integracion = Convert.ToSingle(lblIntegracion.Text);
+
+            if (fr) integracion = Convert.ToSingle(grdFranquicia.get_Texto(1, grdFranquicia.get_ColIndex("Precio")));
+
             cadena = cadena.Replace("[1]", integracion.ToString());
 
             int n = cadena.IndexOf("[");
@@ -259,7 +310,8 @@ namespace Programa1.Carga.Precios
                 int f = cadena.IndexOf("]");
 
                 string testoAReemp = cadena.Substring(n + 1, (f - n) - 1);
-                Single nPrecio = Buscar_PrecioEnGrilla(Convert.ToInt32(testoAReemp));
+
+                Single nPrecio = Buscar_PrecioEnGrilla(Convert.ToInt32(testoAReemp), fr);
 
 
                 cadena = cadena.Replace(cadena.Substring(n, f - n + 1), nPrecio.ToString());
@@ -270,14 +322,16 @@ namespace Programa1.Carga.Precios
             return cadena;
         }
 
-        private Single Buscar_PrecioEnGrilla(int prod)
+        private Single Buscar_PrecioEnGrilla(int prod, bool fr = false)
         {
             Single precio = 0;
-            for (int i = 1; i <= grdProductos.Rows - 1; i++)
+            SpeedGrilla gr = fr ? grdFranquicia : grdProductos;
+
+            for (int i = 1; i <= gr.Rows - 1; i++)
             {
-                if (Convert.ToInt32(grdProductos.get_Texto(i, grdProductos.get_ColIndex("Id_Productos"))) == prod)
+                if (Convert.ToInt32(gr.get_Texto(i, gr.get_ColIndex("Id_Productos"))) == prod)
                 {
-                    precio = Convert.ToSingle(grdProductos.get_Texto(i, grdProductos.get_ColIndex("Precio")));
+                    precio = Convert.ToSingle(gr.get_Texto(i, gr.get_ColIndex("Precio")));
                     break;
                 }
             }
@@ -327,7 +381,7 @@ namespace Programa1.Carga.Precios
             {
                 this.Cursor = Cursors.WaitCursor;
 
-                pr.Fecha = fr.mntFecha.SelectionStart.Date;                
+                pr.Fecha = fr.mntFecha.SelectionStart.Date;
 
                 integracion = Convert.ToSingle(lblIntegracion.Text);
 
@@ -341,6 +395,7 @@ namespace Programa1.Carga.Precios
                     //Guardar primero la integracion
                     pr.Producto.ID = 1;
                     pr.Precio = integracion;
+                    pr.Precio_Fr = Convert.ToSingle(grdFranquicia.get_Texto(1, grdFranquicia.get_ColIndex("Precio")));
                     pr.Agregar();
 
                     //Guardar la Lista
@@ -353,6 +408,7 @@ namespace Programa1.Carga.Precios
                         {
                             pr.Producto.ID = prod;
                             pr.Precio = Convert.ToSingle((grdProductos.get_Texto(i, grdProductos.get_ColIndex("Precio"))));
+                            pr.Precio_Fr = Convert.ToSingle((grdFranquicia.get_Texto(i, grdFranquicia.get_ColIndex("Precio"))));
                             pr.Agregar();
                         }
                     }
@@ -374,7 +430,7 @@ namespace Programa1.Carga.Precios
                 lstFechas.SelectedIndex = 0;
                 this.Cursor = Cursors.Default;
             }
-        }        
+        }
 
         private void cmdImprimir_Click(object sender, EventArgs e)
         {
@@ -398,6 +454,149 @@ namespace Programa1.Carga.Precios
             grdProductos.Columnas[grdProductos.get_ColIndex("Total")].Style.Format = $"N{nuDecimales.Value}";
 
             Cargar_Precios();
+        }
+
+        private void grdFranquicia_Editado(short f, short c, object a)
+        {
+            grdFranquicia.set_Texto(f, c, Convert.ToSingle(a));
+            if (f == 1 && c == 2)
+            {
+                double p = Convert.ToDouble(grdProductos.get_Texto(1, grdProductos.get_ColIndex("Precio")));
+                double pf = Convert.ToDouble(grdFranquicia.get_Texto(1, grdFranquicia.get_ColIndex("Precio")));
+                grdFranquicia.set_Texto(1, grdFranquicia.get_ColIndex("%"), ((p - pf) / pf) * 100);
+                //Si se edita el precio de la franquicia, recalculo los precios.
+                Calcular_Franquicia();
+            }
+            if (c == grdFranquicia.get_ColIndex("% Au"))
+            {
+                double p = Convert.ToDouble(a);
+                grdFranquicia.set_Texto(f, c, p);
+
+                // Guardar el porcentaje en la base de datos
+                prf.Guardar_Porcentaje(Convert.ToInt32(grdFranquicia.get_Texto(f, 0)), p);
+                // Si hay precio en la grilla de productos, recalculo el precio de franquicia
+                double pr = Convert.ToDouble(grdProductos.get_Texto(f, grdProductos.get_ColIndex("Precio")));
+                if (pr > 0)
+                {
+                    pr = pr + (pr * p / 100);
+                    grdFranquicia.set_Texto(f, grdFranquicia.get_ColIndex("Precio"), pr);
+                }
+                grdFranquicia.ActivarCelda((c <= grdFranquicia.Rows - 1) ? f + 1 : 1, c);
+                
+            }
+        }
+
+        private void Calcular_Franquicia()
+        {
+            double p = Convert.ToDouble(grdProductos.get_Texto(1, grdProductos.get_ColIndex("Precio")));
+            double pf = Convert.ToDouble(grdFranquicia.get_Texto(1, grdFranquicia.get_ColIndex("Precio")));
+
+            if (pf == 0) return;
+            
+            p = p / pf;
+            
+
+            for (int i = 2; i <= grdFranquicia.Rows - 1; i++)
+            {
+                pf = grdProductos.get_Texto(i, grdProductos.get_ColIndex("Precio")) == "" ? 0 : Convert.ToDouble(grdProductos.get_Texto(i, grdProductos.get_ColIndex("Precio")));
+                if (pf != 0)
+                {
+                    pf = pf / p;
+                }
+                grdFranquicia.set_Texto(i, grdFranquicia.get_ColIndex("Precio"), pf);
+            }
+        }
+
+        private void cmdGuardarFR_Click(object sender, EventArgs e)
+        {
+            frmGuardar_Varios fr = new frmGuardar_Varios();
+            fr.Cargar();
+            fr.ShowDialog();
+            if (fr.Guardar == true)
+            {
+                Cursor = Cursors.WaitCursor;
+                Herramientas.Herramientas h = new Herramientas.Herramientas();
+
+                prf.Fecha = fr.mntFecha.SelectionStart.Date;
+
+                try
+                {
+                    foreach (string suc in fr.lstSucursales.SelectedItems)
+                    {
+                        //Guardar todo por cada Sucursal                    
+                        prf.Sucursal = h.Codigo_Seleccionado(suc);
+                        for (int i = 1; i < grdFranquicia.Rows; i++)
+                        {
+                            prf.Producto = (int)grdFranquicia.get_Texto(i, 0);
+                            prf.Precio = Convert.ToSingle(grdFranquicia.get_Texto(i, "Precio"));
+
+                            if (prf.Producto > 0) prf.Agregar();
+                        }
+                        for (int i = 1; i < grdFormulas.Rows; i++)
+                        {
+                            prf.Producto = Convert.ToInt16(grdFormulas.get_Texto(i, 0));
+                            prf.Precio = Convert.ToSingle(grdFormulas.get_Texto(i, "PrecioFr"));
+
+                            if (prf.Producto > 0) prf.Agregar();
+                        }
+                    }
+                }
+                catch (Exception er)
+                {
+                    Console.WriteLine(er);
+                }
+                Cargar_Precios();
+
+                Cursor = Cursors.Default;
+            }
+        }
+               
+
+        private void cmdPorcentaje_Click(object sender, EventArgs e)
+        {
+            // Recorrer la grilla de franquicia y aplicar el porcentaje ingresado al precio de cada producto.
+            try
+            {
+                for (int i = 1; i < grdFranquicia.Rows; i++)
+                {
+                    Single p = Convert.ToSingle(grdFranquicia.get_Texto(i, "% Au"));
+                    Single precio = Convert.ToSingle(grdProductos.get_Texto(i, "Precio"));
+                    
+                    if (p != 0) { precio = precio + (precio * p / 100); }
+                    
+                    grdFranquicia.set_Texto(i, "Precio", precio);
+                }                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+            
+
+        private void grdFranquicia_KeyPress(object sender, short e)
+        {
+            if(e == 43)
+            {
+                if(grdFranquicia.Row < grdFranquicia.Rows && grdFranquicia.Col == grdFranquicia.Cols - 1)
+                {
+                    double p = Convert.ToDouble(grdFranquicia.get_Texto(grdFranquicia.Row - 1, grdFranquicia.Col));
+
+                    grdFranquicia.set_Texto(grdFranquicia.Row, grdFranquicia.Col, p);                    
+
+                    // Guardar el porcentaje en la base de datos
+                    prf.Guardar_Porcentaje(Convert.ToInt32(grdFranquicia.get_Texto(grdFranquicia.Row, 0)), p);
+
+                    // Si hay precio en la grilla de productos, recalculo el precio de franquicia
+                    double pr = Convert.ToDouble(grdProductos.get_Texto(grdFranquicia.Row, grdProductos.get_ColIndex("Precio")));
+                    if (pr > 0)
+                    {
+                        pr = pr + (pr * p / 100);
+                        grdFranquicia.set_Texto(grdFranquicia.Row, grdFranquicia.get_ColIndex("Precio"), pr);
+                    }
+                    grdFranquicia.ActivarCelda((grdFranquicia.Col <= grdFranquicia.Rows - 1) ? grdFranquicia.Row + 1 : 1, grdFranquicia.Col);
+                }
+            }
         }
     }
 }

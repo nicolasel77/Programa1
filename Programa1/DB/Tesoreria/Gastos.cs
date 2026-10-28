@@ -309,8 +309,9 @@
         /// Devuelve un total por Tipo, Nombre, Total según la fecha seleccionada.
         /// </summary>
         /// <param name="filtro">Rango a filtrar.</param>
+        /// <param name="mostrar_Cajas">Indica si se deben mostrar las cajas.</param>
         /// <returns></returns>
-        public DataTable TotalPorTipo(string filtro = "")
+        public DataTable TotalPorTipo(string filtro = "", bool mostrar_Cajas = false)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(cadCN);
@@ -320,8 +321,8 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT ID_TipoGastos ID, Desc_Tipo Descripcion, SUM(Importe) Total FROM vw_Gastos" +
-                    $" {filtro}  GROUP BY ID_TipoGastos, Desc_Tipo ORDER BY ID_TipoGastos", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT {(mostrar_Cajas ? "IDC, Caja, " : "")} ID_TipoGastos ID, Desc_Tipo Descripcion, SUM(Importe) Total FROM vw_Gastos" +
+                    $" {filtro}  GROUP BY {(mostrar_Cajas ? "IDC, Caja, " : "")} ID_TipoGastos, Desc_Tipo ORDER BY ID_TipoGastos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -340,8 +341,9 @@
         /// Devuelve un total por SubTipo, Nombre, Total según el Tipo y la fecha seleccionada.
         /// </summary>
         /// <param name="filtro">Tipo y rango a filtrar.</param>
+        /// <param name="mostrar_Cajas">Indica si se deben mostrar las cajas.</param>
         /// <returns></returns>
-        public DataTable TotalPorSubTipo(string filtro = "")
+        public DataTable TotalPorSubTipo(string filtro = "", bool mostrar_Cajas = false)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(cadCN);
@@ -351,8 +353,8 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT ID_TipoGastos IDT, Desc_Tipo, ID_SubTipoGastos ID, Desc_SubTipo Descripcion, SUM(Importe) Total FROM vw_Gastos" +
-                    $" {filtro}  GROUP BY ID_TipoGastos, Desc_Tipo, ID_SubTipoGastos, Desc_SubTipo ORDER BY ID_TipoGastos, ID_SubTipoGastos", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT {(mostrar_Cajas ? "IDC, Caja, " : "")} ID_TipoGastos IDT, Desc_Tipo, ID_SubTipoGastos ID, Desc_SubTipo Descripcion, SUM(Importe) Total FROM vw_Gastos" +
+                    $" {filtro}  GROUP BY {(mostrar_Cajas ? "IDC, Caja, " : "")} ID_TipoGastos, Desc_Tipo, ID_SubTipoGastos, Desc_SubTipo ORDER BY ID_TipoGastos, ID_SubTipoGastos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -371,8 +373,9 @@
         /// Devuelve un total por Detalle, Nombre, Total según el Tipo y la fecha seleccionada.
         /// </summary>
         /// <param name="filtro">Tipo y rango a filtrar.</param>
+        /// <param name="mostrar_Cajas">Indica si se deben mostrar las cajas.</param>
         /// <returns></returns>
-        public DataTable TotalPorDetalle(string filtro = "", bool Mostrar_Fecha = false)
+        public DataTable TotalPorDetalle(string filtro = "", bool Mostrar_Fecha = false, bool mostrar_Cajas = false)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(cadCN);
@@ -385,10 +388,10 @@
                 string fe = Mostrar_Fecha ? "Fecha, " : "";
 
                 SqlCommand comandoSql = new SqlCommand(
-                    $"SELECT {fe}ID_TipoGastos IDT, Desc_Tipo, ID_SubTipoGastos ID_ST, Desc_SubTipo, ID_DetalleGastos ID, Descripcion" +
+                    $"SELECT {fe}{(mostrar_Cajas ? "IDC, Caja, " : "")}ID_TipoGastos IDT, Desc_Tipo, ID_SubTipoGastos ID_ST, Desc_SubTipo, ID_DetalleGastos ID, Descripcion" +
                     $", SUM(Importe) Total FROM vw_Gastos" +
-                    $" {filtro}  GROUP BY {fe}ID_TipoGastos, Desc_Tipo, ID_SubTipoGastos, Desc_SubTipo, ID_DetalleGastos, Descripcion " +
-                    $"ORDER BY {fe}ID_DetalleGastos", conexionSql);
+                    $" {filtro}  GROUP BY {fe}{(mostrar_Cajas ? "IDC, Caja, " : "")}ID_TipoGastos, Desc_Tipo, ID_SubTipoGastos, Desc_SubTipo, ID_DetalleGastos, Descripcion " +
+                    $"ORDER BY {fe}{(mostrar_Cajas ? "IDC, Caja, " : "")}ID_DetalleGastos", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

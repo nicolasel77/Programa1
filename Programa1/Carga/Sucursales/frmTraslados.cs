@@ -27,6 +27,7 @@ using Programa1.DB.Varios;
         private Byte c_TotalS;
         private Byte c_TotalE;
         private Byte c_Promedio;
+        private Byte c_Bloqueado;
         #endregion
 
         int vi = 4;
@@ -57,6 +58,7 @@ using Programa1.DB.Varios;
             c_TotalS = Convert.ToByte(grdTraslados.get_ColIndex("Total_Salida"));
             c_TotalE = Convert.ToByte(grdTraslados.get_ColIndex("Total_Entrada"));
             c_Promedio = Convert.ToByte(grdTraslados.get_ColIndex("Promedio"));
+            c_Bloqueado = Convert.ToByte(grdTraslados.get_ColIndex("Bloqueado"));
 
             formato_Grilla();
 
@@ -102,7 +104,36 @@ using Programa1.DB.Varios;
                         }
                     }
                     break;
+                case Keys.F9:
+                    Bloquear();
+                    break;
             }
+        }
+
+        private void Bloquear()
+        {
+            // Setear el valor de Bloqueado en true en todas las filas seleccionadas. Si no hay ninguna seleccionada setear todas las actuales
+            int f1 = grdTraslados.Selection.r1;
+            int f2 = grdTraslados.Selection.r2;
+
+            if (f1 == f2 && f1 == -1)
+            {
+                f1 = 1;
+                f2 = grdTraslados.Rows - 2;
+            }
+            int contador = 0;
+            for (int i = f1; i <= f2; i++)
+            {
+                Traslados.ID = (int)grdTraslados.get_Texto(i, c_Id);
+                if (Traslados.ID != 0)
+                {
+                    Traslados.Ejecutar_Comando("UPDATE Traslados SET Bloqueado = 1 WHERE Id = " + Traslados.ID);
+                    Traslados.Bloqueado = true;
+                    grdTraslados.set_Texto(i, c_Bloqueado, true);
+                    contador++;
+                }
+            }
+            Mensaje(contador == 0 ? "No se bloqueo ningún registro." : contador == 1 ? "Se bloqueo 1 registro." : $"Se bloquearon {contador} registros.");
         }
 
         #region "Mensaje"
@@ -169,6 +200,7 @@ using Programa1.DB.Varios;
             grdTraslados.set_ColW(c_TotalE + 2, 0);
             grdTraslados.set_ColW(c_TotalE + 3, 0);
             grdTraslados.set_ColW(c_Promedio, 60);
+            grdTraslados.set_ColW(c_Bloqueado, 0);
 
             grdTraslados.set_Texto(0, c_IdProd, "Prod");
             grdTraslados.AutosizeCol(c_IdProd);
@@ -179,6 +211,11 @@ using Programa1.DB.Varios;
             grdTraslados.Columnas[c_TotalS].Format = "C2";
             grdTraslados.Columnas[c_TotalE].Format = "C2";
             grdTraslados.Columnas[c_Promedio].Format = "N2";
+            grdTraslados.Columnas[grdTraslados.get_ColIndex("Costo_SalidaFR")].Format = "N2";
+            grdTraslados.Columnas[grdTraslados.get_ColIndex("Costo_EntradaFR")].Format = "N2";
+            grdTraslados.Columnas[grdTraslados.get_ColIndex("Total_SalidaFR")].Format = "N2";
+            grdTraslados.Columnas[grdTraslados.get_ColIndex("Total_EntradaFR")].Format = "N2";
+            
             
             if (n_usuario.Permiso == Usuarios.e_Permiso.Supervisor)
             {
@@ -257,7 +294,7 @@ using Programa1.DB.Varios;
         }
         private void GrdTraslados_Editado(short f, short c, object a)
         {
-            if (Traslados.Fecha_Cerrada(Traslados.Fecha) == false)
+            if (Traslados.Fecha_Cerrada(Traslados.Fecha) == false && Traslados.Bloqueado == false)
             {
                 int id = Convert.ToInt32(grdTraslados.get_Texto(f, c_Id));
                 switch (c)
@@ -597,6 +634,7 @@ using Programa1.DB.Varios;
                 Traslados.CostoE = Convert.ToSingle(grdTraslados.get_Texto(Fila, c_CostoE));
                 Traslados.Cantidad = Convert.ToInt32(grdTraslados.get_Texto(Fila, c_Cantidad));
                 Traslados.Kilos = Convert.ToSingle(grdTraslados.get_Texto(Fila, c_Kilos));
+                Traslados.Bloqueado = Convert.ToBoolean(grdTraslados.get_Texto(Fila, c_Bloqueado));
             }
 
         }
@@ -732,7 +770,7 @@ using Programa1.DB.Varios;
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (Convert.ToInt32(grdTraslados.get_Texto(grdTraslados.Row, 0)) != 0)
+                    if (Convert.ToInt32(grdTraslados.get_Texto(grdTraslados.Row, 0)) != 0 && Traslados.Bloqueado == false)
                     {
                         if (Traslados.Fecha_Cerrada(Traslados.Fecha) == false)
                         {

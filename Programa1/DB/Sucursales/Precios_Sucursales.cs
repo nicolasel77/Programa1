@@ -4,6 +4,7 @@
     using System;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Security.Policy;
     using System.Windows.Forms;
 
     public class Precios_Sucursales : c_Base
@@ -20,10 +21,11 @@
         public Productos Producto { get; set; } = new Productos();
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public float Precio { get; set; }
+        public float Precio_Fr { get; set; }
 
 
         #region " Devolver Datos "
-        public float Buscar()
+        public float Buscar(bool franquicia = false)
         {
             if (Producto.ID == 399)
             {
@@ -31,17 +33,21 @@
             }
             else
             {
-                var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+                SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
                 object d = null;
 
+                string tabla = franquicia ? "Precios_Franquicia" : "Precios_Sucursales";
                 //Si no hay una sucursal seleccionada se devuelve el primer precio encontrado
-                string suc = $"(SELECT TOP 1 Id_Sucursales FROM Precios_Sucursales WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                        $" AND Id_Productos={Producto.ID} ORDER BY Fecha DESC)";
+
+                string suc = $"(SELECT TOP 1 Id_Sucursales FROM {tabla} " +
+                             $"WHERE Fecha <= '{Fecha:MM/dd/yyyy}' " +
+                             $"AND Id_Productos = {Producto.ID} ORDER BY Fecha DESC)";
+
                 if (Sucursal.ID > 0) { suc = Sucursal.ID.ToString(); }
                 try
                 {
 
-                    SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Sucursales  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
+                    SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM {tabla}  WHERE Fecha<='{Fecha:MM/dd/yyy}'" +
                         $" AND Id_Productos={Producto.ID} AND ID_Sucursales={suc} ORDER BY Fecha DESC", conexionSql);
 
                     conexionSql.Open();
@@ -64,11 +70,11 @@
         public DataTable Tabla_Precios(int tipo)
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, 0.0 Precio FROM Productos WHERE Id_Tipo={tipo} AND Ver=1 ORDER BY Id", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT Id, Nombre, 0.0 AS Compra, 0.0 Franquicia, 0.0 Venta FROM Productos WHERE Id_Tipo={tipo} AND Ver=1 ORDER BY Id", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -85,7 +91,7 @@
         public DataTable Tabla_Precios(string filtro)
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -106,7 +112,7 @@
         public DataTable Precios(byte tipo, bool mostrar_cambiado = false)
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -140,7 +146,7 @@
         public DataTable Precios(string filtro)
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -168,7 +174,7 @@
         public DataTable Fechas(int tipo, int prod = 0, string filtroSuc = "", int top = 50)
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             string filtroProd = "";
             if (prod != 0) { filtroProd = " AND ID_Productos=" + prod; }
@@ -197,7 +203,7 @@
         public DataTable Fechas_Granja(int top = 50)
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -221,7 +227,7 @@
         public DataTable Precios_CarneListaKilos()
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -243,7 +249,7 @@
         public DataTable Precios_Formulas()
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -265,7 +271,7 @@
         public DataTable Integraciones_Sucursales(DateTime fecha)
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -287,7 +293,7 @@
         public DataTable Integraciones_Sucursales(bool Agrupado)
         {
             var dt = new DataTable("Datos");
-            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -308,7 +314,7 @@
 
         public DataTable Consulta_Precios(int tipo)
         {
-            var dt = new DataTable("Datos");
+            DataTable dt = new DataTable("Datos");
             
             SqlParameter parametro = new SqlParameter("@Tipo", tipo);
             dt = sp_Datos("sp_ConsultaPrecios", parametro);
@@ -320,7 +326,7 @@
         #region " Editar Datos "
         public new void  Actualizar()
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -344,7 +350,7 @@
 
         public new void Agregar()
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -357,9 +363,9 @@
                 var d = command.ExecuteNonQuery();
 
                 command.CommandText = $"INSERT INTO Precios_Sucursales (Fecha, Id_Sucursales, Id_Productos, Precio) " +
-                    $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto.ID}, {Precio.ToString().Replace(",", ".")} )";
-
+                    $"VALUES('{Fecha:MM/dd/yyy}', {Sucursal.ID}, {Producto.ID}, {Precio.ToString().Replace(",", ".")} )";
                 d = command.ExecuteNonQuery();
+                              
 
                 sql.Close();
             }
@@ -371,7 +377,7 @@
 
         public new void Borrar()
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {
@@ -394,7 +400,7 @@
 
         public void Borrar_Lista(int Tipo)
         {
-            var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            SqlConnection sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
 
             try
             {

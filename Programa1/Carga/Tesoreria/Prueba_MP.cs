@@ -1,9 +1,8 @@
 ﻿namespace Programa1.Carga.Tesoreria
 {
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
     using Programa1.DB.Tesoreria;
     using System;
+    using System.Text.Json;
     using System.Net.Http;
     using System.Security.Policy;
     using System.Windows.Forms;
@@ -34,8 +33,9 @@
                     response.EnsureSuccessStatusCode();
                     string responseData = await response.Content.ReadAsStringAsync();
 
-                    var parsedJson = JToken.Parse(responseData);
-                    string formattedJson = parsedJson.ToString(Formatting.Indented);
+                    //var parsedJson = JToken.Parse(responseData);
+                    JsonDocument parsedJson = System.Text.Json.JsonDocument.Parse(responseData);
+                    string formattedJson = parsedJson.ToString();
 
                     textBox1.Text = formattedJson;
                 }

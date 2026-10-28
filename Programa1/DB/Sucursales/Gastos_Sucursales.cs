@@ -22,11 +22,11 @@
         public string Descripcion { get; set; }
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Single Importe { get; set; }
-
+        public bool Bloqueado { get; set; } = false;
 
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro, "ID, Fecha, ID_Sucursales, Nombre, ID_Tipo, Descripcion, Importe");            
+            return Datos_Vista(filtro, "ID, Fecha, ID_Sucursales, Nombre, ID_Tipo, Descripcion, Importe, Bloqueado");            
         }
 
 
@@ -36,7 +36,8 @@
             Actualizar("ID_Sucursales", Sucursal.ID);
             Actualizar("ID_Tipo", Tipo.ID);
             Actualizar("Descripcion", Descripcion);
-            Actualizar("Importe", Importe);            
+            Actualizar("Importe", Importe);
+            Actualizar("Bloqueado", Bloqueado);
         }
 
         public new void Agregar()
@@ -46,8 +47,8 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Gastos_Sucursales (Fecha, ID_Sucursales, ID_Tipo, Descripcion, Importe) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Tipo.ID}, '{Descripcion}', {Importe.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Gastos_Sucursales (Fecha, ID_Sucursales, ID_Tipo, Descripcion, Importe, Bloqueado) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Tipo.ID}, '{Descripcion}', {Importe.ToString().Replace(",", ".")}, 0)", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -96,6 +97,7 @@
                 Descripcion = dr["Descripcion"].ToString();
                 Sucursal.ID = Convert.ToInt32(dr["ID_Sucursales"]);
                 Importe = Convert.ToSingle(dr["Importe"]);
+                Bloqueado = Convert.ToBoolean(dr["Bloqueado"]);
 
             }
             catch (Exception)
@@ -106,6 +108,7 @@
                 Descripcion = "";
                 Sucursal.ID = 0;
                 Importe = 0;
+                Bloqueado = false;
             }
 
 

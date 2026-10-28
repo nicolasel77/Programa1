@@ -24,6 +24,7 @@
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Single Costo { get; set; }
         public Single Kilos { get; set; }
+        public bool Bloqueado { get; set; } = false;
 
         public Precios_Sucursales precios = new Precios_Sucursales();
 
@@ -73,6 +74,7 @@
             Actualizar("Descripcion", Descripcion);
             Actualizar("Costo", Costo);
             Actualizar("Kilos", Kilos);
+            Actualizar("Bloqueado", Bloqueado);
         }
 
         public new void Agregar()
@@ -82,8 +84,8 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Stock (Fecha, Id_Sucursales, Id_Productos, Descripcion, Costo, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Stock (Fecha, Id_Sucursales, Id_Productos, Descripcion, Costo, Kilos, Bloqueado) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")}, 0)", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -132,6 +134,7 @@
                 Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Costo = Convert.ToSingle(dr["Costo"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
+                Bloqueado = Convert.ToBoolean(dr["Bloqueado"]);
 
             }
             catch (Exception)
@@ -143,6 +146,7 @@
                 Sucursal.ID = 0;
                 Costo = 0;
                 Kilos = 0;
+                Bloqueado = false;
             }
         }
     }

@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.6.11709.129
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programa1", "Programa1\Programa1.csproj", "{87D003FC-6B79-4965-A4DD-334E03EF4AC7}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SpeedGrilla", "SpeedGrilla\SpeedGrilla.vbproj", "{64F92811-4680-4543-A345-0F68983286E2}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Formatear_Excel", "Formatear_Excel\Formatear_Excel.vbproj", "{CC913E3C-FD5A-4021-ADE6-6B7C4933485A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decidir", "Extras\sdk-net-ventaonline-2.0.4\Solution\Decidir\Decidir.csproj", "{208EA1C5-2305-440F-A4A2-B35C93AAE417}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtractorExtractoBancario", "pdfAexcel\ExtractorExtractoBancario.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,30 @@ Global
 		{CC913E3C-FD5A-4021-ADE6-6B7C4933485A}.Release|x64.Build.0 = Release|Any CPU
 		{CC913E3C-FD5A-4021-ADE6-6B7C4933485A}.Release|x86.ActiveCfg = Release|Any CPU
 		{CC913E3C-FD5A-4021-ADE6-6B7C4933485A}.Release|x86.Build.0 = Release|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Debug|x64.Build.0 = Debug|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Debug|x86.Build.0 = Debug|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Release|x64.ActiveCfg = Release|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Release|x64.Build.0 = Release|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Release|x86.ActiveCfg = Release|Any CPU
+		{208EA1C5-2305-440F-A4A2-B35C93AAE417}.Release|x86.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|x64.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|x86.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|x64.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|x64.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|x86.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

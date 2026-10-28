@@ -31,7 +31,7 @@
         public void Actualizar_Registros()
         {
             String vBorrar = $"[Fecha]='{vFecha.ToString("MM/dd/yyy")}' AND [Importe]={vimporte.ToString().Replace(",", ".")} AND Lote={vlote} AND Comprobante={vcomprobante} AND Tarjeta={vtarjeta}";
-            Borrar(vBorrar);
+            //Borrar(vBorrar);
 
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
             int n = Max_ID();

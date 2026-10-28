@@ -19,7 +19,7 @@
 
         private void cSucursales_Load(object sender, EventArgs e)
         {
-            Sucs.Mostrar_Ocultos = true;
+            Sucs.Mostrar_Ocultos = false;
             Sucs.Filtro_SucCliente = Sucursales.Filtrar_SucsClientes.Todas;
         }
 
@@ -139,6 +139,20 @@
                 }
             }
             return s;
+        }
+
+        public string Codigos_Seleccionados()
+        {
+            string s = herramientas.Codigos_Seleccionados(lst);
+            s = s.Replace("(", "");
+            s = s.Replace(")", "");
+            return s;
+        }
+
+        public int Supervisor_Seleccionado()
+        {
+            if (lstSupervisores.SelectedItems.Count == 0) { return 0; }
+            return herramientas.Codigo_Seleccionado(lstSupervisores.Text);
         }
 
 
@@ -408,5 +422,6 @@
         {
             lstSupervisores.SelectedIndex = -1;
         }
+
     }
 }

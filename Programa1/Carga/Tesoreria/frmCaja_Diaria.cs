@@ -82,7 +82,7 @@ namespace Programa1.Carga.Tesoreria
         {
             usuario = user;
             cGastos.Usuario = usuario;
-            
+
             CD = new Caja_Diaria();
             CD.Usuario = user.ID;
 
@@ -562,6 +562,12 @@ namespace Programa1.Carga.Tesoreria
                 cEntradas.ID = Convert.ToInt32(grdEntradas.get_Texto(f, e_Id));
                 cEntradas.Fecha = mntFecha.SelectionStart.Date;
 
+                if (cEntradas.ID != 0 && usuario.Permiso != Usuarios.e_Permiso.Administrador)
+                {
+                    MessageBox.Show("No se puede modificar el registro.", "Error");
+                    return;
+                }
+
                 if (cEntradas.Fecha_Cerrada() == false | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                 {
                     switch (c)
@@ -754,6 +760,11 @@ namespace Programa1.Carga.Tesoreria
                 {
                     if (cEntradas.Fecha_Cerrada() == false | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                     {
+                        if (cEntradas.ID != 0 && usuario.Permiso != Usuarios.e_Permiso.Administrador)
+                        {
+                            MessageBox.Show("No se puede modificar el registro.", "Error");
+                            return;
+                        }
                         if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                         {
 
@@ -837,12 +848,20 @@ namespace Programa1.Carga.Tesoreria
         #region " Grilla Salidas "
         private void grdSalidas_Editado(short f, short c, object a)
         {
+            cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(f, s_Usuario));
+
             if (usuario.ID == cGastos.Usuario.ID | usuario.Permiso == Usuarios.e_Permiso.Administrador | cGastos.ID == 0)
             {
-                if (mntFecha.SelectionStart.Date >= CD.Fecha | usuario.Permiso == Usuarios.e_Permiso.Administrador)
+                if (mntFecha.SelectionStart.Date >= CD.Fecha)
                 {
                     cGastos.ID = Convert.ToInt32(grdSalidas.get_Texto(f, s_Id));
                     cGastos.Fecha = mntFecha.SelectionStart.Date;
+                    cGastos.Autorizado = Convert.ToBoolean(grdSalidas.get_Texto(f, s_Autorizado));
+                    if (cGastos.Autorizado == true && usuario.Permiso != Usuarios.e_Permiso.Administrador && c != grdSalidas.Columnas["Autorizado"].Index)
+                    {
+                        MessageBox.Show("No se puede modificar el registro autorizado.", "Error");
+                        return;
+                    }
                     if (cGastos.Fecha_Cerrada() == false | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                     {
                         switch (c)
@@ -1211,6 +1230,11 @@ namespace Programa1.Carga.Tesoreria
                     {
                         if (cGastos.Fecha_Cerrada() == false | usuario.Permiso == Usuarios.e_Permiso.Administrador)
                         {
+                            if (cGastos.Autorizado == true && usuario.Permiso != Usuarios.e_Permiso.Administrador)
+                            {
+                                MessageBox.Show("No se puede modificar el registro autorizado.", "Error");
+                                return;
+                            }
                             if (MessageBox.Show("¿Esta seguro de borrar el registro?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                             {
                                 cGastos.Borrar();
@@ -1450,9 +1474,9 @@ namespace Programa1.Carga.Tesoreria
                 cGastos.Descripcion = Convert.ToString(grdSalidas.get_Texto(Fila, s_Descripcion));
                 cGastos.Importe = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Importe));
                 cGastos.Cheque = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Cheque));
+                cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Usuario));
                 if (Fila < grdSalidas.Rows - 1)
                 {
-                    cGastos.Usuario.ID = Convert.ToInt32(grdSalidas.get_Texto(Fila, s_Usuario));
                     if (cGastos.Usuario.ID == 0)
                     {
                         usuario.Nombre = usuario.Nombre;
@@ -1547,7 +1571,7 @@ namespace Programa1.Carga.Tesoreria
 
         #endregion
 
-        
+
 
         private void grdCajas_DobleClick(object sender, EventArgs e)
         {
@@ -1582,6 +1606,12 @@ namespace Programa1.Carga.Tesoreria
             fr.entradas = cEntradas;
             fr.ShowDialog();
             Cargar_Datos();
+        }
+
+        private void efectivosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCargarEfectivos fr = new frmCargarEfectivos();
+            fr.ShowDialog();
         }
     }
 }

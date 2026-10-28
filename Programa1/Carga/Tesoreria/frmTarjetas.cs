@@ -23,20 +23,21 @@
             h.Llenar_List(lstCuentas, cuentas.Datos_Genericos("SELECT Titular FROM dbGastos.dbo.vw_SucCuentas GROUP BY Titular ORDER BY Titular"));
             //Esto es para que la primera vez que se filtre no tire filas vacias
             chTipo.Checked = true;
+
+            grdTarjetas.TeclasManejadas = new int[] { 46 };
         }
 
         private void Cargar()
         {
-            grdTarjetas.MostrarDatos(tarjetas.Datos_Resumen(), true, false);
+            grdTarjetas.MostrarDatos(tarjetas.Datos_Resumen(), true, true);
             if (grdTarjetas.Rows > 0)
             {
                 int c_imp = grdTarjetas.get_ColIndex("Importe");
                 if (c_imp > 0)
                 {
                     if (grdTarjetas.Cols > 0) { grdTarjetas.Columnas[c_imp].Style.Format = "N2"; }
-                    grdTarjetas.AgregarFila();
-                    grdTarjetas.set_Texto(grdTarjetas.Rows - 1, grdTarjetas.get_ColIndex("Importe") - 1, "Total:");
-                    lblTotal.Text = grdTarjetas.SumarCol(grdTarjetas.get_ColIndex("Importe")).ToString("C1");
+                                        
+                    lblTotal.Text = grdTarjetas.SumarCol(grdTarjetas.get_ColIndex("Importe"),false).ToString("C1");
                     grdTarjetas.AutosizeAll();
                 }
             }
@@ -139,7 +140,7 @@
                 {
                     n = $"{n}, {dr[0]}";
                 }
-                cSuc.Filtro_In = n.Substring(2); 
+                cSuc.Filtro_In = n.Substring(2);
             }
             else
             {
@@ -159,8 +160,96 @@
             {
                 tarjetas.Ejecutar_Comando($"DELETE FROM dbgastos.dbo.Entradas_Tarjeta WHERE suc = 0 AND {cFecha.Cadena()}");
                 Cargar();
-            } else
-            { MessageBox.Show("No se pueden borrar registros tan viejos!", "No permitido", MessageBoxButtons.OK); }    
+            }
+            else
+            { MessageBox.Show("No se pueden borrar registros tan viejos!", "No permitido", MessageBoxButtons.OK); }
+        }
+
+        private void grdTarjetas_Editado(short f, short c, object a)
+        {
+            if (f == grdTarjetas.Rows - 1)
+            {
+                switch (c)
+                {
+                    case 0:
+                        // Fecha
+                        grdTarjetas.set_Texto(f, c, a);
+                        grdTarjetas.ActivarCelda(f, 1);
+                        break;
+                    case 1:
+                        // Suc
+                        object n = tarjetas.Dato_Generico("Sucursales", "ID=" + Convert.ToInt16(a), "Nombre");
+                        if (n != null)
+                        {
+                            grdTarjetas.set_Texto(f, c, a);
+                            grdTarjetas.set_Texto(f, c + 1, n);
+
+                            grdTarjetas.ActivarCelda(f, 3);
+                        }
+                        else
+                        {
+                            grdTarjetas.ErrorEnTxt();
+                        }
+                        break;
+                    case 3:
+                        // Tipo Tarjeta
+                        object t = tarjetas.Dato_Generico("dbGastos.dbo.Tipo_Cuentas", "ID=" + Convert.ToInt16(a), "Nombre");
+                        if (t != null)
+                        {
+                            grdTarjetas.set_Texto(f, c, a);
+                            grdTarjetas.set_Texto(f, c + 1, t);
+                            grdTarjetas.ActivarCelda(f, 5);
+                        }
+                        else
+                        {
+                            grdTarjetas.ErrorEnTxt();
+                        }
+                        break;
+                    case 5:
+                        // Importe
+
+                        // Verificar que se haya ingresado la fecha, sucursal y tipo de tarjeta
+                        if (Convert.ToDateTime(grdTarjetas.get_Texto(f, 0)).Year > 2000 && Convert.ToInt16( grdTarjetas.get_Texto(f, 1)) != 0 && Convert.ToInt16(grdTarjetas.get_Texto(f, 3)) != 0)
+                        {
+                            grdTarjetas.set_Texto(f, c, a);
+
+                            // Insertar en la base de datos
+                            tarjetas.Ejecutar_Comando($"INSERT INTO dbgastos.dbo.Entradas_Tarjeta (Fecha, Suc, Id_Tipo, Importe, Lote, Tarjeta, Comprobante) " +
+                                $"VALUES ('{Convert.ToDateTime(grdTarjetas.get_Texto(f, 0)):MM/dd/yyy}', {Convert.ToInt16(grdTarjetas.get_Texto(f, 1))}, " +
+                                $"{Convert.ToInt16(grdTarjetas.get_Texto(f, 3))}, {Convert.ToDecimal(a).ToString().Replace(",",".")}, 0, 0, 0)");
+                            // Agregar una nueva fila
+                            grdTarjetas.AgregarFila();
+                            grdTarjetas.ActivarCelda(f + 1, 0);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Debe ingresar Fecha, Sucursal y Tipo de Tarjeta antes del Importe.", "Faltan datos", MessageBoxButtons.OK);                            
+                        }
+
+                        break;
+                }
+            }
+        }
+
+        private void grdTarjetas_KeyUp(object sender, short e)
+        {
+            if(e == 46)
+            {
+                // Eliminar fila
+                if (grdTarjetas.Rows > 0 && grdTarjetas.Row > -1 && grdTarjetas.Row < grdTarjetas.Rows - 1)
+                {
+                    // Obtener los datos de la fila seleccionada
+                    DateTime fecha = Convert.ToDateTime(grdTarjetas.get_Texto(grdTarjetas.Row, 0));
+                    int suc = Convert.ToInt16(grdTarjetas.get_Texto(grdTarjetas.Row, 1));
+                    int tipo = Convert.ToInt16(grdTarjetas.get_Texto(grdTarjetas.Row, 3));
+                    decimal importe = Convert.ToDecimal(grdTarjetas.get_Texto(grdTarjetas.Row, 5));
+                    // Eliminar de la base de datos
+                    tarjetas.Ejecutar_Comando($"DELETE TOP(1) FROM dbgastos.dbo.Entradas_Tarjeta WHERE Fecha = '{fecha:MM/dd/yyy}' AND Suc = {suc} " +
+                        $"AND Id_Tipo = {tipo} AND Importe = {importe.ToString().Replace(",", ".")}");
+                    // Recargar los datos
+                    grdTarjetas.BorrarFila();
+                }
+            }
         }
     }
 }

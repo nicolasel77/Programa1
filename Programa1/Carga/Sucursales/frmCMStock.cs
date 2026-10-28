@@ -30,7 +30,7 @@
         private void Cargar()
         {
             string s = string.Join(",", Id);
-            DataTable dt = stock.Datos($" Id IN ({s})"); 
+            DataTable dt = stock.Datos($" Id IN ({s}) AND Bloqueado = 0"); 
             grdOriginal.MostrarDatos(dt, true, false);
             grdResultado.MostrarDatos(dt, true, false);
             

@@ -29,9 +29,10 @@ namespace Programa1.Carga.Varios
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVenta_Productos));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grd = new Grilla2.SpeedGrilla();
+            this.cmdExcel = new System.Windows.Forms.Button();
+            this.chTotales = new System.Windows.Forms.CheckBox();
             this.nuSemanas = new System.Windows.Forms.NumericUpDown();
             this.lstSemanas = new System.Windows.Forms.ListBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -62,6 +63,8 @@ namespace Programa1.Carga.Varios
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.cmdExcel);
+            this.splitContainer1.Panel2.Controls.Add(this.chTotales);
             this.splitContainer1.Panel2.Controls.Add(this.nuSemanas);
             this.splitContainer1.Panel2.Controls.Add(this.lstSemanas);
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
@@ -91,9 +94,11 @@ namespace Programa1.Carga.Varios
             this.grd.fColor = System.Drawing.SystemColors.Control;
             this.grd.FixCols = 0;
             this.grd.FixRows = 0;
+            this.grd.Frozen = 0;
             this.grd.FuenteEncabezado = null;
             this.grd.FuentePieDePagina = null;
             this.grd.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grd.LimpiarEstilosAntesDeOrdenar = false;
             this.grd.Location = new System.Drawing.Point(12, 12);
             this.grd.Name = "grd";
             this.grd.PieDePagina = "\t\tPage {0} of {1}";
@@ -104,12 +109,36 @@ namespace Programa1.Carga.Varios
             this.grd.Size = new System.Drawing.Size(1049, 702);
             this.grd.TabIndex = 0;
             // 
+            // cmdExcel
+            // 
+            this.cmdExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdExcel.Location = new System.Drawing.Point(313, 655);
+            this.cmdExcel.Name = "cmdExcel";
+            this.cmdExcel.Size = new System.Drawing.Size(108, 23);
+            this.cmdExcel.TabIndex = 6;
+            this.cmdExcel.Text = "Excel";
+            this.cmdExcel.UseVisualStyleBackColor = true;
+            this.cmdExcel.Click += new System.EventHandler(this.cmdExcel_Click);
+            // 
+            // chTotales
+            // 
+            this.chTotales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chTotales.AutoSize = true;
+            this.chTotales.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chTotales.Location = new System.Drawing.Point(305, 632);
+            this.chTotales.Name = "chTotales";
+            this.chTotales.Size = new System.Drawing.Size(59, 17);
+            this.chTotales.TabIndex = 5;
+            this.chTotales.Text = "Totales";
+            this.chTotales.UseVisualStyleBackColor = true;
+            // 
             // nuSemanas
             // 
             this.nuSemanas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.nuSemanas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nuSemanas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nuSemanas.Location = new System.Drawing.Point(385, 694);
+            this.nuSemanas.Location = new System.Drawing.Point(373, 694);
             this.nuSemanas.Maximum = new decimal(new int[] {
             10,
             0,
@@ -139,9 +168,9 @@ namespace Programa1.Carga.Varios
             this.lstSemanas.ItemHeight = 20;
             this.lstSemanas.Items.AddRange(new object[] {
             "20/12/1977"});
-            this.lstSemanas.Location = new System.Drawing.Point(317, 6);
+            this.lstSemanas.Location = new System.Drawing.Point(305, 6);
             this.lstSemanas.Name = "lstSemanas";
-            this.lstSemanas.Size = new System.Drawing.Size(109, 680);
+            this.lstSemanas.Size = new System.Drawing.Size(109, 620);
             this.lstSemanas.TabIndex = 3;
             this.lstSemanas.SelectedIndexChanged += new System.EventHandler(this.lstSemanas_SelectedIndexChanged);
             // 
@@ -161,7 +190,7 @@ namespace Programa1.Carga.Varios
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.cSuc);
-            this.splitContainer2.Size = new System.Drawing.Size(308, 723);
+            this.splitContainer2.Size = new System.Drawing.Size(296, 723);
             this.splitContainer2.SplitterDistance = 324;
             this.splitContainer2.TabIndex = 2;
             // 
@@ -174,7 +203,7 @@ namespace Programa1.Carga.Varios
             this.cProductos1.Location = new System.Drawing.Point(0, 0);
             this.cProductos1.Mostrar_Tipo = true;
             this.cProductos1.Name = "cProductos1";
-            this.cProductos1.Size = new System.Drawing.Size(308, 324);
+            this.cProductos1.Size = new System.Drawing.Size(296, 324);
             this.cProductos1.TabIndex = 0;
             this.cProductos1.Titulo = "Productos";
             this.cProductos1.Valor_Actual = -1;
@@ -187,10 +216,10 @@ namespace Programa1.Carga.Varios
             this.cSuc.Filtro_In = "";
             this.cSuc.Location = new System.Drawing.Point(0, 0);
             this.cSuc.Mostrar_Botones = true;
-            this.cSuc.Mostrar_Tipo = false;
+            this.cSuc.Mostrar_Tipo = true;
             this.cSuc.Name = "cSuc";
             this.cSuc.selectionMode = System.Windows.Forms.SelectionMode.One;
-            this.cSuc.Size = new System.Drawing.Size(308, 395);
+            this.cSuc.Size = new System.Drawing.Size(296, 395);
             this.cSuc.TabIndex = 1;
             this.cSuc.Titulo = "Sucursales";
             this.cSuc.Valor_Actual = -1;
@@ -207,6 +236,7 @@ namespace Programa1.Carga.Varios
             this.Text = "Venta Productos";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nuSemanas)).EndInit();
@@ -227,5 +257,7 @@ namespace Programa1.Carga.Varios
         private Grilla2.SpeedGrilla grd;
         private System.Windows.Forms.ListBox lstSemanas;
         private System.Windows.Forms.NumericUpDown nuSemanas;
+        private System.Windows.Forms.Button cmdExcel;
+        private System.Windows.Forms.CheckBox chTotales;
     }
 }

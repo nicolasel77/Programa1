@@ -31,15 +31,16 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grd = new Grilla2.SpeedGrilla();
-            this.chValoresCero = new MaterialSkin.Controls.MaterialCheckBox();
-            this.lstFechas = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.nuDecimales = new System.Windows.Forms.NumericUpDown();
+            this.chValoresCero = new MaterialSkin.Controls.MaterialCheckBox();
             this.cmdGuardar = new Programa1.Controles.cBoton();
             this.cmdImprimir = new Programa1.Controles.cBoton();
             this.cmdLimpiar = new Programa1.Controles.cBoton();
             this.cmdBorrar = new Programa1.Controles.cBoton();
+            this.lstFechas = new System.Windows.Forms.ListBox();
             this.Suc = new Programa1.Controles.cSucursales();
+            this.chFiltrarSucs = new MaterialSkin.Controls.MaterialCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -64,6 +65,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.nuDecimales);
+            this.splitContainer1.Panel2.Controls.Add(this.chFiltrarSucs);
             this.splitContainer1.Panel2.Controls.Add(this.chValoresCero);
             this.splitContainer1.Panel2.Controls.Add(this.cmdGuardar);
             this.splitContainer1.Panel2.Controls.Add(this.cmdImprimir);
@@ -124,38 +126,6 @@
             this.grd.TabIndex = 0;
             this.grd.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grd_Editado);
             // 
-            // chValoresCero
-            // 
-            this.chValoresCero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chValoresCero.AutoSize = true;
-            this.chValoresCero.Depth = 0;
-            this.chValoresCero.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.chValoresCero.Location = new System.Drawing.Point(506, 710);
-            this.chValoresCero.Margin = new System.Windows.Forms.Padding(0);
-            this.chValoresCero.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chValoresCero.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chValoresCero.Name = "chValoresCero";
-            this.chValoresCero.Ripple = true;
-            this.chValoresCero.Size = new System.Drawing.Size(162, 30);
-            this.chValoresCero.TabIndex = 4;
-            this.chValoresCero.Text = "Guardar Valores Cero";
-            this.chValoresCero.UseVisualStyleBackColor = true;
-            // 
-            // lstFechas
-            // 
-            this.lstFechas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lstFechas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lstFechas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lstFechas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
-            this.lstFechas.FormattingEnabled = true;
-            this.lstFechas.ItemHeight = 20;
-            this.lstFechas.Location = new System.Drawing.Point(349, 3);
-            this.lstFechas.Name = "lstFechas";
-            this.lstFechas.Size = new System.Drawing.Size(154, 540);
-            this.lstFechas.TabIndex = 2;
-            this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
-            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -184,6 +154,23 @@
             0,
             0});
             this.nuDecimales.ValueChanged += new System.EventHandler(this.nuDecimales_ValueChanged);
+            // 
+            // chValoresCero
+            // 
+            this.chValoresCero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chValoresCero.AutoSize = true;
+            this.chValoresCero.Depth = 0;
+            this.chValoresCero.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chValoresCero.Location = new System.Drawing.Point(506, 710);
+            this.chValoresCero.Margin = new System.Windows.Forms.Padding(0);
+            this.chValoresCero.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chValoresCero.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chValoresCero.Name = "chValoresCero";
+            this.chValoresCero.Ripple = true;
+            this.chValoresCero.Size = new System.Drawing.Size(162, 30);
+            this.chValoresCero.TabIndex = 4;
+            this.chValoresCero.Text = "Guardar Valores Cero";
+            this.chValoresCero.UseVisualStyleBackColor = true;
             // 
             // cmdGuardar
             // 
@@ -225,6 +212,21 @@
             this.cmdBorrar.Texto = "Borrar";
             this.cmdBorrar.Click += new System.EventHandler(this.cmdBorrar_Click);
             // 
+            // lstFechas
+            // 
+            this.lstFechas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstFechas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstFechas.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Programa1.Properties.Settings.Default, "lblTitulos", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.lstFechas.Font = global::Programa1.Properties.Settings.Default.lblTitulos;
+            this.lstFechas.FormattingEnabled = true;
+            this.lstFechas.ItemHeight = 20;
+            this.lstFechas.Location = new System.Drawing.Point(348, 3);
+            this.lstFechas.Name = "lstFechas";
+            this.lstFechas.Size = new System.Drawing.Size(154, 500);
+            this.lstFechas.TabIndex = 2;
+            this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
+            // 
             // Suc
             // 
             this.Suc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -233,7 +235,7 @@
             this.Suc.Filtro_In = "";
             this.Suc.Location = new System.Drawing.Point(2, 3);
             this.Suc.Mostrar_Botones = false;
-            this.Suc.Mostrar_Tipo = true;
+            this.Suc.Mostrar_Tipo = false;
             this.Suc.Name = "Suc";
             this.Suc.selectionMode = System.Windows.Forms.SelectionMode.One;
             this.Suc.Size = new System.Drawing.Size(340, 742);
@@ -241,6 +243,23 @@
             this.Suc.Titulo = "Sucursales";
             this.Suc.Valor_Actual = -1;
             this.Suc.Cambio_Seleccion += new System.EventHandler(this.Suc_Cambio_Seleccion);
+            // 
+            // chFiltrarSucs
+            // 
+            this.chFiltrarSucs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chFiltrarSucs.AutoSize = true;
+            this.chFiltrarSucs.Depth = 0;
+            this.chFiltrarSucs.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chFiltrarSucs.Location = new System.Drawing.Point(349, 506);
+            this.chFiltrarSucs.Margin = new System.Windows.Forms.Padding(0);
+            this.chFiltrarSucs.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chFiltrarSucs.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chFiltrarSucs.Name = "chFiltrarSucs";
+            this.chFiltrarSucs.Ripple = true;
+            this.chFiltrarSucs.Size = new System.Drawing.Size(138, 30);
+            this.chFiltrarSucs.TabIndex = 4;
+            this.chFiltrarSucs.Text = "Filtrar Sucursales";
+            this.chFiltrarSucs.UseVisualStyleBackColor = true;
             // 
             // frmPrecios_Granja
             // 
@@ -277,5 +296,6 @@
         private MaterialSkin.Controls.MaterialCheckBox chValoresCero;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nuDecimales;
+        private MaterialSkin.Controls.MaterialCheckBox chFiltrarSucs;
     }
 }

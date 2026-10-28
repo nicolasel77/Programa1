@@ -11,6 +11,7 @@ namespace Programa1.Carga.Precios
 
         Precios_Sucursales precios;
         Herramientas.Herramientas h = new Herramientas.Herramientas();
+        int suc = 0;
 
         public frmPrecios_Granja()
         {
@@ -75,12 +76,30 @@ namespace Programa1.Carga.Precios
                 grd.set_ColW(1, 300);
                 grd.Columnas[2].Format = $"N{nuDecimales.Value}"; 
             }
+
+            if(chFiltrarSucs.Checked == true)
+            {
+                Suc.Filtro_In = $"(SELECT Id_Sucursales FROM vw_PreciosSucursales WHERE Id_Productos=300 AND Fecha='{precios.Fecha:MM/dd/yyy}' " +
+                    $"AND Precio={lstFechas.Text.Substring(9).Replace(".", "")})";
+            }
+            else {
+                Suc.Filtro_In = "";
+                
+            }
+
+
             this.Cursor = Cursors.Default;
         }
 
         private void Suc_Cambio_Seleccion(object sender, EventArgs e)
         {
-            Cargar_Precios();
+            
+            if (suc != Suc.Valor_Actual)
+            {
+                suc = Suc.Valor_Actual;
+                Cargar_Precios();
+            }
+            
         }
 
         private void cmdBorrar_Click(object sender, EventArgs e)

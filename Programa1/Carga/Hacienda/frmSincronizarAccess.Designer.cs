@@ -61,6 +61,7 @@ namespace Programa1.Carga.Hacienda
             this.label9 = new System.Windows.Forms.Label();
             this.tiActualizar = new System.Windows.Forms.Timer(this.components);
             this.lblFechaAct = new System.Windows.Forms.Label();
+            this.cmdFTP = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdBase
@@ -105,6 +106,7 @@ namespace Programa1.Carga.Hacienda
             this.label4.Size = new System.Drawing.Size(56, 20);
             this.label4.TabIndex = 1;
             this.label4.Text = "Desde";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -115,6 +117,7 @@ namespace Programa1.Carga.Hacienda
             this.label5.Size = new System.Drawing.Size(52, 20);
             this.label5.TabIndex = 1;
             this.label5.Text = "Hasta";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // flBuscar
             // 
@@ -296,6 +299,7 @@ namespace Programa1.Carga.Hacienda
             this.mDesde.Name = "mDesde";
             this.mDesde.Size = new System.Drawing.Size(97, 20);
             this.mDesde.TabIndex = 1;
+            this.mDesde.ValueChanged += new System.EventHandler(this.mDesde_ValueChanged);
             // 
             // mHasta
             // 
@@ -304,6 +308,7 @@ namespace Programa1.Carga.Hacienda
             this.mHasta.Name = "mHasta";
             this.mHasta.Size = new System.Drawing.Size(97, 20);
             this.mHasta.TabIndex = 2;
+            this.mHasta.ValueChanged += new System.EventHandler(this.mHasta_ValueChanged);
             // 
             // label2
             // 
@@ -432,6 +437,17 @@ namespace Programa1.Carga.Hacienda
             this.lblFechaAct.TabIndex = 17;
             this.lblFechaAct.Text = "Subida de archivo:";
             // 
+            // cmdFTP
+            // 
+            this.cmdFTP.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdFTP.Location = new System.Drawing.Point(383, 50);
+            this.cmdFTP.Name = "cmdFTP";
+            this.cmdFTP.Size = new System.Drawing.Size(102, 28);
+            this.cmdFTP.TabIndex = 3;
+            this.cmdFTP.Text = "Bajar Ahora";
+            this.cmdFTP.UseVisualStyleBackColor = true;
+            this.cmdFTP.Click += new System.EventHandler(this.cmdFTP_Click);
+            // 
             // frmSincronizarAccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -453,6 +469,7 @@ namespace Programa1.Carga.Hacienda
             this.Controls.Add(this.cmdCostos_Salida);
             this.Controls.Add(this.chSaldo);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.cmdFTP);
             this.Controls.Add(this.cmdSincSalidas);
             this.Controls.Add(this.chFaena);
             this.Controls.Add(this.chBoleta);
@@ -508,5 +525,6 @@ namespace Programa1.Carga.Hacienda
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Timer tiActualizar;
         private System.Windows.Forms.Label lblFechaAct;
+        private System.Windows.Forms.Button cmdFTP;
     }
 }

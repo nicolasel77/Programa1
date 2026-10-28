@@ -28,7 +28,8 @@
         private const Byte c_Kilos = 12;
         private const Byte c_TotalCompra = 13;
         private const Byte c_TotalVenta = 14;
-        private const Byte c_Promedio = 15;
+        private const Byte c_Promedio = 17;
+        public const byte c_Bloqueado = 18;
         #endregion
         int vi = 4;
         public frmVentas()
@@ -94,9 +95,35 @@
                     }
                     break;
                 case Keys.F9:
-                    cmdCambio.PerformClick();
+                    Bloquear();
                     break;
             }
+        }
+
+        private void Bloquear()
+        {
+            // Setear el valor de Bloqueado en true en todas las filas seleccionadas. Si no hay ninguna seleccionada setear todas las actuales
+            int f1 = grdVenta.Selection.r1;
+            int f2 = grdVenta.Selection.r2;
+
+            if (f1 == f2 && f1 == -1)
+            {
+                f1 = 1;
+                f2 = grdVenta.Rows - 2;
+            }
+            int contador = 0;
+            for (int i = f1; i <= f2; i++)
+            {
+                Venta.ID = (int)grdVenta.get_Texto(i, c_Id);
+                if (Venta.ID != 0)
+                {
+                    Venta.Ejecutar_Comando("UPDATE Ventas SET Bloqueado = 1 WHERE Id = " + Venta.ID);
+                    Venta.Bloqueado = true;
+                    grdVenta.set_Texto(i, c_Bloqueado, true);
+                    contador++;
+                }
+            }
+            Mensaje(contador == 0 ? "No se bloqueo ningún registro." : contador == 1 ? "Se bloqueo 1 registro." : $"Se bloquearon {contador} registros.");
         }
 
         #region "Mensaje"
@@ -170,6 +197,12 @@
             grdVenta.set_ColW(c_Kilos, 60);
             grdVenta.set_ColW(c_TotalCompra, 80);
             grdVenta.set_ColW(c_TotalVenta, 80);
+            grdVenta.set_ColW(c_Bloqueado, 0);
+
+            grdVenta.Columnas[grdVenta.get_ColIndex("Costo_FR")].Style.Format = "N2";
+            grdVenta.Columnas[grdVenta.get_ColIndex("Total_FR")].Style.Format = "N2";
+            
+
             grdVenta.set_ColW(c_Promedio, 60);
 
             grdVenta.set_Texto(0, c_IdProd, "Prod");
@@ -259,7 +292,7 @@
 
         private void GrdVenta_Editado(short f, short c, object a)
         {
-            if (Venta.Fecha_Cerrada(Venta.Fecha) == false)
+            if (Venta.Fecha_Cerrada(Venta.Fecha) == false && Venta.Bloqueado == false)
             {
                 int id = Convert.ToInt32(grdVenta.get_Texto(f, c_Id));
                 switch (c)
@@ -680,7 +713,7 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0)) != 0)
+                    if (Convert.ToInt32(grdVenta.get_Texto(grdVenta.Row, 0)) != 0 && Venta.Bloqueado == false)
                     {
                         if (Venta.Fecha_Cerrada(Venta.Fecha) == false)
                         {

@@ -22,6 +22,7 @@
         private readonly Byte c_Reintegro;
         private readonly Byte c_Kilos_Ven;
         private readonly Byte c_Dif;
+        private readonly byte c_Bloqueado;
         #endregion
 
         public frmOfertas()
@@ -45,6 +46,8 @@
             c_Reintegro = Convert.ToByte(grdOfertas.get_ColIndex("Reintegro"));
             c_Kilos_Ven = Convert.ToByte(grdOfertas.get_ColIndex("Kilos_Vendidos"));
             c_Dif = Convert.ToByte(grdOfertas.get_ColIndex("Diferencia"));
+            c_Bloqueado = Convert.ToByte(grdOfertas.get_ColIndex("Bloqueado"));
+
             formato_Grilla();
 
             //El intercambio de columnas para estas teclas
@@ -88,7 +91,36 @@
                         }
                     }
                     break;
+                case Keys.F9:
+                    Bloquear();
+                    break;
             }
+        }
+
+        private void Bloquear()
+        {
+            // Setear el valor de Bloqueado en true en todas las filas seleccionadas. Si no hay ninguna seleccionada setear todas las actuales
+            int f1 = grdOfertas.Selection.r1;
+            int f2 = grdOfertas.Selection.r2;
+
+            if (f1 == f2 && f1 == -1)
+            {
+                f1 = 1;
+                f2 = grdOfertas.Rows - 2;
+            }
+            int contador = 0;
+            for (int i = f1; i <= f2; i++)
+            {
+                Ofertas.ID = (int)grdOfertas.get_Texto(i, c_Id);
+                if (Ofertas.ID != 0)
+                {
+                    Ofertas.Ejecutar_Comando("UPDATE Ofertas SET Bloqueado = 1 WHERE Id = " + Ofertas.ID);
+                    Ofertas.Bloqueado = true;
+                    grdOfertas.set_Texto(i, c_Bloqueado, true);
+                    contador++;
+                }
+            }
+            Mensaje(contador == 0 ? "No se bloqueo ningún registro." : contador == 1 ? "Se bloqueo 1 registro." : $"Se bloquearon {contador} registros.");
         }
 
         #region "Mensaje"
@@ -147,6 +179,7 @@
             grdOfertas.set_ColW(c_CostoOferta, 60);
             grdOfertas.set_ColW(c_Kilos, 60);
             grdOfertas.set_ColW(c_Reintegro, 80);
+            grdOfertas.set_ColW(c_Bloqueado, 0);
 
             grdOfertas.set_Texto(0, c_IdProd, "Prod");
             grdOfertas.AutosizeCol(c_IdProd);
@@ -204,7 +237,7 @@
         private void GrdOfertas_Editado(short f, short c, object a)
         {
             int id = Convert.ToInt32(grdOfertas.get_Texto(f, c_Id));
-            if (Ofertas.Fecha_Cerrada(Ofertas.Fecha) == false)
+            if (Ofertas.Fecha_Cerrada(Ofertas.Fecha) == false && Ofertas.Bloqueado == false)
             {
                 switch (c)
                 {
@@ -406,7 +439,7 @@
                 Ofertas.Costo_Original = Convert.ToSingle(grdOfertas.get_Texto(Fila, c_CostoOriginal));
                 Ofertas.Costo_Oferta = Convert.ToSingle(grdOfertas.get_Texto(Fila, c_CostoOferta));
                 Ofertas.Kilos = Convert.ToSingle(grdOfertas.get_Texto(Fila, c_Kilos));
-
+                Ofertas.Bloqueado = Convert.ToBoolean(grdOfertas.get_Texto(Fila, c_Bloqueado));
 
                 Ofertas.precios.Fecha = Ofertas.Fecha;
                 Ofertas.precios.Sucursal = Ofertas.Sucursal;
@@ -420,7 +453,7 @@
             {
                 if (grdOfertas.Col == c_Kilos)
                 {
-                    if (Convert.ToInt32(grdOfertas.get_Texto()) == 0)
+                    if (Convert.ToInt32(grdOfertas.get_Texto()) == 0 )
                     {
 
                         Ofertas.Costo_Oferta = Ofertas.precios_ofertas.Buscar_SiguienteCosto();
@@ -452,7 +485,7 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id)) != 0)
+                    if (Convert.ToInt32(grdOfertas.get_Texto(grdOfertas.Row, c_Id)) != 0 && Ofertas.Bloqueado == false)
                     {
                         if (Ofertas.Fecha_Cerrada(Ofertas.Fecha) == false)
                         {

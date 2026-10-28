@@ -102,7 +102,7 @@ namespace Programa1.Carga.Tesoreria
             {
                 case e_Orden.Tipo:
                     string s = h.Unir(cFechas1.Cadena(), grupo);
-                    grdEntradas.MostrarDatos(Entradas.TotalPorTipo(s), true, true);
+                    grdEntradas.MostrarDatos(Entradas.TotalPorTipo(s, chMostrarCajas.Checked), true, true);
                     grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
                     grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";
                     grdEntradas.AutosizeAll();
@@ -111,11 +111,11 @@ namespace Programa1.Carga.Tesoreria
                 case e_Orden.SubTipo:
                     if (Tipo > 0)
                     {
-                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo($"{(grupo.Length != 0 ? grupo + " AND " : "")} Id_TipoEntrada={Tipo} AND {cFechas1.Cadena()}"), true, true);
+                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo($"{(grupo.Length != 0 ? grupo + " AND " : "")} Id_TipoEntrada={Tipo} AND {cFechas1.Cadena()}", chMostrarCajas.Checked), true, true);
                     }
                     else
                     {
-                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), grupo)), true, true);
+                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo(h.Unir(cFechas1.Cadena(), grupo), chMostrarCajas.Checked), true, true);
                     }
                     grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
                     grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";
@@ -138,7 +138,7 @@ namespace Programa1.Carga.Tesoreria
                     if (lst.SelectedIndex > 0)
                     {
                         Tipo = h.Codigo_Seleccionado(lblTipo.Text);
-                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo($"Id_TipoEntrada={Tipo} AND {cFechas1.Cadena()}"), true, true);
+                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo($"Id_TipoEntrada={Tipo} AND {cFechas1.Cadena()}", chMostrarCajas.Checked), true, true);
                         grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
                         grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";
                         grdEntradas.AutosizeAll();
@@ -148,7 +148,7 @@ namespace Programa1.Carga.Tesoreria
                     {
                         Tipo = 0;
                         SubTipo = 0;
-                        grdEntradas.MostrarDatos(Entradas.TotalPorTipo(cFechas1.Cadena()), true, true);
+                        grdEntradas.MostrarDatos(Entradas.TotalPorTipo(cFechas1.Cadena(), chMostrarCajas.Checked), true, true);
                         grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
                         grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";
                         grdEntradas.AutosizeAll();
@@ -163,7 +163,7 @@ namespace Programa1.Carga.Tesoreria
                         string s = cFechas1.Cadena();
                         s = h.Unir(s, Tipo > 0 ? $"Id_TipoEntrada={Tipo}" : "");
                         s = h.Unir(s, $"ID_SubTipoEntrada ={SubTipo}");
-                        grdEntradas.MostrarDatos(Entradas.TotalPorDetalle(s), true, true);
+                        grdEntradas.MostrarDatos(Entradas.TotalPorDetalle(s, chMostrarCajas.Checked), true, true);
                         grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
                         grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";
                         grdEntradas.AutosizeAll();
@@ -174,7 +174,7 @@ namespace Programa1.Carga.Tesoreria
                         SubTipo = 0;
                         string s = cFechas1.Cadena();
                         s = h.Unir(s, Tipo > 0 ? $"Id_TipoEntrada={Tipo}" : "");
-                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo(s), true, true);
+                        grdEntradas.MostrarDatos(Entradas.TotalPorSubTipo(s, chMostrarCajas.Checked), true, true);
                         grdEntradas.SumarCol(grdEntradas.get_ColIndex("Total"), true);
                         grdEntradas.Columnas[grdEntradas.get_ColIndex("Total")].Style.Format = "N2";
                         grdEntradas.AutosizeAll();

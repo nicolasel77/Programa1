@@ -25,7 +25,8 @@
                 }
                 else
                 {
-                    t = $"SELECT Id, Nombre, dbo.f_Balance (Id, '{Semana:MM/dd/yy}', '{Semana.AddDays(6):MM/dd/yy}') AS Balance FROM Sucursales WHERE Ver=1 AND Propio={(esSuc ? "1" : "0")} ORDER BY Id";
+                    //t = $"SELECT Id, Nombre, dbo.f_Balance (Id, '{Semana:MM/dd/yy}', '{Semana.AddDays(6):MM/dd/yy}') AS Balance FROM Sucursales WHERE Ver=1 AND Propio={(esSuc ? "1" : "0")} ORDER BY Id";
+                    t = $"SELECT Id_Sucursales AS ID, Nombre, Balance FROM vw_Estadisticas_Sucursal WHERE Semana BETWEEN '{Semana:MM/dd/yy}' AND '{Semana.AddDays(6):MM/dd/yy}' AND Ver=1 AND Propio={(esSuc ? "1" : "0")} ORDER BY Id_Sucursales";
                 }
                 SqlCommand comandoSql = new SqlCommand(t, conexionSql);
                 comandoSql.CommandType = CommandType.Text;

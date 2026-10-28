@@ -1,4 +1,5 @@
 Imports System.ComponentModel
+Imports C1.Win.C1FlexGrid
 Public Class SpeedGrilla
     Inherits UserControl
     Public lc As New DataTable
@@ -122,7 +123,7 @@ Public Class SpeedGrilla
                     Case "System.DateTime"
                         Grd.Cols(i).TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.CenterCenter
                     Case "System.Single", "System.Double", "System.Decimal"
-                        Grd.Cols(i).Format = "#.00#"
+                        Grd.Cols(i).Format = "#.00"
                         Grd.Cols(i).TextAlign = C1.Win.C1FlexGrid.TextAlignEnum.RightCenter
                     Case "System.Integer", "System.Int16", "System.Int32", "System.Int64"
                         Grd.Cols(i).Format = "#"
@@ -215,6 +216,7 @@ Public Class SpeedGrilla
 
     Public Sub MostrarDatos(ByVal ls As DataTable, ByVal AplicarFormato As Boolean, ByVal AgregarUltimaFila As Boolean)
         Dim i As Int32
+        Grd.Rows.Count = 1
         Grd.Redraw = False
         Grd.Col = -1
         If ls Is Nothing Then
@@ -517,6 +519,17 @@ Public Class SpeedGrilla
             End Try
         End Set
     End Property
+    Public Property ColW(ByVal Columna As String) As Int32
+        Get
+            Return Grd.Cols(Columna).Width
+        End Get
+        Set(ByVal Value As Int32)
+            Try
+                Grd.Cols(Columna).Width = Value
+            Catch ex As Exception
+            End Try
+        End Set
+    End Property
 
     Public ReadOnly Property ColIndex(ByVal NombreColumna As String) As Int32
         Get
@@ -650,7 +663,9 @@ Public Class SpeedGrilla
     End Property
     Public Property Texto(Optional ByVal f As Int32 = -1, Optional ByVal c As Object = -1) As Object
         Get
-            If Not IsNumeric(c) Then c = Grd.Cols.IndexOf(c)
+            If Not IsNumeric(c) Then
+                c = Grd.Cols.IndexOf(c)
+            End If
             If f = -1 Then f = Grd.Row
             If c = -1 Then c = Grd.Col
             'MsgBox(Grd.GetDataDisplay(f, c))
@@ -686,6 +701,8 @@ Public Class SpeedGrilla
             End Try
         End Set
     End Property
+
+
     Public Property AllowMerging() As C1.Win.C1FlexGrid.AllowMergingEnum
         Get
             Return Grd.AllowMerging
@@ -1471,6 +1488,8 @@ Public Class SpeedGrilla
             ttGenenral.SetToolTip(Grd, $"Cant: {Grd.Rows.Count - 1}")
         End If
     End Sub
+
+
 
 
 

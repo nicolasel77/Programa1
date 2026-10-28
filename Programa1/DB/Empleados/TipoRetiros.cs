@@ -6,7 +6,8 @@
     {
         public TipoRetiros()
         {
-            Tabla = "TipoRetiros";
+            Tabla = "dbEmpleados.dbo.Tipos_Retiro";
+            Campo_Nombre = "Descripcion";
         }
 
     }

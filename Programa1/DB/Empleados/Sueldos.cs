@@ -25,15 +25,22 @@
             object d;
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Sueldo FROM Sueldos  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Empleados={Empleado.ID} AND ID_Tipo={Tipo.ID} ORDER BY Fecha DESC", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 ISNULL(Sueldo, 0) FROM dbEmpleados.dbo.Sueldos  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
+                    $" AND Empleado={Empleado.ID} AND Tipo={Tipo.ID} ORDER BY Fecha DESC", conexionSql);
 
                 conexionSql.Open();
 
                 comandoSql.CommandType = CommandType.Text;
                 d = comandoSql.ExecuteScalar();
-
-                conexionSql.Close();
+                if (d == null || d == DBNull.Value)
+                {
+                    d = 0;
+                }
+                else
+                {
+                    d = Convert.ToSingle(d);
+                }
+                    conexionSql.Close();
             }
             catch (Exception)
             {

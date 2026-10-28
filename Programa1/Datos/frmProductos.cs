@@ -17,11 +17,10 @@
         private const byte cNombre = 3;
         private const byte cVer = 4;
         private const byte cImprimir = 5;
-        private const byte cPesable = 6;
-        private const byte cMultiplicador = 7;
-        private const byte cResumirPorVenta = 2;
-        private const byte cTiene_Estadistica = 3;
-        private const byte cOrden= 8;
+        private const byte cPedidos= 6;
+        private const byte cPesable = 7;
+        private const byte cMultiplicador = 8;
+        private const byte cOrden= 9;        
 
         public frmProductos()
         {
@@ -76,9 +75,7 @@
                             grdTipo.set_Texto(f, c, a);
                             prods.Tipo.Agregar();
                             grdTipo.AgregarFila();
-                            grdTipo.ActivarCelda(f, 1);
-                            grdTipo.set_Texto(f, cResumirPorVenta, 1);
-                            grdTipo.set_Texto(f, cTiene_Estadistica, 1);
+                            grdTipo.ActivarCelda(f, 1);                            
                         }
                     }
                     break;
@@ -97,37 +94,7 @@
                         prods.Tipo.Actualizar();
                         grdTipo.ActivarCelda(f, c + 1);
                     }
-                    break;
-                case cResumirPorVenta: // ResumirPorVenta
-                    if (i == 0)
-                    {
-                        Mensaje("Debe ingresar el Id primero");
-                        grdTipo.ActivarCelda(f, 0);
-                    }
-                    else
-                    {
-                        prods.Tipo.ID = i;
-                        prods.Tipo.ResumirPorVenta = (bool) a;
-                        grdTipo.set_Texto(f, c, a);
-                        prods.Tipo.Actualizar("ResumirPorVenta", a);
-                        grdTipo.ActivarCelda(f , c + 1);
-                    }
-                    break;
-                case cTiene_Estadistica: // Tiene_Estadistica
-                    if (i == 0)
-                    {
-                        Mensaje("Debe ingresar el Id primero");
-                        grdTipo.ActivarCelda(f, 0);
-                    }
-                    else
-                    {
-                        prods.Tipo.ID = i;
-                        prods.Tipo.Tiene_Estadistica = (bool)a;
-                        grdTipo.set_Texto(f, c, a);
-                        prods.Tipo.Actualizar("Tiene_Estadistica", a);
-                        grdTipo.ActivarCelda(f + 1, c);
-                    }
-                    break;
+                    break;                
             }
         }
 
@@ -256,6 +223,21 @@
                         grdProductos.set_Texto(f, c, a);
                         prods.Actualizar();
                         grdProductos.ActivarCelda(f, 5);
+                    }
+                    break;
+                case cPedidos: // Ver en pedidos
+                    if (i == 0)
+                    {
+                        Mensaje("Debe ingresar el Id primero");
+                        grdProductos.ActivarCelda(f, 0);
+                    }
+                    else
+                    {
+                        prods.ID = i;
+                        prods.VerEnPedidos = bool.Parse(a.ToString());
+                        grdProductos.set_Texto(f, c, a);
+                        prods.Actualizar();
+                        grdProductos.ActivarCelda(f + 1, c);
                     }
                     break;
                 case cImprimir: // Imp

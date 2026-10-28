@@ -11,7 +11,7 @@
         private bool cCambio = false;
         private DateTime uFecha = Convert.ToDateTime("1/1/2000");
         public DateTime fecha_Actual;
-        public DateTime fecha_Fin;
+        public DateTime fecha_Fin = DateTime.Today;
 
         public enum e_MostrarSolo : byte
         {
@@ -29,7 +29,9 @@
         public cFechas()
         {
             InitializeComponent();
-
+            cCambio = false;
+            fecha_Actual = DateTime.Today;
+            cCambio = true;
             Cargar();
         }
 
@@ -295,7 +297,16 @@
                 {
                     fecha_Actual = mntDias.SelectionStart.Date;
                     fecha_Fin = fecha_Actual;
-                    if (chFiltrar.Checked) Cambio_Seleccion(null, null);
+
+                    try
+                    {
+                        if (chFiltrar.Checked) Cambio_Seleccion(null, null);
+                    }
+                    catch (Exception)
+                    {
+                        // Emitir un beep
+                        Console.Beep();
+                    }
                 }
             }
         }

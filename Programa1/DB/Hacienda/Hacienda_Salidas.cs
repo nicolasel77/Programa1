@@ -2,6 +2,7 @@
 namespace Programa1.DB
 {
     using Programa1.Clases;
+    using Programa1.DB.Sucursales;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
@@ -25,17 +26,23 @@ namespace Programa1.DB
         public Faena Faena { get; set; } = new Faena();
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public float Costo_Salida { get; set; }
+        public float Costo_Franquicia { get; set; }
         public float Media { get; set; }
         public bool Media_Utilizada { get; set; }
 
         public Precios_Sucursales precios = new Precios_Sucursales();        
-        
+        public Precios_Franquicia precios_fr = new Precios_Franquicia();
         public void Cargar_CostoSalida()
         {
             precios.Fecha = Fecha;
             precios.Sucursal = Sucursal;
             precios.Producto = Faena.Producto;
             Costo_Salida = precios.Buscar();
+
+            precios_fr.Fecha = Fecha;
+            precios_fr.Sucursal = Sucursal.ID;
+            precios_fr.Producto = Faena.Producto.ID;
+            Costo_Franquicia = precios_fr.Buscar_Precio(precios_fr);
         }
 
         public DataTable Datos_Salidas(string filtro = "")
@@ -146,8 +153,8 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Hacienda_Salidas (Id, Fecha, Id_Sucursales, Id_Faena, Costo_Salida, Media) " +
-                        $"VALUES({ID}, '{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Faena.ID}, {Costo_Salida.ToString().Replace(",", ".")}, {Media.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Hacienda_Salidas (Id, Fecha, Id_Sucursales, Id_Faena, Costo_Salida, Costo_Franquicia, Media) " +
+                        $"VALUES({ID}, '{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Faena.ID}, {Costo_Salida.ToString().Replace(",", ".")}, {Costo_Franquicia.ToString().Replace(",", ".")}, {Media.ToString().Replace(",", ".")})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -212,6 +219,7 @@ namespace Programa1.DB
                 Faena.ID = Convert.ToInt32(dr["Id_Faena"]);
                 Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Costo_Salida = Convert.ToSingle(dr["Costo_Salida"]);
+                Costo_Franquicia= Convert.ToSingle(dr["Costo_Franquicia"]);
                 Media = Convert.ToSingle(dr["Media"]);
                 Media_Utilizada = Convert.ToBoolean(dr["MU"]);
 

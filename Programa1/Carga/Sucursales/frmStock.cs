@@ -21,6 +21,7 @@
         private readonly Byte c_Costo;
         private readonly Byte c_Kilos;
         private readonly Byte c_Total;
+        private readonly byte c_Bloqueado;
         #endregion
         public frmStock(Usuarios usuario)
         {
@@ -42,6 +43,7 @@
             c_Costo = Convert.ToByte(grdStock.get_ColIndex("Costo"));
             c_Kilos = Convert.ToByte(grdStock.get_ColIndex("Kilos"));
             c_Total = Convert.ToByte(grdStock.get_ColIndex("Total"));
+            c_Bloqueado = Convert.ToByte(grdStock.get_ColIndex("Bloqueado"));
 
             formato_Grilla();
 
@@ -88,7 +90,36 @@
                         }
                     }
                     break;
+                case Keys.F9:
+                    Bloquear();
+                    break;
             }
+        }
+
+        private void Bloquear()
+        {
+            // Setear el valor de Bloqueado en true en todas las filas seleccionadas. Si no hay ninguna seleccionada setear todas las actuales
+            int f1 = grdStock.Selection.r1;
+            int f2 = grdStock.Selection.r2;
+
+            if (f1 == f2 && f1 == -1)
+            {
+                f1 = 1;
+                f2 = grdStock.Rows - 2;
+            }
+            int contador = 0;
+            for (int i = f1; i <= f2; i++)
+            {
+                stock.ID = (int)grdStock.get_Texto(i, c_Id);
+                if (stock.ID != 0)
+                {
+                    stock.Ejecutar_Comando("UPDATE Stock SET Bloqueado = 1 WHERE Id = " + stock.ID);
+                    stock.Bloqueado = true;
+                    grdStock.set_Texto(i, c_Bloqueado, true);
+                    contador++;
+                }
+            }
+            Mensaje(contador == 0 ? "No se bloqueo ningún registro." : contador == 1 ? "Se bloqueo 1 registro." : $"Se bloquearon {contador} registros.");
         }
 
         #region "Mensaje"
@@ -146,6 +177,7 @@
             grdStock.set_ColW(c_Kilos, 60);
             grdStock.set_ColW(c_Total + 1, 0);
             grdStock.set_ColW(c_Total + 2, 0);
+            grdStock.set_ColW(c_Bloqueado, 0);
             
                         
             if (n_usuario.Permiso == Usuarios.e_Permiso.Supervisor)
@@ -213,7 +245,7 @@
 
         private void GrdStock_Editado(short f, short c, object a)
         {
-            if (stock.Fecha_Cerrada(stock.Fecha) == false)
+            if (stock.Fecha_Cerrada(stock.Fecha) == false && stock.Bloqueado == false)
             {
                 int id = Convert.ToInt32(grdStock.get_Texto(f, c_Id));
                 switch (c)
@@ -488,7 +520,7 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0)) != 0)
+                    if (Convert.ToInt32(grdStock.get_Texto(grdStock.Row, 0)) != 0 && stock.Bloqueado == false)
                     {
                         if (stock.Fecha_Cerrada(stock.Fecha) == false)
                         {

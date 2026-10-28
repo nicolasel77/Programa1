@@ -13,12 +13,9 @@
         //public readonly string cadCN = Programa1.Properties.Settings.Default.dbDatosConnectionString;
         public c_Base(string cadena = "")
         {
-            if (System.Environment.UserName.ToLower().StartsWith("nicol"))
+            if (cadena.Length != 0)
             {
-                if (cadena.Length != 0)
-                {
-                    cadCN = cadena;
-                }
+                cadCN = cadena;
             }
         }
         public c_Base(string tabla, string vista)
@@ -678,7 +675,15 @@
                 else
                 {
                     ID = value;
-                    Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+                    if (Campo_Nombre.Length > 0 && dt.Columns.Contains(Campo_Nombre))
+                    {
+                        Nombre = Convert.ToString(dt.Rows[0][Campo_Nombre]);
+                    }
+                    else
+                    {
+                        Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
+                    }
+                    
                     return true;
                 }
 
@@ -852,6 +857,22 @@
             {
             }
 
+        }
+
+        public SqlDataReader EjecutarReader(string query)
+        {
+            SqlDataReader reader;
+
+            using(var cnn = new SqlConnection(cadCN))
+            {
+                SqlCommand command = new SqlCommand(query, cnn);
+                command.CommandType = CommandType.Text;
+                command.Connection = cnn;
+                cnn.Open();
+                reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+
+            return reader;
         }
         #endregion
     }

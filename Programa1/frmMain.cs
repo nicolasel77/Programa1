@@ -1,5 +1,7 @@
 ﻿namespace Programa1
 {
+    using ExtractorExtractoBancario;
+    using iTextSharp.text.pdf.parser;
     using Programa1.Carga;
     using Programa1.Carga.Empleados;
     using Programa1.Carga.Hacienda;
@@ -7,10 +9,12 @@
     using Programa1.Carga.Tesoreria;
     using Programa1.Carga.Varios;
     using Programa1.Clases;
+    using Programa1.DB.Sucursales;
     using Programa1.DB.Varios;
     using System;
     using System.Collections.Generic;
     using System.Drawing;
+    using System.IO;
     using System.Windows.Forms;
 
     public partial class frmMain : Form
@@ -39,7 +43,11 @@
             switch (usuario.Nombre)
             {
                 case "Nicolas":
-
+                    //cajaDiariaToolStripMenuItem1.PerformClick();
+                    //comprasHaciendaToolStripMenuItem.PerformClick();
+                    //carneToolStripMenuItem.PerformClick();
+                    //granjaFranquiciaToolStripMenuItem.PerformClick();
+                    //leerTarjetasToolStripMenuItem.PerformClick();
                     break;
                 case "Ale":
                     cajaDiariaToolStripMenuItem.PerformClick();
@@ -52,14 +60,17 @@
         {
             foreach (Form f in forms)
             {
-                if (f.Name.StartsWith("frm" + sender.ToString()) == true)
+                ToolStripMenuItem t = (ToolStripMenuItem)sender;
+                if (t.Tag == null) { t.Tag = ""; }
+
+                if (f.Name.StartsWith("frm" + sender.ToString()) == true || t.Tag.ToString().ToLower() == f.Name.ToLower())
                 {
                     f.BringToFront();
                     break;
                 }
-
             }
         }
+
 
         private void ResumenToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -887,54 +898,6 @@
             foreach (Form f in forms)
             {
                 if (f.Name == "frmEmpleados")
-                {
-                    forms.Remove(f);
-                    break;
-                }
-            }
-        }
-
-        private void RetirosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool found = false;
-            foreach (Form f in forms)
-            {
-                if (f.Name == "frmRetiros")
-                {
-                    f.BringToFront();
-                    found = true;
-                    break;
-                }
-            }
-            if (found == false)
-            {
-                ToolStripMenuItem t = new ToolStripMenuItem("frmRetiros");
-                t.Text = "Retiros";
-                t.Click += new EventHandler(Mostrar);
-                this.tstMenu.Items.Add(t);
-
-                Form frmRetiros = new frmRetiros();
-                frmRetiros.MdiParent = this;
-                frmRetiros.Disposed += FrmRetiros_Disposed;
-                forms.Add(frmRetiros);
-                frmRetiros.Show();
-                frmRetiros.WindowState = FormWindowState.Minimized;
-                frmRetiros.WindowState = FormWindowState.Maximized;
-            }
-        }
-        private void FrmRetiros_Disposed(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem t in tstMenu.Items)
-            {
-                if (t.Text == "Retiros")
-                {
-                    tstMenu.Items.Remove(t);
-                    break;
-                }
-            }
-            foreach (Form f in forms)
-            {
-                if (f.Name == "frmRetiros")
                 {
                     forms.Remove(f);
                     break;
@@ -2908,7 +2871,8 @@
         private void consultaPreciosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
-            foreach (Form f in forms)            {
+            foreach (Form f in forms)
+            {
 
                 if (f.Name == "frmConsulta_Precios")
                 {
@@ -3019,7 +2983,7 @@
         private void importarExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmImportar_Excel fr = new frmImportar_Excel();
-            fr.Owner = this;   
+            fr.Owner = this;
             fr.Show();
         }
 
@@ -3034,51 +2998,51 @@
         }
         private void mnuPrueba_mp_Click(object sender, EventArgs e)
         {
-                bool found = false;
-                foreach (Form f in forms)
-                {
-                    if (f.Name == "Prueba_MP")
-                    {
-                        f.BringToFront();
-                        found = true;
-                        break;
-                    }
-                }
-                if (found == false)
-                {
-                    ToolStripMenuItem t = new ToolStripMenuItem("Prueba_MP");
-                    t.Text = "Prueba_mp";
-                    t.Click += new EventHandler(Mostrar);
-                    this.tstMenu.Items.Add(t);
-
-                    Form Prueba_MP = new Carga.Tesoreria.Prueba_MP();
-                    Prueba_MP.MdiParent = this;
-                    Prueba_MP.Disposed += Prueba_MP_Disposed;
-                    forms.Add(Prueba_MP);
-                    Prueba_MP.Show();
-                    Prueba_MP.WindowState = FormWindowState.Minimized;
-                    Prueba_MP.WindowState = FormWindowState.Maximized;
-                }
-            }
-            private void Prueba_MP_Disposed(object sender, EventArgs e)
+            bool found = false;
+            foreach (Form f in forms)
             {
-                foreach (ToolStripMenuItem t in tstMenu.Items)
+                if (f.Name == "Prueba_MP")
                 {
-                    if (t.Text == "Prueba_mp")
-                    {
-                        tstMenu.Items.Remove(t);
-                        break;
-                    }
-                }
-                foreach (Form f in forms)
-                {
-                    if (f.Name == "Prueba_mp")
-                    {
-                        forms.Remove(f);
-                        break;
-                    }
+                    f.BringToFront();
+                    found = true;
+                    break;
                 }
             }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("Prueba_MP");
+                t.Text = "Prueba_mp";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form Prueba_MP = new Carga.Tesoreria.Prueba_MP();
+                Prueba_MP.MdiParent = this;
+                Prueba_MP.Disposed += Prueba_MP_Disposed;
+                forms.Add(Prueba_MP);
+                Prueba_MP.Show();
+                Prueba_MP.WindowState = FormWindowState.Minimized;
+                Prueba_MP.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void Prueba_MP_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Prueba_mp")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "Prueba_mp")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
         private void resumenCajasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool found = false;
@@ -3295,7 +3259,7 @@
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (usuario.Nombre == "Paula")
-            { 
+            {
                 c_Base b = new c_Base("Data Source=192.168.1.1;Initial Catalog=dbDatos;User Id=Nikorasu;Password=Oficina02");
 
                 string[] nro = new string[15] { "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰", "¹¹", "¹²", "¹³", "¹⁴", "¹⁵" };
@@ -3303,9 +3267,9 @@
                 int s = Convert.ToInt16(b.Dato_Generico($"SELECT COUNT(*) FROM Reclamos WHERE Final<='{DateTime.Today.ToString("MM/dd/yyy")}' AND Resuelto = 0"));
                 if (s > 0)
                 {
-                    tlReclamos.Text = "!" + nro[s-1];
+                    tlReclamos.Text = "!" + nro[s - 1];
                     tlReclamos.ForeColor = Color.Red;
-                } 
+                }
                 else
                 {
                     tlReclamos.Text = "!";
@@ -3326,5 +3290,571 @@
             reclamosToolStripMenuItem.PerformClick();
         }
 
+        private void retirosEmpleadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmRetiros")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmRetiros");
+                t.Text = "Retiros";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmRetiros = new Carga.Empleados.frmRetiros();
+                frmRetiros.MdiParent = this;
+                frmRetiros.Disposed += FrmRetiros_Disposed;
+                forms.Add(frmRetiros);
+                frmRetiros.Show();
+                frmRetiros.WindowState = FormWindowState.Minimized;
+                frmRetiros.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmRetiros_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Retiros")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmRetiros")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void convertirPdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConvertirPdf fr = new frmConvertirPdf();
+            fr.ShowDialog();
+        }
+
+        private void PedidosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPedidos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmPedidos");
+                t.Text = "Pedidos";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmPedidos = new Carga.Sucursales.frmPedidos();
+                frmPedidos.MdiParent = this;
+                frmPedidos.Disposed += FrmPedidos_Disposed;
+                forms.Add(frmPedidos);
+                frmPedidos.Show();
+                frmPedidos.WindowState = FormWindowState.Minimized;
+                frmPedidos.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmPedidos_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Pedidos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPedidos")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void guardarRepartoDeCarneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmGuardarReparto frm = new frmGuardarReparto();
+            frm.ShowDialog();
+        }
+
+        private void ventasPorProductoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmVenta_Productos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmVenta_Productos");
+                t.Text = "Venta_Productos";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmVenta_Productos = new Carga.Varios.frmVenta_Productos();
+                frmVenta_Productos.MdiParent = this;
+                frmVenta_Productos.Disposed += FrmVenta_Productos_Disposed;
+                forms.Add(frmVenta_Productos);
+                frmVenta_Productos.Show();
+                frmVenta_Productos.WindowState = FormWindowState.Minimized;
+                frmVenta_Productos.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void tiposToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmEdtiarTiposTM")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmEditarTiposTM");
+                t.Text = "Tipos";
+                t.Click += new EventHandler(Mostrar);
+
+                this.tstMenu.Items.Add(t);
+
+                Form frmEditarTiposTM = new Programa1.Carga.TM.frmEditarTiposTM();
+                frmEditarTiposTM.MdiParent = this;
+                frmEditarTiposTM.Disposed += frmTiposTM_Disposed;
+                forms.Add(frmEditarTiposTM);
+                frmEditarTiposTM.Show();
+                frmEditarTiposTM.WindowState = FormWindowState.Minimized;
+                frmEditarTiposTM.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void frmTiposTM_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Tipos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmEditarTiposTM")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void cajaDiariaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCajaTM")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmCajaTM");
+                t.Text = "Caja TM";
+                t.Tag = "frmcajatm";
+                t.Click += new EventHandler(Mostrar);
+
+                this.tstMenu.Items.Add(t);
+
+                Form fr = new Programa1.Carga.TM.frmCajaTM();
+                fr.MdiParent = this;
+                fr.Disposed += frmCajaTM_Disposed;
+                forms.Add(fr);
+                fr.Show();
+                fr.WindowState = FormWindowState.Minimized;
+                fr.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void frmCajaTM_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "CajaTM")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmCajaTM")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void comprasHaciendaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmComprasHaciendaTM")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmComrpasHaciendaTM");
+                t.Text = "Compras H";
+                t.Tag = "frmcomprashaciendatm";
+
+                t.Click += new EventHandler(Mostrar);
+
+                t.BackColor = Color.LightGreen;
+                this.tstMenu.Items.Add(t);
+
+                Form fr = new Programa1.Carga.TM.frmComprasHaciendaTM();
+                fr.MdiParent = this;
+                fr.Disposed += frmComprasHaciendaTM_Disposed;
+                forms.Add(fr);
+                fr.Show();
+                fr.WindowState = FormWindowState.Minimized;
+                fr.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void frmComprasHaciendaTM_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Compras H")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name.ToLower() == "frmcomprashaciendatm")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void granjaFranquiciaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmPrecios_GranjaFr")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmPrecios_GranjaFr");
+                t.Text = "Grajna Fr";
+                t.Tag = "frmPrecios_GranjaFr";
+
+                t.Click += new EventHandler(Mostrar);
+
+                t.BackColor = Color.LightGreen;
+                this.tstMenu.Items.Add(t);
+
+                Form fr = new Programa1.Carga.Precios.frmPrecios_GranjaFr();
+                fr.MdiParent = this;
+                fr.Disposed += frmPrecios_GranjaFr_Disposed;
+                forms.Add(fr);
+                fr.Show();
+                fr.WindowState = FormWindowState.Minimized;
+                fr.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void frmPrecios_GranjaFr_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Granja Fr")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name.ToLower() == "frmprecios_granjafr")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void actualizarPreciosFrToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            Precios_Franquicia p = new Precios_Franquicia();
+            bool n = p.Actualizar_Precios_Franquicia();
+            MessageBox.Show(n ? "Precios actualizados correctamente." : "Error al actualizar los precios.");
+            this.Cursor = Cursors.Default;
+        }
+
+        private void pDFAExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Abrir el selector de archivos para elegir el PDF a convertir
+
+            string rutaPdf = "";
+            string rutaExcel = "";
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "Seleccionar estado de cuenta en PDF";
+                ofd.Filter = "Archivos PDF (*.pdf)|*.pdf";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    rutaPdf = ofd.FileName;
+                }
+                else
+                {
+                    return; // El usuario canceló la selección
+                }
+            }
+            this.Cursor = Cursors.WaitCursor;
+            this.Enabled = false;
+            // ── Argumentos de línea de comandos ─────────────────────────────
+
+            if (!File.Exists(rutaPdf))
+            {
+                MessageBox.Show("❌  No se encontró el archivo: " + rutaPdf);
+                return;
+            }
+
+            rutaExcel = System.IO.Path.ChangeExtension(rutaPdf, ".xlsx");
+
+            // ── Extracción ───────────────────────────────────────────────────
+            Console.WriteLine("📄  Leyendo PDF: " + rutaPdf);
+
+            CabeceraCuenta cabecera;
+            List<Movimiento> movimientos;
+            PdfExtractor.Extraer(rutaPdf, out cabecera, out movimientos);
+
+            Console.WriteLine("   Titular  : " + (string.IsNullOrEmpty(cabecera.Titular) ? "(no detectado)" : cabecera.Titular));
+            Console.WriteLine("   CUIT     : " + (string.IsNullOrEmpty(cabecera.Cuit) ? "-" : cabecera.Cuit));
+            Console.WriteLine("   Cuenta   : " + (string.IsNullOrEmpty(cabecera.NumeroCuenta) ? "-" : cabecera.NumeroCuenta));
+
+            if (movimientos.Count > 0)
+                Console.WriteLine(string.Format("   Período  : {0:dd/MM/yyyy} → {1:dd/MM/yyyy}",
+                    movimientos[0].Fecha, movimientos[movimientos.Count - 1].Fecha));
+
+            Console.WriteLine("   Movimientos encontrados: " + movimientos.Count);
+
+            // ── Generación del Excel ─────────────────────────────────────────
+
+            ExcelWriter.Guardar(rutaExcel, cabecera, movimientos);
+            MessageBox.Show("Excel generado: " + rutaExcel);
+            this.Cursor = Cursors.Default;
+            this.Enabled = true;
+        }
+
+        private void entregasCarniceriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void entregasSucursalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmEntregas")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmEntregas");
+                t.Text = "Entregas";
+                t.Tag = "frmEntregas";
+
+                t.Click += new EventHandler(Mostrar);
+
+                t.BackColor = Color.LightGreen;
+                this.tstMenu.Items.Add(t);
+
+                Form fr = new Programa1.Carga.Sucursales.frmEntregas();
+                fr.MdiParent = this;
+                fr.Disposed += frmEntregas_Disposed;
+                forms.Add(fr);
+                fr.Show();
+                fr.WindowState = FormWindowState.Minimized;
+                fr.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void frmEntregas_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Entregas")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name.ToLower() == "frmentregas")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void valoresToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmValorFranquicia")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmValorFranquicia");
+                t.Text = "Valor Franquicia";
+                t.Tag = "frmValorFranquicia";
+
+                t.Click += new EventHandler(Mostrar);
+
+                t.BackColor = Color.LightGreen;
+                this.tstMenu.Items.Add(t);
+
+                Form fr = new Programa1.Carga.Sucursales.frmValorFranquicia();
+                fr.MdiParent = this;
+                fr.Disposed += frmValorFranquicia_Disposed;
+                forms.Add(fr);
+                fr.Show();
+                fr.WindowState = FormWindowState.Minimized;
+                fr.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void frmValorFranquicia_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Valor Franquicia")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name.ToLower() == "frmvalorfranquicia")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
+
+        private void efectivosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmEfectivos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmEfectivos");
+                t.Text = "Efectivos";
+                t.Tag = "frmEfectivos";
+                t.Click += new EventHandler(Mostrar);
+                t.BackColor = Color.LightGreen;
+                this.tstMenu.Items.Add(t);
+                Form fr = new Programa1.Carga.Sucursales.frmEfectivos();
+                fr.MdiParent = this;
+                fr.Disposed += frmEfectivos_Disposed;
+                forms.Add(fr);
+                fr.Show();
+                fr.WindowState = FormWindowState.Minimized;
+                fr.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void frmEfectivos_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Efectivos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name.ToLower() == "frmefectivos")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
     }
 }

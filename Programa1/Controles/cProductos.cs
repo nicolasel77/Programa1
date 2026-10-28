@@ -341,6 +341,22 @@
         {
             Mostrar_Tipo = !MostrarTipo;
         }
+
+        public int Tipo_Seleccionado()
+        {
+            int n = 0;
+            if (lstTipos.SelectedIndex > -1)
+            {
+                n = herramientas.Codigo_Seleccionado(lstTipos.Text);
+            }
+            return n;
+        }
+
+        internal int Cantidad_Seleccionada()
+        {
+            return lst.SelectedItems.Count;
+
+        }
     }
 
 }

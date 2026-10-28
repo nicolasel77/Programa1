@@ -28,6 +28,7 @@ namespace Programa1.DB
         public float CostoE { get; set; }
         public int Cantidad { get; set; }
         public Single Kilos { get; set; }
+        public bool Bloqueado { get; internal set; }
 
         public Precios_Sucursales precios = new Precios_Sucursales();
 
@@ -47,6 +48,7 @@ namespace Programa1.DB
             Actualizar("Costo_Entrada", CostoE);
             Actualizar("Cantidad", Cantidad);
             Actualizar("Kilos", Kilos);
+            Actualizar("Bloqueado", Bloqueado);
         }
 
         public new void Agregar()
@@ -56,8 +58,8 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Traslados (Fecha, Suc_Salida, Suc_Entrada, Id_Productos, Descripcion, Costo_Salida, Costo_Entrada, Cantidad, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {sucS.ID}, {sucE.ID}, {Producto.ID}, '{Descripcion}', {CostoS.ToString().Replace(",", ".")}, {CostoE.ToString().Replace(",", ".")}, {Cantidad}, {Kilos.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Traslados (Fecha, Suc_Salida, Suc_Entrada, Id_Productos, Descripcion, Costo_Salida, Costo_Entrada, Cantidad, Kilos, Bloqueado) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {sucS.ID}, {sucE.ID}, {Producto.ID}, '{Descripcion}', {CostoS.ToString().Replace(",", ".")}, {CostoE.ToString().Replace(",", ".")}, {Cantidad}, {Kilos.ToString().Replace(",", ".")}, 0)", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -115,7 +117,7 @@ namespace Programa1.DB
                 CostoE = Convert.ToSingle(dr["Costo_Entrada"]);
                 Cantidad = Convert.ToInt32(dr["Cantidad"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
-
+                Bloqueado = Convert.ToBoolean(dr["Bloqueado"]);
             }
             catch (Exception)
             {
@@ -129,6 +131,7 @@ namespace Programa1.DB
                 CostoE = 0;
                 Cantidad = 0;
                 Kilos = 0;
+                Bloqueado = false;
             }
         }
     }

@@ -15,6 +15,7 @@
         private readonly Byte c_IdTipo;
         private readonly Byte c_Descripcion;
         private readonly Byte c_Importe;
+        private readonly Byte c_Bloqueado;
 
         #endregion
         public frmGastos_Sucursales()
@@ -33,6 +34,7 @@
             c_IdTipo = Convert.ToByte(grdGastos.get_ColIndex("Id_Tipo"));
             c_Descripcion = Convert.ToByte(grdGastos.get_ColIndex("Descripcion"));
             c_Importe = Convert.ToByte(grdGastos.get_ColIndex("Importe"));
+            c_Bloqueado = Convert.ToByte(grdGastos.get_ColIndex("Bloqueado"));
 
             formato_Grilla();
 
@@ -140,6 +142,8 @@
             grdGastos.set_ColW(c_IdTipo, 30);
             grdGastos.set_ColW(c_Descripcion, 350);
             grdGastos.set_ColW(c_Importe, 60);
+            grdGastos.set_ColW(c_Bloqueado, 0);
+
 
             grdGastos.Columnas[c_Importe].Format = "N2";
 
@@ -182,7 +186,7 @@
         private void grdGastos_Editado(short f, short c, object a)
         {
             int id = Convert.ToInt32(grdGastos.get_Texto(f, c_Id));
-            if (Gastos_Sucursales.Fecha_Cerrada(Gastos_Sucursales.Fecha) == false)
+            if (Gastos_Sucursales.Fecha_Cerrada(Gastos_Sucursales.Fecha) == false && Gastos_Sucursales.Bloqueado == false)
             {
                 switch (c)
                 {
@@ -310,6 +314,7 @@
                 Gastos_Sucursales.Tipo.ID = Convert.ToInt32(grdGastos.get_Texto(Fila, c_IdTipo));
                 Gastos_Sucursales.Descripcion = grdGastos.get_Texto(Fila, c_Descripcion).ToString();
                 Gastos_Sucursales.Importe = Convert.ToSingle(grdGastos.get_Texto(Fila, c_Importe));
+                Gastos_Sucursales.Bloqueado = Convert.ToBoolean(grdGastos.get_Texto(Fila, c_Bloqueado));
             }
         }
 
@@ -324,7 +329,7 @@
                     break;
                 case 46: //Delete
 
-                    if (Convert.ToInt32(grdGastos.get_Texto(grdGastos.Row, 0)) != 0)
+                    if (Convert.ToInt32(grdGastos.get_Texto(grdGastos.Row, 0)) != 0 && Gastos_Sucursales.Bloqueado == false)
                     {
                         if (Gastos_Sucursales.Fecha_Cerrada(Gastos_Sucursales.Fecha) == false)
                         {

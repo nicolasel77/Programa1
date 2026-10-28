@@ -181,7 +181,7 @@
         /// </summary>
         /// <param name="filtro">Rango a filtrar.</param>
         /// <returns></returns>
-        public DataTable TotalPorTipo(string filtro = "")
+        public DataTable TotalPorTipo(string filtro = "", bool mostrar_Caja = false)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(cadCN);
@@ -191,8 +191,8 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT ID_TipoEntrada ID, Nombre Descripcion, SUM(Importe) Total FROM vw_Entradas" +
-                    $" {filtro}  GROUP BY ID_TipoEntrada, Nombre ORDER BY ID_TipoEntrada", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT {(mostrar_Caja ? "IDC, Caja, " : "")} ID_TipoEntrada ID, Nombre Descripcion, SUM(Importe) Total FROM vw_Entradas" +
+                    $" {filtro}  GROUP BY {(mostrar_Caja ? "IDC, Caja, " : "")} ID_TipoEntrada, Nombre ORDER BY ID_TipoEntrada", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -212,7 +212,7 @@
         /// </summary>
         /// <param name="filtro">Tipo y rango a filtrar.</param>
         /// <returns></returns>
-        public DataTable TotalPorSubTipo(string filtro = "")
+        public DataTable TotalPorSubTipo(string filtro = "", bool mostrar_Caja = false)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(cadCN);
@@ -222,8 +222,8 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT ID_TipoEntrada IDT, Nombre, ID_SubTipoEntrada ID, Descripcion, SUM(Importe) Total FROM vw_Entradas" +
-                    $" {filtro}  GROUP BY ID_TipoEntrada, Nombre, ID_SubTipoEntrada, Descripcion ORDER BY ID_TipoEntrada, ID_SubTipoEntrada", conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT {(mostrar_Caja ? "IDC, Caja, " : "")} ID_TipoEntrada IDT, Nombre, ID_SubTipoEntrada ID, Descripcion, SUM(Importe) Total FROM vw_Entradas" +
+                    $" {filtro}  GROUP BY {(mostrar_Caja ? "IDC, Caja, " : "")} ID_TipoEntrada, Nombre, ID_SubTipoEntrada, Descripcion ORDER BY ID_TipoEntrada, ID_SubTipoEntrada", conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);

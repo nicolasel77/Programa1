@@ -28,6 +28,7 @@
 
         public int Id { get; set; }
         public DateTime Fecha { get; set; } = new DateTime(2000, 1, 1);
+        public DateTime Fecha_Imputacion { get; set; } = new DateTime(2000, 1, 1);
         public Empleados Empleado { get; set; } = new Empleados();
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public TipoRetiros Tipo { get; set; } = new TipoRetiros();
@@ -35,26 +36,96 @@
         public int Dias_Vacas { get; set; }
         public int Dias_Pagados { get; set; }
 
-        public DataTable Datos_Mes(DateTime mes, int suc)
+       
+        public DataTable Datos_Semana(DateTime sem, int suc, int tipo = 0)
         {
             var dt = new DataTable("Datos");
             var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
-
+            
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"EXEC sp_SueldosMes '{mes.ToString("MM/dd/yyy")}', {suc}", conexionSql);
-                comandoSql.CommandType = CommandType.Text;
-                conexionSql.Open();
-                comandoSql.ExecuteNonQuery();
-
+                // crear una variable con los filtros de la semana, sucursal y tipo
+                string filtro = $"Semana BETWEEN '{sem:MM/dd/yy}' AND '{sem.AddDays(6):MM/dd/yy}'";
                 if (suc > 0)
                 {
-                    comandoSql.CommandText = $"SELECT * FROM vw_MesTemp WHERE Mes='{mes.ToString("MM/dd/yyy")}' AND Id_Sucursales={suc} ORDER BY  Id_Empleados";
+                    filtro += $" AND Suc={suc}";
                 }
-                else
+                if (tipo > 0)
                 {
-                    comandoSql.CommandText = $"SELECT * FROM vw_MesTemp WHERE Mes='{mes.ToString("MM/dd/yyy")}' ORDER BY Id_Sucursales, Id_Empleados";
+                    filtro += $" AND Tipo={tipo}";
                 }
+                string cadena = $"SELECT Id, Semana AS Fecha, Suc, Empleado AS Emp, Nombre, Tipo, Descripcion, Nota, Importe FROM dbEmpleados.dbo.vw_Retiros WHERE {filtro} ORDER BY Suc, Empleado";
+
+                SqlCommand comandoSql = new SqlCommand(cadena, conexionSql);
+                conexionSql.Open();                                
+
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        public DataTable Datos_Semana(DateTime sem, string suc, int tipo = 0)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            
+            try
+            {
+                // crear una variable con los filtros de la semana, sucursal y tipo
+                string filtro = $"Semana BETWEEN '{sem:MM/dd/yy}' AND '{sem.AddDays(6):MM/dd/yy} 23:00'";
+                if (suc.Length > 0)
+                {
+                    filtro += $" AND {suc}";
+                }
+                if (tipo > 0)
+                {
+                    filtro += $" AND Tipo={tipo}";
+                }
+                string cadena = $"SELECT Id, Semana AS Fecha, Suc, Empleado AS Emp, Nombre, Tipo, Descripcion, Nota, Importe FROM dbEmpleados.dbo.vw_Retiros WHERE {filtro} ORDER BY Suc, Empleado";
+
+                SqlCommand comandoSql = new SqlCommand(cadena, conexionSql);
+                conexionSql.Open();                                
+
+                comandoSql.CommandType = CommandType.Text;
+
+                SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
+                SqlDat.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+
+            return dt;
+        }
+        public DataTable Datos_Semana(string fecha, string suc, int tipo = 0)
+        {
+            var dt = new DataTable("Datos");
+            var conexionSql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
+            
+            try
+            {
+                // crear una variable con los filtros de la semana, sucursal y tipo
+                string filtro = fecha;
+                if (suc.Length > 0)
+                {
+                    filtro += $" AND {suc}";
+                }
+                if (tipo > 0)
+                {
+                    filtro += $" AND Tipo={tipo}";
+                }
+                string cadena = $"SELECT Id, Semana AS Fecha, Suc, Empleado AS Emp, Nombre, Tipo, Descripcion, Nota, Importe FROM dbEmpleados.dbo.vw_Retiros WHERE {filtro} ORDER BY Semana, Suc, Empleado";
+
+                SqlCommand comandoSql = new SqlCommand(cadena, conexionSql);
+                conexionSql.Open();                                
 
                 comandoSql.CommandType = CommandType.Text;
 
@@ -75,7 +146,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM dbEmpleados.dbo.vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
                     $" AND '{Fecha.AddDays(6).ToString("MM/dd/yyy")}' " +
                     $" AND Id_Empleados={Empleado.ID}" +
                     $" AND Id_Tipo=100" +
@@ -99,7 +170,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM dbEmpleados.dbo.vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
                     $" AND '{Fecha.AddMonths(1).AddDays(-1).ToString("MM/dd/yyy")}' " +
                     $" AND Id_Empleados={Empleado.ID}" +
                     $" AND Id_Tipo=1" +
@@ -123,7 +194,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM dbEmpleados.dbo.vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
                     $" AND '{Fecha.AddMonths(1).AddDays(-1).ToString("MM/dd/yyy")}' " +
                     $" AND Id_Empleados={Empleado.ID}" +
                     $" AND Id_Tipo={Tipo.ID}" +
@@ -159,7 +230,7 @@
                 fIni = fIni.AddDays((fIni.Day - 1) * -1);
                 fFin = fIni.AddDays(-1).AddMonths(12);
 
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Retiros WHERE Fecha BETWEEN '{fIni.ToString("MM/dd/yyy")}'" +
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM dbEmpleados.dbo.vw_Retiros WHERE Fecha BETWEEN '{fIni.ToString("MM/dd/yyy")}'" +
                     $" AND '{fFin.ToString("MM/dd/yyy")}' " +
                     $" AND Id_Empleados={Empleado.ID}" +
                     $" AND Id_Tipo IN(4, 40)" +
@@ -183,7 +254,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"SELECT dbo.f_Aguinaldo('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
+                SqlCommand command = new SqlCommand($"SELECT dbEmpleados.dbo.f_Aguinaldo('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;
@@ -204,7 +275,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"SELECT dbo.f_SaldoAguinaldo('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
+                SqlCommand command = new SqlCommand($"SELECT dbEmpleados.dbo.f_SaldoAguinaldo('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;
@@ -228,7 +299,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(Importe) FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
+                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(Importe) FROM dbEmpleados.dbo.vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
                     $" AND '{Fecha.AddDays(6).ToString("MM/dd/yyy")}' " +
                     $" AND Id_Empleados={Empleado.ID}" +
                     $" AND Id_Tipo=100", conexionSql);
@@ -255,7 +326,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(Importe) FROM vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
+                SqlCommand comandoSql = new SqlCommand($"SELECT SUM(Importe) FROM dbEmpleados.dbo.vw_Retiros WHERE Fecha BETWEEN '{Fecha.ToString("MM/dd/yyy")}'" +
                     $" AND '{Fecha.AddMonths(1).AddDays(-1).ToString("MM/dd/yyy")}' " +
                     $" AND Id_Empleados={Empleado.ID}" +
                     $" AND Id_Tipo=1", conexionSql);
@@ -294,7 +365,7 @@
                 fIni = fIni.AddDays((fIni.Day - 1) * -1);
                 fFin = fIni.AddDays(-1).AddMonths(12);
 
-                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM vw_Vacaciones WHERE Fecha BETWEEN '{fIni.ToString("MM/dd/yyy")}'" +
+                SqlCommand comandoSql = new SqlCommand($"SELECT * FROM dbEmpleados.dbo.vw_Vacaciones WHERE Fecha BETWEEN '{fIni.ToString("MM/dd/yyy")}'" +
                     $" AND '{fFin.ToString("MM/dd/yyy")}' " +
                     $" AND Id_Empleados={Empleado.ID}" +
                     $" ORDER BY Fecha", conexionSql);
@@ -316,7 +387,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"SELECT dbo.f_VacacionesDias('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
+                SqlCommand command = new SqlCommand($"SELECT dbEmpleados.dbo.f_VacacionesDias('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;
@@ -337,7 +408,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"SELECT dbo.f_SueldoDia('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
+                SqlCommand command = new SqlCommand($"SELECT dbEmpleados.dbo.f_SueldoDia('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;
@@ -357,7 +428,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"SELECT dbo.f_SaldoDiaVacas('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
+                SqlCommand command = new SqlCommand($"SELECT dbEmpleados.dbo.f_SaldoDiaVacas('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;
@@ -377,7 +448,7 @@
 
             try
             {
-                SqlCommand command = new SqlCommand($"SELECT dbo.f_SaldoImporteVacas('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
+                SqlCommand command = new SqlCommand($"SELECT dbEmpleados.dbo.f_SaldoImporteVacas('{Fecha.ToString("MM/dd/yy")}', {Empleado.ID})", sql);
                 command.CommandType = CommandType.Text;
                 sql.Open();
                 command.Connection = sql;
@@ -405,13 +476,13 @@
                 sql.Open();
 
                 command.CommandText =
-                $"DELETE FROM Detalle_Vacaciones WHERE " +
+                $"DELETE FROM dbEmpleados.dbo.Detalle_Vacaciones WHERE " +
                 $"Fecha='{Fecha.ToString("MM/dd/yyy")}' AND Id_Empleados={Empleado.ID}";
 
                 var d = command.ExecuteNonQuery();
 
                 command.CommandText =
-                $"INSERT INTO Detalle_Vacaciones (Fecha, Id_Empleados, Dias, Importe, Id_Sucursales, Dias_Pagados) VALUES (" +
+                $"INSERT INTO dbEmpleados.dbo.Detalle_Vacaciones (Fecha, Id_Empleados, Dias, Importe, Id_Sucursales, Dias_Pagados) VALUES (" +
                 $"'{Fecha.ToString("MM/dd/yyy")}'" +
                 $", {Empleado.ID}" +
                 $", {Dias_Vacas}" +
@@ -442,11 +513,12 @@
                 if (Id != 0)
                 {
                     command.CommandText =
-                    $"UPDATE Retiros SET " +
-                    $"  Fecha='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $", Id_Tipo={Tipo.ID}" +
-                    $", Id_Sucursales={Sucursal.ID}" +
-                    $", Id_Empleados={Empleado.ID}" +
+                    $"UPDATE dbEmpleados.dbo.Retiros SET " +
+                    $"  SEMANA='{Fecha:MM/dd/yyy}'" +
+                    $", Fecha_Imputacion='{Fecha:MM/dd/yyy}'" +
+                    $", Tipo={Tipo.ID}" +
+                    $", Suc={Sucursal.ID}" +
+                    $", Empleado={Empleado.ID}" +
                     $", Importe={Importe.ToString().Replace(",", ".")} " +
                     $"  WHERE Id={Id}";
 
@@ -455,8 +527,9 @@
                 else
                 {
                     command.CommandText =
-                    $"INSERT INTO Retiros (Fecha, Id_Empleados, Id_Sucursales, Id_Tipo, Importe) VALUES (" +
-                    $"'{Fecha.ToString("MM/dd/yyy")}'" +
+                    $"INSERT INTO dbEmpleados.dbo.Retiros (Semana, Fecha_Imputacion, Empleado, Suc, Tipo, Importe) VALUES (" +
+                    $" '{Fecha:MM/dd/yyy}'" +
+                    $",'{Fecha:MM/dd/yyy}'" +
                     $", {Empleado.ID}" +
                     $", {Sucursal.ID}" +
                     $", {Tipo.ID}" +
@@ -464,7 +537,7 @@
 
                     var d = command.ExecuteNonQuery();
 
-                    //Id = MaxId();
+                    Id = MaxId();
                 }
 
 
@@ -489,7 +562,7 @@
 
                 if (Id != 0)
                 {
-                    command.CommandText = $"DELETE FROM Retiros WHERE Id={Id}";
+                    command.CommandText = $"DELETE FROM dbEmpleados.dbo.Retiros WHERE Id={Id}";
 
                     var d = command.ExecuteNonQuery();
                 }
@@ -523,7 +596,7 @@
                         }
                     }
                     command.CommandText =
-                    $"DELETE FROM Retiros WHERE " +
+                    $"DELETE FROM dbEmpleados.dbo.Retiros WHERE " +
                     $"  Fecha {f} " +
                     $" AND Id_Tipo={Tipo.ID}" +
                     $" AND Id_Empleados={Empleado.ID}";
@@ -558,7 +631,7 @@
                 string f = $"'{Fecha.Month.ToString()}/5/{Fecha.Year.ToString()}'";
                 f = $"BETWEEN {f} AND '{Fecha.AddMonths(1).Month.ToString()}/4/{Fecha.AddMonths(1).Year.ToString()}'";
                 command.CommandText =
-                $"DELETE FROM Retiros WHERE " +
+                $"DELETE FROM dbEmpleados.dbo.Retiros WHERE " +
                 $"  Fecha {f} " +
                 $" AND Id_Tipo={Tipo.ID}" +
                 $" AND Id_Empleados={Empleado.ID}";
@@ -585,7 +658,7 @@
                 sql.Open();
 
                 command.CommandText =
-                $"DELETE FROM Detalle_Vacaciones WHERE " +
+                $"DELETE FROM dbEmpleados.dbo.Detalle_Vacaciones WHERE " +
                 $"Fecha='{Fecha.ToString("MM/dd/yyy")}' AND Id_Empleados={Empleado.ID}";
 
                 var d = command.ExecuteNonQuery();
@@ -611,7 +684,7 @@
                     command.Connection = sql;
 
 
-                    string s = $"UPDATE Mes_Temp SET Saldo={importe.ToString().Replace(",", ".")} " +
+                    string s = $"UPDATE dbEmpleados.dbo.Mes_Temp SET Saldo={importe.ToString().Replace(",", ".")} " +
                     $" WHERE Mes='{Fecha.ToString("MM/dd/yyy")}'" +
                     $" AND Id_Sucursales={Sucursal.ID}" +
                     $" AND Id_Empleados={Empleado.ID}";
@@ -639,7 +712,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM Retiros", conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT ISNULL(MAX(Id), 0) FROM dbEmpleados.dbo.Retiros", conexionSql);
 
                 conexionSql.Open();
 

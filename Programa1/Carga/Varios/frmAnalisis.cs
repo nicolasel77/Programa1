@@ -59,5 +59,10 @@
         {
 
         }
+
+        private void frmAnalisis_Load(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

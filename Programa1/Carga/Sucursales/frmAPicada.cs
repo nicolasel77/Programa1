@@ -24,6 +24,7 @@
         private Byte c_Total_A;
         private Byte c_Total_S;
         private Byte c_Reintegro;
+        private byte c_Bloqueado;
         #endregion
         public frmAPicada()
         {
@@ -47,6 +48,7 @@
             c_Kilos_S = Convert.ToByte(grdAPicada.get_ColIndex("Kilos_S"));
             c_Total_S = Convert.ToByte(grdAPicada.get_ColIndex("Total_S"));
             c_Reintegro = Convert.ToByte(grdAPicada.get_ColIndex("Reintegro"));
+            c_Bloqueado = Convert.ToByte(grdAPicada.get_ColIndex("Bloqueado"));
 
             formato_Grilla();
 
@@ -156,6 +158,8 @@
             grdAPicada.set_ColW(c_Kilos_S, 60);
             grdAPicada.set_ColW(c_Total_S, 80);
             grdAPicada.set_ColW(c_Reintegro, 80);
+            grdAPicada.set_ColW(c_Bloqueado, 0);
+
 
             grdAPicada.Columnas[c_Costo_A].Format = "C2";
             grdAPicada.Columnas[c_Kilos_A].Format = "N2";
@@ -228,7 +232,7 @@
             int id = Convert.ToInt32(grdAPicada.get_Texto(f, c_Id));
             DateTime df = Convert.ToDateTime(grdAPicada.get_Texto(f, c_Fecha));
 
-            if (APicada.Fecha_Cerrada(df) == false)
+            if (APicada.Fecha_Cerrada(df) == false && APicada.Bloqueado == false)
             {
                 switch (c)
                 {
@@ -431,6 +435,7 @@
                 APicada.Producto_S.ID = Convert.ToInt32(grdAPicada.get_Texto(Fila, c_IdProd_S));
                 APicada.Costo_S = Convert.ToSingle(grdAPicada.get_Texto(Fila, c_Costo_S));
                 APicada.Kilos_S = Convert.ToSingle(grdAPicada.get_Texto(Fila, c_Kilos_S));
+                APicada.Bloqueado = Convert.ToBoolean(grdAPicada.get_Texto(Fila, c_Bloqueado));
             }
         }
 
@@ -472,7 +477,7 @@
             switch (Convert.ToInt32(e))
             {
                 case 46: //Delete
-                    if (Convert.ToInt32(grdAPicada.get_Texto(grdAPicada.Row, 0)) != 0)
+                    if (Convert.ToInt32(grdAPicada.get_Texto(grdAPicada.Row, 0)) != 0 && APicada.Bloqueado == false)
                     {
                         if (APicada.Fecha_Cerrada(APicada.Fecha) == false)
                         {

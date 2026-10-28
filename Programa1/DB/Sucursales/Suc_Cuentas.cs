@@ -18,7 +18,7 @@
         }
 
         public int suc;
-        public int N_Cuenta;
+        public string N_Cuenta;
         public int Tipo;
         public string Titular;
         public Sucursales Sucursal { get; set; } = new Sucursales();
@@ -28,12 +28,19 @@
             return Datos_Vista("", "Suc, Nombre, N_Cuenta, Tipo, Descripcion, Titular ", " Suc, Tipo");
         }
 
-        public bool Cuentas_Compartidas(int cta)
+        public bool Cuentas_Compartidas(string cta)
         {
-            if (Datos_Vista($"N_Cuenta IN (SELECT N_Cuenta FROM dbGastos.dbo.vw_SucCuentas WHERE N_cuenta = {cta})", "Suc", "Suc").Rows.Count > 1)
-            { return true; }
-            else
-            { return false; }
+            try
+            {
+                if (Datos_Vista($"N_Cuenta1 IN (SELECT N_Cuenta1 FROM dbGastos.dbo.vw_SucCuentas WHERE N_cuenta1 = {cta})", "Suc", "Suc").Rows.Count > 1)
+                { return true; }
+                else
+                { return false; }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         //public int N_Cuentas_Compartidas(int suc)
@@ -46,12 +53,12 @@
         //return Datos_Genericos($"SELECT Suc FROM {Vista} WHERE Tipo = 1 AND N_Cuenta = (SELECT TOP 1 N_Cuenta FROM Suc_Cuentas WHERE Suc = {suc})");
         //}
 
-        public int buscar_suc(int establecimiento)
+        public int buscar_suc(string establecimiento)
         {
             int suc = 0;
             try
             {
-                suc = Convert.ToInt32(Dato_Generico(Tabla, $" N_Cuenta = {establecimiento} ORDER BY Suc", "Suc"));
+                suc = Convert.ToInt32(Dato_Generico(Tabla, $" N_Cuenta = '{establecimiento}' OR N_Cuenta1 = {establecimiento} ORDER BY Suc", "Suc"));
             }
             catch
             { 

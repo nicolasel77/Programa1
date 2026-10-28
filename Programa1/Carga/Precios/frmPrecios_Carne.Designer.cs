@@ -35,9 +35,12 @@
             this.lblIntegracion = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblBifes = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.grdProductos = new Grilla2.SpeedGrilla();
+            this.grdFranquicia = new Grilla2.SpeedGrilla();
             this.splFormulas = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.cmdPorcentaje = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.nuDecimales = new System.Windows.Forms.NumericUpDown();
             this.lstFechas = new System.Windows.Forms.ListBox();
@@ -45,6 +48,7 @@
             this.lblSuc = new MaterialSkin.Controls.MaterialLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.cmdBorrar = new Programa1.Controles.cBoton();
+            this.cmdGuardarFR = new Programa1.Controles.cBoton();
             this.cmdGuardar = new Programa1.Controles.cBoton();
             this.cmdImprimir = new Programa1.Controles.cBoton();
             this.cmdFormulas = new Programa1.Controles.cBoton();
@@ -59,6 +63,10 @@
             this.splitContainer1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splFormulas)).BeginInit();
             this.splFormulas.Panel1.SuspendLayout();
             this.splFormulas.Panel2.SuspendLayout();
@@ -90,8 +98,8 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel2.Controls.Add(this.splFormulas);
-            this.splitContainer1.Size = new System.Drawing.Size(1041, 692);
-            this.splitContainer1.SplitterDistance = 445;
+            this.splitContainer1.Size = new System.Drawing.Size(1398, 708);
+            this.splitContainer1.SplitterDistance = 691;
             this.splitContainer1.TabIndex = 0;
             // 
             // statusStrip1
@@ -102,9 +110,9 @@
             this.toolStripStatusLabel1,
             this.lblIntegracion,
             this.lblBifes});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 666);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 682);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(445, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(691, 26);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -138,19 +146,33 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Controls.Add(this.grdProductos);
+            this.panel1.Controls.Add(this.splitContainer2);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(439, 664);
+            this.panel1.Size = new System.Drawing.Size(685, 680);
             this.panel1.TabIndex = 0;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.grdProductos);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.grdFranquicia);
+            this.splitContainer2.Size = new System.Drawing.Size(685, 680);
+            this.splitContainer2.SplitterDistance = 376;
+            this.splitContainer2.TabIndex = 1;
             // 
             // grdProductos
             // 
             this.grdProductos.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
             this.grdProductos.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.grdProductos.AutoResize = false;
             this.grdProductos.bColor = System.Drawing.SystemColors.Window;
             this.grdProductos.bColorSel = System.Drawing.SystemColors.Highlight;
@@ -160,6 +182,7 @@
             this.grdProductos.Cols = 10;
             this.grdProductos.DataMember = "";
             this.grdProductos.DataSource = null;
+            this.grdProductos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdProductos.EnableEdicion = true;
             this.grdProductos.Encabezado = "";
             this.grdProductos.fColor = System.Drawing.SystemColors.Control;
@@ -170,17 +193,53 @@
             this.grdProductos.FuentePieDePagina = null;
             this.grdProductos.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
             this.grdProductos.LimpiarEstilosAntesDeOrdenar = false;
-            this.grdProductos.Location = new System.Drawing.Point(3, 3);
+            this.grdProductos.Location = new System.Drawing.Point(0, 0);
             this.grdProductos.Name = "grdProductos";
             this.grdProductos.PieDePagina = "\t\tPage {0} of {1}";
             this.grdProductos.PintarFilaSel = true;
             this.grdProductos.Redraw = true;
             this.grdProductos.Row = 0;
             this.grdProductos.Rows = 50;
-            this.grdProductos.Size = new System.Drawing.Size(433, 657);
+            this.grdProductos.Size = new System.Drawing.Size(376, 680);
             this.grdProductos.TabIndex = 0;
             this.grdProductos.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdProductos_Editado);
             this.grdProductos.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdProductos_KeyUp);
+            // 
+            // grdFranquicia
+            // 
+            this.grdFranquicia.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdFranquicia.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdFranquicia.AutoResize = false;
+            this.grdFranquicia.bColor = System.Drawing.SystemColors.Window;
+            this.grdFranquicia.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdFranquicia.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdFranquicia.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdFranquicia.Col = 0;
+            this.grdFranquicia.Cols = 10;
+            this.grdFranquicia.DataMember = "";
+            this.grdFranquicia.DataSource = null;
+            this.grdFranquicia.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdFranquicia.EnableEdicion = true;
+            this.grdFranquicia.Encabezado = "";
+            this.grdFranquicia.fColor = System.Drawing.Color.Silver;
+            this.grdFranquicia.FixCols = 0;
+            this.grdFranquicia.FixRows = 0;
+            this.grdFranquicia.Frozen = 0;
+            this.grdFranquicia.FuenteEncabezado = null;
+            this.grdFranquicia.FuentePieDePagina = null;
+            this.grdFranquicia.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdFranquicia.LimpiarEstilosAntesDeOrdenar = false;
+            this.grdFranquicia.Location = new System.Drawing.Point(0, 0);
+            this.grdFranquicia.Name = "grdFranquicia";
+            this.grdFranquicia.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdFranquicia.PintarFilaSel = true;
+            this.grdFranquicia.Redraw = true;
+            this.grdFranquicia.Row = 0;
+            this.grdFranquicia.Rows = 50;
+            this.grdFranquicia.Size = new System.Drawing.Size(305, 680);
+            this.grdFranquicia.TabIndex = 0;
+            this.grdFranquicia.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdFranquicia_Editado);
+            this.grdFranquicia.KeyPress += new Grilla2.SpeedGrilla.KeyPressEventHandler(this.grdFranquicia_KeyPress);
             // 
             // splFormulas
             // 
@@ -200,8 +259,7 @@
             this.splFormulas.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splFormulas.Panel2.Controls.Add(this.cmdCalcular);
             this.splFormulas.Panel2.Controls.Add(this.panel2);
-            this.splFormulas.Panel2Collapsed = true;
-            this.splFormulas.Size = new System.Drawing.Size(592, 692);
+            this.splFormulas.Size = new System.Drawing.Size(703, 708);
             this.splFormulas.SplitterDistance = 526;
             this.splFormulas.TabIndex = 1;
             // 
@@ -215,12 +273,14 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer3.Panel1.Controls.Add(this.cmdPorcentaje);
             this.splitContainer3.Panel1.Controls.Add(this.label2);
             this.splitContainer3.Panel1.Controls.Add(this.nuDecimales);
             this.splitContainer3.Panel1.Controls.Add(this.lstFechas);
             this.splitContainer3.Panel1.Controls.Add(this.panel4);
             this.splitContainer3.Panel1.Controls.Add(this.label1);
             this.splitContainer3.Panel1.Controls.Add(this.cmdBorrar);
+            this.splitContainer3.Panel1.Controls.Add(this.cmdGuardarFR);
             this.splitContainer3.Panel1.Controls.Add(this.cmdGuardar);
             this.splitContainer3.Panel1.Controls.Add(this.cmdImprimir);
             this.splitContainer3.Panel1.Controls.Add(this.cmdFormulas);
@@ -229,9 +289,21 @@
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer3.Panel2.Controls.Add(this.panel3);
-            this.splitContainer3.Size = new System.Drawing.Size(592, 692);
-            this.splitContainer3.SplitterDistance = 109;
+            this.splitContainer3.Size = new System.Drawing.Size(703, 526);
+            this.splitContainer3.SplitterDistance = 193;
             this.splitContainer3.TabIndex = 1;
+            // 
+            // cmdPorcentaje
+            // 
+            this.cmdPorcentaje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdPorcentaje.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdPorcentaje.Location = new System.Drawing.Point(6, 185);
+            this.cmdPorcentaje.Name = "cmdPorcentaje";
+            this.cmdPorcentaje.Size = new System.Drawing.Size(75, 23);
+            this.cmdPorcentaje.TabIndex = 15;
+            this.cmdPorcentaje.Text = "Calcular %";
+            this.cmdPorcentaje.UseVisualStyleBackColor = true;
+            this.cmdPorcentaje.Click += new System.EventHandler(this.cmdPorcentaje_Click);
             // 
             // label2
             // 
@@ -239,7 +311,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(1, 457);
+            this.label2.Location = new System.Drawing.Point(2, 255);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 20);
             this.label2.TabIndex = 12;
@@ -251,7 +323,7 @@
             this.nuDecimales.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nuDecimales.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nuDecimales.ForeColor = System.Drawing.Color.DimGray;
-            this.nuDecimales.Location = new System.Drawing.Point(49, 458);
+            this.nuDecimales.Location = new System.Drawing.Point(50, 256);
             this.nuDecimales.Name = "nuDecimales";
             this.nuDecimales.Size = new System.Drawing.Size(37, 22);
             this.nuDecimales.TabIndex = 11;
@@ -273,7 +345,7 @@
             this.lstFechas.ItemHeight = 20;
             this.lstFechas.Location = new System.Drawing.Point(5, 19);
             this.lstFechas.Name = "lstFechas";
-            this.lstFechas.Size = new System.Drawing.Size(100, 420);
+            this.lstFechas.Size = new System.Drawing.Size(184, 160);
             this.lstFechas.TabIndex = 1;
             this.lstFechas.SelectedIndexChanged += new System.EventHandler(this.lstFechas_SelectedIndexChanged);
             // 
@@ -282,9 +354,9 @@
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.Controls.Add(this.lblSuc);
-            this.panel4.Location = new System.Drawing.Point(0, 486);
+            this.panel4.Location = new System.Drawing.Point(6, 284);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(105, 56);
+            this.panel4.Size = new System.Drawing.Size(182, 56);
             this.panel4.TabIndex = 2;
             // 
             // lblSuc
@@ -297,7 +369,7 @@
             this.lblSuc.Location = new System.Drawing.Point(0, 0);
             this.lblSuc.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblSuc.Name = "lblSuc";
-            this.lblSuc.Size = new System.Drawing.Size(105, 56);
+            this.lblSuc.Size = new System.Drawing.Size(182, 56);
             this.lblSuc.TabIndex = 1;
             this.lblSuc.Text = "Sucursal";
             this.lblSuc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -317,21 +389,33 @@
             this.cmdBorrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdBorrar.Enabled = false;
-            this.cmdBorrar.Location = new System.Drawing.Point(3, 584);
+            this.cmdBorrar.Location = new System.Drawing.Point(6, 418);
             this.cmdBorrar.Name = "cmdBorrar";
-            this.cmdBorrar.Size = new System.Drawing.Size(103, 30);
+            this.cmdBorrar.Size = new System.Drawing.Size(182, 30);
             this.cmdBorrar.TabIndex = 0;
             this.cmdBorrar.Texto = "Borrar";
             this.cmdBorrar.Click += new System.EventHandler(this.cmdBorrar_Click);
+            // 
+            // cmdGuardarFR
+            // 
+            this.cmdGuardarFR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGuardarFR.BackColor = System.Drawing.SystemColors.Control;
+            this.cmdGuardarFR.Location = new System.Drawing.Point(6, 382);
+            this.cmdGuardarFR.Name = "cmdGuardarFR";
+            this.cmdGuardarFR.Size = new System.Drawing.Size(182, 30);
+            this.cmdGuardarFR.TabIndex = 0;
+            this.cmdGuardarFR.Texto = "Guardar Fr";
+            this.cmdGuardarFR.Click += new System.EventHandler(this.cmdGuardarFR_Click);
             // 
             // cmdGuardar
             // 
             this.cmdGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdGuardar.Enabled = false;
-            this.cmdGuardar.Location = new System.Drawing.Point(3, 548);
+            this.cmdGuardar.Location = new System.Drawing.Point(6, 346);
             this.cmdGuardar.Name = "cmdGuardar";
-            this.cmdGuardar.Size = new System.Drawing.Size(103, 30);
+            this.cmdGuardar.Size = new System.Drawing.Size(182, 30);
             this.cmdGuardar.TabIndex = 0;
             this.cmdGuardar.Texto = "Guardar";
             this.cmdGuardar.Click += new System.EventHandler(this.cmdGuardar_Click);
@@ -340,9 +424,9 @@
             // 
             this.cmdImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdImprimir.Location = new System.Drawing.Point(3, 620);
+            this.cmdImprimir.Location = new System.Drawing.Point(6, 454);
             this.cmdImprimir.Name = "cmdImprimir";
-            this.cmdImprimir.Size = new System.Drawing.Size(103, 30);
+            this.cmdImprimir.Size = new System.Drawing.Size(182, 30);
             this.cmdImprimir.TabIndex = 0;
             this.cmdImprimir.Texto = "Imprimir";
             this.cmdImprimir.Click += new System.EventHandler(this.cmdImprimir_Click);
@@ -351,9 +435,9 @@
             // 
             this.cmdFormulas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdFormulas.Location = new System.Drawing.Point(3, 656);
+            this.cmdFormulas.Location = new System.Drawing.Point(6, 490);
             this.cmdFormulas.Name = "cmdFormulas";
-            this.cmdFormulas.Size = new System.Drawing.Size(103, 30);
+            this.cmdFormulas.Size = new System.Drawing.Size(182, 30);
             this.cmdFormulas.TabIndex = 0;
             this.cmdFormulas.Texto = "Fórmulas";
             this.cmdFormulas.Click += new System.EventHandler(this.cmdFormulas_Click);
@@ -367,7 +451,7 @@
             this.panel3.Controls.Add(this.grdSucursales);
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(473, 686);
+            this.panel3.Size = new System.Drawing.Size(500, 520);
             this.panel3.TabIndex = 0;
             // 
             // grdSucursales
@@ -403,14 +487,14 @@
             this.grdSucursales.Redraw = true;
             this.grdSucursales.Row = 0;
             this.grdSucursales.Rows = 50;
-            this.grdSucursales.Size = new System.Drawing.Size(467, 680);
+            this.grdSucursales.Size = new System.Drawing.Size(494, 514);
             this.grdSucursales.TabIndex = 0;
             this.grdSucursales.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdSucursales_CambioFila);
             // 
             // cmdCalcular
             // 
             this.cmdCalcular.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdCalcular.Location = new System.Drawing.Point(424, 140);
+            this.cmdCalcular.Location = new System.Drawing.Point(977, 272);
             this.cmdCalcular.Name = "cmdCalcular";
             this.cmdCalcular.Size = new System.Drawing.Size(165, 19);
             this.cmdCalcular.TabIndex = 1;
@@ -425,7 +509,7 @@
             this.panel2.Controls.Add(this.grdFormulas);
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(586, 131);
+            this.panel2.Size = new System.Drawing.Size(1139, 263);
             this.panel2.TabIndex = 0;
             // 
             // grdFormulas
@@ -436,6 +520,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdFormulas.AutoResize = false;
+            this.grdFormulas.AutoScroll = true;
             this.grdFormulas.bColor = System.Drawing.SystemColors.Window;
             this.grdFormulas.bColorSel = System.Drawing.SystemColors.Highlight;
             this.grdFormulas.bFColor = System.Drawing.SystemColors.WindowText;
@@ -444,7 +529,7 @@
             this.grdFormulas.Cols = 10;
             this.grdFormulas.DataMember = "";
             this.grdFormulas.DataSource = null;
-            this.grdFormulas.EnableEdicion = true;
+            this.grdFormulas.EnableEdicion = false;
             this.grdFormulas.Encabezado = "";
             this.grdFormulas.fColor = System.Drawing.SystemColors.Control;
             this.grdFormulas.FixCols = 0;
@@ -461,14 +546,14 @@
             this.grdFormulas.Redraw = true;
             this.grdFormulas.Row = 0;
             this.grdFormulas.Rows = 50;
-            this.grdFormulas.Size = new System.Drawing.Size(580, 126);
+            this.grdFormulas.Size = new System.Drawing.Size(694, 169);
             this.grdFormulas.TabIndex = 0;
             // 
             // frmPrecios_Carne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 692);
+            this.ClientSize = new System.Drawing.Size(1398, 708);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmPrecios_Carne";
             this.Text = "Carne";
@@ -481,6 +566,10 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.splFormulas.Panel1.ResumeLayout(false);
             this.splFormulas.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splFormulas)).EndInit();
@@ -525,5 +614,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown nuDecimales;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private Grilla2.SpeedGrilla grdFranquicia;
+        private Controles.cBoton cmdGuardarFR;
+        private System.Windows.Forms.Button cmdPorcentaje;
     }
 }

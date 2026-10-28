@@ -43,8 +43,6 @@
             this.tiAuto = new System.Windows.Forms.Timer(this.components);
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblArchivo = new System.Windows.Forms.Label();
-            this.grdCuentas = new Grilla2.SpeedGrilla();
-            this.grdDatos = new Grilla2.SpeedGrilla();
             this.lblTotal = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.cmdRecargar = new MaterialSkin.Controls.MaterialFlatButton();
@@ -52,8 +50,14 @@
             this.lblpb = new System.Windows.Forms.Label();
             this.cmdMP = new MaterialSkin.Controls.MaterialFlatButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.grdDatos = new Grilla2.SpeedGrilla();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.button1 = new System.Windows.Forms.Button();
+            this.rdCuentas = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdTerminalesMP = new MaterialSkin.Controls.MaterialRadioButton();
             this.chAuto = new MaterialSkin.Controls.MaterialCheckBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cmdExcel = new MaterialSkin.Controls.MaterialFlatButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.lstTitulares = new System.Windows.Forms.ListBox();
@@ -61,8 +65,7 @@
             this.cmbSuc = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.rdTerminalesMP = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdCuentas = new MaterialSkin.Controls.MaterialRadioButton();
+            this.grdCuentas = new Grilla2.SpeedGrilla();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -74,6 +77,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -208,7 +212,7 @@
             this.panel5.Controls.Add(this.cmdRuta);
             this.panel5.Location = new System.Drawing.Point(223, 261);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(321, 27);
+            this.panel5.Size = new System.Drawing.Size(221, 27);
             this.panel5.TabIndex = 22;
             // 
             // lblArchivo
@@ -220,45 +224,99 @@
             this.lblArchivo.Size = new System.Drawing.Size(0, 13);
             this.lblArchivo.TabIndex = 23;
             // 
-            // grdCuentas
+            // lblTotal
             // 
-            this.grdCuentas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
-            this.grdCuentas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
-            this.grdCuentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Location = new System.Drawing.Point(2, 173);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(0, 16);
+            this.lblTotal.TabIndex = 24;
+            // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.cmdRecargar);
+            this.panel6.Location = new System.Drawing.Point(450, 262);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(209, 27);
+            this.panel6.TabIndex = 19;
+            // 
+            // cmdRecargar
+            // 
+            this.cmdRecargar.AutoSize = true;
+            this.cmdRecargar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdRecargar.Depth = 0;
+            this.cmdRecargar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdRecargar.Location = new System.Drawing.Point(0, 0);
+            this.cmdRecargar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdRecargar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdRecargar.Name = "cmdRecargar";
+            this.cmdRecargar.Primary = false;
+            this.cmdRecargar.Size = new System.Drawing.Size(207, 25);
+            this.cmdRecargar.TabIndex = 4;
+            this.cmdRecargar.Text = "Recargar";
+            this.cmdRecargar.UseVisualStyleBackColor = true;
+            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
+            // 
+            // pbLeer
+            // 
+            this.pbLeer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdCuentas.AutoResize = false;
-            this.grdCuentas.bColor = System.Drawing.SystemColors.Window;
-            this.grdCuentas.bColorSel = System.Drawing.SystemColors.Highlight;
-            this.grdCuentas.bFColor = System.Drawing.SystemColors.WindowText;
-            this.grdCuentas.bFColorSel = System.Drawing.SystemColors.HighlightText;
-            this.grdCuentas.Col = 0;
-            this.grdCuentas.Cols = 10;
-            this.grdCuentas.DataMember = "";
-            this.grdCuentas.DataSource = null;
-            this.grdCuentas.EnableEdicion = true;
-            this.grdCuentas.Encabezado = "";
-            this.grdCuentas.fColor = System.Drawing.Color.Silver;
-            this.grdCuentas.FixCols = 0;
-            this.grdCuentas.FixRows = 0;
-            this.grdCuentas.Frozen = 0;
-            this.grdCuentas.FuenteEncabezado = null;
-            this.grdCuentas.FuentePieDePagina = null;
-            this.grdCuentas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
-            this.grdCuentas.LimpiarEstilosAntesDeOrdenar = false;
-            this.grdCuentas.Location = new System.Drawing.Point(0, 18);
-            this.grdCuentas.Name = "grdCuentas";
-            this.grdCuentas.PieDePagina = "\t\tPage {0} of {1}";
-            this.grdCuentas.PintarFilaSel = true;
-            this.grdCuentas.Redraw = true;
-            this.grdCuentas.Row = 0;
-            this.grdCuentas.Rows = 50;
-            this.grdCuentas.Size = new System.Drawing.Size(666, 325);
-            this.grdCuentas.TabIndex = 1;
-            this.grdCuentas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdCuentas_Editado);
-            this.grdCuentas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdCuentas_CambioFila);
-            this.grdCuentas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdCuentas_KeyUp);
-            this.grdCuentas.CambioColumna += new Grilla2.SpeedGrilla.CambioColumnaEventHandler(this.grdCuentas_CambioColumna);
+            this.pbLeer.Location = new System.Drawing.Point(223, 228);
+            this.pbLeer.Name = "pbLeer";
+            this.pbLeer.Size = new System.Drawing.Size(221, 27);
+            this.pbLeer.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pbLeer.TabIndex = 25;
+            // 
+            // lblpb
+            // 
+            this.lblpb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblpb.AutoSize = true;
+            this.lblpb.Location = new System.Drawing.Point(220, 211);
+            this.lblpb.Name = "lblpb";
+            this.lblpb.Size = new System.Drawing.Size(52, 13);
+            this.lblpb.TabIndex = 26;
+            this.lblpb.Text = "Progreso:";
+            // 
+            // cmdMP
+            // 
+            this.cmdMP.AutoSize = true;
+            this.cmdMP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdMP.Depth = 0;
+            this.cmdMP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdMP.Location = new System.Drawing.Point(0, 0);
+            this.cmdMP.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdMP.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdMP.Name = "cmdMP";
+            this.cmdMP.Primary = false;
+            this.cmdMP.Size = new System.Drawing.Size(114, 25);
+            this.cmdMP.TabIndex = 32;
+            this.cmdMP.Text = "Actualizar MP";
+            this.cmdMP.UseVisualStyleBackColor = true;
+            this.cmdMP.Click += new System.EventHandler(this.cmdMP_Click);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BackColor = System.Drawing.Color.Gainsboro;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.grdDatos);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Size = new System.Drawing.Size(1428, 643);
+            this.splitContainer1.SplitterDistance = 754;
+            this.splitContainer1.SplitterWidth = 8;
+            this.splitContainer1.TabIndex = 33;
             // 
             // grdDatos
             // 
@@ -294,97 +352,6 @@
             this.grdDatos.Size = new System.Drawing.Size(754, 643);
             this.grdDatos.TabIndex = 0;
             // 
-            // lblTotal
-            // 
-            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(2, 173);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(0, 16);
-            this.lblTotal.TabIndex = 24;
-            // 
-            // panel6
-            // 
-            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.cmdRecargar);
-            this.panel6.Location = new System.Drawing.Point(550, 261);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(116, 27);
-            this.panel6.TabIndex = 19;
-            // 
-            // cmdRecargar
-            // 
-            this.cmdRecargar.AutoSize = true;
-            this.cmdRecargar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cmdRecargar.Depth = 0;
-            this.cmdRecargar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmdRecargar.Location = new System.Drawing.Point(0, 0);
-            this.cmdRecargar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cmdRecargar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cmdRecargar.Name = "cmdRecargar";
-            this.cmdRecargar.Primary = false;
-            this.cmdRecargar.Size = new System.Drawing.Size(114, 25);
-            this.cmdRecargar.TabIndex = 4;
-            this.cmdRecargar.Text = "Recargar";
-            this.cmdRecargar.UseVisualStyleBackColor = true;
-            this.cmdRecargar.Click += new System.EventHandler(this.cmdRecargar_Click);
-            // 
-            // pbLeer
-            // 
-            this.pbLeer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbLeer.Location = new System.Drawing.Point(223, 228);
-            this.pbLeer.Name = "pbLeer";
-            this.pbLeer.Size = new System.Drawing.Size(321, 27);
-            this.pbLeer.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.pbLeer.TabIndex = 25;
-            // 
-            // lblpb
-            // 
-            this.lblpb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblpb.AutoSize = true;
-            this.lblpb.Location = new System.Drawing.Point(220, 211);
-            this.lblpb.Name = "lblpb";
-            this.lblpb.Size = new System.Drawing.Size(52, 13);
-            this.lblpb.TabIndex = 26;
-            this.lblpb.Text = "Progreso:";
-            // 
-            // cmdMP
-            // 
-            this.cmdMP.AutoSize = true;
-            this.cmdMP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cmdMP.Depth = 0;
-            this.cmdMP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmdMP.Location = new System.Drawing.Point(0, 0);
-            this.cmdMP.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cmdMP.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cmdMP.Name = "cmdMP";
-            this.cmdMP.Primary = false;
-            this.cmdMP.Size = new System.Drawing.Size(114, 25);
-            this.cmdMP.TabIndex = 32;
-            this.cmdMP.Text = "Actualizar MP";
-            this.cmdMP.UseVisualStyleBackColor = true;
-            this.cmdMP.Click += new System.EventHandler(this.cmdMP_Click);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.grdDatos);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1428, 643);
-            this.splitContainer1.SplitterDistance = 754;
-            this.splitContainer1.TabIndex = 33;
-            // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -394,9 +361,12 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer2.Panel1.Controls.Add(this.button1);
             this.splitContainer2.Panel1.Controls.Add(this.rdCuentas);
             this.splitContainer2.Panel1.Controls.Add(this.rdTerminalesMP);
             this.splitContainer2.Panel1.Controls.Add(this.chAuto);
+            this.splitContainer2.Panel1.Controls.Add(this.panel3);
             this.splitContainer2.Panel1.Controls.Add(this.panel1);
             this.splitContainer2.Panel1.Controls.Add(this.panel8);
             this.splitContainer2.Panel1.Controls.Add(this.label6);
@@ -417,11 +387,60 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.grdCuentas);
             this.splitContainer2.Panel2.Controls.Add(this.lblCuentas);
-            this.splitContainer2.Size = new System.Drawing.Size(670, 643);
+            this.splitContainer2.Size = new System.Drawing.Size(666, 643);
             this.splitContainer2.SplitterDistance = 293;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(353, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 43;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // rdCuentas
+            // 
+            this.rdCuentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdCuentas.AutoSize = true;
+            this.rdCuentas.Checked = true;
+            this.rdCuentas.Depth = 0;
+            this.rdCuentas.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdCuentas.Location = new System.Drawing.Point(460, 190);
+            this.rdCuentas.Margin = new System.Windows.Forms.Padding(0);
+            this.rdCuentas.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdCuentas.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdCuentas.Name = "rdCuentas";
+            this.rdCuentas.Ripple = true;
+            this.rdCuentas.Size = new System.Drawing.Size(80, 30);
+            this.rdCuentas.TabIndex = 42;
+            this.rdCuentas.TabStop = true;
+            this.rdCuentas.Text = "Cuentas";
+            this.rdCuentas.UseVisualStyleBackColor = true;
+            // 
+            // rdTerminalesMP
+            // 
+            this.rdTerminalesMP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdTerminalesMP.AutoSize = true;
+            this.rdTerminalesMP.Depth = 0;
+            this.rdTerminalesMP.Font = new System.Drawing.Font("Roboto", 10F);
+            this.rdTerminalesMP.Location = new System.Drawing.Point(540, 190);
+            this.rdTerminalesMP.Margin = new System.Windows.Forms.Padding(0);
+            this.rdTerminalesMP.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdTerminalesMP.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdTerminalesMP.Name = "rdTerminalesMP";
+            this.rdTerminalesMP.Ripple = true;
+            this.rdTerminalesMP.Size = new System.Drawing.Size(122, 30);
+            this.rdTerminalesMP.TabIndex = 41;
+            this.rdTerminalesMP.Text = "Terminales MP";
+            this.rdTerminalesMP.UseVisualStyleBackColor = true;
+            this.rdTerminalesMP.CheckedChanged += new System.EventHandler(this.rdTerminalesMP_CheckedChanged);
             // 
             // chAuto
             // 
@@ -429,7 +448,7 @@
             this.chAuto.AutoSize = true;
             this.chAuto.Depth = 0;
             this.chAuto.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chAuto.Location = new System.Drawing.Point(606, 0);
+            this.chAuto.Location = new System.Drawing.Point(602, 0);
             this.chAuto.Margin = new System.Windows.Forms.Padding(0);
             this.chAuto.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chAuto.MouseState = MaterialSkin.MouseState.HOVER;
@@ -441,12 +460,39 @@
             this.chAuto.UseVisualStyleBackColor = true;
             this.chAuto.CheckedChanged += new System.EventHandler(this.chAuto_CheckedChanged);
             // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.cmdExcel);
+            this.panel3.Location = new System.Drawing.Point(581, 228);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(79, 27);
+            this.panel3.TabIndex = 20;
+            // 
+            // cmdExcel
+            // 
+            this.cmdExcel.AutoSize = true;
+            this.cmdExcel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cmdExcel.Depth = 0;
+            this.cmdExcel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdExcel.Location = new System.Drawing.Point(0, 0);
+            this.cmdExcel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cmdExcel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cmdExcel.Name = "cmdExcel";
+            this.cmdExcel.Primary = false;
+            this.cmdExcel.Size = new System.Drawing.Size(77, 25);
+            this.cmdExcel.TabIndex = 32;
+            this.cmdExcel.Text = "Consulta";
+            this.cmdExcel.UseVisualStyleBackColor = true;
+            this.cmdExcel.Click += new System.EventHandler(this.cmdExcel_Click);
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.cmdMP);
-            this.panel1.Location = new System.Drawing.Point(550, 228);
+            this.panel1.Location = new System.Drawing.Point(450, 229);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(116, 27);
             this.panel1.TabIndex = 20;
@@ -513,42 +559,45 @@
             this.panel7.Size = new System.Drawing.Size(157, 154);
             this.panel7.TabIndex = 33;
             // 
-            // rdTerminalesMP
+            // grdCuentas
             // 
-            this.rdTerminalesMP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdTerminalesMP.AutoSize = true;
-            this.rdTerminalesMP.Depth = 0;
-            this.rdTerminalesMP.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdTerminalesMP.Location = new System.Drawing.Point(544, 190);
-            this.rdTerminalesMP.Margin = new System.Windows.Forms.Padding(0);
-            this.rdTerminalesMP.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdTerminalesMP.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdTerminalesMP.Name = "rdTerminalesMP";
-            this.rdTerminalesMP.Ripple = true;
-            this.rdTerminalesMP.Size = new System.Drawing.Size(122, 30);
-            this.rdTerminalesMP.TabIndex = 41;
-            this.rdTerminalesMP.Text = "Terminales MP";
-            this.rdTerminalesMP.UseVisualStyleBackColor = true;
-            this.rdTerminalesMP.CheckedChanged += new System.EventHandler(this.rdTerminalesMP_CheckedChanged);
-            // 
-            // rdCuentas
-            // 
-            this.rdCuentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdCuentas.AutoSize = true;
-            this.rdCuentas.Checked = true;
-            this.rdCuentas.Depth = 0;
-            this.rdCuentas.Font = new System.Drawing.Font("Roboto", 10F);
-            this.rdCuentas.Location = new System.Drawing.Point(464, 190);
-            this.rdCuentas.Margin = new System.Windows.Forms.Padding(0);
-            this.rdCuentas.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdCuentas.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdCuentas.Name = "rdCuentas";
-            this.rdCuentas.Ripple = true;
-            this.rdCuentas.Size = new System.Drawing.Size(80, 30);
-            this.rdCuentas.TabIndex = 42;
-            this.rdCuentas.TabStop = true;
-            this.rdCuentas.Text = "Cuentas";
-            this.rdCuentas.UseVisualStyleBackColor = true;
+            this.grdCuentas.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdCuentas.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdCuentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdCuentas.AutoResize = false;
+            this.grdCuentas.bColor = System.Drawing.SystemColors.Window;
+            this.grdCuentas.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdCuentas.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdCuentas.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdCuentas.Col = 0;
+            this.grdCuentas.Cols = 10;
+            this.grdCuentas.DataMember = "";
+            this.grdCuentas.DataSource = null;
+            this.grdCuentas.EnableEdicion = true;
+            this.grdCuentas.Encabezado = "";
+            this.grdCuentas.fColor = System.Drawing.Color.Silver;
+            this.grdCuentas.FixCols = 0;
+            this.grdCuentas.FixRows = 0;
+            this.grdCuentas.Frozen = 0;
+            this.grdCuentas.FuenteEncabezado = null;
+            this.grdCuentas.FuentePieDePagina = null;
+            this.grdCuentas.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdCuentas.LimpiarEstilosAntesDeOrdenar = false;
+            this.grdCuentas.Location = new System.Drawing.Point(0, 18);
+            this.grdCuentas.Name = "grdCuentas";
+            this.grdCuentas.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdCuentas.PintarFilaSel = true;
+            this.grdCuentas.Redraw = true;
+            this.grdCuentas.Row = 0;
+            this.grdCuentas.Rows = 50;
+            this.grdCuentas.Size = new System.Drawing.Size(662, 325);
+            this.grdCuentas.TabIndex = 1;
+            this.grdCuentas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdCuentas_Editado);
+            this.grdCuentas.CambioFila += new Grilla2.SpeedGrilla.CambioFilaEventHandler(this.grdCuentas_CambioFila);
+            this.grdCuentas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdCuentas_KeyUp);
+            this.grdCuentas.CambioColumna += new Grilla2.SpeedGrilla.CambioColumnaEventHandler(this.grdCuentas_CambioColumna);
             // 
             // frmLeer_Tarjetas
             // 
@@ -576,6 +625,8 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -620,5 +671,8 @@
         private MaterialSkin.Controls.MaterialCheckBox chAuto;
         private MaterialSkin.Controls.MaterialRadioButton rdTerminalesMP;
         private MaterialSkin.Controls.MaterialRadioButton rdCuentas;
+        private System.Windows.Forms.Panel panel3;
+        private MaterialSkin.Controls.MaterialFlatButton cmdExcel;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -218,8 +218,8 @@
             {
                 string cmdText = "";
 
-                cmdText = $"SELECT TOP {Top} Semana, Rend, Balance, Carne, Pollo, Granja, Men, Emb, Rec, IntVenta, IntCompra, DifInt" +
-                            $", Empleados, Gastos, Ganancia, Clientes, Reintegros" +
+                cmdText = $"SELECT TOP {Top} Semana, Rend, Balance, Carne, Pollo, Rec, IntVenta, IntCompra, DifInt" +
+                            $", Empleados, Gastos, Ganancia, Ganancia_fr, Clientes, Reintegros" +
                             $" FROM vw_Estadisticas_Sucursal WHERE " +
                             $" ID_Sucursales={Suc.ID}" +
                             $" AND Semana BETWEEN  '{Sem.Semana.AddYears(-1):MM/dd/yy}' AND '{Sem.Semana:MM/dd/yy}' ORDER BY Semana DESC";
@@ -252,8 +252,8 @@
                 switch (Filtro_Propio)
                 {
                     case Tipo_Propio.Sucursales:
-                        cmdText = $"SELECT ID_Sucursales Suc, Nombre, Rend, Balance, Carne, Pollo, Granja, Men, Emb, Rec, IntVenta, IntCompra, DifInt" +
-                                    $", Empleados, Gastos, Ganancia, Clientes, Reintegros" +
+                        cmdText = $"SELECT ID_Sucursales Suc, Nombre, Rend, Balance, Carne, Pollo, Rec, IntVenta, IntCompra, DifInt" +
+                                    $", Empleados, Gastos, Ganancia, Ganancia_fr, Clientes, Reintegros" +
                                     $" FROM vw_Estadisticas_Sucursal WHERE " +
                                     $" Propio=1 AND {(Filtro_Ver ? "Ver=1 AND " : "")} Semana='{Sem.Semana:MM/dd/yy}' ORDER BY ID_Sucursales";
                         break;
@@ -312,7 +312,7 @@
             return dt;
         }
 
-        public DataTable Ventas_KilosProdSuc(byte semanas = 5, string filtro_Prods = "")
+        public DataTable Ventas_KilosProdSuc(byte semanas = 5, string filtro_Prods = "", bool traspuesto = false)
         {
             DataTable dt = new DataTable("Datos");
 
@@ -324,7 +324,7 @@
                 string Columnas_Semanas = "";
                 Herramientas.Herramientas h = new Herramientas.Herramientas();
 
-                if (filtro_Prods != "") { filtro_Prods = $" WHERE {filtro_Prods}"; }
+                if (filtro_Prods != "" && !traspuesto) { filtro_Prods = $" WHERE {filtro_Prods}"; }
 
                 Columnas_Semanas = "";
                 string suma_Semanas = "";
@@ -339,21 +339,45 @@
                     fecha = fecha.AddDays(7);
                 }
 
-                if (Suc.ID != 0)
+                if (traspuesto)
                 {
-                    cadena = $"SELECT * FROM (SELECT Prod, Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL( Kilos, 0) AS tKilos " +
-                                 $" FROM vw_VentaProductos WHERE Suc={Suc.ID}) AS Venta " +
-                                 $" PIVOT (SUM (tKilos)" +
-                                 $" FOR Semana IN({Columnas_Semanas}))" +
-                                 $" AS VENTAS {filtro_Prods}  ORDER BY Prod";
+                    if (Suc.ID != 0)
+                    {
+                        cadena = $"SELECT * FROM (SELECT Suc, NombreSucursal AS Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL(Kilos, 0) AS tKilos  " +
+                                    $" FROM vw_VentaProductos WHERE Suc={Suc.ID} AND Prod={filtro_Prods}) AS Venta " +
+                                    $" PIVOT (SUM (tKilos) " +
+                                    $" FOR Semana IN({Columnas_Semanas})) " +
+                                    $" AS VENTAS   ORDER BY Suc";
+                        
+                    }
+                    else
+                    {
+                        cadena = $"SELECT * FROM (SELECT Suc, NombreSucursal AS Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL(Kilos, 0) AS tKilos  " +
+                                    $" FROM vw_VentaProductos WHERE Prod={filtro_Prods}) AS Venta " +
+                                    $" PIVOT (SUM (tKilos) " +
+                                    $" FOR Semana IN({Columnas_Semanas})) " +
+                                    $" AS VENTAS   ORDER BY Suc";
+                        
+                    } 
                 }
                 else
                 {
-                    cadena = $"SELECT * FROM (SELECT Prod, Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL( Kilos, 0) AS tKilos " +
-                                $" FROM vw_VentaProductos) AS Venta " +
-                                $" PIVOT (SUM (tKilos)" +
-                                $" FOR Semana IN({Columnas_Semanas}))" +
-                                $" AS VENTAS {filtro_Prods}  ORDER BY Prod";
+                    if (Suc.ID != 0)
+                    {                        
+                        cadena = $"SELECT * FROM (SELECT Prod, Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL( Kilos, 0) AS tKilos " +
+                                     $" FROM vw_VentaProductos WHERE Suc={Suc.ID}) AS Venta " +
+                                     $" PIVOT (SUM (tKilos)" +
+                                     $" FOR Semana IN({Columnas_Semanas}))" +
+                                     $" AS VENTAS {filtro_Prods}  ORDER BY Prod";
+                    }
+                    else
+                    {
+                        cadena = $"SELECT * FROM (SELECT Prod, Nombre, CONVERT(varchar(10), FECHA, 103) AS Semana, ISNULL( Kilos, 0) AS tKilos " +
+                                    $" FROM vw_VentaProductos) AS Venta " +
+                                    $" PIVOT (SUM (tKilos)" +
+                                    $" FOR Semana IN({Columnas_Semanas}))" +
+                                    $" AS VENTAS {filtro_Prods}  ORDER BY Prod";
+                    }
                 }
 
                 conexionSql.Open();
@@ -399,7 +423,14 @@
                             }
                             else
                             {
-                                dr["Stock"] = st.Stock_Kilos($"Fecha='{Sem.Semana.AddDays(6):MM/dd/yy}' AND ID_Productos={dr["Prod"]}");
+                                if (traspuesto)
+                                {
+                                    dr["Stock"] = st.Stock_Kilos($"Fecha='{Sem.Semana.AddDays(6):MM/dd/yy}' AND ID_Productos={filtro_Prods} AND ID_Sucursales={dr["Suc"]}");
+                                }
+                                else
+                                {
+                                    dr["Stock"] = st.Stock_Kilos($"Fecha='{Sem.Semana.AddDays(6):MM/dd/yy}' AND ID_Productos={dr["Prod"]}");
+                                }
                             }
 
                         }

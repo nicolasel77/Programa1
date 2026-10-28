@@ -25,6 +25,7 @@
         public Single Costo_Original { get; set; }
         public Single Costo_Oferta { get; set; }
         public Single Kilos { get; set; }
+        public bool Bloqueado { get; set; } = false;
 
         public Precios_Sucursales precios = new Precios_Sucursales();
         public Lista_Ofertas precios_ofertas = new Lista_Ofertas();
@@ -43,6 +44,7 @@
                 Actualizar("Costo_Original", Costo_Original);
                 Actualizar("Costo_Oferta", Costo_Oferta);
                 Actualizar("Kilos", Kilos);
+                Actualizar("Bloqueado", Bloqueado);
         }
 
         public new void Agregar()
@@ -52,8 +54,8 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Ofertas (Fecha, Id_Sucursales, Id_Productos, Descripcion, Costo_Original, Costo_Oferta, Kilos) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto.ID}, '{Descripcion}', {Costo_Original.ToString().Replace(",", ".")}, {Costo_Oferta.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")})", sql);
+                    new SqlCommand($"INSERT INTO Ofertas (Fecha, Id_Sucursales, Id_Productos, Descripcion, Costo_Original, Costo_Oferta, Kilos, Bloqueado) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto.ID}, '{Descripcion}', {Costo_Original.ToString().Replace(",", ".")}, {Costo_Oferta.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")}, 0)", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -107,6 +109,7 @@
                 Costo_Original = Convert.ToSingle(dr["Costo_Original"]);
                 Costo_Oferta = Convert.ToSingle(dr["Costo_Oferta"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
+                Bloqueado = Convert.ToBoolean(dr["Bloqueado"]);
             }
             catch (Exception)
             {
@@ -118,6 +121,7 @@
                 Costo_Original = 0;
                 Costo_Oferta = 0;
                 Kilos = 0;
+                Bloqueado = false;
             }
         }
 

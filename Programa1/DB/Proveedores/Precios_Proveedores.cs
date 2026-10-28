@@ -36,8 +36,10 @@ namespace Programa1.DB
 
             try
             {
+                string proveedorFiltro = Proveedor.Id == 0 ? "" : $" AND ID_Proveedores={Proveedor.Id}";
+
                 SqlCommand comandoSql = new SqlCommand($"SELECT TOP 1 Precio FROM Precios_Proveedores  WHERE Fecha<='{Fecha.ToString("MM/dd/yyy")}'" +
-                    $" AND Id_Productos={Producto.ID} AND ID_Proveedores={Proveedor.Id} ORDER BY Fecha DESC", conexionSql);
+                    $" AND Id_Productos={Producto.ID} {proveedorFiltro} ORDER BY Fecha DESC", conexionSql);
 
                 conexionSql.Open();
 

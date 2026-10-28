@@ -404,6 +404,7 @@ namespace Programa1.Carga.Hacienda
                         salidas_sistema.Faena.Cargar_Registro();
                         salidas_sistema.Media = Convert.ToInt32(drS["Media"]);
                         salidas_sistema.Cargar_CostoSalida();
+
                         salidas_sistema.Agregar();
                     }
                 }
@@ -600,11 +601,40 @@ namespace Programa1.Carga.Hacienda
                     cmdSincSalidas.PerformClick();
                 }
             }
+            cmdFTP.PerformClick();
+
         }
 
         private void lstBoletas_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void mDesde_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mHasta_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmdFTP_Click(object sender, EventArgs e)
+        {
+            // bajar archivo de gdrive
+            clsFTP ftp = new clsFTP();
+            ftp.bajar_archivo("dbStock.accdb");
         }
     }
 }

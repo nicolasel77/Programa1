@@ -150,7 +150,7 @@ namespace Programa1.Carga.Tesoreria
             {
                 case e_Orden.Tipo:
                     string s = h.Unir(cFechas1.Cadena(), grupo);
-                    grdGastos.MostrarDatos(Gastos.TotalPorTipo(s), true, true);
+                    grdGastos.MostrarDatos(Gastos.TotalPorTipo(s, chMostrarCajas.Checked), true, true);
                     grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                     grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N1";
                     grdGastos.AutosizeAll();
@@ -161,11 +161,11 @@ namespace Programa1.Carga.Tesoreria
                     if (Tipo > 0)
                     {
                         grupo = h.Unir(grupo, $"Id_TipoGastos={Tipo}");
-                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo, chMostrarCajas.Checked), true, true);
                     }
                     else
                     {
-                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo, chMostrarCajas.Checked), true, true);
                     }
                     grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                     grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N1";
@@ -233,7 +233,7 @@ namespace Programa1.Carga.Tesoreria
                             }
                         }
                     }
-                    grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo), true, true);
+                    grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo, false, chMostrarCajas.Checked), true, true);
                     grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N1";
                     grdGastos.AutosizeAll();
                     grdGastos.set_ColW(grdGastos.get_ColIndex("Descripcion"), 400);
@@ -263,7 +263,7 @@ namespace Programa1.Carga.Tesoreria
                     {
                         Tipo = h.Codigo_Seleccionado(lblTipo.Text);
                         grupo = h.Unir($"Id_TipoGastos={Tipo}", grupo);
-                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo, chMostrarCajas.Checked), true, true);
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
                         grdGastos.AutosizeAll();
@@ -274,7 +274,7 @@ namespace Programa1.Carga.Tesoreria
                         Tipo = 0;
                         SubTipo = 0;
                         Detalle = 0;
-                        grdGastos.MostrarDatos(Gastos.TotalPorTipo(grupo), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorTipo(grupo, chMostrarCajas.Checked), true, true);
 
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
@@ -290,7 +290,7 @@ namespace Programa1.Carga.Tesoreria
                         if (Tipo != 0) { grupo = h.Unir($"Id_TipoGastos={Tipo}", grupo); }
                         grupo = h.Unir($"Id_SubTipoGastos={SubTipo}", grupo);
 
-                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo, false, chMostrarCajas.Checked), true, true);
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
                         grdGastos.AutosizeAll();
@@ -301,7 +301,7 @@ namespace Programa1.Carga.Tesoreria
                         SubTipo = 0;
                         if (Tipo != 0) { grupo = h.Unir($"Id_TipoGastos={Tipo}", grupo); }
 
-                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorSubTipo(grupo, chMostrarCajas.Checked), true, true);
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
                         grdGastos.AutosizeAll();
@@ -318,7 +318,7 @@ namespace Programa1.Carga.Tesoreria
                         if (SubTipo > 0) { grupo = h.Unir($"Id_SubTipoGastos={SubTipo}", grupo); }
 
 
-                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo, true), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo, true, chMostrarCajas.Checked), true, true);
 
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";
@@ -332,7 +332,7 @@ namespace Programa1.Carga.Tesoreria
 
                         if (SubTipo > 0) { grupo = h.Unir($"Id_SubTipoGastos={SubTipo}", grupo); }
 
-                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo, true), true, true);
+                        grdGastos.MostrarDatos(Gastos.TotalPorDetalle(grupo, true, chMostrarCajas.Checked), true, true);
 
                         grdGastos.SumarCol(grdGastos.get_ColIndex("Total"), true);
                         grdGastos.Columnas[grdGastos.get_ColIndex("Total")].Style.Format = "N2";

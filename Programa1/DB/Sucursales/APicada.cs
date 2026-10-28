@@ -1,5 +1,6 @@
 ﻿namespace Programa1.DB
 {
+    using DocumentFormat.OpenXml.Office2010.CustomUI;
     using Programa1.Clases;
     using System;
     using System.Data;
@@ -28,6 +29,8 @@
         public Single Costo_A { get; set; }
         public Single Costo_S { get; set; }
 
+        public bool Bloqueado { get; set; } = false;
+
         public Precios_Sucursales precios = new Precios_Sucursales();
 
 
@@ -43,6 +46,7 @@
                 Actualizar("Costo_S", Costo_S);
                 Actualizar("Kilos_A", Kilos_A);
                 Actualizar("Kilos_S", Kilos_S);
+                Actualizar("Bloqueado", Bloqueado);
             }
         }
 
@@ -54,9 +58,9 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO APicada (Fecha, Id_Sucursales, Id_Productos_A, Id_Productos_S, Costo_A, Costo_S, Kilos_A, Kilos_S) " +
+                    new SqlCommand($"INSERT INTO APicada (Fecha, Id_Sucursales, Id_Productos_A, Id_Productos_S, Costo_A, Costo_S, Kilos_A, Kilos_S, Bloqueado) " +
                         $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto_A.ID}, {Producto_S.ID}, {Costo_A.ToString().Replace(",", ".")}, {Costo_S.ToString().Replace(",", ".")}, " +
-                        $"{Kilos_A.ToString().Replace(",", ".")}, {Kilos_S.ToString().Replace(",", ".")})", sql);
+                        $"{Kilos_A.ToString().Replace(",", ".")}, {Kilos_S.ToString().Replace(",", ".")}, 0)", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -110,6 +114,7 @@
                 Producto_S.ID = Convert.ToInt32(dr["Id_Productos_S"]);
                 Costo_S = Convert.ToSingle(dr["Costo_S"]);
                 Kilos_S = Convert.ToSingle(dr["Kilos_S"]);
+                Bloqueado = Convert.ToBoolean(dr["Bloqueado"]);
             }
             catch (Exception)
             {

@@ -1,6 +1,5 @@
 ﻿namespace Programa1.Carga.Tesoreria
-{
-    using Newtonsoft.Json.Linq;
+{    
     using Programa1.Clases;
     using Programa1.Controles;
     using Programa1.DB;
@@ -11,6 +10,7 @@
     using System.Linq;
     using System.Net.Http;
     using System.Text;
+    using System.Text.Json;
     using System.Windows.Forms;
     using static System.ComponentModel.Design.ObjectSelectorEditor;
 
@@ -1112,11 +1112,12 @@
                     if (response.IsSuccessStatusCode)
                     {
                         string responseData = await response.Content.ReadAsStringAsync();
-                        JObject ventas = JObject.Parse(responseData);
+                        JsonDocument ventas = JsonDocument.Parse(responseData);
                         StringBuilder sb = new StringBuilder();
 
-                        var paging = ventas["paging"];
-                        if (total < Convert.ToInt32(paging["total"])) { total = Convert.ToInt32(paging["total"]); }
+                        var paging = ventas.RootElement.GetProperty("paging");
+                        int pagingTotal = paging.GetProperty("total").GetInt32();
+                        if (total < pagingTotal) { total = pagingTotal; }
                     }
                 }
 
@@ -1129,32 +1130,26 @@
                     if (response.IsSuccessStatusCode)
                     {
                         string responseData = await response.Content.ReadAsStringAsync();
-                        JObject ventas = JObject.Parse(responseData);
+                        JsonDocument ventas = JsonDocument.Parse(responseData);
                         StringBuilder sb = new StringBuilder();
 
-                        var paging = ventas["paging"];
-                        if (total > Convert.ToInt32(paging["total"])) { i += -1; continue; }
+                        var paging = ventas.RootElement.GetProperty("paging");
+                        if (total > paging.GetProperty("total").GetDouble()) { i += -1; continue; }
 
-                        foreach (var venta in ventas["results"])
+                        foreach (var venta in ventas.RootElement.GetProperty("results").EnumerateArray())
                         {
                             DataRow nrow = dt.NewRow();
 
-                            //var poi = venta["point_of_interaction"];
-                            //var device = poi["device"];
+                            nrow["Fecha"] = Convert.ToDateTime(venta.GetProperty("money_release_date").GetString()?.Substring(0, 10));
+                            nrow["Importe"] = Convert.ToSingle(venta.GetProperty("transaction_amount").GetDouble());
 
-                            nrow["Fecha"] = Convert.ToDateTime(venta["money_release_date"]?.ToString().Substring(0, 10));
-                            nrow["Importe"] = Convert.ToSingle(venta["transaction_amount"]?.ToString().Replace(".", ","));
-                            var details = venta["transaction_details"];
-                            nrow["Neto"] = Convert.ToSingle(details["net_received_amount"]?.ToString().Replace(".", ","));
+                            var details = venta.GetProperty("transaction_details");
+                            nrow["Neto"] = Convert.ToSingle(details.GetProperty("net_received_amount").GetDouble());
 
                             nrow["Descripcion"] = "Suc Varias";
                             nrow["ID_TipoEntrada"] = 23;
                             nrow["ID_SubTipoEntrada"] = 203;
                             nrow["ID_Caja"] = caja;
-
-                            //if (device == null)
-                            //{ nrow["Suc"] = 0; }
-                            //else { nrow["Suc"] = leer.suc_cuentas.buscar_suc(Convert.ToInt32(device["serial_number"]?.ToString().Substring(8) ?? "N/A")); }
 
                             dt.Rows.Add(nrow);
                         }

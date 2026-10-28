@@ -30,13 +30,14 @@
         public bool Mostrar_Ocultos { get; set; } = false;
 
         public bool Filtrar_Ver { get; set; } = true;
+        public bool VerEnPedidos { get; set; } = true;
 
         public bool Ordern_XId { get; set; } = true;
         public int Orden { get; internal set; }
 
         public new DataTable Datos(string filtro = "")
         {
-            return Datos_Vista(filtro, " Id, Id_Tipo, Descripcion, Nombre, Ver, Imprimir, Pesable, Multiplicador, Orden ");
+            return Datos_Vista(filtro, " Id, Id_Tipo, Descripcion, Nombre, Ver, Imprimir, VerEnPedidos, Pesable, Multiplicador, Orden ");
         }
 
         public void Siguiente(string Filtro = "")
@@ -103,6 +104,7 @@
             Ver = Convert.ToBoolean(dr["Ver"]);
             Imprimir = Convert.ToBoolean(dr["Imprimir"]);
             Pesable = Convert.ToBoolean(dr["Pesable"]);
+            VerEnPedidos = Convert.ToBoolean(dr["VerEnPedidos"]);
             Multiplicador = Convert.ToInt32(dr["Multiplicador"]);
             Orden = Convert.ToInt32(dr["Orden"]);
         }
@@ -115,11 +117,12 @@
             {
                 // Esto es para los boludeans
                 string vver = Ver ? "1" : "0";
+                string vverenp = VerEnPedidos ? "1" : "0";
                 string vimp = Imprimir ? "1" : "0";
                 string vpesa = Pesable ? "1" : "0";                
 
                 SqlCommand command =
-                    new SqlCommand($"UPDATE Productos SET Nombre='{Nombre}', Id_Tipo={Tipo.ID}, Ver={vver}, Imprimir={vimp}, Pesable={vpesa}, Multiplicador={Multiplicador}, Orden={Orden} WHERE Id={ID}", sql);
+                    new SqlCommand($"UPDATE Productos SET Nombre='{Nombre}', Id_Tipo={Tipo.ID}, Ver={vver}, VerEnPedidos={vverenp}, Imprimir={vimp}, Pesable={vpesa}, Multiplicador={Multiplicador}, Orden={Orden} WHERE Id={ID}", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
