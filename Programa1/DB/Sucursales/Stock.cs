@@ -30,21 +30,9 @@
         public Precios_Sucursales precios = new Precios_Sucursales();
         public Sucursales.Precios_Franquicia precios_fr = new Sucursales.Precios_Franquicia();
 
-        // Costo franquicia leído de la tabla Stock (va al final para no correr las columnas de la vista)
-        private const string Campos_FR = "(SELECT ISNULL(S.Costo_Franquicia, 0) FROM Stock S WHERE S.Id = vw_Stock.Id) AS Costo_FR" +
-            ", (SELECT ISNULL(S.Costo_Franquicia, 0) * S.Kilos FROM Stock S WHERE S.Id = vw_Stock.Id) AS Total_FR";
-
         public new DataTable Datos(string filtro = "")
         {
             return Datos_Vista(filtro, "*", "Fecha, Id_Sucursales, Orden, Id_Productos");
-        }
-
-        /// <summary>
-        /// Igual que Datos pero agrega al final las columnas Costo_FR y Total_FR (pantalla de Stock).
-        /// </summary>
-        public DataTable Datos_Con_Franquicia(string filtro = "")
-        {
-            return Datos_Vista(filtro, "vw_Stock.*, " + Campos_FR, "Fecha, Id_Sucursales, Orden, Id_Productos");
         }
 
         /// <summary>
@@ -159,7 +147,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand($"SELECT vw_Stock.*, {Campos_FR} FROM vw_Stock WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Stock WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -174,7 +162,9 @@
                 Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Costo = Convert.ToSingle(dr["Costo"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
-                Costo_Franquicia = dr["Costo_FR"] == DBNull.Value ? 0 : Convert.ToSingle(dr["Costo_FR"]);
+                // En vw_Stock el costo franquicia es la columna que sigue a Total
+                object cfr = dr[dt.Columns["Total"].Ordinal + 1];
+                Costo_Franquicia = cfr == DBNull.Value ? 0 : Convert.ToSingle(cfr);
                 Bloqueado = Convert.ToBoolean(dr["Bloqueado"]);
 
             }
