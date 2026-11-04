@@ -24,13 +24,45 @@
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Single Costo { get; set; }
         public Single Kilos { get; set; }
+        public Single Costo_Franquicia { get; set; }
         public bool Bloqueado { get; set; } = false;
 
         public Precios_Sucursales precios = new Precios_Sucursales();
+        public Sucursales.Precios_Franquicia precios_fr = new Sucursales.Precios_Franquicia();
+
+        // Costo franquicia leído de la tabla Stock (va al final para no correr las columnas de la vista)
+        private const string Campos_FR = "(SELECT ISNULL(S.Costo_Franquicia, 0) FROM Stock S WHERE S.Id = vw_Stock.Id) AS Costo_FR" +
+            ", (SELECT ISNULL(S.Costo_Franquicia, 0) * S.Kilos FROM Stock S WHERE S.Id = vw_Stock.Id) AS Total_FR";
 
         public new DataTable Datos(string filtro = "")
         {
             return Datos_Vista(filtro, "*", "Fecha, Id_Sucursales, Orden, Id_Productos");
+        }
+
+        /// <summary>
+        /// Igual que Datos pero agrega al final las columnas Costo_FR y Total_FR (pantalla de Stock).
+        /// </summary>
+        public DataTable Datos_Con_Franquicia(string filtro = "")
+        {
+            return Datos_Vista(filtro, "vw_Stock.*, " + Campos_FR, "Fecha, Id_Sucursales, Orden, Id_Productos");
+        }
+
+        /// <summary>
+        /// Busca el precio franquicia vigente para la fecha, sucursal y producto actuales.
+        /// </summary>
+        public Single Buscar_Costo_Franquicia()
+        {
+            precios_fr.Fecha = Fecha;
+            precios_fr.Sucursal = Sucursal.ID;
+            precios_fr.Producto = Producto.ID;
+            try
+            {
+                return precios_fr.Buscar_Precio(precios_fr);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
         public Double Stock_Kilos(string filtro)
@@ -77,6 +109,14 @@
             Actualizar("Bloqueado", Bloqueado);
         }
 
+        /// <summary>
+        /// Guarda solo el costo franquicia (así no se pisan los NULL al editar otras columnas).
+        /// </summary>
+        public void Actualizar_Costo_Franquicia()
+        {
+            Actualizar("Costo_Franquicia", Costo_Franquicia);
+        }
+
         public new void Agregar()
         {
             var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString);
@@ -84,8 +124,8 @@
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO Stock (Fecha, Id_Sucursales, Id_Productos, Descripcion, Costo, Kilos, Bloqueado) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")}, 0)", sql);
+                    new SqlCommand($"INSERT INTO Stock (Fecha, Id_Sucursales, Id_Productos, Descripcion, Costo, Kilos, Costo_Franquicia, Bloqueado) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Producto.ID}, '{Descripcion}', {Costo.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")}, {Costo_Franquicia.ToString().Replace(",", ".")}, 0)", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -119,7 +159,7 @@
 
             try
             {
-                SqlCommand comandoSql = new SqlCommand("SELECT * FROM vw_Stock WHERE Id=" + id, conexionSql);
+                SqlCommand comandoSql = new SqlCommand($"SELECT vw_Stock.*, {Campos_FR} FROM vw_Stock WHERE Id=" + id, conexionSql);
                 comandoSql.CommandType = CommandType.Text;
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(comandoSql);
@@ -134,6 +174,7 @@
                 Sucursal.ID = Convert.ToInt32(dr["Id_Sucursales"]);
                 Costo = Convert.ToSingle(dr["Costo"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
+                Costo_Franquicia = dr["Costo_FR"] == DBNull.Value ? 0 : Convert.ToSingle(dr["Costo_FR"]);
                 Bloqueado = Convert.ToBoolean(dr["Bloqueado"]);
 
             }
@@ -146,6 +187,7 @@
                 Sucursal.ID = 0;
                 Costo = 0;
                 Kilos = 0;
+                Costo_Franquicia = 0;
                 Bloqueado = false;
             }
         }
