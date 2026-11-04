@@ -53,6 +53,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.gastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cantClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockDiarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.stockCarneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockGalponToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -277,6 +278,7 @@
             this.toolStripMenuItem2,
             this.gastosToolStripMenuItem,
             this.cantClientesToolStripMenuItem,
+            this.stockDiarioToolStripMenuItem,
             this.toolStripSeparator1,
             this.stockCarneToolStripMenuItem,
             this.stockGalponToolStripMenuItem,
@@ -379,6 +381,13 @@
             this.cantClientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cantClientesToolStripMenuItem.Text = "&Cant Clientes";
             this.cantClientesToolStripMenuItem.Click += new System.EventHandler(this.CantClientesToolStripMenuItem_Click);
+            // 
+            // stockDiarioToolStripMenuItem
+            // 
+            this.stockDiarioToolStripMenuItem.Name = "stockDiarioToolStripMenuItem";
+            this.stockDiarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stockDiarioToolStripMenuItem.Text = "Stock Carne/Pollo &Diario";
+            this.stockDiarioToolStripMenuItem.Click += new System.EventHandler(this.StockDiarioToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -1306,6 +1315,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem gastosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cantClientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stockDiarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuProveedores;
         private System.Windows.Forms.ToolStripMenuItem ttResumenProveedores;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
