@@ -22,6 +22,8 @@
         private readonly Byte c_Kilos;
         private readonly Byte c_Total;
         private readonly byte c_Bloqueado;
+        private readonly Byte c_CostoFR;
+        private readonly Byte c_TotalFR;
         #endregion
         public frmStock(Usuarios usuario)
         {
@@ -33,7 +35,7 @@
             grdStock.TeclasManejadas = n;
 
             stock = new Stock();
-            grdStock.MostrarDatos(stock.Datos("Id=0"), true);
+            grdStock.MostrarDatos(stock.Datos_Con_Franquicia("Id=0"), true);
 
             c_Id = Convert.ToByte(grdStock.get_ColIndex("Id"));
             c_Fecha = Convert.ToByte(grdStock.get_ColIndex("Fecha"));
@@ -44,6 +46,8 @@
             c_Kilos = Convert.ToByte(grdStock.get_ColIndex("Kilos"));
             c_Total = Convert.ToByte(grdStock.get_ColIndex("Total"));
             c_Bloqueado = Convert.ToByte(grdStock.get_ColIndex("Bloqueado"));
+            c_CostoFR = Convert.ToByte(grdStock.get_ColIndex("Costo_FR"));
+            c_TotalFR = Convert.ToByte(grdStock.get_ColIndex("Total_FR"));
 
             formato_Grilla();
 
@@ -143,7 +147,7 @@
 
             string s = Armar_Cadena();
             if (s.Length == 0) { s = "Id=-1"; }
-            grdStock.MostrarDatos(stock.Datos(s), true);
+            grdStock.MostrarDatos(stock.Datos_Con_Franquicia(s), true);
             formato_Grilla();
             Totales();
             grdStock.ActivarCelda(grdStock.Rows - 1, c_Fecha);
@@ -184,6 +188,8 @@
             {
                 grdStock.set_ColW(c_Costo, 0);
                 grdStock.set_ColW(c_Total, 0);
+                grdStock.set_ColW(c_CostoFR, 0);
+                grdStock.set_ColW(c_TotalFR, 0);
                 lblTotal.Visible = false;
                 cmdCambio.Enabled = false;
             }
@@ -191,11 +197,15 @@
             {
                 grdStock.set_ColW(c_Costo, 60);
                 grdStock.set_ColW(c_Total, 80);
+                grdStock.set_ColW(c_CostoFR, 60);
+                grdStock.set_ColW(c_TotalFR, 80);
             }
 
             grdStock.Columnas[c_Costo].Format = "C2";
             grdStock.Columnas[c_Kilos].Format = "N2";
             grdStock.Columnas[c_Total].Format = "C2";
+            grdStock.Columnas[c_CostoFR].Format = "C2";
+            grdStock.Columnas[c_TotalFR].Format = "C2";
 
             grdStock.Columnas[c_IdSuc + 1].Style.ForeColor = Color.DimGray;
             grdStock.Columnas[c_IdSuc].Style.Font = new System.Drawing.Font("Arial", 9, System.Drawing.FontStyle.Bold);
@@ -203,16 +213,24 @@
 
             grdStock.set_Texto(0, c_IdSuc, "Suc");
             grdStock.set_Texto(0, c_IdProd, "Prod");
+            grdStock.set_Texto(0, c_CostoFR, "Costo FR");
+            grdStock.set_Texto(0, c_TotalFR, "Total FR");
+        }
+
+        private Single Numero(object valor)
+        {
+            return Single.TryParse(Convert.ToString(valor), out Single v) ? v : 0;
         }
 
         private void Totales()
         {
             double t = grdStock.SumarCol(c_Total, false);
             double k = grdStock.SumarCol(c_Kilos, false);
+            double tfr = grdStock.SumarCol(c_TotalFR, false);
             int c = grdStock.Rows - 2;
             lblCant.Text = $"Registros: {c:N0}";
             lblKilos.Text = $"Kilos: {k:N2}";
-            lblTotal.Text = $"Total: {t:C2}";
+            lblTotal.Text = $"Total: {t:C2}  Total FR: {tfr:C2}";
         }
 
 
@@ -248,6 +266,21 @@
             if (stock.Fecha_Cerrada(stock.Fecha) == false && stock.Bloqueado == false)
             {
                 int id = Convert.ToInt32(grdStock.get_Texto(f, c_Id));
+
+                if (c == c_CostoFR)
+                {
+                    //Costo franquicia
+                    stock.Costo_Franquicia = Convert.ToSingle(a);
+                    grdStock.set_Texto(f, c, a);
+                    grdStock.set_Texto(f, c_TotalFR, stock.Costo_Franquicia * stock.Kilos);
+
+                    if (id != 0) { stock.Actualizar_Costo_Franquicia(); }
+
+                    grdStock.ActivarCelda(f + 1, c);
+                    Totales();
+                    return;
+                }
+
                 switch (c)
                 {
                     case 1:
@@ -312,7 +345,11 @@
                             grdStock.set_Texto(f, c_Costo, stock.Costo);
                             grdStock.set_Texto(f, c_Total, stock.Costo * stock.Kilos);
 
-                            if (id != 0) { stock.Actualizar(); }
+                            stock.Costo_Franquicia = stock.Buscar_Costo_Franquicia();
+                            grdStock.set_Texto(f, c_CostoFR, stock.Costo_Franquicia);
+                            grdStock.set_Texto(f, c_TotalFR, stock.Costo_Franquicia * stock.Kilos);
+
+                            if (id != 0) { stock.Actualizar(); stock.Actualizar_Costo_Franquicia(); }
 
                             grdStock.ActivarCelda(f, c_Kilos);
                             Totales();
@@ -348,6 +385,7 @@
                         stock.Kilos = Convert.ToSingle(a);
                         grdStock.set_Texto(f, c, a);
                         grdStock.set_Texto(f, c_Total, stock.Costo * stock.Kilos);
+                        grdStock.set_Texto(f, c_TotalFR, stock.Costo_Franquicia * stock.Kilos);
 
                         if (grdStock.Row == grdStock.Rows - 1)
                         {
@@ -393,6 +431,7 @@
                 stock.Sucursal.ID = Convert.ToInt32(grdStock.get_Texto(Fila, c_IdSuc));
                 stock.Costo = Convert.ToSingle(grdStock.get_Texto(Fila, c_Costo));
                 stock.Kilos = Convert.ToSingle(grdStock.get_Texto(Fila, c_Kilos));
+                stock.Costo_Franquicia = Numero(grdStock.get_Texto(Fila, c_CostoFR));
 
                 stock.precios.Fecha = stock.Fecha;
                 stock.precios.Sucursal = stock.Sucursal;
@@ -424,6 +463,7 @@
                     stock.Costo = stock.precios.Buscar();
                     break;
             }
+            stock.Costo_Franquicia = stock.Buscar_Costo_Franquicia();
             grdStock.set_Texto(Fila + 1, c_Fecha, stock.Fecha);
             grdStock.set_Texto(Fila + 1, c_IdSuc, stock.Sucursal.ID);
             grdStock.set_Texto(Fila + 1, c_IdSuc + 1, stock.Sucursal.Nombre);
@@ -431,6 +471,8 @@
             grdStock.set_Texto(Fila + 1, c_Descripcion, stock.Descripcion);
             grdStock.set_Texto(Fila + 1, c_Costo, stock.Costo);
             grdStock.set_Texto(Fila + 1, c_Total, 0);
+            grdStock.set_Texto(Fila + 1, c_CostoFR, stock.Costo_Franquicia);
+            grdStock.set_Texto(Fila + 1, c_TotalFR, 0);
         }
 
         private void GrdStock_KeyPress(object sender, short e)
@@ -455,6 +497,7 @@
                                 stock.Costo = stock.precios.Buscar();
                                 grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
                                 grdStock.set_Texto(grdStock.Row, c_Total, 0);
+                                Poner_Costo_Franquicia(grdStock.Row);
                                 break;
                             //Suc
                             case 2:
@@ -467,6 +510,7 @@
                                 stock.Costo = stock.precios.Buscar();
                                 grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
                                 grdStock.set_Texto(grdStock.Row, c_Total, 0);
+                                Poner_Costo_Franquicia(grdStock.Row);
                                 break;
                             //Nada
                             case 3:
@@ -485,12 +529,20 @@
                                 stock.Costo = stock.precios.Buscar();
                                 grdStock.set_Texto(grdStock.Row, c_Costo, stock.Costo);
                                 grdStock.set_Texto(grdStock.Row, c_Total, 0);
+                                Poner_Costo_Franquicia(grdStock.Row);
                                 break;
                         }
                     }
                 }
             }
         }
+        private void Poner_Costo_Franquicia(int fila)
+        {
+            stock.Costo_Franquicia = stock.Buscar_Costo_Franquicia();
+            grdStock.set_Texto(fila, c_CostoFR, stock.Costo_Franquicia);
+            grdStock.set_Texto(fila, c_TotalFR, 0);
+        }
+
         //{
         //    if (e == 13)
         //    {
@@ -640,17 +692,18 @@
             }
             else
             {
-                float k = 0, t = 0;
+                float k = 0, t = 0, tfr = 0;
                 for (int i = FilaInicio; i <= FilaFin; i++)
                 {
                     k += Convert.ToSingle(grdStock.get_Texto(i, c_Kilos));
                     t += Convert.ToSingle(grdStock.get_Texto(i, c_Total));
+                    tfr += Numero(grdStock.get_Texto(i, c_TotalFR));
                 }
 
                 int c = FilaFin - FilaInicio + 1;
                 lblCant.Text = $"Registros: {c:N0}";
                 lblKilos.Text = $"Kilos: {k:N2}";
-                lblTotal.Text = $"Total Salida: {t:C2}";
+                lblTotal.Text = $"Total Salida: {t:C2}  Total FR: {tfr:C2}";
             }
         }
     }
