@@ -35,7 +35,7 @@
             grdStock.TeclasManejadas = n;
 
             stock = new Stock();
-            grdStock.MostrarDatos(stock.Datos_Con_Franquicia("Id=0"), true);
+            grdStock.MostrarDatos(stock.Datos("Id=0"), true);
 
             c_Id = Convert.ToByte(grdStock.get_ColIndex("Id"));
             c_Fecha = Convert.ToByte(grdStock.get_ColIndex("Fecha"));
@@ -46,8 +46,9 @@
             c_Kilos = Convert.ToByte(grdStock.get_ColIndex("Kilos"));
             c_Total = Convert.ToByte(grdStock.get_ColIndex("Total"));
             c_Bloqueado = Convert.ToByte(grdStock.get_ColIndex("Bloqueado"));
-            c_CostoFR = Convert.ToByte(grdStock.get_ColIndex("Costo_FR"));
-            c_TotalFR = Convert.ToByte(grdStock.get_ColIndex("Total_FR"));
+            // Costo franquicia y Total FR son las dos columnas de vw_Stock que siguen a Total
+            c_CostoFR = Convert.ToByte(c_Total + 1);
+            c_TotalFR = Convert.ToByte(c_Total + 2);
 
             formato_Grilla();
 
@@ -147,7 +148,7 @@
 
             string s = Armar_Cadena();
             if (s.Length == 0) { s = "Id=-1"; }
-            grdStock.MostrarDatos(stock.Datos_Con_Franquicia(s), true);
+            grdStock.MostrarDatos(stock.Datos(s), true);
             formato_Grilla();
             Totales();
             grdStock.ActivarCelda(grdStock.Rows - 1, c_Fecha);
@@ -179,8 +180,6 @@
             grdStock.set_ColW(c_IdProd, 30);
             grdStock.set_ColW(c_Descripcion, 250);
             grdStock.set_ColW(c_Kilos, 60);
-            grdStock.set_ColW(c_Total + 1, 0);
-            grdStock.set_ColW(c_Total + 2, 0);
             grdStock.set_ColW(c_Bloqueado, 0);
             
                         
