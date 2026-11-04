@@ -22,6 +22,7 @@
         {
             Efectivos efectivos = new Efectivos();
             DataTable dt = efectivos.SinCargar();
+            dt.Columns.Add("Seleccionar", typeof(bool));
             grdEfectivos.MostrarDatos(dt, true, false);
             grdEfectivos.set_Texto(0, "ID_Sucursal", "Suc");
             grdEfectivos.AutosizeAll();
@@ -39,6 +40,22 @@
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void grdEfectivos_Editado(short f, short c, object a)
+        {
+            // Solo se puede editar la columna Cargado, la columan Seleccionar es para marcar los registros a cargar
+            if (grdEfectivos.Columnas[c].Name == "Cargado")
+            {
+                Efectivos ef = new Efectivos();
+                ef.ID = Convert.ToInt32(grdEfectivos.get_Texto(f, "ID"));
+                ef.Actualizar("Cargado", a);
+                grdEfectivos.ActivarCelda(f + 1, c);
+            }
+            if (grdEfectivos.Columnas[c].Name == "Seleccionar")
+            {
+                grdEfectivos.ActivarCelda(f + 1, c);
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 namespace Programa1.DB
 {
     using Programa1.Clases;
+    using Programa1.DB.Sucursales;
     using Programa1.DB.Varios;
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -26,12 +27,14 @@ namespace Programa1.DB
         public Sucursales.Sucursales Sucursal { get; set; } = new Sucursales.Sucursales();
         public Single Cantidad { get; set; }
         public Single CostoVenta { get; set; }
+        public Single CostoFranquicia { get; set; }
         public Proveedores.Proveedores Proveedor { get; set; } = new Proveedores.Proveedores();
         public Single CostoCompra { get; set; }
         public Single Kilos { get; set; }
         public Camiones Camion { get; set; } = new Camiones();
         public bool Bloqueado { get; set; } = false;
         public Precios_Sucursales precios = new Precios_Sucursales();
+        public Precios_Franquicia precios_fr = new Precios_Franquicia();
         public Precios_Proveedores precios_Proveedores = new Precios_Proveedores();
 
         public new DataTable Datos(string filtro = "")
@@ -131,6 +134,7 @@ namespace Programa1.DB
             Actualizar("Descripcion", Descripcion);
             Actualizar("Costo_Compra", CostoCompra);
             Actualizar("Costo_Venta", CostoVenta);
+            Actualizar("Costo_Franquicia", CostoFranquicia);
             Actualizar("Kilos", Kilos);
             Actualizar("Bloqueado", Bloqueado);
         }
@@ -142,8 +146,8 @@ namespace Programa1.DB
             try
             {
                 SqlCommand command =
-                    new SqlCommand($"INSERT INTO  Ventas (Fecha, Id_Sucursales, ID_Camion, Id_Proveedores, Id_Productos, Descripcion, Cantidad, Costo_Venta, Costo_Compra, Kilos, Bloqueado) " +
-                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {Cantidad.ToString().Replace(",", ".")}, {CostoVenta.ToString().Replace(",", ".")}, {CostoCompra.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")}, {(Bloqueado ? 1 : 0)})", sql);
+                    new SqlCommand($"INSERT INTO  Ventas (Fecha, Id_Sucursales, ID_Camion, Id_Proveedores, Id_Productos, Descripcion, Cantidad, Costo_Venta, Costo_Compra, Costo_Franquicia, Kilos, Bloqueado) " +
+                        $"VALUES('{Fecha.ToString("MM/dd/yyy")}', {Sucursal.ID}, {Camion.ID}, {Proveedor.Id}, {Producto.ID}, '{Descripcion}', {Cantidad.ToString().Replace(",", ".")}, {CostoVenta.ToString().Replace(",", ".")}, {CostoCompra.ToString().Replace(",", ".")}, {precios_fr.Precio.ToString().Replace(",", ".")}, {Kilos.ToString().Replace(",", ".")}, {(Bloqueado ? 1 : 0)})", sql);
                 command.CommandType = CommandType.Text;
                 command.Connection = sql;
                 sql.Open();
@@ -196,6 +200,7 @@ namespace Programa1.DB
                 Cantidad = Convert.ToSingle(dr["Cantidad"]);
                 CostoVenta = Convert.ToSingle(dr["Costo_Venta"]);
                 CostoCompra = Convert.ToSingle(dr["Costo_Compra"]);
+                precios_fr.Precio = Convert.ToSingle(dr["Costo_Franquicia"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
                 Bloqueado = Convert.ToBoolean(dr["Bloqueado"]);
 
@@ -212,6 +217,7 @@ namespace Programa1.DB
                 Cantidad = 0;
                 CostoCompra = 0;
                 CostoVenta = 0;
+                precios_fr.Precio = 0;
                 Kilos = 0;
                 Bloqueado = false;
             }

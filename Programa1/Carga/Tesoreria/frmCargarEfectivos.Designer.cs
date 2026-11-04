@@ -93,6 +93,7 @@
             this.grdEfectivos.Rows = 50;
             this.grdEfectivos.Size = new System.Drawing.Size(483, 755);
             this.grdEfectivos.TabIndex = 2;
+            this.grdEfectivos.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdEfectivos_Editado);
             // 
             // lblTotal
             // 

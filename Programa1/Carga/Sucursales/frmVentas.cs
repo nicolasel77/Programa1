@@ -28,6 +28,8 @@
         private const Byte c_Kilos = 12;
         private const Byte c_TotalCompra = 13;
         private const Byte c_TotalVenta = 14;
+        private const Byte c_CostoFranquicia = 15;
+        private const Byte c_TotalFranquicia = 16;
         private const Byte c_Promedio = 17;
         public const byte c_Bloqueado = 18;
         #endregion
@@ -305,6 +307,7 @@
                             {
                                 Venta.Fecha = df;
                                 Venta.precios.Fecha = Venta.Fecha;
+                                Venta.precios_fr.Fecha = Venta.Fecha;
                                 Venta.precios_Proveedores.Fecha = Venta.Fecha;
 
                                 grdVenta.set_Texto(f, c, a);
@@ -368,8 +371,11 @@
                         if (Venta.Sucursal.Existe() == true)
                         {
                             Venta.precios.Sucursal = Venta.Sucursal;
+                            Venta.precios_fr.Sucursal = Venta.Sucursal.ID;
 
                             Venta.CostoVenta = Venta.precios.Buscar();
+                            Venta.CostoFranquicia = Venta.precios_fr.Buscar();
+
                             grdVenta.set_Texto(f, c_CostoVenta, Venta.CostoVenta);
                             grdVenta.set_Texto(f, c_TotalVenta, Venta.Kilos * Venta.CostoVenta);
 
@@ -391,6 +397,8 @@
                         if (Venta.Producto.Existe() == true)
                         {
                             Venta.precios.Producto = Venta.Producto;
+                            Venta.precios_fr.Producto = Venta.Producto.ID;
+
                             Listas.Producto = Venta.Producto;
                             Venta.precios_Proveedores.Producto = Venta.Producto;
 
@@ -400,12 +408,20 @@
                             grdVenta.set_Texto(f, c + 1, Venta.Producto.Nombre);
 
                             Venta.precios.Sucursal = Venta.Sucursal;
+                            Venta.precios_fr.Sucursal = Venta.Sucursal.ID;
+
                             Venta.CostoVenta = Venta.precios.Buscar();
+                            Venta.CostoFranquicia = Venta.precios_fr.Buscar();
+
                             grdVenta.set_Texto(f, c_CostoVenta, Venta.CostoVenta);
                             grdVenta.set_Texto(f, c_TotalVenta, Venta.Kilos * Venta.CostoVenta);
+                            
+                            grdVenta.set_Texto(f, c_CostoFranquicia, Venta.CostoFranquicia);
+                            grdVenta.set_Texto(f, c_TotalFranquicia, Venta.Kilos * Venta.CostoFranquicia);
 
                             Venta.precios_Proveedores.Proveedor = Venta.Proveedor;
                             Venta.CostoCompra = Venta.precios_Proveedores.Buscar();
+
                             grdVenta.set_Texto(f, c_CostoCompra, Venta.CostoCompra);
                             grdVenta.set_Texto(f, c_TotalCompra, Venta.Kilos * Venta.CostoCompra);
 
@@ -470,7 +486,16 @@
 
                         Totales();
                         break;
+                    case c_CostoFranquicia:
+                        Venta.CostoFranquicia = Convert.ToSingle(a);
+                        grdVenta.set_Texto(f, c, a);
 
+                        grdVenta.set_Texto(f, c_TotalFranquicia, Venta.CostoFranquicia * Venta.Kilos);
+
+                        if (id != 0) { Venta.Actualizar(); grdVenta.ActivarCelda(f + 1, c); }
+                        
+                        Totales();
+                        break;
                     case c_Kilos:
                         Venta.Kilos = Convert.ToSingle(a);
                         grdVenta.set_Texto(f, c, a);
