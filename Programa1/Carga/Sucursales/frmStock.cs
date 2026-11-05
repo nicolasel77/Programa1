@@ -181,6 +181,8 @@
             grdStock.set_ColW(c_Descripcion, 250);
             grdStock.set_ColW(c_Kilos, 60);
             grdStock.set_ColW(c_Bloqueado, 0);
+            grdStock.set_ColW("Orden", 0);
+            grdStock.set_ColW("ID_Tipo", 0);
             
                         
             if (n_usuario.Permiso == Usuarios.e_Permiso.Supervisor)
