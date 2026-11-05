@@ -21,9 +21,9 @@
         private readonly Byte c_Costo;
         private readonly Byte c_Kilos;
         private readonly Byte c_Total;
-        private readonly byte c_Bloqueado;
         private readonly Byte c_CostoFR;
         private readonly Byte c_TotalFR;
+        private readonly byte c_Bloqueado;
         #endregion
         public frmStock(Usuarios usuario)
         {
@@ -181,8 +181,11 @@
             grdStock.set_ColW(c_Descripcion, 250);
             grdStock.set_ColW(c_Kilos, 60);
             grdStock.set_ColW(c_Bloqueado, 0);
-            
-                        
+            grdStock.set_ColW("Orden", 0);
+            grdStock.set_ColW("Id_Tipo", 0);
+
+
+
             if (n_usuario.Permiso == Usuarios.e_Permiso.Supervisor)
             {
                 grdStock.set_ColW(c_Costo, 0);
