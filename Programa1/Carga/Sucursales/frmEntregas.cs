@@ -136,17 +136,81 @@
 
         private void grdTarjetas_Editado(short f, short c, object a)
         {
-            if (grdTarjetas.get_ColIndex("Id") != -1)
+            int c_Id = grdTarjetas.get_ColIndex("Id");
+            if (c_Id == -1) { return; } // Agrupado: no se edita
+
+            int id = Convert.ToInt32(grdTarjetas.get_Texto(f, c_Id));
+            if (id == 0) { return; }
+            entregas.ID = id;
+
+            if (c == grdTarjetas.get_ColIndex("Fecha"))
             {
-                entregas.ID = Convert.ToInt32(grdTarjetas.get_Texto(f, grdTarjetas.get_ColIndex("Id")));
-                switch (c)
+                DateTime df;
+                if (a == null || !DateTime.TryParse(a.ToString(), out df))
                 {
-                    case 1:
-                        // fecha
-                        entregas.Actualizar("Fecha", a);
-                        grdTarjetas.set_Texto(f, c, a);
-                        break;
-                } 
+                    MessageBox.Show("La fecha no es válida.", "Entregas");
+                    return;
+                }
+                entregas.Actualizar("Fecha", df.Date);
+                grdTarjetas.set_Texto(f, c, df.Date);
+            }
+            else if (c == grdTarjetas.get_ColIndex("Suc"))
+            {
+                int suc = Convert.ToInt32(a);
+                Programa1.DB.Sucursales.Sucursales suc_db = new Programa1.DB.Sucursales.Sucursales();
+                if (suc_db.Existe(suc))
+                {
+                    entregas.Actualizar("Suc", suc);
+                    grdTarjetas.set_Texto(f, c, suc);
+                    grdTarjetas.set_Texto(f, grdTarjetas.get_ColIndex("Nombre"), suc_db.Nombre);
+                }
+                else
+                {
+                    MessageBox.Show($"No se encontró la sucursal {a}.", "Entregas");
+                    grdTarjetas.ErrorEnTxt();
+                }
+            }
+            else if (c == grdTarjetas.get_ColIndex("Tipo"))
+            {
+                int tipo = Convert.ToInt32(a);
+                if (t_entregas.Existe(tipo))
+                {
+                    entregas.Actualizar("Tipo", tipo);
+                    grdTarjetas.set_Texto(f, c, tipo);
+                    grdTarjetas.set_Texto(f, grdTarjetas.get_ColIndex("Descripcion"), entregas.Descripcion_Tipo(id));
+                }
+                else
+                {
+                    MessageBox.Show($"No se encontró el tipo {a}.", "Entregas");
+                    grdTarjetas.ErrorEnTxt();
+                }
+            }
+            else if (c == grdTarjetas.get_ColIndex("Importe"))
+            {
+                double imp = Convert.ToDouble(a);
+                entregas.Actualizar("Importe", imp);
+                grdTarjetas.set_Texto(f, c, imp);
+                lblTotal.Text = grdTarjetas.SumarCol(c, false).ToString("C1");
+            }
+        }
+
+        private void grdTarjetas_KeyUp(object sender, short e)
+        {
+            if (Convert.ToInt32(e) != 46) { return; } // Delete
+
+            int c_Id = grdTarjetas.get_ColIndex("Id");
+            if (c_Id == -1 || grdTarjetas.Row < 1) { return; }
+
+            int id = Convert.ToInt32(grdTarjetas.get_Texto(grdTarjetas.Row, c_Id));
+            if (id == 0) { return; }
+
+            if (MessageBox.Show("¿Esta segura/o de borrar la entrega?", "Borrar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                entregas.ID = id;
+                entregas.Borrar();
+                grdTarjetas.BorrarFila(grdTarjetas.Row);
+                int c_imp = grdTarjetas.get_ColIndex("Importe");
+                if (c_imp > 0) { lblTotal.Text = grdTarjetas.SumarCol(c_imp, false).ToString("C1"); }
             }
         }
     }
