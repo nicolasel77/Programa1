@@ -87,6 +87,15 @@
             return null;
         }
 
+        /// <summary>
+        /// Descripcion del tipo de la entrega, leida de la vista.
+        /// </summary>
+        public string Descripcion_Tipo(int id)
+        {
+            object d = Dato($"Id={id}", "Descripcion");
+            return d == null || d == DBNull.Value ? "" : d.ToString();
+        }
+
         public DataTable Datos_Resumen_modi_tar(string f = "")
         {
             if (f.Length > 0)

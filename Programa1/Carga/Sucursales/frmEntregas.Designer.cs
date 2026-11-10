@@ -108,6 +108,7 @@
             this.grdTarjetas.Size = new System.Drawing.Size(884, 715);
             this.grdTarjetas.TabIndex = 0;
             this.grdTarjetas.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdTarjetas_Editado);
+            this.grdTarjetas.KeyUp += new Grilla2.SpeedGrilla.KeyUpEventHandler(this.grdTarjetas_KeyUp);
             // 
             // splitContainer2
             // 
