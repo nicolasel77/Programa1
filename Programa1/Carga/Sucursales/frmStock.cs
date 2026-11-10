@@ -223,12 +223,23 @@
             return Single.TryParse(Convert.ToString(valor), out Single v) ? v : 0;
         }
 
+        // Cuenta las filas del rango que tienen kilos distintos de 0.
+        private int ContarConKilos(int filaInicio, int filaFin)
+        {
+            int c = 0;
+            for (int i = filaInicio; i <= filaFin; i++)
+            {
+                if (Numero(grdStock.get_Texto(i, c_Kilos)) != 0) c++;
+            }
+            return c;
+        }
+
         private void Totales()
         {
             double t = grdStock.SumarCol(c_Total, false);
             double k = grdStock.SumarCol(c_Kilos, false);
             double tfr = grdStock.SumarCol(c_TotalFR, false);
-            int c = grdStock.Rows - 2;
+            int c = ContarConKilos(1, grdStock.Rows - 2);
             lblCant.Text = $"Registros: {c:N0}";
             lblKilos.Text = $"Kilos: {k:N2}";
             lblTotal.Text = $"Total: {t:C2}  Total FR: {tfr:C2}";
@@ -701,7 +712,7 @@
                     tfr += Numero(grdStock.get_Texto(i, c_TotalFR));
                 }
 
-                int c = FilaFin - FilaInicio + 1;
+                int c = ContarConKilos(FilaInicio, FilaFin);
                 lblCant.Text = $"Registros: {c:N0}";
                 lblKilos.Text = $"Kilos: {k:N2}";
                 lblTotal.Text = $"Total Salida: {t:C2}  Total FR: {tfr:C2}";
