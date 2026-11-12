@@ -3,6 +3,7 @@
     using Programa1.Clases;
     using Programa1.DB.Sucursales;
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Forms;
@@ -62,6 +63,64 @@
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error");
+            }
+        }
+
+        /// <summary>
+        /// Guarda todos los movimientos en una sola transacción: si alguno falla no queda ninguno guardado.
+        /// Devuelve el mensaje de error, o vacío si se guardó todo.
+        /// </summary>
+        public string Guardar_Movimientos(List<Programa1.Carga.Tesoreria.Movimiento_Tarjeta> movimientos)
+        {
+            try
+            {
+                using (var sql = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString))
+                {
+                    sql.Open();
+                    using (SqlTransaction tr = sql.BeginTransaction())
+                    using (var cmd = new SqlCommand(
+                        "INSERT INTO dbGastos.dbo.Entradas_Tarjeta ([Fecha], [Id_Tipo], [Importe], [Acreditado], [Suc], [Fecha_Pago], Lote, Comprobante, Tarjeta) " +
+                        "VALUES (@Fecha, @Id_Tipo, @Importe, 1, @Suc, @Fecha_Pago, @Lote, @Comprobante, @Tarjeta)", sql, tr))
+                    {
+                        cmd.Parameters.Add("@Fecha", SqlDbType.DateTime);
+                        cmd.Parameters.Add("@Id_Tipo", SqlDbType.Int);
+                        SqlParameter importe = cmd.Parameters.Add("@Importe", SqlDbType.Decimal);
+                        importe.Precision = 18;
+                        importe.Scale = 2;
+                        cmd.Parameters.Add("@Suc", SqlDbType.Int);
+                        cmd.Parameters.Add("@Fecha_Pago", SqlDbType.DateTime);
+                        cmd.Parameters.Add("@Lote", SqlDbType.Int);
+                        cmd.Parameters.Add("@Comprobante", SqlDbType.BigInt);
+                        cmd.Parameters.Add("@Tarjeta", SqlDbType.BigInt);
+
+                        try
+                        {
+                            foreach (Programa1.Carga.Tesoreria.Movimiento_Tarjeta m in movimientos)
+                            {
+                                cmd.Parameters["@Fecha"].Value = m.Fecha.Date;
+                                cmd.Parameters["@Id_Tipo"].Value = m.Id_Tipo;
+                                cmd.Parameters["@Importe"].Value = m.Importe;
+                                cmd.Parameters["@Suc"].Value = m.Suc;
+                                cmd.Parameters["@Fecha_Pago"].Value = m.Fecha_Pago.Date;
+                                cmd.Parameters["@Lote"].Value = m.Lote;
+                                cmd.Parameters["@Comprobante"].Value = m.Comprobante;
+                                cmd.Parameters["@Tarjeta"].Value = m.Tarjeta;
+                                cmd.ExecuteNonQuery();
+                            }
+                            tr.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            tr.Rollback();
+                            throw;
+                        }
+                    }
+                }
+                return "";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
             }
         }
 

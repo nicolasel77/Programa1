@@ -843,6 +843,10 @@
     <Compile Include="Carga\Tesoreria\frmImportar_Excel.Designer.cs">
       <DependentUpon>frmImportar_Excel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Tesoreria\frmFormatos_Tarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Tesoreria\Lector_Tarjetas.cs" />
     <Compile Include="Carga\Tesoreria\frmLeer_Tarjetas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1177,6 +1181,7 @@
     <Compile Include="DB\Tesoreria\Gastos.cs" />
     <Compile Include="DB\Tesoreria\Grupo_Entradas.cs" />
     <Compile Include="DB\Tesoreria\Grupo_Gastos.cs" />
+    <Compile Include="DB\Tesoreria\Formatos_Tarjeta.cs" />
     <Compile Include="DB\Tesoreria\Leer_Tarjetas.cs" />
     <Compile Include="DB\Tesoreria\Nombres_ARendir.cs" />
     <Compile Include="DB\Tesoreria\Reclamos.cs" />

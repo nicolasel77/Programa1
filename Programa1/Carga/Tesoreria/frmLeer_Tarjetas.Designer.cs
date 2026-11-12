@@ -53,6 +53,7 @@
             this.grdDatos = new Grilla2.SpeedGrilla();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.button1 = new System.Windows.Forms.Button();
+            this.cmdFormatos = new System.Windows.Forms.Button();
             this.rdCuentas = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdTerminalesMP = new MaterialSkin.Controls.MaterialRadioButton();
             this.chAuto = new MaterialSkin.Controls.MaterialCheckBox();
@@ -362,6 +363,7 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer2.Panel1.Controls.Add(this.cmdFormatos);
             this.splitContainer2.Panel1.Controls.Add(this.button1);
             this.splitContainer2.Panel1.Controls.Add(this.rdCuentas);
             this.splitContainer2.Panel1.Controls.Add(this.rdTerminalesMP);
@@ -404,6 +406,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // cmdFormatos
+            // 
+            this.cmdFormatos.Location = new System.Drawing.Point(353, 76);
+            this.cmdFormatos.Name = "cmdFormatos";
+            this.cmdFormatos.Size = new System.Drawing.Size(75, 23);
+            this.cmdFormatos.TabIndex = 44;
+            this.cmdFormatos.Text = "Formatos";
+            this.cmdFormatos.UseVisualStyleBackColor = true;
+            this.cmdFormatos.Click += new System.EventHandler(this.cmdFormatos_Click);
             // 
             // rdCuentas
             // 
@@ -674,5 +686,6 @@
         private System.Windows.Forms.Panel panel3;
         private MaterialSkin.Controls.MaterialFlatButton cmdExcel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cmdFormatos;
     }
 }
