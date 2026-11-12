@@ -26,6 +26,8 @@ namespace Programa1.DB
         public float CostoS { get; set; }
         public Sucursales.Sucursales sucE { get; set; } = new Sucursales.Sucursales();
         public float CostoE { get; set; }
+        public float CostoSFR { get; set; }
+        public float CostoEFR { get; set; }
         public int Cantidad { get; set; }
         public Single Kilos { get; set; }
         public bool Bloqueado { get; internal set; }
@@ -49,6 +51,17 @@ namespace Programa1.DB
             Actualizar("Cantidad", Cantidad);
             Actualizar("Kilos", Kilos);
             Actualizar("Bloqueado", Bloqueado);
+        }
+
+        // Costos franquicia: se guardan solo cuando se editan en la grilla
+        public void Actualizar_CostoSFR()
+        {
+            Actualizar("Costo_SalidaFR", CostoSFR);
+        }
+
+        public void Actualizar_CostoEFR()
+        {
+            Actualizar("Costo_EntradaFR", CostoEFR);
         }
 
         public new void Agregar()
@@ -115,6 +128,8 @@ namespace Programa1.DB
                 sucE.ID = Convert.ToInt32(dr["Suc_Entrada"]);
                 CostoS = Convert.ToSingle(dr["Costo_Salida"]);
                 CostoE = Convert.ToSingle(dr["Costo_Entrada"]);
+                CostoSFR = dr["Costo_SalidaFR"] == DBNull.Value ? 0 : Convert.ToSingle(dr["Costo_SalidaFR"]);
+                CostoEFR = dr["Costo_EntradaFR"] == DBNull.Value ? 0 : Convert.ToSingle(dr["Costo_EntradaFR"]);
                 Cantidad = Convert.ToInt32(dr["Cantidad"]);
                 Kilos = Convert.ToSingle(dr["Kilos"]);
                 Bloqueado = Convert.ToBoolean(dr["Bloqueado"]);
@@ -129,6 +144,8 @@ namespace Programa1.DB
                 sucE.ID = 0;
                 CostoS = 0;
                 CostoE = 0;
+                CostoSFR = 0;
+                CostoEFR = 0;
                 Cantidad = 0;
                 Kilos = 0;
                 Bloqueado = false;
