@@ -28,6 +28,10 @@ using Programa1.DB.Varios;
         private Byte c_TotalE;
         private Byte c_Promedio;
         private Byte c_Bloqueado;
+        private Byte c_CostoSFR;
+        private Byte c_CostoEFR;
+        private Byte c_TotalSFR;
+        private Byte c_TotalEFR;
         #endregion
 
         int vi = 4;
@@ -59,6 +63,10 @@ using Programa1.DB.Varios;
             c_TotalE = Convert.ToByte(grdTraslados.get_ColIndex("Total_Entrada"));
             c_Promedio = Convert.ToByte(grdTraslados.get_ColIndex("Promedio"));
             c_Bloqueado = Convert.ToByte(grdTraslados.get_ColIndex("Bloqueado"));
+            c_CostoSFR = Convert.ToByte(grdTraslados.get_ColIndex("Costo_SalidaFR"));
+            c_CostoEFR = Convert.ToByte(grdTraslados.get_ColIndex("Costo_EntradaFR"));
+            c_TotalSFR = Convert.ToByte(grdTraslados.get_ColIndex("Total_SalidaFR"));
+            c_TotalEFR = Convert.ToByte(grdTraslados.get_ColIndex("Total_EntradaFR"));
 
             formato_Grilla();
 
@@ -211,10 +219,10 @@ using Programa1.DB.Varios;
             grdTraslados.Columnas[c_TotalS].Format = "C2";
             grdTraslados.Columnas[c_TotalE].Format = "C2";
             grdTraslados.Columnas[c_Promedio].Format = "N2";
-            grdTraslados.Columnas[grdTraslados.get_ColIndex("Costo_SalidaFR")].Format = "N2";
-            grdTraslados.Columnas[grdTraslados.get_ColIndex("Costo_EntradaFR")].Format = "N2";
-            grdTraslados.Columnas[grdTraslados.get_ColIndex("Total_SalidaFR")].Format = "N2";
-            grdTraslados.Columnas[grdTraslados.get_ColIndex("Total_EntradaFR")].Format = "N2";
+            grdTraslados.Columnas[c_CostoSFR].Format = "N2";
+            grdTraslados.Columnas[c_CostoEFR].Format = "N2";
+            grdTraslados.Columnas[c_TotalSFR].Format = "N2";
+            grdTraslados.Columnas[c_TotalEFR].Format = "N2";
             
             
             if (n_usuario.Permiso == Usuarios.e_Permiso.Supervisor)
@@ -297,6 +305,37 @@ using Programa1.DB.Varios;
             if (Traslados.Fecha_Cerrada(Traslados.Fecha) == false && Traslados.Bloqueado == false)
             {
                 int id = Convert.ToInt32(grdTraslados.get_Texto(f, c_Id));
+
+                if (c == c_CostoSFR || c == c_CostoEFR)
+                {
+                    //Costos franquicia: solo se editan en traslados ya guardados
+                    if (id == 0)
+                    {
+                        Mensaje("Primero cargá los kilos del traslado para guardarlo.");
+                        grdTraslados.ErrorEnTxt();
+                        return;
+                    }
+
+                    float costo = Convert.ToSingle(a);
+                    grdTraslados.set_Texto(f, c, a);
+                    if (c == c_CostoSFR)
+                    {
+                        Traslados.CostoSFR = costo;
+                        grdTraslados.set_Texto(f, c_TotalSFR, costo * Traslados.Kilos);
+                        Traslados.Actualizar_CostoSFR();
+                    }
+                    else
+                    {
+                        Traslados.CostoEFR = costo;
+                        grdTraslados.set_Texto(f, c_TotalEFR, costo * Traslados.Kilos);
+                        Traslados.Actualizar_CostoEFR();
+                    }
+
+                    grdTraslados.ActivarCelda(f + 1, c);
+                    Totales();
+                    return;
+                }
+
                 switch (c)
                 {
                     case 1:
@@ -446,6 +485,11 @@ using Programa1.DB.Varios;
                         grdTraslados.set_Texto(f, c, a);
                         grdTraslados.set_Texto(f, c_TotalS, Traslados.CostoS * Traslados.Kilos);
                         grdTraslados.set_Texto(f, c_TotalE, Traslados.CostoE * Traslados.Kilos);
+                        if (id != 0)
+                        {
+                            grdTraslados.set_Texto(f, c_TotalSFR, Traslados.CostoSFR * Traslados.Kilos);
+                            grdTraslados.set_Texto(f, c_TotalEFR, Traslados.CostoEFR * Traslados.Kilos);
+                        }
                         if (Traslados.Cantidad > 0 & Convert.ToInt32(a) > 0) { grdTraslados.set_Texto(f, c_Promedio, Traslados.Kilos / Traslados.Cantidad); }
                         else { grdTraslados.set_Texto(f, c_Promedio, 0); }
 
