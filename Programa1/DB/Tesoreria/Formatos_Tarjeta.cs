@@ -76,13 +76,14 @@
                 new Formato_Tarjeta { Id_Tipo = 9, Fila_Encabezado = 1, Col_Fecha = "#1", Col_Sucursal = "#2", Col_Importe = "#3",
                     Col_Comprobante = "#4", Comprobante_Largo = 17, Col_Estado = "#7", Estados_Validos = "Aprobada",
                     Lote_Fijo = 1, Tarjeta_Fijo = 1 },
-                // Fiserv Cuenta DNI. El lote sale de la columna Ticket, igual que antes (era la columna 24).
+                // Fiserv Cuenta DNI
                 new Formato_Tarjeta { Id_Tipo = 12, Col_Comprobante = "Nro. Transacción", Comprobante_Largo = -8, Col_Fecha = "Fecha",
                     Col_Estado = "Cód. Respuesta", Estados_Validos = "Aprobado", Col_Importe = "Monto total",
-                    Col_Sucursal = "Terminal al Sello", Col_Lote = "Ticket", Lote_Fijo = 0, Tarjeta_Fijo = 1 },
-                // Nave (Banco Galicia): se filtra por fecha de operación y se guarda la de acreditación, igual que antes.
+                    Col_Sucursal = "Terminal al Sello", Col_Lote = "Lote", Lote_Fijo = 0, Tarjeta_Fijo = 1 },
+                // Nave (Banco Galicia): se filtra por fecha de operación y se guarda la de acreditación.
+                // Los movimientos "Por acreditar" se pagan al día siguiente.
                 new Formato_Tarjeta { Id_Tipo = 13, Col_Fecha_Filtro = "Fecha de operación", Col_Fecha = "Fecha de acreditación",
-                    Col_Sucursal = "Local", Suc_Despues_De = "SUC", Col_Importe = "Monto bruto", Col_Estado = "Estado",
+                    Col_Sucursal = "Local", Suc_Despues_De = "SUC", Col_Importe = "Monto bruto", Col_Estado = "Estado", Estados_Dia_Siguiente = "Por acreditar",
                     Lote_Fijo = 1, Tarjeta_Fijo = 1 },
                 // Payway transferencia
                 new Formato_Tarjeta { Id_Tipo = 15, Col_Fecha = "Fecha Aprobado", Col_Estado = "Estado actual", Estados_Validos = "ACREDITADO",
