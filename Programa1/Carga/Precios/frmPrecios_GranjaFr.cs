@@ -8,7 +8,9 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.SqlClient;
     using System.Drawing;
+    using System.Text;
     using System.Windows.Forms;
 
     public partial class frmPrecios_GranjaFr : Form
@@ -386,6 +388,102 @@
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Recalcula los precios de franquicia del pollo de una semana (lunes a domingo) para todas
+        /// las sucursales con dbo.sp_Actualizar_PreciosPollo: costo = promedio de compra del pollo,
+        /// % = diferencia con el precio de lista del domingo, resto = precio de lista / (1 + %).
+        /// Primero muestra el cálculo y solo graba si se confirma.
+        /// </summary>
+        private void cmdSemanaPollo_Click(object sender, EventArgs e)
+        {
+            DateTime hoy = DateTime.Today;
+            int desdeLunes = ((int)hoy.DayOfWeek + 6) % 7;
+            DateTime lunesPasado = hoy.AddDays(-desdeLunes - 7);
+
+            string txt = Microsoft.VisualBasic.Interaction.InputBox(
+                "Lunes de la semana a actualizar (dd/MM/yyyy):", "Precios pollo", lunesPasado.ToString("dd/MM/yyyy"));
+            if (txt.Trim().Length == 0) return;
+
+            if (!DateTime.TryParseExact(txt.Trim(), "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out DateTime fecha))
+            {
+                MessageBox.Show("La fecha no es válida.", "Precios pollo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                DataTable resumen = Ejecutar_SemanaPollo(fecha, true);
+                Cursor = Cursors.Default;
+                if (resumen == null || resumen.Rows.Count == 0)
+                {
+                    MessageBox.Show("No hay sucursales para calcular.", "Precios pollo");
+                    return;
+                }
+
+                DateTime lunes = Convert.ToDateTime(resumen.Rows[0]["Lunes"]);
+                DateTime domingo = Convert.ToDateTime(resumen.Rows[0]["Domingo"]);
+
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine($"Semana del {lunes:dd/MM/yyyy} al {domingo:dd/MM/yyyy}");
+                sb.AppendLine();
+                int ok = 0;
+                foreach (DataRow dr in resumen.Rows)
+                {
+                    if (dr["Estado"].ToString() == "OK")
+                    {
+                        ok++;
+                        sb.AppendLine($"{dr["Id_Sucursales"]} {dr["Nombre"]}: costo {Convert.ToDouble(dr["Costo"]):N2}, " +
+                            $"venta {Convert.ToDouble(dr["Venta"]):N2}, {Convert.ToDouble(dr["Porcentaje"]):N2}%");
+                    }
+                    else
+                    {
+                        sb.AppendLine($"{dr["Id_Sucursales"]} {dr["Nombre"]}: {dr["Estado"]} (no se toca)");
+                    }
+                }
+                sb.AppendLine();
+                sb.AppendLine($"¿Grabar los precios de {ok} sucursales y actualizar Stock y Traslados de esa semana?");
+
+                if (ok == 0)
+                {
+                    MessageBox.Show(sb.ToString(), "Precios pollo");
+                    return;
+                }
+
+                if (MessageBox.Show(sb.ToString(), "Precios pollo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Cursor = Cursors.WaitCursor;
+                    Ejecutar_SemanaPollo(fecha, false);
+                    Cargar_Fechas();
+                    Cursor = Cursors.Default;
+                    MessageBox.Show("Precios actualizados.", "Precios pollo");
+                }
+            }
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Default;
+                MessageBox.Show("Error al actualizar: " + ex.Message, "Precios pollo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private DataTable Ejecutar_SemanaPollo(DateTime fecha, bool simular)
+        {
+            DataSet ds = new DataSet();
+            using (SqlConnection conn = new SqlConnection(Programa1.Properties.Settings.Default.dbDatosConnectionString))
+            using (SqlCommand cmd = new SqlCommand("dbo.sp_Actualizar_PreciosPollo", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 300;
+                cmd.Parameters.Add("@Fecha", SqlDbType.Date).Value = fecha.Date;
+                cmd.Parameters.Add("@Simular", SqlDbType.Bit).Value = simular;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds);
+            }
+            return ds.Tables.Count > 0 ? ds.Tables[0] : null;
         }
     }
 }
