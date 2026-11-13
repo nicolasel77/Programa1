@@ -36,6 +36,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.grdCargasSociales = new Grilla2.SpeedGrilla();
             this.label4 = new System.Windows.Forms.Label();
+            this.grdDevolucionEmpleados = new Grilla2.SpeedGrilla();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // grd
@@ -226,11 +228,61 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "Cargas Sociales";
             // 
+            // grdDevolucionEmpleados
+            // 
+            this.grdDevolucionEmpleados.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.None;
+            this.grdDevolucionEmpleados.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.SingleColumn;
+            this.grdDevolucionEmpleados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.grdDevolucionEmpleados.AutoResize = false;
+            this.grdDevolucionEmpleados.bColor = System.Drawing.SystemColors.Window;
+            this.grdDevolucionEmpleados.bColorSel = System.Drawing.SystemColors.Highlight;
+            this.grdDevolucionEmpleados.bFColor = System.Drawing.SystemColors.WindowText;
+            this.grdDevolucionEmpleados.bFColorSel = System.Drawing.SystemColors.HighlightText;
+            this.grdDevolucionEmpleados.Col = 0;
+            this.grdDevolucionEmpleados.Cols = 10;
+            this.grdDevolucionEmpleados.DataMember = "";
+            this.grdDevolucionEmpleados.DataSource = null;
+            this.grdDevolucionEmpleados.EnableEdicion = true;
+            this.grdDevolucionEmpleados.Encabezado = "";
+            this.grdDevolucionEmpleados.fColor = System.Drawing.Color.Silver;
+            this.grdDevolucionEmpleados.FixCols = 0;
+            this.grdDevolucionEmpleados.FixRows = 0;
+            this.grdDevolucionEmpleados.Frozen = 0;
+            this.grdDevolucionEmpleados.FuenteEncabezado = null;
+            this.grdDevolucionEmpleados.FuentePieDePagina = null;
+            this.grdDevolucionEmpleados.KeyActionEnter = C1.Win.C1FlexGrid.KeyActionEnum.None;
+            this.grdDevolucionEmpleados.LimpiarEstilosAntesDeOrdenar = false;
+            this.grdDevolucionEmpleados.Location = new System.Drawing.Point(1578, 31);
+            this.grdDevolucionEmpleados.Name = "grdDevolucionEmpleados";
+            this.grdDevolucionEmpleados.PieDePagina = "\t\tPage {0} of {1}";
+            this.grdDevolucionEmpleados.PintarFilaSel = true;
+            this.grdDevolucionEmpleados.Redraw = true;
+            this.grdDevolucionEmpleados.Row = 0;
+            this.grdDevolucionEmpleados.Rows = 50;
+            this.grdDevolucionEmpleados.Size = new System.Drawing.Size(373, 693);
+            this.grdDevolucionEmpleados.TabIndex = 0;
+            this.grdDevolucionEmpleados.Editado += new Grilla2.SpeedGrilla.EditadoEventHandler(this.grdDevolucionEmpleados_Editado);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.DimGray;
+            this.label5.Location = new System.Drawing.Point(1575, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(165, 16);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Devolución Empleados";
+            // 
             // frmValorFranquicia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1508, 736);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1964, 736);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.grdDevolucionEmpleados);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -257,5 +309,7 @@
         private System.Windows.Forms.Label label3;
         private Grilla2.SpeedGrilla grdCargasSociales;
         private System.Windows.Forms.Label label4;
+        private Grilla2.SpeedGrilla grdDevolucionEmpleados;
+        private System.Windows.Forms.Label label5;
     }
 }

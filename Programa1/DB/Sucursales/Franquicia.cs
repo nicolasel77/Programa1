@@ -73,5 +73,19 @@
             }
             return dt;
         }
+
+        internal DataTable devolucionEmpleados()
+        {
+            var dt = new DataTable("Franquicia");
+            try
+            {
+                dt = Datos_Genericos("SELECT v.Fecha, v.id_Sucursal, s.Nombre AS Sucursal, v.Importe FROM dbDatos.dbo.valor_devolucionempleado v LEFT JOIN Sucursales s ON s.id = v.id_Sucursal ORDER BY v.Fecha, v.id_Sucursal");
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
     }
 }
