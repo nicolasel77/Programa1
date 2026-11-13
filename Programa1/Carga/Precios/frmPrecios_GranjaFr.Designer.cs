@@ -50,6 +50,7 @@
             this.cmdGuardarFR = new Programa1.Controles.cBoton();
             this.cmdImprimir = new Programa1.Controles.cBoton();
             this.cmdPorcentaje = new System.Windows.Forms.Button();
+            this.cmdSemanaPollo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -160,6 +161,7 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer3.Panel1.Controls.Add(this.cmdSemanaPollo);
             this.splitContainer3.Panel1.Controls.Add(this.cmdPorcentaje);
             this.splitContainer3.Panel1.Controls.Add(this.label2);
             this.splitContainer3.Panel1.Controls.Add(this.nuDecimales);
@@ -420,6 +422,18 @@
             this.cmdPorcentaje.UseVisualStyleBackColor = true;
             this.cmdPorcentaje.Click += new System.EventHandler(this.cmdPorcentaje_Click);
             // 
+            // cmdSemanaPollo
+            // 
+            this.cmdSemanaPollo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdSemanaPollo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmdSemanaPollo.Location = new System.Drawing.Point(5, 486);
+            this.cmdSemanaPollo.Name = "cmdSemanaPollo";
+            this.cmdSemanaPollo.Size = new System.Drawing.Size(172, 30);
+            this.cmdSemanaPollo.TabIndex = 17;
+            this.cmdSemanaPollo.Text = "Actualizar semana (lunes)";
+            this.cmdSemanaPollo.UseVisualStyleBackColor = true;
+            this.cmdSemanaPollo.Click += new System.EventHandler(this.cmdSemanaPollo_Click);
+            // 
             // frmPrecios_GranjaFr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -477,5 +491,6 @@
         private System.Windows.Forms.Panel panel3;
         private Grilla2.SpeedGrilla grdSucursales;
         private System.Windows.Forms.Button cmdPorcentaje;
+        private System.Windows.Forms.Button cmdSemanaPollo;
     }
 }
