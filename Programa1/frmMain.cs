@@ -904,6 +904,53 @@
                 }
             }
         }
+        private void ControlDeclaradoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmControl_Declarado")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmControl_Declarado");
+                t.Text = "Control_Sucursal";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmControl = new Carga.frmControl_Declarado();
+                frmControl.MdiParent = this;
+                frmControl.Disposed += FrmControl_Declarado_Disposed;
+                forms.Add(frmControl);
+                frmControl.Show();
+                frmControl.WindowState = FormWindowState.Minimized;
+                frmControl.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmControl_Declarado_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Control_Sucursal")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmControl_Declarado")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
         private void EmpleadosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             bool found = false;
