@@ -495,6 +495,12 @@
     <Compile Include="Carga\Sucursales\frmCantidadClientes.Designer.cs">
       <DependentUpon>frmCantidadClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Carga\Sucursales\frmControl_Declarado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Carga\Sucursales\frmControl_Declarado.Designer.cs">
+      <DependentUpon>frmControl_Declarado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carga\Sucursales\frmStock_Diario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1209,6 +1215,7 @@
     <Compile Include="DB\Sebero\Seberos.cs" />
     <Compile Include="DB\Sucursales\APicada.cs" />
     <Compile Include="DB\Sucursales\Cantidad_Clientes.cs" />
+    <Compile Include="DB\Sucursales\Control_Declarado.cs" />
     <Compile Include="DB\Sucursales\Stock_Diario.cs" />
     <Compile Include="DB\Sucursales\GastosSucursales_Grupos.cs" />
     <Compile Include="DB\Sucursales\GastosSucursales_Rubros.cs" />
@@ -1364,6 +1371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmCantidadClientes.resx">
       <DependentUpon>frmCantidadClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Carga\Sucursales\frmControl_Declarado.resx">
+      <DependentUpon>frmControl_Declarado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Carga\Sucursales\frmStock_Diario.resx">
       <DependentUpon>frmStock_Diario.cs</DependentUpon>
