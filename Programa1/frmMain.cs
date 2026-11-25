@@ -904,6 +904,53 @@
                 }
             }
         }
+        private void StockDiarioProductosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmStock_Diario_Productos")
+                {
+                    f.BringToFront();
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                ToolStripMenuItem t = new ToolStripMenuItem("frmStock_Diario_Productos");
+                t.Text = "Stock_Diario_Productos";
+                t.Click += new EventHandler(Mostrar);
+                this.tstMenu.Items.Add(t);
+
+                Form frmStock_Diario_Productos = new Carga.frmStock_Diario_Productos();
+                frmStock_Diario_Productos.MdiParent = this;
+                frmStock_Diario_Productos.Disposed += FrmStock_Diario_Productos_Disposed;
+                forms.Add(frmStock_Diario_Productos);
+                frmStock_Diario_Productos.Show();
+                frmStock_Diario_Productos.WindowState = FormWindowState.Minimized;
+                frmStock_Diario_Productos.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void FrmStock_Diario_Productos_Disposed(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem t in tstMenu.Items)
+            {
+                if (t.Text == "Stock_Diario_Productos")
+                {
+                    tstMenu.Items.Remove(t);
+                    break;
+                }
+            }
+            foreach (Form f in forms)
+            {
+                if (f.Name == "frmStock_Diario_Productos")
+                {
+                    forms.Remove(f);
+                    break;
+                }
+            }
+        }
         private void EmpleadosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             bool found = false;
